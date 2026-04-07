@@ -131,24 +131,38 @@ const PLAYLISTS = [
 let nextPageToken = "";
 let allVideos = [];
 
-const select = document.getElementById("seriesSelect");
-PLAYLISTS.forEach(p => {
-  const opt = document.createElement("option");
-  opt.value = p.id;
-  opt.textContent = p.name;
-  select.appendChild(opt);
-});
+const select = document.getElementById("search").oninput = (e) => {
+  const term = e.target.value.toLowerCase();
 
-async function loadPlaylist(id, pageToken = "") {
-  const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=12&playlistId=${id}&key=${API_KEY}&pageToken=${pageToken}`;
-  const res = await fetch(url);
-  const data = await res.json();
+  const filtered = allVideos.filter(v =>
+    v.snippet.title.toLowerCase().includes(term)
+  );
 
-  nextPageToken = data.nextPageToken || "";
-  allVideos = allVideos.concat(data.items.reverse());
+  const playlistDiv = document.getElementById("playlist");
+  playlistDiv.innerHTML = "";
 
-  renderVideos(allVideos);
-}
+  filtered.forEach((item, index) => {
+    const videoId = item.snippet.resourceId.videoId;
+    const title = item.snippet.title;
+
+    const div = document.createElement("div");
+    div.className = "video-item";
+
+    div.innerHTML = `
+      <img src="${item.snippet.thumbnails.medium.url}">
+      <p>${title}</p>
+    `;
+
+    div.onclick = () => {
+      document.getElementById("player").innerHTML =
+        `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+
+      document.getElementById("nowPlaying").textContent = title;
+    };
+
+    playlistDiv.appendChild(div);
+  });
+};
 
 function renderVideos(videos) {
   const playlistDiv = document.getElementById("playlist");
