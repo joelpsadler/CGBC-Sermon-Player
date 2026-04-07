@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sermon Library</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #ffffff;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+select, input {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+#player {
+  width: 100%;
+  aspect-ratio: 16/9;
+  margin-bottom: 10px;
+}
+
+#playlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.video-item {
+  cursor: pointer;
+}
+
+.video-item img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.video-item.active {
+  outline: 2px solid #333;
+}
+
+.toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.toggle button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.active-toggle {
+  background: black;
+  color: white;
+}
+
+#podcast {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h2>Sermon Library</h2>
+
+<select id="seriesSelect"></select>
+
+<div class="toggle">
+  <button id="videoBtn" class="active-toggle">Watch Video</button>
+  <button id="audioBtn">Listen Audio</button>
+</div>
+
+<div id="videoSection">
+  <div id="player"></div>
+  <h3 id="nowPlaying"></h3>
+  <input type="text" id="search" placeholder="Search this series...">
+  <div id="playlist"></div>
+  <button id="loadMore">Load More</button>
+</div>
+
+<div id="podcast">
+  <iframe src="https://www.podbean.com/player-v2/?i=broJacobcedargrovebaptist&from=website&share=1"
+    width="100%" height="500" frameborder="0"></iframe>
+</div>
+
+</div>
+
+<script>
+const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
+
+const PLAYLISTS = [
+  { name: "Current Series - Romans 12", id: "PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS" },
+  { name: "Livestreams", id: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv" },
+
+  { name: "Romans 11", id: "PLKqZ6zXCYxUDFWTa93IQRbgUvCJ7mf9pX" },
+  { name: "Romans 10", id: "PLKqZ6zXCYxUBtim23RGn81VTGuWRiMo3n" },
+  { name: "Romans 9", id: "PLKqZ6zXCYxUAEC6h6yy7KgMsmxsUO_IMZ" },
+  { name: "Romans 8", id: "PLKqZ6zXCYxUAwR-ngWwrzH1gfr700zK1X" },
+  { name: "Romans 7", id: "PLKqZ6zXCYxUAVQsnh5AgSf7Rg5nE5FEyu" },
+  { name: "Romans 6", id: "PLKqZ6zXCYxUBFzNO-rf_2gyv2p8iHeHgo" },
+  { name: "Romans 5", id: "PLKqZ6zXCYxUAWd4W5r8-HQ6WOcm5ZcJYH" },
+  { name: "Romans 4", id: "PLKqZ6zXCYxUCy5_6q0ySkwkFaFkeXmGma" },
+  { name: "Romans 3", id: "PLKqZ6zXCYxUAuPUH-PIVDM-KWW2rMjk-4" },
+  { name: "Romans 2", id: "PLKqZ6zXCYxUCgla_YELYiU33w65J7YI9D" },
+  { name: "Romans 1", id: "LKqZ6zXCYxUAV4_OfXycI9W8q5aQ4R9nd" },
+
+  { name: "Eschatology: The Rapture", id: "PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d" },
+
+  { name: "2026 Specials", id: "PLKqZ6zXCYxUCPWCiVCLNS4UdwNDGWsep0" },
+  { name: "2025 Specials", id: "PLKqZ6zXCYxUALAewPHSUyaEmMisdZFUDp" },
+  { name: "2024 Specials", id: "PLKqZ6zXCYxUBKFfd5poJge2ny5g-pTtC-" },
+
+  { name: "Guest Speaker", id: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW" },
+
+  { name: "All Sermons", id: "PLKqZ6zXCYxUBM36Qy41u3YnnsXET8v4XJ" }
+];
+
+let nextPageToken = "";
+let allVideos = [];
+
+const select = document.getElementById("seriesSelect");
+PLAYLISTS.forEach(p => {
+  const opt = document.createElement("option");
+  opt.value = p.id;
+  opt.textContent = p.name;
+  select.appendChild(opt);
+});
+
+async function loadPlaylist(id, pageToken = "") {
+  const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=12&playlistId=${id}&key=${API_KEY}&pageToken=${pageToken}`;
+  const res = await fetch(url);
+  const data = await res.json();
+
+  nextPageToken = data.nextPageToken || "";
+  allVideos = allVideos.concat(data.items.reverse());
+
+  renderVideos(allVideos);
+}
+
+function renderVideos(videos) {
+  const playlistDiv = document.getElementById("playlist");
+  playlistDiv.innerHTML = "";
+
+  videos.forEach((item, index) => {
+    const videoId = item.snippet.resourceId.videoId;
+    const title = item.snippet.title;
+
+    const div = document.createElement("div");
+    div.className = "video-item";
+    div.innerHTML = `<img src="${item.snippet.thumbnails.medium.url}"><p>${title}</p>`;
+
+    div.onclick = () => playVideo(index);
+
+    playlistDiv.appendChild(div);
+  });
+
+  playVideo(0);
+}
+
+function playVideo(index) {
+  const video = allVideos[index];
+  const videoId = video.snippet.resourceId.videoId;
+
+  document.getElementById("player").innerHTML =
+    `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+
+  document.getElementById("nowPlaying").textContent = video.snippet.title;
+}
+
+select.onchange = () => {
+  allVideos = [];
+  document.getElementById("playlist").innerHTML = "";
+  loadPlaylist(select.value);
+};
+
+document.getElementById("loadMore").onclick = () => {
+  if (nextPageToken) loadPlaylist(select.value, nextPageToken);
+};
+
+document.getElementById("videoBtn").onclick = () => {
+  document.getElementById("videoSection").style.display = "block";
+  document.getElementById("podcast").style.display = "none";
+};
+
+document.getElementById("audioBtn").onclick = () => {
+  document.getElementById("videoSection").style.display = "none";
+  document.getElementById("podcast").style.display = "block";
+};
+
+// Initial load
+loadPlaylist(PLAYLISTS[0].id);
+</script>
+
+</body>
+</html>
