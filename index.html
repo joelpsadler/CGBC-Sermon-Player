@@ -92,8 +92,8 @@ select, input {
 </div>
 
 <div id="podcast">
-  <!-- 🔁 REPLACE THIS WITH YOUR REAL PODBEAN EMBED -->
- <iframe title="CGBC | Lebanon, TN" allowtransparency="true" height="480" width="100%" style="border: none; min-width: min(100%, 430px);height:480px;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist&share=1&download=1&rtl=0&fonts=Verdana&skin=1b1b1b&font-color=auto&logo_link=episode_page&order=episodic&limit=600&filter=all&ss=acd6e3cd340822f09423666b0bb66e07&btn-skin=c73a3a&size=480" loading="lazy" allowfullscreen=""></iframe>
+  <!-- 🔁 PASTE YOUR REAL PODBEAN EMBED BELOW -->
+  <iframe title="CGBC | Lebanon, TN" allowtransparency="true" height="480" width="100%" style="border: none; min-width: min(100%, 430px);height:480px;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist&share=1&download=1&rtl=0&fonts=Verdana&skin=1b1b1b&font-color=auto&logo_link=episode_page&order=episodic&limit=600&filter=all&ss=acd6e3cd340822f09423666b0bb66e07&btn-skin=c73a3a&size=480" loading="lazy" allowfullscreen=""></iframe>
 </div>
 
 </div>
@@ -132,6 +132,7 @@ let nextPageToken = "";
 let allVideos = [];
 
 const select = document.getElementById("seriesSelect");
+
 PLAYLISTS.forEach(p => {
   const opt = document.createElement("option");
   opt.value = p.id;
@@ -180,35 +181,34 @@ function playVideo(index) {
   document.getElementById("nowPlaying").textContent = video.snippet.title;
 }
 
-// ✅ FIXED SEARCH
+/* ✅ FIXED SEARCH */
 document.getElementById("search").oninput = (e) => {
   const term = e.target.value.toLowerCase();
-
-  const filtered = allVideos.filter(v =>
-    v.snippet.title.toLowerCase().includes(term)
-  );
-
   const playlistDiv = document.getElementById("playlist");
   playlistDiv.innerHTML = "";
 
-  filtered.forEach((item, index) => {
-    const videoId = item.snippet.resourceId.videoId;
-    const title = item.snippet.title;
+  const filtered = allVideos
+    .map((video, originalIndex) => ({ video, originalIndex }))
+    .filter(v => v.video.snippet.title.toLowerCase().includes(term));
+
+  if (filtered.length === 0) {
+    playlistDiv.innerHTML = "<p>No results found</p>";
+    return;
+  }
+
+  filtered.forEach(item => {
+    const video = item.video;
+    const index = item.originalIndex;
 
     const div = document.createElement("div");
     div.className = "video-item";
 
     div.innerHTML = `
-      <img src="${item.snippet.thumbnails.medium.url}">
-      <p>${title}</p>
+      <img src="${video.snippet.thumbnails.medium.url}">
+      <p>${video.snippet.title}</p>
     `;
 
-    div.onclick = () => {
-      document.getElementById("player").innerHTML =
-        `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
-
-      document.getElementById("nowPlaying").textContent = title;
-    };
+    div.onclick = () => playVideo(index);
 
     playlistDiv.appendChild(div);
   });
