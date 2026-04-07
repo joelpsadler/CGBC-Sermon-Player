@@ -17,7 +17,7 @@ body {
   padding: 20px;
 }
 
-select, input {
+select {
   padding: 10px;
   width: 100%;
   margin-bottom: 15px;
@@ -27,6 +27,25 @@ select, input {
   width: 100%;
   aspect-ratio: 16/9;
   margin-bottom: 10px;
+}
+
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#filters button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.active-filter {
+  background: black;
+  color: white;
 }
 
 #playlist {
@@ -82,20 +101,29 @@ select, input {
 <div id="videoSection">
   <div id="player"></div>
   <h3 id="nowPlaying"></h3>
-  <input type="text" id="search" placeholder="Search this series...">
+
+  <!-- FILTERS -->
+  <div id="filters">
+    <button onclick="setFilter('all')" class="active-filter">All</button>
+    <button onclick="setFilter('romans')">Romans</button>
+    <button onclick="setFilter('specials')">Specials</button>
+    <button onclick="setFilter('guest')">Guest</button>
+  </div>
+
   <div id="playlist"></div>
   <button id="loadMore">Load More</button>
 </div>
 
 <div id="podcast">
-  <!-- ✅ KEEP YOUR WORKING PODBEAN EMBED HERE -->
-  <iframe title="CGBC | Lebanon, TN" allowtransparency="true" height="480" width="100%" style="border: none; min-width: min(100%, 430px);height:480px;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist&share=1&download=1&rtl=0&fonts=Verdana&skin=1b1b1b&font-color=auto&logo_link=episode_page&order=episodic&limit=600&filter=all&ss=acd6e3cd340822f09423666b0bb66e07&btn-skin=c73a3a&size=480" loading="lazy" allowfullscreen=""></iframe>
+  <iframe title="CGBC | Lebanon, TN" allowtransparency="true" height="480" width="100%" style="border: none; min-width: min(100%, 430px);" scrolling="no"
+    src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist&share=1&download=1&rtl=0&fonts=Verdana&skin=1b1b1b&font-color=auto&logo_link=episode_page&order=episodic&limit=600"
+    loading="lazy"></iframe>
 </div>
 
 </div>
 
 <script>
-const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
+const API_KEY = "YOUR_API_KEY";
 
 const PLAYLISTS = [
   { name: "Livestreams", id: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv" },
@@ -126,6 +154,7 @@ const PLAYLISTS = [
 
 let nextPageToken = "";
 let allVideos = [];
+let currentFilter = "all";
 
 const select = document.getElementById("seriesSelect");
 
@@ -151,14 +180,33 @@ function renderVideos(videos) {
   const playlistDiv = document.getElementById("playlist");
   playlistDiv.innerHTML = "";
 
-  videos.forEach((item, index) => {
+  let filteredVideos = videos.filter(item => {
+    const title = item.snippet.title.toLowerCase();
+
+    if (currentFilter === "romans") return title.includes("romans");
+    if (currentFilter === "specials") return title.includes("special");
+    if (currentFilter === "guest") return title.includes("guest");
+
+    return true;
+  });
+
+  if (filteredVideos.length === 0) {
+    playlistDiv.innerHTML = "<p>No sermons found</p>";
+    return;
+  }
+
+  filteredVideos.forEach((item, index) => {
     const videoId = item.snippet.resourceId.videoId;
     const title = item.snippet.title;
 
     const div = document.createElement("div");
     div.className = "video-item";
 
-    div.innerHTML = `<img src="${item.snippet.thumbnails.medium.url}"><p>${title}</p>`;
+    div.innerHTML = `
+      <img src="${item.snippet.thumbnails.medium.url}">
+      <p>${title}</p>
+    `;
+
     div.onclick = () => playVideo(index);
 
     playlistDiv.appendChild(div);
@@ -177,38 +225,17 @@ function playVideo(index) {
   document.getElementById("nowPlaying").textContent = video.snippet.title;
 }
 
-// SEARCH (FIXED)
-document.getElementById("search").oninput = (e) => {
-  const term = e.target.value.toLowerCase();
-  const playlistDiv = document.getElementById("playlist");
-  playlistDiv.innerHTML = "";
+function setFilter(filter) {
+  currentFilter = filter;
 
-  const filtered = allVideos
-    .map((video, originalIndex) => ({ video, originalIndex }))
-    .filter(v => v.video.snippet.title.toLowerCase().includes(term));
-
-  if (filtered.length === 0) {
-    playlistDiv.innerHTML = "<p>No results found</p>";
-    return;
-  }
-
-  filtered.forEach(item => {
-    const video = item.video;
-    const index = item.originalIndex;
-
-    const div = document.createElement("div");
-    div.className = "video-item";
-
-    div.innerHTML = `
-      <img src="${video.snippet.thumbnails.medium.url}">
-      <p>${video.snippet.title}</p>
-    `;
-
-    div.onclick = () => playVideo(index);
-
-    playlistDiv.appendChild(div);
+  document.querySelectorAll("#filters button").forEach(btn => {
+    btn.classList.remove("active-filter");
   });
-};
+
+  event.target.classList.add("active-filter");
+
+  renderVideos(allVideos);
+}
 
 select.onchange = () => {
   allVideos = [];
