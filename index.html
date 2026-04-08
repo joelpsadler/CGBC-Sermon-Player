@@ -40,10 +40,14 @@
       width: min(1800px, calc(100vw - 8px));
       padding: 6px 10px;
       border-radius: 18px;
-      background: rgba(0,0,0,0.38);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+      background: rgba(0,0,0,0.30);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 -1px 0 rgba(0,0,0,0.16);
+      border: 1px solid rgba(255,255,255,0.06);
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       position: relative;
@@ -54,38 +58,31 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        115deg,
-        rgba(255,255,255,0.18) 0%,
-        rgba(255,255,255,0.08) 10%,
-        rgba(255,255,255,0.02) 18%,
-        rgba(255,255,255,0) 30%
-      );
+      border-radius: inherit;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        inset 1px 0 0 rgba(255,255,255,0.04),
+        inset -1px 0 0 rgba(255,255,255,0.04);
       pointer-events: none;
     }
 
     .logo-panel::after {
       content: "";
       position: absolute;
-      top: -10%;
-      left: 28%;
-      width: 24%;
-      height: 130%;
-      transform: rotate(18deg);
-      background: linear-gradient(
-        180deg,
-        rgba(255,255,255,0.24),
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0)
-      );
-      filter: blur(10px);
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 38%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0));
       pointer-events: none;
-      opacity: 0.6;
     }
 
     .logo-panel:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 26px rgba(0,0,0,0.34);
+      box-shadow:
+        0 10px 26px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 0 -1px 0 rgba(0,0,0,0.18);
     }
 
     .logo-panel img {
@@ -413,16 +410,19 @@
       justify-content: flex-start;
       padding: 22px;
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.28) 45%, rgba(0,0,0,0.76) 100%),
-        linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 15%, rgba(255,255,255,0) 28%);
+        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.42) 100%);
     }
 
     .video-preview-overlay::after {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.22) 65%, rgba(0,0,0,0.48) 100%);
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0.10) 0%,
+        rgba(255,255,255,0.03) 12%,
+        rgba(255,255,255,0) 24%
+      );
       pointer-events: none;
     }
 
@@ -454,7 +454,7 @@
       gap: 10px;
       padding: 12px 16px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.34);
+      background: rgba(0,0,0,0.46);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.14);
@@ -577,13 +577,6 @@
       bottom: 16px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.25);
       z-index: 2;
-    }
-
-    .audio-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 0;
     }
 
     .audio-ready {
@@ -839,7 +832,7 @@
             </div>
 
             <div class="audio-content">
-              <div class="audio-ready">Ready to Listen</div>
+              <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
               <h3 id="audioFeatureTitle">Select a sermon</h3>
               <div class="audio-series" id="audioFeatureSeries"></div>
               <div class="waveform" aria-hidden="true">
@@ -884,6 +877,7 @@
     const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
     const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
+    const STORAGE_KEY = "cgbc_sermon_state_v1";
 
     let sermonData = {};
     let archiveSeriesOrder = [];
@@ -904,6 +898,7 @@
     const audioFeatureArtEl = document.getElementById("audioFeatureArt");
     const audioFeatureTitleEl = document.getElementById("audioFeatureTitle");
     const audioFeatureSeriesEl = document.getElementById("audioFeatureSeries");
+    const audioReadyLabelEl = document.getElementById("audioReadyLabel");
     const audioPlayerEl = document.getElementById("audioPlayer");
     const audioArtPanelEl = document.getElementById("audioArtPanel");
     const audioPlayBadgeEl = document.getElementById("audioPlayBadge");
@@ -1032,6 +1027,10 @@
       return sermons;
     }
 
+    function setAudioReadyState(isPlaying) {
+      audioReadyLabelEl.textContent = isPlaying ? "Listening..." : "Ready to Listen";
+    }
+
     function stopAndHideVideo() {
       videoShellEl.innerHTML = "";
       videoShellEl.style.display = "none";
@@ -1047,6 +1046,7 @@
       audioFeatureCardEl.style.display = "none";
       audioPlaceholderEl.style.display = "none";
       audioFeatureCardEl.classList.remove("playing");
+      setAudioReadyState(false);
     }
 
     function clearMediaState() {
@@ -1261,6 +1261,7 @@
           renderEmptyMeta();
           if (mode === "audio") audioPlaceholderEl.style.display = "flex";
           else videoPlaceholderEl.style.display = "flex";
+          savePlaybackState();
         });
         seriesListEl.appendChild(item);
       });
@@ -1298,6 +1299,7 @@
           } else {
             previewVideo(ep);
           }
+          savePlaybackState();
         });
 
         episodesListEl.appendChild(row);
@@ -1306,6 +1308,12 @@
 
     function playAudio(ep) {
       stopAndHideVideo();
+
+      audioPlayerEl.pause();
+      audioPlayerEl.removeAttribute("src");
+      audioPlayerEl.load();
+      audioFeatureCardEl.classList.remove("playing");
+      setAudioReadyState(false);
 
       audioPlaceholderEl.style.display = "none";
       audioFeatureCardEl.style.display = "block";
@@ -1317,6 +1325,7 @@
       audioPlayerEl.load();
 
       renderMeta(ep, true);
+      savePlaybackState();
     }
 
     async function previewVideo(ep) {
@@ -1361,6 +1370,80 @@
       videoShellEl.style.display = "block";
 
       renderMeta(ep, false);
+      savePlaybackState();
+    }
+
+    function savePlaybackState() {
+      try {
+        const state = {
+          mode,
+          currentSeries,
+          currentEpisodeIndex,
+          audioSrc: audioPlayerEl.currentSrc || audioPlayerEl.src || "",
+          audioTime: audioPlayerEl.currentTime || 0
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch {}
+    }
+
+    function restorePlaybackState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+
+        const state = JSON.parse(raw);
+
+        if (state.mode === "video" || state.mode === "audio") {
+          mode = state.mode;
+          listenBtn.classList.toggle("active", mode === "audio");
+          watchBtn.classList.toggle("active", mode === "video");
+        }
+
+        if (state.currentSeries && sermonData[state.currentSeries]) {
+          currentSeries = state.currentSeries;
+        }
+
+        if (Number.isInteger(state.currentEpisodeIndex)) {
+          currentEpisodeIndex = state.currentEpisodeIndex;
+        }
+
+        renderSeriesList();
+        renderEpisodesList();
+        renderEmptyMeta();
+
+        if (
+          mode === "audio" &&
+          currentSeries &&
+          sermonData[currentSeries] &&
+          sermonData[currentSeries][currentEpisodeIndex]
+        ) {
+          const ep = sermonData[currentSeries][currentEpisodeIndex];
+          playAudio(ep);
+
+          const restoreTimeOnce = () => {
+            try {
+              audioPlayerEl.currentTime = Math.min(
+                state.audioTime || 0,
+                isFinite(audioPlayerEl.duration) && audioPlayerEl.duration > 0
+                  ? audioPlayerEl.duration
+                  : state.audioTime || 0
+              );
+            } catch {}
+            audioPlayerEl.removeEventListener("loadedmetadata", restoreTimeOnce);
+          };
+
+          audioPlayerEl.addEventListener("loadedmetadata", restoreTimeOnce);
+        } else if (mode === "video") {
+          videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
+          videoPlaceholderEl.style.display = "flex";
+        } else {
+          audioPlaceholderEl.style.display = "flex";
+        }
+
+        return true;
+      } catch {
+        return false;
+      }
     }
 
     async function loadRSSData() {
@@ -1446,6 +1529,7 @@
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+      savePlaybackState();
     }
 
     function resetHome() {
@@ -1463,6 +1547,7 @@
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+      savePlaybackState();
     }
 
     function toggleAudioPlayback() {
@@ -1482,14 +1567,24 @@
 
     audioPlayerEl.addEventListener("play", () => {
       audioFeatureCardEl.classList.add("playing");
+      setAudioReadyState(true);
+      savePlaybackState();
     });
 
     audioPlayerEl.addEventListener("pause", () => {
       audioFeatureCardEl.classList.remove("playing");
+      setAudioReadyState(false);
+      savePlaybackState();
     });
 
     audioPlayerEl.addEventListener("ended", () => {
       audioFeatureCardEl.classList.remove("playing");
+      setAudioReadyState(false);
+      savePlaybackState();
+    });
+
+    audioPlayerEl.addEventListener("timeupdate", () => {
+      savePlaybackState();
     });
 
     listenBtn.addEventListener("click", () => setMode("audio"));
@@ -1498,10 +1593,14 @@
 
     (async function init() {
       await loadRSSData();
-      audioPlaceholderEl.style.display = "flex";
-      renderSeriesList();
-      renderEpisodesList();
-      renderEmptyMeta();
+      const restored = restorePlaybackState();
+
+      if (!restored) {
+        audioPlaceholderEl.style.display = "flex";
+        renderSeriesList();
+        renderEpisodesList();
+        renderEmptyMeta();
+      }
     })();
   </script>
 </body>
