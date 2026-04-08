@@ -32,12 +32,12 @@
     .header {
       display: flex;
       justify-content: center;
-      padding: 10px 0 6px;
+      padding: 10px 4px 6px;
       border-bottom: 1px solid var(--border);
     }
 
     .logo-panel {
-      width: min(1600px, calc(100vw - 20px));
+      width: min(1800px, calc(100vw - 8px));
       padding: 6px 10px;
       border-radius: 18px;
       background: rgba(0,0,0,0.38);
@@ -546,6 +546,10 @@
       name: "Livestreams",
       playlistId: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"
     };
+    const VIDEO_ONLY_ARCHIVE = {
+      name: "CGBC Guest Speaker",
+      playlistId: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"
+    };
 
     const CURRENT_SERIES = "Romans Chapter 12";
     const SECONDARY_SERIES = "Eschatology: The Rapture";
@@ -635,30 +639,33 @@
       return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
     }
 
-    async function fetchLivestreamSeries() {
-      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${LIVESTREAMS.playlistId}&key=${API_KEY}`;
+    async function fetchPlaylistSeries(config, newestFirst = false) {
+      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
       const items = Array.isArray(data.items) ? data.items : [];
 
-      const sermons = items
-        .sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt))
-        .map(item => {
-          const videoId = item?.snippet?.resourceId?.videoId || "";
-          return {
-            title: item?.snippet?.title || "Livestream",
-            series: LIVESTREAMS.name,
-            scripture: "",
-            by: "",
-            date: item?.snippet?.publishedAt ? new Date(item.snippet.publishedAt).toLocaleDateString() : "",
-            video: videoId ? `https://youtu.be/${videoId}` : "",
-            videoId,
-            audio: "",
-            img: "",
-            link: "",
-            extra: []
-          };
-        });
+      let sorted = [...items];
+      if (newestFirst) {
+        sorted.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt));
+      }
+
+      const sermons = sorted.map(item => {
+        const videoId = item?.snippet?.resourceId?.videoId || "";
+        return {
+          title: item?.snippet?.title || config.name,
+          series: config.name,
+          scripture: "",
+          by: "",
+          date: item?.snippet?.publishedAt ? new Date(item.snippet.publishedAt).toLocaleDateString() : "",
+          video: videoId ? `https://youtu.be/${videoId}` : "",
+          videoId,
+          audio: "",
+          img: "",
+          link: "",
+          extra: []
+        };
+      });
 
       if (sermons.length) {
         sermons[0].seriesImage = getWatchThumb(sermons[0].videoId);
@@ -722,6 +729,64 @@
       metaBoxEl.innerHTML = html;
     }
 
+    function groupNumberedSeries(names) {
+      const grouped = new Map();
+      const singles = [];
+
+      names.forEach(name => {
+        const match = name.match(/^(.*?)(\d+)\s*$/);
+        if (!match) {
+          singles.push(name);
+          return;
+        }
+
+        const base = match[1].trim();
+        const num = parseInt(match[2], 10);
+
+        if (!grouped.has(base)) grouped.set(base, []);
+        grouped.get(base).push({ name, num });
+      });
+
+      const output = [];
+      const consumed = new Set();
+
+      names.forEach(name => {
+        if (consumed.has(name)) return;
+
+        const match = name.match(/^(.*?)(\d+)\s*$/);
+        if (!match) {
+          singles.includes(name) && output.push(name);
+          consumed.add(name);
+          return;
+        }
+
+        const base = match[1].trim();
+        const family = grouped.get(base) || [];
+        family.sort((a, b) => b.num - a.num);
+
+        family.forEach(item => {
+          output.push(item.name);
+          consumed.add(item.name);
+        });
+
+        const parentCandidate = base.replace(/\s+(chapter|part)$/i, "").trim();
+        const parentMatch = names.find(n => !consumed.has(n) && n.trim().toLowerCase() === parentCandidate.toLowerCase());
+        if (parentMatch) {
+          output.push(parentMatch);
+          consumed.add(parentMatch);
+        }
+      });
+
+      names.forEach(name => {
+        if (!consumed.has(name)) {
+          output.push(name);
+          consumed.add(name);
+        }
+      });
+
+      return output;
+    }
+
     function getPrioritySeries(modeName) {
       const ordered = [];
       if (modeName === "video" && sermonData[LIVESTREAMS.name]) ordered.push(LIVESTREAMS.name);
@@ -734,8 +799,25 @@
     function getVisibleSeriesOrder() {
       const pinned = getPrioritySeries(mode);
       const pinnedSet = new Set(pinned);
-      const archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
-      return [...pinned, ...archive];
+
+      let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
+
+      if (mode === "audio") {
+        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
+      }
+
+      if (mode === "video") {
+        archive = archive.filter(name => name !== LIVESTREAMS.name);
+      }
+
+      const groupedArchive = groupNumberedSeries(archive);
+
+      if (mode === "video" && sermonData[VIDEO_ONLY_ARCHIVE.name] && !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)) {
+        const withoutGuest = groupedArchive.filter(name => name !== VIDEO_ONLY_ARCHIVE.name);
+        return [...pinned, ...withoutGuest, VIDEO_ONLY_ARCHIVE.name];
+      }
+
+      return [...pinned, ...groupedArchive];
     }
 
     function getSeriesCover(seriesName) {
@@ -903,9 +985,14 @@
         }));
       });
 
-      const livestreamEpisodes = await fetchLivestreamSeries();
+      const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
       if (livestreamEpisodes.length) {
         grouped[LIVESTREAMS.name] = livestreamEpisodes;
+      }
+
+      const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
+      if (guestEpisodes.length) {
+        grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
       }
 
       sermonData = grouped;
