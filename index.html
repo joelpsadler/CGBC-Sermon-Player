@@ -1,318 +1,796 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>CGBC Sermons</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGBC Sermons</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-<style>
-:root {
-  --accent: #809F90;
-  --bg: #2f2f2f;
-  --glass: rgba(255,255,255,0.05);
-}
-
-body {
-  margin: 0;
-  font-family: 'Lato', sans-serif;
-  background: var(--bg);
-  color: white;
-}
-
-/* HEADER */
-.header {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.logo-panel {
-  padding: 14px 40px;
-  border-radius: 18px;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 0 18px rgba(0,0,0,0.6);
-  cursor: pointer;
-}
-
-.logo-panel img {
-  height: 85px;
-}
-
-/* LAYOUT */
-.layout {
-  display: flex;
-  height: calc(100vh - 120px);
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 260px;
-  padding: 10px;
-  overflow-y: auto;
-}
-
-.toggle {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.toggle button {
-  flex: 1;
-  padding: 8px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(255,255,255,0.08);
-  color: white;
-  cursor: pointer;
-}
-
-.toggle .active {
-  background: var(--accent);
-  color: black;
-}
-
-.series {
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.series:hover {
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-2px);
-}
-
-.series.active {
-  background: rgba(128,159,144,0.25);
-}
-
-/* MAIN */
-.main {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-/* PLAYER */
-#player {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 14px;
-  margin-bottom: 15px;
-}
-
-#audioPlayer {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-/* ART */
-.art {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.art img {
-  width: 260px;
-  border-radius: 14px;
-}
-
-/* META */
-.meta {
-  background: var(--glass);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-
-/* EPISODES */
-.episode {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.episode img {
-  width: 160px;
-  border-radius: 10px;
-}
-</style>
-
-<script src="https://www.youtube.com/iframe_api"></script>
-</head>
-
-<body>
-
-<div class="header">
-  <div class="logo-panel" id="logo">
-    <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1108178/TS_CGBC_Pog_wLLLL.png">
-  </div>
-</div>
-
-<div class="layout">
-
-<div class="sidebar">
-
-<div class="toggle">
-  <button id="listenBtn" class="active">Listen</button>
-  <button id="watchBtn">Watch</button>
-</div>
-
-<div id="seriesList"></div>
-
-</div>
-
-<div class="main">
-
-<div id="player"></div>
-
-<div class="art" id="art" style="display:none;">
-  <img id="artImg">
-</div>
-
-<audio id="audioPlayer" controls style="display:none;"></audio>
-
-<div class="meta" id="meta"></div>
-<div id="episodes"></div>
-
-</div>
-
-</div>
-
-<script>
-
-const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
-const RSS = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
-
-let data = {};
-let currentSeries = null;
-let mode = "audio";
-let player;
-
-/* PARSE RSS */
-async function loadData(){
-  let txt = await fetch(RSS).then(r=>r.text());
-  let xml = new DOMParser().parseFromString(txt,"text/xml");
-
-  xml.querySelectorAll("item").forEach(item=>{
-    let desc = item.querySelector("description").textContent;
-
-    let get = key => (desc.match(new RegExp(key+":\\s*(.*)"))||[])[1];
-
-    let series = get("Series");
-    let video = get("Video");
-
-    if(!series) return;
-
-    if(!data[series]) data[series] = [];
-
-    data[series].push({
-      title: get("Title"),
-      scripture: get("Scripture"),
-      speaker: get("by"),
-      date: get("Date"),
-      audio: item.querySelector("enclosure").getAttribute("url"),
-      img: item.getElementsByTagName("itunes:image")[0]?.getAttribute("href"),
-      video: video
-    });
-  });
-
-  buildSeries();
-}
-
-/* SERIES */
-function buildSeries(){
-  seriesList.innerHTML="";
-  Object.keys(data).forEach(s=>{
-    let d=document.createElement("div");
-    d.className="series";
-    d.innerText=s;
-    d.onclick=()=>selectSeries(s,d);
-    seriesList.appendChild(d);
-  });
-
-  selectSeries(Object.keys(data)[0], seriesList.firstChild);
-}
-
-/* SELECT SERIES */
-function selectSeries(s,el){
-  document.querySelectorAll(".series").forEach(x=>x.classList.remove("active"));
-  el.classList.add("active");
-  currentSeries=s;
-  renderEpisodes();
-}
-
-/* EPISODES */
-function renderEpisodes(){
-  episodes.innerHTML="";
-  data[currentSeries].forEach(ep=>{
-    let d=document.createElement("div");
-    d.className="episode";
-
-    let thumb = mode==="audio"
-      ? ep.img
-      : `https://img.youtube.com/vi/${extractID(ep.video)}/hqdefault.jpg`;
-
-    d.innerHTML=`<img src="${thumb}"><div>${ep.title}</div>`;
-    d.onclick=()=>play(ep);
-
-    episodes.appendChild(d);
-  });
-}
-
-/* PLAY */
-function play(ep){
-  let metaHTML = `
-    <h3>${ep.title}</h3>
-    <p>${ep.scripture}</p>
-    <p>${ep.speaker}</p>
-    <p>${ep.date}</p>
-  `;
-  meta.innerHTML=metaHTML;
-
-  if(mode==="audio"){
-    playerDiv.style.display="none";
-    audioPlayer.style.display="block";
-    art.style.display="block";
-
-    audioPlayer.src = ep.audio;
-    artImg.src = ep.img;
-  } else {
-    audioPlayer.style.display="none";
-    art.style.display="none";
-    playerDiv.style.display="block";
-
-    let id = extractID(ep.video);
-
-    if(!player){
-      player = new YT.Player('player',{videoId:id});
-    } else {
-      player.loadVideoById(id);
+  <style>
+    :root {
+      --accent: #809F90;
+      --bg: #2f2f2f;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(0,0,0,0.38);
+      --text: #f3f3f3;
+      --muted: #d8d8d8;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 16px;
     }
-  }
-}
 
-/* MODE */
-listenBtn.onclick=()=>{mode="audio";listenBtn.classList.add("active");watchBtn.classList.remove("active");renderEpisodes();};
-watchBtn.onclick=()=>{mode="video";watchBtn.classList.add("active");listenBtn.classList.remove("active");renderEpisodes();};
+    * { box-sizing: border-box; }
 
-/* YT ID */
-function extractID(url){
-  return url?.split("v=")[1]?.split("&")[0];
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+    }
 
-/* RESET */
-logo.onclick=()=>buildSeries();
+    .header {
+      display: flex;
+      justify-content: center;
+      padding: 18px 20px 10px;
+      border-bottom: 1px solid var(--border);
+    }
 
-/* INIT */
-loadData();
+    .logo-panel {
+      width: min(1180px, 96vw);
+      padding: 14px 18px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.42);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-</script>
+    .logo-panel:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.42);
+    }
 
+    .logo-panel img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 120px);
+    }
+
+    .sidebar {
+      width: 300px;
+      padding: 16px 12px 16px 16px;
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+
+    .mode-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      background: linear-gradient(to bottom, var(--bg) 85%, transparent);
+      padding-bottom: 10px;
+    }
+
+    .mode-toggle button {
+      flex: 1;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mode-toggle button:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .mode-toggle button.active {
+      background: rgba(128,159,144,0.38);
+      color: #111;
+      box-shadow: 0 0 0 1px rgba(128,159,144,0.3) inset, 0 6px 18px rgba(128,159,144,0.18);
+    }
+
+    .series-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .series-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .series-item:hover {
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
+    }
+
+    .series-item:hover .series-name {
+      transform: translateY(-2px) scale(1.02);
+      color: #fff;
+    }
+
+    .series-item.active {
+      background: rgba(128,159,144,0.22);
+      box-shadow: 0 0 0 1px rgba(128,159,144,0.28) inset, 0 8px 20px rgba(128,159,144,0.12);
+    }
+
+    .series-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .series-name {
+      font-size: 15px;
+      line-height: 1.2;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .player-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    #videoShell,
+    #audioShell {
+      margin-bottom: 16px;
+    }
+
+    #player {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #1f1f1f;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    #videoPlaceholder,
+    #audioPlaceholder {
+      width: 100%;
+      border-radius: 18px;
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    #videoPlaceholder {
+      aspect-ratio: 16 / 9;
+      padding: 30px;
+    }
+
+    #audioPlaceholder {
+      padding: 24px;
+      min-height: 120px;
+    }
+
+    .audio-art {
+      display: none;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .audio-art img {
+      width: min(260px, 70vw);
+      height: auto;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,0.06);
+    }
+
+    #audioPlayer {
+      width: 100%;
+      display: none;
+      margin-bottom: 16px;
+      border-radius: 12px;
+    }
+
+    .meta {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin-bottom: 18px;
+    }
+
+    .meta h2 {
+      margin: 0 0 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+
+    .meta .series-line {
+      font-family: 'Poppins', sans-serif;
+      color: #f1f1f1;
+      margin-bottom: 10px;
+      opacity: 0.95;
+    }
+
+    .meta p {
+      margin: 5px 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .actions {
+      margin-top: 14px;
+    }
+
+    .rss-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 10px 14px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .rss-button:hover {
+      transform: translateY(-1px);
+      background: rgba(128,159,144,0.28);
+    }
+
+    .rss-button svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .episodes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .episode {
+      display: flex;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .episode:hover {
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
+    }
+
+    .episode:hover .episode-text {
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    .episode.active {
+      background: rgba(128,159,144,0.18);
+      box-shadow: 0 0 0 1px rgba(128,159,144,0.24) inset;
+    }
+
+    .episode img {
+      width: 168px;
+      height: 94px;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .episode-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .episode-title {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .episode-sub {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .main {
+        padding-top: 14px;
+      }
+
+      .episode img {
+        width: 140px;
+        height: 79px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-panel {
+        width: 96vw;
+        padding: 10px 12px;
+      }
+
+      .logo-panel img {
+        width: 100%;
+        height: auto;
+      }
+
+      .main {
+        padding: 14px;
+      }
+
+      .episode {
+        align-items: flex-start;
+      }
+
+      .episode img {
+        width: 120px;
+        height: 68px;
+      }
+
+      .meta h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-panel" id="logoReset" title="Return to first series">
+      <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1108178/TS_CGBC_Pog_wLLLL.png" alt="CGBC" />
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="mode-toggle">
+        <button id="listenBtn" class="active" type="button">Listen</button>
+        <button id="watchBtn" type="button">Watch</button>
+      </div>
+      <div id="seriesList" class="series-list"></div>
+    </aside>
+
+    <main class="main">
+      <div class="player-shell">
+        <div id="videoShell">
+          <div id="videoPlaceholder">Choose a sermon to watch.</div>
+          <div id="player"></div>
+        </div>
+
+        <div id="audioShell">
+          <div id="audioPlaceholder">Choose a sermon to listen.</div>
+          <div class="audio-art" id="audioArt">
+            <img id="audioArtImg" alt="Episode artwork" />
+          </div>
+          <audio id="audioPlayer" controls preload="none"></audio>
+        </div>
+
+        <section class="meta" id="metaBox">
+          <h2>Select a sermon</h2>
+          <div class="series-line">Choose a series from the left.</div>
+        </section>
+
+        <section class="episodes" id="episodes"></section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
+    const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
+    const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1108178/TS_CGBC_Pog_wLLLL.png";
+
+    let sermonData = {};
+    let seriesOrder = [];
+    let mode = "audio";
+    let currentSeries = null;
+    let currentEpisodeIndex = null;
+    let ytPlayer = null;
+    let ytApiReady = false;
+
+    const seriesListEl = document.getElementById("seriesList");
+    const episodesEl = document.getElementById("episodes");
+    const metaBoxEl = document.getElementById("metaBox");
+    const listenBtn = document.getElementById("listenBtn");
+    const watchBtn = document.getElementById("watchBtn");
+    const logoReset = document.getElementById("logoReset");
+
+    const playerEl = document.getElementById("player");
+    const videoPlaceholderEl = document.getElementById("videoPlaceholder");
+    const audioPlayerEl = document.getElementById("audioPlayer");
+    const audioPlaceholderEl = document.getElementById("audioPlaceholder");
+    const audioArtEl = document.getElementById("audioArt");
+    const audioArtImgEl = document.getElementById("audioArtImg");
+
+    function onYouTubeIframeAPIReady() {
+      ytApiReady = true;
+    }
+
+    function htmlDecode(input) {
+      const doc = new DOMParser().parseFromString(input || "", "text/html");
+      return (doc.documentElement.textContent || "").trim();
+    }
+
+    function normalizeLineBreaks(input) {
+      return (input || "")
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<\/p>\s*<p>/gi, "\n")
+        .replace(/<\/div>\s*<div>/gi, "\n");
+    }
+
+    function parseDescription(rawDesc) {
+      const normalized = normalizeLineBreaks(rawDesc);
+      const decoded = htmlDecode(normalized);
+      const lines = decoded.split("\n").map(s => s.trim()).filter(Boolean);
+
+      const out = {
+        title: "",
+        series: "",
+        scripture: "",
+        by: "",
+        date: "",
+        video: "",
+        extra: []
+      };
+
+      for (const line of lines) {
+        const lower = line.toLowerCase();
+        if (lower.startsWith("title:")) out.title = line.split(/title:/i)[1].trim();
+        else if (lower.startsWith("series:")) out.series = line.split(/series:/i)[1].trim();
+        else if (lower.startsWith("scripture:")) out.scripture = line.split(/scripture:/i)[1].trim();
+        else if (lower.startsWith("by:")) out.by = line.split(/by:/i)[1].trim();
+        else if (lower.startsWith("date:")) out.date = line.split(/date:/i)[1].trim();
+        else if (lower.startsWith("video:")) out.video = line.split(/video:/i)[1].trim();
+        else out.extra.push(line);
+      }
+
+      return out;
+    }
+
+    function extractYouTubeId(url) {
+      if (!url) return "";
+      try {
+        const u = new URL(url.trim());
+        if (u.hostname.includes("youtu.be")) {
+          return u.pathname.replace(/^\/+/, "").trim();
+        }
+        const v = u.searchParams.get("v");
+        if (v) return v.trim();
+        if (u.pathname.includes("/shorts/")) {
+          return u.pathname.split("/shorts/")[1].split("/")[0].trim();
+        }
+        return "";
+      } catch {
+        return "";
+      }
+    }
+
+    function getWatchThumb(videoId) {
+      if (!videoId) return FALLBACK_IMAGE;
+      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    }
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      listenBtn.classList.toggle("active", mode === "audio");
+      watchBtn.classList.toggle("active", mode === "video");
+      clearPlayers();
+      renderSeriesList();
+      renderEpisodes();
+      renderEmptyMeta();
+    }
+
+    function clearPlayers() {
+      playerEl.style.display = "none";
+      videoPlaceholderEl.style.display = "flex";
+
+      if (ytPlayer && typeof ytPlayer.stopVideo === "function") {
+        try { ytPlayer.stopVideo(); } catch {}
+      }
+
+      audioPlayerEl.pause();
+      audioPlayerEl.removeAttribute("src");
+      audioPlayerEl.load();
+      audioPlayerEl.style.display = "none";
+      audioPlaceholderEl.style.display = "flex";
+      audioArtEl.style.display = "none";
+    }
+
+    function renderEmptyMeta() {
+      const label = mode === "audio" ? "listen" : "watch";
+      metaBoxEl.innerHTML = `
+        <h2>Select a sermon</h2>
+        <div class="series-line">Choose a sermon to ${label}.</div>
+      `;
+    }
+
+    function renderMeta(ep, isAudio) {
+      let html = `
+        <h2>${ep.title || "Untitled Sermon"}</h2>
+        <div class="series-line">${ep.series || currentSeries || ""}</div>
+      `;
+
+      if (ep.scripture) html += `<p><strong>Scripture:</strong> ${ep.scripture}</p>`;
+      if (ep.by) html += `<p><strong>By:</strong> ${ep.by}</p>`;
+      if (ep.date) html += `<p><strong>Date:</strong> ${ep.date}</p>`;
+
+      if (ep.extra && ep.extra.length) {
+        ep.extra.forEach(line => {
+          html += `<p>${line}</p>`;
+        });
+      }
+
+      if (isAudio && ep.link) {
+        html += `
+          <div class="actions">
+            <a class="rss-button" href="${ep.link}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.18 17.82a2.18 2.18 0 1 0 0 4.36 2.18 2.18 0 0 0 0-4.36Zm-3.27-7.64v3.27c4.15 0 7.64 3.49 7.64 7.64h3.27c0-5.93-4.98-10.91-10.91-10.91Zm0-6.55v3.27c7.75 0 14.09 6.34 14.09 14.09h3.27c0-9.55-7.81-17.36-17.36-17.36Z"/>
+              </svg>
+              Podcast
+            </a>
+          </div>
+        `;
+      }
+
+      metaBoxEl.innerHTML = html;
+    }
+
+    function getSeriesCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      if (!items.length) return FALLBACK_IMAGE;
+
+      const first = items[0];
+      if (mode === "audio") {
+        return first.seriesImage || first.img || FALLBACK_IMAGE;
+      }
+      return getWatchThumb(first.videoId);
+    }
+
+    function renderSeriesList() {
+      seriesListEl.innerHTML = "";
+
+      seriesOrder.forEach(seriesName => {
+        const item = document.createElement("div");
+        item.className = "series-item" + (seriesName === currentSeries ? " active" : "");
+        item.innerHTML = `
+          <img class="series-icon" src="${getSeriesCover(seriesName)}" alt="">
+          <span class="series-name">${seriesName}</span>
+        `;
+        item.addEventListener("click", () => {
+          currentSeries = seriesName;
+          currentEpisodeIndex = null;
+          clearPlayers();
+          renderSeriesList();
+          renderEpisodes();
+          renderEmptyMeta();
+        });
+        seriesListEl.appendChild(item);
+      });
+    }
+
+    function renderEpisodes() {
+      episodesEl.innerHTML = "";
+      if (!currentSeries || !sermonData[currentSeries]) return;
+
+      const items = sermonData[currentSeries];
+
+      items.forEach((ep, index) => {
+        const row = document.createElement("div");
+        row.className = "episode" + (index === currentEpisodeIndex ? " active" : "");
+
+        const thumb = mode === "audio"
+          ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
+          : getWatchThumb(ep.videoId);
+
+        row.innerHTML = `
+          <img src="${thumb}" alt="">
+          <div class="episode-text">
+            <div class="episode-title">${ep.title || "Untitled Sermon"}</div>
+            <div class="episode-sub">${ep.scripture || ep.date || ""}</div>
+          </div>
+        `;
+
+        row.addEventListener("click", () => {
+          currentEpisodeIndex = index;
+          renderEpisodes();
+          if (mode === "audio") {
+            playAudio(ep);
+          } else {
+            playVideo(ep);
+          }
+        });
+
+        episodesEl.appendChild(row);
+      });
+    }
+
+    function playAudio(ep) {
+      playerEl.style.display = "none";
+      videoPlaceholderEl.style.display = "none";
+
+      audioPlayerEl.style.display = "block";
+      audioPlaceholderEl.style.display = "none";
+      audioArtEl.style.display = "block";
+
+      audioArtImgEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+
+      audioPlayerEl.src = ep.audio;
+      audioPlayerEl.load();
+
+      renderMeta(ep, true);
+    }
+
+    function ensureYouTubePlayer(videoId) {
+      if (!ytApiReady || !videoId) return;
+
+      if (!ytPlayer) {
+        ytPlayer = new YT.Player("player", {
+          videoId: videoId,
+          playerVars: {
+            autoplay: 0,
+            rel: 0
+          }
+        });
+      } else {
+        ytPlayer.loadVideoById(videoId);
+      }
+    }
+
+    function playVideo(ep) {
+      if (!ep.videoId) {
+        metaBoxEl.innerHTML = `
+          <h2>${ep.title || "Untitled Sermon"}</h2>
+          <div class="series-line">${ep.series || currentSeries || ""}</div>
+          <p>No video link is available for this sermon yet.</p>
+        `;
+        return;
+      }
+
+      audioPlayerEl.pause();
+      audioPlayerEl.style.display = "none";
+      audioPlaceholderEl.style.display = "none";
+      audioArtEl.style.display = "none";
+
+      playerEl.style.display = "block";
+      videoPlaceholderEl.style.display = "none";
+
+      ensureYouTubePlayer(ep.videoId);
+      renderMeta(ep, false);
+    }
+
+    async function loadRSSData() {
+      const xmlText = await fetch(RSS_URL).then(r => r.text());
+      const xml = new DOMParser().parseFromString(xmlText, "text/xml");
+      const items = Array.from(xml.querySelectorAll("item"));
+
+      const temp = {};
+
+      items.forEach(item => {
+        const rawDescription = item.querySelector("description")?.textContent || "";
+        const parsed = parseDescription(rawDescription);
+        const series = parsed.series || "Other Sermons";
+
+        const enclosure = item.querySelector("enclosure");
+        const audioUrl = enclosure ? enclosure.getAttribute("url") : "";
+        const itemLink = item.querySelector("link")?.textContent?.trim() || "";
+
+        let itemImage = "";
+        const itunesImages = item.getElementsByTagName("itunes:image");
+        if (itunesImages && itunesImages[0]) {
+          itemImage = itunesImages[0].getAttribute("href") || "";
+        }
+
+        const videoId = extractYouTubeId(parsed.video);
+
+        if (!temp[series]) temp[series] = [];
+
+        temp[series].push({
+          title: parsed.title || item.querySelector("title")?.textContent?.split("|")[0]?.trim() || "Untitled Sermon",
+          series: series,
+          scripture: parsed.scripture || "",
+          by: parsed.by || "",
+          date: parsed.date || "",
+          video: parsed.video || "",
+          videoId: videoId,
+          audio: audioUrl,
+          img: itemImage,
+          link: itemLink,
+          extra: parsed.extra || []
+        });
+      });
+
+      // keep feed order as source-of-truth order
+      Object.keys(temp).forEach(series => {
+        const firstImage = temp[series].find(x => x.img)?.img || FALLBACK_IMAGE;
+        temp[series] = temp[series].map(ep => ({
+          ...ep,
+          seriesImage: firstImage
+        }));
+      });
+
+      sermonData = temp;
+      seriesOrder = Object.keys(sermonData);
+      currentSeries = seriesOrder[0] || null;
+    }
+
+    function resetHome() {
+      currentSeries = seriesOrder[0] || null;
+      currentEpisodeIndex = null;
+      clearPlayers();
+      renderSeriesList();
+      renderEpisodes();
+      renderEmptyMeta();
+    }
+
+    listenBtn.addEventListener("click", () => setMode("audio"));
+    watchBtn.addEventListener("click", () => setMode("video"));
+    logoReset.addEventListener("click", resetHome);
+
+    (async function init() {
+      await loadRSSData();
+      renderSeriesList();
+      renderEpisodes();
+      renderEmptyMeta();
+    })();
+  </script>
 </body>
 </html>
