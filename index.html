@@ -877,7 +877,7 @@
     const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
     const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
-    const STORAGE_KEY = "cgbc_sermon_state_v1";
+    const STORAGE_KEY = "cgbc_sermon_state_v2";
 
     let sermonData = {};
     let archiveSeriesOrder = [];
@@ -1375,15 +1375,53 @@
 
     function savePlaybackState() {
       try {
+        const currentEp =
+          currentSeries &&
+          sermonData[currentSeries] &&
+          Number.isInteger(currentEpisodeIndex)
+            ? sermonData[currentSeries][currentEpisodeIndex]
+            : null;
+
         const state = {
           mode,
           currentSeries,
           currentEpisodeIndex,
-          audioSrc: audioPlayerEl.currentSrc || audioPlayerEl.src || "",
+          episodeTitle: currentEp?.title || "",
+          audioSrc: currentEp?.audio || audioPlayerEl.currentSrc || audioPlayerEl.src || "",
           audioTime: audioPlayerEl.currentTime || 0
         };
+
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch {}
+      } catch (err) {
+        console.warn("Could not save playback state", err);
+      }
+    }
+
+    function findEpisodeFromState(state) {
+      if (!state || !state.currentSeries || !sermonData[state.currentSeries]) return null;
+
+      const seriesItems = sermonData[state.currentSeries];
+
+      if (
+        Number.isInteger(state.currentEpisodeIndex) &&
+        seriesItems[state.currentEpisodeIndex]
+      ) {
+        const byIndex = seriesItems[state.currentEpisodeIndex];
+        if (
+          (!state.audioSrc || byIndex.audio === state.audioSrc) ||
+          (!state.episodeTitle || byIndex.title === state.episodeTitle)
+        ) {
+          return { ep: byIndex, index: state.currentEpisodeIndex };
+        }
+      }
+
+      const byAudio = seriesItems.findIndex(ep => state.audioSrc && ep.audio === state.audioSrc);
+      if (byAudio !== -1) return { ep: seriesItems[byAudio], index: byAudio };
+
+      const byTitle = seriesItems.findIndex(ep => state.episodeTitle && ep.title === state.episodeTitle);
+      if (byTitle !== -1) return { ep: seriesItems[byTitle], index: byTitle };
+
+      return null;
     }
 
     function restorePlaybackState() {
@@ -1401,47 +1439,52 @@
 
         if (state.currentSeries && sermonData[state.currentSeries]) {
           currentSeries = state.currentSeries;
-        }
-
-        if (Number.isInteger(state.currentEpisodeIndex)) {
-          currentEpisodeIndex = state.currentEpisodeIndex;
+        } else {
+          currentSeries = getVisibleSeriesOrder()[0] || null;
         }
 
         renderSeriesList();
         renderEpisodesList();
         renderEmptyMeta();
 
-        if (
-          mode === "audio" &&
-          currentSeries &&
-          sermonData[currentSeries] &&
-          sermonData[currentSeries][currentEpisodeIndex]
-        ) {
-          const ep = sermonData[currentSeries][currentEpisodeIndex];
-          playAudio(ep);
+        if (mode === "audio") {
+          const found = findEpisodeFromState(state);
 
-          const restoreTimeOnce = () => {
-            try {
-              audioPlayerEl.currentTime = Math.min(
-                state.audioTime || 0,
-                isFinite(audioPlayerEl.duration) && audioPlayerEl.duration > 0
-                  ? audioPlayerEl.duration
-                  : state.audioTime || 0
-              );
-            } catch {}
-            audioPlayerEl.removeEventListener("loadedmetadata", restoreTimeOnce);
-          };
+          if (found) {
+            currentEpisodeIndex = found.index;
+            renderEpisodesList();
+            playAudio(found.ep);
 
-          audioPlayerEl.addEventListener("loadedmetadata", restoreTimeOnce);
-        } else if (mode === "video") {
-          videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
-          videoPlaceholderEl.style.display = "flex";
-        } else {
+            const restoreTimeOnce = () => {
+              try {
+                const targetTime = Number(state.audioTime || 0);
+                if (Number.isFinite(targetTime) && targetTime > 0) {
+                  audioPlayerEl.currentTime = targetTime;
+                }
+              } catch (err) {
+                console.warn("Could not restore audio time", err);
+              }
+              audioPlayerEl.removeEventListener("loadedmetadata", restoreTimeOnce);
+            };
+
+            audioPlayerEl.addEventListener("loadedmetadata", restoreTimeOnce);
+            audioPlaceholderEl.style.display = "none";
+            return true;
+          }
+
           audioPlaceholderEl.style.display = "flex";
+          return true;
         }
 
-        return true;
-      } catch {
+        if (mode === "video") {
+          videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
+          videoPlaceholderEl.style.display = "flex";
+          return true;
+        }
+
+        return false;
+      } catch (err) {
+        console.warn("Could not restore playback state", err);
         return false;
       }
     }
@@ -1583,9 +1626,7 @@
       savePlaybackState();
     });
 
-    audioPlayerEl.addEventListener("timeupdate", () => {
-      savePlaybackState();
-    });
+    audioPlayerEl.addEventListener("timeupdate", savePlaybackState);
 
     listenBtn.addEventListener("click", () => setMode("audio"));
     watchBtn.addEventListener("click", () => setMode("video"));
