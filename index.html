@@ -32,7 +32,7 @@
     .header {
       display: flex;
       justify-content: center;
-      padding: 10px 4px 6px;
+      padding: 10px 0 6px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -82,7 +82,7 @@
     }
 
     .col-player {
-      padding: 18px;
+      padding: 22px 22px 26px;
     }
 
     .mode-toggle {
@@ -136,6 +136,18 @@
       gap: 8px;
     }
 
+    .series-divider {
+      margin: 10px 8px 6px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: var(--muted);
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+
     .series-item,
     .episode-item {
       border-radius: 14px;
@@ -186,6 +198,13 @@
       background: rgba(255,255,255,0.05);
     }
 
+    .series-copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
     .series-name {
       font-size: 15px;
       line-height: 1.2;
@@ -197,6 +216,32 @@
       transform: translateY(-2px);
       color: #fff;
     }
+
+    .series-chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .series-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.10);
+      color: #f3f3f3;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .series-chip.current { background: rgba(128,159,144,0.45); color: #111; }
+    .series-chip.ongoing { background: rgba(255,255,255,0.14); }
+    .series-chip.specials { background: rgba(255,255,255,0.12); }
+    .series-chip.live { background: rgba(128,159,144,0.45); color: #111; }
+    .series-chip.videoonly { background: rgba(255,255,255,0.12); }
 
     .episode-item-inner {
       display: flex;
@@ -225,11 +270,28 @@
       background: rgba(255,255,255,0.05);
     }
 
+    .episode-item.active .episode-item-inner {
+      position: relative;
+    }
+
+    .episode-item.active .episode-item-inner::before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(128,159,144,0.35);
+    }
+
     .episode-copy {
       min-width: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding-left: 2px;
     }
 
     .episode-title {
@@ -247,7 +309,7 @@
     }
 
     .player-wrap {
-      max-width: 1100px;
+      max-width: 1140px;
     }
 
     #videoShell,
@@ -257,7 +319,7 @@
       border-radius: 18px;
       overflow: hidden;
       box-shadow: var(--shadow-strong);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       min-height: 560px;
     }
 
@@ -296,7 +358,7 @@
       box-shadow: var(--shadow-strong);
       color: var(--muted);
       padding: 24px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .audio-feature-card {
@@ -306,7 +368,7 @@
       border-radius: 22px;
       box-shadow: var(--shadow-strong);
       padding: 24px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       text-align: center;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -404,7 +466,7 @@
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 18px;
+      padding: 20px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
@@ -434,6 +496,12 @@
 
     .meta p strong {
       color: #fff;
+    }
+
+    .meta .meta-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.62);
     }
 
     .actions {
@@ -512,10 +580,10 @@
 
     <main class="col col-player">
       <div class="player-wrap">
-        <div id="videoPlaceholder">Choose a sermon to watch.</div>
+        <div id="videoPlaceholder">Choose a series on the left, then select a sermon to watch.</div>
         <div id="videoShell"></div>
 
-        <div id="audioPlaceholder">Choose a sermon to listen.</div>
+        <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
 
         <div class="audio-feature-card" id="audioFeatureCard">
           <img id="audioFeatureArt" alt="Sermon artwork">
@@ -533,27 +601,34 @@
         <section class="meta" id="metaBox">
           <h2>Select a sermon</h2>
           <div class="series-line">Choose a series and episode.</div>
+          <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
         </section>
       </div>
     </main>
   </div>
 
   <script>
-    const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
-    const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
-    const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
+    /* =========================
+       CONTENT PRIORITY SETTINGS
+       Update these when your current content changes
+       ========================= */
+    const CURRENT_SERIES = "Romans Chapter 12";
+    const SECONDARY_SERIES = "Eschatology: The Rapture";
+    const CURRENT_SPECIALS = "2026 Specials";
+
     const LIVESTREAMS = {
       name: "Livestreams",
       playlistId: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"
     };
+
     const VIDEO_ONLY_ARCHIVE = {
       name: "CGBC Guest Speaker",
       playlistId: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"
     };
 
-    const CURRENT_SERIES = "Romans Chapter 12";
-    const SECONDARY_SERIES = "Eschatology: The Rapture";
-    const CURRENT_SPECIALS = "2026 Specials";
+    const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
+    const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
+    const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
 
     let sermonData = {};
     let archiveSeriesOrder = [];
@@ -699,6 +774,7 @@
       metaBoxEl.innerHTML = `
         <h2>Select a sermon</h2>
         <div class="series-line">Choose a series and episode to ${verb}.</div>
+        <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
       `;
     }
 
@@ -731,31 +807,24 @@
 
     function groupNumberedSeries(names) {
       const grouped = new Map();
-      const singles = [];
+      const consumed = new Set();
+      const output = [];
 
       names.forEach(name => {
-        const match = name.match(/^(.*?)(\d+)\s*$/);
-        if (!match) {
-          singles.push(name);
-          return;
-        }
-
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
+        if (!match) return;
         const base = match[1].trim();
         const num = parseInt(match[2], 10);
-
         if (!grouped.has(base)) grouped.set(base, []);
-        grouped.get(base).push({ name, num });
+        grouped.get(base).push({ name, num, base });
       });
-
-      const output = [];
-      const consumed = new Set();
 
       names.forEach(name => {
         if (consumed.has(name)) return;
 
-        const match = name.match(/^(.*?)(\d+)\s*$/);
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
         if (!match) {
-          singles.includes(name) && output.push(name);
+          output.push(name);
           consumed.add(name);
           return;
         }
@@ -765,12 +834,18 @@
         family.sort((a, b) => b.num - a.num);
 
         family.forEach(item => {
-          output.push(item.name);
-          consumed.add(item.name);
+          if (!consumed.has(item.name)) {
+            output.push(item.name);
+            consumed.add(item.name);
+          }
         });
 
         const parentCandidate = base.replace(/\s+(chapter|part)$/i, "").trim();
-        const parentMatch = names.find(n => !consumed.has(n) && n.trim().toLowerCase() === parentCandidate.toLowerCase());
+        const parentMatch = names.find(n =>
+          !consumed.has(n) &&
+          n.trim().toLowerCase() === parentCandidate.toLowerCase()
+        );
+
         if (parentMatch) {
           output.push(parentMatch);
           consumed.add(parentMatch);
@@ -820,6 +895,16 @@
       return [...pinned, ...groupedArchive];
     }
 
+    function getSeriesChips(seriesName) {
+      const chips = [];
+      if (seriesName === LIVESTREAMS.name) chips.push({ label: "Live", className: "live" });
+      if (seriesName === CURRENT_SERIES) chips.push({ label: "Current", className: "current" });
+      if (seriesName === SECONDARY_SERIES) chips.push({ label: "Ongoing", className: "ongoing" });
+      if (seriesName === CURRENT_SPECIALS) chips.push({ label: "Current Specials", className: "specials" });
+      if (seriesName === VIDEO_ONLY_ARCHIVE.name) chips.push({ label: "Video Only", className: "videoonly" });
+      return chips;
+    }
+
     function getSeriesCover(seriesName) {
       const items = sermonData[seriesName] || [];
       if (!items.length) return FALLBACK_IMAGE;
@@ -836,6 +921,9 @@
     function renderSeriesList() {
       seriesListEl.innerHTML = "";
       const visibleSeries = getVisibleSeriesOrder();
+      const pinned = getPrioritySeries(mode);
+      const pinnedSet = new Set(pinned);
+      let archiveDividerInserted = false;
 
       if (!visibleSeries.includes(currentSeries)) {
         currentSeries = visibleSeries[0] || null;
@@ -843,12 +931,28 @@
       }
 
       visibleSeries.forEach(seriesName => {
+        if (!archiveDividerInserted && !pinnedSet.has(seriesName)) {
+          const divider = document.createElement("div");
+          divider.className = "series-divider";
+          divider.textContent = "Archive";
+          seriesListEl.appendChild(divider);
+          archiveDividerInserted = true;
+        }
+
+        const chips = getSeriesChips(seriesName);
+        const chipsHtml = chips.length
+          ? `<div class="series-chip-row">${chips.map(ch => `<span class="series-chip ${ch.className}">${ch.label}</span>`).join("")}</div>`
+          : "";
+
         const item = document.createElement("div");
         item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "");
         item.innerHTML = `
           <div class="series-item-inner">
             <img src="${getSeriesCover(seriesName)}" alt="">
-            <div class="series-name">${seriesName}</div>
+            <div class="series-copy">
+              <div class="series-name">${seriesName}</div>
+              ${chipsHtml}
+            </div>
           </div>
         `;
         item.addEventListener("click", () => {
@@ -1014,7 +1118,7 @@
       if (mode === "audio") {
         audioPlaceholderEl.style.display = "flex";
       } else {
-        videoPlaceholderEl.textContent = "Choose a sermon to watch.";
+        videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
         videoPlaceholderEl.style.display = "flex";
       }
 
@@ -1031,7 +1135,7 @@
       if (mode === "audio") {
         audioPlaceholderEl.style.display = "flex";
       } else {
-        videoPlaceholderEl.textContent = "Choose a sermon to watch.";
+        videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
         videoPlaceholderEl.style.display = "flex";
       }
 
