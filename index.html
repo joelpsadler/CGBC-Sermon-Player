@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <title>CGBC Sermons</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -18,21 +21,44 @@
       --muted: #d7d7d7;
       --shadow: 0 10px 28px rgba(0,0,0,0.30);
       --shadow-strong: 0 18px 40px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.25);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       background: var(--bg);
       color: var(--text);
       font-family: 'Lato', sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      padding-bottom: var(--safe-bottom);
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    button,
+    audio,
+    iframe {
+      font: inherit;
+    }
+
+    .app-shell {
+      width: 100%;
     }
 
     .header {
       display: flex;
       justify-content: center;
-      padding: 10px 0 6px;
+      padding: calc(10px + var(--safe-top)) 0 6px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -97,12 +123,13 @@
     .layout {
       display: grid;
       grid-template-columns: 290px 340px minmax(0, 1fr);
-      min-height: calc(100vh - 78px);
+      min-height: calc(100vh - 86px - var(--safe-top));
     }
 
     .col {
       min-width: 0;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .col-series {
@@ -125,7 +152,7 @@
       margin-bottom: 14px;
       position: sticky;
       top: 0;
-      z-index: 2;
+      z-index: 3;
       background: linear-gradient(to bottom, var(--bg) 86%, transparent);
       padding-bottom: 10px;
     }
@@ -134,13 +161,14 @@
       flex: 1;
       border: none;
       border-radius: 12px;
-      padding: 10px 12px;
+      padding: 12px 12px;
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
       color: var(--text);
       background: rgba(255,255,255,0.08);
       cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      min-height: 44px;
     }
 
     .mode-toggle button:hover {
@@ -187,6 +215,7 @@
       border-radius: 14px;
       cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .series-item:hover,
@@ -210,6 +239,7 @@
       align-items: center;
       gap: 10px;
       padding: 10px;
+      min-height: 56px;
     }
 
     .series-item.audio img {
@@ -281,6 +311,7 @@
       gap: 10px;
       padding: 8px;
       align-items: flex-start;
+      min-height: 88px;
     }
 
     .episode-item.audio img {
@@ -387,6 +418,7 @@
       border: 1px solid var(--border);
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
     #videoPreview:hover {
@@ -545,6 +577,7 @@
       justify-content: center;
       min-height: 320px;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .audio-art-panel img {
@@ -663,6 +696,7 @@
       display: none;
       margin-bottom: 0;
       border-radius: 12px;
+      min-height: 44px;
     }
 
     .meta {
@@ -722,6 +756,7 @@
       border-radius: 12px;
       padding: 10px 14px;
       transition: transform 0.2s ease, background 0.2s ease;
+      min-height: 44px;
     }
 
     .rss-button:hover {
@@ -735,9 +770,10 @@
       fill: currentColor;
     }
 
+    /* Tablet / mobile */
     @media (max-width: 1180px) {
       .layout {
-        grid-template-columns: 250px 300px minmax(0, 1fr);
+        grid-template-columns: 260px 300px minmax(0, 1fr);
       }
     }
 
@@ -746,113 +782,229 @@
         grid-template-columns: 1fr;
       }
 
+      .col {
+        overflow: visible;
+      }
+
       .col-series,
       .col-episodes {
         border-right: none;
         border-bottom: 1px solid var(--border);
+        padding: 12px 14px;
+      }
+
+      .col-player {
+        padding: 16px 14px 22px;
+      }
+
+      .mode-toggle {
+        position: sticky;
+        top: 0;
       }
 
       #videoShell,
       #videoPlaceholder,
       #videoPreview {
-        min-height: 380px;
+        min-height: 240px;
       }
 
       .video-preview-title {
         font-size: 22px;
       }
 
+      .video-preview-copy {
+        max-width: 100%;
+      }
+
       .audio-split {
         grid-template-columns: 1fr;
+        gap: 18px;
       }
 
       .audio-art-panel {
         min-height: auto;
       }
 
+      .audio-art-panel img {
+        max-width: min(360px, 100%);
+      }
+
       .waveform {
         justify-content: center;
+      }
+
+      .meta h2 {
+        font-size: 24px;
+      }
+    }
+
+    /* Narrow phones / Tithe.ly webview comfort */
+    @media (max-width: 640px) {
+      .header {
+        padding: calc(8px + var(--safe-top)) 0 6px;
+      }
+
+      .logo-panel {
+        width: calc(100vw - 10px);
+        border-radius: 14px;
+        padding: 5px 8px;
+      }
+
+      .logo-panel img {
+        width: min(92vw, 760px);
+      }
+
+      .col-series,
+      .col-episodes,
+      .col-player {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .series-item-inner {
+        padding: 10px 8px;
+      }
+
+      .episode-item-inner {
+        padding: 8px 6px;
+      }
+
+      .episode-item.audio img {
+        width: 78px;
+        height: 78px;
+      }
+
+      .episode-item.video img {
+        width: 102px;
+        height: 58px;
+      }
+
+      .video-preview-overlay {
+        padding: 14px;
+      }
+
+      .video-preview-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .video-preview-cta {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .video-play-icon {
+        width: 44px;
+        height: 44px;
+      }
+
+      .audio-feature-card {
+        padding: 16px;
+      }
+
+      .audio-feature-card h3 {
+        font-size: 24px;
+      }
+
+      .audio-feature-card .audio-series {
+        font-size: 15px;
+      }
+
+      .meta {
+        padding: 16px;
+      }
+
+      .meta h2 {
+        font-size: 22px;
+      }
+
+      .mode-toggle button,
+      .rss-button,
+      #audioPlayer {
+        min-height: 46px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="logo-panel" id="logoReset" title="Reset to first series">
-      <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png" alt="CGBC">
+  <div class="app-shell">
+    <div class="header">
+      <div class="logo-panel" id="logoReset" title="Reset to first series">
+        <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png" alt="CGBC">
+      </div>
     </div>
-  </div>
 
-  <div class="layout">
-    <aside class="col col-series">
-      <div class="mode-toggle">
-        <button id="listenBtn" class="active" type="button">Listen</button>
-        <button id="watchBtn" type="button">Watch</button>
-      </div>
-      <h3 class="section-title">Series</h3>
-      <div id="seriesList" class="series-list"></div>
-    </aside>
+    <div class="layout">
+      <aside class="col col-series">
+        <div class="mode-toggle">
+          <button id="listenBtn" class="active" type="button">Listen</button>
+          <button id="watchBtn" type="button">Watch</button>
+        </div>
+        <h3 class="section-title">Series</h3>
+        <div id="seriesList" class="series-list"></div>
+      </aside>
 
-    <section class="col col-episodes">
-      <h3 class="section-title">Episodes</h3>
-      <div id="episodesList" class="episodes-list"></div>
-    </section>
+      <section class="col col-episodes">
+        <h3 class="section-title">Episodes</h3>
+        <div id="episodesList" class="episodes-list"></div>
+      </section>
 
-    <main class="col col-player">
-      <div class="player-wrap">
-        <div id="videoPlaceholder">Choose a series on the left, then select a sermon to watch.</div>
+      <main class="col col-player">
+        <div class="player-wrap">
+          <div id="videoPlaceholder">Choose a series on the left, then select a sermon to watch.</div>
 
-        <div id="videoPreview">
-          <img id="videoPreviewImg" alt="Selected sermon preview">
-          <div class="video-preview-overlay">
-            <div class="video-preview-copy">
-              <div class="video-preview-kicker">Ready to Watch</div>
-              <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
-              <div class="video-preview-cta">
-                <span class="video-play-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <div id="videoPreview">
+            <img id="videoPreviewImg" alt="Selected sermon preview">
+            <div class="video-preview-overlay">
+              <div class="video-preview-copy">
+                <div class="video-preview-kicker">Ready to Watch</div>
+                <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
+                <div class="video-preview-cta">
+                  <span class="video-play-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  Tap to Play
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="videoShell"></div>
+
+          <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
+
+          <div class="audio-feature-card" id="audioFeatureCard">
+            <div class="audio-split">
+              <div class="audio-art-panel" id="audioArtPanel">
+                <img id="audioFeatureArt" alt="Sermon artwork">
+                <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </span>
-                Tap to Play
+              </div>
+
+              <div class="audio-content">
+                <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
+                <h3 id="audioFeatureTitle">Select a sermon</h3>
+                <div class="audio-series" id="audioFeatureSeries"></div>
+                <div class="waveform" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <audio id="audioPlayer" controls preload="none"></audio>
               </div>
             </div>
           </div>
+
+          <section class="meta" id="metaBox">
+            <h2>Select a sermon</h2>
+            <div class="series-line">Choose a series and episode.</div>
+            <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
+          </section>
         </div>
-
-        <div id="videoShell"></div>
-
-        <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
-
-        <div class="audio-feature-card" id="audioFeatureCard">
-          <div class="audio-split">
-            <div class="audio-art-panel" id="audioArtPanel">
-              <img id="audioFeatureArt" alt="Sermon artwork">
-              <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </span>
-            </div>
-
-            <div class="audio-content">
-              <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
-              <h3 id="audioFeatureTitle">Select a sermon</h3>
-              <div class="audio-series" id="audioFeatureSeries"></div>
-              <div class="waveform" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span>
-              </div>
-              <audio id="audioPlayer" controls preload="none"></audio>
-            </div>
-          </div>
-        </div>
-
-        <section class="meta" id="metaBox">
-          <h2>Select a sermon</h2>
-          <div class="series-line">Choose a series and episode.</div>
-          <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
-        </section>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 
   <script>
@@ -877,7 +1029,6 @@
     const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
     const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
-    const STORAGE_KEY = "cgbc_sermon_state_v2";
 
     let sermonData = {};
     let archiveSeriesOrder = [];
@@ -1261,7 +1412,6 @@
           renderEmptyMeta();
           if (mode === "audio") audioPlaceholderEl.style.display = "flex";
           else videoPlaceholderEl.style.display = "flex";
-          savePlaybackState();
         });
         seriesListEl.appendChild(item);
       });
@@ -1299,7 +1449,6 @@
           } else {
             previewVideo(ep);
           }
-          savePlaybackState();
         });
 
         episodesListEl.appendChild(row);
@@ -1325,7 +1474,6 @@
       audioPlayerEl.load();
 
       renderMeta(ep, true);
-      savePlaybackState();
     }
 
     async function previewVideo(ep) {
@@ -1370,123 +1518,6 @@
       videoShellEl.style.display = "block";
 
       renderMeta(ep, false);
-      savePlaybackState();
-    }
-
-    function savePlaybackState() {
-      try {
-        const currentEp =
-          currentSeries &&
-          sermonData[currentSeries] &&
-          Number.isInteger(currentEpisodeIndex)
-            ? sermonData[currentSeries][currentEpisodeIndex]
-            : null;
-
-        const state = {
-          mode,
-          currentSeries,
-          currentEpisodeIndex,
-          episodeTitle: currentEp?.title || "",
-          audioSrc: currentEp?.audio || audioPlayerEl.currentSrc || audioPlayerEl.src || "",
-          audioTime: audioPlayerEl.currentTime || 0
-        };
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (err) {
-        console.warn("Could not save playback state", err);
-      }
-    }
-
-    function findEpisodeFromState(state) {
-      if (!state || !state.currentSeries || !sermonData[state.currentSeries]) return null;
-
-      const seriesItems = sermonData[state.currentSeries];
-
-      if (
-        Number.isInteger(state.currentEpisodeIndex) &&
-        seriesItems[state.currentEpisodeIndex]
-      ) {
-        const byIndex = seriesItems[state.currentEpisodeIndex];
-        if (
-          (!state.audioSrc || byIndex.audio === state.audioSrc) ||
-          (!state.episodeTitle || byIndex.title === state.episodeTitle)
-        ) {
-          return { ep: byIndex, index: state.currentEpisodeIndex };
-        }
-      }
-
-      const byAudio = seriesItems.findIndex(ep => state.audioSrc && ep.audio === state.audioSrc);
-      if (byAudio !== -1) return { ep: seriesItems[byAudio], index: byAudio };
-
-      const byTitle = seriesItems.findIndex(ep => state.episodeTitle && ep.title === state.episodeTitle);
-      if (byTitle !== -1) return { ep: seriesItems[byTitle], index: byTitle };
-
-      return null;
-    }
-
-    function restorePlaybackState() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return false;
-
-        const state = JSON.parse(raw);
-
-        if (state.mode === "video" || state.mode === "audio") {
-          mode = state.mode;
-          listenBtn.classList.toggle("active", mode === "audio");
-          watchBtn.classList.toggle("active", mode === "video");
-        }
-
-        if (state.currentSeries && sermonData[state.currentSeries]) {
-          currentSeries = state.currentSeries;
-        } else {
-          currentSeries = getVisibleSeriesOrder()[0] || null;
-        }
-
-        renderSeriesList();
-        renderEpisodesList();
-        renderEmptyMeta();
-
-        if (mode === "audio") {
-          const found = findEpisodeFromState(state);
-
-          if (found) {
-            currentEpisodeIndex = found.index;
-            renderEpisodesList();
-            playAudio(found.ep);
-
-            const restoreTimeOnce = () => {
-              try {
-                const targetTime = Number(state.audioTime || 0);
-                if (Number.isFinite(targetTime) && targetTime > 0) {
-                  audioPlayerEl.currentTime = targetTime;
-                }
-              } catch (err) {
-                console.warn("Could not restore audio time", err);
-              }
-              audioPlayerEl.removeEventListener("loadedmetadata", restoreTimeOnce);
-            };
-
-            audioPlayerEl.addEventListener("loadedmetadata", restoreTimeOnce);
-            audioPlaceholderEl.style.display = "none";
-            return true;
-          }
-
-          audioPlaceholderEl.style.display = "flex";
-          return true;
-        }
-
-        if (mode === "video") {
-          videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
-          videoPlaceholderEl.style.display = "flex";
-          return true;
-        }
-
-        return false;
-      } catch (err) {
-        console.warn("Could not restore playback state", err);
-        return false;
-      }
     }
 
     async function loadRSSData() {
@@ -1572,7 +1603,6 @@
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
-      savePlaybackState();
     }
 
     function resetHome() {
@@ -1590,7 +1620,6 @@
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
-      savePlaybackState();
     }
 
     function toggleAudioPlayback() {
@@ -1611,22 +1640,17 @@
     audioPlayerEl.addEventListener("play", () => {
       audioFeatureCardEl.classList.add("playing");
       setAudioReadyState(true);
-      savePlaybackState();
     });
 
     audioPlayerEl.addEventListener("pause", () => {
       audioFeatureCardEl.classList.remove("playing");
       setAudioReadyState(false);
-      savePlaybackState();
     });
 
     audioPlayerEl.addEventListener("ended", () => {
       audioFeatureCardEl.classList.remove("playing");
       setAudioReadyState(false);
-      savePlaybackState();
     });
-
-    audioPlayerEl.addEventListener("timeupdate", savePlaybackState);
 
     listenBtn.addEventListener("click", () => setMode("audio"));
     watchBtn.addEventListener("click", () => setMode("video"));
@@ -1634,14 +1658,10 @@
 
     (async function init() {
       await loadRSSData();
-      const restored = restorePlaybackState();
-
-      if (!restored) {
-        audioPlaceholderEl.style.display = "flex";
-        renderSeriesList();
-        renderEpisodesList();
-        renderEmptyMeta();
-      }
+      audioPlaceholderEl.style.display = "flex";
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
     })();
   </script>
 </body>
