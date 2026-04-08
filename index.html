@@ -2,42 +2,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sermon Library</title>
+<title>CGBC Sermons</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --accent: #2f8f2f;
-  --bg: #0f1110;
+  --accent: #809F90;
+  --bg: #616161;
+  --panel: #4f4f4f;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: 'Lato', sans-serif;
   background: var(--bg);
   color: white;
 }
 
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header img {
+  height: 50px;
+}
+
+/* LAYOUT */
 .layout {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 70px);
 }
 
 /* SIDEBAR */
 .sidebar {
   width: 260px;
   overflow-y: auto;
-  border-right: 1px solid #222;
+  background: #555;
   padding: 10px;
 }
 
 .series {
   padding: 10px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 8px;
+  margin-bottom: 5px;
 }
 
 .series:hover {
-  background: #1a1c1a;
+  background: #666;
 }
 
 .series.active {
@@ -56,8 +72,25 @@ body {
 #player {
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+}
+
+/* METADATA */
+.meta {
+  background: var(--panel);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.meta h2 {
+  font-family: 'Poppins', sans-serif;
+  margin: 0 0 5px;
+}
+
+.meta p {
+  margin: 4px 0;
 }
 
 /* EPISODES */
@@ -70,11 +103,26 @@ body {
 
 .episode img {
   width: 160px;
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
 .episode.active {
   outline: 2px solid var(--accent);
+}
+
+/* MOBILE */
+@media(max-width:800px){
+  .sidebar {
+    position: absolute;
+    left: -260px;
+    top: 70px;
+    height: calc(100vh - 70px);
+    transition: 0.3s;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
 }
 </style>
 
@@ -83,134 +131,137 @@ body {
 
 <body>
 
+<div class="header">
+  <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073708/TS_CGBC_..." />
+</div>
+
 <div class="layout">
 
 <div class="sidebar" id="sidebar"></div>
 
 <div class="main">
   <div id="player"></div>
+  <div class="meta" id="meta"></div>
   <div id="episodes"></div>
 </div>
 
 </div>
 
 <script>
+
 const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
 
 const PLAYLISTS = [
-["Livestreams","PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"],
-["Romans 12","PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS"],
-["Romans 11","PLKqZ6zXCYxUDFWTa93IQRbgUvCJ7mf9pX"],
-["Romans 10","PLKqZ6zXCYxUBtim23RGn81VTGuWRiMo3n"],
-["Romans 9","PLKqZ6zXCYxUAEC6h6yy7KgMsmxsUO_IMZ"],
-["Romans 8","PLKqZ6zXCYxUAwR-ngWwrzH1gfr700zK1X"],
-["Romans 7","PLKqZ6zXCYxUAVQsnh5AgSf7Rg5nE5FEyu"],
-["Romans 6","PLKqZ6zXCYxUBFzNO-rf_2gyv2p8iHeHgo"],
-["Romans 5","PLKqZ6zXCYxUAWd4W5r8-HQ6WOcm5ZcJYH"],
-["Romans 4","PLKqZ6zXCYxUCy5_6q0ySkwkFaFkeXmGma"],
-["Romans 3","PLKqZ6zXCYxUAuPUH-PIVDM-KWW2rMjk-4"],
-["Romans 2","PLKqZ6zXCYxUCgla_YELYiU33w65J7YI9D"],
-["Romans 1","PLKqZ6zXCYxUAV4_OfXycI9W8q5aQ4R9nd"],
-["Romans Full","PLKqZ6zXCYxUCMOi5EgNMr7HDeaRy3gk6F"],
-["Eschatology","PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d"]
+  {name: "Livestreams", id: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"},
+  {name: "Romans Chapter 12 (Current Series)", id: "PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS"},
+  {name: "Romans Chapter 11", id: "PLKqZ6zXCYxUDFWTa93IQRbgUvCJ7mf9pX"},
+  {name: "Romans Chapter 10", id: "PLKqZ6zXCYxUBtim23RGn81VTGuWRiMo3n"},
+  {name: "Romans Chapter 9", id: "PLKqZ6zXCYxUAEC6h6yy7KgMsmxsUO_IMZ"},
+  {name: "Romans Chapter 8", id: "PLKqZ6zXCYxUAwR-ngWwrzH1gfr700zK1X"},
+  {name: "Romans Chapter 7", id: "PLKqZ6zXCYxUAVQsnh5AgSf7Rg5nE5FEyu"},
+  {name: "Romans Chapter 6", id: "PLKqZ6zXCYxUBFzNO-rf_2gyv2p8iHeHgo"},
+  {name: "Romans Chapter 5", id: "PLKqZ6zXCYxUAWd4W5r8-HQ6WOcm5ZcJYH"},
+  {name: "Romans Chapter 4", id: "PLKqZ6zXCYxUCy5_6q0ySkwkFaFkeXmGma"},
+  {name: "Romans Chapter 3", id: "PLKqZ6zXCYxUAuPUH-PIVDM-KWW2rMjk-4"},
+  {name: "Romans Chapter 2", id: "PLKqZ6zXCYxUCgla_YELYiU33w65J7YI9D"},
+  {name: "Romans Chapter 1", id: "PLKqZ6zXCYxUAV4_OfXycI9W8q5aQ4R9nd"},
+  {name: "Romans (Full Series)", id: "PLKqZ6zXCYxUCMOi5EgNMr7HDeaRy3gk6F"},
+  {name: "Eschatology: The Rapture", id: "PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d"},
+  {name: "2026 Specials", id: "PLKqZ6zXCYxUCPWCiVCLNS4UdwNDGWsep0"},
+  {name: "2025 Specials", id: "PLKqZ6zXCYxUALAewPHSUyaEmMisdZFUDp"},
+  {name: "2024 Specials", id: "PLKqZ6zXCYxUBKFfd5poJge2ny5g-pTtC-"},
+  {name: "Re-Prioritize 2025", id: "PLKqZ6zXCYxUAu1O5aR2XmtsCrBsa_iQy0"},
+  {name: "Expect Victory", id: "PLKqZ6zXCYxUDWd6FJ-Zq0SW15Q3M-WwCh"},
+  {name: "Picking Up the Pieces", id: "PLKqZ6zXCYxUBFJUy_YG2nhcydF2bigNDO"},
+  {name: "Disciplines of a Victorious Believer", id: "PLKqZ6zXCYxUBCL5oD8rRdX3uxxvMt6IFr"},
+  {name: "The Dangers of Saying NO to God", id: "PLKqZ6zXCYxUAVvUuXjOyexSNcbi8eq4oi"},
+  {name: "CGBC - Guest Speaker", id: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"},
+  {name: "Worship Night", id: "PLKqZ6zXCYxUDYmkJymG0h1USwIlhdKmtC"},
+  {name: "All Sermons", id: "PLKqZ6zXCYxUBM36Qy41u3YnnsXET8v4XJ"},
+  {name: "Sundays", id: "PLKqZ6zXCYxUASm_ZhYAf-ZbBvGuogtp-l"},
+  {name: "Wednesday Nights", id: "PLKqZ6zXCYxUC5GNAg3SzWSyAAoJ5C21AH"},
+  {name: "Sunday Nights", id: "PLKqZ6zXCYxUBU7Br58uC0j031fssfe7UE"}
 ];
 
-let player;
-let currentList = [];
-let currentIndex = 0;
+let player, currentList = [], currentIndex = 0;
 
-function createPlayer(id) {
-  player = new YT.Player('player', {
-    videoId: id,
-    events: {
-      'onStateChange': e => {
-        if (e.data === YT.PlayerState.ENDED) {
-          if (currentIndex < currentList.length - 1) {
-            playVideo(currentIndex + 1);
-          }
-        }
-      }
-    }
-  });
-}
+/* SIDEBAR */
+const sidebar = document.getElementById("sidebar");
+PLAYLISTS.forEach((p,i)=>{
+  let div = document.createElement("div");
+  div.className = "series";
+  div.innerText = p.name;
+  div.onclick = ()=>loadPlaylist(p.id, div);
+  sidebar.appendChild(div);
+});
 
-async function fetchAllVideos(playlistId) {
-  let videos = [];
-  let nextPageToken = "";
+/* LOAD PLAYLIST */
+async function loadPlaylist(id, el){
+  document.querySelectorAll(".series").forEach(s=>s.classList.remove("active"));
+  if(el) el.classList.add("active");
 
-  do {
-    const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&pageToken=${nextPageToken}&key=${API_KEY}`
-    );
-    const data = await res.json();
+  let res = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=${API_KEY}`);
+  let data = await res.json();
+  currentList = data.items;
 
-    videos = videos.concat(data.items);
-    nextPageToken = data.nextPageToken || "";
+  if(id.includes("UBu3jzPCTncKPpopFcvlVyv")){
+    currentList.sort((a,b)=> new Date(b.snippet.publishedAt)-new Date(a.snippet.publishedAt));
+  }
 
-  } while (nextPageToken);
-
-  return videos.reverse();
-}
-
-function renderSidebar() {
-  const sidebar = document.getElementById("sidebar");
-
-  PLAYLISTS.forEach(([name, id], index) => {
-    const div = document.createElement("div");
-    div.className = "series";
-    div.textContent = name;
-
-    div.onclick = async () => {
-      document.querySelectorAll(".series").forEach(s => s.classList.remove("active"));
-      div.classList.add("active");
-
-      const videos = await fetchAllVideos(id);
-      loadEpisodes(videos);
-    };
-
-    sidebar.appendChild(div);
-
-    if (index === 0) div.click();
-  });
-}
-
-function loadEpisodes(videos) {
-  currentList = videos;
-  const container = document.getElementById("episodes");
-  container.innerHTML = "";
-
-  videos.forEach((item, i) => {
-    const vid = item.snippet.resourceId.videoId;
-
-    const div = document.createElement("div");
-    div.className = "episode";
-
-    div.innerHTML = `
-      <img src="${item.snippet.thumbnails.medium.url}">
-      <div>${item.snippet.title}</div>
-    `;
-
-    div.onclick = () => playVideo(i);
-
-    container.appendChild(div);
-  });
-
+  renderEpisodes();
   playVideo(0);
 }
 
-function playVideo(index) {
-  currentIndex = index;
-  const vid = currentList[index].snippet.resourceId.videoId;
+/* PLAYER */
+function playVideo(i){
+  currentIndex = i;
+  let vid = currentList[i];
 
-  if (!player) createPlayer(vid);
-  else player.loadVideoById(vid);
+  if(!player){
+    player = new YT.Player('player', {
+      videoId: vid.snippet.resourceId.videoId,
+      events:{
+        'onStateChange': e=>{
+          if(e.data===0 && currentIndex<currentList.length-1){
+            playVideo(currentIndex+1);
+          }
+        }
+      }
+    });
+  } else {
+    player.loadVideoById(vid.snippet.resourceId.videoId);
+  }
 
-  document.querySelectorAll(".episode").forEach((e, i) =>
-    e.classList.toggle("active", i === index)
-  );
+  renderMeta(vid.snippet.description);
 }
 
-renderSidebar();
+/* META */
+function renderMeta(desc){
+  let lines = desc.split("\n");
+  let out = "";
+  lines.forEach(l=>{
+    if(l.includes(":")) out += `<p>${l}</p>`;
+  });
+  document.getElementById("meta").innerHTML = out;
+}
+
+/* EPISODES */
+function renderEpisodes(){
+  let el = document.getElementById("episodes");
+  el.innerHTML = "";
+
+  currentList.forEach((v,i)=>{
+    let d = document.createElement("div");
+    d.className = "episode";
+    d.innerHTML = `<img src="${v.snippet.thumbnails.medium.url}"><div>${v.snippet.title}</div>`;
+    d.onclick = ()=>playVideo(i);
+    el.appendChild(d);
+  });
+}
+
+/* LOAD FIRST */
+loadPlaylist(PLAYLISTS[0].id);
+
 </script>
 
 </body>
