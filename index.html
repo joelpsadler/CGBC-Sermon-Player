@@ -351,6 +351,13 @@
       position: relative;
       background: #1f1f1f;
       border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #videoPreview:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 46px rgba(0,0,0,0.5), 0 6px 18px rgba(0,0,0,0.28);
     }
 
     #videoPreview img {
@@ -368,11 +375,23 @@
       align-items: flex-end;
       justify-content: flex-start;
       padding: 22px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.52));
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 18%, rgba(255,255,255,0.0) 34%),
+        linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.56));
+    }
+
+    .video-preview-overlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.06), rgba(255,255,255,0) 46%);
+      pointer-events: none;
     }
 
     .video-preview-copy {
       max-width: 80%;
+      position: relative;
+      z-index: 2;
     }
 
     .video-preview-kicker {
@@ -388,6 +407,49 @@
       font-family: 'Poppins', sans-serif;
       font-size: 28px;
       line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .video-preview-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .video-play-icon,
+    .audio-play-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .video-play-icon {
+      width: 54px;
+      height: 54px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+    }
+
+    .video-play-icon svg,
+    .audio-play-badge svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+      margin-left: 2px;
     }
 
     #audioPlaceholder {
@@ -407,6 +469,7 @@
 
     .audio-feature-card {
       display: none;
+      position: relative;
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.18));
       border: 1px solid var(--border);
       border-radius: 22px;
@@ -416,6 +479,21 @@
       text-align: center;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .audio-feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 16%, rgba(255,255,255,0) 32%);
+      pointer-events: none;
+    }
+
+    .audio-feature-art-wrap {
+      position: relative;
+      width: fit-content;
+      margin: 0 auto 18px;
     }
 
     .audio-feature-card img {
@@ -427,7 +505,25 @@
         0 14px 34px rgba(0,0,0,0.42),
         0 4px 12px rgba(0,0,0,0.22);
       background: rgba(255,255,255,0.05);
-      margin-bottom: 18px;
+      display: block;
+    }
+
+    .audio-play-badge {
+      width: 52px;
+      height: 52px;
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+    }
+
+    .audio-ready {
+      margin: 0 0 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.82;
     }
 
     .audio-feature-card h3 {
@@ -435,6 +531,8 @@
       font-size: 26px;
       margin: 0 0 6px;
       line-height: 1.15;
+      position: relative;
+      z-index: 1;
     }
 
     .audio-feature-card .audio-series {
@@ -442,6 +540,8 @@
       color: #ffffff;
       opacity: 0.9;
       margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
     }
 
     .waveform {
@@ -453,6 +553,8 @@
       margin: 0 auto 18px;
       width: min(560px, 92%);
       opacity: 0.95;
+      position: relative;
+      z-index: 1;
     }
 
     .waveform span {
@@ -504,6 +606,8 @@
       display: none;
       margin-bottom: 0;
       border-radius: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .meta {
@@ -635,8 +739,14 @@
           <img id="videoPreviewImg" alt="Selected sermon preview">
           <div class="video-preview-overlay">
             <div class="video-preview-copy">
-              <div class="video-preview-kicker">Selected Sermon</div>
+              <div class="video-preview-kicker">Ready to Watch</div>
               <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
+              <div class="video-preview-cta">
+                <span class="video-play-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+                Tap to Play
+              </div>
             </div>
           </div>
         </div>
@@ -646,7 +756,13 @@
         <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
 
         <div class="audio-feature-card" id="audioFeatureCard">
-          <img id="audioFeatureArt" alt="Sermon artwork">
+          <div class="audio-feature-art-wrap">
+            <img id="audioFeatureArt" alt="Sermon artwork">
+            <span class="audio-play-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </div>
+          <div class="audio-ready">Ready to Listen</div>
           <h3 id="audioFeatureTitle">Select a sermon</h3>
           <div class="audio-series" id="audioFeatureSeries"></div>
           <div class="waveform" aria-hidden="true">
@@ -817,6 +933,7 @@
       videoShellEl.style.display = "none";
       videoPlaceholderEl.style.display = "none";
       videoPreviewEl.style.display = "none";
+      videoPreviewEl.onclick = null;
     }
 
     function stopAndHideAudio() {
@@ -988,6 +1105,7 @@
       const pinned = getPrioritySeries(mode);
       const pinnedSet = new Set(pinned);
       let archiveDividerInserted = false;
+      let featuredDividerInserted = false;
 
       if (!visibleSeries.includes(currentSeries)) {
         currentSeries = visibleSeries[0] || null;
@@ -995,15 +1113,7 @@
       }
 
       visibleSeries.forEach(seriesName => {
-        if (!archiveDividerInserted && !pinnedSet.has(seriesName)) {
-          const divider = document.createElement("div");
-          divider.className = "series-divider";
-          divider.textContent = "Archive";
-          seriesListEl.appendChild(divider);
-          archiveDividerInserted = true;
-        }
-
-        if (pinnedSet.has(seriesName) && !seriesListEl.querySelector(".series-divider.featured")) {
+        if (!featuredDividerInserted && pinnedSet.has(seriesName)) {
           const divider = document.createElement("div");
           divider.className = "series-divider featured";
           divider.textContent = "Featured Now";
@@ -1011,6 +1121,15 @@
           divider.style.paddingTop = "0";
           divider.style.borderTop = "none";
           seriesListEl.appendChild(divider);
+          featuredDividerInserted = true;
+        }
+
+        if (!archiveDividerInserted && !pinnedSet.has(seriesName)) {
+          const divider = document.createElement("div");
+          divider.className = "series-divider";
+          divider.textContent = "Archive";
+          seriesListEl.appendChild(divider);
+          archiveDividerInserted = true;
         }
 
         const chips = getSeriesChips(seriesName);
@@ -1113,9 +1232,7 @@
 
       renderMeta(ep, false);
 
-      videoPreviewEl.onclick = () => {
-        playVideo(ep);
-      };
+      videoPreviewEl.onclick = () => playVideo(ep);
     }
 
     function playVideo(ep) {
