@@ -12,116 +12,69 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: system-ui, sans-serif;
   background: var(--bg);
-  color: #f5f5f5;
+  color: white;
 }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  overflow-y: auto;
+  border-right: 1px solid #222;
+  padding: 10px;
+}
+
+.series {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.series:hover {
+  background: #1a1c1a;
+}
+
+.series.active {
+  background: var(--accent);
+  color: black;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
   padding: 20px;
+  overflow-y: auto;
 }
 
 /* PLAYER */
 #player {
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-/* ROWS */
-.row {
-  margin-bottom: 30px;
-}
-
-.row h3 {
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-/* HORIZONTAL SCROLL */
-.row-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 14px;
-  padding-bottom: 8px;
-  scroll-snap-type: x mandatory;
-}
-
-.row-container::-webkit-scrollbar {
-  height: 6px;
-}
-.row-container::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-
-/* VIDEO CARD */
-.video {
-  min-width: 240px;
-  cursor: pointer;
-  position: relative;
-  scroll-snap-align: start;
-}
-
-.video img {
-  width: 100%;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-.video:hover img {
-  filter: brightness(0.75);
-}
-
-/* PLAY ICON */
-.play-icon {
-  position: absolute;
-  top: 42%;
-  left: 45%;
-  font-size: 28px;
-  opacity: 0;
-  transition: 0.2s;
-}
-
-.video:hover .play-icon {
-  opacity: 1;
-}
-
-/* ACTIVE VIDEO */
-.video.active {
-  outline: 3px solid var(--accent);
-  border-radius: 8px;
-}
-
-/* TOGGLE */
-.toggle {
-  display: flex;
-  gap: 10px;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
-.toggle button {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #1a1c1a;
-  color: white;
+/* EPISODES */
+.episode {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
-.active-toggle {
-  background: var(--accent);
-  color: white;
+.episode img {
+  width: 160px;
+  border-radius: 6px;
 }
 
-#podcast {
-  display: none;
+.episode.active {
+  outline: 2px solid var(--accent);
 }
 </style>
 
@@ -129,21 +82,14 @@ body {
 </head>
 
 <body>
-<div class="container">
 
-<div class="toggle">
-  <button id="videoBtn" class="active-toggle">Watch</button>
-  <button id="audioBtn">Listen</button>
-</div>
+<div class="layout">
 
-<div id="videoSection">
+<div class="sidebar" id="sidebar"></div>
+
+<div class="main">
   <div id="player"></div>
-  <div id="rows"></div>
-</div>
-
-<div id="podcast">
-  <iframe src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist"
-          width="100%" height="500" style="border:none;"></iframe>
+  <div id="episodes"></div>
 </div>
 
 </div>
@@ -152,11 +98,8 @@ body {
 const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
 
 const PLAYLISTS = [
-["🔴 Livestreams","PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"],
-
-["Eschatology","PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d"],
-  
-["Romans 12 (Current)","PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS"],
+["Livestreams","PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"],
+["Romans 12","PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS"],
 ["Romans 11","PLKqZ6zXCYxUDFWTa93IQRbgUvCJ7mf9pX"],
 ["Romans 10","PLKqZ6zXCYxUBtim23RGn81VTGuWRiMo3n"],
 ["Romans 9","PLKqZ6zXCYxUAEC6h6yy7KgMsmxsUO_IMZ"],
@@ -169,33 +112,16 @@ const PLAYLISTS = [
 ["Romans 2","PLKqZ6zXCYxUCgla_YELYiU33w65J7YI9D"],
 ["Romans 1","PLKqZ6zXCYxUAV4_OfXycI9W8q5aQ4R9nd"],
 ["Romans Full","PLKqZ6zXCYxUCMOi5EgNMr7HDeaRy3gk6F"],
-
-["2026 Specials","PLKqZ6zXCYxUCPWCiVCLNS4UdwNDGWsep0"],
-["2025 Specials","PLKqZ6zXCYxUALAewPHSUyaEmMisdZFUDp"],
-["2024 Specials","PLKqZ6zXCYxUBKFfd5poJge2ny5g-pTtC-"],
-
-["Re-Prioritize 2025","PLKqZ6zXCYxUAu1O5aR2XmtsCrBsa_iQy0"],
-["Expect Victory","PLKqZ6zXCYxUDWd6FJ-Zq0SW15Q3M-WwCh"],
-["Picking Up the Pieces","PLKqZ6zXCYxUBFJUy_YG2nhcydF2bigNDO"],
-["Disciplines","PLKqZ6zXCYxUBCL5oD8rRdX3uxxvMt6IFr"],
-["Saying NO to God","PLKqZ6zXCYxUAVvUuXjOyexSNcbi8eq4oi"],
-
-["Guest Speaker","PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"],
-["Worship Night","PLKqZ6zXCYxUDYmkJymG0h1USwIlhdKmtC"],
-
-["All Sermons","PLKqZ6zXCYxUBM36Qy41u3YnnsXET8v4XJ"],
-["Sundays","PLKqZ6zXCYxUASm_ZhYAf-ZbBvGuogtp-l"],
-["Wednesday","PLKqZ6zXCYxUC5GNAg3SzWSyAAoJ5C21AH"],
-["Sunday Nights","PLKqZ6zXCYxUBU7Br58uC0j031fssfe7UE"]
+["Eschatology","PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d"]
 ];
 
 let player;
 let currentList = [];
 let currentIndex = 0;
 
-function createPlayer(videoId) {
+function createPlayer(id) {
   player = new YT.Player('player', {
-    videoId: videoId,
+    videoId: id,
     events: {
       'onStateChange': e => {
         if (e.data === YT.PlayerState.ENDED) {
@@ -208,42 +134,68 @@ function createPlayer(videoId) {
   });
 }
 
-async function loadAll() {
-  const container = document.getElementById("rows");
+async function fetchAllVideos(playlistId) {
+  let videos = [];
+  let nextPageToken = "";
 
-  for (let [name, id] of PLAYLISTS) {
+  do {
     const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${id}&key=${API_KEY}`
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&pageToken=${nextPageToken}&key=${API_KEY}`
     );
     const data = await res.json();
 
-    const row = document.createElement("div");
-    row.className = "row";
-    row.innerHTML = `<h3>${name}</h3><div class="row-container"></div>`;
+    videos = videos.concat(data.items);
+    nextPageToken = data.nextPageToken || "";
 
-    const rowContainer = row.querySelector(".row-container");
+  } while (nextPageToken);
 
-    data.items.reverse().forEach((item, i) => {
-      const vid = item.snippet.resourceId.videoId;
+  return videos.reverse();
+}
 
-      const div = document.createElement("div");
-      div.className = "video";
+function renderSidebar() {
+  const sidebar = document.getElementById("sidebar");
 
-      div.innerHTML = `
-        <img src="${item.snippet.thumbnails.medium.url}">
-        <div class="play-icon">▶</div>
-      `;
+  PLAYLISTS.forEach(([name, id], index) => {
+    const div = document.createElement("div");
+    div.className = "series";
+    div.textContent = name;
 
-      div.onclick = () => {
-        currentList = data.items;
-        playVideo(i);
-      };
+    div.onclick = async () => {
+      document.querySelectorAll(".series").forEach(s => s.classList.remove("active"));
+      div.classList.add("active");
 
-      rowContainer.appendChild(div);
-    });
+      const videos = await fetchAllVideos(id);
+      loadEpisodes(videos);
+    };
 
-    container.appendChild(row);
-  }
+    sidebar.appendChild(div);
+
+    if (index === 0) div.click();
+  });
+}
+
+function loadEpisodes(videos) {
+  currentList = videos;
+  const container = document.getElementById("episodes");
+  container.innerHTML = "";
+
+  videos.forEach((item, i) => {
+    const vid = item.snippet.resourceId.videoId;
+
+    const div = document.createElement("div");
+    div.className = "episode";
+
+    div.innerHTML = `
+      <img src="${item.snippet.thumbnails.medium.url}">
+      <div>${item.snippet.title}</div>
+    `;
+
+    div.onclick = () => playVideo(i);
+
+    container.appendChild(div);
+  });
+
+  playVideo(0);
 }
 
 function playVideo(index) {
@@ -252,19 +204,13 @@ function playVideo(index) {
 
   if (!player) createPlayer(vid);
   else player.loadVideoById(vid);
+
+  document.querySelectorAll(".episode").forEach((e, i) =>
+    e.classList.toggle("active", i === index)
+  );
 }
 
-document.getElementById("videoBtn").onclick = () => {
-  document.getElementById("videoSection").style.display = "block";
-  document.getElementById("podcast").style.display = "none";
-};
-
-document.getElementById("audioBtn").onclick = () => {
-  document.getElementById("videoSection").style.display = "none";
-  document.getElementById("podcast").style.display = "block";
-};
-
-loadAll();
+renderSidebar();
 </script>
 
 </body>
