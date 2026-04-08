@@ -32,12 +32,12 @@
     .header {
       display: flex;
       justify-content: center;
-      padding: 10px 10px 6px;
+      padding: 10px 0 6px;
       border-bottom: 1px solid var(--border);
     }
 
     .logo-panel {
-      width: min(1400px, calc(100vw - 20px));
+      width: min(1600px, calc(100vw - 20px));
       padding: 6px 10px;
       border-radius: 18px;
       background: rgba(0,0,0,0.38);
@@ -342,50 +342,55 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      gap: 5px;
-      height: 56px;
+      gap: 4px;
+      height: 64px;
       margin: 0 auto 18px;
-      width: min(520px, 90%);
-      opacity: 0.9;
+      width: min(560px, 92%);
+      opacity: 0.95;
     }
 
     .waveform span {
       width: 8px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(128,159,144,0.95), rgba(128,159,144,0.35));
-      box-shadow: 0 0 8px rgba(128,159,144,0.18);
+      background: linear-gradient(180deg, rgba(128,159,144,1), rgba(128,159,144,0.32));
+      box-shadow: 0 0 10px rgba(128,159,144,0.22);
       transform-origin: bottom center;
+      transform: scaleY(0.55);
+      opacity: 0.82;
       animation-play-state: paused;
     }
 
     .audio-feature-card.playing .waveform span {
-      animation-name: wavePulse;
-      animation-duration: 1s;
+      animation-name: waveMotion;
       animation-iteration-count: infinite;
+      animation-direction: alternate;
       animation-timing-function: ease-in-out;
       animation-play-state: running;
     }
 
-    .audio-feature-card .waveform span:nth-child(1)  { height: 22%; animation-delay: 0.00s; }
-    .audio-feature-card .waveform span:nth-child(2)  { height: 48%; animation-delay: 0.08s; }
-    .audio-feature-card .waveform span:nth-child(3)  { height: 72%; animation-delay: 0.16s; }
-    .audio-feature-card .waveform span:nth-child(4)  { height: 36%; animation-delay: 0.24s; }
-    .audio-feature-card .waveform span:nth-child(5)  { height: 84%; animation-delay: 0.32s; }
-    .audio-feature-card .waveform span:nth-child(6)  { height: 56%; animation-delay: 0.40s; }
-    .audio-feature-card .waveform span:nth-child(7)  { height: 28%; animation-delay: 0.48s; }
-    .audio-feature-card .waveform span:nth-child(8)  { height: 68%; animation-delay: 0.56s; }
-    .audio-feature-card .waveform span:nth-child(9)  { height: 92%; animation-delay: 0.64s; }
-    .audio-feature-card .waveform span:nth-child(10) { height: 42%; animation-delay: 0.72s; }
-    .audio-feature-card .waveform span:nth-child(11) { height: 78%; animation-delay: 0.80s; }
-    .audio-feature-card .waveform span:nth-child(12) { height: 34%; animation-delay: 0.88s; }
-    .audio-feature-card .waveform span:nth-child(13) { height: 60%; animation-delay: 0.96s; }
-    .audio-feature-card .waveform span:nth-child(14) { height: 88%; animation-delay: 1.04s; }
-    .audio-feature-card .waveform span:nth-child(15) { height: 46%; animation-delay: 1.12s; }
-    .audio-feature-card .waveform span:nth-child(16) { height: 70%; animation-delay: 1.20s; }
+    .audio-feature-card .waveform span:nth-child(1)  { height: 20%; animation-duration: 0.58s; animation-delay: 0.00s; }
+    .audio-feature-card .waveform span:nth-child(2)  { height: 36%; animation-duration: 0.74s; animation-delay: 0.08s; }
+    .audio-feature-card .waveform span:nth-child(3)  { height: 58%; animation-duration: 0.63s; animation-delay: 0.14s; }
+    .audio-feature-card .waveform span:nth-child(4)  { height: 30%; animation-duration: 0.86s; animation-delay: 0.05s; }
+    .audio-feature-card .waveform span:nth-child(5)  { height: 82%; animation-duration: 0.66s; animation-delay: 0.20s; }
+    .audio-feature-card .waveform span:nth-child(6)  { height: 48%; animation-duration: 0.92s; animation-delay: 0.11s; }
+    .audio-feature-card .waveform span:nth-child(7)  { height: 24%; animation-duration: 0.60s; animation-delay: 0.26s; }
+    .audio-feature-card .waveform span:nth-child(8)  { height: 68%; animation-duration: 0.78s; animation-delay: 0.17s; }
+    .audio-feature-card .waveform span:nth-child(9)  { height: 94%; animation-duration: 0.55s; animation-delay: 0.32s; }
+    .audio-feature-card .waveform span:nth-child(10) { height: 40%; animation-duration: 0.88s; animation-delay: 0.09s; }
+    .audio-feature-card .waveform span:nth-child(11) { height: 74%; animation-duration: 0.70s; animation-delay: 0.24s; }
+    .audio-feature-card .waveform span:nth-child(12) { height: 28%; animation-duration: 0.98s; animation-delay: 0.13s; }
+    .audio-feature-card .waveform span:nth-child(13) { height: 62%; animation-duration: 0.64s; animation-delay: 0.29s; }
+    .audio-feature-card .waveform span:nth-child(14) { height: 88%; animation-duration: 0.82s; animation-delay: 0.18s; }
+    .audio-feature-card .waveform span:nth-child(15) { height: 44%; animation-duration: 0.68s; animation-delay: 0.35s; }
+    .audio-feature-card .waveform span:nth-child(16) { height: 72%; animation-duration: 0.90s; animation-delay: 0.22s; }
 
-    @keyframes wavePulse {
-      0%, 100% { transform: scaleY(0.55); opacity: 0.72; }
-      50% { transform: scaleY(1.15); opacity: 1; }
+    @keyframes waveMotion {
+      0%   { transform: scaleY(0.25); opacity: 0.55; }
+      25%  { transform: scaleY(0.75); opacity: 0.75; }
+      50%  { transform: scaleY(1.2); opacity: 1; }
+      75%  { transform: scaleY(0.6); opacity: 0.82; }
+      100% { transform: scaleY(1.45); opacity: 1; }
     }
 
     #audioPlayer {
@@ -542,8 +547,12 @@
       playlistId: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"
     };
 
+    const CURRENT_SERIES = "Romans Chapter 12";
+    const SECONDARY_SERIES = "Eschatology: The Rapture";
+    const CURRENT_SPECIALS = "2026 Specials";
+
     let sermonData = {};
-    let seriesOrder = [];
+    let archiveSeriesOrder = [];
     let currentSeries = null;
     let currentEpisodeIndex = null;
     let mode = "audio";
@@ -713,6 +722,22 @@
       metaBoxEl.innerHTML = html;
     }
 
+    function getPrioritySeries(modeName) {
+      const ordered = [];
+      if (modeName === "video" && sermonData[LIVESTREAMS.name]) ordered.push(LIVESTREAMS.name);
+      if (sermonData[CURRENT_SERIES]) ordered.push(CURRENT_SERIES);
+      if (sermonData[SECONDARY_SERIES]) ordered.push(SECONDARY_SERIES);
+      if (sermonData[CURRENT_SPECIALS]) ordered.push(CURRENT_SPECIALS);
+      return ordered;
+    }
+
+    function getVisibleSeriesOrder() {
+      const pinned = getPrioritySeries(mode);
+      const pinnedSet = new Set(pinned);
+      const archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
+      return [...pinned, ...archive];
+    }
+
     function getSeriesCover(seriesName) {
       const items = sermonData[seriesName] || [];
       if (!items.length) return FALLBACK_IMAGE;
@@ -724,14 +749,6 @@
 
       const firstWithVideo = items.find(item => item.videoId);
       return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
-    }
-
-    function getVisibleSeriesOrder() {
-      if (mode === "audio") {
-        return seriesOrder.filter(name => name !== LIVESTREAMS.name);
-      }
-      const withoutLivestreams = seriesOrder.filter(name => name !== LIVESTREAMS.name);
-      return sermonData[LIVESTREAMS.name] ? [LIVESTREAMS.name, ...withoutLivestreams] : withoutLivestreams;
     }
 
     function renderSeriesList() {
@@ -892,8 +909,8 @@
       }
 
       sermonData = grouped;
-      seriesOrder = Object.keys(sermonData).filter(name => name !== LIVESTREAMS.name);
-      currentSeries = seriesOrder[0] || LIVESTREAMS.name || null;
+      archiveSeriesOrder = Object.keys(sermonData).filter(name => name !== LIVESTREAMS.name);
+      currentSeries = getVisibleSeriesOrder()[0] || null;
     }
 
     function setMode(nextMode) {
@@ -905,11 +922,11 @@
       stopAndHideVideo();
       stopAndHideAudio();
 
+      currentSeries = getVisibleSeriesOrder()[0] || null;
+
       if (mode === "audio") {
-        currentSeries = getVisibleSeriesOrder()[0] || null;
         audioPlaceholderEl.style.display = "flex";
       } else {
-        currentSeries = getVisibleSeriesOrder()[0] || null;
         videoPlaceholderEl.textContent = "Choose a sermon to watch.";
         videoPlaceholderEl.style.display = "flex";
       }
@@ -923,11 +940,14 @@
       currentSeries = getVisibleSeriesOrder()[0] || null;
       currentEpisodeIndex = null;
       clearMediaState();
-      if (mode === "audio") audioPlaceholderEl.style.display = "flex";
-      else {
+
+      if (mode === "audio") {
+        audioPlaceholderEl.style.display = "flex";
+      } else {
         videoPlaceholderEl.textContent = "Choose a sermon to watch.";
         videoPlaceholderEl.style.display = "flex";
       }
+
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
