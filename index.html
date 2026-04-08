@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CGBC Sermons</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -17,6 +17,7 @@
       --text: #f4f4f4;
       --muted: #d7d7d7;
       --shadow: 0 10px 28px rgba(0,0,0,0.30);
+      --shadow-strong: 0 18px 40px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.25);
     }
 
     * { box-sizing: border-box; }
@@ -36,9 +37,9 @@
     }
 
     .logo-panel {
-      width: min(860px, 88vw);
-      padding: 4px 8px;
-      border-radius: 14px;
+      width: min(1180px, 96vw);
+      padding: 6px 10px;
+      border-radius: 18px;
       background: rgba(0,0,0,0.38);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -54,8 +55,9 @@
 
     .logo-panel img {
       display: block;
-      width: 100%;
+      width: min(860px, 88vw);
       height: auto;
+      margin: 0 auto;
     }
 
     .layout {
@@ -104,7 +106,7 @@
       color: var(--text);
       background: rgba(255,255,255,0.08);
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .mode-toggle button:hover {
@@ -115,6 +117,7 @@
     .mode-toggle button.active {
       background: rgba(128,159,144,0.40);
       color: #111;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
     }
 
     .section-title {
@@ -142,13 +145,18 @@
 
     .series-item:hover,
     .episode-item:hover {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      transform: translateY(-2px);
     }
 
     .series-item.active,
     .episode-item.active {
-      background: rgba(128,159,144,0.20);
-      box-shadow: 0 0 0 1px rgba(128,159,144,0.22) inset;
+      background: rgba(128,159,144,0.28);
+      box-shadow:
+        0 0 0 1px rgba(128,159,144,0.35) inset,
+        0 6px 14px rgba(0,0,0,0.25);
+      transform: translateY(-1px);
     }
 
     .series-item-inner {
@@ -158,10 +166,21 @@
       padding: 10px;
     }
 
-    .series-item img {
+    .series-item.audio img {
       width: 44px;
       height: 44px;
+      aspect-ratio: 1 / 1;
       border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .series-item.video img {
+      width: 68px;
+      height: 38px;
+      aspect-ratio: 16 / 9;
+      border-radius: 9px;
       object-fit: cover;
       flex-shrink: 0;
       background: rgba(255,255,255,0.05);
@@ -237,7 +256,7 @@
       aspect-ratio: 16 / 9;
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-strong);
       margin-bottom: 16px;
       min-height: 560px;
     }
@@ -274,7 +293,7 @@
       background: var(--panel-strong);
       border: 1px solid var(--border);
       border-radius: 18px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-strong);
       color: var(--muted);
       padding: 24px;
       margin-bottom: 16px;
@@ -285,6 +304,7 @@
       display: none;
       margin-bottom: 16px;
       border-radius: 12px;
+      box-shadow: var(--shadow-strong);
     }
 
     .media-art {
@@ -316,15 +336,17 @@
     .meta h2 {
       margin: 0 0 6px;
       font-family: 'Poppins', sans-serif;
-      font-size: 28px;
+      font-size: 30px;
+      font-weight: 600;
       line-height: 1.15;
     }
 
     .meta .series-line {
       margin-bottom: 12px;
       font-family: 'Poppins', sans-serif;
-      color: #f0f0f0;
-      opacity: 0.96;
+      font-size: 16px;
+      color: #ffffff;
+      opacity: 0.9;
     }
 
     .meta p {
@@ -332,6 +354,10 @@
       color: var(--muted);
       font-size: 15px;
       line-height: 1.35;
+    }
+
+    .meta p strong {
+      color: #fff;
     }
 
     .actions {
@@ -513,6 +539,12 @@
       return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
     }
 
+    function getFirstValidVideoThumb(seriesName) {
+      const items = sermonData[seriesName] || [];
+      const firstWithVideo = items.find(item => item.videoId);
+      return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
+    }
+
     function stopAndHideVideo() {
       videoShellEl.innerHTML = "";
       videoShellEl.style.display = "none";
@@ -571,17 +603,20 @@
     function getSeriesCover(seriesName) {
       const items = sermonData[seriesName] || [];
       if (!items.length) return FALLBACK_IMAGE;
-      const first = items[0];
-      return mode === "audio"
-        ? (first.seriesImage || first.img || FALLBACK_IMAGE)
-        : getWatchThumb(first.videoId);
+
+      if (mode === "audio") {
+        const first = items[0];
+        return first.seriesImage || first.img || FALLBACK_IMAGE;
+      }
+
+      return getFirstValidVideoThumb(seriesName);
     }
 
     function renderSeriesList() {
       seriesListEl.innerHTML = "";
       seriesOrder.forEach(seriesName => {
         const item = document.createElement("div");
-        item.className = "series-item" + (seriesName === currentSeries ? " active" : "");
+        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "");
         item.innerHTML = `
           <div class="series-item-inner">
             <img src="${getSeriesCover(seriesName)}" alt="">
@@ -627,6 +662,7 @@
         row.addEventListener("click", () => {
           currentEpisodeIndex = index;
           renderEpisodesList();
+          row.scrollIntoView({ behavior: "smooth", block: "center" });
           if (mode === "audio") playAudio(ep);
           else playVideo(ep);
         });
@@ -664,7 +700,7 @@
         <iframe
           src="https://www.youtube.com/embed/${ep.videoId}"
           title="${(ep.title || "Sermon").replace(/"/g, '&quot;')}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen>
         </iframe>
       `;
@@ -752,7 +788,10 @@
       currentEpisodeIndex = null;
       clearMediaState();
       if (mode === "audio") audioPlaceholderEl.style.display = "flex";
-      else videoPlaceholderEl.style.display = "flex";
+      else {
+        videoPlaceholderEl.textContent = "Choose a sermon to watch.";
+        videoPlaceholderEl.style.display = "flex";
+      }
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
