@@ -55,6 +55,34 @@
       width: 100%;
     }
 
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .site-nav a:hover {
+      background: rgba(128,159,144,0.25);
+      transform: translateY(-1px);
+    }
+
     .header {
       display: flex;
       justify-content: center;
@@ -770,7 +798,6 @@
       fill: currentColor;
     }
 
-    /* Tablet / mobile */
     @media (max-width: 1180px) {
       .layout {
         grid-template-columns: 260px 300px minmax(0, 1fr);
@@ -838,7 +865,6 @@
       }
     }
 
-    /* Narrow phones / Tithe.ly webview comfort */
     @media (max-width: 640px) {
       .header {
         padding: calc(8px + var(--safe-top)) 0 6px;
@@ -923,11 +949,27 @@
       #audioPlayer {
         min-height: 46px;
       }
+
+      .site-nav {
+        padding: 8px 10px;
+        gap: 8px;
+      }
+
+      .site-nav a {
+        font-size: 13px;
+        padding: 9px 12px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="app-shell">
+    <div class="site-nav">
+      <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">← Back to CGBC</a>
+      <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">Home</a>
+      <a href="https://cgbclebanontn.org/pages/livestream" target="_blank" rel="noopener noreferrer">Livestream</a>
+    </div>
+
     <div class="header">
       <div class="logo-panel" id="logoReset" title="Reset to first series">
         <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png" alt="CGBC">
@@ -1008,10 +1050,6 @@
   </div>
 
   <script>
-    /* =========================
-       CONTENT PRIORITY SETTINGS
-       Update these when your current content changes
-       ========================= */
     const CURRENT_SERIES = "Romans Chapter 12";
     const SECONDARY_SERIES = "The Rapture";
     const CURRENT_SPECIALS = "2026 Specials";
@@ -1064,15 +1102,15 @@
 
     function normalizeLineBreaks(input) {
       return (input || "")
-        .replace(/<br\s*\/?>/gi, "\n")
-        .replace(/<\/p>\s*<p>/gi, "\n")
-        .replace(/<\/div>\s*<div>/gi, "\n");
+        .replace(/<br\\s*\\/?>/gi, "\\n")
+        .replace(/<\\/p>\\s*<p>/gi, "\\n")
+        .replace(/<\\/div>\\s*<div>/gi, "\\n");
     }
 
     function parseDescription(rawDesc) {
       const normalized = normalizeLineBreaks(rawDesc);
       const decoded = htmlDecode(normalized);
-      const lines = decoded.split("\n").map(s => s.trim()).filter(Boolean);
+      const lines = decoded.split("\\n").map(s => s.trim()).filter(Boolean);
 
       const out = {
         title: "",
@@ -1103,7 +1141,7 @@
       try {
         const u = new URL(url.trim());
         if (u.hostname.includes("youtu.be")) {
-          return u.pathname.replace(/^\/+/, "").trim();
+          return u.pathname.replace(/^\\/+/, "").trim();
         }
         const v = u.searchParams.get("v");
         if (v) return v.trim();
@@ -1247,7 +1285,7 @@
       const output = [];
 
       names.forEach(name => {
-        const match = name.match(/^(.*?)(\d+)\s*$/i);
+        const match = name.match(/^(.*?)(\\d+)\\s*$/i);
         if (!match) return;
         const base = match[1].trim();
         const num = parseInt(match[2], 10);
@@ -1258,7 +1296,7 @@
       names.forEach(name => {
         if (consumed.has(name)) return;
 
-        const match = name.match(/^(.*?)(\d+)\s*$/i);
+        const match = name.match(/^(.*?)(\\d+)\\s*$/i);
         if (!match) {
           output.push(name);
           consumed.add(name);
@@ -1276,7 +1314,7 @@
           }
         });
 
-        const parentCandidate = base.replace(/\s+(chapter|part)$/i, "").trim();
+        const parentCandidate = base.replace(/\\s+(chapter|part)$/i, "").trim();
         const parentMatch = names.find(n =>
           !consumed.has(n) &&
           n.trim().toLowerCase() === parentCandidate.toLowerCase()
