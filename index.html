@@ -17,7 +17,6 @@
       --text: #f4f4f4;
       --muted: #d7d7d7;
       --shadow: 0 10px 28px rgba(0,0,0,0.30);
-      --radius: 16px;
     }
 
     * { box-sizing: border-box; }
@@ -32,14 +31,14 @@
     .header {
       display: flex;
       justify-content: center;
-      padding: 14px 18px 10px;
+      padding: 12px 18px 8px;
       border-bottom: 1px solid var(--border);
     }
 
     .logo-panel {
-      width: min(1240px, 96vw);
-      padding: 8px 14px;
-      border-radius: 18px;
+      width: min(980px, 92vw);
+      padding: 6px 10px;
+      border-radius: 16px;
       background: rgba(0,0,0,0.38);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -62,8 +61,7 @@
     .layout {
       display: grid;
       grid-template-columns: 290px 340px minmax(0, 1fr);
-      gap: 0;
-      min-height: calc(100vh - 106px);
+      min-height: calc(100vh - 92px);
     }
 
     .col {
@@ -185,11 +183,23 @@
       display: flex;
       gap: 10px;
       padding: 8px;
+      align-items: flex-start;
     }
 
-    .episode-item img {
+    .episode-item.audio img {
+      width: 96px;
+      height: 96px;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .episode-item.video img {
       width: 118px;
       height: 66px;
+      aspect-ratio: 16 / 9;
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
@@ -234,10 +244,11 @@
     #player {
       display: none;
       background: #1f1f1f;
+      min-height: 520px;
     }
 
     #videoPlaceholder {
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -245,10 +256,11 @@
       border: 1px solid var(--border);
       color: var(--muted);
       padding: 30px;
+      min-height: 520px;
     }
 
     #audioPlaceholder {
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -275,11 +287,25 @@
       margin-bottom: 16px;
     }
 
-    .media-art img {
+    .media-art img.art-square {
       width: min(320px, 100%);
-      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
       border-radius: 18px;
-      box-shadow: var(--shadow);
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.42),
+        0 4px 12px rgba(0,0,0,0.22);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .media-art img.art-wide {
+      width: min(720px, 100%);
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.42),
+        0 4px 12px rgba(0,0,0,0.22);
       background: rgba(255,255,255,0.05);
     }
 
@@ -357,10 +383,6 @@
         border-right: none;
         border-bottom: 1px solid var(--border);
       }
-
-      .col-player {
-        padding-top: 14px;
-      }
     }
   </style>
 
@@ -408,7 +430,7 @@
   </div>
 
   <script>
-    const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
+    const API_KEY = "PAIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
     const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1108178/TS_CGBC_Pog_wLLLL.png";
 
@@ -505,7 +527,7 @@
         try { ytPlayer.stopVideo(); } catch {}
       }
       playerEl.style.display = "none";
-      videoPlaceholderEl.style.display = "flex";
+      videoPlaceholderEl.style.display = "none";
     }
 
     function stopAndHideAudio() {
@@ -513,7 +535,7 @@
       audioPlayerEl.removeAttribute("src");
       audioPlayerEl.load();
       audioPlayerEl.style.display = "none";
-      audioPlaceholderEl.style.display = "flex";
+      audioPlaceholderEl.style.display = "none";
       mediaArtEl.style.display = "none";
     }
 
@@ -539,9 +561,7 @@
       if (ep.scripture) html += `<p><strong>Scripture:</strong> ${ep.scripture}</p>`;
       if (ep.by) html += `<p><strong>By:</strong> ${ep.by}</p>`;
       if (ep.date) html += `<p><strong>Date:</strong> ${ep.date}</p>`;
-      if (ep.extra?.length) {
-        ep.extra.forEach(line => html += `<p>${line}</p>`);
-      }
+      if (ep.extra?.length) ep.extra.forEach(line => html += `<p>${line}</p>`);
 
       if (isAudio && ep.link) {
         html += `
@@ -586,6 +606,11 @@
           renderSeriesList();
           renderEpisodesList();
           renderEmptyMeta();
+          if (mode === "audio") {
+            audioPlaceholderEl.style.display = "flex";
+          } else {
+            videoPlaceholderEl.style.display = "flex";
+          }
         });
         seriesListEl.appendChild(item);
       });
@@ -597,7 +622,8 @@
 
       sermonData[currentSeries].forEach((ep, index) => {
         const row = document.createElement("div");
-        row.className = "episode-item" + (index === currentEpisodeIndex ? " active" : "");
+        row.className = `episode-item ${mode}` + (index === currentEpisodeIndex ? " active" : "");
+
         const thumb = mode === "audio"
           ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
           : getWatchThumb(ep.videoId);
@@ -615,11 +641,8 @@
         row.addEventListener("click", () => {
           currentEpisodeIndex = index;
           renderEpisodesList();
-          if (mode === "audio") {
-            playAudio(ep);
-          } else {
-            playVideo(ep);
-          }
+          if (mode === "audio") playAudio(ep);
+          else playVideo(ep);
         });
 
         episodesListEl.appendChild(row);
@@ -633,6 +656,7 @@
       audioPlayerEl.style.display = "block";
       mediaArtEl.style.display = "block";
       mediaArtImgEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+      mediaArtImgEl.className = "art-square";
 
       audioPlayerEl.src = ep.audio;
       audioPlayerEl.load();
@@ -645,11 +669,8 @@
 
       if (!ytPlayer) {
         ytPlayer = new YT.Player("player", {
-          videoId: videoId,
-          playerVars: {
-            autoplay: 0,
-            rel: 0
-          }
+          videoId,
+          playerVars: { autoplay: 0, rel: 0 }
         });
       } else {
         ytPlayer.loadVideoById(videoId);
@@ -666,8 +687,8 @@
         return;
       }
 
-      videoPlaceholderEl.style.display = "none";
       playerEl.style.display = "block";
+      videoPlaceholderEl.style.display = "none";
 
       ensureYouTubePlayer(ep.videoId);
       renderMeta(ep, false);
@@ -677,7 +698,6 @@
       const xmlText = await fetch(RSS_URL).then(r => r.text());
       const xml = new DOMParser().parseFromString(xmlText, "text/xml");
       const items = Array.from(xml.querySelectorAll("item"));
-
       const grouped = {};
 
       items.forEach(item => {
@@ -730,8 +750,20 @@
       mode = nextMode;
       listenBtn.classList.toggle("active", mode === "audio");
       watchBtn.classList.toggle("active", mode === "video");
+
       currentEpisodeIndex = null;
-      clearMediaState();
+
+      stopAndHideVideo();
+      stopAndHideAudio();
+
+      if (mode === "audio") {
+        videoPlaceholderEl.style.display = "none";
+        audioPlaceholderEl.style.display = "flex";
+      } else {
+        audioPlaceholderEl.style.display = "none";
+        videoPlaceholderEl.style.display = "flex";
+      }
+
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
@@ -741,6 +773,11 @@
       currentSeries = seriesOrder[0] || null;
       currentEpisodeIndex = null;
       clearMediaState();
+      if (mode === "audio") {
+        audioPlaceholderEl.style.display = "flex";
+      } else {
+        videoPlaceholderEl.style.display = "flex";
+      }
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
@@ -752,6 +789,7 @@
 
     (async function init() {
       await loadRSSData();
+      audioPlaceholderEl.style.display = "flex";
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
