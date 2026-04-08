@@ -5,11 +5,16 @@
 <title>Sermon Library</title>
 
 <style>
+:root {
+  --accent: #2f8f2f;
+  --bg: #0f1110;
+}
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #111;
-  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: #f5f5f5;
 }
 
 .container {
@@ -18,108 +23,126 @@ body {
   padding: 20px;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-select {
-  padding: 12px;
+/* PLAYER */
+#player {
   width: 100%;
-  margin-bottom: 15px;
-  font-size: 16px;
-  border-radius: 6px;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
+/* ROWS */
+.row {
+  margin-bottom: 30px;
+}
+
+.row h3 {
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+/* HORIZONTAL SCROLL */
+.row-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+}
+
+.row-container::-webkit-scrollbar {
+  height: 6px;
+}
+.row-container::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+/* VIDEO CARD */
+.video {
+  min-width: 240px;
+  cursor: pointer;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.video img {
+  width: 100%;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.video:hover img {
+  filter: brightness(0.75);
+}
+
+/* PLAY ICON */
+.play-icon {
+  position: absolute;
+  top: 42%;
+  left: 45%;
+  font-size: 28px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.video:hover .play-icon {
+  opacity: 1;
+}
+
+/* ACTIVE VIDEO */
+.video.active {
+  outline: 3px solid var(--accent);
+  border-radius: 8px;
+}
+
+/* TOGGLE */
 .toggle {
   display: flex;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .toggle button {
   flex: 1;
   padding: 12px;
-  cursor: pointer;
-  font-size: 16px;
   border: none;
   border-radius: 6px;
+  background: #1a1c1a;
+  color: white;
+  cursor: pointer;
 }
 
 .active-toggle {
-  background: #e50914;
+  background: var(--accent);
   color: white;
-}
-
-#nowPlaying {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#player {
-  width: 100%;
-  aspect-ratio: 16/9;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#playlist {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
-}
-
-.video-item {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.video-item:hover {
-  transform: scale(1.05);
-}
-
-.video-item.active {
-  outline: 3px solid #e50914;
-  border-radius: 6px;
-}
-
-.video-item img {
-  width: 100%;
-  border-radius: 6px;
-}
-
-.video-item p {
-  font-size: 14px;
-  margin-top: 6px;
 }
 
 #podcast {
   display: none;
 }
 </style>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 </head>
 
 <body>
 <div class="container">
 
-<h2>Sermon Library</h2>
-
-<select id="seriesSelect"></select>
-
 <div class="toggle">
-  <button id="videoBtn" class="active-toggle">Watch Video</button>
-  <button id="audioBtn">Listen Audio</button>
+  <button id="videoBtn" class="active-toggle">Watch</button>
+  <button id="audioBtn">Listen</button>
 </div>
 
 <div id="videoSection">
-  <div id="nowPlaying"></div>
   <div id="player"></div>
-  <div id="playlist"></div>
+  <div id="rows"></div>
 </div>
 
 <div id="podcast">
-  <iframe src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist&share=1"
+  <iframe src="https://www.podbean.com/player-v2/?i=9ecaf-109ee67-pbblog-playlist"
           width="100%" height="500" style="border:none;"></iframe>
 </div>
 
@@ -129,83 +152,106 @@ select {
 const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
 
 const PLAYLISTS = [
-  { name: "🔴 Livestreams", id: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv" },
-  { name: "📖 Romans 12 (Current)", id: "PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS" },
-  { name: "Romans", id: "PLKqZ6zXCYxUCMOi5EgNMr7HDeaRy3gk6F" },
-  { name: "Specials", id: "PLKqZ6zXCYxUCPWCiVCLNS4UdwNDGWsep0" },
-  { name: "Guest Speakers", id: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW" },
-  { name: "All Sermons", id: "PLKqZ6zXCYxUBM36Qy41u3YnnsXET8v4XJ" }
+["🔴 Livestreams","PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"],
+["Romans 12 (Current)","PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS"],
+["Romans 11","PLKqZ6zXCYxUDFWTa93IQRbgUvCJ7mf9pX"],
+["Romans 10","PLKqZ6zXCYxUBtim23RGn81VTGuWRiMo3n"],
+["Romans 9","PLKqZ6zXCYxUAEC6h6yy7KgMsmxsUO_IMZ"],
+["Romans 8","PLKqZ6zXCYxUAwR-ngWwrzH1gfr700zK1X"],
+["Romans 7","PLKqZ6zXCYxUAVQsnh5AgSf7Rg5nE5FEyu"],
+["Romans 6","PLKqZ6zXCYxUBFzNO-rf_2gyv2p8iHeHgo"],
+["Romans 5","PLKqZ6zXCYxUAWd4W5r8-HQ6WOcm5ZcJYH"],
+["Romans 4","PLKqZ6zXCYxUCy5_6q0ySkwkFaFkeXmGma"],
+["Romans 3","PLKqZ6zXCYxUAuPUH-PIVDM-KWW2rMjk-4"],
+["Romans 2","PLKqZ6zXCYxUCgla_YELYiU33w65J7YI9D"],
+["Romans 1","PLKqZ6zXCYxUAV4_OfXycI9W8q5aQ4R9nd"],
+["Romans Full","PLKqZ6zXCYxUCMOi5EgNMr7HDeaRy3gk6F"],
+
+["Eschatology","PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d"],
+
+["2026 Specials","PLKqZ6zXCYxUCPWCiVCLNS4UdwNDGWsep0"],
+["2025 Specials","PLKqZ6zXCYxUALAewPHSUyaEmMisdZFUDp"],
+["2024 Specials","PLKqZ6zXCYxUBKFfd5poJge2ny5g-pTtC-"],
+
+["Re-Prioritize 2025","PLKqZ6zXCYxUAu1O5aR2XmtsCrBsa_iQy0"],
+["Expect Victory","PLKqZ6zXCYxUDWd6FJ-Zq0SW15Q3M-WwCh"],
+["Picking Up the Pieces","PLKqZ6zXCYxUBFJUy_YG2nhcydF2bigNDO"],
+["Disciplines","PLKqZ6zXCYxUBCL5oD8rRdX3uxxvMt6IFr"],
+["Saying NO to God","PLKqZ6zXCYxUAVvUuXjOyexSNcbi8eq4oi"],
+
+["Guest Speaker","PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"],
+["Worship Night","PLKqZ6zXCYxUDYmkJymG0h1USwIlhdKmtC"],
+
+["All Sermons","PLKqZ6zXCYxUBM36Qy41u3YnnsXET8v4XJ"],
+["Sundays","PLKqZ6zXCYxUASm_ZhYAf-ZbBvGuogtp-l"],
+["Wednesday","PLKqZ6zXCYxUC5GNAg3SzWSyAAoJ5C21AH"],
+["Sunday Nights","PLKqZ6zXCYxUBU7Br58uC0j031fssfe7UE"]
 ];
 
-let videos = [];
+let player;
+let currentList = [];
 let currentIndex = 0;
 
-const select = document.getElementById("seriesSelect");
-
-PLAYLISTS.forEach(p => {
-  const opt = document.createElement("option");
-  opt.value = p.id;
-  opt.textContent = p.name;
-  select.appendChild(opt);
-});
-
-async function loadPlaylist(id) {
-  document.getElementById("playlist").innerHTML = "Loading...";
-
-  const res = await fetch(
-    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${id}&key=${API_KEY}`
-  );
-
-  const data = await res.json();
-  videos = data.items.reverse();
-
-  renderVideos();
+function createPlayer(videoId) {
+  player = new YT.Player('player', {
+    videoId: videoId,
+    events: {
+      'onStateChange': e => {
+        if (e.data === YT.PlayerState.ENDED) {
+          if (currentIndex < currentList.length - 1) {
+            playVideo(currentIndex + 1);
+          }
+        }
+      }
+    }
+  });
 }
 
-function renderVideos() {
-  const container = document.getElementById("playlist");
-  container.innerHTML = "";
+async function loadAll() {
+  const container = document.getElementById("rows");
 
-  videos.forEach((item, index) => {
-    const vid = item.snippet.resourceId.videoId;
+  for (let [name, id] of PLAYLISTS) {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${id}&key=${API_KEY}`
+    );
+    const data = await res.json();
 
-    const div = document.createElement("div");
-    div.className = "video-item";
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `<h3>${name}</h3><div class="row-container"></div>`;
 
-    div.innerHTML = `
-      <img src="${item.snippet.thumbnails.medium.url}">
-      <p>${item.snippet.title}</p>
-    `;
+    const rowContainer = row.querySelector(".row-container");
 
-    div.onclick = () => playVideo(index);
+    data.items.reverse().forEach((item, i) => {
+      const vid = item.snippet.resourceId.videoId;
 
-    container.appendChild(div);
-  });
+      const div = document.createElement("div");
+      div.className = "video";
 
-  playVideo(0);
+      div.innerHTML = `
+        <img src="${item.snippet.thumbnails.medium.url}">
+        <div class="play-icon">▶</div>
+      `;
+
+      div.onclick = () => {
+        currentList = data.items;
+        playVideo(i);
+      };
+
+      rowContainer.appendChild(div);
+    });
+
+    container.appendChild(row);
+  }
 }
 
 function playVideo(index) {
   currentIndex = index;
-  const video = videos[index];
-  const vid = video.snippet.resourceId.videoId;
+  const vid = currentList[index].snippet.resourceId.videoId;
 
-  document.getElementById("player").innerHTML =
-    `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1" allowfullscreen></iframe>`;
-
-  document.getElementById("nowPlaying").textContent =
-    "Now Playing: " + video.snippet.title;
-
-  highlightActive();
+  if (!player) createPlayer(vid);
+  else player.loadVideoById(vid);
 }
-
-function highlightActive() {
-  document.querySelectorAll(".video-item").forEach((el, i) => {
-    el.classList.toggle("active", i === currentIndex);
-  });
-}
-
-select.onchange = () => loadPlaylist(select.value);
 
 document.getElementById("videoBtn").onclick = () => {
   document.getElementById("videoSection").style.display = "block";
@@ -217,7 +263,7 @@ document.getElementById("audioBtn").onclick = () => {
   document.getElementById("podcast").style.display = "block";
 };
 
-loadPlaylist(PLAYLISTS[0].id);
+loadAll();
 </script>
 
 </body>
