@@ -32,12 +32,12 @@
     .header {
       display: flex;
       justify-content: center;
-      padding: 10px 16px 6px;
+      padding: 10px 10px 6px;
       border-bottom: 1px solid var(--border);
     }
 
     .logo-panel {
-      width: min(1180px, 96vw);
+      width: min(1400px, calc(100vw - 20px));
       padding: 6px 10px;
       border-radius: 18px;
       background: rgba(0,0,0,0.38);
@@ -354,24 +354,39 @@
       border-radius: 999px;
       background: linear-gradient(180deg, rgba(128,159,144,0.95), rgba(128,159,144,0.35));
       box-shadow: 0 0 8px rgba(128,159,144,0.18);
+      transform-origin: bottom center;
+      animation-play-state: paused;
     }
 
-    .waveform span:nth-child(1) { height: 22%; }
-    .waveform span:nth-child(2) { height: 48%; }
-    .waveform span:nth-child(3) { height: 72%; }
-    .waveform span:nth-child(4) { height: 36%; }
-    .waveform span:nth-child(5) { height: 84%; }
-    .waveform span:nth-child(6) { height: 56%; }
-    .waveform span:nth-child(7) { height: 28%; }
-    .waveform span:nth-child(8) { height: 68%; }
-    .waveform span:nth-child(9) { height: 92%; }
-    .waveform span:nth-child(10) { height: 42%; }
-    .waveform span:nth-child(11) { height: 78%; }
-    .waveform span:nth-child(12) { height: 34%; }
-    .waveform span:nth-child(13) { height: 60%; }
-    .waveform span:nth-child(14) { height: 88%; }
-    .waveform span:nth-child(15) { height: 46%; }
-    .waveform span:nth-child(16) { height: 70%; }
+    .audio-feature-card.playing .waveform span {
+      animation-name: wavePulse;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-play-state: running;
+    }
+
+    .audio-feature-card .waveform span:nth-child(1)  { height: 22%; animation-delay: 0.00s; }
+    .audio-feature-card .waveform span:nth-child(2)  { height: 48%; animation-delay: 0.08s; }
+    .audio-feature-card .waveform span:nth-child(3)  { height: 72%; animation-delay: 0.16s; }
+    .audio-feature-card .waveform span:nth-child(4)  { height: 36%; animation-delay: 0.24s; }
+    .audio-feature-card .waveform span:nth-child(5)  { height: 84%; animation-delay: 0.32s; }
+    .audio-feature-card .waveform span:nth-child(6)  { height: 56%; animation-delay: 0.40s; }
+    .audio-feature-card .waveform span:nth-child(7)  { height: 28%; animation-delay: 0.48s; }
+    .audio-feature-card .waveform span:nth-child(8)  { height: 68%; animation-delay: 0.56s; }
+    .audio-feature-card .waveform span:nth-child(9)  { height: 92%; animation-delay: 0.64s; }
+    .audio-feature-card .waveform span:nth-child(10) { height: 42%; animation-delay: 0.72s; }
+    .audio-feature-card .waveform span:nth-child(11) { height: 78%; animation-delay: 0.80s; }
+    .audio-feature-card .waveform span:nth-child(12) { height: 34%; animation-delay: 0.88s; }
+    .audio-feature-card .waveform span:nth-child(13) { height: 60%; animation-delay: 0.96s; }
+    .audio-feature-card .waveform span:nth-child(14) { height: 88%; animation-delay: 1.04s; }
+    .audio-feature-card .waveform span:nth-child(15) { height: 46%; animation-delay: 1.12s; }
+    .audio-feature-card .waveform span:nth-child(16) { height: 70%; animation-delay: 1.20s; }
+
+    @keyframes wavePulse {
+      0%, 100% { transform: scaleY(0.55); opacity: 0.72; }
+      50% { transform: scaleY(1.15); opacity: 1; }
+    }
 
     #audioPlayer {
       width: 100%;
@@ -655,6 +670,7 @@
       audioPlayerEl.load();
       audioFeatureCardEl.style.display = "none";
       audioPlaceholderEl.style.display = "none";
+      audioFeatureCardEl.classList.remove("playing");
     }
 
     function clearMediaState() {
@@ -916,6 +932,18 @@
       renderEpisodesList();
       renderEmptyMeta();
     }
+
+    audioPlayerEl.addEventListener("play", () => {
+      audioFeatureCardEl.classList.add("playing");
+    });
+
+    audioPlayerEl.addEventListener("pause", () => {
+      audioFeatureCardEl.classList.remove("playing");
+    });
+
+    audioPlayerEl.addEventListener("ended", () => {
+      audioFeatureCardEl.classList.remove("playing");
+    });
 
     listenBtn.addEventListener("click", () => setMode("audio"));
     watchBtn.addEventListener("click", () => setMode("video"));
