@@ -31,14 +31,14 @@
     .header {
       display: flex;
       justify-content: center;
-      padding: 12px 18px 8px;
+      padding: 10px 16px 6px;
       border-bottom: 1px solid var(--border);
     }
 
     .logo-panel {
-      width: min(980px, 92vw);
-      padding: 6px 10px;
-      border-radius: 16px;
+      width: min(860px, 88vw);
+      padding: 4px 8px;
+      border-radius: 14px;
       background: rgba(0,0,0,0.38);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -61,7 +61,7 @@
     .layout {
       display: grid;
       grid-template-columns: 290px 340px minmax(0, 1fr);
-      min-height: calc(100vh - 92px);
+      min-height: calc(100vh - 78px);
     }
 
     .col {
@@ -231,7 +231,7 @@
       max-width: 1100px;
     }
 
-    #player,
+    #videoShell,
     #videoPlaceholder {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -239,12 +239,19 @@
       overflow: hidden;
       box-shadow: var(--shadow);
       margin-bottom: 16px;
+      min-height: 560px;
     }
 
-    #player {
+    #videoShell {
       display: none;
       background: #1f1f1f;
-      min-height: 520px;
+    }
+
+    #videoShell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
     }
 
     #videoPlaceholder {
@@ -256,7 +263,6 @@
       border: 1px solid var(--border);
       color: var(--muted);
       padding: 30px;
-      min-height: 520px;
     }
 
     #audioPlaceholder {
@@ -290,17 +296,6 @@
     .media-art img.art-square {
       width: min(320px, 100%);
       aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 18px;
-      box-shadow:
-        0 14px 34px rgba(0,0,0,0.42),
-        0 4px 12px rgba(0,0,0,0.22);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .media-art img.art-wide {
-      width: min(720px, 100%);
-      aspect-ratio: 16 / 9;
       object-fit: cover;
       border-radius: 18px;
       box-shadow:
@@ -383,15 +378,18 @@
         border-right: none;
         border-bottom: 1px solid var(--border);
       }
+
+      #videoShell,
+      #videoPlaceholder {
+        min-height: 380px;
+      }
     }
   </style>
-
-  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <div class="header">
     <div class="logo-panel" id="logoReset" title="Reset to first series">
-      <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1108178/TS_CGBC_Pog_wLLLL.png" alt="CGBC">
+      <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png" alt="CGBC">
     </div>
   </div>
 
@@ -413,7 +411,7 @@
     <main class="col col-player">
       <div class="player-wrap">
         <div id="videoPlaceholder">Choose a sermon to watch.</div>
-        <div id="player"></div>
+        <div id="videoShell"></div>
 
         <div id="audioPlaceholder">Choose a sermon to listen.</div>
         <div class="media-art" id="mediaArt">
@@ -430,22 +428,19 @@
   </div>
 
   <script>
-    const API_KEY = "PAIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
-    const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1108178/TS_CGBC_Pog_wLLLL.png";
+    const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
 
     let sermonData = {};
     let seriesOrder = [];
     let currentSeries = null;
     let currentEpisodeIndex = null;
     let mode = "audio";
-    let ytPlayer = null;
-    let ytApiReady = false;
 
     const seriesListEl = document.getElementById("seriesList");
     const episodesListEl = document.getElementById("episodesList");
     const metaBoxEl = document.getElementById("metaBox");
-    const playerEl = document.getElementById("player");
+    const videoShellEl = document.getElementById("videoShell");
     const videoPlaceholderEl = document.getElementById("videoPlaceholder");
     const audioPlaceholderEl = document.getElementById("audioPlaceholder");
     const audioPlayerEl = document.getElementById("audioPlayer");
@@ -454,10 +449,6 @@
     const listenBtn = document.getElementById("listenBtn");
     const watchBtn = document.getElementById("watchBtn");
     const logoReset = document.getElementById("logoReset");
-
-    function onYouTubeIframeAPIReady() {
-      ytApiReady = true;
-    }
 
     function htmlDecode(input) {
       const doc = new DOMParser().parseFromString(input || "", "text/html");
@@ -523,10 +514,8 @@
     }
 
     function stopAndHideVideo() {
-      if (ytPlayer) {
-        try { ytPlayer.stopVideo(); } catch {}
-      }
-      playerEl.style.display = "none";
+      videoShellEl.innerHTML = "";
+      videoShellEl.style.display = "none";
       videoPlaceholderEl.style.display = "none";
     }
 
@@ -606,11 +595,8 @@
           renderSeriesList();
           renderEpisodesList();
           renderEmptyMeta();
-          if (mode === "audio") {
-            audioPlaceholderEl.style.display = "flex";
-          } else {
-            videoPlaceholderEl.style.display = "flex";
-          }
+          if (mode === "audio") audioPlaceholderEl.style.display = "flex";
+          else videoPlaceholderEl.style.display = "flex";
         });
         seriesListEl.appendChild(item);
       });
@@ -664,33 +650,27 @@
       renderMeta(ep, true);
     }
 
-    function ensureYouTubePlayer(videoId) {
-      if (!ytApiReady || !videoId) return;
-
-      if (!ytPlayer) {
-        ytPlayer = new YT.Player("player", {
-          videoId,
-          playerVars: { autoplay: 0, rel: 0 }
-        });
-      } else {
-        ytPlayer.loadVideoById(videoId);
-      }
-    }
-
     function playVideo(ep) {
       stopAndHideAudio();
 
       if (!ep.videoId) {
-        videoPlaceholderEl.style.display = "flex";
         videoPlaceholderEl.textContent = "No video is available for this sermon yet.";
+        videoPlaceholderEl.style.display = "flex";
         renderMeta(ep, false);
         return;
       }
 
-      playerEl.style.display = "block";
+      videoShellEl.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/${ep.videoId}"
+          title="${(ep.title || "Sermon").replace(/"/g, '&quot;')}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      `;
+      videoShellEl.style.display = "block";
       videoPlaceholderEl.style.display = "none";
 
-      ensureYouTubePlayer(ep.videoId);
       renderMeta(ep, false);
     }
 
@@ -750,17 +730,15 @@
       mode = nextMode;
       listenBtn.classList.toggle("active", mode === "audio");
       watchBtn.classList.toggle("active", mode === "video");
-
       currentEpisodeIndex = null;
 
       stopAndHideVideo();
       stopAndHideAudio();
 
       if (mode === "audio") {
-        videoPlaceholderEl.style.display = "none";
         audioPlaceholderEl.style.display = "flex";
       } else {
-        audioPlaceholderEl.style.display = "none";
+        videoPlaceholderEl.textContent = "Choose a sermon to watch.";
         videoPlaceholderEl.style.display = "flex";
       }
 
@@ -773,11 +751,8 @@
       currentSeries = seriesOrder[0] || null;
       currentEpisodeIndex = null;
       clearMediaState();
-      if (mode === "audio") {
-        audioPlaceholderEl.style.display = "flex";
-      } else {
-        videoPlaceholderEl.style.display = "flex";
-      }
+      if (mode === "audio") audioPlaceholderEl.style.display = "flex";
+      else videoPlaceholderEl.style.display = "flex";
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
