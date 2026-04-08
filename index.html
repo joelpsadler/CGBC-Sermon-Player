@@ -9,10 +9,11 @@
 <style>
 :root {
   --accent: #809F90;
-  --bg: #616161;
-  --panel: #4f4f4f;
+  --bg: #414141;
+  --panel: rgba(255,255,255,0.05);
 }
 
+/* GLOBAL */
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -24,7 +25,7 @@ body {
 .header {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 12px 20px;
 }
 
 .header img {
@@ -34,31 +35,32 @@ body {
 /* LAYOUT */
 .layout {
   display: flex;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 74px);
 }
 
 /* SIDEBAR */
 .sidebar {
   width: 260px;
   overflow-y: auto;
-  background: #555;
   padding: 10px;
 }
 
 .series {
-  padding: 10px;
+  padding: 12px;
+  margin-bottom: 6px;
+  border-radius: 10px;
   cursor: pointer;
-  border-radius: 8px;
-  margin-bottom: 5px;
+  transition: 0.25s;
 }
 
 .series:hover {
-  background: #666;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(6px);
 }
 
 .series.active {
-  background: var(--accent);
-  color: black;
+  background: rgba(128,159,144,0.25);
+  box-shadow: 0 0 10px rgba(128,159,144,0.5);
 }
 
 /* MAIN */
@@ -66,6 +68,27 @@ body {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+}
+
+/* TOGGLE */
+.toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.toggle button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  cursor: pointer;
+}
+
+.toggle .active {
+  background: rgba(128,159,144,0.4);
 }
 
 /* PLAYER */
@@ -76,21 +99,47 @@ body {
   margin-bottom: 15px;
 }
 
-/* METADATA */
+#audioPlayer {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* META */
 .meta {
   background: var(--panel);
   padding: 15px;
   border-radius: 12px;
   margin-bottom: 15px;
+  backdrop-filter: blur(8px);
 }
 
 .meta h2 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   margin: 0 0 5px;
 }
 
-.meta p {
-  margin: 4px 0;
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.actions a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.actions a:hover {
+  background: rgba(128,159,144,0.4);
 }
 
 /* EPISODES */
@@ -99,6 +148,13 @@ body {
   gap: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+  padding: 6px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.episode:hover {
+  background: rgba(255,255,255,0.05);
 }
 
 .episode img {
@@ -107,7 +163,7 @@ body {
 }
 
 .episode.active {
-  outline: 2px solid var(--accent);
+  box-shadow: 0 0 8px rgba(128,159,144,0.6);
 }
 
 /* MOBILE */
@@ -115,11 +171,11 @@ body {
   .sidebar {
     position: absolute;
     left: -260px;
-    top: 70px;
-    height: calc(100vh - 70px);
+    top: 74px;
+    height: calc(100vh - 74px);
+    background: #333;
     transition: 0.3s;
   }
-
   .sidebar.open {
     left: 0;
   }
@@ -132,7 +188,7 @@ body {
 <body>
 
 <div class="header">
-  <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073708/TS_CGBC_..." />
+  <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073708/TS_CGBC_Pog.png">
 </div>
 
 <div class="layout">
@@ -140,94 +196,69 @@ body {
 <div class="sidebar" id="sidebar"></div>
 
 <div class="main">
-  <div id="player"></div>
-  <div class="meta" id="meta"></div>
-  <div id="episodes"></div>
+
+<div class="toggle">
+  <button id="watchBtn" class="active">Watch</button>
+  <button id="listenBtn">Listen</button>
 </div>
 
+<div id="player"></div>
+<audio id="audioPlayer" controls style="display:none;"></audio>
+
+<div class="meta" id="meta"></div>
+<div id="episodes"></div>
+
+</div>
 </div>
 
 <script>
 
-const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
+const API_KEY = "PASTE_API_KEY_HERE";
 
-const PLAYLISTS = [
-  {name: "Livestreams", id: "PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv"},
-  {name: "Romans Chapter 12 (Current Series)", id: "PLKqZ6zXCYxUDucHCEif_ph_C9_ZWTlkXS"},
-  {name: "Romans Chapter 11", id: "PLKqZ6zXCYxUDFWTa93IQRbgUvCJ7mf9pX"},
-  {name: "Romans Chapter 10", id: "PLKqZ6zXCYxUBtim23RGn81VTGuWRiMo3n"},
-  {name: "Romans Chapter 9", id: "PLKqZ6zXCYxUAEC6h6yy7KgMsmxsUO_IMZ"},
-  {name: "Romans Chapter 8", id: "PLKqZ6zXCYxUAwR-ngWwrzH1gfr700zK1X"},
-  {name: "Romans Chapter 7", id: "PLKqZ6zXCYxUAVQsnh5AgSf7Rg5nE5FEyu"},
-  {name: "Romans Chapter 6", id: "PLKqZ6zXCYxUBFzNO-rf_2gyv2p8iHeHgo"},
-  {name: "Romans Chapter 5", id: "PLKqZ6zXCYxUAWd4W5r8-HQ6WOcm5ZcJYH"},
-  {name: "Romans Chapter 4", id: "PLKqZ6zXCYxUCy5_6q0ySkwkFaFkeXmGma"},
-  {name: "Romans Chapter 3", id: "PLKqZ6zXCYxUAuPUH-PIVDM-KWW2rMjk-4"},
-  {name: "Romans Chapter 2", id: "PLKqZ6zXCYxUCgla_YELYiU33w65J7YI9D"},
-  {name: "Romans Chapter 1", id: "PLKqZ6zXCYxUAV4_OfXycI9W8q5aQ4R9nd"},
-  {name: "Romans (Full Series)", id: "PLKqZ6zXCYxUCMOi5EgNMr7HDeaRy3gk6F"},
-  {name: "Eschatology: The Rapture", id: "PLKqZ6zXCYxUD_H0yLurqm1kuDG4nCEs4d"},
-  {name: "2026 Specials", id: "PLKqZ6zXCYxUCPWCiVCLNS4UdwNDGWsep0"},
-  {name: "2025 Specials", id: "PLKqZ6zXCYxUALAewPHSUyaEmMisdZFUDp"},
-  {name: "2024 Specials", id: "PLKqZ6zXCYxUBKFfd5poJge2ny5g-pTtC-"},
-  {name: "Re-Prioritize 2025", id: "PLKqZ6zXCYxUAu1O5aR2XmtsCrBsa_iQy0"},
-  {name: "Expect Victory", id: "PLKqZ6zXCYxUDWd6FJ-Zq0SW15Q3M-WwCh"},
-  {name: "Picking Up the Pieces", id: "PLKqZ6zXCYxUBFJUy_YG2nhcydF2bigNDO"},
-  {name: "Disciplines of a Victorious Believer", id: "PLKqZ6zXCYxUBCL5oD8rRdX3uxxvMt6IFr"},
-  {name: "The Dangers of Saying NO to God", id: "PLKqZ6zXCYxUAVvUuXjOyexSNcbi8eq4oi"},
-  {name: "CGBC - Guest Speaker", id: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"},
-  {name: "Worship Night", id: "PLKqZ6zXCYxUDYmkJymG0h1USwIlhdKmtC"},
-  {name: "All Sermons", id: "PLKqZ6zXCYxUBM36Qy41u3YnnsXET8v4XJ"},
-  {name: "Sundays", id: "PLKqZ6zXCYxUASm_ZhYAf-ZbBvGuogtp-l"},
-  {name: "Wednesday Nights", id: "PLKqZ6zXCYxUC5GNAg3SzWSyAAoJ5C21AH"},
-  {name: "Sunday Nights", id: "PLKqZ6zXCYxUBU7Br58uC0j031fssfe7UE"}
-];
+const RSS = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
 
-let player, currentList = [], currentIndex = 0;
+const PLAYLISTS = [/* SAME LIST YOU JUST ADDED */];
+
+let mode = "video";
+let player, currentList=[], currentIndex=0, audioData={};
 
 /* SIDEBAR */
 const sidebar = document.getElementById("sidebar");
-PLAYLISTS.forEach((p,i)=>{
-  let div = document.createElement("div");
-  div.className = "series";
-  div.innerText = p.name;
-  div.onclick = ()=>loadPlaylist(p.id, div);
-  sidebar.appendChild(div);
+PLAYLISTS.forEach(p=>{
+  let d=document.createElement("div");
+  d.className="series";
+  d.innerText=p.name;
+  d.onclick=()=>loadPlaylist(p.id,d);
+  sidebar.appendChild(d);
 });
 
-/* LOAD PLAYLIST */
-async function loadPlaylist(id, el){
+/* TOGGLE */
+watchBtn.onclick=()=>{mode="video";watchBtn.classList.add("active");listenBtn.classList.remove("active");renderEpisodes();};
+listenBtn.onclick=()=>{mode="audio";listenBtn.classList.add("active");watchBtn.classList.remove("active");renderEpisodes();};
+
+/* LOAD VIDEO */
+async function loadPlaylist(id,el){
   document.querySelectorAll(".series").forEach(s=>s.classList.remove("active"));
-  if(el) el.classList.add("active");
+  el.classList.add("active");
 
-  let res = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=${API_KEY}`);
-  let data = await res.json();
-  currentList = data.items;
-
-  if(id.includes("UBu3jzPCTncKPpopFcvlVyv")){
-    currentList.sort((a,b)=> new Date(b.snippet.publishedAt)-new Date(a.snippet.publishedAt));
-  }
+  let res=await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=${API_KEY}`);
+  let data=await res.json();
+  currentList=data.items;
 
   renderEpisodes();
   playVideo(0);
 }
 
-/* PLAYER */
+/* VIDEO */
 function playVideo(i){
-  currentIndex = i;
-  let vid = currentList[i];
+  currentIndex=i;
+  document.getElementById("audioPlayer").style.display="none";
+  document.getElementById("player").style.display="block";
+
+  let vid=currentList[i];
 
   if(!player){
-    player = new YT.Player('player', {
-      videoId: vid.snippet.resourceId.videoId,
-      events:{
-        'onStateChange': e=>{
-          if(e.data===0 && currentIndex<currentList.length-1){
-            playVideo(currentIndex+1);
-          }
-        }
-      }
-    });
+    player=new YT.Player('player',{videoId:vid.snippet.resourceId.videoId});
   } else {
     player.loadVideoById(vid.snippet.resourceId.videoId);
   }
@@ -235,32 +266,86 @@ function playVideo(i){
   renderMeta(vid.snippet.description);
 }
 
-/* META */
-function renderMeta(desc){
-  let lines = desc.split("\n");
-  let out = "";
-  lines.forEach(l=>{
-    if(l.includes(":")) out += `<p>${l}</p>`;
+/* AUDIO LOAD */
+async function loadAudio(){
+  let txt=await fetch(RSS).then(r=>r.text());
+  let xml=new DOMParser().parseFromString(txt,"text/xml");
+  let items=[...xml.querySelectorAll("item")];
+
+  items.forEach(item=>{
+    let title=item.querySelector("title").textContent;
+    let series=title.split("|")[1]?.trim() || "Other";
+
+    if(!audioData[series]) audioData[series]=[];
+
+    audioData[series].push({
+      title:title.split("|")[0],
+      audio:item.querySelector("enclosure").getAttribute("url"),
+      desc:item.querySelector("description").textContent,
+      img:item.querySelector("itunes\\:image")?.getAttribute("href"),
+      link:item.querySelector("link").textContent
+    });
   });
-  document.getElementById("meta").innerHTML = out;
+}
+
+/* AUDIO */
+function playAudio(ep){
+  document.getElementById("player").style.display="none";
+  let a=document.getElementById("audioPlayer");
+  a.style.display="block";
+  a.src=ep.audio;
+
+  renderMeta(ep.desc, ep.link);
+}
+
+/* META */
+function renderMeta(desc,link=""){
+  let html="";
+  desc.split("\n").forEach(l=>{
+    if(l.includes(":")) html+=`<p>${l}</p>`;
+  });
+
+  html+=`
+  <div class="actions">
+    <a href="https://podcasts.apple.com/us/podcast/cgbc-lebanon-tn/id1713109744" target="_blank">Apple</a>
+    <a href="https://open.spotify.com/show/6pK9I8y22hRcmwYLkGR8YI" target="_blank">Spotify</a>
+    <a href="${link}" target="_blank">Podcast</a>
+  </div>
+  `;
+
+  meta.innerHTML=html;
 }
 
 /* EPISODES */
 function renderEpisodes(){
-  let el = document.getElementById("episodes");
-  el.innerHTML = "";
+  let el=episodes;
+  el.innerHTML="";
 
-  currentList.forEach((v,i)=>{
-    let d = document.createElement("div");
-    d.className = "episode";
-    d.innerHTML = `<img src="${v.snippet.thumbnails.medium.url}"><div>${v.snippet.title}</div>`;
-    d.onclick = ()=>playVideo(i);
-    el.appendChild(d);
-  });
+  if(mode==="video"){
+    currentList.forEach((v,i)=>{
+      let d=document.createElement("div");
+      d.className="episode";
+      d.innerHTML=`<img src="${v.snippet.thumbnails.medium.url}"><div>${v.snippet.title}</div>`;
+      d.onclick=()=>playVideo(i);
+      el.appendChild(d);
+    });
+  } else {
+    let active=document.querySelector(".series.active")?.innerText;
+    let list=audioData[active]||[];
+
+    list.forEach(ep=>{
+      let d=document.createElement("div");
+      d.className="episode";
+      d.innerHTML=`<img src="${ep.img}"><div>${ep.title}</div>`;
+      d.onclick=()=>playAudio(ep);
+      el.appendChild(d);
+    });
+  }
 }
 
-/* LOAD FIRST */
-loadPlaylist(PLAYLISTS[0].id);
+/* INIT */
+loadAudio();
+loadPlaylist(PLAYLISTS[0].id, sidebar.firstChild);
 
 </script>
 
