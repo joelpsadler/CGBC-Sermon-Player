@@ -13,7 +13,6 @@
   --glass: rgba(255,255,255,0.06);
 }
 
-/* BODY */
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -29,13 +28,13 @@ body {
 
 .logo-wrap {
   display: inline-block;
-  padding: 8px 16px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  padding: 10px 18px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 14px rgba(0,0,0,0.5);
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
 .logo-wrap:hover {
@@ -49,7 +48,7 @@ body {
 /* LAYOUT */
 .layout {
   display: flex;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 95px);
 }
 
 /* SIDEBAR */
@@ -60,16 +59,32 @@ body {
 }
 
 .series {
-  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
   border-radius: 10px;
   cursor: pointer;
-  margin-bottom: 6px;
   transition: 0.25s;
+}
+
+.series img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.series span {
+  transition: 0.25s;
+}
+
+.series:hover span {
+  transform: translateY(-2px) scale(1.03);
+  color: #fff;
 }
 
 .series:hover {
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(6px);
 }
 
 .series.active {
@@ -118,6 +133,18 @@ body {
   margin-bottom: 15px;
 }
 
+/* AUDIO ART */
+.audio-art {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.audio-art img {
+  width: 220px;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
 /* META */
 .meta {
   background: var(--glass);
@@ -127,25 +154,15 @@ body {
   backdrop-filter: blur(10px);
 }
 
-.meta h2 {
-  font-family: 'Poppins';
-  margin: 0 0 5px;
-}
-
-/* ACTIONS */
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
+/* BUTTON */
 .actions a {
+  display: inline-block;
+  margin-top: 10px;
   padding: 8px 12px;
   border-radius: 8px;
   background: rgba(255,255,255,0.08);
   text-decoration: none;
   color: white;
-  font-size: 14px;
 }
 
 .actions a:hover {
@@ -160,11 +177,7 @@ body {
   cursor: pointer;
   padding: 6px;
   border-radius: 10px;
-  transition: 0.2s;
-}
-
-.episode:hover {
-  background: rgba(255,255,255,0.05);
+  transition: 0.25s;
 }
 
 .episode img {
@@ -172,20 +185,18 @@ body {
   border-radius: 10px;
 }
 
-.episode.active {
-  box-shadow: 0 0 8px rgba(128,159,144,0.6);
+.episode div {
+  transition: 0.25s;
 }
 
-/* MOBILE */
-@media(max-width:800px){
-  .sidebar {
-    position: absolute;
-    left: -260px;
-    top: 90px;
-    height: calc(100vh - 90px);
-    background: #333;
-  }
+.episode:hover div {
+  transform: translateY(-2px) scale(1.02);
 }
+
+.episode:hover {
+  background: rgba(255,255,255,0.05);
+}
+
 </style>
 
 <script src="https://www.youtube.com/iframe_api"></script>
@@ -211,6 +222,11 @@ body {
 </div>
 
 <div id="player"></div>
+
+<div class="audio-art" id="audioArt" style="display:none;">
+  <img id="audioImg">
+</div>
+
 <audio id="audioPlayer" controls style="display:none;"></audio>
 
 <div class="meta" id="meta"></div>
@@ -256,19 +272,28 @@ const PLAYLISTS = [
 {name:"Sunday Nights",id:"PLKqZ6zXCYxUBU7Br58uC0j031fssfe7UE"}
 ];
 
-let mode="video", player, currentList=[], audioData={};
+let mode="video", player, currentList=[], audioData={}, playlistImages={};
 
-/* LOGO RESET */
-logo.onclick=()=>loadPlaylist(PLAYLISTS[0].id, document.querySelector(".series"));
+/* LOAD PLAYLIST THUMBNAILS */
+async function loadPlaylistImages(){
+  for(let p of PLAYLISTS){
+    let res=await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${p.id}&key=${API_KEY}`);
+    let data=await res.json();
+    playlistImages[p.name]=data.items?.[0]?.snippet?.thumbnails?.default?.url;
+  }
+}
 
 /* SIDEBAR */
-PLAYLISTS.forEach(p=>{
-  let d=document.createElement("div");
-  d.className="series";
-  d.innerText=p.name;
-  d.onclick=()=>loadPlaylist(p.id,d);
-  sidebar.appendChild(d);
-});
+function buildSidebar(){
+  sidebar.innerHTML="";
+  PLAYLISTS.forEach(p=>{
+    let d=document.createElement("div");
+    d.className="series";
+    d.innerHTML=`<img src="${playlistImages[p.name]}"><span>${p.name}</span>`;
+    d.onclick=()=>loadPlaylist(p.id,d);
+    sidebar.appendChild(d);
+  });
+}
 
 /* TOGGLE */
 watchBtn.onclick=()=>{mode="video";watchBtn.classList.add("active");listenBtn.classList.remove("active");renderEpisodes();};
@@ -284,13 +309,13 @@ async function loadPlaylist(id,el){
   currentList=data.items;
 
   renderEpisodes();
-  playVideo(0);
 }
 
 /* VIDEO */
 function playVideo(i){
   document.getElementById("audioPlayer").style.display="none";
-  document.getElementById("player").style.display="block";
+  audioArt.style.display="none";
+  playerDiv.style.display="block";
 
   let vid=currentList[i];
 
@@ -300,7 +325,7 @@ function playVideo(i){
     player.loadVideoById(vid.snippet.resourceId.videoId);
   }
 
-  renderMeta(vid.snippet.description);
+  renderMeta(vid.snippet.description,false);
 }
 
 /* AUDIO LOAD */
@@ -312,51 +337,53 @@ async function loadAudio(){
     let title=item.querySelector("title").textContent;
     let parts=title.split("|");
     let series=parts[1]?.trim();
-
     if(!series) return;
+
+    let img=item.getElementsByTagName("itunes:image")[0]?.getAttribute("href");
+
     if(!audioData[series]) audioData[series]=[];
 
     audioData[series].push({
       title:parts[0],
       audio:item.querySelector("enclosure").getAttribute("url"),
       desc:item.querySelector("description").textContent,
-      img:item.querySelector("itunes\\:image")?.getAttribute("href"),
+      img:img,
       link:item.querySelector("link").textContent
     });
   });
 }
 
 function playAudio(ep){
-  document.getElementById("player").style.display="none";
-  let a=document.getElementById("audioPlayer");
-  a.style.display="block";
-  a.src=ep.audio;
+  playerDiv.style.display="none";
 
-  renderMeta(ep.desc, ep.link);
+  audioPlayer.style.display="block";
+  audioArt.style.display="block";
+
+  audioPlayer.src=ep.audio;
+  audioImg.src=ep.img || "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073708/TS_CGBC_Pog.png";
+
+  renderMeta(ep.desc,true,ep.link);
 }
 
 /* META */
-function renderMeta(desc,link=""){
+function renderMeta(desc,isAudio=false,link=""){
   let html="";
   desc.split("\n").forEach(l=>{
     if(l.includes(":")) html+=`<p>${l}</p>`;
   });
 
-  html+=`
-  <div class="actions">
-    <a href="https://podcasts.apple.com/us/podcast/cgbc-lebanon-tn/id1713109744" target="_blank">Apple</a>
-    <a href="https://open.spotify.com/show/6pK9I8y22hRcmwYLkGR8YI" target="_blank">Spotify</a>
-    <a href="${link}" target="_blank">Podcast</a>
-  </div>
-  `;
+  if(isAudio){
+    html+=`<div class="actions">
+      <a href="${link}" target="_blank">📡 Podcast</a>
+    </div>`;
+  }
 
   meta.innerHTML=html;
 }
 
 /* EPISODES */
 function renderEpisodes(){
-  let el=episodes;
-  el.innerHTML="";
+  episodes.innerHTML="";
 
   if(mode==="video"){
     currentList.forEach((v,i)=>{
@@ -364,7 +391,7 @@ function renderEpisodes(){
       d.className="episode";
       d.innerHTML=`<img src="${v.snippet.thumbnails.medium.url}"><div>${v.snippet.title}</div>`;
       d.onclick=()=>playVideo(i);
-      el.appendChild(d);
+      episodes.appendChild(d);
     });
   } else {
     let active=document.querySelector(".series.active")?.innerText;
@@ -375,14 +402,21 @@ function renderEpisodes(){
       d.className="episode";
       d.innerHTML=`<img src="${ep.img}"><div>${ep.title}</div>`;
       d.onclick=()=>playAudio(ep);
-      el.appendChild(d);
+      episodes.appendChild(d);
     });
   }
 }
 
+/* LOGO RESET */
+logo.onclick=()=>loadPlaylist(PLAYLISTS[0].id);
+
 /* INIT */
-loadAudio();
-loadPlaylist(PLAYLISTS[0].id);
+(async ()=>{
+  await loadPlaylistImages();
+  buildSidebar();
+  await loadAudio();
+  loadPlaylist(PLAYLISTS[0].id);
+})();
 
 </script>
 
