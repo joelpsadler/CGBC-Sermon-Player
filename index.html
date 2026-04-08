@@ -58,7 +58,6 @@
     .site-nav {
       display: flex;
       justify-content: center;
-      gap: 10px;
       padding: 10px 16px;
       background: rgba(0,0,0,0.25);
       backdrop-filter: blur(10px);
@@ -952,7 +951,6 @@
 
       .site-nav {
         padding: 8px 10px;
-        gap: 8px;
       }
 
       .site-nav a {
@@ -966,8 +964,6 @@
   <div class="app-shell">
     <div class="site-nav">
       <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">← Back to CGBC</a>
-      <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">Home</a>
-      <a href="https://cgbclebanontn.org/pages/livestream" target="_blank" rel="noopener noreferrer">Livestream</a>
     </div>
 
     <div class="header">
@@ -1102,15 +1098,15 @@
 
     function normalizeLineBreaks(input) {
       return (input || "")
-        .replace(/<br\\s*\\/?>/gi, "\\n")
-        .replace(/<\\/p>\\s*<p>/gi, "\\n")
-        .replace(/<\\/div>\\s*<div>/gi, "\\n");
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<\/p>\s*<p>/gi, "\n")
+        .replace(/<\/div>\s*<div>/gi, "\n");
     }
 
     function parseDescription(rawDesc) {
       const normalized = normalizeLineBreaks(rawDesc);
       const decoded = htmlDecode(normalized);
-      const lines = decoded.split("\\n").map(s => s.trim()).filter(Boolean);
+      const lines = decoded.split("\n").map(s => s.trim()).filter(Boolean);
 
       const out = {
         title: "",
@@ -1141,7 +1137,7 @@
       try {
         const u = new URL(url.trim());
         if (u.hostname.includes("youtu.be")) {
-          return u.pathname.replace(/^\\/+/, "").trim();
+          return u.pathname.replace(/^\/+/, "").trim();
         }
         const v = u.searchParams.get("v");
         if (v) return v.trim();
@@ -1285,7 +1281,7 @@
       const output = [];
 
       names.forEach(name => {
-        const match = name.match(/^(.*?)(\\d+)\\s*$/i);
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
         if (!match) return;
         const base = match[1].trim();
         const num = parseInt(match[2], 10);
@@ -1296,7 +1292,7 @@
       names.forEach(name => {
         if (consumed.has(name)) return;
 
-        const match = name.match(/^(.*?)(\\d+)\\s*$/i);
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
         if (!match) {
           output.push(name);
           consumed.add(name);
@@ -1314,7 +1310,7 @@
           }
         });
 
-        const parentCandidate = base.replace(/\\s+(chapter|part)$/i, "").trim();
+        const parentCandidate = base.replace(/\s+(chapter|part)$/i, "").trim();
         const parentMatch = names.find(n =>
           !consumed.has(n) &&
           n.trim().toLowerCase() === parentCandidate.toLowerCase()
