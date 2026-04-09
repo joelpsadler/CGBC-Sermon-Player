@@ -22,11 +22,9 @@
   <style>
     /* ======================================================
        GLOBAL VARIABLES
-       Main shared colors and layout values.
     ======================================================= */
     :root {
       --accent: #809F90;
-      --accent-dark: #6d8d7d;
       --accent-glow: rgba(128,159,144,0.55);
       --bg: #2f2f2f;
       --panel: rgba(255,255,255,0.06);
@@ -92,7 +90,7 @@
 
     /* ======================================================
        HEADER
-       Logo only now. Back button moved to the top controls.
+       Dark glass with light edges for subtle 3D effect.
     ======================================================= */
     .header-wrap {
       display: flex;
@@ -112,18 +110,31 @@
       padding: 6px 12px;
       border-radius: 16px;
       background:
-        linear-gradient(180deg, rgba(128,159,144,0.34), rgba(70,95,82,0.22));
+        linear-gradient(180deg, rgba(28,28,28,0.54), rgba(10,10,10,0.26));
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow:
         0 8px 22px rgba(0,0,0,0.24),
-        inset 0 1px 0 rgba(255,255,255,0.10),
-        inset 0 -1px 0 rgba(0,0,0,0.18);
-      border: 1px solid rgba(154, 197, 174, 0.18);
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 1px 0 0 rgba(255,255,255,0.05),
+        inset -1px 0 0 rgba(255,255,255,0.05),
+        inset 0 -1px 0 rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.08);
       cursor: pointer;
       transition: transform 0.2s ease;
       overflow: hidden;
       position: relative;
+    }
+
+    .logo-panel::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 42%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+      pointer-events: none;
     }
 
     .logo-panel:hover {
@@ -135,14 +146,15 @@
       width: min(860px, 100%);
       height: auto;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     /* ======================================================
        TOP CONTROLS
-       Listen / Watch / Sermon Selection / Back to CGBC
     ======================================================= */
     .top-controls {
-      padding: 10px 12px 10px;
+      padding: 10px 10px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background: rgba(0,0,0,0.10);
       backdrop-filter: blur(10px);
@@ -157,8 +169,8 @@
     .mode-toggle {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      width: min(920px, 100%);
+      gap: 1px;
+      width: min(980px, 100%);
     }
 
     .mode-btn,
@@ -186,14 +198,14 @@
       gap: 10px;
       min-height: 52px;
       width: 100%;
-      padding: 0 16px 0 18px;
+      padding: 0 14px 0 16px;
       font-family: 'Poppins', sans-serif;
       font-size: 15px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.08);
       color: inherit;
       box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+      clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
@@ -518,10 +530,6 @@
       display: block;
     }
 
-    /* ======================================================
-       AUDIO OVERLAY CONTROLS
-       Play + back + forward over artwork.
-    ======================================================= */
     .audio-overlay-controls {
       position: absolute;
       left: 16px;
@@ -854,9 +862,6 @@
 
     /* ======================================================
        CURRENT SERIES CARD
-       This is the series metadata block under the player.
-       Video mode uses widescreen image.
-       Audio mode uses square art.
     ======================================================= */
     .series-context-card {
       display: none;
@@ -931,7 +936,6 @@
 
     /* ======================================================
        MOBILE DRAWER
-       Reduced margins / padding for more space.
     ======================================================= */
     .drawer-overlay {
       display: none;
@@ -970,7 +974,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      padding: calc(10px + var(--safe-top)) 12px 8px;
+      padding: calc(8px + var(--safe-top)) 12px 6px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: rgba(40, 54, 47, 0.92);
       backdrop-filter: blur(10px);
@@ -980,13 +984,14 @@
     .drawer-top h2 {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      font-size: 17px;
+      font-size: 16px;
+      line-height: 1.05;
     }
 
     .drawer-sections {
       display: grid;
       grid-template-rows: minmax(0, 46%) minmax(0, 54%);
-      height: calc(100% - 58px - var(--safe-top));
+      height: calc(100% - 52px - var(--safe-top));
     }
 
     .drawer-panel {
@@ -1010,7 +1015,8 @@
       top: 0;
       z-index: 3;
       margin: 0;
-      padding: 8px 10px 7px;
+      padding: 6px 10px 5px;
+      line-height: 1.05;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -1034,7 +1040,7 @@
 
     .drawer-panel .series-list,
     .drawer-panel .episodes-list {
-      padding: 8px 10px 10px;
+      padding: 6px 10px 10px;
     }
 
     /* ======================================================
@@ -1101,10 +1107,6 @@
       .mode-toggle {
         width: 100%;
       }
-
-      .series-context-card.video-mode .series-context-media img {
-        aspect-ratio: 16 / 9;
-      }
     }
 
     @media (max-width: 640px) {
@@ -1122,11 +1124,11 @@
       }
 
       .top-controls {
-        padding: 8px 10px 10px;
+        padding: 8px 8px 10px;
       }
 
       .mode-toggle {
-        gap: 8px;
+        gap: 1px;
       }
 
       .mode-btn-shell {
@@ -1219,7 +1221,6 @@
       .mode-btn,
       .series-context-btn,
       .close-drawer-btn,
-      .action-btn,
       .rss-button,
       #audioPlayer {
         min-height: 46px;
@@ -1231,7 +1232,6 @@
 
   <!-- ======================================================
        HEADER
-       Logo only now.
   ======================================================= -->
   <div class="header-wrap">
     <div class="header-row">
@@ -1246,7 +1246,6 @@
 
   <!-- ======================================================
        TOP CONTROLS
-       Back to CGBC now lives here.
   ======================================================= -->
   <div class="top-controls">
     <div class="top-controls-inner">
@@ -1359,13 +1358,8 @@
     <!-- PLAYER / DETAILS -->
     <main class="col col-player" id="playerSection">
 
-      <!-- Video placeholder -->
       <div id="videoPlaceholder">Choose a series to begin watching.</div>
-
-      <!-- Video player -->
       <div id="videoShell"></div>
-
-      <!-- Audio placeholder -->
       <div id="audioPlaceholder">Choose a series to begin listening.</div>
 
       <!-- ===================================================
@@ -1414,7 +1408,7 @@
       </div>
 
       <!-- ===================================================
-           METADATA PANEL
+           METADATA
       ==================================================== -->
       <section class="meta" id="metaBox">
         <h2>Select a sermon</h2>
@@ -1595,6 +1589,19 @@
       return out;
     }
 
+    /* Title format helper:
+       "Episode Title | Series Name"
+       If description fields are missing, we can infer from title. */
+    function splitTitleParts(rawTitle) {
+      const clean = (rawTitle || '').trim();
+      const parts = clean.split('|').map(part => part.trim()).filter(Boolean);
+
+      return {
+        episodeTitle: parts[0] || clean || 'Untitled Sermon',
+        inferredSeries: parts.length > 1 ? parts[parts.length - 1] : ''
+      };
+    }
+
     function extractYouTubeId(url) {
       if (!url) return '';
 
@@ -1624,12 +1631,10 @@
         : FALLBACK_IMAGE;
     }
 
-    /* Find a series-wide widescreen image for video mode */
     function getSeriesWideCover(seriesName) {
       const items = sermonData[seriesName] || [];
-      const withVideo = items.find(item => item.videoId);
-      if (withVideo) return getWatchThumb(withVideo.videoId);
-      return FALLBACK_IMAGE;
+      if (!items.length) return FALLBACK_IMAGE;
+      return items[0].seriesWideImage || FALLBACK_IMAGE;
     }
 
     async function fetchPlaylistSeries(config, newestFirst = false) {
@@ -1662,13 +1667,11 @@
           img: '',
           link: '',
           extra: [],
-          sortTimestamp: parseDateToTimestamp(publishedAt)
+          sortTimestamp: parseDateToTimestamp(publishedAt),
+          seriesImage: getWatchThumb(videoId),
+          seriesWideImage: getWatchThumb(videoId)
         };
       });
-
-      if (sermons.length) {
-        sermons[0].seriesImage = getWatchThumb(sermons[0].videoId);
-      }
 
       return sermons;
     }
@@ -1756,44 +1759,9 @@
     }
 
     /* ======================================================
-       SHARE
-       Audio shares audio artwork + audio/RSS link.
-       Video shares video artwork + YouTube link.
+       SHARE REMOVED
+       Intentionally omitted per request.
     ======================================================= */
-    async function shareCurrentEpisode() {
-      if (!currentEpisodeData) return;
-
-      const ep = currentEpisodeData;
-
-      const isAudioShare = mode === 'audio';
-      const shareUrl = isAudioShare
-        ? (ep.audio || ep.link || window.location.href)
-        : (ep.video || window.location.href);
-
-      const shareImage = isAudioShare
-        ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
-        : (ep.videoId ? getWatchThumb(ep.videoId) : FALLBACK_IMAGE);
-
-      const sharePayload = {
-        title: ep.title || 'CGBC Sermon',
-        text: [
-          ep.title || 'CGBC Sermon',
-          ep.series || '',
-          shareImage
-        ].filter(Boolean).join('\n'),
-        url: shareUrl
-      };
-
-      try {
-        if (navigator.share) {
-          await navigator.share(sharePayload);
-          return;
-        }
-
-        await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
-        alert('Share details copied to clipboard.');
-      } catch {}
-    }
 
     /* ======================================================
        CURRENT SERIES CARD
@@ -1881,19 +1849,12 @@
         `);
       }
 
-      actionButtons.push(`
-        <button class="action-btn" id="shareEpisodeBtn" type="button">Share</button>
-      `);
-
       metaBoxEl.innerHTML = `
         <h2>${ep.title || 'Untitled Sermon'}</h2>
         <div class="series-line">${ep.series || currentSeries || ''}</div>
         <div class="meta-grid">${buildMetaRows(ep)}</div>
         <div class="actions">${actionButtons.join('')}</div>
       `;
-
-      const shareBtn = document.getElementById('shareEpisodeBtn');
-      if (shareBtn) shareBtn.addEventListener('click', shareCurrentEpisode);
 
       updateSeriesContext();
     }
@@ -2103,13 +2064,7 @@
     function getSeriesCover(seriesName) {
       const items = sermonData[seriesName] || [];
       if (!items.length) return FALLBACK_IMAGE;
-
-      if (mode === 'audio') {
-        return items[0].seriesImage || items[0].img || FALLBACK_IMAGE;
-      }
-
-      const firstWithVideo = items.find(item => item.videoId);
-      return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
+      return items[0].seriesImage || FALLBACK_IMAGE;
     }
 
     /* ======================================================
@@ -2172,7 +2127,7 @@
       item.innerHTML = `
         <div class="series-item-inner">
           <button class="thumb-tap" type="button" aria-label="Open ${seriesName}">
-            <img src="${getSeriesCover(seriesName)}" alt="">
+            <img src="${mode === 'video' ? getSeriesWideCover(seriesName) : getSeriesCover(seriesName)}" alt="">
           </button>
           <div class="series-copy">
             <div class="series-name">${seriesName}</div>
@@ -2245,7 +2200,7 @@
 
       const thumb = mode === 'audio'
         ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
-        : getWatchThumb(ep.videoId);
+        : (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE);
 
       row.innerHTML = `
         <div class="episode-item-inner">
@@ -2289,6 +2244,9 @@
 
     /* ======================================================
        LOAD RSS + YOUTUBE DATA
+       Series art logic:
+       - First episode in the series defines series square art
+       - Same episode's linked YouTube video defines widescreen art
     ======================================================= */
     async function loadRSSData() {
       const xmlText = await fetch(RSS_URL).then(r => r.text());
@@ -2299,7 +2257,12 @@
       items.forEach(item => {
         const rawDescription = item.querySelector('description')?.textContent || '';
         const parsed = parseDescription(rawDescription);
-        const series = parsed.series || 'Other Sermons';
+
+        const rawTitle = item.querySelector('title')?.textContent?.trim() || 'Untitled Sermon';
+        const split = splitTitleParts(rawTitle);
+
+        const series = parsed.series || split.inferredSeries || 'Other Sermons';
+        const episodeTitle = parsed.title || split.episodeTitle || 'Untitled Sermon';
 
         const enclosure = item.querySelector('enclosure');
         const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
@@ -2317,7 +2280,7 @@
         if (!grouped[series]) grouped[series] = [];
 
         grouped[series].push({
-          title: parsed.title || item.querySelector('title')?.textContent?.split('|')[0]?.trim() || 'Untitled Sermon',
+          title: episodeTitle,
           series,
           scripture: parsed.scripture || '',
           by: parsed.by || '',
@@ -2332,9 +2295,21 @@
         });
       });
 
+      /* Sort newest first, then apply series art from the FIRST episode in that series */
       Object.keys(grouped).forEach(series => {
-        const firstImage = grouped[series].find(x => x.img)?.img || FALLBACK_IMAGE;
-        grouped[series] = grouped[series].map(ep => ({ ...ep, seriesImage: firstImage }));
+        grouped[series].sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+
+        const firstEpisode = grouped[series][0];
+        const seriesSquareArt = firstEpisode?.img || FALLBACK_IMAGE;
+        const seriesWideArt = firstEpisode?.videoId
+          ? getWatchThumb(firstEpisode.videoId)
+          : FALLBACK_IMAGE;
+
+        grouped[series] = grouped[series].map(ep => ({
+          ...ep,
+          seriesImage: seriesSquareArt,
+          seriesWideImage: seriesWideArt
+        }));
       });
 
       const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
