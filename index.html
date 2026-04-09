@@ -8,12 +8,14 @@
   />
   <title>CGBC Sermons</title>
 
+  <!-- ========= FAVICON ========= -->
   <link rel="icon" type="image/png" sizes="64x64" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ========= ROOT ========= */
     :root {
       --accent: #809F90;
       --bg: #2f2f2f;
@@ -25,6 +27,8 @@
       --shadow: 0 10px 28px rgba(0,0,0,0.30);
       --shadow-strong: 0 18px 40px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.25);
       --shadow-player: 0 28px 60px rgba(0,0,0,0.52), 0 10px 24px rgba(0,0,0,0.30);
+      --shadow-art-strong: 0 22px 46px rgba(0,0,0,0.50), 0 8px 18px rgba(0,0,0,0.28);
+      --selected-glow: 0 0 0 1px rgba(128,159,144,0.35) inset, 0 10px 22px rgba(0,0,0,0.28), 0 0 18px rgba(128,159,144,0.12);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -45,13 +49,22 @@
       padding-bottom: var(--safe-bottom);
     }
 
+    body.mode-audio .top-controls {
+      box-shadow: inset 0 -1px 0 rgba(128,159,144,0.10);
+    }
+
+    body.mode-video .top-controls {
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.08);
+    }
+
     img {
       max-width: 100%;
     }
 
     button,
     audio,
-    iframe {
+    iframe,
+    input {
       font: inherit;
     }
 
@@ -59,6 +72,7 @@
       width: 100%;
     }
 
+    /* ========= TOP NAV ========= */
     .site-nav {
       display: flex;
       justify-content: center;
@@ -86,6 +100,7 @@
       transform: translateY(-1px);
     }
 
+    /* ========= HEADER ========= */
     .header {
       display: flex;
       justify-content: center;
@@ -151,6 +166,104 @@
       z-index: 1;
     }
 
+    /* ========= STATIC TOP CONTROLS ========= */
+    .top-controls {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .top-controls-inner {
+      display: grid;
+      grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      max-width: 1680px;
+      margin: 0 auto;
+    }
+
+    .mode-toggle {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-toggle button {
+      flex: 1;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      min-height: 44px;
+    }
+
+    .mode-toggle button:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .mode-toggle button.active {
+      background: rgba(128,159,144,0.40);
+      color: #111;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 8px 10px;
+      min-height: 48px;
+    }
+
+    .search-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      opacity: 0.8;
+    }
+
+    .search-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .search-input::placeholder {
+      color: rgba(255,255,255,0.55);
+    }
+
+    .search-clear {
+      border: none;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      min-height: 36px;
+      min-width: 36px;
+      display: none;
+    }
+
+    .search-clear.visible {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========= MAIN LAYOUT ========= */
     .layout {
       display: grid;
       grid-template-columns: 290px 340px minmax(0, 1fr);
@@ -185,42 +298,7 @@
       display: block;
     }
 
-    .mode-toggle {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-      position: sticky;
-      top: 0;
-      z-index: 3;
-      background: linear-gradient(to bottom, var(--bg) 86%, transparent);
-      padding-bottom: 10px;
-    }
-
-    .mode-toggle button {
-      flex: 1;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      background: rgba(255,255,255,0.08);
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-      min-height: 44px;
-    }
-
-    .mode-toggle button:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.12);
-    }
-
-    .mode-toggle button.active {
-      background: rgba(128,159,144,0.40);
-      color: #111;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-    }
-
+    /* ========= SECTION LABELS ========= */
     .section-title {
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
@@ -228,6 +306,11 @@
       color: var(--muted);
       margin: 0 0 10px;
       text-transform: uppercase;
+    }
+
+    /* ========= HORIZONTAL RAIL WRAPPERS ========= */
+    .rail-wrap {
+      position: relative;
     }
 
     .series-list,
@@ -249,6 +332,7 @@
       opacity: 0.9;
     }
 
+    /* ========= CARDS ========= */
     .series-item,
     .episode-item {
       border-radius: 14px;
@@ -268,38 +352,38 @@
     .series-item.active,
     .episode-item.active {
       background: rgba(128,159,144,0.28);
-      box-shadow:
-        0 0 0 1px rgba(128,159,144,0.35) inset,
-        0 6px 14px rgba(0,0,0,0.25);
+      box-shadow: var(--selected-glow);
       transform: translateY(-1px);
     }
 
     .series-item-inner {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       padding: 10px;
-      min-height: 56px;
+      min-height: 64px;
     }
 
     .series-item.audio img {
-      width: 44px;
-      height: 44px;
+      width: 58px;
+      height: 58px;
       aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+    }
+
+    .series-item.video img {
+      width: 88px;
+      height: 50px;
+      aspect-ratio: 16 / 9;
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
       background: rgba(255,255,255,0.05);
-    }
-
-    .series-item.video img {
-      width: 68px;
-      height: 38px;
-      aspect-ratio: 16 / 9;
-      border-radius: 9px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
     }
 
     .series-copy {
@@ -362,6 +446,7 @@
       object-fit: cover;
       flex-shrink: 0;
       background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
     }
 
     .episode-item.video img {
@@ -372,6 +457,7 @@
       object-fit: cover;
       flex-shrink: 0;
       background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
     }
 
     .episode-item.active .episode-item-inner {
@@ -387,7 +473,14 @@
       width: 4px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 10px rgba(128,159,144,0.35);
+      box-shadow: 0 0 14px rgba(128,159,144,0.50);
+    }
+
+    .episode-item.active {
+      box-shadow:
+        0 0 0 1px rgba(128,159,144,0.45) inset,
+        0 10px 22px rgba(0,0,0,0.30),
+        0 0 18px rgba(128,159,144,0.12);
     }
 
     .episode-copy {
@@ -412,8 +505,29 @@
       line-height: 1.25;
     }
 
+    /* ========= PLAYER ========= */
     .player-wrap {
       max-width: 1140px;
+    }
+
+    .player-focus-shell {
+      position: relative;
+      border-radius: 22px;
+    }
+
+    .player-focus-shell::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(128,159,144,0.18), rgba(255,255,255,0.02));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .player-focus-shell.active::before {
+      opacity: 1;
     }
 
     #videoShell,
@@ -601,6 +715,10 @@
       pointer-events: none;
     }
 
+    .audio-feature-card.selected {
+      box-shadow: var(--shadow-player), 0 0 0 1px rgba(128,159,144,0.22) inset, 0 0 18px rgba(128,159,144,0.10);
+    }
+
     .audio-split {
       display: grid;
       grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
@@ -626,9 +744,7 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 18px;
-      box-shadow:
-        0 16px 38px rgba(0,0,0,0.46),
-        0 6px 14px rgba(0,0,0,0.24);
+      box-shadow: var(--shadow-art-strong);
       background: rgba(255,255,255,0.05);
       display: block;
     }
@@ -731,14 +847,41 @@
       100% { transform: scaleY(1.45); opacity: 1; }
     }
 
+    .audio-controls-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .skip-btn {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      min-height: 46px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .skip-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(128,159,144,0.22);
+    }
+
     #audioPlayer {
       width: 100%;
       display: none;
       margin-bottom: 0;
       border-radius: 12px;
-      min-height: 44px;
+      min-height: 46px;
     }
 
+    /* ========= META ========= */
     .meta {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -758,37 +901,59 @@
     }
 
     .meta .series-line {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-family: 'Poppins', sans-serif;
       font-size: 16px;
       color: #ffffff;
-      opacity: 0.9;
+      opacity: 0.92;
     }
 
-    .meta p {
-      margin: 6px 0;
+    .meta-grid {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .meta-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.60);
+      padding-top: 2px;
+    }
+
+    .meta-value {
       color: var(--muted);
       font-size: 15px;
       line-height: 1.35;
     }
 
-    .meta p strong {
-      color: #fff;
-    }
-
-    .meta .meta-note {
+    .meta-note {
       margin-top: 10px;
       font-size: 13px;
       color: rgba(255,255,255,0.62);
     }
 
     .actions {
-      margin-top: 14px;
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
+    .action-btn,
     .rss-button {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       text-decoration: none;
       color: #fff;
@@ -798,19 +963,23 @@
       padding: 10px 14px;
       transition: transform 0.2s ease, background 0.2s ease;
       min-height: 44px;
+      cursor: pointer;
     }
 
+    .action-btn:hover,
     .rss-button:hover {
       transform: translateY(-1px);
       background: rgba(128,159,144,0.28);
     }
 
+    .action-btn svg,
     .rss-button svg {
       width: 18px;
       height: 18px;
       fill: currentColor;
     }
 
+    /* ========= RESPONSIVE ========= */
     @media (max-width: 1180px) {
       .layout {
         grid-template-columns: 260px 300px minmax(0, 1fr);
@@ -818,6 +987,10 @@
     }
 
     @media (max-width: 980px) {
+      .top-controls-inner {
+        grid-template-columns: 1fr;
+      }
+
       .layout {
         display: flex;
         flex-direction: column;
@@ -886,13 +1059,6 @@
         display: block;
       }
 
-      .mode-toggle {
-        position: static;
-        top: auto;
-        padding-bottom: 0;
-        margin-bottom: 12px;
-      }
-
       .player-wrap {
         max-width: 100%;
       }
@@ -937,26 +1103,43 @@
         font-size: 24px;
       }
 
-      .series-item-inner {
-        min-height: 50px;
-      }
-
-      .episode-item-inner {
-        min-height: 70px;
-      }
-
       .section-title {
         display: none;
+      }
+
+      .rail-wrap {
+        position: relative;
+      }
+
+      .rail-wrap::before,
+      .rail-wrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 10px;
+        width: 18px;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .rail-wrap::before {
+        left: 0;
+        background: linear-gradient(90deg, var(--bg), rgba(47,47,47,0));
+      }
+
+      .rail-wrap::after {
+        right: 0;
+        background: linear-gradient(270deg, var(--bg), rgba(47,47,47,0));
       }
 
       .series-list,
       .episodes-list {
         display: flex;
         flex-direction: row;
-        gap: 10px;
+        gap: 12px;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 2px 2px 10px;
+        padding: 2px 2px 12px;
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
       }
@@ -984,16 +1167,26 @@
       }
 
       .series-list .series-item {
-        width: min(280px, 82vw);
+        width: min(300px, 84vw);
       }
 
       .episodes-list .episode-item {
-        width: min(320px, 86vw);
+        width: min(330px, 88vw);
       }
 
       .series-list .series-item-inner,
       .episodes-list .episode-item-inner {
         height: 100%;
+      }
+
+      .series-list .series-item.audio img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .series-list .series-item.video img {
+        width: 96px;
+        height: 54px;
       }
 
       .episodes-list .episode-item.audio img {
@@ -1004,6 +1197,15 @@
       .episodes-list .episode-item.video img {
         width: 110px;
         height: 62px;
+      }
+
+      .audio-controls-row {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
       }
     }
 
@@ -1025,14 +1227,6 @@
       .col {
         padding-left: 10px;
         padding-right: 10px;
-      }
-
-      .series-item-inner {
-        padding: 10px 8px;
-      }
-
-      .episode-item-inner {
-        padding: 8px 6px;
       }
 
       .video-preview-overlay {
@@ -1076,7 +1270,9 @@
 
       .mode-toggle button,
       .rss-button,
-      #audioPlayer {
+      .action-btn,
+      #audioPlayer,
+      .skip-btn {
         min-height: 46px;
       }
 
@@ -1094,28 +1290,50 @@
       }
 
       .series-list .series-item {
-        width: min(270px, 84vw);
+        width: min(285px, 86vw);
       }
 
       .episodes-list .episode-item {
-        width: min(300px, 88vw);
+        width: min(312px, 90vw);
       }
     }
   </style>
 </head>
-<body>
+<body class="mode-audio">
   <div class="app-shell">
+    <!-- ========= RETURN NAV ========= -->
     <div class="site-nav">
       <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">← Back to CGBC</a>
     </div>
 
+    <!-- ========= LOGO HEADER ========= -->
     <div class="header">
       <div class="logo-panel" id="logoReset" title="Reset to first series">
         <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png" alt="CGBC">
       </div>
     </div>
 
+    <!-- ========= STATIC TOP CONTROLS ========= -->
+    <div class="top-controls">
+      <div class="top-controls-inner">
+        <div class="mode-toggle">
+          <button id="listenBtn" class="active" type="button">Listen</button>
+          <button id="watchBtn" type="button">Watch</button>
+        </div>
+
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M10 4a6 6 0 1 0 3.87 10.59l4.77 4.77 1.41-1.41-4.77-4.77A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/>
+          </svg>
+          <input id="searchInput" class="search-input" type="text" placeholder="Search series, episodes, scripture, speaker...">
+          <button id="searchClear" class="search-clear" type="button" aria-label="Clear search">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========= MAIN LAYOUT ========= -->
     <div class="layout">
+      <!-- ========= SERIES COLUMN ========= -->
       <aside class="col col-series open" id="seriesSection">
         <button class="mobile-section-toggle" type="button" data-target="series">
           <span class="mobile-label-wrap">
@@ -1128,15 +1346,14 @@
         </button>
 
         <div class="mobile-section-body">
-          <div class="mode-toggle">
-            <button id="listenBtn" class="active" type="button">Listen</button>
-            <button id="watchBtn" type="button">Watch</button>
-          </div>
           <h3 class="section-title">Series</h3>
-          <div id="seriesList" class="series-list"></div>
+          <div class="rail-wrap">
+            <div id="seriesList" class="series-list"></div>
+          </div>
         </div>
       </aside>
 
+      <!-- ========= EPISODES COLUMN ========= -->
       <section class="col col-episodes" id="episodesSection">
         <button class="mobile-section-toggle" type="button" data-target="episodes">
           <span class="mobile-label-wrap">
@@ -1150,10 +1367,13 @@
 
         <div class="mobile-section-body">
           <h3 class="section-title">Episodes</h3>
-          <div id="episodesList" class="episodes-list"></div>
+          <div class="rail-wrap">
+            <div id="episodesList" class="episodes-list"></div>
+          </div>
         </div>
       </section>
 
+      <!-- ========= PLAYER COLUMN ========= -->
       <main class="col col-player" id="playerSection">
         <button class="mobile-section-toggle" type="button" data-target="player">
           <span class="mobile-label-wrap">
@@ -1167,52 +1387,60 @@
 
         <div class="mobile-section-body">
           <div class="player-wrap">
-            <div id="videoPlaceholder">Choose a series on the left, then select a sermon to watch.</div>
+            <div class="player-focus-shell" id="playerFocusShell">
+              <div id="videoPlaceholder">Choose a series to begin watching.</div>
 
-            <div id="videoPreview">
-              <img id="videoPreviewImg" alt="Selected sermon preview">
-              <div class="video-preview-overlay">
-                <div class="video-preview-copy">
-                  <div class="video-preview-kicker">Ready to Watch</div>
-                  <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
-                  <div class="video-preview-cta">
-                    <span class="video-play-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <div id="videoPreview">
+                <img id="videoPreviewImg" alt="Selected sermon preview">
+                <div class="video-preview-overlay">
+                  <div class="video-preview-copy">
+                    <div class="video-preview-kicker">Ready to Watch</div>
+                    <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
+                    <div class="video-preview-cta">
+                      <span class="video-play-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                      </span>
+                      Tap to Play
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="videoShell"></div>
+
+              <div id="audioPlaceholder">Choose a series to begin listening.</div>
+
+              <div class="audio-feature-card" id="audioFeatureCard">
+                <div class="audio-split">
+                  <div class="audio-art-panel" id="audioArtPanel">
+                    <img id="audioFeatureArt" alt="Sermon artwork">
+                    <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </span>
-                    Tap to Play
+                  </div>
+
+                  <div class="audio-content">
+                    <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
+                    <h3 id="audioFeatureTitle">Select a sermon</h3>
+                    <div class="audio-series" id="audioFeatureSeries"></div>
+                    <div class="waveform" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span>
+                      <span></span><span></span><span></span><span></span>
+                      <span></span><span></span><span></span><span></span>
+                      <span></span><span></span><span></span><span></span>
+                    </div>
+
+                    <div class="audio-controls-row">
+                      <button id="skipBackBtn" class="skip-btn" type="button">− 30s</button>
+                      <audio id="audioPlayer" controls preload="none"></audio>
+                      <button id="skipForwardBtn" class="skip-btn" type="button">+ 30s</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="videoShell"></div>
-
-            <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
-
-            <div class="audio-feature-card" id="audioFeatureCard">
-              <div class="audio-split">
-                <div class="audio-art-panel" id="audioArtPanel">
-                  <img id="audioFeatureArt" alt="Sermon artwork">
-                  <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  </span>
-                </div>
-
-                <div class="audio-content">
-                  <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
-                  <h3 id="audioFeatureTitle">Select a sermon</h3>
-                  <div class="audio-series" id="audioFeatureSeries"></div>
-                  <div class="waveform" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                  </div>
-                  <audio id="audioPlayer" controls preload="none"></audio>
-                </div>
-              </div>
-            </div>
-
+            <!-- ========= META PANEL ========= -->
             <section class="meta" id="metaBox">
               <h2>Select a sermon</h2>
               <div class="series-line">Choose a series and episode.</div>
@@ -1225,6 +1453,7 @@
   </div>
 
   <script>
+    /* ========= CONTENT PRIORITY SETTINGS ========= */
     const CURRENT_SERIES = "Romans Chapter 12";
     const SECONDARY_SERIES = "The Rapture";
     const CURRENT_SPECIALS = "2026 Specials";
@@ -1239,24 +1468,32 @@
       playlistId: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"
     };
 
+    /* ========= EXTERNAL FEEDS ========= */
     const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
     const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
 
+    /* ========= APP STATE ========= */
     let sermonData = {};
     let archiveSeriesOrder = [];
     let currentSeries = null;
     let currentEpisodeIndex = null;
+    let currentEpisodeData = null;
     let mode = "audio";
+    let searchQuery = "";
 
+    /* ========= DOM REFERENCES ========= */
+    const bodyEl = document.body;
     const seriesListEl = document.getElementById("seriesList");
     const episodesListEl = document.getElementById("episodesList");
     const metaBoxEl = document.getElementById("metaBox");
+
     const videoShellEl = document.getElementById("videoShell");
     const videoPlaceholderEl = document.getElementById("videoPlaceholder");
     const videoPreviewEl = document.getElementById("videoPreview");
     const videoPreviewImgEl = document.getElementById("videoPreviewImg");
     const videoPreviewTitleEl = document.getElementById("videoPreviewTitle");
+
     const audioPlaceholderEl = document.getElementById("audioPlaceholder");
     const audioFeatureCardEl = document.getElementById("audioFeatureCard");
     const audioFeatureArtEl = document.getElementById("audioFeatureArt");
@@ -1266,9 +1503,16 @@
     const audioPlayerEl = document.getElementById("audioPlayer");
     const audioArtPanelEl = document.getElementById("audioArtPanel");
     const audioPlayBadgeEl = document.getElementById("audioPlayBadge");
+    const skipBackBtnEl = document.getElementById("skipBackBtn");
+    const skipForwardBtnEl = document.getElementById("skipForwardBtn");
+
     const listenBtn = document.getElementById("listenBtn");
     const watchBtn = document.getElementById("watchBtn");
     const logoReset = document.getElementById("logoReset");
+    const searchInputEl = document.getElementById("searchInput");
+    const searchClearEl = document.getElementById("searchClear");
+
+    const playerFocusShellEl = document.getElementById("playerFocusShell");
 
     const seriesSectionEl = document.getElementById("seriesSection");
     const episodesSectionEl = document.getElementById("episodesSection");
@@ -1277,6 +1521,7 @@
     const mobileEpisodesSubtitleEl = document.getElementById("mobileEpisodesSubtitle");
     const mobilePlayerSubtitleEl = document.getElementById("mobilePlayerSubtitle");
 
+    /* ========= MOBILE HELPERS ========= */
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
@@ -1316,23 +1561,92 @@
       mobileSeriesSubtitleEl.textContent = currentSeries || "Choose a sermon series";
 
       if (currentSeries && sermonData[currentSeries]) {
-        mobileEpisodesSubtitleEl.textContent = `${sermonData[currentSeries].length} episode${sermonData[currentSeries].length === 1 ? "" : "s"}`;
+        const visibleEpisodeCount = getVisibleEpisodesForSeries(currentSeries).length;
+        mobileEpisodesSubtitleEl.textContent = `${visibleEpisodeCount} episode${visibleEpisodeCount === 1 ? "" : "s"}`;
       } else {
         mobileEpisodesSubtitleEl.textContent = "Select a series first";
       }
 
-      if (
-        currentSeries &&
-        Number.isInteger(currentEpisodeIndex) &&
-        sermonData[currentSeries] &&
-        sermonData[currentSeries][currentEpisodeIndex]
-      ) {
-        mobilePlayerSubtitleEl.textContent = sermonData[currentSeries][currentEpisodeIndex].title || "Selected episode";
+      if (currentEpisodeData) {
+        mobilePlayerSubtitleEl.textContent = currentEpisodeData.title || "Selected episode";
       } else {
         mobilePlayerSubtitleEl.textContent = "Select an episode to begin";
       }
     }
 
+    /* ========= SEARCH HELPERS ========= */
+    function normalizeText(value) {
+      return String(value || "").toLowerCase().trim();
+    }
+
+    function episodeMatchesQuery(ep, query) {
+      const q = normalizeText(query);
+      if (!q) return true;
+
+      const haystack = [
+        ep.title,
+        ep.series,
+        ep.scripture,
+        ep.by,
+        ep.date,
+        ep.video,
+        ...(ep.extra || [])
+      ].join(" ").toLowerCase();
+
+      return haystack.includes(q);
+    }
+
+    function getVisibleSeriesOrder() {
+      const pinned = getPrioritySeries(mode);
+      const pinnedSet = new Set(pinned);
+
+      let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
+
+      if (mode === "audio") {
+        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
+      }
+
+      if (mode === "video") {
+        archive = archive.filter(name => name !== LIVESTREAMS.name);
+      }
+
+      const groupedArchive = groupNumberedSeries(archive);
+
+      let ordered = [...pinned, ...groupedArchive];
+
+      if (mode === "video" && sermonData[VIDEO_ONLY_ARCHIVE.name] && !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)) {
+        ordered = [...pinned, ...groupedArchive.filter(name => name !== VIDEO_ONLY_ARCHIVE.name), VIDEO_ONLY_ARCHIVE.name];
+      }
+
+      if (!searchQuery) return ordered;
+
+      return ordered.filter(seriesName => {
+        const seriesMatch = normalizeText(seriesName).includes(normalizeText(searchQuery));
+        const episodeMatch = (sermonData[seriesName] || []).some(ep => episodeMatchesQuery(ep, searchQuery));
+        return seriesMatch || episodeMatch;
+      });
+    }
+
+    function getVisibleEpisodesForSeries(seriesName) {
+      const allEpisodes = sermonData[seriesName] || [];
+      if (!searchQuery) {
+        return allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
+      }
+
+      const matched = allEpisodes
+        .map((ep, originalIndex) => ({ ep, originalIndex }))
+        .filter(({ ep }) => episodeMatchesQuery(ep, searchQuery));
+
+      if (matched.length > 0) return matched;
+
+      if (normalizeText(seriesName).includes(normalizeText(searchQuery))) {
+        return allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
+      }
+
+      return [];
+    }
+
+    /* ========= TEXT / FEED PARSING ========= */
     function htmlDecode(input) {
       const doc = new DOMParser().parseFromString(input || "", "text/html");
       return (doc.documentElement.textContent || "").trim();
@@ -1454,6 +1768,7 @@
       return sermons;
     }
 
+    /* ========= MEDIA SESSION / LOCK SCREEN ========= */
     function updateMediaSession(ep) {
       if (!("mediaSession" in navigator) || !ep) return;
 
@@ -1471,8 +1786,8 @@
 
         navigator.mediaSession.setActionHandler("play", () => audioPlayerEl.play());
         navigator.mediaSession.setActionHandler("pause", () => audioPlayerEl.pause());
-        navigator.mediaSession.setActionHandler("previoustrack", null);
-        navigator.mediaSession.setActionHandler("nexttrack", null);
+        navigator.mediaSession.setActionHandler("seekbackward", () => skipAudioBy(-30));
+        navigator.mediaSession.setActionHandler("seekforward", () => skipAudioBy(30));
       } catch {}
     }
 
@@ -1481,6 +1796,17 @@
       try {
         navigator.mediaSession.metadata = null;
       } catch {}
+    }
+
+    /* ========= MODE / PLAYER VISUAL STATE ========= */
+    function setBodyModeClass() {
+      bodyEl.classList.toggle("mode-audio", mode === "audio");
+      bodyEl.classList.toggle("mode-video", mode === "video");
+    }
+
+    function setPlayerFocusActive(active) {
+      playerFocusShellEl.classList.toggle("active", active);
+      audioFeatureCardEl.classList.toggle("selected", active && mode === "audio");
     }
 
     function setAudioReadyState(isPlaying) {
@@ -1492,6 +1818,62 @@
       }
     }
 
+    /* ========= SHARE ========= */
+    async function shareCurrentEpisode() {
+      if (!currentEpisodeData) return;
+
+      const ep = currentEpisodeData;
+      const shareUrl =
+        ep.video ||
+        ep.link ||
+        ep.audio ||
+        window.location.href;
+
+      const shareTextParts = [
+        ep.title || "CGBC Sermon",
+        ep.series ? `Series: ${ep.series}` : "",
+        ep.scripture ? `Scripture: ${ep.scripture}` : "",
+        ep.by ? `By: ${ep.by}` : "",
+        ep.date ? `Date: ${ep.date}` : "",
+        "CGBC - Lebanon, TN"
+      ].filter(Boolean);
+
+      const sharePayload = {
+        title: ep.title || "CGBC Sermon",
+        text: shareTextParts.join("\n"),
+        url: shareUrl
+      };
+
+      try {
+        const imageUrl = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+        if (navigator.canShare && navigator.share && imageUrl) {
+          try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const extension = blob.type.includes("png") ? "png" : "jpg";
+            const file = new File([blob], `cgbc-sermon-art.${extension}`, { type: blob.type || "image/png" });
+
+            if (navigator.canShare({ files: [file] })) {
+              await navigator.share({
+                ...sharePayload,
+                files: [file]
+              });
+              return;
+            }
+          } catch {}
+        }
+
+        if (navigator.share) {
+          await navigator.share(sharePayload);
+          return;
+        }
+
+        await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
+        alert("Episode details copied to clipboard.");
+      } catch {}
+    }
+
+    /* ========= MEDIA CONTROL HELPERS ========= */
     function stopAndHideVideo() {
       videoShellEl.innerHTML = "";
       videoShellEl.style.display = "none";
@@ -1514,46 +1896,132 @@
     function clearMediaState() {
       stopAndHideVideo();
       stopAndHideAudio();
+      currentEpisodeData = null;
+      setPlayerFocusActive(false);
+    }
+
+    function skipAudioBy(seconds) {
+      if (!audioPlayerEl.src) return;
+      const nextTime = Math.max(0, Math.min((audioPlayerEl.currentTime || 0) + seconds, isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : (audioPlayerEl.currentTime || 0) + seconds));
+      audioPlayerEl.currentTime = nextTime;
+    }
+
+    function toggleAudioPlayback() {
+      if (!audioPlayerEl.src) return;
+      if (audioPlayerEl.paused) {
+        audioPlayerEl.play();
+      } else {
+        audioPlayerEl.pause();
+      }
+    }
+
+    /* ========= META RENDER ========= */
+    function buildMetaRows(ep) {
+      const rows = [];
+
+      if (ep.scripture) {
+        rows.push(`
+          <div class="meta-row">
+            <div class="meta-label">Scripture</div>
+            <div class="meta-value">${ep.scripture}</div>
+          </div>
+        `);
+      }
+
+      if (ep.by) {
+        rows.push(`
+          <div class="meta-row">
+            <div class="meta-label">Speaker</div>
+            <div class="meta-value">${ep.by}</div>
+          </div>
+        `);
+      }
+
+      if (ep.date) {
+        rows.push(`
+          <div class="meta-row">
+            <div class="meta-label">Date</div>
+            <div class="meta-value">${ep.date}</div>
+          </div>
+        `);
+      }
+
+      if (ep.extra?.length) {
+        ep.extra.forEach(line => {
+          rows.push(`
+            <div class="meta-row">
+              <div class="meta-label">Notes</div>
+              <div class="meta-value">${line}</div>
+            </div>
+          `);
+        });
+      }
+
+      return rows.join("");
     }
 
     function renderEmptyMeta() {
-      const verb = mode === "audio" ? "listen to" : "watch";
+      const verb = mode === "audio" ? "listening" : "watching";
       metaBoxEl.innerHTML = `
         <h2>Select a sermon</h2>
-        <div class="series-line">Choose a series and episode to ${verb}.</div>
-        <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
+        <div class="series-line">Choose a series and episode to begin ${verb}.</div>
+        <p class="meta-note">Use the search bar above to quickly find series, titles, scriptures, or speakers.</p>
       `;
       updateMobileSubtitles();
     }
 
     function renderMeta(ep, isAudio) {
-      let html = `
-        <h2>${ep.title || "Untitled Sermon"}</h2>
-        <div class="series-line">${ep.series || currentSeries || ""}</div>
-      `;
-
-      if (ep.scripture) html += `<p><strong>Scripture:</strong> ${ep.scripture}</p>`;
-      if (ep.by) html += `<p><strong>By:</strong> ${ep.by}</p>`;
-      if (ep.date) html += `<p><strong>Date:</strong> ${ep.date}</p>`;
-      if (ep.extra?.length) ep.extra.forEach(line => html += `<p>${line}</p>`);
+      const actionButtons = [];
 
       if (isAudio && ep.link) {
-        html += `
-          <div class="actions">
-            <a class="rss-button" href="${ep.link}" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6.18 17.82a2.18 2.18 0 1 0 0 4.36 2.18 2.18 0 0 0 0-4.36Zm-3.27-7.64v3.27c4.15 0 7.64 3.49 7.64 7.64h3.27c0-5.93-4.98-10.91-10.91-10.91Zm0-6.55v3.27c7.75 0 14.09 6.34 14.09 14.09h3.27c0-9.55-7.81-17.36-17.36-17.36Z"/>
-              </svg>
-              Podcast
-            </a>
-          </div>
-        `;
+        actionButtons.push(`
+          <a class="rss-button" href="${ep.link}" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.18 17.82a2.18 2.18 0 1 0 0 4.36 2.18 2.18 0 0 0 0-4.36Zm-3.27-7.64v3.27c4.15 0 7.64 3.49 7.64 7.64h3.27c0-5.93-4.98-10.91-10.91-10.91Zm0-6.55v3.27c7.75 0 14.09 6.34 14.09 14.09h3.27c0-9.55-7.81-17.36-17.36-17.36Z"/>
+            </svg>
+            Podcast
+          </a>
+        `);
       }
 
-      metaBoxEl.innerHTML = html;
+      if (ep.video) {
+        actionButtons.push(`
+          <a class="action-btn" href="${ep.video}" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            YouTube
+          </a>
+        `);
+      }
+
+      actionButtons.push(`
+        <button class="action-btn" id="shareEpisodeBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 16.08a2.91 2.91 0 0 0-1.96.77L8.91 12.7a3.28 3.28 0 0 0 0-1.39l7-4.11A3 3 0 1 0 15 5a2.91 2.91 0 0 0 .04.49l-7 4.12a3 3 0 1 0 0 4.78l7.11 4.16A2.91 2.91 0 0 0 15 19a3 3 0 1 0 3-2.92Z"/>
+          </svg>
+          Share
+        </button>
+      `);
+
+      metaBoxEl.innerHTML = `
+        <h2>${ep.title || "Untitled Sermon"}</h2>
+        <div class="series-line">${ep.series || currentSeries || ""}</div>
+        <div class="meta-grid">
+          ${buildMetaRows(ep)}
+        </div>
+        <div class="actions">
+          ${actionButtons.join("")}
+        </div>
+      `;
+
+      const shareBtn = document.getElementById("shareEpisodeBtn");
+      if (shareBtn) {
+        shareBtn.addEventListener("click", shareCurrentEpisode);
+      }
+
       updateMobileSubtitles();
     }
 
+    /* ========= SERIES ORDERING ========= */
     function groupNumberedSeries(names) {
       const grouped = new Map();
       const consumed = new Set();
@@ -1620,30 +2088,6 @@
       return ordered;
     }
 
-    function getVisibleSeriesOrder() {
-      const pinned = getPrioritySeries(mode);
-      const pinnedSet = new Set(pinned);
-
-      let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
-
-      if (mode === "audio") {
-        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
-      }
-
-      if (mode === "video") {
-        archive = archive.filter(name => name !== LIVESTREAMS.name);
-      }
-
-      const groupedArchive = groupNumberedSeries(archive);
-
-      if (mode === "video" && sermonData[VIDEO_ONLY_ARCHIVE.name] && !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)) {
-        const withoutGuest = groupedArchive.filter(name => name !== VIDEO_ONLY_ARCHIVE.name);
-        return [...pinned, ...withoutGuest, VIDEO_ONLY_ARCHIVE.name];
-      }
-
-      return [...pinned, ...groupedArchive];
-    }
-
     function getSeriesChips(seriesName) {
       const chips = [];
       if (seriesName === LIVESTREAMS.name) chips.push({ label: "Live", className: "live" });
@@ -1667,6 +2111,7 @@
       return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
     }
 
+    /* ========= LIST RENDERING ========= */
     function renderSeriesList() {
       seriesListEl.innerHTML = "";
       const visibleSeries = getVisibleSeriesOrder();
@@ -1678,6 +2123,7 @@
       if (!visibleSeries.includes(currentSeries)) {
         currentSeries = visibleSeries[0] || null;
         currentEpisodeIndex = null;
+        currentEpisodeData = null;
       }
 
       visibleSeries.forEach(seriesName => {
@@ -1719,6 +2165,7 @@
         item.addEventListener("click", () => {
           currentSeries = seriesName;
           currentEpisodeIndex = null;
+          currentEpisodeData = null;
           clearMediaState();
           renderSeriesList();
           renderEpisodesList();
@@ -1735,19 +2182,28 @@
         seriesListEl.appendChild(item);
       });
 
+      if (!visibleSeries.length) {
+        seriesListEl.innerHTML = `
+          <div class="meta-note" style="padding: 8px 4px;">No matching series found.</div>
+        `;
+      }
+
       updateMobileSubtitles();
     }
 
     function renderEpisodesList() {
       episodesListEl.innerHTML = "";
+
       if (!currentSeries || !sermonData[currentSeries]) {
         updateMobileSubtitles();
         return;
       }
 
-      sermonData[currentSeries].forEach((ep, index) => {
+      const visibleEpisodes = getVisibleEpisodesForSeries(currentSeries);
+
+      visibleEpisodes.forEach(({ ep, originalIndex }) => {
         const row = document.createElement("div");
-        row.className = `episode-item ${mode}` + (index === currentEpisodeIndex ? " active" : "");
+        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "");
 
         const thumb = mode === "audio"
           ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
@@ -1764,7 +2220,8 @@
         `;
 
         row.addEventListener("click", () => {
-          currentEpisodeIndex = index;
+          currentEpisodeIndex = originalIndex;
+          currentEpisodeData = ep;
           renderEpisodesList();
           row.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 
@@ -1785,9 +2242,16 @@
         episodesListEl.appendChild(row);
       });
 
+      if (!visibleEpisodes.length) {
+        episodesListEl.innerHTML = `
+          <div class="meta-note" style="padding: 8px 4px;">No matching episodes found in this series.</div>
+        `;
+      }
+
       updateMobileSubtitles();
     }
 
+    /* ========= PLAYER ACTIONS ========= */
     function playAudio(ep) {
       stopAndHideVideo();
 
@@ -1806,8 +2270,10 @@
       audioPlayerEl.src = ep.audio;
       audioPlayerEl.load();
 
+      currentEpisodeData = ep;
       updateMediaSession(ep);
       renderMeta(ep, true);
+      setPlayerFocusActive(true);
     }
 
     async function previewVideo(ep) {
@@ -1818,6 +2284,7 @@
         videoPlaceholderEl.textContent = "No video is available for this sermon yet.";
         videoPlaceholderEl.style.display = "flex";
         renderMeta(ep, false);
+        setPlayerFocusActive(true);
         return;
       }
 
@@ -1825,8 +2292,10 @@
       videoPreviewTitleEl.textContent = ep.title || "Selected sermon";
       videoPreviewEl.style.display = "block";
 
+      currentEpisodeData = ep;
       renderMeta(ep, false);
       videoPreviewEl.onclick = () => playVideo(ep);
+      setPlayerFocusActive(true);
     }
 
     function playVideo(ep) {
@@ -1836,6 +2305,7 @@
         videoPlaceholderEl.textContent = "No video is available for this sermon yet.";
         videoPlaceholderEl.style.display = "flex";
         renderMeta(ep, false);
+        setPlayerFocusActive(true);
         return;
       }
 
@@ -1850,9 +2320,12 @@
       `;
       videoShellEl.style.display = "block";
 
+      currentEpisodeData = ep;
       renderMeta(ep, false);
+      setPlayerFocusActive(true);
     }
 
+    /* ========= DATA LOADING ========= */
     async function loadRSSData() {
       const xmlText = await fetch(RSS_URL).then(r => r.text());
       const xml = new DOMParser().parseFromString(xmlText, "text/xml");
@@ -1915,11 +2388,15 @@
       currentSeries = getVisibleSeriesOrder()[0] || null;
     }
 
+    /* ========= MODE / RESET ========= */
     function setMode(nextMode) {
       mode = nextMode;
+      setBodyModeClass();
+
       listenBtn.classList.toggle("active", mode === "audio");
       watchBtn.classList.toggle("active", mode === "video");
       currentEpisodeIndex = null;
+      currentEpisodeData = null;
 
       stopAndHideVideo();
       stopAndHideAudio();
@@ -1927,15 +2404,17 @@
       currentSeries = getVisibleSeriesOrder()[0] || null;
 
       if (mode === "audio") {
+        audioPlaceholderEl.textContent = "Choose a series to begin listening.";
         audioPlaceholderEl.style.display = "flex";
       } else {
-        videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
+        videoPlaceholderEl.textContent = "Choose a series to begin watching.";
         videoPlaceholderEl.style.display = "flex";
       }
 
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+      setPlayerFocusActive(false);
 
       if (isMobileLayout()) {
         setMobileOpen("series");
@@ -1946,18 +2425,21 @@
     function resetHome() {
       currentSeries = getVisibleSeriesOrder()[0] || null;
       currentEpisodeIndex = null;
+      currentEpisodeData = null;
       clearMediaState();
 
       if (mode === "audio") {
+        audioPlaceholderEl.textContent = "Choose a series to begin listening.";
         audioPlaceholderEl.style.display = "flex";
       } else {
-        videoPlaceholderEl.textContent = "Choose a series on the left, then select a sermon to watch.";
+        videoPlaceholderEl.textContent = "Choose a series to begin watching.";
         videoPlaceholderEl.style.display = "flex";
       }
 
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+      setPlayerFocusActive(false);
 
       if (isMobileLayout()) {
         setMobileOpen("series");
@@ -1965,20 +2447,15 @@
       }
     }
 
-    function toggleAudioPlayback() {
-      if (!audioPlayerEl.src) return;
-      if (audioPlayerEl.paused) {
-        audioPlayerEl.play();
-      } else {
-        audioPlayerEl.pause();
-      }
-    }
-
+    /* ========= EVENTS ========= */
     audioArtPanelEl.addEventListener("click", toggleAudioPlayback);
     audioPlayBadgeEl.addEventListener("click", (e) => {
       e.stopPropagation();
       toggleAudioPlayback();
     });
+
+    skipBackBtnEl.addEventListener("click", () => skipAudioBy(-30));
+    skipForwardBtnEl.addEventListener("click", () => skipAudioBy(30));
 
     audioPlayerEl.addEventListener("play", () => {
       audioFeatureCardEl.classList.add("playing");
@@ -1999,6 +2476,54 @@
     watchBtn.addEventListener("click", () => setMode("video"));
     logoReset.addEventListener("click", resetHome);
 
+    searchInputEl.addEventListener("input", () => {
+      searchQuery = searchInputEl.value.trim();
+      searchClearEl.classList.toggle("visible", !!searchQuery);
+
+      const visibleSeries = getVisibleSeriesOrder();
+      if (!visibleSeries.includes(currentSeries)) {
+        currentSeries = visibleSeries[0] || null;
+        currentEpisodeIndex = null;
+        currentEpisodeData = null;
+        clearMediaState();
+        renderEmptyMeta();
+      }
+
+      renderSeriesList();
+      renderEpisodesList();
+
+      if (!visibleSeries.length) {
+        currentSeries = null;
+        currentEpisodeIndex = null;
+        currentEpisodeData = null;
+        clearMediaState();
+        renderEmptyMeta();
+      }
+    });
+
+    searchClearEl.addEventListener("click", () => {
+      searchInputEl.value = "";
+      searchQuery = "";
+      searchClearEl.classList.remove("visible");
+      currentSeries = getVisibleSeriesOrder()[0] || null;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+
+      if (mode === "audio") {
+        audioPlaceholderEl.textContent = "Choose a series to begin listening.";
+        audioPlaceholderEl.style.display = "flex";
+      } else {
+        videoPlaceholderEl.textContent = "Choose a series to begin watching.";
+        videoPlaceholderEl.style.display = "flex";
+      }
+
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
+      setPlayerFocusActive(false);
+    });
+
     window.addEventListener("resize", () => {
       if (isMobileLayout()) {
         if (
@@ -2015,12 +2540,18 @@
       }
     });
 
+    /* ========= APP INIT ========= */
     (async function init() {
+      setBodyModeClass();
       await loadRSSData();
+
+      audioPlaceholderEl.textContent = "Choose a series to begin listening.";
       audioPlaceholderEl.style.display = "flex";
+
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+      setPlayerFocusActive(false);
 
       if (isMobileLayout()) {
         setMobileOpen("series");
