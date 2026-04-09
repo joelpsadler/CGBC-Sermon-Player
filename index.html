@@ -27,7 +27,7 @@
       --shadow: 0 10px 28px rgba(0,0,0,0.30);
       --shadow-strong: 0 18px 40px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.25);
       --shadow-player: 0 28px 60px rgba(0,0,0,0.52), 0 10px 24px rgba(0,0,0,0.30);
-      --shadow-art-strong: 0 22px 46px rgba(0,0,0,0.50), 0 8px 18px rgba(0,0,0,0.28);
+      --shadow-art-strong: 0 26px 52px rgba(0,0,0,0.56), 0 10px 22px rgba(0,0,0,0.30);
       --selected-glow: 0 0 0 1px rgba(128,159,144,0.35) inset, 0 10px 22px rgba(0,0,0,0.28), 0 0 18px rgba(128,159,144,0.12);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -38,6 +38,9 @@
     html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
       font-family: 'Lato', sans-serif;
@@ -71,6 +74,8 @@
 
     .app-shell {
       width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     /* ========= TOP NAV ========= */
@@ -111,6 +116,7 @@
 
     .logo-panel {
       width: min(1800px, calc(100vw - 8px));
+      max-width: 100%;
       padding: 6px 10px;
       border-radius: 18px;
       background: rgba(0,0,0,0.30);
@@ -178,7 +184,7 @@
 
     .top-controls-inner {
       display: grid;
-      grid-template-columns: minmax(220px, 320px) minmax(180px, 220px) minmax(0, 1fr);
+      grid-template-columns: minmax(220px, 320px);
       gap: 12px;
       align-items: center;
       max-width: 1680px;
@@ -215,101 +221,21 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
     }
 
-    .sort-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 8px 12px;
-      min-height: 48px;
-    }
-
-    .sort-label {
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: rgba(255,255,255,0.68);
-      white-space: nowrap;
-    }
-
-    .sort-select {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: #fff;
-      font-size: 15px;
-      appearance: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-    }
-
-    .sort-select option {
-      color: #111;
-    }
-
-    .search-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 8px 10px;
-      min-height: 48px;
-    }
-
-    .search-icon {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-      opacity: 0.8;
-    }
-
-    .search-input {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: #fff;
-      font-size: 15px;
-    }
-
-    .search-input::placeholder {
-      color: rgba(255,255,255,0.55);
-    }
-
-    .search-clear {
-      border: none;
-      background: rgba(255,255,255,0.10);
-      color: #fff;
-      border-radius: 10px;
-      padding: 8px 10px;
-      cursor: pointer;
-      min-height: 36px;
-      min-width: 36px;
-      display: none;
-    }
-
-    .search-clear.visible {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     /* ========= MAIN LAYOUT ========= */
     .layout {
       display: grid;
       grid-template-columns: 290px 340px minmax(0, 1fr);
       min-height: calc(100vh - 86px - var(--safe-top));
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     .col {
       min-width: 0;
+      max-width: 100%;
       overflow-y: auto;
+      overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
     }
 
@@ -333,6 +259,7 @@
 
     .mobile-section-body {
       display: block;
+      max-width: 100%;
     }
 
     /* ========= SECTION LABELS ========= */
@@ -345,16 +272,27 @@
       text-transform: uppercase;
     }
 
-    /* ========= HORIZONTAL RAIL WRAPPERS ========= */
+    /* ========= RAIL WRAPPERS ========= */
     .rail-wrap {
       position: relative;
+      width: 100%;
+      max-width: 100%;
     }
 
-    .series-list,
+    .series-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      max-width: 100%;
+    }
+
     .episodes-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      width: 100%;
+      max-width: 100%;
     }
 
     .series-divider {
@@ -377,6 +315,7 @@
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       -webkit-tap-highlight-color: transparent;
       min-width: 0;
+      max-width: 100%;
     }
 
     .series-item:hover,
@@ -545,6 +484,7 @@
     /* ========= PLAYER ========= */
     .player-wrap {
       max-width: 1140px;
+      width: 100%;
     }
 
     .player-focus-shell {
@@ -577,6 +517,7 @@
       box-shadow: var(--shadow-player);
       margin-bottom: 18px;
       min-height: 560px;
+      max-width: 100%;
     }
 
     #videoShell {
@@ -712,6 +653,9 @@
       width: 22px;
       height: 22px;
       fill: #fff;
+    }
+
+    .video-play-icon svg {
       margin-left: 2px;
     }
 
@@ -773,6 +717,25 @@
       min-height: 320px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s ease;
+    }
+
+    .audio-art-panel:hover {
+      transform: translateY(-2px);
+    }
+
+    .audio-art-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0) 50%,
+        rgba(0,0,0,0.24) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
     }
 
     .audio-art-panel img {
@@ -793,6 +756,7 @@
       background: linear-gradient(120deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 14%, rgba(255,255,255,0) 28%);
       border-radius: 18px;
       pointer-events: none;
+      z-index: 2;
     }
 
     .audio-play-badge {
@@ -802,7 +766,22 @@
       right: 16px;
       bottom: 16px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-      z-index: 2;
+      z-index: 3;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .audio-play-badge:hover {
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.28);
+    }
+
+    .audio-feature-card.playing .audio-play-badge {
+      background: rgba(128,159,144,0.30);
+      border-color: rgba(128,159,144,0.40);
+      box-shadow:
+        0 10px 28px rgba(0,0,0,0.25),
+        0 0 18px rgba(128,159,144,0.30),
+        0 0 30px rgba(128,159,144,0.18);
     }
 
     .audio-ready {
@@ -1144,86 +1123,86 @@
         display: none;
       }
 
-      .rail-wrap {
-        position: relative;
+      /* Series stays vertical on mobile */
+      .series-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow: visible;
+        padding: 0;
       }
 
-      .rail-wrap::before,
-      .rail-wrap::after {
+      .series-list .series-divider {
+        display: block;
+      }
+
+      .series-list .series-item {
+        width: 100%;
+      }
+
+      /* Episodes become horizontal on mobile */
+      .rail-wrap.episodes-rail {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .rail-wrap.episodes-rail::before,
+      .rail-wrap.episodes-rail::after {
         content: "";
         position: absolute;
         top: 0;
         bottom: 10px;
-        width: 18px;
+        width: 14px;
         z-index: 2;
         pointer-events: none;
       }
 
-      .rail-wrap::before {
+      .rail-wrap.episodes-rail::before {
         left: 0;
         background: linear-gradient(90deg, var(--bg), rgba(47,47,47,0));
       }
 
-      .rail-wrap::after {
+      .rail-wrap.episodes-rail::after {
         right: 0;
         background: linear-gradient(270deg, var(--bg), rgba(47,47,47,0));
       }
 
-      .series-list,
       .episodes-list {
         display: flex;
         flex-direction: row;
-        gap: 12px;
+        gap: 8px;
         overflow-x: auto;
         overflow-y: hidden;
         padding: 2px 2px 12px;
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
+        width: max-content;
+        min-width: 100%;
       }
 
-      .series-list::-webkit-scrollbar,
-      .episodes-list::-webkit-scrollbar {
+      .episodes-list::-webkit-scrollbar,
+      .rail-wrap.episodes-rail::-webkit-scrollbar {
         height: 8px;
       }
 
-      .series-list::-webkit-scrollbar-thumb,
-      .episodes-list::-webkit-scrollbar-thumb {
+      .episodes-list::-webkit-scrollbar-thumb,
+      .rail-wrap.episodes-rail::-webkit-scrollbar-thumb {
         background: rgba(255,255,255,0.14);
         border-radius: 999px;
       }
 
-      .series-list .series-divider,
-      .episodes-list .series-divider {
-        display: none;
-      }
-
-      .series-list .series-item,
       .episodes-list .episode-item {
         flex: 0 0 auto;
         scroll-snap-align: start;
+        width: min(308px, 86vw);
       }
 
-      .series-list .series-item {
-        width: min(300px, 84vw);
-      }
-
-      .episodes-list .episode-item {
-        width: min(330px, 88vw);
-      }
-
-      .series-list .series-item-inner,
       .episodes-list .episode-item-inner {
         height: 100%;
-      }
-
-      .series-list .series-item.audio img {
-        width: 64px;
-        height: 64px;
-      }
-
-      .series-list .series-item.video img {
-        width: 96px;
-        height: 54px;
       }
 
       .episodes-list .episode-item.audio img {
@@ -1309,9 +1288,7 @@
       .rss-button,
       .action-btn,
       #audioPlayer,
-      .skip-btn,
-      .sort-wrap,
-      .search-wrap {
+      .skip-btn {
         min-height: 46px;
       }
 
@@ -1328,12 +1305,8 @@
         padding: 12px 14px;
       }
 
-      .series-list .series-item {
-        width: min(285px, 86vw);
-      }
-
       .episodes-list .episode-item {
-        width: min(312px, 90vw);
+        width: min(296px, 88vw);
       }
     }
   </style>
@@ -1358,23 +1331,6 @@
         <div class="mode-toggle">
           <button id="listenBtn" class="active" type="button">Listen</button>
           <button id="watchBtn" type="button">Watch</button>
-        </div>
-
-        <div class="sort-wrap">
-          <span class="sort-label">Sort</span>
-          <select id="sortSelect" class="sort-select">
-            <option value="series">Series Order</option>
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-          </select>
-        </div>
-
-        <div class="search-wrap">
-          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M10 4a6 6 0 1 0 3.87 10.59l4.77 4.77 1.41-1.41-4.77-4.77A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/>
-          </svg>
-          <input id="searchInput" class="search-input" type="text" placeholder="Search series, episodes, scripture, speaker...">
-          <button id="searchClear" class="search-clear" type="button" aria-label="Clear search">×</button>
         </div>
       </div>
     </div>
@@ -1415,7 +1371,7 @@
 
         <div class="mobile-section-body">
           <h3 class="section-title">Episodes</h3>
-          <div class="rail-wrap">
+          <div class="rail-wrap episodes-rail">
             <div id="episodesList" class="episodes-list"></div>
           </div>
         </div>
@@ -1440,7 +1396,7 @@
 
               <div id="videoPreview">
                 <img id="videoPreviewImg" alt="Selected sermon preview">
-                <div class="video-preview-overlay">
+                <div class="video-preview-overlay" id="videoPreviewOverlay">
                   <div class="video-preview-copy">
                     <div class="video-preview-kicker">Ready to Watch</div>
                     <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
@@ -1463,7 +1419,7 @@
                   <div class="audio-art-panel" id="audioArtPanel">
                     <img id="audioFeatureArt" alt="Sermon artwork">
                     <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </span>
                   </div>
 
@@ -1528,8 +1484,6 @@
     let currentEpisodeIndex = null;
     let currentEpisodeData = null;
     let mode = "audio";
-    let searchQuery = "";
-    let sortMode = "series";
 
     /* ========= DOM REFERENCES ========= */
     const bodyEl = document.body;
@@ -1552,15 +1506,13 @@
     const audioPlayerEl = document.getElementById("audioPlayer");
     const audioArtPanelEl = document.getElementById("audioArtPanel");
     const audioPlayBadgeEl = document.getElementById("audioPlayBadge");
+    const audioPlayIconEl = document.getElementById("audioPlayIcon");
     const skipBackBtnEl = document.getElementById("skipBackBtn");
     const skipForwardBtnEl = document.getElementById("skipForwardBtn");
 
     const listenBtn = document.getElementById("listenBtn");
     const watchBtn = document.getElementById("watchBtn");
     const logoReset = document.getElementById("logoReset");
-    const searchInputEl = document.getElementById("searchInput");
-    const searchClearEl = document.getElementById("searchClear");
-    const sortSelectEl = document.getElementById("sortSelect");
 
     const playerFocusShellEl = document.getElementById("playerFocusShell");
 
@@ -1624,29 +1576,7 @@
       }
     }
 
-    /* ========= SEARCH HELPERS ========= */
-    function normalizeText(value) {
-      return String(value || "").toLowerCase().trim();
-    }
-
-    function episodeMatchesQuery(ep, query) {
-      const q = normalizeText(query);
-      if (!q) return true;
-
-      const haystack = [
-        ep.title,
-        ep.series,
-        ep.scripture,
-        ep.by,
-        ep.date,
-        ep.video,
-        ...(ep.extra || [])
-      ].join(" ").toLowerCase();
-
-      return haystack.includes(q);
-    }
-
-    /* ========= DATE / SORT HELPERS ========= */
+    /* ========= DATE / FEED PARSING ========= */
     function parseDateToTimestamp(value) {
       if (!value) return 0;
 
@@ -1664,23 +1594,6 @@
       return 0;
     }
 
-    function getEpisodeTimestamp(ep) {
-      return ep.sortTimestamp || parseDateToTimestamp(ep.date) || 0;
-    }
-
-    function getSeriesSortValue(seriesName, direction = "newest") {
-      const episodes = sermonData[seriesName] || [];
-      if (!episodes.length) return 0;
-
-      const timestamps = episodes.map(getEpisodeTimestamp).filter(Boolean);
-      if (!timestamps.length) return 0;
-
-      return direction === "oldest"
-        ? Math.min(...timestamps)
-        : Math.max(...timestamps);
-    }
-
-    /* ========= TEXT / FEED PARSING ========= */
     function htmlDecode(input) {
       const doc = new DOMParser().parseFromString(input || "", "text/html");
       return (doc.documentElement.textContent || "").trim();
@@ -1847,6 +1760,9 @@
 
     function setAudioReadyState(isPlaying) {
       audioReadyLabelEl.textContent = isPlaying ? "Listening..." : "Ready to Listen";
+      audioPlayIconEl.innerHTML = isPlaying
+        ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
+        : '<path d="M8 5v14l11-7z"/>';
       if ("mediaSession" in navigator) {
         try {
           navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
@@ -2001,7 +1917,7 @@
       metaBoxEl.innerHTML = `
         <h2>Select a sermon</h2>
         <div class="series-line">Choose a series and episode to begin ${verb}.</div>
-        <p class="meta-note">Use sort for browsing order, or search for a quick lookup.</p>
+        <p class="meta-note">Browse by series first, then choose an episode to load the player.</p>
       `;
       updateMobileSubtitles();
     }
@@ -2167,43 +2083,12 @@
         ordered = [...pinned, ...groupNumberedSeries(archive).filter(name => name !== VIDEO_ONLY_ARCHIVE.name), VIDEO_ONLY_ARCHIVE.name];
       }
 
-      if (sortMode === "newest") {
-        ordered = [...ordered].sort((a, b) => getSeriesSortValue(b, "newest") - getSeriesSortValue(a, "newest"));
-      } else if (sortMode === "oldest") {
-        ordered = [...ordered].sort((a, b) => getSeriesSortValue(a, "oldest") - getSeriesSortValue(b, "oldest"));
-      }
-
-      if (!searchQuery) return ordered;
-
-      return ordered.filter(seriesName => {
-        const seriesMatch = normalizeText(seriesName).includes(normalizeText(searchQuery));
-        const episodeMatch = (sermonData[seriesName] || []).some(ep => episodeMatchesQuery(ep, searchQuery));
-        return seriesMatch || episodeMatch;
-      });
+      return ordered;
     }
 
     function getVisibleEpisodesForSeries(seriesName) {
       const allEpisodes = sermonData[seriesName] || [];
-
-      let mapped = allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
-
-      if (searchQuery) {
-        const matched = mapped.filter(({ ep }) => episodeMatchesQuery(ep, searchQuery));
-
-        if (matched.length > 0) {
-          mapped = matched;
-        } else if (!normalizeText(seriesName).includes(normalizeText(searchQuery))) {
-          return [];
-        }
-      }
-
-      if (sortMode === "newest") {
-        mapped.sort((a, b) => getEpisodeTimestamp(b.ep) - getEpisodeTimestamp(a.ep));
-      } else if (sortMode === "oldest") {
-        mapped.sort((a, b) => getEpisodeTimestamp(a.ep) - getEpisodeTimestamp(b.ep));
-      }
-
-      return mapped;
+      return allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
     }
 
     /* ========= LIST RENDERING ========= */
@@ -2222,7 +2107,7 @@
       }
 
       visibleSeries.forEach(seriesName => {
-        if (sortMode === "series" && !featuredDividerInserted && pinnedSet.has(seriesName)) {
+        if (!featuredDividerInserted && pinnedSet.has(seriesName)) {
           const divider = document.createElement("div");
           divider.className = "series-divider featured";
           divider.textContent = "Featured Now";
@@ -2233,7 +2118,7 @@
           featuredDividerInserted = true;
         }
 
-        if (sortMode === "series" && !archiveDividerInserted && !pinnedSet.has(seriesName)) {
+        if (!archiveDividerInserted && !pinnedSet.has(seriesName)) {
           const divider = document.createElement("div");
           divider.className = "series-divider";
           divider.textContent = "Archive";
@@ -2277,12 +2162,6 @@
         seriesListEl.appendChild(item);
       });
 
-      if (!visibleSeries.length) {
-        seriesListEl.innerHTML = `
-          <div class="meta-note" style="padding: 8px 4px;">No matching series found.</div>
-        `;
-      }
-
       updateMobileSubtitles();
     }
 
@@ -2318,7 +2197,7 @@
           currentEpisodeIndex = originalIndex;
           currentEpisodeData = ep;
           renderEpisodesList();
-          row.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+          row.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
 
           if (mode === "audio") {
             playAudio(ep);
@@ -2336,12 +2215,6 @@
 
         episodesListEl.appendChild(row);
       });
-
-      if (!visibleEpisodes.length) {
-        episodesListEl.innerHTML = `
-          <div class="meta-note" style="padding: 8px 4px;">No matching episodes found in this series.</div>
-        `;
-      }
 
       updateMobileSubtitles();
     }
@@ -2573,77 +2446,13 @@
     watchBtn.addEventListener("click", () => setMode("video"));
     logoReset.addEventListener("click", resetHome);
 
-    sortSelectEl.addEventListener("change", () => {
-      sortMode = sortSelectEl.value;
-
-      const visibleSeries = getVisibleSeriesOrder();
-      if (!visibleSeries.includes(currentSeries)) {
-        currentSeries = visibleSeries[0] || null;
-        currentEpisodeIndex = null;
-        currentEpisodeData = null;
-        clearMediaState();
-        renderEmptyMeta();
-      }
-
-      renderSeriesList();
-      renderEpisodesList();
-    });
-
-    searchInputEl.addEventListener("input", () => {
-      searchQuery = searchInputEl.value.trim();
-      searchClearEl.classList.toggle("visible", !!searchQuery);
-
-      const visibleSeries = getVisibleSeriesOrder();
-      if (!visibleSeries.includes(currentSeries)) {
-        currentSeries = visibleSeries[0] || null;
-        currentEpisodeIndex = null;
-        currentEpisodeData = null;
-        clearMediaState();
-        renderEmptyMeta();
-      }
-
-      renderSeriesList();
-      renderEpisodesList();
-
-      if (!visibleSeries.length) {
-        currentSeries = null;
-        currentEpisodeIndex = null;
-        currentEpisodeData = null;
-        clearMediaState();
-        renderEmptyMeta();
-      }
-    });
-
-    searchClearEl.addEventListener("click", () => {
-      searchInputEl.value = "";
-      searchQuery = "";
-      searchClearEl.classList.remove("visible");
-      currentSeries = getVisibleSeriesOrder()[0] || null;
-      currentEpisodeIndex = null;
-      currentEpisodeData = null;
-      clearMediaState();
-
-      if (mode === "audio") {
-        audioPlaceholderEl.textContent = "Choose a series to begin listening.";
-        audioPlaceholderEl.style.display = "flex";
-      } else {
-        videoPlaceholderEl.textContent = "Choose a series to begin watching.";
-        videoPlaceholderEl.style.display = "flex";
-      }
-
-      renderSeriesList();
-      renderEpisodesList();
-      renderEmptyMeta();
-      setPlayerFocusActive(false);
-    });
-
     window.addEventListener("resize", () => {
       if (isMobileLayout()) {
-        if (
-          !seriesSectionEl.classList.contains("open") &&
-          !episodesSectionEl.classList.contains("open") &&
-          !playerSectionEl.classList.contains("open")
-        ) {
+        if (currentEpisodeData) {
+          setMobileOpen("player");
+        } else if (currentSeries) {
+          setMobileOpen("episodes");
+        } else {
           setMobileOpen("series");
         }
       } else {
@@ -2652,6 +2461,86 @@
         playerSectionEl.classList.add("open");
       }
     });
+
+    window.addEventListener("orientationchange", () => {
+      setTimeout(() => {
+        if (isMobileLayout()) {
+          if (currentEpisodeData) {
+            setMobileOpen("player");
+            scrollToSection(playerSectionEl);
+          } else if (currentSeries) {
+            setMobileOpen("episodes");
+            scrollToSection(episodesSectionEl);
+          } else {
+            setMobileOpen("series");
+            scrollToSection(seriesSectionEl);
+          }
+        }
+      }, 200);
+    });
+
+    /* ========= SHARE ========= */
+    async function shareCurrentEpisode() {
+      if (!currentEpisodeData) return;
+
+      const ep = currentEpisodeData;
+      const shareUrl =
+        ep.video ||
+        ep.link ||
+        ep.audio ||
+        window.location.href;
+
+      const shareTextParts = [
+        ep.title || "CGBC Sermon",
+        ep.series ? `Series: ${ep.series}` : "",
+        ep.scripture ? `Scripture: ${ep.scripture}` : "",
+        ep.by ? `By: ${ep.by}` : "",
+        ep.date ? `Date: ${ep.date}` : "",
+        "CGBC - Lebanon, TN"
+      ].filter(Boolean);
+
+      const sharePayload = {
+        title: ep.title || "CGBC Sermon",
+        text: shareTextParts.join("\n"),
+        url: shareUrl
+      };
+
+      try {
+        const imageUrl = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+        if (navigator.canShare && navigator.share && imageUrl) {
+          try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const extension = blob.type.includes("png") ? "png" : "jpg";
+            const file = new File([blob], `cgbc-sermon-art.${extension}`, { type: blob.type || "image/png" });
+
+            if (navigator.canShare({ files: [file] })) {
+              await navigator.share({
+                ...sharePayload,
+                files: [file]
+              });
+              return;
+            }
+          } catch {}
+        }
+
+        if (navigator.share) {
+          await navigator.share(sharePayload);
+          return;
+        }
+
+        await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
+        alert("Episode details copied to clipboard.");
+      } catch {}
+    }
+
+    /* ========= META RENDER BIND ========= */
+    const originalRenderMeta = renderMeta;
+    renderMeta = function(ep, isAudio) {
+      originalRenderMeta(ep, isAudio);
+      const shareBtn = document.getElementById("shareEpisodeBtn");
+      if (shareBtn) shareBtn.addEventListener("click", shareCurrentEpisode);
+    };
 
     /* ========= APP INIT ========= */
     (async function init() {
