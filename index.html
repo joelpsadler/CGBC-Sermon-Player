@@ -41,7 +41,6 @@
       color: var(--text);
       font-family: 'Lato', sans-serif;
       -webkit-text-size-adjust: 100%;
-      touch-action: pan-y;
     }
 
     body {
@@ -106,7 +105,7 @@
         inset 0 -1px 0 rgba(0,0,0,0.16);
       border: 1px solid rgba(255,255,255,0.06);
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease;
       position: relative;
       overflow: hidden;
     }
@@ -173,7 +172,7 @@
       flex: 1;
       border: none;
       border-radius: 12px;
-      padding: 12px 12px;
+      padding: 12px;
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
       color: var(--text);
@@ -247,15 +246,6 @@
     .episodes-list {
       width: 100%;
       max-width: 100%;
-    }
-
-    .series-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .episodes-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -283,13 +273,13 @@
       background: transparent;
     }
 
-    .series-item.is-clickable,
-    .episode-item.is-clickable {
+    .series-item.desktop-clickable,
+    .episode-item.desktop-clickable {
       cursor: pointer;
     }
 
-    .series-item.is-clickable:hover,
-    .episode-item.is-clickable:hover {
+    .series-item.desktop-clickable:hover,
+    .episode-item.desktop-clickable:hover {
       background: rgba(255,255,255,0.08);
       backdrop-filter: blur(6px);
       transform: translateY(-2px);
@@ -384,7 +374,6 @@
 
     .series-item:hover .series-name,
     .episode-item:hover .episode-title {
-      transform: translateY(-2px);
       color: #fff;
     }
 
@@ -544,6 +533,7 @@
       justify-content: flex-start;
       padding: 22px;
       background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.42) 100%);
+      pointer-events: none;
     }
 
     .video-preview-overlay::after {
@@ -605,7 +595,6 @@
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-      cursor: pointer;
     }
 
     .video-play-icon svg {
@@ -1074,20 +1063,24 @@
       .meta h2 { font-size: 24px; }
       .section-title { display: none; }
 
-      .series-list {
+      /* Simplified mobile: everything vertical */
+      .series-list,
+      .episodes-list {
         display: flex;
         flex-direction: column;
         gap: 8px;
         overflow: visible;
         padding: 0;
+        width: 100%;
       }
 
-      .series-list .series-divider {
+      .series-list .series-divider,
+      .episodes-list .series-divider {
         display: block;
       }
 
       .series-list .series-item,
-      .series-list .episode-item {
+      .episodes-list .episode-item {
         width: 100%;
       }
 
@@ -1106,73 +1099,12 @@
         height: 74px;
       }
 
-      .rail-wrap.episodes-rail {
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .rail-wrap.episodes-rail::before,
-      .rail-wrap.episodes-rail::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 10px;
-        width: 14px;
-        z-index: 2;
-        pointer-events: none;
-      }
-
-      .rail-wrap.episodes-rail::before {
-        left: 0;
-        background: linear-gradient(90deg, var(--bg), rgba(47,47,47,0));
-      }
-
-      .rail-wrap.episodes-rail::after {
-        right: 0;
-        background: linear-gradient(270deg, var(--bg), rgba(47,47,47,0));
-      }
-
-      .episodes-list {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 2px 2px 12px;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        width: max-content;
-        min-width: 100%;
-      }
-
-      .episodes-list::-webkit-scrollbar,
-      .rail-wrap.episodes-rail::-webkit-scrollbar {
-        height: 8px;
-      }
-
-      .episodes-list::-webkit-scrollbar-thumb,
-      .rail-wrap.episodes-rail::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.14);
-        border-radius: 999px;
-      }
-
-      .episodes-list .episode-item {
-        flex: 0 0 auto;
-        scroll-snap-align: start;
-        width: min(300px, 86vw);
-      }
-
-      .episodes-list .episode-item-inner {
-        height: 100%;
-      }
-
-      .episodes-list .episode-item.audio .thumb-tap img {
+      .episode-item.audio .thumb-tap img {
         width: 92px;
         height: 92px;
       }
 
-      .episodes-list .episode-item.video .thumb-tap img {
+      .episode-item.video .thumb-tap img {
         width: 118px;
         height: 66px;
       }
@@ -1282,10 +1214,6 @@
       .mobile-section-toggle {
         padding: 12px 14px;
       }
-
-      .episodes-list .episode-item {
-        width: min(290px, 88vw);
-      }
     }
   </style>
 </head>
@@ -1343,7 +1271,7 @@
 
         <div class="mobile-section-body">
           <h3 class="section-title">Episodes</h3>
-          <div class="rail-wrap episodes-rail">
+          <div class="rail-wrap">
             <div id="episodesList" class="episodes-list"></div>
           </div>
         </div>
@@ -1457,11 +1385,6 @@
     let currentEpisodeData = null;
     let mode = "audio";
 
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchMoved = false;
-    const TOUCH_DRAG_THRESHOLD = 10;
-
     const bodyEl = document.body;
     const seriesListEl = document.getElementById("seriesList");
     const episodesListEl = document.getElementById("episodesList");
@@ -1499,30 +1422,6 @@
     const mobileSeriesSubtitleEl = document.getElementById("mobileSeriesSubtitle");
     const mobileEpisodesSubtitleEl = document.getElementById("mobileEpisodesSubtitle");
     const mobilePlayerSubtitleEl = document.getElementById("mobilePlayerSubtitle");
-
-    document.addEventListener("touchstart", (e) => {
-      const t = e.touches && e.touches[0];
-      if (!t) return;
-      touchMoved = false;
-      touchStartX = t.clientX;
-      touchStartY = t.clientY;
-    }, { passive: true });
-
-    document.addEventListener("touchmove", (e) => {
-      const t = e.touches && e.touches[0];
-      if (!t) return;
-      const dx = Math.abs(t.clientX - touchStartX);
-      const dy = Math.abs(t.clientY - touchStartY);
-      if (dx > TOUCH_DRAG_THRESHOLD || dy > TOUCH_DRAG_THRESHOLD) {
-        touchMoved = true;
-      }
-    }, { passive: true });
-
-    document.addEventListener("touchend", () => {
-      setTimeout(() => {
-        touchMoved = false;
-      }, 0);
-    }, { passive: true });
 
     function isMobileLayout() {
       return window.innerWidth <= 980;
@@ -1993,7 +1892,7 @@
       currentEpisodeIndex = originalIndex;
       currentEpisodeData = ep;
       renderEpisodesList();
-      if (rowEl) rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      if (rowEl) rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
 
       if (mode === "audio") playAudio(ep);
       else previewVideo(ep);
@@ -2041,7 +1940,7 @@
         }
 
         const item = document.createElement("div");
-        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "") + (!isMobileLayout() ? " is-clickable" : "");
+        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "") + (!isMobileLayout() ? " desktop-clickable" : "");
 
         const chips = getSeriesChips(seriesName);
         const chipsHtml = chips.length
@@ -2064,7 +1963,6 @@
         thumbBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (touchMoved) return;
           selectSeries(seriesName);
         });
 
@@ -2087,7 +1985,7 @@
 
       getVisibleEpisodesForSeries(currentSeries).forEach(({ ep, originalIndex }) => {
         const row = document.createElement("div");
-        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "") + (!isMobileLayout() ? " is-clickable" : "");
+        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "") + (!isMobileLayout() ? " desktop-clickable" : "");
 
         const thumb = mode === "audio"
           ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
@@ -2109,7 +2007,6 @@
         thumbBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (touchMoved) return;
           selectEpisode(ep, originalIndex, row);
         });
 
@@ -2165,11 +2062,7 @@
 
       currentEpisodeData = ep;
       renderMeta(ep, false);
-      videoPreviewEl.onclick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        playVideo(ep);
-      };
+      videoPreviewEl.onclick = () => playVideo(ep);
       setPlayerFocusActive(true);
     }
 
