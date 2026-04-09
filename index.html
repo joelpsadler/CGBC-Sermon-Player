@@ -22,7 +22,7 @@
   <style>
     /* ======================================================
        GLOBAL VARIABLES
-       These are the main colors and shared style values.
+       Main shared colors and layout values.
     ======================================================= */
     :root {
       --accent: #809F90;
@@ -71,11 +71,10 @@
     }
 
     img { max-width: 100%; }
-    button, audio, iframe { font: inherit; }
+    button, audio, iframe, a { font: inherit; }
 
     /* ======================================================
-       SIMPLE SVG ICONS
-       These are drawn with CSS-sized inline SVG in HTML.
+       SIMPLE INLINE SVG ICONS
     ======================================================= */
     .icon {
       width: 20px;
@@ -92,8 +91,8 @@
     }
 
     /* ======================================================
-       TOP HEADER ROW
-       Back to CGBC + Logo stay beside each other on all sizes.
+       HEADER
+       Logo only now. Back button moved to the top controls.
     ======================================================= */
     .header-wrap {
       display: flex;
@@ -104,40 +103,13 @@
 
     .header-row {
       width: min(1800px, 100%);
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #fff;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 0 14px;
-      min-height: 58px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: transform 0.2s ease, background 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .back-btn:hover {
-      transform: translateY(-1px);
-      background: rgba(128,159,144,0.22);
+      display: block;
     }
 
     .logo-panel {
-      min-width: 0;
       width: 100%;
-      padding: 4px 10px;
+      min-width: 0;
+      padding: 6px 12px;
       border-radius: 16px;
       background:
         linear-gradient(180deg, rgba(128,159,144,0.34), rgba(70,95,82,0.22));
@@ -160,14 +132,14 @@
 
     .logo-panel img {
       display: block;
-      width: min(720px, 100%);
+      width: min(860px, 100%);
       height: auto;
       margin: 0 auto;
     }
 
     /* ======================================================
-       TOP MODE CONTROLS
-       Reworked so they feel less like generic equal blocks.
+       TOP CONTROLS
+       Listen / Watch / Sermon Selection / Back to CGBC
     ======================================================= */
     .top-controls {
       padding: 10px 12px 10px;
@@ -184,12 +156,13 @@
 
     .mode-toggle {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
-      width: min(700px, 100%);
+      width: min(920px, 100%);
     }
 
-    .mode-btn {
+    .mode-btn,
+    .mode-link {
       position: relative;
       border: none;
       min-height: 52px;
@@ -198,9 +171,11 @@
       cursor: pointer;
       padding: 0;
       transition: transform 0.2s ease;
+      text-decoration: none;
     }
 
-    .mode-btn:hover {
+    .mode-btn:hover,
+    .mode-link:hover {
       transform: translateY(-1px);
     }
 
@@ -230,8 +205,23 @@
       box-shadow: 0 12px 28px rgba(0,0,0,0.24), 0 0 0 1px rgba(128,159,144,0.20) inset;
     }
 
-    .browse-btn.top-browse-btn {
-      display: none;
+    .mode-btn-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.02;
+    }
+
+    .mode-btn-text .top-line {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mode-btn-text .bottom-line {
+      font-size: 11px;
+      opacity: 0.85;
+      margin-top: 2px;
+      letter-spacing: 0.02em;
     }
 
     /* ======================================================
@@ -240,7 +230,7 @@
     .layout {
       display: grid;
       grid-template-columns: 320px 380px minmax(0, 1fr);
-      height: calc(100vh - 132px - var(--safe-top) - var(--safe-bottom));
+      height: calc(100vh - 138px - var(--safe-top) - var(--safe-bottom));
       min-height: 0;
       width: 100%;
       max-width: 100%;
@@ -289,8 +279,8 @@
     }
 
     .series-divider {
-      margin: 10px 8px 6px;
-      padding-top: 10px;
+      margin: 8px 4px 4px;
+      padding-top: 8px;
       border-top: 1px solid rgba(255,255,255,0.10);
       color: var(--muted);
       font-family: 'Poppins', sans-serif;
@@ -530,7 +520,7 @@
 
     /* ======================================================
        AUDIO OVERLAY CONTROLS
-       Play + back + forward now all live over the artwork.
+       Play + back + forward over artwork.
     ======================================================= */
     .audio-overlay-controls {
       position: absolute;
@@ -601,7 +591,6 @@
         0 0 42px rgba(128,159,144,0.22);
     }
 
-    /* Thin tracing ring animation around the play circle */
     .audio-play-circle-wrap {
       position: relative;
       width: 38px;
@@ -695,7 +684,6 @@
       font-size: 16px;
     }
 
-    /* Wider, more variable waveform */
     .waveform {
       display: flex;
       align-items: flex-end;
@@ -755,7 +743,6 @@
       100% { transform: scaleY(1.48); opacity: 1; }
     }
 
-    /* Native audio player sits below, alone */
     .audio-controls-row {
       display: block;
     }
@@ -770,7 +757,6 @@
 
     /* ======================================================
        METADATA PANEL
-       In watch mode we now show a wider widescreen image.
     ======================================================= */
     .meta,
     .series-context-card {
@@ -836,46 +822,6 @@
       color: rgba(255,255,255,0.62);
     }
 
-    .meta-media-block {
-      display: none;
-      margin: 0 0 16px;
-    }
-
-    .meta.with-video-art .meta-media-block {
-      display: block;
-    }
-
-    .meta-media-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .meta-media-layout img {
-      width: 100%;
-      max-width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 14px;
-      display: block;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .meta-media-copy {
-      min-width: 0;
-    }
-
-    .meta-media-kicker {
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.70);
-      margin-bottom: 8px;
-    }
-
     .actions {
       margin-top: 16px;
       display: flex;
@@ -908,25 +854,59 @@
 
     /* ======================================================
        CURRENT SERIES CARD
+       This is the series metadata block under the player.
+       Video mode uses widescreen image.
+       Audio mode uses square art.
     ======================================================= */
     .series-context-card {
       display: none;
       margin-top: 16px;
     }
 
-    .series-context-head {
-      display: grid;
-      grid-template-columns: 88px minmax(0, 1fr);
-      gap: 14px;
-      align-items: center;
+    .series-context-kicker {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 8px;
     }
 
-    .series-context-head img {
-      width: 88px;
-      height: 88px;
-      border-radius: 14px;
-      object-fit: cover;
+    .series-context-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      line-height: 1.12;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+
+    .series-context-sub {
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+
+    .series-context-media {
+      margin-bottom: 14px;
+    }
+
+    .series-context-media img {
       display: block;
+      width: 100%;
+      max-width: 100%;
+      object-fit: cover;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.22);
+    }
+
+    .series-context-card.audio-mode .series-context-media img {
+      aspect-ratio: 1 / 1;
+      max-width: 180px;
+      border-radius: 16px;
+    }
+
+    .series-context-card.video-mode .series-context-media img {
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
     }
 
     .series-context-btn,
@@ -951,7 +931,7 @@
 
     /* ======================================================
        MOBILE DRAWER
-       SERIES is intentionally more prominent than EPISODES.
+       Reduced margins / padding for more space.
     ======================================================= */
     .drawer-overlay {
       display: none;
@@ -989,8 +969,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      padding: calc(12px + var(--safe-top)) 14px 10px;
+      gap: 8px;
+      padding: calc(10px + var(--safe-top)) 12px 8px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: rgba(40, 54, 47, 0.92);
       backdrop-filter: blur(10px);
@@ -1000,13 +980,13 @@
     .drawer-top h2 {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .drawer-sections {
       display: grid;
       grid-template-rows: minmax(0, 46%) minmax(0, 54%);
-      height: calc(100% - 66px - var(--safe-top));
+      height: calc(100% - 58px - var(--safe-top));
     }
 
     .drawer-panel {
@@ -1030,7 +1010,7 @@
       top: 0;
       z-index: 3;
       margin: 0;
-      padding: 12px 14px 10px;
+      padding: 8px 10px 7px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -1054,7 +1034,7 @@
 
     .drawer-panel .series-list,
     .drawer-panel .episodes-list {
-      padding: 12px 14px 14px;
+      padding: 8px 10px 10px;
     }
 
     /* ======================================================
@@ -1088,10 +1068,6 @@
         display: block;
       }
 
-      .browse-btn.top-browse-btn {
-        display: inline-block;
-      }
-
       #videoShell,
       #videoPlaceholder {
         min-height: 220px;
@@ -1122,30 +1098,11 @@
         display: block;
       }
 
-      .header-row {
-        grid-template-columns: 120px minmax(0, 1fr);
-        gap: 8px;
-      }
-
-      .back-btn {
-        min-height: 52px;
-        font-size: 13px;
-        padding: 0 10px;
-      }
-
-      .logo-panel {
-        padding: 4px 8px;
-      }
-
-      .logo-panel img {
-        width: min(640px, 100%);
-      }
-
       .mode-toggle {
         width: 100%;
       }
 
-      .meta-media-layout img {
+      .series-context-card.video-mode .series-context-media img {
         aspect-ratio: 16 / 9;
       }
     }
@@ -1155,26 +1112,13 @@
         padding: calc(6px + var(--safe-top)) 8px 6px;
       }
 
-      .header-row {
-        grid-template-columns: 112px minmax(0, 1fr);
-        gap: 8px;
-      }
-
-      .back-btn {
-        min-height: 44px;
-        border-radius: 12px;
-        font-size: 12px;
-        padding: 0 8px;
-      }
-
       .logo-panel {
-        min-height: 44px;
-        padding: 3px 8px;
+        padding: 4px 8px;
         border-radius: 14px;
       }
 
       .logo-panel img {
-        width: min(92vw, 520px);
+        width: min(92vw, 620px);
       }
 
       .top-controls {
@@ -1187,9 +1131,17 @@
 
       .mode-btn-shell {
         min-height: 48px;
-        padding: 0 10px 0 12px;
+        padding: 0 8px 0 10px;
         font-size: 13px;
         gap: 8px;
+      }
+
+      .mode-btn-text .top-line {
+        font-size: 12px;
+      }
+
+      .mode-btn-text .bottom-line {
+        font-size: 10px;
       }
 
       .icon {
@@ -1256,6 +1208,14 @@
         font-size: 22px;
       }
 
+      .series-context-name {
+        font-size: 21px;
+      }
+
+      .series-context-card.audio-mode .series-context-media img {
+        max-width: 150px;
+      }
+
       .mode-btn,
       .series-context-btn,
       .close-drawer-btn,
@@ -1270,14 +1230,11 @@
 <body class="mode-audio">
 
   <!-- ======================================================
-       HEADER ROW
+       HEADER
+       Logo only now.
   ======================================================= -->
   <div class="header-wrap">
     <div class="header-row">
-      <a class="back-btn" href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">
-        ← Back to CGBC
-      </a>
-
       <div class="logo-panel" id="logoReset" title="Reset to first series">
         <img
           src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png"
@@ -1289,6 +1246,7 @@
 
   <!-- ======================================================
        TOP CONTROLS
+       Back to CGBC now lives here.
   ======================================================= -->
   <div class="top-controls">
     <div class="top-controls-inner">
@@ -1301,7 +1259,10 @@
                 <path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/>
               </svg>
             </span>
-            <span>Listen</span>
+            <span class="mode-btn-text">
+              <span class="top-line">Listen</span>
+              <span class="bottom-line">Audio</span>
+            </span>
           </span>
         </button>
 
@@ -1312,20 +1273,40 @@
                 <path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/>
               </svg>
             </span>
-            <span>Watch</span>
+            <span class="mode-btn-text">
+              <span class="top-line">Watch</span>
+              <span class="bottom-line">Video</span>
+            </span>
           </span>
         </button>
 
-        <button class="mode-btn browse-btn top-browse-btn" id="openDrawerBtn" type="button">
+        <button class="mode-btn" id="openDrawerBtn" type="button">
           <span class="mode-btn-shell">
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h10v2H4v-2Z"/>
               </svg>
             </span>
-            <span>Browse</span>
+            <span class="mode-btn-text">
+              <span class="top-line">Sermon</span>
+              <span class="bottom-line">Selection</span>
+            </span>
           </span>
         </button>
+
+        <a class="mode-link" href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">
+          <span class="mode-btn-shell">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M14.71 6.71a1 1 0 0 0-1.42-1.42L7.59 11l5.7 5.71a1 1 0 1 0 1.42-1.42L10.41 11l4.3-4.29Z"/>
+              </svg>
+            </span>
+            <span class="mode-btn-text">
+              <span class="top-line">Back to</span>
+              <span class="bottom-line">CGBC</span>
+            </span>
+          </span>
+        </a>
 
       </div>
     </div>
@@ -1396,7 +1377,6 @@
           <div class="audio-art-panel" id="audioArtPanel">
             <img id="audioFeatureArt" alt="Sermon artwork">
 
-            <!-- Overlay controls at bottom of artwork -->
             <div class="audio-overlay-controls">
               <button id="miniSkipBackBtn" class="audio-mini-skip" type="button">−30</button>
 
@@ -1434,7 +1414,7 @@
       </div>
 
       <!-- ===================================================
-           METADATA
+           METADATA PANEL
       ==================================================== -->
       <section class="meta" id="metaBox">
         <h2>Select a sermon</h2>
@@ -1445,15 +1425,14 @@
       <!-- ===================================================
            CURRENT SERIES CARD
       ==================================================== -->
-      <section class="series-context-card" id="seriesContextCard">
-        <div class="series-context-head">
+      <section class="series-context-card audio-mode" id="seriesContextCard">
+        <div class="series-context-kicker">Current Series</div>
+        <div class="series-context-name" id="seriesContextTitle">Choose a series</div>
+        <div class="series-context-sub" id="seriesContextSub">Select a series to begin</div>
+        <div class="series-context-media">
           <img id="seriesContextImage" alt="Current series artwork">
-          <div>
-            <h3 id="seriesContextTitle">Current Series</h3>
-            <div class="series-context-sub" id="seriesContextSub">Choose a series</div>
-            <button class="series-context-btn" id="seriesContextBrowseBtn" type="button">Change Series</button>
-          </div>
         </div>
+        <button class="series-context-btn" id="seriesContextBrowseBtn" type="button">Change Series</button>
       </section>
     </main>
   </div>
@@ -1519,6 +1498,7 @@
     const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
     const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
 
+    const seriesContextCardEl = document.getElementById('seriesContextCard');
     const seriesContextImageEl = document.getElementById('seriesContextImage');
     const seriesContextTitleEl = document.getElementById('seriesContextTitle');
     const seriesContextSubEl = document.getElementById('seriesContextSub');
@@ -1644,6 +1624,14 @@
         : FALLBACK_IMAGE;
     }
 
+    /* Find a series-wide widescreen image for video mode */
+    function getSeriesWideCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      const withVideo = items.find(item => item.videoId);
+      if (withVideo) return getWatchThumb(withVideo.videoId);
+      return FALLBACK_IMAGE;
+    }
+
     async function fetchPlaylistSeries(config, newestFirst = false) {
       const url =
         `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
@@ -1767,24 +1755,32 @@
       else audioPlayerEl.pause();
     }
 
+    /* ======================================================
+       SHARE
+       Audio shares audio artwork + audio/RSS link.
+       Video shares video artwork + YouTube link.
+    ======================================================= */
     async function shareCurrentEpisode() {
       if (!currentEpisodeData) return;
 
       const ep = currentEpisodeData;
-      const shareUrl = ep.video || ep.link || ep.audio || window.location.href;
 
-      const shareTextParts = [
-        ep.title || 'CGBC Sermon',
-        ep.series ? `Series: ${ep.series}` : '',
-        ep.scripture ? `Scripture: ${ep.scripture}` : '',
-        ep.by ? `By: ${ep.by}` : '',
-        ep.date ? `Date: ${ep.date}` : '',
-        'CGBC - Lebanon, TN'
-      ].filter(Boolean);
+      const isAudioShare = mode === 'audio';
+      const shareUrl = isAudioShare
+        ? (ep.audio || ep.link || window.location.href)
+        : (ep.video || window.location.href);
+
+      const shareImage = isAudioShare
+        ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
+        : (ep.videoId ? getWatchThumb(ep.videoId) : FALLBACK_IMAGE);
 
       const sharePayload = {
         title: ep.title || 'CGBC Sermon',
-        text: shareTextParts.join('\n'),
+        text: [
+          ep.title || 'CGBC Sermon',
+          ep.series || '',
+          shareImage
+        ].filter(Boolean).join('\n'),
         url: shareUrl
       };
 
@@ -1795,25 +1791,36 @@
         }
 
         await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
-        alert('Episode details copied to clipboard.');
+        alert('Share details copied to clipboard.');
       } catch {}
     }
 
     /* ======================================================
-       SERIES CONTEXT CARD
+       CURRENT SERIES CARD
     ======================================================= */
     function updateSeriesContext() {
       if (!currentSeries || !sermonData[currentSeries]) {
-        seriesContextTitleEl.textContent = 'Current Series';
-        seriesContextSubEl.textContent = 'Choose a series';
+        seriesContextTitleEl.textContent = 'Choose a series';
+        seriesContextSubEl.textContent = 'Select a series to begin';
         seriesContextImageEl.src = FALLBACK_IMAGE;
+        seriesContextCardEl.classList.remove('video-mode');
+        seriesContextCardEl.classList.add('audio-mode');
         return;
       }
 
       const count = sermonData[currentSeries].length;
       seriesContextTitleEl.textContent = currentSeries;
       seriesContextSubEl.textContent = `${count} episode${count === 1 ? '' : 's'} available`;
-      seriesContextImageEl.src = getSeriesCover(currentSeries);
+
+      if (mode === 'video') {
+        seriesContextCardEl.classList.remove('audio-mode');
+        seriesContextCardEl.classList.add('video-mode');
+        seriesContextImageEl.src = getSeriesWideCover(currentSeries);
+      } else {
+        seriesContextCardEl.classList.remove('video-mode');
+        seriesContextCardEl.classList.add('audio-mode');
+        seriesContextImageEl.src = getSeriesCover(currentSeries);
+      }
     }
 
     /* ======================================================
@@ -1846,7 +1853,6 @@
     function renderEmptyMeta() {
       const verb = mode === 'audio' ? 'listening' : 'watching';
 
-      metaBoxEl.classList.remove('with-video-art');
       metaBoxEl.innerHTML = `
         <h2>Select a sermon</h2>
         <div class="series-line">Choose a series and episode to begin ${verb}.</div>
@@ -1879,27 +1885,9 @@
         <button class="action-btn" id="shareEpisodeBtn" type="button">Share</button>
       `);
 
-      const showVideoArt = mode === 'video' && ep && ep.videoId;
-      const videoArtHtml = showVideoArt
-        ? `
-          <div class="meta-media-block">
-            <div class="meta-media-layout">
-              <img src="${getWatchThumb(ep.videoId)}" alt="">
-              <div class="meta-media-copy">
-                <div class="meta-media-kicker">Now Watching</div>
-                <div class="series-line">${ep.series || currentSeries || ''}</div>
-              </div>
-            </div>
-          </div>
-        `
-        : '';
-
-      metaBoxEl.classList.toggle('with-video-art', showVideoArt);
-
       metaBoxEl.innerHTML = `
-        ${videoArtHtml}
         <h2>${ep.title || 'Untitled Sermon'}</h2>
-        ${showVideoArt ? '' : `<div class="series-line">${ep.series || currentSeries || ''}</div>`}
+        <div class="series-line">${ep.series || currentSeries || ''}</div>
         <div class="meta-grid">${buildMetaRows(ep)}</div>
         <div class="actions">${actionButtons.join('')}</div>
       `;
