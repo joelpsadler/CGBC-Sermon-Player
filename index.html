@@ -22,11 +22,12 @@
   <style>
     /* ======================================================
        GLOBAL VARIABLES
-       Change these to affect the overall color palette.
+       These are the main colors and shared style values.
     ======================================================= */
     :root {
       --accent: #809F90;
       --accent-dark: #6d8d7d;
+      --accent-glow: rgba(128,159,144,0.55);
       --bg: #2f2f2f;
       --panel: rgba(255,255,255,0.06);
       --panel-strong: rgba(0,0,0,0.34);
@@ -73,10 +74,26 @@
     button, audio, iframe { font: inherit; }
 
     /* ======================================================
+       SIMPLE SVG ICONS
+       These are drawn with CSS-sized inline SVG in HTML.
+    ======================================================= */
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: currentColor;
+    }
+
+    /* ======================================================
        TOP HEADER ROW
-       This row now contains:
-       - Back to CGBC button
-       - Shorter logo banner
+       Back to CGBC + Logo stay beside each other on all sizes.
     ======================================================= */
     .header-wrap {
       display: flex;
@@ -149,9 +166,8 @@
     }
 
     /* ======================================================
-       TOP CONTROLS
-       On mobile this now contains:
-       Listen | Watch | Browse Sermons
+       TOP MODE CONTROLS
+       Reworked so they feel less like generic equal blocks.
     ======================================================= */
     .top-controls {
       padding: 10px 12px 10px;
@@ -169,38 +185,49 @@
     .mode-toggle {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      width: min(560px, 100%);
+      gap: 10px;
+      width: min(700px, 100%);
     }
 
-    .mode-toggle button,
-    .browse-btn,
-    .close-drawer-btn,
-    .series-context-btn {
+    .mode-btn {
+      position: relative;
       border: none;
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
+      min-height: 52px;
       color: var(--text);
-      background: rgba(255,255,255,0.08);
+      background: transparent;
       cursor: pointer;
-      min-height: 44px;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      padding: 0;
+      transition: transform 0.2s ease;
     }
 
-    .mode-toggle button:hover,
-    .browse-btn:hover,
-    .close-drawer-btn:hover,
-    .series-context-btn:hover {
+    .mode-btn:hover {
       transform: translateY(-1px);
-      background: rgba(255,255,255,0.12);
     }
 
-    .mode-toggle button.active {
-      background: rgba(128,159,144,0.40);
+    .mode-btn-shell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      width: 100%;
+      padding: 0 16px 0 18px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: inherit;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    }
+
+    .mode-btn.active .mode-btn-shell {
+      background: linear-gradient(180deg, rgba(128,159,144,0.55), rgba(110,136,123,0.40));
       color: #111;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.24), 0 0 0 1px rgba(128,159,144,0.20) inset;
     }
 
     .browse-btn.top-browse-btn {
@@ -208,7 +235,7 @@
     }
 
     /* ======================================================
-       MAIN DESKTOP LAYOUT
+       DESKTOP 3-COLUMN LAYOUT
     ======================================================= */
     .layout {
       display: grid;
@@ -501,10 +528,50 @@
       display: block;
     }
 
-    .audio-play-badge {
+    /* ======================================================
+       AUDIO OVERLAY CONTROLS
+       Play + back + forward now all live over the artwork.
+    ======================================================= */
+    .audio-overlay-controls {
       position: absolute;
       left: 16px;
+      right: 16px;
       bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      z-index: 4;
+    }
+
+    .audio-mini-skip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      padding: 0 10px;
+    }
+
+    .audio-mini-skip:hover {
+      transform: translateY(-1px);
+      background: rgba(0,0,0,0.56);
+    }
+
+    .audio-play-badge {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -516,8 +583,13 @@
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
       cursor: pointer;
-      z-index: 3;
       transition: all 0.25s ease;
+      overflow: visible;
+    }
+
+    .audio-play-badge:hover {
+      transform: translateY(-1px);
+      background: rgba(0,0,0,0.56);
     }
 
     .audio-feature-card.playing .audio-play-badge {
@@ -529,7 +601,49 @@
         0 0 42px rgba(128,159,144,0.22);
     }
 
+    /* Thin tracing ring animation around the play circle */
+    .audio-play-circle-wrap {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+
+    .audio-play-circle-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 999px;
+      background:
+        conic-gradient(
+          from 0deg,
+          rgba(128,159,144,0.0) 0deg,
+          rgba(128,159,144,0.0) 235deg,
+          rgba(148, 216, 175, 0.92) 285deg,
+          rgba(128,159,144,0.0) 335deg,
+          rgba(128,159,144,0.0) 360deg
+        );
+      mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      opacity: 0;
+      transform: rotate(0deg);
+      pointer-events: none;
+    }
+
+    .audio-feature-card.playing .audio-play-circle-wrap::before {
+      opacity: 1;
+      animation: traceRing 1.5s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(148, 216, 175, 0.55));
+    }
+
+    @keyframes traceRing {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     .audio-play-circle {
+      position: absolute;
+      inset: 0;
       width: 38px;
       height: 38px;
       border-radius: 999px;
@@ -538,7 +652,6 @@
       justify-content: center;
       background: rgba(255,255,255,0.18);
       border: 1px solid rgba(255,255,255,0.18);
-      flex-shrink: 0;
     }
 
     .audio-play-circle svg {
@@ -582,24 +695,27 @@
       font-size: 16px;
     }
 
+    /* Wider, more variable waveform */
     .waveform {
       display: flex;
       align-items: flex-end;
-      justify-content: flex-start;
-      gap: 4px;
-      height: 70px;
-      margin: 0 0 18px;
+      justify-content: space-between;
+      gap: 6px;
+      height: 88px;
+      margin: 6px 0 18px;
       width: 100%;
-      opacity: 0.95;
+      max-width: 100%;
+      opacity: 0.98;
     }
 
     .waveform span {
-      width: 8px;
+      flex: 1 1 0;
+      min-width: 6px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(128,159,144,1), rgba(128,159,144,0.32));
+      background: linear-gradient(180deg, rgba(128,159,144,1), rgba(128,159,144,0.26));
       box-shadow: 0 0 10px rgba(128,159,144,0.22);
       transform-origin: bottom center;
-      transform: scaleY(0.55);
+      transform: scaleY(0.52);
       opacity: 0.82;
       animation-play-state: paused;
     }
@@ -612,55 +728,36 @@
       animation-play-state: running;
     }
 
-    .audio-feature-card .waveform span:nth-child(1)  { height: 20%; animation-duration: 0.58s; animation-delay: 0.00s; }
-    .audio-feature-card .waveform span:nth-child(2)  { height: 36%; animation-duration: 0.74s; animation-delay: 0.08s; }
-    .audio-feature-card .waveform span:nth-child(3)  { height: 58%; animation-duration: 0.63s; animation-delay: 0.14s; }
-    .audio-feature-card .waveform span:nth-child(4)  { height: 30%; animation-duration: 0.86s; animation-delay: 0.05s; }
-    .audio-feature-card .waveform span:nth-child(5)  { height: 82%; animation-duration: 0.66s; animation-delay: 0.20s; }
-    .audio-feature-card .waveform span:nth-child(6)  { height: 48%; animation-duration: 0.92s; animation-delay: 0.11s; }
-    .audio-feature-card .waveform span:nth-child(7)  { height: 24%; animation-duration: 0.60s; animation-delay: 0.26s; }
-    .audio-feature-card .waveform span:nth-child(8)  { height: 68%; animation-duration: 0.78s; animation-delay: 0.17s; }
-    .audio-feature-card .waveform span:nth-child(9)  { height: 94%; animation-duration: 0.55s; animation-delay: 0.32s; }
-    .audio-feature-card .waveform span:nth-child(10) { height: 40%; animation-duration: 0.88s; animation-delay: 0.09s; }
-    .audio-feature-card .waveform span:nth-child(11) { height: 74%; animation-duration: 0.70s; animation-delay: 0.24s; }
-    .audio-feature-card .waveform span:nth-child(12) { height: 28%; animation-duration: 0.98s; animation-delay: 0.13s; }
-    .audio-feature-card .waveform span:nth-child(13) { height: 62%; animation-duration: 0.64s; animation-delay: 0.29s; }
-    .audio-feature-card .waveform span:nth-child(14) { height: 88%; animation-duration: 0.82s; animation-delay: 0.18s; }
-    .audio-feature-card .waveform span:nth-child(15) { height: 44%; animation-duration: 0.68s; animation-delay: 0.35s; }
-    .audio-feature-card .waveform span:nth-child(16) { height: 72%; animation-duration: 0.90s; animation-delay: 0.22s; }
+    .audio-feature-card .waveform span:nth-child(1)  { height: 16%; animation-duration: 0.64s; animation-delay: 0.00s; }
+    .audio-feature-card .waveform span:nth-child(2)  { height: 54%; animation-duration: 0.91s; animation-delay: 0.07s; }
+    .audio-feature-card .waveform span:nth-child(3)  { height: 22%; animation-duration: 0.58s; animation-delay: 0.13s; }
+    .audio-feature-card .waveform span:nth-child(4)  { height: 70%; animation-duration: 1.02s; animation-delay: 0.03s; }
+    .audio-feature-card .waveform span:nth-child(5)  { height: 30%; animation-duration: 0.75s; animation-delay: 0.15s; }
+    .audio-feature-card .waveform span:nth-child(6)  { height: 48%; animation-duration: 0.84s; animation-delay: 0.22s; }
+    .audio-feature-card .waveform span:nth-child(7)  { height: 76%; animation-duration: 0.67s; animation-delay: 0.08s; }
+    .audio-feature-card .waveform span:nth-child(8)  { height: 18%; animation-duration: 0.93s; animation-delay: 0.26s; }
+    .audio-feature-card .waveform span:nth-child(9)  { height: 62%; animation-duration: 0.73s; animation-delay: 0.19s; }
+    .audio-feature-card .waveform span:nth-child(10) { height: 28%; animation-duration: 0.88s; animation-delay: 0.10s; }
+    .audio-feature-card .waveform span:nth-child(11) { height: 88%; animation-duration: 0.61s; animation-delay: 0.31s; }
+    .audio-feature-card .waveform span:nth-child(12) { height: 24%; animation-duration: 1.00s; animation-delay: 0.14s; }
+    .audio-feature-card .waveform span:nth-child(13) { height: 68%; animation-duration: 0.71s; animation-delay: 0.29s; }
+    .audio-feature-card .waveform span:nth-child(14) { height: 20%; animation-duration: 0.96s; animation-delay: 0.18s; }
+    .audio-feature-card .waveform span:nth-child(15) { height: 82%; animation-duration: 0.66s; animation-delay: 0.34s; }
+    .audio-feature-card .waveform span:nth-child(16) { height: 34%; animation-duration: 0.78s; animation-delay: 0.12s; }
+    .audio-feature-card .waveform span:nth-child(17) { height: 58%; animation-duration: 0.92s; animation-delay: 0.27s; }
+    .audio-feature-card .waveform span:nth-child(18) { height: 14%; animation-duration: 0.60s; animation-delay: 0.38s; }
 
     @keyframes waveMotion {
-      0%   { transform: scaleY(0.25); opacity: 0.55; }
-      25%  { transform: scaleY(0.75); opacity: 0.75; }
-      50%  { transform: scaleY(1.2); opacity: 1; }
-      75%  { transform: scaleY(0.6); opacity: 0.82; }
-      100% { transform: scaleY(1.45); opacity: 1; }
+      0%   { transform: scaleY(0.22); opacity: 0.55; }
+      25%  { transform: scaleY(0.78); opacity: 0.76; }
+      50%  { transform: scaleY(1.20); opacity: 1; }
+      75%  { transform: scaleY(0.56); opacity: 0.82; }
+      100% { transform: scaleY(1.48); opacity: 1; }
     }
 
+    /* Native audio player sits below, alone */
     .audio-controls-row {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .skip-btn {
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      border-radius: 12px;
-      padding: 10px 12px;
-      min-height: 46px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .skip-btn:hover {
-      transform: translateY(-1px);
-      background: rgba(128,159,144,0.22);
+      display: block;
     }
 
     #audioPlayer {
@@ -673,7 +770,7 @@
 
     /* ======================================================
        METADATA PANEL
-       In watch mode this now shows the current episode artwork.
+       In watch mode we now show a wider widescreen image.
     ======================================================= */
     .meta,
     .series-context-card {
@@ -750,16 +847,17 @@
 
     .meta-media-layout {
       display: grid;
-      grid-template-columns: 160px minmax(0, 1fr);
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 14px;
       align-items: start;
     }
 
     .meta-media-layout img {
-      width: 160px;
-      height: 90px;
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 14px;
       display: block;
       box-shadow: 0 10px 20px rgba(0,0,0,0.25);
       background: rgba(255,255,255,0.05);
@@ -831,8 +929,29 @@
       display: block;
     }
 
+    .series-context-btn,
+    .close-drawer-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .series-context-btn:hover,
+    .close-drawer-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
     /* ======================================================
        MOBILE DRAWER
+       SERIES is intentionally more prominent than EPISODES.
     ======================================================= */
     .drawer-overlay {
       display: none;
@@ -886,7 +1005,7 @@
 
     .drawer-sections {
       display: grid;
-      grid-template-rows: minmax(0, 42%) minmax(0, 58%);
+      grid-template-rows: minmax(0, 46%) minmax(0, 54%);
       height: calc(100% - 66px - var(--safe-top));
     }
 
@@ -918,11 +1037,19 @@
     }
 
     .drawer-panel.series-panel .section-title {
-      background: rgba(83, 110, 96, 0.90);
+      background: rgba(83, 110, 96, 0.92);
+      font-size: 16px;
+      letter-spacing: 0.09em;
+      font-weight: 700;
+      color: #f6f6f6;
     }
 
     .drawer-panel.episodes-panel .section-title {
-      background: rgba(73, 95, 85, 0.90);
+      background: rgba(73, 95, 85, 0.92);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      color: rgba(255,255,255,0.80);
     }
 
     .drawer-panel .series-list,
@@ -962,9 +1089,7 @@
       }
 
       .browse-btn.top-browse-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        display: inline-block;
       }
 
       #videoShell,
@@ -982,11 +1107,11 @@
       }
 
       .audio-art-panel img {
-        max-width: min(360px, 100%);
+        max-width: min(420px, 100%);
       }
 
       .waveform {
-        justify-content: center;
+        justify-content: space-between;
       }
 
       .meta h2 {
@@ -997,22 +1122,30 @@
         display: block;
       }
 
-      .audio-controls-row {
-        grid-template-columns: 1fr;
+      .header-row {
+        grid-template-columns: 120px minmax(0, 1fr);
+        gap: 8px;
       }
 
-      .meta-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
+      .back-btn {
+        min-height: 52px;
+        font-size: 13px;
+        padding: 0 10px;
       }
 
-      .meta-media-layout {
-        grid-template-columns: 1fr;
+      .logo-panel {
+        padding: 4px 8px;
+      }
+
+      .logo-panel img {
+        width: min(640px, 100%);
+      }
+
+      .mode-toggle {
+        width: 100%;
       }
 
       .meta-media-layout img {
-        width: 100%;
-        height: auto;
         aspect-ratio: 16 / 9;
       }
     }
@@ -1023,20 +1156,25 @@
       }
 
       .header-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 8px;
       }
 
       .back-btn {
         min-height: 44px;
+        border-radius: 12px;
+        font-size: 12px;
+        padding: 0 8px;
       }
 
       .logo-panel {
-        padding: 4px 8px;
+        min-height: 44px;
+        padding: 3px 8px;
         border-radius: 14px;
       }
 
       .logo-panel img {
-        width: min(92vw, 620px);
+        width: min(92vw, 520px);
       }
 
       .top-controls {
@@ -1044,19 +1182,19 @@
       }
 
       .mode-toggle {
-        width: 100%;
+        gap: 8px;
       }
 
-      .mode-toggle button,
-      .browse-btn,
-      .close-drawer-btn,
-      .series-context-btn,
-      .rss-button,
-      .action-btn,
-      #audioPlayer,
-      .skip-btn {
-        min-height: 46px;
+      .mode-btn-shell {
+        min-height: 48px;
+        padding: 0 10px 0 12px;
         font-size: 13px;
+        gap: 8px;
+      }
+
+      .icon {
+        width: 18px;
+        height: 18px;
       }
 
       .col-player {
@@ -1064,13 +1202,26 @@
         padding-right: 10px;
       }
 
+      .audio-overlay-controls {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        gap: 8px;
+      }
+
+      .audio-mini-skip {
+        min-width: 46px;
+        height: 46px;
+        font-size: 11px;
+        padding: 0 8px;
+      }
+
       .audio-play-badge {
-        left: 14px;
-        bottom: 14px;
         gap: 10px;
         padding: 8px 12px 8px 8px;
       }
 
+      .audio-play-circle-wrap,
       .audio-play-circle {
         width: 34px;
         height: 34px;
@@ -1092,12 +1243,26 @@
         font-size: 15px;
       }
 
+      .waveform {
+        height: 80px;
+        gap: 5px;
+      }
+
       .meta {
         padding: 16px;
       }
 
       .meta h2 {
         font-size: 22px;
+      }
+
+      .mode-btn,
+      .series-context-btn,
+      .close-drawer-btn,
+      .action-btn,
+      .rss-button,
+      #audioPlayer {
+        min-height: 46px;
       }
     }
   </style>
@@ -1106,7 +1271,6 @@
 
   <!-- ======================================================
        HEADER ROW
-       Back button + logo now live together.
   ======================================================= -->
   <div class="header-wrap">
     <div class="header-row">
@@ -1125,15 +1289,44 @@
 
   <!-- ======================================================
        TOP CONTROLS
-       Mobile: Listen | Watch | Browse Sermons
-       Desktop: Browse button hidden
   ======================================================= -->
   <div class="top-controls">
     <div class="top-controls-inner">
       <div class="mode-toggle">
-        <button id="listenBtn" class="active" type="button">Listen</button>
-        <button id="watchBtn" type="button">Watch</button>
-        <button class="browse-btn top-browse-btn" id="openDrawerBtn" type="button">Browse Sermons</button>
+
+        <button class="mode-btn active" id="listenBtn" type="button">
+          <span class="mode-btn-shell">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/>
+              </svg>
+            </span>
+            <span>Listen</span>
+          </span>
+        </button>
+
+        <button class="mode-btn" id="watchBtn" type="button">
+          <span class="mode-btn-shell">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/>
+              </svg>
+            </span>
+            <span>Watch</span>
+          </span>
+        </button>
+
+        <button class="mode-btn browse-btn top-browse-btn" id="openDrawerBtn" type="button">
+          <span class="mode-btn-shell">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h10v2H4v-2Z"/>
+              </svg>
+            </span>
+            <span>Browse</span>
+          </span>
+        </button>
+
       </div>
     </div>
   </div>
@@ -1145,7 +1338,6 @@
 
   <!-- ======================================================
        MOBILE DRAWER
-       Series and Episodes live here on mobile.
   ======================================================= -->
   <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
     <div class="drawer-top">
@@ -1183,7 +1375,7 @@
       <div id="episodesList" class="episodes-list"></div>
     </section>
 
-    <!-- PLAYER / DETAILS COLUMN -->
+    <!-- PLAYER / DETAILS -->
     <main class="col col-player" id="playerSection">
 
       <!-- Video placeholder -->
@@ -1204,14 +1396,23 @@
           <div class="audio-art-panel" id="audioArtPanel">
             <img id="audioFeatureArt" alt="Sermon artwork">
 
-            <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
-              <span class="audio-play-circle">
-                <svg id="audioPlayIcon" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+            <!-- Overlay controls at bottom of artwork -->
+            <div class="audio-overlay-controls">
+              <button id="miniSkipBackBtn" class="audio-mini-skip" type="button">−30</button>
+
+              <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
+                <span class="audio-play-circle-wrap">
+                  <span class="audio-play-circle">
+                    <svg id="audioPlayIcon" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </span>
+                </span>
+                <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
               </span>
-              <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
-            </span>
+
+              <button id="miniSkipForwardBtn" class="audio-mini-skip" type="button">+30</button>
+            </div>
           </div>
 
           <div class="audio-content">
@@ -1220,16 +1421,13 @@
             <div class="audio-series" id="audioFeatureSeries"></div>
 
             <div class="waveform" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
 
             <div class="audio-controls-row">
-              <button id="skipBackBtn" class="skip-btn" type="button">− 30s</button>
               <audio id="audioPlayer" controls preload="none"></audio>
-              <button id="skipForwardBtn" class="skip-btn" type="button">+ 30s</button>
             </div>
           </div>
         </div>
@@ -1237,7 +1435,6 @@
 
       <!-- ===================================================
            METADATA
-           In watch mode this now includes episode artwork.
       ==================================================== -->
       <section class="meta" id="metaBox">
         <h2>Select a sermon</h2>
@@ -1247,7 +1444,6 @@
 
       <!-- ===================================================
            CURRENT SERIES CARD
-           Only shown on mobile for context under the player.
       ==================================================== -->
       <section class="series-context-card" id="seriesContextCard">
         <div class="series-context-head">
@@ -1320,8 +1516,8 @@
     const audioPlayBadgeEl = document.getElementById('audioPlayBadge');
     const audioPlayIconEl = document.getElementById('audioPlayIcon');
     const audioPlayLabelEl = document.getElementById('audioPlayLabel');
-    const skipBackBtnEl = document.getElementById('skipBackBtn');
-    const skipForwardBtnEl = document.getElementById('skipForwardBtn');
+    const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
+    const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
 
     const seriesContextImageEl = document.getElementById('seriesContextImage');
     const seriesContextTitleEl = document.getElementById('seriesContextTitle');
@@ -1622,7 +1818,6 @@
 
     /* ======================================================
        METADATA RENDERING
-       In video mode we now show current episode artwork here.
     ======================================================= */
     function buildMetaRows(ep) {
       const rows = [];
@@ -2236,14 +2431,25 @@
 
     logoReset.addEventListener('click', resetHome);
 
-    audioArtPanelEl.addEventListener('click', toggleAudioPlayback);
+    audioArtPanelEl.addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      toggleAudioPlayback();
+    });
+
     audioPlayBadgeEl.addEventListener('click', e => {
       e.stopPropagation();
       toggleAudioPlayback();
     });
 
-    skipBackBtnEl.addEventListener('click', () => skipAudioBy(-30));
-    skipForwardBtnEl.addEventListener('click', () => skipAudioBy(30));
+    miniSkipBackBtnEl.addEventListener('click', e => {
+      e.stopPropagation();
+      skipAudioBy(-30);
+    });
+
+    miniSkipForwardBtnEl.addEventListener('click', e => {
+      e.stopPropagation();
+      skipAudioBy(30);
+    });
 
     audioPlayerEl.addEventListener('play', () => {
       setAudioReadyState(true);
@@ -2278,6 +2484,8 @@
       await loadRSSData();
 
       bodyEl.classList.add('mode-audio');
+      listenBtn.classList.add('active');
+      watchBtn.classList.remove('active');
 
       audioPlaceholderEl.textContent = 'Choose a series to begin listening.';
       audioPlaceholderEl.style.display = 'flex';
