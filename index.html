@@ -8,26 +8,34 @@
   />
   <title>CGBC Sermons</title>
 
-  <!-- SITE ICONS -->
+  <!-- ======================================================
+       SITE ICONS
+  ======================================================= -->
   <link rel="icon" type="image/png" sizes="64x64" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
 
-  <!-- FONTS -->
+  <!-- ======================================================
+       GOOGLE FONTS
+  ======================================================= -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================================================
-       GLOBAL COLORS / VARIABLES
-       Change these first if you want to adjust the overall look.
-    ========================================================== */
+    /* ======================================================
+       GLOBAL VARIABLES
+       Change these to affect the overall color palette.
+    ======================================================= */
     :root {
       --accent: #809F90;
+      --accent-dark: #6d8d7d;
       --bg: #2f2f2f;
       --panel: rgba(255,255,255,0.06);
       --panel-strong: rgba(0,0,0,0.34);
       --border: rgba(255,255,255,0.08);
       --text: #f4f4f4;
       --muted: #d7d7d7;
+
+      --drawer-series-bg: rgba(111, 140, 124, 0.16);
+      --drawer-episodes-bg: rgba(98, 124, 111, 0.20);
 
       --shadow: 0 18px 40px rgba(0,0,0,0.32);
       --shadow-player: 0 28px 60px rgba(0,0,0,0.52), 0 10px 24px rgba(0,0,0,0.30);
@@ -57,7 +65,6 @@
       padding-bottom: var(--safe-bottom);
     }
 
-    /* When the mobile drawer is open, prevent the page behind it from scrolling */
     body.drawer-open {
       overflow: hidden;
     }
@@ -65,60 +72,69 @@
     img { max-width: 100%; }
     button, audio, iframe { font: inherit; }
 
-    /* =========================================================
-       TOP NAV / HEADER
-    ========================================================== */
-    .site-nav {
+    /* ======================================================
+       TOP HEADER ROW
+       This row now contains:
+       - Back to CGBC button
+       - Shorter logo banner
+    ======================================================= */
+    .header-wrap {
       display: flex;
       justify-content: center;
-      padding: 10px 16px;
-      background: rgba(0,0,0,0.25);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      flex-wrap: wrap;
-    }
-
-    .site-nav a {
-      text-decoration: none;
-      color: #fff;
-      background: rgba(255,255,255,0.08);
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      transition: 0.2s ease;
-    }
-
-    .site-nav a:hover {
-      background: rgba(128,159,144,0.25);
-      transform: translateY(-1px);
-    }
-
-    .header {
-      display: flex;
-      justify-content: center;
-      padding: calc(10px + var(--safe-top)) 0 6px;
+      padding: calc(8px + var(--safe-top)) 10px 6px;
       border-bottom: 1px solid var(--border);
     }
 
-    .logo-panel {
-      width: min(1800px, calc(100vw - 8px));
-      max-width: 100%;
-      padding: 6px 10px;
-      border-radius: 18px;
-      background: rgba(0,0,0,0.30);
+    .header-row {
+      width: min(1800px, 100%);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 0 14px;
+      min-height: 58px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(128,159,144,0.22);
+    }
+
+    .logo-panel {
+      min-width: 0;
+      width: 100%;
+      padding: 4px 10px;
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(128,159,144,0.34), rgba(70,95,82,0.22));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       box-shadow:
         0 8px 22px rgba(0,0,0,0.24),
-        inset 0 1px 0 rgba(255,255,255,0.12),
-        inset 0 -1px 0 rgba(0,0,0,0.16);
-      border: 1px solid rgba(255,255,255,0.06);
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        inset 0 -1px 0 rgba(0,0,0,0.18);
+      border: 1px solid rgba(154, 197, 174, 0.18);
       cursor: pointer;
       transition: transform 0.2s ease;
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
 
     .logo-panel:hover {
@@ -127,19 +143,18 @@
 
     .logo-panel img {
       display: block;
-      width: min(860px, 88vw);
+      width: min(720px, 100%);
       height: auto;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
     }
 
-    /* =========================================================
-       TOP MODE TOGGLE
-       Listen / Watch
-    ========================================================== */
+    /* ======================================================
+       TOP CONTROLS
+       On mobile this now contains:
+       Listen | Watch | Browse Sermons
+    ======================================================= */
     .top-controls {
-      padding: 12px 14px 10px;
+      padding: 10px 12px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background: rgba(0,0,0,0.10);
       backdrop-filter: blur(10px);
@@ -147,17 +162,15 @@
     }
 
     .top-controls-inner {
-      display: grid;
-      grid-template-columns: minmax(220px, 320px);
-      gap: 12px;
-      align-items: center;
-      max-width: 1680px;
-      margin: 0 auto;
+      display: flex;
+      justify-content: center;
     }
 
     .mode-toggle {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
+      width: min(560px, 100%);
     }
 
     .mode-toggle button,
@@ -173,11 +186,7 @@
       background: rgba(255,255,255,0.08);
       cursor: pointer;
       min-height: 44px;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .mode-toggle button {
-      flex: 1;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .mode-toggle button:hover,
@@ -194,16 +203,17 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
     }
 
-    /* =========================================================
-       MAIN 3-COLUMN DESKTOP LAYOUT
-       Left = series
-       Middle = episodes
-       Right = player/details
-    ========================================================== */
+    .browse-btn.top-browse-btn {
+      display: none;
+    }
+
+    /* ======================================================
+       MAIN DESKTOP LAYOUT
+    ======================================================= */
     .layout {
       display: grid;
       grid-template-columns: 320px 380px minmax(0, 1fr);
-      height: calc(100vh - 86px - var(--safe-top) - var(--safe-bottom));
+      height: calc(100vh - 132px - var(--safe-top) - var(--safe-bottom));
       min-height: 0;
       width: 100%;
       max-width: 100%;
@@ -263,9 +273,9 @@
       opacity: 0.9;
     }
 
-    /* =========================================================
-       SERIES + EPISODE ROWS
-    ========================================================== */
+    /* ======================================================
+       SERIES / EPISODE ROWS
+    ======================================================= */
     .series-item,
     .episode-item {
       border-radius: 14px;
@@ -379,9 +389,9 @@
       background: rgba(255,255,255,0.12);
     }
 
-    /* =========================================================
-       VIDEO PLAYER AREA
-    ========================================================== */
+    /* ======================================================
+       VIDEO PLAYER
+    ======================================================= */
     #videoShell,
     #videoPlaceholder {
       width: 100%;
@@ -424,10 +434,9 @@
       min-height: 180px;
     }
 
-    /* =========================================================
-       RESTORED AUDIO FEATURE CARD
-       This is the main polished audio player area.
-    ========================================================== */
+    /* ======================================================
+       AUDIO FEATURE CARD
+    ======================================================= */
     .audio-feature-card {
       display: none;
       position: relative;
@@ -492,7 +501,6 @@
       display: block;
     }
 
-    /* Floating pill button over the artwork */
     .audio-play-badge {
       position: absolute;
       left: 16px;
@@ -574,7 +582,6 @@
       font-size: 16px;
     }
 
-    /* Decorative waveform area */
     .waveform {
       display: flex;
       align-items: flex-end;
@@ -630,7 +637,6 @@
       100% { transform: scaleY(1.45); opacity: 1; }
     }
 
-    /* Audio controls row */
     .audio-controls-row {
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
@@ -665,9 +671,10 @@
       min-height: 46px;
     }
 
-    /* =========================================================
-       METADATA / DETAILS BOX
-    ========================================================== */
+    /* ======================================================
+       METADATA PANEL
+       In watch mode this now shows the current episode artwork.
+    ======================================================= */
     .meta,
     .series-context-card {
       background: var(--panel);
@@ -732,6 +739,45 @@
       color: rgba(255,255,255,0.62);
     }
 
+    .meta-media-block {
+      display: none;
+      margin: 0 0 16px;
+    }
+
+    .meta.with-video-art .meta-media-block {
+      display: block;
+    }
+
+    .meta-media-layout {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .meta-media-layout img {
+      width: 160px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .meta-media-copy {
+      min-width: 0;
+    }
+
+    .meta-media-kicker {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 8px;
+    }
+
     .actions {
       margin-top: 16px;
       display: flex;
@@ -762,10 +808,9 @@
       background: rgba(128,159,144,0.28);
     }
 
-    /* =========================================================
-       CURRENT SERIES CONTEXT CARD
-       This stays below the player on mobile.
-    ========================================================== */
+    /* ======================================================
+       CURRENT SERIES CARD
+    ======================================================= */
     .series-context-card {
       display: none;
       margin-top: 16px;
@@ -786,14 +831,9 @@
       display: block;
     }
 
-    /* =========================================================
+    /* ======================================================
        MOBILE DRAWER
-       This is the slide-out panel for series + episodes.
-    ========================================================== */
-    .mobile-browse-bar {
-      display: none;
-    }
-
+    ======================================================= */
     .drawer-overlay {
       display: none;
       position: fixed;
@@ -831,9 +871,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: calc(14px + var(--safe-top)) 14px 12px;
+      padding: calc(12px + var(--safe-top)) 14px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.22);
+      background: rgba(40, 54, 47, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .drawer-top h2 {
@@ -845,22 +887,52 @@
     .drawer-sections {
       display: grid;
       grid-template-rows: minmax(0, 42%) minmax(0, 58%);
-      height: calc(100% - 72px - var(--safe-top));
+      height: calc(100% - 66px - var(--safe-top));
     }
 
     .drawer-panel {
       min-height: 0;
       overflow-y: auto;
-      padding: 14px;
+      padding: 0;
+      position: relative;
     }
 
-    .drawer-panel + .drawer-panel {
+    .drawer-panel.series-panel {
+      background: var(--drawer-series-bg);
+    }
+
+    .drawer-panel.episodes-panel {
+      background: var(--drawer-episodes-bg);
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* =========================================================
+    .drawer-panel .section-title {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      margin: 0;
+      padding: 12px 14px 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .drawer-panel.series-panel .section-title {
+      background: rgba(83, 110, 96, 0.90);
+    }
+
+    .drawer-panel.episodes-panel .section-title {
+      background: rgba(73, 95, 85, 0.90);
+    }
+
+    .drawer-panel .series-list,
+    .drawer-panel .episodes-list {
+      padding: 12px 14px 14px;
+    }
+
+    /* ======================================================
        RESPONSIVE
-    ========================================================== */
+    ======================================================= */
     @media (max-width: 1180px) {
       .layout {
         grid-template-columns: 290px 340px minmax(0, 1fr);
@@ -868,10 +940,6 @@
     }
 
     @media (max-width: 980px) {
-      .top-controls-inner {
-        grid-template-columns: 1fr;
-      }
-
       .layout {
         display: block;
         height: auto;
@@ -889,16 +957,14 @@
         overflow: visible;
       }
 
-      .mobile-browse-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin: 0 0 14px;
-      }
-
       .mobile-drawer {
         display: block;
+      }
+
+      .browse-btn.top-browse-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
 
       #videoShell,
@@ -939,21 +1005,58 @@
         grid-template-columns: 1fr;
         gap: 4px;
       }
+
+      .meta-media-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-media-layout img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+      }
     }
 
     @media (max-width: 640px) {
-      .header {
-        padding: calc(8px + var(--safe-top)) 0 6px;
+      .header-wrap {
+        padding: calc(6px + var(--safe-top)) 8px 6px;
+      }
+
+      .header-row {
+        grid-template-columns: 1fr;
+      }
+
+      .back-btn {
+        min-height: 44px;
       }
 
       .logo-panel {
-        width: calc(100vw - 10px);
+        padding: 4px 8px;
         border-radius: 14px;
-        padding: 5px 8px;
       }
 
       .logo-panel img {
-        width: min(92vw, 760px);
+        width: min(92vw, 620px);
+      }
+
+      .top-controls {
+        padding: 8px 10px 10px;
+      }
+
+      .mode-toggle {
+        width: 100%;
+      }
+
+      .mode-toggle button,
+      .browse-btn,
+      .close-drawer-btn,
+      .series-context-btn,
+      .rss-button,
+      .action-btn,
+      #audioPlayer,
+      .skip-btn {
+        min-height: 46px;
+        font-size: 13px;
       }
 
       .col-player {
@@ -996,72 +1099,54 @@
       .meta h2 {
         font-size: 22px;
       }
-
-      .mode-toggle button,
-      .browse-btn,
-      .close-drawer-btn,
-      .series-context-btn,
-      .rss-button,
-      .action-btn,
-      #audioPlayer,
-      .skip-btn {
-        min-height: 46px;
-      }
-
-      .site-nav {
-        padding: 8px 10px;
-      }
-
-      .site-nav a {
-        font-size: 13px;
-        padding: 9px 12px;
-      }
     }
   </style>
 </head>
 <body class="mode-audio">
 
-  <!-- =======================================================
-       TOP SITE NAV
-  ======================================================== -->
-  <div class="site-nav">
-    <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">← Back to CGBC</a>
-  </div>
+  <!-- ======================================================
+       HEADER ROW
+       Back button + logo now live together.
+  ======================================================= -->
+  <div class="header-wrap">
+    <div class="header-row">
+      <a class="back-btn" href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">
+        ← Back to CGBC
+      </a>
 
-  <!-- =======================================================
-       LOGO / RESET AREA
-       Clicking the logo resets to the first series.
-  ======================================================== -->
-  <div class="header">
-    <div class="logo-panel" id="logoReset" title="Reset to first series">
-      <img
-        src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png"
-        alt="CGBC"
-      >
+      <div class="logo-panel" id="logoReset" title="Reset to first series">
+        <img
+          src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png"
+          alt="CGBC"
+        >
+      </div>
     </div>
   </div>
 
-  <!-- =======================================================
-       LISTEN / WATCH TOGGLE
-  ======================================================== -->
+  <!-- ======================================================
+       TOP CONTROLS
+       Mobile: Listen | Watch | Browse Sermons
+       Desktop: Browse button hidden
+  ======================================================= -->
   <div class="top-controls">
     <div class="top-controls-inner">
       <div class="mode-toggle">
         <button id="listenBtn" class="active" type="button">Listen</button>
         <button id="watchBtn" type="button">Watch</button>
+        <button class="browse-btn top-browse-btn" id="openDrawerBtn" type="button">Browse Sermons</button>
       </div>
     </div>
   </div>
 
-  <!-- =======================================================
+  <!-- ======================================================
        MOBILE DRAWER OVERLAY
-  ======================================================== -->
+  ======================================================= -->
   <div class="drawer-overlay" id="drawerOverlay"></div>
 
-  <!-- =======================================================
+  <!-- ======================================================
        MOBILE DRAWER
-       This is only used on mobile/tablet widths.
-  ======================================================== -->
+       Series and Episodes live here on mobile.
+  ======================================================= -->
   <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
     <div class="drawer-top">
       <h2>Browse Sermons</h2>
@@ -1069,66 +1154,56 @@
     </div>
 
     <div class="drawer-sections">
-      <div class="drawer-panel">
+      <div class="drawer-panel series-panel">
         <h3 class="section-title">Series</h3>
         <div id="mobileSeriesList" class="series-list"></div>
       </div>
 
-      <div class="drawer-panel">
+      <div class="drawer-panel episodes-panel">
         <h3 class="section-title">Episodes</h3>
         <div id="mobileEpisodesList" class="episodes-list"></div>
       </div>
     </div>
   </aside>
 
-  <!-- =======================================================
-       MAIN LAYOUT
-       Desktop: 3 columns
-       Mobile: player area visible, drawer handles browsing
-  ======================================================== -->
+  <!-- ======================================================
+       MAIN APP LAYOUT
+  ======================================================= -->
   <div class="layout">
 
-    <!-- LEFT COLUMN: SERIES -->
+    <!-- DESKTOP SERIES COLUMN -->
     <aside class="col col-series">
       <h3 class="section-title">Series</h3>
       <div id="seriesList" class="series-list"></div>
     </aside>
 
-    <!-- MIDDLE COLUMN: EPISODES -->
+    <!-- DESKTOP EPISODES COLUMN -->
     <section class="col col-episodes">
       <h3 class="section-title">Episodes</h3>
       <div id="episodesList" class="episodes-list"></div>
     </section>
 
-    <!-- RIGHT COLUMN: PLAYER / DETAILS -->
+    <!-- PLAYER / DETAILS COLUMN -->
     <main class="col col-player" id="playerSection">
-
-      <!-- Mobile browse button -->
-      <div class="mobile-browse-bar">
-        <button class="browse-btn" id="openDrawerBtn" type="button">☰ Browse Sermons</button>
-      </div>
 
       <!-- Video placeholder -->
       <div id="videoPlaceholder">Choose a series to begin watching.</div>
 
-      <!-- Video iframe container -->
+      <!-- Video player -->
       <div id="videoShell"></div>
 
       <!-- Audio placeholder -->
       <div id="audioPlaceholder">Choose a series to begin listening.</div>
 
       <!-- ===================================================
-           RESTORED AUDIO FEATURE CARD
-           This is the polished player card.
+           AUDIO FEATURE CARD
       ==================================================== -->
       <div class="audio-feature-card" id="audioFeatureCard">
         <div class="audio-split">
 
-          <!-- Artwork area -->
           <div class="audio-art-panel" id="audioArtPanel">
             <img id="audioFeatureArt" alt="Sermon artwork">
 
-            <!-- Floating pill button -->
             <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
               <span class="audio-play-circle">
                 <svg id="audioPlayIcon" viewBox="0 0 24 24">
@@ -1139,13 +1214,11 @@
             </span>
           </div>
 
-          <!-- Text + controls -->
           <div class="audio-content">
             <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
             <h3 id="audioFeatureTitle">Select a sermon</h3>
             <div class="audio-series" id="audioFeatureSeries"></div>
 
-            <!-- Decorative waveform -->
             <div class="waveform" aria-hidden="true">
               <span></span><span></span><span></span><span></span>
               <span></span><span></span><span></span><span></span>
@@ -1153,7 +1226,6 @@
               <span></span><span></span><span></span><span></span>
             </div>
 
-            <!-- Skip buttons + native audio player -->
             <div class="audio-controls-row">
               <button id="skipBackBtn" class="skip-btn" type="button">− 30s</button>
               <audio id="audioPlayer" controls preload="none"></audio>
@@ -1163,14 +1235,20 @@
         </div>
       </div>
 
-      <!-- Sermon metadata -->
+      <!-- ===================================================
+           METADATA
+           In watch mode this now includes episode artwork.
+      ==================================================== -->
       <section class="meta" id="metaBox">
         <h2>Select a sermon</h2>
         <div class="series-line">Choose a series and episode.</div>
         <p class="meta-note">Browse by series first, then choose an episode to load the player.</p>
       </section>
 
-      <!-- Current series context card -->
+      <!-- ===================================================
+           CURRENT SERIES CARD
+           Only shown on mobile for context under the player.
+      ==================================================== -->
       <section class="series-context-card" id="seriesContextCard">
         <div class="series-context-head">
           <img id="seriesContextImage" alt="Current series artwork">
@@ -1185,10 +1263,9 @@
   </div>
 
   <script>
-    /* =========================================================
-       MAIN CONFIG
-       These constants control featured/current series and feeds.
-    ========================================================== */
+    /* ======================================================
+       APP CONFIG
+    ======================================================= */
     const CURRENT_SERIES = 'Romans Chapter 12';
     const SECONDARY_SERIES = 'The Rapture';
     const CURRENT_SPECIALS = '2026 Specials';
@@ -1207,21 +1284,19 @@
     const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
     const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png';
 
-    /* =========================================================
+    /* ======================================================
        APP STATE
-       These variables change as the user interacts with the page.
-    ========================================================== */
+    ======================================================= */
     let sermonData = {};
     let archiveSeriesOrder = [];
     let currentSeries = null;
     let currentEpisodeIndex = null;
     let currentEpisodeData = null;
-    let mode = 'audio'; // 'audio' or 'video'
+    let mode = 'audio';
 
-    /* =========================================================
+    /* ======================================================
        DOM REFERENCES
-       These are shortcuts to the page elements we use often.
-    ========================================================== */
+    ======================================================= */
     const bodyEl = document.body;
 
     const seriesListEl = document.getElementById('seriesList');
@@ -1262,17 +1337,13 @@
     const mobileDrawerEl = document.getElementById('mobileDrawer');
     const seriesContextBrowseBtn = document.getElementById('seriesContextBrowseBtn');
 
-    /* =========================================================
-       HELPER: CHECK IF WE ARE IN MOBILE LAYOUT
-    ========================================================== */
+    /* ======================================================
+       HELPERS
+    ======================================================= */
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
 
-    /* =========================================================
-       HELPER: TRY TO LOCK TO PORTRAIT ON MOBILE
-       Safe to fail silently.
-    ========================================================== */
     async function tryPortraitLock() {
       try {
         if (screen.orientation && screen.orientation.lock) {
@@ -1281,9 +1352,6 @@
       } catch {}
     }
 
-    /* =========================================================
-       MOBILE DRAWER OPEN/CLOSE
-    ========================================================== */
     function openDrawer() {
       if (!isMobileLayout()) return;
       bodyEl.classList.add('drawer-open');
@@ -1302,9 +1370,6 @@
       }, 40);
     }
 
-    /* =========================================================
-       SMALL DATA HELPERS
-    ========================================================== */
     function parseDateToTimestamp(value) {
       if (!value) return 0;
       const direct = Date.parse(value);
@@ -1324,11 +1389,6 @@
         .replace(/<\/div>\s*<div>/gi, '\n');
     }
 
-    /* =========================================================
-       PARSE RSS DESCRIPTION
-       Pulls out title / series / scripture / speaker / date / video
-       from the RSS description text.
-    ========================================================== */
     function parseDescription(rawDesc) {
       const normalized = normalizeLineBreaks(rawDesc);
       const decoded = htmlDecode(normalized);
@@ -1359,9 +1419,6 @@
       return out;
     }
 
-    /* =========================================================
-       EXTRACT YOUTUBE VIDEO ID FROM URL
-    ========================================================== */
     function extractYouTubeId(url) {
       if (!url) return '';
 
@@ -1391,10 +1448,6 @@
         : FALLBACK_IMAGE;
     }
 
-    /* =========================================================
-       LOAD YOUTUBE PLAYLIST SERIES
-       Used for livestreams and video-only series.
-    ========================================================== */
     async function fetchPlaylistSeries(config, newestFirst = false) {
       const url =
         `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
@@ -1436,11 +1489,9 @@
       return sermons;
     }
 
-    /* =========================================================
-       MEDIA SESSION SUPPORT
-       This is what helps iPhone / iOS lock screen and Control Center
-       show artwork, title, and skip buttons.
-    ========================================================== */
+    /* ======================================================
+       MEDIA SESSION
+    ======================================================= */
     function updateMediaSession(ep) {
       if (!('mediaSession' in navigator) || !ep) return;
 
@@ -1461,30 +1512,12 @@
           ]
         });
 
-        navigator.mediaSession.setActionHandler('play', () => {
-          audioPlayerEl.play();
-        });
-
-        navigator.mediaSession.setActionHandler('pause', () => {
-          audioPlayerEl.pause();
-        });
-
-        navigator.mediaSession.setActionHandler('seekbackward', () => {
-          skipAudioBy(-30);
-        });
-
-        navigator.mediaSession.setActionHandler('seekforward', () => {
-          skipAudioBy(30);
-        });
-
-        /* These two are extra fallback handlers some platforms use */
-        navigator.mediaSession.setActionHandler('previoustrack', () => {
-          skipAudioBy(-30);
-        });
-
-        navigator.mediaSession.setActionHandler('nexttrack', () => {
-          skipAudioBy(30);
-        });
+        navigator.mediaSession.setActionHandler('play', () => audioPlayerEl.play());
+        navigator.mediaSession.setActionHandler('pause', () => audioPlayerEl.pause());
+        navigator.mediaSession.setActionHandler('seekbackward', () => skipAudioBy(-30));
+        navigator.mediaSession.setActionHandler('seekforward', () => skipAudioBy(30));
+        navigator.mediaSession.setActionHandler('previoustrack', () => skipAudioBy(-30));
+        navigator.mediaSession.setActionHandler('nexttrack', () => skipAudioBy(30));
       } catch {}
     }
 
@@ -1496,10 +1529,6 @@
       } catch {}
     }
 
-    /* =========================================================
-       UPDATE VISUAL AUDIO PLAY STATE
-       This controls the pill label / icon / playing glow.
-    ========================================================== */
     function setAudioReadyState(isPlaying) {
       audioReadyLabelEl.textContent = isPlaying ? 'Listening...' : 'Ready to Listen';
 
@@ -1519,9 +1548,6 @@
       }
     }
 
-    /* =========================================================
-       AUDIO SKIP HELPERS
-    ========================================================== */
     function skipAudioBy(seconds) {
       if (!audioPlayerEl.src) return;
 
@@ -1545,9 +1571,6 @@
       else audioPlayerEl.pause();
     }
 
-    /* =========================================================
-       SHARE CURRENT EPISODE
-    ========================================================== */
     async function shareCurrentEpisode() {
       if (!currentEpisodeData) return;
 
@@ -1580,9 +1603,9 @@
       } catch {}
     }
 
-    /* =========================================================
-       CURRENT SERIES CONTEXT CARD
-    ========================================================== */
+    /* ======================================================
+       SERIES CONTEXT CARD
+    ======================================================= */
     function updateSeriesContext() {
       if (!currentSeries || !sermonData[currentSeries]) {
         seriesContextTitleEl.textContent = 'Current Series';
@@ -1597,9 +1620,10 @@
       seriesContextImageEl.src = getSeriesCover(currentSeries);
     }
 
-    /* =========================================================
-       META / DETAILS RENDERING
-    ========================================================== */
+    /* ======================================================
+       METADATA RENDERING
+       In video mode we now show current episode artwork here.
+    ======================================================= */
     function buildMetaRows(ep) {
       const rows = [];
 
@@ -1627,6 +1651,7 @@
     function renderEmptyMeta() {
       const verb = mode === 'audio' ? 'listening' : 'watching';
 
+      metaBoxEl.classList.remove('with-video-art');
       metaBoxEl.innerHTML = `
         <h2>Select a sermon</h2>
         <div class="series-line">Choose a series and episode to begin ${verb}.</div>
@@ -1659,9 +1684,27 @@
         <button class="action-btn" id="shareEpisodeBtn" type="button">Share</button>
       `);
 
+      const showVideoArt = mode === 'video' && ep && ep.videoId;
+      const videoArtHtml = showVideoArt
+        ? `
+          <div class="meta-media-block">
+            <div class="meta-media-layout">
+              <img src="${getWatchThumb(ep.videoId)}" alt="">
+              <div class="meta-media-copy">
+                <div class="meta-media-kicker">Now Watching</div>
+                <div class="series-line">${ep.series || currentSeries || ''}</div>
+              </div>
+            </div>
+          </div>
+        `
+        : '';
+
+      metaBoxEl.classList.toggle('with-video-art', showVideoArt);
+
       metaBoxEl.innerHTML = `
+        ${videoArtHtml}
         <h2>${ep.title || 'Untitled Sermon'}</h2>
-        <div class="series-line">${ep.series || currentSeries || ''}</div>
+        ${showVideoArt ? '' : `<div class="series-line">${ep.series || currentSeries || ''}</div>`}
         <div class="meta-grid">${buildMetaRows(ep)}</div>
         <div class="actions">${actionButtons.join('')}</div>
       `;
@@ -1672,9 +1715,9 @@
       updateSeriesContext();
     }
 
-    /* =========================================================
-       MEDIA HIDE / RESET HELPERS
-    ========================================================== */
+    /* ======================================================
+       MEDIA RESET
+    ======================================================= */
     function stopAndHideVideo() {
       videoShellEl.innerHTML = '';
       videoShellEl.style.display = 'none';
@@ -1697,14 +1740,9 @@
       currentEpisodeData = null;
     }
 
-    /* =========================================================
-       PLAY AUDIO
-       This restores:
-       - art-led card
-       - Media Session metadata
-       - lock screen art
-       - skip actions
-    ========================================================== */
+    /* ======================================================
+       AUDIO / VIDEO PLAY
+    ======================================================= */
     function playAudio(ep) {
       stopAndHideVideo();
 
@@ -1730,9 +1768,6 @@
       setAudioReadyState(false);
     }
 
-    /* =========================================================
-       PLAY VIDEO
-    ========================================================== */
     function playVideo(ep) {
       stopAndHideAudio();
 
@@ -1762,9 +1797,9 @@
       renderMeta(ep, false);
     }
 
-    /* =========================================================
-       SERIES ORDER HELPERS
-    ========================================================== */
+    /* ======================================================
+       SERIES HELPERS
+    ======================================================= */
     function getPrioritySeries(modeName) {
       const ordered = [];
 
@@ -1894,9 +1929,9 @@
       return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
     }
 
-    /* =========================================================
+    /* ======================================================
        SELECT SERIES / EPISODE
-    ========================================================== */
+    ======================================================= */
     function selectSeries(seriesName) {
       currentSeries = seriesName;
       currentEpisodeIndex = null;
@@ -1939,9 +1974,9 @@
       }
     }
 
-    /* =========================================================
-       BUILD SERIES ROWS
-    ========================================================== */
+    /* ======================================================
+       BUILD SERIES LIST
+    ======================================================= */
     function makeSeriesItem(seriesName) {
       const item = document.createElement('div');
       item.className = `series-item ${mode}` + (seriesName === currentSeries ? ' active' : '');
@@ -2018,9 +2053,9 @@
       renderSeriesInto(mobileSeriesListEl);
     }
 
-    /* =========================================================
-       BUILD EPISODE ROWS
-    ========================================================== */
+    /* ======================================================
+       BUILD EPISODE LIST
+    ======================================================= */
     function makeEpisodeItem(ep, originalIndex) {
       const row = document.createElement('div');
       row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? ' active' : '');
@@ -2069,9 +2104,9 @@
       renderEpisodesInto(mobileEpisodesListEl);
     }
 
-    /* =========================================================
-       LOAD ALL RSS + YOUTUBE DATA
-    ========================================================== */
+    /* ======================================================
+       LOAD RSS + YOUTUBE DATA
+    ======================================================= */
     async function loadRSSData() {
       const xmlText = await fetch(RSS_URL).then(r => r.text());
       const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
@@ -2114,13 +2149,11 @@
         });
       });
 
-      /* Give each series a default series image */
       Object.keys(grouped).forEach(series => {
         const firstImage = grouped[series].find(x => x.img)?.img || FALLBACK_IMAGE;
         grouped[series] = grouped[series].map(ep => ({ ...ep, seriesImage: firstImage }));
       });
 
-      /* Add YouTube playlist-based series */
       const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
       if (livestreamEpisodes.length) grouped[LIVESTREAMS.name] = livestreamEpisodes;
 
@@ -2133,9 +2166,9 @@
       currentSeries = getVisibleSeriesOrder()[0] || null;
     }
 
-    /* =========================================================
+    /* ======================================================
        MODE SWITCHING
-    ========================================================== */
+    ======================================================= */
     function setMode(nextMode) {
       mode = nextMode;
 
@@ -2166,9 +2199,9 @@
       renderEmptyMeta();
     }
 
-    /* =========================================================
+    /* ======================================================
        RESET HOME
-    ========================================================== */
+    ======================================================= */
     function resetHome() {
       currentSeries = getVisibleSeriesOrder()[0] || null;
       currentEpisodeIndex = null;
@@ -2190,24 +2223,19 @@
       closeDrawer();
     }
 
-    /* =========================================================
+    /* ======================================================
        EVENT LISTENERS
-    ========================================================== */
-
-    /* Drawer */
+    ======================================================= */
     openDrawerBtn?.addEventListener('click', openDrawer);
     closeDrawerBtn?.addEventListener('click', closeDrawer);
     drawerOverlayEl?.addEventListener('click', closeDrawer);
     seriesContextBrowseBtn?.addEventListener('click', openDrawer);
 
-    /* Mode toggle */
     listenBtn.addEventListener('click', () => setMode('audio'));
     watchBtn.addEventListener('click', () => setMode('video'));
 
-    /* Reset */
     logoReset.addEventListener('click', resetHome);
 
-    /* Audio controls */
     audioArtPanelEl.addEventListener('click', toggleAudioPlayback);
     audioPlayBadgeEl.addEventListener('click', e => {
       e.stopPropagation();
@@ -2217,7 +2245,6 @@
     skipBackBtnEl.addEventListener('click', () => skipAudioBy(-30));
     skipForwardBtnEl.addEventListener('click', () => skipAudioBy(30));
 
-    /* Audio element events */
     audioPlayerEl.addEventListener('play', () => {
       setAudioReadyState(true);
     });
@@ -2230,7 +2257,6 @@
       setAudioReadyState(false);
     });
 
-    /* Resize / rotate */
     window.addEventListener('resize', () => {
       if (!isMobileLayout()) {
         closeDrawer();
@@ -2244,9 +2270,9 @@
       }, 200);
     });
 
-    /* =========================================================
-       STARTUP
-    ========================================================== */
+    /* ======================================================
+       INITIAL PAGE LOAD
+    ======================================================= */
     (async function init() {
       await tryPortraitLock();
       await loadRSSData();
