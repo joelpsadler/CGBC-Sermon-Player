@@ -196,14 +196,16 @@
     .layout {
       display: grid;
       grid-template-columns: 320px 380px minmax(0, 1fr);
-      min-height: calc(100vh - 86px - var(--safe-top));
+      height: calc(100vh - 86px - var(--safe-top) - var(--safe-bottom));
+      min-height: 0;
       width: 100%;
       max-width: 100%;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .col {
       min-width: 0;
+      min-height: 0;
       max-width: 100%;
       overflow-y: auto;
       overflow-x: hidden;
@@ -249,6 +251,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      touch-action: pan-y;
     }
 
     .series-divider {
@@ -972,12 +975,16 @@
       .layout {
         display: flex;
         flex-direction: column;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
       }
 
       .col {
         overflow: visible;
         border-right: none;
         padding: 0 12px;
+        min-height: 0;
       }
 
       .col-series,
@@ -1891,16 +1898,23 @@
     function selectEpisode(ep, originalIndex, rowEl) {
       currentEpisodeIndex = originalIndex;
       currentEpisodeData = ep;
-      renderEpisodesList();
-
-      if (rowEl) {
-        rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
-      }
 
       if (mode === "audio") {
+        renderEpisodesList();
+
+        if (rowEl) {
+          rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        }
+
         playAudio(ep);
       } else {
         playVideo(ep);
+        renderEpisodesList();
+
+        const activeRow = episodesListEl.querySelector(".episode-item.active");
+        if (activeRow) {
+          activeRow.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        }
       }
 
       updateMobileSubtitles();
@@ -2076,25 +2090,30 @@
       stopAndHideAudio();
 
       if (!ep.videoId) {
+        stopAndHideVideo();
         videoPlaceholderEl.textContent = "No video is available for this sermon yet.";
         videoPlaceholderEl.style.display = "flex";
+        currentEpisodeData = ep;
         renderMeta(ep, false);
         setPlayerFocusActive(true);
         return;
       }
 
-      stopAndHideVideo();
+      videoPlaceholderEl.style.display = "none";
+      videoPreviewEl.style.display = "none";
+      videoPreviewEl.onclick = null;
 
-      videoShellEl.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1"
-          title="${(ep.title || "Sermon").replace(/"/g, '&quot;')}"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      `;
-
+      videoShellEl.innerHTML = "";
       videoShellEl.style.display = "block";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+      iframe.title = ep.title || "Sermon";
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.setAttribute("playsinline", "1");
+
+      videoShellEl.appendChild(iframe);
 
       currentEpisodeData = ep;
       renderMeta(ep, false);
