@@ -64,7 +64,8 @@
     button,
     audio,
     iframe,
-    input {
+    input,
+    select {
       font: inherit;
     }
 
@@ -177,7 +178,7 @@
 
     .top-controls-inner {
       display: grid;
-      grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+      grid-template-columns: minmax(220px, 320px) minmax(180px, 220px) minmax(0, 1fr);
       gap: 12px;
       align-items: center;
       max-width: 1680px;
@@ -212,6 +213,42 @@
       background: rgba(128,159,144,0.40);
       color: #111;
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .sort-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 8px 12px;
+      min-height: 48px;
+    }
+
+    .sort-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.68);
+      white-space: nowrap;
+    }
+
+    .sort-select {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      font-size: 15px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .sort-select option {
+      color: #111;
     }
 
     .search-wrap {
@@ -1272,7 +1309,9 @@
       .rss-button,
       .action-btn,
       #audioPlayer,
-      .skip-btn {
+      .skip-btn,
+      .sort-wrap,
+      .search-wrap {
         min-height: 46px;
       }
 
@@ -1319,6 +1358,15 @@
         <div class="mode-toggle">
           <button id="listenBtn" class="active" type="button">Listen</button>
           <button id="watchBtn" type="button">Watch</button>
+        </div>
+
+        <div class="sort-wrap">
+          <span class="sort-label">Sort</span>
+          <select id="sortSelect" class="sort-select">
+            <option value="series">Series Order</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
         </div>
 
         <div class="search-wrap">
@@ -1481,6 +1529,7 @@
     let currentEpisodeData = null;
     let mode = "audio";
     let searchQuery = "";
+    let sortMode = "series";
 
     /* ========= DOM REFERENCES ========= */
     const bodyEl = document.body;
@@ -1511,6 +1560,7 @@
     const logoReset = document.getElementById("logoReset");
     const searchInputEl = document.getElementById("searchInput");
     const searchClearEl = document.getElementById("searchClear");
+    const sortSelectEl = document.getElementById("sortSelect");
 
     const playerFocusShellEl = document.getElementById("playerFocusShell");
 
@@ -1596,54 +1646,38 @@
       return haystack.includes(q);
     }
 
-    function getVisibleSeriesOrder() {
-      const pinned = getPrioritySeries(mode);
-      const pinnedSet = new Set(pinned);
+    /* ========= DATE / SORT HELPERS ========= */
+    function parseDateToTimestamp(value) {
+      if (!value) return 0;
 
-      let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
+      const direct = Date.parse(value);
+      if (!Number.isNaN(direct)) return direct;
 
-      if (mode === "audio") {
-        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
+      const shortMatch = String(value).match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+      if (shortMatch) {
+        let [, mm, dd, yy] = shortMatch;
+        let year = parseInt(yy, 10);
+        if (yy.length === 2) year += year < 70 ? 2000 : 1900;
+        return new Date(year, parseInt(mm, 10) - 1, parseInt(dd, 10)).getTime();
       }
 
-      if (mode === "video") {
-        archive = archive.filter(name => name !== LIVESTREAMS.name);
-      }
-
-      const groupedArchive = groupNumberedSeries(archive);
-
-      let ordered = [...pinned, ...groupedArchive];
-
-      if (mode === "video" && sermonData[VIDEO_ONLY_ARCHIVE.name] && !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)) {
-        ordered = [...pinned, ...groupedArchive.filter(name => name !== VIDEO_ONLY_ARCHIVE.name), VIDEO_ONLY_ARCHIVE.name];
-      }
-
-      if (!searchQuery) return ordered;
-
-      return ordered.filter(seriesName => {
-        const seriesMatch = normalizeText(seriesName).includes(normalizeText(searchQuery));
-        const episodeMatch = (sermonData[seriesName] || []).some(ep => episodeMatchesQuery(ep, searchQuery));
-        return seriesMatch || episodeMatch;
-      });
+      return 0;
     }
 
-    function getVisibleEpisodesForSeries(seriesName) {
-      const allEpisodes = sermonData[seriesName] || [];
-      if (!searchQuery) {
-        return allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
-      }
+    function getEpisodeTimestamp(ep) {
+      return ep.sortTimestamp || parseDateToTimestamp(ep.date) || 0;
+    }
 
-      const matched = allEpisodes
-        .map((ep, originalIndex) => ({ ep, originalIndex }))
-        .filter(({ ep }) => episodeMatchesQuery(ep, searchQuery));
+    function getSeriesSortValue(seriesName, direction = "newest") {
+      const episodes = sermonData[seriesName] || [];
+      if (!episodes.length) return 0;
 
-      if (matched.length > 0) return matched;
+      const timestamps = episodes.map(getEpisodeTimestamp).filter(Boolean);
+      if (!timestamps.length) return 0;
 
-      if (normalizeText(seriesName).includes(normalizeText(searchQuery))) {
-        return allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
-      }
-
-      return [];
+      return direction === "oldest"
+        ? Math.min(...timestamps)
+        : Math.max(...timestamps);
     }
 
     /* ========= TEXT / FEED PARSING ========= */
@@ -1746,18 +1780,20 @@
 
       const sermons = sorted.map(item => {
         const videoId = item?.snippet?.resourceId?.videoId || "";
+        const publishedAt = item?.snippet?.publishedAt || "";
         return {
           title: item?.snippet?.title || config.name,
           series: config.name,
           scripture: "",
           by: "",
-          date: item?.snippet?.publishedAt ? new Date(item.snippet.publishedAt).toLocaleDateString() : "",
+          date: publishedAt ? new Date(publishedAt).toLocaleDateString() : "",
           video: videoId ? `https://youtu.be/${videoId}` : "",
           videoId,
           audio: "",
           img: "",
           link: "",
-          extra: []
+          extra: [],
+          sortTimestamp: parseDateToTimestamp(publishedAt)
         };
       });
 
@@ -1965,7 +2001,7 @@
       metaBoxEl.innerHTML = `
         <h2>Select a sermon</h2>
         <div class="series-line">Choose a series and episode to begin ${verb}.</div>
-        <p class="meta-note">Use the search bar above to quickly find series, titles, scriptures, or speakers.</p>
+        <p class="meta-note">Use sort for browsing order, or search for a quick lookup.</p>
       `;
       updateMobileSubtitles();
     }
@@ -2111,6 +2147,65 @@
       return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
     }
 
+    function getVisibleSeriesOrder() {
+      const pinned = getPrioritySeries(mode);
+      const pinnedSet = new Set(pinned);
+
+      let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
+
+      if (mode === "audio") {
+        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
+      }
+
+      if (mode === "video") {
+        archive = archive.filter(name => name !== LIVESTREAMS.name);
+      }
+
+      let ordered = [...pinned, ...groupNumberedSeries(archive)];
+
+      if (mode === "video" && sermonData[VIDEO_ONLY_ARCHIVE.name] && !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)) {
+        ordered = [...pinned, ...groupNumberedSeries(archive).filter(name => name !== VIDEO_ONLY_ARCHIVE.name), VIDEO_ONLY_ARCHIVE.name];
+      }
+
+      if (sortMode === "newest") {
+        ordered = [...ordered].sort((a, b) => getSeriesSortValue(b, "newest") - getSeriesSortValue(a, "newest"));
+      } else if (sortMode === "oldest") {
+        ordered = [...ordered].sort((a, b) => getSeriesSortValue(a, "oldest") - getSeriesSortValue(b, "oldest"));
+      }
+
+      if (!searchQuery) return ordered;
+
+      return ordered.filter(seriesName => {
+        const seriesMatch = normalizeText(seriesName).includes(normalizeText(searchQuery));
+        const episodeMatch = (sermonData[seriesName] || []).some(ep => episodeMatchesQuery(ep, searchQuery));
+        return seriesMatch || episodeMatch;
+      });
+    }
+
+    function getVisibleEpisodesForSeries(seriesName) {
+      const allEpisodes = sermonData[seriesName] || [];
+
+      let mapped = allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
+
+      if (searchQuery) {
+        const matched = mapped.filter(({ ep }) => episodeMatchesQuery(ep, searchQuery));
+
+        if (matched.length > 0) {
+          mapped = matched;
+        } else if (!normalizeText(seriesName).includes(normalizeText(searchQuery))) {
+          return [];
+        }
+      }
+
+      if (sortMode === "newest") {
+        mapped.sort((a, b) => getEpisodeTimestamp(b.ep) - getEpisodeTimestamp(a.ep));
+      } else if (sortMode === "oldest") {
+        mapped.sort((a, b) => getEpisodeTimestamp(a.ep) - getEpisodeTimestamp(b.ep));
+      }
+
+      return mapped;
+    }
+
     /* ========= LIST RENDERING ========= */
     function renderSeriesList() {
       seriesListEl.innerHTML = "";
@@ -2127,7 +2222,7 @@
       }
 
       visibleSeries.forEach(seriesName => {
-        if (!featuredDividerInserted && pinnedSet.has(seriesName)) {
+        if (sortMode === "series" && !featuredDividerInserted && pinnedSet.has(seriesName)) {
           const divider = document.createElement("div");
           divider.className = "series-divider featured";
           divider.textContent = "Featured Now";
@@ -2138,7 +2233,7 @@
           featuredDividerInserted = true;
         }
 
-        if (!archiveDividerInserted && !pinnedSet.has(seriesName)) {
+        if (sortMode === "series" && !archiveDividerInserted && !pinnedSet.has(seriesName)) {
           const divider = document.createElement("div");
           divider.className = "series-divider";
           divider.textContent = "Archive";
@@ -2340,6 +2435,7 @@
         const enclosure = item.querySelector("enclosure");
         const audioUrl = enclosure ? enclosure.getAttribute("url") : "";
         const itemLink = item.querySelector("link")?.textContent?.trim() || "";
+        const pubDateRaw = item.querySelector("pubDate")?.textContent?.trim() || "";
 
         let itemImage = "";
         const itunesImages = item.getElementsByTagName("itunes:image");
@@ -2361,7 +2457,8 @@
           audio: audioUrl,
           img: itemImage,
           link: itemLink,
-          extra: parsed.extra || []
+          extra: parsed.extra || [],
+          sortTimestamp: parseDateToTimestamp(pubDateRaw || parsed.date)
         });
       });
 
@@ -2475,6 +2572,22 @@
     listenBtn.addEventListener("click", () => setMode("audio"));
     watchBtn.addEventListener("click", () => setMode("video"));
     logoReset.addEventListener("click", resetHome);
+
+    sortSelectEl.addEventListener("change", () => {
+      sortMode = sortSelectEl.value;
+
+      const visibleSeries = getVisibleSeriesOrder();
+      if (!visibleSeries.includes(currentSeries)) {
+        currentSeries = visibleSeries[0] || null;
+        currentEpisodeIndex = null;
+        currentEpisodeData = null;
+        clearMediaState();
+        renderEmptyMeta();
+      }
+
+      renderSeriesList();
+      renderEpisodesList();
+    });
 
     searchInputEl.addEventListener("input", () => {
       searchQuery = searchInputEl.value.trim();
