@@ -271,6 +271,7 @@
       min-width: 0;
       max-width: 100%;
       background: transparent;
+      cursor: pointer;
     }
 
     .series-item.desktop-clickable,
@@ -1063,7 +1064,6 @@
       .meta h2 { font-size: 24px; }
       .section-title { display: none; }
 
-      /* Simplified mobile: everything vertical */
       .series-list,
       .episodes-list {
         display: flex;
@@ -1892,10 +1892,16 @@
       currentEpisodeIndex = originalIndex;
       currentEpisodeData = ep;
       renderEpisodesList();
-      if (rowEl) rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
 
-      if (mode === "audio") playAudio(ep);
-      else previewVideo(ep);
+      if (rowEl) {
+        rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      }
+
+      if (mode === "audio") {
+        playAudio(ep);
+      } else {
+        playVideo(ep);
+      }
 
       updateMobileSubtitles();
 
@@ -1940,7 +1946,7 @@
         }
 
         const item = document.createElement("div");
-        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "") + (!isMobileLayout() ? " desktop-clickable" : "");
+        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "") + " desktop-clickable";
 
         const chips = getSeriesChips(seriesName);
         const chipsHtml = chips.length
@@ -1959,16 +1965,16 @@
           </div>
         `;
 
+        const selectThisSeries = () => selectSeries(seriesName);
+
         const thumbBtn = item.querySelector(".thumb-tap");
         thumbBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          selectSeries(seriesName);
+          selectThisSeries();
         });
 
-        if (!isMobileLayout()) {
-          item.addEventListener("click", () => selectSeries(seriesName));
-        }
+        item.addEventListener("click", selectThisSeries);
 
         seriesListEl.appendChild(item);
       });
@@ -1985,7 +1991,7 @@
 
       getVisibleEpisodesForSeries(currentSeries).forEach(({ ep, originalIndex }) => {
         const row = document.createElement("div");
-        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "") + (!isMobileLayout() ? " desktop-clickable" : "");
+        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "") + " desktop-clickable";
 
         const thumb = mode === "audio"
           ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
@@ -2003,16 +2009,16 @@
           </div>
         `;
 
+        const selectThisEpisode = () => selectEpisode(ep, originalIndex, row);
+
         const thumbBtn = row.querySelector(".thumb-tap");
         thumbBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          selectEpisode(ep, originalIndex, row);
+          selectThisEpisode();
         });
 
-        if (!isMobileLayout()) {
-          row.addEventListener("click", () => selectEpisode(ep, originalIndex, row));
-        }
+        row.addEventListener("click", selectThisEpisode);
 
         episodesListEl.appendChild(row);
       });
@@ -2077,7 +2083,7 @@
         return;
       }
 
-      videoPreviewEl.style.display = "none";
+      stopAndHideVideo();
 
       videoShellEl.innerHTML = `
         <iframe
