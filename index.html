@@ -696,7 +696,6 @@
       z-index: 2;
     }
 
-    /* AUDIO PILL - THIS PASS */
     .audio-play-badge {
       position: absolute;
       left: 16px;
@@ -1458,6 +1457,11 @@
     let currentEpisodeData = null;
     let mode = "audio";
 
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoved = false;
+    const TOUCH_DRAG_THRESHOLD = 10;
+
     const bodyEl = document.body;
     const seriesListEl = document.getElementById("seriesList");
     const episodesListEl = document.getElementById("episodesList");
@@ -1495,6 +1499,30 @@
     const mobileSeriesSubtitleEl = document.getElementById("mobileSeriesSubtitle");
     const mobileEpisodesSubtitleEl = document.getElementById("mobileEpisodesSubtitle");
     const mobilePlayerSubtitleEl = document.getElementById("mobilePlayerSubtitle");
+
+    document.addEventListener("touchstart", (e) => {
+      const t = e.touches && e.touches[0];
+      if (!t) return;
+      touchMoved = false;
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+    }, { passive: true });
+
+    document.addEventListener("touchmove", (e) => {
+      const t = e.touches && e.touches[0];
+      if (!t) return;
+      const dx = Math.abs(t.clientX - touchStartX);
+      const dy = Math.abs(t.clientY - touchStartY);
+      if (dx > TOUCH_DRAG_THRESHOLD || dy > TOUCH_DRAG_THRESHOLD) {
+        touchMoved = true;
+      }
+    }, { passive: true });
+
+    document.addEventListener("touchend", () => {
+      setTimeout(() => {
+        touchMoved = false;
+      }, 0);
+    }, { passive: true });
 
     function isMobileLayout() {
       return window.innerWidth <= 980;
@@ -2036,6 +2064,7 @@
         thumbBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (touchMoved) return;
           selectSeries(seriesName);
         });
 
@@ -2080,6 +2109,7 @@
         thumbBtn.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
+          if (touchMoved) return;
           selectEpisode(ep, originalIndex, row);
         });
 
@@ -2155,14 +2185,16 @@
       }
 
       videoPreviewEl.style.display = "none";
+
       videoShellEl.innerHTML = `
         <iframe
-          src="https://www.youtube.com/embed/${ep.videoId}?autoplay=1"
+          src="https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1"
           title="${(ep.title || "Sermon").replace(/"/g, '&quot;')}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="autoplay; encrypted-media; picture-in-picture"
           allowfullscreen>
         </iframe>
       `;
+
       videoShellEl.style.display = "block";
 
       currentEpisodeData = ep;
