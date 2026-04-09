@@ -8,14 +8,12 @@
   />
   <title>CGBC Sermons</title>
 
-  <!-- ========= FAVICON ========= -->
   <link rel="icon" type="image/png" sizes="64x64" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ========= ROOT ========= */
     :root {
       --accent: #809F90;
       --bg: #2f2f2f;
@@ -24,8 +22,6 @@
       --border: rgba(255,255,255,0.08);
       --text: #f4f4f4;
       --muted: #d7d7d7;
-      --shadow: 0 10px 28px rgba(0,0,0,0.30);
-      --shadow-strong: 0 18px 40px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.25);
       --shadow-player: 0 28px 60px rgba(0,0,0,0.52), 0 10px 24px rgba(0,0,0,0.30);
       --shadow-art-strong: 0 26px 52px rgba(0,0,0,0.56), 0 10px 22px rgba(0,0,0,0.30);
       --selected-glow: 0 0 0 1px rgba(128,159,144,0.35) inset, 0 10px 22px rgba(0,0,0,0.28), 0 0 18px rgba(128,159,144,0.12);
@@ -45,6 +41,7 @@
       color: var(--text);
       font-family: 'Lato', sans-serif;
       -webkit-text-size-adjust: 100%;
+      touch-action: pan-y;
     }
 
     body {
@@ -52,25 +49,8 @@
       padding-bottom: var(--safe-bottom);
     }
 
-    body.mode-audio .top-controls {
-      box-shadow: inset 0 -1px 0 rgba(128,159,144,0.10);
-    }
-
-    body.mode-video .top-controls {
-      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.08);
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    button,
-    audio,
-    iframe,
-    input,
-    select {
-      font: inherit;
-    }
+    img { max-width: 100%; }
+    button, audio, iframe { font: inherit; }
 
     .app-shell {
       width: 100%;
@@ -78,7 +58,6 @@
       overflow-x: hidden;
     }
 
-    /* ========= TOP NAV ========= */
     .site-nav {
       display: flex;
       justify-content: center;
@@ -106,7 +85,6 @@
       transform: translateY(-1px);
     }
 
-    /* ========= HEADER ========= */
     .header {
       display: flex;
       justify-content: center;
@@ -158,10 +136,6 @@
 
     .logo-panel:hover {
       transform: translateY(-1px);
-      box-shadow:
-        0 10px 26px rgba(0,0,0,0.30),
-        inset 0 1px 0 rgba(255,255,255,0.14),
-        inset 0 -1px 0 rgba(0,0,0,0.18);
     }
 
     .logo-panel img {
@@ -173,7 +147,6 @@
       z-index: 1;
     }
 
-    /* ========= STATIC TOP CONTROLS ========= */
     .top-controls {
       padding: 12px 14px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -221,10 +194,9 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.18);
     }
 
-    /* ========= MAIN LAYOUT ========= */
     .layout {
       display: grid;
-      grid-template-columns: 290px 340px minmax(0, 1fr);
+      grid-template-columns: 320px 380px minmax(0, 1fr);
       min-height: calc(100vh - 86px - var(--safe-top));
       width: 100%;
       max-width: 100%;
@@ -241,7 +213,7 @@
 
     .col-series {
       border-right: 1px solid var(--border);
-      padding: 14px 12px 14px 16px;
+      padding: 14px 14px 14px 16px;
     }
 
     .col-episodes {
@@ -253,16 +225,9 @@
       padding: 22px 22px 26px;
     }
 
-    .mobile-section-toggle {
-      display: none;
-    }
+    .mobile-section-toggle { display: none; }
+    .mobile-section-body { display: block; max-width: 100%; }
 
-    .mobile-section-body {
-      display: block;
-      max-width: 100%;
-    }
-
-    /* ========= SECTION LABELS ========= */
     .section-title {
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
@@ -272,9 +237,14 @@
       text-transform: uppercase;
     }
 
-    /* ========= RAIL WRAPPERS ========= */
     .rail-wrap {
       position: relative;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .series-list,
+    .episodes-list {
       width: 100%;
       max-width: 100%;
     }
@@ -283,16 +253,12 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      width: 100%;
-      max-width: 100%;
     }
 
     .episodes-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      width: 100%;
-      max-width: 100%;
     }
 
     .series-divider {
@@ -307,19 +273,23 @@
       opacity: 0.9;
     }
 
-    /* ========= CARDS ========= */
     .series-item,
     .episode-item {
       border-radius: 14px;
-      cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       -webkit-tap-highlight-color: transparent;
       min-width: 0;
       max-width: 100%;
+      background: transparent;
     }
 
-    .series-item:hover,
-    .episode-item:hover {
+    .series-item.is-clickable,
+    .episode-item.is-clickable {
+      cursor: pointer;
+    }
+
+    .series-item.is-clickable:hover,
+    .episode-item.is-clickable:hover {
       background: rgba(255,255,255,0.08);
       backdrop-filter: blur(6px);
       transform: translateY(-2px);
@@ -332,48 +302,85 @@
       transform: translateY(-1px);
     }
 
-    .series-item-inner {
+    .series-item-inner,
+    .episode-item-inner {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-start;
+      gap: 14px;
       padding: 10px;
-      min-height: 64px;
     }
 
-    .series-item.audio img {
-      width: 58px;
-      height: 58px;
+    .series-item-inner { min-height: 74px; }
+    .episode-item-inner { min-height: 98px; }
+
+    .thumb-tap {
+      flex-shrink: 0;
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+
+    .thumb-tap img {
+      display: block;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+      object-fit: cover;
+    }
+
+    .series-item.audio .thumb-tap img {
+      width: 72px;
+      height: 72px;
       aspect-ratio: 1 / 1;
-      border-radius: 12px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+      border-radius: 14px;
     }
 
-    .series-item.video img {
-      width: 88px;
-      height: 50px;
+    .series-item.video .thumb-tap img {
+      width: 116px;
+      height: 66px;
       aspect-ratio: 16 / 9;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+      border-radius: 12px;
     }
 
-    .series-copy {
+    .episode-item.audio .thumb-tap img {
+      width: 104px;
+      height: 104px;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+    }
+
+    .episode-item.video .thumb-tap img {
+      width: 132px;
+      height: 74px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+    }
+
+    .series-copy,
+    .episode-copy {
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      justify-content: center;
+      flex: 1;
+      padding-top: 2px;
     }
 
-    .series-name {
-      font-size: 15px;
-      line-height: 1.2;
+    .series-name,
+    .episode-title {
+      color: #fff;
+      line-height: 1.25;
       transition: transform 0.2s ease, color 0.2s ease;
     }
+
+    .series-name { font-size: 16px; }
+    .episode-title { font-size: 15px; }
 
     .series-item:hover .series-name,
     .episode-item:hover .episode-title {
@@ -381,10 +388,18 @@
       color: #fff;
     }
 
+    .episode-sub {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.25;
+    }
+
     .series-chip-row {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
+      margin-top: 5px;
     }
 
     .series-chip {
@@ -406,36 +421,6 @@
     .series-chip.live { background: rgba(128,159,144,0.45); color: #111; }
     .series-chip.videoonly { background: rgba(255,255,255,0.12); }
 
-    .episode-item-inner {
-      display: flex;
-      gap: 10px;
-      padding: 8px;
-      align-items: flex-start;
-      min-height: 88px;
-    }
-
-    .episode-item.audio img {
-      width: 96px;
-      height: 96px;
-      aspect-ratio: 1 / 1;
-      border-radius: 12px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
-    }
-
-    .episode-item.video img {
-      width: 118px;
-      height: 66px;
-      aspect-ratio: 16 / 9;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
-    }
-
     .episode-item.active .episode-item-inner {
       position: relative;
     }
@@ -452,36 +437,6 @@
       box-shadow: 0 0 14px rgba(128,159,144,0.50);
     }
 
-    .episode-item.active {
-      box-shadow:
-        0 0 0 1px rgba(128,159,144,0.45) inset,
-        0 10px 22px rgba(0,0,0,0.30),
-        0 0 18px rgba(128,159,144,0.12);
-    }
-
-    .episode-copy {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 2px;
-    }
-
-    .episode-title {
-      font-size: 15px;
-      color: #fff;
-      line-height: 1.25;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .episode-sub {
-      margin-top: 4px;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.25;
-    }
-
-    /* ========= PLAYER ========= */
     .player-wrap {
       max-width: 1140px;
       width: 100%;
@@ -501,10 +456,16 @@
       opacity: 0;
       transition: opacity 0.2s ease;
       pointer-events: none;
+      z-index: 0;
     }
 
     .player-focus-shell.active::before {
       opacity: 1;
+    }
+
+    .player-focus-shell > * {
+      position: relative;
+      z-index: 1;
     }
 
     #videoShell,
@@ -532,7 +493,8 @@
       display: block;
     }
 
-    #videoPlaceholder {
+    #videoPlaceholder,
+    #audioPlaceholder {
       display: none;
       align-items: center;
       justify-content: center;
@@ -541,11 +503,19 @@
       border: 1px solid var(--border);
       color: var(--muted);
       padding: 30px;
+      box-shadow: var(--shadow-player);
+      margin-bottom: 18px;
+      border-radius: 18px;
+    }
+
+    #audioPlaceholder {
+      min-height: 180px;
     }
 
     #videoPreview {
       display: none;
       position: relative;
+      z-index: 3;
       background: #1f1f1f;
       border: 1px solid var(--border);
       cursor: pointer;
@@ -573,20 +543,14 @@
       align-items: flex-end;
       justify-content: flex-start;
       padding: 22px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.42) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.42) 100%);
     }
 
     .video-preview-overlay::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        120deg,
-        rgba(255,255,255,0.10) 0%,
-        rgba(255,255,255,0.03) 12%,
-        rgba(255,255,255,0) 24%
-      );
+      background: linear-gradient(120deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 12%, rgba(255,255,255,0) 24%);
       pointer-events: none;
     }
 
@@ -642,7 +606,8 @@
       cursor: pointer;
     }
 
-    .video-play-icon {
+    .video-play-icon,
+    .audio-play-badge {
       width: 54px;
       height: 54px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.25);
@@ -655,24 +620,7 @@
       fill: #fff;
     }
 
-    .video-play-icon svg {
-      margin-left: 2px;
-    }
-
-    #audioPlaceholder {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 180px;
-      background: var(--panel-strong);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow-player);
-      color: var(--muted);
-      padding: 24px;
-      margin-bottom: 18px;
-    }
+    .video-play-icon svg { margin-left: 2px; }
 
     .audio-feature-card {
       display: none;
@@ -729,11 +677,7 @@
       position: absolute;
       inset: 0;
       border-radius: 18px;
-      background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0) 50%,
-        rgba(0,0,0,0.24) 100%
-      );
+      background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.24) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -760,14 +704,12 @@
     }
 
     .audio-play-badge {
-      width: 56px;
-      height: 56px;
       position: absolute;
       right: 16px;
       bottom: 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
       z-index: 3;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      overflow: visible;
     }
 
     .audio-play-badge:hover {
@@ -776,12 +718,48 @@
     }
 
     .audio-feature-card.playing .audio-play-badge {
-      background: rgba(128,159,144,0.30);
-      border-color: rgba(128,159,144,0.40);
+      background: rgba(128,159,144,0.34);
+      border-color: rgba(128,159,144,0.50);
       box-shadow:
         0 10px 28px rgba(0,0,0,0.25),
-        0 0 18px rgba(128,159,144,0.30),
-        0 0 30px rgba(128,159,144,0.18);
+        0 0 22px rgba(128,159,144,0.45),
+        0 0 42px rgba(128,159,144,0.22);
+    }
+
+    .audio-feature-card.playing .audio-play-badge::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 999px;
+      background: conic-gradient(
+        from 0deg,
+        rgba(128,159,144,0) 0deg,
+        rgba(128,159,144,0.10) 70deg,
+        rgba(180,220,200,0.70) 110deg,
+        rgba(128,159,144,0.14) 150deg,
+        rgba(128,159,144,0) 220deg,
+        rgba(128,159,144,0) 360deg
+      );
+      filter: blur(6px);
+      animation: audioRingSpin 2.2s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .audio-feature-card.playing .audio-play-badge::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 999px;
+      box-shadow:
+        0 0 0 1px rgba(190,235,210,0.24),
+        0 0 18px rgba(128,159,144,0.34);
+      pointer-events: none;
+    }
+
+    @keyframes audioRingSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
 
     .audio-ready {
@@ -897,7 +875,6 @@
       min-height: 46px;
     }
 
-    /* ========= META ========= */
     .meta {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -995,10 +972,9 @@
       fill: currentColor;
     }
 
-    /* ========= RESPONSIVE ========= */
     @media (max-width: 1180px) {
       .layout {
-        grid-template-columns: 260px 300px minmax(0, 1fr);
+        grid-template-columns: 290px 340px minmax(0, 1fr);
       }
     }
 
@@ -1051,9 +1027,7 @@
         margin-top: 2px;
       }
 
-      .mobile-section-toggle .mobile-label-wrap {
-        text-align: left;
-      }
+      .mobile-section-toggle .mobile-label-wrap { text-align: left; }
 
       .mobile-chevron {
         width: 18px;
@@ -1075,14 +1049,8 @@
         display: block;
       }
 
-      .player-wrap {
-        max-width: 100%;
-      }
-
-      .col-player {
-        margin-top: 0;
-        padding-bottom: 22px;
-      }
+      .player-wrap { max-width: 100%; }
+      .col-player { padding-bottom: 22px; }
 
       #videoShell,
       #videoPlaceholder,
@@ -1090,13 +1058,8 @@
         min-height: 220px;
       }
 
-      .video-preview-title {
-        font-size: 22px;
-      }
-
-      .video-preview-copy {
-        max-width: 100%;
-      }
+      .video-preview-title { font-size: 22px; }
+      .video-preview-copy { max-width: 100%; }
 
       .audio-split {
         grid-template-columns: 1fr;
@@ -1111,19 +1074,10 @@
         max-width: min(360px, 100%);
       }
 
-      .waveform {
-        justify-content: center;
-      }
+      .waveform { justify-content: center; }
+      .meta h2 { font-size: 24px; }
+      .section-title { display: none; }
 
-      .meta h2 {
-        font-size: 24px;
-      }
-
-      .section-title {
-        display: none;
-      }
-
-      /* Series stays vertical on mobile */
       .series-list {
         display: flex;
         flex-direction: column;
@@ -1136,15 +1090,27 @@
         display: block;
       }
 
-      .series-list .series-item {
+      .series-list .series-item,
+      .series-list .episode-item {
         width: 100%;
       }
 
-      /* Episodes become horizontal on mobile */
+      .series-item-inner,
+      .episode-item-inner {
+        gap: 12px;
+      }
+
+      .series-item.audio .thumb-tap img {
+        width: 84px;
+        height: 84px;
+      }
+
+      .series-item.video .thumb-tap img {
+        width: 132px;
+        height: 74px;
+      }
+
       .rail-wrap.episodes-rail {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
@@ -1198,21 +1164,21 @@
       .episodes-list .episode-item {
         flex: 0 0 auto;
         scroll-snap-align: start;
-        width: min(308px, 86vw);
+        width: min(300px, 86vw);
       }
 
       .episodes-list .episode-item-inner {
         height: 100%;
       }
 
-      .episodes-list .episode-item.audio img {
-        width: 84px;
-        height: 84px;
+      .episodes-list .episode-item.audio .thumb-tap img {
+        width: 92px;
+        height: 92px;
       }
 
-      .episodes-list .episode-item.video img {
-        width: 110px;
-        height: 62px;
+      .episodes-list .episode-item.video .thumb-tap img {
+        width: 118px;
+        height: 66px;
       }
 
       .audio-controls-row {
@@ -1259,7 +1225,8 @@
         font-size: 11px;
       }
 
-      .video-play-icon {
+      .video-play-icon,
+      .audio-play-badge {
         width: 44px;
         height: 44px;
       }
@@ -1306,26 +1273,23 @@
       }
 
       .episodes-list .episode-item {
-        width: min(296px, 88vw);
+        width: min(290px, 88vw);
       }
     }
   </style>
 </head>
 <body class="mode-audio">
   <div class="app-shell">
-    <!-- ========= RETURN NAV ========= -->
     <div class="site-nav">
       <a href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">← Back to CGBC</a>
     </div>
 
-    <!-- ========= LOGO HEADER ========= -->
     <div class="header">
       <div class="logo-panel" id="logoReset" title="Reset to first series">
         <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png" alt="CGBC">
       </div>
     </div>
 
-    <!-- ========= STATIC TOP CONTROLS ========= -->
     <div class="top-controls">
       <div class="top-controls-inner">
         <div class="mode-toggle">
@@ -1335,9 +1299,7 @@
       </div>
     </div>
 
-    <!-- ========= MAIN LAYOUT ========= -->
     <div class="layout">
-      <!-- ========= SERIES COLUMN ========= -->
       <aside class="col col-series open" id="seriesSection">
         <button class="mobile-section-toggle" type="button" data-target="series">
           <span class="mobile-label-wrap">
@@ -1357,7 +1319,6 @@
         </div>
       </aside>
 
-      <!-- ========= EPISODES COLUMN ========= -->
       <section class="col col-episodes" id="episodesSection">
         <button class="mobile-section-toggle" type="button" data-target="episodes">
           <span class="mobile-label-wrap">
@@ -1377,7 +1338,6 @@
         </div>
       </section>
 
-      <!-- ========= PLAYER COLUMN ========= -->
       <main class="col col-player" id="playerSection">
         <button class="mobile-section-toggle" type="button" data-target="player">
           <span class="mobile-label-wrap">
@@ -1396,7 +1356,7 @@
 
               <div id="videoPreview">
                 <img id="videoPreviewImg" alt="Selected sermon preview">
-                <div class="video-preview-overlay" id="videoPreviewOverlay">
+                <div class="video-preview-overlay">
                   <div class="video-preview-copy">
                     <div class="video-preview-kicker">Ready to Watch</div>
                     <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
@@ -1444,7 +1404,6 @@
               </div>
             </div>
 
-            <!-- ========= META PANEL ========= -->
             <section class="meta" id="metaBox">
               <h2>Select a sermon</h2>
               <div class="series-line">Choose a series and episode.</div>
@@ -1457,7 +1416,6 @@
   </div>
 
   <script>
-    /* ========= CONTENT PRIORITY SETTINGS ========= */
     const CURRENT_SERIES = "Romans Chapter 12";
     const SECONDARY_SERIES = "The Rapture";
     const CURRENT_SPECIALS = "2026 Specials";
@@ -1472,12 +1430,10 @@
       playlistId: "PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW"
     };
 
-    /* ========= EXTERNAL FEEDS ========= */
     const API_KEY = "AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo";
     const RSS_URL = "https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml";
     const FALLBACK_IMAGE = "https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png";
 
-    /* ========= APP STATE ========= */
     let sermonData = {};
     let archiveSeriesOrder = [];
     let currentSeries = null;
@@ -1485,7 +1441,6 @@
     let currentEpisodeData = null;
     let mode = "audio";
 
-    /* ========= DOM REFERENCES ========= */
     const bodyEl = document.body;
     const seriesListEl = document.getElementById("seriesList");
     const episodesListEl = document.getElementById("episodesList");
@@ -1523,9 +1478,16 @@
     const mobileEpisodesSubtitleEl = document.getElementById("mobileEpisodesSubtitle");
     const mobilePlayerSubtitleEl = document.getElementById("mobilePlayerSubtitle");
 
-    /* ========= MOBILE HELPERS ========= */
     function isMobileLayout() {
       return window.innerWidth <= 980;
+    }
+
+    async function tryPortraitLock() {
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock("portrait");
+        }
+      } catch {}
     }
 
     function setMobileOpen(sectionName) {
@@ -1546,11 +1508,7 @@
       btn.addEventListener("click", () => {
         if (!isMobileLayout()) return;
         const target = btn.dataset.target;
-        const map = {
-          series: seriesSectionEl,
-          episodes: episodesSectionEl,
-          player: playerSectionEl
-        };
+        const map = { series: seriesSectionEl, episodes: episodesSectionEl, player: playerSectionEl };
         const isOpen = map[target].classList.contains("open");
         seriesSectionEl.classList.remove("open");
         episodesSectionEl.classList.remove("open");
@@ -1563,34 +1521,19 @@
       mobileSeriesSubtitleEl.textContent = currentSeries || "Choose a sermon series";
 
       if (currentSeries && sermonData[currentSeries]) {
-        const visibleEpisodeCount = getVisibleEpisodesForSeries(currentSeries).length;
-        mobileEpisodesSubtitleEl.textContent = `${visibleEpisodeCount} episode${visibleEpisodeCount === 1 ? "" : "s"}`;
+        const count = getVisibleEpisodesForSeries(currentSeries).length;
+        mobileEpisodesSubtitleEl.textContent = `${count} episode${count === 1 ? "" : "s"}`;
       } else {
         mobileEpisodesSubtitleEl.textContent = "Select a series first";
       }
 
-      if (currentEpisodeData) {
-        mobilePlayerSubtitleEl.textContent = currentEpisodeData.title || "Selected episode";
-      } else {
-        mobilePlayerSubtitleEl.textContent = "Select an episode to begin";
-      }
+      mobilePlayerSubtitleEl.textContent = currentEpisodeData ? (currentEpisodeData.title || "Selected episode") : "Select an episode to begin";
     }
 
-    /* ========= DATE / FEED PARSING ========= */
     function parseDateToTimestamp(value) {
       if (!value) return 0;
-
       const direct = Date.parse(value);
       if (!Number.isNaN(direct)) return direct;
-
-      const shortMatch = String(value).match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
-      if (shortMatch) {
-        let [, mm, dd, yy] = shortMatch;
-        let year = parseInt(yy, 10);
-        if (yy.length === 2) year += year < 70 ? 2000 : 1900;
-        return new Date(year, parseInt(mm, 10) - 1, parseInt(dd, 10)).getTime();
-      }
-
       return 0;
     }
 
@@ -1611,15 +1554,7 @@
       const decoded = htmlDecode(normalized);
       const lines = decoded.split("\n").map(s => s.trim()).filter(Boolean);
 
-      const out = {
-        title: "",
-        series: "",
-        scripture: "",
-        by: "",
-        date: "",
-        video: "",
-        extra: []
-      };
+      const out = { title: "", series: "", scripture: "", by: "", date: "", video: "", extra: [] };
 
       for (const line of lines) {
         const lower = line.toLowerCase();
@@ -1639,14 +1574,10 @@
       if (!url) return "";
       try {
         const u = new URL(url.trim());
-        if (u.hostname.includes("youtu.be")) {
-          return u.pathname.replace(/^\/+/, "").trim();
-        }
+        if (u.hostname.includes("youtu.be")) return u.pathname.replace(/^\/+/, "").trim();
         const v = u.searchParams.get("v");
         if (v) return v.trim();
-        if (u.pathname.includes("/shorts/")) {
-          return u.pathname.split("/shorts/")[1].split("/")[0].trim();
-        }
+        if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1].split("/")[0].trim();
         return "";
       } catch {
         return "";
@@ -1676,7 +1607,6 @@
           if (ok) return url;
         } catch {}
       }
-
       return candidates[candidates.length - 1];
     }
 
@@ -1710,17 +1640,12 @@
         };
       });
 
-      if (sermons.length) {
-        sermons[0].seriesImage = getWatchThumb(sermons[0].videoId);
-      }
-
+      if (sermons.length) sermons[0].seriesImage = getWatchThumb(sermons[0].videoId);
       return sermons;
     }
 
-    /* ========= MEDIA SESSION / LOCK SCREEN ========= */
     function updateMediaSession(ep) {
       if (!("mediaSession" in navigator) || !ep) return;
-
       try {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: ep.title || "CGBC Sermon",
@@ -1732,7 +1657,6 @@
             { src: ep.img || ep.seriesImage || FALLBACK_IMAGE, sizes: "512x512", type: "image/png" }
           ]
         });
-
         navigator.mediaSession.setActionHandler("play", () => audioPlayerEl.play());
         navigator.mediaSession.setActionHandler("pause", () => audioPlayerEl.pause());
         navigator.mediaSession.setActionHandler("seekbackward", () => skipAudioBy(-30));
@@ -1742,12 +1666,9 @@
 
     function clearMediaSession() {
       if (!("mediaSession" in navigator)) return;
-      try {
-        navigator.mediaSession.metadata = null;
-      } catch {}
+      try { navigator.mediaSession.metadata = null; } catch {}
     }
 
-    /* ========= MODE / PLAYER VISUAL STATE ========= */
     function setBodyModeClass() {
       bodyEl.classList.toggle("mode-audio", mode === "audio");
       bodyEl.classList.toggle("mode-video", mode === "video");
@@ -1763,69 +1684,12 @@
       audioPlayIconEl.innerHTML = isPlaying
         ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
         : '<path d="M8 5v14l11-7z"/>';
+      audioPlayIconEl.style.marginLeft = isPlaying ? "0px" : "2px";
       if ("mediaSession" in navigator) {
-        try {
-          navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
-        } catch {}
+        try { navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused"; } catch {}
       }
     }
 
-    /* ========= SHARE ========= */
-    async function shareCurrentEpisode() {
-      if (!currentEpisodeData) return;
-
-      const ep = currentEpisodeData;
-      const shareUrl =
-        ep.video ||
-        ep.link ||
-        ep.audio ||
-        window.location.href;
-
-      const shareTextParts = [
-        ep.title || "CGBC Sermon",
-        ep.series ? `Series: ${ep.series}` : "",
-        ep.scripture ? `Scripture: ${ep.scripture}` : "",
-        ep.by ? `By: ${ep.by}` : "",
-        ep.date ? `Date: ${ep.date}` : "",
-        "CGBC - Lebanon, TN"
-      ].filter(Boolean);
-
-      const sharePayload = {
-        title: ep.title || "CGBC Sermon",
-        text: shareTextParts.join("\n"),
-        url: shareUrl
-      };
-
-      try {
-        const imageUrl = ep.img || ep.seriesImage || FALLBACK_IMAGE;
-        if (navigator.canShare && navigator.share && imageUrl) {
-          try {
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
-            const extension = blob.type.includes("png") ? "png" : "jpg";
-            const file = new File([blob], `cgbc-sermon-art.${extension}`, { type: blob.type || "image/png" });
-
-            if (navigator.canShare({ files: [file] })) {
-              await navigator.share({
-                ...sharePayload,
-                files: [file]
-              });
-              return;
-            }
-          } catch {}
-        }
-
-        if (navigator.share) {
-          await navigator.share(sharePayload);
-          return;
-        }
-
-        await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
-        alert("Episode details copied to clipboard.");
-      } catch {}
-    }
-
-    /* ========= MEDIA CONTROL HELPERS ========= */
     function stopAndHideVideo() {
       videoShellEl.innerHTML = "";
       videoShellEl.style.display = "none";
@@ -1860,55 +1724,46 @@
 
     function toggleAudioPlayback() {
       if (!audioPlayerEl.src) return;
-      if (audioPlayerEl.paused) {
-        audioPlayerEl.play();
-      } else {
-        audioPlayerEl.pause();
-      }
+      if (audioPlayerEl.paused) audioPlayerEl.play();
+      else audioPlayerEl.pause();
     }
 
-    /* ========= META RENDER ========= */
+    async function shareCurrentEpisode() {
+      if (!currentEpisodeData) return;
+
+      const ep = currentEpisodeData;
+      const shareUrl = ep.video || ep.link || ep.audio || window.location.href;
+      const shareTextParts = [
+        ep.title || "CGBC Sermon",
+        ep.series ? `Series: ${ep.series}` : "",
+        ep.scripture ? `Scripture: ${ep.scripture}` : "",
+        ep.by ? `By: ${ep.by}` : "",
+        ep.date ? `Date: ${ep.date}` : "",
+        "CGBC - Lebanon, TN"
+      ].filter(Boolean);
+
+      const sharePayload = {
+        title: ep.title || "CGBC Sermon",
+        text: shareTextParts.join("\n"),
+        url: shareUrl
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(sharePayload);
+          return;
+        }
+        await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
+        alert("Episode details copied to clipboard.");
+      } catch {}
+    }
+
     function buildMetaRows(ep) {
       const rows = [];
-
-      if (ep.scripture) {
-        rows.push(`
-          <div class="meta-row">
-            <div class="meta-label">Scripture</div>
-            <div class="meta-value">${ep.scripture}</div>
-          </div>
-        `);
-      }
-
-      if (ep.by) {
-        rows.push(`
-          <div class="meta-row">
-            <div class="meta-label">Speaker</div>
-            <div class="meta-value">${ep.by}</div>
-          </div>
-        `);
-      }
-
-      if (ep.date) {
-        rows.push(`
-          <div class="meta-row">
-            <div class="meta-label">Date</div>
-            <div class="meta-value">${ep.date}</div>
-          </div>
-        `);
-      }
-
-      if (ep.extra?.length) {
-        ep.extra.forEach(line => {
-          rows.push(`
-            <div class="meta-row">
-              <div class="meta-label">Notes</div>
-              <div class="meta-value">${line}</div>
-            </div>
-          `);
-        });
-      }
-
+      if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
+      if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
+      if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
+      if (ep.extra?.length) ep.extra.forEach(line => rows.push(`<div class="meta-row"><div class="meta-label">Notes</div><div class="meta-value">${line}</div></div>`));
       return rows.join("");
     }
 
@@ -1924,7 +1779,6 @@
 
     function renderMeta(ep, isAudio) {
       const actionButtons = [];
-
       if (isAudio && ep.link) {
         actionButtons.push(`
           <a class="rss-button" href="${ep.link}" target="_blank" rel="noopener noreferrer">
@@ -1957,23 +1811,16 @@
       metaBoxEl.innerHTML = `
         <h2>${ep.title || "Untitled Sermon"}</h2>
         <div class="series-line">${ep.series || currentSeries || ""}</div>
-        <div class="meta-grid">
-          ${buildMetaRows(ep)}
-        </div>
-        <div class="actions">
-          ${actionButtons.join("")}
-        </div>
+        <div class="meta-grid">${buildMetaRows(ep)}</div>
+        <div class="actions">${actionButtons.join("")}</div>
       `;
 
       const shareBtn = document.getElementById("shareEpisodeBtn");
-      if (shareBtn) {
-        shareBtn.addEventListener("click", shareCurrentEpisode);
-      }
+      if (shareBtn) shareBtn.addEventListener("click", shareCurrentEpisode);
 
       updateMobileSubtitles();
     }
 
-    /* ========= SERIES ORDERING ========= */
     function groupNumberedSeries(names) {
       const grouped = new Map();
       const consumed = new Set();
@@ -1985,13 +1832,13 @@
         const base = match[1].trim();
         const num = parseInt(match[2], 10);
         if (!grouped.has(base)) grouped.set(base, []);
-        grouped.get(base).push({ name, num, base });
+        grouped.get(base).push({ name, num });
       });
 
       names.forEach(name => {
         if (consumed.has(name)) return;
-
         const match = name.match(/^(.*?)(\d+)\s*$/i);
+
         if (!match) {
           output.push(name);
           consumed.add(name);
@@ -2010,10 +1857,7 @@
         });
 
         const parentCandidate = base.replace(/\s+(chapter|part)$/i, "").trim();
-        const parentMatch = names.find(n =>
-          !consumed.has(n) &&
-          n.trim().toLowerCase() === parentCandidate.toLowerCase()
-        );
+        const parentMatch = names.find(n => !consumed.has(n) && n.trim().toLowerCase() === parentCandidate.toLowerCase());
 
         if (parentMatch) {
           output.push(parentMatch);
@@ -2053,12 +1897,10 @@
     function getSeriesCover(seriesName) {
       const items = sermonData[seriesName] || [];
       if (!items.length) return FALLBACK_IMAGE;
-
       if (mode === "audio") {
         const first = items[0];
         return first.seriesImage || first.img || FALLBACK_IMAGE;
       }
-
       const firstWithVideo = items.find(item => item.videoId);
       return firstWithVideo ? getWatchThumb(firstWithVideo.videoId) : FALLBACK_IMAGE;
     }
@@ -2068,30 +1910,55 @@
       const pinnedSet = new Set(pinned);
 
       let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
-
-      if (mode === "audio") {
-        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
-      }
-
-      if (mode === "video") {
-        archive = archive.filter(name => name !== LIVESTREAMS.name);
-      }
+      if (mode === "audio") archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
+      if (mode === "video") archive = archive.filter(name => name !== LIVESTREAMS.name);
 
       let ordered = [...pinned, ...groupNumberedSeries(archive)];
-
       if (mode === "video" && sermonData[VIDEO_ONLY_ARCHIVE.name] && !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)) {
         ordered = [...pinned, ...groupNumberedSeries(archive).filter(name => name !== VIDEO_ONLY_ARCHIVE.name), VIDEO_ONLY_ARCHIVE.name];
       }
-
       return ordered;
     }
 
     function getVisibleEpisodesForSeries(seriesName) {
-      const allEpisodes = sermonData[seriesName] || [];
-      return allEpisodes.map((ep, originalIndex) => ({ ep, originalIndex }));
+      return (sermonData[seriesName] || []).map((ep, originalIndex) => ({ ep, originalIndex }));
     }
 
-    /* ========= LIST RENDERING ========= */
+    function selectSeries(seriesName) {
+      currentSeries = seriesName;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
+      if (mode === "audio") audioPlaceholderEl.style.display = "flex";
+      else videoPlaceholderEl.style.display = "flex";
+      updateMobileSubtitles();
+
+      if (isMobileLayout()) {
+        setMobileOpen("episodes");
+        scrollToSection(episodesSectionEl);
+      }
+    }
+
+    function selectEpisode(ep, originalIndex, rowEl) {
+      currentEpisodeIndex = originalIndex;
+      currentEpisodeData = ep;
+      renderEpisodesList();
+      if (rowEl) rowEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+
+      if (mode === "audio") playAudio(ep);
+      else previewVideo(ep);
+
+      updateMobileSubtitles();
+
+      if (isMobileLayout()) {
+        setMobileOpen("player");
+        scrollToSection(playerSectionEl);
+      }
+    }
+
     function renderSeriesList() {
       seriesListEl.innerHTML = "";
       const visibleSeries = getVisibleSeriesOrder();
@@ -2126,39 +1993,37 @@
           archiveDividerInserted = true;
         }
 
+        const item = document.createElement("div");
+        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "") + (!isMobileLayout() ? " is-clickable" : "");
+
         const chips = getSeriesChips(seriesName);
         const chipsHtml = chips.length
           ? `<div class="series-chip-row">${chips.map(ch => `<span class="series-chip ${ch.className}">${ch.label}</span>`).join("")}</div>`
           : "";
 
-        const item = document.createElement("div");
-        item.className = `series-item ${mode}` + (seriesName === currentSeries ? " active" : "");
         item.innerHTML = `
           <div class="series-item-inner">
-            <img src="${getSeriesCover(seriesName)}" alt="">
+            <button class="thumb-tap" type="button" aria-label="Open ${seriesName}">
+              <img src="${getSeriesCover(seriesName)}" alt="">
+            </button>
             <div class="series-copy">
               <div class="series-name">${seriesName}</div>
               ${chipsHtml}
             </div>
           </div>
         `;
-        item.addEventListener("click", () => {
-          currentSeries = seriesName;
-          currentEpisodeIndex = null;
-          currentEpisodeData = null;
-          clearMediaState();
-          renderSeriesList();
-          renderEpisodesList();
-          renderEmptyMeta();
-          if (mode === "audio") audioPlaceholderEl.style.display = "flex";
-          else videoPlaceholderEl.style.display = "flex";
-          updateMobileSubtitles();
 
-          if (isMobileLayout()) {
-            setMobileOpen("episodes");
-            scrollToSection(episodesSectionEl);
-          }
+        const thumbBtn = item.querySelector(".thumb-tap");
+        thumbBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          selectSeries(seriesName);
         });
+
+        if (!isMobileLayout()) {
+          item.addEventListener("click", () => selectSeries(seriesName));
+        }
+
         seriesListEl.appendChild(item);
       });
 
@@ -2167,17 +2032,14 @@
 
     function renderEpisodesList() {
       episodesListEl.innerHTML = "";
-
       if (!currentSeries || !sermonData[currentSeries]) {
         updateMobileSubtitles();
         return;
       }
 
-      const visibleEpisodes = getVisibleEpisodesForSeries(currentSeries);
-
-      visibleEpisodes.forEach(({ ep, originalIndex }) => {
+      getVisibleEpisodesForSeries(currentSeries).forEach(({ ep, originalIndex }) => {
         const row = document.createElement("div");
-        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "");
+        row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? " active" : "") + (!isMobileLayout() ? " is-clickable" : "");
 
         const thumb = mode === "audio"
           ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
@@ -2185,7 +2047,9 @@
 
         row.innerHTML = `
           <div class="episode-item-inner">
-            <img src="${thumb}" alt="">
+            <button class="thumb-tap" type="button" aria-label="Open ${ep.title || 'episode'}">
+              <img src="${thumb}" alt="">
+            </button>
             <div class="episode-copy">
               <div class="episode-title">${ep.title || "Untitled Sermon"}</div>
               <div class="episode-sub">${ep.scripture || ep.date || ""}</div>
@@ -2193,25 +2057,16 @@
           </div>
         `;
 
-        row.addEventListener("click", () => {
-          currentEpisodeIndex = originalIndex;
-          currentEpisodeData = ep;
-          renderEpisodesList();
-          row.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-
-          if (mode === "audio") {
-            playAudio(ep);
-          } else {
-            previewVideo(ep);
-          }
-
-          updateMobileSubtitles();
-
-          if (isMobileLayout()) {
-            setMobileOpen("player");
-            scrollToSection(playerSectionEl);
-          }
+        const thumbBtn = row.querySelector(".thumb-tap");
+        thumbBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          selectEpisode(ep, originalIndex, row);
         });
+
+        if (!isMobileLayout()) {
+          row.addEventListener("click", () => selectEpisode(ep, originalIndex, row));
+        }
 
         episodesListEl.appendChild(row);
       });
@@ -2219,7 +2074,6 @@
       updateMobileSubtitles();
     }
 
-    /* ========= PLAYER ACTIONS ========= */
     function playAudio(ep) {
       stopAndHideVideo();
 
@@ -2262,7 +2116,11 @@
 
       currentEpisodeData = ep;
       renderMeta(ep, false);
-      videoPreviewEl.onclick = () => playVideo(ep);
+      videoPreviewEl.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        playVideo(ep);
+      };
       setPlayerFocusActive(true);
     }
 
@@ -2293,7 +2151,6 @@
       setPlayerFocusActive(true);
     }
 
-    /* ========= DATA LOADING ========= */
     async function loadRSSData() {
       const xmlText = await fetch(RSS_URL).then(r => r.text());
       const xml = new DOMParser().parseFromString(xmlText, "text/xml");
@@ -2312,9 +2169,7 @@
 
         let itemImage = "";
         const itunesImages = item.getElementsByTagName("itunes:image");
-        if (itunesImages && itunesImages[0]) {
-          itemImage = itunesImages[0].getAttribute("href") || "";
-        }
+        if (itunesImages && itunesImages[0]) itemImage = itunesImages[0].getAttribute("href") || "";
 
         const videoId = extractYouTubeId(parsed.video);
 
@@ -2337,28 +2192,20 @@
 
       Object.keys(grouped).forEach(series => {
         const firstImage = grouped[series].find(x => x.img)?.img || FALLBACK_IMAGE;
-        grouped[series] = grouped[series].map(ep => ({
-          ...ep,
-          seriesImage: firstImage
-        }));
+        grouped[series] = grouped[series].map(ep => ({ ...ep, seriesImage: firstImage }));
       });
 
       const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
-      if (livestreamEpisodes.length) {
-        grouped[LIVESTREAMS.name] = livestreamEpisodes;
-      }
+      if (livestreamEpisodes.length) grouped[LIVESTREAMS.name] = livestreamEpisodes;
 
       const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
-      if (guestEpisodes.length) {
-        grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
-      }
+      if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
 
       sermonData = grouped;
       archiveSeriesOrder = Object.keys(sermonData).filter(name => name !== LIVESTREAMS.name);
       currentSeries = getVisibleSeriesOrder()[0] || null;
     }
 
-    /* ========= MODE / RESET ========= */
     function setMode(nextMode) {
       mode = nextMode;
       setBodyModeClass();
@@ -2417,7 +2264,6 @@
       }
     }
 
-    /* ========= EVENTS ========= */
     audioArtPanelEl.addEventListener("click", toggleAudioPlayback);
     audioPlayBadgeEl.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -2448,13 +2294,9 @@
 
     window.addEventListener("resize", () => {
       if (isMobileLayout()) {
-        if (currentEpisodeData) {
-          setMobileOpen("player");
-        } else if (currentSeries) {
-          setMobileOpen("episodes");
-        } else {
-          setMobileOpen("series");
-        }
+        if (currentEpisodeData) setMobileOpen("player");
+        else if (currentSeries) setMobileOpen("episodes");
+        else setMobileOpen("series");
       } else {
         seriesSectionEl.classList.add("open");
         episodesSectionEl.classList.add("open");
@@ -2464,6 +2306,7 @@
 
     window.addEventListener("orientationchange", () => {
       setTimeout(() => {
+        tryPortraitLock();
         if (isMobileLayout()) {
           if (currentEpisodeData) {
             setMobileOpen("player");
@@ -2479,72 +2322,9 @@
       }, 200);
     });
 
-    /* ========= SHARE ========= */
-    async function shareCurrentEpisode() {
-      if (!currentEpisodeData) return;
-
-      const ep = currentEpisodeData;
-      const shareUrl =
-        ep.video ||
-        ep.link ||
-        ep.audio ||
-        window.location.href;
-
-      const shareTextParts = [
-        ep.title || "CGBC Sermon",
-        ep.series ? `Series: ${ep.series}` : "",
-        ep.scripture ? `Scripture: ${ep.scripture}` : "",
-        ep.by ? `By: ${ep.by}` : "",
-        ep.date ? `Date: ${ep.date}` : "",
-        "CGBC - Lebanon, TN"
-      ].filter(Boolean);
-
-      const sharePayload = {
-        title: ep.title || "CGBC Sermon",
-        text: shareTextParts.join("\n"),
-        url: shareUrl
-      };
-
-      try {
-        const imageUrl = ep.img || ep.seriesImage || FALLBACK_IMAGE;
-        if (navigator.canShare && navigator.share && imageUrl) {
-          try {
-            const response = await fetch(imageUrl);
-            const blob = await response.blob();
-            const extension = blob.type.includes("png") ? "png" : "jpg";
-            const file = new File([blob], `cgbc-sermon-art.${extension}`, { type: blob.type || "image/png" });
-
-            if (navigator.canShare({ files: [file] })) {
-              await navigator.share({
-                ...sharePayload,
-                files: [file]
-              });
-              return;
-            }
-          } catch {}
-        }
-
-        if (navigator.share) {
-          await navigator.share(sharePayload);
-          return;
-        }
-
-        await navigator.clipboard.writeText(`${sharePayload.text}\n${sharePayload.url}`);
-        alert("Episode details copied to clipboard.");
-      } catch {}
-    }
-
-    /* ========= META RENDER BIND ========= */
-    const originalRenderMeta = renderMeta;
-    renderMeta = function(ep, isAudio) {
-      originalRenderMeta(ep, isAudio);
-      const shareBtn = document.getElementById("shareEpisodeBtn");
-      if (shareBtn) shareBtn.addEventListener("click", shareCurrentEpisode);
-    };
-
-    /* ========= APP INIT ========= */
     (async function init() {
       setBodyModeClass();
+      await tryPortraitLock();
       await loadRSSData();
 
       audioPlaceholderEl.textContent = "Choose a series to begin listening.";
