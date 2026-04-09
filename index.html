@@ -593,34 +593,27 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.22);
     }
 
-    .video-play-icon,
-    .audio-play-badge {
+    .video-play-icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 54px;
+      height: 54px;
       border-radius: 999px;
       background: rgba(255,255,255,0.18);
       border: 1px solid rgba(255,255,255,0.18);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
       cursor: pointer;
     }
 
-    .video-play-icon,
-    .audio-play-badge {
-      width: 54px;
-      height: 54px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-    }
-
-    .video-play-icon svg,
-    .audio-play-badge svg {
+    .video-play-icon svg {
       width: 22px;
       height: 22px;
       fill: #fff;
+      margin-left: 2px;
     }
-
-    .video-play-icon svg { margin-left: 2px; }
 
     .audio-feature-card {
       display: none;
@@ -703,18 +696,58 @@
       z-index: 2;
     }
 
+    /* AUDIO PILL - THIS PASS */
     .audio-play-badge {
       position: absolute;
-      right: 16px;
+      left: 16px;
       bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px 10px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      cursor: pointer;
       z-index: 3;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-      overflow: visible;
+      transition: all 0.25s ease;
     }
 
     .audio-play-badge:hover {
-      transform: scale(1.05);
-      background: rgba(255,255,255,0.28);
+      transform: translateY(-1px);
+      background: rgba(0,0,0,0.52);
+    }
+
+    .audio-play-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
+      flex-shrink: 0;
+    }
+
+    .audio-play-circle svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+      margin-left: 2px;
+    }
+
+    .audio-play-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0.9;
+      white-space: nowrap;
     }
 
     .audio-feature-card.playing .audio-play-badge {
@@ -724,42 +757,6 @@
         0 10px 28px rgba(0,0,0,0.25),
         0 0 22px rgba(128,159,144,0.45),
         0 0 42px rgba(128,159,144,0.22);
-    }
-
-    .audio-feature-card.playing .audio-play-badge::before {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border-radius: 999px;
-      background: conic-gradient(
-        from 0deg,
-        rgba(128,159,144,0) 0deg,
-        rgba(128,159,144,0.10) 70deg,
-        rgba(180,220,200,0.70) 110deg,
-        rgba(128,159,144,0.14) 150deg,
-        rgba(128,159,144,0) 220deg,
-        rgba(128,159,144,0) 360deg
-      );
-      filter: blur(6px);
-      animation: audioRingSpin 2.2s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .audio-feature-card.playing .audio-play-badge::after {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: 999px;
-      box-shadow:
-        0 0 0 1px rgba(190,235,210,0.24),
-        0 0 18px rgba(128,159,144,0.34);
-      pointer-events: none;
-    }
-
-    @keyframes audioRingSpin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
     }
 
     .audio-ready {
@@ -1225,10 +1222,25 @@
         font-size: 11px;
       }
 
-      .video-play-icon,
-      .audio-play-badge {
+      .video-play-icon {
         width: 44px;
         height: 44px;
+      }
+
+      .audio-play-badge {
+        left: 14px;
+        bottom: 14px;
+        gap: 10px;
+        padding: 8px 12px 8px 8px;
+      }
+
+      .audio-play-circle {
+        width: 34px;
+        height: 34px;
+      }
+
+      .audio-play-label {
+        font-size: 10px;
       }
 
       .audio-feature-card {
@@ -1379,7 +1391,12 @@
                   <div class="audio-art-panel" id="audioArtPanel">
                     <img id="audioFeatureArt" alt="Sermon artwork">
                     <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
-                      <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      <span class="audio-play-circle">
+                        <svg id="audioPlayIcon" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </span>
+                      <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
                     </span>
                   </div>
 
@@ -1462,6 +1479,7 @@
     const audioArtPanelEl = document.getElementById("audioArtPanel");
     const audioPlayBadgeEl = document.getElementById("audioPlayBadge");
     const audioPlayIconEl = document.getElementById("audioPlayIcon");
+    const audioPlayLabelEl = document.getElementById("audioPlayLabel");
     const skipBackBtnEl = document.getElementById("skipBackBtn");
     const skipForwardBtnEl = document.getElementById("skipForwardBtn");
 
@@ -1685,6 +1703,7 @@
         ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
         : '<path d="M8 5v14l11-7z"/>';
       audioPlayIconEl.style.marginLeft = isPlaying ? "0px" : "2px";
+      audioPlayLabelEl.textContent = isPlaying ? "Playing" : "Tap to Play";
       if ("mediaSession" in navigator) {
         try { navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused"; } catch {}
       }
