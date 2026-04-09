@@ -8,6 +8,9 @@
   />
   <title>CGBC Sermons</title>
 
+  <link rel="icon" type="image/png" sizes="64x64" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
+  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073724/Favicon-CGBC-64x64-PX.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -21,6 +24,7 @@
       --muted: #d7d7d7;
       --shadow: 0 10px 28px rgba(0,0,0,0.30);
       --shadow-strong: 0 18px 40px rgba(0,0,0,0.45), 0 4px 14px rgba(0,0,0,0.25);
+      --shadow-player: 0 28px 60px rgba(0,0,0,0.52), 0 10px 24px rgba(0,0,0,0.30);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -251,6 +255,7 @@
       cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       -webkit-tap-highlight-color: transparent;
+      min-width: 0;
     }
 
     .series-item:hover,
@@ -418,7 +423,7 @@
       aspect-ratio: 16 / 9;
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: var(--shadow-strong);
+      box-shadow: var(--shadow-player);
       margin-bottom: 18px;
       min-height: 560px;
     }
@@ -458,7 +463,7 @@
 
     #videoPreview:hover {
       transform: translateY(-2px);
-      box-shadow: 0 22px 46px rgba(0,0,0,0.5), 0 6px 18px rgba(0,0,0,0.28);
+      box-shadow: 0 30px 64px rgba(0,0,0,0.55), 0 10px 24px rgba(0,0,0,0.30);
     }
 
     #videoPreview img {
@@ -568,7 +573,7 @@
       background: var(--panel-strong);
       border: 1px solid var(--border);
       border-radius: 18px;
-      box-shadow: var(--shadow-strong);
+      box-shadow: var(--shadow-player);
       color: var(--muted);
       padding: 24px;
       margin-bottom: 18px;
@@ -580,7 +585,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.18));
       border: 1px solid var(--border);
       border-radius: 22px;
-      box-shadow: var(--shadow-strong);
+      box-shadow: var(--shadow-player);
       padding: 24px;
       margin-bottom: 18px;
       backdrop-filter: blur(10px);
@@ -622,8 +627,8 @@
       object-fit: cover;
       border-radius: 18px;
       box-shadow:
-        0 14px 34px rgba(0,0,0,0.42),
-        0 4px 12px rgba(0,0,0,0.22);
+        0 16px 38px rgba(0,0,0,0.46),
+        0 6px 14px rgba(0,0,0,0.24);
       background: rgba(255,255,255,0.05);
       display: block;
     }
@@ -741,6 +746,7 @@
       padding: 20px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.32);
     }
 
     .meta h2 {
@@ -942,6 +948,63 @@
       .section-title {
         display: none;
       }
+
+      .series-list,
+      .episodes-list {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 2px 2px 10px;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .series-list::-webkit-scrollbar,
+      .episodes-list::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .series-list::-webkit-scrollbar-thumb,
+      .episodes-list::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.14);
+        border-radius: 999px;
+      }
+
+      .series-list .series-divider,
+      .episodes-list .series-divider {
+        display: none;
+      }
+
+      .series-list .series-item,
+      .episodes-list .episode-item {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+      }
+
+      .series-list .series-item {
+        width: min(280px, 82vw);
+      }
+
+      .episodes-list .episode-item {
+        width: min(320px, 86vw);
+      }
+
+      .series-list .series-item-inner,
+      .episodes-list .episode-item-inner {
+        height: 100%;
+      }
+
+      .episodes-list .episode-item.audio img {
+        width: 84px;
+        height: 84px;
+      }
+
+      .episodes-list .episode-item.video img {
+        width: 110px;
+        height: 62px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -970,16 +1033,6 @@
 
       .episode-item-inner {
         padding: 8px 6px;
-      }
-
-      .episode-item.audio img {
-        width: 78px;
-        height: 78px;
-      }
-
-      .episode-item.video img {
-        width: 102px;
-        height: 58px;
       }
 
       .video-preview-overlay {
@@ -1038,6 +1091,14 @@
 
       .mobile-section-toggle {
         padding: 12px 14px;
+      }
+
+      .series-list .series-item {
+        width: min(270px, 84vw);
+      }
+
+      .episodes-list .episode-item {
+        width: min(300px, 88vw);
       }
     }
   </style>
@@ -1393,8 +1454,42 @@
       return sermons;
     }
 
+    function updateMediaSession(ep) {
+      if (!("mediaSession" in navigator) || !ep) return;
+
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: ep.title || "CGBC Sermon",
+          artist: ep.by || "CGBC Lebanon, TN",
+          album: ep.series || "CGBC Sermons",
+          artwork: [
+            { src: ep.img || ep.seriesImage || FALLBACK_IMAGE, sizes: "64x64", type: "image/png" },
+            { src: ep.img || ep.seriesImage || FALLBACK_IMAGE, sizes: "256x256", type: "image/png" },
+            { src: ep.img || ep.seriesImage || FALLBACK_IMAGE, sizes: "512x512", type: "image/png" }
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler("play", () => audioPlayerEl.play());
+        navigator.mediaSession.setActionHandler("pause", () => audioPlayerEl.pause());
+        navigator.mediaSession.setActionHandler("previoustrack", null);
+        navigator.mediaSession.setActionHandler("nexttrack", null);
+      } catch {}
+    }
+
+    function clearMediaSession() {
+      if (!("mediaSession" in navigator)) return;
+      try {
+        navigator.mediaSession.metadata = null;
+      } catch {}
+    }
+
     function setAudioReadyState(isPlaying) {
       audioReadyLabelEl.textContent = isPlaying ? "Listening..." : "Ready to Listen";
+      if ("mediaSession" in navigator) {
+        try {
+          navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+        } catch {}
+      }
     }
 
     function stopAndHideVideo() {
@@ -1413,6 +1508,7 @@
       audioPlaceholderEl.style.display = "none";
       audioFeatureCardEl.classList.remove("playing");
       setAudioReadyState(false);
+      clearMediaSession();
     }
 
     function clearMediaState() {
@@ -1670,7 +1766,7 @@
         row.addEventListener("click", () => {
           currentEpisodeIndex = index;
           renderEpisodesList();
-          row.scrollIntoView({ behavior: "smooth", block: "center" });
+          row.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
 
           if (mode === "audio") {
             playAudio(ep);
@@ -1710,6 +1806,7 @@
       audioPlayerEl.src = ep.audio;
       audioPlayerEl.load();
 
+      updateMediaSession(ep);
       renderMeta(ep, true);
     }
 
