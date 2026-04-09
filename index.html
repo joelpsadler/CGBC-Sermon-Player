@@ -173,6 +173,14 @@
       padding: 22px 22px 26px;
     }
 
+    .mobile-section-toggle {
+      display: none;
+    }
+
+    .mobile-section-body {
+      display: block;
+    }
+
     .mode-toggle {
       display: flex;
       gap: 8px;
@@ -805,33 +813,93 @@
 
     @media (max-width: 980px) {
       .layout {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
       }
 
       .col {
         overflow: visible;
+        border-right: none;
+        padding: 0 12px;
       }
 
       .col-series,
-      .col-episodes {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 12px 14px;
+      .col-episodes,
+      .col-player {
+        border-bottom: none;
       }
 
-      .col-player {
-        padding: 16px 14px 22px;
+      .mobile-section-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.06);
+        color: var(--text);
+        padding: 14px 16px;
+        border-radius: 16px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        margin: 12px 0 0;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .mobile-section-toggle .mobile-subtitle {
+        display: block;
+        font-family: 'Lato', sans-serif;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .mobile-section-toggle .mobile-label-wrap {
+        text-align: left;
+      }
+
+      .mobile-chevron {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .col.open .mobile-chevron {
+        transform: rotate(180deg);
+      }
+
+      .mobile-section-body {
+        display: none;
+        padding: 12px 0 0;
+      }
+
+      .col.open .mobile-section-body {
+        display: block;
       }
 
       .mode-toggle {
-        position: sticky;
-        top: 0;
+        position: static;
+        top: auto;
+        padding-bottom: 0;
+        margin-bottom: 12px;
+      }
+
+      .player-wrap {
+        max-width: 100%;
+      }
+
+      .col-player {
+        margin-top: 0;
+        padding-bottom: 22px;
       }
 
       #videoShell,
       #videoPlaceholder,
       #videoPreview {
-        min-height: 240px;
+        min-height: 220px;
       }
 
       .video-preview-title {
@@ -862,6 +930,18 @@
       .meta h2 {
         font-size: 24px;
       }
+
+      .series-item-inner {
+        min-height: 50px;
+      }
+
+      .episode-item-inner {
+        min-height: 70px;
+      }
+
+      .section-title {
+        display: none;
+      }
     }
 
     @media (max-width: 640px) {
@@ -879,11 +959,9 @@
         width: min(92vw, 760px);
       }
 
-      .col-series,
-      .col-episodes,
-      .col-player {
-        padding-left: 12px;
-        padding-right: 12px;
+      .col {
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       .series-item-inner {
@@ -957,6 +1035,10 @@
         font-size: 13px;
         padding: 9px 12px;
       }
+
+      .mobile-section-toggle {
+        padding: 12px 14px;
+      }
     }
   </style>
 </head>
@@ -973,73 +1055,109 @@
     </div>
 
     <div class="layout">
-      <aside class="col col-series">
-        <div class="mode-toggle">
-          <button id="listenBtn" class="active" type="button">Listen</button>
-          <button id="watchBtn" type="button">Watch</button>
+      <aside class="col col-series open" id="seriesSection">
+        <button class="mobile-section-toggle" type="button" data-target="series">
+          <span class="mobile-label-wrap">
+            <span>Series</span>
+            <span class="mobile-subtitle" id="mobileSeriesSubtitle">Choose a sermon series</span>
+          </span>
+          <svg class="mobile-chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
+        </button>
+
+        <div class="mobile-section-body">
+          <div class="mode-toggle">
+            <button id="listenBtn" class="active" type="button">Listen</button>
+            <button id="watchBtn" type="button">Watch</button>
+          </div>
+          <h3 class="section-title">Series</h3>
+          <div id="seriesList" class="series-list"></div>
         </div>
-        <h3 class="section-title">Series</h3>
-        <div id="seriesList" class="series-list"></div>
       </aside>
 
-      <section class="col col-episodes">
-        <h3 class="section-title">Episodes</h3>
-        <div id="episodesList" class="episodes-list"></div>
+      <section class="col col-episodes" id="episodesSection">
+        <button class="mobile-section-toggle" type="button" data-target="episodes">
+          <span class="mobile-label-wrap">
+            <span>Episodes</span>
+            <span class="mobile-subtitle" id="mobileEpisodesSubtitle">Select a series first</span>
+          </span>
+          <svg class="mobile-chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
+        </button>
+
+        <div class="mobile-section-body">
+          <h3 class="section-title">Episodes</h3>
+          <div id="episodesList" class="episodes-list"></div>
+        </div>
       </section>
 
-      <main class="col col-player">
-        <div class="player-wrap">
-          <div id="videoPlaceholder">Choose a series on the left, then select a sermon to watch.</div>
+      <main class="col col-player" id="playerSection">
+        <button class="mobile-section-toggle" type="button" data-target="player">
+          <span class="mobile-label-wrap">
+            <span>Player & Details</span>
+            <span class="mobile-subtitle" id="mobilePlayerSubtitle">Select an episode to begin</span>
+          </span>
+          <svg class="mobile-chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+          </svg>
+        </button>
 
-          <div id="videoPreview">
-            <img id="videoPreviewImg" alt="Selected sermon preview">
-            <div class="video-preview-overlay">
-              <div class="video-preview-copy">
-                <div class="video-preview-kicker">Ready to Watch</div>
-                <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
-                <div class="video-preview-cta">
-                  <span class="video-play-icon">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <div class="mobile-section-body">
+          <div class="player-wrap">
+            <div id="videoPlaceholder">Choose a series on the left, then select a sermon to watch.</div>
+
+            <div id="videoPreview">
+              <img id="videoPreviewImg" alt="Selected sermon preview">
+              <div class="video-preview-overlay">
+                <div class="video-preview-copy">
+                  <div class="video-preview-kicker">Ready to Watch</div>
+                  <div class="video-preview-title" id="videoPreviewTitle">Select a sermon to watch</div>
+                  <div class="video-preview-cta">
+                    <span class="video-play-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    Tap to Play
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="videoShell"></div>
+
+            <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
+
+            <div class="audio-feature-card" id="audioFeatureCard">
+              <div class="audio-split">
+                <div class="audio-art-panel" id="audioArtPanel">
+                  <img id="audioFeatureArt" alt="Sermon artwork">
+                  <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                   </span>
-                  Tap to Play
+                </div>
+
+                <div class="audio-content">
+                  <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
+                  <h3 id="audioFeatureTitle">Select a sermon</h3>
+                  <div class="audio-series" id="audioFeatureSeries"></div>
+                  <div class="waveform" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <audio id="audioPlayer" controls preload="none"></audio>
                 </div>
               </div>
             </div>
+
+            <section class="meta" id="metaBox">
+              <h2>Select a sermon</h2>
+              <div class="series-line">Choose a series and episode.</div>
+              <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
+            </section>
           </div>
-
-          <div id="videoShell"></div>
-
-          <div id="audioPlaceholder">Choose a series on the left, then select a sermon to listen.</div>
-
-          <div class="audio-feature-card" id="audioFeatureCard">
-            <div class="audio-split">
-              <div class="audio-art-panel" id="audioArtPanel">
-                <img id="audioFeatureArt" alt="Sermon artwork">
-                <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </span>
-              </div>
-
-              <div class="audio-content">
-                <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
-                <h3 id="audioFeatureTitle">Select a sermon</h3>
-                <div class="audio-series" id="audioFeatureSeries"></div>
-                <div class="waveform" aria-hidden="true">
-                  <span></span><span></span><span></span><span></span>
-                  <span></span><span></span><span></span><span></span>
-                  <span></span><span></span><span></span><span></span>
-                  <span></span><span></span><span></span><span></span>
-                </div>
-                <audio id="audioPlayer" controls preload="none"></audio>
-              </div>
-            </div>
-          </div>
-
-          <section class="meta" id="metaBox">
-            <h2>Select a sermon</h2>
-            <div class="series-line">Choose a series and episode.</div>
-            <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
-          </section>
         </div>
       </main>
     </div>
@@ -1090,6 +1208,69 @@
     const listenBtn = document.getElementById("listenBtn");
     const watchBtn = document.getElementById("watchBtn");
     const logoReset = document.getElementById("logoReset");
+
+    const seriesSectionEl = document.getElementById("seriesSection");
+    const episodesSectionEl = document.getElementById("episodesSection");
+    const playerSectionEl = document.getElementById("playerSection");
+    const mobileSeriesSubtitleEl = document.getElementById("mobileSeriesSubtitle");
+    const mobileEpisodesSubtitleEl = document.getElementById("mobileEpisodesSubtitle");
+    const mobilePlayerSubtitleEl = document.getElementById("mobilePlayerSubtitle");
+
+    function isMobileLayout() {
+      return window.innerWidth <= 980;
+    }
+
+    function setMobileOpen(sectionName) {
+      if (!isMobileLayout()) return;
+      seriesSectionEl.classList.toggle("open", sectionName === "series");
+      episodesSectionEl.classList.toggle("open", sectionName === "episodes");
+      playerSectionEl.classList.toggle("open", sectionName === "player");
+    }
+
+    function scrollToSection(el) {
+      if (!isMobileLayout()) return;
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 40);
+    }
+
+    document.querySelectorAll(".mobile-section-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (!isMobileLayout()) return;
+        const target = btn.dataset.target;
+        const map = {
+          series: seriesSectionEl,
+          episodes: episodesSectionEl,
+          player: playerSectionEl
+        };
+        const isOpen = map[target].classList.contains("open");
+        seriesSectionEl.classList.remove("open");
+        episodesSectionEl.classList.remove("open");
+        playerSectionEl.classList.remove("open");
+        if (!isOpen) map[target].classList.add("open");
+      });
+    });
+
+    function updateMobileSubtitles() {
+      mobileSeriesSubtitleEl.textContent = currentSeries || "Choose a sermon series";
+
+      if (currentSeries && sermonData[currentSeries]) {
+        mobileEpisodesSubtitleEl.textContent = `${sermonData[currentSeries].length} episode${sermonData[currentSeries].length === 1 ? "" : "s"}`;
+      } else {
+        mobileEpisodesSubtitleEl.textContent = "Select a series first";
+      }
+
+      if (
+        currentSeries &&
+        Number.isInteger(currentEpisodeIndex) &&
+        sermonData[currentSeries] &&
+        sermonData[currentSeries][currentEpisodeIndex]
+      ) {
+        mobilePlayerSubtitleEl.textContent = sermonData[currentSeries][currentEpisodeIndex].title || "Selected episode";
+      } else {
+        mobilePlayerSubtitleEl.textContent = "Select an episode to begin";
+      }
+    }
 
     function htmlDecode(input) {
       const doc = new DOMParser().parseFromString(input || "", "text/html");
@@ -1246,6 +1427,7 @@
         <div class="series-line">Choose a series and episode to ${verb}.</div>
         <p class="meta-note">Current and ongoing series stay pinned at the top for easier browsing.</p>
       `;
+      updateMobileSubtitles();
     }
 
     function renderMeta(ep, isAudio) {
@@ -1273,6 +1455,7 @@
       }
 
       metaBoxEl.innerHTML = html;
+      updateMobileSubtitles();
     }
 
     function groupNumberedSeries(names) {
@@ -1446,14 +1629,25 @@
           renderEmptyMeta();
           if (mode === "audio") audioPlaceholderEl.style.display = "flex";
           else videoPlaceholderEl.style.display = "flex";
+          updateMobileSubtitles();
+
+          if (isMobileLayout()) {
+            setMobileOpen("episodes");
+            scrollToSection(episodesSectionEl);
+          }
         });
         seriesListEl.appendChild(item);
       });
+
+      updateMobileSubtitles();
     }
 
     function renderEpisodesList() {
       episodesListEl.innerHTML = "";
-      if (!currentSeries || !sermonData[currentSeries]) return;
+      if (!currentSeries || !sermonData[currentSeries]) {
+        updateMobileSubtitles();
+        return;
+      }
 
       sermonData[currentSeries].forEach((ep, index) => {
         const row = document.createElement("div");
@@ -1483,10 +1677,19 @@
           } else {
             previewVideo(ep);
           }
+
+          updateMobileSubtitles();
+
+          if (isMobileLayout()) {
+            setMobileOpen("player");
+            scrollToSection(playerSectionEl);
+          }
         });
 
         episodesListEl.appendChild(row);
       });
+
+      updateMobileSubtitles();
     }
 
     function playAudio(ep) {
@@ -1526,7 +1729,6 @@
       videoPreviewEl.style.display = "block";
 
       renderMeta(ep, false);
-
       videoPreviewEl.onclick = () => playVideo(ep);
     }
 
@@ -1637,6 +1839,11 @@
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+
+      if (isMobileLayout()) {
+        setMobileOpen("series");
+        scrollToSection(seriesSectionEl);
+      }
     }
 
     function resetHome() {
@@ -1654,6 +1861,11 @@
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+
+      if (isMobileLayout()) {
+        setMobileOpen("series");
+        scrollToSection(seriesSectionEl);
+      }
     }
 
     function toggleAudioPlayback() {
@@ -1690,12 +1902,36 @@
     watchBtn.addEventListener("click", () => setMode("video"));
     logoReset.addEventListener("click", resetHome);
 
+    window.addEventListener("resize", () => {
+      if (isMobileLayout()) {
+        if (
+          !seriesSectionEl.classList.contains("open") &&
+          !episodesSectionEl.classList.contains("open") &&
+          !playerSectionEl.classList.contains("open")
+        ) {
+          setMobileOpen("series");
+        }
+      } else {
+        seriesSectionEl.classList.add("open");
+        episodesSectionEl.classList.add("open");
+        playerSectionEl.classList.add("open");
+      }
+    });
+
     (async function init() {
       await loadRSSData();
       audioPlaceholderEl.style.display = "flex";
       renderSeriesList();
       renderEpisodesList();
       renderEmptyMeta();
+
+      if (isMobileLayout()) {
+        setMobileOpen("series");
+      } else {
+        seriesSectionEl.classList.add("open");
+        episodesSectionEl.classList.add("open");
+        playerSectionEl.classList.add("open");
+      }
     })();
   </script>
 </body>
