@@ -994,52 +994,12 @@
       }
 
       .mobile-section-toggle {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,0.06);
-        color: var(--text);
-        padding: 14px 16px;
-        border-radius: 16px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 15px;
-        margin: 12px 0 0;
-        cursor: pointer;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-
-      .mobile-section-toggle .mobile-subtitle {
-        display: block;
-        font-family: 'Lato', sans-serif;
-        font-size: 12px;
-        color: var(--muted);
-        margin-top: 2px;
-      }
-
-      .mobile-section-toggle .mobile-label-wrap { text-align: left; }
-
-      .mobile-chevron {
-        width: 18px;
-        height: 18px;
-        transition: transform 0.2s ease;
-        flex-shrink: 0;
-      }
-
-      .col.open .mobile-chevron {
-        transform: rotate(180deg);
+        display: none !important;
       }
 
       .mobile-section-body {
-        display: none;
+        display: block !important;
         padding: 12px 0 0;
-      }
-
-      .col.open .mobile-section-body {
-        display: block;
       }
 
       .player-wrap { max-width: 100%; }
@@ -1069,7 +1029,10 @@
 
       .waveform { justify-content: center; }
       .meta h2 { font-size: 24px; }
-      .section-title { display: none; }
+      .section-title {
+        display: block;
+        margin-top: 8px;
+      }
 
       .series-list,
       .episodes-list {
@@ -1217,10 +1180,6 @@
         font-size: 13px;
         padding: 9px 12px;
       }
-
-      .mobile-section-toggle {
-        padding: 12px 14px;
-      }
     }
   </style>
 </head>
@@ -1265,7 +1224,7 @@
         </div>
       </aside>
 
-      <section class="col col-episodes" id="episodesSection">
+      <section class="col col-episodes open" id="episodesSection">
         <button class="mobile-section-toggle" type="button" data-target="episodes">
           <span class="mobile-label-wrap">
             <span>Episodes</span>
@@ -1284,7 +1243,7 @@
         </div>
       </section>
 
-      <main class="col col-player" id="playerSection">
+      <main class="col col-player open" id="playerSection">
         <button class="mobile-section-toggle" type="button" data-target="player">
           <span class="mobile-label-wrap">
             <span>Player & Details</span>
@@ -1442,11 +1401,11 @@
       } catch {}
     }
 
-    function setMobileOpen(sectionName) {
+    function setMobileOpen() {
       if (!isMobileLayout()) return;
-      seriesSectionEl.classList.toggle("open", sectionName === "series");
-      episodesSectionEl.classList.toggle("open", sectionName === "episodes");
-      playerSectionEl.classList.toggle("open", sectionName === "player");
+      seriesSectionEl.classList.add("open");
+      episodesSectionEl.classList.add("open");
+      playerSectionEl.classList.add("open");
     }
 
     function scrollToSection(el) {
@@ -1459,13 +1418,6 @@
     document.querySelectorAll(".mobile-section-toggle").forEach(btn => {
       btn.addEventListener("click", () => {
         if (!isMobileLayout()) return;
-        const target = btn.dataset.target;
-        const map = { series: seriesSectionEl, episodes: episodesSectionEl, player: playerSectionEl };
-        const isOpen = map[target].classList.contains("open");
-        seriesSectionEl.classList.remove("open");
-        episodesSectionEl.classList.remove("open");
-        playerSectionEl.classList.remove("open");
-        if (!isOpen) map[target].classList.add("open");
       });
     });
 
@@ -1890,7 +1842,6 @@
       updateMobileSubtitles();
 
       if (isMobileLayout()) {
-        setMobileOpen("episodes");
         scrollToSection(episodesSectionEl);
       }
     }
@@ -1920,7 +1871,6 @@
       updateMobileSubtitles();
 
       if (isMobileLayout()) {
-        setMobileOpen("player");
         scrollToSection(playerSectionEl);
       }
     }
@@ -2203,7 +2153,7 @@
       setPlayerFocusActive(false);
 
       if (isMobileLayout()) {
-        setMobileOpen("series");
+        setMobileOpen();
         scrollToSection(seriesSectionEl);
       }
     }
@@ -2228,7 +2178,7 @@
       setPlayerFocusActive(false);
 
       if (isMobileLayout()) {
-        setMobileOpen("series");
+        setMobileOpen();
         scrollToSection(seriesSectionEl);
       }
     }
@@ -2263,9 +2213,7 @@
 
     window.addEventListener("resize", () => {
       if (isMobileLayout()) {
-        if (currentEpisodeData) setMobileOpen("player");
-        else if (currentSeries) setMobileOpen("episodes");
-        else setMobileOpen("series");
+        setMobileOpen();
       } else {
         seriesSectionEl.classList.add("open");
         episodesSectionEl.classList.add("open");
@@ -2277,14 +2225,12 @@
       setTimeout(() => {
         tryPortraitLock();
         if (isMobileLayout()) {
+          setMobileOpen();
           if (currentEpisodeData) {
-            setMobileOpen("player");
             scrollToSection(playerSectionEl);
           } else if (currentSeries) {
-            setMobileOpen("episodes");
             scrollToSection(episodesSectionEl);
           } else {
-            setMobileOpen("series");
             scrollToSection(seriesSectionEl);
           }
         }
@@ -2305,7 +2251,7 @@
       setPlayerFocusActive(false);
 
       if (isMobileLayout()) {
-        setMobileOpen("series");
+        setMobileOpen();
       } else {
         seriesSectionEl.classList.add("open");
         episodesSectionEl.classList.add("open");
