@@ -492,11 +492,13 @@
     .audio-art-panel {
       position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 324px;
+      justify-content: flex-start;
+      min-height: 0;
       padding-bottom: 0;
       -webkit-tap-highlight-color: transparent;
+      gap: 10px;
     }
     .audio-art-panel img {
       width: 100%;
@@ -510,28 +512,30 @@
       display: block;
     }
     .audio-transport-overlay {
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 20px;
+      position: static;
+      left: auto;
+      right: auto;
+      bottom: auto;
       display: flex;
       justify-content: center;
-      pointer-events: none;
-      z-index: 3;
+      width: 100%;
+      pointer-events: auto;
+      z-index: 1;
+      margin-top: 2px;
     }
     .audio-transport-glass {
       pointer-events: auto;
       position: relative;
-      width: min(100%, 268px);
-      padding: 5px 6px;
+      width: min(100%, 252px);
+      padding: 4px 5px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(18,18,18,0.48), rgba(8,8,8,0.34));
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(20,20,20,0.58), rgba(10,10,10,0.42));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(255,255,255,0.10);
       box-shadow:
-        0 8px 20px rgba(0,0,0,0.24),
-        inset 0 1px 0 rgba(255,255,255,0.07);
+        0 6px 16px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.06);
       overflow: hidden;
       isolation: isolate;
     }
@@ -558,7 +562,7 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
 
     .audio-ready {
@@ -606,7 +610,7 @@
     }
     .audio-clock-time {
       font-family: 'Poppins', sans-serif;
-      font-size: clamp(24px, 3.8vw, 46px);
+      font-size: clamp(22px, 3.6vw, 44px);
       line-height: 0.92;
       letter-spacing: -0.04em;
       color: #fff;
@@ -712,16 +716,16 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 6px;
       min-width: 0;
       width: 100%;
-      padding: 7px 9px 7px 7px;
+      padding: 6px 8px 6px 6px;
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(92,114,103,0.18), rgba(38,48,43,0.24));
+      background: linear-gradient(180deg, rgba(82,102,92,0.16), rgba(34,43,39,0.22));
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(168,205,185,0.16);
-      box-shadow: 0 5px 14px rgba(0,0,0,0.18);
+      border: 1px solid rgba(168,205,185,0.14);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
       cursor: pointer;
       transition: all 0.25s ease;
       overflow: visible;
@@ -771,8 +775,8 @@
 
     .audio-play-circle-wrap {
       position: relative;
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       flex-shrink: 0;
     }
     .audio-play-circle-wrap::before {
@@ -808,8 +812,8 @@
     .audio-play-circle {
       position: absolute;
       inset: 0;
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 999px;
       display: flex;
       align-items: center;
@@ -1197,15 +1201,15 @@
       }
       .audio-split {
         grid-template-columns: 1fr;
-        gap: 7px;
+        gap: 6px;
       }
       .audio-art-panel {
         min-height: auto;
         padding-bottom: 0;
       }
       .audio-art-panel img {
-        width: min(100%, 356px);
-        max-width: 356px;
+        width: min(100%, 350px);
+        max-width: 350px;
       }
       .audio-transport-overlay {
         left: 12px;
@@ -1213,8 +1217,8 @@
         bottom: 14px;
       }
       .audio-transport-glass {
-        width: min(100%, 250px);
-        padding: 4px 5px;
+        width: min(100%, 236px);
+        padding: 4px 4px;
       }
       .audio-content {
         gap: 3px;
