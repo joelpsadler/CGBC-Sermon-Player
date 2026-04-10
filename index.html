@@ -9,25 +9,20 @@
   <title>CGBC Sermons</title>
 
   <!-- ======================================================
-       SITE ICONS
-       Using the better fallback image you provided.
+       SITE ICONS / FALLBACK IMAGE
   ======================================================= -->
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
   <meta name="theme-color" content="#2f2f2f" />
 
   <!-- ======================================================
-       GOOGLE FONTS
+       FONTS
   ======================================================= -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ======================================================
-       GLOBAL VARIABLES
-    ======================================================= */
     :root {
       --accent: #809F90;
-      --accent-glow: rgba(128,159,144,0.55);
       --bg: #2f2f2f;
       --panel: rgba(255,255,255,0.06);
       --panel-strong: rgba(0,0,0,0.34);
@@ -73,9 +68,6 @@
     img { max-width: 100%; }
     button, audio, iframe, a { font: inherit; }
 
-    /* ======================================================
-       SIMPLE INLINE SVG ICONS
-    ======================================================= */
     .icon {
       width: 20px;
       height: 20px;
@@ -110,8 +102,7 @@
       min-width: 0;
       padding: 6px 12px;
       border-radius: 16px;
-      background:
-        linear-gradient(180deg, rgba(28,28,28,0.54), rgba(10,10,10,0.26));
+      background: linear-gradient(180deg, rgba(28,28,28,0.54), rgba(10,10,10,0.26));
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow:
@@ -153,7 +144,6 @@
 
     /* ======================================================
        TOP CONTROLS
-       Listen + Watch now share one outer group band.
     ======================================================= */
     .top-controls {
       padding: 10px 8px 10px;
@@ -176,17 +166,17 @@
       align-items: stretch;
     }
 
+    /* Listen + Watch pair */
     .listen-watch-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
       padding: 2px;
-      border-radius: 18px;
+      border-radius: 20px;
       background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.10),
         0 10px 24px rgba(0,0,0,0.18);
-      margin-right: 0;
       position: relative;
       z-index: 1;
     }
@@ -202,6 +192,7 @@
       padding: 0;
       transition: transform 0.2s ease;
       text-decoration: none;
+      display: block;
     }
 
     .mode-btn:hover,
@@ -230,13 +221,11 @@
     }
 
     .listen-watch-group .mode-btn:first-child .mode-btn-shell {
-      border-radius: 14px 0 0 14px;
-      clip-path: inset(0 round 14px 0 0 14px);
+      border-radius: 16px 0 0 16px;
     }
 
     .listen-watch-group .mode-btn:last-child .mode-btn-shell {
-      border-radius: 0 14px 14px 0;
-      clip-path: inset(0 round 0 14px 14px 0);
+      border-radius: 0 16px 16px 0;
     }
 
     .mode-toggle > .mode-btn .mode-btn-shell,
@@ -246,9 +235,11 @@
     }
 
     .mode-btn.active .mode-btn-shell {
-      background: linear-gradient(180deg, rgba(128,159,144,0.55), rgba(110,136,123,0.40));
+      background: linear-gradient(180deg, rgba(128,159,144,0.58), rgba(110,136,123,0.42));
       color: #111;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.24), 0 0 0 1px rgba(128,159,144,0.20) inset;
+      box-shadow:
+        0 12px 28px rgba(0,0,0,0.24),
+        0 0 0 1px rgba(128,159,144,0.20) inset;
     }
 
     .mode-btn-text {
@@ -271,7 +262,7 @@
     }
 
     /* ======================================================
-       DESKTOP 3-COLUMN LAYOUT
+       DESKTOP LAYOUT
     ======================================================= */
     .layout {
       display: grid;
@@ -453,7 +444,7 @@
     }
 
     /* ======================================================
-       VIDEO PLAYER
+       PLAYER AREAS
     ======================================================= */
     #videoShell,
     #videoPlaceholder {
@@ -798,7 +789,7 @@
     }
 
     /* ======================================================
-       METADATA PANEL
+       METADATA / SERIES CONTEXT
     ======================================================= */
     .meta,
     .series-context-card {
@@ -894,9 +885,6 @@
       background: rgba(128,159,144,0.28);
     }
 
-    /* ======================================================
-       CURRENT SERIES CARD
-    ======================================================= */
     .series-context-card {
       display: none;
       margin-top: 16px;
@@ -1134,10 +1122,6 @@
         max-width: min(420px, 100%);
       }
 
-      .waveform {
-        justify-content: space-between;
-      }
-
       .meta h2 {
         font-size: 24px;
       }
@@ -1261,14 +1245,6 @@
         max-width: 150px;
       }
 
-      .mode-btn,
-      .series-context-btn,
-      .close-drawer-btn,
-      .rss-button,
-      #audioPlayer {
-        min-height: 46px;
-      }
-
       .drawer-title-wrap h2 {
         font-size: 14px;
       }
@@ -1277,9 +1253,6 @@
 </head>
 <body class="mode-audio">
 
-  <!-- ======================================================
-       HEADER
-  ======================================================= -->
   <div class="header-wrap">
     <div class="header-row">
       <div class="logo-panel" id="logoReset" title="Reset to first series">
@@ -1291,9 +1264,6 @@
     </div>
   </div>
 
-  <!-- ======================================================
-       TOP CONTROLS
-  ======================================================= -->
   <div class="top-controls">
     <div class="top-controls-inner">
       <div class="mode-toggle">
@@ -1360,22 +1330,12 @@
     </div>
   </div>
 
-  <!-- ======================================================
-       MOBILE DRAWER OVERLAY
-  ======================================================= -->
   <div class="drawer-overlay" id="drawerOverlay"></div>
 
-  <!-- ======================================================
-       MOBILE DRAWER
-  ======================================================= -->
   <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
     <div class="drawer-top">
       <div class="drawer-title-wrap">
-        <span class="icon" id="drawerTitleIcon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/>
-          </svg>
-        </span>
+        <span class="icon" id="drawerTitleIcon" aria-hidden="true"></span>
         <h2 id="drawerTitleText">Browse Sermon Audio</h2>
       </div>
       <button class="close-drawer-btn" id="closeDrawerBtn" type="button">Close</button>
@@ -1394,11 +1354,7 @@
     </div>
   </aside>
 
-  <!-- ======================================================
-       MAIN APP LAYOUT
-  ======================================================= -->
   <div class="layout">
-
     <aside class="col col-series">
       <h3 class="section-title">Series</h3>
       <div id="seriesList" class="series-list"></div>
@@ -1410,14 +1366,12 @@
     </section>
 
     <main class="col col-player" id="playerSection">
-
       <div id="videoPlaceholder">Choose a series to begin watching.</div>
       <div id="videoShell"></div>
       <div id="audioPlaceholder">Choose a series to begin listening.</div>
 
       <div class="audio-feature-card" id="audioFeatureCard">
         <div class="audio-split">
-
           <div class="audio-art-panel" id="audioArtPanel">
             <img id="audioFeatureArt" alt="Sermon artwork">
 
@@ -1476,9 +1430,6 @@
   </div>
 
   <script>
-    /* ======================================================
-       APP CONFIG
-    ======================================================= */
     const CURRENT_SERIES = 'Romans Chapter 12';
     const SECONDARY_SERIES = 'The Rapture';
     const CURRENT_SPECIALS = '2026 Specials';
@@ -1497,9 +1448,6 @@
     const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
     const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
 
-    /* ======================================================
-       APP STATE
-    ======================================================= */
     let sermonData = {};
     let archiveSeriesOrder = [];
     let currentSeries = null;
@@ -1507,9 +1455,6 @@
     let currentEpisodeData = null;
     let mode = 'audio';
 
-    /* ======================================================
-       DOM REFERENCES
-    ======================================================= */
     const bodyEl = document.body;
 
     const seriesListEl = document.getElementById('seriesList');
@@ -1553,9 +1498,6 @@
     const drawerTitleTextEl = document.getElementById('drawerTitleText');
     const drawerTitleIconEl = document.getElementById('drawerTitleIcon');
 
-    /* ======================================================
-       HELPERS
-    ======================================================= */
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
@@ -1589,8 +1531,7 @@
     function parseDateToTimestamp(value) {
       if (!value) return 0;
       const direct = Date.parse(value);
-      if (!Number.isNaN(direct)) return direct;
-      return 0;
+      return Number.isNaN(direct) ? 0 : direct;
     }
 
     function htmlDecode(input) {
@@ -1600,15 +1541,15 @@
 
     function normalizeLineBreaks(input) {
       return (input || '')
-        .replace(/<br\\s*\\/?>/gi, '\\n')
-        .replace(/<\\/p>\\s*<p>/gi, '\\n')
-        .replace(/<\\/div>\\s*<div>/gi, '\\n');
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/p>\s*<p>/gi, '\n')
+        .replace(/<\/div>\s*<div>/gi, '\n');
     }
 
     function parseDescription(rawDesc) {
       const normalized = normalizeLineBreaks(rawDesc);
       const decoded = htmlDecode(normalized);
-      const lines = decoded.split('\\n').map(s => s.trim()).filter(Boolean);
+      const lines = decoded.split('\n').map(s => s.trim()).filter(Boolean);
 
       const out = {
         title: '',
@@ -1622,7 +1563,6 @@
 
       for (const line of lines) {
         const lower = line.toLowerCase();
-
         if (lower.startsWith('title:')) out.title = line.split(/title:/i)[1].trim();
         else if (lower.startsWith('series:')) out.series = line.split(/series:/i)[1].trim();
         else if (lower.startsWith('scripture:')) out.scripture = line.split(/scripture:/i)[1].trim();
@@ -1652,7 +1592,7 @@
         const u = new URL(url.trim());
 
         if (u.hostname.includes('youtu.be')) {
-          return u.pathname.replace(/^\\/+/, '').trim();
+          return u.pathname.replace(/^\/+/, '').trim();
         }
 
         const v = u.searchParams.get('v');
@@ -1672,12 +1612,6 @@
       return videoId
         ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
         : FALLBACK_IMAGE;
-    }
-
-    function getSeriesWideCover(seriesName) {
-      const items = sermonData[seriesName] || [];
-      if (!items.length) return FALLBACK_IMAGE;
-      return items[0].seriesWideImage || FALLBACK_IMAGE;
     }
 
     function getAudioIconSvg() {
@@ -1715,14 +1649,14 @@
       const items = Array.isArray(data.items) ? data.items : [];
 
       let sorted = [...items];
-
       if (newestFirst) {
         sorted.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt));
       }
 
-      const sermons = sorted.map(item => {
+      return sorted.map(item => {
         const videoId = item?.snippet?.resourceId?.videoId || '';
         const publishedAt = item?.snippet?.publishedAt || '';
+        const thumb = getWatchThumb(videoId);
 
         return {
           title: item?.snippet?.title || config.name,
@@ -1737,18 +1671,12 @@
           link: '',
           extra: [],
           sortTimestamp: parseDateToTimestamp(publishedAt),
-          seriesImage: getWatchThumb(videoId),
-          seriesWideImage: getWatchThumb(videoId)
+          seriesImage: thumb,
+          seriesWideImage: thumb
         };
       });
-
-      return sermons;
     }
 
-    /* ======================================================
-       MEDIA SESSION
-       Fallback image now uses better supplied artwork.
-    ======================================================= */
     function updateMediaSession(ep) {
       if (!('mediaSession' in navigator) || !ep) return;
 
@@ -1780,7 +1708,6 @@
 
     function clearMediaSession() {
       if (!('mediaSession' in navigator)) return;
-
       try {
         navigator.mediaSession.metadata = null;
       } catch {}
@@ -1812,9 +1739,7 @@
         0,
         Math.min(
           (audioPlayerEl.currentTime || 0) + seconds,
-          isFinite(audioPlayerEl.duration)
-            ? audioPlayerEl.duration
-            : (audioPlayerEl.currentTime || 0) + seconds
+          isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : (audioPlayerEl.currentTime || 0) + seconds
         )
       );
 
@@ -1823,14 +1748,20 @@
 
     function toggleAudioPlayback() {
       if (!audioPlayerEl.src) return;
-
       if (audioPlayerEl.paused) audioPlayerEl.play();
       else audioPlayerEl.pause();
     }
 
-    /* ======================================================
-       CURRENT SERIES CARD
-    ======================================================= */
+    function getSeriesWideCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesWideImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
+    function getSeriesCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
     function updateSeriesContext() {
       if (!currentSeries || !sermonData[currentSeries]) {
         seriesContextTitleEl.textContent = 'Choose a series';
@@ -1862,15 +1793,12 @@
       if (ep.scripture) {
         rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
       }
-
       if (ep.by) {
         rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
       }
-
       if (ep.date) {
         rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
       }
-
       if (ep.extra?.length) {
         ep.extra.forEach(line => {
           rows.push(`<div class="meta-row"><div class="meta-label">Notes</div><div class="meta-value">${line}</div></div>`);
@@ -2014,12 +1942,10 @@
       const output = [];
 
       names.forEach(name => {
-        const match = name.match(/^(.*?)(\\d+)\\s*$/i);
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
         if (!match) return;
-
         const base = match[1].trim();
         const num = parseInt(match[2], 10);
-
         if (!grouped.has(base)) grouped.set(base, []);
         grouped.get(base).push({ name, num });
       });
@@ -2027,8 +1953,7 @@
       names.forEach(name => {
         if (consumed.has(name)) return;
 
-        const match = name.match(/^(.*?)(\\d+)\\s*$/i);
-
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
         if (!match) {
           output.push(name);
           consumed.add(name);
@@ -2046,7 +1971,7 @@
           }
         });
 
-        const parentCandidate = base.replace(/\\s+(chapter|part)$/i, '').trim();
+        const parentCandidate = base.replace(/\s+(chapter|part)$/i, '').trim();
         const parentMatch = names.find(
           n => !consumed.has(n) && n.trim().toLowerCase() === parentCandidate.toLowerCase()
         );
@@ -2104,20 +2029,12 @@
 
     function getSeriesChips(seriesName) {
       const chips = [];
-
       if (seriesName === LIVESTREAMS.name) chips.push({ label: 'Live', className: 'live' });
       if (seriesName === CURRENT_SERIES) chips.push({ label: 'Current', className: 'current' });
       if (seriesName === SECONDARY_SERIES) chips.push({ label: 'Current', className: 'current' });
       if (seriesName === CURRENT_SPECIALS) chips.push({ label: 'Current Specials', className: 'specials' });
       if (seriesName === VIDEO_ONLY_ARCHIVE.name) chips.push({ label: 'Video Only', className: 'videoonly' });
-
       return chips;
-    }
-
-    function getSeriesCover(seriesName) {
-      const items = sermonData[seriesName] || [];
-      if (!items.length) return FALLBACK_IMAGE;
-      return items[0].seriesImage || FALLBACK_IMAGE;
     }
 
     function selectSeries(seriesName) {
@@ -2145,11 +2062,7 @@
 
       if (mode === 'audio') {
         renderEpisodesList();
-
-        if (rowEl) {
-          rowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-        }
-
+        if (rowEl) rowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         playAudio(ep);
       } else {
         playVideo(ep);
@@ -2192,7 +2105,6 @@
       });
 
       item.addEventListener('click', selectThisSeries);
-
       return item;
     }
 
@@ -2267,13 +2179,11 @@
       });
 
       row.addEventListener('click', selectThisEpisode);
-
       return row;
     }
 
     function renderEpisodesInto(el) {
       el.innerHTML = '';
-
       if (!currentSeries || !sermonData[currentSeries]) return;
 
       getVisibleEpisodesForSeries(currentSeries).forEach(({ ep, originalIndex }) => {
@@ -2286,11 +2196,6 @@
       renderEpisodesInto(mobileEpisodesListEl);
     }
 
-    /* ======================================================
-       LOAD RSS + YOUTUBE DATA
-       FIX: series art now uses the FIRST episode in feed order,
-       not the newest or last sorted episode.
-    ======================================================= */
     async function loadRSSData() {
       const xmlText = await fetch(RSS_URL).then(r => r.text());
       const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
@@ -2363,7 +2268,6 @@
 
       sermonData = grouped;
       archiveSeriesOrder = Object.keys(sermonData).filter(name => name !== LIVESTREAMS.name);
-
       currentSeries = getVisibleSeriesOrder()[0] || null;
     }
 
@@ -2419,10 +2323,10 @@
       closeDrawer();
     }
 
-    openDrawerBtn?.addEventListener('click', openDrawer);
-    closeDrawerBtn?.addEventListener('click', closeDrawer);
-    drawerOverlayEl?.addEventListener('click', closeDrawer);
-    seriesContextBrowseBtn?.addEventListener('click', openDrawer);
+    openDrawerBtn.addEventListener('click', openDrawer);
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    drawerOverlayEl.addEventListener('click', closeDrawer);
+    seriesContextBrowseBtn.addEventListener('click', openDrawer);
 
     listenBtn.addEventListener('click', () => setMode('audio'));
     watchBtn.addEventListener('click', () => setMode('video'));
@@ -2449,22 +2353,12 @@
       skipAudioBy(30);
     });
 
-    audioPlayerEl.addEventListener('play', () => {
-      setAudioReadyState(true);
-    });
-
-    audioPlayerEl.addEventListener('pause', () => {
-      setAudioReadyState(false);
-    });
-
-    audioPlayerEl.addEventListener('ended', () => {
-      setAudioReadyState(false);
-    });
+    audioPlayerEl.addEventListener('play', () => setAudioReadyState(true));
+    audioPlayerEl.addEventListener('pause', () => setAudioReadyState(false));
+    audioPlayerEl.addEventListener('ended', () => setAudioReadyState(false));
 
     window.addEventListener('resize', () => {
-      if (!isMobileLayout()) {
-        closeDrawer();
-      }
+      if (!isMobileLayout()) closeDrawer();
     });
 
     window.addEventListener('orientationchange', () => {
