@@ -536,12 +536,16 @@
       isolation: isolate;
     }
     .audio-transport-glass::before {
-      content: none;
+      content: none !important;
+      animation: none !important;
+      opacity: 0 !important;
+      filter: none !important;
     }
     .audio-feature-card.playing .audio-transport-glass::before {
-      opacity: 0;
-      animation: none;
-      filter: none;
+      content: none !important;
+      opacity: 0 !important;
+      animation: none !important;
+      filter: none !important;
     }
     @keyframes transportTrace {
       from { transform: rotate(0deg); }
@@ -721,7 +725,7 @@
     .audio-play-badge::before {
       content: "";
       position: absolute;
-      inset: -1px;
+      inset: -3px;
       border-radius: inherit;
       padding: 1.5px;
       background:
@@ -729,7 +733,7 @@
           from 0deg,
           rgba(128,159,144,0.0) 0deg,
           rgba(128,159,144,0.0) 244deg,
-          rgba(164,231,190,0.52) 300deg,
+          rgba(164,231,190,0.56) 300deg,
           rgba(128,159,144,0.0) 340deg,
           rgba(128,159,144,0.0) 360deg
         );
@@ -743,24 +747,21 @@
       mask-composite: exclude;
       opacity: 0;
       pointer-events: none;
-      z-index: 0;
+      z-index: 3;
     }
     .audio-play-badge:hover {
       transform: translateY(-1px);
       background: linear-gradient(180deg, rgba(102,126,114,0.22), rgba(42,54,47,0.28));
     }
     .audio-feature-card.playing .audio-play-badge {
-      background: linear-gradient(180deg, rgba(112,140,126,0.28), rgba(58,76,67,0.30));
-      border-color: rgba(142,182,162,0.30);
-      box-shadow:
-        0 6px 16px rgba(0,0,0,0.18),
-        0 0 8px rgba(128,159,144,0.08),
-        0 0 14px rgba(128,159,144,0.03);
+      background: linear-gradient(180deg, rgba(112,140,126,0.26), rgba(58,76,67,0.28));
+      border-color: rgba(142,182,162,0.24);
+      box-shadow: 0 5px 14px rgba(0,0,0,0.18);
     }
     .audio-feature-card.playing .audio-play-badge::before {
       opacity: 1;
       animation: traceRing 1.7s linear infinite;
-      filter: drop-shadow(0 0 2px rgba(164,231,190,0.12));
+      filter: drop-shadow(0 0 1px rgba(164,231,190,0.10));
     }
 
     .audio-play-circle-wrap {
