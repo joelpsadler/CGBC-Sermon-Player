@@ -8,16 +8,10 @@
   />
   <title>CGBC Sermons</title>
 
-  <!-- ======================================================
-       SITE ICONS / FALLBACK IMAGE
-  ======================================================= -->
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
   <meta name="theme-color" content="#2f2f2f" />
 
-  <!-- ======================================================
-       FONTS
-  ======================================================= -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -82,9 +76,6 @@
       fill: currentColor;
     }
 
-    /* ======================================================
-       HEADER
-    ======================================================= */
     .header-wrap {
       display: flex;
       justify-content: center;
@@ -142,9 +133,6 @@
       z-index: 1;
     }
 
-    /* ======================================================
-       TOP CONTROLS
-    ======================================================= */
     .top-controls {
       padding: 10px 8px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -160,13 +148,12 @@
 
     .mode-toggle {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 0;
-      width: min(980px, 100%);
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+      width: min(760px, 100%);
       align-items: stretch;
     }
 
-    /* Listen + Watch pair */
     .listen-watch-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -181,8 +168,7 @@
       z-index: 1;
     }
 
-    .mode-btn,
-    .mode-link {
+    .mode-btn {
       position: relative;
       border: none;
       min-height: 52px;
@@ -191,12 +177,10 @@
       cursor: pointer;
       padding: 0;
       transition: transform 0.2s ease;
-      text-decoration: none;
       display: block;
     }
 
-    .mode-btn:hover,
-    .mode-link:hover {
+    .mode-btn:hover {
       transform: translateY(-1px);
       z-index: 2;
     }
@@ -228,10 +212,9 @@
       border-radius: 0 16px 16px 0;
     }
 
-    .mode-toggle > .mode-btn .mode-btn-shell,
-    .mode-toggle > .mode-link .mode-btn-shell {
-      border-radius: 0;
-      clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+    .mode-toggle > .mode-btn .mode-btn-shell {
+      border-radius: 16px;
+      clip-path: none;
     }
 
     .mode-btn.active .mode-btn-shell {
@@ -261,9 +244,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* ======================================================
-       DESKTOP LAYOUT
-    ======================================================= */
     .layout {
       display: grid;
       grid-template-columns: 320px 380px minmax(0, 1fr);
@@ -327,9 +307,6 @@
       opacity: 0.9;
     }
 
-    /* ======================================================
-       SERIES / EPISODE ROWS
-    ======================================================= */
     .series-item,
     .episode-item {
       border-radius: 14px;
@@ -443,9 +420,6 @@
       background: rgba(255,255,255,0.12);
     }
 
-    /* ======================================================
-       PLAYER AREAS
-    ======================================================= */
     #videoShell,
     #videoPlaceholder {
       width: 100%;
@@ -488,9 +462,6 @@
       min-height: 180px;
     }
 
-    /* ======================================================
-       AUDIO FEATURE CARD
-    ======================================================= */
     .audio-feature-card {
       display: none;
       position: relative;
@@ -788,11 +759,7 @@
       min-height: 46px;
     }
 
-    /* ======================================================
-       METADATA / SERIES CONTEXT
-    ======================================================= */
-    .meta,
-    .series-context-card {
+    .meta {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -800,21 +767,16 @@
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-    }
-
-    .meta {
       margin-top: 0;
     }
 
-    .meta h2,
-    .series-context-card h3 {
+    .meta h2 {
       margin: 0 0 8px;
       font-family: 'Poppins', sans-serif;
       line-height: 1.15;
     }
 
-    .meta .series-line,
-    .series-context-sub {
+    .meta .series-line {
       color: #ffffff;
       opacity: 0.92;
       margin-bottom: 14px;
@@ -863,7 +825,8 @@
     }
 
     .action-btn,
-    .rss-button {
+    .rss-button,
+    .close-drawer-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -877,88 +840,16 @@
       min-height: 44px;
       cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease;
+      font-family: 'Poppins', sans-serif;
     }
 
     .action-btn:hover,
-    .rss-button:hover {
+    .rss-button:hover,
+    .close-drawer-btn:hover {
       transform: translateY(-1px);
       background: rgba(128,159,144,0.28);
     }
 
-    .series-context-card {
-      display: none;
-      margin-top: 16px;
-    }
-
-    .series-context-kicker {
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.10em;
-      color: rgba(255,255,255,0.62);
-      margin-bottom: 8px;
-    }
-
-    .series-context-name {
-      font-family: 'Poppins', sans-serif;
-      font-size: 24px;
-      line-height: 1.12;
-      color: #fff;
-      margin: 0 0 8px;
-    }
-
-    .series-context-sub {
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
-
-    .series-context-media {
-      margin-bottom: 14px;
-    }
-
-    .series-context-media img {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      object-fit: cover;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.22);
-    }
-
-    .series-context-card.audio-mode .series-context-media img {
-      aspect-ratio: 1 / 1;
-      max-width: 180px;
-      border-radius: 16px;
-    }
-
-    .series-context-card.video-mode .series-context-media img {
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
-    }
-
-    .series-context-btn,
-    .close-drawer-btn {
-      border: none;
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      background: rgba(255,255,255,0.08);
-      cursor: pointer;
-      min-height: 44px;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .series-context-btn:hover,
-    .close-drawer-btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.12);
-    }
-
-    /* ======================================================
-       MOBILE DRAWER
-    ======================================================= */
     .drawer-overlay {
       display: none;
       position: fixed;
@@ -1073,9 +964,6 @@
       padding: 6px 10px 10px;
     }
 
-    /* ======================================================
-       RESPONSIVE
-    ======================================================= */
     @media (max-width: 1180px) {
       .layout {
         grid-template-columns: 290px 340px minmax(0, 1fr);
@@ -1126,10 +1014,6 @@
         font-size: 24px;
       }
 
-      .series-context-card {
-        display: block;
-      }
-
       .mode-toggle {
         width: 100%;
       }
@@ -1154,8 +1038,8 @@
       }
 
       .mode-toggle {
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 0;
+        grid-template-columns: 2fr 1fr;
+        gap: 10px;
       }
 
       .mode-btn-shell {
@@ -1237,14 +1121,6 @@
         font-size: 22px;
       }
 
-      .series-context-name {
-        font-size: 21px;
-      }
-
-      .series-context-card.audio-mode .series-context-media img {
-        max-width: 150px;
-      }
-
       .drawer-title-wrap h2 {
         font-size: 14px;
       }
@@ -1267,7 +1143,6 @@
   <div class="top-controls">
     <div class="top-controls-inner">
       <div class="mode-toggle">
-
         <div class="listen-watch-group">
           <button class="mode-btn active" id="listenBtn" type="button">
             <span class="mode-btn-shell">
@@ -1311,21 +1186,6 @@
             </span>
           </span>
         </button>
-
-        <a class="mode-link" href="https://cgbclebanontn.org" target="_blank" rel="noopener noreferrer">
-          <span class="mode-btn-shell">
-            <span class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M14.71 6.71a1 1 0 0 0-1.42-1.42L7.59 11l5.7 5.71a1 1 0 1 0 1.42-1.42L10.41 11l4.3-4.29Z"/>
-              </svg>
-            </span>
-            <span class="mode-btn-text">
-              <span class="top-line">Back to</span>
-              <span class="bottom-line">CGBC</span>
-            </span>
-          </span>
-        </a>
-
       </div>
     </div>
   </div>
@@ -1416,16 +1276,6 @@
         <div class="series-line">Choose a series and episode.</div>
         <p class="meta-note">Browse by series first, then choose an episode to load the player.</p>
       </section>
-
-      <section class="series-context-card audio-mode" id="seriesContextCard">
-        <div class="series-context-kicker">Current Series</div>
-        <div class="series-context-name" id="seriesContextTitle">Choose a series</div>
-        <div class="series-context-sub" id="seriesContextSub">Select a series to begin</div>
-        <div class="series-context-media">
-          <img id="seriesContextImage" alt="Current series artwork">
-        </div>
-        <button class="series-context-btn" id="seriesContextBrowseBtn" type="button">Change Series</button>
-      </section>
     </main>
   </div>
 
@@ -1481,11 +1331,6 @@
     const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
     const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
 
-    const seriesContextCardEl = document.getElementById('seriesContextCard');
-    const seriesContextImageEl = document.getElementById('seriesContextImage');
-    const seriesContextTitleEl = document.getElementById('seriesContextTitle');
-    const seriesContextSubEl = document.getElementById('seriesContextSub');
-
     const listenBtn = document.getElementById('listenBtn');
     const watchBtn = document.getElementById('watchBtn');
     const logoReset = document.getElementById('logoReset');
@@ -1494,7 +1339,6 @@
     const closeDrawerBtn = document.getElementById('closeDrawerBtn');
     const drawerOverlayEl = document.getElementById('drawerOverlay');
     const mobileDrawerEl = document.getElementById('mobileDrawer');
-    const seriesContextBrowseBtn = document.getElementById('seriesContextBrowseBtn');
     const drawerTitleTextEl = document.getElementById('drawerTitleText');
     const drawerTitleIconEl = document.getElementById('drawerTitleIcon');
 
@@ -1640,6 +1484,23 @@
       }
     }
 
+    function isPinnedSeries(seriesName) {
+      return seriesName === LIVESTREAMS.name ||
+             seriesName === CURRENT_SERIES ||
+             seriesName === SECONDARY_SERIES ||
+             seriesName === CURRENT_SPECIALS;
+    }
+
+    function getSeriesWideCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesWideImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
+    function getSeriesCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
     async function fetchPlaylistSeries(config, newestFirst = false) {
       const url =
         `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
@@ -1752,41 +1613,6 @@
       else audioPlayerEl.pause();
     }
 
-    function getSeriesWideCover(seriesName) {
-      const items = sermonData[seriesName] || [];
-      return items.length ? (items[0].seriesWideImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
-    }
-
-    function getSeriesCover(seriesName) {
-      const items = sermonData[seriesName] || [];
-      return items.length ? (items[0].seriesImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
-    }
-
-    function updateSeriesContext() {
-      if (!currentSeries || !sermonData[currentSeries]) {
-        seriesContextTitleEl.textContent = 'Choose a series';
-        seriesContextSubEl.textContent = 'Select a series to begin';
-        seriesContextImageEl.src = FALLBACK_IMAGE;
-        seriesContextCardEl.classList.remove('video-mode');
-        seriesContextCardEl.classList.add('audio-mode');
-        return;
-      }
-
-      const count = sermonData[currentSeries].length;
-      seriesContextTitleEl.textContent = currentSeries;
-      seriesContextSubEl.textContent = `${count} episode${count === 1 ? '' : 's'} available`;
-
-      if (mode === 'video') {
-        seriesContextCardEl.classList.remove('audio-mode');
-        seriesContextCardEl.classList.add('video-mode');
-        seriesContextImageEl.src = getSeriesWideCover(currentSeries);
-      } else {
-        seriesContextCardEl.classList.remove('video-mode');
-        seriesContextCardEl.classList.add('audio-mode');
-        seriesContextImageEl.src = getSeriesCover(currentSeries);
-      }
-    }
-
     function buildMetaRows(ep) {
       const rows = [];
 
@@ -1816,8 +1642,6 @@
         <div class="series-line">Choose a series and episode to begin ${verb}.</div>
         <p class="meta-note">Browse by series first, then choose an episode to load the player.</p>
       `;
-
-      updateSeriesContext();
     }
 
     function renderMeta(ep, isAudio) {
@@ -1845,8 +1669,6 @@
         <div class="meta-grid">${buildMetaRows(ep)}</div>
         <div class="actions">${actionButtons.join('')}</div>
       `;
-
-      updateSeriesContext();
     }
 
     function stopAndHideVideo() {
@@ -2024,7 +1846,16 @@
     }
 
     function getVisibleEpisodesForSeries(seriesName) {
-      return (sermonData[seriesName] || []).map((ep, originalIndex) => ({ ep, originalIndex }));
+      const items = sermonData[seriesName] || [];
+      const ordered = [...items];
+
+      if (isPinnedSeries(seriesName)) {
+        ordered.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+      } else {
+        ordered.sort((a, b) => a.sortTimestamp - b.sortTimestamp);
+      }
+
+      return ordered.map((ep, visibleIndex) => ({ ep, originalIndex: visibleIndex }));
     }
 
     function getSeriesChips(seriesName) {
@@ -2052,8 +1883,6 @@
       } else {
         videoPlaceholderEl.style.display = 'flex';
       }
-
-      updateSeriesContext();
     }
 
     function selectEpisode(ep, originalIndex, rowEl) {
@@ -2251,13 +2080,11 @@
           ? getWatchThumb(firstEpisodeInFeed.videoId)
           : FALLBACK_IMAGE;
 
-        grouped[series] = grouped[series]
-          .map(ep => ({
-            ...ep,
-            seriesImage: seriesSquareArt,
-            seriesWideImage: seriesWideArt
-          }))
-          .sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+        grouped[series] = grouped[series].map(ep => ({
+          ...ep,
+          seriesImage: seriesSquareArt,
+          seriesWideImage: seriesWideArt
+        }));
       });
 
       const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
@@ -2326,7 +2153,6 @@
     openDrawerBtn.addEventListener('click', openDrawer);
     closeDrawerBtn.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
-    seriesContextBrowseBtn.addEventListener('click', openDrawer);
 
     listenBtn.addEventListener('click', () => setMode('audio'));
     watchBtn.addEventListener('click', () => setMode('video'));
