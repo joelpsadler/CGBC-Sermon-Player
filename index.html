@@ -1319,7 +1319,42 @@
       }
       .drawer-title-wrap h2 { font-size: 14px; }
     }
-  </style>
+  
+    /* Final hard override: static cleanup mode truly disables all audio motion effects. */
+    .audio-transport-glass::before,
+    .audio-feature-card.playing .audio-transport-glass::before,
+    .audio-play-badge::before,
+    .audio-feature-card.playing .audio-play-badge::before,
+    .audio-play-circle-wrap::before,
+    .audio-feature-card.playing .audio-play-circle-wrap::before {
+      content: none !important;
+      display: none !important;
+      opacity: 0 !important;
+      animation: none !important;
+      filter: none !important;
+      background: none !important;
+      box-shadow: none !important;
+    }
+
+    .audio-feature-card.playing .audio-play-badge,
+    .audio-play-badge,
+    .audio-feature-card.playing .audio-transport-glass,
+    .audio-transport-glass,
+    .audio-feature-card.playing .audio-play-circle,
+    .audio-play-circle {
+      animation: none !important;
+    }
+
+    @media (max-width: 980px) {
+      .audio-transport-overlay {
+        position: static !important;
+        inset: auto !important;
+        margin-top: 2px !important;
+        width: 100% !important;
+      }
+    }
+
+</style>
 </head>
 <body class="mode-audio">
 
