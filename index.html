@@ -1,1 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CGBC Sermons</title>
 
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
+  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
+  <meta name="theme-color" content="#2f2f2f" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #809F90;
+      --bg: #2f2f2f;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(0,0,0,0.34);
+      --border: rgba(255,255,255,0.08);
+      --text: #f4f4f4;
+      --muted: #d7d7d7;
+      --drawer-series-bg: rgba(108,108,108,0.16);
+      --drawer-episodes-bg: rgba(128,128,128,0.12);
+      --drawer-top-bg: linear-gradient(180deg, rgba(8,8,8,0.96), rgba(20,20,20,0.88));
+      --drawer-series-header-bg: rgba(32,32,32,0.94);
+      --drawer-episodes-header-bg: rgba(58,58,58,0.90);
+      --shadow: 0 18px 40px rgba(0,0,0,0.32);
+      --shadow-player: 0 28px 60px rgba(0,0,0,0.52), 0 10px 24px rgba(0,0,0,0.30);
+      --shadow-art-strong: 0 26px 52px rgba(0,0,0,0.56), 0 10px 22px rgba(0,0,0,0.30);
+      --selected-glow: 0 0 0 1px rgba(128,159,144,0.35) inset, 0 10px 22px rgba(0,0,0,0.28), 0 0 18px rgba(128,159,144,0.12);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      padding-bottom: var(--safe-bottom);
+    }
+    body.drawer-open { overflow: hidden; }
+    img { max-width: 100%; }
+    button, audio, iframe, a { font: inherit; }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      fill: currentColor;
+    }
+
+    .header-wrap {
+      display: flex;
+      justify-content: center;
+      padding: calc(8px + var(--safe-top)) 10px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-row {
+      width: min(1800px, 100%);
+      display: block;
+    }
+    .logo-panel {
+      width: 100%;
+      min-width: 0;
+      padding: 6px 12px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(28,28,28,0.54), rgba(10,10,10,0.26));
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 1px 0 0 rgba(255,255,255,0.05),
+        inset -1px 0 0 rgba(255,255,255,0.05),
+        inset 0 -1px 0 rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    .logo-panel::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 42%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .logo-panel:hover { transform: translateY(-1px); }
+    .logo-panel img {
+      display: block;
+      width: min(860px, 100%);
+      height: auto;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-controls {
+      position: relative;
+      z-index: 40;
+      padding: 10px 8px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .top-controls-inner {
+      display: flex;
+      justify-content: center;
+    }
+    .mode-toggle {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+      width: min(760px, 100%);
+      align-items: stretch;
+    }
+    .listen-watch-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 2px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.10),
+        0 10px 24px rgba(0,0,0,0.18);
+      position: relative;
+      z-index: 1;
+    }
+    .mode-btn {
+      position: relative;
+      border: none;
+      min-height: 52px;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.2s ease;
+      display: block;
+    }
+    .mode-btn:hover { transform: translateY(-1px); z-index: 2; }
+    .mode-btn-shell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      width: 100%;
+      padding: 0 14px 0 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: inherit;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    }
+    .listen-watch-group .mode-btn:first-child .mode-btn-shell {
+      border-radius: 16px 0 0 16px;
+    }
+    .listen-watch-group .mode-btn:last-child .mode-btn-shell {
+      border-radius: 0 16px 16px 0;
+    }
+    .mode-toggle > .mode-btn .mode-btn-shell {
+      border-radius: 16px;
+      clip-path: none;
+    }
+    .mode-btn.active .mode-btn-shell {
+      background: linear-gradient(180deg, rgba(128,159,144,0.58), rgba(110,136,123,0.42));
+      color: #111;
+      box-shadow:
+        0 12px 28px rgba(0,0,0,0.24),
+        0 0 0 1px rgba(128,159,144,0.20) inset;
+    }
+    .mode-btn-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.02;
+    }
+    .mode-btn-text .top-line {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .mode-btn-text .bottom-line {
+      font-size: 11px;
+      opacity: 0.85;
+      margin-top: 2px;
+      letter-spacing: 0.02em;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 380px minmax(0, 1fr);
+      height: calc(100vh - 138px - var(--safe-top) - var(--safe-bottom));
+      min-height: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      transition: grid-template-columns 0.28s ease;
+    }
+    .col {
+      min-width: 0;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      transition: padding 0.28s ease, opacity 0.28s ease, width 0.28s ease;
+    }
+    .col-series {
+      border-right: 1px solid var(--border);
+      padding: 14px 14px 14px 16px;
+    }
+    .col-episodes {
+      border-right: 1px solid var(--border);
+      padding: 14px 12px;
+    }
+    .col-player {
+      padding: 22px 22px 26px;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .episodes-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .episodes-header-row .section-title {
+      margin: 0;
+    }
+    .change-series-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      min-height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .change-series-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(128,159,144,0.24);
+    }
+
+    .series-list,
+    .episodes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      touch-action: pan-y;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .series-divider {
+      margin: 8px 4px 4px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: var(--muted);
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      transition: opacity 0.28s ease;
+    }
+
+    .series-item,
+    .episode-item {
+      border-radius: 14px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.28s ease;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .series-item:hover,
+    .episode-item:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    .series-item.active,
+    .episode-item.active {
+      background: linear-gradient(180deg, rgba(128,159,144,0.34), rgba(108,136,122,0.24));
+      box-shadow:
+        0 0 0 1px rgba(128,159,144,0.38) inset,
+        0 10px 22px rgba(0,0,0,0.30),
+        0 0 22px rgba(128,159,144,0.16);
+    }
+
+    .series-item-inner,
+    .episode-item-inner {
+      display: flex;
+      gap: 14px;
+      padding: 10px;
+      align-items: flex-start;
+      transition: padding 0.28s ease, gap 0.28s ease;
+    }
+
+    .thumb-tap {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      touch-action: manipulation;
+    }
+    .thumb-tap img {
+      display: block;
+      object-fit: cover;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.20);
+      transition: width 0.28s ease, height 0.28s ease, border-radius 0.28s ease, opacity 0.28s ease;
+    }
+
+    .series-item.audio .thumb-tap img,
+    .episode-item.audio .thumb-tap img {
+      width: 84px;
+      height: 84px;
+      border-radius: 14px;
+    }
+    .series-item.video .thumb-tap img,
+    .episode-item.video .thumb-tap img {
+      width: 132px;
+      height: 74px;
+      border-radius: 12px;
+    }
+
+    .series-copy,
+    .episode-copy {
+      flex: 1;
+      min-width: 0;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .series-name,
+    .episode-title {
+      color: #fff;
+      line-height: 1.25;
+      font-family: 'Poppins', sans-serif;
+    }
+    .series-name { font-size: 16px; }
+    .episode-title { font-size: 15px; }
+
+    .episode-sub {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.25;
+    }
+
+    .series-chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+      transition: opacity 0.28s ease;
+    }
+    .series-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #f4f4f4;
+    }
+    .series-chip.current,
+    .series-chip.live {
+      background: rgba(128,159,144,0.45);
+      color: #111;
+    }
+    .series-chip.specials,
+    .series-chip.videoonly {
+      background: rgba(255,255,255,0.12);
+    }
+
+    #videoShell,
+    #videoPlaceholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      min-height: 420px;
+      background: #1f1f1f;
+      box-shadow: var(--shadow-player);
+    }
+    #videoShell { display: none; }
+    #videoShell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    #videoPlaceholder,
+    #audioPlaceholder {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    #audioPlaceholder { min-height: 180px; }
+
+    .audio-feature-card {
+      display: none;
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.18));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow-player);
+      padding: 24px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow: hidden;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .audio-feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 16%, rgba(255,255,255,0) 32%);
+      pointer-events: none;
+    }
+    .audio-feature-card.playing {
+      box-shadow:
+        var(--shadow-player),
+        0 0 0 1px rgba(128,159,144,0.22) inset,
+        0 0 18px rgba(128,159,144,0.10);
+    }
+
+    .audio-split {
+      display: grid;
+      grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .audio-art-panel {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s ease;
+    }
+    .audio-art-panel:hover { transform: translateY(-2px); }
+    .audio-art-panel img {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: var(--shadow-art-strong);
+      background: rgba(255,255,255,0.05);
+      display: block;
+    }
+
+    .audio-overlay-controls {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      z-index: 4;
+    }
+
+    .audio-mini-skip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      padding: 0 10px;
+    }
+    .audio-mini-skip:hover {
+      transform: translateY(-1px);
+      background: rgba(0,0,0,0.56);
+    }
+
+    .audio-play-badge {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px 10px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      overflow: visible;
+    }
+    .audio-play-badge:hover {
+      transform: translateY(-1px);
+      background: rgba(0,0,0,0.56);
+    }
+    .audio-feature-card.playing .audio-play-badge {
+      background: rgba(128,159,144,0.34);
+      border-color: rgba(128,159,144,0.50);
+      box-shadow:
+        0 10px 28px rgba(0,0,0,0.25),
+        0 0 22px rgba(128,159,144,0.45),
+        0 0 42px rgba(128,159,144,0.22);
+    }
+
+    .audio-play-circle-wrap {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+    .audio-play-circle-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 999px;
+      background:
+        conic-gradient(
+          from 0deg,
+          rgba(128,159,144,0.0) 0deg,
+          rgba(128,159,144,0.0) 235deg,
+          rgba(148, 216, 175, 0.92) 285deg,
+          rgba(128,159,144,0.0) 335deg,
+          rgba(128,159,144,0.0) 360deg
+        );
+      mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      opacity: 0;
+      transform: rotate(0deg);
+      pointer-events: none;
+    }
+    .audio-feature-card.playing .audio-play-circle-wrap::before {
+      opacity: 1;
+      animation: traceRing 1.5s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(148, 216, 175, 0.55));
+    }
+    @keyframes traceRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .audio-play-circle {
+      position: absolute;
+      inset: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .audio-play-circle svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+      margin-left: 2px;
+    }
+
+    .audio-play-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0.92;
+      white-space: nowrap;
+    }
+    .audio-ready {
+      margin: 0 0 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.82;
+    }
+    .audio-feature-card h3 {
+      margin: 0 0 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+    .audio-feature-card .audio-series {
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      opacity: 0.92;
+      margin-bottom: 14px;
+      font-size: 18px;
+    }
+
+    .waveform {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 3px;
+      height: 132px;
+      margin: 10px 0 16px;
+      width: 100%;
+      max-width: 100%;
+      opacity: 0.98;
+      padding: 14px 14px 10px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.18));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .waveform span {
+      flex: 1 1 0;
+      min-width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(165,190,176,1), rgba(128,159,144,0.18));
+      box-shadow: 0 0 10px rgba(128,159,144,0.22);
+      transform-origin: bottom center;
+      transform: scaleY(0.42);
+      opacity: 0.88;
+      animation-play-state: paused;
+    }
+    .audio-feature-card.playing .waveform span {
+      animation-name: waveMotion;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+      animation-play-state: running;
+    }
+
+    @keyframes waveMotion {
+      0%   { transform: scaleY(0.22); opacity: 0.55; }
+      25%  { transform: scaleY(0.78); opacity: 0.76; }
+      50%  { transform: scaleY(1.20); opacity: 1; }
+      75%  { transform: scaleY(0.56); opacity: 0.82; }
+      100% { transform: scaleY(1.48); opacity: 1; }
+    }
+
+    .audio-controls-row { display: block; }
+    #audioPlayer {
+      width: 100%;
+      display: none;
+      margin-bottom: 0;
+      border-radius: 12px;
+      min-height: 46px;
+    }
+
+    .meta {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin-top: 0;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .meta h2 {
+      margin: 0 0 8px;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.15;
+    }
+    .meta .series-line {
+      color: #ffffff;
+      opacity: 0.92;
+      margin-bottom: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .meta-grid {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .meta-row {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+    .meta-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.60);
+      padding-top: 2px;
+    }
+    .meta-value {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .meta-note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.62);
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .action-btn,
+    .rss-button,
+    .close-drawer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 10px 14px;
+      min-height: 44px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+    .action-btn:hover,
+    .rss-button:hover,
+    .close-drawer-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(128,159,144,0.28);
+    }
+
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.58);
+      z-index: 110;
+    }
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(92vw, 430px);
+      background: #252525;
+      box-shadow: 24px 0 60px rgba(0,0,0,0.42);
+      z-index: 120;
+      transform: translateX(-102%);
+      transition: transform 0.25s ease;
+      overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .drawer-open .drawer-overlay { display: block; }
+    .drawer-open .mobile-drawer { transform: translateX(0); }
+
+    .drawer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: calc(14px + var(--safe-top)) 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: var(--drawer-top-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 8px 20px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .drawer-top::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 46%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .drawer-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .drawer-title-wrap h2 {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 1.05;
+      white-space: nowrap;
+    }
+
+    .drawer-sections {
+      display: grid;
+      grid-template-rows: minmax(0, 46%) minmax(0, 54%);
+      height: calc(100% - 52px - var(--safe-top));
+    }
+    .drawer-panel {
+      min-height: 0;
+      overflow-y: auto;
+      padding: 0;
+      position: relative;
+    }
+    .drawer-panel.series-panel { background: var(--drawer-series-bg); }
+    .drawer-panel.episodes-panel {
+      background: var(--drawer-episodes-bg);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .drawer-panel .section-title {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      margin: 0;
+      padding: 6px 10px 5px;
+      line-height: 1.05;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .drawer-panel.series-panel .section-title {
+      background: var(--drawer-series-header-bg);
+      font-size: 16px;
+      letter-spacing: 0.09em;
+      font-weight: 700;
+      color: #f6f6f6;
+    }
+    .drawer-panel.episodes-panel .section-title {
+      background: var(--drawer-episodes-header-bg);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+    }
+    .drawer-panel .series-list,
+    .drawer-panel .episodes-list {
+      padding: 6px 10px 10px;
+    }
+
+    /* DESKTOP STAGE MODE */
+    @media (min-width: 981px) {
+      body.desktop-selected .layout {
+        grid-template-columns: 96px 300px minmax(0, 1fr);
+      }
+
+      body.desktop-selected .col-series {
+        padding: 12px 8px;
+        opacity: 0.88;
+      }
+
+      body.desktop-selected .col-episodes {
+        padding: 14px 12px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      }
+
+      body.desktop-selected .col-player {
+        padding: 20px 26px 28px;
+      }
+
+      body.desktop-selected .col-player .audio-feature-card,
+      body.desktop-selected .col-player .meta,
+      body.desktop-selected .col-player #videoShell {
+        transform: translateY(-2px);
+      }
+
+      body.desktop-selected .col-series .section-title {
+        opacity: 0.58;
+        transform: translateX(2px);
+        font-size: 11px;
+      }
+
+      body.desktop-selected .col-series .series-divider {
+        opacity: 0.45;
+        font-size: 9px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      body.desktop-selected .col-series .series-item-inner {
+        gap: 0;
+        justify-content: center;
+        padding: 8px 4px;
+      }
+
+      body.desktop-selected .col-series .series-copy {
+        display: none;
+      }
+
+      body.desktop-selected .col-series .series-item.audio .thumb-tap img {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+      }
+
+      body.desktop-selected .col-series .series-item.video .thumb-tap img {
+        width: 72px;
+        height: 72px;
+        border-radius: 14px;
+      }
+
+      body.desktop-selected .col-episodes .episodes-header-row .section-title {
+        opacity: 0.8;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+
+      body.desktop-selected .col-episodes .change-series-btn {
+        display: inline-flex;
+      }
+
+      body.desktop-selected .col-episodes .episodes-list {
+        gap: 10px;
+      }
+
+      body.desktop-selected .col-episodes .episode-item {
+        background: rgba(255,255,255,0.03);
+      }
+
+      body.desktop-selected .col-episodes .episode-item:not(.active) {
+        opacity: 0.82;
+      }
+
+      body.desktop-selected .col-episodes .episode-item.active {
+        background: rgba(128,159,144,0.24);
+      }
+
+      body.desktop-selected .col-episodes .episode-item.active .episode-item-inner {
+        padding: 12px;
+      }
+
+      body.desktop-selected .col-episodes .episode-item.active .episode-title {
+        font-size: 17px;
+      }
+    }
+
+
+
+    /* Desktop player launcher */
+    @media (min-width: 981px) {
+      .mode-toggle {
+        grid-template-columns: 2fr 1fr;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 13px;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .layout {
+        grid-template-columns: 290px 340px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .top-controls {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(18,18,18,0.82);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+      body.mobile-media-active .header-wrap {
+        display: none;
+      }
+      #playerSection {
+        scroll-margin-top: 92px;
+      }
+      .layout {
+        display: block;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+      }
+      .col-series,
+      .col-episodes {
+        display: none;
+      }
+      .col-player {
+        padding: 14px 12px 24px;
+        overflow: visible;
+      }
+      .mobile-drawer {
+        display: block;
+      }
+      #videoShell,
+      #videoPlaceholder {
+        min-height: 220px;
+      }
+      .audio-split {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .audio-art-panel { min-height: auto; }
+      .audio-art-panel img { max-width: min(420px, 100%); }
+      .meta h2 { font-size: 24px; }
+      .mode-toggle { width: 100%; }
+    }
+
+    @media (max-width: 640px) {
+      .waveform {
+        height: 108px;
+        gap: 2px;
+        padding: 10px 10px 8px;
+      }
+      .header-wrap {
+        padding: calc(6px + var(--safe-top)) 8px 6px;
+      }
+      .logo-panel {
+        padding: 4px 8px;
+        border-radius: 14px;
+      }
+      .logo-panel img {
+        width: min(92vw, 620px);
+      }
+      .top-controls {
+        padding: 8px 8px 10px;
+      }
+      .mode-toggle {
+        grid-template-columns: 2fr 1fr;
+        gap: 10px;
+      }
+      .mode-btn-shell {
+        min-height: 48px;
+        padding: 0 8px 0 10px;
+        font-size: 13px;
+        gap: 8px;
+      }
+      .mode-btn-text .top-line { font-size: 12px; }
+      .mode-btn-text .bottom-line { font-size: 10px; }
+      .icon {
+        width: 18px;
+        height: 18px;
+      }
+      .col-player {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .audio-overlay-controls {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        gap: 8px;
+      }
+      .audio-mini-skip {
+        min-width: 46px;
+        height: 46px;
+        font-size: 11px;
+        padding: 0 8px;
+      }
+      .audio-play-badge {
+        gap: 10px;
+        padding: 8px 12px 8px 8px;
+      }
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 34px;
+        height: 34px;
+      }
+      .audio-play-label { font-size: 10px; }
+      .audio-feature-card { padding: 16px; }
+      .audio-feature-card h3 { font-size: 24px; }
+      .audio-feature-card .audio-series { font-size: 15px; }
+      .waveform {
+        height: 80px;
+        gap: 5px;
+      }
+      .meta { padding: 16px; }
+      .meta h2 { font-size: 22px; }
+      .drawer-title-wrap h2 { font-size: 14px; }
+    }
+
+    .popup-note {
+      display: none;
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.58);
+    }
+
+  </style>
+</head>
+<body class="mode-audio">
+
+  <div class="header-wrap">
+    <div class="header-row">
+      <div class="logo-panel" id="logoReset" title="Reset to first series">
+        <img
+          src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png"
+          alt="CGBC"
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="top-controls">
+    <div class="top-controls-inner">
+      <div class="mode-toggle">
+        <div class="listen-watch-group">
+          <button class="mode-btn active" id="listenBtn" type="button">
+            <span class="mode-btn-shell">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg>
+              </span>
+              <span class="mode-btn-text">
+                <span class="top-line">Listen</span>
+                <span class="bottom-line">Audio</span>
+              </span>
+            </span>
+          </button>
+
+          <button class="mode-btn" id="watchBtn" type="button">
+            <span class="mode-btn-shell">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg>
+              </span>
+              <span class="mode-btn-text">
+                <span class="top-line">Watch</span>
+                <span class="bottom-line">Video</span>
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <button class="mode-btn" id="openDrawerBtn" type="button">
+          <span class="mode-btn-shell">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 5.5A2.5 2.5 0 0 1 8.5 3h7A2.5 2.5 0 0 1 18 5.5v9A2.5 2.5 0 0 1 15.5 17h-7A2.5 2.5 0 0 1 6 14.5v-9Zm2.5-.5a.5.5 0 0 0-.5.5v9c0 .28.22.5.5.5h7a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-7ZM4 8.5a1 1 0 0 1 1 1v9A2.5 2.5 0 0 0 7.5 21h8a1 1 0 1 1 0 2h-8A4.5 4.5 0 0 1 3 18.5v-9a1 1 0 0 1 1-1Z"/></svg>
+            </span>
+            <span class="mode-btn-text">
+              <span class="top-line">Open Player</span>
+              <span class="bottom-line">Desktop</span>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="drawer-top">
+      <div class="drawer-title-wrap">
+        <span class="icon" id="drawerTitleIcon" aria-hidden="true"></span>
+        <h2 id="drawerTitleText">Browse Sermon Audio</h2>
+      </div>
+      <button class="close-drawer-btn" id="closeDrawerBtn" type="button">Close</button>
+    </div>
+
+    <div class="drawer-sections">
+      <div class="drawer-panel series-panel">
+        <h3 class="section-title">Series</h3>
+        <div id="mobileSeriesList" class="series-list"></div>
+      </div>
+      <div class="drawer-panel episodes-panel">
+        <h3 class="section-title">Episodes</h3>
+        <div id="mobileEpisodesList" class="episodes-list"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="layout" id="layout">
+    <aside class="col col-series">
+      <h3 class="section-title">Series</h3>
+      <div id="seriesList" class="series-list"></div>
+    </aside>
+
+    <section class="col col-episodes">
+      <div class="episodes-header-row">
+        <h3 class="section-title" id="episodesHeaderTitle">Episodes</h3>
+        <button class="change-series-btn" id="desktopChangeSeriesBtn" type="button">Change Series</button>
+      </div>
+      <div id="episodesList" class="episodes-list"></div>
+    </section>
+
+    <main class="col col-player" id="playerSection">
+      <div id="videoPlaceholder">Choose a series to begin watching.</div>
+      <div id="videoShell"></div>
+      <div id="audioPlaceholder">Tap Sermon Selection above to begin listening.</div>
+
+      <div class="audio-feature-card" id="audioFeatureCard">
+        <div class="audio-split">
+          <div class="audio-art-panel" id="audioArtPanel">
+            <img id="audioFeatureArt" alt="Sermon artwork">
+            <div class="audio-overlay-controls">
+              <button id="miniSkipBackBtn" class="audio-mini-skip" type="button">−30</button>
+
+              <span class="audio-play-badge" id="audioPlayBadge" aria-hidden="true">
+                <span class="audio-play-circle-wrap">
+                  <span class="audio-play-circle">
+                    <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                </span>
+                <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
+              </span>
+
+              <button id="miniSkipForwardBtn" class="audio-mini-skip" type="button">+30</button>
+            </div>
+          </div>
+
+          <div class="audio-content">
+            <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
+            <h3 id="audioFeatureTitle">Select a sermon</h3>
+            <div class="audio-series" id="audioFeatureSeries"></div>
+
+            <div class="waveform" id="mainWaveform" aria-hidden="true"></div>
+
+            <div class="audio-controls-row">
+              <audio id="audioPlayer" controls preload="none"></audio>
+              <div class="popup-note" id="popupNote">Desktop audio can also be launched into a separate player window from the top right button.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="meta" id="metaBox">
+        <h2>Select a sermon</h2>
+        <div class="series-line">Choose a series and episode.</div>
+        <p class="meta-note">Browse by series first, then choose an episode to load the player.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const CURRENT_SERIES = 'Romans Chapter 12';
+    const SECONDARY_SERIES = 'The Rapture';
+    const CURRENT_SPECIALS = '2026 Specials';
+
+    const LIVESTREAMS = {
+      name: 'Livestreams',
+      playlistId: 'PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv'
+    };
+
+    const VIDEO_ONLY_ARCHIVE = {
+      name: 'CGBC Guest Speaker',
+      playlistId: 'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW'
+    };
+
+    const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
+    const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
+    const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
+
+    let sermonData = {};
+    let archiveSeriesOrder = [];
+    let currentSeries = null;
+    let currentEpisodeIndex = null;
+    let currentEpisodeData = null;
+    let mode = 'audio';
+
+    const bodyEl = document.body;
+    const seriesListEl = document.getElementById('seriesList');
+    const episodesListEl = document.getElementById('episodesList');
+    const mobileSeriesListEl = document.getElementById('mobileSeriesList');
+    const mobileEpisodesListEl = document.getElementById('mobileEpisodesList');
+    const metaBoxEl = document.getElementById('metaBox');
+    const playerSectionEl = document.getElementById('playerSection');
+    const videoShellEl = document.getElementById('videoShell');
+    const videoPlaceholderEl = document.getElementById('videoPlaceholder');
+    const audioPlaceholderEl = document.getElementById('audioPlaceholder');
+    const audioFeatureCardEl = document.getElementById('audioFeatureCard');
+    const audioFeatureArtEl = document.getElementById('audioFeatureArt');
+    const audioFeatureTitleEl = document.getElementById('audioFeatureTitle');
+    const audioFeatureSeriesEl = document.getElementById('audioFeatureSeries');
+    const audioReadyLabelEl = document.getElementById('audioReadyLabel');
+    const audioPlayerEl = document.getElementById('audioPlayer');
+    const audioArtPanelEl = document.getElementById('audioArtPanel');
+    const audioPlayBadgeEl = document.getElementById('audioPlayBadge');
+    const audioPlayIconEl = document.getElementById('audioPlayIcon');
+    const audioPlayLabelEl = document.getElementById('audioPlayLabel');
+    const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
+    const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
+    const listenBtn = document.getElementById('listenBtn');
+    const watchBtn = document.getElementById('watchBtn');
+    const logoReset = document.getElementById('logoReset');
+    const openDrawerBtn = document.getElementById('openDrawerBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const drawerOverlayEl = document.getElementById('drawerOverlay');
+    const mobileDrawerEl = document.getElementById('mobileDrawer');
+    const drawerTitleTextEl = document.getElementById('drawerTitleText');
+    const drawerTitleIconEl = document.getElementById('drawerTitleIcon');
+    const desktopChangeSeriesBtn = document.getElementById('desktopChangeSeriesBtn');
+    const episodesHeaderTitle = document.getElementById('episodesHeaderTitle');
+    const popupNoteEl = document.getElementById('popupNote');
+    const popupChannel = 'cgbc-sermon-popup';
+    let popupWindowRef = null;
+
+    function isMobileLayout() {
+      return window.innerWidth <= 980;
+    }
+
+    function updateDesktopSelectedState() {
+      const shouldCollapse = !isMobileLayout() && !!currentEpisodeData;
+      bodyEl.classList.toggle('desktop-selected', shouldCollapse);
+      if (episodesHeaderTitle) {
+        episodesHeaderTitle.textContent = shouldCollapse ? 'Up Next' : 'Episodes';
+      }
+      updatePlayerSurfaceState();
+      updateDesktopLauncherCopy();
+    }
+
+    async function tryPortraitLock() {
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock('portrait');
+        }
+      } catch {}
+    }
+
+    function openDrawer() {
+      if (!isMobileLayout()) return;
+      bodyEl.classList.add('drawer-open');
+      mobileDrawerEl.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDrawer() {
+      bodyEl.classList.remove('drawer-open');
+      mobileDrawerEl.setAttribute('aria-hidden', 'true');
+    }
+
+    function parseDateToTimestamp(value) {
+      if (!value) return 0;
+      const direct = Date.parse(value);
+      return Number.isNaN(direct) ? 0 : direct;
+    }
+
+    function htmlDecode(input) {
+      const doc = new DOMParser().parseFromString(input || '', 'text/html');
+      return (doc.documentElement.textContent || '').trim();
+    }
+
+    function normalizeLineBreaks(input) {
+      return (input || '')
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/p>\s*<p>/gi, '\n')
+        .replace(/<\/div>\s*<div>/gi, '\n');
+    }
+
+    function parseDescription(rawDesc) {
+      const normalized = normalizeLineBreaks(rawDesc);
+      const decoded = htmlDecode(normalized);
+      const lines = decoded.split('\n').map(s => s.trim()).filter(Boolean);
+
+      const out = {
+        title: '',
+        series: '',
+        scripture: '',
+        by: '',
+        date: '',
+        video: '',
+        extra: []
+      };
+
+      for (const line of lines) {
+        const lower = line.toLowerCase();
+        if (lower.startsWith('title:')) out.title = line.split(/title:/i)[1].trim();
+        else if (lower.startsWith('series:')) out.series = line.split(/series:/i)[1].trim();
+        else if (lower.startsWith('scripture:')) out.scripture = line.split(/scripture:/i)[1].trim();
+        else if (lower.startsWith('by:')) out.by = line.split(/by:/i)[1].trim();
+        else if (lower.startsWith('date:')) out.date = line.split(/date:/i)[1].trim();
+        else if (lower.startsWith('video:')) out.video = line.split(/video:/i)[1].trim();
+        else out.extra.push(line);
+      }
+
+      return out;
+    }
+
+    function splitTitleParts(rawTitle) {
+      const clean = (rawTitle || '').trim();
+      const parts = clean.split('|').map(part => part.trim()).filter(Boolean);
+
+      return {
+        episodeTitle: parts[0] || clean || 'Untitled Sermon',
+        inferredSeries: parts.length > 1 ? parts[parts.length - 1] : ''
+      };
+    }
+
+    function extractYouTubeId(url) {
+      if (!url) return '';
+      try {
+        const u = new URL(url.trim());
+        if (u.hostname.includes('youtu.be')) return u.pathname.replace(/^\/+/, '').trim();
+        const v = u.searchParams.get('v');
+        if (v) return v.trim();
+        if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('/')[0].trim();
+        return '';
+      } catch {
+        return '';
+      }
+    }
+
+    function getWatchThumb(videoId) {
+      return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
+    }
+
+    function getAudioIconSvg() {
+      return `<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg>`;
+    }
+
+    function getVideoIconSvg() {
+      return `<svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg>`;
+    }
+
+
+    // Beginner note: this updates a few layout states so mobile and desktop each feel intentional.
+    function updatePlayerSurfaceState() {
+      const mobileActive = isMobileLayout() && !!currentEpisodeData;
+      bodyEl.classList.toggle('mobile-media-active', mobileActive);
+      if (popupNoteEl) popupNoteEl.style.display = (!isMobileLayout() && mode === 'audio') ? 'block' : 'none';
+    }
+
+    // Beginner note: the desktop button becomes a real launcher on desktop, but still opens the slide-out menu on mobile.
+    function updateDesktopLauncherCopy() {
+      const topLine = openDrawerBtn.querySelector('.top-line');
+      const bottomLine = openDrawerBtn.querySelector('.bottom-line');
+      if (!topLine || !bottomLine) return;
+      if (isMobileLayout()) {
+        topLine.textContent = 'Sermon';
+        bottomLine.textContent = 'Selection';
+      } else if (mode === 'audio') {
+        topLine.textContent = 'Open Player';
+        bottomLine.textContent = 'Desktop';
+      } else {
+        topLine.textContent = 'Open Mini View';
+        bottomLine.textContent = 'Desktop';
+      }
+    }
+
+    // Beginner note: this creates extra skinny bars so the waveform feels richer without hand-writing dozens of spans.
+    function buildMainWaveform() {
+      const host = document.getElementById('mainWaveform');
+      if (!host || host.children.length) return;
+      for (let i = 0; i < 56; i += 1) {
+        const bar = document.createElement('span');
+        const base = 14 + ((i * 17) % 70);
+        const duration = (0.52 + ((i * 29) % 80) / 100).toFixed(2);
+        const delay = (((i * 11) % 37) / 100).toFixed(2);
+        bar.style.height = `${base}%`;
+        bar.style.animationDuration = `${duration}s`;
+        bar.style.animationDelay = `${delay}s`;
+        host.appendChild(bar);
+      }
+    }
+
+    function savePopupState(extra = {}) {
+      if (!currentEpisodeData) return;
+      const payload = {
+        type: 'state',
+        mode,
+        episode: currentEpisodeData,
+        currentTime: mode === 'audio' ? (audioPlayerEl.currentTime || 0) : 0,
+        isPlaying: mode === 'audio' ? !audioPlayerEl.paused : true,
+        ...extra
+      };
+      localStorage.setItem(popupChannel, JSON.stringify(payload));
+    }
+
+    function restoreFromPopupState(payload) {
+      if (!payload || !payload.episode) return;
+      mode = payload.mode || mode;
+      listenBtn.classList.toggle('active', mode === 'audio');
+      watchBtn.classList.toggle('active', mode === 'video');
+      bodyEl.classList.toggle('mode-audio', mode === 'audio');
+      bodyEl.classList.toggle('mode-video', mode === 'video');
+      currentSeries = payload.episode.series || currentSeries;
+      renderSeriesList();
+      renderEpisodesList();
+      if (mode === 'audio') {
+        playAudio(payload.episode);
+        audioPlayerEl.currentTime = payload.currentTime || 0;
+        if (payload.resumePlaying) {
+          audioPlayerEl.play().catch(() => {});
+        }
+      } else {
+        playVideo(payload.episode);
+      }
+      updatePlayerSurfaceState();
+      updateDesktopLauncherCopy();
+    }
+
+    function getPopupHtml() {
+      return `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CGBC Player</title>
+<style>
+body{margin:0;background:#111;color:#f4f4f4;font-family:Lato,Arial,sans-serif;padding:14px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.18));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:14px;box-shadow:0 20px 48px rgba(0,0,0,.45)}
+.label{font:700 11px Poppins,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.title{font:700 18px Poppins,Arial,sans-serif;line-height:1.15;margin:0 0 6px}
+.sub{font:600 14px Poppins,Arial,sans-serif;opacity:.86;margin-bottom:12px}
+.row{display:flex;gap:12px;align-items:center}
+.art{width:90px;height:90px;border-radius:18px;object-fit:cover;box-shadow:0 14px 28px rgba(0,0,0,.35)}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button,a{border:none;text-decoration:none;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:11px 14px;font:700 14px Poppins,Arial,sans-serif;cursor:pointer}
+.primary{background:linear-gradient(180deg,rgba(128,159,144,.58),rgba(110,136,123,.42));color:#111}
+.wave{display:flex;align-items:flex-end;gap:2px;height:44px;margin:14px 0;padding:8px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+.wave span{flex:1;min-width:2px;border-radius:999px;background:linear-gradient(180deg,rgba(165,190,176,1),rgba(128,159,144,.18));transform-origin:bottom center;animation:waveMotion .8s ease-in-out infinite alternate}
+video,iframe,audio{width:100%;border-radius:18px;background:#000;border:0}
+@keyframes waveMotion{0%{transform:scaleY(.25);opacity:.55}50%{transform:scaleY(.9);opacity:1}100%{transform:scaleY(1.45);opacity:.95}}
+</style></head><body><div class="card" id="app"></div>
+<script>
+const key='${popupChannel}';
+const state = JSON.parse(localStorage.getItem(key) || '{}');
+const app = document.getElementById('app');
+function writeBack(extra){ localStorage.setItem(key, JSON.stringify({ ...state, ...extra })); }
+if(state.mode==='audio' && state.episode){
+  app.innerHTML = '<div class="label">Background Audio</div><div class="row"><img class="art" src="'+(state.episode.img||state.episode.seriesImage||'')+'"><div style="flex:1;min-width:0"><h1 class="title">'+(state.episode.title||'CGBC Sermon')+'</h1><div class="sub">'+(state.episode.series||'')+'</div></div></div><div class="wave" id="wv"></div><audio id="audio" controls autoplay src="'+(state.episode.audio||'')+'"></audio><div class="controls"><button id="back">-30</button><button class="primary" id="toggle">Pause</button><button id="fwd">+30</button><button id="return">Return to Site Player</button></div>';
+  const a=document.getElementById('audio'); a.currentTime = state.currentTime || 0;
+  const w=document.getElementById('wv'); for(let i=0;i<40;i++){const s=document.createElement('span'); s.style.height=(16+((i*13)%70))+'%'; s.style.animationDuration=(.5+((i*23)%80)/100)+'s'; s.style.animationDelay=(((i*7)%35)/100)+'s'; w.appendChild(s);}
+  document.getElementById('back').onclick=()=>a.currentTime=Math.max(0,(a.currentTime||0)-30);
+  document.getElementById('fwd').onclick=()=>a.currentTime=Math.min((a.duration||1e9),(a.currentTime||0)+30);
+  document.getElementById('toggle').onclick=()=>{if(a.paused){a.play();document.getElementById('toggle').textContent='Pause';}else{a.pause();document.getElementById('toggle').textContent='Play';}};
+  document.getElementById('return').onclick=()=>{writeBack({returnToPage:true,currentTime:a.currentTime||0,resumePlaying:!a.paused}); window.close();};
+  window.addEventListener('beforeunload', ()=>writeBack({returnToPage:true,currentTime:a.currentTime||0,resumePlaying:!a.paused}));
+} else if(state.episode) {
+  const vid = state.episode.videoId ? 'https://www.youtube.com/embed/'+state.episode.videoId+'?autoplay=1&playsinline=1&rel=0&modestbranding=1' : '';
+  app.innerHTML = '<div class="label">Mini View</div><h1 class="title">'+(state.episode.title||'CGBC Sermon')+'</h1><div class="sub">'+(state.episode.series||'')+'</div>'+(vid?'<iframe allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="'+vid+'" style="aspect-ratio:16/9"></iframe>':'<div class="sub">No video available.</div>')+'<div class="controls"><button id="return">Return to Site Player</button>'+(state.episode.video?'<a href="'+state.episode.video+'" target="_blank" rel="noopener noreferrer">YouTube</a>':'')+'</div>';
+  document.getElementById('return').onclick=()=>{writeBack({returnToPage:true,resumePlaying:true}); window.close();};
+  window.addEventListener('beforeunload', ()=>writeBack({returnToPage:true,resumePlaying:true}));
+}
+</script></body></html>`;
+    }
+
+    function openDesktopPlayerWindow() {
+      if (isMobileLayout() || !currentEpisodeData) {
+        openDrawer();
+        return;
+      }
+      savePopupState();
+      const size = mode === 'audio' ? 'width=420,height=520' : 'width=520,height=420';
+      popupWindowRef = window.open('', 'cgbcDesktopPlayer', `${size},resizable=yes,scrollbars=no`);
+      if (!popupWindowRef) return;
+      popupWindowRef.document.open();
+      popupWindowRef.document.write(getPopupHtml());
+      popupWindowRef.document.close();
+      if (mode === 'audio') {
+        audioPlayerEl.pause();
+        setAudioReadyState(false);
+      } else {
+        stopAndHideVideo();
+        renderMeta(currentEpisodeData, false);
+      }
+    }
+
+    function updateDrawerHeader() {
+      if (mode === 'audio') {
+        drawerTitleTextEl.textContent = 'Browse Sermon Audio';
+        drawerTitleIconEl.innerHTML = getAudioIconSvg();
+      } else {
+        drawerTitleTextEl.textContent = 'Browse Sermon Video';
+        drawerTitleIconEl.innerHTML = getVideoIconSvg();
+      }
+    }
+
+    function isPinnedSeries(seriesName) {
+      return seriesName === LIVESTREAMS.name ||
+             seriesName === CURRENT_SERIES ||
+             seriesName === SECONDARY_SERIES ||
+             seriesName === CURRENT_SPECIALS;
+    }
+
+    function getPrioritySeries(modeName) {
+      const ordered = [];
+      if (modeName === 'video' && sermonData[LIVESTREAMS.name]) ordered.push(LIVESTREAMS.name);
+      if (sermonData[CURRENT_SERIES]) ordered.push(CURRENT_SERIES);
+      if (sermonData[SECONDARY_SERIES]) ordered.push(SECONDARY_SERIES);
+      if (sermonData[CURRENT_SPECIALS]) ordered.push(CURRENT_SPECIALS);
+      return ordered;
+    }
+
+    function groupNumberedSeries(names) {
+      const grouped = new Map();
+      const consumed = new Set();
+      const output = [];
+
+      names.forEach(name => {
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
+        if (!match) return;
+        const base = match[1].trim();
+        const num = parseInt(match[2], 10);
+        if (!grouped.has(base)) grouped.set(base, []);
+        grouped.get(base).push({ name, num });
+      });
+
+      names.forEach(name => {
+        if (consumed.has(name)) return;
+
+        const match = name.match(/^(.*?)(\d+)\s*$/i);
+        if (!match) {
+          output.push(name);
+          consumed.add(name);
+          return;
+        }
+
+        const base = match[1].trim();
+        const family = grouped.get(base) || [];
+        family.sort((a, b) => b.num - a.num);
+
+        family.forEach(item => {
+          if (!consumed.has(item.name)) {
+            output.push(item.name);
+            consumed.add(item.name);
+          }
+        });
+
+        const parentCandidate = base.replace(/\s+(chapter|part)$/i, '').trim();
+        const parentMatch = names.find(
+          n => !consumed.has(n) && n.trim().toLowerCase() === parentCandidate.toLowerCase()
+        );
+
+        if (parentMatch) {
+          output.push(parentMatch);
+          consumed.add(parentMatch);
+        }
+      });
+
+      names.forEach(name => {
+        if (!consumed.has(name)) {
+          output.push(name);
+          consumed.add(name);
+        }
+      });
+
+      return output;
+    }
+
+    function getVisibleSeriesOrder() {
+      const pinned = getPrioritySeries(mode);
+      const pinnedSet = new Set(pinned);
+
+      let archive = archiveSeriesOrder.filter(name => !pinnedSet.has(name));
+
+      if (mode === 'audio') {
+        archive = archive.filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
+      }
+      if (mode === 'video') {
+        archive = archive.filter(name => name !== LIVESTREAMS.name);
+      }
+
+      let ordered = [...pinned, ...groupNumberedSeries(archive)];
+
+      if (
+        mode === 'video' &&
+        sermonData[VIDEO_ONLY_ARCHIVE.name] &&
+        !pinnedSet.has(VIDEO_ONLY_ARCHIVE.name)
+      ) {
+        ordered = [
+          ...pinned,
+          ...groupNumberedSeries(archive).filter(name => name !== VIDEO_ONLY_ARCHIVE.name),
+          VIDEO_ONLY_ARCHIVE.name
+        ];
+      }
+
+      return ordered;
+    }
+
+    function getDisplayOrderedEpisodes(seriesName) {
+      const items = [...(sermonData[seriesName] || [])];
+      if (isPinnedSeries(seriesName)) {
+        items.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+      } else {
+        items.sort((a, b) => a.sortTimestamp - b.sortTimestamp);
+      }
+      return items;
+    }
+
+    function getVisibleEpisodesForSeries(seriesName) {
+      return getDisplayOrderedEpisodes(seriesName).map((ep, visibleIndex) => ({ ep, originalIndex: visibleIndex }));
+    }
+
+    function getSeriesWideCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesWideImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
+    function getSeriesCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
+    async function fetchPlaylistSeries(config, newestFirst = false) {
+      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const items = Array.isArray(data.items) ? data.items : [];
+
+      let sorted = [...items];
+      if (newestFirst) {
+        sorted.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt));
+      }
+
+      return sorted.map(item => {
+        const videoId = item?.snippet?.resourceId?.videoId || '';
+        const publishedAt = item?.snippet?.publishedAt || '';
+        const thumb = getWatchThumb(videoId);
+
+        return {
+          title: item?.snippet?.title || config.name,
+          series: config.name,
+          scripture: '',
+          by: '',
+          date: publishedAt ? new Date(publishedAt).toLocaleDateString() : '',
+          video: videoId ? `https://youtu.be/${videoId}` : '',
+          videoId,
+          audio: '',
+          img: '',
+          link: '',
+          extra: [],
+          sortTimestamp: parseDateToTimestamp(publishedAt),
+          seriesImage: thumb,
+          seriesWideImage: thumb
+        };
+      });
+    }
+
+    function updateMediaSession(ep) {
+      if (!('mediaSession' in navigator) || !ep) return;
+      const artworkSrc = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: ep.title || 'CGBC Sermon',
+          artist: ep.by || 'CGBC Lebanon, TN',
+          album: ep.series || 'CGBC Sermons',
+          artwork: [
+            { src: artworkSrc, sizes: '96x96', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '128x128', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '192x192', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '256x256', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '384x384', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => audioPlayerEl.play());
+        navigator.mediaSession.setActionHandler('pause', () => audioPlayerEl.pause());
+        navigator.mediaSession.setActionHandler('seekbackward', () => skipAudioBy(-30));
+        navigator.mediaSession.setActionHandler('seekforward', () => skipAudioBy(30));
+        navigator.mediaSession.setActionHandler('previoustrack', () => skipAudioBy(-30));
+        navigator.mediaSession.setActionHandler('nexttrack', () => skipAudioBy(30));
+      } catch {}
+    }
+
+    function clearMediaSession() {
+      if (!('mediaSession' in navigator)) return;
+      try {
+        navigator.mediaSession.metadata = null;
+      } catch {}
+    }
+
+    function setAudioReadyState(isPlaying) {
+      audioReadyLabelEl.textContent = isPlaying ? 'Listening...' : 'Ready to Listen';
+
+      audioPlayIconEl.innerHTML = isPlaying
+        ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
+        : '<path d="M8 5v14l11-7z"/>';
+
+      audioPlayIconEl.style.marginLeft = isPlaying ? '0px' : '2px';
+      audioPlayLabelEl.textContent = isPlaying ? 'Playing' : 'Tap to Play';
+
+      audioFeatureCardEl.classList.toggle('playing', isPlaying);
+
+      if ('mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+        } catch {}
+      }
+    }
+
+    function skipAudioBy(seconds) {
+      if (!audioPlayerEl.src) return;
+      const nextTime = Math.max(
+        0,
+        Math.min(
+          (audioPlayerEl.currentTime || 0) + seconds,
+          isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : (audioPlayerEl.currentTime || 0) + seconds
+        )
+      );
+      audioPlayerEl.currentTime = nextTime;
+    }
+
+    function toggleAudioPlayback() {
+      if (!audioPlayerEl.src) return;
+      if (audioPlayerEl.paused) audioPlayerEl.play();
+      else audioPlayerEl.pause();
+    }
+
+    function buildMetaRows(ep) {
+      const rows = [];
+      if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
+      if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
+      if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
+      if (ep.extra?.length) {
+        ep.extra.forEach(line => {
+          rows.push(`<div class="meta-row"><div class="meta-label">Publisher</div><div class="meta-value">${line}</div></div>`);
+        });
+      }
+      return rows.join('');
+    }
+
+    function renderEmptyMeta() {
+      const mobilePrompt = mode === 'audio'
+        ? 'Tap Sermon Selection above to begin listening.'
+        : 'Tap Sermon Selection above to begin watching.';
+
+      metaBoxEl.innerHTML = `
+        <h2>Select a sermon</h2>
+        <div class="series-line">${isMobileLayout() ? mobilePrompt : `Choose a series and episode to begin ${mode === 'audio' ? 'listening' : 'watching'}.`}</div>
+        <p class="meta-note">Browse by series first, then choose an episode to load the player.</p>
+      `;
+      updateDesktopSelectedState();
+    }
+
+    function renderMeta(ep, isAudio) {
+      const actionButtons = [];
+
+      if (isAudio && ep.link) {
+        actionButtons.push(`<a class="rss-button" href="${ep.link}" target="_blank" rel="noopener noreferrer">Podcast</a>`);
+      }
+      if (ep.video) {
+        actionButtons.push(`<a class="action-btn" href="${ep.video}" target="_blank" rel="noopener noreferrer">YouTube</a>`);
+      }
+
+      metaBoxEl.innerHTML = `
+        <h2>${ep.title || 'Untitled Sermon'}</h2>
+        <div class="series-line">${ep.series || currentSeries || ''}</div>
+        <div class="meta-grid">${buildMetaRows(ep)}</div>
+        <div class="actions">${actionButtons.join('')}</div>
+      `;
+      updateDesktopSelectedState();
+    }
+
+    function stopAndHideVideo() {
+      videoShellEl.innerHTML = '';
+      videoShellEl.style.display = 'none';
+      videoPlaceholderEl.style.display = 'none';
+    }
+
+    function stopAndHideAudio() {
+      audioPlayerEl.pause();
+      audioPlayerEl.removeAttribute('src');
+      audioPlayerEl.load();
+      audioFeatureCardEl.style.display = 'none';
+      audioPlaceholderEl.style.display = 'none';
+      setAudioReadyState(false);
+      clearMediaSession();
+    }
+
+    function clearMediaState() {
+      stopAndHideVideo();
+      stopAndHideAudio();
+      currentEpisodeData = null;
+      updateDesktopSelectedState();
+    }
+
+    function playAudio(ep) {
+      stopAndHideVideo();
+
+      audioPlayerEl.pause();
+      audioPlayerEl.removeAttribute('src');
+      audioPlayerEl.load();
+
+      audioPlaceholderEl.style.display = 'none';
+      audioFeatureCardEl.style.display = 'block';
+
+      audioFeatureArtEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+      audioFeatureTitleEl.textContent = ep.title || 'Untitled Sermon';
+      audioFeatureSeriesEl.textContent = ep.series || currentSeries || '';
+
+      audioPlayerEl.style.display = 'block';
+      audioPlayerEl.src = ep.audio;
+      audioPlayerEl.load();
+
+      currentEpisodeData = ep;
+      updateMediaSession(ep);
+      renderMeta(ep, true);
+      setAudioReadyState(false);
+      updateDesktopSelectedState();
+    }
+
+    function playVideo(ep) {
+      stopAndHideAudio();
+
+      if (!ep.videoId) {
+        stopAndHideVideo();
+        videoPlaceholderEl.textContent = 'No video is available for this sermon yet.';
+        videoPlaceholderEl.style.display = 'flex';
+        currentEpisodeData = ep;
+        renderMeta(ep, false);
+        updateDesktopSelectedState();
+        return;
+      }
+
+      videoPlaceholderEl.style.display = 'none';
+      videoShellEl.innerHTML = '';
+      videoShellEl.style.display = 'block';
+
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+      iframe.title = ep.title || 'Sermon';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('playsinline', '1');
+
+      videoShellEl.appendChild(iframe);
+
+      currentEpisodeData = ep;
+      renderMeta(ep, false);
+      updateDesktopSelectedState();
+    }
+
+    function getSeriesChips(seriesName) {
+      const chips = [];
+      if (seriesName === LIVESTREAMS.name) chips.push({ label: 'Live', className: 'live' });
+      if (seriesName === CURRENT_SERIES) chips.push({ label: 'Current', className: 'current' });
+      if (seriesName === SECONDARY_SERIES) chips.push({ label: 'Current', className: 'current' });
+      if (seriesName === CURRENT_SPECIALS) chips.push({ label: 'Current Specials', className: 'specials' });
+      if (seriesName === VIDEO_ONLY_ARCHIVE.name) chips.push({ label: 'Video Only', className: 'videoonly' });
+      return chips;
+    }
+
+    function selectSeries(seriesName) {
+      currentSeries = seriesName;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+
+      clearMediaState();
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
+
+      if (mode === 'audio') {
+        audioPlaceholderEl.style.display = 'flex';
+      } else {
+        videoPlaceholderEl.style.display = 'flex';
+      }
+
+      updateDesktopSelectedState();
+    }
+
+    function selectEpisode(ep, originalIndex, rowEl) {
+      currentEpisodeIndex = originalIndex;
+      currentEpisodeData = ep;
+
+      if (mode === 'audio') {
+        renderEpisodesList();
+        if (rowEl) rowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        playAudio(ep);
+      } else {
+        playVideo(ep);
+        renderEpisodesList();
+      }
+
+      updateDesktopSelectedState();
+
+      if (isMobileLayout()) {
+        closeDrawer();
+        playerSectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        updatePlayerSurfaceState();
+      }
+    }
+
+    function makeSeriesItem(seriesName) {
+      const item = document.createElement('div');
+      item.className = `series-item ${mode}` + (seriesName === currentSeries ? ' active' : '');
+
+      const chips = getSeriesChips(seriesName);
+      const chipsHtml = chips.length
+        ? `<div class="series-chip-row">${chips.map(ch => `<span class="series-chip ${ch.className}">${ch.label}</span>`).join('')}</div>`
+        : '';
+
+      item.innerHTML = `
+        <div class="series-item-inner">
+          <button class="thumb-tap" type="button" aria-label="Open ${seriesName}">
+            <img src="${mode === 'video' ? getSeriesWideCover(seriesName) : getSeriesCover(seriesName)}" alt="">
+          </button>
+          <div class="series-copy">
+            <div class="series-name">${seriesName}</div>
+            ${chipsHtml}
+          </div>
+        </div>
+      `;
+
+      const selectThisSeries = () => selectSeries(seriesName);
+
+      item.querySelector('.thumb-tap').addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        selectThisSeries();
+      });
+
+      item.addEventListener('click', selectThisSeries);
+      return item;
+    }
+
+    function renderSeriesInto(el) {
+      el.innerHTML = '';
+
+      const visibleSeries = getVisibleSeriesOrder();
+      const pinned = getPrioritySeries(mode);
+      const pinnedSet = new Set(pinned);
+
+      let archiveDividerInserted = false;
+      let featuredDividerInserted = false;
+
+      if (!visibleSeries.includes(currentSeries)) {
+        currentSeries = visibleSeries[0] || null;
+        currentEpisodeIndex = null;
+        currentEpisodeData = null;
+      }
+
+      visibleSeries.forEach(seriesName => {
+        if (!featuredDividerInserted && pinnedSet.has(seriesName)) {
+          const divider = document.createElement('div');
+          divider.className = 'series-divider';
+          divider.textContent = 'Featured Now';
+          el.appendChild(divider);
+          featuredDividerInserted = true;
+        }
+
+        if (!archiveDividerInserted && !pinnedSet.has(seriesName)) {
+          const divider = document.createElement('div');
+          divider.className = 'series-divider';
+          divider.textContent = 'Archive';
+          el.appendChild(divider);
+          archiveDividerInserted = true;
+        }
+
+        el.appendChild(makeSeriesItem(seriesName));
+      });
+    }
+
+    function renderSeriesList() {
+      renderSeriesInto(seriesListEl);
+      renderSeriesInto(mobileSeriesListEl);
+      updateDesktopSelectedState();
+    }
+
+    function makeEpisodeItem(ep, originalIndex) {
+      const row = document.createElement('div');
+      row.className = `episode-item ${mode}` + (originalIndex === currentEpisodeIndex ? ' active' : '');
+
+      const thumb = mode === 'audio'
+        ? (ep.img || ep.seriesImage || FALLBACK_IMAGE)
+        : (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE);
+
+      row.innerHTML = `
+        <div class="episode-item-inner">
+          <button class="thumb-tap" type="button" aria-label="Open ${ep.title || 'episode'}">
+            <img src="${thumb}" alt="">
+          </button>
+          <div class="episode-copy">
+            <div class="episode-title">${ep.title || 'Untitled Sermon'}</div>
+            <div class="episode-sub">${ep.scripture || ep.date || ''}</div>
+          </div>
+        </div>
+      `;
+
+      const selectThisEpisode = () => selectEpisode(ep, originalIndex, row);
+
+      row.querySelector('.thumb-tap').addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        selectThisEpisode();
+      });
+
+      row.addEventListener('click', selectThisEpisode);
+      return row;
+    }
+
+    function renderEpisodesInto(el) {
+      el.innerHTML = '';
+      if (!currentSeries || !sermonData[currentSeries]) return;
+
+      getVisibleEpisodesForSeries(currentSeries).forEach(({ ep, originalIndex }) => {
+        el.appendChild(makeEpisodeItem(ep, originalIndex));
+      });
+    }
+
+    function renderEpisodesList() {
+      renderEpisodesInto(episodesListEl);
+      renderEpisodesInto(mobileEpisodesListEl);
+      updateDesktopSelectedState();
+    }
+
+    async function loadRSSData() {
+      const xmlText = await fetch(RSS_URL).then(r => r.text());
+      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+      const items = Array.from(xml.querySelectorAll('item'));
+      const grouped = {};
+
+      items.forEach((item) => {
+        const rawDescription = item.querySelector('description')?.textContent || '';
+        const parsed = parseDescription(rawDescription);
+
+        const rawTitle = item.querySelector('title')?.textContent?.trim() || 'Untitled Sermon';
+        const split = splitTitleParts(rawTitle);
+
+        const series = parsed.series || split.inferredSeries || 'Other Sermons';
+        const episodeTitle = parsed.title || split.episodeTitle || 'Untitled Sermon';
+
+        const enclosure = item.querySelector('enclosure');
+        const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
+        const itemLink = item.querySelector('link')?.textContent?.trim() || '';
+        const pubDateRaw = item.querySelector('pubDate')?.textContent?.trim() || '';
+
+        let itemImage = '';
+        const itunesImages = item.getElementsByTagName('itunes:image');
+        if (itunesImages && itunesImages[0]) {
+          itemImage = itunesImages[0].getAttribute('href') || '';
+        }
+
+        const videoId = extractYouTubeId(parsed.video);
+
+        if (!grouped[series]) grouped[series] = [];
+
+        grouped[series].push({
+          title: episodeTitle,
+          series,
+          scripture: parsed.scripture || '',
+          by: parsed.by || '',
+          date: parsed.date || '',
+          video: parsed.video || '',
+          videoId,
+          audio: audioUrl,
+          img: itemImage,
+          link: itemLink,
+          extra: parsed.extra || [],
+          sortTimestamp: parseDateToTimestamp(pubDateRaw || parsed.date)
+        });
+      });
+
+      Object.keys(grouped).forEach(series => {
+        const displayOrdered = [...grouped[series]];
+        if (isPinnedSeries(series)) {
+          displayOrdered.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+        } else {
+          displayOrdered.sort((a, b) => a.sortTimestamp - b.sortTimestamp);
+        }
+
+        const displayFirst = displayOrdered[0];
+        const seriesSquareArt = displayFirst?.img || FALLBACK_IMAGE;
+        const seriesWideArt = displayFirst?.videoId ? getWatchThumb(displayFirst.videoId) : FALLBACK_IMAGE;
+
+        grouped[series] = grouped[series].map(ep => ({
+          ...ep,
+          seriesImage: seriesSquareArt,
+          seriesWideImage: seriesWideArt
+        }));
+      });
+
+      const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
+      if (livestreamEpisodes.length) grouped[LIVESTREAMS.name] = livestreamEpisodes;
+
+      const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
+      if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
+
+      sermonData = grouped;
+      archiveSeriesOrder = Object.keys(sermonData).filter(name => name !== LIVESTREAMS.name);
+      currentSeries = getVisibleSeriesOrder()[0] || null;
+    }
+
+    function getVisibleEpisodesForSeries(seriesName) {
+      const items = [...(sermonData[seriesName] || [])];
+      if (isPinnedSeries(seriesName)) {
+        items.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+      } else {
+        items.sort((a, b) => a.sortTimestamp - b.sortTimestamp);
+      }
+      return items.map((ep, visibleIndex) => ({ ep, originalIndex: visibleIndex }));
+    }
+
+    function setMode(nextMode) {
+      mode = nextMode;
+
+      bodyEl.classList.toggle('mode-audio', mode === 'audio');
+      bodyEl.classList.toggle('mode-video', mode === 'video');
+
+      listenBtn.classList.toggle('active', mode === 'audio');
+      watchBtn.classList.toggle('active', mode === 'video');
+
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+
+      stopAndHideVideo();
+      stopAndHideAudio();
+
+      currentSeries = getPrioritySeries(mode)[0] || getVisibleSeriesOrder()[0] || null;
+
+      if (mode === 'audio') {
+        audioPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin listening.' : 'Choose a series to begin listening.';
+        audioPlaceholderEl.style.display = 'flex';
+      } else {
+        videoPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin watching.' : 'Choose a series to begin watching.';
+        videoPlaceholderEl.style.display = 'flex';
+      }
+
+      updateDrawerHeader();
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
+      updateDesktopSelectedState();
+    }
+
+    function resetHome() {
+      currentSeries = getVisibleSeriesOrder()[0] || null;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+
+      clearMediaState();
+
+      if (mode === 'audio') {
+        audioPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin listening.' : 'Choose a series to begin listening.';
+        audioPlaceholderEl.style.display = 'flex';
+      } else {
+        videoPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin watching.' : 'Choose a series to begin watching.';
+        videoPlaceholderEl.style.display = 'flex';
+      }
+
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
+      closeDrawer();
+      updateDesktopSelectedState();
+    }
+
+    openDrawerBtn.addEventListener('click', () => { if (isMobileLayout()) openDrawer(); else openDesktopPlayerWindow(); });
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    drawerOverlayEl.addEventListener('click', closeDrawer);
+
+    listenBtn.addEventListener('click', () => setMode('audio'));
+    watchBtn.addEventListener('click', () => setMode('video'));
+
+    logoReset.addEventListener('click', resetHome);
+
+    desktopChangeSeriesBtn.addEventListener('click', () => {
+      currentEpisodeData = null;
+      currentEpisodeIndex = null;
+      clearMediaState();
+      renderEpisodesList();
+      renderEmptyMeta();
+      updateDesktopSelectedState();
+    });
+
+    audioArtPanelEl.addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      toggleAudioPlayback();
+    });
+
+    audioPlayBadgeEl.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleAudioPlayback();
+    });
+
+    miniSkipBackBtnEl.addEventListener('click', e => {
+      e.stopPropagation();
+      skipAudioBy(-30);
+    });
+
+    miniSkipForwardBtnEl.addEventListener('click', e => {
+      e.stopPropagation();
+      skipAudioBy(30);
+    });
+
+    audioPlayerEl.addEventListener('play', () => setAudioReadyState(true));
+    audioPlayerEl.addEventListener('pause', () => setAudioReadyState(false));
+    audioPlayerEl.addEventListener('ended', () => setAudioReadyState(false));
+
+    window.addEventListener('resize', () => {
+      if (!isMobileLayout()) closeDrawer();
+      updateDesktopSelectedState();
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key !== popupChannel || !event.newValue) return;
+      try {
+        const payload = JSON.parse(event.newValue);
+        if (payload.returnToPage) {
+          restoreFromPopupState(payload);
+        }
+      } catch {}
+    });
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        tryPortraitLock();
+        closeDrawer();
+        updateDesktopSelectedState();
+      }, 200);
+    });
+
+    (async function init() {
+      await tryPortraitLock();
+      await loadRSSData();
+
+      bodyEl.classList.add('mode-audio');
+      listenBtn.classList.add('active');
+      watchBtn.classList.remove('active');
+
+      updateDrawerHeader();
+      buildMainWaveform();
+      updateDesktopLauncherCopy();
+
+      audioPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin listening.' : 'Choose a series to begin listening.';
+      audioPlaceholderEl.style.display = 'flex';
+
+      renderSeriesList();
+      renderEpisodesList();
+      renderEmptyMeta();
+      updateDesktopSelectedState();
+    })();
+  </script>
+</body>
+</html>
