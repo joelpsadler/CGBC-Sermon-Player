@@ -482,9 +482,9 @@
 
     .audio-split {
       display: grid;
-      grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
-      gap: 24px;
-      align-items: stretch;
+      grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
       position: relative;
       z-index: 1;
     }
@@ -494,18 +494,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 320px;
+      min-height: 360px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       transition: transform 0.2s ease;
     }
     .audio-art-panel:hover { transform: translateY(-2px); }
     .audio-art-panel img {
-      width: 100%;
-      max-width: 320px;
+      width: min(100%, 360px);
+      max-width: 360px;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      border-radius: 18px;
+      object-position: center;
+      border-radius: 22px;
       box-shadow: var(--shadow-art-strong);
       background: rgba(255,255,255,0.05);
       display: block;
@@ -513,13 +514,13 @@
 
     .audio-overlay-controls {
       position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       z-index: 4;
     }
 
@@ -527,21 +528,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 52px;
-      height: 52px;
+      min-width: 58px;
+      height: 58px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.48);
+      border: 1px solid rgba(255,255,255,0.16);
       color: #fff;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.28);
       cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease;
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.02em;
-      padding: 0 10px;
+      padding: 0 12px;
     }
     .audio-mini-skip:hover {
       transform: translateY(-1px);
@@ -552,14 +553,14 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px 14px 10px 10px;
+      gap: 14px;
+      padding: 12px 18px 12px 12px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.48);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
       cursor: pointer;
       transition: all 0.25s ease;
       overflow: visible;
@@ -569,44 +570,44 @@
       background: rgba(0,0,0,0.56);
     }
     .audio-feature-card.playing .audio-play-badge {
-      background: rgba(128,159,144,0.34);
-      border-color: rgba(128,159,144,0.50);
+      background: rgba(128,159,144,0.30);
+      border-color: rgba(128,159,144,0.54);
       box-shadow:
-        0 10px 28px rgba(0,0,0,0.25),
-        0 0 22px rgba(128,159,144,0.45),
-        0 0 42px rgba(128,159,144,0.22);
+        0 12px 30px rgba(0,0,0,0.28),
+        0 0 26px rgba(128,159,144,0.40),
+        0 0 52px rgba(128,159,144,0.20);
     }
 
     .audio-play-circle-wrap {
       position: relative;
-      width: 38px;
-      height: 38px;
+      width: 54px;
+      height: 54px;
       flex-shrink: 0;
     }
     .audio-play-circle-wrap::before {
       content: "";
       position: absolute;
-      inset: -5px;
+      inset: -8px;
       border-radius: 999px;
       background:
         conic-gradient(
           from 0deg,
           rgba(128,159,144,0.0) 0deg,
-          rgba(128,159,144,0.0) 235deg,
-          rgba(148, 216, 175, 0.92) 285deg,
-          rgba(128,159,144,0.0) 335deg,
+          rgba(128,159,144,0.0) 218deg,
+          rgba(164, 231, 190, 0.98) 282deg,
+          rgba(128,159,144,0.0) 342deg,
           rgba(128,159,144,0.0) 360deg
         );
-      mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
       opacity: 0;
       transform: rotate(0deg);
       pointer-events: none;
     }
     .audio-feature-card.playing .audio-play-circle-wrap::before {
       opacity: 1;
-      animation: traceRing 1.5s linear infinite;
-      filter: drop-shadow(0 0 6px rgba(148, 216, 175, 0.55));
+      animation: traceRing 1.15s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(164, 231, 190, 0.72));
     }
     @keyframes traceRing {
       from { transform: rotate(0deg); }
@@ -616,29 +617,30 @@
     .audio-play-circle {
       position: absolute;
       inset: 0;
-      width: 38px;
-      height: 38px;
+      width: 54px;
+      height: 54px;
       border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .audio-play-circle svg {
-      width: 18px;
-      height: 18px;
+      width: 24px;
+      height: 24px;
       fill: #fff;
       margin-left: 2px;
     }
 
     .audio-play-label {
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: #fff;
-      opacity: 0.92;
+      opacity: 0.94;
       white-space: nowrap;
     }
     .audio-ready {
@@ -646,74 +648,37 @@
       font-family: 'Poppins', sans-serif;
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.10em;
       opacity: 0.82;
     }
     .audio-feature-card h3 {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-family: 'Poppins', sans-serif;
       font-size: 34px;
-      line-height: 1.12;
-      letter-spacing: -0.01em;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
     }
     .audio-feature-card .audio-series {
       font-family: 'Poppins', sans-serif;
       color: #ffffff;
       opacity: 0.92;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       font-size: 18px;
     }
+    /* Beginner note: the old decorative waveform was removed to keep the player cleaner and more stable across screen sizes. */
+    .waveform { display: none !important; }
 
-    .waveform {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 3px;
-      height: 132px;
-      margin: 10px 0 16px;
-      width: 100%;
-      max-width: 100%;
-      opacity: 0.98;
-      padding: 14px 14px 10px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.18));
-      border: 1px solid rgba(255,255,255,0.07);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    .audio-controls-row {
+      display: block;
+      margin-top: 6px;
     }
-    .waveform span {
-      flex: 1 1 0;
-      min-width: 3px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(165,190,176,1), rgba(128,159,144,0.18));
-      box-shadow: 0 0 10px rgba(128,159,144,0.22);
-      transform-origin: bottom center;
-      transform: scaleY(0.42);
-      opacity: 0.88;
-      animation-play-state: paused;
-    }
-    .audio-feature-card.playing .waveform span {
-      animation-name: waveMotion;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-in-out;
-      animation-play-state: running;
-    }
-
-    @keyframes waveMotion {
-      0%   { transform: scaleY(0.22); opacity: 0.55; }
-      25%  { transform: scaleY(0.78); opacity: 0.76; }
-      50%  { transform: scaleY(1.20); opacity: 1; }
-      75%  { transform: scaleY(0.56); opacity: 0.82; }
-      100% { transform: scaleY(1.48); opacity: 1; }
-    }
-
-    .audio-controls-row { display: block; }
     #audioPlayer {
       width: 100%;
       display: none;
       margin-bottom: 0;
-      border-radius: 12px;
-      min-height: 46px;
+      border-radius: 14px;
+      min-height: 56px;
+      background: rgba(255,255,255,0.04);
     }
 
     .meta {
@@ -1063,21 +1028,27 @@
         min-height: 220px;
       }
       .audio-split {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
+      display: grid;
+      grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+      gap: 28px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
       .audio-art-panel { min-height: auto; }
-      .audio-art-panel img { max-width: min(420px, 100%); }
-      .meta h2 { font-size: 24px; }
-      .mode-toggle { width: 100%; }
+      .audio-art-panel img {
+      width: min(100%, 360px);
+      max-width: 360px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 22px;
+      box-shadow: var(--shadow-art-strong);
+      background: rgba(255,255,255,0.05);
+      display: block;
     }
 
     @media (max-width: 640px) {
-      .waveform {
-        height: 108px;
-        gap: 2px;
-        padding: 10px 10px 8px;
-      }
       .header-wrap {
         padding: calc(6px + var(--safe-top)) 8px 6px;
       }
@@ -1112,37 +1083,123 @@
         padding-right: 10px;
       }
       .audio-overlay-controls {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-        gap: 8px;
-      }
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 4;
+    }
       .audio-mini-skip {
-        min-width: 46px;
-        height: 46px;
-        font-size: 11px;
-        padding: 0 8px;
-      }
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.48);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      padding: 0 12px;
+    }
       .audio-play-badge {
-        gap: 10px;
-        padding: 8px 12px 8px 8px;
-      }
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px 12px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.48);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      overflow: visible;
+    }
       .audio-play-circle-wrap,
       .audio-play-circle {
-        width: 34px;
-        height: 34px;
-      }
-      .audio-play-label { font-size: 10px; }
-      .audio-feature-card { padding: 16px; }
-      .audio-feature-card h3 { font-size: 24px; }
-      .audio-feature-card .audio-series { font-size: 15px; }
-      .waveform {
-        height: 80px;
-        gap: 5px;
-      }
-      .meta { padding: 16px; }
-      .meta h2 { font-size: 22px; }
-      .drawer-title-wrap h2 { font-size: 14px; }
+      position: absolute;
+      inset: 0;
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.20);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+      .audio-play-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0.94;
+      white-space: nowrap;
+    }
+
+
+    /* Popup route: same site, smaller window, mobile-style player. */
+    body.popup-route .header-wrap,
+    body.popup-route .col-series,
+    body.popup-route .col-episodes,
+    body.popup-route #desktopChangeSeriesBtn,
+    body.popup-route #metaBox,
+    body.popup-route #mobileDrawer,
+    body.popup-route #drawerOverlay {
+      display: none !important;
+    }
+    body.popup-route .top-controls {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: rgba(12,12,12,0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    body.popup-route .top-controls-inner {
+      justify-content: stretch;
+    }
+    body.popup-route .mode-toggle {
+      grid-template-columns: 1fr;
+      width: 100%;
+      max-width: none;
+    }
+    body.popup-route .listen-watch-group {
+      width: 100%;
+    }
+    body.popup-route #openDrawerBtn {
+      display: block !important;
+    }
+    body.popup-route .layout {
+      display: block;
+      height: auto;
+      min-height: 0;
+      overflow: visible;
+    }
+    body.popup-route .col-player {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 12px 12px 18px;
+      overflow: visible;
+    }
+    body.popup-route .popup-note {
+      display: none !important;
     }
 
     .popup-note {
@@ -1278,11 +1335,9 @@
             <h3 id="audioFeatureTitle">Select a sermon</h3>
             <div class="audio-series" id="audioFeatureSeries"></div>
 
-            <div class="waveform" id="mainWaveform" aria-hidden="true"></div>
-
             <div class="audio-controls-row">
               <audio id="audioPlayer" controls preload="none"></audio>
-              <div class="popup-note" id="popupNote">Desktop audio can also be launched into a separate player window from the top right button.</div>
+              <div class="popup-note" id="popupNote">Desktop audio can also launch this same player into a small separate window, so listeners can keep the sermon running while they work.</div>
             </div>
           </div>
         </div>
@@ -1361,6 +1416,19 @@
 
     function isMobileLayout() {
       return window.innerWidth <= 980;
+    }
+
+    // Beginner note: the popup player is just this same page opened in a smaller window with a query flag.
+    function isPopupRoute() {
+      return new URLSearchParams(window.location.search).get('popup') === '1';
+    }
+
+    function readPopupState() {
+      try {
+        return JSON.parse(localStorage.getItem(popupChannel) || 'null');
+      } catch {
+        return null;
+      }
     }
 
     function updateDesktopSelectedState() {
@@ -1478,9 +1546,10 @@
 
     // Beginner note: this updates a few layout states so mobile and desktop each feel intentional.
     function updatePlayerSurfaceState() {
-      const mobileActive = isMobileLayout() && !!currentEpisodeData;
+      const mobileActive = isMobileLayout() && !!currentEpisodeData && !isPopupRoute();
       bodyEl.classList.toggle('mobile-media-active', mobileActive);
-      if (popupNoteEl) popupNoteEl.style.display = (!isMobileLayout() && mode === 'audio') ? 'block' : 'none';
+      bodyEl.classList.toggle('popup-route', isPopupRoute());
+      if (popupNoteEl) popupNoteEl.style.display = (!isMobileLayout() && mode === 'audio' && !isPopupRoute()) ? 'block' : 'none';
     }
 
     // Beginner note: the desktop button becomes a real launcher on desktop, but still opens the slide-out menu on mobile.
@@ -1488,7 +1557,10 @@
       const topLine = openDrawerBtn.querySelector('.top-line');
       const bottomLine = openDrawerBtn.querySelector('.bottom-line');
       if (!topLine || !bottomLine) return;
-      if (isMobileLayout()) {
+      if (isPopupRoute()) {
+        topLine.textContent = 'Return';
+        bottomLine.textContent = 'To Site';
+      } else if (isMobileLayout()) {
         topLine.textContent = 'Sermon';
         bottomLine.textContent = 'Selection';
       } else if (mode === 'audio') {
@@ -1500,22 +1572,6 @@
       }
     }
 
-    // Beginner note: this creates extra skinny bars so the waveform feels richer without hand-writing dozens of spans.
-    function buildMainWaveform() {
-      const host = document.getElementById('mainWaveform');
-      if (!host || host.children.length) return;
-      for (let i = 0; i < 56; i += 1) {
-        const bar = document.createElement('span');
-        const base = 14 + ((i * 17) % 70);
-        const duration = (0.52 + ((i * 29) % 80) / 100).toFixed(2);
-        const delay = (((i * 11) % 37) / 100).toFixed(2);
-        bar.style.height = `${base}%`;
-        bar.style.animationDuration = `${duration}s`;
-        bar.style.animationDelay = `${delay}s`;
-        host.appendChild(bar);
-      }
-    }
-
     function savePopupState(extra = {}) {
       if (!currentEpisodeData) return;
       const payload = {
@@ -1524,6 +1580,7 @@
         episode: currentEpisodeData,
         currentTime: mode === 'audio' ? (audioPlayerEl.currentTime || 0) : 0,
         isPlaying: mode === 'audio' ? !audioPlayerEl.paused : true,
+        resumePlaying: mode === 'audio' ? !audioPlayerEl.paused : true,
         ...extra
       };
       localStorage.setItem(popupChannel, JSON.stringify(payload));
@@ -1539,6 +1596,7 @@
       currentSeries = payload.episode.series || currentSeries;
       renderSeriesList();
       renderEpisodesList();
+      updateDrawerHeader();
       if (mode === 'audio') {
         playAudio(payload.episode);
         audioPlayerEl.currentTime = payload.currentTime || 0;
@@ -1551,67 +1609,32 @@
       updatePlayerSurfaceState();
       updateDesktopLauncherCopy();
     }
-
-    function getPopupHtml() {
-      return `<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CGBC Player</title>
-<style>
-body{margin:0;background:#111;color:#f4f4f4;font-family:Lato,Arial,sans-serif;padding:14px}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.18));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:14px;box-shadow:0 20px 48px rgba(0,0,0,.45)}
-.label{font:700 11px Poppins,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:8px}
-.title{font:700 18px Poppins,Arial,sans-serif;line-height:1.15;margin:0 0 6px}
-.sub{font:600 14px Poppins,Arial,sans-serif;opacity:.86;margin-bottom:12px}
-.row{display:flex;gap:12px;align-items:center}
-.art{width:90px;height:90px;border-radius:18px;object-fit:cover;box-shadow:0 14px 28px rgba(0,0,0,.35)}
-.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-button,a{border:none;text-decoration:none;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:11px 14px;font:700 14px Poppins,Arial,sans-serif;cursor:pointer}
-.primary{background:linear-gradient(180deg,rgba(128,159,144,.58),rgba(110,136,123,.42));color:#111}
-.wave{display:flex;align-items:flex-end;gap:2px;height:44px;margin:14px 0;padding:8px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
-.wave span{flex:1;min-width:2px;border-radius:999px;background:linear-gradient(180deg,rgba(165,190,176,1),rgba(128,159,144,.18));transform-origin:bottom center;animation:waveMotion .8s ease-in-out infinite alternate}
-video,iframe,audio{width:100%;border-radius:18px;background:#000;border:0}
-@keyframes waveMotion{0%{transform:scaleY(.25);opacity:.55}50%{transform:scaleY(.9);opacity:1}100%{transform:scaleY(1.45);opacity:.95}}
-</style></head><body><div class="card" id="app"></div>
-<script>
-const key='${popupChannel}';
-const state = JSON.parse(localStorage.getItem(key) || '{}');
-const app = document.getElementById('app');
-function writeBack(extra){ localStorage.setItem(key, JSON.stringify({ ...state, ...extra })); }
-if(state.mode==='audio' && state.episode){
-  app.innerHTML = '<div class="label">Background Audio</div><div class="row"><img class="art" src="'+(state.episode.img||state.episode.seriesImage||'')+'"><div style="flex:1;min-width:0"><h1 class="title">'+(state.episode.title||'CGBC Sermon')+'</h1><div class="sub">'+(state.episode.series||'')+'</div></div></div><div class="wave" id="wv"></div><audio id="audio" controls autoplay src="'+(state.episode.audio||'')+'"></audio><div class="controls"><button id="back">-30</button><button class="primary" id="toggle">Pause</button><button id="fwd">+30</button><button id="return">Return to Site Player</button></div>';
-  const a=document.getElementById('audio'); a.currentTime = state.currentTime || 0;
-  const w=document.getElementById('wv'); for(let i=0;i<40;i++){const s=document.createElement('span'); s.style.height=(16+((i*13)%70))+'%'; s.style.animationDuration=(.5+((i*23)%80)/100)+'s'; s.style.animationDelay=(((i*7)%35)/100)+'s'; w.appendChild(s);}
-  document.getElementById('back').onclick=()=>a.currentTime=Math.max(0,(a.currentTime||0)-30);
-  document.getElementById('fwd').onclick=()=>a.currentTime=Math.min((a.duration||1e9),(a.currentTime||0)+30);
-  document.getElementById('toggle').onclick=()=>{if(a.paused){a.play();document.getElementById('toggle').textContent='Pause';}else{a.pause();document.getElementById('toggle').textContent='Play';}};
-  document.getElementById('return').onclick=()=>{writeBack({returnToPage:true,currentTime:a.currentTime||0,resumePlaying:!a.paused}); window.close();};
-  window.addEventListener('beforeunload', ()=>writeBack({returnToPage:true,currentTime:a.currentTime||0,resumePlaying:!a.paused}));
-} else if(state.episode) {
-  const vid = state.episode.videoId ? 'https://www.youtube.com/embed/'+state.episode.videoId+'?autoplay=1&playsinline=1&rel=0&modestbranding=1' : '';
-  app.innerHTML = '<div class="label">Mini View</div><h1 class="title">'+(state.episode.title||'CGBC Sermon')+'</h1><div class="sub">'+(state.episode.series||'')+'</div>'+(vid?'<iframe allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="'+vid+'" style="aspect-ratio:16/9"></iframe>':'<div class="sub">No video available.</div>')+'<div class="controls"><button id="return">Return to Site Player</button>'+(state.episode.video?'<a href="'+state.episode.video+'" target="_blank" rel="noopener noreferrer">YouTube</a>':'')+'</div>';
-  document.getElementById('return').onclick=()=>{writeBack({returnToPage:true,resumePlaying:true}); window.close();};
-  window.addEventListener('beforeunload', ()=>writeBack({returnToPage:true,resumePlaying:true}));
-}
-<\/script></body></html>`;
-    }
-
+    // Beginner note: instead of writing a fake mini player into a blank popup,
+    // we open this same page in a smaller window and let the responsive layout do the work.
     function openDesktopPlayerWindow() {
+      if (isPopupRoute()) {
+        savePopupState({ returnToPage: true, resumePlaying: mode === 'audio' ? !audioPlayerEl.paused : true });
+        window.close();
+        return;
+      }
+
       if (isMobileLayout() || !currentEpisodeData) {
         openDrawer();
         return;
       }
-      savePopupState();
-      const size = mode === 'audio' ? 'width=420,height=520' : 'width=520,height=420';
-      popupWindowRef = window.open('', 'cgbcDesktopPlayer', `${size},resizable=yes,scrollbars=no`);
+
+      savePopupState({ openedFromMain: true });
+
+      const popupUrl = new URL(window.location.href);
+      popupUrl.searchParams.set('popup', '1');
+      popupUrl.searchParams.set('mode', mode);
+      const size = mode === 'audio' ? 'width=460,height=860' : 'width=460,height=900';
+      popupWindowRef = window.open(popupUrl.toString(), 'cgbcDesktopPlayer', `${size},resizable=yes,scrollbars=yes`);
       if (!popupWindowRef) return;
-      popupWindowRef.document.open();
-      popupWindowRef.document.write(getPopupHtml());
-      popupWindowRef.document.close();
+
       if (mode === 'audio') {
         audioPlayerEl.pause();
         setAudioReadyState(false);
-      } else {
-        stopAndHideVideo();
-        renderMeta(currentEpisodeData, false);
       }
     }
 
@@ -2297,7 +2320,7 @@ if(state.mode==='audio' && state.episode){
       updateDesktopSelectedState();
     }
 
-    openDrawerBtn.addEventListener('click', () => { if (isMobileLayout()) openDrawer(); else openDesktopPlayerWindow(); });
+    openDrawerBtn.addEventListener('click', () => { if (isPopupRoute()) openDesktopPlayerWindow(); else if (isMobileLayout()) openDrawer(); else openDesktopPlayerWindow(); });
     closeDrawerBtn.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
 
@@ -2362,7 +2385,19 @@ if(state.mode==='audio' && state.episode){
       }, 200);
     });
 
+    // Beginner note: if the popup player window closes, we write its last state back so the main page can restore it.
+    window.addEventListener('beforeunload', () => {
+      if (!isPopupRoute() || !currentEpisodeData) return;
+      savePopupState({
+        returnToPage: true,
+        resumePlaying: mode === 'audio' ? !audioPlayerEl.paused : true
+      });
+    });
+
     (async function init() {
+      const popupState = readPopupState();
+      if (isPopupRoute()) bodyEl.classList.add('popup-route');
+
       await tryPortraitLock();
       await loadRSSData();
 
@@ -2371,7 +2406,6 @@ if(state.mode==='audio' && state.episode){
       watchBtn.classList.remove('active');
 
       updateDrawerHeader();
-      buildMainWaveform();
       updateDesktopLauncherCopy();
 
       audioPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin listening.' : 'Choose a series to begin listening.';
@@ -2381,6 +2415,10 @@ if(state.mode==='audio' && state.episode){
       renderEpisodesList();
       renderEmptyMeta();
       updateDesktopSelectedState();
+
+      if (isPopupRoute() && popupState && popupState.episode) {
+        restoreFromPopupState(popupState);
+      }
     })();
   </script>
 </body>
