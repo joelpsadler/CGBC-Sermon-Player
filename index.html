@@ -125,6 +125,33 @@
       display: flex;
       justify-content: center;
     }
+    .listen-watch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .mobile-nav-logo {
+      display: none;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 8px 18px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-nav-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .mode-toggle {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -482,9 +509,9 @@
        The art is the anchor, the clock is the status cue, and the metadata stays below. */
     .audio-split {
       display: grid;
-      grid-template-columns: minmax(240px, 344px) minmax(0, 1fr);
-      gap: 22px;
-      align-items: center;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: 30px;
+      align-items: start;
       position: relative;
       z-index: 1;
     }
@@ -502,7 +529,7 @@
     }
     .audio-art-panel img {
       width: 100%;
-      max-width: 344px;
+      max-width: 300px;
       aspect-ratio: 1 / 1;
       object-fit: cover;
       object-position: center;
@@ -526,7 +553,7 @@
     .audio-transport-glass {
       pointer-events: auto;
       position: relative;
-      width: min(100%, 252px);
+      width: min(100%, 244px);
       padding: 4px 5px;
       border-radius: 999px;
       background: linear-gradient(180deg, rgba(20,20,20,0.58), rgba(10,10,10,0.42));
@@ -562,7 +589,8 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 6px;
+      padding-top: 8px;
     }
 
     .audio-ready {
@@ -576,24 +604,24 @@
     .audio-feature-card h3 {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      font-size: 32px;
+      font-size: 34px;
       line-height: 1.08;
     }
     .audio-feature-card .audio-series {
       font-family: 'Poppins', sans-serif;
       color: #ffffff;
       opacity: 0.92;
-      margin: -3px 0 0;
-      font-size: 17px;
+      margin: -1px 0 2px;
+      font-size: 18px;
     }
 
     .audio-clock-row {
       display: flex;
       align-items: end;
       justify-content: space-between;
-      gap: 8px;
+      gap: 12px;
       flex-wrap: wrap;
-      padding: 1px 0 0;
+      padding: 6px 0 2px;
     }
     .audio-clock-block {
       display: flex;
@@ -1234,25 +1262,15 @@
     }
 
     @media (max-width: 640px) {
-      .header-wrap {
-        padding: calc(6px + var(--safe-top)) 8px 6px;
-      }
-      .logo-panel {
-        padding: 4px 8px;
-        border-radius: 14px;
-      }
-      .logo-panel img {
-        width: min(92vw, 620px);
-      }
       .top-controls {
         padding: 8px 8px 10px;
       }
       .mode-toggle {
         grid-template-columns: 2fr 1fr;
-        gap: 10px;
+        gap: 8px;
       }
       .mode-btn-shell {
-        min-height: 48px;
+        min-height: 46px;
         padding: 0 8px 0 10px;
         font-size: 13px;
         gap: 8px;
@@ -1372,7 +1390,11 @@
   <div class="top-controls">
     <div class="top-controls-inner">
       <div class="mode-toggle">
-        <div class="listen-watch-group">
+        <div class="listen-watch-wrap">
+          <div class="mobile-nav-logo" aria-hidden="true">
+            <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1073708/TS_CGBC_Pog.png" alt="CGBC logo">
+          </div>
+          <div class="listen-watch-group">
           <button class="mode-btn active" id="listenBtn" type="button">
             <span class="mode-btn-shell">
               <span class="icon" aria-hidden="true">
@@ -1396,6 +1418,7 @@
               </span>
             </span>
           </button>
+          </div>
         </div>
 
         <button class="mode-btn" id="openDrawerBtn" type="button">
