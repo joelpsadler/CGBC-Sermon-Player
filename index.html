@@ -4564,6 +4564,82 @@
       }
     }
 
+
+    /* V53: desktop top break
+       - compact controls stop at the left columns
+       - player/video rises to the top beside them
+       - keep a little top padding for depth */
+    @media (min-width: 981px) {
+      .top-controls {
+        position: absolute !important;
+        left: 18px !important;
+        top: 12px !important;
+        width: 420px !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        z-index: 25 !important;
+      }
+
+      .top-controls-inner {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+      }
+
+      .mode-toggle {
+        grid-template-columns: 78px 160px 160px !important;
+        gap: 12px !important;
+        width: 100% !important;
+      }
+
+      .mobile-nav-logo {
+        width: 78px !important;
+        height: 62px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 56px !important;
+      }
+
+      .layout {
+        height: calc(100vh - 16px) !important;
+        margin-top: 0 !important;
+      }
+
+      /* Left columns start under the floating controls */
+      .col-series,
+      .col-episodes {
+        padding-top: 92px !important;
+      }
+
+      /* Player rises up beside the controls */
+      .col-player {
+        padding-top: 14px !important;
+      }
+
+      body.desktop-selected .col-player {
+        padding-top: 14px !important;
+      }
+
+      body.desktop-selected .col-player .audio-feature-card,
+      body.desktop-selected .col-player #videoShell,
+      body.desktop-selected .col-player .meta {
+        transform: translateY(0) !important;
+      }
+
+      /* Give the raised player a little breathing room so it feels intentional */
+      .audio-feature-card,
+      #videoShell {
+        margin-top: 6px !important;
+      }
+
+      #playerSection {
+        scroll-margin-top: 22px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
