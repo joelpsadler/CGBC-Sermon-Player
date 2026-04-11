@@ -3671,6 +3671,104 @@
       }
     }
 
+
+    /* V43: desktop control width pass */
+    @media (min-width: 981px) {
+      .audio-art-panel {
+        gap: 14px !important;
+      }
+
+      .audio-art-panel img {
+        max-width: 332px !important;
+      }
+
+      .audio-transport-overlay {
+        margin-top: 8px !important;
+      }
+
+      .audio-transport-glass {
+        width: min(100%, 392px) !important;
+        max-width: 392px !important;
+        padding: 6px 7px !important;
+      }
+
+      .audio-transport {
+        grid-template-columns: 68px minmax(0, 1fr) 68px !important;
+        gap: 10px !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 68px !important;
+        width: 68px !important;
+        height: 68px !important;
+        font-size: 24px !important;
+        padding: 0 12px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 68px !important;
+        padding: 8px 18px 8px 8px !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 8px 8px 8px 18px !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 48px !important;
+        height: 48px !important;
+      }
+
+      .audio-play-circle-wrap {
+        margin-right: 16px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 24px !important;
+        height: 24px !important;
+      }
+
+      .audio-play-text-wrap {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-label {
+        font-size: 18px !important;
+        letter-spacing: 0.04em !important;
+        white-space: nowrap !important;
+      }
+
+      .audio-play-dots {
+        min-width: 2.2em !important;
+      }
+
+      .audio-content {
+        gap: 8px !important;
+        padding-top: 12px !important;
+      }
+
+      .audio-feature-card h3 {
+        font-size: 40px !important;
+      }
+
+      .audio-feature-card .audio-series {
+        font-size: 20px !important;
+      }
+
+      .audio-clock-row {
+        gap: 18px !important;
+        padding: 10px 0 4px !important;
+      }
+
+      .audio-clock-time {
+        font-size: clamp(36px, 4.2vw, 58px) !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
