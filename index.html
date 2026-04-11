@@ -5023,103 +5023,12 @@
     }
 
 
-    /* V59: desktop series-column hierarchy pass
-       - make series column feel slightly more primary than episodes
-       - larger thumbs and text in series column only
-       - episode column stays a bit smaller for hierarchy */
+    /* V62: revert thumbnail sizing changes, keep only larger desktop labels/badges
+       - series and episodes return to the same stable thumbnail sizing behavior
+       - keep cleaner no-band / no-divider desktop shell
+       - preserve stronger column headings and status pills */
     @media (min-width: 981px) {
-      /* Series column gets slightly larger visual weight */
-      .col-series {
-        padding-right: 18px !important;
-      }
-
-      .col-series .series-item-inner {
-        gap: 16px !important;
-        padding: 12px !important;
-      }
-
-      .col-series .thumb-tap img,
-      .col-series .thumb-shell img,
-      .col-series .series-thumb {
-        width: 92px !important;
-        height: 92px !important;
-        border-radius: 15px !important;
-      }
-
-      .col-series .series-title {
-        font-size: 18px !important;
-        line-height: 1.12 !important;
-        font-weight: 600 !important;
-      }
-
-      .col-series .series-meta,
-      .col-series .series-subtitle,
-      .col-series .series-description {
-        font-size: 12.5px !important;
-      }
-
-      .col-series .series-tag,
-      .col-series .pill,
-      .col-series .status-pill {
-        font-size: 10.5px !important;
-        padding: 4px 8px !important;
-      }
-
-      /* Episode column stays slightly tighter/smaller */
-      .col-episodes .episode-item-inner {
-        gap: 12px !important;
-        padding: 9px !important;
-      }
-
-      .col-episodes .thumb-tap img,
-      .col-episodes .thumb-shell img,
-      .col-episodes .episode-thumb {
-        width: 82px !important;
-        height: 82px !important;
-        border-radius: 13px !important;
-      }
-
-      .col-episodes .episode-title {
-        font-size: 15px !important;
-        line-height: 1.14 !important;
-        font-weight: 500 !important;
-      }
-
-      .col-episodes .episode-meta,
-      .col-episodes .episode-subtitle,
-      .col-episodes .episode-description,
-      .col-episodes .episode-date {
-        font-size: 12px !important;
-      }
-    }
-
-
-    /* V60: desktop image aspect + label/badge size polish
-       - let widescreen artwork stay widescreen where used
-       - increase SERIES / EPISODES headings
-       - increase LIVE / CURRENT / specials badges */
-    @media (min-width: 981px) {
-      /* Make series thumbnails use natural aspect ratio instead of forced square */
-      .col-series .thumb-tap img,
-      .col-series .thumb-shell img,
-      .col-series .series-thumb {
-        width: 122px !important;
-        height: 84px !important;
-        object-fit: cover !important;
-        border-radius: 15px !important;
-      }
-
-      /* Keep episodes a little smaller, but also widescreen-friendly */
-      .col-episodes .thumb-tap img,
-      .col-episodes .thumb-shell img,
-      .col-episodes .episode-thumb {
-        width: 110px !important;
-        height: 76px !important;
-        object-fit: cover !important;
-        border-radius: 13px !important;
-      }
-
-      /* Stronger section labels */
+      /* Turn up the desktop column headings only */
       .section-title {
         font-size: 16px !important;
         letter-spacing: 0.04em !important;
@@ -5131,107 +5040,15 @@
         margin-bottom: 0 !important;
       }
 
-      /* Bigger series text */
-      .col-series .series-title {
-        font-size: 19px !important;
-        line-height: 1.12 !important;
-        font-weight: 600 !important;
-      }
-
-      .col-series .series-meta,
-      .col-series .series-subtitle,
-      .col-series .series-description {
-        font-size: 13px !important;
-      }
-
-      /* Slightly stronger episode title too */
-      .col-episodes .episode-title {
-        font-size: 16px !important;
-        line-height: 1.14 !important;
-        font-weight: 500 !important;
-      }
-
-      .col-episodes .episode-meta,
-      .col-episodes .episode-subtitle,
-      .col-episodes .episode-description,
-      .col-episodes .episode-date {
-        font-size: 12.5px !important;
-      }
-
-      /* Bigger status badges */
-      .col-series .series-tag,
-      .col-series .pill,
-      .col-series .status-pill,
-      .col-episodes .series-tag,
-      .col-episodes .pill,
-      .col-episodes .status-pill {
+      /* Turn up the badges without changing thumbnail geometry */
+      .series-tag,
+      .pill,
+      .status-pill {
         font-size: 11.5px !important;
         font-weight: 600 !important;
         padding: 5px 10px !important;
         border-radius: 999px !important;
         letter-spacing: 0.02em !important;
-      }
-    }
-
-
-    /* V61: mode-aware desktop thumbnails
-       - audio stays square
-       - video stays widescreen
-       - keep the larger labels/badges from V60 */
-    @media (min-width: 981px) {
-      /* Undo the shared desktop thumb sizing from V60 */
-      .col-series .thumb-tap img,
-      .col-series .thumb-shell img,
-      .col-series .series-thumb,
-      .col-episodes .thumb-tap img,
-      .col-episodes .thumb-shell img,
-      .col-episodes .episode-thumb {
-        object-fit: cover !important;
-      }
-
-      /* AUDIO MODE: square artwork */
-      body.mode-audio .col-series .thumb-tap img,
-      body.mode-audio .col-series .thumb-shell img,
-      body.mode-audio .col-series .series-thumb {
-        width: 92px !important;
-        height: 92px !important;
-        border-radius: 15px !important;
-      }
-
-      body.mode-audio .col-episodes .thumb-tap img,
-      body.mode-audio .col-episodes .thumb-shell img,
-      body.mode-audio .col-episodes .episode-thumb {
-        width: 82px !important;
-        height: 82px !important;
-        border-radius: 13px !important;
-      }
-
-      /* VIDEO MODE: widescreen artwork */
-      body.mode-video .col-series .thumb-tap img,
-      body.mode-video .col-series .thumb-shell img,
-      body.mode-video .col-series .series-thumb {
-        width: 122px !important;
-        height: 84px !important;
-        border-radius: 15px !important;
-      }
-
-      body.mode-video .col-episodes .thumb-tap img,
-      body.mode-video .col-episodes .thumb-shell img,
-      body.mode-video .col-episodes .episode-thumb {
-        width: 110px !important;
-        height: 76px !important;
-        border-radius: 13px !important;
-      }
-
-      /* Keep text blocks aligned cleanly with either aspect ratio */
-      .col-series .series-item-inner,
-      .col-episodes .episode-item-inner {
-        align-items: flex-start !important;
-      }
-
-      .col-series .series-text,
-      .col-episodes .episode-text {
-        min-width: 0 !important;
       }
     }
 
