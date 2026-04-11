@@ -5234,16 +5234,50 @@
   </div>
 
   <script>
-    const CURRENT_SERIES = 'Romans Chapter 12';
-    const SECONDARY_SERIES = 'The Rapture';
-    const CURRENT_SPECIALS = '2026 Specials';
+    /* ========================================================================
+       ======================= EDIT_HERE_MAIN_CONFIG ========================
+       Beginner note:
+       This is the main section to update when your current sermon focus changes.
+       Search for: EDIT_HERE_MAIN_CONFIG
+
+       WHAT TO EDIT MOST OFTEN:
+       1) SHARED_PINNED_CURRENT_ITEMS
+          - These appear in BOTH Audio and Video when matching sermon media exists.
+          - When a current item is no longer current, simply remove it from this list.
+          - It will automatically fall back into its normal archive location.
+          - Example formats:
+              'Romans Chapter 12'
+              'Eschatology: The Rapture'
+              '2026 Specials'
+
+       2) LIVESTREAMS
+          - Video only
+          - Always pinned at the very top in Video mode
+
+       3) VIDEO_ONLY_ARCHIVE
+          - Guest speakers / video-only archive
+          - Always pinned at the very bottom in Video mode
+       ======================================================================== */
+
+    const SHARED_PINNED_CURRENT_ITEMS = [
+      /* EDIT_HERE_PINNED_CURRENT:
+         Keep these in the order you want them shown.
+         Remove old current items here and add new ones here. */
+      'Romans Chapter 12',
+      'The Rapture',
+      '2026 Specials'
+    ];
 
     const LIVESTREAMS = {
+      /* EDIT_HERE_LIVESTREAMS:
+         Change only if the livestream playlist or display name changes. */
       name: 'Livestreams',
       playlistId: 'PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv'
     };
 
     const VIDEO_ONLY_ARCHIVE = {
+      /* EDIT_HERE_GUEST_SPEAKERS:
+         This stays video-only and always sorts to the bottom of Video mode. */
       name: 'CGBC Guest Speaker',
       playlistId: 'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW'
     };
@@ -5414,6 +5448,115 @@
       };
     }
 
+    /* ========================================================================
+       ====================== EDIT_HERE_PARSING_NOTES =========================
+       Beginner note:
+       This section is the foundation for the future grouped navigator.
+       Search for: EDIT_HERE_PARSING_NOTES
+
+       It does NOT fully replace the current navigator yet.
+       This first pass adds the shared taxonomy / classification layer safely
+       so later UI passes can use the same data on desktop and mobile.
+
+       CONTENT MODEL TARGET:
+       - Pinned Current Items
+       - Bible Books
+       - Standalone Series
+       - Year Specials
+       - By Date
+       - Video-only outliers:
+         Livestreams at the top
+         Guest Speakers at the bottom
+       ======================================================================== */
+
+    const BIBLE_BOOK_NAMES = [
+      'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
+      '1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra',
+      'Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon',
+      'Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos',
+      'Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah',
+      'Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians',
+      '2 Corinthians','Galatians','Ephesians','Philippians','Colossians',
+      '1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon',
+      'Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'
+    ];
+
+    function normalizeWhitespace(value) {
+      return (value || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function detectBibleBook(value) {
+      const clean = normalizeWhitespace(value);
+      if (!clean) return '';
+      const lower = clean.toLowerCase();
+
+      for (const book of BIBLE_BOOK_NAMES) {
+        const bookLower = book.toLowerCase();
+        if (lower === bookLower) return book;
+        if (lower.startsWith(bookLower + ' ')) return book;
+        if (lower.includes(' ' + bookLower + ' ')) return book;
+        if (lower.endsWith(' ' + bookLower)) return book;
+      }
+      return '';
+    }
+
+    function parseStandaloneParentChild(seriesName) {
+      const clean = normalizeWhitespace(seriesName);
+      if (!clean.includes(':')) {
+        return {
+          parent: clean,
+          child: ''
+        };
+      }
+
+      const parts = clean.split(':').map(part => normalizeWhitespace(part)).filter(Boolean);
+      if (parts.length < 2) {
+        return {
+          parent: clean,
+          child: ''
+        };
+      }
+
+      return {
+        parent: parts[0],
+        child: parts.slice(1).join(': ')
+      };
+    }
+
+    function inferYearFromDate(value) {
+      const timestamp = parseDateToTimestamp(value);
+      if (!timestamp) return '';
+      return String(new Date(timestamp).getFullYear());
+    }
+
+    function classifySermonEntry(entry) {
+      const seriesName = normalizeWhitespace(entry.series || '');
+      const scripture = normalizeWhitespace(entry.scripture || '');
+      const bookFromSeries = detectBibleBook(seriesName);
+      const bookFromScripture = detectBibleBook(scripture);
+      const bibleBook = bookFromSeries || bookFromScripture;
+
+      const standaloneParts = parseStandaloneParentChild(seriesName);
+      const inferredYear = inferYearFromDate(entry.date || '');
+
+      const isPinnedCurrent = SHARED_PINNED_CURRENT_ITEMS.includes(seriesName);
+      const isYearSpecial = /special/i.test(seriesName) && /\b20\d{2}\b/.test(seriesName);
+      const isStandaloneWithMiniSeries = !bibleBook && !!standaloneParts.child;
+      const isStandaloneSeries = !bibleBook && !isYearSpecial;
+
+      return {
+        isPinnedCurrent,
+        bibleBook,
+        isYearSpecial,
+        isStandaloneSeries,
+        isStandaloneWithMiniSeries,
+        standaloneParent: isStandaloneWithMiniSeries ? standaloneParts.parent : seriesName,
+        standaloneChild: isStandaloneWithMiniSeries ? standaloneParts.child : '',
+        specialYear: isYearSpecial ? (seriesName.match(/\b20\d{2}\b/)?.[0] || inferredYear) : '',
+        dateYear: inferredYear
+      };
+    }
+
     function extractYouTubeId(url) {
       if (!url) return '';
       try {
@@ -5452,17 +5595,20 @@
 
     function isPinnedSeries(seriesName) {
       return seriesName === LIVESTREAMS.name ||
-             seriesName === CURRENT_SERIES ||
-             seriesName === SECONDARY_SERIES ||
-             seriesName === CURRENT_SPECIALS;
+             SHARED_PINNED_CURRENT_ITEMS.includes(seriesName);
     }
 
     function getPrioritySeries(modeName) {
       const ordered = [];
-      if (modeName === 'video' && sermonData[LIVESTREAMS.name]) ordered.push(LIVESTREAMS.name);
-      if (sermonData[CURRENT_SERIES]) ordered.push(CURRENT_SERIES);
-      if (sermonData[SECONDARY_SERIES]) ordered.push(SECONDARY_SERIES);
-      if (sermonData[CURRENT_SPECIALS]) ordered.push(CURRENT_SPECIALS);
+
+      if (modeName === 'video' && sermonData[LIVESTREAMS.name]) {
+        ordered.push(LIVESTREAMS.name);
+      }
+
+      SHARED_PINNED_CURRENT_ITEMS.forEach(seriesName => {
+        if (sermonData[seriesName]) ordered.push(seriesName);
+      });
+
       return ordered;
     }
 
@@ -6096,6 +6242,9 @@
       return items.map((ep, visibleIndex) => ({ ep, originalIndex: visibleIndex }));
     }
 
+    /* Beginner note:
+       Search for: EDIT_HERE_MODE_BEHAVIOR
+       Future grouped desktop/mobile navigation should plug into this shared mode switch. */
     function setMode(nextMode) {
       mode = nextMode;
 
