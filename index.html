@@ -3268,6 +3268,51 @@
       }
     }
 
+
+    /* V32: active play text = Playing, plus a little more vertical room in the player card */
+    .audio-clock-label {
+      display: none !important;
+    }
+
+    @media (max-width: 980px) {
+      .audio-feature-card {
+        padding-bottom: 14px !important;
+      }
+
+      .audio-split {
+        gap: 8px !important;
+      }
+
+      .audio-art-panel img {
+        width: min(100%, 304px) !important;
+        max-width: 304px !important;
+      }
+
+      .audio-transport-overlay {
+        margin-top: 2px !important;
+      }
+
+      .audio-content {
+        gap: 3px !important;
+        padding-top: 4px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .audio-feature-card {
+        padding-bottom: 16px !important;
+      }
+
+      .audio-art-panel img {
+        width: min(100%, 312px) !important;
+        max-width: 312px !important;
+      }
+
+      .audio-content {
+        gap: 3px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -3853,7 +3898,7 @@
         : '<path d="M8 5v14l11-7z"/>';
 
       audioPlayIconEl.style.marginLeft = isPlaying ? '0px' : '2px';
-      audioPlayLabelEl.textContent = isPlaying ? 'Tap to Pause' : 'Tap to Play';
+      audioPlayLabelEl.textContent = isPlaying ? 'Playing' : 'Tap to Play';
 
       audioFeatureCardEl.classList.toggle('playing', isPlaying);
 
