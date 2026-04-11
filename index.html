@@ -4246,6 +4246,70 @@
       }
     }
 
+
+    /* V49: desktop audio field grows taller, and the art grows with it */
+    @media (min-width: 981px) {
+      .audio-feature-card {
+        padding-top: 30px !important;
+        padding-bottom: 32px !important;
+      }
+
+      .audio-split {
+        align-items: start !important;
+        gap: 42px !important;
+        grid-template-columns: minmax(320px, 380px) minmax(0, 1fr) !important;
+      }
+
+      .audio-art-panel {
+        gap: 16px !important;
+      }
+
+      .audio-art-panel img {
+        max-width: 352px !important;
+      }
+
+      .audio-transport-overlay {
+        margin-top: 12px !important;
+      }
+
+      .audio-content {
+        padding-top: 18px !important;
+        gap: 12px !important;
+      }
+
+      .audio-ready {
+        font-size: 12px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .audio-feature-card h3 {
+        font-size: 40px !important;
+        line-height: 1.06 !important;
+      }
+
+      .audio-feature-card .audio-series {
+        font-size: 20px !important;
+        margin: 2px 0 8px !important;
+      }
+
+      .audio-clock-row {
+        padding: 10px 0 6px !important;
+        gap: 18px !important;
+      }
+
+      .audio-clock-time {
+        font-size: clamp(38px, 4.4vw, 60px) !important;
+      }
+
+      .audio-progress-wrap {
+        gap: 6px !important;
+      }
+
+      .audio-progress {
+        height: 8px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
