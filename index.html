@@ -94,10 +94,12 @@
       overflow: hidden;
     }
     .brand-logo-btn img {
-      width: 100%;
-      height: 100%;
+      width: 108%;
+      height: 108%;
       object-fit: contain;
       display: block;
+      transform: scale(1.02);
+      transform-origin: center;
     }
     .brand-copy {
       min-width: 0;
@@ -1550,6 +1552,23 @@
       return window.innerWidth <= 980;
     }
 
+    function scrollMobileSelectorToTop() {
+      if (!isMobileLayout()) return;
+      const target = mobileInlineNavEl || playerSectionEl;
+      if (!target) return;
+      window.requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    function scrollPlayerIntoView() {
+      const target = playerStageEl || playerSectionEl;
+      if (!target) return;
+      window.requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
     function getDeepestMobileView() {
       if (navLeafKey) return 'queue';
       if (navBranchKey) return 'leaf';
@@ -1773,7 +1792,7 @@
     function getRootItems() {
       const items = [];
       if (mode === 'video' && sermonData[LIVESTREAMS.name]) items.push({ key: 'livestreams', title: 'Livestreams', meta: 'YouTube live archive' });
-      items.push({ key: 'pinnedCurrent', title: 'Pinned Current Items', meta: 'What matters now' });
+      items.push({ key: 'pinnedCurrent', title: 'Series in Progress', meta: 'What matters now' });
       items.push({ key: 'bibleBooks', title: 'Bible Books', meta: 'Book studies and chapter buckets' });
       items.push({ key: 'standaloneSeries', title: 'Standalone Series', meta: 'Named sermon collections' });
       items.push({ key: 'yearSpecials', title: 'Year Specials', meta: 'One-offs and holiday sermons' });
@@ -1786,7 +1805,7 @@
       if (!browseBuckets || !navRootKey) return [];
       if (navRootKey === 'livestreams') return [{ key: 'live-collection', title: 'Livestreams', meta: 'Pinned first in Watch mode' }];
       if (navRootKey === 'guestSpeakers') return [{ key: 'guest-collection', title: 'Guest Speakers', meta: 'Pinned last in Watch mode' }];
-      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Current Sermons', meta: formatCountLabel(browseBuckets.pinnedCurrent.length, 'current item', 'current items') }];
+      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Series in Progress', meta: formatCountLabel(browseBuckets.pinnedCurrent.length, 'current item', 'current items') }];
       if (navRootKey === 'bibleBooks') return sortBibleBooksInCanonicalOrder(Object.keys(browseBuckets.bibleBooks)).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.bibleBooks[key].length, 'series', 'series') }));
       if (navRootKey === 'standaloneSeries') return Object.keys(browseBuckets.standaloneSeries).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.standaloneSeries[key].length, 'series', 'series') }));
       if (navRootKey === 'yearSpecials') return Object.keys(browseBuckets.yearSpecials).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.yearSpecials[key].length, 'series', 'series') }));
@@ -1882,6 +1901,7 @@
       renderQueue();
       renderEmptyMeta();
       showModePlaceholder();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
     }
 
     function setBranch(key) {
@@ -1897,6 +1917,7 @@
       renderQueue();
       renderEmptyMeta();
       showModePlaceholder();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
     }
 
     function setLeaf(key) {
@@ -1910,6 +1931,7 @@
       renderQueue();
       renderEmptyMeta();
       showModePlaceholder();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
     }
 
     function sortBibleBooksInCanonicalOrder(keys) {
@@ -2493,7 +2515,7 @@
       renderNavigation();
       if (isMobileLayout()) {
         window.setTimeout(() => {
-          playerStageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollPlayerIntoView();
         }, 80);
       }
     }
@@ -2624,6 +2646,7 @@
       else if (mobileNavView === 'branch') mobileNavView = 'root';
       renderMobileDrawerFlow();
       renderMobileInlineFlow();
+      scrollMobileSelectorToTop();
     });
     drawerHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileDrawerFlow(); });
     if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.addEventListener('click', () => {
@@ -2633,7 +2656,7 @@
       else if (mobileNavView === 'branch') mobileNavView = 'root';
       renderMobileInlineFlow();
     });
-    if (mobileInlineHomeBtnEl) mobileInlineHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileInlineFlow(); });
+    if (mobileInlineHomeBtnEl) mobileInlineHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileInlineFlow(); scrollMobileSelectorToTop(); });
     closeDrawerBtnEl.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
     listenBtnEl.addEventListener('click', () => setMode('audio'));
