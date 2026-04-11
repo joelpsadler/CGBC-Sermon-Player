@@ -924,11 +924,26 @@
       line-height: 1.4;
     }
     @media (max-width: 980px) {
+      /* Mobile drawer fix:
+         let the whole drawer scroll vertically through all four navigation sections
+         instead of trapping only the first two visible panes inside a fixed-height grid. */
+      .drawer-body,
       .drawer-body-deep {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 64px - var(--safe-top));
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
       }
-      .drawer-pane { min-height: 180px; }
+      .drawer-pane {
+        min-height: auto;
+        overflow: visible;
+        flex: 0 0 auto;
+      }
+      .drawer-pane-body {
+        overflow: visible;
+      }
     }
 
 </style>
