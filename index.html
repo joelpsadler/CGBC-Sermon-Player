@@ -4132,6 +4132,120 @@
       }
     }
 
+
+    /* V48: desktop audio player actual recovery pass
+       Goal: make stopped/playing text fit cleanly, no clipping, no overlap. */
+    @media (min-width: 981px) {
+      .audio-transport-overlay {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 10px !important;
+      }
+
+      .audio-transport-glass {
+        width: 420px !important;
+        max-width: 420px !important;
+        min-width: 420px !important;
+        padding: 6px !important;
+        box-sizing: border-box !important;
+      }
+
+      .audio-transport {
+        display: grid !important;
+        grid-template-columns: 72px minmax(0,1fr) 72px !important;
+        gap: 8px !important;
+        align-items: center !important;
+      }
+
+      .audio-mini-skip {
+        width: 72px !important;
+        min-width: 72px !important;
+        height: 68px !important;
+        font-size: 23px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+      }
+
+      .audio-play-badge {
+        min-width: 0 !important;
+        width: 100% !important;
+        min-height: 68px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+        padding: 8px 14px 8px 10px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        flex-direction: row-reverse !important;
+        justify-content: space-between !important;
+        padding: 8px 10px 8px 14px !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 46px !important;
+        height: 46px !important;
+      }
+
+      .audio-play-circle-wrap {
+        flex: 0 0 46px !important;
+        margin-right: 14px !important;
+        margin-left: 0 !important;
+      }
+
+      .audio-feature-card.playing .audio-play-circle-wrap {
+        margin-right: 0 !important;
+        margin-left: 14px !important;
+      }
+
+      .audio-play-text-wrap {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+      }
+
+      .audio-feature-card.playing .audio-play-text-wrap {
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-label {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        text-overflow: clip !important;
+        font-size: 15px !important;
+        letter-spacing: 0.03em !important;
+        text-align: center !important;
+      }
+
+      .audio-feature-card.playing .audio-play-label {
+        text-align: left !important;
+      }
+
+      .audio-play-dots {
+        min-width: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        flex: 0 0 auto !important;
+      }
+
+      .audio-feature-card.playing .audio-play-dots {
+        min-width: 1.6em !important;
+        width: auto !important;
+        overflow: visible !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
