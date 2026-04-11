@@ -1001,7 +1001,7 @@
     }
     .drawer-tool-btn {
       min-height: 36px;
-      padding: 0 12px;
+      padding: 6px 12px;
       border-radius: 12px;
       display: inline-flex;
       align-items: center;
@@ -1009,7 +1009,11 @@
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
+      line-height: 1.15;
+      text-align: center;
+      white-space: normal;
+      max-width: 128px;
       color: var(--text);
     }
     .drawer-tool-btn[disabled] {
@@ -1135,13 +1139,17 @@
     .mobile-inline-actions { display:flex; gap:8px; align-items:center; }
     .mobile-inline-btn {
       min-height: 34px;
-      padding: 0 12px;
+      padding: 6px 12px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
+      line-height: 1.15;
+      text-align: center;
+      white-space: normal;
+      max-width: 128px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
     .mobile-inline-path {
@@ -2004,14 +2012,37 @@
       return wrap;
     }
 
+
+    function getMobileBackTargetLabel() {
+      if (mobileNavView === 'selected') return 'Episodes';
+      if (mobileNavView === 'queue') {
+        if (hasMeaningfulLeafStep() && navLeafKey) return getLeafTitleByKey(navLeafKey);
+        if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
+        if (navRootKey) return 'Categories';
+      }
+      if (mobileNavView === 'leaf') {
+        if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
+        if (navRootKey) return 'Categories';
+      }
+      if (mobileNavView === 'branch') return 'Categories';
+      return '';
+    }
+
+    function getMobileBackButtonText() {
+      const target = getMobileBackTargetLabel();
+      if (!target) return 'Back';
+      return `Back to ${target}`;
+    }
+
     function updateDrawerTools() {
       const labels = [];
       labels.push(mode === 'audio' ? 'Audio' : 'Video');
       if (mobileNavView !== 'root' && navRootKey) labels.push(getRootTitleByKey(navRootKey));
-      if ((mobileNavView === 'leaf' || mobileNavView === 'queue') && navBranchKey) labels.push(getBranchTitleByKey(navBranchKey));
-      if (mobileNavView === 'queue' && navLeafKey) labels.push(getLeafTitleByKey(navLeafKey));
+      if ((mobileNavView === 'leaf' || mobileNavView === 'queue' || mobileNavView === 'selected') && navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
+      if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
       drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
       drawerBackBtnEl.disabled = mobileNavView === 'root';
+      drawerBackBtnEl.textContent = getMobileBackButtonText();
     }
 
     function renderMobileDrawerFlow() {
@@ -2094,7 +2125,10 @@
       if (navBranchKey && ['leaf','queue','selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a path.';
-      if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
+      if (mobileInlineBackBtnEl) {
+        mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
+        mobileInlineBackBtnEl.textContent = getMobileBackButtonText();
+      }
     }
 
     function renderMobileInlineFlow() {
