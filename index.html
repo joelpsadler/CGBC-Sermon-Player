@@ -3030,6 +3030,244 @@
       }
     }
 
+
+    /* V31: static player polish + play button layout prep (no motion yet) */
+    /* Beginner note: this pass sets up the play pill behavior and spacing without adding animation yet. */
+
+    .audio-transport-glass::before,
+    .audio-feature-card.playing .audio-transport-glass::before,
+    .audio-play-badge::before,
+    .audio-feature-card.playing .audio-play-badge::before,
+    .audio-play-circle-wrap::before,
+    .audio-feature-card.playing .audio-play-circle-wrap::before {
+      content: none !important;
+      display: none !important;
+      opacity: 0 !important;
+      animation: none !important;
+      filter: none !important;
+      background: none !important;
+      box-shadow: none !important;
+    }
+
+    .audio-ready {
+      margin-bottom: 2px !important;
+    }
+
+    .audio-clock-label {
+      display: none !important;
+    }
+
+    .audio-clock-row {
+      padding: 2px 0 2px !important;
+      gap: 10px !important;
+      align-items: end !important;
+    }
+
+    .audio-clock-time {
+      font-size: clamp(28px, 4.4vw, 52px) !important;
+      line-height: 0.90 !important;
+      letter-spacing: -0.05em !important;
+    }
+
+    .audio-clock-total {
+      font-size: 18px !important;
+      padding-bottom: 4px !important;
+    }
+
+    .audio-progress-wrap {
+      gap: 4px !important;
+    }
+
+    .audio-progress {
+      height: 7px !important;
+    }
+
+    .audio-progress-times {
+      font-size: 12px !important;
+    }
+
+    .audio-transport-glass {
+      width: min(100%, 282px) !important;
+      padding: 5px 6px !important;
+      border-radius: 999px !important;
+    }
+
+    .audio-transport {
+      gap: 6px !important;
+      grid-template-columns: auto minmax(0,1fr) auto !important;
+    }
+
+    .audio-mini-skip {
+      min-width: 60px !important;
+      width: 60px !important;
+      height: 60px !important;
+      font-size: 22px !important;
+      padding: 0 14px !important;
+    }
+
+    .audio-play-badge {
+      min-height: 60px !important;
+      padding: 7px 14px 7px 7px !important;
+      gap: 10px !important;
+      justify-content: flex-start !important;
+      transition: all 0.24s ease !important;
+    }
+
+    .audio-play-circle-wrap {
+      width: 44px !important;
+      height: 44px !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.24s ease !important;
+    }
+
+    .audio-play-circle {
+      width: 44px !important;
+      height: 44px !important;
+      background: rgba(255,255,255,0.18) !important;
+    }
+
+    .audio-play-circle svg {
+      width: 22px !important;
+      height: 22px !important;
+    }
+
+    .audio-play-label {
+      font-size: 15px !important;
+      letter-spacing: 0.06em !important;
+      white-space: nowrap !important;
+    }
+
+    /* Stopped = circle on left, label to the right */
+    .audio-play-badge {
+      flex-direction: row !important;
+    }
+
+    /* Playing = circle moves to right, text becomes Tap to Pause via JS */
+    .audio-feature-card.playing .audio-play-badge {
+      flex-direction: row-reverse !important;
+      justify-content: space-between !important;
+      padding: 7px 7px 7px 14px !important;
+    }
+
+    .audio-feature-card.playing .audio-play-circle svg {
+      margin-left: 0 !important;
+    }
+
+    @media (max-width: 980px) {
+      .audio-content {
+        gap: 2px !important;
+        padding-top: 2px !important;
+      }
+
+      .audio-transport-glass {
+        width: min(100%, 290px) !important;
+        padding: 4px 5px !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 48px !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 18px !important;
+        padding: 0 8px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 48px !important;
+        padding: 5px 12px 5px 5px !important;
+        gap: 8px !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 5px 5px 5px 12px !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 38px !important;
+        height: 38px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 19px !important;
+        height: 19px !important;
+      }
+
+      .audio-play-label {
+        font-size: 13px !important;
+        letter-spacing: 0.05em !important;
+      }
+
+      .audio-clock-row {
+        padding: 1px 0 2px !important;
+      }
+
+      .audio-clock-time {
+        font-size: 32px !important;
+      }
+
+      .audio-clock-total {
+        font-size: 16px !important;
+        padding-bottom: 3px !important;
+      }
+
+      .audio-progress {
+        height: 6px !important;
+      }
+
+      .audio-progress-times {
+        font-size: 11px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .audio-transport-glass {
+        width: min(100%, 264px) !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 44px !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 17px !important;
+        padding: 0 6px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 44px !important;
+        padding: 4px 10px 4px 4px !important;
+        gap: 7px !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 4px 4px 4px 10px !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 34px !important;
+        height: 34px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      .audio-play-label {
+        font-size: 12px !important;
+        letter-spacing: 0.04em !important;
+      }
+
+      .audio-clock-time {
+        font-size: 30px !important;
+      }
+
+      .audio-clock-total {
+        font-size: 15px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -3615,7 +3853,7 @@
         : '<path d="M8 5v14l11-7z"/>';
 
       audioPlayIconEl.style.marginLeft = isPlaying ? '0px' : '2px';
-      audioPlayLabelEl.textContent = isPlaying ? 'Playing' : 'Tap to Play';
+      audioPlayLabelEl.textContent = isPlaying ? 'Tap to Pause' : 'Tap to Play';
 
       audioFeatureCardEl.classList.toggle('playing', isPlaying);
 
