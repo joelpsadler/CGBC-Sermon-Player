@@ -4,36 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC Sermons</title>
-
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
-  <meta name="theme-color" content="#111111" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
+  <meta name="theme-color" content="#0f0f10" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #111111;
-      --bg-soft: #1a1a1a;
-      --panel: rgba(255,255,255,0.06);
-      --panel-strong: rgba(255,255,255,0.10);
-      --panel-heavy: rgba(0,0,0,0.50);
+      --bg: #0f0f10;
+      --bg-2: #161618;
+      --panel: rgba(255,255,255,0.05);
+      --panel-2: rgba(255,255,255,0.08);
+      --panel-3: rgba(255,255,255,0.12);
       --border: rgba(255,255,255,0.09);
-      --border-strong: rgba(255,255,255,0.14);
       --text: #f4f4f4;
       --muted: rgba(255,255,255,0.70);
-      --muted-soft: rgba(255,255,255,0.54);
+      --muted-2: rgba(255,255,255,0.52);
       --accent: #8fae9d;
-      --accent-strong: #b8d5c3;
-      --accent-ink: #102117;
-      --shadow: 0 20px 44px rgba(0,0,0,0.34);
-      --shadow-soft: 0 10px 24px rgba(0,0,0,0.20);
-      --shadow-player: 0 26px 54px rgba(0,0,0,0.44);
+      --accent-2: #b9d2c3;
+      --accent-ink: #112018;
+      --shadow: 0 18px 40px rgba(0,0,0,0.32);
+      --shadow-deep: 0 30px 70px rgba(0,0,0,0.40);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --mobile-top-offset: 92px;
-      --drawer-top-bg: linear-gradient(180deg, rgba(3,3,3,0.98), rgba(10,10,10,0.94));
-      --drawer-series-bg: linear-gradient(180deg, rgba(72,72,72,0.72), rgba(50,50,50,0.80));
-      --drawer-episodes-bg: linear-gradient(180deg, rgba(62,62,62,0.62), rgba(40,40,40,0.74));
+      --mobile-sticky-offset: 90px;
     }
 
     * { box-sizing: border-box; }
@@ -45,477 +38,354 @@
       overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: 'Lato', sans-serif;
+      font-family: 'Inter', sans-serif;
       -webkit-text-size-adjust: 100%;
     }
     body {
       min-height: 100vh;
       padding-bottom: var(--safe-bottom);
       background:
-        radial-gradient(circle at top, rgba(143,174,157,0.10), transparent 36%),
-        linear-gradient(180deg, #171717, #111111 28%, #0d0d0d 100%);
+        radial-gradient(circle at top, rgba(143,174,157,0.10), transparent 34%),
+        linear-gradient(180deg, #171719 0%, #101011 36%, #0c0c0d 100%);
     }
     body.drawer-open { overflow: hidden; }
     img { max-width: 100%; }
-    button, audio, iframe, a, input { font: inherit; }
+    button, audio, iframe, input { font: inherit; }
     button {
       border: none;
       background: none;
       color: inherit;
       cursor: pointer;
+      padding: 0;
     }
 
-    .icon {
-      width: 20px;
-      height: 20px;
+    .icon { width: 18px; height: 18px; display: inline-flex; flex: 0 0 auto; }
+    .icon svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+
+    .app-shell {
+      width: min(1860px, 100%);
+      margin: 0 auto;
+      padding: 0 12px 16px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: calc(12px + var(--safe-top)) 6px 10px;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .brand-logo-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-    }
-    .icon svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      fill: currentColor;
-    }
-
-    /* =========================================================================
-       HEADER / TOP NAV
-       Beginner note:
-       Desktop and mobile share the same HTML for the top controls.
-       CSS decides when the large banner shows and when the compact mobile-style
-       navigation shows.
-       ========================================================================= */
-    .header-wrap {
-      display: flex;
-      justify-content: center;
-      padding: calc(10px + var(--safe-top)) 12px 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .header-row {
-      width: min(1700px, 100%);
-    }
-    .logo-panel {
-      width: 100%;
-      border-radius: 18px;
-      padding: 8px 14px;
-      background:
-        linear-gradient(180deg, rgba(30,30,30,0.74), rgba(10,10,10,0.34));
+      width: 84px;
+      height: 62px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow:
-        0 12px 30px rgba(0,0,0,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.10);
-      cursor: pointer;
+      box-shadow: var(--shadow);
       overflow: hidden;
-      position: relative;
     }
-    .logo-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 36%);
-      pointer-events: none;
-    }
-    .logo-panel img {
-      display: block;
-      width: min(860px, 100%);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .top-controls {
-      position: sticky;
-      top: 0;
-      z-index: 110;
-      padding: 10px 10px;
-      background: rgba(12,12,12,0.84);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .top-controls-inner {
-      display: flex;
-      justify-content: center;
-    }
-    .mode-toggle {
-      width: min(760px, 100%);
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 10px;
-      align-items: stretch;
-    }
-    .listen-watch-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-    .mobile-nav-logo {
-      display: none;
-      width: 48px;
-      height: 48px;
-      flex: 0 0 48px;
-      align-items: center;
-      justify-content: center;
-    }
-    .mobile-nav-logo img {
+    .brand-logo-btn img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
     }
+    .brand-copy {
+      min-width: 0;
+    }
+    .brand-title {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(20px, 2vw, 30px);
+      line-height: 1.02;
+    }
+    .brand-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-    .listen-watch-group {
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .mode-pill {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
       padding: 2px;
-      width: 100%;
-      min-width: 0;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), var(--shadow-soft);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.07);
+      min-width: 330px;
     }
-    .mode-btn {
-      min-height: 52px;
-      display: block;
-      padding: 0;
-    }
-    .mode-btn-shell {
-      min-height: 52px;
-      width: 100%;
-      border-radius: 16px;
+
+    .mode-btn-shell,
+    .utility-btn-shell {
+      min-height: 54px;
+      padding: 0 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 0 14px 0 16px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
-      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      color: var(--text);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
     }
-    .mode-btn:hover .mode-btn-shell {
-      transform: translateY(-1px);
-    }
-    .listen-watch-group .mode-btn:first-child .mode-btn-shell {
-      border-radius: 16px 0 0 16px;
-    }
-    .listen-watch-group .mode-btn:last-child .mode-btn-shell {
-      border-radius: 0 16px 16px 0;
-    }
+    .mode-pill .mode-btn:first-child .mode-btn-shell { border-radius: 18px 8px 8px 18px; }
+    .mode-pill .mode-btn:last-child .mode-btn-shell { border-radius: 8px 18px 18px 8px; }
     .mode-btn.active .mode-btn-shell {
-      background: linear-gradient(180deg, rgba(143,174,157,0.78), rgba(121,150,135,0.54));
+      background: linear-gradient(180deg, rgba(143,174,157,0.84), rgba(116,145,129,0.62));
       color: var(--accent-ink);
-      box-shadow:
-        0 14px 30px rgba(0,0,0,0.20),
-        0 0 0 1px rgba(143,174,157,0.18) inset;
+      border-color: rgba(143,174,157,0.16);
     }
-    .mode-btn-text {
+    .mode-btn:hover .mode-btn-shell,
+    .utility-btn:hover .utility-btn-shell { transform: translateY(-1px); }
+
+    .btn-copy {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      line-height: 1;
+      line-height: 1.02;
+      font-family: 'Poppins', sans-serif;
     }
-    .mode-btn-text .top-line {
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .mode-btn-text .bottom-line {
-      font-size: 11px;
-      margin-top: 2px;
-      opacity: 0.86;
+    .btn-copy .top { font-size: 14px; font-weight: 700; }
+    .btn-copy .bottom { font-size: 11px; color: var(--muted); }
+    .mode-btn.active .btn-copy .bottom { color: rgba(17,32,24,0.72); }
+
+    .utility-btn { display: none; }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 290px 360px minmax(0, 1fr);
+      gap: 16px;
+      min-height: calc(100vh - 118px - var(--safe-top) - var(--safe-bottom));
+      align-items: stretch;
     }
 
-    /* =========================================================================
-       MAIN LAYOUT
-       ========================================================================= */
-    .layout {
-      display: grid;
-      grid-template-columns: 114px 360px minmax(0, 1fr);
-      gap: 0;
-      height: calc(100vh - 154px - var(--safe-top) - var(--safe-bottom));
-      min-height: 0;
-      width: 100%;
-      max-width: 100%;
-      overflow: hidden;
-    }
-    .col {
+    .panel {
       min-width: 0;
       min-height: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .column-head {
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+    .column-title {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+    }
+    .column-scroll {
+      min-height: 0;
+      overflow: auto;
+      padding: 14px;
       -webkit-overflow-scrolling: touch;
     }
-    .col-series {
-      padding: 18px 10px 22px 12px;
-      border-right: 1px solid rgba(255,255,255,0.04);
-    }
-    .col-episodes {
-      padding: 18px 14px 22px 12px;
-      border-right: 1px solid rgba(255,255,255,0.04);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
-    }
-    .col-player {
-      padding: 18px 22px 30px;
-    }
 
-    .rail-heading {
-      margin: 0 0 12px;
+    .browse-group { margin-bottom: 18px; }
+    .browse-group-title {
+      margin: 0 0 10px;
       font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-size: 12px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.64);
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
     }
-    .episodes-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .change-series-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #fff;
+    .browse-subgroup-title {
+      margin: 10px 0 8px;
       font-family: 'Poppins', sans-serif;
-      font-size: 13px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.46);
     }
 
-    /* =========================================================================
-       SERIES RAIL
-       Beginner note:
-       The left rail is now a compact "sectioned browser". It still stays shallow
-       and touch-safe so it does not become fragile.
-       ========================================================================= */
     .series-list,
-    .episodes-list {
+    .episode-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
+    }
+
+    .series-card,
+    .episode-card {
       width: 100%;
-      min-width: 0;
-      touch-action: pan-y;
-    }
-
-    .series-divider {
-      margin: 14px 2px 4px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.52);
-    }
-    .series-subdivider {
-      margin: 6px 4px 2px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
-    }
-
-    .series-item {
-      border-radius: 16px;
-      background: transparent;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
-    .series-item:hover {
-      background: rgba(255,255,255,0.05);
-    }
-    .series-item.active {
-      background: linear-gradient(180deg, rgba(143,174,157,0.34), rgba(106,132,119,0.18));
-      box-shadow:
-        0 0 0 1px rgba(143,174,157,0.16) inset,
-        0 14px 26px rgba(0,0,0,0.22);
-    }
-    .series-item-inner {
+      text-align: left;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 6px;
-      text-align: center;
-    }
-    .thumb-tap {
-      padding: 0;
-      margin: 0;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      touch-action: manipulation;
-      flex-shrink: 0;
-    }
-    .thumb-tap img {
-      display: block;
-      object-fit: cover;
-      object-position: center;
-      background: rgba(255,255,255,0.06);
-      box-shadow: var(--shadow-soft);
-    }
-    .series-item.audio .thumb-tap img {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-    }
-    .series-item.video .thumb-tap img {
-      width: 74px;
-      height: 74px;
-      border-radius: 16px;
-    }
-    .series-copy {
-      min-width: 0;
-      width: 100%;
-    }
-    .series-overline {
-      font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
-      margin-bottom: 4px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .series-name {
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      line-height: 1.2;
-      color: #fff;
-      overflow-wrap: anywhere;
-    }
-    .series-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 5px;
-      margin-top: 6px;
-    }
-    .series-chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #fff;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .series-chip.current,
-    .series-chip.live {
-      background: rgba(143,174,157,0.68);
-      color: var(--accent-ink);
-    }
-
-    /* =========================================================================
-       EPISODE QUEUE
-       ========================================================================= */
-    .episode-item {
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-      cursor: pointer;
-    }
-    .episode-item:hover {
-      background: rgba(255,255,255,0.06);
-    }
-    .episode-item.active {
-      background: linear-gradient(180deg, rgba(143,174,157,0.34), rgba(106,132,119,0.16));
-      box-shadow:
-        0 0 0 1px rgba(143,174,157,0.14) inset,
-        0 14px 28px rgba(0,0,0,0.20);
-    }
-    .episode-item-inner {
-      display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: flex-start;
       padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
     }
-    .episode-item.audio .thumb-tap img {
-      width: 88px;
-      height: 88px;
-      border-radius: 16px;
+    .series-card:hover,
+    .episode-card:hover { transform: translateY(-1px); background: rgba(255,255,255,0.06); }
+    .series-card.active,
+    .episode-card.active {
+      background: linear-gradient(180deg, rgba(143,174,157,0.20), rgba(143,174,157,0.10));
+      border-color: rgba(143,174,157,0.26);
+      box-shadow: 0 0 0 1px rgba(143,174,157,0.16) inset;
     }
-    .episode-item.video .thumb-tap img {
-      width: 150px;
-      height: 84px;
+
+    .series-thumb,
+    .episode-thumb {
+      flex: 0 0 auto;
       border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.24);
+      background: rgba(255,255,255,0.04);
     }
-    .episode-copy {
+    .series-card.audio .series-thumb,
+    .episode-card.audio .episode-thumb {
+      width: 72px;
+      height: 72px;
+    }
+    .series-card.video .series-thumb,
+    .episode-card.video .episode-thumb {
+      width: 118px;
+      height: 66px;
+      border-radius: 12px;
+    }
+    .series-thumb img,
+    .episode-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-copy {
       min-width: 0;
       flex: 1;
     }
-    .episode-overline {
-      font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.46);
-      margin-bottom: 4px;
-    }
-    .episode-title {
+    .card-title {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
       font-size: 16px;
-      line-height: 1.22;
-      color: #fff;
+      line-height: 1.18;
     }
-    .episode-sub {
-      margin-top: 6px;
+    .card-subtitle {
+      margin-top: 5px;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.32;
-    }
-    .queue-empty {
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.07);
+      line-height: 1.24;
     }
 
-    /* =========================================================================
-       PLAYER STAGE
-       ========================================================================= */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .chip.current,
+    .chip.live {
+      background: rgba(143,174,157,0.84);
+      color: var(--accent-ink);
+      border-color: transparent;
+    }
+
+    .queue-empty,
+    .browse-empty {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      border: 1px dashed rgba(255,255,255,0.10);
+      font-size: 14px;
+    }
+
+    .stage-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+      min-height: 0;
+    }
+    .player-stage,
+    .meta-stage {
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow-deep);
+      overflow: hidden;
+    }
+    .player-stage {
+      padding: 20px;
+      min-height: 360px;
+    }
+    .meta-stage {
+      padding: 22px 24px;
+    }
+
     #videoShell,
     #videoPlaceholder {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      min-height: 360px;
-      background: #191919;
+      aspect-ratio: 16/9;
+      min-height: 320px;
       border-radius: 22px;
       overflow: hidden;
-      box-shadow: var(--shadow-player);
-      margin-bottom: 18px;
-    }
-    #videoShell {
+      background: rgba(0,0,0,0.34);
+      border: 1px solid rgba(255,255,255,0.06);
       display: none;
-      border: 1px solid rgba(255,255,255,0.08);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 30px;
     }
     #videoShell iframe {
       width: 100%;
@@ -523,339 +393,224 @@
       border: 0;
       display: block;
     }
-
-    #videoPlaceholder,
     #audioPlaceholder {
       display: none;
+      min-height: 220px;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 30px;
-      border-radius: 22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.20));
-      border: 1px solid rgba(255,255,255,0.08);
       color: var(--muted);
-      box-shadow: var(--shadow);
-      margin-bottom: 18px;
-    }
-    #audioPlaceholder {
-      min-height: 200px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.26);
     }
 
-    /* =========================================================================
-       AUDIO PLAYER
-       Beginner note:
-       The audio controls are intentionally simple and stable.
-       We still present them with rich visuals, but the transport panel stays in
-       normal layout flow. No absolute overlay tricks are used here.
-       ========================================================================= */
-    .audio-feature-card {
+    .audio-stage {
       display: none;
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 18px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04) 24%, rgba(0,0,0,0.22));
-      border: 1px solid rgba(255,255,255,0.09);
-      box-shadow: var(--shadow-player);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .audio-feature-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(255,255,255,0.10), transparent 26%);
-      pointer-events: none;
-    }
-    .audio-feature-card.playing {
-      box-shadow:
-        var(--shadow-player),
-        0 0 0 1px rgba(143,174,157,0.20) inset,
-        0 0 26px rgba(143,174,157,0.08);
-    }
-
-    .audio-split {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
-      gap: 36px;
+      grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+      gap: 24px;
       align-items: start;
     }
-    .audio-art-panel {
+    .audio-art-wrap {
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 14px;
-      min-width: 0;
+      align-items: center;
     }
-    .audio-art-panel img {
+    .audio-art {
       width: 100%;
-      max-width: 340px;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      object-position: center;
-      display: block;
+      max-width: 330px;
+      aspect-ratio: 1/1;
       border-radius: 24px;
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 26px 56px rgba(0,0,0,0.36);
+      overflow: hidden;
+      box-shadow: var(--shadow-deep);
+      background: rgba(255,255,255,0.04);
+    }
+    .audio-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .audio-transport-overlay {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-top: 2px;
-      position: static;
-    }
-    .audio-transport-glass {
-      width: min(100%, 420px);
-      background: linear-gradient(180deg, rgba(16,16,16,0.76), rgba(8,8,8,0.56));
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 999px;
-      box-shadow:
-        0 10px 24px rgba(0,0,0,0.24),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 8px;
-    }
+    /* Beginner note:
+       Audio controls are deliberately kept in normal document flow.
+       No risky absolute overlays, no animated wrappers, no stacked control hacks. */
     .audio-transport {
-      display: grid;
-      grid-template-columns: 72px minmax(0, 1fr) 72px;
-      gap: 10px;
-      align-items: center;
       width: 100%;
+      max-width: 420px;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) 64px;
+      gap: 8px;
+      align-items: center;
+      padding: 6px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(21,21,21,0.82), rgba(10,10,10,0.58));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadow);
     }
-    .audio-mini-skip {
-      width: 72px;
-      min-width: 72px;
-      height: 68px;
+    .transport-btn,
+    .transport-play {
+      min-height: 64px;
       border-radius: 999px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.10);
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-    }
-    .audio-play-badge {
-      min-height: 68px;
-      width: 100%;
-      min-width: 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 14px;
-      padding: 8px 18px 8px 10px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(79,100,90,0.30), rgba(37,47,42,0.34));
-      border: 1px solid rgba(164,199,181,0.16);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.16);
-    }
-    .audio-play-circle {
-      width: 48px;
-      height: 48px;
-      flex: 0 0 48px;
-      border-radius: 999px;
+      color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .transport-play {
+      justify-content: flex-start;
+      padding: 0 14px 0 8px;
+      gap: 14px;
+      min-width: 0;
+      background: linear-gradient(180deg, rgba(80,100,91,0.24), rgba(39,49,44,0.30));
+      border-color: rgba(143,174,157,0.18);
+    }
+    .transport-play-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
       background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-    .audio-play-circle svg {
-      width: 24px;
-      height: 24px;
-      fill: #fff;
-      margin-left: 2px;
-    }
-    .audio-feature-card.playing .audio-play-circle svg {
-      margin-left: 0;
-    }
-    .audio-play-text-wrap {
+      border: 1px solid rgba(255,255,255,0.16);
       display: inline-flex;
       align-items: center;
-      gap: 0;
-      min-width: 0;
-      flex: 1 1 auto;
-      overflow: hidden;
+      justify-content: center;
+      flex: 0 0 48px;
     }
-    .audio-play-label,
-    .audio-play-dots {
+    .transport-play-circle svg { width: 22px; height: 22px; fill: #fff; }
+    .transport-play-copy {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
       font-family: 'Poppins', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 15px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: #fff;
       white-space: nowrap;
     }
-    .audio-play-dots {
-      min-width: 1.8em;
+    .transport-dots {
+      min-width: 1.6em;
+      display: inline-block;
       text-align: left;
     }
 
     .audio-content {
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      min-width: 0;
-      padding-top: 10px;
+      padding-top: 8px;
     }
-    .audio-ready {
+    .audio-status {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      color: var(--muted);
       text-transform: uppercase;
-      color: rgba(255,255,255,0.76);
+      letter-spacing: 0.08em;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
     }
-    .audio-feature-card h3 {
+    .audio-title {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      font-size: 40px;
-      line-height: 1.05;
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.06;
     }
-    .audio-feature-card .audio-series {
+    .audio-series {
+      color: rgba(255,255,255,0.88);
       font-family: 'Poppins', sans-serif;
-      font-size: 20px;
-      color: rgba(255,255,255,0.92);
-      margin: 0 0 4px;
+      font-size: 18px;
     }
-
-    .audio-clock-row {
+    .audio-time-row {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      padding-top: 6px;
+      padding-top: 2px;
     }
-    .audio-clock-block {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-    .audio-clock-label {
+    .audio-now {
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.54);
-      margin-bottom: 3px;
-    }
-    .audio-clock-time {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(42px, 4.6vw, 64px);
+      font-size: clamp(30px, 4vw, 62px);
       line-height: 0.92;
       letter-spacing: -0.05em;
       font-variant-numeric: tabular-nums;
     }
-    .audio-clock-total {
+    .audio-total {
       font-family: 'Poppins', sans-serif;
       font-size: 20px;
+      color: var(--muted);
       font-variant-numeric: tabular-nums;
-      color: rgba(255,255,255,0.70);
-      padding-bottom: 6px;
+      padding-bottom: 5px;
     }
-
     .audio-progress-wrap {
       display: grid;
       gap: 6px;
-      margin-top: 2px;
     }
     .audio-progress {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 10px;
+      height: 8px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
       outline: none;
       cursor: pointer;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.22);
     }
     .audio-progress::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 999px;
-      background: var(--accent-strong);
-      border: 2px solid rgba(18,18,18,0.74);
-      box-shadow: 0 0 0 3px rgba(143,174,157,0.16);
+      background: var(--accent-2);
+      border: 2px solid rgba(17,17,17,0.84);
+      box-shadow: 0 0 0 3px rgba(143,174,157,0.18);
     }
     .audio-progress::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 999px;
-      background: var(--accent-strong);
-      border: 2px solid rgba(18,18,18,0.74);
-      box-shadow: 0 0 0 3px rgba(143,174,157,0.16);
+      background: var(--accent-2);
+      border: 2px solid rgba(17,17,17,0.84);
+      box-shadow: 0 0 0 3px rgba(143,174,157,0.18);
     }
     .audio-progress-times {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      color: rgba(255,255,255,0.70);
+      font-size: 12px;
+      color: var(--muted);
       font-variant-numeric: tabular-nums;
     }
+    #audioPlayer { display: none; }
 
-    #audioPlayer {
-      display: none;
-      width: 100%;
-      margin-top: 0;
-    }
-
-    /* =========================================================================
-       METADATA BOX
-       ========================================================================= */
-    .meta {
-      border-radius: 22px;
-      padding: 22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.20));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .meta h2 {
-      margin: 0 0 10px;
+    .meta-title {
+      margin: 0 0 8px;
       font-family: 'Poppins', sans-serif;
-      font-size: 30px;
+      font-size: clamp(24px, 2.2vw, 38px);
       line-height: 1.08;
     }
-    .meta .series-line {
-      margin-bottom: 18px;
+    .meta-series {
       font-family: 'Poppins', sans-serif;
       font-size: 18px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.94);
+      color: rgba(255,255,255,0.90);
+      margin-bottom: 18px;
     }
-    .meta .meta-intro {
-      font-family: 'Poppins', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
-      line-height: 1.3;
+    .meta-intro {
+      font-size: 18px;
+      font-weight: 700;
       color: rgba(255,255,255,0.92);
       margin-bottom: 12px;
     }
     .meta-note {
-      color: rgba(255,255,255,0.62);
+      color: var(--muted);
       font-size: 14px;
-      line-height: 1.4;
+      line-height: 1.42;
     }
     .meta-grid {
       display: grid;
@@ -863,593 +618,365 @@
     }
     .meta-row {
       display: grid;
-      grid-template-columns: 144px minmax(0, 1fr);
-      gap: 12px;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 14px;
       align-items: start;
     }
     .meta-label {
+      color: var(--muted-2);
       font-family: 'Poppins', sans-serif;
       font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.56);
       padding-top: 2px;
     }
     .meta-value {
       color: var(--muted);
+      line-height: 1.42;
       font-size: 15px;
-      line-height: 1.4;
     }
 
-    /* =========================================================================
-       MOBILE DRAWER
-       ========================================================================= */
     .drawer-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.68);
-      z-index: 140;
+      background: rgba(0,0,0,0.70);
+      z-index: 180;
     }
-    .mobile-drawer {
+    .drawer {
       display: none;
       position: fixed;
-      inset: 0 auto 0 0;
-      width: min(92vw, 430px);
-      transform: translateX(-102%);
-      transition: transform 0.24s ease;
-      background: #161616;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(92vw, 440px);
+      background: #171718;
       border-right: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 24px 0 56px rgba(0,0,0,0.46);
-      z-index: 141;
+      box-shadow: 24px 0 60px rgba(0,0,0,0.56);
+      z-index: 190;
+      transform: translateX(-102%);
+      transition: transform 0.22s ease;
       overflow: hidden;
     }
-    body.drawer-open .drawer-overlay {
-      display: block;
-    }
-    body.drawer-open .mobile-drawer {
-      transform: translateX(0);
-    }
+    body.drawer-open .drawer-overlay { display: block; }
+    body.drawer-open .drawer { transform: translateX(0); }
 
     .drawer-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       padding: calc(10px + var(--safe-top)) 12px 10px;
-      background: var(--drawer-top-bg);
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(1,1,1,0.98), rgba(11,11,11,0.94));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
-    .drawer-title-wrap {
+    .drawer-title {
       display: flex;
       align-items: center;
       gap: 8px;
       min-width: 0;
-    }
-    .drawer-title-wrap h2 {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      line-height: 1.08;
-      white-space: nowrap;
+      font-size: 15px;
+      font-weight: 700;
     }
-    .close-drawer-btn {
+    .drawer-close {
       min-height: 42px;
       padding: 0 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.08);
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .drawer-sections {
-      height: calc(100% - 64px - var(--safe-top));
+    .drawer-body {
       display: grid;
-      grid-template-rows: minmax(0, 42%) minmax(0, 58%);
+      grid-template-rows: 46% 54%;
+      height: calc(100% - 64px - var(--safe-top));
     }
-    .drawer-panel {
+    .drawer-pane {
       min-height: 0;
-      overflow-y: auto;
-      position: relative;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    .drawer-panel.series-panel {
-      background: var(--drawer-series-bg);
-    }
-    .drawer-panel.episodes-panel {
-      background: var(--drawer-episodes-bg);
+    .drawer-pane.series-pane { background: linear-gradient(180deg, rgba(5,5,5,0.96), rgba(18,18,18,0.92)); }
+    .drawer-pane.episodes-pane {
+      background: linear-gradient(180deg, rgba(92,92,96,0.38), rgba(56,56,58,0.40));
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-    .drawer-panel .rail-heading {
+    .drawer-pane-head {
       position: sticky;
       top: 0;
-      z-index: 3;
-      margin: 0;
-      padding: 8px 12px 7px;
-      background: rgba(10,10,10,0.24);
+      z-index: 4;
+      padding: 8px 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.80);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(16,16,16,0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.84);
     }
-    .drawer-panel .series-list,
-    .drawer-panel .episodes-list {
-      padding: 8px 10px 12px;
+    .drawer-pane.episodes-pane .drawer-pane-head {
+      background: rgba(74,74,76,0.76);
     }
-    .drawer-panel .series-item {
-      background: rgba(255,255,255,0.03);
-    }
-    .drawer-panel .series-item.active,
-    .drawer-panel .episode-item.active {
-      background: linear-gradient(180deg, rgba(143,174,157,0.42), rgba(106,132,119,0.20));
-    }
+    .drawer-pane-body { padding: 10px; }
 
-    /* =========================================================================
-       RESPONSIVE
-       ========================================================================= */
-    @media (min-width: 981px) {
-      /* Beginner note: desktop must always preserve the 3-stage shell:
-         [series rail] [episode queue] [player stage].
-         These explicit desktop rules prevent any accidental collapse into a 2-column layout. */
-      .layout {
-        display: grid !important;
-        grid-template-columns: 114px 360px minmax(420px, 1fr) !important;
-      }
-      .col-series,
-      .col-episodes,
-      .col-player {
-        display: block !important;
-      }
-      .col-player {
-        min-width: 420px;
-      }
-    }
-
-    @media (max-width: 1180px) {
-      .layout {
-        display: grid !important;
-        grid-template-columns: 104px 320px minmax(380px, 1fr) !important;
-      }
-      .col-series,
-      .col-episodes,
-      .col-player {
-        display: block !important;
-      }
-      .col-player {
-        min-width: 380px;
-      }
-      .episode-item.video .thumb-tap img {
-        width: 136px;
-        height: 76px;
-      }
+    @media (max-width: 1100px) {
+      .workspace { grid-template-columns: 250px 320px minmax(0, 1fr); }
     }
 
     @media (max-width: 980px) {
-      .header-wrap {
-        display: none;
-      }
-      .top-controls {
+      .app-shell { padding: 0 8px 14px; }
+      .masthead {
+        position: sticky;
+        top: 0;
+        z-index: 140;
+        background: rgba(9,9,10,0.88);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        margin: 0 -8px;
         padding: calc(8px + var(--safe-top)) 8px 10px;
-        background: rgba(8,8,8,0.92);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
       }
-      .top-controls-inner {
+      .brand-copy { display: none; }
+      .brand-logo-btn {
+        width: 58px;
+        height: 46px;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+      .top-actions {
+        flex: 1;
         justify-content: stretch;
       }
-      .mode-toggle {
-        width: 100%;
-        grid-template-columns: 2fr 1fr;
-        gap: 8px;
+      .mode-pill {
+        min-width: 0;
+        flex: 1;
       }
-      .listen-watch-wrap {
-        display: grid;
-        grid-template-columns: 60px minmax(0, 1fr);
-        gap: 8px;
-        align-items: center;
-      }
-      .mobile-nav-logo {
-        display: inline-flex;
-        width: 60px;
-        height: 48px;
-      }
-      .mode-btn-shell {
-        min-height: 46px;
-        padding: 0 8px 0 10px;
-        gap: 8px;
-      }
-      .mode-btn-text .top-line { font-size: 12px; }
-      .mode-btn-text .bottom-line { font-size: 10px; }
-
-      .layout {
-        display: block;
-        height: auto;
-        overflow: visible;
-      }
-      .col-series,
-      .col-episodes {
-        display: none;
-      }
-      .col-player {
-        padding: 10px 10px 24px;
-        overflow: visible;
-      }
-
-      .mobile-drawer {
-        display: block;
-      }
-
-      #playerSection {
-        scroll-margin-top: var(--mobile-top-offset);
-      }
-
-      #videoShell,
-      #videoPlaceholder {
-        min-height: 220px;
-      }
-
-      .audio-feature-card {
-        padding: 14px;
-        border-radius: 22px;
-      }
-      .audio-split {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-      .audio-art-panel {
-        gap: 10px;
-      }
-      .audio-art-panel img {
-        width: min(100%, 306px);
-        max-width: 306px;
-        border-radius: 22px;
-      }
-      .audio-transport-glass {
-        width: min(100%, 310px);
-        padding: 6px;
-      }
-      .audio-transport {
-        grid-template-columns: 48px minmax(0, 1fr) 48px;
-        gap: 8px;
-      }
-      .audio-mini-skip {
-        width: 48px;
-        min-width: 48px;
-        height: 48px;
-        font-size: 18px;
-      }
-      .audio-play-badge {
+      .mode-btn-shell,
+      .utility-btn-shell {
         min-height: 48px;
-        gap: 10px;
-        padding: 5px 12px 5px 5px;
+        padding: 0 10px;
+        gap: 6px;
       }
-      .audio-play-circle {
+      .btn-copy .top { font-size: 12px; }
+      .btn-copy .bottom { font-size: 9px; }
+      .utility-btn { display: block; width: 132px; }
+      .workspace {
+        display: block;
+        min-height: 0;
+      }
+      .browse-column,
+      .queue-column { display: none; }
+      .stage-column { gap: 12px; }
+      .player-stage { min-height: 0; padding: 14px; }
+      #playerSection { scroll-margin-top: var(--mobile-sticky-offset); }
+      #videoShell,
+      #videoPlaceholder { min-height: 220px; }
+      .audio-stage {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .audio-art-wrap { gap: 10px; }
+      .audio-art { max-width: 320px; }
+      .audio-transport {
+        max-width: 320px;
+        grid-template-columns: 50px minmax(0, 1fr) 50px;
+      }
+      .transport-btn,
+      .transport-play { min-height: 50px; }
+      .transport-play { padding: 0 10px 0 5px; gap: 10px; }
+      .transport-play-circle {
         width: 38px;
         height: 38px;
         flex-basis: 38px;
       }
-      .audio-play-circle svg {
-        width: 19px;
-        height: 19px;
-      }
-      .audio-play-label,
-      .audio-play-dots {
-        font-size: 13px;
-      }
-      .audio-content {
-        gap: 5px;
-        padding-top: 0;
-      }
-      .audio-feature-card h3 {
-        font-size: 28px;
-      }
-      .audio-feature-card .audio-series {
-        font-size: 15px;
-      }
-      .audio-clock-row {
-        padding-top: 4px;
-        gap: 10px;
-      }
-      .audio-clock-time {
-        font-size: clamp(34px, 8vw, 46px);
-      }
-      .audio-clock-total {
-        font-size: 15px;
-        padding-bottom: 4px;
-      }
-      .audio-progress {
-        height: 8px;
-      }
-      .audio-progress-times {
-        font-size: 11px;
-      }
-      .meta {
-        padding: 16px;
-      }
-      .meta h2 {
-        font-size: 24px;
-      }
-      .meta .series-line {
-        font-size: 16px;
-        margin-bottom: 14px;
-      }
-      .meta .meta-intro {
-        font-size: 16px;
-      }
-      .meta-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
-      }
+      .transport-play-copy { font-size: 13px; }
+      .audio-title { font-size: 26px; }
+      .audio-series { font-size: 15px; }
+      .audio-now { font-size: 34px; }
+      .audio-total { font-size: 16px; }
+      .meta-stage { padding: 18px 16px; }
+      .meta-row { grid-template-columns: 118px minmax(0, 1fr); gap: 10px; }
+      .drawer { display: block; }
     }
 
     @media (max-width: 640px) {
-      .top-controls {
-        padding: calc(8px + var(--safe-top)) 8px 10px;
-      }
-      .mode-toggle {
-        grid-template-columns: 2fr 1fr;
-        gap: 8px;
-      }
-      .listen-watch-wrap {
-        grid-template-columns: 54px minmax(0, 1fr);
-        gap: 6px;
-      }
-      .mobile-nav-logo {
-        width: 54px;
-        height: 44px;
-      }
-      .mode-btn-shell {
-        min-height: 44px;
-        padding: 0 6px 0 8px;
-        gap: 6px;
-      }
-      .mode-btn-text .top-line {
-        font-size: 11px;
-      }
-      .mode-btn-text .bottom-line {
-        font-size: 9px;
-      }
-
-      .audio-feature-card {
-        padding: 12px;
-      }
-      .audio-art-panel img {
-        width: min(100%, 294px);
-        max-width: 294px;
-      }
-      .audio-transport-glass {
-        width: min(100%, 288px);
-      }
+      .brand-logo-btn { width: 52px; height: 42px; }
+      .utility-btn { width: 118px; }
+      .mode-btn-shell,
+      .utility-btn-shell { min-height: 44px; padding: 0 8px; }
+      .btn-copy .top { font-size: 11px; }
+      .btn-copy .bottom { font-size: 8px; }
+      .player-stage { padding: 12px; }
       .audio-transport {
+        max-width: 292px;
         grid-template-columns: 44px minmax(0, 1fr) 44px;
       }
-      .audio-mini-skip {
-        width: 44px;
-        min-width: 44px;
-        height: 44px;
-        font-size: 17px;
-      }
-      .audio-play-badge {
-        min-height: 44px;
-        gap: 8px;
-        padding: 4px 10px 4px 4px;
-      }
-      .audio-play-circle {
+      .transport-btn,
+      .transport-play { min-height: 44px; }
+      .transport-play-circle {
         width: 34px;
         height: 34px;
         flex-basis: 34px;
       }
-      .audio-play-circle svg {
-        width: 18px;
-        height: 18px;
-      }
-      .audio-play-label,
-      .audio-play-dots {
-        font-size: 12px;
-      }
-      .audio-feature-card h3 {
-        font-size: 25px;
-      }
-      .audio-feature-card .audio-series {
-        font-size: 14px;
-      }
-      .audio-clock-time {
-        font-size: clamp(30px, 9vw, 40px);
-      }
-      .audio-clock-total {
-        font-size: 14px;
-      }
-      .meta h2 {
-        font-size: 22px;
-      }
+      .transport-play-copy { font-size: 12px; }
+      .audio-title { font-size: 23px; }
+      .audio-now { font-size: 30px; }
+      .meta-title { font-size: 22px; }
+      .meta-intro { font-size: 17px; }
+      .meta-row { grid-template-columns: 102px minmax(0,1fr); }
     }
   </style>
 </head>
 <body class="mode-audio">
-
-  <div class="header-wrap">
-    <div class="header-row">
-      <div class="logo-panel" id="logoReset" title="Reset to first browsing bucket">
-        <img
-          src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1223105/TS_CGBC_Pog_wLLLL_Cropeed.png"
-          alt="CGBC"
-        >
+  <div class="app-shell">
+    <header class="masthead">
+      <div class="brand-lockup">
+        <button class="brand-logo-btn" id="logoReset" type="button" title="Reset to first series">
+          <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1226646/TS_CGBC_Pog_TrimMediaAPP.png" alt="CGBC logo">
+        </button>
+        <div class="brand-copy">
+          <h1 class="brand-title">CGBC Sermons</h1>
+          <div class="brand-subtitle">Fresh rebuild focused on stable playback, clearer browsing, and a true three-stage desktop layout.</div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="top-controls">
-    <div class="top-controls-inner">
-      <div class="mode-toggle">
-        <div class="listen-watch-wrap">
-          <div class="mobile-nav-logo" aria-hidden="true">
-            <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1226646/TS_CGBC_Pog_TrimMediaAPP.png" alt="CGBC logo">
-          </div>
-
-          <div class="listen-watch-group">
-            <button class="mode-btn active" id="listenBtn" type="button">
-              <span class="mode-btn-shell">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg>
-                </span>
-                <span class="mode-btn-text">
-                  <span class="top-line">Listen</span>
-                  <span class="bottom-line">Audio</span>
-                </span>
-              </span>
-            </button>
-
-            <button class="mode-btn" id="watchBtn" type="button">
-              <span class="mode-btn-shell">
-                <span class="icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg>
-                </span>
-                <span class="mode-btn-text">
-                  <span class="top-line">Watch</span>
-                  <span class="bottom-line">Video</span>
-                </span>
-              </span>
-            </button>
-          </div>
+      <div class="top-actions">
+        <div class="mode-pill">
+          <button class="mode-btn active" id="listenBtn" type="button">
+            <span class="mode-btn-shell">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg></span>
+              <span class="btn-copy"><span class="top">Listen</span><span class="bottom">Audio</span></span>
+            </span>
+          </button>
+          <button class="mode-btn" id="watchBtn" type="button">
+            <span class="mode-btn-shell">
+              <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg></span>
+              <span class="btn-copy"><span class="top">Watch</span><span class="bottom">Video</span></span>
+            </span>
+          </button>
         </div>
 
-        <button class="mode-btn" id="openDrawerBtn" type="button">
-          <span class="mode-btn-shell">
-            <span class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h10v2H4v-2Z"/></svg>
-            </span>
-            <span class="mode-btn-text">
-              <span class="top-line">Sermon</span>
-              <span class="bottom-line">Selection</span>
-            </span>
+        <button class="utility-btn" id="openDrawerBtn" type="button">
+          <span class="utility-btn-shell">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h10v2H4v-2Z"/></svg></span>
+            <span class="btn-copy"><span class="top">Sermon</span><span class="bottom">Selection</span></span>
           </span>
         </button>
       </div>
-    </div>
-  </div>
+    </header>
 
-  <div class="drawer-overlay" id="drawerOverlay"></div>
-
-  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-    <div class="drawer-top">
-      <div class="drawer-title-wrap">
-        <span class="icon" id="drawerTitleIcon" aria-hidden="true"></span>
-        <h2 id="drawerTitleText">Browse Sermon Audio</h2>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="drawer-top">
+        <div class="drawer-title"><span class="icon" id="drawerTitleIcon"></span><span id="drawerTitleText">Browse Sermon Audio</span></div>
+        <button class="drawer-close" id="closeDrawerBtn" type="button">Close</button>
       </div>
-      <button class="close-drawer-btn" id="closeDrawerBtn" type="button">Close</button>
-    </div>
-
-    <div class="drawer-sections">
-      <div class="drawer-panel series-panel">
-        <h3 class="rail-heading">Browse</h3>
-        <div id="mobileSeriesList" class="series-list"></div>
+      <div class="drawer-body">
+        <section class="drawer-pane series-pane">
+          <div class="drawer-pane-head">Browse</div>
+          <div class="drawer-pane-body" id="mobileBrowseList"></div>
+        </section>
+        <section class="drawer-pane episodes-pane">
+          <div class="drawer-pane-head">Up Next</div>
+          <div class="drawer-pane-body" id="mobileEpisodesList"></div>
+        </section>
       </div>
-      <div class="drawer-panel episodes-panel">
-        <h3 class="rail-heading" id="mobileEpisodesHeading">Up Next</h3>
-        <div id="mobileEpisodesList" class="episodes-list"></div>
-      </div>
-    </div>
-  </aside>
-
-  <div class="layout">
-    <aside class="col col-series">
-      <h3 class="rail-heading">Browse</h3>
-      <div id="seriesList" class="series-list"></div>
     </aside>
 
-    <section class="col col-episodes">
-      <div class="episodes-header-row">
-        <h3 class="rail-heading" id="episodesHeaderTitle">Up Next</h3>
-        <button class="change-series-btn" id="desktopChangeSeriesBtn" type="button">Back to Browse</button>
-      </div>
-      <div id="episodesList" class="episodes-list"></div>
-    </section>
+    <main class="workspace">
+      <section class="panel column browse-column">
+        <div class="column-head">
+          <p class="eyebrow">Browse</p>
+          <h2 class="column-title">Sermon Library</h2>
+        </div>
+        <div class="column-scroll" id="browseList"></div>
+      </section>
 
-    <main class="col col-player" id="playerSection">
-      <div id="videoPlaceholder">Choose a sermon bucket to begin watching.</div>
-      <div id="videoShell"></div>
+      <section class="panel column queue-column">
+        <div class="column-head">
+          <p class="eyebrow">Up Next</p>
+          <h2 class="column-title" id="episodesHeaderTitle">Episodes</h2>
+        </div>
+        <div class="column-scroll" id="episodesList"></div>
+      </section>
 
-      <div id="audioPlaceholder">Choose a sermon bucket to begin listening.</div>
+      <section class="stage-column" id="playerSection">
+        <section class="player-stage">
+          <div id="videoPlaceholder">Choose an episode from the queue to begin watching.</div>
+          <div id="videoShell"></div>
+          <div id="audioPlaceholder">Choose an episode from the queue to begin listening.</div>
 
-      <div class="audio-feature-card" id="audioFeatureCard">
-        <div class="audio-split">
-          <div class="audio-art-panel">
-            <img id="audioFeatureArt" alt="Sermon artwork">
+          <div class="audio-stage" id="audioStage">
+            <div class="audio-art-wrap">
+              <div class="audio-art"><img id="audioFeatureArt" alt="Sermon artwork"></div>
 
-            <div class="audio-transport-overlay">
-              <div class="audio-transport-glass">
-                <div class="audio-transport">
-                  <button id="miniSkipBackBtn" class="audio-mini-skip" type="button" aria-label="Skip backward 30 seconds">−30</button>
+              <div class="audio-transport">
+                <button class="transport-btn" id="miniSkipBackBtn" type="button">−30</button>
+                <button class="transport-play" id="audioPlayBadge" type="button" aria-label="Play or pause audio">
+                  <span class="transport-play-circle"><svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+                  <span class="transport-play-copy"><span id="audioPlayLabel">Tap to Play</span><span class="transport-dots" id="audioPlayDots" aria-hidden="true"></span></span>
+                </button>
+                <button class="transport-btn" id="miniSkipForwardBtn" type="button">+30</button>
+              </div>
+            </div>
 
-                  <button id="audioPlayBadge" class="audio-play-badge" type="button" aria-label="Play or pause audio">
-                    <span class="audio-play-circle" aria-hidden="true">
-                      <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </span>
-                    <span class="audio-play-text-wrap">
-                      <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
-                      <span class="audio-play-dots" id="audioPlayDots" aria-hidden="true"></span>
-                    </span>
-                  </button>
+            <div class="audio-content">
+              <p class="audio-status" id="audioReadyLabel">Ready to Listen</p>
+              <h3 class="audio-title" id="audioFeatureTitle">Select a sermon</h3>
+              <div class="audio-series" id="audioFeatureSeries"></div>
 
-                  <button id="miniSkipForwardBtn" class="audio-mini-skip" type="button" aria-label="Skip forward 30 seconds">+30</button>
+              <div class="audio-time-row">
+                <div class="audio-now" id="audioClockCurrent">00:00</div>
+                <div class="audio-total" id="audioClockTotal">/ 00:00</div>
+              </div>
+
+              <div class="audio-progress-wrap">
+                <input id="audioProgress" class="audio-progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="Audio progress">
+                <div class="audio-progress-times">
+                  <span id="audioElapsedSmall">00:00</span>
+                  <span id="audioRemainingSmall">00:00</span>
                 </div>
               </div>
+
+              <audio id="audioPlayer" preload="none"></audio>
             </div>
           </div>
+        </section>
 
-          <div class="audio-content">
-            <div class="audio-ready" id="audioReadyLabel">Ready to Listen</div>
-            <h3 id="audioFeatureTitle">Select a sermon</h3>
-            <div class="audio-series" id="audioFeatureSeries"></div>
-
-            <div class="audio-clock-row">
-              <div class="audio-clock-block">
-                <div class="audio-clock-label">Current Position</div>
-                <div class="audio-clock-time" id="audioClockCurrent">00:00</div>
-              </div>
-              <div class="audio-clock-total" id="audioClockTotal">/ 00:00</div>
-            </div>
-
-            <div class="audio-progress-wrap">
-              <!-- Beginner note:
-                   The native audio element still powers playback.
-                   This range slider is a simpler custom progress UI on top of it. -->
-              <input id="audioProgress" class="audio-progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="Audio progress">
-              <div class="audio-progress-times">
-                <span id="audioElapsedSmall">00:00</span>
-                <span id="audioRemainingSmall">00:00</span>
-              </div>
-            </div>
-
-            <audio id="audioPlayer" preload="none"></audio>
-          </div>
-        </div>
-      </div>
-
-      <section class="meta" id="metaBox">
-        <h2>Select a sermon</h2>
-        <div class="meta-intro">Browse by category and then choose an episode to load the player.</div>
-        <p class="meta-note">Audio is the master structure. Video follows the same sermon architecture, with Livestreams first and Guest Speakers last.</p>
+        <section class="meta-stage" id="metaBox">
+          <h2 class="meta-title">Select a sermon</h2>
+          <div class="meta-intro">Choose a sermon bucket and episode to begin listening.</div>
+          <p class="meta-note">Browse by category and then choose an episode to load the player.</p>
+        </section>
       </section>
     </main>
   </div>
 
   <script>
-    /* =========================================================================
-       MAIN CONFIG
+    /* =====================================================================
+       CGBC clean restart build
        Beginner note:
-       Keep manual editorial changes here first.
-       ========================================================================= */
-    const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
-    const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
-    const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
+       This file keeps only the stable essentials:
+       - RSS parsing
+       - YouTube linking
+       - one audio transport path
+       - one desktop layout model
+       - one mobile drawer model
+       ===================================================================== */
 
     const SHARED_PINNED_CURRENT_ITEMS = [
       'Romans Chapter 12',
-      'Eschatology: The Rapture'
+      'The Rapture',
+      '2026 Specials'
     ];
 
     const LIVESTREAMS = {
@@ -1462,6 +989,10 @@
       playlistId: 'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW'
     };
 
+    const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
+    const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
+    const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
+
     const BIBLE_BOOK_NAMES = [
       'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
       '1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra',
@@ -1469,40 +1000,31 @@
       'Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos',
       'Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah',
       'Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians',
-      '2 Corinthians','Galatians','Ephesians','Philippians','Colossians',
-      '1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon',
-      'Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'
+      '2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians',
+      '2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James',
+      '1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'
     ];
 
-    const PLAYING_DOT_STATES = ['', '.', '..', '...'];
-
-    let sermonSeriesMap = {};
-    let navigationModel = { audio: [], video: [] };
+    let sermonData = {};
+    let browseBuckets = null;
     let mode = 'audio';
-    let selectedNodeId = null;
-    let selectedEpisodeIndex = null;
+    let currentSeries = null;
+    let currentEpisodeIndex = null;
     let currentEpisodeData = null;
-    let playingDotsIndex = 0;
     let playingDotsTimer = null;
+    let playingDotsIndex = 0;
+    const playingDotsStates = ['', '.', '..', '...'];
 
-    /* =========================================================================
-       DOM LOOKUPS
-       ========================================================================= */
     const bodyEl = document.body;
-    const seriesListEl = document.getElementById('seriesList');
+    const browseListEl = document.getElementById('browseList');
+    const mobileBrowseListEl = document.getElementById('mobileBrowseList');
     const episodesListEl = document.getElementById('episodesList');
-    const mobileSeriesListEl = document.getElementById('mobileSeriesList');
     const mobileEpisodesListEl = document.getElementById('mobileEpisodesList');
     const episodesHeaderTitleEl = document.getElementById('episodesHeaderTitle');
-    const mobileEpisodesHeadingEl = document.getElementById('mobileEpisodesHeading');
-    const desktopChangeSeriesBtnEl = document.getElementById('desktopChangeSeriesBtn');
-
-    const metaBoxEl = document.getElementById('metaBox');
-    const playerSectionEl = document.getElementById('playerSection');
-    const videoShellEl = document.getElementById('videoShell');
     const videoPlaceholderEl = document.getElementById('videoPlaceholder');
+    const videoShellEl = document.getElementById('videoShell');
     const audioPlaceholderEl = document.getElementById('audioPlaceholder');
-    const audioFeatureCardEl = document.getElementById('audioFeatureCard');
+    const audioStageEl = document.getElementById('audioStage');
     const audioFeatureArtEl = document.getElementById('audioFeatureArt');
     const audioFeatureTitleEl = document.getElementById('audioFeatureTitle');
     const audioFeatureSeriesEl = document.getElementById('audioFeatureSeries');
@@ -1517,22 +1039,20 @@
     const audioElapsedSmallEl = document.getElementById('audioElapsedSmall');
     const audioRemainingSmallEl = document.getElementById('audioRemainingSmall');
     const audioProgressEl = document.getElementById('audioProgress');
-    const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
-    const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
-
+    const metaBoxEl = document.getElementById('metaBox');
     const listenBtnEl = document.getElementById('listenBtn');
     const watchBtnEl = document.getElementById('watchBtn');
     const logoResetEl = document.getElementById('logoReset');
     const openDrawerBtnEl = document.getElementById('openDrawerBtn');
     const closeDrawerBtnEl = document.getElementById('closeDrawerBtn');
     const drawerOverlayEl = document.getElementById('drawerOverlay');
-    const mobileDrawerEl = document.getElementById('mobileDrawer');
+    const drawerEl = document.getElementById('mobileDrawer');
     const drawerTitleTextEl = document.getElementById('drawerTitleText');
     const drawerTitleIconEl = document.getElementById('drawerTitleIcon');
+    const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
+    const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
+    const playerSectionEl = document.getElementById('playerSection');
 
-    /* =========================================================================
-       UTILITY HELPERS
-       ========================================================================= */
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
@@ -1541,35 +1061,10 @@
       return (value || '').replace(/\s+/g, ' ').trim();
     }
 
-    function normalizeKey(value) {
-      return normalizeWhitespace(value).toLowerCase();
-    }
-
-    function escapeHtml(value) {
-      return String(value || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
     function parseDateToTimestamp(value) {
       if (!value) return 0;
-      const parsed = Date.parse(value);
-      return Number.isNaN(parsed) ? 0 : parsed;
-    }
-
-    function formatAudioTime(seconds) {
-      if (!Number.isFinite(seconds) || seconds < 0) return '00:00';
-      const wholeSeconds = Math.floor(seconds);
-      const hours = Math.floor(wholeSeconds / 3600);
-      const minutes = Math.floor((wholeSeconds % 3600) / 60);
-      const secs = wholeSeconds % 60;
-      if (hours > 0) {
-        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-      }
-      return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      const direct = Date.parse(value);
+      return Number.isNaN(direct) ? 0 : direct;
     }
 
     function htmlDecode(input) {
@@ -1584,226 +1079,11 @@
         .replace(/<\/div>\s*<div>/gi, '\n');
     }
 
-    function inferYearFromTimestamp(timestamp) {
-      if (!timestamp) return '';
-      const d = new Date(timestamp);
-      return Number.isNaN(d.getTime()) ? '' : String(d.getFullYear());
-    }
-
-    function getMonthNameFromTimestamp(timestamp) {
-      if (!timestamp) return '';
-      const d = new Date(timestamp);
-      return Number.isNaN(d.getTime()) ? '' : d.toLocaleString('en-US', { month: 'long' });
-    }
-
-    function getMonthIndexFromTimestamp(timestamp) {
-      if (!timestamp) return 99;
-      const d = new Date(timestamp);
-      return Number.isNaN(d.getTime()) ? 99 : d.getMonth();
-    }
-
-    function extractYouTubeId(url) {
-      if (!url) return '';
-      try {
-        const u = new URL(url.trim());
-        if (u.hostname.includes('youtu.be')) return u.pathname.replace(/^\/+/, '').trim();
-        const v = u.searchParams.get('v');
-        if (v) return v.trim();
-        if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('/')[0].trim();
-        return '';
-      } catch {
-        return '';
-      }
-    }
-
-    function getWatchThumb(videoId) {
-      return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
-    }
-
-    function getAudioIconSvg() {
-      return '<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg>';
-    }
-
-    function getVideoIconSvg() {
-      return '<svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg>';
-    }
-
-    function updateDrawerHeader() {
-      drawerTitleTextEl.textContent = mode === 'audio' ? 'Browse Sermon Audio' : 'Browse Sermon Video';
-      drawerTitleIconEl.innerHTML = mode === 'audio' ? getAudioIconSvg() : getVideoIconSvg();
-    }
-
-    function scrollPlayerIntoViewPreservingTopControls() {
-      const topControlsEl = document.querySelector('.top-controls');
-      const controlsHeight = topControlsEl ? topControlsEl.offsetHeight : 0;
-      const extraSpacing = isMobileLayout() ? 12 : 16;
-      const bannerAllowance = isMobileLayout() ? 0 : 12;
-      const targetTop = playerSectionEl.getBoundingClientRect().top + window.scrollY - controlsHeight - extraSpacing - bannerAllowance;
-      window.scrollTo({
-        top: Math.max(targetTop, 0),
-        behavior: 'smooth'
-      });
-    }
-
-    /* =========================================================================
-       AUDIO DOTS / MEDIA STATE
-       ========================================================================= */
-    function stopPlayingDots() {
-      if (playingDotsTimer) {
-        clearInterval(playingDotsTimer);
-        playingDotsTimer = null;
-      }
-      playingDotsIndex = 0;
-      audioPlayDotsEl.textContent = '';
-    }
-
-    function startPlayingDots() {
-      stopPlayingDots();
-      audioPlayLabelEl.textContent = 'Playing';
-      audioPlayDotsEl.textContent = PLAYING_DOT_STATES[playingDotsIndex];
-      playingDotsTimer = setInterval(() => {
-        if (audioPlayerEl.paused) return;
-        playingDotsIndex = (playingDotsIndex + 1) % PLAYING_DOT_STATES.length;
-        audioPlayDotsEl.textContent = PLAYING_DOT_STATES[playingDotsIndex];
-      }, 450);
-    }
-
-    function updateAudioProgressUi() {
-      const current = audioPlayerEl.currentTime || 0;
-      const duration = Number.isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : 0;
-      const progressValue = duration > 0 ? (current / duration) * 100 : 0;
-
-      audioClockCurrentEl.textContent = formatAudioTime(current);
-      audioClockTotalEl.textContent = `/ ${formatAudioTime(duration)}`;
-      audioElapsedSmallEl.textContent = formatAudioTime(current);
-      audioRemainingSmallEl.textContent = duration > 0
-        ? `-${formatAudioTime(Math.max(duration - current, 0))}`
-        : '00:00';
-      audioProgressEl.value = progressValue;
-    }
-
-    function clearMediaSession() {
-      if (!('mediaSession' in navigator)) return;
-      try {
-        navigator.mediaSession.metadata = null;
-      } catch {}
-    }
-
-    function updateMediaSession(ep) {
-      if (!('mediaSession' in navigator) || !ep) return;
-      const artworkSrc = ep.img || ep.seriesImage || FALLBACK_IMAGE;
-
-      try {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: ep.title || 'CGBC Sermon',
-          artist: ep.by || 'CGBC',
-          album: ep.series || 'CGBC Sermons',
-          artwork: [
-            { src: artworkSrc, sizes: '96x96', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '128x128', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '192x192', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '256x256', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '384x384', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }
-          ]
-        });
-
-        navigator.mediaSession.setActionHandler('play', () => audioPlayerEl.play());
-        navigator.mediaSession.setActionHandler('pause', () => audioPlayerEl.pause());
-        navigator.mediaSession.setActionHandler('seekbackward', () => skipAudioBy(-30));
-        navigator.mediaSession.setActionHandler('seekforward', () => skipAudioBy(30));
-      } catch {}
-    }
-
-    function setAudioReadyState(isPlaying) {
-      audioReadyLabelEl.textContent = isPlaying ? 'Listening...' : 'Ready to Listen';
-      audioFeatureCardEl.classList.toggle('playing', isPlaying);
-
-      audioPlayIconEl.innerHTML = isPlaying
-        ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
-        : '<path d="M8 5v14l11-7z"/>';
-
-      audioPlayIconEl.style.marginLeft = isPlaying ? '0px' : '2px';
-
-      if (isPlaying) {
-        startPlayingDots();
-      } else {
-        stopPlayingDots();
-        audioPlayLabelEl.textContent = 'Tap to Play';
-      }
-
-      if ('mediaSession' in navigator) {
-        try {
-          navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
-        } catch {}
-      }
-    }
-
-    function skipAudioBy(seconds) {
-      if (!audioPlayerEl.src) return;
-      const nextTime = Math.max(
-        0,
-        Math.min(
-          (audioPlayerEl.currentTime || 0) + seconds,
-          Number.isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : (audioPlayerEl.currentTime || 0) + seconds
-        )
-      );
-      audioPlayerEl.currentTime = nextTime;
-    }
-
-    function toggleAudioPlayback() {
-      if (!audioPlayerEl.src) return;
-      if (audioPlayerEl.paused) audioPlayerEl.play();
-      else audioPlayerEl.pause();
-    }
-
-    function stopAndHideVideo() {
-      videoShellEl.innerHTML = '';
-      videoShellEl.style.display = 'none';
-      videoPlaceholderEl.style.display = 'none';
-    }
-
-    function stopAndHideAudio() {
-      audioPlayerEl.pause();
-      audioPlayerEl.removeAttribute('src');
-      audioPlayerEl.load();
-      audioFeatureCardEl.style.display = 'none';
-      audioPlaceholderEl.style.display = 'none';
-      audioClockCurrentEl.textContent = '00:00';
-      audioClockTotalEl.textContent = '/ 00:00';
-      audioElapsedSmallEl.textContent = '00:00';
-      audioRemainingSmallEl.textContent = '00:00';
-      audioProgressEl.value = 0;
-      setAudioReadyState(false);
-      clearMediaSession();
-    }
-
-    function clearMediaState() {
-      stopAndHideVideo();
-      stopAndHideAudio();
-      currentEpisodeData = null;
-      selectedEpisodeIndex = null;
-      updateDesktopSelectedState();
-    }
-
-    /* =========================================================================
-       DATA PARSING
-       ========================================================================= */
     function parseDescription(rawDesc) {
       const normalized = normalizeLineBreaks(rawDesc);
       const decoded = htmlDecode(normalized);
       const lines = decoded.split('\n').map(s => s.trim()).filter(Boolean);
-
-      const out = {
-        title: '',
-        series: '',
-        scripture: '',
-        by: '',
-        date: '',
-        video: '',
-        extra: []
-      };
-
+      const out = { title: '', series: '', scripture: '', by: '', date: '', video: '', extra: [] };
       for (const line of lines) {
         const lower = line.toLowerCase();
         if (lower.startsWith('title:')) out.title = line.split(/title:/i)[1].trim();
@@ -1814,90 +1094,177 @@
         else if (lower.startsWith('video:')) out.video = line.split(/video:/i)[1].trim();
         else out.extra.push(line);
       }
-
       return out;
     }
 
     function splitTitleParts(rawTitle) {
-      const clean = normalizeWhitespace(rawTitle || '');
-      const parts = clean.split('|').map(part => normalizeWhitespace(part)).filter(Boolean);
-
+      const clean = (rawTitle || '').trim();
+      const parts = clean.split('|').map(part => part.trim()).filter(Boolean);
       return {
         episodeTitle: parts[0] || clean || 'Untitled Sermon',
         inferredSeries: parts.length > 1 ? parts[parts.length - 1] : ''
       };
     }
 
-    function detectBibleBook(value) {
-      const clean = normalizeWhitespace(value);
-      const lower = clean.toLowerCase();
-      if (!lower) return '';
+    function extractYouTubeId(url) {
+      if (!url) return '';
+      try {
+        const parsed = new URL(url.trim());
+        if (parsed.hostname.includes('youtu.be')) return parsed.pathname.replace(/^\/+/, '').trim();
+        const v = parsed.searchParams.get('v');
+        if (v) return v.trim();
+        if (parsed.pathname.includes('/shorts/')) return parsed.pathname.split('/shorts/')[1].split('/')[0].trim();
+      } catch {}
+      return '';
+    }
 
+    function getWatchThumb(videoId) {
+      return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
+    }
+
+    function detectBibleBook(value) {
+      const clean = normalizeWhitespace(value).toLowerCase();
+      if (!clean) return '';
       for (const book of BIBLE_BOOK_NAMES) {
-        const bookLower = book.toLowerCase();
-        if (
-          lower === bookLower ||
-          lower.startsWith(bookLower + ' ') ||
-          lower.includes(' ' + bookLower + ' ') ||
-          lower.endsWith(' ' + bookLower)
-        ) {
+        const test = book.toLowerCase();
+        if (clean === test || clean.startsWith(test + ' ') || clean.includes(' ' + test + ' ') || clean.endsWith(' ' + test)) {
           return book;
         }
       }
-
       return '';
     }
 
     function parseStandaloneParentChild(seriesName) {
       const clean = normalizeWhitespace(seriesName);
-      if (!clean.includes(':')) {
-        return { parent: clean, child: '' };
-      }
-
+      if (!clean.includes(':')) return { parent: clean, child: '' };
       const parts = clean.split(':').map(part => normalizeWhitespace(part)).filter(Boolean);
-      if (parts.length < 2) {
-        return { parent: clean, child: '' };
-      }
-
-      return {
-        parent: parts[0],
-        child: parts.slice(1).join(': ')
-      };
+      if (parts.length < 2) return { parent: clean, child: '' };
+      return { parent: parts[0], child: parts.slice(1).join(': ') };
     }
 
-    function classifySeries(seriesName, firstEntry) {
-      const cleanSeriesName = normalizeWhitespace(seriesName);
-      const scripture = normalizeWhitespace(firstEntry?.scripture || '');
-      const bookFromSeries = detectBibleBook(cleanSeriesName);
-      const bookFromScripture = detectBibleBook(scripture);
-      const bibleBook = bookFromSeries || bookFromScripture;
-      const standalone = parseStandaloneParentChild(cleanSeriesName);
-      const inferredYear = inferYearFromTimestamp(firstEntry?.sortTimestamp || 0);
-      const explicitYear = (cleanSeriesName.match(/\b20\d{2}\b/) || [])[0] || '';
-      const isYearSpecial = /special/i.test(cleanSeriesName) && !!(explicitYear || inferredYear);
-      const isPinnedCurrent = SHARED_PINNED_CURRENT_ITEMS.map(normalizeKey).includes(normalizeKey(cleanSeriesName));
+    function inferYearFromTimestamp(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return String(date.getFullYear());
+    }
+
+    function getMonthNameFromTimestamp(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleString('en-US', { month: 'long' });
+    }
+
+    function classifySeries(seriesName, sampleEntry) {
+      const series = normalizeWhitespace(seriesName);
+      const scripture = normalizeWhitespace(sampleEntry?.scripture || '');
+      const bibleBook = detectBibleBook(series) || detectBibleBook(scripture);
+      const standalone = parseStandaloneParentChild(series);
+      const inferredYear = inferYearFromTimestamp(sampleEntry?.sortTimestamp || 0);
+      const specialYearMatch = series.match(/\b20\d{2}\b/);
+      const isYearSpecial = /special/i.test(series) && !!specialYearMatch;
+      const isPinnedCurrent = SHARED_PINNED_CURRENT_ITEMS.includes(series);
       const isStandaloneSeries = !bibleBook && !isYearSpecial;
-
       return {
-        seriesName: cleanSeriesName,
-        isPinnedCurrent,
         bibleBook,
+        isPinnedCurrent,
         isYearSpecial,
-        specialYear: explicitYear || inferredYear || 'Unknown Year',
         isStandaloneSeries,
-        standaloneParent: standalone.child ? standalone.parent : cleanSeriesName,
+        standaloneParent: standalone.child ? standalone.parent : series,
         standaloneChild: standalone.child || '',
+        specialYear: specialYearMatch ? specialYearMatch[0] : inferredYear
       };
     }
 
-    function getPinnedSeriesSet() {
-      return new Set(SHARED_PINNED_CURRENT_ITEMS.map(normalizeKey));
+    function getSeriesSortDirection(seriesName) {
+      return SHARED_PINNED_CURRENT_ITEMS.includes(seriesName) || seriesName === LIVESTREAMS.name ? 'desc' : 'asc';
     }
 
-    function sortEpisodesForSeries(seriesName, items) {
-      const pinned = getPinnedSeriesSet().has(normalizeKey(seriesName));
-      const sorted = [...items].sort((a, b) => a.sortTimestamp - b.sortTimestamp);
-      return pinned ? sorted.reverse() : sorted;
+    function getDisplayedEpisodes(seriesName) {
+      const episodes = [...(sermonData[seriesName] || [])];
+      const direction = getSeriesSortDirection(seriesName);
+      episodes.sort((a, b) => direction === 'desc' ? b.sortTimestamp - a.sortTimestamp : a.sortTimestamp - b.sortTimestamp);
+      return episodes;
+    }
+
+    function applySeriesArtwork() {
+      Object.keys(sermonData).forEach(seriesName => {
+        const displayedEpisodes = getDisplayedEpisodes(seriesName);
+        const firstDisplayed = displayedEpisodes[0] || {};
+        const seriesImage = firstDisplayed.img || FALLBACK_IMAGE;
+        const seriesWideImage = firstDisplayed.videoId ? getWatchThumb(firstDisplayed.videoId) : FALLBACK_IMAGE;
+        sermonData[seriesName] = sermonData[seriesName].map(ep => ({ ...ep, seriesImage, seriesWideImage }));
+      });
+    }
+
+    function buildBrowseBuckets() {
+      const buckets = {
+        pinnedCurrent: [],
+        bibleBooks: {},
+        standaloneSeries: {},
+        yearSpecials: {},
+        byDate: {}
+      };
+
+      Object.keys(sermonData).forEach(seriesName => {
+        if (seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name) return;
+        const sampleEntry = getDisplayedEpisodes(seriesName)[0] || {};
+        const info = classifySeries(seriesName, sampleEntry);
+        const eligibleForMode = mode === 'audio' ? true : !!(sermonData[seriesName] || []).some(ep => ep.videoId);
+        if (!eligibleForMode) return;
+
+        if (info.isPinnedCurrent) buckets.pinnedCurrent.push(seriesName);
+        if (info.bibleBook) {
+          if (!buckets.bibleBooks[info.bibleBook]) buckets.bibleBooks[info.bibleBook] = [];
+          buckets.bibleBooks[info.bibleBook].push(seriesName);
+        } else if (info.isYearSpecial) {
+          const yearKey = info.specialYear || 'Unknown Year';
+          if (!buckets.yearSpecials[yearKey]) buckets.yearSpecials[yearKey] = [];
+          buckets.yearSpecials[yearKey].push(seriesName);
+        } else {
+          const parentKey = info.standaloneParent || seriesName;
+          if (!buckets.standaloneSeries[parentKey]) buckets.standaloneSeries[parentKey] = [];
+          buckets.standaloneSeries[parentKey].push(seriesName);
+        }
+
+        (sermonData[seriesName] || []).forEach(ep => {
+          if (mode === 'video' && !ep.videoId) return;
+          const yearKey = inferYearFromTimestamp(ep.sortTimestamp) || 'Unknown Year';
+          const monthKey = getMonthNameFromTimestamp(ep.sortTimestamp) || 'Unknown Month';
+          if (!buckets.byDate[yearKey]) buckets.byDate[yearKey] = {};
+          if (!buckets.byDate[yearKey][monthKey]) buckets.byDate[yearKey][monthKey] = [];
+          buckets.byDate[yearKey][monthKey].push({
+            seriesName,
+            title: ep.title,
+            date: ep.date,
+            timestamp: ep.sortTimestamp
+          });
+        });
+      });
+
+      buckets.pinnedCurrent.sort((a, b) => SHARED_PINNED_CURRENT_ITEMS.indexOf(a) - SHARED_PINNED_CURRENT_ITEMS.indexOf(b));
+      Object.keys(buckets.bibleBooks).forEach(book => buckets.bibleBooks[book].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
+      Object.keys(buckets.standaloneSeries).forEach(key => buckets.standaloneSeries[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
+      Object.keys(buckets.yearSpecials).forEach(year => buckets.yearSpecials[year].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
+      Object.keys(buckets.byDate).forEach(year => {
+        Object.keys(buckets.byDate[year]).forEach(month => {
+          buckets.byDate[year][month].sort((a, b) => b.timestamp - a.timestamp);
+        });
+      });
+
+      return buckets;
+    }
+
+    function getModeTopSeries() {
+      const picks = [];
+      if (mode === 'video' && sermonData[LIVESTREAMS.name]) picks.push(LIVESTREAMS.name);
+      SHARED_PINNED_CURRENT_ITEMS.forEach(name => {
+        if (!sermonData[name]) return;
+        if (mode === 'video' && !(sermonData[name] || []).some(ep => ep.videoId)) return;
+        picks.push(name);
+      });
+      return picks;
     }
 
     async function fetchPlaylistSeries(config, newestFirst = false) {
@@ -1905,17 +1272,14 @@
       const res = await fetch(url);
       const data = await res.json();
       const items = Array.isArray(data.items) ? data.items : [];
-
-      const sortedItems = [...items];
-      if (newestFirst) {
-        sortedItems.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt));
-      }
-
-      return sortedItems.map(item => {
+      const sorted = [...items].sort((a, b) => newestFirst
+        ? new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
+        : new Date(a.snippet.publishedAt) - new Date(b.snippet.publishedAt)
+      );
+      return sorted.map(item => {
         const videoId = item?.snippet?.resourceId?.videoId || '';
         const publishedAt = item?.snippet?.publishedAt || '';
-        const wideThumb = getWatchThumb(videoId);
-
+        const thumb = getWatchThumb(videoId);
         return {
           title: item?.snippet?.title || config.name,
           series: config.name,
@@ -1929,14 +1293,13 @@
           link: '',
           extra: [],
           sortTimestamp: parseDateToTimestamp(publishedAt),
-          seriesImage: wideThumb,
-          seriesWideImage: wideThumb,
-          overline: config.name
+          seriesImage: thumb,
+          seriesWideImage: thumb
         };
       });
     }
 
-    async function loadRSSData() {
+    async function loadData() {
       const xmlText = await fetch(RSS_URL).then(r => r.text());
       const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
       const items = Array.from(xml.querySelectorAll('item'));
@@ -1947,24 +1310,17 @@
         const parsed = parseDescription(rawDescription);
         const rawTitle = item.querySelector('title')?.textContent?.trim() || 'Untitled Sermon';
         const split = splitTitleParts(rawTitle);
-
-        const series = normalizeWhitespace(parsed.series || split.inferredSeries || 'Other Sermons');
-        const title = normalizeWhitespace(parsed.title || split.episodeTitle || 'Untitled Sermon');
-
+        const series = parsed.series || split.inferredSeries || 'Other Sermons';
+        const title = parsed.title || split.episodeTitle || 'Untitled Sermon';
         const enclosure = item.querySelector('enclosure');
         const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
         const itemLink = item.querySelector('link')?.textContent?.trim() || '';
         const pubDateRaw = item.querySelector('pubDate')?.textContent?.trim() || '';
-
-        let itemImage = '';
         const itunesImages = item.getElementsByTagName('itunes:image');
-        if (itunesImages && itunesImages[0]) {
-          itemImage = itunesImages[0].getAttribute('href') || '';
-        }
-
+        const itemImage = itunesImages && itunesImages[0] ? (itunesImages[0].getAttribute('href') || '') : '';
         const videoId = extractYouTubeId(parsed.video);
-        if (!grouped[series]) grouped[series] = [];
 
+        if (!grouped[series]) grouped[series] = [];
         grouped[series].push({
           title,
           series,
@@ -1981,682 +1337,464 @@
         });
       });
 
-      Object.keys(grouped).forEach(seriesName => {
-        const sorted = sortEpisodesForSeries(seriesName, grouped[seriesName]);
-
-        /* Beginner note:
-           This is the critical artwork inheritance rule.
-           Series artwork comes from the first displayed episode after final sorting. */
-        const seriesLead = sorted[0];
-        const seriesSquareArt = seriesLead?.img || FALLBACK_IMAGE;
-        const seriesWideArt = seriesLead?.videoId ? getWatchThumb(seriesLead.videoId) : FALLBACK_IMAGE;
-
-        grouped[seriesName] = grouped[seriesName].map(ep => ({
-          ...ep,
-          seriesImage: seriesSquareArt,
-          seriesWideImage: seriesWideArt
-        }));
-      });
-
       const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
       if (livestreamEpisodes.length) grouped[LIVESTREAMS.name] = livestreamEpisodes;
-
       const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
       if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
 
-      sermonSeriesMap = grouped;
+      sermonData = grouped;
+      applySeriesArtwork();
+      browseBuckets = buildBrowseBuckets();
+      currentSeries = getModeTopSeries()[0] || Object.keys(sermonData)[0] || null;
     }
 
-    /* =========================================================================
-       NAVIGATION MODEL
-       Beginner note:
-       The PDF describes a deeper tree. This pass keeps the browsing UI shallow
-       and stable by flattening each leaf bucket into one rail node.
-       That preserves the agreed taxonomy without making the UI brittle.
-       ========================================================================= */
-    function buildNavigationModel() {
-      const audioNodes = [];
-      const videoNodes = [];
-
-      const pinnedAudio = [];
-      const pinnedVideo = [];
-      const bibleByBook = new Map();
-      const standaloneByParent = new Map();
-      const yearSpecialsByYear = new Map();
-      const byDateAudio = new Map();
-      const byDateVideo = new Map();
-
-      const allSeriesNames = Object.keys(sermonSeriesMap)
-        .filter(name => name !== LIVESTREAMS.name && name !== VIDEO_ONLY_ARCHIVE.name);
-
-      allSeriesNames.forEach(seriesName => {
-        const sortedEpisodes = sortEpisodesForSeries(seriesName, sermonSeriesMap[seriesName]);
-        const firstEntry = sortedEpisodes[0] || {};
-        const info = classifySeries(seriesName, firstEntry);
-
-        const nodeBase = {
-          id: `series::${seriesName}`,
-          type: 'series',
-          seriesName,
-          title: info.standaloneChild || seriesName,
-          overline: '',
-          group: '',
-          items: sortedEpisodes,
-          sectionKey: '',
-          artworkAudio: firstEntry.seriesImage || FALLBACK_IMAGE,
-          artworkVideo: firstEntry.seriesWideImage || FALLBACK_IMAGE,
-          hasVideo: sortedEpisodes.some(item => !!item.videoId),
-          hasAudio: sortedEpisodes.some(item => !!item.audio)
-        };
-
-        if (info.isPinnedCurrent) {
-          const pinnedNode = {
-            ...nodeBase,
-            group: 'Pinned Current Items',
-            sectionKey: 'pinned',
-            overline: 'Current'
-          };
-          pinnedAudio.push(pinnedNode);
-          if (pinnedNode.hasVideo) pinnedVideo.push(pinnedNode);
-        }
-
-        if (info.bibleBook) {
-          const node = {
-            ...nodeBase,
-            group: 'Bible Books',
-            sectionKey: 'bible',
-            overline: info.bibleBook
-          };
-          if (!bibleByBook.has(info.bibleBook)) bibleByBook.set(info.bibleBook, []);
-          bibleByBook.get(info.bibleBook).push(node);
-        } else if (info.isYearSpecial) {
-          const node = {
-            ...nodeBase,
-            group: 'Year Specials',
-            sectionKey: 'specials',
-            overline: info.specialYear
-          };
-          if (!yearSpecialsByYear.has(info.specialYear)) yearSpecialsByYear.set(info.specialYear, []);
-          yearSpecialsByYear.get(info.specialYear).push(node);
-        } else if (info.isStandaloneSeries) {
-          const parentKey = info.standaloneParent || seriesName;
-          const node = {
-            ...nodeBase,
-            group: 'Standalone Series',
-            sectionKey: 'standalone',
-            overline: info.standaloneChild ? parentKey : 'Series',
-            title: info.standaloneChild || seriesName
-          };
-          if (!standaloneByParent.has(parentKey)) standaloneByParent.set(parentKey, []);
-          standaloneByParent.get(parentKey).push(node);
-        }
-
-        sortedEpisodes.forEach(entry => {
-          const year = inferYearFromTimestamp(entry.sortTimestamp) || 'Unknown Year';
-          const month = getMonthNameFromTimestamp(entry.sortTimestamp) || 'Unknown Month';
-          const monthIndex = getMonthIndexFromTimestamp(entry.sortTimestamp);
-          const bucketId = `${year}::${month}`;
-
-          if (!byDateAudio.has(bucketId)) {
-            byDateAudio.set(bucketId, {
-              id: `date::audio::${bucketId}`,
-              type: 'dateBucket',
-              title: month,
-              overline: year,
-              group: 'Audio by Date',
-              sectionKey: 'byDateAudio',
-              sortYear: Number(year) || 0,
-              sortMonth: monthIndex,
-              items: []
-            });
-          }
-          byDateAudio.get(bucketId).items.push({
-            ...entry,
-            __sourceSeries: seriesName
-          });
-
-          if (entry.videoId) {
-            if (!byDateVideo.has(bucketId)) {
-              byDateVideo.set(bucketId, {
-                id: `date::video::${bucketId}`,
-                type: 'dateBucket',
-                title: month,
-                overline: year,
-                group: 'Video by Date',
-                sectionKey: 'byDateVideo',
-                sortYear: Number(year) || 0,
-                sortMonth: monthIndex,
-                items: []
-              });
-            }
-            byDateVideo.get(bucketId).items.push({
-              ...entry,
-              __sourceSeries: seriesName
-            });
-          }
-        });
-      });
-
-      const sortedBibleBooks = [...bibleByBook.keys()].sort((a, b) => {
-        return BIBLE_BOOK_NAMES.indexOf(a) - BIBLE_BOOK_NAMES.indexOf(b);
-      });
-
-      sortedBibleBooks.forEach(book => {
-        const nodes = bibleByBook.get(book) || [];
-        nodes.sort((a, b) => a.seriesName.localeCompare(b.seriesName, undefined, { numeric: true }));
-        nodes.forEach(node => {
-          audioNodes.push(node);
-          if (node.hasVideo) videoNodes.push(node);
-        });
-      });
-
-      const sortedStandaloneParents = [...standaloneByParent.keys()].sort((a, b) => a.localeCompare(b));
-      const standaloneAudioNodes = [];
-      const standaloneVideoNodes = [];
-      sortedStandaloneParents.forEach(parent => {
-        const nodes = standaloneByParent.get(parent) || [];
-        nodes.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }));
-        nodes.forEach(node => {
-          standaloneAudioNodes.push(node);
-          if (node.hasVideo) standaloneVideoNodes.push(node);
-        });
-      });
-
-      const sortedSpecialYears = [...yearSpecialsByYear.keys()].sort((a, b) => Number(b) - Number(a));
-      const specialAudioNodes = [];
-      const specialVideoNodes = [];
-      sortedSpecialYears.forEach(year => {
-        const nodes = yearSpecialsByYear.get(year) || [];
-        nodes.sort((a, b) => a.seriesName.localeCompare(b.seriesName, undefined, { numeric: true }));
-        nodes.forEach(node => {
-          specialAudioNodes.push(node);
-          if (node.hasVideo) specialVideoNodes.push(node);
-        });
-      });
-
-      const byDateAudioNodes = [...byDateAudio.values()]
-        .sort((a, b) => (b.sortYear - a.sortYear) || (b.sortMonth - a.sortMonth));
-      byDateAudioNodes.forEach(node => {
-        node.items.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
-      });
-
-      const byDateVideoNodes = [...byDateVideo.values()]
-        .sort((a, b) => (b.sortYear - a.sortYear) || (b.sortMonth - a.sortMonth));
-      byDateVideoNodes.forEach(node => {
-        node.items.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
-      });
-
-      navigationModel.audio = [
-        ...pinnedAudio,
-        ...audioNodes,
-        ...standaloneAudioNodes,
-        ...specialAudioNodes,
-        ...byDateAudioNodes
-      ];
-
-      const livestreamNode = sermonSeriesMap[LIVESTREAMS.name]
-        ? {
-            id: `series::${LIVESTREAMS.name}`,
-            type: 'series',
-            seriesName: LIVESTREAMS.name,
-            title: LIVESTREAMS.name,
-            overline: 'Live',
-            group: 'Livestreams',
-            sectionKey: 'livestreams',
-            items: sermonSeriesMap[LIVESTREAMS.name],
-            artworkAudio: FALLBACK_IMAGE,
-            artworkVideo: sermonSeriesMap[LIVESTREAMS.name][0]?.seriesWideImage || FALLBACK_IMAGE,
-            hasVideo: true,
-            hasAudio: false
-          }
-        : null;
-
-      const guestNode = sermonSeriesMap[VIDEO_ONLY_ARCHIVE.name]
-        ? {
-            id: `series::${VIDEO_ONLY_ARCHIVE.name}`,
-            type: 'series',
-            seriesName: VIDEO_ONLY_ARCHIVE.name,
-            title: VIDEO_ONLY_ARCHIVE.name,
-            overline: 'Archive',
-            group: 'Guest Speakers',
-            sectionKey: 'guestSpeakers',
-            items: sermonSeriesMap[VIDEO_ONLY_ARCHIVE.name],
-            artworkAudio: FALLBACK_IMAGE,
-            artworkVideo: sermonSeriesMap[VIDEO_ONLY_ARCHIVE.name][0]?.seriesWideImage || FALLBACK_IMAGE,
-            hasVideo: true,
-            hasAudio: false
-          }
-        : null;
-
-      navigationModel.video = [
-        ...(livestreamNode ? [livestreamNode] : []),
-        ...pinnedVideo,
-        ...videoNodes,
-        ...standaloneVideoNodes,
-        ...specialVideoNodes,
-        ...byDateVideoNodes,
-        ...(guestNode ? [guestNode] : [])
-      ];
+    function createIconMarkup(kind) {
+      if (kind === 'audio') return '<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg>';
+      return '<svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg>';
     }
 
-    function getCurrentNodes() {
-      return navigationModel[mode] || [];
+    function updateDrawerHeader() {
+      drawerTitleTextEl.textContent = mode === 'audio' ? 'Browse Sermon Audio' : 'Browse Sermon Video';
+      drawerTitleIconEl.innerHTML = createIconMarkup(mode === 'audio' ? 'audio' : 'video');
     }
 
-    function getNodeById(nodeId) {
-      return getCurrentNodes().find(node => node.id === nodeId) || null;
+    function openDrawer() {
+      if (!isMobileLayout()) return;
+      bodyEl.classList.add('drawer-open');
+      drawerEl.setAttribute('aria-hidden', 'false');
     }
 
-    function getDefaultNodeIdForMode() {
-      const nodes = getCurrentNodes();
-      return nodes.length ? nodes[0].id : null;
+    function closeDrawer() {
+      bodyEl.classList.remove('drawer-open');
+      drawerEl.setAttribute('aria-hidden', 'true');
     }
 
-    function getSeriesChips(node) {
+    function getSeriesChips(seriesName) {
       const chips = [];
-      if (node.sectionKey === 'livestreams') chips.push({ label: 'Live', className: 'live' });
-      if (node.sectionKey === 'guestSpeakers') chips.push({ label: 'Video Only', className: 'videoonly' });
-      if (node.sectionKey === 'pinned') chips.push({ label: 'Current', className: 'current' });
-      if (node.group === 'Year Specials') chips.push({ label: 'Special', className: 'specials' });
+      if (seriesName === LIVESTREAMS.name) chips.push({ label: 'Live', className: 'live' });
+      if (SHARED_PINNED_CURRENT_ITEMS.includes(seriesName)) chips.push({ label: 'Current', className: 'current' });
+      if (seriesName === VIDEO_ONLY_ARCHIVE.name) chips.push({ label: 'Video Only', className: '' });
       return chips;
     }
 
-    /* =========================================================================
-       RENDERING
-       ========================================================================= */
-    function renderEmptyMeta() {
-      const mobilePrompt = mode === 'audio'
-        ? 'Tap Sermon Selection above to begin listening'
-        : 'Tap Sermon Selection above to begin watching';
-
-      const desktopPrompt = mode === 'audio'
-        ? 'Choose a sermon bucket and episode to begin listening.'
-        : 'Choose a sermon bucket and episode to begin watching.';
-
-      metaBoxEl.innerHTML = `
-        <h2>Select a sermon</h2>
-        <div class="meta-intro">${escapeHtml(isMobileLayout() ? mobilePrompt : desktopPrompt)}</div>
-        <p class="meta-note">Browse by category and then choose an episode to load the player.</p>
+    function makeSeriesCard(seriesName) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `series-card ${mode}` + (seriesName === currentSeries ? ' active' : '');
+      const thumb = mode === 'video'
+        ? (sermonData[seriesName]?.[0]?.seriesWideImage || FALLBACK_IMAGE)
+        : (sermonData[seriesName]?.[0]?.seriesImage || FALLBACK_IMAGE);
+      const chips = getSeriesChips(seriesName);
+      button.innerHTML = `
+        <div class="series-thumb"><img src="${thumb}" alt=""></div>
+        <div class="card-copy">
+          <h3 class="card-title">${seriesName}</h3>
+          ${chips.length ? `<div class="chip-row">${chips.map(ch => `<span class="chip ${ch.className}">${ch.label}</span>`).join('')}</div>` : ''}
+        </div>
       `;
+      button.addEventListener('click', () => selectSeries(seriesName));
+      return button;
+    }
+
+    function renderBrowseGroup(targetEl, title, seriesNames, subgroupMap = null) {
+      if (!seriesNames?.length && !subgroupMap) return;
+      const wrap = document.createElement('section');
+      wrap.className = 'browse-group';
+      wrap.innerHTML = `<h3 class="browse-group-title">${title}</h3>`;
+      if (seriesNames?.length) {
+        const list = document.createElement('div');
+        list.className = 'series-list';
+        seriesNames.forEach(name => list.appendChild(makeSeriesCard(name)));
+        wrap.appendChild(list);
+      }
+      if (subgroupMap) {
+        Object.keys(subgroupMap).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).forEach(key => {
+          const heading = document.createElement('h4');
+          heading.className = 'browse-subgroup-title';
+          heading.textContent = key;
+          wrap.appendChild(heading);
+          const list = document.createElement('div');
+          list.className = 'series-list';
+          subgroupMap[key].forEach(name => list.appendChild(makeSeriesCard(name)));
+          wrap.appendChild(list);
+        });
+      }
+      targetEl.appendChild(wrap);
+    }
+
+    function renderDateGroup(targetEl, title, byDateMap) {
+      if (!byDateMap || !Object.keys(byDateMap).length) return;
+      const wrap = document.createElement('section');
+      wrap.className = 'browse-group';
+      wrap.innerHTML = `<h3 class="browse-group-title">${title}</h3>`;
+      const years = Object.keys(byDateMap).sort((a, b) => Number(b) - Number(a));
+      years.forEach(year => {
+        const yearHeading = document.createElement('h4');
+        yearHeading.className = 'browse-subgroup-title';
+        yearHeading.textContent = year;
+        wrap.appendChild(yearHeading);
+        const months = Object.keys(byDateMap[year]);
+        months.forEach(month => {
+          const monthHeading = document.createElement('div');
+          monthHeading.className = 'browse-subgroup-title';
+          monthHeading.style.marginTop = '8px';
+          monthHeading.style.fontSize = '10px';
+          monthHeading.style.opacity = '0.75';
+          monthHeading.textContent = month;
+          wrap.appendChild(monthHeading);
+          const seriesSet = [...new Set(byDateMap[year][month].map(item => item.seriesName))];
+          const list = document.createElement('div');
+          list.className = 'series-list';
+          seriesSet.forEach(name => list.appendChild(makeSeriesCard(name)));
+          wrap.appendChild(list);
+        });
+      });
+      targetEl.appendChild(wrap);
+    }
+
+    function renderBrowseInto(targetEl) {
+      targetEl.innerHTML = '';
+      if (!browseBuckets) return;
+
+      if (mode === 'video' && sermonData[LIVESTREAMS.name]) {
+        renderBrowseGroup(targetEl, 'Livestreams', [LIVESTREAMS.name]);
+      }
+      renderBrowseGroup(targetEl, 'Pinned Current Items', browseBuckets.pinnedCurrent);
+      renderBrowseGroup(targetEl, 'Bible Books', null, browseBuckets.bibleBooks);
+      renderBrowseGroup(targetEl, 'Standalone Series', null, browseBuckets.standaloneSeries);
+      renderBrowseGroup(targetEl, 'Year Specials', null, browseBuckets.yearSpecials);
+      renderDateGroup(targetEl, mode === 'audio' ? 'Audio by Date' : 'Video by Date', browseBuckets.byDate);
+      if (mode === 'video' && sermonData[VIDEO_ONLY_ARCHIVE.name]) {
+        renderBrowseGroup(targetEl, 'Guest Speakers', [VIDEO_ONLY_ARCHIVE.name]);
+      }
+
+      if (!targetEl.children.length) {
+        targetEl.innerHTML = '<div class="browse-empty">No matching sermon buckets are available in this mode yet.</div>';
+      }
+    }
+
+    function getVisibleEpisodesForSeries(seriesName) {
+      return getDisplayedEpisodes(seriesName)
+        .filter(ep => mode === 'audio' ? true : !!ep.videoId)
+        .map((ep, index) => ({ ep, originalIndex: index }));
+    }
+
+    function makeEpisodeCard(ep, originalIndex) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `episode-card ${mode}` + (originalIndex === currentEpisodeIndex ? ' active' : '');
+      const thumb = mode === 'video'
+        ? (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE)
+        : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
+      const subtitle = ep.scripture || ep.date || '';
+      button.innerHTML = `
+        <div class="episode-thumb"><img src="${thumb}" alt=""></div>
+        <div class="card-copy">
+          <h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3>
+          <div class="card-subtitle">${subtitle}</div>
+        </div>
+      `;
+      button.addEventListener('click', () => selectEpisode(ep, originalIndex));
+      return button;
+    }
+
+    function renderEpisodesInto(targetEl) {
+      targetEl.innerHTML = '';
+      if (!currentSeries || !sermonData[currentSeries]) {
+        targetEl.innerHTML = '<div class="queue-empty">Choose a sermon bucket first.</div>';
+        return;
+      }
+      const visibleEpisodes = getVisibleEpisodesForSeries(currentSeries);
+      if (!visibleEpisodes.length) {
+        targetEl.innerHTML = '<div class="queue-empty">No episodes are available for this series in the current mode.</div>';
+        return;
+      }
+      const list = document.createElement('div');
+      list.className = 'episode-list';
+      visibleEpisodes.forEach(({ ep, originalIndex }) => list.appendChild(makeEpisodeCard(ep, originalIndex)));
+      targetEl.appendChild(list);
+    }
+
+    function formatAudioTime(seconds) {
+      if (!Number.isFinite(seconds) || seconds < 0) return '00:00';
+      const total = Math.floor(seconds);
+      const hours = Math.floor(total / 3600);
+      const minutes = Math.floor((total % 3600) / 60);
+      const secs = total % 60;
+      return hours > 0
+        ? `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+        : `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function updateAudioProgressUi() {
+      const current = audioPlayerEl.currentTime || 0;
+      const duration = Number.isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : 0;
+      const progressValue = duration > 0 ? (current / duration) * 100 : 0;
+      audioClockCurrentEl.textContent = formatAudioTime(current);
+      audioClockTotalEl.textContent = `/ ${formatAudioTime(duration)}`;
+      audioElapsedSmallEl.textContent = formatAudioTime(current);
+      audioRemainingSmallEl.textContent = duration > 0 ? `-${formatAudioTime(Math.max(duration - current, 0))}` : '00:00';
+      audioProgressEl.value = progressValue;
+    }
+
+    function stopPlayingDots() {
+      if (playingDotsTimer) clearInterval(playingDotsTimer);
+      playingDotsTimer = null;
+      playingDotsIndex = 0;
+      audioPlayDotsEl.textContent = '';
+    }
+
+    function startPlayingDots() {
+      stopPlayingDots();
+      audioPlayLabelEl.textContent = 'Playing';
+      audioPlayDotsEl.textContent = playingDotsStates[playingDotsIndex];
+      playingDotsTimer = setInterval(() => {
+        if (audioPlayerEl.paused) return;
+        playingDotsIndex = (playingDotsIndex + 1) % playingDotsStates.length;
+        audioPlayDotsEl.textContent = playingDotsStates[playingDotsIndex];
+      }, 450);
+    }
+
+    function updateMediaSession(ep) {
+      if (!('mediaSession' in navigator) || !ep) return;
+      const artworkSrc = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: ep.title || 'CGBC Sermon',
+          artist: ep.by || 'CGBC Lebanon, TN',
+          album: ep.series || 'CGBC Sermons',
+          artwork: [
+            { src: artworkSrc, sizes: '96x96', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '128x128', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '192x192', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '256x256', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '384x384', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+        navigator.mediaSession.setActionHandler('play', () => audioPlayerEl.play());
+        navigator.mediaSession.setActionHandler('pause', () => audioPlayerEl.pause());
+        navigator.mediaSession.setActionHandler('seekbackward', () => skipAudioBy(-30));
+        navigator.mediaSession.setActionHandler('seekforward', () => skipAudioBy(30));
+      } catch {}
+    }
+
+    function clearMediaSession() {
+      if (!('mediaSession' in navigator)) return;
+      try { navigator.mediaSession.metadata = null; } catch {}
+    }
+
+    function setAudioReadyState(isPlaying) {
+      audioReadyLabelEl.textContent = isPlaying ? 'Listening...' : 'Ready to Listen';
+      audioPlayIconEl.innerHTML = isPlaying
+        ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
+        : '<path d="M8 5v14l11-7z"/>';
+      if (isPlaying) startPlayingDots();
+      else {
+        stopPlayingDots();
+        audioPlayLabelEl.textContent = 'Tap to Play';
+      }
+      if ('mediaSession' in navigator) {
+        try { navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused'; } catch {}
+      }
+    }
+
+    function stopAndHideVideo() {
+      videoShellEl.innerHTML = '';
+      videoShellEl.style.display = 'none';
+      videoPlaceholderEl.style.display = 'none';
+    }
+
+    function stopAndHideAudio() {
+      audioPlayerEl.pause();
+      audioPlayerEl.removeAttribute('src');
+      audioPlayerEl.load();
+      audioStageEl.style.display = 'none';
+      audioPlaceholderEl.style.display = 'none';
+      audioClockCurrentEl.textContent = '00:00';
+      audioClockTotalEl.textContent = '/ 00:00';
+      audioElapsedSmallEl.textContent = '00:00';
+      audioRemainingSmallEl.textContent = '00:00';
+      audioProgressEl.value = 0;
+      setAudioReadyState(false);
+      clearMediaSession();
+    }
+
+    function clearMediaState() {
+      stopAndHideVideo();
+      stopAndHideAudio();
+      currentEpisodeData = null;
     }
 
     function buildMetaRows(ep) {
       const rows = [];
-      if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${escapeHtml(ep.scripture)}</div></div>`);
-      if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${escapeHtml(ep.by)}</div></div>`);
-      if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${escapeHtml(ep.date)}</div></div>`);
+      if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
+      if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
+      if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
       if (ep.extra?.length) {
         ep.extra.forEach(line => {
-          rows.push(`<div class="meta-row"><div class="meta-label">Publisher / Creator</div><div class="meta-value">${escapeHtml(line)}</div></div>`);
+          rows.push(`<div class="meta-row"><div class="meta-label">Publisher / Creator</div><div class="meta-value">${line}</div></div>`);
         });
       }
       return rows.join('');
     }
 
+    function renderEmptyMeta() {
+      const mobilePrompt = mode === 'audio'
+        ? 'Tap Sermon Selection above to begin listening'
+        : 'Tap Sermon Selection above to begin watching';
+      const desktopPrompt = mode === 'audio'
+        ? 'Choose a sermon bucket and episode to begin listening.'
+        : 'Choose a sermon bucket and episode to begin watching.';
+      metaBoxEl.innerHTML = `
+        <h2 class="meta-title">Select a sermon</h2>
+        <div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div>
+        <p class="meta-note">Browse by category and then choose an episode to load the player.</p>
+      `;
+    }
+
     function renderMeta(ep) {
       metaBoxEl.innerHTML = `
-        <h2>${escapeHtml(ep.title || 'Untitled Sermon')}</h2>
-        <div class="series-line">${escapeHtml(ep.series || ep.__sourceSeries || '')}</div>
+        <h2 class="meta-title">${ep.title || 'Untitled Sermon'}</h2>
+        <div class="meta-series">${ep.series || currentSeries || ''}</div>
         <div class="meta-grid">${buildMetaRows(ep)}</div>
       `;
     }
 
-    function updateDesktopSelectedState() {
-      const shouldShowBack = !isMobileLayout() && !!selectedNodeId && !!currentEpisodeData;
-      desktopChangeSeriesBtnEl.style.display = shouldShowBack ? 'inline-flex' : 'none';
-      const heading = selectedNodeId ? 'Up Next' : 'Browse';
-      episodesHeaderTitleEl.textContent = heading;
-      mobileEpisodesHeadingEl.textContent = heading;
-    }
-
-    function makeSeriesItem(node) {
-      const item = document.createElement('div');
-      item.className = `series-item ${mode}${node.id === selectedNodeId ? ' active' : ''}`;
-
-      const thumbSrc = mode === 'audio' ? node.artworkAudio : node.artworkVideo;
-      const chips = getSeriesChips(node);
-      const chipsHtml = chips.length
-        ? `<div class="series-chip-row">${chips.map(ch => `<span class="series-chip ${ch.className}">${escapeHtml(ch.label)}</span>`).join('')}</div>`
-        : '';
-
-      item.innerHTML = `
-        <div class="series-item-inner">
-          <button class="thumb-tap" type="button" aria-label="Open ${escapeHtml(node.title)}">
-            <img src="${escapeHtml(thumbSrc || FALLBACK_IMAGE)}" alt="">
-          </button>
-          <div class="series-copy">
-            <div class="series-overline">${escapeHtml(node.overline || node.group || '')}</div>
-            <div class="series-name">${escapeHtml(node.title)}</div>
-            ${chipsHtml}
-          </div>
-        </div>
-      `;
-
-      const selectNode = () => {
-        selectedNodeId = node.id;
-        selectedEpisodeIndex = null;
-        currentEpisodeData = null;
-        clearMediaState();
-        renderSeriesLists();
-        renderEpisodesLists();
-        renderEmptyMeta();
-
-        if (mode === 'audio') {
-          audioPlaceholderEl.style.display = 'flex';
-          audioPlaceholderEl.textContent = isMobileLayout()
-            ? 'Tap Sermon Selection above to begin listening'
-            : 'Choose an episode from the queue to begin listening.';
-        } else {
-          videoPlaceholderEl.style.display = 'flex';
-          videoPlaceholderEl.textContent = isMobileLayout()
-            ? 'Tap Sermon Selection above to begin watching'
-            : 'Choose an episode from the queue to begin watching.';
-        }
-
-        updateDesktopSelectedState();
-      };
-
-      item.querySelector('.thumb-tap').addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        selectNode();
-      });
-      item.addEventListener('click', selectNode);
-
-      return item;
-    }
-
-    function renderSeriesInto(el) {
-      el.innerHTML = '';
-      const nodes = getCurrentNodes();
-      if (!nodes.length) return;
-
-      let lastGroup = '';
-      let lastSubgroup = '';
-
-      nodes.forEach(node => {
-        if (node.group !== lastGroup) {
-          const divider = document.createElement('div');
-          divider.className = 'series-divider';
-          divider.textContent = node.group;
-          el.appendChild(divider);
-          lastGroup = node.group;
-          lastSubgroup = '';
-        }
-
-        const subgroupKey = `${node.group}::${node.overline || ''}`;
-        const shouldSubdivide =
-          (node.group === 'Bible Books' || node.group === 'Standalone Series' || node.group === 'Year Specials' || node.group.includes('Date')) &&
-          node.overline &&
-          subgroupKey !== lastSubgroup;
-
-        if (shouldSubdivide) {
-          const subdivider = document.createElement('div');
-          subdivider.className = 'series-subdivider';
-          subdivider.textContent = node.overline;
-          el.appendChild(subdivider);
-          lastSubgroup = subgroupKey;
-        }
-
-        el.appendChild(makeSeriesItem(node));
-      });
-    }
-
-    function renderSeriesLists() {
-      renderSeriesInto(seriesListEl);
-      renderSeriesInto(mobileSeriesListEl);
-    }
-
-    function getSelectedNodeItems() {
-      const node = getNodeById(selectedNodeId);
-      return node ? node.items : [];
-    }
-
-    function makeEpisodeItem(entry, index, node) {
-      const row = document.createElement('div');
-      row.className = `episode-item ${mode}${index === selectedEpisodeIndex ? ' active' : ''}`;
-
-      const thumbSrc = mode === 'audio'
-        ? (entry.img || entry.seriesImage || FALLBACK_IMAGE)
-        : (entry.videoId ? getWatchThumb(entry.videoId) : entry.seriesWideImage || FALLBACK_IMAGE);
-
-      const overline = node.type === 'dateBucket'
-        ? (entry.__sourceSeries || entry.series || '')
-        : (entry.date || '');
-
-      row.innerHTML = `
-        <div class="episode-item-inner">
-          <button class="thumb-tap" type="button" aria-label="Open ${escapeHtml(entry.title || 'episode')}">
-            <img src="${escapeHtml(thumbSrc)}" alt="">
-          </button>
-          <div class="episode-copy">
-            <div class="episode-overline">${escapeHtml(overline)}</div>
-            <div class="episode-title">${escapeHtml(entry.title || 'Untitled Sermon')}</div>
-            <div class="episode-sub">${escapeHtml(entry.scripture || entry.date || '')}</div>
-          </div>
-        </div>
-      `;
-
-      const selectEpisode = () => {
-        selectedEpisodeIndex = index;
-        currentEpisodeData = entry;
-
-        if (mode === 'audio') playAudio(entry);
-        else playVideo(entry);
-
-        renderEpisodesLists();
-        renderMeta(entry);
-        updateDesktopSelectedState();
-
-        if (isMobileLayout()) {
-          closeDrawer();
-          scrollPlayerIntoViewPreservingTopControls();
-        }
-      };
-
-      row.querySelector('.thumb-tap').addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        selectEpisode();
-      });
-      row.addEventListener('click', selectEpisode);
-
-      return row;
-    }
-
-    function renderEpisodesInto(el) {
-      el.innerHTML = '';
-      const node = getNodeById(selectedNodeId);
-      if (!node) {
-        el.innerHTML = `<div class="queue-empty">Choose a category in the left rail to load the queue.</div>`;
-        return;
-      }
-
-      const items = node.items || [];
-      if (!items.length) {
-        el.innerHTML = `<div class="queue-empty">No episodes were found for this bucket.</div>`;
-        return;
-      }
-
-      items.forEach((entry, index) => {
-        el.appendChild(makeEpisodeItem(entry, index, node));
-      });
-    }
-
-    function renderEpisodesLists() {
-      renderEpisodesInto(episodesListEl);
-      renderEpisodesInto(mobileEpisodesListEl);
-    }
-
-    /* =========================================================================
-       PLAYBACK
-       ========================================================================= */
     function playAudio(ep) {
       stopAndHideVideo();
-
       audioPlayerEl.pause();
       audioPlayerEl.removeAttribute('src');
       audioPlayerEl.load();
-
       audioPlaceholderEl.style.display = 'none';
-      audioFeatureCardEl.style.display = 'block';
-
+      audioStageEl.style.display = 'grid';
       audioFeatureArtEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
       audioFeatureTitleEl.textContent = ep.title || 'Untitled Sermon';
-      audioFeatureSeriesEl.textContent = ep.series || ep.__sourceSeries || '';
-
+      audioFeatureSeriesEl.textContent = ep.series || currentSeries || '';
       audioPlayerEl.src = ep.audio || '';
       audioPlayerEl.load();
-
-      updateMediaSession(ep);
+      currentEpisodeData = ep;
       updateAudioProgressUi();
+      updateMediaSession(ep);
       setAudioReadyState(false);
+      renderMeta(ep);
     }
 
     function playVideo(ep) {
       stopAndHideAudio();
-
+      currentEpisodeData = ep;
       if (!ep.videoId) {
-        stopAndHideVideo();
         videoPlaceholderEl.textContent = 'No video is available for this sermon yet.';
         videoPlaceholderEl.style.display = 'flex';
+        renderMeta(ep);
         return;
       }
-
       videoPlaceholderEl.style.display = 'none';
       videoShellEl.innerHTML = '';
       videoShellEl.style.display = 'block';
-
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
       iframe.title = ep.title || 'Sermon';
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
       iframe.allowFullscreen = true;
       iframe.setAttribute('playsinline', '1');
-
       videoShellEl.appendChild(iframe);
+      renderMeta(ep);
     }
 
-    /* =========================================================================
-       MODE / RESET
-       ========================================================================= */
-    function setMode(nextMode) {
-      mode = nextMode;
-
-      bodyEl.classList.toggle('mode-audio', mode === 'audio');
-      bodyEl.classList.toggle('mode-video', mode === 'video');
-
-      listenBtnEl.classList.toggle('active', mode === 'audio');
-      watchBtnEl.classList.toggle('active', mode === 'video');
-
+    function selectSeries(seriesName) {
+      currentSeries = seriesName;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
       clearMediaState();
-
-      if (!getCurrentNodes().length) {
-        buildNavigationModel();
-      }
-
-      selectedNodeId = getDefaultNodeIdForMode();
-
-      renderSeriesLists();
-      renderEpisodesLists();
+      renderBrowse();
+      renderEpisodes();
       renderEmptyMeta();
-      updateDrawerHeader();
+      if (mode === 'audio') audioPlaceholderEl.style.display = 'flex';
+      else videoPlaceholderEl.style.display = 'flex';
+    }
 
-      if (mode === 'audio') {
-        audioPlaceholderEl.style.display = 'flex';
-        audioPlaceholderEl.textContent = isMobileLayout()
-          ? 'Tap Sermon Selection above to begin listening'
-          : 'Choose an episode from the queue to begin listening.';
-      } else {
-        videoPlaceholderEl.style.display = 'flex';
-        videoPlaceholderEl.textContent = isMobileLayout()
-          ? 'Tap Sermon Selection above to begin watching'
-          : 'Choose an episode from the queue to begin watching.';
+    function selectEpisode(ep, originalIndex) {
+      currentEpisodeIndex = originalIndex;
+      if (mode === 'audio') playAudio(ep);
+      else playVideo(ep);
+      renderEpisodes();
+      if (isMobileLayout()) {
+        closeDrawer();
+        playerSectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    }
 
-      updateDesktopSelectedState();
+    function renderBrowse() {
+      browseBuckets = buildBrowseBuckets();
+      renderBrowseInto(browseListEl);
+      renderBrowseInto(mobileBrowseListEl);
+    }
+
+    function renderEpisodes() {
+      episodesHeaderTitleEl.textContent = currentSeries ? 'Up Next' : 'Episodes';
+      renderEpisodesInto(episodesListEl);
+      renderEpisodesInto(mobileEpisodesListEl);
     }
 
     function resetHome() {
+      currentSeries = getModeTopSeries()[0] || Object.keys(sermonData)[0] || null;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
       clearMediaState();
-      selectedNodeId = getDefaultNodeIdForMode();
-      renderSeriesLists();
-      renderEpisodesLists();
+      renderBrowse();
+      renderEpisodes();
       renderEmptyMeta();
-
-      if (mode === 'audio') {
-        audioPlaceholderEl.style.display = 'flex';
-        audioPlaceholderEl.textContent = isMobileLayout()
-          ? 'Tap Sermon Selection above to begin listening'
-          : 'Choose an episode from the queue to begin listening.';
-      } else {
-        videoPlaceholderEl.style.display = 'flex';
-        videoPlaceholderEl.textContent = isMobileLayout()
-          ? 'Tap Sermon Selection above to begin watching'
-          : 'Choose an episode from the queue to begin watching.';
-      }
-
+      if (mode === 'audio') audioPlaceholderEl.style.display = 'flex';
+      else videoPlaceholderEl.style.display = 'flex';
       closeDrawer();
-      updateDesktopSelectedState();
     }
 
-    /* =========================================================================
-       DRAWER
-       ========================================================================= */
-    function openDrawer() {
-      if (!isMobileLayout()) return;
-      bodyEl.classList.add('drawer-open');
-      mobileDrawerEl.setAttribute('aria-hidden', 'false');
+    function setMode(nextMode) {
+      mode = nextMode;
+      listenBtnEl.classList.toggle('active', mode === 'audio');
+      watchBtnEl.classList.toggle('active', mode === 'video');
+      bodyEl.classList.toggle('mode-audio', mode === 'audio');
+      bodyEl.classList.toggle('mode-video', mode === 'video');
+      currentSeries = getModeTopSeries()[0] || currentSeries;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+      updateDrawerHeader();
+      renderBrowse();
+      renderEpisodes();
+      renderEmptyMeta();
+      if (mode === 'audio') audioPlaceholderEl.style.display = 'flex';
+      else videoPlaceholderEl.style.display = 'flex';
     }
 
-    function closeDrawer() {
-      bodyEl.classList.remove('drawer-open');
-      mobileDrawerEl.setAttribute('aria-hidden', 'true');
+    function skipAudioBy(seconds) {
+      if (!audioPlayerEl.src) return;
+      const nextTime = Math.max(0, Math.min((audioPlayerEl.currentTime || 0) + seconds, Number.isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : (audioPlayerEl.currentTime || 0) + seconds));
+      audioPlayerEl.currentTime = nextTime;
     }
 
-    /* =========================================================================
-       EVENTS
-       ========================================================================= */
-    openDrawerBtnEl.addEventListener('click', () => {
-      if (isMobileLayout()) openDrawer();
-    });
+    function toggleAudioPlayback() {
+      if (!audioPlayerEl.src) return;
+      if (audioPlayerEl.paused) audioPlayerEl.play();
+      else audioPlayerEl.pause();
+    }
+
+    openDrawerBtnEl.addEventListener('click', openDrawer);
     closeDrawerBtnEl.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
-
     listenBtnEl.addEventListener('click', () => setMode('audio'));
     watchBtnEl.addEventListener('click', () => setMode('video'));
     logoResetEl.addEventListener('click', resetHome);
-
-    desktopChangeSeriesBtnEl.addEventListener('click', () => {
-      currentEpisodeData = null;
-      selectedEpisodeIndex = null;
-      clearMediaState();
-      renderEpisodesLists();
-      renderEmptyMeta();
-      updateDesktopSelectedState();
-    });
-
-    audioPlayBadgeEl.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleAudioPlayback();
-    });
-
-    miniSkipBackBtnEl.addEventListener('click', e => {
-      e.stopPropagation();
-      skipAudioBy(-30);
-    });
-
-    miniSkipForwardBtnEl.addEventListener('click', e => {
-      e.stopPropagation();
-      skipAudioBy(30);
-    });
+    audioPlayBadgeEl.addEventListener('click', toggleAudioPlayback);
+    miniSkipBackBtnEl.addEventListener('click', e => { e.stopPropagation(); skipAudioBy(-30); });
+    miniSkipForwardBtnEl.addEventListener('click', e => { e.stopPropagation(); skipAudioBy(30); });
 
     audioPlayerEl.addEventListener('play', () => setAudioReadyState(true));
     audioPlayerEl.addEventListener('pause', () => setAudioReadyState(false));
     audioPlayerEl.addEventListener('ended', () => setAudioReadyState(false));
     audioPlayerEl.addEventListener('timeupdate', updateAudioProgressUi);
     audioPlayerEl.addEventListener('loadedmetadata', updateAudioProgressUi);
-
     audioProgressEl.addEventListener('input', () => {
       const duration = Number.isFinite(audioPlayerEl.duration) ? audioPlayerEl.duration : 0;
       if (!duration) return;
@@ -2666,34 +1804,25 @@
 
     window.addEventListener('resize', () => {
       if (!isMobileLayout()) closeDrawer();
-      updateDesktopSelectedState();
       renderEmptyMeta();
     });
 
-    /* =========================================================================
-       INIT
-       ========================================================================= */
     (async function init() {
-      updateDrawerHeader();
-      await loadRSSData();
-      buildNavigationModel();
-      selectedNodeId = getDefaultNodeIdForMode();
-
-      renderSeriesLists();
-      renderEpisodesLists();
-      renderEmptyMeta();
-
-      audioPlaceholderEl.style.display = 'flex';
-      audioPlaceholderEl.textContent = isMobileLayout()
-        ? 'Tap Sermon Selection above to begin listening'
-        : 'Choose an episode from the queue to begin listening.';
-
-      updateDesktopSelectedState();
-
-      /* Beginner note:
-         These debug exports are useful while validating the new sort logic. */
-      window.CGBC_SERMON_SERIES_MAP = sermonSeriesMap;
-      window.CGBC_NAVIGATION_MODEL = navigationModel;
+      try {
+        await loadData();
+        updateDrawerHeader();
+        renderBrowse();
+        renderEpisodes();
+        renderEmptyMeta();
+        audioPlaceholderEl.style.display = 'flex';
+      } catch (error) {
+        console.error(error);
+        browseListEl.innerHTML = '<div class="browse-empty">The sermon feed failed to load. Check the RSS source or network access and try again.</div>';
+        episodesListEl.innerHTML = '<div class="queue-empty">Nothing could be loaded yet.</div>';
+        mobileBrowseListEl.innerHTML = '<div class="browse-empty">The sermon feed failed to load.</div>';
+        mobileEpisodesListEl.innerHTML = '<div class="queue-empty">Nothing could be loaded yet.</div>';
+        renderEmptyMeta();
+      }
     })();
   </script>
 </body>
