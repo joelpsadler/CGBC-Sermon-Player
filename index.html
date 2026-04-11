@@ -1372,6 +1372,104 @@
       }
     }
 
+
+    /* Mobile header split: desktop keeps the large banner; mobile gets a compact nav with logo only. */
+    @media (max-width: 980px) {
+      .header-wrap {
+        display: none !important;
+      }
+
+      .top-controls {
+        padding: calc(8px + var(--safe-top)) 8px 10px !important;
+        background: rgba(14,14,14,0.92) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+      }
+
+      .top-controls-inner {
+        justify-content: stretch !important;
+      }
+
+      .mode-toggle {
+        width: 100% !important;
+        grid-template-columns: minmax(0, 1fr) 150px !important;
+        gap: 10px !important;
+        align-items: stretch !important;
+      }
+
+      .listen-watch-wrap {
+        display: grid !important;
+        grid-template-columns: 40px minmax(0, 1fr) !important;
+        gap: 8px !important;
+        align-items: stretch !important;
+        min-width: 0 !important;
+      }
+
+      .mobile-nav-logo {
+        display: inline-flex !important;
+        width: 40px !important;
+        height: 40px !important;
+        flex: 0 0 40px !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+      }
+
+      .mobile-nav-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+      }
+
+      .listen-watch-group {
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+
+      .mode-btn-shell {
+        min-height: 46px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 46px !important;
+      }
+
+      .col-player {
+        padding-top: 10px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 140px !important;
+        gap: 8px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 36px minmax(0, 1fr) !important;
+        gap: 8px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 36px !important;
+        height: 36px !important;
+        flex-basis: 36px !important;
+        border-radius: 9px !important;
+      }
+
+      .mode-btn-shell {
+        min-height: 44px !important;
+        padding: 0 8px 0 10px !important;
+      }
+
+      .mode-btn-text .top-line {
+        font-size: 12px !important;
+      }
+
+      .mode-btn-text .bottom-line {
+        font-size: 10px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
