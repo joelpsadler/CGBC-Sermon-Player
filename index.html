@@ -5234,23 +5234,79 @@
   </div>
 
   <script>
-    const CURRENT_SERIES = 'Romans Chapter 12';
-    const SECONDARY_SERIES = 'The Rapture';
-    const CURRENT_SPECIALS = '2026 Specials';
+    /* =========================================================================
+       ========================= EDIT_HERE_MAIN_CONFIG ========================
+       BEGINNER NOTE:
+       This is the safest place to make future manual updates.
+       Use Find/Search in your editor for: EDIT_HERE_MAIN_CONFIG
 
+       WHAT THESE SETTINGS CONTROL:
+       - Which sermon items are considered "current"
+       - The Video-only Livestreams playlist
+       - The Video-only Guest Speakers playlist
+       - General feed/API source settings
+
+       VERY IMPORTANT:
+       - In this Pass 1 & 2 file, the UI and behavior are intentionally kept
+         the same as the stable v63b build.
+       - These notes and config aliases are here to prepare for the grouped
+         navigator rebuild later without changing the working interface now.
+       ========================================================================= */
+
+    /* EDIT_HERE_PINNED_CURRENT
+       Put shared current sermon items here.
+       These are the items that will eventually appear as pinned current items
+       in BOTH Audio and Video, except for the permanent Video-only outliers.
+
+       HOW TO EDIT LATER:
+       - Remove old current items when they are no longer current.
+       - Add new current items in the order you want them prioritized.
+
+       EXAMPLES:
+       'Romans Chapter 12'
+       'Eschatology: The Rapture'
+       '2026 Specials'
+    */
+    const SHARED_PINNED_CURRENT_ITEMS = [
+      'Romans Chapter 12',
+      'The Rapture',
+      '2026 Specials'
+    ];
+
+    /* EDIT_HERE_LIVESTREAMS
+       Video-only outlier.
+       This stays pinned at the TOP of Video mode.
+    */
     const LIVESTREAMS = {
       name: 'Livestreams',
       playlistId: 'PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv'
     };
 
+    /* EDIT_HERE_GUEST_SPEAKERS
+       Video-only outlier.
+       This stays pinned at the BOTTOM of Video mode.
+    */
     const VIDEO_ONLY_ARCHIVE = {
       name: 'CGBC Guest Speaker',
       playlistId: 'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW'
     };
 
+    /* EDIT_HERE_SOURCE_SETTINGS
+       Normally you should not need to change these unless the feed or API
+       source changes.
+    */
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
     const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
+
+    /* -------------------------------------------------------------------------
+       BACKWARD-COMPATIBILITY ALIASES
+       These keep the current stable v63b behavior unchanged for now.
+       Later passes can switch over to SHARED_PINNED_CURRENT_ITEMS directly.
+       ------------------------------------------------------------------------- */
+    const CURRENT_SERIES = SHARED_PINNED_CURRENT_ITEMS[0] || '';
+    const SECONDARY_SERIES = SHARED_PINNED_CURRENT_ITEMS[1] || '';
+    const CURRENT_SPECIALS = SHARED_PINNED_CURRENT_ITEMS[2] || '';
 
     let sermonData = {};
     let archiveSeriesOrder = [];
@@ -6096,6 +6152,12 @@
       return items.map((ep, visibleIndex) => ({ ep, originalIndex: visibleIndex }));
     }
 
+    /* =========================================================================
+       EDIT_HERE_MODE_BEHAVIOR
+       BEGINNER NOTE:
+       This is where the Audio / Video mode switching starts.
+       Do not edit this yet unless a future pass specifically says to.
+       ========================================================================= */
     function setMode(nextMode) {
       mode = nextMode;
 
