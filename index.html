@@ -5173,6 +5173,68 @@
       }
     }
 
+
+    /* V61: mode-aware desktop thumbnails
+       - audio stays square
+       - video stays widescreen
+       - keep the larger labels/badges from V60 */
+    @media (min-width: 981px) {
+      /* Undo the shared desktop thumb sizing from V60 */
+      .col-series .thumb-tap img,
+      .col-series .thumb-shell img,
+      .col-series .series-thumb,
+      .col-episodes .thumb-tap img,
+      .col-episodes .thumb-shell img,
+      .col-episodes .episode-thumb {
+        object-fit: cover !important;
+      }
+
+      /* AUDIO MODE: square artwork */
+      body.mode-audio .col-series .thumb-tap img,
+      body.mode-audio .col-series .thumb-shell img,
+      body.mode-audio .col-series .series-thumb {
+        width: 92px !important;
+        height: 92px !important;
+        border-radius: 15px !important;
+      }
+
+      body.mode-audio .col-episodes .thumb-tap img,
+      body.mode-audio .col-episodes .thumb-shell img,
+      body.mode-audio .col-episodes .episode-thumb {
+        width: 82px !important;
+        height: 82px !important;
+        border-radius: 13px !important;
+      }
+
+      /* VIDEO MODE: widescreen artwork */
+      body.mode-video .col-series .thumb-tap img,
+      body.mode-video .col-series .thumb-shell img,
+      body.mode-video .col-series .series-thumb {
+        width: 122px !important;
+        height: 84px !important;
+        border-radius: 15px !important;
+      }
+
+      body.mode-video .col-episodes .thumb-tap img,
+      body.mode-video .col-episodes .thumb-shell img,
+      body.mode-video .col-episodes .episode-thumb {
+        width: 110px !important;
+        height: 76px !important;
+        border-radius: 13px !important;
+      }
+
+      /* Keep text blocks aligned cleanly with either aspect ratio */
+      .col-series .series-item-inner,
+      .col-episodes .episode-item-inner {
+        align-items: flex-start !important;
+      }
+
+      .col-series .series-text,
+      .col-episodes .episode-text {
+        min-width: 0 !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
