@@ -3923,6 +3923,100 @@
       }
     }
 
+
+    /* V46: desktop audio controls actual visible fix
+       - stop reserving dot space when idle
+       - widen the middle pill in practice
+       - prevent label clipping/overlap */
+    @media (min-width: 981px) {
+      .audio-transport-glass {
+        width: min(100%, 440px) !important;
+        max-width: 440px !important;
+        padding: 6px 6px !important;
+      }
+
+      .audio-transport {
+        grid-template-columns: 66px minmax(0, 1fr) 66px !important;
+        gap: 8px !important;
+        align-items: center !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 66px !important;
+        width: 66px !important;
+        height: 66px !important;
+        font-size: 23px !important;
+        padding: 0 10px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 66px !important;
+        min-width: 0 !important;
+        padding: 8px 14px 8px 8px !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 8px 12px 8px 10px !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 46px !important;
+        height: 46px !important;
+      }
+
+      .audio-play-circle-wrap {
+        flex: 0 0 46px !important;
+        margin-right: 14px !important;
+      }
+
+      .audio-feature-card.playing .audio-play-circle-wrap {
+        margin-right: 12px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 22px !important;
+        height: 22px !important;
+      }
+
+      .audio-play-text-wrap {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        overflow: hidden !important;
+        padding-right: 0 !important;
+      }
+
+      .audio-play-label {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+        text-align: left !important;
+        font-size: 16px !important;
+        letter-spacing: 0.03em !important;
+      }
+
+      /* Key fix: do not reserve width for dots when stopped */
+      .audio-play-dots {
+        min-width: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        flex: 0 0 auto !important;
+      }
+
+      .audio-feature-card.playing .audio-play-dots {
+        min-width: 1.7em !important;
+        width: auto !important;
+        overflow: visible !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
