@@ -4310,6 +4310,138 @@
       }
     }
 
+
+    /* V50: desktop banner removal pass
+       - remove large desktop banner
+       - use compact logo beside controls like mobile
+       - left-adjust top controls so player can rise */
+    @media (min-width: 981px) {
+      .header-wrap {
+        display: none !important;
+      }
+
+      .top-controls {
+        padding: 14px 18px 12px !important;
+        background: rgba(14,14,14,0.90) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+      }
+
+      .top-controls-inner {
+        justify-content: flex-start !important;
+      }
+
+      .mode-toggle {
+        display: grid !important;
+        grid-template-columns: 78px 220px 220px !important;
+        gap: 12px !important;
+        width: auto !important;
+        max-width: none !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        display: contents !important;
+      }
+
+      .mobile-nav-logo {
+        display: inline-flex !important;
+        width: 78px !important;
+        height: 62px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 4px 0 0 !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+      }
+
+      .mobile-nav-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        display: block !important;
+      }
+
+      .listen-watch-group {
+        display: contents !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      #openDrawerBtn {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      .listen-watch-group .mode-btn,
+      #openDrawerBtn {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 58px !important;
+        width: 100% !important;
+        padding: 0 16px !important;
+        gap: 10px !important;
+        border-radius: 18px !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        background: rgba(255,255,255,0.08) !important;
+      }
+
+      .listen-watch-group .mode-btn.active .mode-btn-shell {
+        background: linear-gradient(180deg, rgba(128,159,144,0.58), rgba(110,136,123,0.42)) !important;
+        color: #111 !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 22px !important;
+        height: 22px !important;
+      }
+
+      .listen-watch-group .mode-btn-text,
+      #openDrawerBtn .mode-btn-text {
+        align-items: flex-start !important;
+        line-height: 0.98 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 11px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+
+      /* Let the player rise now that the banner is gone */
+      .layout {
+        height: calc(100vh - 88px) !important;
+      }
+
+      .col-player {
+        padding-top: 14px !important;
+      }
+
+      #playerSection {
+        scroll-margin-top: 92px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
