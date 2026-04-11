@@ -3548,6 +3548,129 @@
       }
     }
 
+
+    /* V42: desktop audio refinement pass */
+    @media (min-width: 981px) {
+      .audio-split {
+        grid-template-columns: minmax(260px, 340px) minmax(0, 1fr) !important;
+        gap: 34px !important;
+        align-items: start !important;
+      }
+
+      .audio-art-panel img {
+        max-width: 320px !important;
+      }
+
+      .audio-transport-overlay {
+        margin-top: 6px !important;
+      }
+
+      .audio-transport-glass {
+        width: min(100%, 352px) !important;
+        padding: 5px 6px !important;
+      }
+
+      .audio-transport {
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        gap: 8px !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 64px !important;
+        width: 64px !important;
+        height: 64px !important;
+        font-size: 23px !important;
+        padding: 0 14px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 64px !important;
+        padding: 7px 16px 7px 7px !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 7px 7px 7px 16px !important;
+        justify-content: space-between !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 46px !important;
+        height: 46px !important;
+      }
+
+      .audio-play-circle-wrap {
+        margin-right: 14px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 23px !important;
+        height: 23px !important;
+      }
+
+      .audio-play-text-wrap {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-label {
+        text-align: left !important;
+        font-size: 17px !important;
+        letter-spacing: 0.04em !important;
+      }
+
+      .audio-play-dots {
+        min-width: 2.1em !important;
+      }
+
+      .audio-content {
+        gap: 6px !important;
+        padding-top: 10px !important;
+      }
+
+      .audio-ready {
+        font-size: 12px !important;
+      }
+
+      .audio-feature-card h3 {
+        font-size: 38px !important;
+        line-height: 1.06 !important;
+      }
+
+      .audio-feature-card .audio-series {
+        font-size: 19px !important;
+        margin: 0 0 4px !important;
+      }
+
+      .audio-clock-row {
+        gap: 16px !important;
+        padding: 8px 0 4px !important;
+      }
+
+      .audio-clock-time {
+        font-size: clamp(34px, 4vw, 56px) !important;
+      }
+
+      .audio-clock-total {
+        font-size: 19px !important;
+        padding-bottom: 5px !important;
+      }
+
+      .audio-progress-wrap {
+        gap: 5px !important;
+      }
+
+      .audio-progress {
+        height: 8px !important;
+      }
+
+      .audio-progress-times {
+        font-size: 13px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
