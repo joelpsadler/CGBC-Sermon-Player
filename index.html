@@ -5093,6 +5093,86 @@
       }
     }
 
+
+    /* V60: desktop image aspect + label/badge size polish
+       - let widescreen artwork stay widescreen where used
+       - increase SERIES / EPISODES headings
+       - increase LIVE / CURRENT / specials badges */
+    @media (min-width: 981px) {
+      /* Make series thumbnails use natural aspect ratio instead of forced square */
+      .col-series .thumb-tap img,
+      .col-series .thumb-shell img,
+      .col-series .series-thumb {
+        width: 122px !important;
+        height: 84px !important;
+        object-fit: cover !important;
+        border-radius: 15px !important;
+      }
+
+      /* Keep episodes a little smaller, but also widescreen-friendly */
+      .col-episodes .thumb-tap img,
+      .col-episodes .thumb-shell img,
+      .col-episodes .episode-thumb {
+        width: 110px !important;
+        height: 76px !important;
+        object-fit: cover !important;
+        border-radius: 13px !important;
+      }
+
+      /* Stronger section labels */
+      .section-title {
+        font-size: 16px !important;
+        letter-spacing: 0.04em !important;
+        font-weight: 700 !important;
+        margin-bottom: 14px !important;
+      }
+
+      .episodes-header-row .section-title {
+        margin-bottom: 0 !important;
+      }
+
+      /* Bigger series text */
+      .col-series .series-title {
+        font-size: 19px !important;
+        line-height: 1.12 !important;
+        font-weight: 600 !important;
+      }
+
+      .col-series .series-meta,
+      .col-series .series-subtitle,
+      .col-series .series-description {
+        font-size: 13px !important;
+      }
+
+      /* Slightly stronger episode title too */
+      .col-episodes .episode-title {
+        font-size: 16px !important;
+        line-height: 1.14 !important;
+        font-weight: 500 !important;
+      }
+
+      .col-episodes .episode-meta,
+      .col-episodes .episode-subtitle,
+      .col-episodes .episode-description,
+      .col-episodes .episode-date {
+        font-size: 12.5px !important;
+      }
+
+      /* Bigger status badges */
+      .col-series .series-tag,
+      .col-series .pill,
+      .col-series .status-pill,
+      .col-episodes .series-tag,
+      .col-episodes .pill,
+      .col-episodes .status-pill {
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        padding: 5px 10px !important;
+        border-radius: 999px !important;
+        letter-spacing: 0.02em !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
