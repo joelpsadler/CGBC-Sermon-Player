@@ -834,7 +834,104 @@
       .meta-intro { font-size: 17px; }
       .meta-row { grid-template-columns: 102px minmax(0,1fr); }
     }
-  </style>
+  
+
+    .drawer-body-deep {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .nav-stack {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .nav-section {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-section-head {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-list {
+      display: grid;
+      gap: 8px;
+    }
+    .nav-card {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      text-align: left;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+    .nav-card:hover { background: rgba(255,255,255,0.08); }
+    .nav-card.active {
+      background: linear-gradient(180deg, rgba(143,174,157,0.34), rgba(112,138,123,0.20));
+      border-color: rgba(143,174,157,0.22);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.18);
+    }
+    .nav-card-copy { min-width: 0; flex: 1; }
+    .nav-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      line-height: 1.15;
+      margin: 0;
+    }
+    .nav-card-meta {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    .nav-card-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex: 0 0 56px;
+      background: rgba(255,255,255,0.06);
+    }
+    .nav-card.video .nav-card-thumb {
+      width: 80px;
+      height: 50px;
+      border-radius: 12px;
+      flex-basis: 80px;
+    }
+    .nav-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .nav-empty {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.10);
+      color: var(--muted-2);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    @media (max-width: 980px) {
+      .drawer-body-deep {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .drawer-pane { min-height: 180px; }
+    }
+
+</style>
 </head>
 <body class="mode-audio">
   <div class="app-shell">
@@ -880,13 +977,21 @@
         <div class="drawer-title"><span class="icon" id="drawerTitleIcon"></span><span id="drawerTitleText">Browse Sermon Audio</span></div>
         <button class="drawer-close" id="closeDrawerBtn" type="button">Close</button>
       </div>
-      <div class="drawer-body">
+      <div class="drawer-body drawer-body-deep">
         <section class="drawer-pane series-pane">
-          <div class="drawer-pane-head">Browse</div>
-          <div class="drawer-pane-body" id="mobileBrowseList"></div>
+          <div class="drawer-pane-head">Step 1 · Category</div>
+          <div class="drawer-pane-body" id="mobileRootList"></div>
+        </section>
+        <section class="drawer-pane series-pane">
+          <div class="drawer-pane-head" id="mobileBranchHead">Step 2 · Branch</div>
+          <div class="drawer-pane-body" id="mobileBranchList"></div>
         </section>
         <section class="drawer-pane episodes-pane">
-          <div class="drawer-pane-head">Up Next</div>
+          <div class="drawer-pane-head" id="mobileLeafHead">Step 3 · Series / Month</div>
+          <div class="drawer-pane-body" id="mobileLeafList"></div>
+        </section>
+        <section class="drawer-pane episodes-pane">
+          <div class="drawer-pane-head" id="mobileQueueHead">Up Next</div>
           <div class="drawer-pane-body" id="mobileEpisodesList"></div>
         </section>
       </div>
@@ -896,15 +1001,28 @@
       <section class="panel column browse-column">
         <div class="column-head">
           <p class="eyebrow">Browse</p>
-          <h2 class="column-title">Sermon Library</h2>
+          <h2 class="column-title">Mode-First Sermon Navigation</h2>
         </div>
-        <div class="column-scroll" id="browseList"></div>
+        <div class="column-scroll nav-stack">
+          <section class="nav-section">
+            <div class="nav-section-head">Step 1 · Category</div>
+            <div id="rootList"></div>
+          </section>
+          <section class="nav-section">
+            <div class="nav-section-head" id="branchHead">Step 2 · Branch</div>
+            <div id="branchList"></div>
+          </section>
+          <section class="nav-section">
+            <div class="nav-section-head" id="leafHead">Step 3 · Series / Month</div>
+            <div id="leafList"></div>
+          </section>
+        </div>
       </section>
 
       <section class="panel column queue-column">
         <div class="column-head">
-          <p class="eyebrow">Up Next</p>
-          <h2 class="column-title" id="episodesHeaderTitle">Episodes</h2>
+          <p class="eyebrow">Queue</p>
+          <h2 class="column-title" id="episodesHeaderTitle">Up Next</h2>
         </div>
         <div class="column-scroll" id="episodesList"></div>
       </section>
@@ -962,17 +1080,6 @@
   </div>
 
   <script>
-    /* =====================================================================
-       CGBC clean restart build
-       Beginner note:
-       This file keeps only the stable essentials:
-       - RSS parsing
-       - YouTube linking
-       - one audio transport path
-       - one desktop layout model
-       - one mobile drawer model
-       ===================================================================== */
-
     const SHARED_PINNED_CURRENT_ITEMS = [
       'Romans Chapter 12',
       'The Rapture',
@@ -992,6 +1099,7 @@
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
     const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
+    const MONTH_ORDER = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     const BIBLE_BOOK_NAMES = [
       'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
@@ -1008,6 +1116,9 @@
     let sermonData = {};
     let browseBuckets = null;
     let mode = 'audio';
+    let navRootKey = null;
+    let navBranchKey = null;
+    let navLeafKey = null;
     let currentSeries = null;
     let currentEpisodeIndex = null;
     let currentEpisodeData = null;
@@ -1016,8 +1127,17 @@
     const playingDotsStates = ['', '.', '..', '...'];
 
     const bodyEl = document.body;
-    const browseListEl = document.getElementById('browseList');
-    const mobileBrowseListEl = document.getElementById('mobileBrowseList');
+    const rootListEl = document.getElementById('rootList');
+    const branchListEl = document.getElementById('branchList');
+    const leafListEl = document.getElementById('leafList');
+    const mobileRootListEl = document.getElementById('mobileRootList');
+    const mobileBranchListEl = document.getElementById('mobileBranchList');
+    const mobileLeafListEl = document.getElementById('mobileLeafList');
+    const branchHeadEl = document.getElementById('branchHead');
+    const leafHeadEl = document.getElementById('leafHead');
+    const mobileBranchHeadEl = document.getElementById('mobileBranchHead');
+    const mobileLeafHeadEl = document.getElementById('mobileLeafHead');
+    const mobileQueueHeadEl = document.getElementById('mobileQueueHead');
     const episodesListEl = document.getElementById('episodesList');
     const mobileEpisodesListEl = document.getElementById('mobileEpisodesList');
     const episodesHeaderTitleEl = document.getElementById('episodesHeaderTitle');
@@ -1040,25 +1160,32 @@
     const audioRemainingSmallEl = document.getElementById('audioRemainingSmall');
     const audioProgressEl = document.getElementById('audioProgress');
     const metaBoxEl = document.getElementById('metaBox');
+    const playerSectionEl = document.getElementById('playerSection');
+    const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
+    const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
     const listenBtnEl = document.getElementById('listenBtn');
     const watchBtnEl = document.getElementById('watchBtn');
     const logoResetEl = document.getElementById('logoReset');
     const openDrawerBtnEl = document.getElementById('openDrawerBtn');
     const closeDrawerBtnEl = document.getElementById('closeDrawerBtn');
     const drawerOverlayEl = document.getElementById('drawerOverlay');
-    const drawerEl = document.getElementById('mobileDrawer');
+    const mobileDrawerEl = document.getElementById('mobileDrawer');
     const drawerTitleTextEl = document.getElementById('drawerTitleText');
     const drawerTitleIconEl = document.getElementById('drawerTitleIcon');
-    const miniSkipBackBtnEl = document.getElementById('miniSkipBackBtn');
-    const miniSkipForwardBtnEl = document.getElementById('miniSkipForwardBtn');
-    const playerSectionEl = document.getElementById('playerSection');
 
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
 
-    function normalizeWhitespace(value) {
-      return (value || '').replace(/\s+/g, ' ').trim();
+    function openDrawer() {
+      if (!isMobileLayout()) return;
+      bodyEl.classList.add('drawer-open');
+      mobileDrawerEl.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDrawer() {
+      bodyEl.classList.remove('drawer-open');
+      mobileDrawerEl.setAttribute('aria-hidden', 'true');
     }
 
     function parseDateToTimestamp(value) {
@@ -1073,10 +1200,11 @@
     }
 
     function normalizeLineBreaks(input) {
-      return (input || '')
-        .replace(/<br\s*\/?>/gi, '\n')
-        .replace(/<\/p>\s*<p>/gi, '\n')
-        .replace(/<\/div>\s*<div>/gi, '\n');
+      return (input || '').replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>\s*<p>/gi, '\n').replace(/<\/div>\s*<div>/gi, '\n');
+    }
+
+    function normalizeWhitespace(value) {
+      return (value || '').replace(/\s+/g, ' ').trim();
     }
 
     function parseDescription(rawDesc) {
@@ -1100,36 +1228,15 @@
     function splitTitleParts(rawTitle) {
       const clean = (rawTitle || '').trim();
       const parts = clean.split('|').map(part => part.trim()).filter(Boolean);
-      return {
-        episodeTitle: parts[0] || clean || 'Untitled Sermon',
-        inferredSeries: parts.length > 1 ? parts[parts.length - 1] : ''
-      };
-    }
-
-    function extractYouTubeId(url) {
-      if (!url) return '';
-      try {
-        const parsed = new URL(url.trim());
-        if (parsed.hostname.includes('youtu.be')) return parsed.pathname.replace(/^\/+/, '').trim();
-        const v = parsed.searchParams.get('v');
-        if (v) return v.trim();
-        if (parsed.pathname.includes('/shorts/')) return parsed.pathname.split('/shorts/')[1].split('/')[0].trim();
-      } catch {}
-      return '';
-    }
-
-    function getWatchThumb(videoId) {
-      return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
+      return { episodeTitle: parts[0] || clean || 'Untitled Sermon', inferredSeries: parts.length > 1 ? parts[parts.length - 1] : '' };
     }
 
     function detectBibleBook(value) {
       const clean = normalizeWhitespace(value).toLowerCase();
       if (!clean) return '';
       for (const book of BIBLE_BOOK_NAMES) {
-        const test = book.toLowerCase();
-        if (clean === test || clean.startsWith(test + ' ') || clean.includes(' ' + test + ' ') || clean.endsWith(' ' + test)) {
-          return book;
-        }
+        const probe = book.toLowerCase();
+        if (clean === probe || clean.startsWith(probe + ' ') || clean.includes(' ' + probe + ' ') || clean.endsWith(' ' + probe)) return book;
       }
       return '';
     }
@@ -1165,16 +1272,30 @@
       const specialYearMatch = series.match(/\b20\d{2}\b/);
       const isYearSpecial = /special/i.test(series) && !!specialYearMatch;
       const isPinnedCurrent = SHARED_PINNED_CURRENT_ITEMS.includes(series);
-      const isStandaloneSeries = !bibleBook && !isYearSpecial;
       return {
         bibleBook,
         isPinnedCurrent,
         isYearSpecial,
-        isStandaloneSeries,
         standaloneParent: standalone.child ? standalone.parent : series,
         standaloneChild: standalone.child || '',
         specialYear: specialYearMatch ? specialYearMatch[0] : inferredYear
       };
+    }
+
+    function extractYouTubeId(url) {
+      if (!url) return '';
+      try {
+        const u = new URL(url.trim());
+        if (u.hostname.includes('youtu.be')) return u.pathname.replace(/^\/+/, '').trim();
+        const v = u.searchParams.get('v');
+        if (v) return v.trim();
+        if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('/')[0].trim();
+      } catch {}
+      return '';
+    }
+
+    function getWatchThumb(videoId) {
+      return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : FALLBACK_IMAGE;
     }
 
     function getSeriesSortDirection(seriesName) {
@@ -1199,14 +1320,7 @@
     }
 
     function buildBrowseBuckets() {
-      const buckets = {
-        pinnedCurrent: [],
-        bibleBooks: {},
-        standaloneSeries: {},
-        yearSpecials: {},
-        byDate: {}
-      };
-
+      const buckets = { pinnedCurrent: [], bibleBooks: {}, standaloneSeries: {}, yearSpecials: {}, byDate: {} };
       Object.keys(sermonData).forEach(seriesName => {
         if (seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name) return;
         const sampleEntry = getDisplayedEpisodes(seriesName)[0] || {};
@@ -1234,118 +1348,161 @@
           const monthKey = getMonthNameFromTimestamp(ep.sortTimestamp) || 'Unknown Month';
           if (!buckets.byDate[yearKey]) buckets.byDate[yearKey] = {};
           if (!buckets.byDate[yearKey][monthKey]) buckets.byDate[yearKey][monthKey] = [];
-          buckets.byDate[yearKey][monthKey].push({
-            seriesName,
-            title: ep.title,
-            date: ep.date,
-            timestamp: ep.sortTimestamp
-          });
+          buckets.byDate[yearKey][monthKey].push({ seriesName, title: ep.title, date: ep.date, timestamp: ep.sortTimestamp, videoId: ep.videoId || '' });
         });
       });
 
       buckets.pinnedCurrent.sort((a, b) => SHARED_PINNED_CURRENT_ITEMS.indexOf(a) - SHARED_PINNED_CURRENT_ITEMS.indexOf(b));
-      Object.keys(buckets.bibleBooks).forEach(book => buckets.bibleBooks[book].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
+      Object.keys(buckets.bibleBooks).forEach(key => buckets.bibleBooks[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
       Object.keys(buckets.standaloneSeries).forEach(key => buckets.standaloneSeries[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
-      Object.keys(buckets.yearSpecials).forEach(year => buckets.yearSpecials[year].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
+      Object.keys(buckets.yearSpecials).forEach(key => buckets.yearSpecials[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
       Object.keys(buckets.byDate).forEach(year => {
-        Object.keys(buckets.byDate[year]).forEach(month => {
-          buckets.byDate[year][month].sort((a, b) => b.timestamp - a.timestamp);
-        });
+        Object.keys(buckets.byDate[year]).forEach(month => buckets.byDate[year][month].sort((a, b) => b.timestamp - a.timestamp));
       });
-
       return buckets;
     }
 
-    function getModeTopSeries() {
-      const picks = [];
-      if (mode === 'video' && sermonData[LIVESTREAMS.name]) picks.push(LIVESTREAMS.name);
-      SHARED_PINNED_CURRENT_ITEMS.forEach(name => {
-        if (!sermonData[name]) return;
-        if (mode === 'video' && !(sermonData[name] || []).some(ep => ep.videoId)) return;
-        picks.push(name);
-      });
-      return picks;
+    function monthSortDescending(a, b) {
+      return MONTH_ORDER.indexOf(b) - MONTH_ORDER.indexOf(a);
     }
 
-    async function fetchPlaylistSeries(config, newestFirst = false) {
-      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      const items = Array.isArray(data.items) ? data.items : [];
-      const sorted = [...items].sort((a, b) => newestFirst
-        ? new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt)
-        : new Date(a.snippet.publishedAt) - new Date(b.snippet.publishedAt)
-      );
-      return sorted.map(item => {
-        const videoId = item?.snippet?.resourceId?.videoId || '';
-        const publishedAt = item?.snippet?.publishedAt || '';
-        const thumb = getWatchThumb(videoId);
-        return {
-          title: item?.snippet?.title || config.name,
-          series: config.name,
-          scripture: '',
-          by: '',
-          date: publishedAt ? new Date(publishedAt).toLocaleDateString() : '',
-          video: videoId ? `https://youtu.be/${videoId}` : '',
-          videoId,
-          audio: '',
-          img: '',
-          link: '',
-          extra: [],
-          sortTimestamp: parseDateToTimestamp(publishedAt),
-          seriesImage: thumb,
-          seriesWideImage: thumb
-        };
-      });
+    function getRootItems() {
+      const items = [];
+      if (mode === 'video' && sermonData[LIVESTREAMS.name]) items.push({ key: 'livestreams', title: 'Livestreams', meta: 'YouTube live archive' });
+      items.push({ key: 'pinnedCurrent', title: 'Pinned Current Items', meta: 'What matters now' });
+      items.push({ key: 'bibleBooks', title: 'Bible Books', meta: 'Book studies and chapter buckets' });
+      items.push({ key: 'standaloneSeries', title: 'Standalone Series', meta: 'Named sermon collections' });
+      items.push({ key: 'yearSpecials', title: 'Year Specials', meta: 'One-offs and holiday sermons' });
+      items.push({ key: 'byDate', title: mode === 'audio' ? 'Audio by Date' : 'Video by Date', meta: 'Year → Month → Entry' });
+      if (mode === 'video' && sermonData[VIDEO_ONLY_ARCHIVE.name]) items.push({ key: 'guestSpeakers', title: 'Guest Speakers', meta: 'Video-only speaker archive' });
+      return items;
     }
 
-    async function loadData() {
-      const xmlText = await fetch(RSS_URL).then(r => r.text());
-      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
-      const items = Array.from(xml.querySelectorAll('item'));
-      const grouped = {};
+    function getBranchItems() {
+      if (!browseBuckets || !navRootKey) return [];
+      if (navRootKey === 'livestreams') return [{ key: 'live-collection', title: 'Livestreams', meta: 'Pinned first in Watch mode' }];
+      if (navRootKey === 'guestSpeakers') return [{ key: 'guest-collection', title: 'Guest Speakers', meta: 'Pinned last in Watch mode' }];
+      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Current Sermons', meta: `${browseBuckets.pinnedCurrent.length} pinned item(s)` }];
+      if (navRootKey === 'bibleBooks') return Object.keys(browseBuckets.bibleBooks).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${browseBuckets.bibleBooks[key].length} series bucket(s)` }));
+      if (navRootKey === 'standaloneSeries') return Object.keys(browseBuckets.standaloneSeries).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${browseBuckets.standaloneSeries[key].length} series bucket(s)` }));
+      if (navRootKey === 'yearSpecials') return Object.keys(browseBuckets.yearSpecials).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${browseBuckets.yearSpecials[key].length} sermon bucket(s)` }));
+      if (navRootKey === 'byDate') return Object.keys(browseBuckets.byDate).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${Object.keys(browseBuckets.byDate[key] || {}).length} month bucket(s)` }));
+      return [];
+    }
 
-      items.forEach(item => {
-        const rawDescription = item.querySelector('description')?.textContent || '';
-        const parsed = parseDescription(rawDescription);
-        const rawTitle = item.querySelector('title')?.textContent?.trim() || 'Untitled Sermon';
-        const split = splitTitleParts(rawTitle);
-        const series = parsed.series || split.inferredSeries || 'Other Sermons';
-        const title = parsed.title || split.episodeTitle || 'Untitled Sermon';
-        const enclosure = item.querySelector('enclosure');
-        const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
-        const itemLink = item.querySelector('link')?.textContent?.trim() || '';
-        const pubDateRaw = item.querySelector('pubDate')?.textContent?.trim() || '';
-        const itunesImages = item.getElementsByTagName('itunes:image');
-        const itemImage = itunesImages && itunesImages[0] ? (itunesImages[0].getAttribute('href') || '') : '';
-        const videoId = extractYouTubeId(parsed.video);
+    function getLeafItems() {
+      if (!browseBuckets || !navRootKey || !navBranchKey) return [];
+      if (navRootKey === 'livestreams') {
+        return [{ key: LIVESTREAMS.name, title: LIVESTREAMS.name, type: 'series', meta: `${(sermonData[LIVESTREAMS.name] || []).length} video item(s)`, image: getSeriesWideCover(LIVESTREAMS.name) }];
+      }
+      if (navRootKey === 'guestSpeakers') {
+        return [{ key: VIDEO_ONLY_ARCHIVE.name, title: VIDEO_ONLY_ARCHIVE.name, type: 'series', meta: `${(sermonData[VIDEO_ONLY_ARCHIVE.name] || []).length} video item(s)`, image: getSeriesWideCover(VIDEO_ONLY_ARCHIVE.name) }];
+      }
+      if (navRootKey === 'pinnedCurrent') {
+        return browseBuckets.pinnedCurrent.map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+      }
+      if (navRootKey === 'bibleBooks') {
+        return (browseBuckets.bibleBooks[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+      }
+      if (navRootKey === 'standaloneSeries') {
+        return (browseBuckets.standaloneSeries[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: parseStandaloneParentChild(seriesName).child || seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+      }
+      if (navRootKey === 'yearSpecials') {
+        return (browseBuckets.yearSpecials[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+      }
+      if (navRootKey === 'byDate') {
+        return Object.keys(browseBuckets.byDate[navBranchKey] || {}).sort(monthSortDescending).map(month => ({ key: month, title: month, type: 'month', meta: `${(browseBuckets.byDate[navBranchKey][month] || []).length} sermon entr${(browseBuckets.byDate[navBranchKey][month] || []).length === 1 ? 'y' : 'ies'}` }));
+      }
+      return [];
+    }
 
-        if (!grouped[series]) grouped[series] = [];
-        grouped[series].push({
-          title,
-          series,
-          scripture: parsed.scripture || '',
-          by: parsed.by || '',
-          date: parsed.date || '',
-          video: parsed.video || '',
-          videoId,
-          audio: audioUrl,
-          img: itemImage,
-          link: itemLink,
-          extra: parsed.extra || [],
-          sortTimestamp: parseDateToTimestamp(pubDateRaw || parsed.date)
-        });
-      });
+    function getVisibleEpisodesForSeries(seriesName) {
+      return getDisplayedEpisodes(seriesName).filter(ep => mode === 'audio' ? true : !!ep.videoId).map((ep, index) => ({ ep, originalIndex: index }));
+    }
 
-      const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
-      if (livestreamEpisodes.length) grouped[LIVESTREAMS.name] = livestreamEpisodes;
-      const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
-      if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
+    function getSeriesArtForMode(seriesName) {
+      const episodes = sermonData[seriesName] || [];
+      const sample = episodes[0] || {};
+      return mode === 'video' ? (sample.seriesWideImage || FALLBACK_IMAGE) : (sample.seriesImage || FALLBACK_IMAGE);
+    }
 
-      sermonData = grouped;
-      applySeriesArtwork();
-      browseBuckets = buildBrowseBuckets();
-      currentSeries = getModeTopSeries()[0] || Object.keys(sermonData)[0] || null;
+    function getSeriesWideCover(seriesName) {
+      const items = sermonData[seriesName] || [];
+      return items.length ? (items[0].seriesWideImage || FALLBACK_IMAGE) : FALLBACK_IMAGE;
+    }
+
+    function getQueueEntries() {
+      if (!browseBuckets) return [];
+      if (navRootKey === 'byDate' && navBranchKey && navLeafKey) {
+        return (browseBuckets.byDate[navBranchKey]?.[navLeafKey] || []).map((entry, index) => {
+          const match = (sermonData[entry.seriesName] || []).find(ep => ep.title === entry.title && ep.date === entry.date) || (sermonData[entry.seriesName] || [])[0];
+          return { kind: 'dated-entry', ep: match, originalIndex: index, label: entry.date || entry.title };
+        }).filter(item => item.ep && (mode === 'audio' ? true : !!item.ep.videoId));
+      }
+      if (!currentSeries || !sermonData[currentSeries]) return [];
+      return getVisibleEpisodesForSeries(currentSeries).map(({ ep, originalIndex }) => ({ kind: 'episode', ep, originalIndex }));
+    }
+
+    function setDefaultNavigation() {
+      const roots = getRootItems();
+      navRootKey = roots[0]?.key || null;
+      const branches = getBranchItems();
+      navBranchKey = branches[0]?.key || null;
+      const leaves = getLeafItems();
+      navLeafKey = leaves[0]?.key || null;
+      syncSeriesSelection();
+    }
+
+    function syncSeriesSelection() {
+      if (navRootKey === 'byDate') {
+        currentSeries = null;
+        return;
+      }
+      const leaves = getLeafItems();
+      const selected = leaves.find(item => item.key === navLeafKey);
+      currentSeries = selected && selected.type === 'series' ? selected.key : null;
+    }
+
+    function setRoot(key) {
+      navRootKey = key;
+      const branches = getBranchItems();
+      navBranchKey = branches[0]?.key || null;
+      const leaves = getLeafItems();
+      navLeafKey = leaves[0]?.key || null;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+      syncSeriesSelection();
+      renderNavigation();
+      renderQueue();
+      renderEmptyMeta();
+      showModePlaceholder();
+    }
+
+    function setBranch(key) {
+      navBranchKey = key;
+      const leaves = getLeafItems();
+      navLeafKey = leaves[0]?.key || null;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+      syncSeriesSelection();
+      renderNavigation();
+      renderQueue();
+      renderEmptyMeta();
+      showModePlaceholder();
+    }
+
+    function setLeaf(key) {
+      navLeafKey = key;
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+      syncSeriesSelection();
+      renderNavigation();
+      renderQueue();
+      renderEmptyMeta();
+      showModePlaceholder();
     }
 
     function createIconMarkup(kind) {
@@ -1355,164 +1512,77 @@
 
     function updateDrawerHeader() {
       drawerTitleTextEl.textContent = mode === 'audio' ? 'Browse Sermon Audio' : 'Browse Sermon Video';
-      drawerTitleIconEl.innerHTML = createIconMarkup(mode === 'audio' ? 'audio' : 'video');
+      drawerTitleIconEl.innerHTML = createIconMarkup(mode);
     }
 
-    function openDrawer() {
-      if (!isMobileLayout()) return;
-      bodyEl.classList.add('drawer-open');
-      drawerEl.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeDrawer() {
-      bodyEl.classList.remove('drawer-open');
-      drawerEl.setAttribute('aria-hidden', 'true');
-    }
-
-    function getSeriesChips(seriesName) {
-      const chips = [];
-      if (seriesName === LIVESTREAMS.name) chips.push({ label: 'Live', className: 'live' });
-      if (SHARED_PINNED_CURRENT_ITEMS.includes(seriesName)) chips.push({ label: 'Current', className: 'current' });
-      if (seriesName === VIDEO_ONLY_ARCHIVE.name) chips.push({ label: 'Video Only', className: '' });
-      return chips;
-    }
-
-    function makeSeriesCard(seriesName) {
+    function createNavCard(item, isActive, onClick) {
       const button = document.createElement('button');
       button.type = 'button';
-      button.className = `series-card ${mode}` + (seriesName === currentSeries ? ' active' : '');
-      const thumb = mode === 'video'
-        ? (sermonData[seriesName]?.[0]?.seriesWideImage || FALLBACK_IMAGE)
-        : (sermonData[seriesName]?.[0]?.seriesImage || FALLBACK_IMAGE);
-      const chips = getSeriesChips(seriesName);
-      button.innerHTML = `
-        <div class="series-thumb"><img src="${thumb}" alt=""></div>
-        <div class="card-copy">
-          <h3 class="card-title">${seriesName}</h3>
-          ${chips.length ? `<div class="chip-row">${chips.map(ch => `<span class="chip ${ch.className}">${ch.label}</span>`).join('')}</div>` : ''}
-        </div>
-      `;
-      button.addEventListener('click', () => selectSeries(seriesName));
+      button.className = `nav-card ${mode}` + (isActive ? ' active' : '');
+      button.innerHTML = `${item.image ? `<span class="nav-card-thumb"><img src="${item.image}" alt=""></span>` : ''}<span class="nav-card-copy"><h3 class="nav-card-title">${item.title}</h3>${item.meta ? `<div class="nav-card-meta">${item.meta}</div>` : ''}</span>`;
+      button.addEventListener('click', onClick);
       return button;
     }
 
-    function renderBrowseGroup(targetEl, title, seriesNames, subgroupMap = null) {
-      if (!seriesNames?.length && !subgroupMap) return;
-      const wrap = document.createElement('section');
-      wrap.className = 'browse-group';
-      wrap.innerHTML = `<h3 class="browse-group-title">${title}</h3>`;
-      if (seriesNames?.length) {
-        const list = document.createElement('div');
-        list.className = 'series-list';
-        seriesNames.forEach(name => list.appendChild(makeSeriesCard(name)));
-        wrap.appendChild(list);
-      }
-      if (subgroupMap) {
-        Object.keys(subgroupMap).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).forEach(key => {
-          const heading = document.createElement('h4');
-          heading.className = 'browse-subgroup-title';
-          heading.textContent = key;
-          wrap.appendChild(heading);
-          const list = document.createElement('div');
-          list.className = 'series-list';
-          subgroupMap[key].forEach(name => list.appendChild(makeSeriesCard(name)));
-          wrap.appendChild(list);
-        });
-      }
-      targetEl.appendChild(wrap);
-    }
-
-    function renderDateGroup(targetEl, title, byDateMap) {
-      if (!byDateMap || !Object.keys(byDateMap).length) return;
-      const wrap = document.createElement('section');
-      wrap.className = 'browse-group';
-      wrap.innerHTML = `<h3 class="browse-group-title">${title}</h3>`;
-      const years = Object.keys(byDateMap).sort((a, b) => Number(b) - Number(a));
-      years.forEach(year => {
-        const yearHeading = document.createElement('h4');
-        yearHeading.className = 'browse-subgroup-title';
-        yearHeading.textContent = year;
-        wrap.appendChild(yearHeading);
-        const months = Object.keys(byDateMap[year]);
-        months.forEach(month => {
-          const monthHeading = document.createElement('div');
-          monthHeading.className = 'browse-subgroup-title';
-          monthHeading.style.marginTop = '8px';
-          monthHeading.style.fontSize = '10px';
-          monthHeading.style.opacity = '0.75';
-          monthHeading.textContent = month;
-          wrap.appendChild(monthHeading);
-          const seriesSet = [...new Set(byDateMap[year][month].map(item => item.seriesName))];
-          const list = document.createElement('div');
-          list.className = 'series-list';
-          seriesSet.forEach(name => list.appendChild(makeSeriesCard(name)));
-          wrap.appendChild(list);
-        });
-      });
-      targetEl.appendChild(wrap);
-    }
-
-    function renderBrowseInto(targetEl) {
+    function renderNavList(targetEl, items, activeKey, onPick, emptyText) {
       targetEl.innerHTML = '';
-      if (!browseBuckets) return;
-
-      if (mode === 'video' && sermonData[LIVESTREAMS.name]) {
-        renderBrowseGroup(targetEl, 'Livestreams', [LIVESTREAMS.name]);
+      if (!items.length) {
+        targetEl.innerHTML = `<div class="nav-empty">${emptyText}</div>`;
+        return;
       }
-      renderBrowseGroup(targetEl, 'Pinned Current Items', browseBuckets.pinnedCurrent);
-      renderBrowseGroup(targetEl, 'Bible Books', null, browseBuckets.bibleBooks);
-      renderBrowseGroup(targetEl, 'Standalone Series', null, browseBuckets.standaloneSeries);
-      renderBrowseGroup(targetEl, 'Year Specials', null, browseBuckets.yearSpecials);
-      renderDateGroup(targetEl, mode === 'audio' ? 'Audio by Date' : 'Video by Date', browseBuckets.byDate);
-      if (mode === 'video' && sermonData[VIDEO_ONLY_ARCHIVE.name]) {
-        renderBrowseGroup(targetEl, 'Guest Speakers', [VIDEO_ONLY_ARCHIVE.name]);
-      }
-
-      if (!targetEl.children.length) {
-        targetEl.innerHTML = '<div class="browse-empty">No matching sermon buckets are available in this mode yet.</div>';
-      }
+      const wrap = document.createElement('div');
+      wrap.className = 'nav-list';
+      items.forEach(item => wrap.appendChild(createNavCard(item, item.key === activeKey, () => onPick(item.key))));
+      targetEl.appendChild(wrap);
     }
 
-    function getVisibleEpisodesForSeries(seriesName) {
-      return getDisplayedEpisodes(seriesName)
-        .filter(ep => mode === 'audio' ? true : !!ep.videoId)
-        .map((ep, index) => ({ ep, originalIndex: index }));
+    function renderNavigation() {
+      const roots = getRootItems();
+      const branches = getBranchItems();
+      const leaves = getLeafItems();
+      renderNavList(rootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
+      renderNavList(mobileRootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
+      renderNavList(branchListEl, branches, navBranchKey, setBranch, 'Choose a top-level category first.');
+      renderNavList(mobileBranchListEl, branches, navBranchKey, setBranch, 'Choose a top-level category first.');
+      renderNavList(leafListEl, leaves, navLeafKey, setLeaf, 'Choose a branch to see series buckets or month buckets.');
+      renderNavList(mobileLeafListEl, leaves, navLeafKey, setLeaf, 'Choose a branch to see series buckets or month buckets.');
+
+      branchHeadEl.textContent = navRootKey === 'byDate' ? 'Step 2 · Year' : 'Step 2 · Branch';
+      mobileBranchHeadEl.textContent = branchHeadEl.textContent;
+      leafHeadEl.textContent = navRootKey === 'byDate' ? 'Step 3 · Month' : 'Step 3 · Series / Bucket';
+      mobileLeafHeadEl.textContent = leafHeadEl.textContent;
     }
 
-    function makeEpisodeCard(ep, originalIndex) {
+    function makeQueueCard(ep, originalIndex, labelOverride = '') {
       const button = document.createElement('button');
       button.type = 'button';
-      button.className = `episode-card ${mode}` + (originalIndex === currentEpisodeIndex ? ' active' : '');
-      const thumb = mode === 'video'
-        ? (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE)
-        : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
-      const subtitle = ep.scripture || ep.date || '';
-      button.innerHTML = `
-        <div class="episode-thumb"><img src="${thumb}" alt=""></div>
-        <div class="card-copy">
-          <h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3>
-          <div class="card-subtitle">${subtitle}</div>
-        </div>
-      `;
+      const isActive = !!currentEpisodeData && currentEpisodeData.title === ep.title && currentEpisodeData.series === ep.series;
+      button.className = `episode-card ${mode}` + (isActive ? ' active' : '');
+      const thumb = mode === 'video' ? (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE) : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
+      const subtitle = labelOverride || ep.scripture || ep.date || '';
+      button.innerHTML = `<div class="episode-thumb"><img src="${thumb}" alt=""></div><div class="card-copy"><h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3><div class="card-subtitle">${subtitle}</div></div>`;
       button.addEventListener('click', () => selectEpisode(ep, originalIndex));
       return button;
     }
 
-    function renderEpisodesInto(targetEl) {
+    function renderQueueInto(targetEl) {
       targetEl.innerHTML = '';
-      if (!currentSeries || !sermonData[currentSeries]) {
-        targetEl.innerHTML = '<div class="queue-empty">Choose a sermon bucket first.</div>';
-        return;
-      }
-      const visibleEpisodes = getVisibleEpisodesForSeries(currentSeries);
-      if (!visibleEpisodes.length) {
-        targetEl.innerHTML = '<div class="queue-empty">No episodes are available for this series in the current mode.</div>';
+      const queueEntries = getQueueEntries();
+      if (!queueEntries.length) {
+        targetEl.innerHTML = `<div class="queue-empty">${navRootKey === 'byDate' ? 'Choose a year and month to load dated sermon entries.' : 'Choose a series bucket to load the episode queue.'}</div>`;
         return;
       }
       const list = document.createElement('div');
       list.className = 'episode-list';
-      visibleEpisodes.forEach(({ ep, originalIndex }) => list.appendChild(makeEpisodeCard(ep, originalIndex)));
+      queueEntries.forEach(item => list.appendChild(makeQueueCard(item.ep, item.originalIndex, item.label || '')));
       targetEl.appendChild(list);
+    }
+
+    function renderQueue() {
+      episodesHeaderTitleEl.textContent = navRootKey === 'byDate' ? `${navLeafKey || 'Entries'}` : (currentSeries ? 'Up Next' : 'Episodes');
+      mobileQueueHeadEl.textContent = navRootKey === 'byDate' ? `Entries · ${navLeafKey || ''}` : 'Up Next';
+      renderQueueInto(episodesListEl);
+      renderQueueInto(mobileEpisodesListEl);
     }
 
     function formatAudioTime(seconds) {
@@ -1521,9 +1591,7 @@
       const hours = Math.floor(total / 3600);
       const minutes = Math.floor((total % 3600) / 60);
       const secs = total % 60;
-      return hours > 0
-        ? `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
-        : `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      return hours > 0 ? `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}` : `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     }
 
     function updateAudioProgressUi() {
@@ -1586,9 +1654,7 @@
 
     function setAudioReadyState(isPlaying) {
       audioReadyLabelEl.textContent = isPlaying ? 'Listening...' : 'Ready to Listen';
-      audioPlayIconEl.innerHTML = isPlaying
-        ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>'
-        : '<path d="M8 5v14l11-7z"/>';
+      audioPlayIconEl.innerHTML = isPlaying ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
       if (isPlaying) startPlayingDots();
       else {
         stopPlayingDots();
@@ -1631,34 +1697,28 @@
       if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
       if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
       if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
-      if (ep.extra?.length) {
-        ep.extra.forEach(line => {
-          rows.push(`<div class="meta-row"><div class="meta-label">Publisher / Creator</div><div class="meta-value">${line}</div></div>`);
-        });
-      }
+      if (ep.extra?.length) ep.extra.forEach(line => rows.push(`<div class="meta-row"><div class="meta-label">Publisher / Creator</div><div class="meta-value">${line}</div></div>`));
       return rows.join('');
     }
 
     function renderEmptyMeta() {
-      const mobilePrompt = mode === 'audio'
-        ? 'Tap Sermon Selection above to begin listening'
-        : 'Tap Sermon Selection above to begin watching';
-      const desktopPrompt = mode === 'audio'
-        ? 'Choose a sermon bucket and episode to begin listening.'
-        : 'Choose a sermon bucket and episode to begin watching.';
-      metaBoxEl.innerHTML = `
-        <h2 class="meta-title">Select a sermon</h2>
-        <div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div>
-        <p class="meta-note">Browse by category and then choose an episode to load the player.</p>
-      `;
+      const mobilePrompt = mode === 'audio' ? 'Tap Sermon Selection above to begin listening' : 'Tap Sermon Selection above to begin watching';
+      const desktopPrompt = mode === 'audio' ? 'Choose a category, branch, series bucket, and episode to begin listening.' : 'Choose a category, branch, series bucket, and episode to begin watching.';
+      metaBoxEl.innerHTML = `<h2 class="meta-title">Select a sermon</h2><div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div><p class="meta-note">The experience begins with Listen or Watch, then follows the three-step taxonomy path before loading the player.</p>`;
     }
 
     function renderMeta(ep) {
-      metaBoxEl.innerHTML = `
-        <h2 class="meta-title">${ep.title || 'Untitled Sermon'}</h2>
-        <div class="meta-series">${ep.series || currentSeries || ''}</div>
-        <div class="meta-grid">${buildMetaRows(ep)}</div>
-      `;
+      metaBoxEl.innerHTML = `<h2 class="meta-title">${ep.title || 'Untitled Sermon'}</h2><div class="meta-series">${ep.series || currentSeries || ''}</div><div class="meta-grid">${buildMetaRows(ep)}</div>`;
+    }
+
+    function showModePlaceholder() {
+      if (mode === 'audio') {
+        audioPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin listening' : 'Choose an episode from the queue to begin listening.';
+        audioPlaceholderEl.style.display = 'flex';
+      } else {
+        videoPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin watching' : 'Choose an episode from the queue to begin watching.';
+        videoPlaceholderEl.style.display = 'flex';
+      }
     }
 
     function playAudio(ep) {
@@ -1702,70 +1762,120 @@
       renderMeta(ep);
     }
 
-    function selectSeries(seriesName) {
-      currentSeries = seriesName;
-      currentEpisodeIndex = null;
-      currentEpisodeData = null;
-      clearMediaState();
-      renderBrowse();
-      renderEpisodes();
-      renderEmptyMeta();
-      if (mode === 'audio') audioPlaceholderEl.style.display = 'flex';
-      else videoPlaceholderEl.style.display = 'flex';
-    }
-
     function selectEpisode(ep, originalIndex) {
       currentEpisodeIndex = originalIndex;
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
-      renderEpisodes();
+      renderQueue();
       if (isMobileLayout()) {
         closeDrawer();
         playerSectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
-    function renderBrowse() {
+    async function fetchPlaylistSeries(config, newestFirst = false) {
+      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const items = Array.isArray(data.items) ? data.items : [];
+      let sorted = [...items];
+      if (newestFirst) sorted.sort((a, b) => new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt));
+      return sorted.map(item => {
+        const videoId = item?.snippet?.resourceId?.videoId || '';
+        const publishedAt = item?.snippet?.publishedAt || '';
+        const thumb = getWatchThumb(videoId);
+        return {
+          title: item?.snippet?.title || config.name,
+          series: config.name,
+          scripture: '',
+          by: '',
+          date: publishedAt ? new Date(publishedAt).toLocaleDateString() : '',
+          video: videoId ? `https://youtu.be/${videoId}` : '',
+          videoId,
+          audio: '',
+          img: '',
+          link: '',
+          extra: [],
+          sortTimestamp: parseDateToTimestamp(publishedAt),
+          seriesImage: thumb,
+          seriesWideImage: thumb
+        };
+      });
+    }
+
+    async function loadData() {
+      const xmlText = await fetch(RSS_URL).then(r => r.text());
+      const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+      const items = Array.from(xml.querySelectorAll('item'));
+      const grouped = {};
+      items.forEach(item => {
+        const rawDescription = item.querySelector('description')?.textContent || '';
+        const parsed = parseDescription(rawDescription);
+        const rawTitle = item.querySelector('title')?.textContent?.trim() || 'Untitled Sermon';
+        const split = splitTitleParts(rawTitle);
+        const series = parsed.series || split.inferredSeries || 'Other Sermons';
+        const title = parsed.title || split.episodeTitle || 'Untitled Sermon';
+        const enclosure = item.querySelector('enclosure');
+        const audioUrl = enclosure ? enclosure.getAttribute('url') : '';
+        const itemLink = item.querySelector('link')?.textContent?.trim() || '';
+        const pubDateRaw = item.querySelector('pubDate')?.textContent?.trim() || '';
+        const itunesImages = item.getElementsByTagName('itunes:image');
+        const itemImage = itunesImages && itunesImages[0] ? (itunesImages[0].getAttribute('href') || '') : '';
+        const videoId = extractYouTubeId(parsed.video);
+        if (!grouped[series]) grouped[series] = [];
+        grouped[series].push({
+          title,
+          series,
+          scripture: parsed.scripture || '',
+          by: parsed.by || '',
+          date: parsed.date || '',
+          video: parsed.video || '',
+          videoId,
+          audio: audioUrl,
+          img: itemImage,
+          link: itemLink,
+          extra: parsed.extra || [],
+          sortTimestamp: parseDateToTimestamp(pubDateRaw || parsed.date)
+        });
+      });
+      const livestreamEpisodes = await fetchPlaylistSeries(LIVESTREAMS, true);
+      if (livestreamEpisodes.length) grouped[LIVESTREAMS.name] = livestreamEpisodes;
+      const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
+      if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
+      sermonData = grouped;
+      applySeriesArtwork();
       browseBuckets = buildBrowseBuckets();
-      renderBrowseInto(browseListEl);
-      renderBrowseInto(mobileBrowseListEl);
-    }
-
-    function renderEpisodes() {
-      episodesHeaderTitleEl.textContent = currentSeries ? 'Up Next' : 'Episodes';
-      renderEpisodesInto(episodesListEl);
-      renderEpisodesInto(mobileEpisodesListEl);
-    }
-
-    function resetHome() {
-      currentSeries = getModeTopSeries()[0] || Object.keys(sermonData)[0] || null;
-      currentEpisodeIndex = null;
-      currentEpisodeData = null;
-      clearMediaState();
-      renderBrowse();
-      renderEpisodes();
-      renderEmptyMeta();
-      if (mode === 'audio') audioPlaceholderEl.style.display = 'flex';
-      else videoPlaceholderEl.style.display = 'flex';
-      closeDrawer();
+      setDefaultNavigation();
     }
 
     function setMode(nextMode) {
       mode = nextMode;
+      browseBuckets = buildBrowseBuckets();
       listenBtnEl.classList.toggle('active', mode === 'audio');
       watchBtnEl.classList.toggle('active', mode === 'video');
       bodyEl.classList.toggle('mode-audio', mode === 'audio');
       bodyEl.classList.toggle('mode-video', mode === 'video');
-      currentSeries = getModeTopSeries()[0] || currentSeries;
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       clearMediaState();
+      setDefaultNavigation();
       updateDrawerHeader();
-      renderBrowse();
-      renderEpisodes();
+      renderNavigation();
+      renderQueue();
       renderEmptyMeta();
-      if (mode === 'audio') audioPlaceholderEl.style.display = 'flex';
-      else videoPlaceholderEl.style.display = 'flex';
+      showModePlaceholder();
+    }
+
+    function resetHome() {
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      clearMediaState();
+      setDefaultNavigation();
+      renderNavigation();
+      renderQueue();
+      renderEmptyMeta();
+      showModePlaceholder();
+      closeDrawer();
     }
 
     function skipAudioBy(seconds) {
@@ -1789,7 +1899,6 @@
     audioPlayBadgeEl.addEventListener('click', toggleAudioPlayback);
     miniSkipBackBtnEl.addEventListener('click', e => { e.stopPropagation(); skipAudioBy(-30); });
     miniSkipForwardBtnEl.addEventListener('click', e => { e.stopPropagation(); skipAudioBy(30); });
-
     audioPlayerEl.addEventListener('play', () => setAudioReadyState(true));
     audioPlayerEl.addEventListener('pause', () => setAudioReadyState(false));
     audioPlayerEl.addEventListener('ended', () => setAudioReadyState(false));
@@ -1801,29 +1910,25 @@
       audioPlayerEl.currentTime = duration * (Number(audioProgressEl.value) / 100);
       updateAudioProgressUi();
     });
-
-    window.addEventListener('resize', () => {
-      if (!isMobileLayout()) closeDrawer();
-      renderEmptyMeta();
-    });
+    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); renderEmptyMeta(); });
 
     (async function init() {
       try {
         await loadData();
         updateDrawerHeader();
-        renderBrowse();
-        renderEpisodes();
+        renderNavigation();
+        renderQueue();
         renderEmptyMeta();
-        audioPlaceholderEl.style.display = 'flex';
+        showModePlaceholder();
       } catch (error) {
         console.error(error);
-        browseListEl.innerHTML = '<div class="browse-empty">The sermon feed failed to load. Check the RSS source or network access and try again.</div>';
+        rootListEl.innerHTML = '<div class="nav-empty">The sermon feed failed to load. Check the RSS source or network access and try again.</div>';
+        mobileRootListEl.innerHTML = '<div class="nav-empty">The sermon feed failed to load.</div>';
         episodesListEl.innerHTML = '<div class="queue-empty">Nothing could be loaded yet.</div>';
-        mobileBrowseListEl.innerHTML = '<div class="browse-empty">The sermon feed failed to load.</div>';
         mobileEpisodesListEl.innerHTML = '<div class="queue-empty">Nothing could be loaded yet.</div>';
         renderEmptyMeta();
       }
     })();
-  </script>
+</script>
 </body>
 </html>
