@@ -3313,6 +3313,101 @@
       }
     }
 
+
+    /* V33: single playback sweep inside the center pill text area */
+    .audio-transport-glass::before,
+    .audio-feature-card.playing .audio-transport-glass::before,
+    .audio-play-circle-wrap::before,
+    .audio-feature-card.playing .audio-play-circle-wrap::before {
+      content: none !important;
+      display: none !important;
+      opacity: 0 !important;
+      animation: none !important;
+      filter: none !important;
+      background: none !important;
+      box-shadow: none !important;
+    }
+
+    .audio-play-badge {
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .audio-play-badge::before {
+      content: "" !important;
+      position: absolute !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      left: -38% !important;
+      width: 38% !important;
+      border-radius: 999px !important;
+      background: linear-gradient(
+        90deg,
+        rgba(164,231,190,0.00) 0%,
+        rgba(164,231,190,0.08) 18%,
+        rgba(164,231,190,0.22) 50%,
+        rgba(164,231,190,0.08) 82%,
+        rgba(164,231,190,0.00) 100%
+      ) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      filter: blur(2px) !important;
+    }
+
+    @keyframes playingSweep {
+      0% { transform: translateX(0%); opacity: 0; }
+      10% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateX(360%); opacity: 0; }
+    }
+
+    .audio-feature-card.playing .audio-play-badge::before {
+      opacity: 1 !important;
+      animation: playingSweep 1.5s linear infinite !important;
+    }
+
+    .audio-play-label,
+    .audio-play-circle-wrap {
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    .audio-play-label {
+      font-size: 16px !important;
+      letter-spacing: 0.04em !important;
+      text-align: center !important;
+      flex: 1 1 auto !important;
+    }
+
+    .audio-feature-card.playing .audio-play-badge {
+      justify-content: space-between !important;
+    }
+
+    @media (max-width: 980px) {
+      .audio-play-label {
+        font-size: 14px !important;
+        letter-spacing: 0.035em !important;
+      }
+
+      .audio-play-badge::before {
+        width: 42% !important;
+        left: -42% !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .audio-play-label {
+        font-size: 13.5px !important;
+        letter-spacing: 0.03em !important;
+      }
+
+      .audio-play-badge::before {
+        width: 44% !important;
+        left: -44% !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
