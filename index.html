@@ -4017,6 +4017,121 @@
       }
     }
 
+
+    /* V47: desktop audio controls hard reset for clean fit */
+    @media (min-width: 981px) {
+      /* Make the desktop control row actually wide enough */
+      .audio-transport-glass {
+        width: min(100%, 520px) !important;
+        max-width: 520px !important;
+        padding: 7px 8px !important;
+      }
+
+      .audio-transport {
+        display: grid !important;
+        grid-template-columns: 74px minmax(0, 1fr) 74px !important;
+        gap: 10px !important;
+        align-items: center !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 74px !important;
+        width: 74px !important;
+        height: 70px !important;
+        font-size: 24px !important;
+        padding: 0 10px !important;
+      }
+
+      /* Reset the center pill to a reliable layout */
+      .audio-play-badge {
+        min-width: 0 !important;
+        width: 100% !important;
+        min-height: 70px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 0 !important;
+        padding: 8px 18px 8px 10px !important;
+        overflow: hidden !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        flex-direction: row-reverse !important;
+        justify-content: space-between !important;
+        padding: 8px 10px 8px 18px !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 48px !important;
+        height: 48px !important;
+      }
+
+      .audio-play-circle-wrap {
+        flex: 0 0 48px !important;
+        margin-right: 16px !important;
+      }
+
+      .audio-feature-card.playing .audio-play-circle-wrap {
+        margin-right: 0 !important;
+        margin-left: 16px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 23px !important;
+        height: 23px !important;
+      }
+
+      .audio-play-text-wrap {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+      }
+
+      .audio-feature-card.playing .audio-play-text-wrap {
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-label {
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        text-overflow: clip !important;
+        text-align: left !important;
+        font-size: 17px !important;
+        letter-spacing: 0.035em !important;
+      }
+
+      /* Do not steal width when stopped */
+      .audio-play-dots {
+        flex: 0 0 auto !important;
+        min-width: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .audio-feature-card.playing .audio-play-dots {
+        min-width: 1.9em !important;
+        width: auto !important;
+        overflow: visible !important;
+      }
+
+      /* Give the desktop player a little more visual weight overall */
+      .audio-art-panel img {
+        max-width: 330px !important;
+      }
+
+      .audio-transport-overlay {
+        margin-top: 10px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
