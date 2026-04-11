@@ -5470,6 +5470,142 @@
       };
     }
 
+    /* =========================================================================
+       ======================== EDIT_HERE_PARSING_NOTES ========================
+       BEGINNER NOTE:
+       This pass adds helper functions only.
+       It does NOT replace the current working navigator yet.
+
+       PURPOSE:
+       - Prepare the future grouped navigation model
+       - Keep Audio as the master structure
+       - Let Video mirror that structure later
+       - Keep the current UI behavior stable while we test the data layer first
+
+       FUTURE TARGET STRUCTURE:
+       - Pinned Current Items
+       - Bible Books
+       - Standalone Series
+       - Year Specials
+       - By Date
+       - Video-only outliers:
+         Livestreams at top
+         Guest Speakers at bottom
+
+       SEARCH TAGS:
+       - EDIT_HERE_PARSING_NOTES
+       - EDIT_HERE_TAXONOMY_SUMMARY
+       ========================================================================= */
+
+    const BIBLE_BOOK_NAMES = [
+      'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
+      '1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra',
+      'Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon',
+      'Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos',
+      'Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah',
+      'Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians',
+      '2 Corinthians','Galatians','Ephesians','Philippians','Colossians',
+      '1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon',
+      'Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'
+    ];
+
+    function normalizeWhitespace(value) {
+      return (value || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function detectBibleBook(value) {
+      const clean = normalizeWhitespace(value);
+      if (!clean) return '';
+
+      const lower = clean.toLowerCase();
+
+      for (const book of BIBLE_BOOK_NAMES) {
+        const bookLower = book.toLowerCase();
+        if (
+          lower === bookLower ||
+          lower.startsWith(bookLower + ' ') ||
+          lower.includes(' ' + bookLower + ' ') ||
+          lower.endsWith(' ' + bookLower)
+        ) {
+          return book;
+        }
+      }
+
+      return '';
+    }
+
+    function parseStandaloneParentChild(seriesName) {
+      const clean = normalizeWhitespace(seriesName);
+      if (!clean.includes(':')) {
+        return {
+          parent: clean,
+          child: ''
+        };
+      }
+
+      const parts = clean.split(':').map(part => normalizeWhitespace(part)).filter(Boolean);
+      if (parts.length < 2) {
+        return {
+          parent: clean,
+          child: ''
+        };
+      }
+
+      return {
+        parent: parts[0],
+        child: parts.slice(1).join(': ')
+      };
+    }
+
+    function inferYearFromTimestamp(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return String(date.getFullYear());
+    }
+
+    function classifySermonEntry(entry) {
+      const seriesName = normalizeWhitespace(entry.series || '');
+      const scripture = normalizeWhitespace(entry.scripture || '');
+      const title = normalizeWhitespace(entry.title || '');
+      const bookFromSeries = detectBibleBook(seriesName);
+      const bookFromScripture = detectBibleBook(scripture);
+      const bibleBook = bookFromSeries || bookFromScripture;
+      const standaloneParts = parseStandaloneParentChild(seriesName);
+      const inferredYear = inferYearFromTimestamp(entry.timestamp || 0);
+
+      const isPinnedCurrent = SHARED_PINNED_CURRENT_ITEMS.includes(seriesName);
+      const specialYearMatch = seriesName.match(/\b20\d{2}\b/);
+      const isYearSpecial = /special/i.test(seriesName) && !!specialYearMatch;
+      const isStandaloneSeries = !bibleBook && !isYearSpecial && !!seriesName;
+      const isStandaloneWithMiniSeries = isStandaloneSeries && !!standaloneParts.child;
+
+      return {
+        title,
+        seriesName,
+        scripture,
+        bibleBook,
+        isPinnedCurrent,
+        isYearSpecial,
+        isStandaloneSeries,
+        isStandaloneWithMiniSeries,
+        standaloneParent: isStandaloneWithMiniSeries ? standaloneParts.parent : seriesName,
+        standaloneChild: isStandaloneWithMiniSeries ? standaloneParts.child : '',
+        specialYear: isYearSpecial ? specialYearMatch[0] : inferredYear,
+        dateYear: inferredYear
+      };
+    }
+
+    function buildTaxonomySummaryFromSermonData() {
+      return Object.keys(sermonData).map(seriesName => {
+        const firstEntry = sermonData[seriesName]?.[0] || {};
+        return {
+          seriesName,
+          ...classifySermonEntry(firstEntry)
+        };
+      });
+    }
+
     function extractYouTubeId(url) {
       if (!url) return '';
       try {
@@ -6139,6 +6275,14 @@
 
       sermonData = grouped;
       archiveSeriesOrder = Object.keys(sermonData).filter(name => name !== LIVESTREAMS.name);
+
+      /* BEGINNER NOTE:
+         Search for: EDIT_HERE_TAXONOMY_SUMMARY
+         This is a safe debug summary of the future grouped structure.
+         It does not change the current navigator yet.
+      */
+      window.CGBC_TAXONOMY_SUMMARY = buildTaxonomySummaryFromSermonData();
+
       currentSeries = getVisibleSeriesOrder()[0] || null;
     }
 
