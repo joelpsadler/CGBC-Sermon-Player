@@ -946,6 +946,135 @@
       }
     }
 
+
+    .drawer-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(8,8,8,0.96), rgba(14,14,14,0.92));
+    }
+    .drawer-tool-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .drawer-tool-btn {
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .drawer-tool-btn[disabled] {
+      opacity: 0.45;
+      cursor: default;
+    }
+    .drawer-path {
+      min-width: 0;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+      line-height: 1.25;
+    }
+    .mobile-nav-flow {
+      display: none;
+    }
+    .flow-stage {
+      display: grid;
+      gap: 12px;
+      padding: 12px;
+    }
+    .flow-summary-list {
+      display: grid;
+      gap: 10px;
+    }
+    .flow-summary {
+      display: grid;
+      gap: 7px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .flow-summary-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .flow-summary-step {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .flow-summary-change {
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      color: var(--text);
+    }
+    .flow-summary-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      line-height: 1.15;
+    }
+    .flow-summary-meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+    .flow-stage-head {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      margin: 0 -12px;
+      padding: 10px 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.82);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(16,16,16,0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .flow-stage.queue-view .flow-stage-head {
+      background: rgba(54,54,56,0.76);
+    }
+    @media (max-width: 980px) {
+      .drawer-body,
+      .drawer-body-deep {
+        display: block;
+        height: calc(100% - 64px - var(--safe-top));
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+      .drawer-pane {
+        display: none !important;
+      }
+      .mobile-nav-flow {
+        display: block;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -992,7 +1121,15 @@
         <div class="drawer-title"><span class="icon" id="drawerTitleIcon"></span><span id="drawerTitleText">Browse Sermon Audio</span></div>
         <button class="drawer-close" id="closeDrawerBtn" type="button">Close</button>
       </div>
+      <div class="drawer-tools">
+        <div class="drawer-tool-actions">
+          <button class="drawer-tool-btn" id="drawerBackBtn" type="button">Back</button>
+          <button class="drawer-tool-btn" id="drawerHomeBtn" type="button">Start Over</button>
+        </div>
+        <div class="drawer-path" id="drawerPathLabel">Start at the top and drill down.</div>
+      </div>
       <div class="drawer-body drawer-body-deep">
+        <div class="mobile-nav-flow" id="mobileNavFlow"></div>
         <section class="drawer-pane series-pane">
           <div class="drawer-pane-head">Step 1 · Category</div>
           <div class="drawer-pane-body" id="mobileRootList"></div>
@@ -1187,13 +1324,28 @@
     const mobileDrawerEl = document.getElementById('mobileDrawer');
     const drawerTitleTextEl = document.getElementById('drawerTitleText');
     const drawerTitleIconEl = document.getElementById('drawerTitleIcon');
+    const drawerBackBtnEl = document.getElementById('drawerBackBtn');
+    const drawerHomeBtnEl = document.getElementById('drawerHomeBtn');
+    const drawerPathLabelEl = document.getElementById('drawerPathLabel');
+    const mobileNavFlowEl = document.getElementById('mobileNavFlow');
+
+    let mobileNavView = 'queue';
 
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
 
+    function getDeepestMobileView() {
+      if (navLeafKey) return 'queue';
+      if (navBranchKey) return 'leaf';
+      if (navRootKey) return 'branch';
+      return 'root';
+    }
+
     function openDrawer() {
       if (!isMobileLayout()) return;
+      mobileNavView = getDeepestMobileView();
+      renderMobileDrawerFlow();
       bodyEl.classList.add('drawer-open');
       mobileDrawerEl.setAttribute('aria-hidden', 'false');
     }
@@ -1417,33 +1569,33 @@
       if (!browseBuckets || !navRootKey) return [];
       if (navRootKey === 'livestreams') return [{ key: 'live-collection', title: 'Livestreams', meta: 'Pinned first in Watch mode' }];
       if (navRootKey === 'guestSpeakers') return [{ key: 'guest-collection', title: 'Guest Speakers', meta: 'Pinned last in Watch mode' }];
-      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Current Sermons', meta: `${browseBuckets.pinnedCurrent.length} pinned item(s)` }];
-      if (navRootKey === 'bibleBooks') return Object.keys(browseBuckets.bibleBooks).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${browseBuckets.bibleBooks[key].length} series bucket(s)` }));
-      if (navRootKey === 'standaloneSeries') return Object.keys(browseBuckets.standaloneSeries).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${browseBuckets.standaloneSeries[key].length} series bucket(s)` }));
-      if (navRootKey === 'yearSpecials') return Object.keys(browseBuckets.yearSpecials).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${browseBuckets.yearSpecials[key].length} sermon bucket(s)` }));
-      if (navRootKey === 'byDate') return Object.keys(browseBuckets.byDate).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: `${Object.keys(browseBuckets.byDate[key] || {}).length} month bucket(s)` }));
+      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Current Sermons', meta: formatCountLabel(browseBuckets.pinnedCurrent.length, 'current item', 'current items') }];
+      if (navRootKey === 'bibleBooks') return sortBibleBooksInCanonicalOrder(Object.keys(browseBuckets.bibleBooks)).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.bibleBooks[key].length, 'series', 'series') }));
+      if (navRootKey === 'standaloneSeries') return Object.keys(browseBuckets.standaloneSeries).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.standaloneSeries[key].length, 'series', 'series') }));
+      if (navRootKey === 'yearSpecials') return Object.keys(browseBuckets.yearSpecials).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.yearSpecials[key].length, 'series', 'series') }));
+      if (navRootKey === 'byDate') return Object.keys(browseBuckets.byDate).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(Object.keys(browseBuckets.byDate[key] || {}).length, 'month', 'months') }));
       return [];
     }
 
     function getLeafItems() {
       if (!browseBuckets || !navRootKey || !navBranchKey) return [];
       if (navRootKey === 'livestreams') {
-        return [{ key: LIVESTREAMS.name, title: LIVESTREAMS.name, type: 'series', meta: `${(sermonData[LIVESTREAMS.name] || []).length} video item(s)`, image: getSeriesWideCover(LIVESTREAMS.name) }];
+        return [{ key: LIVESTREAMS.name, title: LIVESTREAMS.name, type: 'series', meta: formatCountLabel((sermonData[LIVESTREAMS.name] || []).length, 'video', 'videos'), image: getSeriesWideCover(LIVESTREAMS.name) }];
       }
       if (navRootKey === 'guestSpeakers') {
-        return [{ key: VIDEO_ONLY_ARCHIVE.name, title: VIDEO_ONLY_ARCHIVE.name, type: 'series', meta: `${(sermonData[VIDEO_ONLY_ARCHIVE.name] || []).length} video item(s)`, image: getSeriesWideCover(VIDEO_ONLY_ARCHIVE.name) }];
+        return [{ key: VIDEO_ONLY_ARCHIVE.name, title: VIDEO_ONLY_ARCHIVE.name, type: 'series', meta: formatCountLabel((sermonData[VIDEO_ONLY_ARCHIVE.name] || []).length, 'video', 'videos'), image: getSeriesWideCover(VIDEO_ONLY_ARCHIVE.name) }];
       }
       if (navRootKey === 'pinnedCurrent') {
-        return browseBuckets.pinnedCurrent.map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+        return browseBuckets.pinnedCurrent.map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
       }
       if (navRootKey === 'bibleBooks') {
-        return (browseBuckets.bibleBooks[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+        return (browseBuckets.bibleBooks[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
       }
       if (navRootKey === 'standaloneSeries') {
-        return (browseBuckets.standaloneSeries[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: parseStandaloneParentChild(seriesName).child || seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+        return (browseBuckets.standaloneSeries[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: parseStandaloneParentChild(seriesName).child || seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
       }
       if (navRootKey === 'yearSpecials') {
-        return (browseBuckets.yearSpecials[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: `${getVisibleEpisodesForSeries(seriesName).length} item(s)`, image: getSeriesArtForMode(seriesName) }));
+        return (browseBuckets.yearSpecials[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
       }
       if (navRootKey === 'byDate') {
         return Object.keys(browseBuckets.byDate[navBranchKey] || {}).sort(monthSortDescending).map(month => ({ key: month, title: month, type: 'month', meta: `${(browseBuckets.byDate[navBranchKey][month] || []).length} sermon entr${(browseBuckets.byDate[navBranchKey][month] || []).length === 1 ? 'y' : 'ies'}` }));
@@ -1508,6 +1660,9 @@
       currentEpisodeData = null;
       clearMediaState();
       syncSeriesSelection();
+      if (isMobileLayout()) mobileNavView = 'branch';
+      if (isMobileLayout()) mobileNavView = 'leaf';
+      if (isMobileLayout()) mobileNavView = 'queue';
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -1538,6 +1693,141 @@
       renderQueue();
       renderEmptyMeta();
       showModePlaceholder();
+    }
+
+    function sortBibleBooksInCanonicalOrder(keys) {
+      return [...keys].sort((a, b) => {
+        const ai = BIBLE_BOOK_NAMES.indexOf(a);
+        const bi = BIBLE_BOOK_NAMES.indexOf(b);
+        if (ai === -1 && bi === -1) return a.localeCompare(b, undefined, { numeric: true });
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      });
+    }
+
+    function formatCountLabel(count, singular, plural) {
+      return `${count} ${count === 1 ? singular : plural}`;
+    }
+
+    function getRootTitleByKey(key) {
+      const item = getRootItems().find(entry => entry.key === key);
+      return item ? item.title : '';
+    }
+
+    function getBranchTitleByKey(key) {
+      const item = getBranchItems().find(entry => entry.key === key);
+      return item ? item.title : '';
+    }
+
+    function getLeafTitleByKey(key) {
+      const item = getLeafItems().find(entry => entry.key === key);
+      return item ? item.title : '';
+    }
+
+    function getBranchHeadText() {
+      return navRootKey === 'byDate' ? 'Step 2 · Year' : 'Step 2 · Branch';
+    }
+
+    function getLeafHeadText() {
+      return navRootKey === 'byDate' ? 'Step 3 · Month' : 'Step 3 · Series / Bucket';
+    }
+
+    function renderFlowSummary(stepLabel, title, meta, onChange) {
+      const wrap = document.createElement('div');
+      wrap.className = 'flow-summary';
+      const top = document.createElement('div');
+      top.className = 'flow-summary-top';
+      const step = document.createElement('div');
+      step.className = 'flow-summary-step';
+      step.textContent = stepLabel;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'flow-summary-change';
+      btn.textContent = 'Change';
+      btn.addEventListener('click', onChange);
+      top.append(step, btn);
+      const titleEl = document.createElement('div');
+      titleEl.className = 'flow-summary-title';
+      titleEl.textContent = title;
+      wrap.append(top, titleEl);
+      if (meta) {
+        const metaEl = document.createElement('div');
+        metaEl.className = 'flow-summary-meta';
+        metaEl.textContent = meta;
+        wrap.append(metaEl);
+      }
+      return wrap;
+    }
+
+    function updateDrawerTools() {
+      const labels = [];
+      labels.push(mode === 'audio' ? 'Audio' : 'Video');
+      if (mobileNavView !== 'root' && navRootKey) labels.push(getRootTitleByKey(navRootKey));
+      if ((mobileNavView === 'leaf' || mobileNavView === 'queue') && navBranchKey) labels.push(getBranchTitleByKey(navBranchKey));
+      if (mobileNavView === 'queue' && navLeafKey) labels.push(getLeafTitleByKey(navLeafKey));
+      drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
+      drawerBackBtnEl.disabled = mobileNavView === 'root';
+    }
+
+    function renderMobileDrawerFlow() {
+      if (!mobileNavFlowEl) return;
+      mobileNavFlowEl.innerHTML = '';
+      const stage = document.createElement('div');
+      stage.className = `flow-stage ${mobileNavView === 'queue' ? 'queue-view' : ''}`;
+      const summaries = document.createElement('div');
+      summaries.className = 'flow-summary-list';
+
+      if (mobileNavView !== 'root' && navRootKey) {
+        const rootItem = getRootItems().find(item => item.key === navRootKey);
+        if (rootItem) summaries.appendChild(renderFlowSummary('Category', rootItem.title, rootItem.meta || '', () => { mobileNavView = 'root'; renderMobileDrawerFlow(); }));
+      }
+      if ((mobileNavView === 'leaf' || mobileNavView === 'queue') && navBranchKey) {
+        summaries.appendChild(renderFlowSummary(navRootKey === 'byDate' ? 'Year' : 'Branch', getBranchTitleByKey(navBranchKey), '', () => { mobileNavView = 'branch'; renderMobileDrawerFlow(); }));
+      }
+      if (mobileNavView === 'queue' && navLeafKey) {
+        summaries.appendChild(renderFlowSummary(navRootKey === 'byDate' ? 'Month' : 'Series / Bucket', getLeafTitleByKey(navLeafKey), '', () => { mobileNavView = 'leaf'; renderMobileDrawerFlow(); }));
+      }
+      if (summaries.childNodes.length) stage.appendChild(summaries);
+
+      const head = document.createElement('div');
+      head.className = 'flow-stage-head';
+      let items = [];
+      let activeKey = null;
+      let emptyText = '';
+      let onPick = () => {};
+      if (mobileNavView === 'root') {
+        head.textContent = 'Category';
+        items = getRootItems();
+        activeKey = navRootKey;
+        emptyText = 'Choose Listen or Watch above to load the mode-first taxonomy.';
+        onPick = key => setRoot(key);
+      } else if (mobileNavView === 'branch') {
+        head.textContent = getBranchHeadText().replace('Step 2 · ', '');
+        items = getBranchItems();
+        activeKey = navBranchKey;
+        emptyText = 'Choose a top-level category first.';
+        onPick = key => setBranch(key);
+      } else if (mobileNavView === 'leaf') {
+        head.textContent = getLeafHeadText().replace('Step 3 · ', '');
+        items = getLeafItems();
+        activeKey = navLeafKey;
+        emptyText = 'Choose a branch to see the next level.';
+        onPick = key => setLeaf(key);
+      } else {
+        head.textContent = navRootKey === 'byDate' ? 'Entries' : 'Episodes';
+      }
+      stage.appendChild(head);
+
+      const body = document.createElement('div');
+      if (mobileNavView === 'queue') {
+        renderQueueInto(body);
+      } else {
+        renderNavList(body, items, activeKey, onPick, emptyText);
+      }
+      stage.appendChild(body);
+      mobileNavFlowEl.appendChild(stage);
+      updateDrawerTools();
     }
 
     function createIconMarkup(kind) {
@@ -1576,16 +1866,14 @@
       const branches = getBranchItems();
       const leaves = getLeafItems();
       renderNavList(rootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
-      renderNavList(mobileRootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
       renderNavList(branchListEl, branches, navBranchKey, setBranch, 'Choose a top-level category first.');
-      renderNavList(mobileBranchListEl, branches, navBranchKey, setBranch, 'Choose a top-level category first.');
       renderNavList(leafListEl, leaves, navLeafKey, setLeaf, 'Choose a branch to see series buckets or month buckets.');
-      renderNavList(mobileLeafListEl, leaves, navLeafKey, setLeaf, 'Choose a branch to see series buckets or month buckets.');
 
-      branchHeadEl.textContent = navRootKey === 'byDate' ? 'Step 2 · Year' : 'Step 2 · Branch';
+      branchHeadEl.textContent = getBranchHeadText();
       mobileBranchHeadEl.textContent = branchHeadEl.textContent;
-      leafHeadEl.textContent = navRootKey === 'byDate' ? 'Step 3 · Month' : 'Step 3 · Series / Bucket';
+      leafHeadEl.textContent = getLeafHeadText();
       mobileLeafHeadEl.textContent = leafHeadEl.textContent;
+      renderMobileDrawerFlow();
     }
 
     function makeQueueCard(ep, originalIndex, labelOverride = '') {
@@ -1618,6 +1906,7 @@
       mobileQueueHeadEl.textContent = navRootKey === 'byDate' ? `Entries · ${navLeafKey || ''}` : 'Up Next';
       renderQueueInto(episodesListEl);
       renderQueueInto(mobileEpisodesListEl);
+      renderMobileDrawerFlow();
     }
 
     function formatAudioTime(seconds) {
@@ -1926,6 +2215,13 @@
     }
 
     openDrawerBtnEl.addEventListener('click', openDrawer);
+    drawerBackBtnEl.addEventListener('click', () => {
+      if (mobileNavView === 'queue') mobileNavView = 'leaf';
+      else if (mobileNavView === 'leaf') mobileNavView = 'branch';
+      else if (mobileNavView === 'branch') mobileNavView = 'root';
+      renderMobileDrawerFlow();
+    });
+    drawerHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileDrawerFlow(); });
     closeDrawerBtnEl.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
     listenBtnEl.addEventListener('click', () => setMode('audio'));
@@ -1945,7 +2241,7 @@
       audioPlayerEl.currentTime = duration * (Number(audioProgressEl.value) / 100);
       updateAudioProgressUi();
     });
-    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); renderEmptyMeta(); });
+    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); renderEmptyMeta(); renderMobileDrawerFlow(); });
 
     (async function init() {
       try {
