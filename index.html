@@ -3356,6 +3356,40 @@
       }
     }
 
+
+    /* V37: keep PLAYING fixed and animate dots in their own slot on the right */
+    .audio-play-text-wrap {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0 !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+    }
+
+    .audio-play-label {
+      text-align: center !important;
+      white-space: nowrap !important;
+      flex: 0 0 auto !important;
+    }
+
+    .audio-play-dots {
+      display: inline-block !important;
+      min-width: 1.8em !important;
+      text-align: left !important;
+      white-space: nowrap !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: inherit !important;
+      letter-spacing: 0.02em !important;
+      color: rgba(255,255,255,0.96) !important;
+    }
+
+    .audio-feature-card.playing .audio-play-label,
+    .audio-feature-card.playing .audio-play-dots {
+      color: #ffffff !important;
+      text-shadow: none !important;
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -3478,7 +3512,10 @@
                       <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </span>
                   </span>
-                  <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
+                  <span class="audio-play-text-wrap">
+                    <span class="audio-play-label" id="audioPlayLabel">Tap to Play</span>
+                    <span class="audio-play-dots" id="audioPlayDots" aria-hidden="true"></span>
+                  </span>
                 </button>
 
                 <button id="miniSkipForwardBtn" class="audio-mini-skip" type="button">+30</button>
@@ -3568,6 +3605,7 @@
     const audioPlayBadgeEl = document.getElementById('audioPlayBadge');
     const audioPlayIconEl = document.getElementById('audioPlayIcon');
     const audioPlayLabelEl = document.getElementById('audioPlayLabel');
+    const audioPlayDotsEl = document.getElementById('audioPlayDots');
     const audioClockCurrentEl = document.getElementById('audioClockCurrent');
     const audioClockTotalEl = document.getElementById('audioClockTotal');
     const audioElapsedSmallEl = document.getElementById('audioElapsedSmall');
@@ -3588,9 +3626,9 @@
     const episodesHeaderTitle = document.getElementById('episodesHeaderTitle');
     let playingDotsIndex = 0;
     let playingDotsTimer = null;
-    const playingDotsStates = ['Playing', 'Playing.', 'Playing..', 'Playing...'];
+    const playingDotsStates = ['', '.', '..', '...'];
 
-    function getPlayingDotsLabel() {
+    function getPlayingDotsText() {
       return playingDotsStates[playingDotsIndex % playingDotsStates.length];
     }
 
@@ -3600,15 +3638,17 @@
         playingDotsTimer = null;
       }
       playingDotsIndex = 0;
+      if (audioPlayDotsEl) audioPlayDotsEl.textContent = '';
     }
 
     function startPlayingDots() {
       stopPlayingDots();
-      audioPlayLabelEl.textContent = getPlayingDotsLabel();
+      audioPlayLabelEl.textContent = 'Playing';
+      if (audioPlayDotsEl) audioPlayDotsEl.textContent = getPlayingDotsText();
       playingDotsTimer = setInterval(() => {
         if (audioPlayerEl.paused) return;
         playingDotsIndex = (playingDotsIndex + 1) % playingDotsStates.length;
-        audioPlayLabelEl.textContent = getPlayingDotsLabel();
+        if (audioPlayDotsEl) audioPlayDotsEl.textContent = getPlayingDotsText();
       }, 450);
     }
 
@@ -3968,10 +4008,12 @@
 
       audioPlayIconEl.style.marginLeft = isPlaying ? '0px' : '2px';
 
-      if (isPlaying) startPlayingDots();
-      else {
+      if (isPlaying) {
+        startPlayingDots();
+      } else {
         stopPlayingDots();
         audioPlayLabelEl.textContent = 'Tap to Play';
+        if (audioPlayDotsEl) audioPlayDotsEl.textContent = '';
       }
 
       audioFeatureCardEl.classList.toggle('playing', isPlaying);
