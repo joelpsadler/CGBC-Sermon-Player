@@ -4640,6 +4640,97 @@
       }
     }
 
+
+    /* V54: desktop top-left composition pass with collapsed-left-column accounting
+       - top controls end over the post-selection collapsed left structure
+       - player/video stays high on the right
+       - add a little depth padding under the compact header */
+    @media (min-width: 981px) {
+      .top-controls {
+        position: absolute !important;
+        left: 18px !important;
+        top: 12px !important;
+        width: 362px !important; /* logo + two buttons only, sized to collapsed left structure */
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        z-index: 25 !important;
+      }
+
+      .top-controls-inner {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+      }
+
+      .mode-toggle {
+        grid-template-columns: 74px 132px 132px !important;
+        gap: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 74px !important;
+        height: 58px !important;
+        margin-right: 0 !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 54px !important;
+        padding: 0 12px !important;
+        gap: 8px !important;
+        border-radius: 17px !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 20px !important;
+        height: 20px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 14px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 10px !important;
+      }
+
+      .layout {
+        height: calc(100vh - 14px) !important;
+        margin-top: 0 !important;
+      }
+
+      /* Left structure starts beneath the compact header, accounting for collapsed selected layout */
+      .col-series,
+      .col-episodes {
+        padding-top: 84px !important;
+      }
+
+      /* Player/video stays high and gets a little soft offset for depth */
+      .col-player,
+      body.desktop-selected .col-player {
+        padding-top: 10px !important;
+      }
+
+      body.desktop-selected .col-player .audio-feature-card,
+      body.desktop-selected .col-player #videoShell,
+      body.desktop-selected .col-player .meta {
+        transform: translateY(0) !important;
+      }
+
+      .audio-feature-card,
+      #videoShell {
+        margin-top: 8px !important;
+      }
+
+      #playerSection {
+        scroll-margin-top: 20px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
