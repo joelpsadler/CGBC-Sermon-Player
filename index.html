@@ -385,7 +385,13 @@
       justify-content: center;
       text-align: center;
       color: var(--muted);
+    }
+    #videoPlaceholder {
       padding: 30px;
+    }
+    #videoShell {
+      padding: 0;
+      min-height: 0;
     }
     #videoShell iframe {
       width: 100%;
@@ -1169,6 +1175,7 @@
     }
     .mobile-inline-stage-body { padding: 12px; }
 
+    
     @media (min-width: 981px) {
       html, body { height: 100%; }
       body { overflow: hidden; }
@@ -1182,14 +1189,35 @@
         min-height: 0;
         height: 100%;
       }
-      .browse-column,
-      .queue-column,
-      .stage-column { min-height: 0; }
-      .browse-column,
-      .queue-column,
-      .stage-column { overflow: hidden; }
-      .stage-column { overflow: auto; -webkit-overflow-scrolling: touch; }
+      .workspace > .panel,
+      .workspace > .stage-column {
+        height: 100%;
+        min-height: 0;
+      }
+      .panel.column,
+      .stage-column {
+        overflow: hidden;
+      }
+      .column {
+        height: 100%;
+      }
+      .column-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .stage-column {
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+      .player-stage,
+      .meta-stage {
+        flex: 0 0 auto;
+      }
     }
+
 
     @media (max-width: 980px) {
       .utility-btn,
@@ -1434,6 +1462,7 @@
     const videoShellEl = document.getElementById('videoShell');
     const audioPlaceholderEl = document.getElementById('audioPlaceholder');
     const audioStageEl = document.getElementById('audioStage');
+    const playerStageEl = document.querySelector('.player-stage');
     const audioFeatureArtEl = document.getElementById('audioFeatureArt');
     const audioFeatureTitleEl = document.getElementById('audioFeatureTitle');
     const audioFeatureSeriesEl = document.getElementById('audioFeatureSeries');
@@ -1577,7 +1606,8 @@
     function classifySeries(seriesName, sampleEntry) {
       const series = normalizeWhitespace(seriesName);
       const scripture = normalizeWhitespace(sampleEntry?.scripture || '');
-      const bibleBook = detectBibleBook(series) || detectBibleBook(scripture);
+      const titleBibleBook = detectBibleBook(series);
+      const bibleBook = titleBibleBook || detectBibleBook(scripture);
       const standalone = parseStandaloneParentChild(series);
       const inferredYear = inferYearFromTimestamp(sampleEntry?.sortTimestamp || 0);
       const specialYearMatch = series.match(/\b20\d{2}\b/);
@@ -1585,6 +1615,7 @@
       const isPinnedCurrent = SHARED_PINNED_CURRENT_ITEMS.includes(series);
       return {
         bibleBook,
+        titleBibleBook,
         isPinnedCurrent,
         isYearSpecial,
         standaloneParent: standalone.child ? standalone.parent : series,
@@ -1653,7 +1684,7 @@
         const eligibleForMode = mode === 'audio' ? true : !!(sermonData[seriesName] || []).some(ep => ep.videoId);
         if (!eligibleForMode) return;
 
-        const isNamedStandalone = !!info.standaloneChild || !info.bibleBook;
+        const isNamedStandalone = !!info.standaloneChild || !info.titleBibleBook;
 
         if (info.isPinnedCurrent && !buckets.pinnedCurrent.includes(seriesName)) {
           buckets.pinnedCurrent.push(seriesName);
@@ -2281,7 +2312,7 @@
     }
 
     function renderEmptyMeta() {
-      const mobilePrompt = mode === 'audio' ? 'Tap Sermon Selection above to begin listening' : 'Tap Sermon Selection above to begin watching';
+      const mobilePrompt = mode === 'audio' ? 'Choose a sermon path above to begin listening' : 'Choose a sermon path above to begin watching';
       const desktopPrompt = mode === 'audio' ? 'Choose a category, branch, series bucket, and episode to begin listening.' : 'Choose a category, branch, series bucket, and episode to begin watching.';
       metaBoxEl.innerHTML = `<h2 class="meta-title">Select a sermon</h2><div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div><p class="meta-note">The experience begins with Listen or Watch, then follows the three-step taxonomy path before loading the player.</p>`;
     }
@@ -2292,10 +2323,10 @@
 
     function showModePlaceholder() {
       if (mode === 'audio') {
-        audioPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin listening' : 'Choose an episode from the queue to begin listening.';
+        audioPlaceholderEl.textContent = isMobileLayout() ? 'Choose a sermon path above to begin listening' : 'Choose an episode from the queue to begin listening.';
         audioPlaceholderEl.style.display = 'flex';
       } else {
-        videoPlaceholderEl.textContent = isMobileLayout() ? 'Tap Sermon Selection above to begin watching' : 'Choose an episode from the queue to begin watching.';
+        videoPlaceholderEl.textContent = isMobileLayout() ? 'Choose a sermon path above to begin watching' : 'Choose an episode from the queue to begin watching.';
         videoPlaceholderEl.style.display = 'flex';
       }
     }
@@ -2347,9 +2378,11 @@
       else playVideo(ep);
       renderQueue();
       if (isMobileLayout()) {
-        const topOffset = document.querySelector('.masthead')?.offsetHeight || 0;
-        const targetTop = playerSectionEl.getBoundingClientRect().top + window.scrollY - topOffset - 10;
-        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+        window.requestAnimationFrame(() => {
+          const topOffset = document.querySelector('.masthead')?.offsetHeight || 0;
+          const targetTop = (playerStageEl || playerSectionEl).getBoundingClientRect().top + window.scrollY - topOffset - 8;
+          window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+        });
       }
     }
 
@@ -2507,7 +2540,7 @@
       audioPlayerEl.currentTime = duration * (Number(audioProgressEl.value) / 100);
       updateAudioProgressUi();
     });
-    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); renderEmptyMeta(); renderMobileDrawerFlow(); });
+    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); if (currentEpisodeData) renderMeta(currentEpisodeData); else renderEmptyMeta(); renderMobileDrawerFlow(); renderMobileInlineFlow(); });
 
     (async function init() {
       try {
