@@ -4784,6 +4784,67 @@
       }
     }
 
+
+    /* V56: left-columns-only divider mask
+       - stop divider lines below the floating desktop controls
+       - apply only to series/episodes columns
+       - do not paint over the player/video column */
+    @media (min-width: 981px) {
+      .top-controls {
+        z-index: 40 !important;
+      }
+
+      .col-series,
+      .col-episodes,
+      .col-player {
+        position: relative !important;
+      }
+
+      /* Turn off the previous all-column masks */
+      .col-series::before,
+      .col-episodes::before,
+      .col-player::before,
+      .col-series::after,
+      .col-episodes::after,
+      .col-player::after {
+        content: none !important;
+      }
+
+      /* Mask only the left two columns under the compact header */
+      .col-series::before,
+      .col-episodes::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        height: 78px !important;
+        background: rgba(20,20,20,0.985) !important;
+        pointer-events: none !important;
+        z-index: 3 !important;
+      }
+
+      .col-series::after,
+      .col-episodes::after {
+        content: "" !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 78px !important;
+        height: 12px !important;
+        background: linear-gradient(180deg, rgba(20,20,20,0.78), rgba(20,20,20,0)) !important;
+        pointer-events: none !important;
+        z-index: 3 !important;
+      }
+
+      .col-series > *,
+      .col-episodes > *,
+      .col-player > * {
+        position: relative !important;
+        z-index: 4 !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
