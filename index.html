@@ -4916,6 +4916,112 @@
       }
     }
 
+
+    /* V58: desktop simplified top area
+       - remove black band behind logo/buttons
+       - remove vertical column separators
+       - keep compact desktop controls and cleaner open layout */
+    @media (min-width: 981px) {
+      /* Remove the dark band feeling behind the desktop control cluster */
+      .top-controls {
+        position: absolute !important;
+        left: 18px !important;
+        top: 12px !important;
+        width: 362px !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        z-index: 40 !important;
+      }
+
+      .top-controls-inner {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+      }
+
+      .mode-toggle {
+        grid-template-columns: 74px 132px 132px !important;
+        gap: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 74px !important;
+        height: 58px !important;
+        margin-right: 0 !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 54px !important;
+        padding: 0 12px !important;
+        gap: 8px !important;
+        border-radius: 17px !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 20px !important;
+        height: 20px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 14px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 10px !important;
+      }
+
+      /* Remove vertical column separators for a cleaner desktop look */
+      .col-series,
+      .col-episodes {
+        border-right: none !important;
+      }
+
+      /* Remove all top masking bands/divider hacks */
+      .col-series::before,
+      .col-series::after,
+      .col-episodes::before,
+      .col-episodes::after,
+      .col-player::before,
+      .col-player::after {
+        content: none !important;
+        display: none !important;
+      }
+
+      /* Give the left columns natural breathing room below the floating controls */
+      .col-series,
+      .col-episodes {
+        padding-top: 88px !important;
+      }
+
+      .col-player,
+      body.desktop-selected .col-player {
+        padding-top: 12px !important;
+      }
+
+      .audio-feature-card,
+      #videoShell {
+        margin-top: 6px !important;
+      }
+
+      /* Let the layout breathe without the old banner/bands */
+      .layout {
+        height: calc(100vh - 14px) !important;
+        margin-top: 0 !important;
+      }
+
+      .col-series .section-title,
+      .col-episodes .section-title {
+        margin-top: 2px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
