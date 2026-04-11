@@ -367,6 +367,13 @@
       padding: 20px;
       min-height: 360px;
     }
+    .player-stage.video-active {
+      padding: 0;
+      background: rgba(0,0,0,0.28);
+    }
+    .player-stage.video-active + .meta-stage {
+      margin-top: 2px;
+    }
     .meta-stage {
       padding: 22px 24px;
     }
@@ -392,6 +399,15 @@
     #videoShell {
       padding: 0;
       min-height: 0;
+    }
+    .player-stage.video-active #videoShell,
+    .player-stage.video-active #videoPlaceholder {
+      border: none;
+      border-radius: 0;
+      aspect-ratio: 16/9;
+      width: 100%;
+      min-height: 0;
+      box-shadow: none;
     }
     #videoShell iframe {
       width: 100%;
@@ -736,6 +752,20 @@
       .workspace { grid-template-columns: 250px 320px minmax(0, 1fr); }
     }
 
+
+    @media (min-width: 981px) {
+      html, body { height: 100%; overflow: hidden; }
+      .app-shell { height: 100vh; display: flex; flex-direction: column; }
+      .workspace { flex: 1 1 auto; min-height: 0; overflow: hidden; }
+      .panel.column, .stage-column { min-height: 0; }
+      .column-scroll, .stage-column { min-height: 0; }
+      .stage-column { overflow: auto; padding-right: 2px; }
+      .workspace.compact-middle { grid-template-columns: 270px 280px minmax(0, 1fr); }
+      .nav-section.collapsed { padding: 12px; }
+      .nav-section.collapsed .nav-section-head { margin-bottom: 0; }
+      .nav-section.collapsed .flow-summary { background: rgba(255,255,255,0.03); }
+    }
+
     @media (max-width: 980px) {
       .app-shell { padding: 0 8px 14px; }
       .masthead {
@@ -783,6 +813,7 @@
       .queue-column { display: none; }
       .stage-column { gap: 12px; }
       .player-stage { min-height: 0; padding: 14px; }
+      .player-stage.video-active { padding: 0; }
       #playerSection { scroll-margin-top: var(--mobile-sticky-offset); }
       #videoShell,
       #videoPlaceholder { min-height: 220px; }
@@ -822,6 +853,7 @@
       .btn-copy .top { font-size: 11px; }
       .btn-copy .bottom { font-size: 8px; }
       .player-stage { padding: 12px; }
+      .player-stage.video-active { padding: 0; }
       .audio-transport {
         max-width: 292px;
         grid-template-columns: 44px minmax(0, 1fr) 44px;
@@ -1120,9 +1152,7 @@
       line-height: 1.25;
     }
     .mobile-inline-summary {
-      display: grid;
-      gap: 8px;
-      padding: 10px 12px 0;
+      display: none;
     }
     .mobile-inline-chip {
       display: flex;
@@ -1309,15 +1339,15 @@
           <h2 class="column-title">Mode-First Sermon Navigation</h2>
         </div>
         <div class="column-scroll nav-stack">
-          <section class="nav-section">
+          <section class="nav-section" id="rootSection">
             <div class="nav-section-head">Step 1 · Category</div>
             <div id="rootList"></div>
           </section>
-          <section class="nav-section">
+          <section class="nav-section" id="branchSection">
             <div class="nav-section-head" id="branchHead">Step 2 · Branch</div>
             <div id="branchList"></div>
           </section>
-          <section class="nav-section">
+          <section class="nav-section" id="leafSection">
             <div class="nav-section-head" id="leafHead">Step 3 · Series / Month</div>
             <div id="leafList"></div>
           </section>
@@ -1452,6 +1482,10 @@
     const mobileLeafListEl = document.getElementById('mobileLeafList');
     const branchHeadEl = document.getElementById('branchHead');
     const leafHeadEl = document.getElementById('leafHead');
+    const rootSectionEl = document.getElementById('rootSection');
+    const branchSectionEl = document.getElementById('branchSection');
+    const leafSectionEl = document.getElementById('leafSection');
+    const workspaceEl = document.querySelector('.workspace');
     const mobileBranchHeadEl = document.getElementById('mobileBranchHead');
     const mobileLeafHeadEl = document.getElementById('mobileLeafHead');
     const mobileQueueHeadEl = document.getElementById('mobileQueueHead');
@@ -1901,11 +1935,23 @@
     }
 
     function getBranchHeadText() {
-      return navRootKey === 'byDate' ? 'Step 2 · Year' : 'Step 2 · Branch';
+      if (navRootKey === 'byDate') return 'Step 2 · Choose Year';
+      if (navRootKey === 'bibleBooks') return 'Step 2 · Choose Book';
+      if (navRootKey === 'standaloneSeries') return 'Step 2 · Choose Series';
+      if (navRootKey === 'yearSpecials') return 'Step 2 · Choose Year';
+      if (navRootKey === 'pinnedCurrent') return 'Step 2 · Current Items';
+      if (navRootKey === 'livestreams') return 'Step 2 · Livestreams';
+      if (navRootKey === 'guestSpeakers') return 'Step 2 · Guest Speakers';
+      return 'Step 2 · Choose Branch';
     }
 
     function getLeafHeadText() {
-      return navRootKey === 'byDate' ? 'Step 3 · Month' : 'Step 3 · Series / Bucket';
+      if (navRootKey === 'byDate') return 'Step 3 · Choose Month';
+      if (navRootKey === 'bibleBooks') return 'Step 3 · Choose Series';
+      if (navRootKey === 'standaloneSeries') return 'Step 3 · Choose Mini-Series';
+      if (navRootKey === 'yearSpecials') return 'Step 3 · Choose Series';
+      if (navRootKey === 'pinnedCurrent') return 'Step 3 · Choose Series';
+      return 'Step 3 · Choose Series';
     }
 
     function hasMeaningfulBranchStep() {
@@ -2045,8 +2091,8 @@
       if (!mobileInlinePathLabelEl) return;
       const labels = [mode === 'audio' ? 'Audio' : 'Video'];
       if (navRootKey) labels.push(getRootTitleByKey(navRootKey));
-      if (navBranchKey && (mobileNavView === 'leaf' || mobileNavView === 'queue' || !hasMeaningfulBranchStep())) labels.push(getBranchTitleByKey(navBranchKey));
-      if (navLeafKey && mobileNavView === 'queue' && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
+      if (navBranchKey && ['leaf','queue','selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
+      if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a path.';
       if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
     }
@@ -2054,27 +2100,6 @@
     function renderMobileInlineFlow() {
       if (!mobileInlineNavEl || !mobileInlineStageBodyEl || !isMobileLayout()) return;
       mobileInlineSummaryEl.innerHTML = '';
-
-      if (navRootKey) {
-        mobileInlineSummaryEl.appendChild(renderMobileInlineSummaryChip('Category', getRootTitleByKey(navRootKey), () => {
-          mobileNavView = 'root';
-          renderMobileInlineFlow();
-        }));
-      }
-      if (navBranchKey && (mobileNavView === 'leaf' || mobileNavView === 'queue')) {
-        if (hasMeaningfulBranchStep()) {
-          mobileInlineSummaryEl.appendChild(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Year' : 'Branch', getBranchTitleByKey(navBranchKey), () => {
-            mobileNavView = 'branch';
-            renderMobileInlineFlow();
-          }));
-        }
-      }
-      if (navLeafKey && mobileNavView === 'queue' && hasMeaningfulLeafStep()) {
-        mobileInlineSummaryEl.appendChild(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Month' : 'Series / Bucket', getLeafTitleByKey(navLeafKey), () => {
-          mobileNavView = 'leaf';
-          renderMobileInlineFlow();
-        }));
-      }
 
       let items = [];
       let activeKey = null;
@@ -2089,17 +2114,19 @@
         emptyText = 'Choose Listen or Watch above to load the mode-first taxonomy.';
         onPick = key => setRoot(key);
       } else if (mobileNavView === 'branch') {
-        headText = navRootKey === 'byDate' ? 'Choose Year' : 'Choose Branch';
+        headText = getBranchHeadText().replace('Step 2 · ', '');
         items = getBranchItems();
         activeKey = navBranchKey;
         emptyText = 'Choose a category first.';
         onPick = key => setBranch(key);
       } else if (mobileNavView === 'leaf') {
-        headText = navRootKey === 'byDate' ? 'Choose Month' : 'Choose Series';
+        headText = getLeafHeadText().replace('Step 3 · ', '');
         items = getLeafItems();
         activeKey = navLeafKey;
         emptyText = 'Choose the previous step first.';
         onPick = key => setLeaf(key);
+      } else if (mobileNavView === 'selected' && currentEpisodeData) {
+        headText = mode === 'audio' ? 'Now Listening' : 'Now Watching';
       } else {
         headText = navRootKey === 'byDate' ? 'Choose Entry' : 'Choose Episode';
       }
@@ -2108,6 +2135,8 @@
       mobileInlineStageBodyEl.innerHTML = '';
       if (mobileNavView === 'queue') {
         renderQueueInto(mobileInlineStageBodyEl);
+      } else if (mobileNavView === 'selected' && currentEpisodeData) {
+        mobileInlineStageBodyEl.appendChild(renderFlowSummary('Selected Episode', currentEpisodeData.title || 'Selected episode', currentEpisodeData.scripture || currentEpisodeData.date || '', () => { mobileNavView = 'queue'; renderMobileInlineFlow(); }));
       } else {
         renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
       }
@@ -2145,18 +2174,62 @@
       targetEl.appendChild(wrap);
     }
 
+    function renderDesktopCollapsedSection(targetEl, sectionEl, stepLabel, title, meta, onChange) {
+      if (!targetEl || !sectionEl) return;
+      targetEl.innerHTML = '';
+      targetEl.appendChild(renderFlowSummary(stepLabel, title, meta || '', onChange));
+      sectionEl.classList.add('collapsed');
+    }
+
     function renderNavigation() {
       const roots = getRootItems();
       const branches = getBranchItems();
       const leaves = getLeafItems();
-      renderNavList(rootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
-      renderNavList(branchListEl, branches, navBranchKey, setBranch, 'Choose a top-level category first.');
-      renderNavList(leafListEl, leaves, navLeafKey, setLeaf, 'Choose a branch to see series buckets or month buckets.');
+      const mobile = isMobileLayout();
+      const desktopProgressive = !mobile;
+
+      if (rootSectionEl) rootSectionEl.classList.remove('collapsed');
+      if (branchSectionEl) branchSectionEl.classList.remove('collapsed');
+      if (leafSectionEl) leafSectionEl.classList.remove('collapsed');
+
+      if (desktopProgressive && navRootKey && (navBranchKey || navLeafKey || currentEpisodeData)) {
+        const rootItem = roots.find(item => item.key === navRootKey);
+        renderDesktopCollapsedSection(rootListEl, rootSectionEl, 'Category', getRootTitleByKey(navRootKey), rootItem?.meta || '', () => setRoot(navRootKey));
+      } else {
+        renderNavList(rootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
+      }
+
+      const showBranch = hasMeaningfulBranchStep();
+      if (branchSectionEl) branchSectionEl.style.display = showBranch ? '' : 'none';
+      if (showBranch) {
+        if (desktopProgressive && navBranchKey && (navLeafKey || currentEpisodeData)) {
+          renderDesktopCollapsedSection(branchListEl, branchSectionEl, getBranchHeadText().replace('Step 2 · ', ''), getBranchTitleByKey(navBranchKey), '', () => setBranch(navBranchKey));
+        } else {
+          renderNavList(branchListEl, branches, navBranchKey, setBranch, 'Choose a top-level category first.');
+        }
+      } else if (branchListEl) {
+        branchListEl.innerHTML = '';
+      }
+
+      const showLeaf = !!navRootKey && (!!navBranchKey || !showBranch);
+      if (leafSectionEl) leafSectionEl.style.display = showLeaf ? '' : 'none';
+      if (showLeaf) {
+        if (desktopProgressive && navLeafKey && currentEpisodeData) {
+          renderDesktopCollapsedSection(leafListEl, leafSectionEl, getLeafHeadText().replace('Step 3 · ', ''), getLeafTitleByKey(navLeafKey), '', () => setLeaf(navLeafKey));
+        } else {
+          renderNavList(leafListEl, leaves, navLeafKey, setLeaf, 'Choose a branch to see series buckets or month buckets.');
+        }
+      } else if (leafListEl) {
+        leafListEl.innerHTML = '';
+      }
 
       branchHeadEl.textContent = getBranchHeadText();
       mobileBranchHeadEl.textContent = branchHeadEl.textContent;
       leafHeadEl.textContent = getLeafHeadText();
       mobileLeafHeadEl.textContent = leafHeadEl.textContent;
+
+      if (workspaceEl) workspaceEl.classList.toggle('compact-middle', navRootKey !== 'bibleBooks' && navRootKey !== 'byDate');
+
       renderMobileDrawerFlow();
       renderMobileInlineFlow();
     }
@@ -2279,9 +2352,11 @@
       videoShellEl.innerHTML = '';
       videoShellEl.style.display = 'none';
       videoPlaceholderEl.style.display = 'none';
+      if (playerStageEl) playerStageEl.classList.remove('video-active');
     }
 
     function stopAndHideAudio() {
+      if (playerStageEl) playerStageEl.classList.remove('audio-active');
       audioPlayerEl.pause();
       audioPlayerEl.removeAttribute('src');
       audioPlayerEl.load();
@@ -2307,7 +2382,7 @@
       if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
       if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
       if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
-      if (ep.extra?.length) ep.extra.forEach(line => rows.push(`<div class="meta-row"><div class="meta-label">Publisher / Creator</div><div class="meta-value">${line}</div></div>`));
+      if (ep.extra?.length) ep.extra.forEach(line => rows.push(`<div class="meta-row"><div class="meta-label">Publisher</div><div class="meta-value">${line}</div></div>`));
       return rows.join('');
     }
 
@@ -2322,6 +2397,7 @@
     }
 
     function showModePlaceholder() {
+      if (playerStageEl) playerStageEl.classList.remove('video-active', 'audio-active');
       if (mode === 'audio') {
         audioPlaceholderEl.textContent = isMobileLayout() ? 'Choose a sermon path above to begin listening' : 'Choose an episode from the queue to begin listening.';
         audioPlaceholderEl.style.display = 'flex';
@@ -2338,6 +2414,7 @@
       audioPlayerEl.load();
       audioPlaceholderEl.style.display = 'none';
       audioStageEl.style.display = 'grid';
+      if (playerStageEl) { playerStageEl.classList.remove('video-active'); playerStageEl.classList.add('audio-active'); }
       audioFeatureArtEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
       audioFeatureTitleEl.textContent = ep.title || 'Untitled Sermon';
       audioFeatureSeriesEl.textContent = ep.series || currentSeries || '';
@@ -2362,6 +2439,7 @@
       videoPlaceholderEl.style.display = 'none';
       videoShellEl.innerHTML = '';
       videoShellEl.style.display = 'block';
+      if (playerStageEl) { playerStageEl.classList.remove('audio-active'); playerStageEl.classList.add('video-active'); }
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
       iframe.title = ep.title || 'Sermon';
@@ -2376,13 +2454,13 @@
       currentEpisodeIndex = originalIndex;
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
+      if (isMobileLayout()) mobileNavView = 'selected';
       renderQueue();
+      renderNavigation();
       if (isMobileLayout()) {
-        window.requestAnimationFrame(() => {
-          const topOffset = document.querySelector('.masthead')?.offsetHeight || 0;
-          const targetTop = (playerStageEl || playerSectionEl).getBoundingClientRect().top + window.scrollY - topOffset - 8;
-          window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-        });
+        window.setTimeout(() => {
+          playerStageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
       }
     }
 
@@ -2515,7 +2593,8 @@
     });
     drawerHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileDrawerFlow(); });
     if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.addEventListener('click', () => {
-      if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
+      if (mobileNavView === 'selected') mobileNavView = 'queue';
+      else if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
       else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
       else if (mobileNavView === 'branch') mobileNavView = 'root';
       renderMobileInlineFlow();
