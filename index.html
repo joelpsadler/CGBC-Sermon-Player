@@ -1950,6 +1950,285 @@
       }
     }
 
+
+    /* V23: mobile header polish */
+    @media (max-width: 980px) {
+      .top-controls {
+        padding: calc(8px + var(--safe-top)) 10px 8px !important;
+      }
+
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 124px !important;
+        gap: 8px !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 62px minmax(0, 1fr) !important;
+        gap: 6px !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 62px !important;
+        height: 50px !important;
+        flex: 0 0 62px !important;
+        margin-left: 2px !important;
+        align-self: center !important;
+      }
+
+      .listen-watch-group {
+        padding: 1px !important;
+        border-radius: 17px !important;
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.08),
+          0 6px 14px rgba(0,0,0,0.16) !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 40px !important;
+        padding: 0 4px 0 6px !important;
+        gap: 4px !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 12px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 9px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 40px !important;
+        padding: 0 8px !important;
+        border-radius: 17px !important;
+      }
+
+      #openDrawerBtn .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.75px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+
+      .col-player {
+        padding-top: 8px !important;
+      }
+
+      .audio-feature-card {
+        padding-top: 10px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 118px !important;
+        gap: 8px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 64px minmax(0, 1fr) !important;
+        gap: 6px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 64px !important;
+        height: 52px !important;
+        flex-basis: 64px !important;
+      }
+
+      .listen-watch-group {
+        border-radius: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 38px !important;
+        padding: 0 3px 0 5px !important;
+        gap: 3px !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 11.25px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 8.5px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 38px !important;
+        padding: 0 7px !important;
+        border-radius: 16px !important;
+      }
+
+      #openDrawerBtn .icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 10.75px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.25px !important;
+      }
+    }
+
+
+    /* V24: shrink Listen/Watch side padding more so Sermon button can be larger and set apart */
+    @media (max-width: 980px) {
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 136px !important;
+        gap: 12px !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 64px minmax(0, 1fr) !important;
+        gap: 6px !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 64px !important;
+        height: 52px !important;
+        flex: 0 0 64px !important;
+      }
+
+      .listen-watch-group {
+        padding: 1px !important;
+        border-radius: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 38px !important;
+        padding: 0 2px 0 4px !important;
+        gap: 3px !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      .listen-watch-group .mode-btn-text {
+        line-height: 0.96 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 8.75px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 44px !important;
+        padding: 0 10px !important;
+        border-radius: 18px !important;
+      }
+
+      #openDrawerBtn .icon {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 12px !important;
+        font-weight: 700 !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 9px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 128px !important;
+        gap: 10px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 62px minmax(0, 1fr) !important;
+        gap: 5px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 62px !important;
+        height: 50px !important;
+        flex-basis: 62px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 36px !important;
+        padding: 0 2px 0 4px !important;
+        gap: 2px !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 11px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 8.25px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 42px !important;
+        padding: 0 9px !important;
+        border-radius: 17px !important;
+      }
+
+      #openDrawerBtn .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11.25px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.5px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
