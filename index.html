@@ -3769,6 +3769,87 @@
       }
     }
 
+
+    /* V44: desktop audio control balance — give the middle pill clear dominance */
+    @media (min-width: 981px) {
+      .audio-art-panel {
+        gap: 14px !important;
+      }
+
+      .audio-art-panel img {
+        max-width: 332px !important;
+      }
+
+      .audio-transport-overlay {
+        margin-top: 8px !important;
+      }
+
+      .audio-transport-glass {
+        width: min(100%, 428px) !important;
+        max-width: 428px !important;
+        padding: 6px 7px !important;
+      }
+
+      /* Make the middle control meaningfully wider than the skip buttons */
+      .audio-transport {
+        grid-template-columns: 76px minmax(0, 1fr) 76px !important;
+        gap: 10px !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 76px !important;
+        width: 76px !important;
+        height: 72px !important;
+        font-size: 24px !important;
+        padding: 0 12px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 72px !important;
+        padding: 8px 22px 8px 10px !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 8px 10px 8px 22px !important;
+        justify-content: space-between !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 50px !important;
+        height: 50px !important;
+      }
+
+      .audio-play-circle-wrap {
+        margin-right: 18px !important;
+        flex: 0 0 50px !important;
+      }
+
+      .audio-play-circle svg {
+        width: 24px !important;
+        height: 24px !important;
+      }
+
+      .audio-play-text-wrap {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-label {
+        text-align: left !important;
+        font-size: 18px !important;
+        letter-spacing: 0.04em !important;
+        white-space: nowrap !important;
+      }
+
+      .audio-play-dots {
+        min-width: 2.2em !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
