@@ -3458,6 +3458,96 @@
       }
     }
 
+
+    /* V41: apply the final audio pill spacing tweaks to desktop too, for consistency */
+    @media (min-width: 981px) {
+      .audio-transport-glass {
+        width: min(100%, 300px) !important;
+        padding: 5px 6px !important;
+      }
+
+      .audio-transport {
+        gap: 6px !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 62px !important;
+        width: 62px !important;
+        height: 62px !important;
+        font-size: 22px !important;
+        padding: 0 14px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 62px !important;
+        padding: 7px 14px 7px 7px !important;
+        gap: 0 !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 7px 7px 7px 14px !important;
+        justify-content: space-between !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 44px !important;
+        height: 44px !important;
+      }
+
+      .audio-play-circle {
+        background: rgba(255,255,255,0.18) !important;
+      }
+
+      .audio-play-circle svg {
+        width: 22px !important;
+        height: 22px !important;
+      }
+
+      .audio-play-circle-wrap {
+        margin-right: 12px !important;
+      }
+
+      .audio-play-text-wrap {
+        gap: 0 !important;
+        padding-left: 0 !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-label {
+        text-align: left !important;
+        font-size: 16px !important;
+        letter-spacing: 0.04em !important;
+      }
+
+      .audio-play-dots {
+        font-size: inherit !important;
+      }
+
+      .audio-clock-label {
+        display: none !important;
+      }
+
+      .audio-clock-time {
+        font-size: clamp(30px, 3.8vw, 52px) !important;
+        line-height: 0.90 !important;
+      }
+
+      .audio-clock-total {
+        font-size: 18px !important;
+        padding-bottom: 4px !important;
+      }
+
+      .audio-progress {
+        height: 7px !important;
+      }
+
+      .audio-progress-times {
+        font-size: 12px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
