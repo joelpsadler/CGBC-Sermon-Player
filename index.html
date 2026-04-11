@@ -1344,7 +1344,7 @@
 
     function openDrawer() {
       if (!isMobileLayout()) return;
-      mobileNavView = getDeepestMobileView();
+      mobileNavView = 'root';
       renderMobileDrawerFlow();
       bodyEl.classList.add('drawer-open');
       mobileDrawerEl.setAttribute('aria-hidden', 'false');
