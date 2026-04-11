@@ -1321,25 +1321,45 @@
 
     function buildBrowseBuckets() {
       const buckets = { pinnedCurrent: [], bibleBooks: {}, standaloneSeries: {}, yearSpecials: {}, byDate: {} };
+
+      /* Beginner note:
+         Items are allowed to surface in more than one browse path.
+         Example:
+         - A named standalone mini-series can still appear under Standalone Series
+           even when its scripture also points to a Bible Book.
+         - By Date remains an additional surface, not the only home.
+      */
+      const pushUnique = (target, key, value) => {
+        if (!target[key]) target[key] = [];
+        if (!target[key].includes(value)) target[key].push(value);
+      };
+
       Object.keys(sermonData).forEach(seriesName => {
         if (seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name) return;
+
         const sampleEntry = getDisplayedEpisodes(seriesName)[0] || {};
         const info = classifySeries(seriesName, sampleEntry);
         const eligibleForMode = mode === 'audio' ? true : !!(sermonData[seriesName] || []).some(ep => ep.videoId);
         if (!eligibleForMode) return;
 
-        if (info.isPinnedCurrent) buckets.pinnedCurrent.push(seriesName);
+        const isNamedStandalone = !!info.standaloneChild || !info.bibleBook;
+
+        if (info.isPinnedCurrent && !buckets.pinnedCurrent.includes(seriesName)) {
+          buckets.pinnedCurrent.push(seriesName);
+        }
+
         if (info.bibleBook) {
-          if (!buckets.bibleBooks[info.bibleBook]) buckets.bibleBooks[info.bibleBook] = [];
-          buckets.bibleBooks[info.bibleBook].push(seriesName);
-        } else if (info.isYearSpecial) {
+          pushUnique(buckets.bibleBooks, info.bibleBook, seriesName);
+        }
+
+        if (info.isYearSpecial) {
           const yearKey = info.specialYear || 'Unknown Year';
-          if (!buckets.yearSpecials[yearKey]) buckets.yearSpecials[yearKey] = [];
-          buckets.yearSpecials[yearKey].push(seriesName);
-        } else {
+          pushUnique(buckets.yearSpecials, yearKey, seriesName);
+        }
+
+        if (!info.isYearSpecial && isNamedStandalone) {
           const parentKey = info.standaloneParent || seriesName;
-          if (!buckets.standaloneSeries[parentKey]) buckets.standaloneSeries[parentKey] = [];
-          buckets.standaloneSeries[parentKey].push(seriesName);
+          pushUnique(buckets.standaloneSeries, parentKey, seriesName);
         }
 
         (sermonData[seriesName] || []).forEach(ep => {
