@@ -5606,6 +5606,108 @@
       });
     }
 
+    /* =========================================================================
+       ======================= EDIT_HERE_GROUPING_NOTES ========================
+       BEGINNER NOTE:
+       This pass builds a SAFE grouped-data model only.
+       It still does NOT replace the current working navigator yet.
+
+       PURPOSE:
+       - Prepare the future grouped tree
+       - Keep the current UI fully stable
+       - Let us verify bucket placement before changing desktop/mobile navigation
+
+       OUTPUTS CREATED BY THIS PASS:
+       - window.CGBC_TAXONOMY_SUMMARY
+       - window.CGBC_GROUPED_DEBUG
+
+       SEARCH TAGS:
+       - EDIT_HERE_GROUPING_NOTES
+       - EDIT_HERE_GROUPED_DEBUG
+       ========================================================================= */
+
+    function getMonthNameFromTimestamp(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleString('en-US', { month: 'long' });
+    }
+
+    function buildGroupedDebugStructure() {
+      const grouped = {
+        audio: {
+          pinnedCurrentItems: [],
+          bibleBooks: {},
+          standaloneSeries: {},
+          yearSpecials: {},
+          byDate: {}
+        },
+        video: {
+          livestreams: LIVESTREAMS.name,
+          pinnedCurrentItems: [],
+          bibleBooks: {},
+          standaloneSeries: {},
+          yearSpecials: {},
+          byDate: {},
+          guestSpeakers: VIDEO_ONLY_ARCHIVE.name
+        }
+      };
+
+      Object.keys(sermonData).forEach(seriesName => {
+        if (seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name) return;
+
+        const firstEntry = sermonData[seriesName]?.[0] || {};
+        const info = classifySermonEntry(firstEntry);
+
+        if (info.isPinnedCurrent) {
+          grouped.audio.pinnedCurrentItems.push(seriesName);
+          grouped.video.pinnedCurrentItems.push(seriesName);
+        }
+
+        if (info.bibleBook) {
+          if (!grouped.audio.bibleBooks[info.bibleBook]) grouped.audio.bibleBooks[info.bibleBook] = [];
+          if (!grouped.video.bibleBooks[info.bibleBook]) grouped.video.bibleBooks[info.bibleBook] = [];
+          grouped.audio.bibleBooks[info.bibleBook].push(seriesName);
+          grouped.video.bibleBooks[info.bibleBook].push(seriesName);
+        } else if (info.isStandaloneSeries) {
+          const standaloneKey = info.standaloneParent || seriesName;
+          if (!grouped.audio.standaloneSeries[standaloneKey]) grouped.audio.standaloneSeries[standaloneKey] = [];
+          if (!grouped.video.standaloneSeries[standaloneKey]) grouped.video.standaloneSeries[standaloneKey] = [];
+          grouped.audio.standaloneSeries[standaloneKey].push(seriesName);
+          grouped.video.standaloneSeries[standaloneKey].push(seriesName);
+        } else if (info.isYearSpecial) {
+          const yearKey = info.specialYear || 'Unknown Year';
+          if (!grouped.audio.yearSpecials[yearKey]) grouped.audio.yearSpecials[yearKey] = [];
+          if (!grouped.video.yearSpecials[yearKey]) grouped.video.yearSpecials[yearKey] = [];
+          grouped.audio.yearSpecials[yearKey].push(seriesName);
+          grouped.video.yearSpecials[yearKey].push(seriesName);
+        }
+
+        (sermonData[seriesName] || []).forEach(entry => {
+          const yearKey = inferYearFromTimestamp(entry.timestamp || 0) || 'Unknown Year';
+          const monthKey = getMonthNameFromTimestamp(entry.timestamp || 0) || 'Unknown Month';
+
+          if (!grouped.audio.byDate[yearKey]) grouped.audio.byDate[yearKey] = {};
+          if (!grouped.audio.byDate[yearKey][monthKey]) grouped.audio.byDate[yearKey][monthKey] = [];
+          grouped.audio.byDate[yearKey][monthKey].push({
+            seriesName,
+            title: entry.title || '',
+            date: entry.date || ''
+          });
+
+          if (!grouped.video.byDate[yearKey]) grouped.video.byDate[yearKey] = {};
+          if (!grouped.video.byDate[yearKey][monthKey]) grouped.video.byDate[yearKey][monthKey] = [];
+          grouped.video.byDate[yearKey][monthKey].push({
+            seriesName,
+            title: entry.title || '',
+            date: entry.date || ''
+          });
+        });
+      });
+
+      return grouped;
+    }
+
     function extractYouTubeId(url) {
       if (!url) return '';
       try {
@@ -6282,6 +6384,13 @@
          It does not change the current navigator yet.
       */
       window.CGBC_TAXONOMY_SUMMARY = buildTaxonomySummaryFromSermonData();
+
+      /* BEGINNER NOTE:
+         Search for: EDIT_HERE_GROUPED_DEBUG
+         This is the first grouped bucket model for the future navigator rewrite.
+         It is debug data only in this pass. The current UI still stays unchanged.
+      */
+      window.CGBC_GROUPED_DEBUG = buildGroupedDebugStructure();
 
       currentSeries = getVisibleSeriesOrder()[0] || null;
     }
