@@ -992,9 +992,36 @@
     /* =========================================================================
        RESPONSIVE
        ========================================================================= */
+    @media (min-width: 981px) {
+      /* Beginner note: desktop must always preserve the 3-stage shell:
+         [series rail] [episode queue] [player stage].
+         These explicit desktop rules prevent any accidental collapse into a 2-column layout. */
+      .layout {
+        display: grid !important;
+        grid-template-columns: 114px 360px minmax(420px, 1fr) !important;
+      }
+      .col-series,
+      .col-episodes,
+      .col-player {
+        display: block !important;
+      }
+      .col-player {
+        min-width: 420px;
+      }
+    }
+
     @media (max-width: 1180px) {
       .layout {
-        grid-template-columns: 104px 320px minmax(0, 1fr);
+        display: grid !important;
+        grid-template-columns: 104px 320px minmax(380px, 1fr) !important;
+      }
+      .col-series,
+      .col-episodes,
+      .col-player {
+        display: block !important;
+      }
+      .col-player {
+        min-width: 380px;
       }
       .episode-item.video .thumb-tap img {
         width: 136px;
