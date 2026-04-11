@@ -2229,6 +2229,502 @@
       }
     }
 
+
+    /* V25: grow Listen/Watch area, shrink Sermon button width */
+    @media (max-width: 980px) {
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 118px !important;
+        gap: 10px !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 62px minmax(0, 1fr) !important;
+        gap: 6px !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 62px !important;
+        height: 50px !important;
+        flex: 0 0 62px !important;
+      }
+
+      .listen-watch-group {
+        width: 100% !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 39px !important;
+        padding: 0 3px 0 5px !important;
+        gap: 3px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 11.5px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 8.75px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 42px !important;
+        padding: 0 8px !important;
+        border-radius: 17px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.5px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: minmax(0, 1fr) 112px !important;
+        gap: 9px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 60px minmax(0, 1fr) !important;
+        gap: 5px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 60px !important;
+        height: 48px !important;
+        flex-basis: 60px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 37px !important;
+        padding: 0 2px 0 4px !important;
+        gap: 2px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 11px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 8.25px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 40px !important;
+        padding: 0 7px !important;
+        border-radius: 16px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 10.5px !important;
+      }
+
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8px !important;
+      }
+    }
+
+
+    /* V26: equalize the three top buttons in size, font, and icon scale */
+    @media (max-width: 980px) {
+      .mode-toggle {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 54px minmax(0, 1fr) !important;
+        gap: 6px !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 54px !important;
+        height: 44px !important;
+        flex: 0 0 54px !important;
+      }
+
+      .listen-watch-group,
+      #openDrawerBtn .mode-btn-shell {
+        border-radius: 17px !important;
+      }
+
+      .listen-watch-group {
+        width: 100% !important;
+        padding: 1px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 42px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        padding: 0 6px !important;
+        gap: 5px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        padding: 0 8px !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.75px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 50px minmax(0, 1fr) !important;
+        gap: 5px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 50px !important;
+        height: 42px !important;
+        flex-basis: 50px !important;
+      }
+
+      .listen-watch-group,
+      #openDrawerBtn .mode-btn-shell {
+        border-radius: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 40px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        padding: 0 5px !important;
+        gap: 4px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        padding: 0 7px !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.25px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+    }
+
+
+    /* V27: make the two pills equal overall size as buttons:
+       [Listen/Watch pill] [Sermon button] with matching height/font/icon scale */
+    @media (max-width: 980px) {
+      .mode-toggle {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 52px minmax(0, 1fr) !important;
+        gap: 6px !important;
+        align-items: center !important;
+      }
+
+      .mobile-nav-logo {
+        width: 52px !important;
+        height: 42px !important;
+        flex: 0 0 52px !important;
+      }
+
+      /* Make the Listen/Watch pill and Sermon button match in outer height */
+      .listen-watch-group,
+      .mode-toggle > #openDrawerBtn .mode-btn-shell {
+        border-radius: 16px !important;
+      }
+
+      .listen-watch-group {
+        padding: 1px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 42px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        padding: 0 6px !important;
+        gap: 5px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        padding: 0 10px !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.75px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 48px minmax(0, 1fr) !important;
+        gap: 5px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 48px !important;
+        height: 40px !important;
+        flex-basis: 48px !important;
+      }
+
+      .listen-watch-group,
+      .mode-toggle > #openDrawerBtn .mode-btn-shell {
+        border-radius: 15px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 40px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        padding: 0 5px !important;
+        gap: 4px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        padding: 0 8px !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.25px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+    }
+
+
+    /* V28: true 3-equal-buttons mobile header */
+    @media (max-width: 980px) {
+      .header-wrap,
+      body.mobile-media-active .header-wrap {
+        display: none !important;
+      }
+
+      .top-controls {
+        padding: calc(8px + var(--safe-top)) 10px 8px !important;
+        background: rgba(14,14,14,0.94) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+      }
+
+      .top-controls-inner {
+        justify-content: stretch !important;
+      }
+
+      .mode-toggle {
+        display: grid !important;
+        grid-template-columns: 56px repeat(3, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        display: contents !important;
+      }
+
+      .mobile-nav-logo {
+        display: inline-flex !important;
+        width: 56px !important;
+        height: 44px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+      }
+
+      .mobile-nav-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        display: block !important;
+      }
+
+      .listen-watch-group {
+        display: contents !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      .listen-watch-group .mode-btn,
+      #openDrawerBtn {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 42px !important;
+        width: 100% !important;
+        padding: 0 8px !important;
+        gap: 5px !important;
+        border-radius: 16px !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        background: rgba(255,255,255,0.08) !important;
+      }
+
+      .listen-watch-group .mode-btn.active .mode-btn-shell {
+        background: linear-gradient(180deg, rgba(128,159,144,0.58), rgba(110,136,123,0.42)) !important;
+        color: #111 !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      .listen-watch-group .mode-btn-text,
+      #openDrawerBtn .mode-btn-text {
+        align-items: flex-start !important;
+        line-height: 0.98 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 11.25px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.5px !important;
+        margin-top: 0 !important;
+        opacity: 0.95 !important;
+      }
+
+      .col-player {
+        padding-top: 8px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .mode-toggle {
+        grid-template-columns: 50px repeat(3, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 50px !important;
+        height: 40px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell,
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 40px !important;
+        padding: 0 6px !important;
+        gap: 4px !important;
+        border-radius: 15px !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 10.75px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
