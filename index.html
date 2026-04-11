@@ -4442,6 +4442,128 @@
       }
     }
 
+
+    /* V51: desktop compact header cleanup
+       - remove Sermon Selection button on desktop only
+       - keep compact logo + Listen/Watch only
+       - left-adjust controls so player can sit higher/cleaner */
+    @media (min-width: 981px) {
+      #openDrawerBtn {
+        display: none !important;
+      }
+
+      .top-controls {
+        padding: 12px 18px 10px !important;
+      }
+
+      .top-controls-inner {
+        justify-content: flex-start !important;
+      }
+
+      .mode-toggle {
+        display: grid !important;
+        grid-template-columns: 78px 232px 232px !important;
+        gap: 12px !important;
+        width: auto !important;
+        max-width: none !important;
+        align-items: center !important;
+      }
+
+      .listen-watch-wrap {
+        display: contents !important;
+      }
+
+      .mobile-nav-logo {
+        width: 78px !important;
+        height: 62px !important;
+        margin-right: 6px !important;
+      }
+
+      .listen-watch-group {
+        display: contents !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      .listen-watch-group .mode-btn {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 58px !important;
+        width: 100% !important;
+        padding: 0 16px !important;
+        gap: 10px !important;
+        border-radius: 18px !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+
+      .listen-watch-group .icon {
+        width: 22px !important;
+        height: 22px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line {
+        font-size: 11px !important;
+        opacity: 0.95 !important;
+      }
+
+      .layout {
+        height: calc(100vh - 82px) !important;
+      }
+
+      .col-player {
+        padding-top: 10px !important;
+      }
+    }
+
+
+    /* V52: desktop player rises to the top beside the compact header */
+    @media (min-width: 981px) {
+      .top-controls {
+        padding: 8px 18px 6px !important;
+        border-bottom: none !important;
+      }
+
+      .top-controls-inner {
+        align-items: flex-start !important;
+      }
+
+      .layout {
+        height: calc(100vh - 68px) !important;
+        margin-top: 0 !important;
+      }
+
+      .col-series,
+      .col-episodes,
+      .col-player {
+        padding-top: 8px !important;
+      }
+
+      body.desktop-selected .col-player {
+        padding-top: 8px !important;
+      }
+
+      body.desktop-selected .col-player .audio-feature-card,
+      body.desktop-selected .col-player .meta,
+      body.desktop-selected .col-player #videoShell {
+        transform: translateY(-8px) !important;
+      }
+
+      #playerSection {
+        scroll-margin-top: 74px !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
