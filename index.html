@@ -2836,6 +2836,200 @@
       }
     }
 
+
+    /* V30: bind Listen + Watch as a shared toggle while keeping the three buttons visually equal */
+    @media (max-width: 980px) {
+      .top-controls {
+        padding: calc(8px + var(--safe-top)) 10px 10px !important;
+      }
+
+      .mode-toggle {
+        display: grid !important;
+        grid-template-columns: 64px repeat(3, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        align-items: center !important;
+      }
+
+      /* Beginner note:
+         We stop using "display: contents" here so Listen + Watch can live inside one shared
+         toggle tray, but each button still uses one equal-width column. */
+      .listen-watch-wrap {
+        grid-column: 1 / span 3 !important;
+        display: grid !important;
+        grid-template-columns: 64px repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        align-items: center !important;
+        min-width: 0 !important;
+      }
+
+      .mobile-nav-logo {
+        width: 64px !important;
+        height: 56px !important;
+        flex: 0 0 64px !important;
+        margin-left: 4px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+      }
+
+      .mobile-nav-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+      }
+
+      .listen-watch-group {
+        grid-column: 2 / span 2 !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0 !important;
+        width: 100% !important;
+        padding: 2px !important;
+        border-radius: 18px !important;
+        background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)) !important;
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.08),
+          0 8px 18px rgba(0,0,0,0.16) !important;
+        box-sizing: border-box !important;
+      }
+
+      .listen-watch-group .mode-btn {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 48px !important;
+        width: 100% !important;
+        padding: 0 7px !important;
+        gap: 5px !important;
+        border-radius: 16px !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+        box-shadow: none !important;
+      }
+
+      .listen-watch-group .mode-btn:first-child .mode-btn-shell {
+        border-radius: 16px 8px 8px 16px !important;
+      }
+
+      .listen-watch-group .mode-btn:last-child .mode-btn-shell {
+        border-radius: 8px 16px 16px 8px !important;
+      }
+
+      #openDrawerBtn {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 48px !important;
+        width: 100% !important;
+        padding: 0 9px !important;
+        gap: 5px !important;
+        border-radius: 18px !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 20px !important;
+        height: 20px !important;
+      }
+
+      .listen-watch-group .mode-btn-text,
+      #openDrawerBtn .mode-btn-text {
+        align-items: flex-start !important;
+        line-height: 0.96 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 9.5px !important;
+        margin-top: 0 !important;
+        opacity: 0.96 !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-controls {
+        padding: calc(8px + var(--safe-top)) 8px 10px !important;
+      }
+
+      .mode-toggle {
+        grid-template-columns: 60px repeat(3, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+      }
+
+      .listen-watch-wrap {
+        grid-template-columns: 60px repeat(2, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+      }
+
+      .mobile-nav-logo {
+        width: 60px !important;
+        height: 52px !important;
+        flex-basis: 60px !important;
+        margin-left: 2px !important;
+      }
+
+      .listen-watch-group {
+        padding: 2px !important;
+        border-radius: 17px !important;
+      }
+
+      .listen-watch-group .mode-btn .mode-btn-shell {
+        min-height: 44px !important;
+        padding: 0 6px !important;
+        gap: 4px !important;
+        border-radius: 15px !important;
+      }
+
+      .listen-watch-group .mode-btn:first-child .mode-btn-shell {
+        border-radius: 15px 7px 7px 15px !important;
+      }
+
+      .listen-watch-group .mode-btn:last-child .mode-btn-shell {
+        border-radius: 7px 15px 15px 7px !important;
+      }
+
+      #openDrawerBtn .mode-btn-shell {
+        min-height: 44px !important;
+        padding: 0 8px !important;
+        gap: 4px !important;
+        border-radius: 17px !important;
+      }
+
+      .listen-watch-group .icon,
+      #openDrawerBtn .icon {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      .listen-watch-group .mode-btn-text .top-line,
+      #openDrawerBtn .mode-btn-text .top-line {
+        font-size: 12px !important;
+        font-weight: 700 !important;
+      }
+
+      .listen-watch-group .mode-btn-text .bottom-line,
+      #openDrawerBtn .mode-btn-text .bottom-line {
+        font-size: 8.75px !important;
+        margin-top: 0 !important;
+        opacity: 0.96 !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
