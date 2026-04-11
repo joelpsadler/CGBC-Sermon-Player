@@ -3850,6 +3850,79 @@
       }
     }
 
+
+    /* V45: desktop control row final fit — stop text/icon overlap and keep middle pill dominant */
+    @media (min-width: 981px) {
+      .audio-transport-glass {
+        width: min(100%, 456px) !important;
+        max-width: 456px !important;
+        padding: 6px 7px !important;
+      }
+
+      .audio-transport {
+        grid-template-columns: 72px minmax(0, 1fr) 72px !important;
+        gap: 10px !important;
+        align-items: center !important;
+      }
+
+      .audio-mini-skip {
+        min-width: 72px !important;
+        width: 72px !important;
+        height: 68px !important;
+        font-size: 24px !important;
+        padding: 0 10px !important;
+      }
+
+      .audio-play-badge {
+        min-height: 68px !important;
+        padding: 8px 20px 8px 10px !important;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+      }
+
+      .audio-feature-card.playing .audio-play-badge {
+        padding: 8px 10px 8px 20px !important;
+        justify-content: flex-start !important;
+      }
+
+      .audio-play-circle-wrap,
+      .audio-play-circle {
+        width: 50px !important;
+        height: 50px !important;
+      }
+
+      .audio-play-circle-wrap {
+        margin-right: 18px !important;
+        flex: 0 0 50px !important;
+      }
+
+      .audio-feature-card.playing .audio-play-circle-wrap {
+        margin-right: 14px !important;
+      }
+
+      .audio-play-text-wrap {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        justify-content: flex-start !important;
+        padding-right: 8px !important;
+      }
+
+      .audio-feature-card.playing .audio-play-text-wrap {
+        padding-right: 22px !important;
+      }
+
+      .audio-play-label {
+        text-align: left !important;
+        font-size: 17px !important;
+        letter-spacing: 0.035em !important;
+        white-space: nowrap !important;
+      }
+
+      .audio-play-dots {
+        min-width: 2.1em !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
