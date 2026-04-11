@@ -1075,6 +1075,131 @@
       }
     }
 
+
+
+    .mobile-inline-nav {
+      display: none;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .mobile-inline-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
+    }
+    .mobile-inline-actions { display:flex; gap:8px; align-items:center; }
+    .mobile-inline-btn {
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+    }
+    .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
+    .mobile-inline-path {
+      min-width: 0;
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.25;
+    }
+    .mobile-inline-summary {
+      display: grid;
+      gap: 8px;
+      padding: 10px 12px 0;
+    }
+    .mobile-inline-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-inline-chip-copy { min-width: 0; }
+    .mobile-inline-chip-step {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
+      margin-bottom: 4px;
+    }
+    .mobile-inline-chip-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      line-height: 1.15;
+    }
+    .mobile-inline-chip-btn {
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      flex: 0 0 auto;
+    }
+    .mobile-inline-stage-head {
+      padding: 12px;
+      margin-top: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(18,18,18,0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .mobile-inline-stage-body { padding: 12px; }
+
+    @media (min-width: 981px) {
+      html, body { height: 100%; }
+      body { overflow: hidden; }
+      .app-shell {
+        height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        padding-bottom: 12px;
+      }
+      .workspace {
+        min-height: 0;
+        height: 100%;
+      }
+      .browse-column,
+      .queue-column,
+      .stage-column { min-height: 0; }
+      .browse-column,
+      .queue-column,
+      .stage-column { overflow: hidden; }
+      .stage-column { overflow: auto; -webkit-overflow-scrolling: touch; }
+    }
+
+    @media (max-width: 980px) {
+      .utility-btn,
+      .drawer,
+      .drawer-overlay { display: none !important; }
+      body.drawer-open { overflow: auto; }
+      .mobile-inline-nav { display: block; }
+      .stage-column { gap: 12px; }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -1180,6 +1305,18 @@
       </section>
 
       <section class="stage-column" id="playerSection">
+        <section class="mobile-inline-nav" id="mobileInlineNav" aria-label="Mobile sermon navigation">
+          <div class="mobile-inline-tools">
+            <div class="mobile-inline-actions">
+              <button class="mobile-inline-btn" id="mobileInlineBackBtn" type="button">Back</button>
+              <button class="mobile-inline-btn" id="mobileInlineHomeBtn" type="button">Start Over</button>
+            </div>
+            <div class="mobile-inline-path" id="mobileInlinePathLabel">Start with Listen or Watch, then choose a path.</div>
+          </div>
+          <div class="mobile-inline-summary" id="mobileInlineSummary"></div>
+          <div class="mobile-inline-stage-head" id="mobileInlineStageHead">Choose Category</div>
+          <div class="mobile-inline-stage-body" id="mobileInlineStageBody"></div>
+        </section>
         <section class="player-stage">
           <div id="videoPlaceholder">Choose an episode from the queue to begin watching.</div>
           <div id="videoShell"></div>
@@ -1328,8 +1465,15 @@
     const drawerHomeBtnEl = document.getElementById('drawerHomeBtn');
     const drawerPathLabelEl = document.getElementById('drawerPathLabel');
     const mobileNavFlowEl = document.getElementById('mobileNavFlow');
+    const mobileInlineNavEl = document.getElementById('mobileInlineNav');
+    const mobileInlineBackBtnEl = document.getElementById('mobileInlineBackBtn');
+    const mobileInlineHomeBtnEl = document.getElementById('mobileInlineHomeBtn');
+    const mobileInlinePathLabelEl = document.getElementById('mobileInlinePathLabel');
+    const mobileInlineSummaryEl = document.getElementById('mobileInlineSummary');
+    const mobileInlineStageHeadEl = document.getElementById('mobileInlineStageHead');
+    const mobileInlineStageBodyEl = document.getElementById('mobileInlineStageBody');
 
-    let mobileNavView = 'queue';
+    let mobileNavView = 'root';
 
     function isMobileLayout() {
       return window.innerWidth <= 980;
@@ -1660,9 +1804,7 @@
       currentEpisodeData = null;
       clearMediaState();
       syncSeriesSelection();
-      if (isMobileLayout()) mobileNavView = 'branch';
-      if (isMobileLayout()) mobileNavView = 'leaf';
-      if (isMobileLayout()) mobileNavView = 'queue';
+      if (isMobileLayout()) mobileNavView = getNextMobileViewAfterRoot();
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -1677,6 +1819,7 @@
       currentEpisodeData = null;
       clearMediaState();
       syncSeriesSelection();
+      if (isMobileLayout()) mobileNavView = getNextMobileViewAfterBranch();
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -1689,6 +1832,7 @@
       currentEpisodeData = null;
       clearMediaState();
       syncSeriesSelection();
+      if (isMobileLayout()) mobileNavView = 'queue';
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -1731,6 +1875,29 @@
 
     function getLeafHeadText() {
       return navRootKey === 'byDate' ? 'Step 3 · Month' : 'Step 3 · Series / Bucket';
+    }
+
+    function hasMeaningfulBranchStep() {
+      if (!navRootKey) return false;
+      if (navRootKey === 'livestreams' || navRootKey === 'guestSpeakers' || navRootKey === 'pinnedCurrent') return false;
+      return getBranchItems().length > 0;
+    }
+
+    function hasMeaningfulLeafStep() {
+      if (!navRootKey || !navBranchKey) return false;
+      if (navRootKey === 'byDate') return getLeafItems().length > 0;
+      const leaves = getLeafItems();
+      return leaves.length > 1;
+    }
+
+    function getNextMobileViewAfterRoot() {
+      if (hasMeaningfulBranchStep()) return 'branch';
+      if (getLeafItems().length > 0 && hasMeaningfulLeafStep()) return 'leaf';
+      return 'queue';
+    }
+
+    function getNextMobileViewAfterBranch() {
+      return hasMeaningfulLeafStep() ? 'leaf' : 'queue';
     }
 
     function renderFlowSummary(stepLabel, title, meta, onChange) {
@@ -1830,6 +1997,92 @@
       updateDrawerTools();
     }
 
+    function renderMobileInlineSummaryChip(stepLabel, title, onChange) {
+      const row = document.createElement('div');
+      row.className = 'mobile-inline-chip';
+      row.innerHTML = `<div class="mobile-inline-chip-copy"><div class="mobile-inline-chip-step">${stepLabel}</div><div class="mobile-inline-chip-title">${title}</div></div>`;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mobile-inline-chip-btn';
+      btn.textContent = 'Change';
+      btn.addEventListener('click', onChange);
+      row.appendChild(btn);
+      return row;
+    }
+
+    function updateMobileInlineTools() {
+      if (!mobileInlinePathLabelEl) return;
+      const labels = [mode === 'audio' ? 'Audio' : 'Video'];
+      if (navRootKey) labels.push(getRootTitleByKey(navRootKey));
+      if (navBranchKey && (mobileNavView === 'leaf' || mobileNavView === 'queue' || !hasMeaningfulBranchStep())) labels.push(getBranchTitleByKey(navBranchKey));
+      if (navLeafKey && mobileNavView === 'queue' && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
+      mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a path.';
+      if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
+    }
+
+    function renderMobileInlineFlow() {
+      if (!mobileInlineNavEl || !mobileInlineStageBodyEl || !isMobileLayout()) return;
+      mobileInlineSummaryEl.innerHTML = '';
+
+      if (navRootKey) {
+        mobileInlineSummaryEl.appendChild(renderMobileInlineSummaryChip('Category', getRootTitleByKey(navRootKey), () => {
+          mobileNavView = 'root';
+          renderMobileInlineFlow();
+        }));
+      }
+      if (navBranchKey && (mobileNavView === 'leaf' || mobileNavView === 'queue')) {
+        if (hasMeaningfulBranchStep()) {
+          mobileInlineSummaryEl.appendChild(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Year' : 'Branch', getBranchTitleByKey(navBranchKey), () => {
+            mobileNavView = 'branch';
+            renderMobileInlineFlow();
+          }));
+        }
+      }
+      if (navLeafKey && mobileNavView === 'queue' && hasMeaningfulLeafStep()) {
+        mobileInlineSummaryEl.appendChild(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Month' : 'Series / Bucket', getLeafTitleByKey(navLeafKey), () => {
+          mobileNavView = 'leaf';
+          renderMobileInlineFlow();
+        }));
+      }
+
+      let items = [];
+      let activeKey = null;
+      let emptyText = '';
+      let onPick = () => {};
+      let headText = 'Choose Category';
+
+      if (mobileNavView === 'root') {
+        headText = 'Choose Category';
+        items = getRootItems();
+        activeKey = navRootKey;
+        emptyText = 'Choose Listen or Watch above to load the mode-first taxonomy.';
+        onPick = key => setRoot(key);
+      } else if (mobileNavView === 'branch') {
+        headText = navRootKey === 'byDate' ? 'Choose Year' : 'Choose Branch';
+        items = getBranchItems();
+        activeKey = navBranchKey;
+        emptyText = 'Choose a category first.';
+        onPick = key => setBranch(key);
+      } else if (mobileNavView === 'leaf') {
+        headText = navRootKey === 'byDate' ? 'Choose Month' : 'Choose Series';
+        items = getLeafItems();
+        activeKey = navLeafKey;
+        emptyText = 'Choose the previous step first.';
+        onPick = key => setLeaf(key);
+      } else {
+        headText = navRootKey === 'byDate' ? 'Choose Entry' : 'Choose Episode';
+      }
+
+      mobileInlineStageHeadEl.textContent = headText;
+      mobileInlineStageBodyEl.innerHTML = '';
+      if (mobileNavView === 'queue') {
+        renderQueueInto(mobileInlineStageBodyEl);
+      } else {
+        renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
+      }
+      updateMobileInlineTools();
+    }
+
     function createIconMarkup(kind) {
       if (kind === 'audio') return '<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v5a3 3 0 0 0 3 3h1v4H8v2h8v-2h-3v-4h1a3 3 0 0 0 3-3V8a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0v5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8Zm-4 2h2v4a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3v-4h2v4a5 5 0 0 1-5 5h-4a5 5 0 0 1-5-5v-4Z"/></svg>';
       return '<svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1.2l4.1 3.08c.66.5 1.59.03 1.59-.8V6.92c0-.83-.93-1.3-1.59-.8L16 9.2V8a2 2 0 0 0-2-2H4Zm10 10H4V8h10v8Z"/></svg>';
@@ -1874,6 +2127,7 @@
       leafHeadEl.textContent = getLeafHeadText();
       mobileLeafHeadEl.textContent = leafHeadEl.textContent;
       renderMobileDrawerFlow();
+      renderMobileInlineFlow();
     }
 
     function makeQueueCard(ep, originalIndex, labelOverride = '') {
@@ -1907,6 +2161,7 @@
       renderQueueInto(episodesListEl);
       renderQueueInto(mobileEpisodesListEl);
       renderMobileDrawerFlow();
+      renderMobileInlineFlow();
     }
 
     function formatAudioTime(seconds) {
@@ -2092,8 +2347,9 @@
       else playVideo(ep);
       renderQueue();
       if (isMobileLayout()) {
-        closeDrawer();
-        playerSectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const topOffset = document.querySelector('.masthead')?.offsetHeight || 0;
+        const targetTop = playerSectionEl.getBoundingClientRect().top + window.scrollY - topOffset - 10;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
       }
     }
 
@@ -2183,6 +2439,7 @@
       currentEpisodeData = null;
       clearMediaState();
       setDefaultNavigation();
+      mobileNavView = 'root';
       updateDrawerHeader();
       renderNavigation();
       renderQueue();
@@ -2195,6 +2452,7 @@
       currentEpisodeData = null;
       clearMediaState();
       setDefaultNavigation();
+      mobileNavView = 'root';
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -2214,14 +2472,22 @@
       else audioPlayerEl.pause();
     }
 
-    openDrawerBtnEl.addEventListener('click', openDrawer);
+    if (openDrawerBtnEl) openDrawerBtnEl.addEventListener('click', openDrawer);
     drawerBackBtnEl.addEventListener('click', () => {
       if (mobileNavView === 'queue') mobileNavView = 'leaf';
       else if (mobileNavView === 'leaf') mobileNavView = 'branch';
       else if (mobileNavView === 'branch') mobileNavView = 'root';
       renderMobileDrawerFlow();
+      renderMobileInlineFlow();
     });
     drawerHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileDrawerFlow(); });
+    if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.addEventListener('click', () => {
+      if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
+      else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
+      else if (mobileNavView === 'branch') mobileNavView = 'root';
+      renderMobileInlineFlow();
+    });
+    if (mobileInlineHomeBtnEl) mobileInlineHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileInlineFlow(); });
     closeDrawerBtnEl.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
     listenBtnEl.addEventListener('click', () => setMode('audio'));
