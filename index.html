@@ -784,15 +784,24 @@
         margin: 0 -8px;
         padding: calc(8px + var(--safe-top)) 8px 8px;
         border-bottom: 1px solid rgba(255,255,255,0.06);
+        gap: 6px;
       }
       .brand-copy { display: none; }
+      .brand-lockup { gap: 4px; }
       .brand-logo-btn {
-        width: 58px;
-        height: 42px;
+        width: 62px;
+        height: 44px;
         border-radius: 0;
         background: transparent;
         border: none;
         box-shadow: none;
+        overflow: visible;
+      }
+      .brand-logo-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: scale(1.0);
       }
       .top-actions {
         flex: 1;
@@ -853,7 +862,9 @@
     }
 
     @media (max-width: 640px) {
-      .brand-logo-btn { width: 50px; height: 36px; }
+      .brand-logo-btn { width: 56px; height: 40px; }
+      .mobile-inline-tools { grid-template-columns: minmax(164px, auto) minmax(0, 1fr); }
+      .mobile-inline-btn { max-width: 148px; }
       .utility-btn { width: 118px; }
       .mode-btn-shell,
       .utility-btn-shell { min-height: 44px; padding: 0 8px; }
@@ -1135,18 +1146,23 @@
       overflow: hidden;
     }
     .mobile-inline-tools {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: minmax(172px, auto) minmax(0, 1fr);
+      align-items: start;
       gap: 10px;
       padding: 8px 10px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
     }
-    .mobile-inline-actions { display:flex; gap:8px; align-items:center; }
+    .mobile-inline-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 0;
+    }
     .mobile-inline-btn {
-      min-height: 34px;
-      padding: 6px 12px;
+      min-height: 36px;
+      padding: 6px 14px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
@@ -1156,17 +1172,22 @@
       line-height: 1.15;
       text-align: center;
       white-space: normal;
-      max-width: 144px;
+      max-width: 156px;
+      flex: 0 0 auto;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
     .mobile-inline-path {
       min-width: 0;
       text-align: right;
-      font-size: 12px;
+      font-size: 11px;
       color: rgba(255,255,255,0.92);
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      line-height: 1.25;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      align-self: center;
     }
     .mobile-inline-summary {
       display: none;
@@ -1207,11 +1228,11 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 10px 12px;
+      padding: 10px 14px;
       margin-top: 8px;
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.82);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -1219,6 +1240,9 @@
       background: rgba(18,18,18,0.86);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .mobile-inline-stage-body { padding: 10px 12px 8px; }
 
@@ -1569,10 +1593,13 @@
     }
 
     function scrollPlayerIntoView() {
-      const target = playerStageEl || playerSectionEl;
+      const stickyOffset = Math.max(76, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-sticky-offset')) || 90);
+      const target = (isMobileLayout() && mode === 'video' ? (videoShellEl || playerStageEl) : (playerStageEl || playerSectionEl));
       if (!target) return;
       window.requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const rect = target.getBoundingClientRect();
+        const top = window.scrollY + rect.top - stickyOffset - (mode === 'video' ? 10 : 4);
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
       });
     }
 
@@ -1782,6 +1809,17 @@
         });
       });
 
+      SHARED_PINNED_CURRENT_ITEMS.forEach(label => {
+        const normalizedLabel = normalizeWhitespace(label);
+        const matchingSeries = Object.keys(sermonData).find(seriesName => {
+          const parent = parseStandaloneParentChild(seriesName).parent || normalizeWhitespace(seriesName);
+          return normalizeWhitespace(parent) === normalizedLabel;
+        });
+        if (matchingSeries && !buckets.pinnedCurrent.includes(matchingSeries)) {
+          buckets.pinnedCurrent.push(matchingSeries);
+        }
+      });
+
       buckets.pinnedCurrent.sort((a, b) => {
         const ap = parseStandaloneParentChild(a).parent || a;
         const bp = parseStandaloneParentChild(b).parent || b;
@@ -1833,7 +1871,12 @@
         return [{ key: VIDEO_ONLY_ARCHIVE.name, title: VIDEO_ONLY_ARCHIVE.name, type: 'series', meta: formatCountLabel((sermonData[VIDEO_ONLY_ARCHIVE.name] || []).length, 'video', 'videos'), image: getSeriesWideCover(VIDEO_ONLY_ARCHIVE.name) }];
       }
       if (navRootKey === 'pinnedCurrent') {
-        return browseBuckets.pinnedCurrent.map(seriesName => { const standalone = parseStandaloneParentChild(seriesName); const title = SHARED_PINNED_CURRENT_ITEMS.includes(standalone.parent) ? standalone.parent : seriesName; return ({ key: seriesName, title, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }); });
+        return browseBuckets.pinnedCurrent.map(seriesName => {
+          const standalone = parseStandaloneParentChild(seriesName);
+          const parentTitle = normalizeWhitespace(standalone.parent || seriesName);
+          const title = SHARED_PINNED_CURRENT_ITEMS.includes(parentTitle) ? parentTitle : seriesName;
+          return ({ key: seriesName, title, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) });
+        });
       }
       if (navRootKey === 'bibleBooks') {
         return (browseBuckets.bibleBooks[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
@@ -2061,8 +2104,22 @@
       return '';
     }
 
+    function shortenBackTarget(target) {
+      const clean = (target || '').trim();
+      if (!clean) return '';
+      if (clean.length <= 22) return clean;
+      const words = clean.split(/\s+/);
+      let out = '';
+      for (const word of words) {
+        const candidate = (out ? out + ' ' : '') + word;
+        if (candidate.length > 18) break;
+        out = candidate;
+      }
+      return (out || clean.slice(0, 18)) + '…';
+    }
+
     function getMobileBackButtonText() {
-      const target = getMobileBackTargetLabel();
+      const target = shortenBackTarget(getMobileBackTargetLabel());
       if (!target) return 'Back';
       return `Back to ${target}`;
     }
