@@ -94,11 +94,11 @@
       overflow: hidden;
     }
     .brand-logo-btn img {
-      width: 108%;
-      height: 108%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       display: block;
-      transform: scale(1.02);
+      transform: scale(0.98);
       transform-origin: center;
     }
     .brand-copy {
@@ -783,8 +783,8 @@
       }
       .brand-copy { display: none; }
       .brand-logo-btn {
-        width: 58px;
-        height: 46px;
+        width: 54px;
+        height: 42px;
         border-radius: 0;
         background: transparent;
         border: none;
@@ -848,7 +848,7 @@
     }
 
     @media (max-width: 640px) {
-      .brand-logo-btn { width: 52px; height: 42px; }
+      .brand-logo-btn { width: 46px; height: 36px; }
       .utility-btn { width: 118px; }
       .mode-btn-shell,
       .utility-btn-shell { min-height: 44px; padding: 0 8px; }
@@ -1439,7 +1439,7 @@
   <script>
     const SHARED_PINNED_CURRENT_ITEMS = [
       'Romans Chapter 12',
-      'The Rapture',
+      'Eschatology',
       '2026 Specials'
     ];
 
@@ -1792,11 +1792,11 @@
     function getRootItems() {
       const items = [];
       if (mode === 'video' && sermonData[LIVESTREAMS.name]) items.push({ key: 'livestreams', title: 'Livestreams', meta: 'YouTube live archive' });
-      items.push({ key: 'pinnedCurrent', title: 'Series in Progress', meta: 'What matters now' });
-      items.push({ key: 'bibleBooks', title: 'Bible Books', meta: 'Book studies and chapter buckets' });
-      items.push({ key: 'standaloneSeries', title: 'Standalone Series', meta: 'Named sermon collections' });
-      items.push({ key: 'yearSpecials', title: 'Year Specials', meta: 'One-offs and holiday sermons' });
-      items.push({ key: 'byDate', title: mode === 'audio' ? 'Audio by Date' : 'Video by Date', meta: 'Year → Month → Entry' });
+      items.push({ key: 'pinnedCurrent', title: 'Series in Progress', meta: 'Continue current series' });
+      items.push({ key: 'bibleBooks', title: 'Bible Books', meta: 'Verse-by-verse book studies' });
+      items.push({ key: 'standaloneSeries', title: 'Standalone Series', meta: 'Topical sermon series' });
+      items.push({ key: 'yearSpecials', title: 'Year Specials', meta: 'Special sermons by year' });
+      items.push({ key: 'byDate', title: mode === 'audio' ? 'Audio by Date' : 'Video by Date', meta: 'Year → Month → Day' });
       if (mode === 'video' && sermonData[VIDEO_ONLY_ARCHIVE.name]) items.push({ key: 'guestSpeakers', title: 'Guest Speakers', meta: 'Video-only speaker archive' });
       return items;
     }
@@ -1805,7 +1805,7 @@
       if (!browseBuckets || !navRootKey) return [];
       if (navRootKey === 'livestreams') return [{ key: 'live-collection', title: 'Livestreams', meta: 'Pinned first in Watch mode' }];
       if (navRootKey === 'guestSpeakers') return [{ key: 'guest-collection', title: 'Guest Speakers', meta: 'Pinned last in Watch mode' }];
-      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Series in Progress', meta: formatCountLabel(browseBuckets.pinnedCurrent.length, 'current item', 'current items') }];
+      if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Series in Progress', meta: formatCountLabel(browseBuckets.pinnedCurrent.length, 'series', 'series') }];
       if (navRootKey === 'bibleBooks') return sortBibleBooksInCanonicalOrder(Object.keys(browseBuckets.bibleBooks)).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.bibleBooks[key].length, 'series', 'series') }));
       if (navRootKey === 'standaloneSeries') return Object.keys(browseBuckets.standaloneSeries).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.standaloneSeries[key].length, 'series', 'series') }));
       if (navRootKey === 'yearSpecials') return Object.keys(browseBuckets.yearSpecials).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.yearSpecials[key].length, 'series', 'series') }));
@@ -2097,7 +2097,7 @@
         head.textContent = 'Category';
         items = getRootItems();
         activeKey = navRootKey;
-        emptyText = 'Choose Listen or Watch above to load the mode-first taxonomy.';
+        emptyText = 'Choose Listen or Watch above to load the mode-first browse path.';
         onPick = key => setRoot(key);
       } else if (mobileNavView === 'branch') {
         head.textContent = getBranchHeadText().replace('Step 2 · ', '');
@@ -2167,7 +2167,7 @@
         headText = 'Choose Category';
         items = getRootItems();
         activeKey = navRootKey;
-        emptyText = 'Choose Listen or Watch above to load the mode-first taxonomy.';
+        emptyText = 'Choose Listen or Watch above to load the mode-first browse path.';
         onPick = key => setRoot(key);
       } else if (mobileNavView === 'branch') {
         headText = getBranchHeadText().replace('Step 2 · ', '');
@@ -2252,7 +2252,7 @@
         const rootItem = roots.find(item => item.key === navRootKey);
         renderDesktopCollapsedSection(rootListEl, rootSectionEl, 'Category', getRootTitleByKey(navRootKey), rootItem?.meta || '', () => setRoot(navRootKey));
       } else {
-        renderNavList(rootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first taxonomy.');
+        renderNavList(rootListEl, roots, navRootKey, setRoot, 'Choose Listen or Watch above to load the mode-first browse path.');
       }
 
       const showBranch = hasMeaningfulBranchStep();
@@ -2445,7 +2445,7 @@
     function renderEmptyMeta() {
       const mobilePrompt = mode === 'audio' ? 'Choose a sermon path above to begin listening' : 'Choose a sermon path above to begin watching';
       const desktopPrompt = mode === 'audio' ? 'Choose a category, branch, series bucket, and episode to begin listening.' : 'Choose a category, branch, series bucket, and episode to begin watching.';
-      metaBoxEl.innerHTML = `<h2 class="meta-title">Select a sermon</h2><div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div><p class="meta-note">The experience begins with Listen or Watch, then follows the three-step taxonomy path before loading the player.</p>`;
+      metaBoxEl.innerHTML = `<h2 class="meta-title">Select a sermon</h2><div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div><p class="meta-note">The experience begins with Listen or Watch, then follows the three-step browse path before loading the player.</p>`;
     }
 
     function renderMeta(ep) {
