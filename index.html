@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC Sermons</title>
-  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
-  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg">
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
+  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <meta name="theme-color" content="#0f0f10" />
+  <meta name="apple-mobile-web-app-title" content="CGBC Media" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -1417,7 +1418,7 @@
 
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
-    const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1090648/Unknown.jpg';
+    const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
     const MONTH_ORDER = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     const BIBLE_BOOK_NAMES = [
@@ -2525,7 +2526,7 @@
     function getScriptureLabel(value) {
       const clean = normalizeWhitespace(value || '');
       if (!clean) return 'Scripture';
-      return clean.toLowerCase() === 'various' ? 'Selected Scriptures' : 'Scripture';
+      return clean.toLowerCase() === 'various' ? 'Selected Scripture' : 'Scripture';
     }
 
     function renderAudioDetails(ep) {
