@@ -1267,54 +1267,40 @@
 
 
 
-    /* Mobile shell refactor, pass 2:
-       - Let the page/body own scrolling again so sticky elements pin to the viewport reliably.
-       - Keep the player card in normal flow so artwork and transport controls never become their own scroll region.
+    /* Mobile shell reset, pass 1:
+       - One sticky masthead.
+       - One sticky decision-tree strip directly under it.
+       - Everything else scrolls in the normal page flow.
     */
     @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
       html, body {
-        height: 100%;
+        height: auto;
         min-height: 100%;
       }
       body {
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
       .app-shell {
-        height: 100dvh;
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 0;
-      }
-      .masthead {
-        position: sticky;
-        top: 0;
-        z-index: 220;
-        flex: 0 0 auto;
+        height: auto;
+        min-height: 100vh;
+        display: block;
+        padding-bottom: calc(18px + var(--safe-bottom));
       }
       .workspace {
-        flex: 1 1 auto;
-        min-height: 0;
-        height: auto;
-        overflow: hidden;
         display: block;
-      }
-      .panel.column {
-        height: auto;
+        height: auto !important;
         min-height: 0;
         overflow: visible;
       }
       .stage-column {
-        height: 100%;
+        height: auto !important;
         min-height: 0;
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-y: contain;
-        padding-bottom: calc(18px + var(--safe-bottom));
+        overflow: visible;
+        padding-bottom: 0;
       }
       #playerSection {
-        scroll-margin-top: 0;
+        scroll-margin-top: calc(var(--mobile-masthead-offset, 0px) + 160px);
       }
       .player-stage,
       .meta-stage,
@@ -1322,24 +1308,13 @@
         overflow: visible;
         max-height: none;
       }
-      .player-stage,
-      .meta-stage {
-        position: relative;
-        z-index: 0;
-      }
-      .player-stage {
-        margin-bottom: 0;
-      }
-      .meta-stage {
-        margin-top: 12px;
-        flex: 0 0 auto;
-      }
       .mobile-inline-nav {
+        display: block;
         position: sticky;
-        top: 0;
+        top: var(--mobile-masthead-offset, 0px);
         z-index: 210;
-        margin: 0 -8px 0;
-        padding: 0 8px 4px;
+        margin: 0 -8px 8px;
+        padding: 0 8px 6px;
         background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.94));
         border-bottom: 1px solid rgba(255,255,255,0.05);
       }
@@ -1353,6 +1328,15 @@
       .mobile-inline-btn {
         min-height: 42px;
       }
+      .mobile-inline-back {
+        min-width: 0;
+        max-width: none;
+        flex: 1 1 auto;
+      }
+      .mobile-inline-home {
+        min-width: 92px;
+        max-width: 108px;
+      }
       .mobile-inline-path {
         white-space: normal;
         overflow: visible;
@@ -1362,9 +1346,6 @@
         line-height: 1.24;
         font-weight: 600;
         color: rgba(255,255,255,0.80);
-      }
-      .mobile-inline-path-row {
-        min-width: 0;
       }
       .mobile-inline-stage-head {
         white-space: normal;
@@ -1380,83 +1361,19 @@
       }
       .mobile-inline-stage-body {
         padding: 10px 12px 8px;
+        max-height: min(46vh, 420px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
       }
       .utility-btn {
         display: none !important;
       }
     }
 
-
     .mobile-top-shell {
       display: none;
     }
-    @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
-      .mobile-top-shell {
-        display: block;
-        position: sticky;
-        top: var(--mobile-masthead-offset, 0px);
-        z-index: 215;
-        background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.94));
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-      }
-      .mobile-top-shell .mobile-inline-tools {
-        gap: 8px;
-        padding: 8px 6px 6px;
-      }
-      .mobile-top-shell .mobile-inline-path-row {
-        min-width: 0;
-      }
-      .mobile-top-shell .mobile-inline-path {
-        white-space: normal;
-        overflow: visible;
-        text-overflow: initial;
-        word-break: break-word;
-        font-size: 11.5px;
-        line-height: 1.24;
-        font-weight: 600;
-        color: rgba(255,255,255,0.80);
-      }
-      .mobile-top-shell .mobile-inline-stage-head {
-        white-space: normal;
-        overflow: visible;
-        text-overflow: initial;
-        font-size: 10.5px;
-        color: rgba(255,255,255,0.62);
-        padding: 7px 14px 6px;
-        margin-top: 0;
-      }
-      .mobile-inline-nav {
-        position: static;
-        margin: 0;
-        padding: 0;
-        background: transparent;
-        border-bottom: none;
-      }
-      .mobile-inline-nav .mobile-inline-tools,
-      .mobile-inline-nav .mobile-inline-path-row,
-      .mobile-inline-nav .mobile-inline-stage-head {
-        display: none !important;
-      }
-      .mobile-inline-stage-body {
-        padding-top: 12px;
-      }
-      .workspace {
-        flex: 1 1 auto;
-        min-height: 0;
-        overflow: hidden;
-        display: block;
-      }
-      .stage-column {
-        height: 100%;
-        min-height: 0;
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-y: contain;
-        padding-bottom: calc(18px + var(--safe-bottom));
-      }
-    }
-
 </style>
 </head>
 <body class="mode-audio">
@@ -1497,7 +1414,6 @@
       </div>
     </header>
 
-    <section class="mobile-top-shell" id="mobileTopShell" aria-label="Pinned mobile navigation"></section>
 
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="drawer" id="mobileDrawer" aria-hidden="true">
@@ -1696,6 +1612,7 @@
     const branchSectionEl = document.getElementById('branchSection');
     const leafSectionEl = document.getElementById('leafSection');
     const workspaceEl = document.querySelector('.workspace');
+    const mastheadEl = document.querySelector('.masthead');
     const appShellEl = document.querySelector('.app-shell');
     const mobileBranchHeadEl = document.getElementById('mobileBranchHead');
     const mobileLeafHeadEl = document.getElementById('mobileLeafHead');
@@ -2391,6 +2308,7 @@
         clearMediaState();
         renderEmptyMeta();
         showModePlaceholder();
+        syncMobileShellHeight();
         if (ctx.source === 'leaf') {
           if (ctx.leafKey) navLeafKey = ctx.leafKey;
           currentSeries = null;
@@ -2564,45 +2482,17 @@
 
 
     function syncMobilePinnedShell() {
-      const shell = document.getElementById('mobileTopShell');
-      if (!shell || !mobileInlineNavEl) return;
-      const isMobile = isMobileLayout();
-      if (!isMobile) {
-        shell.innerHTML = '';
-        shell.style.display = 'none';
-        mobileInlineNavEl.style.removeProperty('display');
-        return;
-      }
-      shell.style.display = 'block';
-      shell.innerHTML = '';
-      const frag = document.createDocumentFragment();
-      const tools = mobileInlineNavEl.querySelector('.mobile-inline-tools');
-      const pathRow = mobileInlineNavEl.querySelector('.mobile-inline-path-row');
-      const stageHead = mobileInlineNavEl.querySelector('.mobile-inline-stage-head');
-      if (tools) frag.appendChild(tools);
-      if (pathRow) frag.appendChild(pathRow);
-      if (stageHead && !stageHead.classList.contains('hidden')) frag.appendChild(stageHead);
-      shell.appendChild(frag);
+      return;
     }
 
     function syncMobileShellHeight() {
-      if (!isMobileLayout() || !appShellEl || !workspaceEl || !playerSectionEl || !mastheadEl) {
+      if (!mastheadEl) return;
+      if (!isMobileLayout()) {
         document.documentElement.style.removeProperty('--mobile-masthead-offset');
-        if (appShellEl) appShellEl.style.removeProperty('height');
-        if (workspaceEl) workspaceEl.style.removeProperty('height');
-        if (playerSectionEl) playerSectionEl.style.removeProperty('height');
         return;
       }
-      const viewportH = Math.max(window.innerHeight || 0, window.visualViewport?.height || 0);
-      if (!viewportH) return;
       const mastheadH = Math.ceil(mastheadEl.getBoundingClientRect().height || 0);
       document.documentElement.style.setProperty('--mobile-masthead-offset', `${mastheadH}px`);
-      const pinnedShellEl = document.getElementById('mobileTopShell');
-      const pinnedShellH = isMobileLayout() ? Math.ceil(pinnedShellEl?.getBoundingClientRect().height || 0) : 0;
-      const workspaceH = Math.max(0, viewportH - mastheadH - pinnedShellH);
-      appShellEl.style.height = `${viewportH}px`;
-      workspaceEl.style.height = `${workspaceH}px`;
-      playerSectionEl.style.height = `${workspaceH}px`;
     }
 
     function createIconMarkup(kind) {
@@ -3189,7 +3079,7 @@
       audioPlayerEl.currentTime = duration * (Number(audioProgressEl.value) / 100);
       updateAudioProgressUi();
     });
-    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); if (currentEpisodeData) renderMeta(currentEpisodeData); else renderEmptyMeta(); renderMobileDrawerFlow(); renderMobileInlineFlow(); });
+    window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); if (currentEpisodeData) renderMeta(currentEpisodeData); else renderEmptyMeta(); renderMobileDrawerFlow(); renderMobileInlineFlow(); syncMobileShellHeight(); });
 
     (async function init() {
       try {
