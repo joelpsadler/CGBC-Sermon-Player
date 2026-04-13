@@ -435,6 +435,10 @@
       min-width: 0;
       min-height: 0;
     }
+    .stage-column > * {
+      flex: 0 0 auto;
+      min-height: 0;
+    }
     .player-stage,
     .meta-stage {
       border-radius: 28px;
@@ -1298,6 +1302,7 @@
         overflow-y: auto;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
         padding-bottom: calc(18px + var(--safe-bottom));
       }
       #playerSection {
@@ -1308,6 +1313,14 @@
       .audio-stage {
         overflow: visible;
         max-height: none;
+      }
+      .player-stage,
+      .meta-stage {
+        position: relative;
+        z-index: 0;
+      }
+      .meta-stage {
+        margin-top: 12px;
       }
       .mobile-inline-nav {
         position: sticky;
@@ -1596,6 +1609,7 @@
     const branchSectionEl = document.getElementById('branchSection');
     const leafSectionEl = document.getElementById('leafSection');
     const workspaceEl = document.querySelector('.workspace');
+    const appShellEl = document.querySelector('.app-shell');
     const mobileBranchHeadEl = document.getElementById('mobileBranchHead');
     const mobileLeafHeadEl = document.getElementById('mobileLeafHead');
     const mobileQueueHeadEl = document.getElementById('mobileQueueHead');
@@ -2278,6 +2292,11 @@
 
     function performMobileBack() {
       if (currentEpisodeData) {
+        currentEpisodeData = null;
+        currentEpisodeIndex = null;
+        clearMediaState();
+        renderEmptyMeta();
+        showModePlaceholder();
         mobileNavView = 'queue';
         renderQueue();
         renderNavigation();
@@ -2438,6 +2457,22 @@
         renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
       }
       updateMobileInlineTools();
+    }
+
+    function syncMobileShellHeight() {
+      if (!isMobileLayout() || !appShellEl || !workspaceEl || !playerSectionEl || !mastheadEl) {
+        if (appShellEl) appShellEl.style.removeProperty('height');
+        if (workspaceEl) workspaceEl.style.removeProperty('height');
+        if (playerSectionEl) playerSectionEl.style.removeProperty('height');
+        return;
+      }
+      const viewportH = Math.max(window.innerHeight || 0, window.visualViewport?.height || 0);
+      if (!viewportH) return;
+      const mastheadH = Math.ceil(mastheadEl.getBoundingClientRect().height || 0);
+      const workspaceH = Math.max(0, viewportH - mastheadH);
+      appShellEl.style.height = `${viewportH}px`;
+      workspaceEl.style.height = `${workspaceH}px`;
+      playerSectionEl.style.height = `${workspaceH}px`;
     }
 
     function createIconMarkup(kind) {
