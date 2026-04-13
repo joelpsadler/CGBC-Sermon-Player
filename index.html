@@ -959,7 +959,17 @@
     }
 
     @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
-      .app-shell { padding: 0 8px 14px; }
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+      .app-shell {
+        padding: 0 8px 0;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
       .masthead {
         position: sticky;
         top: 0;
@@ -1010,6 +1020,11 @@
       .workspace {
         display: block;
         min-height: 0;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
       }
       .browse-column,
       .queue-column { display: none; }
@@ -1052,7 +1067,7 @@
       .brand-logo-btn { width: 78px; height: 58px; }
       .mobile-inline-nav {
         position: sticky;
-        top: calc(var(--safe-top) + 60px);
+        top: 0;
         z-index: 170;
         background: linear-gradient(180deg, rgba(8,8,8,0.97), rgba(10,10,10,0.94));
         margin: 0 -8px 0;
@@ -1113,19 +1128,19 @@
     .mobile-inline-path {
       min-width: 0;
       text-align: left;
-      font-size: 18px;
-      color: rgba(255,255,255,0.96);
+      font-size: 16px;
+      color: rgba(255,255,255,0.92);
       font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      line-height: 1.28;
+      font-weight: 600;
+      line-height: 1.24;
       white-space: normal;
       overflow: visible;
       text-overflow: unset;
       overflow-wrap: anywhere;
       padding: 2px 2px 0;
     }
-    .mobile-inline-path-seg { color: rgba(255,255,255,0.96); }
-    .mobile-inline-path-sep { color: rgba(208,232,220,0.92); font-weight: 900; padding: 0 6px; font-size: 1.08em; }
+    .mobile-inline-path-seg { color: rgba(255,255,255,0.92); }
+    .mobile-inline-path-sep { color: rgba(208,232,220,0.85); font-weight: 800; padding: 0 5px; font-size: 1.02em; }
     .mobile-inline-summary {
       display: none;
     }
@@ -1168,24 +1183,26 @@
       padding: 6px 14px 6px;
       margin-top: 2px;
       font-family: 'Poppins', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
+      color: rgba(255,255,255,0.34);
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: rgba(18,18,18,0.86);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
     }
     .mobile-inline-stage-body { padding: 12px 12px 10px; }
     .mobile-inline-stage-body.collapsed { display:none; }
     .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
     .mobile-inline-stage-body .nav-list { gap: 12px; }
     .mobile-inline-stage-body .browse-subgroup-title { margin: 12px 2px 6px; color: rgba(255,255,255,0.68); }
+    .mobile-inline-nav.selected-view .mobile-inline-stage-head { display:none !important; }
+    .mobile-inline-nav.selected-view .mobile-inline-stage-body { display:none !important; }
     }
 
     @media (min-width: 981px) {
@@ -1237,6 +1254,7 @@
       .drawer-overlay { display: none !important; }
       body.drawer-open { overflow: auto; }
       .mobile-inline-nav { display: block; }
+      .utility-btn, #openDrawerBtn { display:none !important; visibility:hidden !important; }
       .stage-column { gap: 12px; }
     }
 
@@ -1249,7 +1267,7 @@
       .utility-btn { display: none !important; }
       .mobile-inline-nav {
         position: sticky;
-        top: calc(var(--safe-top) + 58px);
+        top: 0;
         z-index: 170;
         background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.95));
         margin: 0 -8px 0;
@@ -1268,8 +1286,8 @@
       .mobile-inline-btn { min-height: 44px; padding: 0 16px; font-size: 14px; }
       .mobile-inline-back { min-width: 250px; max-width: 360px; text-align:left; justify-content:flex-start; }
       .mobile-inline-home { min-width: 110px; max-width: 128px; }
-      .mobile-inline-path { font-size: 18px; line-height: 1.22; }
-      .mobile-inline-stage-head { font-size: 10px; padding-top: 5px; padding-bottom: 5px; color: rgba(255,255,255,0.40); }
+      .mobile-inline-path { font-size: 15px; line-height: 1.18; }
+      .mobile-inline-stage-head { font-size: 11px; padding-top: 5px; padding-bottom: 5px; color: rgba(255,255,255,0.34); }
       .mobile-inline-stage-body { padding-top: 8px; }
       .player-stage { padding: 12px; }
       .audio-title { font-size: 22px; }
@@ -1569,10 +1587,16 @@
 
     try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
     window.addEventListener('load', () => {
-      if (isMobileLayout()) window.scrollTo({ top: 0, behavior: 'auto' });
+      if (isMobileLayout()) {
+        if (workspaceEl && typeof workspaceEl.scrollTo === 'function') workspaceEl.scrollTo({ top: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
     });
     window.addEventListener('pageshow', () => {
-      if (isMobileLayout()) setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 0);
+      if (isMobileLayout()) setTimeout(() => {
+        if (workspaceEl && typeof workspaceEl.scrollTo === 'function') workspaceEl.scrollTo({ top: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }, 0);
     });
 
     let mobileNavView = 'root';
@@ -1609,7 +1633,12 @@
       if (!target) return;
       window.requestAnimationFrame(() => {
         if (isMobileLayout()) {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          const scroller = workspaceEl || document.scrollingElement || document.documentElement;
+          if (scroller && scroller !== document.body && typeof scroller.scrollTo === 'function') {
+            scroller.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
           return;
         }
         const rect = target.getBoundingClientRect();
@@ -2302,6 +2331,7 @@
     function renderMobileInlineFlow() {
       if (!mobileInlineNavEl || !mobileInlineStageBodyEl || !isMobileLayout()) return;
       mobileInlineSummaryEl.innerHTML = '';
+      mobileInlineNavEl.classList.toggle('selected-view', mobileNavView === 'selected');
 
       let items = [];
       let activeKey = null;
@@ -2872,6 +2902,7 @@
       renderQueue();
       renderEmptyMeta();
       showModePlaceholder();
+      if (isMobileLayout() && workspaceEl && typeof workspaceEl.scrollTo === 'function') workspaceEl.scrollTo({ top: 0, behavior: 'auto' });
     }
 
     function resetHome() {
@@ -2937,6 +2968,12 @@
       updateAudioProgressUi();
     });
     window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); if (currentEpisodeData) renderMeta(currentEpisodeData); else renderEmptyMeta(); renderMobileDrawerFlow(); renderMobileInlineFlow(); });
+    window.addEventListener('load', () => {
+      if (isMobileLayout() && workspaceEl && typeof workspaceEl.scrollTo === 'function') {
+        workspaceEl.scrollTo({ top: 0, behavior: 'auto' });
+      }
+    });
+
 
     (async function init() {
       try {
