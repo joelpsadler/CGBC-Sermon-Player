@@ -1051,6 +1051,14 @@
       .meta-row { grid-template-columns: 118px minmax(0, 1fr); gap: 10px; }
       .drawer { display: block; }
     }
+    @media (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      .utility-btn,
+      #openDrawerBtn,
+      .drawer,
+      .drawer-overlay { display: none !important; }
+      .mobile-inline-nav { display: block !important; }
+    }
+
 
     @media (max-width: 640px) {
       .brand-logo-btn { width: 78px; height: 58px; }
@@ -1077,12 +1085,12 @@
       gap: 10px;
     }
     .mobile-inline-actions {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px;
+      display: flex;
+      gap: 8px;
       align-items: center;
       min-width: 0;
       width: 100%;
+      justify-content: space-between;
     }
     .mobile-inline-btn {
       min-height: 46px;
@@ -1099,15 +1107,13 @@
       flex: 0 1 auto;
     }
     .mobile-inline-back {
-      min-width: 0;
-      width: 100%;
-      max-width: none;
+      min-width: 220px;
+      max-width: 300px;
       text-align: left;
       justify-content: flex-start;
     }
     .mobile-inline-home {
       min-width: 100px;
-      width: 110px;
       max-width: 118px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
@@ -1123,9 +1129,9 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
       line-height: 1.22;
-      white-space: normal;
-      overflow: visible;
-      text-overflow: initial;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       padding: 0 2px;
     }
     .mobile-inline-summary {
@@ -1185,7 +1191,6 @@
     }
     .mobile-inline-stage-body { padding: 12px 12px 10px; }
     .mobile-inline-stage-body.collapsed { display:none; }
-    #openDrawerBtn, .utility-btn { display: none !important; visibility: hidden !important; pointer-events: none !important; width:0 !important; min-width:0 !important; max-width:0 !important; padding:0 !important; margin:0 !important; border:0 !important; }
     .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
     .mobile-inline-stage-head.hidden { display:none; }
     .mobile-inline-stage-body .nav-list { gap: 12px; }
@@ -1306,7 +1311,7 @@
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-y: contain;
-        padding-bottom: calc(8px + var(--safe-bottom));
+        padding-bottom: calc(18px + var(--safe-bottom));
       }
       #playerSection {
         scroll-margin-top: 0;
@@ -1692,7 +1697,9 @@
     let mobileNavView = 'root';
 
     function isMobileLayout() {
-      return window.innerWidth <= 980;
+      const coarse = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const landscape = window.matchMedia('(orientation: landscape)').matches;
+      return window.innerWidth <= 980 || (coarse && landscape && window.innerWidth <= 1400);
     }
 
     function scrollMobileSelectorToTop() {
@@ -2481,19 +2488,19 @@
     }
 
     function syncMobileShellHeight() {
-      if (!isMobileLayout() || !appShellEl || !workspaceEl || !mastheadEl) {
+      if (!isMobileLayout() || !appShellEl || !workspaceEl || !playerSectionEl || !mastheadEl) {
         if (appShellEl) appShellEl.style.removeProperty('height');
         if (workspaceEl) workspaceEl.style.removeProperty('height');
         if (playerSectionEl) playerSectionEl.style.removeProperty('height');
         return;
       }
-      const viewportH = Math.max(window.visualViewport?.height || 0, window.innerHeight || 0);
+      const viewportH = Math.max(window.innerHeight || 0, window.visualViewport?.height || 0);
       if (!viewportH) return;
       const mastheadH = Math.ceil(mastheadEl.getBoundingClientRect().height || 0);
       const workspaceH = Math.max(0, viewportH - mastheadH);
       appShellEl.style.height = `${viewportH}px`;
       workspaceEl.style.height = `${workspaceH}px`;
-      if (playerSectionEl) playerSectionEl.style.removeProperty('height');
+      playerSectionEl.style.height = `${workspaceH}px`;
     }
 
     function createIconMarkup(kind) {
@@ -2803,7 +2810,7 @@
       let source = [];
       let title = '';
 
-      if (navRootKey === 'byDate' && sameMonth.length) {
+      if (sameMonth.length) {
         source = sameMonth;
         title = sameMonthTitle;
       } else if (sameContext.length) {
@@ -2812,9 +2819,6 @@
       } else if (sameSeries.length) {
         source = sameSeries;
         title = 'More in this Series';
-      } else if (sameMonth.length) {
-        source = sameMonth;
-        title = sameMonthTitle;
       } else if (sameBook.length) {
         source = sameBook;
         title = `More from ${currentBook}`;
