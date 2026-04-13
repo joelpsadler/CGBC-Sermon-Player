@@ -971,8 +971,8 @@
       .brand-copy { display: none; }
       .brand-lockup { gap: 0; }
       .brand-logo-btn {
-        width: 78px;
-        height: 58px;
+        width: 92px;
+        height: 68px;
         border-radius: 0;
         background: transparent;
         border: none;
@@ -995,12 +995,13 @@
       }
       .mode-btn-shell,
       .utility-btn-shell {
-        min-height: 48px;
-        padding: 0 10px;
-        gap: 6px;
+        min-height: 54px;
+        padding: 0 12px;
+        gap: 8px;
       }
-      .btn-copy .top { font-size: 12px; }
-      .btn-copy .bottom { font-size: 9px; }
+      .mode-pill .icon { width: 20px; height: 20px; }
+      .btn-copy .top { font-size: 14px; }
+      .btn-copy .bottom { font-size: 10px; }
       .utility-btn { display: block; width: 132px; }
       .workspace {
         display: block;
@@ -1044,7 +1045,7 @@
     }
 
     @media (max-width: 640px) {
-      .brand-logo-btn { width: 68px; height: 50px; }
+      .brand-logo-btn { width: 80px; height: 58px; }
       .mobile-inline-tools {
       display: grid;
       gap: 8px;
@@ -1938,7 +1939,7 @@
       currentEpisodeData = null;
       clearMediaState();
       syncSeriesSelection();
-      if (isMobileLayout()) mobileNavView = 'selected';
+      if (isMobileLayout()) mobileNavView = 'queue';
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -2646,7 +2647,7 @@
       currentEpisodeIndex = originalIndex;
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
-      if (isMobileLayout()) mobileNavView = 'queue';
+      if (isMobileLayout()) mobileNavView = 'selected';
       renderQueue();
       renderNavigation();
       if (isMobileLayout()) {
