@@ -1180,6 +1180,7 @@
     .mobile-inline-stage-body { padding: 12px 12px 10px; }
     .mobile-inline-stage-body.collapsed { display:none; }
     .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
+    .mobile-inline-stage-head.hidden { display:none; }
     .mobile-inline-stage-body .nav-list { gap: 12px; }
     .mobile-inline-stage-body .browse-subgroup-title { margin: 12px 2px 6px; color: rgba(255,255,255,0.68); }
 
@@ -1253,45 +1254,53 @@
 
 
 
-    /* Mobile shell refactor: keep the header pinned and make only the content column scroll. */
+    /* Mobile shell refactor, pass 2:
+       - Let the page/body own scrolling again so sticky elements pin to the viewport reliably.
+       - Keep the player card in normal flow so artwork and transport controls never become their own scroll region.
+    */
     @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
       html, body {
-        height: 100%;
+        height: auto;
+        min-height: 100%;
       }
       body {
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
       .app-shell {
-        height: 100dvh;
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 0;
+        height: auto;
+        min-height: 100dvh;
+        display: block;
+        padding-bottom: calc(10px + var(--safe-bottom));
       }
       .masthead {
-        flex: 0 0 auto;
         position: sticky;
         top: 0;
         z-index: 220;
       }
-      .workspace {
-        flex: 1 1 auto;
+      .workspace,
+      .stage-column,
+      .panel.column {
+        height: auto;
         min-height: 0;
-        overflow: hidden;
+        overflow: visible;
       }
       .stage-column {
-        height: 100%;
-        min-height: 0;
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
         padding-bottom: calc(18px + var(--safe-bottom));
       }
       #playerSection {
         scroll-margin-top: 0;
       }
+      .player-stage,
+      .meta-stage,
+      .audio-stage {
+        overflow: visible;
+        max-height: none;
+      }
       .mobile-inline-nav {
         position: sticky;
-        top: 0;
+        top: calc(var(--safe-top) + 58px);
         z-index: 210;
         margin: 0 -8px 0;
         padding: 0 8px 4px;
@@ -1312,6 +1321,7 @@
         white-space: normal;
         overflow: visible;
         text-overflow: initial;
+        word-break: break-word;
         font-size: 12px;
         line-height: 1.24;
         font-weight: 500;
@@ -1327,6 +1337,10 @@
         font-size: 11px;
         color: rgba(255,255,255,0.72);
         padding: 8px 14px 7px;
+      }
+      .mobile-inline-stage-head.hidden,
+      .mobile-inline-stage-body.collapsed {
+        display: none;
       }
       .mobile-inline-stage-body {
         padding: 10px 12px 8px;
@@ -2382,9 +2396,10 @@
       mobileInlineStageBodyEl.innerHTML = '';
       mobileInlineStageHeadEl.classList.remove('collapsed');
       mobileInlineStageBodyEl.classList.remove('collapsed');
+      mobileInlineStageHeadEl.classList.remove('hidden');
       if (mobileNavView === 'selected') {
-        mobileInlineStageHeadEl.textContent = mode === 'audio' ? 'Now Listening' : 'Now Watching';
-        mobileInlineStageHeadEl.classList.add('collapsed');
+        mobileInlineStageHeadEl.textContent = '';
+        mobileInlineStageHeadEl.classList.add('hidden');
         mobileInlineStageBodyEl.classList.add('collapsed');
       } else if (mobileNavView === 'queue') {
         renderQueueInto(mobileInlineStageBodyEl);
@@ -2819,9 +2834,9 @@
       renderQueue();
       renderNavigation();
       if (isMobileLayout()) {
-        window.setTimeout(() => {
-          scrollPlayerIntoView();
-        }, 80);
+        // Beginner note:
+        // Do not auto-scroll the whole page after selection.
+        // The header needs to stay visually anchored, and the player is already directly below it.
       }
     }
 
