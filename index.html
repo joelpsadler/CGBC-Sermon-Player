@@ -6,6 +6,9 @@
   <title>CGBC Sermons</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
+  <link rel="manifest" href="CGBC-media.webmanifest">
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#0f0f10" />
   <meta name="apple-mobile-web-app-title" content="CGBC Media" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,7 +30,7 @@
       --shadow-deep: 0 30px 70px rgba(0,0,0,0.40);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --mobile-sticky-offset: 90px;
+      --mobile-sticky-offset: 140px;
     }
 
     * { box-sizing: border-box; }
@@ -955,25 +958,25 @@
       .nav-section.collapsed .flow-summary { background: rgba(255,255,255,0.03); }
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
       .app-shell { padding: 0 8px 14px; }
       .masthead {
         position: sticky;
         top: 0;
-        z-index: 140;
-        background: rgba(9,9,10,0.88);
+        z-index: 180;
+        background: rgba(9,9,10,0.94);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         margin: 0 -8px;
-        padding: calc(8px + var(--safe-top)) 8px 8px;
+        padding: calc(6px + var(--safe-top)) 8px 6px;
         border-bottom: 1px solid rgba(255,255,255,0.06);
-        gap: 6px;
+        gap: 4px;
       }
       .brand-copy { display: none; }
       .brand-lockup { gap: 0; }
       .brand-logo-btn {
-        width: 92px;
-        height: 68px;
+        width: 78px;
+        height: 58px;
         border-radius: 0;
         background: transparent;
         border: none;
@@ -996,14 +999,14 @@
       }
       .mode-btn-shell,
       .utility-btn-shell {
-        min-height: 58px;
-        padding: 0 14px;
-        gap: 9px;
+        min-height: 48px;
+        padding: 0 12px;
+        gap: 8px;
       }
-      .mode-pill .icon { width: 22px; height: 22px; }
-      .btn-copy .top { font-size: 16px; }
-      .btn-copy .bottom { font-size: 11px; }
-      .utility-btn { display: block; width: 132px; }
+      .mode-pill .icon { width: 19px; height: 19px; }
+      .btn-copy .top { font-size: 14px; }
+      .btn-copy .bottom { font-size: 10px; }
+      .utility-btn { display: block; width: 118px; }
       .workspace {
         display: block;
         min-height: 0;
@@ -1046,11 +1049,20 @@
     }
 
     @media (max-width: 640px) {
-      .brand-logo-btn { width: 92px; height: 66px; }
+      .brand-logo-btn { width: 78px; height: 58px; }
+      .mobile-inline-nav {
+        position: sticky;
+        top: calc(var(--safe-top) + 60px);
+        z-index: 170;
+        background: linear-gradient(180deg, rgba(8,8,8,0.97), rgba(10,10,10,0.94));
+        margin: 0 -8px 0;
+        padding: 0 8px 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
       .mobile-inline-tools {
       display: grid;
-      gap: 8px;
-      padding: 8px 6px 6px;
+      gap: 10px;
+      padding: 10px 6px 8px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
     }
@@ -1069,28 +1081,28 @@
       justify-content: space-between;
     }
     .mobile-inline-btn {
-      min-height: 38px;
-      padding: 8px 14px;
+      min-height: 46px;
+      padding: 10px 16px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       line-height: 1.15;
       text-align: center;
       white-space: normal;
       flex: 0 1 auto;
     }
     .mobile-inline-back {
-      min-width: 188px;
-      max-width: 246px;
+      min-width: 220px;
+      max-width: 300px;
       text-align: left;
       justify-content: flex-start;
     }
     .mobile-inline-home {
-      min-width: 84px;
-      max-width: 96px;
+      min-width: 100px;
+      max-width: 118px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
     .mobile-inline-path-row {
@@ -1100,7 +1112,7 @@
     .mobile-inline-path {
       min-width: 0;
       text-align: left;
-      font-size: 11px;
+      font-size: 13px;
       color: rgba(255,255,255,0.84);
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
@@ -1149,10 +1161,10 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 12px 14px 10px;
-      margin-top: 6px;
+      padding: 10px 14px 9px;
+      margin-top: 4px;
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.82);
@@ -1215,13 +1227,28 @@
     }
 
 
-    @media (max-width: 980px) {
+    @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
       .utility-btn,
       .drawer,
       .drawer-overlay { display: none !important; }
       body.drawer-open { overflow: auto; }
       .mobile-inline-nav { display: block; }
       .stage-column { gap: 12px; }
+    }
+
+
+    @media (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      .masthead { padding-top: calc(4px + var(--safe-top)); padding-bottom: 4px; gap: 2px; }
+      .brand-logo-btn { width: 68px; height: 48px; }
+      .mode-btn-shell { min-height: 42px; }
+      .utility-btn { display: none !important; }
+      .mobile-inline-actions-row { gap: 10px; }
+      .mobile-inline-btn { min-height: 42px; padding: 0 14px; font-size: 13px; }
+      .mobile-inline-path { font-size: 13px; }
+      .mobile-inline-stage-head { font-size: 13px; padding-top: 8px; padding-bottom: 8px; }
+      .player-stage { padding: 12px; }
+      .audio-title { font-size: 22px; }
+      .audio-now { font-size: 30px; }
     }
 
 </style>
@@ -1515,6 +1542,14 @@
     const mobileInlineStageHeadEl = document.getElementById('mobileInlineStageHead');
     const mobileInlineStageBodyEl = document.getElementById('mobileInlineStageBody');
 
+    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+    window.addEventListener('load', () => {
+      if (isMobileLayout()) window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+    window.addEventListener('pageshow', () => {
+      if (isMobileLayout()) setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), 0);
+    });
+
     let mobileNavView = 'root';
 
     function isMobileLayout() {
@@ -1531,7 +1566,7 @@
     }
 
     function scrollPlayerIntoView() {
-      const stickyOffset = Math.max(76, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-sticky-offset')) || 90);
+      const stickyOffset = Math.max(110, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-sticky-offset')) || 140);
       const target = (isMobileLayout() && mode === 'video' ? (videoShellEl || playerStageEl) : (playerStageEl || playerSectionEl));
       if (!target) return;
       window.requestAnimationFrame(() => {
@@ -2129,7 +2164,7 @@
       if (mobileNavView !== 'root' && navRootKey) labels.push(getRootTitleByKey(navRootKey));
       if ((mobileNavView === 'leaf' || mobileNavView === 'queue' || mobileNavView === 'selected') && navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
-      if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
+      if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && (((hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series')) || navRootKey === 'byDate')) labels.push(getLeafTitleByKey(navLeafKey));
       drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
       drawerBackBtnEl.disabled = mobileNavView === 'root';
       drawerBackBtnEl.textContent = getMobileBackButtonText();
@@ -2392,7 +2427,7 @@
       const queueEntries = getQueueEntries();
       if (!queueEntries.length) {
         const inlineHelp = navRootKey === 'byDate'
-          ? 'Choose a year and month to load dated sermon entries.'
+          ? 'Choose a year, month, and day to load dated sermon entries.'
           : (navRootKey === 'bibleBooks' && getBibleBookLeafGrouping() === 'episodes'
               ? 'Choose a stand alone episode above to begin.'
               : 'Choose a series bucket to load the episode queue.');
@@ -2566,6 +2601,13 @@
       const sameBook = currentBook
         ? queueEntries.filter(item => getEpisodePrimaryBook(item.ep) === currentBook)
         : [];
+      let sameMonth = [];
+      let sameMonthTitle = '';
+      if (navRootKey === 'byDate' && navBranchKey && navLeafKey) {
+        const monthEntries = (browseBuckets.byDate?.[navBranchKey]?.[navLeafKey] || []).filter(entry => !(entry.title === currentEpisodeData.title && entry.series === currentEpisodeData.series));
+        sameMonth = monthEntries.map((entry, index) => ({ ep: entry, originalIndex: index }));
+        sameMonthTitle = `More from ${navLeafKey} ${navBranchKey}`;
+      }
 
       let source = [];
       let title = '';
@@ -2576,6 +2618,9 @@
       } else if (sameSeries.length) {
         source = sameSeries;
         title = 'More in this Series';
+      } else if (sameMonth.length) {
+        source = sameMonth;
+        title = sameMonthTitle;
       } else if (sameBook.length) {
         source = sameBook;
         title = `More from ${currentBook}`;
