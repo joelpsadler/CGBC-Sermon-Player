@@ -1006,7 +1006,7 @@
       .mode-pill .icon { width: 19px; height: 19px; }
       .btn-copy .top { font-size: 14px; }
       .btn-copy .bottom { font-size: 10px; }
-      .utility-btn { display: block; width: 118px; }
+      .utility-btn { display: none !important; width: 118px; }
       .workspace {
         display: block;
         min-height: 0;
@@ -1068,41 +1068,42 @@
     }
     .mobile-inline-actions-row {
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
     }
     .mobile-inline-actions {
       display: flex;
-      gap: 8px;
-      align-items: center;
+      gap: 10px;
+      align-items: stretch;
       min-width: 0;
       width: 100%;
       justify-content: space-between;
     }
     .mobile-inline-btn {
-      min-height: 48px;
-      padding: 11px 18px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 52px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 600;
       line-height: 1.15;
       text-align: center;
       white-space: normal;
       flex: 0 1 auto;
     }
     .mobile-inline-back {
-      min-width: 220px;
-      max-width: 300px;
+      min-width: 240px;
+      max-width: 340px;
       text-align: left;
       justify-content: flex-start;
     }
     .mobile-inline-home {
-      min-width: 100px;
-      max-width: 118px;
+      min-width: 108px;
+      max-width: 126px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
     .mobile-inline-path-row {
@@ -1112,16 +1113,19 @@
     .mobile-inline-path {
       min-width: 0;
       text-align: left;
-      font-size: 15px;
-      color: rgba(255,255,255,0.92);
+      font-size: 18px;
+      color: rgba(255,255,255,0.96);
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      line-height: 1.22;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 0 2px;
+      line-height: 1.28;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+      overflow-wrap: anywhere;
+      padding: 2px 2px 0;
     }
+    .mobile-inline-path-seg { color: rgba(255,255,255,0.96); }
+    .mobile-inline-path-sep { color: rgba(208,232,220,0.92); font-weight: 900; padding: 0 6px; font-size: 1.08em; }
     .mobile-inline-summary {
       display: none;
     }
@@ -1161,13 +1165,13 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 8px 14px 8px;
+      padding: 6px 14px 6px;
       margin-top: 2px;
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.06em;
+      font-size: 10px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.62);
+      color: rgba(255,255,255,0.42);
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: rgba(18,18,18,0.86);
@@ -1260,12 +1264,12 @@
         background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
       }
       .mobile-inline-actions-row { gap: 10px; }
-      .mobile-inline-actions { display:flex; gap: 10px; align-items:center; justify-content: space-between; width:100%; }
-      .mobile-inline-btn { min-height: 42px; padding: 0 16px; font-size: 14px; }
+      .mobile-inline-actions { display:flex; gap: 10px; align-items:stretch; justify-content: space-between; width:100%; }
+      .mobile-inline-btn { min-height: 44px; padding: 0 16px; font-size: 14px; }
       .mobile-inline-back { min-width: 250px; max-width: 360px; text-align:left; justify-content:flex-start; }
       .mobile-inline-home { min-width: 110px; max-width: 128px; }
-      .mobile-inline-path { font-size: 15px; }
-      .mobile-inline-stage-head { font-size: 11px; padding-top: 7px; padding-bottom: 7px; color: rgba(255,255,255,0.58); }
+      .mobile-inline-path { font-size: 18px; line-height: 1.22; }
+      .mobile-inline-stage-head { font-size: 10px; padding-top: 5px; padding-bottom: 5px; color: rgba(255,255,255,0.40); }
       .mobile-inline-stage-body { padding-top: 8px; }
       .player-stage { padding: 12px; }
       .audio-title { font-size: 22px; }
@@ -1303,7 +1307,7 @@
           </button>
         </div>
 
-        <button class="utility-btn" id="openDrawerBtn" type="button">
+        <button class="utility-btn" id="openDrawerBtn" type="button" hidden aria-hidden="true">
           <span class="utility-btn-shell">
             <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h10v2H4v-2Z"/></svg></span>
             <span class="btn-copy"><span class="top">Sermon</span><span class="bottom">Selection</span></span>
@@ -1573,6 +1577,19 @@
 
     let mobileNavView = 'root';
 
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    }
+
+    function renderBreadcrumbMarkup(labels, fallbackText) {
+      if (!labels || !labels.length) return escapeHtml(fallbackText || '');
+      return labels.map((label, index) => {
+        const safe = escapeHtml(label);
+        if (index === 0) return `<span class="mobile-inline-path-seg">${safe}</span>`;
+        return `<span class="mobile-inline-path-sep">›</span><span class="mobile-inline-path-seg">${safe}</span>`;
+      }).join('');
+    }
+
     function isMobileLayout() {
       return window.innerWidth <= 980;
     }
@@ -1591,6 +1608,10 @@
       const target = (isMobileLayout() ? (playerSectionEl || playerStageEl) : (mode === 'video' ? (videoShellEl || playerStageEl) : (playerStageEl || playerSectionEl)));
       if (!target) return;
       window.requestAnimationFrame(() => {
+        if (isMobileLayout()) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
         const rect = target.getBoundingClientRect();
         const top = window.scrollY + rect.top - stickyOffset + 2;
         window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
@@ -2186,7 +2207,7 @@
       if ((mobileNavView === 'leaf' || mobileNavView === 'queue' || mobileNavView === 'selected') && navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
       if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && (((hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series')) || navRootKey === 'byDate')) labels.push(getLeafTitleByKey(navLeafKey));
-      drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
+      drawerPathLabelEl.innerHTML = renderBreadcrumbMarkup(labels, 'Start at the top and drill down.');
       drawerBackBtnEl.disabled = mobileNavView === 'root';
       drawerBackBtnEl.textContent = getMobileBackButtonText();
     }
@@ -2271,7 +2292,7 @@
       if (navBranchKey && ['leaf','queue','selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
       if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
-      mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
+      mobileInlinePathLabelEl.innerHTML = renderBreadcrumbMarkup(labels, 'Start with Listen or Watch, then choose a browse path.');
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
         mobileInlineBackBtnEl.textContent = getMobileBackButtonText();
@@ -2312,13 +2333,15 @@
 
       mobileInlineStageHeadEl.textContent = headText;
       mobileInlineStageBodyEl.innerHTML = '';
+      mobileInlineStageHeadEl.style.display = '';
       mobileInlineStageHeadEl.classList.remove('collapsed');
       mobileInlineStageBodyEl.classList.remove('collapsed');
       if (mobileNavView === 'selected') {
-        mobileInlineStageHeadEl.textContent = mode === 'audio' ? 'Listening' : 'Watching';
-        mobileInlineStageHeadEl.classList.add('collapsed');
+        mobileInlineStageHeadEl.textContent = '';
+        mobileInlineStageHeadEl.style.display = 'none';
         mobileInlineStageBodyEl.classList.add('collapsed');
       } else if (mobileNavView === 'queue') {
+        mobileInlineStageHeadEl.style.display = '';
         renderQueueInto(mobileInlineStageBodyEl);
       } else {
         renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
