@@ -1025,7 +1025,7 @@
         gap: 14px;
       }
       .audio-art-wrap { gap: 10px; }
-      .audio-art { max-width: 320px; }
+      .audio-art { max-width: 292px; }
       .audio-transport {
         max-width: 320px;
         grid-template-columns: 50px minmax(0, 1fr) 50px;
@@ -1249,6 +1249,7 @@
       .mobile-inline-stage-head { font-size: 13px; padding-top: 8px; padding-bottom: 8px; }
       .player-stage { padding: 12px; }
       .audio-title { font-size: 22px; }
+      .audio-art { max-width: 270px; }
       .audio-now { font-size: 30px; }
     }
 
@@ -2271,6 +2272,26 @@
       return `Back to ${target}`;
     }
 
+    function canGoMobileBack() {
+      return !!currentEpisodeData || mobileNavView !== 'root';
+    }
+
+    function performMobileBack() {
+      if (currentEpisodeData) {
+        mobileNavView = 'queue';
+        renderQueue();
+        renderNavigation();
+        if (isMobileLayout()) scrollMobileSelectorToTop();
+        return;
+      }
+      if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
+      else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
+      else if (mobileNavView === 'branch') mobileNavView = 'root';
+      renderQueue();
+      renderNavigation();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
+    }
+
     function updateDrawerTools() {
       const labels = [];
       labels.push(mode === 'audio' ? 'Audio' : 'Video');
@@ -2279,7 +2300,7 @@
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
       if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && (((hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series')) || navRootKey === 'byDate')) labels.push(getLeafTitleByKey(navLeafKey));
       drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
-      drawerBackBtnEl.disabled = mobileNavView === 'root';
+      drawerBackBtnEl.disabled = !canGoMobileBack();
       drawerBackBtnEl.textContent = getMobileBackButtonText();
     }
 
@@ -2365,7 +2386,7 @@
       if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
       if (mobileInlineBackBtnEl) {
-        mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
+        mobileInlineBackBtnEl.disabled = !canGoMobileBack();
         mobileInlineBackBtnEl.textContent = getMobileBackButtonText();
       }
     }
@@ -2972,22 +2993,9 @@
     }
 
     if (openDrawerBtnEl) openDrawerBtnEl.addEventListener('click', openDrawer);
-    drawerBackBtnEl.addEventListener('click', () => {
-      if (mobileNavView === 'queue') mobileNavView = 'leaf';
-      else if (mobileNavView === 'leaf') mobileNavView = 'branch';
-      else if (mobileNavView === 'branch') mobileNavView = 'root';
-      renderMobileDrawerFlow();
-      renderMobileInlineFlow();
-      scrollMobileSelectorToTop();
-    });
+    drawerBackBtnEl.addEventListener('click', performMobileBack);
     drawerHomeBtnEl.addEventListener('click', () => { resetHome(); scrollMobileSelectorToTop(); });
-    if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.addEventListener('click', () => {
-      if (mobileNavView === 'selected') mobileNavView = 'queue';
-      else if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
-      else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
-      else if (mobileNavView === 'branch') mobileNavView = 'root';
-      renderMobileInlineFlow();
-    });
+    if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.addEventListener('click', performMobileBack);
     if (mobileInlineHomeBtnEl) mobileInlineHomeBtnEl.addEventListener('click', () => { resetHome(); scrollMobileSelectorToTop(); });
     closeDrawerBtnEl.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
