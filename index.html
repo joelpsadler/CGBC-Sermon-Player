@@ -995,13 +995,13 @@
       }
       .mode-btn-shell,
       .utility-btn-shell {
-        min-height: 54px;
-        padding: 0 12px;
-        gap: 8px;
+        min-height: 58px;
+        padding: 0 14px;
+        gap: 9px;
       }
-      .mode-pill .icon { width: 20px; height: 20px; }
-      .btn-copy .top { font-size: 14px; }
-      .btn-copy .bottom { font-size: 10px; }
+      .mode-pill .icon { width: 22px; height: 22px; }
+      .btn-copy .top { font-size: 16px; }
+      .btn-copy .bottom { font-size: 11px; }
       .utility-btn { display: block; width: 132px; }
       .workspace {
         display: block;
@@ -1045,7 +1045,7 @@
     }
 
     @media (max-width: 640px) {
-      .brand-logo-btn { width: 80px; height: 58px; }
+      .brand-logo-btn { width: 92px; height: 66px; }
       .mobile-inline-tools {
       display: grid;
       gap: 8px;
@@ -1834,9 +1834,10 @@
       if (navRootKey === 'bibleBooks') {
         const bucket = browseBuckets.bibleBooks[navBranchKey] || { series: [], episodes: [] };
         const items = [];
-        if (bucket.series.length) items.push({ key: '__section_series', title: 'Series', type: 'section' });
+        const showSections = bucket.series.length && bucket.episodes.length;
+        if (showSections && bucket.series.length) items.push({ key: '__section_series', title: 'Series', type: 'section' });
         bucket.series.forEach(seriesName => items.push({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
-        if (bucket.episodes.length) items.push({ key: '__section_episodes', title: 'Stand Alone Episodes', type: 'section' });
+        if (showSections && bucket.episodes.length) items.push({ key: '__section_episodes', title: 'Stand Alone Episodes', type: 'section' });
         bucket.episodes.forEach(item => { const eps = sermonData[item.seriesName] || []; const match = eps.find(ep => ep.title === item.episodeTitle && ep.date === item.date) || eps.find(ep => ep.title === item.episodeTitle) || eps[0]; if (match && (mode === 'audio' || match.videoId)) items.push({ key: item.key, title: item.episodeTitle, type: 'episode_surface', meta: item.scripture || item.date || '', image: mode === 'video' ? (match.videoId ? getWatchThumb(match.videoId) : match.seriesWideImage || FALLBACK_IMAGE) : (match.img || match.seriesImage || FALLBACK_IMAGE), episodeRef: match }); });
         return items;
       }
@@ -1885,7 +1886,7 @@
       const branches = getBranchItems();
       navBranchKey = branches[0]?.key || null;
       const leaves = getLeafItems();
-      navLeafKey = leaves[0]?.key || null;
+      navLeafKey = getDefaultLeafKey(leaves);
       syncSeriesSelection();
     }
 
@@ -1904,7 +1905,7 @@
       const branches = getBranchItems();
       navBranchKey = branches[0]?.key || null;
       const leaves = getLeafItems();
-      navLeafKey = leaves[0]?.key || null;
+      navLeafKey = getDefaultLeafKey(leaves);
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       clearMediaState();
@@ -1920,7 +1921,7 @@
     function setBranch(key) {
       navBranchKey = key;
       const leaves = getLeafItems();
-      navLeafKey = leaves[0]?.key || null;
+      navLeafKey = getDefaultLeafKey(leaves);
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       clearMediaState();
@@ -1960,6 +1961,26 @@
 
     function formatCountLabel(count, singular, plural) {
       return `${count} ${count === 1 ? singular : plural}`;
+    }
+
+    function getActionableLeafItems() {
+      return getLeafItems().filter(item => item.type !== 'section');
+    }
+
+    function getDefaultLeafKey(items) {
+      const actionable = (items || []).find(item => item.type !== 'section');
+      return actionable ? actionable.key : (items[0]?.key || null);
+    }
+
+    function getBibleBookLeafGrouping() {
+      if (navRootKey !== 'bibleBooks' || !navBranchKey || !browseBuckets) return 'mixed';
+      const bucket = browseBuckets.bibleBooks[navBranchKey] || { series: [], episodes: [] };
+      const hasSeries = !!bucket.series.length;
+      const hasEpisodes = !!bucket.episodes.length;
+      if (hasSeries && hasEpisodes) return 'mixed';
+      if (hasSeries) return 'series';
+      if (hasEpisodes) return 'episodes';
+      return 'mixed';
     }
 
     function getEpisodePrimaryBook(ep) {
@@ -2003,7 +2024,12 @@
 
     function getLeafHeadText() {
       if (navRootKey === 'byDate') return 'Step 3 · Choose Month';
-      if (navRootKey === 'bibleBooks') return 'Step 3 · Choose Series or Episode';
+      if (navRootKey === 'bibleBooks') {
+        const grouping = getBibleBookLeafGrouping();
+        if (grouping === 'series') return 'Step 3 · Choose Series';
+        if (grouping === 'episodes') return 'Step 3 · Choose Episode';
+        return 'Step 3 · Choose Series or Episode';
+      }
       if (navRootKey === 'standaloneSeries') return 'Step 3 · Choose Mini-Series';
       if (navRootKey === 'yearSpecials') return 'Step 3 · Choose Series';
       if (navRootKey === 'pinnedCurrent') return 'Step 3 · Choose Series';
@@ -2019,7 +2045,7 @@
     function hasMeaningfulLeafStep() {
       if (!navRootKey || !navBranchKey) return false;
       if (navRootKey === 'byDate') return getLeafItems().length > 0;
-      const leaves = getLeafItems();
+      const leaves = getActionableLeafItems();
       return leaves.length > 1;
     }
 
@@ -2101,7 +2127,8 @@
       labels.push(mode === 'audio' ? 'Audio' : 'Video');
       if (mobileNavView !== 'root' && navRootKey) labels.push(getRootTitleByKey(navRootKey));
       if ((mobileNavView === 'leaf' || mobileNavView === 'queue' || mobileNavView === 'selected') && navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
-      if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
+      const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
+      if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
       drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
       drawerBackBtnEl.disabled = mobileNavView === 'root';
       drawerBackBtnEl.textContent = getMobileBackButtonText();
@@ -2185,7 +2212,8 @@
       const labels = [mode === 'audio' ? 'Audio' : 'Video'];
       if (navRootKey) labels.push(getRootTitleByKey(navRootKey));
       if (navBranchKey && ['leaf','queue','selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
-      if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
+      const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
+      if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
@@ -2362,7 +2390,12 @@
       targetEl.innerHTML = '';
       const queueEntries = getQueueEntries();
       if (!queueEntries.length) {
-        targetEl.innerHTML = `<div class="queue-empty">${navRootKey === 'byDate' ? 'Choose a year and month to load dated sermon entries.' : 'Choose a series bucket to load the episode queue.'}</div>`;
+        const inlineHelp = navRootKey === 'byDate'
+          ? 'Choose a year and month to load dated sermon entries.'
+          : (navRootKey === 'bibleBooks' && getBibleBookLeafGrouping() === 'episodes'
+              ? 'Choose a stand alone episode above to begin.'
+              : 'Choose a series bucket to load the episode queue.');
+        targetEl.innerHTML = `<div class="queue-empty">${inlineHelp}</div>`;
         return;
       }
       const list = document.createElement('div');
@@ -2541,7 +2574,7 @@
         title = `More from ${currentScriptureContext}`;
       } else if (sameSeries.length) {
         source = sameSeries;
-        title = navRootKey === 'bibleBooks' && currentBook ? `More from ${currentBook}` : 'More in this Series';
+        title = 'More in this Series';
       } else if (sameBook.length) {
         source = sameBook;
         title = `More from ${currentBook}`;
