@@ -78,14 +78,14 @@
     .brand-lockup {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
       min-width: 0;
     }
     .brand-logo-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 90px;
+      width: 94px;
       height: 62px;
       border-radius: 16px;
       background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
@@ -98,7 +98,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      transform: scale(1.08);
+      transform: scale(1.14);
       transform-origin: center;
     }
     .brand-copy {
@@ -119,7 +119,7 @@
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
@@ -279,7 +279,7 @@
     }
     .series-card.audio .series-thumb,
     .episode-card.audio .episode-thumb {
-      width: 72px;
+      width: 78px;
       height: 72px;
     }
     .series-card.video .series-thumb,
@@ -528,16 +528,31 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
       padding-top: 8px;
     }
     .audio-status {
-      margin: 0;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      display: none;
+    }
+    .audio-detail-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: baseline;
+      color: rgba(255,255,255,0.84);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+    .audio-detail-label {
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .audio-detail-value {
+      color: rgba(255,255,255,0.90);
+      font-weight: 600;
     }
     .audio-title {
       margin: 0;
@@ -650,6 +665,98 @@
       gap: 14px;
       align-items: start;
     }
+    .stage-info {
+      display: none;
+      padding: 16px 18px 18px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(12,12,12,0.44), rgba(12,12,12,0.18));
+    }
+    .stage-info-title {
+      margin: 0 0 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      line-height: 1.08;
+    }
+    .stage-info-series {
+      color: rgba(255,255,255,0.88);
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .stage-info-meta {
+      display: grid;
+      gap: 6px;
+    }
+    .stage-info-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.86);
+    }
+    .stage-info-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .related-shell {
+      display: none;
+      gap: 12px;
+    }
+    .related-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .related-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      margin: 0;
+    }
+    .related-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+      scroll-snap-type: x proximity;
+    }
+    .related-card {
+      flex: 0 0 220px;
+      max-width: 220px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      scroll-snap-align: start;
+      text-align: left;
+    }
+    .related-thumb {
+      width: 64px;
+      height: 64px;
+      flex: 0 0 64px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+    }
+    .related-card.video .related-thumb {
+      width: 84px;
+      height: 48px;
+      flex-basis: 84px;
+      border-radius: 12px;
+    }
+    .related-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .related-copy { min-width:0; }
+    .related-copy h4 { margin:0; font-family:'Poppins',sans-serif; font-size:14px; line-height:1.15; }
+    .related-copy p { margin:5px 0 0; color:var(--muted); font-size:12px; line-height:1.25; }
     .meta-label {
       color: var(--muted-2);
       font-family: 'Poppins', sans-serif;
@@ -787,10 +894,10 @@
         gap: 6px;
       }
       .brand-copy { display: none; }
-      .brand-lockup { gap: 4px; }
+      .brand-lockup { gap: 2px; }
       .brand-logo-btn {
-        width: 62px;
-        height: 44px;
+        width: 66px;
+        height: 46px;
         border-radius: 0;
         background: transparent;
         border: none;
@@ -863,306 +970,30 @@
 
     @media (max-width: 640px) {
       .brand-logo-btn { width: 56px; height: 40px; }
-      .mobile-inline-tools { grid-template-columns: minmax(164px, auto) minmax(0, 1fr); }
-      .mobile-inline-btn { max-width: 148px; }
-      .utility-btn { width: 118px; }
-      .mode-btn-shell,
-      .utility-btn-shell { min-height: 44px; padding: 0 8px; }
-      .btn-copy .top { font-size: 11px; }
-      .btn-copy .bottom { font-size: 8px; }
-      .player-stage { padding: 12px; }
-      .player-stage.video-active { padding: 0; }
-      .audio-transport {
-        max-width: 292px;
-        grid-template-columns: 44px minmax(0, 1fr) 44px;
-      }
-      .transport-btn,
-      .transport-play { min-height: 44px; }
-      .transport-play-circle {
-        width: 34px;
-        height: 34px;
-        flex-basis: 34px;
-      }
-      .transport-play-copy { font-size: 12px; }
-      .audio-title { font-size: 23px; }
-      .audio-now { font-size: 30px; }
-      .meta-title { font-size: 22px; }
-      .meta-intro { font-size: 17px; }
-      .meta-row { grid-template-columns: 102px minmax(0,1fr); }
-    }
-  
-
-    .drawer-body-deep {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    .nav-stack {
-      display: grid;
-      gap: 14px;
-      align-content: start;
-    }
-    .nav-section {
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-    .nav-section-head {
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .nav-list {
+      .mobile-inline-tools {
       display: grid;
       gap: 8px;
-    }
-    .nav-card {
-      display: flex;
-      width: 100%;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      text-align: left;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      color: var(--text);
-    }
-    .nav-card:hover { background: rgba(255,255,255,0.08); }
-    .nav-card.active {
-      background: linear-gradient(180deg, rgba(143,174,157,0.34), rgba(112,138,123,0.20));
-      border-color: rgba(143,174,157,0.22);
-      box-shadow: 0 14px 26px rgba(0,0,0,0.18);
-    }
-    .nav-card-copy { min-width: 0; flex: 1; }
-    .nav-card-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      line-height: 1.15;
-      margin: 0;
-    }
-    .nav-card-meta {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.2;
-    }
-    .nav-card-thumb {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      overflow: hidden;
-      flex: 0 0 56px;
-      background: rgba(255,255,255,0.06);
-    }
-    .nav-card.video .nav-card-thumb {
-      width: 80px;
-      height: 50px;
-      border-radius: 12px;
-      flex-basis: 80px;
-    }
-    .nav-card-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .nav-empty {
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px dashed rgba(255,255,255,0.10);
-      color: var(--muted-2);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    @media (max-width: 980px) {
-      /* Mobile drawer fix:
-         let the whole drawer scroll vertically through all four navigation sections
-         instead of trapping only the first two visible panes inside a fixed-height grid. */
-      .drawer-body,
-      .drawer-body-deep {
-        display: flex;
-        flex-direction: column;
-        height: calc(100% - 64px - var(--safe-top));
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-      }
-      .drawer-pane {
-        min-height: auto;
-        overflow: visible;
-        flex: 0 0 auto;
-      }
-      .drawer-pane-body {
-        overflow: visible;
-      }
-    }
-
-
-    .drawer-tools {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 8px 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(8,8,8,0.96), rgba(14,14,14,0.92));
-    }
-    .drawer-tool-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .drawer-tool-btn {
-      min-height: 36px;
-      padding: 6px 12px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      line-height: 1.15;
-      text-align: center;
-      white-space: normal;
-      max-width: 144px;
-      color: var(--text);
-    }
-    .drawer-tool-btn[disabled] {
-      opacity: 0.45;
-      cursor: default;
-    }
-    .drawer-path {
-      min-width: 0;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: right;
-      line-height: 1.25;
-    }
-    .mobile-nav-flow {
-      display: none;
-    }
-    .flow-stage {
-      display: grid;
-      gap: 12px;
-      padding: 12px;
-    }
-    .flow-summary-list {
-      display: grid;
-      gap: 10px;
-    }
-    .flow-summary {
-      display: grid;
-      gap: 7px;
-      padding: 12px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .flow-summary-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .flow-summary-step {
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted-2);
-    }
-    .flow-summary-change {
-      min-height: 28px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      color: var(--text);
-    }
-    .flow-summary-title {
-      font-family: 'Poppins', sans-serif;
-      font-size: 17px;
-      line-height: 1.15;
-    }
-    .flow-summary-meta {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.3;
-    }
-    .flow-stage-head {
-      position: sticky;
-      top: 0;
-      z-index: 4;
-      margin: 0 -12px;
-      padding: 10px 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.82);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(16,16,16,0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .flow-stage.queue-view .flow-stage-head {
-      background: rgba(54,54,56,0.76);
-    }
-    @media (max-width: 980px) {
-      .drawer-body,
-      .drawer-body-deep {
-        display: block;
-        height: calc(100% - 64px - var(--safe-top));
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-      }
-      .drawer-pane {
-        display: none !important;
-      }
-      .mobile-nav-flow {
-        display: block;
-      }
-    }
-
-
-
-    .mobile-inline-nav {
-      display: none;
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .mobile-inline-tools {
-      display: grid;
-      grid-template-columns: minmax(172px, auto) minmax(0, 1fr);
-      align-items: start;
-      gap: 10px;
-      padding: 8px 10px;
+      padding: 10px 10px 8px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
+    }
+    .mobile-inline-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
     .mobile-inline-actions {
       display: flex;
       gap: 8px;
       align-items: center;
       min-width: 0;
+      width: 100%;
+      justify-content: space-between;
     }
     .mobile-inline-btn {
-      min-height: 36px;
-      padding: 6px 14px;
+      min-height: 38px;
+      padding: 8px 14px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
@@ -1172,22 +1003,35 @@
       line-height: 1.15;
       text-align: center;
       white-space: normal;
-      max-width: 156px;
-      flex: 0 0 auto;
+      flex: 0 1 auto;
+    }
+    .mobile-inline-back {
+      min-width: 176px;
+      max-width: 220px;
+      text-align: left;
+      justify-content: flex-start;
+    }
+    .mobile-inline-home {
+      min-width: 78px;
+      max-width: 92px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
+    .mobile-inline-path-row {
+      display: block;
+      min-width: 0;
+    }
     .mobile-inline-path {
       min-width: 0;
-      text-align: right;
+      text-align: left;
       font-size: 11px;
-      color: rgba(255,255,255,0.92);
+      color: rgba(255,255,255,0.84);
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.22;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      align-self: center;
+      padding: 0 2px;
     }
     .mobile-inline-summary {
       display: none;
@@ -1228,8 +1072,8 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 10px 14px;
-      margin-top: 8px;
+      padding: 14px 14px 10px;
+      margin-top: 10px;
       font-family: 'Poppins', sans-serif;
       font-size: 11px;
       letter-spacing: 0.06em;
@@ -1244,7 +1088,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .mobile-inline-stage-body { padding: 10px 12px 8px; }
+    .mobile-inline-stage-body { padding: 12px 12px 10px; }
 
     
     @media (min-width: 981px) {
@@ -1348,7 +1192,7 @@
       <div class="drawer-tools">
         <div class="drawer-tool-actions">
           <button class="drawer-tool-btn" id="drawerBackBtn" type="button">Back</button>
-          <button class="drawer-tool-btn" id="drawerHomeBtn" type="button">Start Over</button>
+          <button class="drawer-tool-btn" id="drawerHomeBtn" type="button">Home</button>
         </div>
         <div class="drawer-path" id="drawerPathLabel">Start at the top and drill down.</div>
       </div>
@@ -1406,13 +1250,17 @@
       <section class="stage-column" id="playerSection">
         <section class="mobile-inline-nav" id="mobileInlineNav" aria-label="Mobile sermon navigation">
           <div class="mobile-inline-tools">
-            <div class="mobile-inline-actions">
-              <button class="mobile-inline-btn" id="mobileInlineBackBtn" type="button">Back</button>
-              <button class="mobile-inline-btn" id="mobileInlineHomeBtn" type="button">Start Over</button>
+            <div class="mobile-inline-actions-row">
+              <div class="mobile-inline-actions">
+                <button class="mobile-inline-btn mobile-inline-back" id="mobileInlineBackBtn" type="button">Back</button>
+                <button class="mobile-inline-btn mobile-inline-home" id="mobileInlineHomeBtn" type="button">Home</button>
+              </div>
             </div>
-            <div class="mobile-inline-path" id="mobileInlinePathLabel">Start with Listen or Watch, then choose a path.</div>
+            <div class="mobile-inline-path-row">
+              <div class="mobile-inline-path" id="mobileInlinePathLabel">Start with Listen or Watch, then choose a path.</div>
+            </div>
           </div>
-          <div class="mobile-inline-summary" id="mobileInlineSummary"></div>
+          <div class="mobile-inline-summary" id="mobileInlineSummary" style="display:none"></div>
           <div class="mobile-inline-stage-head" id="mobileInlineStageHead">Choose Category</div>
           <div class="mobile-inline-stage-body" id="mobileInlineStageBody"></div>
         </section>
@@ -1439,6 +1287,8 @@
               <p class="audio-status" id="audioReadyLabel">Ready to Listen</p>
               <h3 class="audio-title" id="audioFeatureTitle">Select a sermon</h3>
               <div class="audio-series" id="audioFeatureSeries"></div>
+              <div class="audio-detail-row" id="audioScriptureRow"><span class="audio-detail-label" id="audioScriptureLabel">Scripture</span><span class="audio-detail-value" id="audioFeatureScripture"></span></div>
+              <div class="audio-detail-row" id="audioSpeakerRow"><span class="audio-detail-label">Speaker</span><span class="audio-detail-value" id="audioFeatureSpeaker"></span></div>
 
               <div class="audio-time-row">
                 <div class="audio-now" id="audioClockCurrent">00:00</div>
@@ -1456,6 +1306,7 @@
               <audio id="audioPlayer" preload="none"></audio>
             </div>
           </div>
+          <div class="stage-info" id="stageInfo"></div>
         </section>
 
         <section class="meta-stage" id="metaBox">
@@ -1541,6 +1392,12 @@
     const audioFeatureArtEl = document.getElementById('audioFeatureArt');
     const audioFeatureTitleEl = document.getElementById('audioFeatureTitle');
     const audioFeatureSeriesEl = document.getElementById('audioFeatureSeries');
+    const audioFeatureScriptureEl = document.getElementById('audioFeatureScripture');
+    const audioFeatureSpeakerEl = document.getElementById('audioFeatureSpeaker');
+    const audioScriptureLabelEl = document.getElementById('audioScriptureLabel');
+    const audioScriptureRowEl = document.getElementById('audioScriptureRow');
+    const audioSpeakerRowEl = document.getElementById('audioSpeakerRow');
+    const stageInfoEl = document.getElementById('stageInfo');
     const audioReadyLabelEl = document.getElementById('audioReadyLabel');
     const audioPlayerEl = document.getElementById('audioPlayer');
     const audioPlayBadgeEl = document.getElementById('audioPlayBadge');
@@ -1770,6 +1627,10 @@
         if (!target[key]) target[key] = [];
         if (!target[key].includes(value)) target[key].push(value);
       };
+      const ensureBookBucket = key => {
+        if (!buckets.bibleBooks[key]) buckets.bibleBooks[key] = { series: [], episodes: [] };
+        return buckets.bibleBooks[key];
+      };
 
       Object.keys(sermonData).forEach(seriesName => {
         if (seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name) return;
@@ -1786,7 +1647,8 @@
         }
 
         if (info.bibleBook) {
-          pushUnique(buckets.bibleBooks, info.bibleBook, seriesName);
+          const bucket = ensureBookBucket(info.bibleBook);
+          if (!bucket.series.includes(seriesName)) bucket.series.push(seriesName);
         }
 
         if (info.isYearSpecial) {
@@ -1799,8 +1661,16 @@
           pushUnique(buckets.standaloneSeries, parentKey, seriesName);
         }
 
-        (sermonData[seriesName] || []).forEach(ep => {
+        (sermonData[seriesName] || []).forEach((ep, epIndex) => {
           if (mode === 'video' && !ep.videoId) return;
+          const episodeBook = detectBibleBook(normalizeWhitespace(ep.scripture || ''));
+          if (episodeBook && episodeBook !== info.bibleBook) {
+            const bucket = ensureBookBucket(episodeBook);
+            const refKey = `${seriesName}::${ep.title}::${ep.date || epIndex}`;
+            if (!bucket.episodes.some(item => item.key === refKey)) {
+              bucket.episodes.push({ key: refKey, seriesName, episodeTitle: ep.title, date: ep.date || '', scripture: ep.scripture || '', sortTimestamp: ep.sortTimestamp });
+            }
+          }
           const yearKey = inferYearFromTimestamp(ep.sortTimestamp) || 'Unknown Year';
           const monthKey = getMonthNameFromTimestamp(ep.sortTimestamp) || 'Unknown Month';
           if (!buckets.byDate[yearKey]) buckets.byDate[yearKey] = {};
@@ -1825,7 +1695,10 @@
         const bp = parseStandaloneParentChild(b).parent || b;
         return SHARED_PINNED_CURRENT_ITEMS.indexOf(ap) - SHARED_PINNED_CURRENT_ITEMS.indexOf(bp);
       });
-      Object.keys(buckets.bibleBooks).forEach(key => buckets.bibleBooks[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
+      Object.keys(buckets.bibleBooks).forEach(key => {
+        buckets.bibleBooks[key].series.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+        buckets.bibleBooks[key].episodes.sort((a, b) => b.sortTimestamp - a.sortTimestamp);
+      });
       Object.keys(buckets.standaloneSeries).forEach(key => buckets.standaloneSeries[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
       Object.keys(buckets.yearSpecials).forEach(key => buckets.yearSpecials[key].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })));
       Object.keys(buckets.byDate).forEach(year => {
@@ -1855,7 +1728,7 @@
       if (navRootKey === 'livestreams') return [{ key: 'live-collection', title: 'Livestreams', meta: 'Pinned first in Watch mode' }];
       if (navRootKey === 'guestSpeakers') return [{ key: 'guest-collection', title: 'Guest Speakers', meta: 'Pinned last in Watch mode' }];
       if (navRootKey === 'pinnedCurrent') return [{ key: 'current-collection', title: 'Series in Progress', meta: formatCountLabel(browseBuckets.pinnedCurrent.length, 'series', 'series') }];
-      if (navRootKey === 'bibleBooks') return sortBibleBooksInCanonicalOrder(Object.keys(browseBuckets.bibleBooks)).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.bibleBooks[key].length, 'series', 'series') }));
+      if (navRootKey === 'bibleBooks') return sortBibleBooksInCanonicalOrder(Object.keys(browseBuckets.bibleBooks)).map(key => { const bucket = browseBuckets.bibleBooks[key] || { series: [], episodes: [] }; const parts = []; if (bucket.series.length) parts.push(formatCountLabel(bucket.series.length, 'series', 'series')); if (bucket.episodes.length) parts.push(formatCountLabel(bucket.episodes.length, 'individual episode', 'individual episodes')); return ({ key, title: key, meta: parts.join(' • ') }); });
       if (navRootKey === 'standaloneSeries') return Object.keys(browseBuckets.standaloneSeries).sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.standaloneSeries[key].length, 'series', 'series') }));
       if (navRootKey === 'yearSpecials') return Object.keys(browseBuckets.yearSpecials).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(browseBuckets.yearSpecials[key].length, 'series', 'series') }));
       if (navRootKey === 'byDate') return Object.keys(browseBuckets.byDate).sort((a, b) => b.localeCompare(a, undefined, { numeric: true })).map(key => ({ key, title: key, meta: formatCountLabel(Object.keys(browseBuckets.byDate[key] || {}).length, 'month', 'months') }));
@@ -1879,7 +1752,13 @@
         });
       }
       if (navRootKey === 'bibleBooks') {
-        return (browseBuckets.bibleBooks[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
+        const bucket = browseBuckets.bibleBooks[navBranchKey] || { series: [], episodes: [] };
+        const items = [];
+        if (bucket.series.length) items.push({ key: '__section_series', title: 'Series', type: 'section' });
+        bucket.series.forEach(seriesName => items.push({ key: seriesName, title: seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
+        if (bucket.episodes.length) items.push({ key: '__section_episodes', title: 'Stand Alone Episodes', type: 'section' });
+        bucket.episodes.forEach(item => { const eps = sermonData[item.seriesName] || []; const match = eps.find(ep => ep.title === item.episodeTitle && ep.date === item.date) || eps.find(ep => ep.title === item.episodeTitle) || eps[0]; if (match && (mode === 'audio' || match.videoId)) items.push({ key: item.key, title: item.episodeTitle, type: 'episode_surface', meta: item.scripture || item.date || '', image: mode === 'video' ? (match.videoId ? getWatchThumb(match.videoId) : match.seriesWideImage || FALLBACK_IMAGE) : (match.img || match.seriesImage || FALLBACK_IMAGE), episodeRef: match }); });
+        return items;
       }
       if (navRootKey === 'standaloneSeries') {
         return (browseBuckets.standaloneSeries[navBranchKey] || []).map(seriesName => ({ key: seriesName, title: parseStandaloneParentChild(seriesName).child || seriesName, type: 'series', meta: formatCountLabel(getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'), image: getSeriesArtForMode(seriesName) }));
@@ -2031,7 +1910,7 @@
 
     function getLeafHeadText() {
       if (navRootKey === 'byDate') return 'Step 3 · Choose Month';
-      if (navRootKey === 'bibleBooks') return 'Step 3 · Choose Series';
+      if (navRootKey === 'bibleBooks') return 'Step 3 · Choose Series or Episode';
       if (navRootKey === 'standaloneSeries') return 'Step 3 · Choose Mini-Series';
       if (navRootKey === 'yearSpecials') return 'Step 3 · Choose Series';
       if (navRootKey === 'pinnedCurrent') return 'Step 3 · Choose Series';
@@ -2214,7 +2093,7 @@
       if (navRootKey) labels.push(getRootTitleByKey(navRootKey));
       if (navBranchKey && ['leaf','queue','selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep()) labels.push(getLeafTitleByKey(navLeafKey));
-      mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a path.';
+      mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = mobileNavView === 'root';
         mobileInlineBackBtnEl.textContent = getMobileBackButtonText();
@@ -2249,18 +2128,14 @@
         activeKey = navLeafKey;
         emptyText = 'Choose the previous step first.';
         onPick = key => setLeaf(key);
-      } else if (mobileNavView === 'selected' && currentEpisodeData) {
-        headText = mode === 'audio' ? 'Now Listening' : 'Now Watching';
       } else {
         headText = navRootKey === 'byDate' ? 'Choose Day' : 'Choose Episode';
       }
 
       mobileInlineStageHeadEl.textContent = headText;
       mobileInlineStageBodyEl.innerHTML = '';
-      if (mobileNavView === 'queue') {
+      if (mobileNavView === 'queue' || mobileNavView === 'selected') {
         renderQueueInto(mobileInlineStageBodyEl);
-      } else if (mobileNavView === 'selected' && currentEpisodeData) {
-        mobileInlineStageBodyEl.appendChild(renderFlowSummary('Selected Episode', currentEpisodeData.title || 'Selected episode', currentEpisodeData.scripture || currentEpisodeData.date || '', () => { mobileNavView = 'queue'; renderMobileInlineFlow(); scrollMobileSelectorToTop(); }));
       } else {
         renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
       }
@@ -2294,7 +2169,20 @@
       }
       const wrap = document.createElement('div');
       wrap.className = 'nav-list';
-      items.forEach(item => wrap.appendChild(createNavCard(item, item.key === activeKey, () => onPick(item.key))));
+      items.forEach(item => {
+        if (item.type === 'section') {
+          const divider = document.createElement('div');
+          divider.className = 'browse-subgroup-title';
+          divider.textContent = item.title;
+          wrap.appendChild(divider);
+          return;
+        }
+        if (item.type === 'episode_surface' && item.episodeRef) {
+          wrap.appendChild(createNavCard(item, false, () => selectEpisode(item.episodeRef, 0)));
+          return;
+        }
+        wrap.appendChild(createNavCard(item, item.key === activeKey, () => onPick(item.key)));
+      });
       targetEl.appendChild(wrap);
     }
 
@@ -2356,6 +2244,7 @@
 
       renderMobileDrawerFlow();
       renderMobileInlineFlow();
+      scrollMobileSelectorToTop();
     }
 
     function makeQueueCard(ep, originalIndex, labelOverride = '') {
@@ -2460,7 +2349,7 @@
     }
 
     function setAudioReadyState(isPlaying) {
-      audioReadyLabelEl.textContent = isPlaying ? 'Listening...' : 'Ready to Listen';
+      audioReadyLabelEl.textContent = '';
       audioPlayIconEl.innerHTML = isPlaying ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
       if (isPlaying) startPlayingDots();
       else {
@@ -2501,27 +2390,82 @@
       currentEpisodeData = null;
     }
 
-    function buildMetaRows(ep) {
-      const rows = [];
-      if (ep.scripture) rows.push(`<div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value">${ep.scripture}</div></div>`);
-      if (ep.by) rows.push(`<div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value">${ep.by}</div></div>`);
-      if (ep.date) rows.push(`<div class="meta-row"><div class="meta-label">Date</div><div class="meta-value">${ep.date}</div></div>`);
-      if (ep.extra?.length) ep.extra.forEach(line => rows.push(`<div class="meta-row"><div class="meta-label">Publisher</div><div class="meta-value">${line}</div></div>`));
-      return rows.join('');
+    function getScriptureLabel(value) {
+      const clean = normalizeWhitespace(value || '');
+      if (!clean) return 'Scripture';
+      return clean.toLowerCase() === 'various' ? 'Selected Scriptures' : 'Scripture';
     }
 
-    function renderEmptyMeta() {
-      const mobilePrompt = mode === 'audio' ? 'Choose a sermon path above to begin listening' : 'Choose a sermon path above to begin watching';
-      const desktopPrompt = mode === 'audio' ? 'Choose a category, then follow the browse path to begin listening.' : 'Choose a category, then follow the browse path to begin watching.';
-      metaBoxEl.innerHTML = `<h2 class="meta-title">Select a sermon</h2><div class="meta-intro">${isMobileLayout() ? mobilePrompt : desktopPrompt}</div><p class="meta-note">Start with Listen or Watch, choose a browse path, then pick an episode to load the player.</p>`;
+    function renderAudioDetails(ep) {
+      const scripture = normalizeWhitespace(ep.scripture || '');
+      audioFeatureScriptureEl.textContent = scripture || '';
+      audioScriptureLabelEl.textContent = getScriptureLabel(scripture);
+      audioScriptureRowEl.style.display = scripture ? 'flex' : 'none';
+      audioFeatureSpeakerEl.textContent = normalizeWhitespace(ep.by || '');
+      audioSpeakerRowEl.style.display = ep.by ? 'flex' : 'none';
+    }
+
+    function renderStageInfo(ep) {
+      if (!stageInfoEl) return;
+      if (mode === 'audio') {
+        stageInfoEl.style.display = 'none';
+        stageInfoEl.innerHTML = '';
+        return;
+      }
+      const scripture = normalizeWhitespace(ep.scripture || '');
+      const speaker = normalizeWhitespace(ep.by || '');
+      const rows = [];
+      if (scripture) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scripture)}</span><span>${scripture}</span></div>`);
+      if (speaker) rows.push(`<div class="stage-info-row"><span class="stage-info-label">Speaker</span><span>${speaker}</span></div>`);
+      stageInfoEl.innerHTML = `<h3 class="stage-info-title">${ep.title || 'Untitled Sermon'}</h3><div class="stage-info-series">${ep.series || currentSeries || ''}</div><div class="stage-info-meta">${rows.join('')}</div>`;
+      stageInfoEl.style.display = 'block';
+    }
+
+    function getRelatedEntries() {
+      if (!currentEpisodeData) return { title: '', items: [] };
+      const queueEntries = getQueueEntries().filter(item => item.ep && !(item.ep.title === currentEpisodeData.title && item.ep.series === currentEpisodeData.series));
+      const sameSeries = queueEntries.filter(item => item.ep.series === currentEpisodeData.series);
+      const source = sameSeries.length ? sameSeries : queueEntries;
+      let title = '';
+      if (sameSeries.length) title = navRootKey === 'bibleBooks' ? `More from ${navBranchKey}` : 'More in this Series';
+      else if (queueEntries.length) title = 'Up Next';
+      return { title, items: source.slice(0, 10) };
     }
 
     function renderMeta(ep) {
-      metaBoxEl.innerHTML = `<h2 class="meta-title">${ep.title || 'Untitled Sermon'}</h2><div class="meta-series">${ep.series || currentSeries || ''}</div><div class="meta-grid">${buildMetaRows(ep)}</div>`;
+      const related = getRelatedEntries();
+      if (!related.items.length) {
+        metaBoxEl.style.display = 'none';
+        metaBoxEl.innerHTML = '';
+        return;
+      }
+      const cards = related.items.map((item, index) => {
+        const entry = item.ep;
+        const thumb = mode === 'video' ? (entry.videoId ? getWatchThumb(entry.videoId) : entry.seriesWideImage || FALLBACK_IMAGE) : (entry.img || entry.seriesImage || FALLBACK_IMAGE);
+        return `<button type="button" class="related-card ${mode}" data-related-index="${index}"><span class="related-thumb"><img src="${thumb}" alt=""></span><span class="related-copy"><h4>${entry.title || 'Untitled Sermon'}</h4><p>${entry.scripture || entry.date || ''}</p></span></button>`;
+      }).join('');
+      metaBoxEl.style.display = 'block';
+      metaBoxEl.innerHTML = `<div class="related-shell" style="display:grid;"><div class="related-head"><h3 class="related-title">${related.title}</h3></div><div class="related-row">${cards}</div></div>`;
+      metaBoxEl.querySelectorAll('[data-related-index]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = related.items[Number(btn.getAttribute('data-related-index'))];
+          if (item && item.ep) selectEpisode(item.ep, item.originalIndex || 0);
+        });
+      });
+    }
+
+    function renderEmptyMeta() {
+      metaBoxEl.style.display = 'none';
+      metaBoxEl.innerHTML = '';
+      if (stageInfoEl) {
+        stageInfoEl.style.display = 'none';
+        stageInfoEl.innerHTML = '';
+      }
     }
 
     function showModePlaceholder() {
       if (playerStageEl) playerStageEl.classList.remove('video-active', 'audio-active');
+      if (stageInfoEl) { stageInfoEl.style.display = 'none'; stageInfoEl.innerHTML = ''; }
       if (mode === 'audio') {
         audioPlaceholderEl.textContent = isMobileLayout() ? 'Choose a sermon path above to begin listening' : 'Choose an episode from the queue to begin listening.';
         audioPlaceholderEl.style.display = 'flex';
@@ -2529,6 +2473,7 @@
         videoPlaceholderEl.textContent = isMobileLayout() ? 'Choose a sermon path above to begin watching' : 'Choose an episode from the queue to begin watching.';
         videoPlaceholderEl.style.display = 'flex';
       }
+      metaBoxEl.style.display = 'none';
     }
 
     function playAudio(ep) {
@@ -2542,6 +2487,8 @@
       audioFeatureArtEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
       audioFeatureTitleEl.textContent = ep.title || 'Untitled Sermon';
       audioFeatureSeriesEl.textContent = ep.series || currentSeries || '';
+      renderAudioDetails(ep);
+      renderStageInfo(ep);
       audioPlayerEl.src = ep.audio || '';
       audioPlayerEl.load();
       currentEpisodeData = ep;
@@ -2554,6 +2501,7 @@
     function playVideo(ep) {
       stopAndHideAudio();
       currentEpisodeData = ep;
+      renderStageInfo(ep);
       if (!ep.videoId) {
         videoPlaceholderEl.textContent = 'No video is available for this sermon yet.';
         videoPlaceholderEl.style.display = 'flex';
@@ -2578,7 +2526,7 @@
       currentEpisodeIndex = originalIndex;
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
-      if (isMobileLayout()) mobileNavView = 'selected';
+      if (isMobileLayout()) mobileNavView = 'queue';
       renderQueue();
       renderNavigation();
       if (isMobileLayout()) {
@@ -2716,7 +2664,7 @@
       renderMobileInlineFlow();
       scrollMobileSelectorToTop();
     });
-    drawerHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileDrawerFlow(); });
+    drawerHomeBtnEl.addEventListener('click', () => { resetHome(); scrollMobileSelectorToTop(); });
     if (mobileInlineBackBtnEl) mobileInlineBackBtnEl.addEventListener('click', () => {
       if (mobileNavView === 'selected') mobileNavView = 'queue';
       else if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
@@ -2724,7 +2672,7 @@
       else if (mobileNavView === 'branch') mobileNavView = 'root';
       renderMobileInlineFlow();
     });
-    if (mobileInlineHomeBtnEl) mobileInlineHomeBtnEl.addEventListener('click', () => { mobileNavView = 'root'; renderMobileInlineFlow(); scrollMobileSelectorToTop(); });
+    if (mobileInlineHomeBtnEl) mobileInlineHomeBtnEl.addEventListener('click', () => { resetHome(); scrollMobileSelectorToTop(); });
     closeDrawerBtnEl.addEventListener('click', closeDrawer);
     drawerOverlayEl.addEventListener('click', closeDrawer);
     listenBtnEl.addEventListener('click', () => setMode('audio'));
