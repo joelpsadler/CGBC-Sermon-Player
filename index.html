@@ -1394,7 +1394,7 @@
       .mobile-top-shell {
         display: block;
         position: sticky;
-        top: 0;
+        top: var(--mobile-masthead-offset, 0px);
         z-index: 215;
         background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.94));
         border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -2587,6 +2587,7 @@
 
     function syncMobileShellHeight() {
       if (!isMobileLayout() || !appShellEl || !workspaceEl || !playerSectionEl || !mastheadEl) {
+        document.documentElement.style.removeProperty('--mobile-masthead-offset');
         if (appShellEl) appShellEl.style.removeProperty('height');
         if (workspaceEl) workspaceEl.style.removeProperty('height');
         if (playerSectionEl) playerSectionEl.style.removeProperty('height');
@@ -2595,6 +2596,7 @@
       const viewportH = Math.max(window.innerHeight || 0, window.visualViewport?.height || 0);
       if (!viewportH) return;
       const mastheadH = Math.ceil(mastheadEl.getBoundingClientRect().height || 0);
+      document.documentElement.style.setProperty('--mobile-masthead-offset', `${mastheadH}px`);
       const pinnedShellEl = document.getElementById('mobileTopShell');
       const pinnedShellH = isMobileLayout() ? Math.ceil(pinnedShellEl?.getBoundingClientRect().height || 0) : 0;
       const workspaceH = Math.max(0, viewportH - mastheadH - pinnedShellH);
