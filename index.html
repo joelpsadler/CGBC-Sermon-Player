@@ -72,7 +72,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       padding: calc(10px + var(--safe-top)) 6px 10px;
     }
     .brand-lockup {
@@ -604,6 +604,7 @@
       flex-direction: column;
       gap: 6px;
       padding-top: 8px;
+      padding-bottom: 12px;
     }
     .audio-status {
       display: none;
@@ -968,10 +969,10 @@
         gap: 6px;
       }
       .brand-copy { display: none; }
-      .brand-lockup { gap: 2px; }
+      .brand-lockup { gap: 0; }
       .brand-logo-btn {
-        width: 70px;
-        height: 50px;
+        width: 78px;
+        height: 58px;
         border-radius: 0;
         background: transparent;
         border: none;
@@ -1043,11 +1044,11 @@
     }
 
     @media (max-width: 640px) {
-      .brand-logo-btn { width: 60px; height: 44px; }
+      .brand-logo-btn { width: 68px; height: 50px; }
       .mobile-inline-tools {
       display: grid;
       gap: 8px;
-      padding: 10px 10px 8px;
+      padding: 8px 6px 6px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
     }
@@ -1080,14 +1081,14 @@
       flex: 0 1 auto;
     }
     .mobile-inline-back {
-      min-width: 176px;
-      max-width: 220px;
+      min-width: 188px;
+      max-width: 246px;
       text-align: left;
       justify-content: flex-start;
     }
     .mobile-inline-home {
-      min-width: 78px;
-      max-width: 92px;
+      min-width: 84px;
+      max-width: 96px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
     .mobile-inline-path-row {
@@ -1146,8 +1147,8 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 14px 14px 10px;
-      margin-top: 10px;
+      padding: 12px 14px 10px;
+      margin-top: 6px;
       font-family: 'Poppins', sans-serif;
       font-size: 11px;
       letter-spacing: 0.06em;
@@ -1163,6 +1164,8 @@
       text-overflow: ellipsis;
     }
     .mobile-inline-stage-body { padding: 12px 12px 10px; }
+    .mobile-inline-stage-body.collapsed { display:none; }
+    .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
     .mobile-inline-stage-body .nav-list { gap: 12px; }
     .mobile-inline-stage-body .browse-subgroup-title { margin: 12px 2px 6px; color: rgba(255,255,255,0.68); }
 
@@ -1935,7 +1938,7 @@
       currentEpisodeData = null;
       clearMediaState();
       syncSeriesSelection();
-      if (isMobileLayout()) mobileNavView = 'queue';
+      if (isMobileLayout()) mobileNavView = 'selected';
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
@@ -1957,6 +1960,19 @@
     function formatCountLabel(count, singular, plural) {
       return `${count} ${count === 1 ? singular : plural}`;
     }
+
+    function getEpisodePrimaryBook(ep) {
+      return detectBibleBook(normalizeWhitespace(ep?.scripture || ''));
+    }
+
+    function getEpisodeScriptureContext(ep) {
+      const scripture = normalizeWhitespace(ep?.scripture || '');
+      if (!scripture || /^various$/i.test(scripture)) return '';
+      const match = scripture.match(/^((?:[1-3]\s)?[A-Za-z]+(?:\s[A-Za-z]+)*)\s(\d+)/);
+      if (!match) return '';
+      return `${match[1]} ${match[2]}`;
+    }
+
 
     function getRootTitleByKey(key) {
       const item = getRootItems().find(entry => entry.key === key);
@@ -2210,7 +2226,13 @@
 
       mobileInlineStageHeadEl.textContent = headText;
       mobileInlineStageBodyEl.innerHTML = '';
-      if (mobileNavView === 'queue' || mobileNavView === 'selected') {
+      mobileInlineStageHeadEl.classList.remove('collapsed');
+      mobileInlineStageBodyEl.classList.remove('collapsed');
+      if (mobileNavView === 'selected') {
+        mobileInlineStageHeadEl.textContent = mode === 'audio' ? 'Now Listening' : 'Now Watching';
+        mobileInlineStageHeadEl.classList.add('collapsed');
+        mobileInlineStageBodyEl.classList.add('collapsed');
+      } else if (mobileNavView === 'queue') {
         renderQueueInto(mobileInlineStageBodyEl);
       } else {
         renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
@@ -2501,10 +2523,32 @@
       if (!currentEpisodeData) return { title: '', items: [] };
       const queueEntries = getQueueEntries().filter(item => item.ep && !(item.ep.title === currentEpisodeData.title && item.ep.series === currentEpisodeData.series));
       const sameSeries = queueEntries.filter(item => item.ep.series === currentEpisodeData.series);
-      const source = sameSeries.length ? sameSeries : queueEntries;
+      const currentScriptureContext = getEpisodeScriptureContext(currentEpisodeData);
+      const sameContext = currentScriptureContext
+        ? queueEntries.filter(item => getEpisodeScriptureContext(item.ep) === currentScriptureContext)
+        : [];
+      const currentBook = navRootKey === 'bibleBooks' ? navBranchKey : getEpisodePrimaryBook(currentEpisodeData);
+      const sameBook = currentBook
+        ? queueEntries.filter(item => getEpisodePrimaryBook(item.ep) === currentBook)
+        : [];
+
+      let source = [];
       let title = '';
-      if (sameSeries.length) title = navRootKey === 'bibleBooks' ? `More from ${navBranchKey}` : 'More in this Series';
-      else if (queueEntries.length) title = 'Up Next';
+
+      if (sameContext.length) {
+        source = sameContext;
+        title = `More from ${currentScriptureContext}`;
+      } else if (sameSeries.length) {
+        source = sameSeries;
+        title = navRootKey === 'bibleBooks' && currentBook ? `More from ${currentBook}` : 'More in this Series';
+      } else if (sameBook.length) {
+        source = sameBook;
+        title = `More from ${currentBook}`;
+      } else if (queueEntries.length) {
+        source = queueEntries;
+        title = 'Up Next';
+      }
+
       return { title, items: source.slice(0, 10) };
     }
 
