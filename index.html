@@ -30,7 +30,7 @@
       --shadow-deep: 0 30px 70px rgba(0,0,0,0.40);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --mobile-sticky-offset: 140px;
+      --mobile-sticky-offset: 162px;
     }
 
     * { box-sizing: border-box; }
@@ -1081,14 +1081,14 @@
       justify-content: space-between;
     }
     .mobile-inline-btn {
-      min-height: 46px;
-      padding: 10px 16px;
+      min-height: 48px;
+      padding: 11px 18px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.15;
       text-align: center;
       white-space: normal;
@@ -1112,10 +1112,10 @@
     .mobile-inline-path {
       min-width: 0;
       text-align: left;
-      font-size: 13px;
-      color: rgba(255,255,255,0.84);
+      font-size: 15px;
+      color: rgba(255,255,255,0.92);
       font-family: 'Poppins', sans-serif;
-      font-weight: 600;
+      font-weight: 700;
       line-height: 1.22;
       white-space: nowrap;
       overflow: hidden;
@@ -1161,13 +1161,13 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 10px 14px 9px;
-      margin-top: 4px;
+      padding: 8px 14px 8px;
+      margin-top: 2px;
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.82);
+      color: rgba(255,255,255,0.62);
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: rgba(18,18,18,0.86);
@@ -1182,8 +1182,8 @@
     .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
     .mobile-inline-stage-body .nav-list { gap: 12px; }
     .mobile-inline-stage-body .browse-subgroup-title { margin: 12px 2px 6px; color: rgba(255,255,255,0.68); }
+    }
 
-    
     @media (min-width: 981px) {
       html, body { height: 100%; }
       body { overflow: hidden; }
@@ -1238,14 +1238,35 @@
 
 
     @media (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      :root { --mobile-sticky-offset: 148px; }
       .masthead { padding-top: calc(4px + var(--safe-top)); padding-bottom: 4px; gap: 2px; }
       .brand-logo-btn { width: 68px; height: 48px; }
       .mode-btn-shell { min-height: 42px; }
       .utility-btn { display: none !important; }
+      .mobile-inline-nav {
+        position: sticky;
+        top: calc(var(--safe-top) + 58px);
+        z-index: 170;
+        background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.95));
+        margin: 0 -8px 0;
+        padding: 0 8px 4px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .mobile-inline-tools {
+        display: grid;
+        gap: 8px;
+        padding: 8px 6px 7px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
+      }
       .mobile-inline-actions-row { gap: 10px; }
-      .mobile-inline-btn { min-height: 42px; padding: 0 14px; font-size: 13px; }
-      .mobile-inline-path { font-size: 13px; }
-      .mobile-inline-stage-head { font-size: 13px; padding-top: 8px; padding-bottom: 8px; }
+      .mobile-inline-actions { display:flex; gap: 10px; align-items:center; justify-content: space-between; width:100%; }
+      .mobile-inline-btn { min-height: 42px; padding: 0 16px; font-size: 14px; }
+      .mobile-inline-back { min-width: 250px; max-width: 360px; text-align:left; justify-content:flex-start; }
+      .mobile-inline-home { min-width: 110px; max-width: 128px; }
+      .mobile-inline-path { font-size: 15px; }
+      .mobile-inline-stage-head { font-size: 11px; padding-top: 7px; padding-bottom: 7px; color: rgba(255,255,255,0.58); }
+      .mobile-inline-stage-body { padding-top: 8px; }
       .player-stage { padding: 12px; }
       .audio-title { font-size: 22px; }
       .audio-now { font-size: 30px; }
@@ -1566,12 +1587,12 @@
     }
 
     function scrollPlayerIntoView() {
-      const stickyOffset = Math.max(110, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-sticky-offset')) || 140);
-      const target = (isMobileLayout() && mode === 'video' ? (videoShellEl || playerStageEl) : (playerStageEl || playerSectionEl));
+      const stickyOffset = Math.max(118, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-sticky-offset')) || 162);
+      const target = (isMobileLayout() ? (playerSectionEl || playerStageEl) : (mode === 'video' ? (videoShellEl || playerStageEl) : (playerStageEl || playerSectionEl)));
       if (!target) return;
       window.requestAnimationFrame(() => {
         const rect = target.getBoundingClientRect();
-        const top = window.scrollY + rect.top - stickyOffset - (mode === 'video' ? 10 : 4);
+        const top = window.scrollY + rect.top - stickyOffset + 2;
         window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
       });
     }
@@ -2294,7 +2315,7 @@
       mobileInlineStageHeadEl.classList.remove('collapsed');
       mobileInlineStageBodyEl.classList.remove('collapsed');
       if (mobileNavView === 'selected') {
-        mobileInlineStageHeadEl.textContent = mode === 'audio' ? 'Now Listening' : 'Now Watching';
+        mobileInlineStageHeadEl.textContent = mode === 'audio' ? 'Listening' : 'Watching';
         mobileInlineStageHeadEl.classList.add('collapsed');
         mobileInlineStageBodyEl.classList.add('collapsed');
       } else if (mobileNavView === 'queue') {
