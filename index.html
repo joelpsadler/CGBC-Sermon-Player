@@ -1319,8 +1319,12 @@
         position: relative;
         z-index: 0;
       }
+      .player-stage {
+        margin-bottom: 0;
+      }
       .meta-stage {
         margin-top: 12px;
+        flex: 0 0 auto;
       }
       .mobile-inline-nav {
         position: sticky;
@@ -1592,6 +1596,8 @@
     let currentSeries = null;
     let currentEpisodeIndex = null;
     let currentEpisodeData = null;
+    let selectedEntrySource = 'queue';
+    let selectedContext = null;
     let playingDotsTimer = null;
     let playingDotsIndex = 0;
     const playingDotsStates = ['', '.', '..', '...'];
@@ -2072,6 +2078,7 @@
       navLeafKey = getDefaultLeafKey(leaves);
       currentEpisodeIndex = null;
       currentEpisodeData = null;
+      selectedContext = null;
       clearMediaState();
       syncSeriesSelection();
       if (isMobileLayout()) mobileNavView = getNextMobileViewAfterRoot();
@@ -2088,6 +2095,7 @@
       navLeafKey = getDefaultLeafKey(leaves);
       currentEpisodeIndex = null;
       currentEpisodeData = null;
+      selectedContext = null;
       clearMediaState();
       syncSeriesSelection();
       if (isMobileLayout()) mobileNavView = getNextMobileViewAfterBranch();
@@ -2102,6 +2110,7 @@
       navLeafKey = key;
       currentEpisodeIndex = null;
       currentEpisodeData = null;
+      selectedContext = null;
       clearMediaState();
       syncSeriesSelection();
       if (isMobileLayout()) mobileNavView = 'queue';
@@ -2292,12 +2301,21 @@
 
     function performMobileBack() {
       if (currentEpisodeData) {
+        const ctx = selectedContext || {};
         currentEpisodeData = null;
         currentEpisodeIndex = null;
+        selectedContext = null;
         clearMediaState();
         renderEmptyMeta();
         showModePlaceholder();
-        mobileNavView = 'queue';
+        if (ctx.source === 'leaf') {
+          if (ctx.leafKey) navLeafKey = ctx.leafKey;
+          currentSeries = null;
+          mobileNavView = 'leaf';
+        } else {
+          if (ctx.seriesName) currentSeries = ctx.seriesName;
+          mobileNavView = 'queue';
+        }
         renderQueue();
         renderNavigation();
         if (isMobileLayout()) scrollMobileSelectorToTop();
@@ -2511,7 +2529,7 @@
           return;
         }
         if (item.type === 'episode_surface' && item.episodeRef) {
-          wrap.appendChild(createNavCard(item, false, () => selectEpisode(item.episodeRef, 0)));
+          wrap.appendChild(createNavCard(item, false, () => selectEpisode(item.episodeRef, 0, { source: 'leaf', leafKey: navLeafKey, seriesName: item.episodeRef?.series || '' })));
           return;
         }
         wrap.appendChild(createNavCard(item, item.key === activeKey, () => onPick(item.key)));
@@ -2588,7 +2606,7 @@
       const thumb = mode === 'video' ? (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE) : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
       const subtitle = labelOverride || ep.scripture || ep.date || '';
       button.innerHTML = `<div class="episode-thumb"><img src="${thumb}" alt=""></div><div class="card-copy"><h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3><div class="card-subtitle">${subtitle}</div></div>`;
-      button.addEventListener('click', () => selectEpisode(ep, originalIndex));
+      button.addEventListener('click', () => selectEpisode(ep, originalIndex, { source: 'queue', leafKey: navLeafKey, seriesName: currentSeries || ep.series || '' }));
       return button;
     }
 
@@ -2815,7 +2833,7 @@
         return `<button type="button" class="related-card ${mode}" data-related-index="${index}"><span class="related-thumb"><img src="${thumb}" alt=""></span><span class="related-copy"><h4>${entry.title || 'Untitled Sermon'}</h4><p>${entry.scripture || entry.date || ''}</p></span></button>`;
       }).join('');
       metaBoxEl.style.display = 'block';
-      metaBoxEl.innerHTML = `<div class="related-shell" style="display:grid;"><div class="related-head"><h3 class="related-title">${related.title}</h3></div><div class="related-row">${cards}</div></div>`;
+      metaBoxEl.innerHTML = `<div class="related-shell" style="display:grid; gap: 10px;"><div class="related-head"><h3 class="related-title">${related.title}</h3></div><div class="related-row">${cards}</div></div>`;
       metaBoxEl.querySelectorAll('[data-related-index]').forEach(btn => {
         btn.addEventListener('click', () => {
           const item = related.items[Number(btn.getAttribute('data-related-index'))];
@@ -2892,8 +2910,14 @@
       renderMeta(ep);
     }
 
-    function selectEpisode(ep, originalIndex) {
+    function selectEpisode(ep, originalIndex, options = {}) {
       currentEpisodeIndex = originalIndex;
+      selectedEntrySource = options.source || 'queue';
+      selectedContext = {
+        source: selectedEntrySource,
+        leafKey: options.leafKey || navLeafKey || null,
+        seriesName: options.seriesName || currentSeries || ep.series || ''
+      };
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
       if (isMobileLayout()) mobileNavView = 'selected';
@@ -2990,6 +3014,7 @@
       bodyEl.classList.toggle('mode-video', mode === 'video');
       currentEpisodeIndex = null;
       currentEpisodeData = null;
+      selectedContext = null;
       clearMediaState();
       setDefaultNavigation();
       mobileNavView = 'root';
@@ -3004,6 +3029,7 @@
     function resetHome() {
       currentEpisodeIndex = null;
       currentEpisodeData = null;
+      selectedContext = null;
       clearMediaState();
       setDefaultNavigation();
       mobileNavView = 'root';
