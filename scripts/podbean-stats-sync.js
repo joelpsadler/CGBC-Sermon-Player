@@ -6,7 +6,7 @@ const CLIENT_ID = process.env.PODBEAN_CLIENT_ID;
 const CLIENT_SECRET = process.env.PODBEAN_CLIENT_SECRET;
 const STATS_DAYS = Number(process.env.PODBEAN_STATS_DAYS || 3650);
 const PAGE_LIMIT = Math.min(100, Number(process.env.PODBEAN_LIMIT || 100));
-const CHUNK_DAYS = 90;
+const CHUNK_DAYS = 60;
 
 const REQUEST_DELAY_MS = 700;
 const RETRY_BASE_DELAY_MS = 2500;
