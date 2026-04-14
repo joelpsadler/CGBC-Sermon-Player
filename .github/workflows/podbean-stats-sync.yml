@@ -27,8 +27,11 @@ jobs:
         env:
           PODBEAN_CLIENT_ID: ${{ secrets.PODBEAN_CLIENT_ID }}
           PODBEAN_CLIENT_SECRET: ${{ secrets.PODBEAN_CLIENT_SECRET }}
-          PODBEAN_STATS_DAYS: "3650"
           PODBEAN_LIMIT: "100"
+          PODBEAN_TRACK_WINDOW_DAYS: "60"
+          PODBEAN_REQUEST_DELAY_MS: "1200"
+          PODBEAN_RETRY_BASE_DELAY_MS: "4000"
+          PODBEAN_MAX_RETRIES: "5"
         run: node scripts/podbean-stats-sync.js
 
       - name: Commit updated stats.json
