@@ -26,6 +26,8 @@
       --accent: #8fae9d;
       --accent-2: #b9d2c3;
       --accent-ink: #112018;
+      --bg-image-mobile: url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230674/Mobile.jpg');
+      --bg-image-desktop: url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230673/Desktop.jpg');
       --shadow: 0 18px 40px rgba(0,0,0,0.32);
       --shadow-deep: 0 30px 70px rgba(0,0,0,0.40);
       --safe-top: env(safe-area-inset-top, 0px);
@@ -1403,6 +1405,78 @@
       }
       .utility-btn {
         display: none !important;
+      }
+    }
+    @media (max-width: 980px) {
+      body {
+        background:
+          linear-gradient(180deg, rgba(8,8,9,0.54), rgba(8,8,9,0.84)),
+          radial-gradient(circle at top, rgba(130,160,145,0.08), transparent 30%),
+          var(--bg-image-mobile) center / cover no-repeat;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      .masthead {
+        padding-top: calc(8px + var(--safe-top));
+        padding-bottom: 8px;
+      }
+      .masthead-inner {
+        grid-template-columns: 84px minmax(0, 1fr);
+        gap: 10px;
+        align-items: center;
+      }
+      .logo-mark {
+        width: 72px;
+        max-width: 72px;
+      }
+      .mode-toggle {
+        min-height: 72px;
+        border-radius: 26px;
+      }
+      .mode-btn {
+        min-height: 64px;
+        padding: 12px 14px;
+      }
+      .mode-btn .mode-title {
+        font-size: 16px;
+      }
+      .mode-btn .mode-sub {
+        font-size: 12px;
+      }
+      .mobile-inline-nav {
+        margin: 0 -8px 6px;
+        padding: 0 8px 6px;
+      }
+      .mobile-inline-tools {
+        padding: 8px 4px 4px;
+      }
+      .mobile-inline-actions {
+        gap: 10px;
+      }
+      .mobile-inline-btn {
+        min-height: 48px;
+        border-radius: 18px;
+        font-size: 15px;
+      }
+      .mobile-inline-back {
+        flex: 1 1 auto;
+      }
+      .mobile-inline-home {
+        min-width: 108px;
+        max-width: 124px;
+      }
+      .mobile-inline-path {
+        font-size: 11px;
+        line-height: 1.2;
+      }
+      .mobile-inline-stage-head {
+        padding: 6px 14px 4px;
+        font-size: 10px;
+      }
+      .stage-column {
+        padding-left: 10px;
+        padding-right: 10px;
       }
     }
 
