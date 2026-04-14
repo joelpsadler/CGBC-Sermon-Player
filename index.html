@@ -1048,6 +1048,12 @@
         font-size: 13px;
         line-height: 1.35;
       }
+
+      body:not(.has-selection) .player-stage,
+      body:not(.has-selection) .meta-stage {
+        display: none;
+      }
+
       .audio-stage {
         grid-template-columns: 1fr;
         gap: 14px;
@@ -1464,6 +1470,7 @@
       display: grid !important;
       gap: 8px;
       padding: 8px 0 8px;
+      flex: 0 0 auto;
     }
 
     .mobile-inline-chip {
@@ -1595,13 +1602,18 @@
         z-index: 290;
         background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.94));
         border-bottom: 1px solid rgba(255,255,255,0.06);
+        max-height: calc(100dvh - var(--mobile-masthead-offset, 74px));
+        overflow: hidden;
       }
 
       .mobile-inline-nav {
-        display: block;
+        display: flex;
+        flex-direction: column;
         margin: 0;
         padding: 0 8px 6px;
         background: transparent;
+        max-height: calc(100dvh - var(--mobile-masthead-offset, 74px));
+        min-height: 0;
       }
 
       .mobile-inline-tools {
@@ -1670,6 +1682,7 @@
       .mobile-inline-stage-head {
         padding: 8px 14px 7px;
         margin-top: 3px;
+        flex: 0 0 auto;
         font-family: 'Poppins', sans-serif;
         font-size: 11px;
         letter-spacing: 0.06em;
@@ -1687,8 +1700,14 @@
       .mobile-inline-stage-head.hidden { display:none; }
       .mobile-inline-stage-body {
         padding: 10px 12px 8px;
-        overflow: visible !important;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
         max-height: none !important;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+        touch-action: pan-y;
       }
       body.has-selection .mobile-inline-stage-body {
         display: none !important;
@@ -1715,6 +1734,10 @@
         overscroll-behavior-y: contain;
         touch-action: pan-y;
         padding: calc(var(--mobile-top-stack-height, 170px) + 10px) 8px calc(18px + var(--safe-bottom));
+      }
+
+      body:not(.has-selection) .stage-column {
+        overflow: hidden;
       }
       #playerSection {
         scroll-margin-top: calc(var(--mobile-top-stack-height, 170px) + 8px);
