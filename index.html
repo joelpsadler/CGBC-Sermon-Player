@@ -2824,14 +2824,15 @@
     function getScriptureLabel(value) {
       const clean = normalizeWhitespace(value || '');
       if (!clean) return 'Scripture';
-      return clean.toLowerCase() === 'various' ? 'Selected Scripture' : 'Scripture';
+      return 'Scripture';
     }
 
     function renderAudioDetails(ep) {
       const scripture = normalizeWhitespace(ep.scripture || '');
-      audioFeatureScriptureEl.textContent = scripture || '';
-      audioScriptureLabelEl.textContent = getScriptureLabel(scripture);
-      audioScriptureRowEl.style.display = scripture ? 'flex' : 'none';
+      const scriptureDisplay = scripture.toLowerCase() === 'various' ? 'Selected Scriptures' : scripture;
+      audioFeatureScriptureEl.textContent = scriptureDisplay || '';
+      audioScriptureLabelEl.textContent = getScriptureLabel(scriptureDisplay);
+      audioScriptureRowEl.style.display = scriptureDisplay ? 'flex' : 'none';
       audioFeatureSpeakerEl.textContent = normalizeWhitespace(ep.by || '');
       audioSpeakerRowEl.style.display = ep.by ? 'flex' : 'none';
     }
@@ -2844,9 +2845,10 @@
         return;
       }
       const scripture = normalizeWhitespace(ep.scripture || '');
+      const scriptureDisplay = scripture.toLowerCase() === 'various' ? 'Selected Scriptures' : scripture;
       const speaker = normalizeWhitespace(ep.by || '');
       const rows = [];
-      if (scripture) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scripture)}</span><span>${scripture}</span></div>`);
+      if (scriptureDisplay) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scriptureDisplay)}</span><span>${scriptureDisplay}</span></div>`);
       if (speaker) rows.push(`<div class="stage-info-row"><span class="stage-info-label">Speaker</span><span>${speaker}</span></div>`);
       stageInfoEl.innerHTML = `<h3 class="stage-info-title">${ep.title || 'Untitled Sermon'}</h3><div class="stage-info-series">${ep.series || currentSeries || ''}</div><div class="stage-info-meta">${rows.join('')}</div>`;
       stageInfoEl.style.display = 'block';
@@ -3287,12 +3289,28 @@
 
   window.getMobileBackTargetLabel = function patchedGetMobileBackTargetLabel() {
     if (!!window.currentEpisodeData || !!window.selectedContext || !!window.selectionReturnSnapshot) return 'Episodes';
-    if (window.mobileNavView === 'queue') return typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep()
-      ? window.getLeafBackLabel()
-      : ((typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) ? window.getBranchBackLabel() : 'Categories');
-    if (window.mobileNavView === 'leaf') return (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) ? window.getBranchBackLabel() : 'Categories';
+
+    if (window.mobileNavView === 'queue') {
+      if (typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep() && window.navLeafKey) {
+        return typeof window.getLeafTitleByKey === 'function' ? (window.getLeafTitleByKey(window.navLeafKey) || 'Episodes') : 'Episodes';
+      }
+      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep() && window.navBranchKey) {
+        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Categories') : 'Categories';
+      }
+      if (window.navRootKey) return 'Categories';
+      return '';
+    }
+
+    if (window.mobileNavView === 'leaf') {
+      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep() && window.navBranchKey) {
+        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Categories') : 'Categories';
+      }
+      if (window.navRootKey) return 'Categories';
+      return '';
+    }
+
     if (window.mobileNavView === 'branch') return 'Categories';
-    return 'Back';
+    return '';
   };
 
   window.performMobileBack = function patchedPerformMobileBack() {
@@ -3340,136 +3358,62 @@
 
 
 <script>
-/* v56 refinement pass:
-   - Restore dynamic Back labels
-   - Show "Selected Scriptures" instead of "Various"
-   - Re-assert pre-play lock-screen artwork
+/* v57 direct refinement fix:
+   - enforce correct pre-play lock screen art
+   - ensure back text never degrades to "Back to Back"
 */
 (function () {
-  const PREPLAY_LOCK_IMAGE_V56 = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
+  const PREPLAY_LOCK_IMAGE_V57 = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
 
-  function getDynamicBackTargetLabelV56() {
-    if (!!window.currentEpisodeData || !!window.selectedContext || !!window.selectionReturnSnapshot) return 'Episodes';
-
-    if (window.mobileNavView === 'queue') {
-      if (typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep()) {
-        return typeof window.getLeafTitleByKey === 'function' ? (window.getLeafTitleByKey(window.navLeafKey) || 'Episodes') : 'Episodes';
-      }
-      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) {
-        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Back') : 'Back';
-      }
-      return 'Categories';
-    }
-
-    if (window.mobileNavView === 'leaf') {
-      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) {
-        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Back') : 'Back';
-      }
-      return 'Categories';
-    }
-
-    if (window.mobileNavView === 'branch') {
-      return 'Categories';
-    }
-
-    return 'Back';
-  }
-
-  function shortenBackTargetV56(target) {
-    const clean = String(target || '').trim();
-    if (!clean) return 'Back';
-    if (clean.length <= 24) return clean;
-    return clean.slice(0, 21).trim() + '…';
-  }
-
-  window.getMobileBackTargetLabel = function patchedGetMobileBackTargetLabelV56() {
-    return getDynamicBackTargetLabelV56();
-  };
-
-  function updateBackButtonLabelV56() {
-    const target = shortenBackTargetV56(getDynamicBackTargetLabelV56());
-    const label = target === 'Back' ? 'Back' : `Back to ${target}`;
-
-    if (window.mobileInlineBackBtnEl) {
-      window.mobileInlineBackBtnEl.textContent = label;
-    }
-    if (window.drawerBackBtnEl) {
-      window.drawerBackBtnEl.textContent = label;
-    }
-  }
-
-  function normalizeScriptureDisplayV56() {
-    const raw = (window.currentEpisodeData && window.currentEpisodeData.scripture) || '';
-    const normalized = String(raw).trim();
-    const displayValue = /^various$/i.test(normalized) ? 'Selected Scriptures' : normalized;
-
-    if (window.audioFeatureScriptureEl) {
-      window.audioFeatureScriptureEl.textContent = displayValue;
-    }
-    if (window.audioScriptureLabelEl) {
-      window.audioScriptureLabelEl.textContent = 'Scripture';
-    }
-    if (window.audioScriptureRowEl) {
-      window.audioScriptureRowEl.style.display = displayValue ? '' : 'none';
-    }
-  }
-
-  const originalRenderNowPlayingV56 = window.renderNowPlaying;
-  if (typeof originalRenderNowPlayingV56 === 'function') {
-    window.renderNowPlaying = function patchedRenderNowPlayingV56(ep) {
-      const result = originalRenderNowPlayingV56.call(this, ep);
-      normalizeScriptureDisplayV56();
-      updateBackButtonLabelV56();
-      return result;
-    };
-  }
-
-  const originalRenderEmptyMetaV56 = window.renderEmptyMeta;
-  if (typeof originalRenderEmptyMetaV56 === 'function') {
-    window.renderEmptyMeta = function patchedRenderEmptyMetaV56() {
-      const result = originalRenderEmptyMetaV56.call(this);
-      updateBackButtonLabelV56();
-      return result;
-    };
-  }
-
-  const originalRenderMobileInlineFlowV56 = window.renderMobileInlineFlow;
-  if (typeof originalRenderMobileInlineFlowV56 === 'function') {
-    window.renderMobileInlineFlow = function patchedRenderMobileInlineFlowV56() {
-      const result = originalRenderMobileInlineFlowV56.call(this);
-      updateBackButtonLabelV56();
-      return result;
-    };
-  }
-
-  const originalUpdateMediaSessionV56 = window.updateMediaSession;
-  if (typeof originalUpdateMediaSessionV56 === 'function') {
-    window.updateMediaSession = function patchedUpdateMediaSessionV56(ep, preferPreplayArtwork = false) {
-      if (!('mediaSession' in navigator) || !ep) return originalUpdateMediaSessionV56.call(this, ep, preferPreplayArtwork);
-      const artworkSrc = preferPreplayArtwork
-        ? PREPLAY_LOCK_IMAGE_V56
-        : (ep.img || ep.seriesImage || PREPLAY_LOCK_IMAGE_V56);
+  const originalPlayAudioV57 = window.playAudio;
+  if (typeof originalPlayAudioV57 === 'function') {
+    window.playAudio = function patchedPlayAudioV57(ep) {
+      const result = originalPlayAudioV57.call(this, ep);
       try {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: ep.title || 'CGBC Sermon',
-          artist: ep.by || 'CGBC Lebanon, TN',
-          album: ep.series || 'CGBC Sermons',
-          artwork: [
-            { src: artworkSrc, sizes: '96x96', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '128x128', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '192x192', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '256x256', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '384x384', type: 'image/jpeg' },
-            { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }
-          ]
-        });
+        if ('mediaSession' in navigator && ep) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: ep.title || 'CGBC Sermon',
+            artist: ep.by || 'CGBC Lebanon, TN',
+            album: ep.series || 'CGBC Sermons',
+            artwork: [
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '96x96', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '128x128', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '192x192', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '256x256', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '384x384', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '512x512', type: 'image/jpeg' }
+            ]
+          });
+        }
       } catch (e) {}
-      return originalUpdateMediaSessionV56.call(this, ep, preferPreplayArtwork);
+      return result;
     };
   }
 
-  updateBackButtonLabelV56();
-  normalizeScriptureDisplayV56();
+  const originalGetMobileBackButtonTextV57 = window.getMobileBackButtonText;
+  if (typeof originalGetMobileBackButtonTextV57 === 'function') {
+    window.getMobileBackButtonText = function patchedGetMobileBackButtonTextV57() {
+      const target = (typeof window.getMobileBackTargetLabel === 'function' ? window.getMobileBackTargetLabel() : '') || '';
+      const clean = String(target).trim();
+      if (!clean || clean.toLowerCase() === 'back') return 'Back';
+      return `Back to ${clean}`;
+    };
+  }
+
+  if (typeof window.renderMobileInlineFlow === 'function') {
+    const originalRenderMobileInlineFlowV57 = window.renderMobileInlineFlow;
+    window.renderMobileInlineFlow = function patchedRenderMobileInlineFlowV57() {
+      const result = originalRenderMobileInlineFlowV57.call(this);
+      if (window.mobileInlineBackBtnEl && window.getMobileBackButtonText) {
+        window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
+      }
+      return result;
+    };
+  }
+
+  if (window.mobileInlineBackBtnEl && window.getMobileBackButtonText) {
+    window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
+  }
 })();
 </script>
 
