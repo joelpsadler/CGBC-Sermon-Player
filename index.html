@@ -3338,5 +3338,140 @@
 })();
 </script>
 
+
+<script>
+/* v56 refinement pass:
+   - Restore dynamic Back labels
+   - Show "Selected Scriptures" instead of "Various"
+   - Re-assert pre-play lock-screen artwork
+*/
+(function () {
+  const PREPLAY_LOCK_IMAGE_V56 = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
+
+  function getDynamicBackTargetLabelV56() {
+    if (!!window.currentEpisodeData || !!window.selectedContext || !!window.selectionReturnSnapshot) return 'Episodes';
+
+    if (window.mobileNavView === 'queue') {
+      if (typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep()) {
+        return typeof window.getLeafTitleByKey === 'function' ? (window.getLeafTitleByKey(window.navLeafKey) || 'Episodes') : 'Episodes';
+      }
+      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) {
+        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Back') : 'Back';
+      }
+      return 'Categories';
+    }
+
+    if (window.mobileNavView === 'leaf') {
+      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) {
+        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Back') : 'Back';
+      }
+      return 'Categories';
+    }
+
+    if (window.mobileNavView === 'branch') {
+      return 'Categories';
+    }
+
+    return 'Back';
+  }
+
+  function shortenBackTargetV56(target) {
+    const clean = String(target || '').trim();
+    if (!clean) return 'Back';
+    if (clean.length <= 24) return clean;
+    return clean.slice(0, 21).trim() + '…';
+  }
+
+  window.getMobileBackTargetLabel = function patchedGetMobileBackTargetLabelV56() {
+    return getDynamicBackTargetLabelV56();
+  };
+
+  function updateBackButtonLabelV56() {
+    const target = shortenBackTargetV56(getDynamicBackTargetLabelV56());
+    const label = target === 'Back' ? 'Back' : `Back to ${target}`;
+
+    if (window.mobileInlineBackBtnEl) {
+      window.mobileInlineBackBtnEl.textContent = label;
+    }
+    if (window.drawerBackBtnEl) {
+      window.drawerBackBtnEl.textContent = label;
+    }
+  }
+
+  function normalizeScriptureDisplayV56() {
+    const raw = (window.currentEpisodeData && window.currentEpisodeData.scripture) || '';
+    const normalized = String(raw).trim();
+    const displayValue = /^various$/i.test(normalized) ? 'Selected Scriptures' : normalized;
+
+    if (window.audioFeatureScriptureEl) {
+      window.audioFeatureScriptureEl.textContent = displayValue;
+    }
+    if (window.audioScriptureLabelEl) {
+      window.audioScriptureLabelEl.textContent = 'Scripture';
+    }
+    if (window.audioScriptureRowEl) {
+      window.audioScriptureRowEl.style.display = displayValue ? '' : 'none';
+    }
+  }
+
+  const originalRenderNowPlayingV56 = window.renderNowPlaying;
+  if (typeof originalRenderNowPlayingV56 === 'function') {
+    window.renderNowPlaying = function patchedRenderNowPlayingV56(ep) {
+      const result = originalRenderNowPlayingV56.call(this, ep);
+      normalizeScriptureDisplayV56();
+      updateBackButtonLabelV56();
+      return result;
+    };
+  }
+
+  const originalRenderEmptyMetaV56 = window.renderEmptyMeta;
+  if (typeof originalRenderEmptyMetaV56 === 'function') {
+    window.renderEmptyMeta = function patchedRenderEmptyMetaV56() {
+      const result = originalRenderEmptyMetaV56.call(this);
+      updateBackButtonLabelV56();
+      return result;
+    };
+  }
+
+  const originalRenderMobileInlineFlowV56 = window.renderMobileInlineFlow;
+  if (typeof originalRenderMobileInlineFlowV56 === 'function') {
+    window.renderMobileInlineFlow = function patchedRenderMobileInlineFlowV56() {
+      const result = originalRenderMobileInlineFlowV56.call(this);
+      updateBackButtonLabelV56();
+      return result;
+    };
+  }
+
+  const originalUpdateMediaSessionV56 = window.updateMediaSession;
+  if (typeof originalUpdateMediaSessionV56 === 'function') {
+    window.updateMediaSession = function patchedUpdateMediaSessionV56(ep, preferPreplayArtwork = false) {
+      if (!('mediaSession' in navigator) || !ep) return originalUpdateMediaSessionV56.call(this, ep, preferPreplayArtwork);
+      const artworkSrc = preferPreplayArtwork
+        ? PREPLAY_LOCK_IMAGE_V56
+        : (ep.img || ep.seriesImage || PREPLAY_LOCK_IMAGE_V56);
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: ep.title || 'CGBC Sermon',
+          artist: ep.by || 'CGBC Lebanon, TN',
+          album: ep.series || 'CGBC Sermons',
+          artwork: [
+            { src: artworkSrc, sizes: '96x96', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '128x128', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '192x192', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '256x256', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '384x384', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+      } catch (e) {}
+      return originalUpdateMediaSessionV56.call(this, ep, preferPreplayArtwork);
+    };
+  }
+
+  updateBackButtonLabelV56();
+  normalizeScriptureDisplayV56();
+})();
+</script>
+
 </body>
 </html>
