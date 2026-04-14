@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T21:29:06.141Z",
+  "generated_at": "2026-04-14T21:40:37.177Z",
   "source": {
     "provider": "podbean",
     "metric": "downloads",
@@ -7,5 +7,10 @@
     "end": "2026-04-14",
     "chunk_days": 90
   },
-  "episodes": {}
+  "episodes": {},
+  "summary": {
+    "total_episodes_seen": 131,
+    "total_episodes_synced": 0,
+    "total_episodes_failed": 131
+  }
 }
