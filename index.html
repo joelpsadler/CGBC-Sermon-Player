@@ -2301,16 +2301,39 @@
 
 
     function getMobileBackTargetLabel() {
-      if (mobileNavView === 'selected') return 'Episodes';
+      /* Beginner note:
+         Build the Back label from the same tree state that drives the breadcrumb.
+         Do not infer from a second parallel state machine. */
+      if (currentEpisodeData || selectedContext || selectionReturnSnapshot) return 'Episodes';
+
+      const segments = [];
+      if (navRootKey) segments.push(getRootTitleByKey(navRootKey));
+
+      if (navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) {
+        segments.push(getBranchTitleByKey(navBranchKey));
+      }
+
+      const leafItemForBack = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
+      if (
+        navLeafKey &&
+        (
+          ((hasMeaningfulLeafStep() && leafItemForBack && leafItemForBack.type === 'series')) ||
+          navRootKey === 'byDate'
+        )
+      ) {
+        segments.push(getLeafTitleByKey(navLeafKey));
+      }
+
       if (mobileNavView === 'queue') {
-        if (hasMeaningfulLeafStep() && navLeafKey) return getLeafTitleByKey(navLeafKey);
-        if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
-        if (navRootKey) return 'Categories';
+        if (segments.length >= 2) return segments[segments.length - 2];
+        if (segments.length === 1) return 'Categories';
+        return '';
       }
+
       if (mobileNavView === 'leaf') {
-        if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
-        if (navRootKey) return 'Categories';
+        return segments[0] || 'Categories';
       }
+
       if (mobileNavView === 'branch') return 'Categories';
       return '';
     }
@@ -2331,7 +2354,7 @@
 
     function getMobileBackButtonText() {
       const target = shortenBackTarget(getMobileBackTargetLabel());
-      if (!target) return 'Back';
+      if (!target || target.toLowerCase() === 'back') return 'Back';
       return `Back to ${target}`;
     }
 
@@ -2499,6 +2522,10 @@
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = !canGoMobileBack();
         mobileInlineBackBtnEl.textContent = getMobileBackButtonText();
+      }
+      if (drawerBackBtnEl) {
+        drawerBackBtnEl.disabled = !canGoMobileBack();
+        drawerBackBtnEl.textContent = getMobileBackButtonText();
       }
     }
 
@@ -3414,91 +3441,6 @@
   if (window.mobileInlineBackBtnEl && window.getMobileBackButtonText) {
     window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
   }
-})();
-</script>
-
-
-<script>
-/* v59 back-label-only fix:
-   Only improve the displayed Back label based on current tree state.
-   No playback or lock-screen changes here. */
-(function () {
-  function computeBackTargetV59() {
-    if (window.currentEpisodeData || window.selectedContext || window.selectionReturnSnapshot) {
-      return 'Episodes';
-    }
-
-    if (window.mobileNavView === 'queue') {
-      if (window.navLeafKey && typeof window.getLeafTitleByKey === 'function') {
-        return window.getLeafTitleByKey(window.navLeafKey) || 'Episodes';
-      }
-      if (window.navBranchKey && typeof window.getBranchTitleByKey === 'function') {
-        return window.getBranchTitleByKey(window.navBranchKey) || 'Categories';
-      }
-      if (window.navRootKey && typeof window.getRootTitleByKey === 'function') {
-        return window.getRootTitleByKey(window.navRootKey) || 'Categories';
-      }
-      return 'Categories';
-    }
-
-    if (window.mobileNavView === 'leaf') {
-      if (window.navBranchKey && typeof window.getBranchTitleByKey === 'function') {
-        return window.getBranchTitleByKey(window.navBranchKey) || 'Categories';
-      }
-      if (window.navRootKey && typeof window.getRootTitleByKey === 'function') {
-        return window.getRootTitleByKey(window.navRootKey) || 'Categories';
-      }
-      return 'Categories';
-    }
-
-    if (window.mobileNavView === 'branch') {
-      if (window.navRootKey && typeof window.getRootTitleByKey === 'function') {
-        return window.getRootTitleByKey(window.navRootKey) || 'Categories';
-      }
-      return 'Categories';
-    }
-
-    return '';
-  }
-
-  function computeBackLabelV59() {
-    const clean = String(computeBackTargetV59() || '').trim();
-    if (!clean || clean.toLowerCase() === 'back') return 'Back';
-    return `Back to ${clean}`;
-  }
-
-  function refreshBackLabelV59() {
-    const label = computeBackLabelV59();
-    if (window.mobileInlineBackBtnEl) window.mobileInlineBackBtnEl.textContent = label;
-    if (window.drawerBackBtnEl) window.drawerBackBtnEl.textContent = label;
-  }
-
-  const wrapNames = [
-    'renderMobileInlineFlow',
-    'renderNavigation',
-    'renderQueue',
-    'renderEmptyMeta',
-    'playAudio',
-    'playVideo',
-    'performMobileBack',
-    'setRoot',
-    'setBranch',
-    'setLeaf',
-    'setMode',
-    'resetHome'
-  ];
-
-  for (const name of wrapNames) {
-    const original = window[name];
-    if (typeof original !== 'function') continue;
-    window[name] = function patchedBackRefreshWrapperV59(...args) {
-      const result = original.apply(this, args);
-      refreshBackLabelV59();
-      return result;
-    };
-  }
-
-  refreshBackLabelV59();
 })();
 </script>
 
