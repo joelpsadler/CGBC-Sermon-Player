@@ -276,10 +276,14 @@ async function main() {
     }
 
     try {
+      const episodeStart = publishDate
+        ? publishDate.slice(0, 10)
+        : start;
+
       const stats = await getEpisodeDownloadsChunked(
         accessToken,
         episodeId,
-        start,
+        episodeStart,
         end
       );
 
