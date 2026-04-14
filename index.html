@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - v41</title>
+  <title>CGBC Sermons - v42</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
@@ -1620,6 +1620,7 @@
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     const RSS_URL = 'https://feed.podbean.com/broJacobcedargrovebaptist/feed.xml';
     const FALLBACK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
+    const PREPLAY_LOCK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
     const MONTH_ORDER = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     const BIBLE_BOOK_NAMES = [
@@ -2351,36 +2352,47 @@
     }
 
     function performMobileBack() {
-      if (currentEpisodeData) {
+      const backingOutOfSelection = !!currentEpisodeData || mobileNavView === 'selected';
+
+      if (backingOutOfSelection) {
         const ctx = selectedContext || {};
+        const leafItem = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
 
         /* Beginner note:
-           After a sermon is selected, Back should always return to the
-           current episode queue first. Do not skip past the queue here. */
+           Back from a selected sermon should always rebuild the queue view first.
+           Reconstruct the active bucket explicitly instead of relying on leftover state. */
+        if (ctx.leafKey) navLeafKey = ctx.leafKey;
+        if (ctx.seriesName) currentSeries = ctx.seriesName;
+        else if (!currentSeries && leafItem && leafItem.type === 'series') currentSeries = leafItem.key;
+
         currentEpisodeData = null;
         currentEpisodeIndex = null;
         selectedContext = null;
 
-        if (ctx.leafKey) navLeafKey = ctx.leafKey;
-        if (ctx.seriesName) currentSeries = ctx.seriesName;
-
         clearMediaState();
         renderEmptyMeta();
         showModePlaceholder();
-        syncMobileShellHeight();
 
         mobileNavView = 'queue';
 
         renderQueue();
-        renderNavigation();
+        renderMobileInlineFlow();
+        renderMobileDrawerFlow();
+        syncMobileShellHeight();
         if (isMobileLayout()) scrollMobileSelectorToTop();
         return;
       }
-      if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
-      else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
-      else if (mobileNavView === 'branch') mobileNavView = 'root';
-      renderQueue();
+
+      if (mobileNavView === 'queue') {
+        mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
+      } else if (mobileNavView === 'leaf') {
+        mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
+      } else if (mobileNavView === 'branch') {
+        mobileNavView = 'root';
+      }
+
       renderNavigation();
+      renderQueue();
       if (isMobileLayout()) scrollMobileSelectorToTop();
     }
 
@@ -2731,9 +2743,11 @@
       }, 450);
     }
 
-    function updateMediaSession(ep) {
+    function updateMediaSession(ep, preferPreplayArtwork = false) {
       if (!('mediaSession' in navigator) || !ep) return;
-      const artworkSrc = ep.img || ep.seriesImage || FALLBACK_IMAGE;
+      const artworkSrc = preferPreplayArtwork
+        ? PREPLAY_LOCK_IMAGE
+        : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
       try {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: ep.title || 'CGBC Sermon',
@@ -2939,7 +2953,7 @@
       audioPlayerEl.load();
       currentEpisodeData = ep;
       updateAudioProgressUi();
-      updateMediaSession(ep);
+      updateMediaSession(ep, true);
       setAudioReadyState(false);
       renderMeta(ep);
     }
@@ -3125,7 +3139,10 @@
     audioPlayBadgeEl.addEventListener('click', toggleAudioPlayback);
     miniSkipBackBtnEl.addEventListener('click', e => { e.stopPropagation(); skipAudioBy(-30); });
     miniSkipForwardBtnEl.addEventListener('click', e => { e.stopPropagation(); skipAudioBy(30); });
-    audioPlayerEl.addEventListener('play', () => setAudioReadyState(true));
+    audioPlayerEl.addEventListener('play', () => {
+      setAudioReadyState(true);
+      if (currentEpisodeData) updateMediaSession(currentEpisodeData, false);
+    });
     audioPlayerEl.addEventListener('pause', () => setAudioReadyState(false));
     audioPlayerEl.addEventListener('ended', () => setAudioReadyState(false));
     audioPlayerEl.addEventListener('timeupdate', updateAudioProgressUi);
