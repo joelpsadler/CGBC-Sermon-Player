@@ -4,13 +4,13 @@ const path = require("path");
 
 const CLIENT_ID = process.env.PODBEAN_CLIENT_ID;
 const CLIENT_SECRET = process.env.PODBEAN_CLIENT_SECRET;
-const STATS_DAYS = Number(process.env.PODBEAN_STATS_DAYS || 3650);
-const PAGE_LIMIT = Math.min(100, Number(process.env.PODBEAN_LIMIT || 100));
-const CHUNK_DAYS = 60;
 
-const REQUEST_DELAY_MS = 700;
-const RETRY_BASE_DELAY_MS = 2500;
-const MAX_RETRIES = 4;
+const PAGE_LIMIT = Math.min(100, Number(process.env.PODBEAN_LIMIT || 100));
+const TRACK_WINDOW_DAYS = Number(process.env.PODBEAN_TRACK_WINDOW_DAYS || 60);
+
+const REQUEST_DELAY_MS = Number(process.env.PODBEAN_REQUEST_DELAY_MS || 1200);
+const RETRY_BASE_DELAY_MS = Number(process.env.PODBEAN_RETRY_BASE_DELAY_MS || 4000);
+const MAX_RETRIES = Number(process.env.PODBEAN_MAX_RETRIES || 5);
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
   console.error("Missing PODBEAN_CLIENT_ID or PODBEAN_CLIENT_SECRET.");
@@ -18,11 +18,15 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 }
 
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function isoDate(date) {
   return date.toISOString().slice(0, 10);
+}
+
+function isoDateToday() {
+  return isoDate(new Date());
 }
 
 function isoDateDaysAgo(daysAgo) {
@@ -31,42 +35,19 @@ function isoDateDaysAgo(daysAgo) {
   return isoDate(d);
 }
 
-function isoDateToday() {
-  return isoDate(new Date());
+function fetchStartDateForEpisode(publishDateIso, trackWindowDays) {
+  const recentFloor = isoDateDaysAgo(trackWindowDays);
+  if (!publishDateIso) return recentFloor;
+  const publishedDay = String(publishDateIso).slice(0, 10);
+  return publishedDay > recentFloor ? publishedDay : recentFloor;
 }
 
-function parseIsoDate(str) {
-  return new Date(`${str}T00:00:00.000Z`);
+function normalizeEpisodeTitle(value) {
+  return String(value || "").replace(/\s+/g, " ").trim();
 }
 
-function addDays(date, days) {
-  const d = new Date(date);
-  d.setUTCDate(d.getUTCDate() + days);
-  return d;
-}
-
-function buildDateChunks(startStr, endStr, chunkDays = CHUNK_DAYS) {
-  const chunks = [];
-  let cursor = parseIsoDate(startStr);
-  const end = parseIsoDate(endStr);
-
-  while (cursor <= end) {
-    const chunkStart = new Date(cursor);
-    let chunkEnd = addDays(chunkStart, chunkDays - 1);
-
-    if (chunkEnd > end) {
-      chunkEnd = new Date(end);
-    }
-
-    chunks.push({
-      start: isoDate(chunkStart),
-      end: isoDate(chunkEnd),
-    });
-
-    cursor = addDays(chunkEnd, 1);
-  }
-
-  return chunks;
+function safeObject(value) {
+  return value && typeof value === "object" && !Array.isArray(value) ? value : {};
 }
 
 async function fetchJson(url, options = {}, retryCount = 0) {
@@ -84,17 +65,13 @@ async function fetchJson(url, options = {}, retryCount = 0) {
       ? retryAfterSeconds * 1000
       : RETRY_BASE_DELAY_MS * Math.pow(2, retryCount);
 
-    console.warn(
-      `429 rate limit hit. Waiting ${waitMs}ms before retry ${retryCount + 1} for ${url}`
-    );
+    console.warn(`429 rate limit. Waiting ${waitMs}ms then retrying ${url}`);
     await sleep(waitMs);
     return fetchJson(url, options, retryCount + 1);
   }
 
   if (!res.ok) {
-    throw new Error(
-      `Request failed ${res.status} ${res.statusText} for ${url}\n${text}`
-    );
+    throw new Error(`Request failed ${res.status} ${res.statusText} for ${url}\n${text}`);
   }
 
   try {
@@ -147,20 +124,15 @@ async function getAllEpisodes(accessToken) {
     url.searchParams.set("limit", String(PAGE_LIMIT));
 
     const data = await fetchJson(url.toString(), {
-      headers: {
-        "User-Agent": "CGBCMediaPlayerStatsSync/1.0",
-      },
+      headers: { "User-Agent": "CGBCMediaPlayerStatsSync/1.0" },
     });
 
     const list = extractEpisodeList(data);
-
     episodes.push(...list);
 
     console.log(`Fetched episode page offset=${offset}, count=${list.length}`);
 
-    if (list.length < PAGE_LIMIT) {
-      break;
-    }
+    if (list.length < PAGE_LIMIT) break;
 
     offset += list.length;
     await sleep(REQUEST_DELAY_MS);
@@ -178,126 +150,123 @@ async function getEpisodeDownloadsForRange(accessToken, episodeId, start, end) {
   url.searchParams.set("end", end);
 
   const data = await fetchJson(url.toString(), {
-    headers: {
-      "User-Agent": "CGBCMediaPlayerStatsSync/1.0",
-    },
+    headers: { "User-Agent": "CGBCMediaPlayerStatsSync/1.0" },
   });
 
-  const statsObj =
-    data?.stats && typeof data.stats === "object" && !Array.isArray(data.stats)
-      ? data.stats
-      : {};
-
-  const daily = Object.entries(statsObj).map(([date, downloads]) => ({
-    date,
-    downloads: Number(downloads || 0),
-  }));
-
-  const total = daily.reduce((sum, row) => sum + row.downloads, 0);
-
-  return {
-    total_downloads: total,
-    daily,
-  };
+  const statsObj = safeObject(data?.stats);
+  return Object.entries(statsObj)
+    .map(([date, downloads]) => ({ date, downloads: Number(downloads || 0) }))
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-async function getEpisodeDownloadsChunked(accessToken, episodeId, start, end) {
-  const chunks = buildDateChunks(start, end, CHUNK_DAYS);
-  const byDate = new Map();
-
-  for (const chunk of chunks) {
-    const result = await getEpisodeDownloadsForRange(
-      accessToken,
-      episodeId,
-      chunk.start,
-      chunk.end
-    );
-
-    for (const row of result.daily) {
-      byDate.set(row.date, (byDate.get(row.date) || 0) + row.downloads);
-    }
-
-    await sleep(REQUEST_DELAY_MS);
+function readExistingStats(statsPath) {
+  if (!fs.existsSync(statsPath)) {
+    return { generated_at: null, source: {}, episodes: {}, summary: {} };
   }
 
-  const daily = [...byDate.entries()]
-    .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([date, downloads]) => ({
-      date,
-      downloads,
-    }));
-
-  const total = daily.reduce((sum, row) => sum + row.downloads, 0);
-
-  return {
-    total_downloads: total,
-    daily,
-  };
+  try {
+    return JSON.parse(fs.readFileSync(statsPath, "utf8"));
+  } catch (err) {
+    console.warn(`Could not parse existing stats.json, starting fresh: ${err.message}`);
+    return { generated_at: null, source: {}, episodes: {}, summary: {} };
+  }
 }
 
-function normalizeEpisodeTitle(value) {
-  return String(value || "").replace(/\s+/g, " ").trim();
+function mergeEpisodeRecord(existingRecord, incomingMeta, dailyRows, todayIso) {
+  const record = {
+    podbean_episode_id: incomingMeta.podbean_episode_id,
+    title: incomingMeta.title,
+    permalink_url: incomingMeta.permalink_url,
+    publish_time: incomingMeta.publish_time,
+    tracking_started_at: existingRecord?.tracking_started_at || todayIso,
+    last_successful_sync_at: todayIso,
+    downloads_by_date: safeObject(existingRecord?.downloads_by_date),
+  };
+
+  for (const row of dailyRows) {
+    record.downloads_by_date[row.date] = Number(row.downloads || 0);
+  }
+
+  const total = Object.values(record.downloads_by_date).reduce(
+    (sum, value) => sum + Number(value || 0),
+    0
+  );
+
+  record.plays_total = total;
+  record.downloads_total = total;
+  return record;
 }
 
 async function main() {
   const accessToken = await getAccessToken();
   const episodes = await getAllEpisodes(accessToken);
 
-  const start = isoDateDaysAgo(STATS_DAYS);
-  const end = isoDateToday();
+  const today = isoDateToday();
+  const statsPath = path.resolve(process.cwd(), "stats", "stats.json");
+  const existing = readExistingStats(statsPath);
 
   const output = {
     generated_at: new Date().toISOString(),
     source: {
       provider: "podbean",
-      metric: "downloads",
-      start,
-      end,
-      chunk_days: CHUNK_DAYS,
+      metric: "plays",
+      window_days: TRACK_WINDOW_DAYS,
+      strategy: "incremental_recent_window_merge",
     },
-    episodes: {},
+    episodes: safeObject(existing.episodes),
     summary: {
       total_episodes_seen: episodes.length,
       total_episodes_synced: 0,
       total_episodes_failed: 0,
+      total_existing_records: Object.keys(safeObject(existing.episodes)).length,
     },
   };
 
   for (const ep of episodes) {
     const episodeId = ep?.id || "";
+    if (!episodeId) continue;
+
     const title = normalizeEpisodeTitle(ep?.title);
     const permalink = ep?.permalink_url || ep?.link || "";
-    const publishDate = ep?.publish_time
-      ? new Date(ep.publish_time * 1000).toISOString()
-      : "";
+    const publishDateIso = ep?.publish_time ? new Date(ep.publish_time * 1000).toISOString() : "";
 
-    if (!episodeId) {
-      continue;
-    }
+    const incomingMeta = {
+      podbean_episode_id: episodeId,
+      title,
+      permalink_url: permalink,
+      publish_time: publishDateIso,
+    };
+
+    const start = fetchStartDateForEpisode(publishDateIso, TRACK_WINDOW_DAYS);
+    const end = today;
 
     try {
-      const episodeStart = publishDate
-        ? publishDate.slice(0, 10)
-        : start;
+      const dailyRows = await getEpisodeDownloadsForRange(accessToken, episodeId, start, end);
+      const existingRecord = safeObject(output.episodes[episodeId]);
 
-      const stats = await getEpisodeDownloadsChunked(
-        accessToken,
-        episodeId,
-        episodeStart,
-        end
+      output.episodes[episodeId] = mergeEpisodeRecord(
+        existingRecord,
+        incomingMeta,
+        dailyRows,
+        today
       );
 
+      output.summary.total_episodes_synced += 1;
+      console.log(`Synced ${title} -> ${output.episodes[episodeId].plays_total}`);
+    } catch (err) {
+      const existingRecord = safeObject(output.episodes[episodeId]);
       output.episodes[episodeId] = {
-        podbean_episode_id: episodeId,
-        title,
-        permalink_url: permalink,
-        publish_time: publishDate,
-        downloads_total: stats.total_downloads,
+        ...existingRecord,
+        ...incomingMeta,
+        downloads_by_date: safeObject(existingRecord.downloads_by_date),
+        plays_total: Number(existingRecord.plays_total || existingRecord.downloads_total || 0),
+        downloads_total: Number(existingRecord.downloads_total || existingRecord.plays_total || 0),
+        tracking_started_at: existingRecord.tracking_started_at || today,
+        last_successful_sync_at: existingRecord.last_successful_sync_at || null,
+        last_failed_sync_at: today,
+        last_error: err.message,
       };
 
-      output.summary.total_episodes_synced += 1;
-      console.log(`Synced ${title} -> ${stats.total_downloads}`);
-    } catch (err) {
       output.summary.total_episodes_failed += 1;
       console.warn(`Failed stats for ${title} (${episodeId}): ${err.message}`);
     }
@@ -305,11 +274,10 @@ async function main() {
     await sleep(REQUEST_DELAY_MS);
   }
 
-  const outFile = path.resolve(process.cwd(), "stats", "stats.json");
-  fs.mkdirSync(path.dirname(outFile), { recursive: true });
-  fs.writeFileSync(outFile, JSON.stringify(output, null, 2), "utf8");
+  fs.mkdirSync(path.dirname(statsPath), { recursive: true });
+  fs.writeFileSync(statsPath, JSON.stringify(output, null, 2), "utf8");
 
-  console.log(`Wrote ${outFile}`);
+  console.log(`Wrote ${statsPath}`);
   console.log(
     `Summary: seen=${output.summary.total_episodes_seen}, synced=${output.summary.total_episodes_synced}, failed=${output.summary.total_episodes_failed}`
   );
