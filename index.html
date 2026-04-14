@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC Sermons - v43</title>
-  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
-  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
-  <link rel="manifest" href="CGBC-media.webmanifest">
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
+  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
+  <link rel="manifest" href="CGBC-media.webmanifest?v=63">
   <meta name="theme-color" content="#0b0b0c" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#0f0f10" />
@@ -1481,6 +1481,7 @@
     }
 
 </style>
+  <link rel="shortcut icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
 </head>
 <body class="mode-audio">
   <div class="app-shell">
@@ -3566,6 +3567,66 @@
   }
 
   resyncBackTextV61();
+})();
+</script>
+
+
+<script>
+/* v63 iOS fallback cache-bust pass:
+   Force all likely iOS no-audio-yet sources to the same cache-busted fallback image. */
+(function () {
+  const IOS_FALLBACK_V63 = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1';
+
+  function applyIosFallbackSourcesV63() {
+    document.title = 'CGBC Sermons';
+
+    const selectors = [
+      'link[rel="icon"]',
+      'link[rel="apple-touch-icon"]',
+      'link[rel="shortcut icon"]'
+    ];
+
+    selectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(node => node.setAttribute('href', IOS_FALLBACK_V63));
+    });
+
+    let theme = document.querySelector('meta[name="theme-color"]');
+    if (!theme) {
+      theme = document.createElement('meta');
+      theme.setAttribute('name', 'theme-color');
+      document.head.appendChild(theme);
+    }
+    theme.setAttribute('content', '#0c0c0d');
+  }
+
+  const originalPlayAudioV63 = window.playAudio;
+  if (typeof originalPlayAudioV63 === 'function') {
+    window.playAudio = function patchedPlayAudioV63(ep) {
+      applyIosFallbackSourcesV63();
+      const result = originalPlayAudioV63.call(this, ep);
+      try {
+        if ('mediaSession' in navigator && ep) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: ep.title || 'CGBC Sermon',
+            artist: ep.by || 'CGBC Lebanon, TN',
+            album: ep.series || 'CGBC Sermons',
+            artwork: [
+              { src: IOS_FALLBACK_V63, sizes: '96x96', type: 'image/jpeg' },
+              { src: IOS_FALLBACK_V63, sizes: '128x128', type: 'image/jpeg' },
+              { src: IOS_FALLBACK_V63, sizes: '192x192', type: 'image/jpeg' },
+              { src: IOS_FALLBACK_V63, sizes: '256x256', type: 'image/jpeg' },
+              { src: IOS_FALLBACK_V63, sizes: '384x384', type: 'image/jpeg' },
+              { src: IOS_FALLBACK_V63, sizes: '512x512', type: 'image/jpeg' },
+              { src: IOS_FALLBACK_V63, sizes: '1024x1024', type: 'image/jpeg' }
+            ]
+          });
+        }
+      } catch (e) {}
+      return result;
+    };
+  }
+
+  applyIosFallbackSourcesV63();
 })();
 </script>
 
