@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons</title>
-  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
-  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
+  <title>CGBC Sermons - v43</title>
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
+  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
   <meta name="theme-color" content="#0b0b0c" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -2301,26 +2301,17 @@
 
 
     function getMobileBackTargetLabel() {
-      if (currentEpisodeData || selectedContext || selectionReturnSnapshot) return 'Episodes';
-
+      if (mobileNavView === 'selected') return 'Episodes';
       if (mobileNavView === 'queue') {
-        if (navLeafKey) return getLeafTitleByKey(navLeafKey) || 'Episodes';
-        if (navBranchKey) return getBranchTitleByKey(navBranchKey) || 'Categories';
-        if (navRootKey) return getRootTitleByKey(navRootKey) || 'Categories';
-        return '';
+        if (hasMeaningfulLeafStep() && navLeafKey) return getLeafTitleByKey(navLeafKey);
+        if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
+        if (navRootKey) return 'Categories';
       }
-
       if (mobileNavView === 'leaf') {
-        if (navBranchKey) return getBranchTitleByKey(navBranchKey) || (navRootKey ? getRootTitleByKey(navRootKey) : 'Categories');
-        if (navRootKey) return getRootTitleByKey(navRootKey) || 'Categories';
-        return '';
+        if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
+        if (navRootKey) return 'Categories';
       }
-
-      if (mobileNavView === 'branch') {
-        if (navRootKey) return getRootTitleByKey(navRootKey) || 'Categories';
-        return 'Categories';
-      }
-
+      if (mobileNavView === 'branch') return 'Categories';
       return '';
     }
 
@@ -2340,7 +2331,7 @@
 
     function getMobileBackButtonText() {
       const target = shortenBackTarget(getMobileBackTargetLabel());
-      if (!target || target.toLowerCase() === 'back') return 'Back';
+      if (!target) return 'Back';
       return `Back to ${target}`;
     }
 
@@ -3298,12 +3289,28 @@
 
   window.getMobileBackTargetLabel = function patchedGetMobileBackTargetLabel() {
     if (!!window.currentEpisodeData || !!window.selectedContext || !!window.selectionReturnSnapshot) return 'Episodes';
-    if (window.mobileNavView === 'queue') return typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep()
-      ? window.getLeafBackLabel()
-      : ((typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) ? window.getBranchBackLabel() : 'Categories');
-    if (window.mobileNavView === 'leaf') return (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) ? window.getBranchBackLabel() : 'Categories';
+
+    if (window.mobileNavView === 'queue') {
+      if (typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep() && window.navLeafKey) {
+        return typeof window.getLeafTitleByKey === 'function' ? (window.getLeafTitleByKey(window.navLeafKey) || 'Episodes') : 'Episodes';
+      }
+      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep() && window.navBranchKey) {
+        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Categories') : 'Categories';
+      }
+      if (window.navRootKey) return 'Categories';
+      return '';
+    }
+
+    if (window.mobileNavView === 'leaf') {
+      if (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep() && window.navBranchKey) {
+        return typeof window.getBranchTitleByKey === 'function' ? (window.getBranchTitleByKey(window.navBranchKey) || 'Categories') : 'Categories';
+      }
+      if (window.navRootKey) return 'Categories';
+      return '';
+    }
+
     if (window.mobileNavView === 'branch') return 'Categories';
-    return 'Back';
+    return '';
   };
 
   window.performMobileBack = function patchedPerformMobileBack() {
@@ -3351,27 +3358,17 @@
 
 
 <script>
-/* v58 direct refinement fix:
-   - dynamic Back labels from the actual tree state
-   - pre-play fallback art for no-audio-yet state
-   - cleaner document title/icon for iOS fallback media card
+/* v57 direct refinement fix:
+   - enforce correct pre-play lock screen art
+   - ensure back text never degrades to "Back to Back"
 */
 (function () {
-  const PREPLAY_LOCK_IMAGE_V58 = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
+  const PREPLAY_LOCK_IMAGE_V57 = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
 
-  function applyPreplayDocumentFallbackV58() {
-    document.title = 'CGBC Sermons';
-    let icon = document.querySelector('link[rel="icon"]');
-    if (icon) icon.setAttribute('href', PREPLAY_LOCK_IMAGE_V58);
-    let apple = document.querySelector('link[rel="apple-touch-icon"]');
-    if (apple) apple.setAttribute('href', PREPLAY_LOCK_IMAGE_V58);
-  }
-
-  const originalPlayAudioV58 = window.playAudio;
-  if (typeof originalPlayAudioV58 === 'function') {
-    window.playAudio = function patchedPlayAudioV58(ep) {
-      applyPreplayDocumentFallbackV58();
-      const result = originalPlayAudioV58.call(this, ep);
+  const originalPlayAudioV57 = window.playAudio;
+  if (typeof originalPlayAudioV57 === 'function') {
+    window.playAudio = function patchedPlayAudioV57(ep) {
+      const result = originalPlayAudioV57.call(this, ep);
       try {
         if ('mediaSession' in navigator && ep) {
           navigator.mediaSession.metadata = new MediaMetadata({
@@ -3379,35 +3376,129 @@
             artist: ep.by || 'CGBC Lebanon, TN',
             album: ep.series || 'CGBC Sermons',
             artwork: [
-              { src: PREPLAY_LOCK_IMAGE_V58, sizes: '96x96', type: 'image/jpeg' },
-              { src: PREPLAY_LOCK_IMAGE_V58, sizes: '128x128', type: 'image/jpeg' },
-              { src: PREPLAY_LOCK_IMAGE_V58, sizes: '192x192', type: 'image/jpeg' },
-              { src: PREPLAY_LOCK_IMAGE_V58, sizes: '256x256', type: 'image/jpeg' },
-              { src: PREPLAY_LOCK_IMAGE_V58, sizes: '384x384', type: 'image/jpeg' },
-              { src: PREPLAY_LOCK_IMAGE_V58, sizes: '512x512', type: 'image/jpeg' }
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '96x96', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '128x128', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '192x192', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '256x256', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '384x384', type: 'image/jpeg' },
+              { src: PREPLAY_LOCK_IMAGE_V57, sizes: '512x512', type: 'image/jpeg' }
             ]
           });
         }
       } catch (e) {}
-      if (window.mobileInlineBackBtnEl && typeof window.getMobileBackButtonText === 'function') {
+      return result;
+    };
+  }
+
+  const originalGetMobileBackButtonTextV57 = window.getMobileBackButtonText;
+  if (typeof originalGetMobileBackButtonTextV57 === 'function') {
+    window.getMobileBackButtonText = function patchedGetMobileBackButtonTextV57() {
+      const target = (typeof window.getMobileBackTargetLabel === 'function' ? window.getMobileBackTargetLabel() : '') || '';
+      const clean = String(target).trim();
+      if (!clean || clean.toLowerCase() === 'back') return 'Back';
+      return `Back to ${clean}`;
+    };
+  }
+
+  if (typeof window.renderMobileInlineFlow === 'function') {
+    const originalRenderMobileInlineFlowV57 = window.renderMobileInlineFlow;
+    window.renderMobileInlineFlow = function patchedRenderMobileInlineFlowV57() {
+      const result = originalRenderMobileInlineFlowV57.call(this);
+      if (window.mobileInlineBackBtnEl && window.getMobileBackButtonText) {
         window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
       }
       return result;
     };
   }
 
-  const originalRenderMobileInlineFlowV58 = window.renderMobileInlineFlow;
-  if (typeof originalRenderMobileInlineFlowV58 === 'function') {
-    window.renderMobileInlineFlow = function patchedRenderMobileInlineFlowV58() {
-      const result = originalRenderMobileInlineFlowV58.call(this);
-      if (window.mobileInlineBackBtnEl && typeof window.getMobileBackButtonText === 'function') {
-        window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
+  if (window.mobileInlineBackBtnEl && window.getMobileBackButtonText) {
+    window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
+  }
+})();
+</script>
+
+
+<script>
+/* v59 back-label-only fix:
+   Only improve the displayed Back label based on current tree state.
+   No playback or lock-screen changes here. */
+(function () {
+  function computeBackTargetV59() {
+    if (window.currentEpisodeData || window.selectedContext || window.selectionReturnSnapshot) {
+      return 'Episodes';
+    }
+
+    if (window.mobileNavView === 'queue') {
+      if (window.navLeafKey && typeof window.getLeafTitleByKey === 'function') {
+        return window.getLeafTitleByKey(window.navLeafKey) || 'Episodes';
       }
+      if (window.navBranchKey && typeof window.getBranchTitleByKey === 'function') {
+        return window.getBranchTitleByKey(window.navBranchKey) || 'Categories';
+      }
+      if (window.navRootKey && typeof window.getRootTitleByKey === 'function') {
+        return window.getRootTitleByKey(window.navRootKey) || 'Categories';
+      }
+      return 'Categories';
+    }
+
+    if (window.mobileNavView === 'leaf') {
+      if (window.navBranchKey && typeof window.getBranchTitleByKey === 'function') {
+        return window.getBranchTitleByKey(window.navBranchKey) || 'Categories';
+      }
+      if (window.navRootKey && typeof window.getRootTitleByKey === 'function') {
+        return window.getRootTitleByKey(window.navRootKey) || 'Categories';
+      }
+      return 'Categories';
+    }
+
+    if (window.mobileNavView === 'branch') {
+      if (window.navRootKey && typeof window.getRootTitleByKey === 'function') {
+        return window.getRootTitleByKey(window.navRootKey) || 'Categories';
+      }
+      return 'Categories';
+    }
+
+    return '';
+  }
+
+  function computeBackLabelV59() {
+    const clean = String(computeBackTargetV59() || '').trim();
+    if (!clean || clean.toLowerCase() === 'back') return 'Back';
+    return `Back to ${clean}`;
+  }
+
+  function refreshBackLabelV59() {
+    const label = computeBackLabelV59();
+    if (window.mobileInlineBackBtnEl) window.mobileInlineBackBtnEl.textContent = label;
+    if (window.drawerBackBtnEl) window.drawerBackBtnEl.textContent = label;
+  }
+
+  const wrapNames = [
+    'renderMobileInlineFlow',
+    'renderNavigation',
+    'renderQueue',
+    'renderEmptyMeta',
+    'playAudio',
+    'playVideo',
+    'performMobileBack',
+    'setRoot',
+    'setBranch',
+    'setLeaf',
+    'setMode',
+    'resetHome'
+  ];
+
+  for (const name of wrapNames) {
+    const original = window[name];
+    if (typeof original !== 'function') continue;
+    window[name] = function patchedBackRefreshWrapperV59(...args) {
+      const result = original.apply(this, args);
+      refreshBackLabelV59();
       return result;
     };
   }
 
-  applyPreplayDocumentFallbackV58();
+  refreshBackLabelV59();
 })();
 </script>
 
