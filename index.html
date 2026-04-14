@@ -3184,5 +3184,80 @@
       }
     })();
 </script>
+
+  <script>
+    /* v54 hard reset patch:
+       Back from a selected episode should not try to be clever.
+       It should fully clear selected media UI and rebuild the current queue bucket. */
+    function hardResetSelectedEpisodeToQueue() {
+      const snap = selectionReturnSnapshot || selectedContext || {};
+
+      if (snap.navRootKey) navRootKey = snap.navRootKey;
+      if (snap.navBranchKey) navBranchKey = snap.navBranchKey;
+      if (snap.navLeafKey || snap.leafKey) navLeafKey = snap.navLeafKey || snap.leafKey;
+
+      currentSeries = snap.seriesName || snap.currentSeries || currentSeries || '';
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      selectedEntrySource = 'queue';
+      selectedContext = null;
+      selectionReturnSnapshot = null;
+
+      bodyEl.classList.remove('has-selection');
+
+      clearMediaState();
+      renderEmptyMeta();
+      showModePlaceholder();
+
+      mobileNavView = 'queue';
+
+      renderQueue();
+      renderNavigation();
+      if (typeof renderMobileInlineFlow === 'function') renderMobileInlineFlow();
+      if (typeof renderMobileDrawerFlow === 'function') renderMobileDrawerFlow();
+      if (typeof syncMobilePinnedShell === 'function') syncMobilePinnedShell();
+      if (typeof syncMobileShellHeight === 'function') syncMobileShellHeight();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
+    }
+
+    function performMobileBack() {
+      const hasSelectedEpisodeState =
+        !!currentEpisodeData ||
+        !!selectedContext ||
+        !!selectionReturnSnapshot ||
+        bodyEl.classList.contains('has-selection') ||
+        playerStageEl.classList.contains('video-active') ||
+        (audioStageEl && getComputedStyle(audioStageEl).display !== 'none') ||
+        (videoShellEl && getComputedStyle(videoShellEl).display !== 'none');
+
+      if (hasSelectedEpisodeState) {
+        hardResetSelectedEpisodeToQueue();
+        return;
+      }
+
+      if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
+      else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
+      else if (mobileNavView === 'branch') mobileNavView = 'root';
+
+      renderQueue();
+      renderNavigation();
+      if (typeof renderMobileInlineFlow === 'function') renderMobileInlineFlow();
+      if (typeof renderMobileDrawerFlow === 'function') renderMobileDrawerFlow();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
+    }
+
+    function canGoMobileBack() {
+      return !!currentEpisodeData || !!selectedContext || !!selectionReturnSnapshot || mobileNavView !== 'root';
+    }
+
+    function getMobileBackTargetLabel() {
+      if (!!currentEpisodeData || !!selectedContext || !!selectionReturnSnapshot) return 'Episodes';
+      if (mobileNavView === 'queue') return hasMeaningfulLeafStep() ? getLeafBackLabel() : (hasMeaningfulBranchStep() ? getBranchBackLabel() : 'Categories');
+      if (mobileNavView === 'leaf') return hasMeaningfulBranchStep() ? getBranchBackLabel() : 'Categories';
+      if (mobileNavView === 'branch') return 'Categories';
+      return 'Back';
+    }
+  </script>
+
 </body>
 </html>
