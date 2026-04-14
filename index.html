@@ -1073,8 +1073,8 @@
       }
       .mobile-inline-tools {
       display: grid;
-      gap: 10px;
-      padding: 10px 6px 8px;
+      gap: 7px;
+      padding: 7px 6px 6px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
     }
@@ -1093,8 +1093,8 @@
       justify-content: space-between;
     }
     .mobile-inline-btn {
-      min-height: 46px;
-      padding: 10px 16px;
+      min-height: 38px;
+      padding: 8px 14px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
@@ -1107,14 +1107,14 @@
       flex: 0 1 auto;
     }
     .mobile-inline-back {
-      min-width: 220px;
-      max-width: 300px;
+      min-width: 188px;
+      max-width: 260px;
       text-align: left;
       justify-content: flex-start;
     }
     .mobile-inline-home {
-      min-width: 100px;
-      max-width: 118px;
+      min-width: 84px;
+      max-width: 96px;
     }
     .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
     .mobile-inline-path-row {
@@ -1124,7 +1124,7 @@
     .mobile-inline-path {
       min-width: 0;
       text-align: left;
-      font-size: 13px;
+      font-size: 11px;
       color: rgba(255,255,255,0.84);
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
@@ -1136,47 +1136,49 @@
     }
     .mobile-inline-summary {
       display: none;
+      gap: 8px;
+      padding: 8px 12px 4px;
     }
     .mobile-inline-chip {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
     }
     .mobile-inline-chip-copy { min-width: 0; }
     .mobile-inline-chip-step {
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--muted-2);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .mobile-inline-chip-title {
       font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      line-height: 1.15;
+      font-size: 13px;
+      line-height: 1.12;
     }
     .mobile-inline-chip-btn {
-      min-height: 28px;
-      padding: 0 10px;
+      min-height: 24px;
+      padding: 0 9px;
       border-radius: 999px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.08);
       color: var(--text);
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 10px 14px 9px;
-      margin-top: 4px;
+      padding: 8px 14px 7px;
+      margin-top: 2px;
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.82);
@@ -1189,7 +1191,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .mobile-inline-stage-body { padding: 12px 12px 10px; }
+    .mobile-inline-stage-body { padding: 10px 12px 8px; }
     .mobile-inline-stage-body.collapsed { display:none; }
     .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
     .mobile-inline-stage-head.hidden { display:none; }
@@ -1308,6 +1310,17 @@
         overflow: visible;
         max-height: none;
       }
+      .player-stage.is-idle {
+        min-height: 0;
+        padding: 12px;
+      }
+      .player-stage.is-idle #audioPlaceholder,
+      .player-stage.is-idle #videoPlaceholder {
+        min-height: 150px;
+        padding: 20px;
+        font-size: 14px;
+        border-radius: 18px;
+      }
       .mobile-inline-nav {
         display: block;
         position: sticky;
@@ -1319,14 +1332,17 @@
         border-bottom: 1px solid rgba(255,255,255,0.05);
       }
       .mobile-inline-tools {
-        gap: 8px;
-        padding: 8px 6px 6px;
+        gap: 6px;
+        padding: 6px 6px 5px;
+      }
+      .mobile-inline-summary {
+        display: grid;
       }
       .mobile-inline-actions-row {
         gap: 8px;
       }
       .mobile-inline-btn {
-        min-height: 42px;
+        min-height: 36px;
       }
       .mobile-inline-back {
         min-width: 0;
@@ -1342,7 +1358,7 @@
         overflow: visible;
         text-overflow: initial;
         word-break: break-word;
-        font-size: 11.5px;
+        font-size: 10.5px;
         line-height: 1.24;
         font-weight: 600;
         color: rgba(255,255,255,0.80);
@@ -1351,9 +1367,9 @@
         white-space: normal;
         overflow: visible;
         text-overflow: initial;
-        font-size: 10.5px;
-        color: rgba(255,255,255,0.62);
-        padding: 7px 14px 6px;
+        font-size: 10px;
+        color: rgba(255,255,255,0.58);
+        padding: 6px 14px 5px;
       }
       .mobile-inline-stage-head.hidden,
       .mobile-inline-stage-body.collapsed {
@@ -1600,6 +1616,7 @@
     const playingDotsStates = ['', '.', '..', '...'];
 
     const bodyEl = document.body;
+    const mastheadEl = document.querySelector('.masthead');
     const rootListEl = document.getElementById('rootList');
     const branchListEl = document.getElementById('branchList');
     const leafListEl = document.getElementById('leafList');
@@ -2461,6 +2478,32 @@
         headText = navRootKey === 'byDate' ? 'Choose Day' : 'Choose Episode';
       }
 
+      const summaryRows = [];
+      if (navRootKey && mobileNavView !== 'root') {
+        summaryRows.push(renderMobileInlineSummaryChip('Category', getRootTitleByKey(navRootKey), () => {
+          mobileNavView = 'root';
+          renderMobileInlineFlow();
+        }));
+      }
+      if (navBranchKey && ['leaf', 'queue', 'selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) {
+        summaryRows.push(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Year' : 'Branch', getBranchTitleByKey(navBranchKey), () => {
+          mobileNavView = 'branch';
+          renderMobileInlineFlow();
+        }));
+      }
+      if (navLeafKey && ['queue', 'selected'].includes(mobileNavView) && hasMeaningfulLeafStep()) {
+        summaryRows.push(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Month' : 'Series', getLeafTitleByKey(navLeafKey), () => {
+          mobileNavView = 'leaf';
+          renderMobileInlineFlow();
+        }));
+      }
+      if (summaryRows.length) {
+        mobileInlineSummaryEl.style.display = 'grid';
+        summaryRows.forEach(row => mobileInlineSummaryEl.appendChild(row));
+      } else {
+        mobileInlineSummaryEl.style.display = 'none';
+      }
+
       mobileInlineStageHeadEl.textContent = headText;
       mobileInlineStageBodyEl.innerHTML = '';
       mobileInlineStageHeadEl.classList.remove('collapsed');
@@ -2854,7 +2897,10 @@
     }
 
     function showModePlaceholder() {
-      if (playerStageEl) playerStageEl.classList.remove('video-active', 'audio-active');
+      if (playerStageEl) {
+        playerStageEl.classList.remove('video-active', 'audio-active');
+        playerStageEl.classList.add('is-idle');
+      }
       if (stageInfoEl) { stageInfoEl.style.display = 'none'; stageInfoEl.innerHTML = ''; }
       if (mode === 'audio') {
         audioPlaceholderEl.textContent = isMobileLayout() ? 'Choose a sermon path above to begin listening' : 'Choose an episode from the queue to begin listening.';
@@ -2873,7 +2919,7 @@
       audioPlayerEl.load();
       audioPlaceholderEl.style.display = 'none';
       audioStageEl.style.display = 'grid';
-      if (playerStageEl) { playerStageEl.classList.remove('video-active'); playerStageEl.classList.add('audio-active'); }
+      if (playerStageEl) { playerStageEl.classList.remove('video-active', 'is-idle'); playerStageEl.classList.add('audio-active'); }
       audioFeatureArtEl.src = ep.img || ep.seriesImage || FALLBACK_IMAGE;
       audioFeatureTitleEl.textContent = ep.title || 'Untitled Sermon';
       audioFeatureSeriesEl.textContent = ep.series || currentSeries || '';
@@ -2894,6 +2940,7 @@
       renderStageInfo(ep);
       if (!ep.videoId) {
         videoPlaceholderEl.textContent = 'No video is available for this sermon yet.';
+        if (playerStageEl) playerStageEl.classList.add('is-idle');
         videoPlaceholderEl.style.display = 'flex';
         renderMeta(ep);
         return;
@@ -2901,7 +2948,7 @@
       videoPlaceholderEl.style.display = 'none';
       videoShellEl.innerHTML = '';
       videoShellEl.style.display = 'block';
-      if (playerStageEl) { playerStageEl.classList.remove('audio-active'); playerStageEl.classList.add('video-active'); }
+      if (playerStageEl) { playerStageEl.classList.remove('audio-active', 'is-idle'); playerStageEl.classList.add('video-active'); }
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube.com/embed/${ep.videoId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
       iframe.title = ep.title || 'Sermon';
