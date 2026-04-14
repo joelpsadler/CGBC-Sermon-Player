@@ -8,9 +8,17 @@ const STATS_DAYS = Number(process.env.PODBEAN_STATS_DAYS || 3650);
 const PAGE_LIMIT = Math.min(100, Number(process.env.PODBEAN_LIMIT || 100));
 const CHUNK_DAYS = 90;
 
+const REQUEST_DELAY_MS = 700;
+const RETRY_BASE_DELAY_MS = 2500;
+const MAX_RETRIES = 4;
+
 if (!CLIENT_ID || !CLIENT_SECRET) {
   console.error("Missing PODBEAN_CLIENT_ID or PODBEAN_CLIENT_SECRET.");
   process.exit(1);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function isoDate(date) {
@@ -45,7 +53,10 @@ function buildDateChunks(startStr, endStr, chunkDays = CHUNK_DAYS) {
   while (cursor <= end) {
     const chunkStart = new Date(cursor);
     let chunkEnd = addDays(chunkStart, chunkDays - 1);
-    if (chunkEnd > end) chunkEnd = new Date(end);
+
+    if (chunkEnd > end) {
+      chunkEnd = new Date(end);
+    }
 
     chunks.push({
       start: isoDate(chunkStart),
@@ -58,10 +69,34 @@ function buildDateChunks(startStr, endStr, chunkDays = CHUNK_DAYS) {
   return chunks;
 }
 
-async function fetchJson(url, options = {}) {
+async function fetchJson(url, options = {}, retryCount = 0) {
   const res = await fetch(url, options);
   const text = await res.text();
-  if (!res.ok) throw new Error(`Request failed ${res.status} ${res.statusText} for ${url}\n${text}`);
+
+  if (res.status === 429) {
+    if (retryCount >= MAX_RETRIES) {
+      throw new Error(`Rate limited too many times for ${url}`);
+    }
+
+    const retryAfterHeader = res.headers.get("retry-after");
+    const retryAfterSeconds = retryAfterHeader ? Number(retryAfterHeader) : NaN;
+    const waitMs = Number.isFinite(retryAfterSeconds)
+      ? retryAfterSeconds * 1000
+      : RETRY_BASE_DELAY_MS * Math.pow(2, retryCount);
+
+    console.warn(
+      `429 rate limit hit. Waiting ${waitMs}ms before retry ${retryCount + 1} for ${url}`
+    );
+    await sleep(waitMs);
+    return fetchJson(url, options, retryCount + 1);
+  }
+
+  if (!res.ok) {
+    throw new Error(
+      `Request failed ${res.status} ${res.statusText} for ${url}\n${text}`
+    );
+  }
+
   try {
     return JSON.parse(text);
   } catch {
@@ -72,6 +107,7 @@ async function fetchJson(url, options = {}) {
 async function getAccessToken() {
   const form = new URLSearchParams();
   form.set("grant_type", "client_credentials");
+
   const basic = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64");
 
   const data = await fetchJson("https://api.podbean.com/v1/oauth/token", {
@@ -84,8 +120,20 @@ async function getAccessToken() {
     body: form.toString(),
   });
 
-  if (!data.access_token) throw new Error("Podbean token response did not include access_token.");
+  if (!data.access_token) {
+    throw new Error("Podbean token response did not include access_token.");
+  }
+
   return data.access_token;
+}
+
+function extractEpisodeList(data) {
+  if (Array.isArray(data?.episodes)) return data.episodes;
+  if (Array.isArray(data?.items)) return data.items;
+  if (Array.isArray(data?.data?.episodes)) return data.data.episodes;
+  if (Array.isArray(data?.data?.items)) return data.data.items;
+  if (Array.isArray(data)) return data;
+  return [];
 }
 
 async function getAllEpisodes(accessToken) {
@@ -99,20 +147,26 @@ async function getAllEpisodes(accessToken) {
     url.searchParams.set("limit", String(PAGE_LIMIT));
 
     const data = await fetchJson(url.toString(), {
-      headers: { "User-Agent": "CGBCMediaPlayerStatsSync/1.0" },
+      headers: {
+        "User-Agent": "CGBCMediaPlayerStatsSync/1.0",
+      },
     });
 
-    const list =
-      Array.isArray(data.episodes) ? data.episodes :
-      Array.isArray(data.items) ? data.items :
-      Array.isArray(data) ? data :
-      [];
+    const list = extractEpisodeList(data);
 
     episodes.push(...list);
-    if (list.length < PAGE_LIMIT) break;
+
+    console.log(`Fetched episode page offset=${offset}, count=${list.length}`);
+
+    if (list.length < PAGE_LIMIT) {
+      break;
+    }
+
     offset += list.length;
+    await sleep(REQUEST_DELAY_MS);
   }
 
+  console.log(`Total episodes fetched: ${episodes.length}`);
   return episodes;
 }
 
@@ -124,17 +178,27 @@ async function getEpisodeDownloadsForRange(accessToken, episodeId, start, end) {
   url.searchParams.set("end", end);
 
   const data = await fetchJson(url.toString(), {
-    headers: { "User-Agent": "CGBCMediaPlayerStatsSync/1.0" },
+    headers: {
+      "User-Agent": "CGBCMediaPlayerStatsSync/1.0",
+    },
   });
 
-  const statsObj = data.stats && typeof data.stats === "object" && !Array.isArray(data.stats) ? data.stats : {};
+  const statsObj =
+    data?.stats && typeof data.stats === "object" && !Array.isArray(data.stats)
+      ? data.stats
+      : {};
+
   const daily = Object.entries(statsObj).map(([date, downloads]) => ({
     date,
     downloads: Number(downloads || 0),
   }));
 
   const total = daily.reduce((sum, row) => sum + row.downloads, 0);
-  return { total_downloads: total, daily };
+
+  return {
+    total_downloads: total,
+    daily,
+  };
 }
 
 async function getEpisodeDownloadsChunked(accessToken, episodeId, start, end) {
@@ -142,18 +206,33 @@ async function getEpisodeDownloadsChunked(accessToken, episodeId, start, end) {
   const byDate = new Map();
 
   for (const chunk of chunks) {
-    const result = await getEpisodeDownloadsForRange(accessToken, episodeId, chunk.start, chunk.end);
+    const result = await getEpisodeDownloadsForRange(
+      accessToken,
+      episodeId,
+      chunk.start,
+      chunk.end
+    );
+
     for (const row of result.daily) {
       byDate.set(row.date, (byDate.get(row.date) || 0) + row.downloads);
     }
+
+    await sleep(REQUEST_DELAY_MS);
   }
 
   const daily = [...byDate.entries()]
     .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([date, downloads]) => ({ date, downloads }));
+    .map(([date, downloads]) => ({
+      date,
+      downloads,
+    }));
 
   const total = daily.reduce((sum, row) => sum + row.downloads, 0);
-  return { total_downloads: total, daily };
+
+  return {
+    total_downloads: total,
+    daily,
+  };
 }
 
 function normalizeEpisodeTitle(value) {
@@ -169,20 +248,41 @@ async function main() {
 
   const output = {
     generated_at: new Date().toISOString(),
-    source: { provider: "podbean", metric: "downloads", start, end, chunk_days: CHUNK_DAYS },
+    source: {
+      provider: "podbean",
+      metric: "downloads",
+      start,
+      end,
+      chunk_days: CHUNK_DAYS,
+    },
     episodes: {},
+    summary: {
+      total_episodes_seen: episodes.length,
+      total_episodes_synced: 0,
+      total_episodes_failed: 0,
+    },
   };
 
   for (const ep of episodes) {
-    const episodeId = ep.id || "";
-    const title = normalizeEpisodeTitle(ep.title);
-    const permalink = ep.permalink_url || ep.link || "";
-    const publishDate = ep.publish_time ? new Date(ep.publish_time * 1000).toISOString() : "";
+    const episodeId = ep?.id || "";
+    const title = normalizeEpisodeTitle(ep?.title);
+    const permalink = ep?.permalink_url || ep?.link || "";
+    const publishDate = ep?.publish_time
+      ? new Date(ep.publish_time * 1000).toISOString()
+      : "";
 
-    if (!episodeId) continue;
+    if (!episodeId) {
+      continue;
+    }
 
     try {
-      const stats = await getEpisodeDownloadsChunked(accessToken, episodeId, start, end);
+      const stats = await getEpisodeDownloadsChunked(
+        accessToken,
+        episodeId,
+        start,
+        end
+      );
+
       output.episodes[episodeId] = {
         podbean_episode_id: episodeId,
         title,
@@ -190,16 +290,25 @@ async function main() {
         publish_time: publishDate,
         downloads_total: stats.total_downloads,
       };
+
+      output.summary.total_episodes_synced += 1;
       console.log(`Synced ${title} -> ${stats.total_downloads}`);
     } catch (err) {
+      output.summary.total_episodes_failed += 1;
       console.warn(`Failed stats for ${title} (${episodeId}): ${err.message}`);
     }
+
+    await sleep(REQUEST_DELAY_MS);
   }
 
   const outFile = path.resolve(process.cwd(), "stats", "stats.json");
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, JSON.stringify(output, null, 2), "utf8");
+
   console.log(`Wrote ${outFile}`);
+  console.log(
+    `Summary: seen=${output.summary.total_episodes_seen}, synced=${output.summary.total_episodes_synced}, failed=${output.summary.total_episodes_failed}`
+  );
 }
 
 main().catch((err) => {
