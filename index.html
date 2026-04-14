@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - v43</title>
+  <title>CGBC Sermons - v44</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
@@ -31,6 +31,7 @@
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
       --mobile-sticky-offset: 140px;
+      --mobile-top-stack-height: 150px;
     }
 
     * { box-sizing: border-box; }
@@ -1086,11 +1087,13 @@
     @media (max-width: 640px) {
       .brand-logo-btn { width: 78px; height: 58px; }
       .mobile-inline-nav {
-        position: sticky;
-        top: calc(var(--safe-top) + 60px);
-        z-index: 170;
+        position: fixed;
+        top: var(--mobile-masthead-offset, 74px);
+        left: 0;
+        right: 0;
+        z-index: 230;
         background: linear-gradient(180deg, rgba(8,8,8,0.97), rgba(10,10,10,0.94));
-        margin: 0 -8px 0;
+        margin: 0;
         padding: 0 8px 6px;
         border-bottom: 1px solid rgba(255,255,255,0.06);
       }
@@ -1216,6 +1219,12 @@
     .mobile-inline-stage-body.collapsed { display:none; }
     .mobile-inline-stage-head.collapsed { margin-top:0; border-top:none; }
     .mobile-inline-stage-head.hidden { display:none; }
+    body.has-selection .mobile-inline-stage-body,
+    body.has-selection #mobileInlineStageBody {
+      display: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
     .mobile-inline-stage-body .nav-list { gap: 12px; }
     .mobile-inline-stage-body .browse-subgroup-title { margin: 12px 2px 6px; color: rgba(255,255,255,0.68); }
 
@@ -1396,6 +1405,16 @@
 
     .mobile-top-shell {
       display: none;
+    }
+
+    @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      .app-shell {
+        position: relative;
+      }
+      .browse-column,
+      .queue-column {
+        display: none !important;
+      }
     }
     /* Pass 3:
        Mobile should have one vertical scroll owner only.
@@ -2317,7 +2336,7 @@
 
 
     function getMobileBackTargetLabel() {
-      if (mobileNavView === 'selected') return 'Episodes';
+      if (currentEpisodeData) return 'Episodes';
       if (mobileNavView === 'queue') {
         if (hasMeaningfulLeafStep() && navLeafKey) return getLeafTitleByKey(navLeafKey);
         if (hasMeaningfulBranchStep() && navBranchKey) return getBranchTitleByKey(navBranchKey);
@@ -2376,6 +2395,7 @@
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       selectedContext = null;
+      selectionReturnSnapshot = null;
 
       clearMediaState();
       renderEmptyMeta();
@@ -2383,12 +2403,11 @@
 
       mobileNavView = 'queue';
 
+      /* Beginner note:
+         Rebuild the queue-first state in one stable render pass.
+         Do not bounce through an extra "selected" view on the way back. */
       renderNavigation();
       renderQueue();
-      renderMobileInlineFlow();
-      renderMobileDrawerFlow();
-
-      selectionReturnSnapshot = null;
 
       syncMobileShellHeight();
       if (isMobileLayout()) scrollMobileSelectorToTop();
@@ -2399,7 +2418,7 @@
     }
 
     function performMobileBack() {
-      const backingOutOfSelection = !!currentEpisodeData || mobileNavView === 'selected' || !!selectionReturnSnapshot;
+      const backingOutOfSelection = !!currentEpisodeData || !!selectionReturnSnapshot;
 
       if (backingOutOfSelection) {
         restoreQueueFromSelectionSnapshot();
@@ -2423,9 +2442,9 @@
       const labels = [];
       labels.push(mode === 'audio' ? 'Audio' : 'Video');
       if (mobileNavView !== 'root' && navRootKey) labels.push(getRootTitleByKey(navRootKey));
-      if ((mobileNavView === 'leaf' || mobileNavView === 'queue' || mobileNavView === 'selected') && navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
+      if ((mobileNavView === 'leaf' || mobileNavView === 'queue') && navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
-      if ((mobileNavView === 'queue' || mobileNavView === 'selected') && navLeafKey && (((hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series')) || navRootKey === 'byDate')) labels.push(getLeafTitleByKey(navLeafKey));
+      if ((mobileNavView === 'queue') && navLeafKey && (((hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series')) || navRootKey === 'byDate')) labels.push(getLeafTitleByKey(navLeafKey));
       drawerPathLabelEl.textContent = labels.join(' › ') || 'Start at the top and drill down.';
       drawerBackBtnEl.disabled = !canGoMobileBack();
       drawerBackBtnEl.textContent = getMobileBackButtonText();
@@ -2508,9 +2527,9 @@
       if (!mobileInlinePathLabelEl) return;
       const labels = [mode === 'audio' ? 'Audio' : 'Video'];
       if (navRootKey) labels.push(getRootTitleByKey(navRootKey));
-      if (navBranchKey && ['leaf','queue','selected'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
+      if (navBranchKey && ['leaf','queue'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
-      if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
+      if (navLeafKey && ['queue'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = !canGoMobileBack();
@@ -2555,7 +2574,7 @@
       mobileInlineStageHeadEl.classList.remove('collapsed');
       mobileInlineStageBodyEl.classList.remove('collapsed');
       mobileInlineStageHeadEl.classList.remove('hidden');
-      if (mobileNavView === 'selected' || !!currentEpisodeData) {
+      if (!!currentEpisodeData) {
         mobileInlineStageHeadEl.textContent = '';
         mobileInlineStageHeadEl.classList.add('hidden');
         mobileInlineStageBodyEl.classList.add('collapsed');
@@ -2578,10 +2597,13 @@
       if (!mastheadEl) return;
       if (!isMobileLayout()) {
         document.documentElement.style.removeProperty('--mobile-masthead-offset');
+        document.documentElement.style.removeProperty('--mobile-top-stack-height');
         return;
       }
       const mastheadH = Math.ceil(mastheadEl.getBoundingClientRect().height || 0);
+      const inlineH = mobileInlineNavEl ? Math.ceil(mobileInlineNavEl.getBoundingClientRect().height || 0) : 0;
       document.documentElement.style.setProperty('--mobile-masthead-offset', `${mastheadH}px`);
+      document.documentElement.style.setProperty('--mobile-top-stack-height', `${mastheadH + inlineH}px`);
     }
 
     function createIconMarkup(kind) {
@@ -3019,7 +3041,12 @@
       };
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
-      if (isMobileLayout()) mobileNavView = 'selected';
+
+      /* Beginner note:
+         Keep the queue as the underlying mobile state even after selection.
+         The selected sermon is a focused player state layered on top of the queue,
+         not a separate navigation level. */
+      if (isMobileLayout()) mobileNavView = 'queue';
       renderQueue();
       renderNavigation();
       if (isMobileLayout()) {
