@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - v44</title>
+  <title>CGBC Sermons - v50 Mobile Shell Rebuild</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
@@ -1443,6 +1443,339 @@
       }
     }
 
+
+    /* v50 mobile shell rebuild:
+       - fixed header cell
+       - fixed progress/actions cell
+       - one scroll pane below
+       - prior choices collapse into chips
+    */
+    .mobile-shell { display: none; }
+
+    .mobile-inline-nav {
+      display: none;
+    }
+
+    .mobile-inline-summary {
+      display: none;
+    }
+
+    .mobile-inline-summary.is-visible {
+      display: grid !important;
+      gap: 8px;
+      padding: 8px 0 8px;
+    }
+
+    .mobile-inline-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mobile-inline-chip-copy { min-width: 0; }
+    .mobile-inline-chip-step {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
+      margin-bottom: 4px;
+    }
+    .mobile-inline-chip-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      line-height: 1.15;
+    }
+    .mobile-inline-chip-btn {
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      :root {
+        --mobile-header-height: 74px;
+        --mobile-shell-height: 168px;
+      }
+
+      html, body {
+        height: 100%;
+        min-height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .app-shell {
+        width: 100%;
+        height: 100dvh;
+        min-height: 100dvh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .masthead {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 300;
+        margin: 0;
+        padding: calc(6px + var(--safe-top)) 8px 6px;
+        background: rgba(9,9,10,0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        gap: 4px;
+      }
+
+      .brand-copy { display: none !important; }
+      .brand-lockup { gap: 0; }
+      .brand-logo-btn {
+        width: 78px;
+        height: 58px;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        overflow: visible;
+      }
+      .brand-logo-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: scale(1.0);
+      }
+
+      .top-actions {
+        flex: 1;
+        justify-content: stretch;
+      }
+      .mode-pill {
+        min-width: 0;
+        flex: 1;
+      }
+      .mode-btn-shell,
+      .utility-btn-shell {
+        min-height: 48px;
+        padding: 0 12px;
+        gap: 8px;
+      }
+      .mode-pill .icon { width: 19px; height: 19px; }
+      .btn-copy .top { font-size: 14px; }
+      .btn-copy .bottom { font-size: 10px; }
+      .utility-btn,
+      .drawer,
+      .drawer-overlay,
+      .mobile-top-shell {
+        display: none !important;
+      }
+
+      .mobile-shell {
+        display: block;
+        position: fixed;
+        top: var(--mobile-masthead-offset, 74px);
+        left: 0;
+        right: 0;
+        z-index: 290;
+        background: linear-gradient(180deg, rgba(8,8,8,0.98), rgba(10,10,10,0.94));
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .mobile-inline-nav {
+        display: block;
+        margin: 0;
+        padding: 0 8px 6px;
+        background: transparent;
+      }
+
+      .mobile-inline-tools {
+        display: grid;
+        gap: 8px;
+        padding: 8px 6px 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: linear-gradient(180deg, rgba(10,10,10,0.92), rgba(16,16,16,0.88));
+      }
+      .mobile-inline-actions-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .mobile-inline-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        min-width: 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      .mobile-inline-btn {
+        min-height: 42px;
+        padding: 8px 14px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: var(--text);
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        line-height: 1.15;
+        text-align: center;
+        white-space: normal;
+        flex: 0 1 auto;
+      }
+      .mobile-inline-back {
+        min-width: 220px;
+        max-width: 300px;
+        text-align: left;
+        justify-content: flex-start;
+      }
+      .mobile-inline-home {
+        min-width: 100px;
+        max-width: 118px;
+      }
+      .mobile-inline-btn[disabled] { opacity: .45; cursor: default; }
+      .mobile-inline-path-row {
+        display: block;
+        min-width: 0;
+      }
+      .mobile-inline-path {
+        min-width: 0;
+        text-align: left;
+        font-size: 12px;
+        color: rgba(255,255,255,0.84);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        line-height: 1.22;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 2px;
+      }
+      .mobile-inline-stage-head {
+        padding: 8px 14px 7px;
+        margin-top: 3px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.82);
+        border-top: 1px solid rgba(255,255,255,0.06);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: rgba(18,18,18,0.86);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mobile-inline-stage-head.hidden { display:none; }
+      .mobile-inline-stage-body {
+        padding: 10px 12px 8px;
+        overflow: visible !important;
+        max-height: none !important;
+      }
+      body.has-selection .mobile-inline-stage-body {
+        display: none !important;
+      }
+
+      .workspace {
+        flex: 1 1 auto;
+        min-height: 0;
+        height: 100%;
+        display: block;
+        overflow: hidden;
+      }
+      .browse-column,
+      .queue-column {
+        display: none !important;
+      }
+      .stage-column {
+        display: block;
+        min-height: 0;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+        touch-action: pan-y;
+        padding: calc(var(--mobile-top-stack-height, 170px) + 10px) 8px calc(18px + var(--safe-bottom));
+      }
+      #playerSection {
+        scroll-margin-top: calc(var(--mobile-top-stack-height, 170px) + 8px);
+      }
+
+      .player-stage {
+        min-height: 0;
+        padding: 14px;
+      }
+      .player-stage.video-active { padding: 0; }
+      #videoShell,
+      #videoPlaceholder { min-height: 220px; }
+      #videoShell { aspect-ratio: 16/9; }
+
+      body:not(.has-selection) .player-stage {
+        min-height: 0;
+        padding: 10px 12px;
+      }
+      body:not(.has-selection) .meta-stage {
+        padding: 18px 16px;
+      }
+      body:not(.has-selection) .meta-title {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      body:not(.has-selection) .meta-intro {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      body:not(.has-selection) .meta-note {
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .audio-stage {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .audio-art-wrap { gap: 10px; }
+      .audio-art { max-width: 292px; }
+      .audio-transport {
+        max-width: 320px;
+        grid-template-columns: 50px minmax(0, 1fr) 50px;
+      }
+      .transport-btn,
+      .transport-play { min-height: 50px; }
+      .transport-play { padding: 0 10px 0 5px; gap: 10px; }
+      .transport-play-circle {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+      }
+      .transport-play-copy { font-size: 13px; }
+      .audio-title { font-size: 26px; }
+      .audio-series { font-size: 15px; }
+      .audio-now { font-size: 34px; }
+      .audio-total { font-size: 16px; }
+      .meta-stage { padding: 18px 16px; }
+      .meta-row { grid-template-columns: 118px minmax(0, 1fr); gap: 10px; }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -1482,6 +1815,25 @@
         </button>
       </div>
     </header>
+    <section class="mobile-shell" id="mobileShell" aria-label="Mobile sermon navigation">
+      <section class="mobile-inline-nav" id="mobileInlineNav" aria-label="Mobile sermon navigation">
+          <div class="mobile-inline-tools">
+            <div class="mobile-inline-actions-row">
+              <div class="mobile-inline-actions">
+                <button class="mobile-inline-btn mobile-inline-back" id="mobileInlineBackBtn" type="button">Back</button>
+                <button class="mobile-inline-btn mobile-inline-home" id="mobileInlineHomeBtn" type="button">Home</button>
+              </div>
+            </div>
+            <div class="mobile-inline-path-row">
+              <div class="mobile-inline-path" id="mobileInlinePathLabel">Start with Listen or Watch, then choose a path.</div>
+            </div>
+          </div>
+          <div class="mobile-inline-summary" id="mobileInlineSummary" style="display:none"></div>
+          <div class="mobile-inline-stage-head" id="mobileInlineStageHead">Choose Category</div>
+          <div class="mobile-inline-stage-body" id="mobileInlineStageBody"></div>
+        </section>
+    </section>
+
 
 
     <div class="drawer-overlay" id="drawerOverlay"></div>
@@ -1549,22 +1901,6 @@
       </section>
 
       <section class="stage-column" id="playerSection">
-        <section class="mobile-inline-nav" id="mobileInlineNav" aria-label="Mobile sermon navigation">
-          <div class="mobile-inline-tools">
-            <div class="mobile-inline-actions-row">
-              <div class="mobile-inline-actions">
-                <button class="mobile-inline-btn mobile-inline-back" id="mobileInlineBackBtn" type="button">Back</button>
-                <button class="mobile-inline-btn mobile-inline-home" id="mobileInlineHomeBtn" type="button">Home</button>
-              </div>
-            </div>
-            <div class="mobile-inline-path-row">
-              <div class="mobile-inline-path" id="mobileInlinePathLabel">Start with Listen or Watch, then choose a path.</div>
-            </div>
-          </div>
-          <div class="mobile-inline-summary" id="mobileInlineSummary" style="display:none"></div>
-          <div class="mobile-inline-stage-head" id="mobileInlineStageHead">Choose Category</div>
-          <div class="mobile-inline-stage-body" id="mobileInlineStageBody"></div>
-        </section>
         <section class="player-stage">
           <div id="videoPlaceholder">Choose an episode from the queue to begin watching.</div>
           <div id="videoShell"></div>
@@ -2403,11 +2739,8 @@
 
       mobileNavView = 'queue';
 
-      /* Beginner note:
-         Rebuild the queue-first state in one stable render pass.
-         Do not bounce through an extra "selected" view on the way back. */
-      renderNavigation();
       renderQueue();
+      renderNavigation();
 
       syncMobileShellHeight();
       if (isMobileLayout()) scrollMobileSelectorToTop();
@@ -2527,9 +2860,9 @@
       if (!mobileInlinePathLabelEl) return;
       const labels = [mode === 'audio' ? 'Audio' : 'Video'];
       if (navRootKey) labels.push(getRootTitleByKey(navRootKey));
-      if (navBranchKey && ['leaf','queue'].includes(mobileNavView) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
+      if (navBranchKey && ((['leaf','queue'].includes(mobileNavView)) || !!currentEpisodeData) && (hasMeaningfulBranchStep() || navRootKey === 'byDate')) labels.push(getBranchTitleByKey(navBranchKey));
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
-      if (navLeafKey && ['queue'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
+      if (navLeafKey && ((['queue'].includes(mobileNavView)) || !!currentEpisodeData) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = !canGoMobileBack();
@@ -2539,7 +2872,56 @@
 
     function renderMobileInlineFlow() {
       if (!mobileInlineNavEl || !mobileInlineStageBodyEl || !isMobileLayout()) return;
+
       mobileInlineSummaryEl.innerHTML = '';
+      mobileInlineSummaryEl.classList.remove('is-visible');
+
+      const summaryItems = [];
+
+      if (navRootKey) {
+        const rootItem = getRootItems().find(item => item.key === navRootKey);
+        if (mobileNavView !== 'root' || !!currentEpisodeData) {
+          summaryItems.push(renderMobileInlineSummaryChip('Category', rootItem?.title || getRootTitleByKey(navRootKey), () => {
+            currentEpisodeData = null;
+            selectionReturnSnapshot = null;
+            mobileNavView = 'root';
+            renderNavigation();
+            renderQueue();
+            renderEmptyMeta();
+            showModePlaceholder();
+          }));
+        }
+      }
+
+      if (navBranchKey && (hasMeaningfulBranchStep() || navRootKey === 'byDate') && (mobileNavView === 'leaf' || mobileNavView === 'queue' || !!currentEpisodeData)) {
+        summaryItems.push(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Year' : 'Branch', getBranchTitleByKey(navBranchKey), () => {
+          currentEpisodeData = null;
+          selectionReturnSnapshot = null;
+          mobileNavView = 'branch';
+          renderNavigation();
+          renderQueue();
+          renderEmptyMeta();
+          showModePlaceholder();
+        }));
+      }
+
+      const leafItemForSummary = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
+      if (navLeafKey && (mobileNavView === 'queue' || !!currentEpisodeData) && (navRootKey === 'byDate' || hasMeaningfulLeafStep())) {
+        summaryItems.push(renderMobileInlineSummaryChip(navRootKey === 'byDate' ? 'Month / Day' : 'Series / Bucket', getLeafTitleByKey(navLeafKey), () => {
+          currentEpisodeData = null;
+          selectionReturnSnapshot = null;
+          mobileNavView = 'leaf';
+          renderNavigation();
+          renderQueue();
+          renderEmptyMeta();
+          showModePlaceholder();
+        }));
+      }
+
+      if (summaryItems.length) {
+        mobileInlineSummaryEl.classList.add('is-visible');
+        summaryItems.forEach(item => mobileInlineSummaryEl.appendChild(item));
+      }
 
       let items = [];
       let activeKey = null;
@@ -2571,23 +2953,20 @@
 
       mobileInlineStageHeadEl.textContent = headText;
       mobileInlineStageBodyEl.innerHTML = '';
-      mobileInlineStageHeadEl.classList.remove('collapsed');
-      mobileInlineStageBodyEl.classList.remove('collapsed');
       mobileInlineStageHeadEl.classList.remove('hidden');
+
       if (!!currentEpisodeData) {
-        mobileInlineStageHeadEl.textContent = '';
         mobileInlineStageHeadEl.classList.add('hidden');
-        mobileInlineStageBodyEl.classList.add('collapsed');
       } else if (mobileNavView === 'queue') {
         renderQueueInto(mobileInlineStageBodyEl);
       } else {
         renderNavList(mobileInlineStageBodyEl, items, activeKey, onPick, emptyText);
       }
+
       updateMobileInlineTools();
       syncMobilePinnedShell();
       syncMobileShellHeight();
     }
-
 
     function syncMobilePinnedShell() {
       return;
@@ -2601,9 +2980,11 @@
         return;
       }
       const mastheadH = Math.ceil(mastheadEl.getBoundingClientRect().height || 0);
-      const inlineH = mobileInlineNavEl ? Math.ceil(mobileInlineNavEl.getBoundingClientRect().height || 0) : 0;
+      const shellH = document.getElementById('mobileShell')
+        ? Math.ceil(document.getElementById('mobileShell').getBoundingClientRect().height || 0)
+        : 0;
       document.documentElement.style.setProperty('--mobile-masthead-offset', `${mastheadH}px`);
-      document.documentElement.style.setProperty('--mobile-top-stack-height', `${mastheadH + inlineH}px`);
+      document.documentElement.style.setProperty('--mobile-top-stack-height', `${mastheadH + shellH}px`);
     }
 
     function createIconMarkup(kind) {
@@ -2859,6 +3240,11 @@
       stopAndHideVideo();
       stopAndHideAudio();
       currentEpisodeData = null;
+    }
+
+    function updateSelectionShellState() {
+      const hasSelection = !!currentEpisodeData;
+      bodyEl.classList.toggle('has-selection', hasSelection);
     }
 
     function getScriptureLabel(value) {
@@ -3219,6 +3605,8 @@
         renderQueue();
         renderEmptyMeta();
         showModePlaceholder();
+        updateSelectionShellState();
+        syncMobileShellHeight();
       } catch (error) {
         console.error(error);
         rootListEl.innerHTML = '<div class="nav-empty">The sermon feed failed to load. Check the RSS source or network access and try again.</div>';
