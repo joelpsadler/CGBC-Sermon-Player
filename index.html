@@ -3185,79 +3185,158 @@
     })();
 </script>
 
-  <script>
-    /* v54 hard reset patch:
-       Back from a selected episode should not try to be clever.
-       It should fully clear selected media UI and rebuild the current queue bucket. */
-    function hardResetSelectedEpisodeToQueue() {
-      const snap = selectionReturnSnapshot || selectedContext || {};
+<script>
+/* v55 targeted v52 back fix only.
+   Keep the existing shell and selection flow.
+   Only force Back from selected episode to rebuild the current queue bucket. */
+(function () {
+  const PREPLAY_LOCK_IMAGE = 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg';
 
-      if (snap.navRootKey) navRootKey = snap.navRootKey;
-      if (snap.navBranchKey) navBranchKey = snap.navBranchKey;
-      if (snap.navLeafKey || snap.leafKey) navLeafKey = snap.navLeafKey || snap.leafKey;
+  window.updateSelectionShellState = function updateSelectionShellState() {
+    const hasSelection = !!window.currentEpisodeData;
+    if (window.bodyEl) window.bodyEl.classList.toggle('has-selection', hasSelection);
+  };
 
-      currentSeries = snap.seriesName || snap.currentSeries || currentSeries || '';
-      currentEpisodeIndex = null;
-      currentEpisodeData = null;
-      selectedEntrySource = 'queue';
-      selectedContext = null;
-      selectionReturnSnapshot = null;
+  const originalSelectEpisode = window.selectEpisode;
+  if (typeof originalSelectEpisode === 'function') {
+    window.selectEpisode = function patchedSelectEpisode(ep, originalIndex, options = {}) {
+      const result = originalSelectEpisode.call(this, ep, originalIndex, options);
+      window.updateSelectionShellState();
+      return result;
+    };
+  }
 
-      bodyEl.classList.remove('has-selection');
+  const originalUpdateMediaSession = window.updateMediaSession;
+  if (typeof originalUpdateMediaSession === 'function') {
+    window.updateMediaSession = function patchedUpdateMediaSession(ep, preferPreplayArtwork = false) {
+      if (!('mediaSession' in navigator) || !ep) return;
+      const artworkSrc = preferPreplayArtwork
+        ? PREPLAY_LOCK_IMAGE
+        : (ep.img || ep.seriesImage || window.FALLBACK_IMAGE || PREPLAY_LOCK_IMAGE);
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: ep.title || 'CGBC Sermon',
+          artist: ep.by || 'CGBC Lebanon, TN',
+          album: ep.series || 'CGBC Sermons',
+          artwork: [
+            { src: artworkSrc, sizes: '96x96', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '128x128', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '192x192', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '256x256', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '384x384', type: 'image/jpeg' },
+            { src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+      } catch {}
+      return originalUpdateMediaSession.call(this, ep, preferPreplayArtwork);
+    };
+  }
 
-      clearMediaState();
-      renderEmptyMeta();
-      showModePlaceholder();
+  function forceQueueReturnFromSelectedEpisode() {
+    const snap = window.selectionReturnSnapshot || window.selectedContext || {};
 
-      mobileNavView = 'queue';
+    if (snap.navRootKey) window.navRootKey = snap.navRootKey;
+    if (snap.navBranchKey) window.navBranchKey = snap.navBranchKey;
+    if (snap.navLeafKey || snap.leafKey) window.navLeafKey = snap.navLeafKey || snap.leafKey;
 
-      renderQueue();
-      renderNavigation();
-      if (typeof renderMobileInlineFlow === 'function') renderMobileInlineFlow();
-      if (typeof renderMobileDrawerFlow === 'function') renderMobileDrawerFlow();
-      if (typeof syncMobilePinnedShell === 'function') syncMobilePinnedShell();
-      if (typeof syncMobileShellHeight === 'function') syncMobileShellHeight();
-      if (isMobileLayout()) scrollMobileSelectorToTop();
+    window.currentSeries = snap.seriesName || snap.currentSeries || window.currentSeries || '';
+    window.currentEpisodeIndex = null;
+    window.currentEpisodeData = null;
+    window.selectedContext = null;
+    window.selectionReturnSnapshot = null;
+    window.selectedEntrySource = 'queue';
+
+    if (typeof window.clearMediaState === 'function') window.clearMediaState();
+
+    if (window.playerStageEl) window.playerStageEl.classList.remove('video-active', 'audio-active');
+    if (window.audioStageEl) window.audioStageEl.style.display = 'none';
+    if (window.videoShellEl) { window.videoShellEl.innerHTML = ''; window.videoShellEl.style.display = 'none'; }
+    if (window.videoPlaceholderEl) window.videoPlaceholderEl.style.display = 'none';
+    if (window.audioPlaceholderEl) window.audioPlaceholderEl.style.display = 'none';
+
+    window.mobileNavView = 'queue';
+    window.updateSelectionShellState();
+
+    if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
+    if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
+
+    if (window.mobileInlineStageHeadEl) {
+      window.mobileInlineStageHeadEl.classList.remove('hidden', 'collapsed');
+      window.mobileInlineStageHeadEl.textContent = window.navRootKey === 'byDate' ? 'Choose Day' : 'Choose Episode';
     }
 
-    function performMobileBack() {
-      const hasSelectedEpisodeState =
-        !!currentEpisodeData ||
-        !!selectedContext ||
-        !!selectionReturnSnapshot ||
-        bodyEl.classList.contains('has-selection') ||
-        playerStageEl.classList.contains('video-active') ||
-        (audioStageEl && getComputedStyle(audioStageEl).display !== 'none') ||
-        (videoShellEl && getComputedStyle(videoShellEl).display !== 'none');
-
-      if (hasSelectedEpisodeState) {
-        hardResetSelectedEpisodeToQueue();
-        return;
-      }
-
-      if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
-      else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
-      else if (mobileNavView === 'branch') mobileNavView = 'root';
-
-      renderQueue();
-      renderNavigation();
-      if (typeof renderMobileInlineFlow === 'function') renderMobileInlineFlow();
-      if (typeof renderMobileDrawerFlow === 'function') renderMobileDrawerFlow();
-      if (isMobileLayout()) scrollMobileSelectorToTop();
+    if (window.mobileFlowContentEl && typeof window.renderQueueInto === 'function') {
+      window.mobileFlowContentEl.innerHTML = '';
+      window.renderQueueInto(window.mobileFlowContentEl);
     }
 
-    function canGoMobileBack() {
-      return !!currentEpisodeData || !!selectedContext || !!selectionReturnSnapshot || mobileNavView !== 'root';
+    if (typeof window.renderQueue === 'function') window.renderQueue();
+    if (typeof window.renderNavigation === 'function') window.renderNavigation();
+    if (typeof window.renderMobileInlineFlow === 'function') window.renderMobileInlineFlow();
+    if (typeof window.renderMobileDrawerFlow === 'function') window.renderMobileDrawerFlow();
+    if (typeof window.syncMobilePinnedShell === 'function') window.syncMobilePinnedShell();
+    if (typeof window.syncMobileShellHeight === 'function') window.syncMobileShellHeight();
+    if (typeof window.scrollMobileSelectorToTop === 'function' && typeof window.isMobileLayout === 'function' && window.isMobileLayout()) {
+      window.scrollMobileSelectorToTop();
+    }
+  }
+
+  window.canGoMobileBack = function patchedCanGoMobileBack() {
+    return !!window.currentEpisodeData || !!window.selectedContext || !!window.selectionReturnSnapshot || window.mobileNavView !== 'root';
+  };
+
+  window.getMobileBackTargetLabel = function patchedGetMobileBackTargetLabel() {
+    if (!!window.currentEpisodeData || !!window.selectedContext || !!window.selectionReturnSnapshot) return 'Episodes';
+    if (window.mobileNavView === 'queue') return typeof window.hasMeaningfulLeafStep === 'function' && window.hasMeaningfulLeafStep()
+      ? window.getLeafBackLabel()
+      : ((typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) ? window.getBranchBackLabel() : 'Categories');
+    if (window.mobileNavView === 'leaf') return (typeof window.hasMeaningfulBranchStep === 'function' && window.hasMeaningfulBranchStep()) ? window.getBranchBackLabel() : 'Categories';
+    if (window.mobileNavView === 'branch') return 'Categories';
+    return 'Back';
+  };
+
+  window.performMobileBack = function patchedPerformMobileBack() {
+    const hasSelectedEpisode =
+      !!window.currentEpisodeData ||
+      !!window.selectedContext ||
+      !!window.selectionReturnSnapshot;
+
+    if (hasSelectedEpisode) {
+      forceQueueReturnFromSelectedEpisode();
+      return;
     }
 
-    function getMobileBackTargetLabel() {
-      if (!!currentEpisodeData || !!selectedContext || !!selectionReturnSnapshot) return 'Episodes';
-      if (mobileNavView === 'queue') return hasMeaningfulLeafStep() ? getLeafBackLabel() : (hasMeaningfulBranchStep() ? getBranchBackLabel() : 'Categories');
-      if (mobileNavView === 'leaf') return hasMeaningfulBranchStep() ? getBranchBackLabel() : 'Categories';
-      if (mobileNavView === 'branch') return 'Categories';
-      return 'Back';
+    if (window.mobileNavView === 'queue') window.mobileNavView = window.hasMeaningfulLeafStep() ? 'leaf' : (window.hasMeaningfulBranchStep() ? 'branch' : 'root');
+    else if (window.mobileNavView === 'leaf') window.mobileNavView = window.hasMeaningfulBranchStep() ? 'branch' : 'root';
+    else if (window.mobileNavView === 'branch') window.mobileNavView = 'root';
+
+    if (typeof window.renderQueue === 'function') window.renderQueue();
+    if (typeof window.renderNavigation === 'function') window.renderNavigation();
+    if (typeof window.renderMobileInlineFlow === 'function') window.renderMobileInlineFlow();
+    if (typeof window.renderMobileDrawerFlow === 'function') window.renderMobileDrawerFlow();
+    if (typeof window.scrollMobileSelectorToTop === 'function' && typeof window.isMobileLayout === 'function' && window.isMobileLayout()) {
+      window.scrollMobileSelectorToTop();
     }
-  </script>
+  };
+
+  if (window.mobileInlineBackBtnEl) {
+    window.mobileInlineBackBtnEl.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.performMobileBack();
+    };
+  }
+  if (window.drawerBackBtnEl) {
+    window.drawerBackBtnEl.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.performMobileBack();
+    };
+  }
+
+  window.updateSelectionShellState();
+})();
+</script>
 
 </body>
 </html>
