@@ -1024,6 +1024,29 @@
       #videoShell,
       #videoPlaceholder { min-height: 220px; }
       #videoShell { aspect-ratio: 16/9; }
+
+      /* Pass 2 repair:
+         Keep the selector logic untouched.
+         Only reduce how much the idle player/meta area dominates mobile browsing. */
+      body:not(.has-selection) .player-stage {
+        min-height: 0;
+        padding: 10px 12px;
+      }
+      body:not(.has-selection) .meta-stage {
+        padding: 18px 16px;
+      }
+      body:not(.has-selection) .meta-title {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      body:not(.has-selection) .meta-intro {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      body:not(.has-selection) .meta-note {
+        font-size: 13px;
+        line-height: 1.35;
+      }
       .audio-stage {
         grid-template-columns: 1fr;
         gap: 14px;
@@ -1093,8 +1116,8 @@
       justify-content: space-between;
     }
     .mobile-inline-btn {
-      min-height: 46px;
-      padding: 10px 16px;
+      min-height: 42px;
+      padding: 8px 14px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
@@ -1124,7 +1147,7 @@
     .mobile-inline-path {
       min-width: 0;
       text-align: left;
-      font-size: 13px;
+      font-size: 12px;
       color: rgba(255,255,255,0.84);
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
@@ -1173,10 +1196,10 @@
       flex: 0 0 auto;
     }
     .mobile-inline-stage-head {
-      padding: 10px 14px 9px;
-      margin-top: 4px;
+      padding: 8px 14px 7px;
+      margin-top: 3px;
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.82);
@@ -2085,6 +2108,7 @@
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
+      updateSelectionShellState();
       showModePlaceholder();
       if (isMobileLayout()) scrollMobileSelectorToTop();
     }
@@ -2845,6 +2869,8 @@
     }
 
     function renderEmptyMeta() {
+      currentEpisodeData = null;
+      updateSelectionShellState();
       metaBoxEl.style.display = 'none';
       metaBoxEl.innerHTML = '';
       if (stageInfoEl) {
@@ -3020,7 +3046,8 @@
       clearMediaState();
       setDefaultNavigation();
       mobileNavView = 'root';
-      updateDrawerHeader();
+      updateSelectionShellState();
+        updateDrawerHeader();
       renderNavigation();
       renderQueue();
       renderEmptyMeta();
