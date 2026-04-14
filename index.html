@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - v42</title>
+  <title>CGBC Sermons - v43</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
@@ -1646,6 +1646,7 @@
     let currentEpisodeData = null;
     let selectedEntrySource = 'queue';
     let selectedContext = null;
+    let selectionReturnSnapshot = null;
     let playingDotsTimer = null;
     let playingDotsIndex = 0;
     const playingDotsStates = ['', '.', '..', '...'];
@@ -2130,6 +2131,7 @@
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       selectedContext = null;
+      selectionReturnSnapshot = null;
       clearMediaState();
       syncSeriesSelection();
       if (isMobileLayout()) mobileNavView = getNextMobileViewAfterRoot();
@@ -2148,6 +2150,7 @@
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       selectedContext = null;
+      selectionReturnSnapshot = null;
       clearMediaState();
       syncSeriesSelection();
       if (isMobileLayout()) mobileNavView = getNextMobileViewAfterBranch();
@@ -2163,6 +2166,7 @@
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       selectedContext = null;
+      selectionReturnSnapshot = null;
       clearMediaState();
       syncSeriesSelection();
       if (isMobileLayout()) mobileNavView = 'queue';
@@ -2347,39 +2351,58 @@
       return `Back to ${target}`;
     }
 
+    function captureSelectionReturnSnapshot(ep, originalIndex, options = {}) {
+      selectionReturnSnapshot = {
+        navRootKey,
+        navBranchKey,
+        navLeafKey,
+        currentSeries: currentSeries || ep?.series || '',
+        currentEpisodeIndex: originalIndex ?? null,
+        mode,
+        source: options.source || 'queue',
+        seriesName: options.seriesName || currentSeries || ep?.series || '',
+        leafKey: options.leafKey || navLeafKey || null
+      };
+    }
+
+    function restoreQueueFromSelectionSnapshot() {
+      const snap = selectionReturnSnapshot || selectedContext || {};
+
+      if (snap.navRootKey) navRootKey = snap.navRootKey;
+      if (snap.navBranchKey) navBranchKey = snap.navBranchKey;
+      if (snap.navLeafKey || snap.leafKey) navLeafKey = snap.navLeafKey || snap.leafKey;
+
+      currentSeries = snap.seriesName || snap.currentSeries || currentSeries || '';
+      currentEpisodeIndex = null;
+      currentEpisodeData = null;
+      selectedContext = null;
+
+      clearMediaState();
+      renderEmptyMeta();
+      showModePlaceholder();
+
+      mobileNavView = 'queue';
+
+      renderNavigation();
+      renderQueue();
+      renderMobileInlineFlow();
+      renderMobileDrawerFlow();
+
+      selectionReturnSnapshot = null;
+
+      syncMobileShellHeight();
+      if (isMobileLayout()) scrollMobileSelectorToTop();
+    }
+
     function canGoMobileBack() {
       return !!currentEpisodeData || mobileNavView !== 'root';
     }
 
     function performMobileBack() {
-      const backingOutOfSelection = !!currentEpisodeData || mobileNavView === 'selected';
+      const backingOutOfSelection = !!currentEpisodeData || mobileNavView === 'selected' || !!selectionReturnSnapshot;
 
       if (backingOutOfSelection) {
-        const ctx = selectedContext || {};
-        const leafItem = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
-
-        /* Beginner note:
-           Back from a selected sermon should always rebuild the queue view first.
-           Reconstruct the active bucket explicitly instead of relying on leftover state. */
-        if (ctx.leafKey) navLeafKey = ctx.leafKey;
-        if (ctx.seriesName) currentSeries = ctx.seriesName;
-        else if (!currentSeries && leafItem && leafItem.type === 'series') currentSeries = leafItem.key;
-
-        currentEpisodeData = null;
-        currentEpisodeIndex = null;
-        selectedContext = null;
-
-        clearMediaState();
-        renderEmptyMeta();
-        showModePlaceholder();
-
-        mobileNavView = 'queue';
-
-        renderQueue();
-        renderMobileInlineFlow();
-        renderMobileDrawerFlow();
-        syncMobileShellHeight();
-        if (isMobileLayout()) scrollMobileSelectorToTop();
+        restoreQueueFromSelectionSnapshot();
         return;
       }
 
@@ -2983,12 +3006,16 @@
     }
 
     function selectEpisode(ep, originalIndex, options = {}) {
+      captureSelectionReturnSnapshot(ep, originalIndex, options);
       currentEpisodeIndex = originalIndex;
       selectedEntrySource = options.source || 'queue';
       selectedContext = {
         source: selectedEntrySource,
         leafKey: options.leafKey || navLeafKey || null,
-        seriesName: options.seriesName || currentSeries || ep.series || ''
+        seriesName: options.seriesName || currentSeries || ep.series || '',
+        navRootKey,
+        navBranchKey,
+        navLeafKey
       };
       if (mode === 'audio') playAudio(ep);
       else playVideo(ep);
@@ -3087,6 +3114,7 @@
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       selectedContext = null;
+      selectionReturnSnapshot = null;
       clearMediaState();
       setDefaultNavigation();
       mobileNavView = 'root';
@@ -3103,6 +3131,7 @@
       currentEpisodeIndex = null;
       currentEpisodeData = null;
       selectedContext = null;
+      selectionReturnSnapshot = null;
       clearMediaState();
       setDefaultNavigation();
       mobileNavView = 'root';
