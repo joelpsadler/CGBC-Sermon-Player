@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons</title>
+  <title>CGBC Sermons - v40</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
@@ -1397,6 +1397,33 @@
     .mobile-top-shell {
       display: none;
     }
+    /* Pass 3:
+       Mobile should have one vertical scroll owner only.
+       The stage column scrolls; the selector stack inside it should stay in normal flow. */
+    @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      .mobile-inline-nav,
+      .mobile-inline-summary,
+      .mobile-inline-stage-body,
+      #mobileInlineStageBody,
+      #mobileInlineSummary {
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+      }
+
+      .mobile-inline-nav *,
+      .mobile-inline-stage-body * {
+        overscroll-behavior-y: auto;
+      }
+
+      .nav-list,
+      .series-list,
+      .episode-list {
+        overflow: visible !important;
+        max-height: none !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
