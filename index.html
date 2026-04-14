@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - v40</title>
+  <title>CGBC Sermons - v41</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228849/Icon-iOS-Default-1024x1024%401x.png">
   <link rel="manifest" href="CGBC-media.webmanifest">
@@ -2353,21 +2353,24 @@
     function performMobileBack() {
       if (currentEpisodeData) {
         const ctx = selectedContext || {};
+
+        /* Beginner note:
+           After a sermon is selected, Back should always return to the
+           current episode queue first. Do not skip past the queue here. */
         currentEpisodeData = null;
         currentEpisodeIndex = null;
         selectedContext = null;
+
+        if (ctx.leafKey) navLeafKey = ctx.leafKey;
+        if (ctx.seriesName) currentSeries = ctx.seriesName;
+
         clearMediaState();
         renderEmptyMeta();
         showModePlaceholder();
         syncMobileShellHeight();
-        if (ctx.source === 'leaf') {
-          if (ctx.leafKey) navLeafKey = ctx.leafKey;
-          currentSeries = null;
-          mobileNavView = 'leaf';
-        } else {
-          if (ctx.seriesName) currentSeries = ctx.seriesName;
-          mobileNavView = 'queue';
-        }
+
+        mobileNavView = 'queue';
+
         renderQueue();
         renderNavigation();
         if (isMobileLayout()) scrollMobileSelectorToTop();
