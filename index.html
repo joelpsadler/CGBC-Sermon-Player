@@ -2519,13 +2519,38 @@
       const leafItemForPath = navLeafKey ? getLeafItems().find(item => item.key === navLeafKey) : null;
       if (navLeafKey && ['queue','selected'].includes(mobileNavView) && hasMeaningfulLeafStep() && leafItemForPath && leafItemForPath.type === 'series') labels.push(getLeafTitleByKey(navLeafKey));
       mobileInlinePathLabelEl.textContent = labels.join(' › ') || 'Start with Listen or Watch, then choose a browse path.';
+
+      const backTarget = (() => {
+        if (currentEpisodeData || selectedContext || selectionReturnSnapshot) return 'Episodes';
+
+        const visible = labels.slice(1); /* Drop Audio/Video; keep only the decision-tree path. */
+
+        if (mobileNavView === 'queue') {
+          if (visible.length >= 2) return visible[visible.length - 2];
+          if (visible.length === 1) return 'Categories';
+          return '';
+        }
+
+        if (mobileNavView === 'leaf') {
+          if (visible.length >= 1) return visible[0];
+          return 'Categories';
+        }
+
+        if (mobileNavView === 'branch') return 'Categories';
+        return '';
+      })();
+
+      const backText = (!backTarget || String(backTarget).trim().toLowerCase() === 'back')
+        ? 'Back'
+        : `Back to ${backTarget}`;
+
       if (mobileInlineBackBtnEl) {
         mobileInlineBackBtnEl.disabled = !canGoMobileBack();
-        mobileInlineBackBtnEl.textContent = getMobileBackButtonText();
+        mobileInlineBackBtnEl.textContent = backText;
       }
       if (drawerBackBtnEl) {
         drawerBackBtnEl.disabled = !canGoMobileBack();
-        drawerBackBtnEl.textContent = getMobileBackButtonText();
+        drawerBackBtnEl.textContent = backText;
       }
     }
 
@@ -3441,6 +3466,32 @@
   if (window.mobileInlineBackBtnEl && window.getMobileBackButtonText) {
     window.mobileInlineBackBtnEl.textContent = window.getMobileBackButtonText();
   }
+})();
+</script>
+
+
+<script>
+/* v61 direct DOM text-source fix only:
+   Re-run the real button text assignment after render passes. */
+(function () {
+  function resyncBackTextV61() {
+    if (typeof window.updateMobileInlineTools === 'function') {
+      window.updateMobileInlineTools();
+    }
+  }
+
+  const names = ['renderMobileInlineFlow','renderNavigation','renderQueue','performMobileBack','playAudio','playVideo','setRoot','setBranch','setLeaf','setMode','resetHome'];
+  for (const name of names) {
+    const original = window[name];
+    if (typeof original !== 'function') continue;
+    window[name] = function patchedV61ResyncWrapper(...args) {
+      const result = original.apply(this, args);
+      resyncBackTextV61();
+      return result;
+    };
+  }
+
+  resyncBackTextV61();
 })();
 </script>
 
