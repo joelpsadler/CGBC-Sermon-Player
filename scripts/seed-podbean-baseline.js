@@ -21,6 +21,10 @@ function normalizeUrl(url) {
   return String(url || "").trim().replace(/\/+$/, "/");
 }
 
+function normalizeMediaUrl(url) {
+  return String(url || "").trim();
+}
+
 function toAbsolutePermalink(showUrl, permalink) {
   const root = normalizeUrl(showUrl);
   if (!permalink) return "";
@@ -89,32 +93,19 @@ function readCsv(filePath) {
 
 function readExistingStats(statsPath) {
   if (!fs.existsSync(statsPath)) {
-    return {
-      generated_at: null,
-      source: {},
-      podcast_totals: {},
-      episodes: {},
-      summary: {},
-    };
+    return { generated_at: null, source: {}, podcast_totals: {}, episodes: {}, summary: {} };
   }
-
   try {
     return JSON.parse(fs.readFileSync(statsPath, "utf8"));
   } catch (err) {
-    return {
-      generated_at: null,
-      source: {},
-      podcast_totals: {},
-      episodes: {},
-      summary: {},
-    };
+    return { generated_at: null, source: {}, podcast_totals: {}, episodes: {}, summary: {} };
   }
 }
 
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCInitialStateSeed/4.0",
+      "User-Agent": "CGBCInitialStateSeed/5.0",
       "Accept": "text/html,application/xhtml+xml",
     },
   });
@@ -133,7 +124,14 @@ function extractInitialState(html) {
   }
 
   const escaped = match[1];
-  const decoded = JSON.parse('"' + escaped.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"');
+  const decoded = escaped
+    .replace(/\\\"/g, '"')
+    .replace(/\\\\/g, "\\")
+    .replace(/\\\//g, "/")
+    .replace(/\\n/g, "\n")
+    .replace(/\\r/g, "\r")
+    .replace(/\\t/g, "\t");
+
   return JSON.parse(decoded);
 }
 
@@ -156,25 +154,23 @@ function findEpisodeRecords(state, showUrl) {
   walk(state, (node) => {
     if (!Array.isArray(node) || !node.length) return;
     const looksLikeEpisodeArray = node.some((item) =>
-      item &&
-      typeof item === "object" &&
+      item && typeof item === "object" &&
       ("downloadCount" in item) &&
       ("title" in item) &&
-      ("permalink" in item || "permalink_url" in item)
+      ("permalink" in item || "permalink_url" in item || "url" in item)
     );
-
     if (!looksLikeEpisodeArray) return;
 
     for (const item of node) {
       if (!item || typeof item !== "object") continue;
-      const permalink = toAbsolutePermalink(showUrl, item.permalink || item.permalink_url || "");
-      const mediaUrl = String(item.mediaUrl || item.media_url || "").trim();
+      const permalink = toAbsolutePermalink(showUrl, item.permalink || item.permalink_url || item.url || "");
+      const mediaUrl = normalizeMediaUrl(item.mediaUrl || item.media_url || item.contentUrl || item.content_url || "");
       const title = String(item.title || "").trim();
-      if (!title || !permalink) continue;
+      if (!title || (!permalink && !mediaUrl)) continue;
 
-      const key = permalink + "::" + mediaUrl;
-      if (seen.has(key)) continue;
-      seen.add(key);
+      const dedupeKey = `${permalink}::${mediaUrl}`;
+      if (seen.has(dedupeKey)) continue;
+      seen.add(dedupeKey);
 
       records.push({
         permalink_url: permalink,
@@ -193,11 +189,8 @@ function findEpisodeRecords(state, showUrl) {
 function findBaseInfo(state) {
   let best = null;
   walk(state, (node) => {
-    if (
-      node &&
-      typeof node === "object" &&
-      ("podcastDownloads" in node || "totalEpisodes" in node || "podcastTitle" in node)
-    ) {
+    if (node && typeof node === "object" &&
+      ("podcastDownloads" in node || "totalEpisodes" in node || "podcastTitle" in node)) {
       best = node;
     }
   });
@@ -232,7 +225,7 @@ async function scrapeInitialStatePages(showUrl) {
   const pagination = findPaginationInfo(rootState);
   const totalPages = Math.max(1, Math.min(MAX_PAGES, Number(pagination.listTotalPage || 1)));
 
-  const byPermalink = new Map();
+  const byKey = new Map();
   let pagesFetched = 0;
 
   for (let page = 1; page <= totalPages; page += 1) {
@@ -242,9 +235,11 @@ async function scrapeInitialStatePages(showUrl) {
     const records = findEpisodeRecords(state, showUrl);
 
     for (const record of records) {
-      const existing = byPermalink.get(record.permalink_url);
+      const key = record.media_url || record.permalink_url;
+      if (!key) continue;
+      const existing = byKey.get(key);
       if (!existing || record.download_count > existing.download_count) {
-        byPermalink.set(record.permalink_url, record);
+        byKey.set(key, record);
       }
     }
 
@@ -252,12 +247,7 @@ async function scrapeInitialStatePages(showUrl) {
     await sleep(REQUEST_DELAY_MS);
   }
 
-  return {
-    baseInfo,
-    pagination,
-    pagesFetched,
-    records: [...byPermalink.values()],
-  };
+  return { baseInfo, pagination, pagesFetched, records: [...byKey.values()] };
 }
 
 async function main() {
@@ -268,35 +258,54 @@ async function main() {
   const existing = readExistingStats(STATS_PATH);
   const rows = readCsv(CSV_PATH);
   const scraped = await scrapeInitialStatePages(PODBEAN_SHOW_URL);
-  const byPermalink = new Map(scraped.records.map((r) => [r.permalink_url, r]));
+  const byMedia = new Map(scraped.records.filter(r => r.media_url).map((r) => [r.media_url, r]));
+  const byPermalink = new Map(scraped.records.filter(r => r.permalink_url).map((r) => [r.permalink_url, r]));
   const byTitle = new Map(scraped.records.map((r) => [r.title_key, r]));
   const now = new Date().toISOString();
 
   const episodes = safeObject(existing.episodes);
   let seeded = 0;
-  let exactPermalinkMatches = 0;
+  let mediaMatches = 0;
+  let permalinkMatches = 0;
   let titleMatches = 0;
   let csvFallbacks = 0;
 
   for (const row of rows) {
     const permalink = normalizeUrl(String(row["Episode URL"] || ""));
-    const mediaUrl = String(row["Media URL"] || "").trim();
+    const mediaUrl = normalizeMediaUrl(String(row["Media URL"] || ""));
     const title = String(row["Episode"] || "").trim();
     const publishTime = String(row["Release Date"] || "").trim();
     const csvDownloads = Number(row["Downloads"] || 0);
     const titleKey = normalizeTitle(title);
 
-    const publicRecord = byPermalink.get(permalink) || byTitle.get(titleKey) || null;
-    if (byPermalink.get(permalink)) exactPermalinkMatches += 1;
-    else if (publicRecord) titleMatches += 1;
-    else csvFallbacks += 1;
+    let publicRecord = null;
+    let source = "csv_downloads";
+
+    if (mediaUrl && byMedia.has(mediaUrl)) {
+      publicRecord = byMedia.get(mediaUrl);
+      source = "podbean_initial_state_media";
+      mediaMatches += 1;
+    } else if (permalink && byPermalink.has(permalink)) {
+      publicRecord = byPermalink.get(permalink);
+      source = "podbean_initial_state_permalink";
+      permalinkMatches += 1;
+    } else if (titleKey && byTitle.has(titleKey)) {
+      publicRecord = byTitle.get(titleKey);
+      source = "podbean_initial_state_title";
+      titleMatches += 1;
+    } else {
+      csvFallbacks += 1;
+    }
 
     const chosen = publicRecord ? Number(publicRecord.download_count || 0) : csvDownloads;
-    const current = safeObject(episodes[permalink]);
+    const key = mediaUrl || permalink;
+    if (!key) continue;
 
-    episodes[permalink] = {
+    const current = safeObject(episodes[key]);
+
+    episodes[key] = {
       ...current,
-      identity_key: current.identity_key || permalink,
+      identity_key: current.identity_key || key,
       episode_url: current.episode_url || permalink,
       permalink_url: current.permalink_url || permalink,
       media_url: current.media_url || mediaUrl || (publicRecord ? publicRecord.media_url : ""),
@@ -305,7 +314,7 @@ async function main() {
       plays_total: Math.max(Number(current.plays_total || current.downloads_total || 0), Number(chosen || 0)),
       downloads_total: Math.max(Number(current.downloads_total || current.plays_total || 0), Number(chosen || 0)),
       baseline_seeded_at: current.baseline_seeded_at || now,
-      baseline_source: publicRecord ? "podbean_initial_state" : "csv_downloads",
+      baseline_source: source,
       baseline_csv_downloads: csvDownloads,
       baseline_public_downloads: publicRecord ? Number(publicRecord.download_count || 0) : null,
       baseline_public_title: publicRecord ? publicRecord.title : null,
@@ -324,7 +333,7 @@ async function main() {
       ...(safeObject(existing.source)),
       provider: "podbean_public_initial_state_plus_csv",
       metric: "plays",
-      strategy: "window_initial_state_seed",
+      strategy: "window_initial_state_seed_v5",
       show_url: PODBEAN_SHOW_URL,
     },
     podcast_totals: {
@@ -339,7 +348,8 @@ async function main() {
       total_csv_rows_seen: rows.length,
       total_baseline_seeded: seeded,
       total_initial_state_records_found: scraped.records.length,
-      total_initial_state_permalink_matches: exactPermalinkMatches,
+      total_initial_state_media_matches: mediaMatches,
+      total_initial_state_permalink_matches: permalinkMatches,
       total_initial_state_title_matches: titleMatches,
       total_csv_fallbacks: csvFallbacks,
       initial_state_pages_fetched: scraped.pagesFetched,
@@ -352,7 +362,7 @@ async function main() {
   fs.writeFileSync(STATS_PATH, JSON.stringify(output, null, 2), "utf8");
   console.log(`Wrote ${STATS_PATH}`);
   console.log(
-    `Summary -> seeded=${seeded}, records=${scraped.records.length}, permalinkMatches=${exactPermalinkMatches}, titleMatches=${titleMatches}, csvFallbacks=${csvFallbacks}, pagesFetched=${scraped.pagesFetched}`
+    `Summary -> seeded=${seeded}, records=${scraped.records.length}, mediaMatches=${mediaMatches}, permalinkMatches=${permalinkMatches}, titleMatches=${titleMatches}, csvFallbacks=${csvFallbacks}, pagesFetched=${scraped.pagesFetched}`
   );
 }
 
