@@ -4180,5 +4180,268 @@ function compactCount(value) {
 })();
 </script>
 
+
+<style id="v65-mobile-counts-pass">
+  .card-metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .audio-metric-row,
+  .stage-metric-row {
+    gap: 6px;
+  }
+  @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+    .brand-logo-btn {
+      width: 102px;
+      height: 62px;
+    }
+    .impact-host-mobile {
+      display: block;
+      margin: -2px -8px 6px;
+      padding: 0 12px 6px;
+      background: rgba(8,8,8,0.96);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .impact-host-mobile .impact-strip {
+      width: 100%;
+      margin-top: 0;
+      gap: 16px;
+      justify-content: flex-end;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .impact-host-mobile .impact-pill {
+      flex: 0 0 auto;
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .impact-host-mobile .impact-value {
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .impact-host-mobile .impact-label {
+      font-size: 17px;
+      letter-spacing: 0;
+      text-transform: none;
+      color: rgba(255,255,255,0.96);
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .impact-host-mobile .impact-meta {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+/* v65 counts and layout pass
+   - Fetch real YouTube view counts for all video entries.
+   - Use clean metric text without duplicate marker glyphs.
+   - Drive Watch totals from live-computed video totals.
+   - Keep Shorts slot available with one obvious place to add the playlist ID.
+*/
+(function () {
+  const SHORTS_PLAYLIST_ID_V65 = '';
+  let videoStatsLoadedV65 = false;
+  let videoStatsPendingV65 = null;
+
+  function formatMetricValueCleanV65(value, singular, plural) {
+    const num = Number(value || 0);
+    if (!Number.isFinite(num) || num <= 0) return '';
+    return `${compactCount(num)} ${num === 1 ? singular : plural}`;
+  }
+
+  window.formatMetricValue = formatMetricValueCleanV65;
+  if (typeof formatMetricValue === 'function') {
+    formatMetricValue = formatMetricValueCleanV65;
+  }
+
+  function getVideoViewsForEpisodeV65(ep) {
+    if (!ep) return 0;
+    const statsMap = typeof videoStatsById !== 'undefined' ? videoStatsById : null;
+    const raw = statsMap && ep.videoId && statsMap.get(ep.videoId)
+      ? (statsMap.get(ep.videoId).views || statsMap.get(ep.videoId).viewCount || 0)
+      : (ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
+    const num = Number(raw || 0);
+    return Number.isFinite(num) && num > 0 ? num : 0;
+  }
+
+  function recomputeVideoLibraryTotalsV65() {
+    const totals = { views: 0, videos: 0 };
+    Object.entries(sermonData || {}).forEach(([seriesName, episodes]) => {
+      const excluded = seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name || seriesName === 'CGBC Shorts';
+      (episodes || []).forEach((ep) => {
+        if (!ep || !ep.videoId || excluded) return;
+        totals.views += getVideoViewsForEpisodeV65(ep);
+        totals.videos += 1;
+      });
+    });
+    try { videoLibraryTotals = totals; } catch (e) {}
+    return totals;
+  }
+
+  function refreshMetricSurfacesV65() {
+    if (typeof renderQueue === 'function') renderQueue();
+    if (typeof renderNavigation === 'function') renderNavigation();
+    if (typeof renderImpactTotals === 'function') renderImpactTotals(typeof statsState === 'undefined' ? null : statsState);
+    if (typeof currentEpisodeData !== 'undefined' && currentEpisodeData) {
+      if (typeof renderAudioDetails === 'function') renderAudioDetails(currentEpisodeData);
+      if (typeof renderStageInfo === 'function') renderStageInfo(currentEpisodeData);
+      if (typeof renderMeta === 'function') renderMeta(currentEpisodeData);
+    }
+  }
+
+  const originalGetEpisodeMetricTextV65 = window.getEpisodeMetricText;
+  if (typeof originalGetEpisodeMetricTextV65 === 'function') {
+    window.getEpisodeMetricText = function patchedGetEpisodeMetricTextV65(ep) {
+      if (!ep) return '';
+      if (mode === 'audio') {
+        const stats = getAudioEpisodeStats(ep);
+        const plays = Number(stats?.plays_total || stats?.downloads_total || stats?.baseline_public_downloads || 0);
+        return formatMetricValueCleanV65(plays, 'play', 'plays');
+      }
+      return formatMetricValueCleanV65(getVideoViewsForEpisodeV65(ep), 'view', 'views');
+    };
+    getEpisodeMetricText = window.getEpisodeMetricText;
+  }
+
+  const originalRenderImpactTotalsV65 = window.renderImpactTotals;
+  if (typeof originalRenderImpactTotalsV65 === 'function') {
+    window.renderImpactTotals = function patchedRenderImpactTotalsV65(stats) {
+      statsState = stats || null;
+      buildAudioStatsIndexes(statsState);
+      const totals = statsState && statsState.podcast_totals ? statsState.podcast_totals : {};
+      const isVideoMode = mode === 'video';
+      const computedVideoTotals = recomputeVideoLibraryTotalsV65();
+      const primaryValue = isVideoMode
+        ? (computedVideoTotals.views || totals.video_views_total || totals.views_total || 0)
+        : (totals.plays_total || 0);
+      const secondaryValue = isVideoMode
+        ? (computedVideoTotals.videos || totals.video_episodes_total || totals.videos_total || 0)
+        : (totals.episodes_total || 0);
+
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(primaryValue);
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(secondaryValue);
+      if (impactPlaysLabelEl) impactPlaysLabelEl.textContent = isVideoMode ? 'Views' : 'Plays';
+      if (impactEpisodesLabelEl) impactEpisodesLabelEl.textContent = isVideoMode ? 'Videos' : 'Episodes';
+      if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = '';
+      if (impactEpisodesMetaEl) impactEpisodesMetaEl.textContent = '';
+    };
+    renderImpactTotals = window.renderImpactTotals;
+  }
+
+  async function fetchYouTubeVideoStatsV65(videoIds) {
+    const ids = Array.from(new Set((videoIds || []).filter(Boolean)));
+    const map = new Map();
+    for (let i = 0; i < ids.length; i += 50) {
+      const batch = ids.slice(i, i + 50);
+      const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${batch.join(',')}&key=${API_KEY}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`videos ${res.status}`);
+      const data = await res.json();
+      (data.items || []).forEach((item) => {
+        const id = item?.id || '';
+        const views = Number(item?.statistics?.viewCount || 0);
+        if (id) map.set(id, { views, viewCount: views });
+      });
+    }
+    return map;
+  }
+
+  if (typeof fetchYouTubeVideoStats !== 'function') {
+    window.fetchYouTubeVideoStats = fetchYouTubeVideoStatsV65;
+  }
+
+  async function hydrateVideoStatsV65() {
+    if (videoStatsLoadedV65) return;
+    if (videoStatsPendingV65) return videoStatsPendingV65;
+    const ids = [];
+    Object.values(sermonData || {}).forEach((episodes) => {
+      (episodes || []).forEach((ep) => {
+        if (ep && ep.videoId) ids.push(ep.videoId);
+      });
+    });
+    if (!ids.length) return;
+
+    videoStatsPendingV65 = (async () => {
+      try {
+        const statsMap = await fetchYouTubeVideoStatsV65(ids);
+        statsMap.forEach((value, key) => {
+          try {
+            if (typeof videoStatsById !== 'undefined' && videoStatsById && typeof videoStatsById.set === 'function') {
+              videoStatsById.set(key, value);
+            }
+          } catch (e) {}
+        });
+        Object.values(sermonData || {}).forEach((episodes) => {
+          (episodes || []).forEach((ep) => {
+            if (!ep || !ep.videoId) return;
+            const stats = statsMap.get(ep.videoId);
+            if (!stats) return;
+            ep.videoViewsTotal = Number(stats.views || 0);
+            ep.viewCount = Number(stats.viewCount || stats.views || 0);
+          });
+        });
+
+        if (SHORTS_PLAYLIST_ID_V65 && !sermonData['CGBC Shorts'] && typeof fetchPlaylistSeries === 'function') {
+          try {
+            const shortsEpisodes = await fetchPlaylistSeries({ name: 'CGBC Shorts', playlistId: SHORTS_PLAYLIST_ID_V65 }, true);
+            if (shortsEpisodes.length) {
+              sermonData['CGBC Shorts'] = shortsEpisodes.map((ep) => ({ ...ep, isShort: true }));
+              if (typeof applySeriesArtwork === 'function') applySeriesArtwork();
+              if (typeof buildBrowseBuckets === 'function') browseBuckets = buildBrowseBuckets();
+            }
+          } catch (err) {
+            console.warn('Shorts playlist could not be loaded in v65.', err);
+          }
+        }
+
+        videoStatsLoadedV65 = true;
+        recomputeVideoLibraryTotalsV65();
+        refreshMetricSurfacesV65();
+      } catch (err) {
+        console.warn('YouTube stats could not be loaded in v65.', err);
+      } finally {
+        videoStatsPendingV65 = null;
+      }
+    })();
+
+    return videoStatsPendingV65;
+  }
+
+  function waitForSermonDataV65(attemptsLeft = 24) {
+    const hasData = sermonData && Object.keys(sermonData).length > 0;
+    if (hasData) {
+      hydrateVideoStatsV65();
+      return;
+    }
+    if (attemptsLeft <= 0) return;
+    setTimeout(() => waitForSermonDataV65(attemptsLeft - 1), 500);
+  }
+
+  ensureImpactHostV64();
+  refreshMetricSurfacesV65();
+  waitForSermonDataV65();
+  window.addEventListener('focus', () => {
+    if (!videoStatsLoadedV65 && sermonData && Object.keys(sermonData).length) hydrateVideoStatsV65();
+  });
+})();
+</script>
+
 </body>
 </html>
