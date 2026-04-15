@@ -4601,5 +4601,316 @@ function compactCount(value) {
 })();
 </script>
 
+
+<style>
+/* v68 mobile header + video stats repair */
+@media (max-width: 980px) {
+  .impact-host-mobile {
+    padding-top: 2px;
+    padding-bottom: 10px;
+  }
+  .impact-host-mobile .impact-strip {
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding-right: 6px;
+  }
+  .impact-host-mobile .impact-pill {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    overflow: visible;
+  }
+  .impact-host-mobile .impact-value {
+    font-size: clamp(14px, 4.9vw, 18px);
+    line-height: 1.15;
+    padding-top: 2px;
+    font-style: italic;
+  }
+  .impact-host-mobile .impact-label {
+    font-size: clamp(12px, 4.1vw, 17px);
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(255,255,255,0.92);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+}
+</style>
+<script>
+/* v68 video metrics recovery + persistent Shorts slot
+   - Create a real video stats map when older patches forgot to.
+   - Keep retrying YouTube video statistics until metrics populate or attempts are exhausted.
+   - Keep Shorts visible in Watch mode whenever a playlist ID is configured.
+   - Tighten mobile header totals line-height so text no longer clips at the top.
+*/
+(function(){
+  const SHORTS_COLLECTION_V68 = { name: 'CGBC Shorts', playlistId: 'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
+  const EXCLUDED_VIDEO_TOTAL_SERIES_V68 = new Set(['Livestreams', 'CGBC Guest Speaker', 'CGBC Shorts']);
+  const MAX_RETRIES_V68 = 8;
+  let retryCountV68 = 0;
+
+  if (!window.videoStatsById || typeof window.videoStatsById.get !== 'function') {
+    window.videoStatsById = new Map();
+  }
+
+  function hasShortsConfigV68() {
+    return !!SHORTS_COLLECTION_V68.playlistId;
+  }
+
+  function hasShortsEpisodesV68() {
+    return !!(window.sermonData && Array.isArray(window.sermonData[SHORTS_COLLECTION_V68.name]) && window.sermonData[SHORTS_COLLECTION_V68.name].length);
+  }
+
+  async function ensureShortsLoadedV68() {
+    if (hasShortsEpisodesV68()) return true;
+    if (!hasShortsConfigV68() || typeof fetchPlaylistSeries !== 'function') return false;
+    try {
+      const shortsEpisodes = await fetchPlaylistSeries(SHORTS_COLLECTION_V68, true);
+      if (Array.isArray(shortsEpisodes) && shortsEpisodes.length) {
+        sermonData[SHORTS_COLLECTION_V68.name] = shortsEpisodes.map((ep) => ({
+          ...ep,
+          isShort: true,
+          series: SHORTS_COLLECTION_V68.name,
+          seriesImage: ep.seriesImage || getWatchThumb(ep.videoId),
+          seriesWideImage: ep.seriesWideImage || getWatchThumb(ep.videoId)
+        }));
+        if (typeof applySeriesArtwork === 'function') applySeriesArtwork();
+        if (typeof buildBrowseBuckets === 'function') window.browseBuckets = browseBuckets = buildBrowseBuckets();
+        return true;
+      }
+    } catch (err) {
+      console.warn('Shorts playlist could not be loaded in v68.', err);
+    }
+    return false;
+  }
+
+  async function fetchStatsBatchV68(videoIds) {
+    const ids = Array.from(new Set((videoIds || []).filter(Boolean)));
+    if (!ids.length) return new Map();
+    if (typeof fetchYouTubeVideoStatsV65 === 'function') return fetchYouTubeVideoStatsV65(ids);
+    if (typeof fetchYouTubeVideoStats === 'function') return fetchYouTubeVideoStats(ids);
+    const map = new Map();
+    for (let i = 0; i < ids.length; i += 50) {
+      const batch = ids.slice(i, i + 50);
+      const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${batch.join(',')}&key=${API_KEY}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`videos ${res.status}`);
+      const data = await res.json();
+      (data.items || []).forEach((item) => {
+        const id = item?.id || '';
+        const views = Number(item?.statistics?.viewCount || 0);
+        if (id) map.set(id, { views, viewCount: views });
+      });
+    }
+    return map;
+  }
+
+  function applyStatsToEpisodesV68(statsMap) {
+    let hydrated = 0;
+    Object.values(sermonData || {}).forEach((episodes) => {
+      (episodes || []).forEach((ep) => {
+        if (!ep || !ep.videoId) return;
+        const stats = statsMap.get(ep.videoId) || window.videoStatsById.get(ep.videoId);
+        if (!stats) return;
+        const views = Number(stats.views || stats.viewCount || 0);
+        ep.videoViewsTotal = views;
+        ep.viewCount = views;
+        ep.views_total = views;
+        hydrated += 1;
+      });
+    });
+    return hydrated;
+  }
+
+  function getEpisodeViewsV68(ep) {
+    if (!ep) return 0;
+    const cached = ep.videoId ? window.videoStatsById.get(ep.videoId) : null;
+    return Number(
+      (cached && (cached.views || cached.viewCount)) ||
+      ep.videoViewsTotal ||
+      ep.viewCount ||
+      ep.views_total ||
+      0
+    );
+  }
+
+  function computeArchiveVideoTotalsV68() {
+    const totals = { views: 0, videos: 0, hasAnyViews: false };
+    Object.entries(sermonData || {}).forEach(([seriesName, episodes]) => {
+      if (EXCLUDED_VIDEO_TOTAL_SERIES_V68.has(seriesName)) return;
+      (episodes || []).forEach((ep) => {
+        if (!ep || !ep.videoId) return;
+        totals.videos += 1;
+        const views = getEpisodeViewsV68(ep);
+        if (views > 0) {
+          totals.views += views;
+          totals.hasAnyViews = true;
+        }
+      });
+    });
+    window.videoLibraryTotals = totals;
+    return totals;
+  }
+
+  function refreshAllMetricsV68() {
+    computeArchiveVideoTotalsV68();
+    if (typeof renderImpactTotals === 'function') renderImpactTotals(typeof statsState === 'undefined' ? null : statsState);
+    if (typeof renderQueue === 'function') renderQueue();
+    if (typeof renderNavigation === 'function') renderNavigation();
+    if (currentEpisodeData) {
+      if (mode === 'audio' && typeof renderAudioDetails === 'function') renderAudioDetails(currentEpisodeData);
+      if (mode === 'video' && typeof renderStageInfo === 'function') renderStageInfo(currentEpisodeData);
+    }
+  }
+
+  function patchEpisodeMetricGetterV68() {
+    const original = window.getEpisodeMetricText;
+    if (typeof original !== 'function' || original.__v68patched) return;
+    const wrapped = function(ep) {
+      if (!ep) return '';
+      if (mode === 'audio') return original.call(this, ep);
+      const views = getEpisodeViewsV68(ep);
+      return typeof formatMetricValue === 'function' ? formatMetricValue(views, 'view', 'views') : (views > 0 ? `${views} views` : '');
+    };
+    wrapped.__v68patched = true;
+    window.getEpisodeMetricText = wrapped;
+    getEpisodeMetricText = wrapped;
+  }
+
+  function patchImpactTotalsV68() {
+    const original = window.renderImpactTotals;
+    if (typeof original !== 'function' || original.__v68patched) return;
+    const wrapped = function(stats) {
+      statsState = stats || null;
+      if (typeof buildAudioStatsIndexes === 'function') buildAudioStatsIndexes(statsState);
+      const totals = statsState && statsState.podcast_totals ? statsState.podcast_totals : {};
+      const isVideoMode = mode === 'video';
+      const archiveTotals = computeArchiveVideoTotalsV68();
+      const primaryText = isVideoMode ? (archiveTotals.hasAnyViews ? compactCount(archiveTotals.views) : '—') : compactCount(totals.plays_total || 0);
+      const secondaryText = isVideoMode ? compactCount(archiveTotals.videos || 0) : compactCount(totals.episodes_total || 0);
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = primaryText;
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = secondaryText;
+      if (impactPlaysLabelEl) impactPlaysLabelEl.textContent = isVideoMode ? 'Views' : 'Plays';
+      if (impactEpisodesLabelEl) impactEpisodesLabelEl.textContent = isVideoMode ? 'Videos' : 'Episodes';
+      if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = '';
+      if (impactEpisodesMetaEl) impactEpisodesMetaEl.textContent = '';
+    };
+    wrapped.__v68patched = true;
+    window.renderImpactTotals = wrapped;
+    renderImpactTotals = wrapped;
+  }
+
+  function patchRootItemsV68() {
+    const original = window.getRootItems;
+    if (typeof original !== 'function' || original.__v68patched) return;
+    const wrapped = function() {
+      const items = original.call(this);
+      if (mode === 'video' && hasShortsConfigV68()) {
+        const already = items.some((item) => item && item.key === 'shorts');
+        if (!already) {
+          const guestIndex = items.findIndex((item) => item && item.key === 'guestSpeakers');
+          const shortItem = { key: 'shorts', title: 'Shorts', meta: 'Short-form video archive' };
+          if (guestIndex >= 0) items.splice(guestIndex, 0, shortItem);
+          else items.push(shortItem);
+        }
+      }
+      return items;
+    };
+    wrapped.__v68patched = true;
+    window.getRootItems = wrapped;
+    getRootItems = wrapped;
+  }
+
+  function patchSetRootV68() {
+    const original = window.setRoot;
+    if (typeof original !== 'function' || original.__v68patched) return;
+    const wrapped = async function(key) {
+      if (key === 'shorts') await ensureShortsLoadedV68();
+      return original.apply(this, arguments);
+    };
+    wrapped.__v68patched = true;
+    window.setRoot = wrapped;
+    setRoot = wrapped;
+  }
+
+  async function hydrateVideoMetricsV68(force = false) {
+    await ensureShortsLoadedV68();
+    const ids = [];
+    Object.values(sermonData || {}).forEach((episodes) => {
+      (episodes || []).forEach((ep) => {
+        if (ep && ep.videoId) ids.push(ep.videoId);
+      });
+    });
+    if (!ids.length) return;
+    const missingIds = force ? ids : ids.filter((id) => !window.videoStatsById.has(id));
+    if (!missingIds.length && !force) {
+      refreshAllMetricsV68();
+      return;
+    }
+    try {
+      const statsMap = await fetchStatsBatchV68(missingIds);
+      statsMap.forEach((value, key) => window.videoStatsById.set(key, value));
+      applyStatsToEpisodesV68(statsMap);
+      const totals = computeArchiveVideoTotalsV68();
+      refreshAllMetricsV68();
+      const needsRetry = totals.videos > 0 && !totals.hasAnyViews && retryCountV68 < MAX_RETRIES_V68;
+      if (needsRetry) {
+        retryCountV68 += 1;
+        setTimeout(() => hydrateVideoMetricsV68(true), 1400);
+      }
+    } catch (err) {
+      console.warn('Video metrics could not be loaded in v68.', err);
+      if (retryCountV68 < MAX_RETRIES_V68) {
+        retryCountV68 += 1;
+        setTimeout(() => hydrateVideoMetricsV68(true), 1600);
+      }
+    }
+  }
+
+  patchEpisodeMetricGetterV68();
+  patchImpactTotalsV68();
+  patchRootItemsV68();
+  patchSetRootV68();
+
+  const originalLoadDataV68 = window.loadData;
+  if (typeof originalLoadDataV68 === 'function' && !originalLoadDataV68.__v68patched) {
+    const wrappedLoad = async function() {
+      const result = await originalLoadDataV68.apply(this, arguments);
+      await ensureShortsLoadedV68();
+      refreshAllMetricsV68();
+      setTimeout(() => hydrateVideoMetricsV68(true), 250);
+      return result;
+    };
+    wrappedLoad.__v68patched = true;
+    window.loadData = wrappedLoad;
+    loadData = wrappedLoad;
+  }
+
+  setTimeout(() => {
+    ensureShortsLoadedV68().finally(() => {
+      refreshAllMetricsV68();
+      hydrateVideoMetricsV68(true);
+    });
+  }, 80);
+
+  window.addEventListener('focus', () => hydrateVideoMetricsV68(false));
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) hydrateVideoMetricsV68(false);
+  });
+})();
+</script>
+
 </body>
 </html>
