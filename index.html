@@ -5266,5 +5266,159 @@ function compactCount(value) {
 })();
 </script>
 
+
+<script>
+/* v75 targeted cleanup
+   - Flatten one-off Bible Book items into direct episode surfaces.
+   - Make Shorts open straight into its queue flow.
+   - Resolve related-card entries back to full episode objects so art/scripture persist.
+*/
+(function(){
+  const SHORTS_NAME_V75 = 'CGBC Shorts';
+
+  function makeEpisodeRefKeyV75(seriesName, ep, fallbackIndex){
+    return `${seriesName}::${ep?.title || ''}::${ep?.date || fallbackIndex || ''}`;
+  }
+
+  function resolveEpisodeObjectV75(entry){
+    if (!entry) return null;
+    if (entry.img || entry.seriesImage || entry.seriesWideImage || entry.videoId || entry.audioUrl) return entry;
+    const seriesName = entry.seriesName || entry.series || '';
+    const list = sermonData?.[seriesName] || [];
+    if (!list.length) return entry;
+    return list.find(ep => ep.title === entry.title && ep.date === entry.date)
+      || list.find(ep => ep.title === entry.title)
+      || list[0]
+      || entry;
+  }
+
+  function patchBuildBrowseBucketsV75(){
+    const original = window.buildBrowseBuckets;
+    if (typeof original !== 'function' || original.__v75patched) return;
+    const wrapped = function(){
+      const buckets = original.apply(this, arguments);
+      if (!buckets || !buckets.bibleBooks) return buckets;
+
+      Object.keys(buckets.bibleBooks).forEach(bookKey => {
+        const bucket = buckets.bibleBooks[bookKey];
+        if (!bucket) return;
+        const flattened = [];
+        const keptSeries = [];
+
+        (bucket.series || []).forEach(seriesName => {
+          const visible = (typeof getVisibleEpisodesForSeries === 'function')
+            ? getVisibleEpisodesForSeries(seriesName)
+            : ((sermonData?.[seriesName] || []).map((ep, originalIndex) => ({ ep, originalIndex })));
+          if (visible.length === 1) {
+            const only = visible[0]?.ep;
+            if (only && (mode === 'audio' || only.videoId)) {
+              const refKey = makeEpisodeRefKeyV75(seriesName, only, visible[0]?.originalIndex || 0);
+              if (!(bucket.episodes || []).some(item => item.key === refKey) && !flattened.some(item => item.key === refKey)) {
+                flattened.push({
+                  key: refKey,
+                  seriesName,
+                  episodeTitle: only.title,
+                  date: only.date || '',
+                  scripture: only.scripture || '',
+                  sortTimestamp: only.sortTimestamp || 0
+                });
+              }
+            } else {
+              keptSeries.push(seriesName);
+            }
+          } else {
+            keptSeries.push(seriesName);
+          }
+        });
+
+        bucket.series = keptSeries.sort((a,b) => a.localeCompare(b, undefined, { numeric: true }));
+        bucket.episodes = [...(bucket.episodes || []), ...flattened]
+          .filter((item, idx, arr) => arr.findIndex(other => other.key === item.key) === idx)
+          .sort((a,b) => (b.sortTimestamp || 0) - (a.sortTimestamp || 0));
+      });
+
+      return buckets;
+    };
+    wrapped.__v75patched = true;
+    window.buildBrowseBuckets = wrapped;
+    buildBrowseBuckets = wrapped;
+  }
+
+  function patchShortsDirectOpenV75(){
+    const patchFn = (name, maker) => {
+      const original = window[name];
+      if (typeof original !== 'function' || original.__v75patched) return;
+      const wrapped = maker(original);
+      wrapped.__v75patched = true;
+      window[name] = wrapped;
+      globalThis[name] = wrapped;
+    };
+
+    patchFn('getBranchItems', original => function(){
+      if (mode === 'video' && navRootKey === 'shorts') return [];
+      return original.apply(this, arguments);
+    });
+
+    patchFn('getLeafItems', original => function(){
+      if (mode === 'video' && navRootKey === 'shorts') {
+        const count = (sermonData?.[SHORTS_NAME_V75] || []).filter(ep => !!ep.videoId).length;
+        return count ? [{
+          key: SHORTS_NAME_V75,
+          title: 'Shorts',
+          type: 'series',
+          meta: formatCountLabel(count, 'video', 'videos'),
+          image: typeof getSeriesWideCover === 'function' ? getSeriesWideCover(SHORTS_NAME_V75) : FALLBACK_IMAGE
+        }] : [];
+      }
+      return original.apply(this, arguments);
+    });
+
+    patchFn('getBranchHeadText', original => function(){
+      if (mode === 'video' && navRootKey === 'shorts') return 'Step 2 · Shorts';
+      return original.apply(this, arguments);
+    });
+
+    patchFn('hasMeaningfulBranchStep', original => function(){
+      if (mode === 'video' && navRootKey === 'shorts') return false;
+      return original.apply(this, arguments);
+    });
+  }
+
+  function patchRelatedEntriesV75(){
+    const original = window.getRelatedEntries;
+    if (typeof original !== 'function' || original.__v75patched) return;
+    const wrapped = function(){
+      const result = original.apply(this, arguments);
+      if (!result || !Array.isArray(result.items)) return result;
+      result.items = result.items.map(item => {
+        const resolved = resolveEpisodeObjectV75(item.ep);
+        return { ...item, ep: resolved || item.ep };
+      });
+      return result;
+    };
+    wrapped.__v75patched = true;
+    window.getRelatedEntries = wrapped;
+    getRelatedEntries = wrapped;
+  }
+
+  function refreshV75(){
+    if (typeof buildBrowseBuckets === 'function') browseBuckets = buildBrowseBuckets();
+    if (typeof renderNavigation === 'function') renderNavigation();
+    if (typeof renderQueue === 'function') renderQueue();
+    if (currentEpisodeData && typeof renderMeta === 'function') renderMeta(currentEpisodeData);
+  }
+
+  patchBuildBrowseBucketsV75();
+  patchShortsDirectOpenV75();
+  patchRelatedEntriesV75();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', refreshV75, { once: true });
+  } else {
+    refreshV75();
+  }
+})();
+</script>
+
 </body>
 </html>
