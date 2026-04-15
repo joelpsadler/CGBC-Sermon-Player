@@ -5,8 +5,8 @@ const path = require("path");
 const PODBEAN_SHOW_URL =
   process.env.PODBEAN_SHOW_URL || "https://brojacobcedargrovebaptist.podbean.com/";
 const STATS_PATH = path.resolve(process.cwd(), "stats", "stats.json");
-const MAX_PAGES = Number(process.env.PODBEAN_MAX_PAGES || 20);
-const REQUEST_DELAY_MS = Number(process.env.PODBEAN_REQUEST_DELAY_MS || 600);
+const MAX_PAGES = Number(process.env.PODBEAN_MAX_PAGES || 10);
+const REQUEST_DELAY_MS = Number(process.env.PODBEAN_REQUEST_DELAY_MS || 500);
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -14,6 +14,30 @@ function sleep(ms) {
 
 function safeObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+}
+
+function normalizeUrl(url) {
+  return String(url || "").trim().replace(/\/+$/, "/");
+}
+
+function toAbsolutePermalink(showUrl, permalink) {
+  const root = normalizeUrl(showUrl);
+  if (!permalink) return "";
+  const raw = String(permalink).trim();
+  if (/^https?:\/\//i.test(raw)) return normalizeUrl(raw);
+  return normalizeUrl(root.replace(/\/$/, "") + "/" + raw.replace(/^\//, ""));
+}
+
+function normalizeTitle(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[–—]/g, "-")
+    .replace(/[’‘]/g, "'")
+    .replace(/&/g, " and ")
+    .replace(/\|/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function readExistingStats(statsPath) {
@@ -44,7 +68,7 @@ function readExistingStats(statsPath) {
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCVisibleTextSync/3.0",
+      "User-Agent": "CGBCInitialStateSync/4.0",
       "Accept": "text/html,application/xhtml+xml",
     },
   });
@@ -56,281 +80,286 @@ async function fetchHtml(url) {
   return html;
 }
 
-function decodeEntities(str) {
-  return String(str || "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
-}
-
-function htmlToVisibleText(html) {
-  return decodeEntities(
-    html
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<br\s*\/?>/gi, "\n")
-      .replace(/<\/p>/gi, "\n")
-      .replace(/<\/div>/gi, "\n")
-      .replace(/<\/section>/gi, "\n")
-      .replace(/<\/article>/gi, "\n")
-      .replace(/<\/li>/gi, "\n")
-      .replace(/<\/h[1-6]>/gi, "\n")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/\r/g, "")
-      .replace(/\t/g, " ")
-  )
-    .replace(/\u00a0/g, " ")
-    .replace(/[ ]{2,}/g, " ")
-    .replace(/\n{2,}/g, "\n")
-    .trim();
-}
-
-function normalizeUrl(url) {
-  return String(url || "").trim().replace(/\/+$/, "/");
-}
-
-function normalizeTitle(value) {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/[–—]/g, "-")
-    .replace(/[’‘]/g, "'")
-    .replace(/&/g, " and ")
-    .replace(/\|/g, " ")
-    .replace(/[^a-z0-9]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function parseCompactNumber(value) {
-  const raw = String(value || "").trim().toUpperCase();
-  const match = raw.match(/^(\d+(?:\.\d+)?)([KMB])?$/);
-  if (!match) return null;
-
-  const n = Number(match[1]);
-  const suffix = match[2] || "";
-  const scale = suffix === "K" ? 1000 : suffix === "M" ? 1000000 : suffix === "B" ? 1000000000 : 1;
-  return Math.round(n * scale);
-}
-
-function extractPodcastTotals(visibleText) {
-  const lines = visibleText.split("\n").map((s) => s.trim()).filter(Boolean);
-
-  let plays = null;
-  let episodes = null;
-
-  for (let i = 0; i < lines.length - 1; i += 1) {
-    if (!Number.isFinite(plays) && /^(\d+(?:\.\d+)?[KMB]?)$/i.test(lines[i]) && /^Downloads$/i.test(lines[i + 1])) {
-      plays = parseCompactNumber(lines[i]);
-    }
-    if (!Number.isFinite(episodes) && /^\d+$/.test(lines[i]) && /^Episodes$/i.test(lines[i + 1])) {
-      episodes = Number(lines[i]);
-    }
-    if (Number.isFinite(plays) && Number.isFinite(episodes)) break;
+function extractInitialState(html) {
+  const match = html.match(/window\.__INITIAL_STATE__\s*=\s*"([\s\S]*?)"\s*<\/script>/i);
+  if (!match) {
+    throw new Error("Could not find window.__INITIAL_STATE__ in HTML");
   }
 
-  return {
-    plays: Number.isFinite(plays) ? plays : null,
-    episodes: Number.isFinite(episodes) ? episodes : null,
-  };
+  const escaped = match[1];
+  const decoded = JSON.parse('"' + escaped.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"');
+  return JSON.parse(decoded);
 }
 
-function pageCandidates(baseUrl) {
-  const root = normalizeUrl(baseUrl);
-  const out = [root];
-  for (let i = 2; i <= MAX_PAGES; i += 1) {
-    out.push(`${root}page/${i}/`);
+function walk(value, visit) {
+  if (Array.isArray(value)) {
+    visit(value);
+    for (const item of value) walk(item, visit);
+    return;
   }
-  return out;
+  if (value && typeof value === "object") {
+    visit(value);
+    for (const v of Object.values(value)) walk(v, visit);
+  }
 }
 
-function isNoiseLine(line) {
-  return !line ||
-    /^Likes$/i.test(line) ||
-    /^Share$/i.test(line) ||
-    /^Read more$/i.test(line) ||
-    /^RSS$/i.test(line) ||
-    /^Episodes$/i.test(line) ||
-    /^Home$/i.test(line) ||
-    /^Cancel$/i.test(line) ||
-    /^Subscribe$/i.test(line) ||
-    /^Profile$/i.test(line) ||
-    /^\d+(?:\.\d+)?[KMB]?$/i.test(line) ||
-    /^Downloads$/i.test(line);
-}
+function findEpisodeRecords(state, showUrl) {
+  const records = [];
+  const seen = new Set();
 
-function extractEpisodePairsFromVisibleText(visibleText) {
-  const lines = visibleText
-    .split("\n")
-    .map((s) => s.trim())
-    .filter(Boolean);
+  walk(state, (node) => {
+    if (!Array.isArray(node) || !node.length) return;
+    const looksLikeEpisodeArray = node.some((item) =>
+      item &&
+      typeof item === "object" &&
+      ("downloadCount" in item) &&
+      ("title" in item) &&
+      ("permalink" in item || "permalink_url" in item)
+    );
 
-  const out = [];
+    if (!looksLikeEpisodeArray) return;
 
-  for (let i = 0; i < lines.length; i += 1) {
-    const line = lines[i];
-    const match = line.match(/^Download\s+(\d+)$/i);
-    if (!match) continue;
+    for (const item of node) {
+      if (!item || typeof item !== "object") continue;
+      const permalinkRaw = item.permalink || item.permalink_url || "";
+      const permalink = toAbsolutePermalink(showUrl, permalinkRaw);
+      const mediaUrl = String(item.mediaUrl || item.media_url || "").trim();
+      const title = String(item.title || "").trim();
+      if (!title || !permalink) continue;
 
-    const downloads = Number(match[1]);
-    let title = null;
+      const key = permalink + "::" + mediaUrl;
+      if (seen.has(key)) continue;
+      seen.add(key);
 
-    for (let j = i - 1; j >= Math.max(0, i - 18); j -= 1) {
-      const candidate = lines[j];
-      if (isNoiseLine(candidate)) continue;
-      if (/^Title:/i.test(candidate)) continue;
-      if (/^Series:/i.test(candidate)) continue;
-      if (/^Scripture:/i.test(candidate)) continue;
-      if (/^by:/i.test(candidate)) continue;
-      if (/^Date:/i.test(candidate)) continue;
-      if (/^Video:/i.test(candidate)) continue;
-      if (/^\d+\s+days?\s+ago$/i.test(candidate)) continue;
-      if (/^[A-Za-z]{3,9}\s+[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}$/i.test(candidate)) continue;
-      if (/^[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}$/i.test(candidate)) continue;
-      if (/^CGBC\b/i.test(candidate)) continue;
-      if (/^Established in/i.test(candidate)) continue;
-      if (/^https?:\/\//i.test(candidate)) continue;
-
-      title = candidate;
-      break;
-    }
-
-    if (title) {
-      out.push({
+      records.push({
+        permalink_url: permalink,
+        media_url: mediaUrl,
         title,
         title_key: normalizeTitle(title),
-        downloads,
+        download_count: Number(item.downloadCount || 0),
+        publish_time: item.datePublished || item.publish_time || item.publishDate || null,
+        publish_timestamp: Number(item.publishTimestamp || 0) || null,
+        deep_link: item.deepLink || null,
+        share_link: item.shareLink || null,
+        status: item.status || null,
       });
     }
-  }
+  });
 
-  return out;
+  return records;
 }
 
-function buildExistingTitleIndex(episodes) {
-  const index = new Map();
+function findBaseInfo(state) {
+  let best = null;
 
-  for (const [key, episode] of Object.entries(episodes || {})) {
-    const current = safeObject(episode);
-    const title = current.title || current.display_title || "";
-    const titleKey = normalizeTitle(title);
-    if (!titleKey) continue;
-
-    if (!index.has(titleKey)) index.set(titleKey, []);
-    index.get(titleKey).push({ key, episode: current });
-  }
-
-  return index;
-}
-
-async function scrapeAllPages(showUrl) {
-  const pages = pageCandidates(showUrl);
-  const episodePairs = [];
-  let pagesFetched = 0;
-  let page1VisibleText = "";
-
-  for (const url of pages) {
-    try {
-      const html = await fetchHtml(url);
-      pagesFetched += 1;
-      const visibleText = htmlToVisibleText(html);
-
-      if (!page1VisibleText) page1VisibleText = visibleText;
-
-      const pairs = extractEpisodePairsFromVisibleText(visibleText);
-      if (!pairs.length && url !== normalizeUrl(showUrl)) {
-        break;
-      }
-
-      episodePairs.push(...pairs);
-      await sleep(REQUEST_DELAY_MS);
-    } catch (err) {
-      if (url === normalizeUrl(showUrl)) throw err;
-      break;
+  walk(state, (node) => {
+    if (
+      node &&
+      typeof node === "object" &&
+      ("podcastDownloads" in node || "totalEpisodes" in node || "podcastTitle" in node)
+    ) {
+      best = node;
     }
+  });
+
+  return safeObject(best);
+}
+
+function findPaginationInfo(state) {
+  let info = { listTotalPage: null, listPage: null, listTotalCount: null };
+
+  walk(state, (node) => {
+    if (!node || typeof node !== "object") return;
+    if ("listTotalPage" in node || "listPage" in node || "listTotalCount" in node) {
+      info = {
+        listTotalPage: Number(node.listTotalPage || 0) || info.listTotalPage,
+        listPage: Number(node.listPage || 0) || info.listPage,
+        listTotalCount: Number(node.listTotalCount || 0) || info.listTotalCount,
+      };
+    }
+  });
+
+  return info;
+}
+
+function buildPageUrl(showUrl, pageNumber) {
+  const root = normalizeUrl(showUrl);
+  if (pageNumber <= 1) return root;
+  return `${root}page/${pageNumber}/`;
+}
+
+async function scrapeInitialStatePages(showUrl) {
+  const rootHtml = await fetchHtml(buildPageUrl(showUrl, 1));
+  const rootState = extractInitialState(rootHtml);
+  const baseInfo = findBaseInfo(rootState);
+  const pagination = findPaginationInfo(rootState);
+  const totalPages = Math.max(1, Math.min(MAX_PAGES, Number(pagination.listTotalPage || 1)));
+
+  const byPermalink = new Map();
+  let pagesFetched = 0;
+
+  for (let page = 1; page <= totalPages; page += 1) {
+    const url = buildPageUrl(showUrl, page);
+    const html = page === 1 ? rootHtml : await fetchHtml(url);
+    const state = page === 1 ? rootState : extractInitialState(html);
+    const records = findEpisodeRecords(state, showUrl);
+
+    for (const record of records) {
+      const existing = byPermalink.get(record.permalink_url);
+      if (!existing || record.download_count > existing.download_count) {
+        byPermalink.set(record.permalink_url, record);
+      }
+    }
+
+    pagesFetched += 1;
+    await sleep(REQUEST_DELAY_MS);
   }
 
   return {
+    baseInfo,
+    pagination,
     pagesFetched,
-    episodePairs,
-    page1VisibleText,
+    records: [...byPermalink.values()],
   };
+}
+
+function buildTitleIndex(episodes) {
+  const titleIndex = new Map();
+  for (const [key, value] of Object.entries(episodes || {})) {
+    const episode = safeObject(value);
+    const titleKey = normalizeTitle(episode.title || "");
+    if (!titleKey) continue;
+    if (!titleIndex.has(titleKey)) titleIndex.set(titleKey, []);
+    titleIndex.get(titleKey).push({ key, episode });
+  }
+  return titleIndex;
 }
 
 async function main() {
   const existing = readExistingStats(STATS_PATH);
-  const scrape = await scrapeAllPages(PODBEAN_SHOW_URL);
-  const totals = extractPodcastTotals(scrape.page1VisibleText);
-
-  const now = new Date().toISOString();
+  const scraped = await scrapeInitialStatePages(PODBEAN_SHOW_URL);
   const episodes = safeObject(existing.episodes);
-  const titleIndex = buildExistingTitleIndex(episodes);
+  const titleIndex = buildTitleIndex(episodes);
+  const now = new Date().toISOString();
 
-  let matches = 0;
+  let permalinkMatches = 0;
+  let titleMatches = 0;
+  let insertedNew = 0;
 
-  for (const pair of scrape.episodePairs) {
-    const candidates = titleIndex.get(pair.title_key) || [];
-    if (!candidates.length) continue;
+  for (const record of scraped.records) {
+    const exact = episodes[record.permalink_url];
+    if (exact) {
+      const current = safeObject(exact);
+      const newValue = Math.max(
+        Number(current.plays_total || current.downloads_total || 0),
+        Number(record.download_count || 0)
+      );
 
-    for (const candidate of candidates) {
-      const current = safeObject(candidate.episode);
-      const newValue = Math.max(Number(current.plays_total || current.downloads_total || 0), Number(pair.downloads || 0));
-
-      episodes[candidate.key] = {
+      episodes[record.permalink_url] = {
         ...current,
-        title: current.title || pair.title,
+        permalink_url: current.permalink_url || record.permalink_url,
+        media_url: current.media_url || record.media_url,
+        title: current.title || record.title,
+        publish_time: current.publish_time || record.publish_time,
         plays_total: newValue,
         downloads_total: newValue,
-        public_listing_downloads: Number(pair.downloads || 0),
-        public_listing_title: pair.title,
-        public_listing_title_key: pair.title_key,
-        last_public_listing_sync_at: now,
+        podbean_public_download_count: Number(record.download_count || 0),
+        podbean_public_title: record.title,
+        podbean_public_title_key: record.title_key,
+        podbean_public_share_link: record.share_link,
+        podbean_public_deep_link: record.deep_link,
+        last_public_sync_at: now,
         downloads_by_date: safeObject(current.downloads_by_date),
       };
-
-      matches += 1;
+      permalinkMatches += 1;
+      continue;
     }
+
+    const titleCandidates = titleIndex.get(record.title_key) || [];
+    if (titleCandidates.length) {
+      const chosen = titleCandidates[0];
+      const current = safeObject(chosen.episode);
+      const newValue = Math.max(
+        Number(current.plays_total || current.downloads_total || 0),
+        Number(record.download_count || 0)
+      );
+
+      episodes[chosen.key] = {
+        ...current,
+        permalink_url: current.permalink_url || record.permalink_url,
+        media_url: current.media_url || record.media_url,
+        title: current.title || record.title,
+        publish_time: current.publish_time || record.publish_time,
+        plays_total: newValue,
+        downloads_total: newValue,
+        podbean_public_download_count: Number(record.download_count || 0),
+        podbean_public_title: record.title,
+        podbean_public_title_key: record.title_key,
+        podbean_public_share_link: record.share_link,
+        podbean_public_deep_link: record.deep_link,
+        last_public_sync_at: now,
+        downloads_by_date: safeObject(current.downloads_by_date),
+      };
+      titleMatches += 1;
+      continue;
+    }
+
+    episodes[record.permalink_url] = {
+      identity_key: record.permalink_url,
+      permalink_url: record.permalink_url,
+      media_url: record.media_url,
+      title: record.title,
+      publish_time: record.publish_time,
+      plays_total: Number(record.download_count || 0),
+      downloads_total: Number(record.download_count || 0),
+      podbean_public_download_count: Number(record.download_count || 0),
+      podbean_public_title: record.title,
+      podbean_public_title_key: record.title_key,
+      podbean_public_share_link: record.share_link,
+      podbean_public_deep_link: record.deep_link,
+      inserted_from_initial_state: true,
+      last_public_sync_at: now,
+      downloads_by_date: {},
+    };
+    insertedNew += 1;
   }
 
+  const baseInfo = scraped.baseInfo;
   const output = {
     generated_at: now,
     source: {
       ...(safeObject(existing.source)),
-      provider: "podbean_public_site",
+      provider: "podbean_public_initial_state",
       metric: "plays",
-      strategy: "visible_text_block_parser",
+      strategy: "window_initial_state_parser",
       show_url: PODBEAN_SHOW_URL,
     },
     podcast_totals: {
       ...(safeObject(existing.podcast_totals)),
-      plays_total: Number.isFinite(totals.plays)
-        ? totals.plays
-        : Number(existing?.podcast_totals?.plays_total || 0),
-      episodes_total: Number.isFinite(totals.episodes)
-        ? totals.episodes
-        : Number(existing?.podcast_totals?.episodes_total || 0),
+      plays_total: Number(baseInfo.podcastDownloads || existing?.podcast_totals?.plays_total || 0),
+      episodes_total: Number(baseInfo.totalEpisodes || existing?.podcast_totals?.episodes_total || 0),
       last_updated: now,
       source_url: PODBEAN_SHOW_URL,
     },
     episodes,
     summary: {
       ...(safeObject(existing.summary)),
-      sync_type: "podcast_totals_plus_visible_text_episode_blocks",
-      pages_fetched: scrape.pagesFetched,
-      visible_text_pairs_found: scrape.episodePairs.length,
-      episode_listing_matches: matches,
+      sync_type: "podcast_totals_plus_initial_state_episode_records",
+      pages_fetched: scraped.pagesFetched,
+      initial_state_records_found: scraped.records.length,
+      initial_state_permalink_matches: permalinkMatches,
+      initial_state_title_matches: titleMatches,
+      initial_state_new_records_inserted: insertedNew,
+      initial_state_list_total_page: Number(scraped.pagination.listTotalPage || 0),
+      initial_state_list_total_count: Number(scraped.pagination.listTotalCount || 0),
     },
   };
 
   fs.mkdirSync(path.dirname(STATS_PATH), { recursive: true });
   fs.writeFileSync(STATS_PATH, JSON.stringify(output, null, 2), "utf8");
-
   console.log(`Wrote ${STATS_PATH}`);
   console.log(
-    `Totals -> plays=${output.podcast_totals.plays_total}, episodes=${output.podcast_totals.episodes_total}, visiblePairs=${scrape.episodePairs.length}, matches=${matches}, pagesFetched=${scrape.pagesFetched}`
+    `Totals -> plays=${output.podcast_totals.plays_total}, episodes=${output.podcast_totals.episodes_total}, records=${scraped.records.length}, permalinkMatches=${permalinkMatches}, titleMatches=${titleMatches}, insertedNew=${insertedNew}, pagesFetched=${scraped.pagesFetched}`
   );
 }
 
