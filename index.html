@@ -401,19 +401,6 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
       letter-spacing: 0.01em;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .metric-triangle {
-      color: rgba(143,174,157,0.84);
-      font-size: 11px;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transform: translateY(-0.5px);
-      flex: 0 0 auto;
     }
     .card-metric.is-hidden {
       display: none;
@@ -677,13 +664,6 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
       letter-spacing: 0.01em;
-    }
-    .audio-metric-row .metric-triangle,
-    .stage-metric-row .metric-triangle {
-      color: rgba(143,174,157,0.84);
-      font-size: 11px;
-      line-height: 1;
-      transform: translateY(-0.5px);
     }
     .audio-metric-row {
       padding-top: 2px;
@@ -1853,8 +1833,6 @@
     let audioStatsByMediaUrl = new Map();
     let audioStatsByPermalink = new Map();
     let audioStatsByTitle = new Map();
-    let videoStatsById = new Map();
-    let videoLibraryTotals = { views: 0, videos: 0 };
 
         const bodyEl = document.body;
     const rootListEl = document.getElementById('rootList');
@@ -3114,7 +3092,7 @@
       audioSpeakerRowEl.style.display = ep.by ? 'flex' : 'none';
       const metricText = getEpisodeMetricText(ep);
       if (audioMetricRowEl && audioMetricTextEl) {
-        audioMetricTextEl.innerHTML = metricText ? formatMetricMarkup(metricText) : '';
+        audioMetricTextEl.textContent = metricText;
         audioMetricRowEl.style.display = metricText ? 'flex' : 'none';
       }
     }
@@ -3133,7 +3111,7 @@
       const rows = [];
       if (scriptureDisplay) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scriptureDisplay)}</span><span>${escapeHtml(scriptureDisplay)}</span></div>`);
       if (speaker) rows.push(`<div class="stage-info-row"><span class="stage-info-label">Speaker</span><span>${escapeHtml(speaker)}</span></div>`);
-      if (metricText) rows.push(`<div class="stage-info-row stage-metric-row">${formatMetricMarkup(metricText)}</div>`);
+      if (metricText) rows.push(`<div class="stage-info-row stage-metric-row"><span>${escapeHtml(metricText)}</span></div>`);
       stageInfoEl.innerHTML = `<h3 class="stage-info-title">${escapeHtml(ep.title || 'Untitled Sermon')}</h3><div class="stage-info-series">${escapeHtml(ep.series || currentSeries || '')}</div><div class="stage-info-meta">${rows.join('')}</div>`;
       stageInfoEl.style.display = 'block';
     }
@@ -3298,52 +3276,6 @@
       }
     }
 
-
-    async function fetchYouTubeVideoStats(videoIds) {
-      const ids = Array.from(new Set((videoIds || []).map(id => String(id || '').trim()).filter(Boolean)));
-      const statsById = new Map();
-      for (let i = 0; i < ids.length; i += 50) {
-        const batch = ids.slice(i, i + 50);
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${batch.join(',')}&key=${API_KEY}`;
-        try {
-          const res = await fetch(url);
-          const data = await res.json();
-          const items = Array.isArray(data.items) ? data.items : [];
-          items.forEach((item) => {
-            const id = item?.id || '';
-            if (!id) return;
-            statsById.set(id, {
-              views: Number(item?.statistics?.viewCount || 0),
-              publishedAt: item?.snippet?.publishedAt || ''
-            });
-          });
-        } catch (err) {
-          console.warn('Unable to fetch YouTube video statistics batch.', err);
-        }
-      }
-      return statsById;
-    }
-
-    function applyVideoStatsToSermonData() {
-      const totals = { views: 0, videos: 0 };
-      Object.entries(sermonData || {}).forEach(([seriesName, episodes]) => {
-        const isExcludedSeries = seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name;
-        (episodes || []).forEach((ep) => {
-          if (!ep || !ep.videoId) return;
-          const stats = videoStatsById.get(ep.videoId);
-          const views = Number(stats?.views || 0);
-          ep.videoViewsTotal = views;
-          ep.viewCount = views;
-          ep.views_total = views;
-          if (!isExcludedSeries) {
-            totals.views += views;
-            totals.videos += 1;
-          }
-        });
-      });
-      videoLibraryTotals = totals;
-    }
-
     async function fetchPlaylistSeries(config, newestFirst = false) {
       const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
       const res = await fetch(url);
@@ -3414,12 +3346,6 @@
       const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
       if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
       sermonData = grouped;
-      const allVideoIds = Object.values(sermonData)
-        .flat()
-        .map(ep => ep?.videoId || '')
-        .filter(Boolean);
-      videoStatsById = await fetchYouTubeVideoStats(allVideoIds);
-      applyVideoStatsToSermonData();
       applySeriesArtwork();
       browseBuckets = buildBrowseBuckets();
       setDefaultNavigation();
@@ -3538,12 +3464,7 @@
       const num = Number(value || 0);
       if (!Number.isFinite(num) || num <= 0) return '';
       const label = num === 1 ? singular : plural;
-      return `${compactCount(num)} ${label}`;
-    }
-
-    function formatMetricMarkup(metricText) {
-      if (!metricText) return '';
-      return `<span class="metric-triangle" aria-hidden="true">▶</span><span>${escapeHtml(metricText)}</span>`;
+      return `▶ ${compactCount(num)} ${label}`;
     }
 
     function buildAudioStatsIndexes(stats) {
@@ -3580,13 +3501,12 @@
         const plays = Number(stats?.plays_total || stats?.downloads_total || stats?.baseline_public_downloads || 0);
         return formatMetricValue(plays, 'play', 'plays');
       }
-      const videoStats = ep.videoId && videoStatsById.has(ep.videoId) ? videoStatsById.get(ep.videoId) : null;
-      const views = Number(videoStats?.views || ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
+      const views = Number(ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
       return formatMetricValue(views, 'view', 'views');
     }
 
     function renderEpisodeMetricLine(metricText) {
-      return metricText ? `<div class="card-metric">${formatMetricMarkup(metricText)}</div>` : '<div class="card-metric is-hidden"></div>';
+      return metricText ? `<div class="card-metric">${escapeHtml(metricText)}</div>` : '<div class="card-metric is-hidden"></div>';
     }
 
 function compactCount(value) {
@@ -3602,8 +3522,8 @@ function compactCount(value) {
       buildAudioStatsIndexes(statsState);
       const totals = statsState && statsState.podcast_totals ? statsState.podcast_totals : {};
       const isVideoMode = mode === 'video';
-      const primaryValue = isVideoMode ? (videoLibraryTotals.views || totals.video_views_total || totals.views_total || 0) : (totals.plays_total || 0);
-      const secondaryValue = isVideoMode ? (videoLibraryTotals.videos || totals.video_episodes_total || totals.videos_total || 0) : (totals.episodes_total || 0);
+      const primaryValue = isVideoMode ? (totals.video_views_total || totals.views_total || 0) : (totals.plays_total || 0);
+      const secondaryValue = isVideoMode ? (totals.video_episodes_total || totals.videos_total || 0) : (totals.episodes_total || 0);
 
       if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(primaryValue);
       if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(secondaryValue);
@@ -3965,6 +3885,298 @@ function compactCount(value) {
   }
 
   applyIosFallbackSourcesV63();
+})();
+</script>
+
+
+<style id="v64-mobile-final-pass">
+  .metric-triangle-svg {
+    width: 11px;
+    height: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    transform: translateY(-0.5px);
+  }
+  .metric-triangle-svg svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: rgba(143,174,157,0.84);
+  }
+  .impact-host-mobile {
+    display: none;
+  }
+  @media (max-width: 980px), (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+    .masthead {
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .brand-logo-btn {
+      width: 86px;
+      height: 60px;
+    }
+    .impact-host-mobile {
+      display: block;
+      margin: 0 -8px 6px;
+      padding: 0 8px 8px;
+      background: rgba(8,8,8,0.96);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .impact-host-mobile .impact-strip {
+      margin-top: 0;
+      gap: 8px;
+      width: 100%;
+      flex-wrap: nowrap;
+    }
+    .impact-host-mobile .impact-pill {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+</style>
+
+<script>
+/* v64 mobile portrait final pass
+   1) Fix back restore from Bible Books episode surfaces
+   2) Move top totals out from the main masthead row on mobile
+   3) Replace emoji-like metric icon with a muted SVG triangle
+   4) Add optional Shorts hook above Guest Speaker without adding to totals
+   5) Keep dated video entry subtitle visible in Video by Date queues
+*/
+(function () {
+  const SHORTS_COLLECTION_V64 = {
+    name: 'CGBC Shorts',
+    playlistId: '' // Add your Shorts playlist ID here later to enable it.
+  };
+
+  function ensureImpactHostV64() {
+    const masthead = document.querySelector('.masthead');
+    const appShell = document.querySelector('.app-shell');
+    const impactStrip = document.getElementById('impactStrip');
+    if (!masthead || !appShell || !impactStrip) return;
+
+    let host = document.getElementById('impactHostMobile');
+    if (!host) {
+      host = document.createElement('div');
+      host.id = 'impactHostMobile';
+      host.className = 'impact-host-mobile';
+      masthead.insertAdjacentElement('afterend', host);
+    }
+
+    if (typeof isMobileLayout === 'function' && isMobileLayout()) {
+      if (impactStrip.parentElement !== host) host.appendChild(impactStrip);
+    } else {
+      if (impactStrip.parentElement !== masthead) masthead.appendChild(impactStrip);
+    }
+  }
+
+  function metricSvgMarkupV64(metricText) {
+    if (!metricText) return '';
+    return '<span class="metric-triangle-svg" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1 1.2v7.6l6.8-3.8z"></path></svg></span><span>' + escapeHtml(metricText) + '</span>';
+  }
+
+  window.formatMetricMarkup = metricSvgMarkupV64;
+
+  const originalRenderEpisodeMetricLineV64 = window.renderEpisodeMetricLine;
+  window.renderEpisodeMetricLine = function patchedRenderEpisodeMetricLineV64(metricText) {
+    return metricText ? `<div class="card-metric">${metricSvgMarkupV64(metricText)}</div>` : '<div class="card-metric is-hidden"></div>';
+  };
+
+  const originalRenderAudioDetailsV64 = window.renderAudioDetails;
+  if (typeof originalRenderAudioDetailsV64 === 'function') {
+    window.renderAudioDetails = function patchedRenderAudioDetailsV64(ep) {
+      const result = originalRenderAudioDetailsV64.call(this, ep);
+      if (typeof audioMetricRowEl !== 'undefined' && typeof audioMetricTextEl !== 'undefined') {
+        const metricText = getEpisodeMetricText(ep);
+        if (audioMetricTextEl) audioMetricTextEl.innerHTML = metricText ? metricSvgMarkupV64(metricText) : '';
+        if (audioMetricRowEl) audioMetricRowEl.style.display = metricText ? 'flex' : 'none';
+      }
+      return result;
+    };
+  }
+
+  const originalRenderStageInfoV64 = window.renderStageInfo;
+  if (typeof originalRenderStageInfoV64 === 'function') {
+    window.renderStageInfo = function patchedRenderStageInfoV64(ep) {
+      return originalRenderStageInfoV64.call(this, ep);
+    };
+  }
+
+  const originalMakeQueueCardV64 = window.makeQueueCard;
+  if (typeof originalMakeQueueCardV64 === 'function') {
+    window.makeQueueCard = function patchedMakeQueueCardV64(ep, originalIndex, labelOverride = '') {
+      const button = document.createElement('button');
+      button.type = 'button';
+      const isActive = !!currentEpisodeData && currentEpisodeData.title === ep.title && currentEpisodeData.series === ep.series;
+      button.className = `episode-card ${mode}` + (isActive ? ' active' : '');
+      const thumb = mode === 'video' ? (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE) : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
+      let subtitle = labelOverride || ep.scripture || ep.date || '';
+      if (navRootKey === 'byDate' && ep.date) subtitle = ep.date;
+      const metricText = getEpisodeMetricText(ep);
+      button.innerHTML = `<div class="episode-thumb"><img src="${thumb}" alt=""></div><div class="card-copy"><h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3><div class="card-subtitle">${subtitle}</div>${window.renderEpisodeMetricLine(metricText)}</div>`;
+      button.addEventListener('click', () => selectEpisode(ep, originalIndex, { source: 'queue', leafKey: navLeafKey, seriesName: currentSeries || ep.series || '' }));
+      return button;
+    };
+  }
+
+  const originalCaptureSelectionReturnSnapshotV64 = window.captureSelectionReturnSnapshot;
+  if (typeof originalCaptureSelectionReturnSnapshotV64 === 'function') {
+    window.captureSelectionReturnSnapshot = function patchedCaptureSelectionReturnSnapshotV64(ep, originalIndex, options = {}) {
+      originalCaptureSelectionReturnSnapshotV64.call(this, ep, originalIndex, options);
+      if (selectionReturnSnapshot) {
+        const fromLeafSurface = options.source === 'leaf';
+        selectionReturnSnapshot.returnView = fromLeafSurface ? 'leaf' : 'queue';
+        selectionReturnSnapshot.source = options.source || selectionReturnSnapshot.source || 'queue';
+      }
+    };
+  }
+
+  function restoreSelectionReturnV64() {
+    const snap = selectionReturnSnapshot || selectedContext || {};
+    if (snap.navRootKey) navRootKey = snap.navRootKey;
+    if (snap.navBranchKey) navBranchKey = snap.navBranchKey;
+    if (snap.navLeafKey || snap.leafKey) navLeafKey = snap.navLeafKey || snap.leafKey;
+
+    const returnView = snap.returnView || (snap.source === 'leaf' ? 'leaf' : 'queue');
+    currentSeries = returnView === 'queue' ? (snap.seriesName || snap.currentSeries || currentSeries || '') : null;
+    currentEpisodeIndex = null;
+    currentEpisodeData = null;
+    selectedContext = null;
+    selectedEntrySource = 'queue';
+
+    if (typeof clearMediaState === 'function') clearMediaState();
+    if (typeof renderEmptyMeta === 'function') renderEmptyMeta();
+    if (typeof showModePlaceholder === 'function') showModePlaceholder();
+
+    mobileNavView = returnView;
+    if (navRootKey === 'bibleBooks' && returnView === 'leaf') currentSeries = null;
+
+    if (typeof updateSelectionShellState === 'function') updateSelectionShellState();
+    if (typeof renderNavigation === 'function') renderNavigation();
+    if (typeof renderQueue === 'function') renderQueue();
+    if (typeof renderMobileInlineFlow === 'function') renderMobileInlineFlow();
+    if (typeof renderMobileDrawerFlow === 'function') renderMobileDrawerFlow();
+    if (typeof syncMobileShellHeight === 'function') syncMobileShellHeight();
+    if (typeof scrollMobileSelectorToTop === 'function' && typeof isMobileLayout === 'function' && isMobileLayout()) scrollMobileSelectorToTop();
+
+    selectionReturnSnapshot = null;
+  }
+
+  window.canGoMobileBack = function patchedCanGoMobileBackV64() {
+    return !!currentEpisodeData || !!selectedContext || !!selectionReturnSnapshot || mobileNavView !== 'root';
+  };
+
+  window.performMobileBack = function patchedPerformMobileBackV64() {
+    const backingOutOfSelection = !!currentEpisodeData || !!selectedContext || !!selectionReturnSnapshot;
+    if (backingOutOfSelection) {
+      restoreSelectionReturnV64();
+      return;
+    }
+    if (mobileNavView === 'queue') mobileNavView = hasMeaningfulLeafStep() ? 'leaf' : (hasMeaningfulBranchStep() ? 'branch' : 'root');
+    else if (mobileNavView === 'leaf') mobileNavView = hasMeaningfulBranchStep() ? 'branch' : 'root';
+    else if (mobileNavView === 'branch') mobileNavView = 'root';
+
+    if (typeof renderNavigation === 'function') renderNavigation();
+    if (typeof renderQueue === 'function') renderQueue();
+    if (typeof renderMobileInlineFlow === 'function') renderMobileInlineFlow();
+    if (typeof renderMobileDrawerFlow === 'function') renderMobileDrawerFlow();
+    if (typeof scrollMobileSelectorToTop === 'function' && typeof isMobileLayout === 'function' && isMobileLayout()) scrollMobileSelectorToTop();
+  };
+
+  if (typeof fetchPlaylistSeries === 'function') {
+    const originalLoadDataV64 = window.loadData;
+    window.loadData = async function patchedLoadDataV64() {
+      const result = await originalLoadDataV64.call(this);
+      try {
+        if (SHORTS_COLLECTION_V64.playlistId) {
+          const shortsEpisodes = await fetchPlaylistSeries(SHORTS_COLLECTION_V64, true);
+          if (shortsEpisodes.length) {
+            sermonData[SHORTS_COLLECTION_V64.name] = shortsEpisodes.map(ep => ({ ...ep, isShort: true }));
+            const newIds = shortsEpisodes.map(ep => ep.videoId).filter(Boolean);
+            if (newIds.length && typeof fetchYouTubeVideoStats === 'function') {
+              const moreStats = await fetchYouTubeVideoStats(newIds);
+              moreStats.forEach((value, key) => videoStatsById.set(key, value));
+            }
+            if (typeof applySeriesArtwork === 'function') applySeriesArtwork();
+            if (typeof buildBrowseBuckets === 'function') browseBuckets = buildBrowseBuckets();
+          }
+        }
+      } catch (err) {
+        console.warn('Shorts collection could not be loaded.', err);
+      }
+      return result;
+    };
+  }
+
+  const originalApplyVideoStatsToSermonDataV64 = window.applyVideoStatsToSermonData;
+  if (typeof originalApplyVideoStatsToSermonDataV64 === 'function') {
+    window.applyVideoStatsToSermonData = function patchedApplyVideoStatsToSermonDataV64() {
+      const result = originalApplyVideoStatsToSermonDataV64.call(this);
+      const totals = { views: 0, videos: 0 };
+      Object.entries(sermonData || {}).forEach(([seriesName, episodes]) => {
+        const isExcludedSeries = seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name || seriesName === SHORTS_COLLECTION_V64.name;
+        (episodes || []).forEach((ep) => {
+          if (!ep || !ep.videoId || isExcludedSeries) return;
+          const stats = videoStatsById.get(ep.videoId);
+          const views = Number(stats?.views || ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
+          totals.views += views;
+          totals.videos += 1;
+        });
+      });
+      videoLibraryTotals = totals;
+      return result;
+    };
+  }
+
+  const originalGetRootItemsV64 = window.getRootItems;
+  if (typeof originalGetRootItemsV64 === 'function') {
+    window.getRootItems = function patchedGetRootItemsV64() {
+      const items = originalGetRootItemsV64.call(this);
+      if (mode === 'video' && sermonData[SHORTS_COLLECTION_V64.name]) {
+        const guestIndex = items.findIndex(item => item.key === 'guestSpeakers');
+        const shortItem = { key: 'shorts', title: 'Shorts', meta: 'Short-form video archive' };
+        if (guestIndex >= 0) items.splice(guestIndex, 0, shortItem);
+        else items.push(shortItem);
+      }
+      return items;
+    };
+  }
+
+  const originalGetBranchItemsV64 = window.getBranchItems;
+  if (typeof originalGetBranchItemsV64 === 'function') {
+    window.getBranchItems = function patchedGetBranchItemsV64() {
+      if (navRootKey === 'shorts') return [{ key: 'shorts-collection', title: 'Shorts', meta: 'Pinned above Guest Speaker' }];
+      return originalGetBranchItemsV64.call(this);
+    };
+  }
+
+  const originalGetLeafItemsV64 = window.getLeafItems;
+  if (typeof originalGetLeafItemsV64 === 'function') {
+    window.getLeafItems = function patchedGetLeafItemsV64() {
+      if (navRootKey === 'shorts') {
+        return sermonData[SHORTS_COLLECTION_V64.name]
+          ? [{ key: SHORTS_COLLECTION_V64.name, title: 'Shorts', type: 'series', meta: formatCountLabel((sermonData[SHORTS_COLLECTION_V64.name] || []).length, 'video', 'videos'), image: getSeriesWideCover(SHORTS_COLLECTION_V64.name) }]
+          : [];
+      }
+      return originalGetLeafItemsV64.call(this);
+    };
+  }
+
+  if (typeof updateDrawerHeader === 'function') updateDrawerHeader();
+  ensureImpactHostV64();
+  if (typeof renderImpactTotals === 'function') renderImpactTotals(typeof statsState === 'undefined' ? null : statsState);
+  if (typeof renderQueue === 'function') renderQueue();
+  if (typeof renderNavigation === 'function') renderNavigation();
+  if (typeof currentEpisodeData !== 'undefined' && currentEpisodeData) {
+    if (typeof renderAudioDetails === 'function') renderAudioDetails(currentEpisodeData);
+    if (typeof renderStageInfo === 'function') renderStageInfo(currentEpisodeData);
+    if (typeof renderMeta === 'function') renderMeta(currentEpisodeData);
+  }
+  if (typeof syncMobileShellHeight === 'function') syncMobileShellHeight();
+  window.addEventListener('resize', ensureImpactHostV64);
+  window.addEventListener('orientationchange', () => setTimeout(ensureImpactHostV64, 60));
 })();
 </script>
 
