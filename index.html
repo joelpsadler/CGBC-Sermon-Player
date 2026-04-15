@@ -5476,5 +5476,49 @@ function compactCount(value) {
 })();
 </script>
 
+
+<script>
+/* v80 Genesis/singleton Bible Books queue fix
+   - Keep v79 as the base.
+   - When a Bible Book branch has only direct episode surfaces and no active currentSeries,
+     seed the queue from that branch's own bucket episodes.
+   - This avoids blank Genesis screens without widening the source set. */
+(function(){
+  function resolveBibleBookBucketEpisodesV80() {
+    if (window.navRootKey !== 'bibleBooks' || !window.navBranchKey || !window.browseBuckets) return [];
+    const bucket = (window.browseBuckets.bibleBooks && window.browseBuckets.bibleBooks[window.navBranchKey]) || null;
+    if (!bucket) return [];
+    const items = [];
+    (bucket.episodes || []).forEach((item, index) => {
+      const list = (window.sermonData && window.sermonData[item.seriesName]) || [];
+      const match = list.find(ep => ep.title === item.episodeTitle && ep.date === item.date)
+        || list.find(ep => ep.title === item.episodeTitle)
+        || list[0];
+      if (!match) return;
+      if (window.mode === 'video' && !match.videoId) return;
+      items.push({ kind: 'episode', ep: match, originalIndex: index });
+    });
+    const seen = new Set();
+    return items.filter(item => {
+      const key = `${item.ep.series || ''}::${item.ep.title || ''}::${item.ep.date || ''}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  const originalGetQueueEntriesV80 = window.getQueueEntries;
+  function wrappedGetQueueEntriesV80() {
+    if (window.navRootKey === 'bibleBooks' && !window.currentSeries) {
+      const bucketEntries = resolveBibleBookBucketEpisodesV80();
+      if (bucketEntries.length) return bucketEntries;
+    }
+    return originalGetQueueEntriesV80.apply(this, arguments);
+  }
+  window.getQueueEntries = wrappedGetQueueEntriesV80;
+  getQueueEntries = wrappedGetQueueEntriesV80;
+})();
+</script>
 </body>
 </html>
+
