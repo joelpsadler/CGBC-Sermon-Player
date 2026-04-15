@@ -5626,5 +5626,122 @@ function compactCount(value) {
 })();
 </script>
 
+
+<script>
+/* v77 direct-episode queue + shorts root cleanup
+   - Bible Books direct-episode branches feed the queue from leaf episode surfaces.
+   - Shorts root hides extra branch/leaf layers and opens directly to its episode queue.
+   - Keeps counts/player logic untouched. */
+(function(){
+  function getShortsSeriesNameV77(){
+    try {
+      return Object.keys(window.sermonData || {}).find(name => /shorts/i.test(name)) || 'CGBC Shorts';
+    } catch (e) {
+      return 'CGBC Shorts';
+    }
+  }
+
+  function getDirectEpisodeLeafItemsV77(){
+    if (window.navRootKey !== 'bibleBooks' || !window.navBranchKey || typeof window.getActionableLeafItems !== 'function') return [];
+    const leaves = (window.getActionableLeafItems() || []).filter(Boolean);
+    if (!leaves.length) return [];
+    const allEpisodeSurfaces = leaves.every(item => item.type === 'episode_surface' && item.episodeRef);
+    return allEpisodeSurfaces ? leaves : [];
+  }
+
+  const originalGetQueueEntriesV77 = window.getQueueEntries;
+  if (typeof originalGetQueueEntriesV77 === 'function') {
+    const wrappedGetQueueEntriesV77 = function(){
+      const directLeaves = getDirectEpisodeLeafItemsV77();
+      if (directLeaves.length) {
+        return directLeaves.map((item, index) => ({
+          kind: 'episode',
+          ep: item.episodeRef,
+          originalIndex: Number.isFinite(item.originalIndex) ? item.originalIndex : index
+        }));
+      }
+      if (window.navRootKey === 'shorts') {
+        const shortsSeries = getShortsSeriesNameV77();
+        if (typeof window.getVisibleEpisodesForSeries === 'function') {
+          return (window.getVisibleEpisodesForSeries(shortsSeries) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
+        }
+      }
+      return originalGetQueueEntriesV77.apply(this, arguments);
+    };
+    window.getQueueEntries = wrappedGetQueueEntriesV77;
+    getQueueEntries = wrappedGetQueueEntriesV77;
+  }
+
+  const originalSyncSeriesSelectionV77 = window.syncSeriesSelection;
+  if (typeof originalSyncSeriesSelectionV77 === 'function') {
+    const wrappedSyncSeriesSelectionV77 = function(){
+      const directLeaves = getDirectEpisodeLeafItemsV77();
+      if (directLeaves.length) {
+        window.currentSeries = null;
+        return;
+      }
+      if (window.navRootKey === 'shorts') {
+        window.currentSeries = getShortsSeriesNameV77();
+        return;
+      }
+      return originalSyncSeriesSelectionV77.apply(this, arguments);
+    };
+    window.syncSeriesSelection = wrappedSyncSeriesSelectionV77;
+    syncSeriesSelection = wrappedSyncSeriesSelectionV77;
+  }
+
+  const originalSetRootV77 = window.setRoot;
+  if (typeof originalSetRootV77 === 'function') {
+    const wrappedSetRootV77 = function(key){
+      if (key === 'shorts') {
+        window.navRootKey = 'shorts';
+        window.navBranchKey = null;
+        window.navLeafKey = null;
+        window.currentSeries = getShortsSeriesNameV77();
+        window.currentEpisodeIndex = null;
+        window.currentEpisodeData = null;
+        window.selectedContext = null;
+        window.selectionReturnSnapshot = null;
+        if (typeof window.clearMediaState === 'function') window.clearMediaState();
+        if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
+        if (typeof window.renderNavigation === 'function') window.renderNavigation();
+        if (typeof window.renderQueue === 'function') window.renderQueue();
+        if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
+        if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
+        if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
+        if (typeof window.scrollMobileSelectorToTop === 'function' && typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.scrollMobileSelectorToTop();
+        return;
+      }
+      return originalSetRootV77.call(this, key);
+    };
+    window.setRoot = wrappedSetRootV77;
+    setRoot = wrappedSetRootV77;
+  }
+
+  const originalRenderNavigationV77 = window.renderNavigation;
+  if (typeof originalRenderNavigationV77 === 'function') {
+    const wrappedRenderNavigationV77 = function(){
+      const result = originalRenderNavigationV77.apply(this, arguments);
+      if (window.navRootKey === 'shorts') {
+        if (window.branchSectionEl) window.branchSectionEl.style.display = 'none';
+        if (window.leafSectionEl) window.leafSectionEl.style.display = 'none';
+        if (window.branchListEl) window.branchListEl.innerHTML = '';
+        if (window.leafListEl) window.leafListEl.innerHTML = '';
+        if (window.mobileBranchListEl) window.mobileBranchListEl.innerHTML = '';
+        if (window.mobileLeafListEl) window.mobileLeafListEl.innerHTML = '';
+        if (window.mobileBranchHeadEl) window.mobileBranchHeadEl.textContent = '';
+        if (window.mobileLeafHeadEl) window.mobileLeafHeadEl.textContent = '';
+        if (window.mobileInlineStageHeadEl) window.mobileInlineStageHeadEl.textContent = 'Choose Short';
+      }
+      return result;
+    };
+    window.renderNavigation = wrappedRenderNavigationV77;
+    renderNavigation = wrappedRenderNavigationV77;
+  }
+
+  if (typeof window.renderQueue === 'function') window.renderQueue();
+})();
+</script>
+
 </body>
 </html>
