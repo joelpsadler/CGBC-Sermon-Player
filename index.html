@@ -4933,7 +4933,7 @@ function compactCount(value) {
 }
 .player-stage.video-active.short-active #videoShell {
   aspect-ratio: 9 / 16;
-  width: min(100%, 430px);
+  width: min(100%, 390px);
   margin: 0 auto;
   border-radius: 22px;
   overflow: hidden;
@@ -4945,94 +4945,118 @@ function compactCount(value) {
 }
 @media (max-width: 980px) {
   .player-stage.video-active.short-active #videoShell {
-    width: min(100%, 360px);
+    width: min(100%, 300px);
+    aspect-ratio: 9 / 19;
   }
 }
 </style>
 <script>
-/* v69 shorts flow + bible-book back cleanup + vertical shorts stage */
+/* v70 consolidated shorts flow + return snapshot restore */
 (function(){
-  const SHORTS_SERIES_NAME_V69 = 'CGBC Shorts';
+  const SHORTS_SERIES_NAME = 'CGBC Shorts';
 
-  function isShortEpisodeV69(ep) {
-    return !!(ep && (ep.isShort || ep.series === SHORTS_SERIES_NAME_V69));
+  function isShortEpisode(ep) {
+    return !!(ep && (ep.isShort || ep.series === SHORTS_SERIES_NAME));
   }
 
-  function applyShortStageClassV69(ep) {
+  function applyShortStageClass(ep) {
     if (!window.playerStageEl) return;
-    playerStageEl.classList.toggle('short-active', isShortEpisodeV69(ep));
+    playerStageEl.classList.toggle('short-active', isShortEpisode(ep));
   }
 
-  function clearShortStageClassV69() {
+  function clearShortStageClass() {
     if (!window.playerStageEl) return;
     playerStageEl.classList.remove('short-active');
   }
 
-  const originalGetBranchItemsV69 = window.getBranchItems;
-  if (typeof originalGetBranchItemsV69 === 'function') {
+  async function ensureShortsLoaded() {
+    const existing = window.sermonData && window.sermonData[SHORTS_SERIES_NAME];
+    if (Array.isArray(existing) && existing.length) return true;
+    if (typeof window.ensureShortsLoadedV68 === 'function') return !!(await window.ensureShortsLoadedV68());
+    if (typeof window.ensureShortsLoadedV67 === 'function') return !!(await window.ensureShortsLoadedV67());
+    return false;
+  }
+
+  const originalSetRoot = window.setRoot;
+  if (typeof originalSetRoot === 'function') {
+    const wrapped = async function(key) {
+      if (key !== 'shorts') return originalSetRoot.apply(this, arguments);
+      await ensureShortsLoaded();
+      window.navRootKey = 'shorts';
+      window.navBranchKey = null;
+      window.navLeafKey = SHORTS_SERIES_NAME;
+      window.currentSeries = SHORTS_SERIES_NAME;
+      window.currentEpisodeIndex = null;
+      window.currentEpisodeData = null;
+      window.selectedContext = null;
+      window.selectionReturnSnapshot = null;
+      if (typeof window.clearMediaState === 'function') window.clearMediaState();
+      clearShortStageClass();
+      if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
+      if (typeof window.renderNavigation === 'function') window.renderNavigation();
+      if (typeof window.renderQueue === 'function') window.renderQueue();
+      if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
+      if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
+      if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
+      if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') {
+        window.scrollMobileSelectorToTop();
+      }
+    };
+    window.setRoot = wrapped;
+    setRoot = wrapped;
+  }
+
+  const originalGetBranchItems = window.getBranchItems;
+  if (typeof originalGetBranchItems === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') return [];
-      return originalGetBranchItemsV69.apply(this, arguments);
+      return originalGetBranchItems.apply(this, arguments);
     };
     window.getBranchItems = wrapped;
     getBranchItems = wrapped;
   }
 
-  const originalGetLeafItemsV69 = window.getLeafItems;
-  if (typeof originalGetLeafItemsV69 === 'function') {
+  const originalGetLeafItems = window.getLeafItems;
+  if (typeof originalGetLeafItems === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') {
-        const shorts = (window.sermonData && window.sermonData[SHORTS_SERIES_NAME_V69]) || [];
+        const shorts = (window.sermonData && window.sermonData[SHORTS_SERIES_NAME]) || [];
         if (!shorts.length) return [];
         return [{
-          key: SHORTS_SERIES_NAME_V69,
+          key: SHORTS_SERIES_NAME,
           title: 'Shorts',
           type: 'series',
           meta: typeof formatCountLabel === 'function' ? formatCountLabel(shorts.length, 'video', 'videos') : `${shorts.length} videos`,
-          image: typeof getSeriesWideCover === 'function' ? getSeriesWideCover(SHORTS_SERIES_NAME_V69) : ''
+          image: typeof getSeriesWideCover === 'function' ? getSeriesWideCover(SHORTS_SERIES_NAME) : ''
         }];
       }
-      return originalGetLeafItemsV69.apply(this, arguments);
+      return originalGetLeafItems.apply(this, arguments);
     };
     window.getLeafItems = wrapped;
     getLeafItems = wrapped;
   }
 
-  const originalHasMeaningfulBranchStepV69 = window.hasMeaningfulBranchStep;
-  if (typeof originalHasMeaningfulBranchStepV69 === 'function') {
+  const originalHasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
+  if (typeof originalHasMeaningfulBranchStep === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') return false;
-      return originalHasMeaningfulBranchStepV69.apply(this, arguments);
+      return originalHasMeaningfulBranchStep.apply(this, arguments);
     };
     window.hasMeaningfulBranchStep = wrapped;
     hasMeaningfulBranchStep = wrapped;
   }
 
-  const originalHasMeaningfulLeafStepV69 = window.hasMeaningfulLeafStep;
-  if (typeof originalHasMeaningfulLeafStepV69 === 'function') {
+  const originalHasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
+  if (typeof originalHasMeaningfulLeafStep === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') return false;
-      return originalHasMeaningfulLeafStepV69.apply(this, arguments);
+      return originalHasMeaningfulLeafStep.apply(this, arguments);
     };
     window.hasMeaningfulLeafStep = wrapped;
     hasMeaningfulLeafStep = wrapped;
   }
 
-  const originalGetMobileBackTargetLabelV69 = window.getMobileBackTargetLabel;
-  if (typeof originalGetMobileBackTargetLabelV69 === 'function') {
-    const wrapped = function() {
-      const snap = window.selectionReturnSnapshot || window.selectedContext || {};
-      if ((window.currentEpisodeData || snap.source === 'leaf') && snap.source === 'leaf') {
-        const leafTitle = window.navLeafKey && typeof window.getLeafTitleByKey === 'function' ? window.getLeafTitleByKey(window.navLeafKey) : '';
-        return leafTitle || 'Browse';
-      }
-      return originalGetMobileBackTargetLabelV69.apply(this, arguments);
-    };
-    window.getMobileBackTargetLabel = wrapped;
-    getMobileBackTargetLabel = wrapped;
-  }
-
-  function restoreSelectionTargetV69() {
+  function restoreSelectionTarget() {
     const snap = window.selectionReturnSnapshot || window.selectedContext || {};
 
     if (snap.navRootKey) window.navRootKey = snap.navRootKey;
@@ -5041,20 +5065,31 @@ function compactCount(value) {
       window.navLeafKey = snap.navLeafKey || snap.leafKey || null;
     }
 
-    const backToLeaf = snap.source === 'leaf';
-    window.currentSeries = backToLeaf ? null : (snap.seriesName || snap.currentSeries || window.currentSeries || '');
+    const returnView = snap.returnView || (snap.source === 'leaf' ? 'leaf' : 'queue');
+    window.currentSeries = returnView === 'queue'
+      ? (snap.seriesName || snap.currentSeries || window.currentSeries || '')
+      : null;
+
+    if (window.navRootKey === 'shorts') {
+      window.navLeafKey = SHORTS_SERIES_NAME;
+      window.currentSeries = SHORTS_SERIES_NAME;
+    }
+    if (window.navRootKey === 'bibleBooks' && returnView === 'leaf') {
+      window.currentSeries = null;
+    }
+
     window.currentEpisodeIndex = null;
     window.currentEpisodeData = null;
     window.selectedContext = null;
-    window.selectedEntrySource = backToLeaf ? 'leaf' : 'queue';
+    window.selectedEntrySource = returnView === 'leaf' ? 'leaf' : 'queue';
     window.selectionReturnSnapshot = null;
 
     if (typeof window.clearMediaState === 'function') window.clearMediaState();
-    clearShortStageClassV69();
+    clearShortStageClass();
     if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
     if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
 
-    window.mobileNavView = backToLeaf ? 'leaf' : 'queue';
+    window.mobileNavView = returnView;
 
     if (typeof window.renderNavigation === 'function') window.renderNavigation();
     if (typeof window.renderQueue === 'function') window.renderQueue();
@@ -5067,37 +5102,37 @@ function compactCount(value) {
     }
   }
 
-  const originalPerformMobileBackV69 = window.performMobileBack;
-  if (typeof originalPerformMobileBackV69 === 'function') {
+  const originalPerformMobileBack = window.performMobileBack;
+  if (typeof originalPerformMobileBack === 'function') {
     const wrapped = function() {
       const snap = window.selectionReturnSnapshot || window.selectedContext || {};
       if (window.currentEpisodeData || snap.source === 'leaf' || snap.source === 'queue' || snap.source === 'dated-entry') {
-        restoreSelectionTargetV69();
+        restoreSelectionTarget();
         return;
       }
-      return originalPerformMobileBackV69.apply(this, arguments);
+      return originalPerformMobileBack.apply(this, arguments);
     };
     window.performMobileBack = wrapped;
     performMobileBack = wrapped;
   }
 
-  const originalPlayVideoV69 = window.playVideo;
-  if (typeof originalPlayVideoV69 === 'function') {
+  const originalPlayVideo = window.playVideo;
+  if (typeof originalPlayVideo === 'function') {
     const wrapped = function(ep) {
-      clearShortStageClassV69();
-      const result = originalPlayVideoV69.apply(this, arguments);
-      applyShortStageClassV69(ep);
+      clearShortStageClass();
+      const result = originalPlayVideo.apply(this, arguments);
+      applyShortStageClass(ep);
       return result;
     };
     window.playVideo = wrapped;
     playVideo = wrapped;
   }
 
-  const originalShowModePlaceholderV69 = window.showModePlaceholder;
-  if (typeof originalShowModePlaceholderV69 === 'function') {
+  const originalShowModePlaceholder = window.showModePlaceholder;
+  if (typeof originalShowModePlaceholder === 'function') {
     const wrapped = function() {
-      clearShortStageClassV69();
-      return originalShowModePlaceholderV69.apply(this, arguments);
+      clearShortStageClass();
+      return originalShowModePlaceholder.apply(this, arguments);
     };
     window.showModePlaceholder = wrapped;
     showModePlaceholder = wrapped;
