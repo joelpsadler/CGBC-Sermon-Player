@@ -1,30 +1,11 @@
 #!/usr/bin/env node
-/**
- * Seed baseline Plays from:
- * 1) stats/downloads_stats.csv (stable identity + fallback count)
- * 2) public Podbean episode pages (visible "Download N" number)
- *
- * Matching strategy:
- * - Use Episode URL from CSV as the identity key
- * - Use Media URL as a secondary stable reference
- * - Title is display text only and can change later
- *
- * Baseline strategy:
- * - Prefer the public site "Download N" count
- * - Fallback to the CSV Downloads column if scraping fails
- * - Conservative: do not invent higher values
- */
-
 const fs = require("fs");
 const path = require("path");
 
+const PODBEAN_SHOW_URL =
+  process.env.PODBEAN_SHOW_URL || "https://brojacobcedargrovebaptist.podbean.com/";
 const CSV_PATH = path.resolve(process.cwd(), "stats", "downloads_stats.csv");
 const STATS_PATH = path.resolve(process.cwd(), "stats", "stats.json");
-const REQUEST_DELAY_MS = Number(process.env.PODBEAN_BASELINE_DELAY_MS || 700);
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 function safeObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};
@@ -44,18 +25,15 @@ function parseCsvLine(line) {
       i += 1;
       continue;
     }
-
     if (ch === '"') {
       inQuotes = !inQuotes;
       continue;
     }
-
     if (ch === "," && !inQuotes) {
       out.push(cur);
       cur = "";
       continue;
     }
-
     cur += ch;
   }
 
@@ -69,26 +47,14 @@ function readCsv(filePath) {
   if (!lines.length) return [];
 
   const headers = parseCsvLine(lines[0]);
-  const rows = [];
-
-  for (const line of lines.slice(1)) {
+  return lines.slice(1).map((line) => {
     const cols = parseCsvLine(line);
     const row = {};
     headers.forEach((header, idx) => {
       row[header] = cols[idx] ?? "";
     });
-    rows.push(row);
-  }
-
-  return rows;
-}
-
-function normalizeTitle(value) {
-  return String(value || "").replace(/\s+/g, " ").trim();
-}
-
-function normalizeUrl(value) {
-  return String(value || "").trim();
+    return row;
+  });
 }
 
 function readExistingStats(statsPath) {
@@ -96,6 +62,7 @@ function readExistingStats(statsPath) {
     return {
       generated_at: null,
       source: {},
+      podcast_totals: {},
       episodes: {},
       summary: {},
     };
@@ -103,138 +70,191 @@ function readExistingStats(statsPath) {
 
   try {
     return JSON.parse(fs.readFileSync(statsPath, "utf8"));
-  } catch {
+  } catch (err) {
+    console.warn(`Could not parse existing stats.json: ${err.message}`);
     return {
       generated_at: null,
       source: {},
+      podcast_totals: {},
       episodes: {},
       summary: {},
     };
   }
 }
 
-async function fetchPage(url) {
+async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCBaselineSeed/1.0",
+      "User-Agent": "CGBCBaselineSeed/2.0",
+      "Accept": "text/html,application/xhtml+xml",
     },
   });
 
-  const text = await res.text();
-
+  const html = await res.text();
   if (!res.ok) {
     throw new Error(`Request failed ${res.status} ${res.statusText} for ${url}`);
   }
-
-  return text;
+  return html;
 }
 
-function extractPublicDownloadCount(html) {
-  // First try a local/visible "Download N" match.
-  const direct = html.match(/Download\s+(\d+)/i);
-  if (direct) return Number(direct[1]);
+function decodeEntities(str) {
+  return str
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
 
-  // Fallback: broader regex for nearby "download" tokens.
-  const fallback = html.match(/download[^0-9]{0,20}(\d+)/i);
-  if (fallback) return Number(fallback[1]);
+function htmlToVisibleText(html) {
+  return decodeEntities(
+    html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<\/p>/gi, "\n")
+      .replace(/<\/div>/gi, "\n")
+      .replace(/<\/section>/gi, "\n")
+      .replace(/<\/article>/gi, "\n")
+      .replace(/<\/li>/gi, "\n")
+      .replace(/<\/h[1-6]>/gi, "\n")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\r/g, "")
+      .replace(/\t/g, " ")
+  )
+    .replace(/\u00a0/g, " ")
+    .replace(/[ ]{2,}/g, " ")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+}
 
-  return null;
+function normalizeTitle(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[’‘]/g, "'")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractListingCounts(visibleText) {
+  const lines = visibleText
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const titleToCount = new Map();
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+
+    if (line === "Episodes" || line === "Load more") continue;
+    if (/^Download\s+\d+$/i.test(line)) continue;
+    if (/^Likes$/i.test(line)) continue;
+    if (/^Share$/i.test(line)) continue;
+    if (/^Read more$/i.test(line)) continue;
+    if (/^RSS$/i.test(line)) continue;
+
+    const next = lines[i + 1] || "";
+    if (/^Download\s+\d+$/i.test(next)) {
+      const titleKey = normalizeTitle(line);
+      const count = Number(next.replace(/[^\d]/g, ""));
+      if (titleKey && Number.isFinite(count)) {
+        titleToCount.set(titleKey, count);
+      }
+    }
+  }
+
+  return titleToCount;
 }
 
 async function main() {
   if (!fs.existsSync(CSV_PATH)) {
-    throw new Error(`Missing CSV file at ${CSV_PATH}`);
+    throw new Error(`Missing CSV at ${CSV_PATH}`);
   }
 
   const existing = readExistingStats(STATS_PATH);
-  const csvRows = readCsv(CSV_PATH);
+  const rows = readCsv(CSV_PATH);
+
+  const html = await fetchHtml(PODBEAN_SHOW_URL);
+  const visibleText = htmlToVisibleText(html);
+  const titleToCount = extractListingCounts(visibleText);
+
   const episodes = safeObject(existing.episodes);
-  const seededAt = new Date().toISOString();
+  const now = new Date().toISOString();
 
   let seeded = 0;
-  let failed = 0;
+  let matchedPublic = 0;
+  let fellBackToCsv = 0;
 
-  for (const row of csvRows) {
-    const title = normalizeTitle(row["Episode"]);
-    const episodeUrl = normalizeUrl(row["Episode URL"]);
-    const mediaUrl = normalizeUrl(row["Media URL"]);
-    const releaseDate = normalizeUrl(row["Release Date"]);
+  for (const row of rows) {
+    const episodeUrl = String(row["Episode URL"] || "").trim();
+    const mediaUrl = String(row["Media URL"] || "").trim();
+    const title = String(row["Episode"] || "").trim();
+    const releaseDate = String(row["Release Date"] || "").trim();
     const csvDownloads = Number(row["Downloads"] || 0);
 
-    if (!episodeUrl) {
-      failed += 1;
-      continue;
-    }
+    if (!episodeUrl) continue;
 
-    const key = episodeUrl;
-    const existingRecord = safeObject(episodes[key]);
+    const titleKey = normalizeTitle(title);
+    const publicDownloads = titleToCount.has(titleKey) ? titleToCount.get(titleKey) : null;
+    const chosen = Number.isFinite(publicDownloads) ? publicDownloads : csvDownloads;
+    const source = Number.isFinite(publicDownloads)
+      ? "podbean_public_show_listing"
+      : "csv_downloads";
 
-    let publicDownloads = null;
-    let sourceUsed = "csv_downloads";
+    if (Number.isFinite(publicDownloads)) matchedPublic += 1;
+    else fellBackToCsv += 1;
 
-    try {
-      const html = await fetchPage(episodeUrl);
-      publicDownloads = extractPublicDownloadCount(html);
-      if (Number.isFinite(publicDownloads)) {
-        sourceUsed = "podbean_public_episode_page";
-      }
-    } catch (err) {
-      // Keep going; we'll fall back to CSV.
-    }
+    const current = safeObject(episodes[episodeUrl]);
 
-    const baselineCount = Number.isFinite(publicDownloads)
-      ? publicDownloads
-      : csvDownloads;
-
-    episodes[key] = {
-      ...existingRecord,
-      identity_key: key,
+    episodes[episodeUrl] = {
+      ...current,
+      identity_key: episodeUrl,
       episode_url: episodeUrl,
       media_url: mediaUrl,
       title,
-      publish_time: releaseDate || existingRecord.publish_time || "",
-      plays_total: Number(existingRecord.plays_total || existingRecord.downloads_total || 0),
-      downloads_total: Number(existingRecord.downloads_total || existingRecord.plays_total || 0),
-      baseline_seeded_at: existingRecord.baseline_seeded_at || seededAt,
-      baseline_source: sourceUsed,
+      publish_time: releaseDate || current.publish_time || "",
+      plays_total: Math.max(Number(current.plays_total || current.downloads_total || 0), Number(chosen || 0)),
+      downloads_total: Math.max(Number(current.downloads_total || current.plays_total || 0), Number(chosen || 0)),
+      baseline_seeded_at: current.baseline_seeded_at || now,
+      baseline_source: source,
       baseline_csv_downloads: csvDownloads,
       baseline_public_downloads: Number.isFinite(publicDownloads) ? publicDownloads : null,
-      last_baseline_refresh_at: seededAt,
-      downloads_by_date: safeObject(existingRecord.downloads_by_date),
+      last_baseline_refresh_at: now,
+      downloads_by_date: safeObject(current.downloads_by_date),
     };
 
-    // Seed only upward from existing zero/empty values.
-    const current = Number(episodes[key].plays_total || 0);
-    const next = Number(baselineCount || 0);
-
-    if (next > current) {
-      episodes[key].plays_total = next;
-      episodes[key].downloads_total = next;
-    }
-
     seeded += 1;
-    console.log(`Seeded ${title} -> ${episodes[key].plays_total} (${sourceUsed})`);
-    await sleep(REQUEST_DELAY_MS);
+    console.log(`Seeded ${title} -> ${episodes[episodeUrl].plays_total} (${source})`);
   }
 
   const output = {
-    generated_at: seededAt,
+    generated_at: now,
     source: {
+      ...(safeObject(existing.source)),
       provider: "podbean_public_site_plus_csv",
       metric: "plays",
-      strategy: "baseline_seed",
+      strategy: "listing_page_title_match_seed",
+      show_url: PODBEAN_SHOW_URL,
     },
+    podcast_totals: safeObject(existing.podcast_totals),
     episodes,
     summary: {
-      total_csv_rows_seen: csvRows.length,
+      total_csv_rows_seen: rows.length,
       total_baseline_seeded: seeded,
-      total_baseline_failed: failed,
+      total_public_title_matches: matchedPublic,
+      total_csv_fallbacks: fellBackToCsv,
     },
   };
 
   fs.mkdirSync(path.dirname(STATS_PATH), { recursive: true });
   fs.writeFileSync(STATS_PATH, JSON.stringify(output, null, 2), "utf8");
   console.log(`Wrote ${STATS_PATH}`);
+  console.log(`Summary -> seeded=${seeded}, publicMatches=${matchedPublic}, csvFallbacks=${fellBackToCsv}`);
 }
 
 main().catch((err) => {
