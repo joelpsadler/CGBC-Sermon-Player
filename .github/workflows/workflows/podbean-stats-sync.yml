@@ -1,0 +1,40 @@
+name: Sync Podbean Stats
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6,18 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync-stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Sync Podbean stats from initial state
+        env:
+          PODBEAN_SHOW_URL: "https://brojacobcedargrovebaptist.podbean.com/"
+          PODBEAN_MAX_PAGES: "10"
+          PODBEAN_REQUEST_DELAY_MS: "500"
+        run: node scripts/podbean-stats-sync.js
+
+      - name: Commit updated stats.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stats/stats.json
+          git diff --staged --quiet || git commit -m "Update Podbean stats"
+          git pull --rebase origin main
+          git push origin main
