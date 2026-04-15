@@ -9,7 +9,7 @@ Then rerun:
 2. Sync Podbean Stats
 
 What changed:
-- totals scraper now reads the public show page text and extracts `Downloads` + `Episodes`
-- seed script now matches the public show listing titles to the CSV titles
-- seed keeps Episode URL as the stored identity key
+- episode matching now uses the public listing-page episode URL, not title text
+- sync now scrapes listing pages for per-episode counts too
+- podcast totals still come from the public show page
 - sync runs twice daily
