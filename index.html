@@ -5420,5 +5420,64 @@ function compactCount(value) {
 })();
 </script>
 
+
+<script>
+/* v82 focused Bible Books queue-source cleanup
+   - When Bible Books resolves to direct episode surfaces, render queue from those leaf items only.
+   - If a mixed Bible Book branch has a selected episode-surface leaf, queue only that episode.
+   - Leave player/count/header systems untouched.
+*/
+(function(){
+  function resolveEpisodeRefV82(item){
+    if (!item) return null;
+    if (item.episodeRef) return item.episodeRef;
+    const seriesName = item.seriesName || item.series || '';
+    const list = (window.sermonData && window.sermonData[seriesName]) || [];
+    return list.find(ep => ep.title === item.title && ep.date === item.date)
+      || list.find(ep => ep.title === item.title)
+      || list[0]
+      || null;
+  }
+
+  const originalGetQueueEntriesV82 = window.getQueueEntries;
+  if (typeof originalGetQueueEntriesV82 === 'function' && !originalGetQueueEntriesV82.__v82patched) {
+    const wrapped = function(){
+      if (window.navRootKey === 'bibleBooks') {
+        const leafItems = (typeof window.getLeafItems === 'function' ? window.getLeafItems() : [])
+          .filter(item => item && item.type !== 'section');
+        const selected = leafItems.find(item => item.key === window.navLeafKey) || null;
+        const allEpisodeSurfaces = leafItems.length > 0 && leafItems.every(item => item.type === 'episode_surface');
+
+        if (selected && selected.type === 'episode_surface') {
+          const ep = resolveEpisodeRefV82(selected);
+          if (ep && (window.mode === 'audio' || ep.videoId)) {
+            return [{ kind: 'episode_surface', ep, originalIndex: 0, label: selected.meta || '' }];
+          }
+        }
+
+        if (allEpisodeSurfaces) {
+          return leafItems
+            .map((item, index) => {
+              const ep = resolveEpisodeRefV82(item);
+              return ep && (window.mode === 'audio' || ep.videoId)
+                ? { kind: 'episode_surface', ep, originalIndex: index, label: item.meta || '' }
+                : null;
+            })
+            .filter(Boolean);
+        }
+      }
+      return originalGetQueueEntriesV82.apply(this, arguments);
+    };
+    wrapped.__v82patched = true;
+    window.getQueueEntries = wrapped;
+    getQueueEntries = wrapped;
+  }
+
+  if (typeof window.renderQueue === 'function') {
+    window.renderQueue();
+  }
+})();
+</script>
 </body>
 </html>
+
