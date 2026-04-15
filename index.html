@@ -401,6 +401,19 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
       letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .metric-triangle {
+      color: rgba(143,174,157,0.84);
+      font-size: 11px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-0.5px);
+      flex: 0 0 auto;
     }
     .card-metric.is-hidden {
       display: none;
@@ -664,6 +677,13 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
       letter-spacing: 0.01em;
+    }
+    .audio-metric-row .metric-triangle,
+    .stage-metric-row .metric-triangle {
+      color: rgba(143,174,157,0.84);
+      font-size: 11px;
+      line-height: 1;
+      transform: translateY(-0.5px);
     }
     .audio-metric-row {
       padding-top: 2px;
@@ -1833,6 +1853,8 @@
     let audioStatsByMediaUrl = new Map();
     let audioStatsByPermalink = new Map();
     let audioStatsByTitle = new Map();
+    let videoStatsById = new Map();
+    let videoLibraryTotals = { views: 0, videos: 0 };
 
         const bodyEl = document.body;
     const rootListEl = document.getElementById('rootList');
@@ -3092,7 +3114,7 @@
       audioSpeakerRowEl.style.display = ep.by ? 'flex' : 'none';
       const metricText = getEpisodeMetricText(ep);
       if (audioMetricRowEl && audioMetricTextEl) {
-        audioMetricTextEl.textContent = metricText;
+        audioMetricTextEl.innerHTML = metricText ? formatMetricMarkup(metricText) : '';
         audioMetricRowEl.style.display = metricText ? 'flex' : 'none';
       }
     }
@@ -3111,7 +3133,7 @@
       const rows = [];
       if (scriptureDisplay) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scriptureDisplay)}</span><span>${escapeHtml(scriptureDisplay)}</span></div>`);
       if (speaker) rows.push(`<div class="stage-info-row"><span class="stage-info-label">Speaker</span><span>${escapeHtml(speaker)}</span></div>`);
-      if (metricText) rows.push(`<div class="stage-info-row stage-metric-row"><span>${escapeHtml(metricText)}</span></div>`);
+      if (metricText) rows.push(`<div class="stage-info-row stage-metric-row">${formatMetricMarkup(metricText)}</div>`);
       stageInfoEl.innerHTML = `<h3 class="stage-info-title">${escapeHtml(ep.title || 'Untitled Sermon')}</h3><div class="stage-info-series">${escapeHtml(ep.series || currentSeries || '')}</div><div class="stage-info-meta">${rows.join('')}</div>`;
       stageInfoEl.style.display = 'block';
     }
@@ -3276,6 +3298,52 @@
       }
     }
 
+
+    async function fetchYouTubeVideoStats(videoIds) {
+      const ids = Array.from(new Set((videoIds || []).map(id => String(id || '').trim()).filter(Boolean)));
+      const statsById = new Map();
+      for (let i = 0; i < ids.length; i += 50) {
+        const batch = ids.slice(i, i + 50);
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${batch.join(',')}&key=${API_KEY}`;
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          const items = Array.isArray(data.items) ? data.items : [];
+          items.forEach((item) => {
+            const id = item?.id || '';
+            if (!id) return;
+            statsById.set(id, {
+              views: Number(item?.statistics?.viewCount || 0),
+              publishedAt: item?.snippet?.publishedAt || ''
+            });
+          });
+        } catch (err) {
+          console.warn('Unable to fetch YouTube video statistics batch.', err);
+        }
+      }
+      return statsById;
+    }
+
+    function applyVideoStatsToSermonData() {
+      const totals = { views: 0, videos: 0 };
+      Object.entries(sermonData || {}).forEach(([seriesName, episodes]) => {
+        const isExcludedSeries = seriesName === LIVESTREAMS.name || seriesName === VIDEO_ONLY_ARCHIVE.name;
+        (episodes || []).forEach((ep) => {
+          if (!ep || !ep.videoId) return;
+          const stats = videoStatsById.get(ep.videoId);
+          const views = Number(stats?.views || 0);
+          ep.videoViewsTotal = views;
+          ep.viewCount = views;
+          ep.views_total = views;
+          if (!isExcludedSeries) {
+            totals.views += views;
+            totals.videos += 1;
+          }
+        });
+      });
+      videoLibraryTotals = totals;
+    }
+
     async function fetchPlaylistSeries(config, newestFirst = false) {
       const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${config.playlistId}&key=${API_KEY}`;
       const res = await fetch(url);
@@ -3346,6 +3414,12 @@
       const guestEpisodes = await fetchPlaylistSeries(VIDEO_ONLY_ARCHIVE, false);
       if (guestEpisodes.length) grouped[VIDEO_ONLY_ARCHIVE.name] = guestEpisodes;
       sermonData = grouped;
+      const allVideoIds = Object.values(sermonData)
+        .flat()
+        .map(ep => ep?.videoId || '')
+        .filter(Boolean);
+      videoStatsById = await fetchYouTubeVideoStats(allVideoIds);
+      applyVideoStatsToSermonData();
       applySeriesArtwork();
       browseBuckets = buildBrowseBuckets();
       setDefaultNavigation();
@@ -3464,7 +3538,12 @@
       const num = Number(value || 0);
       if (!Number.isFinite(num) || num <= 0) return '';
       const label = num === 1 ? singular : plural;
-      return `▶ ${compactCount(num)} ${label}`;
+      return `${compactCount(num)} ${label}`;
+    }
+
+    function formatMetricMarkup(metricText) {
+      if (!metricText) return '';
+      return `<span class="metric-triangle" aria-hidden="true">▶</span><span>${escapeHtml(metricText)}</span>`;
     }
 
     function buildAudioStatsIndexes(stats) {
@@ -3501,12 +3580,13 @@
         const plays = Number(stats?.plays_total || stats?.downloads_total || stats?.baseline_public_downloads || 0);
         return formatMetricValue(plays, 'play', 'plays');
       }
-      const views = Number(ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
+      const videoStats = ep.videoId && videoStatsById.has(ep.videoId) ? videoStatsById.get(ep.videoId) : null;
+      const views = Number(videoStats?.views || ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
       return formatMetricValue(views, 'view', 'views');
     }
 
     function renderEpisodeMetricLine(metricText) {
-      return metricText ? `<div class="card-metric">${escapeHtml(metricText)}</div>` : '<div class="card-metric is-hidden"></div>';
+      return metricText ? `<div class="card-metric">${formatMetricMarkup(metricText)}</div>` : '<div class="card-metric is-hidden"></div>';
     }
 
 function compactCount(value) {
@@ -3522,8 +3602,8 @@ function compactCount(value) {
       buildAudioStatsIndexes(statsState);
       const totals = statsState && statsState.podcast_totals ? statsState.podcast_totals : {};
       const isVideoMode = mode === 'video';
-      const primaryValue = isVideoMode ? (totals.video_views_total || totals.views_total || 0) : (totals.plays_total || 0);
-      const secondaryValue = isVideoMode ? (totals.video_episodes_total || totals.videos_total || 0) : (totals.episodes_total || 0);
+      const primaryValue = isVideoMode ? (videoLibraryTotals.views || totals.video_views_total || totals.views_total || 0) : (totals.plays_total || 0);
+      const secondaryValue = isVideoMode ? (videoLibraryTotals.videos || totals.video_episodes_total || totals.videos_total || 0) : (totals.episodes_total || 0);
 
       if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(primaryValue);
       if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(secondaryValue);
