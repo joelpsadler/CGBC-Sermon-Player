@@ -1,9 +1,15 @@
 {
-  "generated_at": "2026-04-15T00:30:56.438Z",
+  "generated_at": "2026-04-15T01:12:44.733Z",
   "source": {
-    "provider": "podbean_public_site_plus_csv",
+    "provider": "podbean_public_listing_page",
     "metric": "plays",
-    "strategy": "baseline_seed"
+    "strategy": "public_totals_scrape"
+  },
+  "podcast_totals": {
+    "plays_total": 0,
+    "episodes_total": 0,
+    "last_updated": "2026-04-15T01:12:44.733Z",
+    "source_url": "https://brojacobcedargrovebaptist.podbean.com/"
   },
   "episodes": {
     "BJM7A1A97218": {
@@ -3416,6 +3422,7 @@
   "summary": {
     "total_csv_rows_seen": 131,
     "total_baseline_seeded": 131,
-    "total_baseline_failed": 0
+    "total_baseline_failed": 0,
+    "totals_sync_status": "no_match_found_keep_existing"
   }
 }
