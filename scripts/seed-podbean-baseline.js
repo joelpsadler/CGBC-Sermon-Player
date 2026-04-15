@@ -6,6 +6,12 @@ const PODBEAN_SHOW_URL =
   process.env.PODBEAN_SHOW_URL || "https://brojacobcedargrovebaptist.podbean.com/";
 const CSV_PATH = path.resolve(process.cwd(), "stats", "downloads_stats.csv");
 const STATS_PATH = path.resolve(process.cwd(), "stats", "stats.json");
+const MAX_PAGES = Number(process.env.PODBEAN_MAX_PAGES || 20);
+const REQUEST_DELAY_MS = Number(process.env.PODBEAN_REQUEST_DELAY_MS || 600);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function safeObject(value) {
   return value && typeof value === "object" && !Array.isArray(value) ? value : {};
@@ -85,7 +91,7 @@ function readExistingStats(statsPath) {
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCBaselineSeed/2.0",
+      "User-Agent": "CGBCEpisodeSeed/3.0",
       "Accept": "text/html,application/xhtml+xml",
     },
   });
@@ -98,7 +104,7 @@ async function fetchHtml(url) {
 }
 
 function decodeEntities(str) {
-  return str
+  return String(str || "")
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
@@ -106,6 +112,22 @@ function decodeEntities(str) {
     .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
+}
+
+function stripTags(str) {
+  return decodeEntities(
+    String(str || "")
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+  )
+    .replace(/\u00a0/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeUrl(url) {
+  return String(url || "").trim().replace(/\/+$/, "/");
 }
 
 function htmlToVisibleText(html) {
@@ -130,45 +152,89 @@ function htmlToVisibleText(html) {
     .trim();
 }
 
-function normalizeTitle(value) {
-  return String(value || "")
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[’‘]/g, "'")
-    .replace(/[^a-z0-9]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function pageCandidates(baseUrl) {
+  const root = normalizeUrl(baseUrl);
+  const out = [root];
+  for (let i = 2; i <= MAX_PAGES; i += 1) {
+    out.push(`${root}page/${i}/`);
+  }
+  return out;
 }
 
-function extractListingCounts(visibleText) {
-  const lines = visibleText
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
+function extractEpisodeCards(html) {
+  const cards = [];
 
-  const titleToCount = new Map();
+  const articleRegex = /<article[\s\S]*?<\/article>/gi;
+  const articleMatches = html.match(articleRegex) || [];
 
-  for (let i = 0; i < lines.length; i += 1) {
-    const line = lines[i];
+  for (const article of articleMatches) {
+    const hrefMatches = [...article.matchAll(/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)];
+    const visible = htmlToVisibleText(article);
+    const downloadMatch = visible.match(/\bDownload\s+(\d+)\b/i);
+    if (!downloadMatch) continue;
 
-    if (line === "Episodes" || line === "Load more") continue;
-    if (/^Download\s+\d+$/i.test(line)) continue;
-    if (/^Likes$/i.test(line)) continue;
-    if (/^Share$/i.test(line)) continue;
-    if (/^Read more$/i.test(line)) continue;
-    if (/^RSS$/i.test(line)) continue;
+    let bestHref = null;
+    let bestTitle = null;
 
-    const next = lines[i + 1] || "";
-    if (/^Download\s+\d+$/i.test(next)) {
-      const titleKey = normalizeTitle(line);
-      const count = Number(next.replace(/[^\d]/g, ""));
-      if (titleKey && Number.isFinite(count)) {
-        titleToCount.set(titleKey, count);
+    for (const match of hrefMatches) {
+      const href = normalizeUrl(match[1]);
+      const title = stripTags(match[2]);
+      if (!href || !title) continue;
+      if (/\/feed\/?$/i.test(href)) continue;
+      if (/\.mp3($|\?)/i.test(href)) continue;
+      if (/podbean\.com\/e\//i.test(href) || /\/\d{6,}\/?$/i.test(href)) {
+        bestHref = href;
+        bestTitle = title;
+        break;
       }
+    }
+
+    if (bestHref && Number.isFinite(Number(downloadMatch[1]))) {
+      cards.push({
+        episode_url: bestHref,
+        title: bestTitle || "",
+        downloads: Number(downloadMatch[1]),
+      });
     }
   }
 
-  return titleToCount;
+  return cards;
+}
+
+async function scrapeAllListingPages(showUrl) {
+  const pages = pageCandidates(showUrl);
+  const byUrl = new Map();
+  let pagesFetched = 0;
+
+  for (const url of pages) {
+    try {
+      const html = await fetchHtml(url);
+      pagesFetched += 1;
+
+      const cards = extractEpisodeCards(html);
+      if (!cards.length && url !== normalizeUrl(showUrl)) {
+        break;
+      }
+
+      for (const card of cards) {
+        const key = normalizeUrl(card.episode_url);
+        const current = byUrl.get(key);
+        if (!current || card.downloads > current.downloads) {
+          byUrl.set(key, card);
+        }
+      }
+
+      await sleep(REQUEST_DELAY_MS);
+    } catch (err) {
+      if (url === normalizeUrl(showUrl)) throw err;
+      break;
+    }
+  }
+
+  return {
+    byUrl,
+    pagesFetched,
+  };
 }
 
 async function main() {
@@ -176,22 +242,19 @@ async function main() {
     throw new Error(`Missing CSV at ${CSV_PATH}`);
   }
 
-  const existing = readExistingStats(STATS_PATH);
   const rows = readCsv(CSV_PATH);
-
-  const html = await fetchHtml(PODBEAN_SHOW_URL);
-  const visibleText = htmlToVisibleText(html);
-  const titleToCount = extractListingCounts(visibleText);
+  const existing = readExistingStats(STATS_PATH);
+  const listing = await scrapeAllListingPages(PODBEAN_SHOW_URL);
 
   const episodes = safeObject(existing.episodes);
   const now = new Date().toISOString();
 
   let seeded = 0;
-  let matchedPublic = 0;
-  let fellBackToCsv = 0;
+  let publicMatches = 0;
+  let csvFallbacks = 0;
 
   for (const row of rows) {
-    const episodeUrl = String(row["Episode URL"] || "").trim();
+    const episodeUrl = normalizeUrl(row["Episode URL"]);
     const mediaUrl = String(row["Media URL"] || "").trim();
     const title = String(row["Episode"] || "").trim();
     const releaseDate = String(row["Release Date"] || "").trim();
@@ -199,25 +262,27 @@ async function main() {
 
     if (!episodeUrl) continue;
 
-    const titleKey = normalizeTitle(title);
-    const publicDownloads = titleToCount.has(titleKey) ? titleToCount.get(titleKey) : null;
+    const publicCard = listing.byUrl.get(episodeUrl);
+    const publicDownloads = publicCard ? Number(publicCard.downloads || 0) : null;
+
     const chosen = Number.isFinite(publicDownloads) ? publicDownloads : csvDownloads;
     const source = Number.isFinite(publicDownloads)
       ? "podbean_public_show_listing"
       : "csv_downloads";
 
-    if (Number.isFinite(publicDownloads)) matchedPublic += 1;
-    else fellBackToCsv += 1;
+    if (Number.isFinite(publicDownloads)) publicMatches += 1;
+    else csvFallbacks += 1;
 
     const current = safeObject(episodes[episodeUrl]);
 
     episodes[episodeUrl] = {
       ...current,
-      identity_key: episodeUrl,
-      episode_url: episodeUrl,
-      media_url: mediaUrl,
-      title,
-      publish_time: releaseDate || current.publish_time || "",
+      identity_key: current.identity_key || episodeUrl,
+      episode_url: current.episode_url || episodeUrl,
+      permalink_url: current.permalink_url || episodeUrl,
+      media_url: current.media_url || mediaUrl,
+      title: current.title || title,
+      publish_time: current.publish_time || releaseDate,
       plays_total: Math.max(Number(current.plays_total || current.downloads_total || 0), Number(chosen || 0)),
       downloads_total: Math.max(Number(current.downloads_total || current.plays_total || 0), Number(chosen || 0)),
       baseline_seeded_at: current.baseline_seeded_at || now,
@@ -238,7 +303,7 @@ async function main() {
       ...(safeObject(existing.source)),
       provider: "podbean_public_site_plus_csv",
       metric: "plays",
-      strategy: "listing_page_title_match_seed",
+      strategy: "listing_page_url_match_seed",
       show_url: PODBEAN_SHOW_URL,
     },
     podcast_totals: safeObject(existing.podcast_totals),
@@ -246,15 +311,16 @@ async function main() {
     summary: {
       total_csv_rows_seen: rows.length,
       total_baseline_seeded: seeded,
-      total_public_title_matches: matchedPublic,
-      total_csv_fallbacks: fellBackToCsv,
+      total_public_url_matches: publicMatches,
+      total_csv_fallbacks: csvFallbacks,
+      listing_pages_fetched: listing.pagesFetched,
     },
   };
 
   fs.mkdirSync(path.dirname(STATS_PATH), { recursive: true });
   fs.writeFileSync(STATS_PATH, JSON.stringify(output, null, 2), "utf8");
   console.log(`Wrote ${STATS_PATH}`);
-  console.log(`Summary -> seeded=${seeded}, publicMatches=${matchedPublic}, csvFallbacks=${fellBackToCsv}`);
+  console.log(`Summary -> seeded=${seeded}, publicUrlMatches=${publicMatches}, csvFallbacks=${csvFallbacks}, pagesFetched=${listing.pagesFetched}`);
 }
 
 main().catch((err) => {
