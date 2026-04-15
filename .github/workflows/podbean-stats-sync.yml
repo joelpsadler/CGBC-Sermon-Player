@@ -26,7 +26,6 @@ jobs:
       - name: Sync public Podbean totals
         env:
           PODBEAN_SHOW_URL: "https://brojacobcedargrovebaptist.podbean.com/"
-          PODBEAN_REQUEST_DELAY_MS: "1200"
         run: node scripts/podbean-stats-sync.js
 
       - name: Commit updated stats.json
@@ -34,6 +33,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add stats/stats.json
-          git diff --staged --quiet || git commit -m "Update public Podbean totals"
+          git diff --staged --quiet || git commit -m "Update Podbean stats"
           git pull --rebase origin main
           git push origin main
