@@ -1,0 +1,38 @@
+name: Debug Podbean Page
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  debug-podbean:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Inspect Podbean pages
+        env:
+          PODBEAN_SHOW_URL: "https://brojacobcedargrovebaptist.podbean.com/"
+          PODBEAN_MAX_PAGES: "5"
+          PODBEAN_REQUEST_DELAY_MS: "500"
+        run: node scripts/debug-podbean-page.js
+
+      - name: Commit debug output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/debug-podbean-page.js stats/debug .github/workflows/debug-podbean-page.yml
+          git diff --staged --quiet || git commit -m "Add Podbean debug inspection output"
+          git pull --rebase origin main
+          git push origin main
