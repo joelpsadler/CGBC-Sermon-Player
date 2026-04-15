@@ -1,24 +1,15 @@
-# Podbean baseline seed package
+# Public Podbean totals package
 
-Replace/add these files in your repo:
+Replace these files in your repo:
+- `scripts/podbean-stats-sync.js`
+- `.github/workflows/podbean-stats-sync.yml`
 
-- `scripts/seed-podbean-baseline.js`
-- `.github/workflows/seed-podbean-baseline.yml`
+What this version does:
+- Stops using the unreliable Podbean stats API for front-end totals
+- Scrapes the public Podbean show page for:
+  - total Plays
+  - total Episodes
+- Updates `stats/stats.json`
+- Runs twice daily in GitHub Actions
 
-Also upload your CSV to:
-- `stats/downloads_stats.csv`
-
-## What this does
-- Reads `stats/downloads_stats.csv`
-- Uses `Episode URL` as the identity key
-- Scrapes the public Podbean episode page for the visible `Download N`
-- Falls back to the CSV Downloads column if needed
-- Seeds `stats/stats.json` with a baseline Plays value
-
-## Why this is the right seed
-- URLs are more stable than titles
-- The public site count is the closest public baseline you have now
-- Your running stats file becomes the source of truth after seeding
-
-## After seeding
-Run your normal daily sync workflow to keep growing the numbers over time.
+This does not change your per-episode counts yet.
