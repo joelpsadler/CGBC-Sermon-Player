@@ -5422,218 +5422,14 @@ function compactCount(value) {
 
 
 <script>
+/* v78 targeted Genesis/direct-queue cleanup
+   - Keep v75 as the base.
+   - Feed Bible Books direct-episode branches directly into the queue.
+   - Make Shorts root open directly to the queue without branch dead-end.
+   - Avoid broad state overrides so currentSeries cannot leak between paths.
+*/
 (function(){
-  function getShortsSeriesName(){
-    try {
-      return Object.keys(window.sermonData || {}).find(name => /shorts/i.test(name)) || 'CGBC Shorts';
-    } catch(e) {
-      return 'CGBC Shorts';
-    }
-  }
-
-  function resolveBibleBookBucket(bookKey){
-    const raw = (window.browseBuckets && window.browseBuckets.bibleBooks && window.browseBuckets.bibleBooks[bookKey]) || { series: [], episodes: [] };
-    const resolved = { series: [], episodes: [] };
-
-    (raw.series || []).forEach(seriesName => {
-      const visible = typeof window.getVisibleEpisodesForSeries === 'function'
-        ? window.getVisibleEpisodesForSeries(seriesName)
-        : [];
-
-      if (visible.length === 1) {
-        const only = visible[0];
-        if (only && only.ep) {
-          resolved.episodes.push({
-            key: `__flat__${seriesName}__${only.originalIndex}`,
-            episodeTitle: only.ep.title || seriesName,
-            scripture: only.ep.scripture || '',
-            date: only.ep.date || '',
-            seriesName,
-            episodeRef: only.ep,
-            originalIndex: only.originalIndex
-          });
-        }
-      } else if (visible.length > 1) {
-        resolved.series.push(seriesName);
-      }
-    });
-
-    (raw.episodes || []).forEach(item => resolved.episodes.push(item));
-    return resolved;
-  }
-
-  const originalGetBranchItems = window.getBranchItems;
-  if (typeof originalGetBranchItems === 'function') {
-    window.getBranchItems = function(){
-      if (window.navRootKey === 'shorts') return [];
-      if (window.navRootKey === 'bibleBooks' && window.browseBuckets) {
-        return window.sortBibleBooksInCanonicalOrder(Object.keys(window.browseBuckets.bibleBooks || {})).map(key => {
-          const bucket = resolveBibleBookBucket(key);
-          const parts = [];
-          if (bucket.series.length) parts.push(window.formatCountLabel(bucket.series.length, 'series', 'series'));
-          if (bucket.episodes.length) parts.push(window.formatCountLabel(bucket.episodes.length, 'individual episode', 'individual episodes'));
-          return { key, title: key, meta: parts.join(' • ') };
-        });
-      }
-      return originalGetBranchItems.call(this);
-    };
-  }
-
-  const originalGetLeafItems = window.getLeafItems;
-  if (typeof originalGetLeafItems === 'function') {
-    window.getLeafItems = function(){
-      if (window.navRootKey === 'shorts') return [];
-      if (window.navRootKey === 'bibleBooks' && window.navBranchKey && window.browseBuckets) {
-        const bucket = resolveBibleBookBucket(window.navBranchKey);
-        const items = [];
-        const showSections = bucket.series.length && bucket.episodes.length;
-        if (showSections && bucket.series.length) items.push({ key: '__section_series', title: 'Series', type: 'section' });
-        bucket.series.forEach(seriesName => items.push({
-          key: seriesName,
-          title: seriesName,
-          type: 'series',
-          meta: window.formatCountLabel(window.getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'),
-          image: window.getSeriesArtForMode(seriesName)
-        }));
-        if (showSections && bucket.episodes.length) items.push({ key: '__section_episodes', title: 'Stand Alone Episodes', type: 'section' });
-        bucket.episodes.forEach(item => {
-          const eps = (window.sermonData && window.sermonData[item.seriesName]) || [];
-          const match = item.episodeRef || eps.find(ep => ep.title === item.episodeTitle && ep.date === item.date) || eps.find(ep => ep.title === item.episodeTitle) || eps[0];
-          if (!match) return;
-          if (window.mode === 'video' && !match.videoId) return;
-          items.push({
-            key: item.key || `${item.seriesName}::${item.episodeTitle}`,
-            title: item.episodeTitle || match.title || 'Untitled Sermon',
-            type: 'episode_surface',
-            meta: item.scripture || match.scripture || item.date || match.date || '',
-            image: window.mode === 'video'
-              ? (match.videoId ? window.getWatchThumb(match.videoId) : match.seriesWideImage || window.FALLBACK_IMAGE)
-              : (match.img || match.seriesImage || window.FALLBACK_IMAGE),
-            episodeRef: match,
-            originalIndex: Number.isFinite(item.originalIndex) ? item.originalIndex : (((window.sermonData && window.sermonData[item.seriesName]) || []).indexOf(match))
-          });
-        });
-        return items;
-      }
-      return originalGetLeafItems.call(this);
-    };
-  }
-
-  const originalHasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
-  if (typeof originalHasMeaningfulBranchStep === 'function') {
-    window.hasMeaningfulBranchStep = function(){
-      if (window.navRootKey === 'shorts') return false;
-      return originalHasMeaningfulBranchStep.call(this);
-    };
-  }
-
-  const originalHasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
-  if (typeof originalHasMeaningfulLeafStep === 'function') {
-    window.hasMeaningfulLeafStep = function(){
-      if (window.navRootKey === 'shorts') return false;
-      if (window.navRootKey === 'bibleBooks') {
-        const actionable = (window.getActionableLeafItems ? window.getActionableLeafItems() : []).filter(Boolean);
-        if (!actionable.length) return false;
-        if (actionable.length === 1 && actionable[0].type === 'episode_surface') return true;
-        return actionable.length > 1;
-      }
-      return originalHasMeaningfulLeafStep.call(this);
-    };
-  }
-
-  const originalGetBibleBookLeafGrouping = window.getBibleBookLeafGrouping;
-  if (typeof originalGetBibleBookLeafGrouping === 'function') {
-    window.getBibleBookLeafGrouping = function(){
-      if (window.navRootKey !== 'bibleBooks' || !window.navBranchKey) {
-        return originalGetBibleBookLeafGrouping.call(this);
-      }
-      const bucket = resolveBibleBookBucket(window.navBranchKey);
-      const hasSeries = !!bucket.series.length;
-      const hasEpisodes = !!bucket.episodes.length;
-      if (hasSeries && hasEpisodes) return 'mixed';
-      if (hasSeries) return 'series';
-      if (hasEpisodes) return 'episodes';
-      return 'mixed';
-    };
-  }
-
-  const originalSyncSeriesSelection = window.syncSeriesSelection;
-  if (typeof originalSyncSeriesSelection === 'function') {
-    window.syncSeriesSelection = function(){
-      if (window.navRootKey === 'shorts') {
-        window.currentSeries = getShortsSeriesName();
-        return;
-      }
-      return originalSyncSeriesSelection.call(this);
-    };
-  }
-
-  const originalGetQueueEntries = window.getQueueEntries;
-  if (typeof originalGetQueueEntries === 'function') {
-    window.getQueueEntries = function(){
-      if (window.navRootKey === 'shorts') {
-        const shortsSeries = getShortsSeriesName();
-        return (window.getVisibleEpisodesForSeries ? window.getVisibleEpisodesForSeries(shortsSeries) : [])
-          .map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
-      }
-      return originalGetQueueEntries.call(this);
-    };
-  }
-
-  const originalSetRoot = window.setRoot;
-  if (typeof originalSetRoot === 'function') {
-    window.setRoot = function(key){
-      if (key === 'shorts') {
-        window.navRootKey = 'shorts';
-        window.navBranchKey = null;
-        window.navLeafKey = null;
-        window.currentSeries = getShortsSeriesName();
-        window.currentEpisodeIndex = null;
-        window.currentEpisodeData = null;
-        window.selectedContext = null;
-        window.selectionReturnSnapshot = null;
-        if (typeof window.clearMediaState === 'function') window.clearMediaState();
-        if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
-        if (typeof window.renderNavigation === 'function') window.renderNavigation();
-        if (typeof window.renderQueue === 'function') window.renderQueue();
-        if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
-        if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
-        if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
-        if (typeof window.scrollMobileSelectorToTop === 'function' && typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.scrollMobileSelectorToTop();
-        return;
-      }
-      return originalSetRoot.call(this, key);
-    };
-  }
-
-  const originalRenderNavigation = window.renderNavigation;
-  if (typeof originalRenderNavigation === 'function') {
-    window.renderNavigation = function(){
-      const result = originalRenderNavigation.call(this);
-      if (window.navRootKey === 'shorts') {
-        if (window.branchSectionEl) window.branchSectionEl.style.display = 'none';
-        if (window.leafSectionEl) window.leafSectionEl.style.display = 'none';
-        if (window.branchListEl) window.branchListEl.innerHTML = '';
-        if (window.leafListEl) window.leafListEl.innerHTML = '';
-        if (window.mobileBranchListEl) window.mobileBranchListEl.innerHTML = '';
-        if (window.mobileLeafListEl) window.mobileLeafListEl.innerHTML = '';
-        if (window.mobileBranchHeadEl) window.mobileBranchHeadEl.textContent = '';
-        if (window.mobileLeafHeadEl) window.mobileLeafHeadEl.textContent = '';
-      }
-      return result;
-    };
-  }
-})();
-</script>
-
-
-<script>
-/* v77 direct-episode queue + shorts root cleanup
-   - Bible Books direct-episode branches feed the queue from leaf episode surfaces.
-   - Shorts root hides extra branch/leaf layers and opens directly to its episode queue.
-   - Keeps counts/player logic untouched. */
-(function(){
-  function getShortsSeriesNameV77(){
+  function getShortsSeriesNameV78(){
     try {
       return Object.keys(window.sermonData || {}).find(name => /shorts/i.test(name)) || 'CGBC Shorts';
     } catch (e) {
@@ -5641,63 +5437,60 @@ function compactCount(value) {
     }
   }
 
-  function getDirectEpisodeLeafItemsV77(){
-    if (window.navRootKey !== 'bibleBooks' || !window.navBranchKey || typeof window.getActionableLeafItems !== 'function') return [];
-    const leaves = (window.getActionableLeafItems() || []).filter(Boolean);
-    if (!leaves.length) return [];
-    const allEpisodeSurfaces = leaves.every(item => item.type === 'episode_surface' && item.episodeRef);
-    return allEpisodeSurfaces ? leaves : [];
+  function getBibleBookDirectLeafEpisodesV78(){
+    if (window.navRootKey !== 'bibleBooks' || !window.navBranchKey || typeof window.getLeafItems !== 'function') return [];
+    const actionable = (window.getLeafItems() || []).filter(item => item && item.type !== 'section');
+    if (!actionable.length) return [];
+    const allEpisodeSurfaces = actionable.every(item => item.type === 'episode_surface' && item.episodeRef);
+    if (!allEpisodeSurfaces) return [];
+    return actionable.map((item, index) => ({
+      kind: 'episode',
+      ep: item.episodeRef,
+      originalIndex: Number.isFinite(item.originalIndex) ? item.originalIndex : index
+    }));
   }
 
-  const originalGetQueueEntriesV77 = window.getQueueEntries;
-  if (typeof originalGetQueueEntriesV77 === 'function') {
-    const wrappedGetQueueEntriesV77 = function(){
-      const directLeaves = getDirectEpisodeLeafItemsV77();
-      if (directLeaves.length) {
-        return directLeaves.map((item, index) => ({
-          kind: 'episode',
-          ep: item.episodeRef,
-          originalIndex: Number.isFinite(item.originalIndex) ? item.originalIndex : index
-        }));
+  const originalGetQueueEntriesV78 = window.getQueueEntries;
+  if (typeof originalGetQueueEntriesV78 === 'function') {
+    const wrappedGetQueueEntriesV78 = function(){
+      if (window.navRootKey === 'shorts' && typeof window.getVisibleEpisodesForSeries === 'function') {
+        const shortsSeries = getShortsSeriesNameV78();
+        return (window.getVisibleEpisodesForSeries(shortsSeries) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
       }
-      if (window.navRootKey === 'shorts') {
-        const shortsSeries = getShortsSeriesNameV77();
-        if (typeof window.getVisibleEpisodesForSeries === 'function') {
-          return (window.getVisibleEpisodesForSeries(shortsSeries) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
-        }
-      }
-      return originalGetQueueEntriesV77.apply(this, arguments);
+      const directEpisodes = getBibleBookDirectLeafEpisodesV78();
+      if (directEpisodes.length) return directEpisodes;
+      return originalGetQueueEntriesV78.apply(this, arguments);
     };
-    window.getQueueEntries = wrappedGetQueueEntriesV77;
-    getQueueEntries = wrappedGetQueueEntriesV77;
+    window.getQueueEntries = wrappedGetQueueEntriesV78;
+    globalThis.getQueueEntries = wrappedGetQueueEntriesV78;
   }
 
-  const originalSyncSeriesSelectionV77 = window.syncSeriesSelection;
-  if (typeof originalSyncSeriesSelectionV77 === 'function') {
-    const wrappedSyncSeriesSelectionV77 = function(){
-      const directLeaves = getDirectEpisodeLeafItemsV77();
-      if (directLeaves.length) {
+  const originalSyncSeriesSelectionV78 = window.syncSeriesSelection;
+  if (typeof originalSyncSeriesSelectionV78 === 'function') {
+    const wrappedSyncSeriesSelectionV78 = function(){
+      if (window.navRootKey === 'shorts') {
+        window.currentSeries = getShortsSeriesNameV78();
+        return;
+      }
+      const directEpisodes = getBibleBookDirectLeafEpisodesV78();
+      if (directEpisodes.length) {
         window.currentSeries = null;
         return;
       }
-      if (window.navRootKey === 'shorts') {
-        window.currentSeries = getShortsSeriesNameV77();
-        return;
-      }
-      return originalSyncSeriesSelectionV77.apply(this, arguments);
+      return originalSyncSeriesSelectionV78.apply(this, arguments);
     };
-    window.syncSeriesSelection = wrappedSyncSeriesSelectionV77;
-    syncSeriesSelection = wrappedSyncSeriesSelectionV77;
+    window.syncSeriesSelection = wrappedSyncSeriesSelectionV78;
+    globalThis.syncSeriesSelection = wrappedSyncSeriesSelectionV78;
   }
 
-  const originalSetRootV77 = window.setRoot;
-  if (typeof originalSetRootV77 === 'function') {
-    const wrappedSetRootV77 = function(key){
+  const originalSetRootV78 = window.setRoot;
+  if (typeof originalSetRootV78 === 'function') {
+    const wrappedSetRootV78 = function(key){
       if (key === 'shorts') {
         window.navRootKey = 'shorts';
         window.navBranchKey = null;
         window.navLeafKey = null;
-        window.currentSeries = getShortsSeriesNameV77();
+        window.currentSeries = getShortsSeriesNameV78();
         window.currentEpisodeIndex = null;
         window.currentEpisodeData = null;
         window.selectedContext = null;
@@ -5712,16 +5505,16 @@ function compactCount(value) {
         if (typeof window.scrollMobileSelectorToTop === 'function' && typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.scrollMobileSelectorToTop();
         return;
       }
-      return originalSetRootV77.call(this, key);
+      return originalSetRootV78.call(this, key);
     };
-    window.setRoot = wrappedSetRootV77;
-    setRoot = wrappedSetRootV77;
+    window.setRoot = wrappedSetRootV78;
+    globalThis.setRoot = wrappedSetRootV78;
   }
 
-  const originalRenderNavigationV77 = window.renderNavigation;
-  if (typeof originalRenderNavigationV77 === 'function') {
-    const wrappedRenderNavigationV77 = function(){
-      const result = originalRenderNavigationV77.apply(this, arguments);
+  const originalRenderNavigationV78 = window.renderNavigation;
+  if (typeof originalRenderNavigationV78 === 'function') {
+    const wrappedRenderNavigationV78 = function(){
+      const result = originalRenderNavigationV78.apply(this, arguments);
       if (window.navRootKey === 'shorts') {
         if (window.branchSectionEl) window.branchSectionEl.style.display = 'none';
         if (window.leafSectionEl) window.leafSectionEl.style.display = 'none';
@@ -5735,11 +5528,12 @@ function compactCount(value) {
       }
       return result;
     };
-    window.renderNavigation = wrappedRenderNavigationV77;
-    renderNavigation = wrappedRenderNavigationV77;
+    window.renderNavigation = wrappedRenderNavigationV78;
+    globalThis.renderNavigation = wrappedRenderNavigationV78;
   }
 
   if (typeof window.renderQueue === 'function') window.renderQueue();
+  if (typeof window.renderNavigation === 'function') window.renderNavigation();
 })();
 </script>
 
