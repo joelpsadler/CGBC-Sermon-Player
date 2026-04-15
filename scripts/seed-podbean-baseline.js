@@ -105,7 +105,7 @@ function readExistingStats(statsPath) {
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCInitialStateSeed/5.0",
+      "User-Agent": "CGBCInitialStateSeed/6.0",
       "Accept": "text/html,application/xhtml+xml",
     },
   });
@@ -118,20 +118,13 @@ async function fetchHtml(url) {
 }
 
 function extractInitialState(html) {
-  const match = html.match(/window\.__INITIAL_STATE__\s*=\s*"([\s\S]*?)"\s*<\/script>/i);
+  const match = html.match(/window\.__INITIAL_STATE__\s*=\s*("(?:\\.|[^"\\])*")/i);
   if (!match) {
     throw new Error("Could not find window.__INITIAL_STATE__ in HTML");
   }
 
-  const escaped = match[1];
-  const decoded = escaped
-    .replace(/\\\"/g, '"')
-    .replace(/\\\\/g, "\\")
-    .replace(/\\\//g, "/")
-    .replace(/\\n/g, "\n")
-    .replace(/\\r/g, "\r")
-    .replace(/\\t/g, "\t");
-
+  const quotedJsonString = match[1];
+  const decoded = JSON.parse(quotedJsonString);
   return JSON.parse(decoded);
 }
 
@@ -154,7 +147,8 @@ function findEpisodeRecords(state, showUrl) {
   walk(state, (node) => {
     if (!Array.isArray(node) || !node.length) return;
     const looksLikeEpisodeArray = node.some((item) =>
-      item && typeof item === "object" &&
+      item &&
+      typeof item === "object" &&
       ("downloadCount" in item) &&
       ("title" in item) &&
       ("permalink" in item || "permalink_url" in item || "url" in item)
@@ -189,8 +183,11 @@ function findEpisodeRecords(state, showUrl) {
 function findBaseInfo(state) {
   let best = null;
   walk(state, (node) => {
-    if (node && typeof node === "object" &&
-      ("podcastDownloads" in node || "totalEpisodes" in node || "podcastTitle" in node)) {
+    if (
+      node &&
+      typeof node === "object" &&
+      ("podcastDownloads" in node || "totalEpisodes" in node || "podcastTitle" in node)
+    ) {
       best = node;
     }
   });
@@ -333,7 +330,7 @@ async function main() {
       ...(safeObject(existing.source)),
       provider: "podbean_public_initial_state_plus_csv",
       metric: "plays",
-      strategy: "window_initial_state_seed_v5",
+      strategy: "window_initial_state_seed_v6",
       show_url: PODBEAN_SHOW_URL,
     },
     podcast_totals: {
