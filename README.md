@@ -1,22 +1,24 @@
-# Podbean Stats Automation Scaffold
+# Podbean baseline seed package
 
-This package adds a private stats sync layer without changing the working player yet.
+Replace/add these files in your repo:
 
-## Files
-- `scripts/podbean-stats-sync.js`
-- `.github/workflows/podbean-stats-sync.yml`
-- `stats/stats.json`
+- `scripts/seed-podbean-baseline.js`
+- `.github/workflows/seed-podbean-baseline.yml`
 
-## GitHub setup
-Add repo secrets:
-- `PODBEAN_CLIENT_ID`
-- `PODBEAN_CLIENT_SECRET`
+Also upload your CSV to:
+- `stats/downloads_stats.csv`
 
-## Why this structure
-- No Podbean secret in browser code
-- Player still loads from RSS first
-- `stats.json` is optional and can fail safely
-- Easy to schedule with GitHub Actions
+## What this does
+- Reads `stats/downloads_stats.csv`
+- Uses `Episode URL` as the identity key
+- Scrapes the public Podbean episode page for the visible `Download N`
+- Falls back to the CSV Downloads column if needed
+- Seeds `stats/stats.json` with a baseline Plays value
 
-## Next front-end step
-The player can fetch `/stats/stats.json` after render and merge `downloads_total` into episodes.
+## Why this is the right seed
+- URLs are more stable than titles
+- The public site count is the closest public baseline you have now
+- Your running stats file becomes the source of truth after seeding
+
+## After seeding
+Run your normal daily sync workflow to keep growing the numbers over time.
