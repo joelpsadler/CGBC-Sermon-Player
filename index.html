@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - v43</title>
+  <title>CGBC Sermons - v66</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="manifest" href="CGBC-media.webmanifest?v=63">
@@ -3525,8 +3525,10 @@ function compactCount(value) {
       const primaryValue = isVideoMode ? (totals.video_views_total || totals.views_total || 0) : (totals.plays_total || 0);
       const secondaryValue = isVideoMode ? (totals.video_episodes_total || totals.videos_total || 0) : (totals.episodes_total || 0);
 
-      if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(primaryValue);
-      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(secondaryValue);
+      const primaryText = isVideoMode && Number(primaryValue || 0) <= 0 ? '0' : compactCount(primaryValue);
+      const secondaryText = isVideoMode && Number(secondaryValue || 0) <= 0 ? '0' : compactCount(secondaryValue);
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = primaryText;
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = secondaryText;
       if (impactPlaysLabelEl) impactPlaysLabelEl.textContent = isVideoMode ? 'Views' : 'Plays';
       if (impactEpisodesLabelEl) impactEpisodesLabelEl.textContent = isVideoMode ? 'Videos' : 'Episodes';
       if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = '';
@@ -4249,14 +4251,14 @@ function compactCount(value) {
 </style>
 
 <script>
-/* v65 counts and layout pass
+/* v66 shorts and totals polish pass
    - Fetch real YouTube view counts for all video entries.
    - Use clean metric text without duplicate marker glyphs.
    - Drive Watch totals from live-computed video totals.
    - Keep Shorts slot available with one obvious place to add the playlist ID.
 */
 (function () {
-  const SHORTS_PLAYLIST_ID_V65 = '';
+  const SHORTS_PLAYLIST_ID_V65 = 'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj';
   let videoStatsLoadedV65 = false;
   let videoStatsPendingV65 = null;
 
@@ -4335,8 +4337,10 @@ function compactCount(value) {
         ? (computedVideoTotals.videos || totals.video_episodes_total || totals.videos_total || 0)
         : (totals.episodes_total || 0);
 
-      if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(primaryValue);
-      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(secondaryValue);
+      const primaryText = isVideoMode && Number(primaryValue || 0) <= 0 ? '0' : compactCount(primaryValue);
+      const secondaryText = isVideoMode && Number(secondaryValue || 0) <= 0 ? '0' : compactCount(secondaryValue);
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = primaryText;
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = secondaryText;
       if (impactPlaysLabelEl) impactPlaysLabelEl.textContent = isVideoMode ? 'Views' : 'Plays';
       if (impactEpisodesLabelEl) impactEpisodesLabelEl.textContent = isVideoMode ? 'Videos' : 'Episodes';
       if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = '';
@@ -4407,7 +4411,7 @@ function compactCount(value) {
               if (typeof buildBrowseBuckets === 'function') browseBuckets = buildBrowseBuckets();
             }
           } catch (err) {
-            console.warn('Shorts playlist could not be loaded in v65.', err);
+            console.warn('Shorts playlist could not be loaded in v66.', err);
           }
         }
 
@@ -4415,7 +4419,7 @@ function compactCount(value) {
         recomputeVideoLibraryTotalsV65();
         refreshMetricSurfacesV65();
       } catch (err) {
-        console.warn('YouTube stats could not be loaded in v65.', err);
+        console.warn('YouTube stats could not be loaded in v66.', err);
       } finally {
         videoStatsPendingV65 = null;
       }
