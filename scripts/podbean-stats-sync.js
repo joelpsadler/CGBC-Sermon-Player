@@ -44,7 +44,7 @@ function readExistingStats(statsPath) {
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCPublicEpisodeSync/2.0",
+      "User-Agent": "CGBCVisibleTextSync/3.0",
       "Accept": "text/html,application/xhtml+xml",
     },
   });
@@ -65,23 +65,6 @@ function decodeEntities(str) {
     .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
-}
-
-function stripTags(str) {
-  return decodeEntities(
-    String(str || "")
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  )
-    .replace(/\u00a0/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function normalizeUrl(url) {
-  const s = String(url || "").trim();
-  return s.replace(/\/+$/, "/");
 }
 
 function htmlToVisibleText(html) {
@@ -106,6 +89,22 @@ function htmlToVisibleText(html) {
     .trim();
 }
 
+function normalizeUrl(url) {
+  return String(url || "").trim().replace(/\/+$/, "/");
+}
+
+function normalizeTitle(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[–—]/g, "-")
+    .replace(/[’‘]/g, "'")
+    .replace(/&/g, " and ")
+    .replace(/\|/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function parseCompactNumber(value) {
   const raw = String(value || "").trim().toUpperCase();
   const match = raw.match(/^(\d+(?:\.\d+)?)([KMB])?$/);
@@ -118,25 +117,19 @@ function parseCompactNumber(value) {
 }
 
 function extractPodcastTotals(visibleText) {
-  const compact = visibleText.replace(/\n/g, " ");
+  const lines = visibleText.split("\n").map((s) => s.trim()).filter(Boolean);
 
   let plays = null;
   let episodes = null;
 
-  const pairMatch = compact.match(/(\d+(?:\.\d+)?[KMB]?)\s+Downloads\s+(\d+)\s+Episodes/i);
-  if (pairMatch) {
-    plays = parseCompactNumber(pairMatch[1]);
-    episodes = Number(pairMatch[2]);
-  }
-
-  if (!Number.isFinite(plays)) {
-    const playsMatch = compact.match(/(\d+(?:\.\d+)?[KMB]?)\s+Downloads/i);
-    if (playsMatch) plays = parseCompactNumber(playsMatch[1]);
-  }
-
-  if (!Number.isFinite(episodes)) {
-    const epMatch = compact.match(/(\d+)\s+Episodes/i);
-    if (epMatch) episodes = Number(epMatch[1]);
+  for (let i = 0; i < lines.length - 1; i += 1) {
+    if (!Number.isFinite(plays) && /^(\d+(?:\.\d+)?[KMB]?)$/i.test(lines[i]) && /^Downloads$/i.test(lines[i + 1])) {
+      plays = parseCompactNumber(lines[i]);
+    }
+    if (!Number.isFinite(episodes) && /^\d+$/.test(lines[i]) && /^Episodes$/i.test(lines[i + 1])) {
+      episodes = Number(lines[i]);
+    }
+    if (Number.isFinite(plays) && Number.isFinite(episodes)) break;
   }
 
   return {
@@ -154,70 +147,105 @@ function pageCandidates(baseUrl) {
   return out;
 }
 
-function extractEpisodeCards(html) {
-  const cards = [];
+function isNoiseLine(line) {
+  return !line ||
+    /^Likes$/i.test(line) ||
+    /^Share$/i.test(line) ||
+    /^Read more$/i.test(line) ||
+    /^RSS$/i.test(line) ||
+    /^Episodes$/i.test(line) ||
+    /^Home$/i.test(line) ||
+    /^Cancel$/i.test(line) ||
+    /^Subscribe$/i.test(line) ||
+    /^Profile$/i.test(line) ||
+    /^\d+(?:\.\d+)?[KMB]?$/i.test(line) ||
+    /^Downloads$/i.test(line);
+}
 
-  // Podbean/WordPress style articles with links and nearby Download N text.
-  const articleRegex = /<article[\s\S]*?<\/article>/gi;
-  const articleMatches = html.match(articleRegex) || [];
+function extractEpisodePairsFromVisibleText(visibleText) {
+  const lines = visibleText
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-  for (const article of articleMatches) {
-    const hrefMatches = [...article.matchAll(/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)];
-    const visible = htmlToVisibleText(article);
-    const downloadMatch = visible.match(/\bDownload\s+(\d+)\b/i);
-    if (!downloadMatch) continue;
+  const out = [];
 
-    let bestHref = null;
-    let bestTitle = null;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    const match = line.match(/^Download\s+(\d+)$/i);
+    if (!match) continue;
 
-    for (const match of hrefMatches) {
-      const href = normalizeUrl(match[1]);
-      const title = stripTags(match[2]);
-      if (!href || !title) continue;
-      if (/\/feed\/?$/i.test(href)) continue;
-      if (/\.mp3($|\?)/i.test(href)) continue;
-      if (/podbean\.com\/e\//i.test(href) || /\/\d{6,}\/?$/i.test(href)) {
-        bestHref = href;
-        bestTitle = title;
-        break;
-      }
+    const downloads = Number(match[1]);
+    let title = null;
+
+    for (let j = i - 1; j >= Math.max(0, i - 18); j -= 1) {
+      const candidate = lines[j];
+      if (isNoiseLine(candidate)) continue;
+      if (/^Title:/i.test(candidate)) continue;
+      if (/^Series:/i.test(candidate)) continue;
+      if (/^Scripture:/i.test(candidate)) continue;
+      if (/^by:/i.test(candidate)) continue;
+      if (/^Date:/i.test(candidate)) continue;
+      if (/^Video:/i.test(candidate)) continue;
+      if (/^\d+\s+days?\s+ago$/i.test(candidate)) continue;
+      if (/^[A-Za-z]{3,9}\s+[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}$/i.test(candidate)) continue;
+      if (/^[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}$/i.test(candidate)) continue;
+      if (/^CGBC\b/i.test(candidate)) continue;
+      if (/^Established in/i.test(candidate)) continue;
+      if (/^https?:\/\//i.test(candidate)) continue;
+
+      title = candidate;
+      break;
     }
 
-    if (bestHref && Number.isFinite(Number(downloadMatch[1]))) {
-      cards.push({
-        episode_url: bestHref,
-        title: bestTitle || "",
-        downloads: Number(downloadMatch[1]),
+    if (title) {
+      out.push({
+        title,
+        title_key: normalizeTitle(title),
+        downloads,
       });
     }
   }
 
-  return cards;
+  return out;
 }
 
-async function scrapeAllListingPages(showUrl) {
+function buildExistingTitleIndex(episodes) {
+  const index = new Map();
+
+  for (const [key, episode] of Object.entries(episodes || {})) {
+    const current = safeObject(episode);
+    const title = current.title || current.display_title || "";
+    const titleKey = normalizeTitle(title);
+    if (!titleKey) continue;
+
+    if (!index.has(titleKey)) index.set(titleKey, []);
+    index.get(titleKey).push({ key, episode: current });
+  }
+
+  return index;
+}
+
+async function scrapeAllPages(showUrl) {
   const pages = pageCandidates(showUrl);
-  const byUrl = new Map();
+  const episodePairs = [];
   let pagesFetched = 0;
+  let page1VisibleText = "";
 
   for (const url of pages) {
     try {
       const html = await fetchHtml(url);
       pagesFetched += 1;
+      const visibleText = htmlToVisibleText(html);
 
-      const cards = extractEpisodeCards(html);
-      if (!cards.length && url !== normalizeUrl(showUrl)) {
+      if (!page1VisibleText) page1VisibleText = visibleText;
+
+      const pairs = extractEpisodePairsFromVisibleText(visibleText);
+      if (!pairs.length && url !== normalizeUrl(showUrl)) {
         break;
       }
 
-      for (const card of cards) {
-        const key = normalizeUrl(card.episode_url);
-        const current = byUrl.get(key);
-        if (!current || card.downloads > current.downloads) {
-          byUrl.set(key, card);
-        }
-      }
-
+      episodePairs.push(...pairs);
       await sleep(REQUEST_DELAY_MS);
     } catch (err) {
       if (url === normalizeUrl(showUrl)) throw err;
@@ -226,41 +254,45 @@ async function scrapeAllListingPages(showUrl) {
   }
 
   return {
-    byUrl,
     pagesFetched,
+    episodePairs,
+    page1VisibleText,
   };
 }
 
 async function main() {
   const existing = readExistingStats(STATS_PATH);
-  const homeHtml = await fetchHtml(PODBEAN_SHOW_URL);
-  const visibleText = htmlToVisibleText(homeHtml);
-  const totals = extractPodcastTotals(visibleText);
-  const listing = await scrapeAllListingPages(PODBEAN_SHOW_URL);
+  const scrape = await scrapeAllPages(PODBEAN_SHOW_URL);
+  const totals = extractPodcastTotals(scrape.page1VisibleText);
 
   const now = new Date().toISOString();
   const episodes = safeObject(existing.episodes);
+  const titleIndex = buildExistingTitleIndex(episodes);
 
-  let matchedEpisodes = 0;
+  let matches = 0;
 
-  for (const [key, card] of listing.byUrl.entries()) {
-    const current = safeObject(episodes[key]);
+  for (const pair of scrape.episodePairs) {
+    const candidates = titleIndex.get(pair.title_key) || [];
+    if (!candidates.length) continue;
 
-    episodes[key] = {
-      ...current,
-      identity_key: current.identity_key || key,
-      episode_url: current.episode_url || key,
-      permalink_url: current.permalink_url || key,
-      title: current.title || card.title || "",
-      plays_total: Math.max(Number(current.plays_total || current.downloads_total || 0), Number(card.downloads || 0)),
-      downloads_total: Math.max(Number(current.downloads_total || current.plays_total || 0), Number(card.downloads || 0)),
-      public_listing_downloads: Number(card.downloads || 0),
-      last_public_listing_sync_at: now,
-      public_listing_source: PODBEAN_SHOW_URL,
-      downloads_by_date: safeObject(current.downloads_by_date),
-    };
+    for (const candidate of candidates) {
+      const current = safeObject(candidate.episode);
+      const newValue = Math.max(Number(current.plays_total || current.downloads_total || 0), Number(pair.downloads || 0));
 
-    matchedEpisodes += 1;
+      episodes[candidate.key] = {
+        ...current,
+        title: current.title || pair.title,
+        plays_total: newValue,
+        downloads_total: newValue,
+        public_listing_downloads: Number(pair.downloads || 0),
+        public_listing_title: pair.title,
+        public_listing_title_key: pair.title_key,
+        last_public_listing_sync_at: now,
+        downloads_by_date: safeObject(current.downloads_by_date),
+      };
+
+      matches += 1;
+    }
   }
 
   const output = {
@@ -269,7 +301,7 @@ async function main() {
       ...(safeObject(existing.source)),
       provider: "podbean_public_site",
       metric: "plays",
-      strategy: "public_show_totals_and_episode_listing_scrape",
+      strategy: "visible_text_block_parser",
       show_url: PODBEAN_SHOW_URL,
     },
     podcast_totals: {
@@ -286,9 +318,10 @@ async function main() {
     episodes,
     summary: {
       ...(safeObject(existing.summary)),
-      sync_type: "podcast_totals_plus_episode_listing",
-      pages_fetched: listing.pagesFetched,
-      episode_listing_matches: matchedEpisodes,
+      sync_type: "podcast_totals_plus_visible_text_episode_blocks",
+      pages_fetched: scrape.pagesFetched,
+      visible_text_pairs_found: scrape.episodePairs.length,
+      episode_listing_matches: matches,
     },
   };
 
@@ -297,7 +330,7 @@ async function main() {
 
   console.log(`Wrote ${STATS_PATH}`);
   console.log(
-    `Totals -> plays=${output.podcast_totals.plays_total}, episodes=${output.podcast_totals.episodes_total}, matchedEpisodes=${matchedEpisodes}, pagesFetched=${listing.pagesFetched}`
+    `Totals -> plays=${output.podcast_totals.plays_total}, episodes=${output.podcast_totals.episodes_total}, visiblePairs=${scrape.episodePairs.length}, matches=${matches}, pagesFetched=${scrape.pagesFetched}`
   );
 }
 
