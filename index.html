@@ -1480,6 +1480,74 @@
       }
     }
 
+
+    .impact-strip {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .impact-pill {
+      min-width: 128px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: linear-gradient(180deg, rgba(18,18,20,0.78), rgba(18,18,20,0.62));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: grid;
+      gap: 2px;
+    }
+    .impact-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .impact-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .impact-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    @media (max-width: 980px) {
+      .impact-strip {
+        width: 100%;
+        margin-top: 8px;
+        gap: 8px;
+      }
+      .impact-pill {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 9px 12px;
+        border-radius: 16px;
+      }
+      .impact-value {
+        font-size: 18px;
+      }
+      .impact-meta {
+        font-size: 10px;
+      }
+    }
+    @media (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-width: 1400px) {
+      .impact-strip {
+        margin-top: 6px;
+      }
+      .impact-pill {
+        padding: 8px 10px;
+      }
+      .impact-value {
+        font-size: 17px;
+      }
+    }
+
 </style>
   <link rel="shortcut icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
 </head>
@@ -1518,6 +1586,19 @@
             <span class="btn-copy"><span class="top">Sermon</span><span class="bottom">Selection</span></span>
           </span>
         </button>
+      </div>
+
+      <div class="impact-strip" id="impactStrip" aria-label="Podcast totals">
+        <div class="impact-pill">
+          <div class="impact-value" id="impactPlaysValue">—</div>
+          <div class="impact-label">Plays</div>
+          <div class="impact-meta" id="impactPlaysMeta">Updating twice daily</div>
+        </div>
+        <div class="impact-pill">
+          <div class="impact-value" id="impactEpisodesValue">—</div>
+          <div class="impact-label">Episodes</div>
+          <div class="impact-meta" id="impactEpisodesMeta">Available now</div>
+        </div>
       </div>
     </header>
 
@@ -1709,7 +1790,12 @@
     let playingDotsIndex = 0;
     const playingDotsStates = ['', '.', '..', '...'];
 
-    const bodyEl = document.body;
+    const impactPlaysValueEl = document.getElementById('impactPlaysValue');
+    const impactPlaysMetaEl = document.getElementById('impactPlaysMeta');
+    const impactEpisodesValueEl = document.getElementById('impactEpisodesValue');
+    const impactEpisodesMetaEl = document.getElementById('impactEpisodesMeta');
+
+        const bodyEl = document.body;
     const rootListEl = document.getElementById('rootList');
     const branchListEl = document.getElementById('branchList');
     const leafListEl = document.getElementById('leafList');
@@ -3293,6 +3379,34 @@
       audioPlayerEl.currentTime = duration * (Number(audioProgressEl.value) / 100);
       updateAudioProgressUi();
     });
+
+    function compactCount(value) {
+      const num = Number(value || 0);
+      if (!Number.isFinite(num) || num <= 0) return '—';
+      if (num >= 1000000) return `${(num / 1000000).toFixed(num >= 10000000 ? 0 : 1).replace(/\.0$/, '')}M`;
+      if (num >= 1000) return `${(num / 1000).toFixed(num >= 10000 ? 0 : 1).replace(/\.0$/, '')}K`;
+      return String(num);
+    }
+
+    function renderImpactTotals(stats) {
+      const totals = stats && stats.podcast_totals ? stats.podcast_totals : {};
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(totals.plays_total);
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(totals.episodes_total);
+      if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = totals.last_updated ? `Updated ${new Date(totals.last_updated).toLocaleDateString()}` : 'Updating twice daily';
+      if (impactEpisodesMetaEl) impactEpisodesMetaEl.textContent = totals.episodes_total ? 'Available now' : 'Tracking library size';
+    }
+
+    async function loadImpactTotals() {
+      try {
+        const res = await fetch(`./stats/stats.json?ts=${Date.now()}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`stats.json ${res.status}`);
+        const stats = await res.json();
+        renderImpactTotals(stats);
+      } catch (err) {
+        renderImpactTotals(null);
+      }
+    }
+
     window.addEventListener('resize', () => { if (!isMobileLayout()) closeDrawer(); if (currentEpisodeData) renderMeta(currentEpisodeData); else renderEmptyMeta(); renderMobileDrawerFlow(); renderMobileInlineFlow(); syncMobileShellHeight(); });
 
     (async function init() {
@@ -3303,6 +3417,7 @@
         renderQueue();
         renderEmptyMeta();
         showModePlaceholder();
+        loadImpactTotals();
       } catch (error) {
         console.error(error);
         rootListEl.innerHTML = '<div class="nav-empty">The sermon feed failed to load. Check the RSS source or network access and try again.</div>';
