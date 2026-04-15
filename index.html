@@ -5140,5 +5140,341 @@ function compactCount(value) {
 })();
 </script>
 
+
+<style>
+/* v71 focused mobile nav cleanup */
+@media (max-width: 980px) {
+  .player-stage.video-active.short-active #videoShell {
+    width: min(100%, 248px) !important;
+    aspect-ratio: 9 / 16 !important;
+  }
+}
+</style>
+<script>
+/* v71 consolidated Bible Books + Shorts mobile navigation fix */
+(function(){
+  const SHORTS_SERIES_NAME = 'CGBC Shorts';
+
+  function isShortRoot() {
+    return window.navRootKey === 'shorts';
+  }
+
+  function getBookBucket(bookKey) {
+    return (window.browseBuckets && window.browseBuckets.bibleBooks && window.browseBuckets.bibleBooks[bookKey]) || { series: [], episodes: [] };
+  }
+
+  function buildBibleBookLeafItems(bookKey) {
+    const bucket = getBookBucket(bookKey);
+    const items = [];
+    const visibleSeries = (bucket.series || []).filter(seriesName => {
+      const count = typeof window.getVisibleEpisodesForSeries === 'function' ? window.getVisibleEpisodesForSeries(seriesName).length : 0;
+      return count > 0;
+    });
+    const visibleEpisodeSurfaces = [];
+    (bucket.episodes || []).forEach(item => {
+      const eps = window.sermonData?.[item.seriesName] || [];
+      const match = eps.find(ep => ep.title === item.episodeTitle && ep.date === item.date) || eps.find(ep => ep.title === item.episodeTitle) || eps[0];
+      if (match && (window.mode === 'audio' || match.videoId)) {
+        visibleEpisodeSurfaces.push({
+          key: item.key,
+          title: item.episodeTitle,
+          type: 'episode_surface',
+          meta: item.scripture || item.date || '',
+          image: window.mode === 'video'
+            ? (match.videoId ? window.getWatchThumb(match.videoId) : match.seriesWideImage || window.FALLBACK_IMAGE)
+            : (match.img || match.seriesImage || window.FALLBACK_IMAGE),
+          episodeRef: match
+        });
+      }
+    });
+
+    if (visibleSeries.length === 1 && visibleEpisodeSurfaces.length === 0) {
+      const seriesName = visibleSeries[0];
+      const visible = typeof window.getVisibleEpisodesForSeries === 'function' ? window.getVisibleEpisodesForSeries(seriesName) : [];
+      if (visible.length === 1) {
+        const entry = visible[0].ep;
+        return [{
+          key: `single:${seriesName}`,
+          title: entry.title,
+          type: 'episode_surface',
+          meta: entry.scripture || entry.date || '',
+          image: window.mode === 'video'
+            ? (entry.videoId ? window.getWatchThumb(entry.videoId) : entry.seriesWideImage || window.FALLBACK_IMAGE)
+            : (entry.img || entry.seriesImage || window.FALLBACK_IMAGE),
+          episodeRef: entry
+        }];
+      }
+    }
+
+    const showSections = visibleSeries.length && visibleEpisodeSurfaces.length;
+    if (showSections && visibleSeries.length) items.push({ key: '__section_series', title: 'Series', type: 'section' });
+    visibleSeries.forEach(seriesName => items.push({
+      key: seriesName,
+      title: seriesName,
+      type: 'series',
+      meta: window.formatCountLabel(window.getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'),
+      image: window.getSeriesArtForMode(seriesName)
+    }));
+    if (showSections && visibleEpisodeSurfaces.length) items.push({ key: '__section_episodes', title: 'Stand Alone Episodes', type: 'section' });
+    items.push(...visibleEpisodeSurfaces);
+    return items;
+  }
+
+  function computeLeafItems() {
+    if (!window.browseBuckets || !window.navRootKey) return [];
+    if (isShortRoot()) return [];
+    if (window.navRootKey === 'bibleBooks' && window.navBranchKey) return buildBibleBookLeafItems(window.navBranchKey);
+    return window.__v71_originalGetLeafItems ? window.__v71_originalGetLeafItems() : [];
+  }
+
+  if (!window.__v71_originalGetLeafItems) {
+    window.__v71_originalGetLeafItems = window.getLeafItems;
+  }
+  window.getLeafItems = function(){ return computeLeafItems(); };
+  getLeafItems = window.getLeafItems;
+
+  if (!window.__v71_originalGetBranchItems) {
+    window.__v71_originalGetBranchItems = window.getBranchItems;
+  }
+  window.getBranchItems = function(){
+    if (isShortRoot()) return [];
+    return window.__v71_originalGetBranchItems ? window.__v71_originalGetBranchItems() : [];
+  };
+  getBranchItems = window.getBranchItems;
+
+  if (!window.__v71_originalHasMeaningfulBranchStep) {
+    window.__v71_originalHasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
+  }
+  window.hasMeaningfulBranchStep = function(){
+    if (isShortRoot()) return false;
+    if (window.navRootKey === 'bibleBooks') return true;
+    return window.__v71_originalHasMeaningfulBranchStep ? window.__v71_originalHasMeaningfulBranchStep() : false;
+  };
+  hasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
+
+  if (!window.__v71_originalHasMeaningfulLeafStep) {
+    window.__v71_originalHasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
+  }
+  window.hasMeaningfulLeafStep = function(){
+    if (isShortRoot()) return false;
+    if (window.navRootKey === 'bibleBooks' && window.navBranchKey) {
+      const actionable = computeLeafItems().filter(item => item.type !== 'section');
+      return actionable.length > 1 || (actionable.length === 1 && actionable[0].type === 'series');
+    }
+    return window.__v71_originalHasMeaningfulLeafStep ? window.__v71_originalHasMeaningfulLeafStep() : false;
+  };
+  hasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
+
+  window.syncSeriesSelection = function(){
+    if (isShortRoot()) {
+      window.currentSeries = SHORTS_SERIES_NAME;
+      return;
+    }
+    if (window.navRootKey === 'byDate') {
+      window.currentSeries = null;
+      return;
+    }
+    const leaves = computeLeafItems();
+    const selected = leaves.find(item => item.key === window.navLeafKey);
+    window.currentSeries = selected && selected.type === 'series' ? selected.key : null;
+  };
+  syncSeriesSelection = window.syncSeriesSelection;
+
+  window.getQueueEntries = function(){
+    if (!window.browseBuckets) return [];
+    if (window.navRootKey === 'byDate' && window.navBranchKey && window.navLeafKey) {
+      return (window.browseBuckets.byDate[window.navBranchKey]?.[window.navLeafKey] || []).map((entry, index) => {
+        const match = (window.sermonData[entry.seriesName] || []).find(ep => ep.title === entry.title && ep.date === entry.date) || (window.sermonData[entry.seriesName] || [])[0];
+        return { kind: 'dated-entry', ep: match, originalIndex: index, label: entry.date || entry.title };
+      }).filter(item => item.ep && (window.mode === 'audio' ? true : !!item.ep.videoId));
+    }
+    if (isShortRoot()) {
+      return (window.getVisibleEpisodesForSeries(SHORTS_SERIES_NAME) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
+    }
+    if (!window.currentSeries || !window.sermonData[window.currentSeries]) return [];
+    return (window.getVisibleEpisodesForSeries(window.currentSeries) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
+  };
+  getQueueEntries = window.getQueueEntries;
+
+  function resetSelectionState() {
+    window.currentEpisodeIndex = null;
+    window.currentEpisodeData = null;
+    window.selectedContext = null;
+    window.selectionReturnSnapshot = null;
+    if (typeof window.clearMediaState === 'function') window.clearMediaState();
+  }
+
+  function renderAfterNavChange(showPlaceholder=true) {
+    if (typeof window.renderNavigation === 'function') window.renderNavigation();
+    if (typeof window.renderQueue === 'function') window.renderQueue();
+    if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
+    if (showPlaceholder && typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
+    if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
+    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') window.scrollMobileSelectorToTop();
+  }
+
+  window.setRoot = async function(key){
+    if (key === 'shorts') {
+      if (typeof window.ensureShortsLoadedV68 === 'function') await window.ensureShortsLoadedV68();
+      window.navRootKey = 'shorts';
+      window.navBranchKey = null;
+      window.navLeafKey = null;
+      window.currentSeries = SHORTS_SERIES_NAME;
+      resetSelectionState();
+      if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
+      renderAfterNavChange(true);
+      return;
+    }
+    window.navRootKey = key;
+    const branches = window.getBranchItems();
+    window.navBranchKey = branches[0]?.key || null;
+    const leaves = computeLeafItems();
+    window.navLeafKey = (leaves.find(item => item.type !== 'section') || leaves[0] || {}).key || null;
+    window.syncSeriesSelection();
+    resetSelectionState();
+    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = window.getNextMobileViewAfterRoot();
+    renderAfterNavChange(true);
+  };
+  setRoot = window.setRoot;
+
+  window.setBranch = function(key){
+    window.navBranchKey = key;
+    const leaves = computeLeafItems();
+    const actionable = leaves.filter(item => item.type !== 'section');
+    const first = actionable[0] || leaves[0] || null;
+    window.navLeafKey = first ? first.key : null;
+    window.syncSeriesSelection();
+    resetSelectionState();
+
+    if (window.navRootKey === 'bibleBooks') {
+      if (actionable.length === 1 && first && first.type === 'series') {
+        window.currentSeries = first.key;
+        if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
+      } else if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) {
+        window.mobileNavView = 'leaf';
+      }
+    } else if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) {
+      window.mobileNavView = window.getNextMobileViewAfterBranch();
+    }
+
+    renderAfterNavChange(true);
+  };
+  setBranch = window.setBranch;
+
+  window.setLeaf = function(key){
+    window.navLeafKey = key;
+    window.syncSeriesSelection();
+    resetSelectionState();
+    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
+    renderAfterNavChange(true);
+  };
+  setLeaf = window.setLeaf;
+
+  window.captureSelectionReturnSnapshot = function(ep, originalIndex, options = {}) {
+    const source = options.source || 'queue';
+    const returnView = source === 'leaf' ? 'leaf' : 'queue';
+    window.selectionReturnSnapshot = {
+      navRootKey: window.navRootKey,
+      navBranchKey: window.navBranchKey,
+      navLeafKey: window.navLeafKey,
+      currentSeries: window.currentSeries || ep?.series || '',
+      currentEpisodeIndex: originalIndex ?? null,
+      mode: window.mode,
+      source,
+      returnView,
+      seriesName: options.seriesName || window.currentSeries || ep?.series || '',
+      leafKey: options.leafKey || window.navLeafKey || null
+    };
+  };
+  captureSelectionReturnSnapshot = window.captureSelectionReturnSnapshot;
+
+  window.restoreQueueFromSelectionSnapshot = function() {
+    const snap = window.selectionReturnSnapshot || window.selectedContext || {};
+    if ('navRootKey' in snap) window.navRootKey = snap.navRootKey;
+    if ('navBranchKey' in snap) window.navBranchKey = snap.navBranchKey;
+    if ('navLeafKey' in snap || 'leafKey' in snap) window.navLeafKey = snap.navLeafKey || snap.leafKey || null;
+    window.currentSeries = snap.seriesName || snap.currentSeries || null;
+    if (isShortRoot()) window.currentSeries = SHORTS_SERIES_NAME;
+    if (snap.returnView === 'leaf') window.currentSeries = null;
+    window.currentEpisodeIndex = null;
+    window.currentEpisodeData = null;
+    window.selectedContext = null;
+    window.selectionReturnSnapshot = null;
+    if (typeof window.clearMediaState === 'function') window.clearMediaState();
+    if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
+    if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
+    window.mobileNavView = snap.returnView || 'queue';
+    if (typeof window.renderNavigation === 'function') window.renderNavigation();
+    if (typeof window.renderQueue === 'function') window.renderQueue();
+    if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
+    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') window.scrollMobileSelectorToTop();
+  };
+  restoreQueueFromSelectionSnapshot = window.restoreQueueFromSelectionSnapshot;
+
+  window.performMobileBack = function(){
+    if (window.currentEpisodeData || window.selectionReturnSnapshot || window.selectedContext) {
+      window.restoreQueueFromSelectionSnapshot();
+      return;
+    }
+    if (window.mobileNavView === 'queue') {
+      if (isShortRoot()) {
+        window.mobileNavView = 'root';
+        window.navRootKey = window.getRootItems()[0]?.key || null;
+        const branches = window.getBranchItems();
+        window.navBranchKey = branches[0]?.key || null;
+        const leaves = computeLeafItems();
+        window.navLeafKey = (leaves.find(item => item.type !== 'section') || leaves[0] || {}).key || null;
+        window.syncSeriesSelection();
+      } else if (window.navRootKey === 'bibleBooks' && window.navBranchKey) {
+        const actionable = computeLeafItems().filter(item => item.type !== 'section');
+        window.mobileNavView = actionable.length > 1 ? 'leaf' : 'branch';
+        if (window.mobileNavView === 'branch') {
+          window.currentSeries = null;
+          window.navLeafKey = null;
+        }
+      } else {
+        window.mobileNavView = window.hasMeaningfulLeafStep() ? 'leaf' : (window.hasMeaningfulBranchStep() ? 'branch' : 'root');
+      }
+    } else if (window.mobileNavView === 'leaf') {
+      window.mobileNavView = window.hasMeaningfulBranchStep() ? 'branch' : 'root';
+      if (window.mobileNavView === 'branch') {
+        window.currentSeries = null;
+        window.navLeafKey = null;
+      }
+    } else if (window.mobileNavView === 'branch') {
+      window.mobileNavView = 'root';
+      window.currentSeries = null;
+      window.navBranchKey = null;
+      window.navLeafKey = null;
+    }
+    if (typeof window.renderNavigation === 'function') window.renderNavigation();
+    if (typeof window.renderQueue === 'function') window.renderQueue();
+    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') window.scrollMobileSelectorToTop();
+  };
+  performMobileBack = window.performMobileBack;
+
+  window.getMobileBackTargetLabel = function(){
+    if (window.currentEpisodeData || window.selectedContext || window.selectionReturnSnapshot) return 'Episodes';
+    if (isShortRoot()) return window.mobileNavView === 'queue' ? 'Categories' : '';
+    if (window.mobileNavView === 'queue') {
+      if (window.navRootKey === 'bibleBooks' && window.navBranchKey) {
+        const actionable = computeLeafItems().filter(item => item.type !== 'section');
+        return actionable.length > 1 ? window.navBranchKey : 'Bible Books';
+      }
+    }
+    const orig = window.__v71_originalGetMobileBackTargetLabel;
+    return typeof orig === 'function' ? orig() : '';
+  };
+  if (!window.__v71_originalGetMobileBackTargetLabel) window.__v71_originalGetMobileBackTargetLabel = window.getMobileBackTargetLabel;
+  getMobileBackTargetLabel = window.getMobileBackTargetLabel;
+
+  // refresh the root after load so Bible Books / Shorts use the cleaned rules.
+  setTimeout(() => {
+    if (typeof window.renderNavigation === 'function') window.renderNavigation();
+    if (typeof window.renderQueue === 'function') window.renderQueue();
+  }, 30);
+})();
+</script>
+
 </body>
 </html>
