@@ -4933,7 +4933,7 @@ function compactCount(value) {
 }
 .player-stage.video-active.short-active #videoShell {
   aspect-ratio: 9 / 16;
-  width: min(100%, 390px);
+  width: min(100%, 430px);
   margin: 0 auto;
   border-radius: 22px;
   overflow: hidden;
@@ -4945,118 +4945,94 @@ function compactCount(value) {
 }
 @media (max-width: 980px) {
   .player-stage.video-active.short-active #videoShell {
-    width: min(100%, 300px);
-    aspect-ratio: 9 / 19;
+    width: min(100%, 360px);
   }
 }
 </style>
 <script>
-/* v70 consolidated shorts flow + return snapshot restore */
+/* v69 shorts flow + bible-book back cleanup + vertical shorts stage */
 (function(){
-  const SHORTS_SERIES_NAME = 'CGBC Shorts';
+  const SHORTS_SERIES_NAME_V69 = 'CGBC Shorts';
 
-  function isShortEpisode(ep) {
-    return !!(ep && (ep.isShort || ep.series === SHORTS_SERIES_NAME));
+  function isShortEpisodeV69(ep) {
+    return !!(ep && (ep.isShort || ep.series === SHORTS_SERIES_NAME_V69));
   }
 
-  function applyShortStageClass(ep) {
+  function applyShortStageClassV69(ep) {
     if (!window.playerStageEl) return;
-    playerStageEl.classList.toggle('short-active', isShortEpisode(ep));
+    playerStageEl.classList.toggle('short-active', isShortEpisodeV69(ep));
   }
 
-  function clearShortStageClass() {
+  function clearShortStageClassV69() {
     if (!window.playerStageEl) return;
     playerStageEl.classList.remove('short-active');
   }
 
-  async function ensureShortsLoaded() {
-    const existing = window.sermonData && window.sermonData[SHORTS_SERIES_NAME];
-    if (Array.isArray(existing) && existing.length) return true;
-    if (typeof window.ensureShortsLoadedV68 === 'function') return !!(await window.ensureShortsLoadedV68());
-    if (typeof window.ensureShortsLoadedV67 === 'function') return !!(await window.ensureShortsLoadedV67());
-    return false;
-  }
-
-  const originalSetRoot = window.setRoot;
-  if (typeof originalSetRoot === 'function') {
-    const wrapped = async function(key) {
-      if (key !== 'shorts') return originalSetRoot.apply(this, arguments);
-      await ensureShortsLoaded();
-      window.navRootKey = 'shorts';
-      window.navBranchKey = null;
-      window.navLeafKey = SHORTS_SERIES_NAME;
-      window.currentSeries = SHORTS_SERIES_NAME;
-      window.currentEpisodeIndex = null;
-      window.currentEpisodeData = null;
-      window.selectedContext = null;
-      window.selectionReturnSnapshot = null;
-      if (typeof window.clearMediaState === 'function') window.clearMediaState();
-      clearShortStageClass();
-      if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
-      if (typeof window.renderNavigation === 'function') window.renderNavigation();
-      if (typeof window.renderQueue === 'function') window.renderQueue();
-      if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
-      if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
-      if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
-      if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') {
-        window.scrollMobileSelectorToTop();
-      }
-    };
-    window.setRoot = wrapped;
-    setRoot = wrapped;
-  }
-
-  const originalGetBranchItems = window.getBranchItems;
-  if (typeof originalGetBranchItems === 'function') {
+  const originalGetBranchItemsV69 = window.getBranchItems;
+  if (typeof originalGetBranchItemsV69 === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') return [];
-      return originalGetBranchItems.apply(this, arguments);
+      return originalGetBranchItemsV69.apply(this, arguments);
     };
     window.getBranchItems = wrapped;
     getBranchItems = wrapped;
   }
 
-  const originalGetLeafItems = window.getLeafItems;
-  if (typeof originalGetLeafItems === 'function') {
+  const originalGetLeafItemsV69 = window.getLeafItems;
+  if (typeof originalGetLeafItemsV69 === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') {
-        const shorts = (window.sermonData && window.sermonData[SHORTS_SERIES_NAME]) || [];
+        const shorts = (window.sermonData && window.sermonData[SHORTS_SERIES_NAME_V69]) || [];
         if (!shorts.length) return [];
         return [{
-          key: SHORTS_SERIES_NAME,
+          key: SHORTS_SERIES_NAME_V69,
           title: 'Shorts',
           type: 'series',
           meta: typeof formatCountLabel === 'function' ? formatCountLabel(shorts.length, 'video', 'videos') : `${shorts.length} videos`,
-          image: typeof getSeriesWideCover === 'function' ? getSeriesWideCover(SHORTS_SERIES_NAME) : ''
+          image: typeof getSeriesWideCover === 'function' ? getSeriesWideCover(SHORTS_SERIES_NAME_V69) : ''
         }];
       }
-      return originalGetLeafItems.apply(this, arguments);
+      return originalGetLeafItemsV69.apply(this, arguments);
     };
     window.getLeafItems = wrapped;
     getLeafItems = wrapped;
   }
 
-  const originalHasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
-  if (typeof originalHasMeaningfulBranchStep === 'function') {
+  const originalHasMeaningfulBranchStepV69 = window.hasMeaningfulBranchStep;
+  if (typeof originalHasMeaningfulBranchStepV69 === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') return false;
-      return originalHasMeaningfulBranchStep.apply(this, arguments);
+      return originalHasMeaningfulBranchStepV69.apply(this, arguments);
     };
     window.hasMeaningfulBranchStep = wrapped;
     hasMeaningfulBranchStep = wrapped;
   }
 
-  const originalHasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
-  if (typeof originalHasMeaningfulLeafStep === 'function') {
+  const originalHasMeaningfulLeafStepV69 = window.hasMeaningfulLeafStep;
+  if (typeof originalHasMeaningfulLeafStepV69 === 'function') {
     const wrapped = function() {
       if (window.navRootKey === 'shorts') return false;
-      return originalHasMeaningfulLeafStep.apply(this, arguments);
+      return originalHasMeaningfulLeafStepV69.apply(this, arguments);
     };
     window.hasMeaningfulLeafStep = wrapped;
     hasMeaningfulLeafStep = wrapped;
   }
 
-  function restoreSelectionTarget() {
+  const originalGetMobileBackTargetLabelV69 = window.getMobileBackTargetLabel;
+  if (typeof originalGetMobileBackTargetLabelV69 === 'function') {
+    const wrapped = function() {
+      const snap = window.selectionReturnSnapshot || window.selectedContext || {};
+      if ((window.currentEpisodeData || snap.source === 'leaf') && snap.source === 'leaf') {
+        const leafTitle = window.navLeafKey && typeof window.getLeafTitleByKey === 'function' ? window.getLeafTitleByKey(window.navLeafKey) : '';
+        return leafTitle || 'Browse';
+      }
+      return originalGetMobileBackTargetLabelV69.apply(this, arguments);
+    };
+    window.getMobileBackTargetLabel = wrapped;
+    getMobileBackTargetLabel = wrapped;
+  }
+
+  function restoreSelectionTargetV69() {
     const snap = window.selectionReturnSnapshot || window.selectedContext || {};
 
     if (snap.navRootKey) window.navRootKey = snap.navRootKey;
@@ -5065,31 +5041,20 @@ function compactCount(value) {
       window.navLeafKey = snap.navLeafKey || snap.leafKey || null;
     }
 
-    const returnView = snap.returnView || (snap.source === 'leaf' ? 'leaf' : 'queue');
-    window.currentSeries = returnView === 'queue'
-      ? (snap.seriesName || snap.currentSeries || window.currentSeries || '')
-      : null;
-
-    if (window.navRootKey === 'shorts') {
-      window.navLeafKey = SHORTS_SERIES_NAME;
-      window.currentSeries = SHORTS_SERIES_NAME;
-    }
-    if (window.navRootKey === 'bibleBooks' && returnView === 'leaf') {
-      window.currentSeries = null;
-    }
-
+    const backToLeaf = snap.source === 'leaf';
+    window.currentSeries = backToLeaf ? null : (snap.seriesName || snap.currentSeries || window.currentSeries || '');
     window.currentEpisodeIndex = null;
     window.currentEpisodeData = null;
     window.selectedContext = null;
-    window.selectedEntrySource = returnView === 'leaf' ? 'leaf' : 'queue';
+    window.selectedEntrySource = backToLeaf ? 'leaf' : 'queue';
     window.selectionReturnSnapshot = null;
 
     if (typeof window.clearMediaState === 'function') window.clearMediaState();
-    clearShortStageClass();
+    clearShortStageClassV69();
     if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
     if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
 
-    window.mobileNavView = returnView;
+    window.mobileNavView = backToLeaf ? 'leaf' : 'queue';
 
     if (typeof window.renderNavigation === 'function') window.renderNavigation();
     if (typeof window.renderQueue === 'function') window.renderQueue();
@@ -5102,377 +5067,41 @@ function compactCount(value) {
     }
   }
 
-  const originalPerformMobileBack = window.performMobileBack;
-  if (typeof originalPerformMobileBack === 'function') {
+  const originalPerformMobileBackV69 = window.performMobileBack;
+  if (typeof originalPerformMobileBackV69 === 'function') {
     const wrapped = function() {
       const snap = window.selectionReturnSnapshot || window.selectedContext || {};
       if (window.currentEpisodeData || snap.source === 'leaf' || snap.source === 'queue' || snap.source === 'dated-entry') {
-        restoreSelectionTarget();
+        restoreSelectionTargetV69();
         return;
       }
-      return originalPerformMobileBack.apply(this, arguments);
+      return originalPerformMobileBackV69.apply(this, arguments);
     };
     window.performMobileBack = wrapped;
     performMobileBack = wrapped;
   }
 
-  const originalPlayVideo = window.playVideo;
-  if (typeof originalPlayVideo === 'function') {
+  const originalPlayVideoV69 = window.playVideo;
+  if (typeof originalPlayVideoV69 === 'function') {
     const wrapped = function(ep) {
-      clearShortStageClass();
-      const result = originalPlayVideo.apply(this, arguments);
-      applyShortStageClass(ep);
+      clearShortStageClassV69();
+      const result = originalPlayVideoV69.apply(this, arguments);
+      applyShortStageClassV69(ep);
       return result;
     };
     window.playVideo = wrapped;
     playVideo = wrapped;
   }
 
-  const originalShowModePlaceholder = window.showModePlaceholder;
-  if (typeof originalShowModePlaceholder === 'function') {
+  const originalShowModePlaceholderV69 = window.showModePlaceholder;
+  if (typeof originalShowModePlaceholderV69 === 'function') {
     const wrapped = function() {
-      clearShortStageClass();
-      return originalShowModePlaceholder.apply(this, arguments);
+      clearShortStageClassV69();
+      return originalShowModePlaceholderV69.apply(this, arguments);
     };
     window.showModePlaceholder = wrapped;
     showModePlaceholder = wrapped;
   }
-})();
-</script>
-
-
-<style>
-/* v71 focused mobile nav cleanup */
-@media (max-width: 980px) {
-  .player-stage.video-active.short-active #videoShell {
-    width: min(100%, 248px) !important;
-    aspect-ratio: 9 / 16 !important;
-  }
-}
-</style>
-<script>
-/* v71 consolidated Bible Books + Shorts mobile navigation fix */
-(function(){
-  const SHORTS_SERIES_NAME = 'CGBC Shorts';
-
-  function isShortRoot() {
-    return window.navRootKey === 'shorts';
-  }
-
-  function getBookBucket(bookKey) {
-    return (window.browseBuckets && window.browseBuckets.bibleBooks && window.browseBuckets.bibleBooks[bookKey]) || { series: [], episodes: [] };
-  }
-
-  function buildBibleBookLeafItems(bookKey) {
-    const bucket = getBookBucket(bookKey);
-    const items = [];
-    const visibleSeries = (bucket.series || []).filter(seriesName => {
-      const count = typeof window.getVisibleEpisodesForSeries === 'function' ? window.getVisibleEpisodesForSeries(seriesName).length : 0;
-      return count > 0;
-    });
-    const visibleEpisodeSurfaces = [];
-    (bucket.episodes || []).forEach(item => {
-      const eps = window.sermonData?.[item.seriesName] || [];
-      const match = eps.find(ep => ep.title === item.episodeTitle && ep.date === item.date) || eps.find(ep => ep.title === item.episodeTitle) || eps[0];
-      if (match && (window.mode === 'audio' || match.videoId)) {
-        visibleEpisodeSurfaces.push({
-          key: item.key,
-          title: item.episodeTitle,
-          type: 'episode_surface',
-          meta: item.scripture || item.date || '',
-          image: window.mode === 'video'
-            ? (match.videoId ? window.getWatchThumb(match.videoId) : match.seriesWideImage || window.FALLBACK_IMAGE)
-            : (match.img || match.seriesImage || window.FALLBACK_IMAGE),
-          episodeRef: match
-        });
-      }
-    });
-
-    if (visibleSeries.length === 1 && visibleEpisodeSurfaces.length === 0) {
-      const seriesName = visibleSeries[0];
-      const visible = typeof window.getVisibleEpisodesForSeries === 'function' ? window.getVisibleEpisodesForSeries(seriesName) : [];
-      if (visible.length === 1) {
-        const entry = visible[0].ep;
-        return [{
-          key: `single:${seriesName}`,
-          title: entry.title,
-          type: 'episode_surface',
-          meta: entry.scripture || entry.date || '',
-          image: window.mode === 'video'
-            ? (entry.videoId ? window.getWatchThumb(entry.videoId) : entry.seriesWideImage || window.FALLBACK_IMAGE)
-            : (entry.img || entry.seriesImage || window.FALLBACK_IMAGE),
-          episodeRef: entry
-        }];
-      }
-    }
-
-    const showSections = visibleSeries.length && visibleEpisodeSurfaces.length;
-    if (showSections && visibleSeries.length) items.push({ key: '__section_series', title: 'Series', type: 'section' });
-    visibleSeries.forEach(seriesName => items.push({
-      key: seriesName,
-      title: seriesName,
-      type: 'series',
-      meta: window.formatCountLabel(window.getVisibleEpisodesForSeries(seriesName).length, 'episode', 'episodes'),
-      image: window.getSeriesArtForMode(seriesName)
-    }));
-    if (showSections && visibleEpisodeSurfaces.length) items.push({ key: '__section_episodes', title: 'Stand Alone Episodes', type: 'section' });
-    items.push(...visibleEpisodeSurfaces);
-    return items;
-  }
-
-  function computeLeafItems() {
-    if (!window.browseBuckets || !window.navRootKey) return [];
-    if (isShortRoot()) return [];
-    if (window.navRootKey === 'bibleBooks' && window.navBranchKey) return buildBibleBookLeafItems(window.navBranchKey);
-    return window.__v71_originalGetLeafItems ? window.__v71_originalGetLeafItems() : [];
-  }
-
-  if (!window.__v71_originalGetLeafItems) {
-    window.__v71_originalGetLeafItems = window.getLeafItems;
-  }
-  window.getLeafItems = function(){ return computeLeafItems(); };
-  getLeafItems = window.getLeafItems;
-
-  if (!window.__v71_originalGetBranchItems) {
-    window.__v71_originalGetBranchItems = window.getBranchItems;
-  }
-  window.getBranchItems = function(){
-    if (isShortRoot()) return [];
-    return window.__v71_originalGetBranchItems ? window.__v71_originalGetBranchItems() : [];
-  };
-  getBranchItems = window.getBranchItems;
-
-  if (!window.__v71_originalHasMeaningfulBranchStep) {
-    window.__v71_originalHasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
-  }
-  window.hasMeaningfulBranchStep = function(){
-    if (isShortRoot()) return false;
-    if (window.navRootKey === 'bibleBooks') return true;
-    return window.__v71_originalHasMeaningfulBranchStep ? window.__v71_originalHasMeaningfulBranchStep() : false;
-  };
-  hasMeaningfulBranchStep = window.hasMeaningfulBranchStep;
-
-  if (!window.__v71_originalHasMeaningfulLeafStep) {
-    window.__v71_originalHasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
-  }
-  window.hasMeaningfulLeafStep = function(){
-    if (isShortRoot()) return false;
-    if (window.navRootKey === 'bibleBooks' && window.navBranchKey) {
-      const actionable = computeLeafItems().filter(item => item.type !== 'section');
-      return actionable.length > 1 || (actionable.length === 1 && actionable[0].type === 'series');
-    }
-    return window.__v71_originalHasMeaningfulLeafStep ? window.__v71_originalHasMeaningfulLeafStep() : false;
-  };
-  hasMeaningfulLeafStep = window.hasMeaningfulLeafStep;
-
-  window.syncSeriesSelection = function(){
-    if (isShortRoot()) {
-      window.currentSeries = SHORTS_SERIES_NAME;
-      return;
-    }
-    if (window.navRootKey === 'byDate') {
-      window.currentSeries = null;
-      return;
-    }
-    const leaves = computeLeafItems();
-    const selected = leaves.find(item => item.key === window.navLeafKey);
-    window.currentSeries = selected && selected.type === 'series' ? selected.key : null;
-  };
-  syncSeriesSelection = window.syncSeriesSelection;
-
-  window.getQueueEntries = function(){
-    if (!window.browseBuckets) return [];
-    if (window.navRootKey === 'byDate' && window.navBranchKey && window.navLeafKey) {
-      return (window.browseBuckets.byDate[window.navBranchKey]?.[window.navLeafKey] || []).map((entry, index) => {
-        const match = (window.sermonData[entry.seriesName] || []).find(ep => ep.title === entry.title && ep.date === entry.date) || (window.sermonData[entry.seriesName] || [])[0];
-        return { kind: 'dated-entry', ep: match, originalIndex: index, label: entry.date || entry.title };
-      }).filter(item => item.ep && (window.mode === 'audio' ? true : !!item.ep.videoId));
-    }
-    if (isShortRoot()) {
-      return (window.getVisibleEpisodesForSeries(SHORTS_SERIES_NAME) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
-    }
-    if (!window.currentSeries || !window.sermonData[window.currentSeries]) return [];
-    return (window.getVisibleEpisodesForSeries(window.currentSeries) || []).map(({ep, originalIndex}) => ({ kind: 'episode', ep, originalIndex }));
-  };
-  getQueueEntries = window.getQueueEntries;
-
-  function resetSelectionState() {
-    window.currentEpisodeIndex = null;
-    window.currentEpisodeData = null;
-    window.selectedContext = null;
-    window.selectionReturnSnapshot = null;
-    if (typeof window.clearMediaState === 'function') window.clearMediaState();
-  }
-
-  function renderAfterNavChange(showPlaceholder=true) {
-    if (typeof window.renderNavigation === 'function') window.renderNavigation();
-    if (typeof window.renderQueue === 'function') window.renderQueue();
-    if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
-    if (showPlaceholder && typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
-    if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
-    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') window.scrollMobileSelectorToTop();
-  }
-
-  window.setRoot = async function(key){
-    if (key === 'shorts') {
-      if (typeof window.ensureShortsLoadedV68 === 'function') await window.ensureShortsLoadedV68();
-      window.navRootKey = 'shorts';
-      window.navBranchKey = null;
-      window.navLeafKey = null;
-      window.currentSeries = SHORTS_SERIES_NAME;
-      resetSelectionState();
-      if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
-      renderAfterNavChange(true);
-      return;
-    }
-    window.navRootKey = key;
-    const branches = window.getBranchItems();
-    window.navBranchKey = branches[0]?.key || null;
-    const leaves = computeLeafItems();
-    window.navLeafKey = (leaves.find(item => item.type !== 'section') || leaves[0] || {}).key || null;
-    window.syncSeriesSelection();
-    resetSelectionState();
-    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = window.getNextMobileViewAfterRoot();
-    renderAfterNavChange(true);
-  };
-  setRoot = window.setRoot;
-
-  window.setBranch = function(key){
-    window.navBranchKey = key;
-    const leaves = computeLeafItems();
-    const actionable = leaves.filter(item => item.type !== 'section');
-    const first = actionable[0] || leaves[0] || null;
-    window.navLeafKey = first ? first.key : null;
-    window.syncSeriesSelection();
-    resetSelectionState();
-
-    if (window.navRootKey === 'bibleBooks') {
-      if (actionable.length === 1 && first && first.type === 'series') {
-        window.currentSeries = first.key;
-        if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
-      } else if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) {
-        window.mobileNavView = 'leaf';
-      }
-    } else if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) {
-      window.mobileNavView = window.getNextMobileViewAfterBranch();
-    }
-
-    renderAfterNavChange(true);
-  };
-  setBranch = window.setBranch;
-
-  window.setLeaf = function(key){
-    window.navLeafKey = key;
-    window.syncSeriesSelection();
-    resetSelectionState();
-    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout()) window.mobileNavView = 'queue';
-    renderAfterNavChange(true);
-  };
-  setLeaf = window.setLeaf;
-
-  window.captureSelectionReturnSnapshot = function(ep, originalIndex, options = {}) {
-    const source = options.source || 'queue';
-    const returnView = source === 'leaf' ? 'leaf' : 'queue';
-    window.selectionReturnSnapshot = {
-      navRootKey: window.navRootKey,
-      navBranchKey: window.navBranchKey,
-      navLeafKey: window.navLeafKey,
-      currentSeries: window.currentSeries || ep?.series || '',
-      currentEpisodeIndex: originalIndex ?? null,
-      mode: window.mode,
-      source,
-      returnView,
-      seriesName: options.seriesName || window.currentSeries || ep?.series || '',
-      leafKey: options.leafKey || window.navLeafKey || null
-    };
-  };
-  captureSelectionReturnSnapshot = window.captureSelectionReturnSnapshot;
-
-  window.restoreQueueFromSelectionSnapshot = function() {
-    const snap = window.selectionReturnSnapshot || window.selectedContext || {};
-    if ('navRootKey' in snap) window.navRootKey = snap.navRootKey;
-    if ('navBranchKey' in snap) window.navBranchKey = snap.navBranchKey;
-    if ('navLeafKey' in snap || 'leafKey' in snap) window.navLeafKey = snap.navLeafKey || snap.leafKey || null;
-    window.currentSeries = snap.seriesName || snap.currentSeries || null;
-    if (isShortRoot()) window.currentSeries = SHORTS_SERIES_NAME;
-    if (snap.returnView === 'leaf') window.currentSeries = null;
-    window.currentEpisodeIndex = null;
-    window.currentEpisodeData = null;
-    window.selectedContext = null;
-    window.selectionReturnSnapshot = null;
-    if (typeof window.clearMediaState === 'function') window.clearMediaState();
-    if (typeof window.renderEmptyMeta === 'function') window.renderEmptyMeta();
-    if (typeof window.showModePlaceholder === 'function') window.showModePlaceholder();
-    window.mobileNavView = snap.returnView || 'queue';
-    if (typeof window.renderNavigation === 'function') window.renderNavigation();
-    if (typeof window.renderQueue === 'function') window.renderQueue();
-    if (typeof window.updateSelectionShellState === 'function') window.updateSelectionShellState();
-    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') window.scrollMobileSelectorToTop();
-  };
-  restoreQueueFromSelectionSnapshot = window.restoreQueueFromSelectionSnapshot;
-
-  window.performMobileBack = function(){
-    if (window.currentEpisodeData || window.selectionReturnSnapshot || window.selectedContext) {
-      window.restoreQueueFromSelectionSnapshot();
-      return;
-    }
-    if (window.mobileNavView === 'queue') {
-      if (isShortRoot()) {
-        window.mobileNavView = 'root';
-        window.navRootKey = window.getRootItems()[0]?.key || null;
-        const branches = window.getBranchItems();
-        window.navBranchKey = branches[0]?.key || null;
-        const leaves = computeLeafItems();
-        window.navLeafKey = (leaves.find(item => item.type !== 'section') || leaves[0] || {}).key || null;
-        window.syncSeriesSelection();
-      } else if (window.navRootKey === 'bibleBooks' && window.navBranchKey) {
-        const actionable = computeLeafItems().filter(item => item.type !== 'section');
-        window.mobileNavView = actionable.length > 1 ? 'leaf' : 'branch';
-        if (window.mobileNavView === 'branch') {
-          window.currentSeries = null;
-          window.navLeafKey = null;
-        }
-      } else {
-        window.mobileNavView = window.hasMeaningfulLeafStep() ? 'leaf' : (window.hasMeaningfulBranchStep() ? 'branch' : 'root');
-      }
-    } else if (window.mobileNavView === 'leaf') {
-      window.mobileNavView = window.hasMeaningfulBranchStep() ? 'branch' : 'root';
-      if (window.mobileNavView === 'branch') {
-        window.currentSeries = null;
-        window.navLeafKey = null;
-      }
-    } else if (window.mobileNavView === 'branch') {
-      window.mobileNavView = 'root';
-      window.currentSeries = null;
-      window.navBranchKey = null;
-      window.navLeafKey = null;
-    }
-    if (typeof window.renderNavigation === 'function') window.renderNavigation();
-    if (typeof window.renderQueue === 'function') window.renderQueue();
-    if (typeof window.isMobileLayout === 'function' && window.isMobileLayout() && typeof window.scrollMobileSelectorToTop === 'function') window.scrollMobileSelectorToTop();
-  };
-  performMobileBack = window.performMobileBack;
-
-  window.getMobileBackTargetLabel = function(){
-    if (window.currentEpisodeData || window.selectedContext || window.selectionReturnSnapshot) return 'Episodes';
-    if (isShortRoot()) return window.mobileNavView === 'queue' ? 'Categories' : '';
-    if (window.mobileNavView === 'queue') {
-      if (window.navRootKey === 'bibleBooks' && window.navBranchKey) {
-        const actionable = computeLeafItems().filter(item => item.type !== 'section');
-        return actionable.length > 1 ? window.navBranchKey : 'Bible Books';
-      }
-    }
-    const orig = window.__v71_originalGetMobileBackTargetLabel;
-    return typeof orig === 'function' ? orig() : '';
-  };
-  if (!window.__v71_originalGetMobileBackTargetLabel) window.__v71_originalGetMobileBackTargetLabel = window.getMobileBackTargetLabel;
-  getMobileBackTargetLabel = window.getMobileBackTargetLabel;
-
-  // refresh the root after load so Bible Books / Shorts use the cleaned rules.
-  setTimeout(() => {
-    if (typeof window.renderNavigation === 'function') window.renderNavigation();
-    if (typeof window.renderQueue === 'function') window.renderQueue();
-  }, 30);
 })();
 </script>
 
