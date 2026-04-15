@@ -23,11 +23,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Sync public Podbean totals and visible-text episode blocks
+      - name: Sync Podbean stats from initial state
         env:
           PODBEAN_SHOW_URL: "https://brojacobcedargrovebaptist.podbean.com/"
-          PODBEAN_MAX_PAGES: "20"
-          PODBEAN_REQUEST_DELAY_MS: "600"
+          PODBEAN_MAX_PAGES: "10"
+          PODBEAN_REQUEST_DELAY_MS: "500"
         run: node scripts/podbean-stats-sync.js
 
       - name: Commit updated stats.json
