@@ -393,6 +393,19 @@
       line-height: 1.24;
     }
 
+    .card-metric {
+      margin-top: 7px;
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+      line-height: 1.2;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .card-metric.is-hidden {
+      display: none;
+    }
+
     .chip-row {
       display: flex;
       flex-wrap: wrap;
@@ -638,6 +651,22 @@
     .audio-detail-value {
       color: rgba(255,255,255,0.90);
       font-weight: 600;
+    }
+
+    .audio-metric-row,
+    .stage-metric-row {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.80);
+      font-size: 12px;
+      line-height: 1.2;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .audio-metric-row {
+      padding-top: 2px;
     }
     .audio-title {
       margin: 0;
@@ -1487,6 +1516,8 @@
       gap: 10px;
       margin-top: 10px;
       flex-wrap: wrap;
+      width: 100%;
+      flex-basis: 100%;
     }
     .impact-pill {
       min-width: 128px;
@@ -1514,14 +1545,14 @@
       color: var(--muted-2);
     }
     .impact-meta {
-      font-size: 11px;
-      color: var(--muted);
+      display: none;
     }
     @media (max-width: 980px) {
       .impact-strip {
         width: 100%;
         margin-top: 8px;
         gap: 8px;
+        order: 3;
       }
       .impact-pill {
         flex: 1 1 0;
@@ -1591,13 +1622,13 @@
       <div class="impact-strip" id="impactStrip" aria-label="Podcast totals">
         <div class="impact-pill">
           <div class="impact-value" id="impactPlaysValue">—</div>
-          <div class="impact-label">Plays</div>
-          <div class="impact-meta" id="impactPlaysMeta">Updating twice daily</div>
+          <div class="impact-label" id="impactPlaysLabel">Plays</div>
+          <div class="impact-meta" id="impactPlaysMeta"></div>
         </div>
         <div class="impact-pill">
           <div class="impact-value" id="impactEpisodesValue">—</div>
-          <div class="impact-label">Episodes</div>
-          <div class="impact-meta" id="impactEpisodesMeta">Available now</div>
+          <div class="impact-label" id="impactEpisodesLabel">Episodes</div>
+          <div class="impact-meta" id="impactEpisodesMeta"></div>
         </div>
       </div>
     </header>
@@ -1710,6 +1741,7 @@
               <div class="audio-series" id="audioFeatureSeries"></div>
               <div class="audio-detail-row" id="audioScriptureRow"><span class="audio-detail-label" id="audioScriptureLabel">Scripture</span><span class="audio-detail-value" id="audioFeatureScripture"></span></div>
               <div class="audio-detail-row" id="audioSpeakerRow"><span class="audio-detail-label">Speaker</span><span class="audio-detail-value" id="audioFeatureSpeaker"></span></div>
+              <div class="audio-metric-row" id="audioMetricRow"><span id="audioMetricText"></span></div>
 
               <div class="audio-time-row">
                 <div class="audio-now" id="audioClockCurrent">00:00</div>
@@ -1791,9 +1823,16 @@
     const playingDotsStates = ['', '.', '..', '...'];
 
     const impactPlaysValueEl = document.getElementById('impactPlaysValue');
+    const impactPlaysLabelEl = document.getElementById('impactPlaysLabel');
     const impactPlaysMetaEl = document.getElementById('impactPlaysMeta');
     const impactEpisodesValueEl = document.getElementById('impactEpisodesValue');
+    const impactEpisodesLabelEl = document.getElementById('impactEpisodesLabel');
     const impactEpisodesMetaEl = document.getElementById('impactEpisodesMeta');
+
+    let statsState = null;
+    let audioStatsByMediaUrl = new Map();
+    let audioStatsByPermalink = new Map();
+    let audioStatsByTitle = new Map();
 
         const bodyEl = document.body;
     const rootListEl = document.getElementById('rootList');
@@ -1829,6 +1868,8 @@
     const audioScriptureLabelEl = document.getElementById('audioScriptureLabel');
     const audioScriptureRowEl = document.getElementById('audioScriptureRow');
     const audioSpeakerRowEl = document.getElementById('audioSpeakerRow');
+    const audioMetricRowEl = document.getElementById('audioMetricRow');
+    const audioMetricTextEl = document.getElementById('audioMetricText');
     const stageInfoEl = document.getElementById('stageInfo');
     const audioReadyLabelEl = document.getElementById('audioReadyLabel');
     const audioPlayerEl = document.getElementById('audioPlayer');
@@ -2891,7 +2932,8 @@
       button.className = `episode-card ${mode}` + (isActive ? ' active' : '');
       const thumb = mode === 'video' ? (ep.videoId ? getWatchThumb(ep.videoId) : ep.seriesWideImage || FALLBACK_IMAGE) : (ep.img || ep.seriesImage || FALLBACK_IMAGE);
       const subtitle = labelOverride || ep.scripture || ep.date || '';
-      button.innerHTML = `<div class="episode-thumb"><img src="${thumb}" alt=""></div><div class="card-copy"><h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3><div class="card-subtitle">${subtitle}</div></div>`;
+      const metricText = getEpisodeMetricText(ep);
+      button.innerHTML = `<div class="episode-thumb"><img src="${thumb}" alt=""></div><div class="card-copy"><h3 class="card-title">${ep.title || 'Untitled Sermon'}</h3><div class="card-subtitle">${subtitle}</div>${renderEpisodeMetricLine(metricText)}</div>`;
       button.addEventListener('click', () => selectEpisode(ep, originalIndex, { source: 'queue', leafKey: navLeafKey, seriesName: currentSeries || ep.series || '' }));
       return button;
     }
@@ -3048,6 +3090,11 @@
       audioScriptureRowEl.style.display = scriptureDisplay ? 'flex' : 'none';
       audioFeatureSpeakerEl.textContent = normalizeWhitespace(ep.by || '');
       audioSpeakerRowEl.style.display = ep.by ? 'flex' : 'none';
+      const metricText = getEpisodeMetricText(ep);
+      if (audioMetricRowEl && audioMetricTextEl) {
+        audioMetricTextEl.textContent = metricText;
+        audioMetricRowEl.style.display = metricText ? 'flex' : 'none';
+      }
     }
 
     function renderStageInfo(ep) {
@@ -3060,10 +3107,12 @@
       const scripture = normalizeWhitespace(ep.scripture || '');
       const scriptureDisplay = scripture.toLowerCase() === 'various' ? 'Selected Scriptures' : scripture;
       const speaker = normalizeWhitespace(ep.by || '');
+      const metricText = getEpisodeMetricText(ep);
       const rows = [];
-      if (scriptureDisplay) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scriptureDisplay)}</span><span>${scriptureDisplay}</span></div>`);
-      if (speaker) rows.push(`<div class="stage-info-row"><span class="stage-info-label">Speaker</span><span>${speaker}</span></div>`);
-      stageInfoEl.innerHTML = `<h3 class="stage-info-title">${ep.title || 'Untitled Sermon'}</h3><div class="stage-info-series">${ep.series || currentSeries || ''}</div><div class="stage-info-meta">${rows.join('')}</div>`;
+      if (scriptureDisplay) rows.push(`<div class="stage-info-row"><span class="stage-info-label">${getScriptureLabel(scriptureDisplay)}</span><span>${escapeHtml(scriptureDisplay)}</span></div>`);
+      if (speaker) rows.push(`<div class="stage-info-row"><span class="stage-info-label">Speaker</span><span>${escapeHtml(speaker)}</span></div>`);
+      if (metricText) rows.push(`<div class="stage-info-row stage-metric-row"><span>${escapeHtml(metricText)}</span></div>`);
+      stageInfoEl.innerHTML = `<h3 class="stage-info-title">${escapeHtml(ep.title || 'Untitled Sermon')}</h3><div class="stage-info-series">${escapeHtml(ep.series || currentSeries || '')}</div><div class="stage-info-meta">${rows.join('')}</div>`;
       stageInfoEl.style.display = 'block';
     }
 
@@ -3120,7 +3169,8 @@
       const cards = related.items.map((item, index) => {
         const entry = item.ep;
         const thumb = mode === 'video' ? (entry.videoId ? getWatchThumb(entry.videoId) : entry.seriesWideImage || FALLBACK_IMAGE) : (entry.img || entry.seriesImage || FALLBACK_IMAGE);
-        return `<button type="button" class="related-card ${mode}" data-related-index="${index}"><span class="related-thumb"><img src="${thumb}" alt=""></span><span class="related-copy"><h4>${entry.title || 'Untitled Sermon'}</h4><p>${entry.scripture || entry.date || ''}</p></span></button>`;
+        const metricText = getEpisodeMetricText(entry);
+        return `<button type="button" class="related-card ${mode}" data-related-index="${index}"><span class="related-thumb"><img src="${thumb}" alt=""></span><span class="related-copy"><h4>${entry.title || 'Untitled Sermon'}</h4><p>${entry.scripture || entry.date || ''}</p>${metricText ? `<p>${escapeHtml(metricText)}</p>` : ''}</span></button>`;
       }).join('');
       metaBoxEl.style.display = 'block';
       metaBoxEl.innerHTML = `<div class="related-shell" style="display:grid; gap: 10px;"><div class="related-head"><h3 class="related-title">${related.title}</h3></div><div class="related-row">${cards}</div></div>`;
@@ -3321,6 +3371,7 @@
       renderQueue();
       renderEmptyMeta();
       showModePlaceholder();
+      renderImpactTotals(statsState);
       resetMobileScrollPosition();
     }
 
@@ -3380,7 +3431,85 @@
       updateAudioProgressUi();
     });
 
-    function compactCount(value) {
+    
+    function normalizeStatsUrl(value) {
+      return String(value || '').trim().replace(/\/+$/, '/');
+    }
+
+    function normalizeStatsMediaUrl(value) {
+      return String(value || '').trim();
+    }
+
+    function normalizeStatsTitle(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/[–—]/g, '-')
+        .replace(/[’‘]/g, "'")
+        .replace(/&/g, ' and ')
+        .replace(/\|/g, ' ')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>\"]/g, ch => (
+        ch === '&' ? '&amp;' :
+        ch === '<' ? '&lt;' :
+        ch === '>' ? '&gt;' : '&quot;'
+      ));
+    }
+
+    function formatMetricValue(value, singular, plural) {
+      const num = Number(value || 0);
+      if (!Number.isFinite(num) || num <= 0) return '';
+      const label = num === 1 ? singular : plural;
+      return `▶ ${compactCount(num)} ${label}`;
+    }
+
+    function buildAudioStatsIndexes(stats) {
+      audioStatsByMediaUrl = new Map();
+      audioStatsByPermalink = new Map();
+      audioStatsByTitle = new Map();
+      const episodes = stats && stats.episodes ? stats.episodes : {};
+      Object.values(episodes).forEach((episode) => {
+        if (!episode || typeof episode !== 'object') return;
+        const mediaUrl = normalizeStatsMediaUrl(episode.media_url || '');
+        const permalink = normalizeStatsUrl(episode.permalink_url || episode.episode_url || '');
+        const titleKey = normalizeStatsTitle(episode.title || '');
+        if (mediaUrl) audioStatsByMediaUrl.set(mediaUrl, episode);
+        if (permalink) audioStatsByPermalink.set(permalink, episode);
+        if (titleKey && !audioStatsByTitle.has(titleKey)) audioStatsByTitle.set(titleKey, episode);
+      });
+    }
+
+    function getAudioEpisodeStats(ep) {
+      if (!ep) return null;
+      const mediaUrl = normalizeStatsMediaUrl(ep.audio || ep.media_url || '');
+      if (mediaUrl && audioStatsByMediaUrl.has(mediaUrl)) return audioStatsByMediaUrl.get(mediaUrl);
+      const permalink = normalizeStatsUrl(ep.link || ep.permalink_url || ep.episode_url || '');
+      if (permalink && audioStatsByPermalink.has(permalink)) return audioStatsByPermalink.get(permalink);
+      const titleKey = normalizeStatsTitle(ep.title || '');
+      if (titleKey && audioStatsByTitle.has(titleKey)) return audioStatsByTitle.get(titleKey);
+      return null;
+    }
+
+    function getEpisodeMetricText(ep) {
+      if (!ep) return '';
+      if (mode === 'audio') {
+        const stats = getAudioEpisodeStats(ep);
+        const plays = Number(stats?.plays_total || stats?.downloads_total || stats?.baseline_public_downloads || 0);
+        return formatMetricValue(plays, 'play', 'plays');
+      }
+      const views = Number(ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
+      return formatMetricValue(views, 'view', 'views');
+    }
+
+    function renderEpisodeMetricLine(metricText) {
+      return metricText ? `<div class="card-metric">${escapeHtml(metricText)}</div>` : '<div class="card-metric is-hidden"></div>';
+    }
+
+function compactCount(value) {
       const num = Number(value || 0);
       if (!Number.isFinite(num) || num <= 0) return '—';
       if (num >= 1000000) return `${(num / 1000000).toFixed(num >= 10000000 ? 0 : 1).replace(/\.0$/, '')}M`;
@@ -3389,11 +3518,19 @@
     }
 
     function renderImpactTotals(stats) {
-      const totals = stats && stats.podcast_totals ? stats.podcast_totals : {};
-      if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(totals.plays_total);
-      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(totals.episodes_total);
-      if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = totals.last_updated ? `Updated ${new Date(totals.last_updated).toLocaleDateString()}` : 'Updating twice daily';
-      if (impactEpisodesMetaEl) impactEpisodesMetaEl.textContent = totals.episodes_total ? 'Available now' : 'Tracking library size';
+      statsState = stats || null;
+      buildAudioStatsIndexes(statsState);
+      const totals = statsState && statsState.podcast_totals ? statsState.podcast_totals : {};
+      const isVideoMode = mode === 'video';
+      const primaryValue = isVideoMode ? (totals.video_views_total || totals.views_total || 0) : (totals.plays_total || 0);
+      const secondaryValue = isVideoMode ? (totals.video_episodes_total || totals.videos_total || 0) : (totals.episodes_total || 0);
+
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = compactCount(primaryValue);
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = compactCount(secondaryValue);
+      if (impactPlaysLabelEl) impactPlaysLabelEl.textContent = isVideoMode ? 'Views' : 'Plays';
+      if (impactEpisodesLabelEl) impactEpisodesLabelEl.textContent = isVideoMode ? 'Videos' : 'Episodes';
+      if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = '';
+      if (impactEpisodesMetaEl) impactEpisodesMetaEl.textContent = '';
     }
 
     async function loadImpactTotals() {
@@ -3402,6 +3539,12 @@
         if (!res.ok) throw new Error(`stats.json ${res.status}`);
         const stats = await res.json();
         renderImpactTotals(stats);
+        renderQueue();
+        if (currentEpisodeData) {
+          renderAudioDetails(currentEpisodeData);
+          renderStageInfo(currentEpisodeData);
+          renderMeta(currentEpisodeData);
+        }
       } catch (err) {
         renderImpactTotals(null);
       }
