@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Sync public Podbean totals and episode listing
+      - name: Sync public Podbean totals and visible-text episode blocks
         env:
           PODBEAN_SHOW_URL: "https://brojacobcedargrovebaptist.podbean.com/"
           PODBEAN_MAX_PAGES: "20"
