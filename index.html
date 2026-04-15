@@ -4447,5 +4447,159 @@ function compactCount(value) {
 })();
 </script>
 
+
+<script>
+/* v67 video archive totals + shorts load stabilization
+   - Load Shorts with the main video-only collections so it appears reliably.
+   - Keep Watch totals limited to the sermon archive only.
+   - Retry video stats hydration a few times so totals do not get stuck at 0.
+*/
+(function(){
+  const SHORTS_COLLECTION_V67 = { name: 'CGBC Shorts', playlistId: 'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
+  const EXCLUDED_VIDEO_TOTAL_SERIES_V67 = new Set(['Livestreams','CGBC Guest Speaker','CGBC Shorts']);
+  let hydrateAttemptsV67 = 0;
+
+  function hasShortsSeriesV67(){
+    return !!(window.sermonData && Array.isArray(sermonData[SHORTS_COLLECTION_V67.name]) && sermonData[SHORTS_COLLECTION_V67.name].length);
+  }
+
+  async function ensureShortsLoadedV67(){
+    if (hasShortsSeriesV67()) return true;
+    if (!SHORTS_COLLECTION_V67.playlistId || typeof fetchPlaylistSeries !== 'function') return false;
+    try {
+      const shortsEpisodes = await fetchPlaylistSeries(SHORTS_COLLECTION_V67, true);
+      if (shortsEpisodes && shortsEpisodes.length) {
+        sermonData[SHORTS_COLLECTION_V67.name] = shortsEpisodes.map((ep)=>({ ...ep, isShort: true, series: SHORTS_COLLECTION_V67.name }));
+        if (typeof applySeriesArtwork === 'function') applySeriesArtwork();
+        if (typeof buildBrowseBuckets === 'function') browseBuckets = buildBrowseBuckets();
+        if (typeof renderNavigation === 'function') renderNavigation();
+        if (typeof renderQueue === 'function') renderQueue();
+        return true;
+      }
+    } catch (err) {
+      console.warn('Shorts playlist could not be loaded in v67.', err);
+    }
+    return false;
+  }
+
+  function computeArchiveVideoTotalsV67(){
+    const totals = { views: 0, videos: 0, hasAnyViews: false };
+    Object.entries(sermonData || {}).forEach(([seriesName, episodes]) => {
+      if (EXCLUDED_VIDEO_TOTAL_SERIES_V67.has(seriesName)) return;
+      (episodes || []).forEach((ep) => {
+        if (!ep || !ep.videoId) return;
+        totals.videos += 1;
+        const views = Number(ep.videoViewsTotal || ep.viewCount || ep.views_total || 0);
+        if (Number.isFinite(views) && views > 0) {
+          totals.views += views;
+          totals.hasAnyViews = true;
+        }
+      });
+    });
+    try { window.videoLibraryTotals = totals; } catch (e) {}
+    return totals;
+  }
+
+  function patchRootItemsV67(){
+    const original = window.getRootItems;
+    if (typeof original !== 'function' || original.__v67patched) return;
+    const wrapped = function(){
+      const items = original.call(this);
+      if (mode === 'video' && hasShortsSeriesV67()) {
+        const already = items.some(item => item && item.key === 'shorts');
+        if (!already) {
+          const guestIndex = items.findIndex(item => item.key === 'guestSpeakers');
+          const shortItem = { key: 'shorts', title: 'Shorts', meta: 'Short-form video archive' };
+          if (guestIndex >= 0) items.splice(guestIndex, 0, shortItem);
+          else items.push(shortItem);
+        }
+      }
+      return items;
+    };
+    wrapped.__v67patched = true;
+    window.getRootItems = wrapped;
+    getRootItems = wrapped;
+  }
+
+  function patchImpactTotalsV67(){
+    const original = window.renderImpactTotals;
+    if (typeof original !== 'function' || original.__v67patched) return;
+    const wrapped = function(stats){
+      statsState = stats || null;
+      if (typeof buildAudioStatsIndexes === 'function') buildAudioStatsIndexes(statsState);
+      const totals = statsState && statsState.podcast_totals ? statsState.podcast_totals : {};
+      const isVideoMode = mode === 'video';
+      const archiveTotals = computeArchiveVideoTotalsV67();
+      const primaryText = isVideoMode
+        ? (archiveTotals.hasAnyViews ? compactCount(archiveTotals.views) : '—')
+        : compactCount(totals.plays_total || 0);
+      const secondaryText = isVideoMode
+        ? compactCount(archiveTotals.videos || 0)
+        : compactCount(totals.episodes_total || 0);
+      if (impactPlaysValueEl) impactPlaysValueEl.textContent = primaryText;
+      if (impactEpisodesValueEl) impactEpisodesValueEl.textContent = secondaryText;
+      if (impactPlaysLabelEl) impactPlaysLabelEl.textContent = isVideoMode ? 'Views' : 'Plays';
+      if (impactEpisodesLabelEl) impactEpisodesLabelEl.textContent = isVideoMode ? 'Videos' : 'Episodes';
+      if (impactPlaysMetaEl) impactPlaysMetaEl.textContent = '';
+      if (impactEpisodesMetaEl) impactEpisodesMetaEl.textContent = '';
+    };
+    wrapped.__v67patched = true;
+    window.renderImpactTotals = wrapped;
+    renderImpactTotals = wrapped;
+  }
+
+  async function hydrateVideoStatsRetryV67(){
+    hydrateAttemptsV67 += 1;
+    try {
+      await ensureShortsLoadedV67();
+      if (typeof hydrateVideoStatsV65 === 'function') {
+        await hydrateVideoStatsV65();
+      }
+      const totals = computeArchiveVideoTotalsV67();
+      if (typeof renderImpactTotals === 'function') renderImpactTotals(typeof statsState === 'undefined' ? null : statsState);
+      if (typeof renderNavigation === 'function') renderNavigation();
+      if (typeof renderQueue === 'function') renderQueue();
+      const needsRetry = totals.videos > 0 && !totals.hasAnyViews && hydrateAttemptsV67 < 6;
+      if (needsRetry) {
+        setTimeout(hydrateVideoStatsRetryV67, 1500);
+      }
+    } catch (err) {
+      console.warn('Video totals retry failed in v67.', err);
+      if (hydrateAttemptsV67 < 4) setTimeout(hydrateVideoStatsRetryV67, 1500);
+    }
+  }
+
+  patchRootItemsV67();
+  patchImpactTotalsV67();
+
+  const originalLoadDataV67 = window.loadData;
+  if (typeof originalLoadDataV67 === 'function' && !originalLoadDataV67.__v67patched) {
+    const wrappedLoad = async function(){
+      await originalLoadDataV67.apply(this, arguments);
+      await ensureShortsLoadedV67();
+      if (typeof buildBrowseBuckets === 'function') browseBuckets = buildBrowseBuckets();
+      if (typeof renderNavigation === 'function') renderNavigation();
+      if (typeof renderQueue === 'function') renderQueue();
+      setTimeout(hydrateVideoStatsRetryV67, 250);
+    };
+    wrappedLoad.__v67patched = true;
+    window.loadData = wrappedLoad;
+    loadData = wrappedLoad;
+  }
+
+  setTimeout(async () => {
+    await ensureShortsLoadedV67();
+    computeArchiveVideoTotalsV67();
+    if (typeof renderImpactTotals === 'function') renderImpactTotals(typeof statsState === 'undefined' ? null : statsState);
+    if (typeof renderNavigation === 'function') renderNavigation();
+  }, 50);
+
+  window.addEventListener('focus', hydrateVideoStatsRetryV67);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) hydrateVideoStatsRetryV67();
+  });
+})();
+</script>
+
 </body>
 </html>
