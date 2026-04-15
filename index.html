@@ -5420,5 +5420,61 @@ function compactCount(value) {
 })();
 </script>
 
+
+<script>
+/* v79 orphaned singleton Bible Books cleanup
+   - Keep v75 as the base.
+   - If a Bible Book resolves to direct episode surfaces, treat that as a real leaf step.
+   - If the UI still lands on queue for that branch, feed queue entries from those episode surfaces.
+   - Preserve episode series metadata on the player/details. */
+(function(){
+  function getBibleBookDirectSurfaceLeavesV79() {
+    if (window.navRootKey !== 'bibleBooks' || !window.navBranchKey || typeof window.getLeafItems !== 'function') return [];
+    const actionable = (window.getLeafItems() || []).filter(item => item && item.type !== 'section');
+    if (!actionable.length) return [];
+    if (!actionable.every(item => item.type === 'episode_surface' && item.episodeRef)) return [];
+    return actionable;
+  }
+
+  const originalHasMeaningfulLeafStepV79 = window.hasMeaningfulLeafStep;
+  function wrappedHasMeaningfulLeafStepV79() {
+    const directSurfaceLeaves = getBibleBookDirectSurfaceLeavesV79();
+    if (directSurfaceLeaves.length) return true;
+    return originalHasMeaningfulLeafStepV79.apply(this, arguments);
+  }
+  window.hasMeaningfulLeafStep = wrappedHasMeaningfulLeafStepV79;
+  hasMeaningfulLeafStep = wrappedHasMeaningfulLeafStepV79;
+
+  const originalGetNextMobileViewAfterBranchV79 = window.getNextMobileViewAfterBranch;
+  function wrappedGetNextMobileViewAfterBranchV79() {
+    const directSurfaceLeaves = getBibleBookDirectSurfaceLeavesV79();
+    if (directSurfaceLeaves.length) return 'leaf';
+    return originalGetNextMobileViewAfterBranchV79.apply(this, arguments);
+  }
+  window.getNextMobileViewAfterBranch = wrappedGetNextMobileViewAfterBranchV79;
+  getNextMobileViewAfterBranch = wrappedGetNextMobileViewAfterBranchV79;
+
+  const originalGetQueueEntriesV79 = window.getQueueEntries;
+  function wrappedGetQueueEntriesV79() {
+    const directSurfaceLeaves = getBibleBookDirectSurfaceLeavesV79();
+    if (directSurfaceLeaves.length && !window.currentSeries) {
+      return directSurfaceLeaves.map((item, index) => ({ kind: 'episode', ep: item.episodeRef, originalIndex: index }));
+    }
+    return originalGetQueueEntriesV79.apply(this, arguments);
+  }
+  window.getQueueEntries = wrappedGetQueueEntriesV79;
+  getQueueEntries = wrappedGetQueueEntriesV79;
+
+  const originalGetLeafHeadTextV79 = window.getLeafHeadText;
+  function wrappedGetLeafHeadTextV79() {
+    const directSurfaceLeaves = getBibleBookDirectSurfaceLeavesV79();
+    if (directSurfaceLeaves.length) return 'Step 3 · Choose Episode';
+    return originalGetLeafHeadTextV79.apply(this, arguments);
+  }
+  window.getLeafHeadText = wrappedGetLeafHeadTextV79;
+  getLeafHeadText = wrappedGetLeafHeadTextV79;
+})();
+</script>
+
 </body>
 </html>
