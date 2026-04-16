@@ -1,0 +1,12 @@
+{
+  "name": "cgbc-resolver-starter",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:library": "node scripts/fetch-rss.js && node scripts/fetch-youtube-data.js && node scripts/resolve-library.js && node scripts/publish-library.js"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0"
+  }
+}
