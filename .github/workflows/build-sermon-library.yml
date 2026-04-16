@@ -1,0 +1,38 @@
+name: Build Sermon Library
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13,23 * * *"
+
+jobs:
+  build-library:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build resolved library
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: npm run build:library
+
+      - name: Commit generated files if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.json public/*.json
+          git diff --cached --quiet || git commit -m "Update resolved sermon library"
+          git push
