@@ -1,10 +1,14 @@
 {
-  "generatedAt": "2026-04-16T04:18:41.247Z",
+  "generatedAt": "2026-04-16T04:57:53.412Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 131,
     "archiveItems": 131,
     "videoMatchedItems": 70
+  },
+  "totals": {
+    "audioPlaysTotal": 3509,
+    "audioEpisodesTotal": 131
   },
   "items": [
     {
@@ -12,6 +16,10 @@
       "sourceKey": {
         "mediaUrl": "https://mcdn.podbean.com/mf/web/gnz7sthiniv3cnvc/408_W_Audioabqf1.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/300ff708-2b57-3848-a5b3-0cc8c89f1fa8"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-rapture-pt-3-eschatology-the-rapture/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-rapture-pt-3-eschatology-the-rapture/"
       },
       "title": {
         "episodeName": "The Rapture Pt. 3",
@@ -61,8 +69,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gnz7sthiniv3cnvc/408_W_Audioabqf1.mp3",
-        "plays": 0,
-        "durationSeconds": 2010
+        "plays": 14,
+        "durationSeconds": 2010,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -118,6 +127,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/cehkc42vzrq4e7dg/01_Romans_12_1-2_The_Impact_of_the_Gospel_Pt_18f2z6.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/50dfc0e5-9d9e-3baa-a519-fc3de2aa7df3"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-121-2-the-impact-of-the-gospel-pt-1-romans-chapter-12/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-121-2-the-impact-of-the-gospel-pt-1-romans-chapter-12/"
+      },
       "title": {
         "episodeName": "The Impact of the Gospel Pt. 1",
         "subtitle": "",
@@ -158,14 +171,15 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cehkc42vzrq4e7dg/01_Romans_12_1-2_The_Impact_of_the_Gospel_Pt_18f2z6.mp3",
-        "plays": 0,
-        "durationSeconds": 1812
+        "plays": 27,
+        "durationSeconds": 1812,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
         "youtubeId": "j_xzfVXBG9M",
         "url": "https://www.youtube.com/watch?v=j_xzfVXBG9M",
-        "views": 55
+        "views": 56
       },
       "art": {
         "episode": {
@@ -213,6 +227,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/3acf5qtqdvbuniau/08_Romans_11_30-36_How_Unsearchable_Pt_8aerr4.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/767909b5-9c3d-3aa3-96b4-2de302414b38"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-30-36-how-unsearchable-pt-8-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-30-36-how-unsearchable-pt-8-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "How Unsearchable! Pt. 8",
         "subtitle": "",
@@ -248,8 +266,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/3acf5qtqdvbuniau/08_Romans_11_30-36_How_Unsearchable_Pt_8aerr4.mp3",
-        "plays": 0,
-        "durationSeconds": 1970
+        "plays": 22,
+        "durationSeconds": 1970,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -299,6 +318,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/wfbqciwxvk6wigts/02_The_Rapture_Pt_29huhz.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/9f5136d9-e8a8-36d3-b4e3-c3a71a8d2e44"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/eschatology-the-rapture-pt-2-the-rapture/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/eschatology-the-rapture-pt-2-the-rapture/"
+      },
       "title": {
         "episodeName": "The Rapture Pt. 2",
         "subtitle": "Pre-Tribulation",
@@ -343,8 +366,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/wfbqciwxvk6wigts/02_The_Rapture_Pt_29huhz.mp3",
-        "plays": 0,
-        "durationSeconds": 1871
+        "plays": 39,
+        "durationSeconds": 1871,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -399,6 +423,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/knutdgfwiqt7rh65/07_Romans_11_25-29_How_Unsearchable_Pt_768h04.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/6dcb0091-5b0a-386c-a4ec-d81592f9ff1c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-25-29-how-unsearchable-pt-7-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-25-29-how-unsearchable-pt-7-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "How Unsearchable! Pt. 7",
         "subtitle": "",
@@ -439,8 +467,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/knutdgfwiqt7rh65/07_Romans_11_25-29_How_Unsearchable_Pt_768h04.mp3",
-        "plays": 0,
-        "durationSeconds": 2084
+        "plays": 22,
+        "durationSeconds": 2084,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -494,6 +523,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/gmd44ikr6uq967w2/06_Romans_11_22-24_A_Necessary_Clarification_Pt_6ac79i.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/50da6bf6-0249-3216-8c8c-5bc802c8e5bf"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-22-24-a-necessary-clarification-pt-6-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-22-24-a-necessary-clarification-pt-6-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "A Necessary Clarification Pt. 6",
         "subtitle": "",
@@ -529,8 +562,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gmd44ikr6uq967w2/06_Romans_11_22-24_A_Necessary_Clarification_Pt_6ac79i.mp3",
-        "plays": 0,
-        "durationSeconds": 2709
+        "plays": 24,
+        "durationSeconds": 2709,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -580,6 +614,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/5f36xb9wmaimhhxp/05_Romans_11_22-24_A_Necessary_Clarification_Pt_571zu9.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/1722c309-8349-38d8-bb0c-72be77b46f79"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-22-24-a-necessary-clarification-pt-5-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-22-24-a-necessary-clarification-pt-5-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "A Necessary Clarification Pt. 5",
         "subtitle": "",
@@ -615,8 +653,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5f36xb9wmaimhhxp/05_Romans_11_22-24_A_Necessary_Clarification_Pt_571zu9.mp3",
-        "plays": 0,
-        "durationSeconds": 2709
+        "plays": 18,
+        "durationSeconds": 2709,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -666,6 +705,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/utsix8yhngtmpwfy/04_Romans_11_19-21_How_Unsearchable_Pt_46wae8.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d53e264b-3729-3e77-8a88-cf6a1ac83da6"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1119-24-how-unsearchable-pt-4-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1119-24-how-unsearchable-pt-4-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "How Unsearchable Pt. 4",
         "subtitle": "",
@@ -701,8 +744,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/utsix8yhngtmpwfy/04_Romans_11_19-21_How_Unsearchable_Pt_46wae8.mp3",
-        "plays": 0,
-        "durationSeconds": 2051
+        "plays": 14,
+        "durationSeconds": 2051,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -752,6 +796,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/8bu8yypw2pqmuais/03_Romans_11_16-18_How_Unsearchable_Pt_39xc2y.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/5cb38bdd-2c92-39d2-a2b9-c8bfd5714f42"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasefd/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasefd/"
+      },
       "title": {
         "episodeName": "How Unsearchable Pt. 3",
         "subtitle": "",
@@ -787,8 +835,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8bu8yypw2pqmuais/03_Romans_11_16-18_How_Unsearchable_Pt_39xc2y.mp3",
-        "plays": 0,
-        "durationSeconds": 2369
+        "plays": 19,
+        "durationSeconds": 2369,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -838,6 +887,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/wx4ccstesqdabtxw/02_Romans_11_11-15_How_Unsearchable_Pt_26o2w8.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/3a178831-ecb3-379d-bfa0-1f109d61e8cf"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1111-15-how-unsearchable-pt-2-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1111-15-how-unsearchable-pt-2-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "How Unsearchable Pt. 2",
         "subtitle": "",
@@ -873,8 +926,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/wx4ccstesqdabtxw/02_Romans_11_11-15_How_Unsearchable_Pt_26o2w8.mp3",
-        "plays": 0,
-        "durationSeconds": 1954
+        "plays": 16,
+        "durationSeconds": 1954,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -924,6 +978,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/6hb96gcy7x2n3qii/01_Romans_11_1-10_How_Unsearchable_Pt_18rh74.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2e62ed90-bcd4-3765-bad2-efcc7ebff2b1"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-111-10-how-unsearchable-pt-1-romans-chapter-11/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-111-10-how-unsearchable-pt-1-romans-chapter-11/"
+      },
       "title": {
         "episodeName": "How Unsearchable Pt. 1",
         "subtitle": "",
@@ -959,8 +1017,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6hb96gcy7x2n3qii/01_Romans_11_1-10_How_Unsearchable_Pt_18rh74.mp3",
-        "plays": 0,
-        "durationSeconds": 2283
+        "plays": 19,
+        "durationSeconds": 2283,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1010,6 +1069,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/xh5jawzpi76v6qva/04_Romans_10_16-21_Have_You_Heard_Pt_464b2b.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c4022d41-f6ce-3d67-a800-70582f28f601"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1016-21-have-you-heard-pt-4-romans-chapter-10/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1016-21-have-you-heard-pt-4-romans-chapter-10/"
+      },
       "title": {
         "episodeName": "Have You Heard? Pt. 4",
         "subtitle": "",
@@ -1045,8 +1108,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xh5jawzpi76v6qva/04_Romans_10_16-21_Have_You_Heard_Pt_464b2b.mp3",
-        "plays": 0,
-        "durationSeconds": 2553
+        "plays": 16,
+        "durationSeconds": 2553,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1096,6 +1160,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/pphuxssttwwxabw9/01_Amen_Amen_7wkav.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/452ea983-47db-3b3a-b685-993656aa1acc"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/amen-amen-2026-specials/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/amen-amen-2026-specials/"
+      },
       "title": {
         "episodeName": "Amen! Amen!",
         "subtitle": "",
@@ -1131,8 +1199,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/pphuxssttwwxabw9/01_Amen_Amen_7wkav.mp3",
-        "plays": 0,
-        "durationSeconds": 1809
+        "plays": 28,
+        "durationSeconds": 1809,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1178,6 +1247,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/k2fwh7s3rc4fccqd/03_Romans_10_14-15_Have_You_Heard_Part_37jeoe.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/4c9f60a6-c9df-34ce-b5ae-c0ff394af9f9"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1014-15-have-you-heard-pt-3-romans-chapter-10/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-1014-15-have-you-heard-pt-3-romans-chapter-10/"
+      },
       "title": {
         "episodeName": "Have You Heard? Pt. 3",
         "subtitle": "",
@@ -1213,8 +1286,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/k2fwh7s3rc4fccqd/03_Romans_10_14-15_Have_You_Heard_Part_37jeoe.mp3",
-        "plays": 0,
-        "durationSeconds": 2446
+        "plays": 26,
+        "durationSeconds": 2446,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1264,6 +1338,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/v234yz6x5g9dibty/01_Romans_10_5-13_Have_You_Heard_Pt_2mp3_13-37-36-444b7l9i.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/664023a4-aa6c-39a5-b94b-d3a9b173af6d"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-105-13-have-you-heard-pt-2-romans-chapter-10/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-105-13-have-you-heard-pt-2-romans-chapter-10/"
+      },
       "title": {
         "episodeName": "Have You Heard? Pt. 2",
         "subtitle": "",
@@ -1299,8 +1377,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/v234yz6x5g9dibty/01_Romans_10_5-13_Have_You_Heard_Pt_2mp3_13-37-36-444b7l9i.mp3",
-        "plays": 0,
-        "durationSeconds": 1727
+        "plays": 36,
+        "durationSeconds": 1727,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1350,6 +1429,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/bqmxszttqxbwic33/01_Romans_10_1-4_Have_You_Heard_8959m.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/befb0278-8488-3f91-bb51-1736815c43af"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-101-4-have-you-heard-romans-chapter-10/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-101-4-have-you-heard-romans-chapter-10/"
+      },
       "title": {
         "episodeName": "Have You Heard? Pt. 1",
         "subtitle": "",
@@ -1385,8 +1468,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/bqmxszttqxbwic33/01_Romans_10_1-4_Have_You_Heard_8959m.mp3",
-        "plays": 0,
-        "durationSeconds": 2421
+        "plays": 29,
+        "durationSeconds": 2421,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1436,6 +1520,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d788276d-9b89-3cf1-aef6-5c0b19c88039"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-925-33-unexplainable-mercy-pt-5-romans-chapter-9/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-925-33-unexplainable-mercy-pt-5-romans-chapter-9/"
+      },
       "title": {
         "episodeName": "Unexplainable Mercy Pt. 5",
         "subtitle": "",
@@ -1471,8 +1559,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
-        "plays": 0,
-        "durationSeconds": 2370
+        "plays": 84,
+        "durationSeconds": 2370,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1522,6 +1611,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/xpnmxpq7a7saq6h8/Romans_9_19-24_Unexplainable_Mercy_Pt_4_251214_0auhuf.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/ec0b2ba4-6459-3b56-91f6-fe142e567b0b"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdf/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdf/"
+      },
       "title": {
         "episodeName": "Unexplainable Mercy Pt. 4",
         "subtitle": "",
@@ -1557,8 +1650,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xpnmxpq7a7saq6h8/Romans_9_19-24_Unexplainable_Mercy_Pt_4_251214_0auhuf.mp3",
-        "plays": 0,
-        "durationSeconds": 2441
+        "plays": 34,
+        "durationSeconds": 2441,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1608,6 +1702,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/qbhkhc32nui5dsuz/12079cno0.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/b0331e72-be99-3dc4-b25c-da1469f1af96"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/hgliyuhb/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/hgliyuhb/"
+      },
       "title": {
         "episodeName": "Unexplainable Mercy Pt. 3",
         "subtitle": "",
@@ -1643,8 +1741,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/qbhkhc32nui5dsuz/12079cno0.mp3",
-        "plays": 0,
-        "durationSeconds": 2343
+        "plays": 28,
+        "durationSeconds": 2343,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1694,6 +1793,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/fnnmwp8mvzvb2uat/11306a01b.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/fc28ddf9-bdfc-3bcf-9726-a28ac2ce2705"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle-10th-edition-25-specials/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle-10th-edition-25-specials/"
+      },
       "title": {
         "episodeName": "Stand Up In the Battle",
         "subtitle": "10th Edition",
@@ -1729,8 +1832,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/fnnmwp8mvzvb2uat/11306a01b.mp3",
-        "plays": 0,
-        "durationSeconds": 2131
+        "plays": 24,
+        "durationSeconds": 2131,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1778,6 +1882,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/rs8nzz7gt33yxy8r/1123_Save_for_Dupe_12086jyp4.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/fd5d3850-7606-363a-9391-34c803b112ca"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/unexplained-mercy-pt-2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/unexplained-mercy-pt-2-romans/"
+      },
       "title": {
         "episodeName": "Unexplainable Mercy Pt. 2",
         "subtitle": "",
@@ -1813,8 +1921,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rs8nzz7gt33yxy8r/1123_Save_for_Dupe_12086jyp4.mp3",
-        "plays": 0,
-        "durationSeconds": 2110
+        "plays": 19,
+        "durationSeconds": 2110,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1864,6 +1973,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/8jrrhsjd9tngk7qm/1116_PCb9a76.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/4a88a222-9bc8-3863-a90e-8b56b95efc55"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/unexplained-mercy-pt-1-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/unexplained-mercy-pt-1-romans/"
+      },
       "title": {
         "episodeName": "Unexplainable Mercy Pt. 1",
         "subtitle": "",
@@ -1899,8 +2012,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8jrrhsjd9tngk7qm/1116_PCb9a76.mp3",
-        "plays": 0,
-        "durationSeconds": 1952
+        "plays": 24,
+        "durationSeconds": 1952,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -1950,6 +2064,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/bczwezy2brdp4uk8/Working_1109PC62rnj.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c2746cd9-04bd-3e1d-bd3f-04bfe6ef126e"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/are-you-persuaded-pt-2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/are-you-persuaded-pt-2-romans/"
+      },
       "title": {
         "episodeName": "Are You Persuaded Pt. 2",
         "subtitle": "",
@@ -1985,8 +2103,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/bczwezy2brdp4uk8/Working_1109PC62rnj.mp3",
-        "plays": 0,
-        "durationSeconds": 2086
+        "plays": 31,
+        "durationSeconds": 2086,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2036,6 +2155,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/728ufjgkwfrvmzb3/Working_1102WorshipPC9p24l.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/460f32a8-0fff-3379-bedb-9c5ac8623161"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/"
+      },
       "title": {
         "episodeName": "Worship Night Nov. 2, 2025",
         "subtitle": "",
@@ -2071,8 +2194,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/728ufjgkwfrvmzb3/Working_1102WorshipPC9p24l.mp3",
-        "plays": 0,
-        "durationSeconds": 4895
+        "plays": 25,
+        "durationSeconds": 4895,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -2118,6 +2242,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/dn22vutskbp82si6/1102PC8yqh3.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/e2d3a9b3-c75e-3991-9d31-ce267df81846"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/are-you-persuaded-pt-1-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/are-you-persuaded-pt-1-romans/"
+      },
       "title": {
         "episodeName": "Are You Persuaded Pt. 1",
         "subtitle": "",
@@ -2153,8 +2281,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dn22vutskbp82si6/1102PC8yqh3.mp3",
-        "plays": 0,
-        "durationSeconds": 2241
+        "plays": 19,
+        "durationSeconds": 2241,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2204,6 +2333,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/23pgmppxphxfxgz4/1026PC6de5m.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/3add6d1f-2066-3848-a3cf-5a484af8308b"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/what-we-know-is-good-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/what-we-know-is-good-romans/"
+      },
       "title": {
         "episodeName": "What We Know... Is Good",
         "subtitle": "",
@@ -2239,8 +2372,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/23pgmppxphxfxgz4/1026PC6de5m.mp3",
-        "plays": 0,
-        "durationSeconds": 2197
+        "plays": 12,
+        "durationSeconds": 2197,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2290,6 +2424,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/c4bcfd4mfcqht5v9/1019PC9a4c8.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d0e01e58-4b72-3fb7-862d-b051383e735b"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfhjg/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfhjg/"
+      },
       "title": {
         "episodeName": "Pray Anyway...",
         "subtitle": "",
@@ -2325,8 +2463,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/c4bcfd4mfcqht5v9/1019PC9a4c8.mp3",
-        "plays": 0,
-        "durationSeconds": 1434
+        "plays": 18,
+        "durationSeconds": 1434,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2376,6 +2515,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/9b7drvjvmxzxwnk5/Working_10127t319.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/dc03ab84-042c-33a9-8cb4-b6c86faec8ab"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/when-faith-becomes-sight-pt2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/when-faith-becomes-sight-pt2-romans/"
+      },
       "title": {
         "episodeName": "When Faith Becomes Sight Pt. 2",
         "subtitle": "",
@@ -2411,8 +2554,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/9b7drvjvmxzxwnk5/Working_10127t319.mp3",
-        "plays": 0,
-        "durationSeconds": 2003
+        "plays": 12,
+        "durationSeconds": 2003,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2462,6 +2606,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/83x75vrdvkchgp8r/921PCb379q.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/339d3b60-9713-33bc-9a36-92b65474c77a"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/when-faith-becomes-sight-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/when-faith-becomes-sight-romans/"
+      },
       "title": {
         "episodeName": "When Faith Becomes Sight Pt. 1",
         "subtitle": "",
@@ -2497,8 +2645,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/83x75vrdvkchgp8r/921PCb379q.mp3",
-        "plays": 0,
-        "durationSeconds": 1594
+        "plays": 18,
+        "durationSeconds": 1594,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2548,6 +2697,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/tf53pufwumhcvhhe/914PCbgitq.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/faa72a43-aa18-3c1b-adbd-361cf19acf53"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/we-are-his-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/we-are-his-romans/"
+      },
       "title": {
         "episodeName": "We Are His",
         "subtitle": "",
@@ -2583,8 +2736,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/tf53pufwumhcvhhe/914PCbgitq.mp3",
-        "plays": 0,
-        "durationSeconds": 1753
+        "plays": 29,
+        "durationSeconds": 1753,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2634,6 +2788,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/h7y5k2ptz4wyvgx8/907PC5ztfj.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/f9f57c82-6b04-3fc4-a097-2d955ba4e83e"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/whats-on-your-mind-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/whats-on-your-mind-romans/"
+      },
       "title": {
         "episodeName": "What's On Your Mind",
         "subtitle": "",
@@ -2669,8 +2827,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/h7y5k2ptz4wyvgx8/907PC5ztfj.mp3",
-        "plays": 0,
-        "durationSeconds": 1959
+        "plays": 22,
+        "durationSeconds": 1959,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2720,6 +2879,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/mqi97zptzez4gp46/824PCaufds.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/3dd55879-f069-3724-9508-e023f247bd77"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christians-and-the-law-4-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christians-and-the-law-4-romans/"
+      },
       "title": {
         "episodeName": "Christians and the Law: 4",
         "subtitle": "",
@@ -2755,8 +2918,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/mqi97zptzez4gp46/824PCaufds.mp3",
-        "plays": 0,
-        "durationSeconds": 1876
+        "plays": 25,
+        "durationSeconds": 1876,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -2806,6 +2970,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/vwht8cn6skwnaehv/817pcbmixf.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/f3155e87-34c6-34c1-bda1-ffb5a2f37dfc"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/4sadfsdaf/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/4sadfsdaf/"
+      },
       "title": {
         "episodeName": "Christians and the Law: 3",
         "subtitle": "",
@@ -2841,8 +3009,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/vwht8cn6skwnaehv/817pcbmixf.mp3",
-        "plays": 0,
-        "durationSeconds": 1848
+        "plays": 16,
+        "durationSeconds": 1848,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2892,6 +3061,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/y2xa2pjy4bjj9v3b/250803_Full_PodCast661k6.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/4f9edbe6-7d48-36e8-9d95-4c1468d75a76"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christians-and-the-law-2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christians-and-the-law-2-romans/"
+      },
       "title": {
         "episodeName": "Christians and the Law: 2",
         "subtitle": "",
@@ -2927,8 +3100,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/y2xa2pjy4bjj9v3b/250803_Full_PodCast661k6.mp3",
-        "plays": 0,
-        "durationSeconds": 2268
+        "plays": 29,
+        "durationSeconds": 2268,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -2978,6 +3152,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/xizivmumix4arw7q/803pc7mezc.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2c5dfd13-7e9c-3ec9-8c30-af085a025c09"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christians-and-the-law-1-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christians-and-the-law-1-romans/"
+      },
       "title": {
         "episodeName": "Christians and the Law: 1",
         "subtitle": "",
@@ -3013,8 +3191,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xizivmumix4arw7q/803pc7mezc.mp3",
-        "plays": 0,
-        "durationSeconds": 1989
+        "plays": 21,
+        "durationSeconds": 1989,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3064,6 +3243,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/8jv9i29rybhcg6wf/713PC6uaty.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/70d1f07c-4ace-3b05-9bfa-1b5f248062c7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-5-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-5-romans/"
+      },
       "title": {
         "episodeName": "The Sanctified Life Pt. 5",
         "subtitle": "",
@@ -3099,8 +3282,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8jv9i29rybhcg6wf/713PC6uaty.mp3",
-        "plays": 0,
-        "durationSeconds": 1840
+        "plays": 29,
+        "durationSeconds": 1840,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3150,6 +3334,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/sanjamg8prpbniuf/76PC9xm4l.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2da26066-2824-325e-91c1-70eb0b4a1e63"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-4-we-live-for-him-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-4-we-live-for-him-romans/"
+      },
       "title": {
         "episodeName": "The Sanctified Life Pt. 4",
         "subtitle": "",
@@ -3185,8 +3373,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/sanjamg8prpbniuf/76PC9xm4l.mp3",
-        "plays": 0,
-        "durationSeconds": 2221
+        "plays": 25,
+        "durationSeconds": 2221,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3236,6 +3425,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/4gwtkcfepisfrzz5/629PC73c0u.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c2084684-6e62-3c83-95fa-13fac7457dc9"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-3-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-3-romans/"
+      },
       "title": {
         "episodeName": "The Sanctified Life Pt. 3",
         "subtitle": "",
@@ -3271,8 +3464,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/4gwtkcfepisfrzz5/629PC73c0u.mp3",
-        "plays": 0,
-        "durationSeconds": 2076
+        "plays": 26,
+        "durationSeconds": 2076,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3322,6 +3516,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/9ppzd7ry9d94jmhe/622PodCast6mlsr.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/f00f1083-3155-3fff-b8ba-23bf71629709"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-pt-2-romans/"
+      },
       "title": {
         "episodeName": "The Sanctified Life Pt. 2",
         "subtitle": "",
@@ -3357,8 +3555,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/9ppzd7ry9d94jmhe/622PodCast6mlsr.mp3",
-        "plays": 0,
-        "durationSeconds": 1943
+        "plays": 29,
+        "durationSeconds": 1943,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3408,6 +3607,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/27xycki8as638bm4/615PC28zt1i.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d66bcf62-b6f9-3fb4-9086-193a20f8eab7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/heavy-hands-25-specials/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/heavy-hands-25-specials/"
+      },
       "title": {
         "episodeName": "Heavy Hands",
         "subtitle": "",
@@ -3448,8 +3651,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/27xycki8as638bm4/615PC28zt1i.mp3",
-        "plays": 0,
-        "durationSeconds": 1829
+        "plays": 27,
+        "durationSeconds": 1829,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3501,6 +3705,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/gdg5stwifh4kxqgs/68PCbtmou.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2567b992-54d7-3ea2-be6f-f15ebc2ed026"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-sanctified-life-romans/"
+      },
       "title": {
         "episodeName": "The Sanctified Life Pt. 1",
         "subtitle": "",
@@ -3536,8 +3744,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gdg5stwifh4kxqgs/68PCbtmou.mp3",
-        "plays": 0,
-        "durationSeconds": 1893
+        "plays": 22,
+        "durationSeconds": 1893,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -3587,6 +3796,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/r86jjzkikexazgn6/61PodCast7fk6t.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/e8f45d8a-2779-316b-8e20-056b2c18e6cc"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/title-much-more-pt-4-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/title-much-more-pt-4-romans/"
+      },
       "title": {
         "episodeName": "Much More Pt. 4",
         "subtitle": "",
@@ -3622,8 +3835,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/r86jjzkikexazgn6/61PodCast7fk6t.mp3",
-        "plays": 0,
-        "durationSeconds": 1987
+        "plays": 23,
+        "durationSeconds": 1987,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3673,6 +3887,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/hzu8iwpgym9mkmjf/525Podcast7jq61.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/0788edc8-cc08-375a-99f7-6b8cf76a1fed"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/much-more-3-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/much-more-3-romans/"
+      },
       "title": {
         "episodeName": "Much More Pt. 3",
         "subtitle": "",
@@ -3708,8 +3926,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hzu8iwpgym9mkmjf/525Podcast7jq61.mp3",
-        "plays": 0,
-        "durationSeconds": 2038
+        "plays": 19,
+        "durationSeconds": 2038,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3759,6 +3978,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/asag9r5id7wnq7fr/511Audiobf88q.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d299e238-585a-312a-9dd3-3ec10efbac0c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/there-will-come-a-time/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/there-will-come-a-time/"
+      },
       "title": {
         "episodeName": "There Will Come A Time...",
         "subtitle": "",
@@ -3794,8 +4017,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/asag9r5id7wnq7fr/511Audiobf88q.mp3",
-        "plays": 0,
-        "durationSeconds": 2406
+        "plays": 31,
+        "durationSeconds": 2406,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3843,6 +4067,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/cc997wd4ww62cawr/54Audio72e99.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/8fc652c9-99f9-363c-b3a7-b8ec97a90cb6"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/much-more-pt2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/much-more-pt2-romans/"
+      },
       "title": {
         "episodeName": "Much More Pt.2",
         "subtitle": "",
@@ -3878,8 +4106,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cc997wd4ww62cawr/54Audio72e99.mp3",
-        "plays": 0,
-        "durationSeconds": 2006
+        "plays": 19,
+        "durationSeconds": 2006,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -3929,6 +4158,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/4ak7bu3y4hqdzu75/427Audio8uqh7.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d1bad188-dc53-3b62-8a11-cf5f0fa06340"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/much-more-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/much-more-romans/"
+      },
       "title": {
         "episodeName": "Much More Pt. 1",
         "subtitle": "",
@@ -3964,8 +4197,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/4ak7bu3y4hqdzu75/427Audio8uqh7.mp3",
-        "plays": 0,
-        "durationSeconds": 1736
+        "plays": 21,
+        "durationSeconds": 1736,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4015,6 +4249,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/4v5t9vjjpqi6mbt4/420bh2yi.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/246a75a9-2a48-3a3d-9fa2-5aa1a2cb2d06"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-empty-tomb-changes-everything-2025-specials/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-empty-tomb-changes-everything-2025-specials/"
+      },
       "title": {
         "episodeName": "The Empty Tomb Changes Everything",
         "subtitle": "",
@@ -4050,8 +4288,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/4v5t9vjjpqi6mbt4/420bh2yi.mp3",
-        "plays": 0,
-        "durationSeconds": 2998
+        "plays": 21,
+        "durationSeconds": 2998,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4097,6 +4336,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/embnwyfa66gt4urm/4136rbsl.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/52ceba4f-918e-3302-b23e-7f73685b2194"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/title-fast-tracked-calvary-2025-specials/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/title-fast-tracked-calvary-2025-specials/"
+      },
       "title": {
         "episodeName": "Fast-Tracked Calvary",
         "subtitle": "",
@@ -4132,8 +4375,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/embnwyfa66gt4urm/4136rbsl.mp3",
-        "plays": 0,
-        "durationSeconds": 2053
+        "plays": 19,
+        "durationSeconds": 2053,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4185,6 +4429,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/f3fjckajweg3qzwi/32FullWideSF_19hxmt.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/1f306365-3f0f-3d2c-a3e4-881bdb1a3cc8"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/perfect-love-2-gods-perfect-purpose-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/perfect-love-2-gods-perfect-purpose-romans/"
+      },
       "title": {
         "episodeName": "Perfect Love 2 - God's Perfect Purpose | Romans",
         "subtitle": "",
@@ -4220,8 +4468,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/f3fjckajweg3qzwi/32FullWideSF_19hxmt.mp3",
-        "plays": 0,
-        "durationSeconds": 2516
+        "plays": 58,
+        "durationSeconds": 2516,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4271,6 +4520,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/4td2xs4296szecrg/316FullWideSF6notf.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/1f790361-9bdb-34cb-b9f9-6830211db6a2"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/perfect-love-1-perfect-timing-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/perfect-love-1-perfect-timing-romans/"
+      },
       "title": {
         "episodeName": "Perfect Love Pt. 1",
         "subtitle": "Timing",
@@ -4306,8 +4559,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/4td2xs4296szecrg/316FullWideSF6notf.mp3",
-        "plays": 0,
-        "durationSeconds": 2217
+        "plays": 25,
+        "durationSeconds": 2217,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4357,6 +4611,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/6f42mgzendxnmnj6/39PC9juar.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/4ebadb70-f10b-37a6-a3e5-7501fa35d96c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gospel-dividends-3-the-holy-spirit-i-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gospel-dividends-3-the-holy-spirit-i-romans/"
+      },
       "title": {
         "episodeName": "Romans 5:5, Gospel Dividends Pt. 3",
         "subtitle": "",
@@ -4392,8 +4650,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6f42mgzendxnmnj6/39PC9juar.mp3",
-        "plays": 0,
-        "durationSeconds": 2367
+        "plays": 26,
+        "durationSeconds": 2367,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4443,6 +4702,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/b6gbr9rdesdwz6ys/32FullWideSF_PCbhzf9.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2bb69448-3784-3691-b7fe-060c9674cb88"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gospel-dividends-2-access-hope-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gospel-dividends-2-access-hope-romans/"
+      },
       "title": {
         "episodeName": "Gospel Dividends Pt. 2: Access Hope",
         "subtitle": "",
@@ -4478,8 +4741,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/b6gbr9rdesdwz6ys/32FullWideSF_PCbhzf9.mp3",
-        "plays": 0,
-        "durationSeconds": 2337
+        "plays": 24,
+        "durationSeconds": 2337,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4529,6 +4793,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/sbf7gnczxng46r9d/223FullWideSFaudio73vbg.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2d9264cb-799c-3fa7-b78f-b997e94cfc63"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gospel-dividends-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gospel-dividends-romans/"
+      },
       "title": {
         "episodeName": "Gospel Dividends Pt. 1",
         "subtitle": "",
@@ -4564,8 +4832,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/sbf7gnczxng46r9d/223FullWideSFaudio73vbg.mp3",
-        "plays": 0,
-        "durationSeconds": 2087
+        "plays": 31,
+        "durationSeconds": 2087,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4615,6 +4884,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/ykig7edwr5r36mea/216PC6uy27.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/f9618362-e56e-3d0e-baf4-eca9e8d4dfa4"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/being-fully-persuaded-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/being-fully-persuaded-romans/"
+      },
       "title": {
         "episodeName": "Being Fully Persuaded",
         "subtitle": "",
@@ -4650,8 +4923,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ykig7edwr5r36mea/216PC6uy27.mp3",
-        "plays": 0,
-        "durationSeconds": 1920
+        "plays": 26,
+        "durationSeconds": 1920,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4701,6 +4975,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/39sz8pbj3cajn2za/29PC7su9k.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/3b0765a4-69d9-3bf8-b94b-cb588cd38046"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/by-faith-pt-2-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/by-faith-pt-2-romans/"
+      },
       "title": {
         "episodeName": "By Faith Pt. 2",
         "subtitle": "",
@@ -4736,8 +5014,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/39sz8pbj3cajn2za/29PC7su9k.mp3",
-        "plays": 0,
-        "durationSeconds": 2246
+        "plays": 34,
+        "durationSeconds": 2246,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4787,6 +5066,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/vgvzq8y38zt65u6t/131Audioab43a.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/6a8b542d-dce0-3da2-bb70-9762b06b233f"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/by-faith-romans/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/by-faith-romans/"
+      },
       "title": {
         "episodeName": "By Faith Pt. 1",
         "subtitle": "",
@@ -4822,8 +5105,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/vgvzq8y38zt65u6t/131Audioab43a.mp3",
-        "plays": 0,
-        "durationSeconds": 2380
+        "plays": 26,
+        "durationSeconds": 2380,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4873,6 +5157,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/vuqmy3t996i452ba/126audio6cmwg.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/f11cf03d-2f22-34b2-a618-50c6f298506d"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/heart-of-evangelism-reprioritize-2025/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/heart-of-evangelism-reprioritize-2025/"
+      },
       "title": {
         "episodeName": "Pt. 5 Heart of Evangelism",
         "subtitle": "",
@@ -4908,8 +5196,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/vuqmy3t996i452ba/126audio6cmwg.mp3",
-        "plays": 0,
-        "durationSeconds": 2703
+        "plays": 23,
+        "durationSeconds": 2703,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -4959,6 +5248,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/ivjn5zc6x5w3xmzu/119audio88j56.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/aa5b8529-fb79-3d06-a0f9-ad5790b3bcce"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/serving-others-reprioritize-2025/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/serving-others-reprioritize-2025/"
+      },
       "title": {
         "episodeName": "Pt. 4 Serving Others",
         "subtitle": "",
@@ -4994,8 +5287,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ivjn5zc6x5w3xmzu/119audio88j56.mp3",
-        "plays": 0,
-        "durationSeconds": 2671
+        "plays": 25,
+        "durationSeconds": 2671,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5045,6 +5339,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/km7qptqgj8c9cthw/112Nick9lnlm.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/aec6c782-2370-393b-88c0-7c4a1b202588"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/prideful-problems-reprioritize-2025/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/prideful-problems-reprioritize-2025/"
+      },
       "title": {
         "episodeName": "Pt. 3 Prideful Problems",
         "subtitle": "",
@@ -5080,8 +5378,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/km7qptqgj8c9cthw/112Nick9lnlm.mp3",
-        "plays": 0,
-        "durationSeconds": 2165
+        "plays": 22,
+        "durationSeconds": 2165,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5129,6 +5428,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/79j4gcwwgwxyjab4/128amh7j.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/79c6a178-1118-371b-821b-0e569845aaab"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/go-make-it-right-reprioritize-2025/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/go-make-it-right-reprioritize-2025/"
+      },
       "title": {
         "episodeName": "Pt. 2 Go, Make It Right",
         "subtitle": "",
@@ -5164,8 +5467,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/79j4gcwwgwxyjab4/128amh7j.mp3",
-        "plays": 0,
-        "durationSeconds": 2102
+        "plays": 20,
+        "durationSeconds": 2102,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5215,6 +5519,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/hka45nqdctuyjfrq/1229PodCast7ajmg.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d64ea23c-21c3-3a4c-b835-1243cdabeef7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/reprioritize-2025-pt1-spiritual-purity/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/reprioritize-2025-pt1-spiritual-purity/"
+      },
       "title": {
         "episodeName": "Pt. 1 Spiritual Purity",
         "subtitle": "",
@@ -5250,8 +5558,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hka45nqdctuyjfrq/1229PodCast7ajmg.mp3",
-        "plays": 0,
-        "durationSeconds": 2467
+        "plays": 25,
+        "durationSeconds": 2467,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5301,6 +5610,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/6bpiz3vaj3jabwg6/Untitled_Project655yd.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/9685f94f-2983-373f-a169-5c9b3862d0d7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christmas-in-the-grove-2024/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/christmas-in-the-grove-2024/"
+      },
       "title": {
         "episodeName": "Christmas in the Grove 2024",
         "subtitle": "",
@@ -5336,8 +5649,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6bpiz3vaj3jabwg6/Untitled_Project655yd.mp3",
-        "plays": 0,
-        "durationSeconds": 3293
+        "plays": 20,
+        "durationSeconds": 3293,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5387,6 +5701,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/5nv5wrg24cam4m8n/12_22_24_The_True_Light668zj.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/00798040-0d56-30b0-8345-0e2f0daf8a0d"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-true-light/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-true-light/"
+      },
       "title": {
         "episodeName": "The True Light",
         "subtitle": "",
@@ -5422,8 +5740,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5nv5wrg24cam4m8n/12_22_24_The_True_Light668zj.mp3",
-        "plays": 0,
-        "durationSeconds": 2403
+        "plays": 16,
+        "durationSeconds": 2403,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5473,6 +5792,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/2fq6ucd6umd8jen2/1215Podcast9dam7.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/b85162af-f504-32a2-a018-8c7d5ba3a92c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thankful-for-the-cant-pt-3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thankful-for-the-cant-pt-3/"
+      },
       "title": {
         "episodeName": "Thankful For The \"CAN'T\" Pt. 3",
         "subtitle": "",
@@ -5508,8 +5831,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/2fq6ucd6umd8jen2/1215Podcast9dam7.mp3",
-        "plays": 0,
-        "durationSeconds": 2266
+        "plays": 21,
+        "durationSeconds": 2266,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5563,6 +5887,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/fnuqaehim4hgpu6c/12_08_24_Thankful_for_The_CAN_T_Pt_283d3e.m4a",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/62a83290-d5a0-3fb6-9c78-1c37fb0c7af1"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/12082024-thankful-for-the-cant-pt-2/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/12082024-thankful-for-the-cant-pt-2/"
+      },
       "title": {
         "episodeName": "Thankful for the: \"CAN'T\" Pt. 2",
         "subtitle": "",
@@ -5598,8 +5926,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/fnuqaehim4hgpu6c/12_08_24_Thankful_for_The_CAN_T_Pt_283d3e.m4a",
-        "plays": 0,
-        "durationSeconds": 2759
+        "plays": 26,
+        "durationSeconds": 2759,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5653,6 +5982,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/uvvjjckyhzy3fjc4/1216rb5c.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/9dc6e802-a812-30ac-937e-210e3a6b341b"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle-9th-edition/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle-9th-edition/"
+      },
       "title": {
         "episodeName": "Stand Up In the Battle 9th Edition",
         "subtitle": "",
@@ -5688,8 +6021,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/uvvjjckyhzy3fjc4/1216rb5c.mp3",
-        "plays": 0,
-        "durationSeconds": 2412
+        "plays": 22,
+        "durationSeconds": 2412,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5741,6 +6075,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/iqsgza3eyss9dyns/11_24_24_Thankful_For_The_CAN_T7ek1a.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/8dae4181-11dd-33f7-97e5-128bbecc8d37"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/11242024-thankful-for-the-cant/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/11242024-thankful-for-the-cant/"
+      },
       "title": {
         "episodeName": "Thankful for the: \"CAN'T\" Pt. 1",
         "subtitle": "",
@@ -5776,8 +6114,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/iqsgza3eyss9dyns/11_24_24_Thankful_For_The_CAN_T7ek1a.mp3",
-        "plays": 0,
-        "durationSeconds": 1834
+        "plays": 15,
+        "durationSeconds": 1834,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5831,6 +6170,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/ac4d47ckf4butt6m/11_17_24_The_Gospel_Answer_to_Obtaining_Righteousnessaxsut.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/292eb5cc-7793-3689-84e5-efa1497d697c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/11172024-the-gospel-answer-for-obtaining-righteousness/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/11172024-the-gospel-answer-for-obtaining-righteousness/"
+      },
       "title": {
         "episodeName": "The Gospel Answer for: Obtaining Righteousness",
         "subtitle": "",
@@ -5866,8 +6209,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ac4d47ckf4butt6m/11_17_24_The_Gospel_Answer_to_Obtaining_Righteousnessaxsut.mp3",
-        "plays": 0,
-        "durationSeconds": 2120
+        "plays": 14,
+        "durationSeconds": 2120,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -5917,6 +6261,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/8m8d9i2mdxq6tyyc/1110_PodCast9zsht.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/fc3151a3-7245-3d0a-a6f1-a85f4bad4217"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/all-means-all-pt-4/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/all-means-all-pt-4/"
+      },
       "title": {
         "episodeName": "All Means \"ALL\" Pt. 4",
         "subtitle": "",
@@ -5952,8 +6300,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8m8d9i2mdxq6tyyc/1110_PodCast9zsht.mp3",
-        "plays": 0,
-        "durationSeconds": 2032
+        "plays": 26,
+        "durationSeconds": 2032,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -6007,6 +6356,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/q52auy6szwcn64vn/1027a5tlp.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/a90474bc-ce03-39d1-9d80-e384ea89d662"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/testimony/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/testimony/"
+      },
       "title": {
         "episodeName": "Testimony",
         "subtitle": "",
@@ -6042,8 +6395,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/q52auy6szwcn64vn/1027a5tlp.mp3",
-        "plays": 0,
-        "durationSeconds": 1622
+        "plays": 20,
+        "durationSeconds": 1622,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -6089,6 +6443,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/wg24mtqdjzfndmxf/10_13_24_All_Means_ALL_Pt_38o59e.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/a577b474-2141-3045-ad36-734b5cf91b86"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/10132024-all-means-all-pt-3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/10132024-all-means-all-pt-3/"
+      },
       "title": {
         "episodeName": "All Means \"ALL\" Pt. 3",
         "subtitle": "",
@@ -6124,8 +6482,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/wg24mtqdjzfndmxf/10_13_24_All_Means_ALL_Pt_38o59e.mp3",
-        "plays": 0,
-        "durationSeconds": 2348
+        "plays": 19,
+        "durationSeconds": 2348,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -6179,6 +6538,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/miu7mny56p9ivtnx/10_06_24_All_Means_ALL_Pt_2bbbdt.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/0c2c7815-f97a-372e-8efc-ae9ab453826e"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/10062024-all-means-all-pt-2/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/10062024-all-means-all-pt-2/"
+      },
       "title": {
         "episodeName": "All Menas \"ALL\" Pt. 2",
         "subtitle": "",
@@ -6214,8 +6577,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/miu7mny56p9ivtnx/10_06_24_All_Means_ALL_Pt_2bbbdt.mp3",
-        "plays": 0,
-        "durationSeconds": 2581
+        "plays": 20,
+        "durationSeconds": 2581,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6269,6 +6633,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/z4g7pyft6it4zs5j/9_29_24_Faith_Without_Love8u5el.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/a3868d01-a3db-3960-8ab0-6f69eded725b"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/92924-faith-without-love/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/92924-faith-without-love/"
+      },
       "title": {
         "episodeName": "Faith Without Love",
         "subtitle": "",
@@ -6304,8 +6672,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/z4g7pyft6it4zs5j/9_29_24_Faith_Without_Love8u5el.mp3",
-        "plays": 0,
-        "durationSeconds": 2371
+        "plays": 26,
+        "durationSeconds": 2371,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6355,6 +6724,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/595yiy2fxtfw635p/9_22_24_All_Means_ALL8lhdr.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/a394f3d7-395f-38f7-9af8-b7201970a3f0"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/9222024-all-means-all/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/9222024-all-means-all/"
+      },
       "title": {
         "episodeName": "All Menas \"ALL\" Pt.1",
         "subtitle": "",
@@ -6390,8 +6763,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/595yiy2fxtfw635p/9_22_24_All_Means_ALL8lhdr.mp3",
-        "plays": 0,
-        "durationSeconds": 2627
+        "plays": 23,
+        "durationSeconds": 2627,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6445,6 +6819,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/fdkvrvkd9fw5q9xr/9_15_24_Do_As_I_Say_Not_As_I_Doavmfk.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/addb5494-c2b6-3161-b27b-2c1d39686048"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/9152024-do-as-i-say-not-as-i-do/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/9152024-do-as-i-say-not-as-i-do/"
+      },
       "title": {
         "episodeName": "\"Do As I Say, Not As I Do.\"",
         "subtitle": "",
@@ -6480,8 +6858,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/fdkvrvkd9fw5q9xr/9_15_24_Do_As_I_Say_Not_As_I_Doavmfk.mp3",
-        "plays": 0,
-        "durationSeconds": 2763
+        "plays": 23,
+        "durationSeconds": 2763,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6535,6 +6914,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/7msv9bjqxzpsy2cf/09_08_24_Disciplines_Of_A_Victorious_Believer7mrxq.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c010a806-8a15-3c22-87dd-908cde2e51d8"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/090824-disciplines-of-a-victorious-believer/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/090824-disciplines-of-a-victorious-believer/"
+      },
       "title": {
         "episodeName": "Disciplines of a Victorious Believer Pt. 5: Steadfast Service",
         "subtitle": "",
@@ -6570,8 +6953,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/7msv9bjqxzpsy2cf/09_08_24_Disciplines_Of_A_Victorious_Believer7mrxq.mp3",
-        "plays": 0,
-        "durationSeconds": 3204
+        "plays": 25,
+        "durationSeconds": 3204,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6621,6 +7005,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/hrdmyk2tr77dpbgj/09_01_24_Disciplines_Of_a_Victorious_Believer_Pt_4bamx3.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/41b8c268-b2a9-3f96-8476-bf67ee0b671a"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/discipline-of-a-victorious-believer-pt-4/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/discipline-of-a-victorious-believer-pt-4/"
+      },
       "title": {
         "episodeName": "Disciplines of a Victorious Believer Pt. 4: Generous Giving",
         "subtitle": "",
@@ -6656,8 +7044,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hrdmyk2tr77dpbgj/09_01_24_Disciplines_Of_a_Victorious_Believer_Pt_4bamx3.mp3",
-        "plays": 0,
-        "durationSeconds": 2461
+        "plays": 26,
+        "durationSeconds": 2461,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6707,6 +7096,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/7zg6q558pw2yfzbi/8_25_24_Disciplines_of_a_Victorious_Believer_Pt_386spe.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/ea944846-a92a-3995-8533-5a3334c87380"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/disciplines-of-a-victorious-believer-pt3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/disciplines-of-a-victorious-believer-pt3/"
+      },
       "title": {
         "episodeName": "Disciplines of a Victorious Believer Pt. 3: Perservering Fellowship",
         "subtitle": "",
@@ -6742,8 +7135,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/7zg6q558pw2yfzbi/8_25_24_Disciplines_of_a_Victorious_Believer_Pt_386spe.mp3",
-        "plays": 0,
-        "durationSeconds": 2877
+        "plays": 25,
+        "durationSeconds": 2877,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6793,6 +7187,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/3ixeygh2raudyp9i/08_11_24_Disciplines_of_a_Victorious_Believer_Pt_28nyoj.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/67adda47-13c4-3565-a757-d8959114a15f"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/disciplines-of-a-strong-believer/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/disciplines-of-a-strong-believer/"
+      },
       "title": {
         "episodeName": "Disciplines of a Victorious Believer Pt. 2: Pray Powerfully",
         "subtitle": "",
@@ -6828,8 +7226,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/3ixeygh2raudyp9i/08_11_24_Disciplines_of_a_Victorious_Believer_Pt_28nyoj.mp3",
-        "plays": 0,
-        "durationSeconds": 1708
+        "plays": 29,
+        "durationSeconds": 1708,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6879,6 +7278,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/c7em5x5a5p3kyg62/84_Podcastakqka.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c5290121-9c08-38e7-9420-be6150a0d2c2"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/disciplines-of-a-victorious-believer-pt-1/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/disciplines-of-a-victorious-believer-pt-1/"
+      },
       "title": {
         "episodeName": "Disciplines of a Victorious Believer Pt. 1: Hunger for God's Word",
         "subtitle": "",
@@ -6914,8 +7317,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/c7em5x5a5p3kyg62/84_Podcastakqka.mp3",
-        "plays": 0,
-        "durationSeconds": 2595
+        "plays": 26,
+        "durationSeconds": 2595,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -6965,6 +7369,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/phsnqa5xbxriyshn/7_28_24_The_Dangers_of_Unfaithfulness_Pt471833.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d641c42a-5b3a-38b2-9b83-540944314bec"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-dangers-of-unfaithfulness-pt4/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-dangers-of-unfaithfulness-pt4/"
+      },
       "title": {
         "episodeName": "The Danger of Unfaithfulness Pt. 4",
         "subtitle": "",
@@ -7000,8 +7408,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/phsnqa5xbxriyshn/7_28_24_The_Dangers_of_Unfaithfulness_Pt471833.mp3",
-        "plays": 0,
-        "durationSeconds": 2397
+        "plays": 20,
+        "durationSeconds": 2397,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7055,6 +7464,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/cwxt33xfhwjewvxp/7_21_24_The_Danders_Of_Unfaithfulness_Pt_3agh1u.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/975c0c2d-cc38-34cb-b062-0a1b98879fb0"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-danger-of-unfaithfulness-pt-3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-danger-of-unfaithfulness-pt-3/"
+      },
       "title": {
         "episodeName": "The Danger of Unfaithfulness Pt. 3",
         "subtitle": "",
@@ -7090,8 +7503,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cwxt33xfhwjewvxp/7_21_24_The_Danders_Of_Unfaithfulness_Pt_3agh1u.mp3",
-        "plays": 0,
-        "durationSeconds": 2213
+        "plays": 29,
+        "durationSeconds": 2213,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7145,6 +7559,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/gaw8wnvzqwxhiayv/7_14_24_The_Danger_Of_Unfaithfulness_Pt_27qf5z.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d830057e-49ee-3f4e-9da2-88393d680484"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-danger-of-unfaithfulness-pt-2/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-danger-of-unfaithfulness-pt-2/"
+      },
       "title": {
         "episodeName": "The Danger of Unfaithfulness Pt. 2",
         "subtitle": "",
@@ -7180,8 +7598,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gaw8wnvzqwxhiayv/7_14_24_The_Danger_Of_Unfaithfulness_Pt_27qf5z.mp3",
-        "plays": 0,
-        "durationSeconds": 2212
+        "plays": 22,
+        "durationSeconds": 2212,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7235,6 +7654,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/3k2qsagb79set5f8/7_7_24_The_Danger_of_Unfaithfulness_Pt_17t3bo.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/b908cd6a-a86f-3fe1-bd63-a342ba3d85fd"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-danger-of-unfaithfulness-pt-1/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-danger-of-unfaithfulness-pt-1/"
+      },
       "title": {
         "episodeName": "The Danger of Unfaithfulness Pt. 1",
         "subtitle": "",
@@ -7270,8 +7693,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/3k2qsagb79set5f8/7_7_24_The_Danger_of_Unfaithfulness_Pt_17t3bo.mp3",
-        "plays": 0,
-        "durationSeconds": 2616
+        "plays": 25,
+        "durationSeconds": 2616,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7325,6 +7749,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/mc7bemnm554aqy9u/pastor_nicks_sermon_hsgiuy7i845.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/de6b25ea-1c81-3503-adb2-7af79381807a"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/63024-the-one-and-only/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/63024-the-one-and-only/"
+      },
       "title": {
         "episodeName": "The One and Only",
         "subtitle": "",
@@ -7360,8 +7788,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/mc7bemnm554aqy9u/pastor_nicks_sermon_hsgiuy7i845.mp3",
-        "plays": 0,
-        "durationSeconds": 2466
+        "plays": 19,
+        "durationSeconds": 2466,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7411,6 +7840,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/3452axsvqsse7vrw/6_23_24_Thou_Art_Inexcusable_Pt_3758f2.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/61db5807-f708-3e9b-8871-efecb5c1c45c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thou-art-inexcusable-pt-3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thou-art-inexcusable-pt-3/"
+      },
       "title": {
         "episodeName": "Thou Art Inexcusable Pt. 3",
         "subtitle": "",
@@ -7446,8 +7879,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/3452axsvqsse7vrw/6_23_24_Thou_Art_Inexcusable_Pt_3758f2.mp3",
-        "plays": 0,
-        "durationSeconds": 2583
+        "plays": 29,
+        "durationSeconds": 2583,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7501,6 +7935,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/gs7wb982hkbianyz/06_16_24_Thou_Art_Inexcusable_Pt_29o27c.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/a3b327d9-06b7-3849-9954-e23dd0e92801"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thou-art-inexcusable-pt-2-romans-21-16-b/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thou-art-inexcusable-pt-2-romans-21-16-b/"
+      },
       "title": {
         "episodeName": "Thou Art Inexcusable Pt. 2",
         "subtitle": "",
@@ -7536,8 +7974,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gs7wb982hkbianyz/06_16_24_Thou_Art_Inexcusable_Pt_29o27c.mp3",
-        "plays": 0,
-        "durationSeconds": 2519
+        "plays": 26,
+        "durationSeconds": 2519,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7591,6 +8030,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/jwzsrpwveh5cdbgd/9_06_24_Thou_Art_Inexcusable_Pt_18ndn5.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/0b82b541-8362-3850-8525-947ac0823fdb"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/90624-thou-art-inexcusable-pt-1/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/90624-thou-art-inexcusable-pt-1/"
+      },
       "title": {
         "episodeName": "Thou Art Inexcusable Pt. 1",
         "subtitle": "",
@@ -7626,8 +8069,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/jwzsrpwveh5cdbgd/9_06_24_Thou_Art_Inexcusable_Pt_18ndn5.mp3",
-        "plays": 0,
-        "durationSeconds": 2500
+        "plays": 27,
+        "durationSeconds": 2500,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7681,6 +8125,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/w8qfbeuejdf8u7de/06_02_04_Results_of_the_Merciful_Wrath_of_God_Pt_28gtj3.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/29e52c90-9542-3095-8f7d-98e4652af3e4"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/results-of-the-merciful-wrath-of-god-pt-2/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/results-of-the-merciful-wrath-of-god-pt-2/"
+      },
       "title": {
         "episodeName": "Results of the Merciful Wrath of God Pt. 2",
         "subtitle": "",
@@ -7716,8 +8164,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/w8qfbeuejdf8u7de/06_02_04_Results_of_the_Merciful_Wrath_of_God_Pt_28gtj3.mp3",
-        "plays": 0,
-        "durationSeconds": 2133
+        "plays": 18,
+        "durationSeconds": 2133,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7771,6 +8220,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/uqit7qga4s6ys3ms/05_26_24_Results_of_the_Merciful_Wrath_of_God7qbip.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2480235a-ab66-3884-8d7a-bf25720715a9"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/result-of-the-merciful-wrath-of-god/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/result-of-the-merciful-wrath-of-god/"
+      },
       "title": {
         "episodeName": "Results of the Merciful Wrath of God Pt. 1",
         "subtitle": "",
@@ -7806,8 +8259,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/uqit7qga4s6ys3ms/05_26_24_Results_of_the_Merciful_Wrath_of_God7qbip.mp3",
-        "plays": 0,
-        "durationSeconds": 2064
+        "plays": 21,
+        "durationSeconds": 2064,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7861,6 +8315,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/8qxjv8td8pd6srg8/5_19_24_Gods_Merciful_Wrath_Pt2b8pvt.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/0facbe9a-81db-37dc-a41d-3407cf2335a2"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gods-merciful-wrath-pt2/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gods-merciful-wrath-pt2/"
+      },
       "title": {
         "episodeName": "God's Merciful Wrath Pt. 2",
         "subtitle": "",
@@ -7896,8 +8354,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8qxjv8td8pd6srg8/5_19_24_Gods_Merciful_Wrath_Pt2b8pvt.mp3",
-        "plays": 0,
-        "durationSeconds": 2316
+        "plays": 19,
+        "durationSeconds": 2316,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -7951,6 +8410,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/jau7s7g8n438ywin/5_12_2024_And_Also_Some_Women9zgdp.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/858c52b1-4f22-3a2f-a9a1-dde8071c8818"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/and-also-some-women/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/and-also-some-women/"
+      },
       "title": {
         "episodeName": "And Also Some Women...",
         "subtitle": "",
@@ -7986,8 +8449,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/jau7s7g8n438ywin/5_12_2024_And_Also_Some_Women9zgdp.mp3",
-        "plays": 0,
-        "durationSeconds": 1747
+        "plays": 14,
+        "durationSeconds": 1747,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8039,6 +8503,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/v9664desmujcia68/5_4_24_Breaking_The_Mold_Of_The_Consumer_Church83st9.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/44231ed8-9c1c-3e1b-90d8-5a8f5b5fb487"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/breaking-the-mold-of-the-consumer-church/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/breaking-the-mold-of-the-consumer-church/"
+      },
       "title": {
         "episodeName": "Breaking the Mold of the Consumer Church",
         "subtitle": "",
@@ -8074,8 +8542,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/v9664desmujcia68/5_4_24_Breaking_The_Mold_Of_The_Consumer_Church83st9.mp3",
-        "plays": 0,
-        "durationSeconds": 3095
+        "plays": 29,
+        "durationSeconds": 3095,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8127,6 +8596,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/yc89bydun26y4dsj/4_28_24_Gods_Merciful_Wrath_Pt19k6h7.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/b5757182-9920-380c-8c3d-49976e7fffca"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gods-merciful-wrath-pt-1/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gods-merciful-wrath-pt-1/"
+      },
       "title": {
         "episodeName": "God's Merciful Wrath Pt. 1",
         "subtitle": "",
@@ -8162,8 +8635,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/yc89bydun26y4dsj/4_28_24_Gods_Merciful_Wrath_Pt19k6h7.mp3",
-        "plays": 0,
-        "durationSeconds": 2144
+        "plays": 17,
+        "durationSeconds": 2144,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8217,6 +8691,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/xgpfvcnnx4yc4hzm/4_21_24_Is_It_I79nkg.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/2139343e-c4f4-3c68-b6fb-21d86cb8ba2a"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/is-it-i/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/is-it-i/"
+      },
       "title": {
         "episodeName": "Is It I?",
         "subtitle": "",
@@ -8252,8 +8730,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xgpfvcnnx4yc4hzm/4_21_24_Is_It_I79nkg.mp3",
-        "plays": 0,
-        "durationSeconds": 1826
+        "plays": 19,
+        "durationSeconds": 1826,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8305,6 +8784,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/863era6saqe4e4db/4_14_24_Where_Do_Your_Passions_Lie_Pt19chuw.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/aba9712e-843e-3d1c-b647-94dc87dad571"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/where-do-your-passions-lie-pt1/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/where-do-your-passions-lie-pt1/"
+      },
       "title": {
         "episodeName": "How Are You Known Pt. 4",
         "subtitle": "Where do your passions lie?",
@@ -8340,8 +8823,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/863era6saqe4e4db/4_14_24_Where_Do_Your_Passions_Lie_Pt19chuw.mp3",
-        "plays": 0,
-        "durationSeconds": 2399
+        "plays": 20,
+        "durationSeconds": 2399,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8395,6 +8879,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/5i2qu7q4m47xzddk/4_7_24_How_Are_You_Known_Pt393j4c.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/770dfb73-efba-3f69-8cbb-c9d8ec29d18c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-18-16-c-how-are-you-known-pt3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-18-16-c-how-are-you-known-pt3/"
+      },
       "title": {
         "episodeName": "How Are You Known? Pt. 3",
         "subtitle": "",
@@ -8430,8 +8918,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5i2qu7q4m47xzddk/4_7_24_How_Are_You_Known_Pt393j4c.mp3",
-        "plays": 0,
-        "durationSeconds": 1950
+        "plays": 24,
+        "durationSeconds": 1950,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8485,6 +8974,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/h65ueptatrk8yicv/3_31_24_TheCrossroads_Of_Calvary6bk56.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/f69fe7bf-1e7b-366e-89f0-470f3b61ac7c"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thecrossroads-of-calvary/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/thecrossroads-of-calvary/"
+      },
       "title": {
         "episodeName": "The Crossroads Of Calvary",
         "subtitle": "",
@@ -8520,8 +9013,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/h65ueptatrk8yicv/3_31_24_TheCrossroads_Of_Calvary6bk56.mp3",
-        "plays": 0,
-        "durationSeconds": 2857
+        "plays": 18,
+        "durationSeconds": 2857,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8573,6 +9067,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/hysgbnwqtzxx8fjj/3_24_24_Romans_18-16_How_Are_You_Known_Pt2b1ngu.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/aa838a10-4b00-329a-a154-a7c7cacef806"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-116-in-everything/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-116-in-everything/"
+      },
       "title": {
         "episodeName": "How Are You Known? Pt.2",
         "subtitle": "",
@@ -8608,8 +9106,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hysgbnwqtzxx8fjj/3_24_24_Romans_18-16_How_Are_You_Known_Pt2b1ngu.mp3",
-        "plays": 0,
-        "durationSeconds": 2282
+        "plays": 10,
+        "durationSeconds": 2282,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8663,6 +9162,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/p92484n9ats6cmpq/3_10_24_Romans_18-15_How_Are_You_Known_Pt_1alt5o.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c6d48baa-006a-3469-936c-feb2041473fe"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-18-15-how-are-you-known/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-18-15-how-are-you-known/"
+      },
       "title": {
         "episodeName": "How Are You Known? Pt.1",
         "subtitle": "",
@@ -8698,8 +9201,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/p92484n9ats6cmpq/3_10_24_Romans_18-15_How_Are_You_Known_Pt_1alt5o.mp3",
-        "plays": 0,
-        "durationSeconds": 2515
+        "plays": 19,
+        "durationSeconds": 2515,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8753,6 +9257,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/3kvua9zemzxmcjyp/3_3_24_Know_Your_Role_Pt_3701n6.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/9fff1fbb-c04a-3d34-adec-1026ccae3010"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/know-your-roll-pt-3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/know-your-roll-pt-3/"
+      },
       "title": {
         "episodeName": "Romans, Know Your Role Part 3",
         "subtitle": "",
@@ -8788,8 +9296,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/3kvua9zemzxmcjyp/3_3_24_Know_Your_Role_Pt_3701n6.mp3",
-        "plays": 0,
-        "durationSeconds": 1496
+        "plays": 18,
+        "durationSeconds": 1496,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8843,6 +9352,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/rqwhxxdxhukjdqnx/2_25_24_Know_Your_Role_Pt_2a44nw.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/45b5ad5f-3e21-380e-af98-07848c0e4d70"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-7-b-know-your-role-pt-2/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-7-b-know-your-role-pt-2/"
+      },
       "title": {
         "episodeName": "Romans, Know Your Role Part 2",
         "subtitle": "",
@@ -8878,8 +9391,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rqwhxxdxhukjdqnx/2_25_24_Know_Your_Role_Pt_2a44nw.mp3",
-        "plays": 0,
-        "durationSeconds": 1883
+        "plays": 20,
+        "durationSeconds": 1883,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -8933,6 +9447,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/sgciiqr2e2xupwyv/2_18_24_Know_Your_Role_Pt_19atlq.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c248121c-a654-3436-a492-a3abe0c38093"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-7-a-know-your-role-pt-1/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-11-7-a-know-your-role-pt-1/"
+      },
       "title": {
         "episodeName": "Romans, Know Your Role Part 1",
         "subtitle": "",
@@ -8968,8 +9486,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/sgciiqr2e2xupwyv/2_18_24_Know_Your_Role_Pt_19atlq.mp3",
-        "plays": 0,
-        "durationSeconds": 2049
+        "plays": 19,
+        "durationSeconds": 2049,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9023,6 +9542,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/2m3g6vdtaiuuc4ns/2_11_24_Expect_Victory_Part_3_Be_Productive_and_Protect91sby.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/cc04cce5-3723-3e02-a153-797584cb6a98"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/be-productive-and-protect/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/be-productive-and-protect/"
+      },
       "title": {
         "episodeName": "Be Productive and Protect",
         "subtitle": "",
@@ -9058,8 +9581,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/2m3g6vdtaiuuc4ns/2_11_24_Expect_Victory_Part_3_Be_Productive_and_Protect91sby.mp3",
-        "plays": 0,
-        "durationSeconds": 2921
+        "plays": 25,
+        "durationSeconds": 2921,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9109,6 +9633,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/b37rp5szmy3j58z5/2_04_24_Expect_Victory_Part_2_Have_a_Mind_to_Work6y35r.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/94e36b67-82c1-3b28-ad58-137e5e9626e0"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/have-a-mind-to-work/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/have-a-mind-to-work/"
+      },
       "title": {
         "episodeName": "Part 2 - Have A Mind to Work",
         "subtitle": "",
@@ -9144,8 +9672,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/b37rp5szmy3j58z5/2_04_24_Expect_Victory_Part_2_Have_a_Mind_to_Work6y35r.mp3",
-        "plays": 0,
-        "durationSeconds": 2404
+        "plays": 16,
+        "durationSeconds": 2404,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9195,6 +9724,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/z9cdwmy4xj29qqfd/1_28_24_Expect_Victory_Pt_1_Do_Not_Allow_Past_Sin_to_Control_Today7tzur.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/afd78e6a-d332-3724-b437-dd51412c9b9f"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/do-not-let-your-past-sins-control-you/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/do-not-let-your-past-sins-control-you/"
+      },
       "title": {
         "episodeName": "Do Not Let Your Past Sins Control You",
         "subtitle": "",
@@ -9230,8 +9763,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/z9cdwmy4xj29qqfd/1_28_24_Expect_Victory_Pt_1_Do_Not_Allow_Past_Sin_to_Control_Today7tzur.mp3",
-        "plays": 0,
-        "durationSeconds": 2049
+        "plays": 15,
+        "durationSeconds": 2049,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9281,6 +9815,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/zxbt5u7p38btjsyu/1_14_24_God_s_People_on_The_Right_Roadbqbig.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/6724abd6-e34d-3114-af6c-08b10c514469"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gods-people-on-the-right-road/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/gods-people-on-the-right-road/"
+      },
       "title": {
         "episodeName": "God's People On The Right Road",
         "subtitle": "",
@@ -9316,8 +9854,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/zxbt5u7p38btjsyu/1_14_24_God_s_People_on_The_Right_Roadbqbig.mp3",
-        "plays": 0,
-        "durationSeconds": 2333
+        "plays": 12,
+        "durationSeconds": 2333,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9367,6 +9906,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/ywm97vf7ckqu4nti/01_07_24_Good_People_On_The_Wrong_Road_pt170jlh.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/bcd784b1-6cd3-3d46-84f4-b18c1411b2ad"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/good-people-on-the-wrong-road/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/good-people-on-the-wrong-road/"
+      },
       "title": {
         "episodeName": "“Good People” On The Wrong Road",
         "subtitle": "",
@@ -9402,8 +9945,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ywm97vf7ckqu4nti/01_07_24_Good_People_On_The_Wrong_Road_pt170jlh.mp3",
-        "plays": 0,
-        "durationSeconds": 2254
+        "plays": 12,
+        "durationSeconds": 2254,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9453,6 +9997,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/fyw6mm/Heavenly_Portfolio8mnz9.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d1607e1c-7f1e-3afb-ad38-85c3fb562f29"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/heavenly-portfolio/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/heavenly-portfolio/"
+      },
       "title": {
         "episodeName": "Heavenly Portfolio",
         "subtitle": "",
@@ -9488,8 +10036,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/fyw6mm/Heavenly_Portfolio8mnz9.mp3",
-        "plays": 0,
-        "durationSeconds": 2605
+        "plays": 40,
+        "durationSeconds": 2605,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9541,6 +10090,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/cr72mw/Why_Christmas_Came7sggv.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/57b78338-cc77-3647-8bf5-74f5c6233b41"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/why-christmas-came/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/why-christmas-came/"
+      },
       "title": {
         "episodeName": "Why Christmas Came",
         "subtitle": "",
@@ -9576,8 +10129,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cr72mw/Why_Christmas_Came7sggv.mp3",
-        "plays": 0,
-        "durationSeconds": 1706
+        "plays": 32,
+        "durationSeconds": 1706,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9629,6 +10183,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/n8d6am/What_He_Desires_and_Why_We_Give_it6gqve.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/09f74825-8fc2-3903-ab68-3c6abc6311e2"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/what-he-desires-and-why-we-give-it/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/what-he-desires-and-why-we-give-it/"
+      },
       "title": {
         "episodeName": "What He Desires and Why We Give it",
         "subtitle": "",
@@ -9664,8 +10222,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/n8d6am/What_He_Desires_and_Why_We_Give_it6gqve.mp3",
-        "plays": 0,
-        "durationSeconds": 2223
+        "plays": 25,
+        "durationSeconds": 2223,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9717,6 +10276,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/92qf8u/God_s_Christmas_List_-_Steadfastness8ipr5.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/033f05a5-e617-3015-ab8b-c116197a306f"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/god-s-christmas-list-steadfastness/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/god-s-christmas-list-steadfastness/"
+      },
       "title": {
         "episodeName": "God's Christmas List - Steadfastness",
         "subtitle": "",
@@ -9752,8 +10315,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/92qf8u/God_s_Christmas_List_-_Steadfastness8ipr5.mp3",
-        "plays": 0,
-        "durationSeconds": 2103
+        "plays": 31,
+        "durationSeconds": 2103,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9805,6 +10369,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/xv8pv4/God_Honoring_Health8q8ve.m4a",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/9f61b69f-6382-38bd-aaea-015dfc3a633d"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/god-honoring-health/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/god-honoring-health/"
+      },
       "title": {
         "episodeName": "God Honoring Health",
         "subtitle": "",
@@ -9840,8 +10408,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xv8pv4/God_Honoring_Health8q8ve.m4a",
-        "plays": 0,
-        "durationSeconds": 1892
+        "plays": 30,
+        "durationSeconds": 1892,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9893,6 +10462,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/2khcum/Small_Adjustments_Make_Big_Changes8dsx5.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/6bae4c30-1212-34fa-9743-cb796745e702"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/small-adjustments-make-big-changes/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/small-adjustments-make-big-changes/"
+      },
       "title": {
         "episodeName": "Small Adjustments Make Big Change",
         "subtitle": "",
@@ -9928,8 +10501,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/2khcum/Small_Adjustments_Make_Big_Changes8dsx5.mp3",
-        "plays": 0,
-        "durationSeconds": 2201
+        "plays": 50,
+        "durationSeconds": 2201,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -9979,6 +10553,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/xfcuxu/Stand_Up_In_the_Battle6uxam.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/efd0221d-ed14-3df7-ba86-6fb5a8e6d6a0"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle/"
+      },
       "title": {
         "episodeName": "Stand Up In the Battle",
         "subtitle": "2023 Edition",
@@ -10014,8 +10592,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xfcuxu/Stand_Up_In_the_Battle6uxam.mp3",
-        "plays": 0,
-        "durationSeconds": 2829
+        "plays": 46,
+        "durationSeconds": 2829,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10067,6 +10646,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/jwh223/07_In_Your_Family_Part_3_Family_Problems_71dqm.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/b1f425ae-1d88-38de-b804-dd297a481be7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/in-your-family-part-3-family-problems/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/in-your-family-part-3-family-problems/"
+      },
       "title": {
         "episodeName": "In Your Family Part 3",
         "subtitle": "Family Problems",
@@ -10102,8 +10685,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/jwh223/07_In_Your_Family_Part_3_Family_Problems_71dqm.mp3",
-        "plays": 0,
-        "durationSeconds": 2849
+        "plays": 54,
+        "durationSeconds": 2849,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10153,6 +10737,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/hw9yqp/06_In_Your_Family_Part_2_Family_Problems_685gm.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c71aaa6d-074c-3538-8eb3-e3cc6964a822"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/in-your-family-part-2-family-problems/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/in-your-family-part-2-family-problems/"
+      },
       "title": {
         "episodeName": "In Your Family Pt. 2",
         "subtitle": "Family Problems",
@@ -10193,8 +10781,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hw9yqp/06_In_Your_Family_Part_2_Family_Problems_685gm.mp3",
-        "plays": 0,
-        "durationSeconds": 2774
+        "plays": 60,
+        "durationSeconds": 2774,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -10246,6 +10835,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/zkt48n/05_In_Your_Family_Family_Problems_9dj2x.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/12a63c46-cc62-3fef-b956-e47cd56f8d93"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/in-your-family-family-problems/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/in-your-family-family-problems/"
+      },
       "title": {
         "episodeName": "In Your Family",
         "subtitle": "Family Problems",
@@ -10281,8 +10874,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/zkt48n/05_In_Your_Family_Family_Problems_9dj2x.mp3",
-        "plays": 0,
-        "durationSeconds": 2594
+        "plays": 44,
+        "durationSeconds": 2594,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10334,6 +10928,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/v3iy6s/231029_Never_Forget.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/56a87814-0d95-3909-bdfa-ce0669dadc48"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/what-is-the-church/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/what-is-the-church/"
+      },
       "title": {
         "episodeName": "Never Forget",
         "subtitle": "",
@@ -10369,8 +10967,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/v3iy6s/231029_Never_Forget.mp3",
-        "plays": 0,
-        "durationSeconds": 1952
+        "plays": 48,
+        "durationSeconds": 1952,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10420,6 +11019,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/acu86z/04_Healing_a_Broken_Marriage_Part_2.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c783a971-645c-3385-b5d4-6c36172aeb65"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/20231022/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/20231022/"
+      },
       "title": {
         "episodeName": "04 | Healing a Broken Marriage Part 2",
         "subtitle": "",
@@ -10455,8 +11058,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/acu86z/04_Healing_a_Broken_Marriage_Part_2.mp3",
-        "plays": 0,
-        "durationSeconds": 2364
+        "plays": 39,
+        "durationSeconds": 2364,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10508,6 +11112,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/5aggta/03_Healing_a_Broken_Marriage_Part_1.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d18f7d8a-0f98-3299-a201-b70cc73eab67"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/20231008/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/20231008/"
+      },
       "title": {
         "episodeName": "03 | Healing a Broken Marriage Part 1",
         "subtitle": "",
@@ -10543,8 +11151,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5aggta/03_Healing_a_Broken_Marriage_Part_1.mp3",
-        "plays": 0,
-        "durationSeconds": 2384
+        "plays": 42,
+        "durationSeconds": 2384,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10596,6 +11205,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/pqej9t/02_Maintaining_Integritymp3awbqy.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/7912f319-e40b-3bed-bc92-20b49b632f77"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/maintaining-integrity/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/maintaining-integrity/"
+      },
       "title": {
         "episodeName": "02 | Maintaining Integrity",
         "subtitle": "",
@@ -10631,8 +11244,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/pqej9t/02_Maintaining_Integritymp3awbqy.mp3",
-        "plays": 0,
-        "durationSeconds": 2409
+        "plays": 27,
+        "durationSeconds": 2409,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10684,6 +11298,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/cbfx3s/01_Setting_the_Table.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/ea623e6a-49e0-3042-893f-f84c0b4b49b9"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/setting-the-table/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/setting-the-table/"
+      },
       "title": {
         "episodeName": "01 | Setting the Table",
         "subtitle": "",
@@ -10719,8 +11337,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cbfx3s/01_Setting_the_Table.mp3",
-        "plays": 0,
-        "durationSeconds": 2409
+        "plays": 31,
+        "durationSeconds": 2409,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10772,6 +11391,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/e7ntyx/The_Selfish_Prophet.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/6aa55e53-0ace-375e-bbd2-96205069e760"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-saying-yes-to-god/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-saying-yes-to-god/"
+      },
       "title": {
         "episodeName": "07 | The Selfish Prophet",
         "subtitle": "",
@@ -10807,8 +11430,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/e7ntyx/The_Selfish_Prophet.mp3",
-        "plays": 0,
-        "durationSeconds": 2461
+        "plays": 35,
+        "durationSeconds": 2461,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10860,6 +11484,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/6kpgkm/2300910_Recomissioned.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/c4f767e9-e1f3-3b16-a33b-33fe01654de7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/recommissioned/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/recommissioned/"
+      },
       "title": {
         "episodeName": "Recommissioned",
         "subtitle": "",
@@ -10895,8 +11523,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6kpgkm/2300910_Recomissioned.mp3",
-        "plays": 0,
-        "durationSeconds": 2892
+        "plays": 25,
+        "durationSeconds": 2892,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -10948,6 +11577,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/cavx3j/05_Signs_of_a_Repentant_Prophet.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/1a5f8c16-4efa-3f33-b0dc-2a833ed588e9"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/signs-of-a-repentant-prophet/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/signs-of-a-repentant-prophet/"
+      },
       "title": {
         "episodeName": "Signs of a Repentant Prophet",
         "subtitle": "",
@@ -10983,8 +11616,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cavx3j/05_Signs_of_a_Repentant_Prophet.mp3",
-        "plays": 0,
-        "durationSeconds": 2506
+        "plays": 38,
+        "durationSeconds": 2506,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -11036,6 +11670,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/buzqse/230827_Repentance.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/5fc40735-9184-3d73-b1d5-324fff7ee8b5"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/repentance/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/repentance/"
+      },
       "title": {
         "episodeName": "Repentance",
         "subtitle": "",
@@ -11071,8 +11709,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/buzqse/230827_Repentance.mp3",
-        "plays": 0,
-        "durationSeconds": 2425
+        "plays": 40,
+        "durationSeconds": 2425,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -11124,6 +11763,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/jbgecz/The_Indifferent_Man_of_Godbllqf.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/4c055bbd-373d-375b-bc0b-079e2235b993"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-indifferent-man-of-god/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-indifferent-man-of-god/"
+      },
       "title": {
         "episodeName": "The Indifferent Man of God",
         "subtitle": "",
@@ -11159,8 +11802,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/jbgecz/The_Indifferent_Man_of_Godbllqf.mp3",
-        "plays": 0,
-        "durationSeconds": 2960
+        "plays": 60,
+        "durationSeconds": 2960,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -11214,6 +11858,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/v6d6n9/230813_Audio_Enhanced.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/5bb3dff7-00a5-3c04-b4b8-c7a764d67bb7"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-backslidden-prophet/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-backslidden-prophet/"
+      },
       "title": {
         "episodeName": "The Backslidden Prophet",
         "subtitle": "",
@@ -11249,8 +11897,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/v6d6n9/230813_Audio_Enhanced.mp3",
-        "plays": 0,
-        "durationSeconds": 2235
+        "plays": 27,
+        "durationSeconds": 2235,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
@@ -11304,6 +11953,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/khmbfw/01_Jonah_the_Prophet8l40j.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/398b6173-965f-306a-b376-423914b17bee"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/jonah-the-prophet/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/jonah-the-prophet/"
+      },
       "title": {
         "episodeName": "Jonah the Prophet",
         "subtitle": "",
@@ -11339,8 +11992,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/khmbfw/01_Jonah_the_Prophet8l40j.mp3",
-        "plays": 0,
-        "durationSeconds": 2151
+        "plays": 31,
+        "durationSeconds": 2151,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": true,
@@ -11390,6 +12044,10 @@
         "mediaUrl": "https://mcdn.podbean.com/mf/web/m5gpyk/03_All_the_Difference.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/28a7d69e-792b-36f2-9524-71654fd377ad"
       },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/all-the-difference-part-3/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/all-the-difference-part-3/"
+      },
       "title": {
         "episodeName": "All the Difference Pt. 3",
         "subtitle": "",
@@ -11430,8 +12088,9 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/m5gpyk/03_All_the_Difference.mp3",
-        "plays": 0,
-        "durationSeconds": 1446
+        "plays": 29,
+        "durationSeconds": 1446,
+        "statsMatchStrategy": "media_url"
       },
       "video": {
         "hasVideo": false,
