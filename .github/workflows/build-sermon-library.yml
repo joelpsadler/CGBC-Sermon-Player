@@ -24,10 +24,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Seed stats.json if present in repo root
+        run: |
+          if [ -f "stats.json" ]; then
+            mkdir -p data
+            cp stats.json data/stats.json
+          fi
+
       - name: Build resolved library
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: npm run build:library
+        run: |
+          node scripts/fetch-rss.js
+          node scripts/podbean-stats-sync.js
+          node scripts/fetch-youtube-data.js
+          node scripts/resolve-library.js
+          node scripts/publish-library.js
 
       - name: Commit generated files if changed
         run: |
