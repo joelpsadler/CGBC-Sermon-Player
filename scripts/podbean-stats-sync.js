@@ -4,7 +4,22 @@ import { clean, writeJson } from "./utils.js";
 
 const config = JSON.parse(readFileSync(new URL("../config/resolver-config.json", import.meta.url), "utf-8"));
 const RSS_URL = config.rssUrl;
-const INPUT_PATH = process.env.PODBEAN_STATS_INPUT || "stats.json";
+
+function detectInputPath() {
+  const candidates = [
+    process.env.PODBEAN_STATS_INPUT,
+    "data/stats.json",
+    "stats/stats.json",
+    "stats.json"
+  ].filter(Boolean);
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) return candidate;
+  }
+  throw new Error("Missing stats input file. Expected one of: data/stats.json, stats/stats.json, stats.json");
+}
+
+const INPUT_PATH = detectInputPath();
 const OUTPUT_PATH = process.env.PODBEAN_STATS_OUTPUT || "data/stats.json";
 
 function normalizeTitleKey(value) {
@@ -101,10 +116,6 @@ function enrichStats(statsDoc, rssItems) {
 }
 
 async function main() {
-  if (!existsSync(INPUT_PATH)) {
-    throw new Error(`Missing stats input file: ${INPUT_PATH}`);
-  }
-
   const statsDoc = JSON.parse(readFileSync(INPUT_PATH, "utf-8"));
   const xml = await fetch(RSS_URL).then(r => {
     if (!r.ok) throw new Error(`RSS fetch failed: ${r.status}`);
@@ -115,6 +126,7 @@ async function main() {
   const enriched = enrichStats(statsDoc, rssItems);
 
   writeJson(OUTPUT_PATH, enriched);
+  console.log(`Stats input: ${INPUT_PATH}`);
   console.log(`Enriched stats episodes: ${Object.keys(enriched.episodes || {}).length}`);
 }
 
