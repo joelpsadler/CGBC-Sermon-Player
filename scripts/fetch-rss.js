@@ -61,6 +61,19 @@ function first(value) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+function getGuid(item) {
+  const guid = first(item.guid);
+  if (!guid) return "";
+  if (typeof guid === "string") return clean(guid);
+  if (typeof guid === "object") {
+    if (typeof guid["#text"] === "string") return clean(guid["#text"]);
+    if (typeof guid.text === "string") return clean(guid.text);
+    if (typeof guid.__text === "string") return clean(guid.__text);
+    if (typeof guid["cdata"] === "string") return clean(guid["cdata"]);
+  }
+  return "";
+}
+
 function getEpisodeImage(item) {
   const itunesImage = item["itunes:image"];
   if (itunesImage && typeof itunesImage === "object" && itunesImage.href) return clean(itunesImage.href);
@@ -96,7 +109,7 @@ async function main() {
     const notesFields = parseNotesFields(notesRaw);
 
     return {
-      rssGuid: clean(first(item.guid)),
+      rssGuid: getGuid(item),
       mediaUrl: clean(enclosure?.url || ""),
       rssTitle: clean(first(item.title)),
       pubDate: clean(first(item.pubDate)),

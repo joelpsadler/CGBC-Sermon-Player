@@ -52,11 +52,32 @@ function mapSeriesType(raw) {
 function deriveStudyFromSeries(seriesName) {
   const s = clean(seriesName);
   if (!s) return "";
-  if (s.includes(":")) return clean(s.split(":")[0]);
-  const m = s.match(/^(.+?)\s+\d+$/);
-  if (m) return clean(m[1]);
+
+  const chapterMatch = s.match(/^(.*?)(?:\s+chapter)?\s+\d+$/i);
+  if (chapterMatch) {
+    return clean(chapterMatch[1]);
+  }
+
+  if (s.includes(":")) {
+    return clean(s.split(":")[0]);
+  }
+
   const book = detectBibleBook(s);
   return book || "";
+}
+
+function inferSeriesType(seriesName, explicitStudy) {
+  const s = clean(seriesName);
+  const study = clean(explicitStudy);
+  if (!s) return "standalone";
+
+  if (s.includes(":")) return "topical";
+
+  const bookish = detectBibleBook(s) || detectBibleBook(study);
+  if (bookish && /(?:chapter\s*)?\d+$/i.test(s)) return "expositional";
+  if (bookish && /pt\.?\s*\d+$/i.test(s)) return "expositional";
+
+  return "standalone";
 }
 
 function deriveStudyType(studyName, seriesType) {
@@ -70,7 +91,7 @@ function resolveSeries(record) {
   const explicitSeries = clean(record.notesFields?.["Series"]);
   const parts = splitPipeTitle(record.rssTitle);
   const seriesName = explicitSeries || parts.right || "";
-  const type = mapSeriesType(record.notesFields?.["Series Type"]) || (seriesName ? "standalone" : "standalone");
+  const type = mapSeriesType(record.notesFields?.["Series Type"]) || inferSeriesType(seriesName, record.notesFields?.["Study"]);
   return {
     name: seriesName,
     key: slugify(seriesName),
