@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-16T02:25:49.451Z",
+  "generatedAt": "2026-04-16T02:45:23.678Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 131,
@@ -15,27 +15,40 @@
       },
       "title": {
         "episodeName": "The Rapture Pt. 3",
-        "subtitle": "",
-        "display": "The Rapture Pt. 3"
+        "subtitle": "Mid-Tribulation",
+        "display": "The Rapture Pt. 3 (Mid-Tribulation)"
       },
       "series": {
-        "name": "Eschatology: The Rapture",
-        "key": "eschatology-the-rapture",
-        "type": "standalone"
+        "name": "The Rapture",
+        "key": "the-rapture",
+        "type": "topical"
       },
       "study": {
         "name": "Eschatology",
         "key": "eschatology",
-        "type": "none"
+        "type": "topical_study"
       },
       "scripture": {
-        "raw": "Various",
-        "display": "Selected Scriptures",
-        "book": null,
-        "bookKey": null,
-        "isVarious": true
+        "raw": "Daniel 9:27",
+        "display": "Daniel 9:27",
+        "book": "Daniel",
+        "bookKey": "daniel",
+        "isVarious": false
       },
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "Daniel",
+          "key": "daniel"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
         "raw": "Wednesday, 4/08/26",
@@ -73,12 +86,16 @@
       },
       "memberships": {
         "series": [
-          "eschatology-the-rapture"
+          "the-rapture"
         ],
         "studies": [
           "eschatology"
         ],
-        "bibleBooks": [],
+        "bibleBooks": [
+          "revelation",
+          "1-thessalonians",
+          "daniel"
+        ],
         "byYear": [
           "2026"
         ],
@@ -87,10 +104,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "none"
+        "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": true
       }
@@ -109,12 +126,12 @@
       "series": {
         "name": "Romans Chapter 12",
         "key": "romans-chapter-12",
-        "type": "standalone"
+        "type": "expositional"
       },
       "study": {
-        "name": "Romans Chapter",
-        "key": "romans-chapter",
-        "type": "none"
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Romans 12:1-2",
@@ -123,15 +140,20 @@
         "bookKey": "romans",
         "isVarious": false
       },
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "04/05/26 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "04/05/26",
+        "iso": "2026-04-05",
+        "year": 2026,
+        "month": 4,
+        "monthName": "April",
+        "day": 5
       },
       "audio": {
         "hasAudio": true,
@@ -155,8 +177,8 @@
           "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "wide": null
         }
       },
       "memberships": {
@@ -164,19 +186,23 @@
           "romans-chapter-12"
         ],
         "studies": [
-          "romans-chapter"
+          "romans"
         ],
         "bibleBooks": [
           "romans"
         ],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-04"
+        ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": true
       }
@@ -323,8 +349,8 @@
           "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_3_pcaply4.jpg",
-          "wide": "https://i.ytimg.com/vi/09oTrD_5Rto/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/32526_PC9d03g.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_3_pcaply4.jpg",
