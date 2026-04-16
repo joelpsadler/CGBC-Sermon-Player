@@ -24,10 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Seed stats.json if present in repo root
+      - name: Seed stats.json if present
         run: |
-          if [ -f "stats.json" ]; then
-            mkdir -p data
+          mkdir -p data
+          if [ -f "stats/stats.json" ]; then
+            cp stats/stats.json data/stats.json
+          elif [ -f "stats.json" ]; then
             cp stats.json data/stats.json
           fi
 
