@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - Thin Renderer Rebuild</title>
+  <title>CGBC Sermons - UI Pass 1</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <meta name="theme-color" content="#0f0f10" />
@@ -88,9 +88,34 @@
     .impact-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
 
     .workspace{
-      display:grid;grid-template-columns:290px 360px minmax(0,1fr);gap:16px;align-items:stretch;
+      display:grid;grid-template-columns:minmax(0,1fr) minmax(760px, 44vw);gap:16px;align-items:stretch;
       min-height:calc(100vh - 118px)
     }
+    .desktop-rails{
+      display:grid;
+      grid-template-columns:minmax(220px,320px) 0 0;
+      grid-template-rows:auto minmax(0,1fr);
+      gap:16px;
+      min-height:0;
+      align-content:start;
+      transition:grid-template-columns .24s ease;
+    }
+    .workspace.has-branch .desktop-rails{grid-template-columns:minmax(180px,240px) minmax(220px,300px) 0}
+    .workspace.has-leaf .desktop-rails{grid-template-columns:minmax(150px,210px) minmax(190px,250px) minmax(280px,360px)}
+    .desktop-pathbar{
+      grid-column:1 / -1;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;
+      min-height:90px;
+    }
+    .desktop-path-actions,.mobile-path-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .path-btn{min-width:84px; justify-content:center}
+    .rail{min-width:0;min-height:0}
+    .rail-branch,.rail-leaf{opacity:0;transform:translateX(-10px);pointer-events:none;transition:opacity .22s ease, transform .22s ease}
+    .workspace.has-branch .rail-branch,.workspace.has-leaf .rail-leaf{opacity:1;transform:none;pointer-events:auto}
+    .rail-queue-head{padding:4px 0 10px}
+    .stage-column{min-width:760px}
+    
     .panel,.player-stage,.meta-stage{
       border-radius:24px;border:1px solid var(--border);
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
@@ -250,32 +275,55 @@
       </div>
     </header>
 
-    <main class="workspace">
-      <section class="panel column">
-        <div class="column-head"><p class="eyebrow">Browse</p><h2 class="column-title">Navigation</h2></div>
-        <div class="column-scroll">
-          <div id="rootList" class="nav-list"></div>
-          <div style="height:14px"></div>
-          <div id="branchList" class="nav-list"></div>
-          <div style="height:14px"></div>
-          <div id="leafList" class="nav-list"></div>
+    <main class="workspace" id="workspace">
+      <section class="desktop-rails">
+        <div class="desktop-pathbar panel" id="desktopPathbar">
+          <div class="desktop-path-copy">
+            <p class="eyebrow">Browse</p>
+            <h2 class="column-title" id="desktopPathTitle">Choose a category</h2>
+          </div>
+          <div class="desktop-path-actions">
+            <button type="button" class="action-btn path-btn" id="desktopBackBtn">Back</button>
+            <button type="button" class="action-btn path-btn" id="desktopHomeBtn">Home</button>
+          </div>
         </div>
-      </section>
 
-      <section class="panel column">
-        <div class="column-head"><p class="eyebrow">Queue</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
-        <div class="column-scroll" id="episodeList"></div>
+        <section class="panel column rail rail-root" id="rootRail">
+          <div class="column-head"><p class="eyebrow">Step 1</p><h2 class="column-title">Category</h2></div>
+          <div class="column-scroll"><div id="rootList" class="nav-list"></div></div>
+        </section>
+
+        <section class="panel column rail rail-branch" id="branchRail">
+          <div class="column-head"><p class="eyebrow">Step 2</p><h2 class="column-title" id="branchRailTitle">Series / Branch</h2></div>
+          <div class="column-scroll"><div id="branchList" class="nav-list"></div></div>
+        </section>
+
+        <section class="panel column rail rail-leaf" id="leafRail">
+          <div class="column-head"><p class="eyebrow">Step 3</p><h2 class="column-title" id="leafRailTitle">Episodes</h2></div>
+          <div class="column-scroll">
+            <div id="leafList" class="nav-list"></div>
+            <div style="height:14px"></div>
+            <div class="rail-queue-head"><p class="eyebrow">Selection</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
+            <div id="episodeList"></div>
+          </div>
+        </section>
       </section>
 
       <section class="stage-column">
         <section class="panel mobile-panel">
           <div class="column-head"><p class="eyebrow">Browse</p><h2 class="column-title" id="mobilePathTitle">Navigation</h2></div>
           <div class="column-scroll">
+            <div class="mobile-path-actions">
+              <button type="button" class="action-btn path-btn" id="mobileBackBtn">Back</button>
+              <button type="button" class="action-btn path-btn" id="mobileHomeBtn">Home</button>
+            </div>
             <div id="mobileRootList" class="nav-list"></div>
             <div style="height:14px"></div>
             <div id="mobileBranchList" class="nav-list"></div>
             <div style="height:14px"></div>
             <div id="mobileLeafList" class="nav-list"></div>
+            <div style="height:14px"></div>
+            <div id="mobileEpisodeList"></div>
           </div>
         </section>
 
@@ -316,27 +364,23 @@
         </section>
 
         <section class="meta-stage">
-          <h2 class="meta-title" id="metaTitle">Select a sermon</h2>
-          <div class="meta-series" id="metaSeries">Choose Listen or Watch, then browse the prepared archive.</div>
-          <div class="meta-grid">
-            <div class="meta-row"><div class="meta-label">Series</div><div class="meta-value" id="metaSeriesValue">—</div></div>
-            <div class="meta-row"><div class="meta-label">Study</div><div class="meta-value" id="metaStudyValue">—</div></div>
-            <div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value" id="metaScriptureValue">—</div></div>
-            <div class="meta-row"><div class="meta-label">Book Tags</div><div class="meta-value" id="metaBookTagsValue">—</div></div>
-            <div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value" id="metaSpeakerValue">—</div></div>
-            <div class="meta-row"><div class="meta-label">Date</div><div class="meta-value" id="metaDateValue">—</div></div>
-          </div>
-          <div class="meta-actions">
-            <a id="episodePageLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Episode Page</a>
-            <a id="shareLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Share</a>
+          <div class="meta-stage-top">
+            <div>
+              <h2 class="meta-title" id="metaTitle">Select a sermon</h2>
+              <div class="meta-series" id="metaSeries">Choose Listen or Watch, then browse the prepared archive.</div>
+            </div>
+            <div class="meta-actions">
+              <a id="episodePageLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Episode Page</a>
+              <a id="shareLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Share</a>
+            </div>
           </div>
 
-          <div class="related-shell" id="relatedShell" style="margin-top:18px">
-            <div class="related-head"><h3 class="related-title">Related</h3></div>
+          <div class="related-shell" id="relatedShell" style="margin-top:8px">
+            <div class="related-head"><h3 class="related-title">More from this selection</h3></div>
             <div class="related-row" id="relatedRow"></div>
           </div>
           <p class="meta-note" id="metaNote" style="margin-top:18px">
-            Beginner note: this rebuild reads the prepared archive from resolved JSON. The pinned YouTube-only shelves — Livestreams, CGBC Shorts, and Guest Speakers — are sandboxed and fetched live at runtime.
+            Beginner note: the archive stays script-driven through resolved JSON. Livestreams, CGBC Shorts, and Guest Speakers stay sandboxed as live YouTube shelves.
           </p>
         </section>
       </section>
@@ -388,9 +432,18 @@ const els = {
   mobileRootList: document.getElementById('mobileRootList'),
   mobileBranchList: document.getElementById('mobileBranchList'),
   mobileLeafList: document.getElementById('mobileLeafList'),
+  mobileEpisodeList: document.getElementById('mobileEpisodeList'),
   episodeList: document.getElementById('episodeList'),
   queueTitle: document.getElementById('queueTitle'),
   mobilePathTitle: document.getElementById('mobilePathTitle'),
+  workspace: document.getElementById('workspace'),
+  desktopPathTitle: document.getElementById('desktopPathTitle'),
+  branchRailTitle: document.getElementById('branchRailTitle'),
+  leafRailTitle: document.getElementById('leafRailTitle'),
+  desktopBackBtn: document.getElementById('desktopBackBtn'),
+  desktopHomeBtn: document.getElementById('desktopHomeBtn'),
+  mobileBackBtn: document.getElementById('mobileBackBtn'),
+  mobileHomeBtn: document.getElementById('mobileHomeBtn'),
   listenBtn: document.getElementById('listenBtn'),
   watchBtn: document.getElementById('watchBtn'),
   logoReset: document.getElementById('logoReset'),
@@ -420,14 +473,7 @@ const els = {
   miniSkipBackBtn: document.getElementById('miniSkipBackBtn'),
   miniSkipForwardBtn: document.getElementById('miniSkipForwardBtn'),
   metaTitle: document.getElementById('metaTitle'),
-  metaSeries: document.getElementById('metaSeries'),
-  metaSeriesValue: document.getElementById('metaSeriesValue'),
-  metaStudyValue: document.getElementById('metaStudyValue'),
-  metaScriptureValue: document.getElementById('metaScriptureValue'),
-  metaBookTagsValue: document.getElementById('metaBookTagsValue'),
-  metaSpeakerValue: document.getElementById('metaSpeakerValue'),
-  metaDateValue: document.getElementById('metaDateValue'),
-  episodePageLink: document.getElementById('episodePageLink'),
+  metaSeries: document.getElementById('metaSeries'),  episodePageLink: document.getElementById('episodePageLink'),
   shareLink: document.getElementById('shareLink'),
   relatedShell: document.getElementById('relatedShell'),
   relatedRow: document.getElementById('relatedRow')
@@ -871,6 +917,40 @@ function renderCard(row, selectedKey, variant = 'nav') {
     </button>
   `;
 }
+
+function getDesktopPathTitle() {
+  const root = getRootItems().find(row => row.key === appState.nav.rootKey);
+  const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
+  const leaf = getLeafItems().find(row => row.key === appState.nav.leafKey);
+  if (leaf) return `Episodes · ${leaf.title}`;
+  if (branch) return `Series · ${branch.title}`;
+  if (root) return `Browse · ${root.title}`;
+  return 'Choose a category';
+}
+function updateWorkspaceState() {
+  const hasBranch = getBranchItems().length > 0;
+  const hasLeaf = getLeafItems().length > 0;
+  els.workspace.classList.toggle('has-branch', hasBranch);
+  els.workspace.classList.toggle('has-leaf', hasLeaf);
+  els.desktopPathTitle.textContent = getDesktopPathTitle();
+  els.mobilePathTitle.textContent = getDesktopPathTitle();
+  const root = getRootItems().find(row => row.key === appState.nav.rootKey);
+  const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
+  els.branchRailTitle.textContent = root ? root.title : 'Series / Branch';
+  els.leafRailTitle.textContent = branch ? branch.title : 'Episodes';
+}
+function navigateBack() {
+  if (appState.nav.leafKey) appState.nav.leafKey = null;
+  else if (appState.nav.branchKey) appState.nav.branchKey = null;
+  else if (appState.nav.rootKey) appState.nav.rootKey = getRootItems()[0]?.key || null;
+  ensureValidNavigation();
+  rerenderAll();
+}
+function navigateHome() {
+  setDefaultNavigation();
+  appState.currentItem = null;
+  rerenderAll();
+}
 function renderRoots() {
   const rows = getRootItems();
   const html = rows.length ? rows.map(row => renderCard(row, appState.nav.rootKey, 'nav')).join('') : `<div class="empty-state">No root items available.</div>`;
@@ -995,23 +1075,17 @@ function renderMeta() {
   if (!item) {
     els.metaTitle.textContent = 'Select a sermon';
     els.metaSeries.textContent = 'Choose Listen or Watch, then browse the prepared archive.';
-    els.metaSeriesValue.textContent = '—';
-    els.metaStudyValue.textContent = '—';
-    els.metaScriptureValue.textContent = '—';
-    els.metaBookTagsValue.textContent = '—';
-    els.metaSpeakerValue.textContent = '—';
-    els.metaDateValue.textContent = '—';
+    els.episodePageLink.href = '#';
+    els.shareLink.href = '#';
     els.relatedShell.style.display = 'none';
     return;
   }
+  const metric = appState.mode === 'video'
+    ? `${formatNumber(item?.video?.views || 0)} views`
+    : `${formatNumber(item?.audio?.plays || 0)} plays`;
+  const supporting = [item?.series?.name || '', item?.scripture?.display || '', metric].filter(Boolean).join(' · ');
   els.metaTitle.textContent = item?.title?.display || item?.title?.episodeName || '';
-  els.metaSeries.textContent = item?.series?.name || '';
-  els.metaSeriesValue.textContent = item?.series?.name || '—';
-  els.metaStudyValue.textContent = item?.study?.name || '—';
-  els.metaScriptureValue.textContent = item?.scripture?.display || '—';
-  els.metaBookTagsValue.textContent = getBookTagsDisplay(item);
-  els.metaSpeakerValue.textContent = item?.speaker || '—';
-  els.metaDateValue.textContent = formatDate(item);
+  els.metaSeries.textContent = supporting;
   els.episodePageLink.href = item?.links?.episodeUrl || '#';
   els.shareLink.href = item?.links?.shareUrl || item?.links?.episodeUrl || '#';
   renderRelated(item);
@@ -1076,6 +1150,7 @@ function rerenderAll() {
   renderBranches();
   renderLeaves();
   renderQueue();
+  updateWorkspaceState();
   renderImpactTotals();
   renderPlayer();
   renderMeta();
@@ -1108,11 +1183,11 @@ function bindClicks() {
   [els.branchList, els.mobileBranchList].forEach(el => attachListHandler(el, 'branch'));
   [els.leafList, els.mobileLeafList].forEach(el => attachListHandler(el, 'leaf'));
 
-  els.episodeList.addEventListener('click', (event) => {
+  [els.episodeList, els.mobileEpisodeList].forEach(container => container.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-item]');
     if (!button) return;
     selectItem(button.getAttribute('data-item'));
-  });
+  }));
   els.relatedRow.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-item]');
     if (!button) return;
@@ -1129,11 +1204,9 @@ function bindClicks() {
     appState.currentItem = null;
     rerenderAll();
   });
-  els.logoReset.addEventListener('click', () => {
-    setDefaultNavigation();
-    appState.currentItem = null;
-    rerenderAll();
-  });
+  els.logoReset.addEventListener('click', navigateHome);
+  [els.desktopBackBtn, els.mobileBackBtn].forEach(btn => btn.addEventListener('click', navigateBack));
+  [els.desktopHomeBtn, els.mobileHomeBtn].forEach(btn => btn.addEventListener('click', navigateHome));
 
   els.audioPlayBadge.addEventListener('click', () => {
     if (!appState.currentItem?.audio?.url) return;
