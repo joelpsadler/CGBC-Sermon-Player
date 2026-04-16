@@ -881,26 +881,23 @@ function buildQueue() {
   return [];
 }
 function setDefaultNavigation() {
-  const roots = getRootItems();
-  appState.nav.rootKey = roots[0]?.key || null;
-  const branches = getBranchItems();
-  appState.nav.branchKey = branches[0]?.key || null;
-  const leaves = getLeafItems();
-  appState.nav.leafKey = leaves[0]?.key || appState.nav.branchKey;
+  appState.nav.rootKey = null;
+  appState.nav.branchKey = null;
+  appState.nav.leafKey = null;
 }
 function ensureValidNavigation() {
   const roots = getRootItems();
-  if (!roots.find(row => row.key === appState.nav.rootKey)) {
-    appState.nav.rootKey = roots[0]?.key || null;
+  if (appState.nav.rootKey && !roots.find(row => row.key === appState.nav.rootKey)) {
+    appState.nav.rootKey = null;
   }
   const branches = getBranchItems();
-  if (branches.length && !branches.find(row => row.key === appState.nav.branchKey)) {
-    appState.nav.branchKey = branches[0]?.key || null;
+  if (appState.nav.branchKey && !branches.find(row => row.key === appState.nav.branchKey)) {
+    appState.nav.branchKey = null;
   }
   if (!branches.length) appState.nav.branchKey = null;
   const leaves = getLeafItems();
-  if (leaves.length && !leaves.find(row => row.key === appState.nav.leafKey)) {
-    appState.nav.leafKey = leaves[0]?.key || null;
+  if (appState.nav.leafKey && !leaves.find(row => row.key === appState.nav.leafKey)) {
+    appState.nav.leafKey = null;
   }
   if (!leaves.length) appState.nav.leafKey = null;
 }
@@ -928,21 +925,37 @@ function getDesktopPathTitle() {
   return 'Choose a category';
 }
 function updateWorkspaceState() {
-  const hasBranch = getBranchItems().length > 0;
-  const hasLeaf = getLeafItems().length > 0;
+  const hasBranch = !!appState.nav.rootKey && getBranchItems().length > 0;
+  const hasLeaf = !!appState.nav.branchKey && getLeafItems().length > 0;
   els.workspace.classList.toggle('has-branch', hasBranch);
   els.workspace.classList.toggle('has-leaf', hasLeaf);
   els.desktopPathTitle.textContent = getDesktopPathTitle();
   els.mobilePathTitle.textContent = getDesktopPathTitle();
+  updatePathButtons();
   const root = getRootItems().find(row => row.key === appState.nav.rootKey);
   const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
   els.branchRailTitle.textContent = root ? root.title : 'Series / Branch';
   els.leafRailTitle.textContent = branch ? branch.title : 'Episodes';
 }
+
+function updatePathButtons() {
+  const root = getRootItems().find(row => row.key === appState.nav.rootKey);
+  const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
+  const leaf = getLeafItems().find(row => row.key === appState.nav.leafKey);
+  let backLabel = 'Back';
+  if (leaf) backLabel = `Back to ${branch?.title || 'Branch'}`;
+  else if (branch) backLabel = `Back to ${root?.title || 'Categories'}`;
+  else if (root) backLabel = 'Back to Categories';
+  [els.desktopBackBtn, els.mobileBackBtn].forEach(btn => {
+    btn.textContent = backLabel;
+    btn.disabled = !appState.nav.rootKey && !appState.nav.branchKey && !appState.nav.leafKey;
+  });
+}
+
 function navigateBack() {
   if (appState.nav.leafKey) appState.nav.leafKey = null;
   else if (appState.nav.branchKey) appState.nav.branchKey = null;
-  else if (appState.nav.rootKey) appState.nav.rootKey = getRootItems()[0]?.key || null;
+  else if (appState.nav.rootKey) appState.nav.rootKey = null;
   ensureValidNavigation();
   rerenderAll();
 }
@@ -974,10 +987,12 @@ function renderQueue() {
   appState.activeQueue = queue;
   els.queueTitle.textContent = queue.length ? `${formatCountLabel(queue.length, 'episode', 'episodes')}` : 'Episodes';
   if (!queue.length) {
-    els.episodeList.innerHTML = `<div class="empty-state">Choose a bucket with sermons or videos.</div>`;
+    const empty = `<div class="empty-state">Choose a bucket with sermons or videos.</div>`;
+    els.episodeList.innerHTML = empty;
+    els.mobileEpisodeList.innerHTML = empty;
     return;
   }
-  els.episodeList.innerHTML = queue.map(item => {
+  const queueHtml = queue.map(item => {
     const image = getEpisodeArt(item);
     const thumbClass = appState.mode === 'video' ? 'thumb-wide' : 'thumb-square';
     const metric = appState.mode === 'audio'
@@ -986,18 +1001,21 @@ function renderQueue() {
     const chips = [];
     if (appState.nav.rootKey === 'livestreams') chips.push('LIVE');
     if (item?.series?.key === 'romans-chapter-12' || item?.series?.key === 'the-rapture') chips.push('CURRENT');
+    const supportLine = appState.mode === 'audio' ? (item?.scripture?.display || item?.series?.name || '') : (item?.date?.iso || item?.series?.name || '');
     return `
       <button type="button" class="episode-card ${appState.currentItem?.stableId === item.stableId ? 'is-active' : ''}" data-item="${escapeHtml(item.stableId)}">
         <div class="${thumbClass}">${image ? `<img src="${escapeHtml(image)}" alt="">` : ''}</div>
         <div class="card-copy">
           <h3 class="card-title">${escapeHtml(item?.title?.display || item?.title?.episodeName || '')}</h3>
-          <div class="card-subtitle">${escapeHtml(item?.series?.name || '')}</div>
+          <div class="card-subtitle">${escapeHtml(supportLine)}</div>
           <div class="card-metric">${escapeHtml(metric)}</div>
           ${chips.length ? `<div class="chip-row">${chips.map(label => `<span class="chip ${label.toLowerCase()}">${escapeHtml(label)}</span>`).join('')}</div>` : ''}
         </div>
       </button>
     `;
   }).join('');
+  els.episodeList.innerHTML = queueHtml;
+  els.mobileEpisodeList.innerHTML = queueHtml;
   if (!appState.currentItem || !queue.find(item => item.stableId === appState.currentItem.stableId)) {
     selectItem(queue[0]?.stableId || null, false);
   }
@@ -1176,6 +1194,8 @@ function bindClicks() {
       renderBranches();
       renderLeaves();
       renderQueue();
+      updateWorkspaceState();
+      renderPlayer();
       renderMeta();
     });
   }
