@@ -1,16 +1,221 @@
 {
-  "generatedAt": "2026-04-16T14:48:08.972Z",
+  "generatedAt": "2026-04-16T23:31:30.376Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 131,
-    "archiveItems": 131,
-    "videoMatchedItems": 70
+    "rssItems": 133,
+    "archiveItems": 133,
+    "videoMatchedItems": 72
   },
   "totals": {
     "audioPlaysTotal": 3509,
     "audioEpisodesTotal": 131
   },
   "items": [
+    {
+      "stableId": "media-cjnc8m",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/jaw7kmd785azy57n/415_W_PC628gp.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/d54e4f17-d19d-3fd9-b6a3-30639c584b34"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-rapture-pt-4-eschatology-the-rapture/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-rapture-pt-4-eschatology-the-rapture/"
+      },
+      "title": {
+        "episodeName": "The Rapture Pt. 4",
+        "subtitle": "Mid-Tribulation",
+        "display": "The Rapture Pt. 4 (Mid-Tribulation)"
+      },
+      "series": {
+        "name": "The Rapture",
+        "key": "the-rapture",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "1 Thessalonians 5:9",
+        "display": "1 Thessalonians 5:9",
+        "book": "1 Thessalonians",
+        "bookKey": "1-thessalonians",
+        "isVarious": false
+      },
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "04/015/26",
+        "iso": "2026-04-15",
+        "year": 2026,
+        "month": 4,
+        "monthName": "April",
+        "day": 15
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/jaw7kmd785azy57n/415_W_PC628gp.mp3",
+        "plays": 0,
+        "durationSeconds": 1437,
+        "statsMatchStrategy": ""
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "Vs6W99ieh-k",
+        "url": "https://www.youtube.com/watch?v=Vs6W99ieh-k",
+        "views": 2
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Pt4_PCb7jvh.jpg",
+          "wide": "https://i.ytimg.com/vi/Vs6W99ieh-k/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-rapture"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "1-thessalonians"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-04"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-bdan9q",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/ibwgg4ipp5drjk33/412_S_PC935iv.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/1baf1d99-4a54-35f6-a24f-2df3d754ee7b"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-123-5-the-impact-of-the-gospel-pt-2-in-ministry-romans-chapter-12/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-123-5-the-impact-of-the-gospel-pt-2-in-ministry-romans-chapter-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel Pt. 2",
+        "subtitle": "In Ministry",
+        "display": "The Impact of the Gospel Pt. 2 (In Ministry)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:3-5",
+        "display": "Romans 12:3-5",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "04/12/26",
+        "iso": "2026-04-12",
+        "year": 2026,
+        "month": 4,
+        "monthName": "April",
+        "day": 12
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/ibwgg4ipp5drjk33/412_S_PC935iv.mp3",
+        "plays": 0,
+        "durationSeconds": 2255,
+        "statsMatchStrategy": ""
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "4vjSIfyWLcs",
+        "url": "https://www.youtube.com/watch?v=4vjSIfyWLcs",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/ROMANS_12_Pt2_PC6wcfu.jpg",
+          "wide": "https://i.ytimg.com/vi/4vjSIfyWLcs/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-04"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-dj60qo",
       "sourceKey": {
@@ -81,15 +286,15 @@
       },
       "art": {
         "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_3_pcaply4.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_PT3_PC7za28.jpg",
           "wide": "https://i.ytimg.com/vi/09oTrD_5Rto/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/32526_PC9d03g.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
           "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/32526_PC9d03g.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
           "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         }
       },
@@ -378,15 +583,15 @@
       },
       "art": {
         "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/32526_PC9d03g.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
           "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/32526_PC9d03g.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
           "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/32526_PC9d03g.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
           "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
         }
       },
