@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import {
   readJson, writeJson, clean, slugify, simpleHash, splitPipeTitle,
   detectBibleBook, parseFlexibleDate, formatISODate, parseDurationToSeconds,
@@ -54,13 +54,9 @@ function deriveStudyFromSeries(seriesName) {
   if (!s) return "";
 
   const chapterMatch = s.match(/^(.*?)(?:\s+chapter)?\s+\d+$/i);
-  if (chapterMatch) {
-    return clean(chapterMatch[1]);
-  }
+  if (chapterMatch) return clean(chapterMatch[1]);
 
-  if (s.includes(":")) {
-    return clean(s.split(":")[0]);
-  }
+  if (s.includes(":")) return clean(s.split(":")[0]);
 
   const book = detectBibleBook(s);
   return book || "";
@@ -70,13 +66,11 @@ function inferSeriesType(seriesName, explicitStudy) {
   const s = clean(seriesName);
   const study = clean(explicitStudy);
   if (!s) return "standalone";
-
   if (s.includes(":")) return "topical";
 
   const bookish = detectBibleBook(s) || detectBibleBook(study);
   if (bookish && /(?:chapter\s*)?\d+$/i.test(s)) return "expositional";
   if (bookish && /pt\.?\s*\d+$/i.test(s)) return "expositional";
-
   return "standalone";
 }
 
@@ -111,9 +105,7 @@ function resolveStudy(record, series) {
 
 function resolveScripture(record) {
   const raw = clean(record.notesFields?.["Scripture"]);
-  if (!raw) {
-    return { raw: "", display: "", book: null, bookKey: null, isVarious: false };
-  }
+  if (!raw) return { raw: "", display: "", book: null, bookKey: null, isVarious: false };
   if (raw.toLowerCase() === "various") {
     return { raw: "Various", display: variousDisplay, book: null, bookKey: null, isVarious: true };
   }
@@ -146,11 +138,71 @@ function resolveDate(record) {
   };
 }
 
-function resolveAudio(record) {
+function normalizeTitleKey(value) {
+  return clean(value)
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function toIsoDay(value) {
+  const dt = new Date(value || "");
+  if (Number.isNaN(dt.getTime())) return "";
+  return dt.toISOString().slice(0, 10);
+}
+
+function buildStatsIndexes(statsDoc) {
+  const byMediaUrl = new Map();
+  const byEpisodeUrl = new Map();
+  const byDayAndTitle = new Map();
+  const byTitleKey = new Map();
+
+  for (const episode of Object.values(statsDoc?.episodes || {})) {
+    const mediaUrl = clean(episode.media_url);
+    const episodeUrl = clean(episode.episode_url || episode.permalink_url);
+    const titleKey = normalizeTitleKey(episode.public_listing_title || episode.title || "");
+    const publishDay = toIsoDay(episode.publish_time);
+    const compound = `${publishDay}|${titleKey}`;
+
+    if (mediaUrl) byMediaUrl.set(mediaUrl, episode);
+    if (episodeUrl) byEpisodeUrl.set(episodeUrl, episode);
+    if (publishDay && titleKey && !byDayAndTitle.has(compound)) byDayAndTitle.set(compound, episode);
+    if (titleKey && !byTitleKey.has(titleKey)) byTitleKey.set(titleKey, episode);
+  }
+
+  return { byMediaUrl, byEpisodeUrl, byDayAndTitle, byTitleKey };
+}
+
+function matchStats(record, statsIndexes) {
+  const mediaUrl = clean(record.mediaUrl);
+  const episodeUrl = clean(record.episodeUrl);
+  const titleKey = normalizeTitleKey(record.rssTitle);
+  const publishDay = toIsoDay(record.pubDate);
+  const compound = `${publishDay}|${titleKey}`;
+
+  if (mediaUrl && statsIndexes.byMediaUrl.has(mediaUrl)) {
+    return { episode: statsIndexes.byMediaUrl.get(mediaUrl), strategy: "media_url" };
+  }
+  if (episodeUrl && statsIndexes.byEpisodeUrl.has(episodeUrl)) {
+    return { episode: statsIndexes.byEpisodeUrl.get(episodeUrl), strategy: "episode_url" };
+  }
+  if (publishDay && titleKey && statsIndexes.byDayAndTitle.has(compound)) {
+    return { episode: statsIndexes.byDayAndTitle.get(compound), strategy: "publish_day+title_key" };
+  }
+  if (titleKey && statsIndexes.byTitleKey.has(titleKey)) {
+    return { episode: statsIndexes.byTitleKey.get(titleKey), strategy: "title_key" };
+  }
+  return { episode: null, strategy: "" };
+}
+
+function resolveAudio(record, statsMatch) {
+  const statsEpisode = statsMatch?.episode;
   return {
     hasAudio: Boolean(record.mediaUrl),
     url: record.mediaUrl || null,
-    plays: 0,
+    plays: Number(statsEpisode?.plays_total || 0),
     durationSeconds: parseDurationToSeconds(record.itunesDuration),
     episodeArtSquare: record.episodeImage || null
   };
@@ -241,9 +293,19 @@ function applyInheritedArt(items) {
   }
 }
 
+function readStatsDoc() {
+  const preferred = ["data/stats.json", "stats.json"];
+  for (const path of preferred) {
+    if (existsSync(path)) return readJson(path);
+  }
+  return null;
+}
+
 function main() {
   const rss = readJson("data/raw-rss.json");
   const youtube = readJson("data/raw-youtube-data.json");
+  const statsDoc = readStatsDoc();
+  const statsIndexes = buildStatsIndexes(statsDoc || { episodes: {} });
 
   const items = rss.map(record => {
     const stableId = buildStableId(record);
@@ -253,7 +315,8 @@ function main() {
     const scripture = resolveScripture(record);
     const bookTags = resolveBookTags(record);
     const date = resolveDate(record);
-    const audio = resolveAudio(record);
+    const statsMatch = matchStats(record, statsIndexes);
+    const audio = resolveAudio(record, statsMatch);
     const video = resolveVideo(record, youtube);
     const art = buildEpisodeArt(audio, video);
     const memberships = resolveMemberships(series, study, scripture, bookTags, date);
@@ -266,6 +329,10 @@ function main() {
         mediaUrl: record.mediaUrl || null,
         rssGuid: record.rssGuid || null
       },
+      links: {
+        episodeUrl: record.episodeUrl || statsMatch?.episode?.episode_url || statsMatch?.episode?.permalink_url || null,
+        shareUrl: statsMatch?.episode?.share_url || statsMatch?.episode?.episode_url || statsMatch?.episode?.permalink_url || record.episodeUrl || null
+      },
       title,
       series,
       study,
@@ -277,7 +344,8 @@ function main() {
         hasAudio: audio.hasAudio,
         url: audio.url,
         plays: audio.plays,
-        durationSeconds: audio.durationSeconds
+        durationSeconds: audio.durationSeconds,
+        statsMatchStrategy: statsMatch.strategy || ""
       },
       video: {
         hasVideo: video.hasVideo,
@@ -303,6 +371,10 @@ function main() {
       rssItems: rss.length,
       archiveItems: items.length,
       videoMatchedItems: items.filter(i => i.video.hasVideo).length
+    },
+    totals: {
+      audioPlaysTotal: Number(statsDoc?.podcast_totals?.plays_total || 0),
+      audioEpisodesTotal: Number(statsDoc?.podcast_totals?.episodes_total || items.length)
     },
     items
   };

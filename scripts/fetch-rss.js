@@ -111,6 +111,7 @@ async function main() {
     return {
       rssGuid: getGuid(item),
       mediaUrl: clean(enclosure?.url || ""),
+      episodeUrl: clean(first(item.link)),
       rssTitle: clean(first(item.title)),
       pubDate: clean(first(item.pubDate)),
       itunesDuration: clean(first(item["itunes:duration"])),
