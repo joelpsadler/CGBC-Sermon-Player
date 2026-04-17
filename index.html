@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - UI Pass 7</title>
+  <title>CGBC Sermons - UI Pass 8</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <meta name="theme-color" content="#0f0f10" />
@@ -13,9 +13,9 @@
   <style>
     :root{
       --bg:#0f0f10;
-      --panel:rgba(255,255,255,.06);
-      --panel-2:rgba(255,255,255,.08);
-      --border:rgba(255,255,255,.09);
+      --panel:rgba(255,255,255,.035);
+      --panel-2:rgba(255,255,255,.05);
+      --border:rgba(255,255,255,.05);
       --text:#f4f4f4;
       --muted:rgba(255,255,255,.70);
       --muted-2:rgba(255,255,255,.52);
@@ -24,8 +24,8 @@
       --accent-ink:#112018;
       --bg-image-mobile:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230674/Mobile.jpg');
       --bg-image-desktop:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230673/Desktop.jpg');
-      --shadow:0 18px 40px rgba(0,0,0,.32);
-      --shadow-deep:0 30px 70px rgba(0,0,0,.40);
+      --shadow:0 8px 24px rgba(0,0,0,.18);
+      --shadow-deep:0 12px 30px rgba(0,0,0,.20);
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;min-height:100%}
@@ -318,7 +318,85 @@
     @media (min-width: 981px){.share-btn,.detail-actions .share-btn,.player-actions .share-btn{display:none !important}}
     @media (max-width: 980px){body{background:linear-gradient(180deg, rgba(12,12,13,.98) 0%, rgba(10,10,11,.995) 100%),var(--bg-image-mobile) center/cover no-repeat fixed;background-blend-mode:multiply}}
 
-  </style>
+  
+    /* Calm reset */
+    .masthead,
+    .search-bar,
+    .path-strip,
+    .root-strip,
+    .rail,
+    .player-shell,
+    .detail-card,
+    .empty-state,
+    .recommendations{
+      background:rgba(12,12,13,.72) !important;
+      border:1px solid rgba(255,255,255,.04) !important;
+      box-shadow:none !important;
+      backdrop-filter:blur(8px);
+    }
+    .root-chip,
+    .rail-card,
+    .episode-card,
+    .action-btn,
+    .player-pill,
+    .counts-card{
+      background:rgba(255,255,255,.025) !important;
+      border:1px solid rgba(255,255,255,.05) !important;
+      box-shadow:none !important;
+    }
+    .root-chip.active,
+    .rail-card.active,
+    .episode-card.active{
+      background:rgba(143,174,157,.16) !important;
+      border-color:rgba(168,203,184,.24) !important;
+      box-shadow:none !important;
+    }
+    .brand-logo-btn,
+    .mode-pill,
+    .mode-btn-shell{
+      box-shadow:none !important;
+    }
+    .mode-pill{
+      background:rgba(255,255,255,.03) !important;
+      border:1px solid rgba(255,255,255,.05) !important;
+    }
+    .mode-btn.active .mode-btn-shell{
+      background:rgba(143,174,157,.78) !important;
+      border-color:rgba(168,203,184,.18) !important;
+    }
+    .path-strip{
+      padding:10px 14px !important;
+    }
+    .path-strip .label,
+    .root-strip .eyebrow,
+    .rail .eyebrow,
+    .detail-card .eyebrow{
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:11px !important;
+      color:rgba(255,255,255,.42) !important;
+    }
+    .search-bar{
+      padding:8px 10px !important;
+    }
+    .search-bar input{
+      background:rgba(255,255,255,.025) !important;
+      border-color:rgba(255,255,255,.05) !important;
+    }
+    .detail-card .share-btn,
+    .empty-state .share-btn{
+      display:none !important;
+    }
+    .detail-card{
+      padding-top:18px !important;
+    }
+    .detail-card p.note,
+    .empty-state p.note,
+    .beginner-note{
+      display:none !important;
+    }
+
+</style>
 </head>
 <body class="mode-audio">
   <div class="app-shell">
@@ -354,7 +432,7 @@
           <div class="desktop-rootstrip-head">
             <div class="desktop-path-copy">
               <p class="eyebrow">Browse Modes</p>
-              <h2 class="column-title">Choose how to browse</h2>
+              <h2 class="column-title">Browse</h2>
             </div>
             <div class="desktop-root-actions">
               <button type="button" class="action-btn path-btn" id="desktopHomeBtn">Home</button>
@@ -410,9 +488,9 @@
         </section>
 
         <section class="player-stage" id="playerStage">
-          <div id="videoPlaceholder">Choose an episode from the queue to begin watching.</div>
+          <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
-          <div id="audioPlaceholder">Choose an episode from the queue to begin listening.</div>
+          <div id="audioPlaceholder">Select an episode to listen.</div>
 
           <div class="audio-stage" id="audioStage">
             <div class="audio-art-wrap">
@@ -427,7 +505,7 @@
               </div>
             </div>
             <div class="audio-content">
-              <h3 class="audio-title" id="audioFeatureTitle">Select a sermon</h3>
+              <h3 class="audio-title" id="audioFeatureTitle"></h3>
               <div class="audio-series" id="audioFeatureSeries"></div>
               <div class="audio-detail-row"><span class="audio-detail-label">Scripture</span><span class="audio-detail-value" id="audioFeatureScripture"></span></div>
               <div class="audio-detail-row"><span class="audio-detail-label">Speaker</span><span class="audio-detail-value" id="audioFeatureSpeaker"></span></div>
@@ -448,11 +526,11 @@
         <section class="meta-stage" id="metaStage">
           <div class="meta-stage-top">
             <div>
-              <h2 class="meta-title" id="metaTitle">Select a sermon</h2>
+              <h2 class="meta-title" id="metaTitle"></h2>
               <div class="meta-series" id="metaSeries"></div>
             </div>
             <div class="meta-actions">
-              <a id="episodePageLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Episode Page</a>
+              <a id="episodePageLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Open</a>
               <a id="shareLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Share</a>
             </div>
           </div>
@@ -1212,7 +1290,7 @@ function renderPlayer() {
       els.videoPlaceholder.textContent = 'This item does not have a matched video.';
       return;
     }
-    els.videoPlaceholder.textContent = 'Choose an episode from the queue to begin watching.';
+    els.videoPlaceholder.textContent = 'Select an episode to watch.';
     els.playerStage.classList.add('video-active');
     els.videoShell.style.display = 'block';
     if (appState.videoPlayerId !== videoId) {
@@ -1224,7 +1302,7 @@ function renderPlayer() {
 function renderMeta() {
   const item = appState.currentItem;
   if (!item) {
-    els.metaTitle.textContent = 'Select a sermon';
+    els.metaTitle.textContent = '';
     els.metaSeries.textContent = '';
     els.episodePageLink.href = '#';
     els.shareLink.href = '#';
