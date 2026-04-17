@@ -252,6 +252,8 @@
       .mobile-panel.show-branch .mobile-branch-block{display:block}
       .mobile-panel.show-leaf .mobile-leaf-block{display:block}
       .mobile-panel.show-queue .mobile-queue-block{display:block}
+      .player-stage.is-idle{display:none}
+      .meta-stage.is-idle{display:none}
     }
     .mobile-panel{display:none}
     .mobile-nav-block{display:none}
@@ -373,7 +375,7 @@
           <audio id="audioPlayer" preload="metadata"></audio>
         </section>
 
-        <section class="meta-stage">
+        <section class="meta-stage" id="metaStage">
           <div class="meta-stage-top">
             <div>
               <h2 class="meta-title" id="metaTitle">Select a sermon</h2>
@@ -487,7 +489,8 @@ const els = {
   metaSeries: document.getElementById('metaSeries'),  episodePageLink: document.getElementById('episodePageLink'),
   shareLink: document.getElementById('shareLink'),
   relatedShell: document.getElementById('relatedShell'),
-  relatedRow: document.getElementById('relatedRow')
+  relatedRow: document.getElementById('relatedRow'),
+  metaStage: document.getElementById('metaStage')
 };
 
 function escapeHtml(value) {
@@ -936,25 +939,40 @@ function getDesktopPathTitle() {
   return 'Choose a category';
 }
 function updateWorkspaceState() {
-  const hasBranch = !!appState.nav.rootKey && getBranchItems().length > 0;
-  const hasLeaf = !!appState.nav.branchKey && getLeafItems().length > 0;
-  const hasQueue = buildQueue().length > 0;
+  const branchRows = getBranchItems();
+  const leafRows = getLeafItems();
+  const queueRows = buildQueue();
+  const hasBranch = !!appState.nav.rootKey && branchRows.length > 0;
+  const hasLeaf = !!appState.nav.branchKey && (leafRows.length > 0 || queueRows.length > 0);
+
   els.workspace.classList.toggle('has-branch', hasBranch);
   els.workspace.classList.toggle('has-leaf', hasLeaf);
-  els.desktopPathTitle.textContent = getDesktopPathTitle();
-  els.mobilePathTitle.textContent = getDesktopPathTitle();
+
+  const pathTitle = getDesktopPathTitle();
+  els.desktopPathTitle.textContent = pathTitle;
+  els.mobilePathTitle.textContent = pathTitle;
   updatePathButtons();
+
   const root = getRootItems().find(row => row.key === appState.nav.rootKey);
-  const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
+  const branch = branchRows.find(row => row.key === appState.nav.branchKey);
   els.branchRailTitle.textContent = root ? root.title : 'Series / Branch';
   els.leafRailTitle.textContent = branch ? branch.title : 'Episodes';
-  els.mobilePathTitle.textContent = getDesktopPathTitle();
-  els.playerStage.classList.toggle('is-idle', !appState.currentItem);
+
+  const isIdle = !appState.currentItem;
+  els.playerStage.classList.toggle('is-idle', isIdle);
+  if (els.metaStage) els.metaStage.classList.toggle('is-idle', isIdle);
+
   if (els.mobileBrowsePanel) {
-    els.mobileBrowsePanel.classList.toggle('show-root', true);
-    els.mobileBrowsePanel.classList.toggle('show-branch', !!appState.nav.rootKey);
-    els.mobileBrowsePanel.classList.toggle('show-leaf', !!appState.nav.branchKey && getLeafItems().length > 0);
-    els.mobileBrowsePanel.classList.toggle('show-queue', hasQueue);
+    els.mobileBrowsePanel.classList.remove('show-root', 'show-branch', 'show-leaf', 'show-queue');
+    let pane = 'root';
+    if (appState.nav.rootKey && !appState.nav.branchKey) {
+      pane = 'branch';
+    } else if (appState.nav.branchKey) {
+      if (leafRows.length > 0 && !appState.nav.leafKey) pane = 'leaf';
+      else if (queueRows.length > 0) pane = 'queue';
+      else pane = 'leaf';
+    }
+    els.mobileBrowsePanel.classList.add('show-' + pane);
   }
 }
 
