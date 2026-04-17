@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - Mobile First Pass 2</title>
+  <title>CGBC Sermons - Top Nav Pass</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <meta name="theme-color" content="#0f0f10" />
@@ -85,9 +85,46 @@
       border-radius:24px;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow);
       backdrop-filter:blur(10px);overflow:hidden
     }
-    .nav-head,.section{padding:16px}
+    .nav-panel{display:grid;gap:0}
+    .nav-head{padding:16px 16px 12px}
     .eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2);font-size:12px}
     .title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,2vw,24px);line-height:1.08}
+
+    .top-strip-wrap{padding:0 16px 14px}
+    .top-strip{
+      display:flex;gap:14px;overflow-x:auto;padding-bottom:4px;
+      scroll-snap-type:x proximity;
+    }
+    .top-strip::-webkit-scrollbar{height:8px}
+    .top-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+    .top-card{
+      flex:0 0 clamp(240px,28vw,340px);
+      scroll-snap-align:start;
+      display:grid;gap:10px;
+      text-align:left;
+      padding:0;
+      background:none;
+      border:none;
+    }
+    .top-card-image{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.05);
+      position:relative;
+      box-shadow:var(--shadow);
+    }
+    .top-card-image img{width:100%;height:100%;object-fit:cover}
+    .top-card.active .top-card-image{
+      outline:2px solid rgba(143,174,157,.5);
+      outline-offset:0;
+    }
+    .top-card-copy{padding:0 4px}
+    .top-card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,1.7vw,24px);line-height:1.08}
+    .top-card-sub{margin-top:4px;color:var(--muted);font-size:14px;line-height:1.25}
+
     .search-row{display:flex;align-items:center;gap:10px;padding:0 16px 16px}
     .search-row input{
       flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
@@ -95,14 +132,17 @@
     }
     .search-row input::placeholder{color:var(--muted-2)}
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
+
     .path-row{
       display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.05)
     }
-    .path-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(17px,1.8vw,22px);line-height:1.08}
-    .action-btn{
-      min-height:42px;padding:0 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
+    .path-button{
+      min-height:46px;padding:0 16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
       display:inline-flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;white-space:nowrap
     }
+    .path-button[disabled]{opacity:.48;cursor:default}
+    .path-button span{overflow:hidden;text-overflow:ellipsis}
+
     .stack{display:grid;gap:12px;padding:0 16px 16px}
     .choice,.episode,.related{
       width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px;border-radius:20px;
@@ -123,6 +163,7 @@
       margin:0 16px 16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);
       border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
     }
+
     .content{display:grid;gap:16px}
     .player{padding:16px}
     .player.video-active{padding:0;background:rgba(0,0,0,.25)}
@@ -179,12 +220,13 @@
     .related .thumb-square{width:64px;height:64px;flex-basis:64px}
 
     @media (min-width:1040px){
-      .flow{grid-template-columns:minmax(340px,480px) minmax(0,1fr)}
+      .flow{grid-template-columns:minmax(360px,560px) minmax(0,1fr)}
       .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
       .transport{margin:0}
       .meta-row{grid-template-columns:140px minmax(0,1fr)}
+      .top-card{flex-basis:320px}
     }
     @media (max-width:900px){
       body{
@@ -206,6 +248,7 @@
       .thumb-wide{width:108px;height:66px;flex-basis:108px}
       .thumb-square{width:78px;height:78px;flex-basis:78px}
       .meta-row{grid-template-columns:100px minmax(0,1fr)}
+      .top-card{flex-basis:280px}
     }
   </style>
 </head>
@@ -218,7 +261,7 @@
         </button>
         <div>
           <h1>CGBC Sermons</h1>
-          <p>Mobile-first collapsing flow around resolved data and live YouTube shelves.</p>
+          <p>Top navigation refinement pass.</p>
         </div>
       </div>
       <div class="top-actions">
@@ -239,16 +282,19 @@
           <p class="eyebrow">Browse</p>
           <h2 class="title" id="navHeading">Choose a category</h2>
         </div>
+        <div class="top-strip-wrap">
+          <div class="top-strip" id="topStrip"></div>
+        </div>
         <div class="search-row">
           <input id="searchInput" type="search" placeholder="Search title, scripture, series, book, date">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
           <div>
-            <p class="eyebrow" style="margin-bottom:4px">Current Path</p>
+            <p class="eyebrow" style="margin-bottom:4px">Path</p>
             <h3 class="path-title" id="pathTitle">Choose a category</h3>
           </div>
-          <button type="button" class="action-btn" id="backBtn">Back</button>
+          <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
         </div>
         <div class="stack" id="choiceList"></div>
       </section>
@@ -302,8 +348,8 @@
             <div class="meta-row"><div class="meta-label">Video Views</div><div class="meta-value" id="detailVideoViews"></div></div>
           </div>
           <div class="detail-actions">
-            <a id="episodePageLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Open</a>
-            <a id="shareLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Share</a>
+            <a id="episodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open</span></a>
+            <a id="shareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
           </div>
           <div class="related-wrap" id="relatedWrap">
             <h3 class="related-title">More from this selection</h3>
@@ -322,7 +368,7 @@
       books:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234671/Search-Books.jpg',
       date:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234670/Serach-Date.jpg',
       shorts:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234699/shorts.jpg',
-      topicalSeries:''
+      topicalSeries:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234786/Search-Series.jpg'
     };
     const LIVESTREAMS = { name:'Livestreams', playlistId:'PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv' };
     const GUEST_SPEAKERS = { name:'CGBC Guest Speaker', playlistId:'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW' };
@@ -350,6 +396,7 @@
       pathTitle: document.getElementById('pathTitle'),
       backBtn: document.getElementById('backBtn'),
       choiceList: document.getElementById('choiceList'),
+      topStrip: document.getElementById('topStrip'),
       listenBtn: document.getElementById('listenBtn'),
       watchBtn: document.getElementById('watchBtn'),
       logoReset: document.getElementById('logoReset'),
@@ -588,7 +635,7 @@
       if(leaves.length && !state.nav.leafKey) return {rows:leaves, episodeLevel:false};
       return {rows:queueItems(), episodeLevel:true};
     }
-    function pathTitle(){
+    function currentPathTitle(){
       const browse=buildBrowse();
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
@@ -604,6 +651,15 @@
       if(leafChoices().length && !state.nav.leafKey) return 'Choose a selection';
       return 'Choose an episode';
     }
+    function backLabel(){
+      const browse=buildBrowse();
+      const root=browse.roots.find(r=>r.key===state.nav.rootKey);
+      const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
+      if(state.nav.leafKey) return `Back to ${branch?.title || 'selection'}`;
+      if(state.nav.branchKey) return `Back to ${root?.title || 'categories'}`;
+      if(state.nav.rootKey) return 'Back to categories';
+      return 'Back';
+    }
     function updateSearchStatus(){
       const total=getModeItems(state.mode).length, shown=visibleItems().length;
       els.searchStatus.textContent = state.searchTerm.trim() ? `${formatNumber(shown)} of ${formatNumber(total)}` : 'All items';
@@ -611,8 +667,6 @@
     function updateModeUI(){
       els.listenBtn.classList.toggle('active', state.mode==='audio');
       els.watchBtn.classList.toggle('active', state.mode==='video');
-      document.body.classList.toggle('mode-audio', state.mode==='audio');
-      document.body.classList.toggle('mode-video', state.mode==='video');
     }
     function updateImpact(){
       if(!state.data) return;
@@ -630,32 +684,25 @@
         els.impactSecondaryLabel.textContent = 'Video Episodes';
       }
     }
-    function updateBack(){
-      els.backBtn.disabled = !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey;
-      els.backBtn.textContent = 'Back';
-    }
-    function renderCard(row, activeKey, episodeLevel){
-      const thumbClass = episodeLevel ? (state.mode==='video' ? 'thumb-wide' : 'thumb-square') : 'thumb-wide';
-      const image = episodeLevel ? getEpisodeArt(row) : (row.image || ASSETS.fallback);
-      const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
-      const sub = episodeLevel ? (row?.series?.name || '') : (row.meta || '');
-      const metric = episodeLevel ? `${formatCountLabel(state.mode==='audio' ? (row?.audio?.plays || 0) : (row?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views')} · ${formatDate(row)}` : '';
-      const key = episodeLevel ? row.stableId : row.key;
-      const cls = episodeLevel ? 'episode' : 'choice';
-      return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
-        <div class="${thumbClass}"><img src="${escapeHtml(image)}" alt=""></div>
-        <div class="copy">
-          <h3 class="card-title">${escapeHtml(title)}</h3>
-          <div class="card-sub">${escapeHtml(sub)}</div>
-          ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
-        </div>
-      </button>`;
+    function renderTopStrip(){
+      const roots=rootChoices();
+      els.topStrip.innerHTML = roots.map(row => `
+        <button type="button" class="top-card ${state.nav.rootKey===row.key ? 'active' : ''}" data-top-root="${escapeHtml(row.key)}">
+          <div class="top-card-image"><img src="${escapeHtml(row.image || ASSETS.fallback)}" alt=""></div>
+          <div class="top-card-copy">
+            <h3 class="top-card-title">${escapeHtml(row.title)}</h3>
+            <div class="top-card-sub">${escapeHtml(row.meta)}</div>
+          </div>
+        </button>
+      `).join('');
     }
     function renderChoices(){
       els.navHeading.textContent = headingText();
-      els.pathTitle.textContent = pathTitle();
+      els.pathTitle.textContent = currentPathTitle();
+      els.backBtn.disabled = !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey;
+      els.backBtn.querySelector('span').textContent = backLabel();
       updateSearchStatus();
-      updateBack();
+      renderTopStrip();
 
       const {rows, episodeLevel} = choiceRows();
       if(episodeLevel){
@@ -665,12 +712,28 @@
         state.activeQueue = [];
         state.currentItem = null;
       }
-      const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey || state.nav.rootKey);
       if(!rows.length){
         els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
         return;
       }
-      els.choiceList.innerHTML = rows.map(row => renderCard(row, activeKey, episodeLevel)).join('');
+      const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey);
+      els.choiceList.innerHTML = rows.map(row => {
+        const thumbClass = episodeLevel ? (state.mode==='video' ? 'thumb-wide' : 'thumb-square') : 'thumb-wide';
+        const image = episodeLevel ? getEpisodeArt(row) : (row.image || ASSETS.fallback);
+        const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
+        const sub = episodeLevel ? (row?.series?.name || '') : (row.meta || '');
+        const metric = episodeLevel ? `${formatCountLabel(state.mode==='audio' ? (row?.audio?.plays || 0) : (row?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views')} · ${formatDate(row)}` : '';
+        const key = episodeLevel ? row.stableId : row.key;
+        const cls = episodeLevel ? 'episode' : 'choice';
+        return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
+          <div class="${thumbClass}"><img src="${escapeHtml(image)}" alt=""></div>
+          <div class="copy">
+            <h3 class="card-title">${escapeHtml(title)}</h3>
+            <div class="card-sub">${escapeHtml(sub)}</div>
+            ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
+          </div>
+        </button>`;
+      }).join('');
     }
     function renderPlayer(){
       const item=state.currentItem;
@@ -753,15 +816,11 @@
       updateModeUI();
       updateImpact();
     }
+    function resetAll(){ state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; rerender(); }
     function goBack(){
       if(state.nav.leafKey) state.nav.leafKey=null;
       else if(state.nav.branchKey) state.nav.branchKey=null;
       else if(state.nav.rootKey) state.nav.rootKey=null;
-      rerender();
-    }
-    function resetAll(){
-      state.nav={rootKey:null,branchKey:null,leafKey:null};
-      state.currentItem=null;
       rerender();
     }
     function selectChoice(key){
@@ -771,6 +830,14 @@
     }
     function attachEvents(){
       document.body.addEventListener('click', (event)=>{
+        const topBtn=event.target.closest('[data-top-root]');
+        if(topBtn){
+          const key=topBtn.dataset.topRoot;
+          state.nav={rootKey:key,branchKey:null,leafKey:null};
+          state.currentItem=null;
+          rerender();
+          return;
+        }
         const btn=event.target.closest('[data-key]');
         if(!btn) return;
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
