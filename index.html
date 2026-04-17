@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - UI Pass 5</title>
+  <title>CGBC Sermons - UI Pass 6</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <meta name="theme-color" content="#0f0f10" />
@@ -89,13 +89,17 @@
 
     .workspace{
       display:grid;grid-template-columns:minmax(0,1fr) minmax(760px, 44vw);gap:16px;align-items:stretch;
-      min-height:calc(100vh - 118px)
+      min-height:calc(100vh - 118px);
+      height:calc(100vh - 118px);
+      overflow:hidden;
     }
     .desktop-side{
       display:grid;
       grid-template-rows:auto auto minmax(0,1fr);
       gap:16px;
       min-height:0;
+      height:100%;
+      overflow:hidden;
       align-content:start;
     }
     .desktop-rootstrip{
@@ -130,21 +134,35 @@
     .path-btn{min-width:84px; justify-content:center}
     .desktop-lower{
       display:grid;
-      grid-template-columns:0 0;
+      grid-template-columns:0 0 0;
       gap:16px;
       min-height:0;
+      height:100%;
+      overflow:hidden;
       align-content:start;
       transition:grid-template-columns .24s ease;
     }
-    .workspace.has-branch .desktop-lower{grid-template-columns:minmax(240px,320px) 0}
-    .workspace.has-leaf .desktop-lower{grid-template-columns:minmax(200px,260px) minmax(320px,420px)}
-    .rail{min-width:0;min-height:0}
-    .rail-branch,.rail-leaf{display:none;opacity:0;transform:translateX(-10px);pointer-events:none;overflow:hidden;transition:opacity .22s ease, transform .22s ease}
+    .workspace.has-branch .desktop-lower{grid-template-columns:minmax(240px,300px) 0 0}
+    .workspace.has-leaf .desktop-lower{grid-template-columns:minmax(210px,260px) minmax(210px,280px) 0}
+    .workspace.has-queue .desktop-lower{grid-template-columns:minmax(210px,250px) minmax(210px,260px) minmax(280px,360px)}
+    .rail{min-width:0;min-height:0;height:100%}
+    .rail-branch,.rail-leaf,.rail-queue{display:none;opacity:0;transform:translateX(-10px);pointer-events:none;overflow:hidden;transition:opacity .22s ease, transform .22s ease}
     .workspace.has-branch .rail-branch{display:flex;opacity:1;transform:none;pointer-events:auto}
     .workspace.has-leaf .rail-leaf{display:flex;opacity:1;transform:none;pointer-events:auto}
+    .workspace.has-queue .rail-queue{display:flex;opacity:1;transform:none;pointer-events:auto}
     .rail-queue-head{padding:4px 0 10px}
-    .stage-column{min-width:760px}
+    .stage-column{
+      min-width:760px;
+      min-height:0;
+      height:100%;
+      display:grid;
+      grid-template-rows:minmax(0,1fr) auto;
+      gap:16px;
+      overflow:hidden;
+    }
     .player-stage.is-idle #videoShell,.player-stage.is-idle #audioStage{display:none}
+    .player-stage,.meta-stage{min-height:0}
+    .meta-stage{overflow:auto}
     
     .panel,.player-stage,.meta-stage{
       border-radius:24px;border:1px solid var(--border);
@@ -239,7 +257,12 @@
     .related-card .thumb-square{width:64px;height:64px;flex-basis:64px}
     .related-card.video .thumb-wide{width:84px;height:48px;flex-basis:84px}
 
-    @media (max-width: 980px){
+    
+    @media (min-width: 981px){
+      html,body{height:100%;overflow:hidden}
+      .app-shell{height:100vh;overflow:hidden}
+    }
+@media (max-width: 980px){
       body{
         background:
           linear-gradient(180deg, rgba(8,8,9,.54), rgba(8,8,9,.84)),
@@ -342,18 +365,18 @@
 
         <section class="desktop-lower">
           <section class="panel column rail rail-branch" id="branchRail">
-            <div class="column-head"><p class="eyebrow">Step 1</p><h2 class="column-title" id="branchRailTitle">Series / Branch</h2></div>
+            <div class="column-head"><p class="eyebrow">Step 1</p><h2 class="column-title" id="branchRailTitle">Branch</h2></div>
             <div class="column-scroll"><div id="branchList" class="nav-list"></div></div>
           </section>
 
           <section class="panel column rail rail-leaf" id="leafRail">
-            <div class="column-head"><p class="eyebrow">Step 2</p><h2 class="column-title" id="leafRailTitle">Episodes</h2></div>
-            <div class="column-scroll">
-              <div id="leafList" class="nav-list"></div>
-              <div style="height:14px"></div>
-              <div class="rail-queue-head"><p class="eyebrow">Selection</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
-              <div id="episodeList"></div>
-            </div>
+            <div class="column-head"><p class="eyebrow">Step 2</p><h2 class="column-title" id="leafRailTitle">Series / Selection</h2></div>
+            <div class="column-scroll"><div id="leafList" class="nav-list"></div></div>
+          </section>
+
+          <section class="panel column rail rail-queue" id="queueRail">
+            <div class="column-head"><p class="eyebrow">Step 3</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
+            <div class="column-scroll"><div id="episodeList" class="episode-list"></div></div>
           </section>
         </section>
       </section>
@@ -487,6 +510,7 @@ const els = {
   mobilePathTitle: document.getElementById('mobilePathTitle'),
   mobileBrowsePanel: document.getElementById('mobileBrowsePanel'),
   workspace: document.getElementById('workspace'),
+  queueRail: document.getElementById('queueRail'),
   desktopPathTitle: document.getElementById('desktopPathTitle'),
   branchRailTitle: document.getElementById('branchRailTitle'),
   leafRailTitle: document.getElementById('leafRailTitle'),
@@ -592,6 +616,26 @@ function sortNewestFirst(a, b) {
   if (aIso && bIso) return bIso.localeCompare(aIso);
   return (b?.title?.display || '').localeCompare(a?.title?.display || '');
 }
+
+const BIBLE_BOOK_ORDER = [
+  'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
+  '1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job',
+  'Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel',
+  'Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi',
+  'Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians',
+  '1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter',
+  '1 John','2 John','3 John','Jude','Revelation'
+];
+const BIBLE_BOOK_ORDER_MAP = new Map(BIBLE_BOOK_ORDER.map((name, index) => [name.toLowerCase(), index]));
+function sortBookName(a, b) {
+  const aKey = String(a || '').toLowerCase();
+  const bKey = String(b || '').toLowerCase();
+  const aIdx = BIBLE_BOOK_ORDER_MAP.has(aKey) ? BIBLE_BOOK_ORDER_MAP.get(aKey) : 999;
+  const bIdx = BIBLE_BOOK_ORDER_MAP.has(bKey) ? BIBLE_BOOK_ORDER_MAP.get(bKey) : 999;
+  if (aIdx !== bIdx) return aIdx - bIdx;
+  return sortSeriesName(a, b);
+}
+
 function sortSeriesName(a, b) {
   return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
 }
@@ -787,11 +831,11 @@ function buildBrowseModel(items) {
       { key:'shorts', title:'CGBC Shorts', meta:'Live YouTube shelf', image:'' },
       { key:'guestSpeakers', title:'Guest Speakers', meta:'Live YouTube shelf', image:'' }
     ] : []),
-    { key:'current', title:'Series in Progress', meta:formatCountLabel(model.buckets.current.length, 'series', 'series'), image:'' },
-    { key:'bibleBooks', title:'Bible Books', meta:formatCountLabel(model.buckets.bibleBooks.size, 'book', 'books'), image:'' },
-    { key:'standaloneSeries', title:'Standalone Series', meta:formatCountLabel(model.buckets.standaloneSeries.size, 'series', 'series'), image:'' },
-    { key:'yearSpecials', title:'Year Specials', meta:formatCountLabel(model.buckets.yearSpecials.size, 'year', 'years'), image:'' },
-    { key:'byDate', title:appState.mode === 'audio' ? 'Audio by Date' : 'Video by Date', meta:'Year → Month', image:'' }
+    { key:'current', title:'Current', meta:formatCountLabel(model.buckets.current.length, 'series', 'series'), image:'' },
+    { key:'bibleBooks', title:'By Book', meta:formatCountLabel(model.buckets.bibleBooks.size, 'book', 'books'), image:'' },
+    { key:'standaloneSeries', title:'By Series', meta:formatCountLabel(model.buckets.standaloneSeries.size, 'series', 'series'), image:'' },
+    { key:'yearSpecials', title:'Specials', meta:formatCountLabel(model.buckets.yearSpecials.size, 'year', 'years'), image:'' },
+    { key:'byDate', title:'By Date', meta:'Year → Month', image:'' }
   ];
 
   return model;
@@ -816,7 +860,7 @@ function getBranchItems() {
   if (root === 'current') return browse.buckets.current;
   if (root === 'bibleBooks') {
     return Array.from(browse.buckets.bibleBooks.values())
-      .sort((a,b) => sortSeriesName(a.title, b.title))
+      .sort((a,b) => sortBookName(a.title, b.title))
       .map(bucket => ({
         key: bucket.key,
         title: bucket.title,
@@ -971,7 +1015,7 @@ function getDesktopPathTitle() {
   const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
   const leaf = getLeafItems().find(row => row.key === appState.nav.leafKey);
   if (leaf) return `Episodes · ${leaf.title}`;
-  if (branch) return `Series · ${branch.title}`;
+  if (branch) return `${root?.title || 'Browse'} · ${branch.title}`;
   if (root) return `Browse · ${root.title}`;
   return 'Choose a category';
 }
@@ -980,10 +1024,12 @@ function updateWorkspaceState() {
   const leafRows = getLeafItems();
   const queueRows = buildQueue();
   const hasBranch = !!appState.nav.rootKey && branchRows.length > 0;
-  const hasLeaf = !!appState.nav.branchKey && (leafRows.length > 0 || queueRows.length > 0);
+  const hasLeaf = !!appState.nav.branchKey && leafRows.length > 0;
+  const hasQueue = !!appState.nav.branchKey && queueRows.length > 0;
 
   els.workspace.classList.toggle('has-branch', hasBranch);
   els.workspace.classList.toggle('has-leaf', hasLeaf);
+  els.workspace.classList.toggle('has-queue', hasQueue);
 
   const pathTitle = getDesktopPathTitle();
   els.desktopPathTitle.textContent = pathTitle;
@@ -992,8 +1038,10 @@ function updateWorkspaceState() {
 
   const root = getRootItems().find(row => row.key === appState.nav.rootKey);
   const branch = branchRows.find(row => row.key === appState.nav.branchKey);
-  els.branchRailTitle.textContent = root ? root.title : 'Series / Branch';
-  els.leafRailTitle.textContent = branch ? branch.title : 'Episodes';
+  const leaf = leafRows.find(row => row.key === appState.nav.leafKey);
+  els.branchRailTitle.textContent = root ? root.title : 'Branch';
+  els.leafRailTitle.textContent = branch ? branch.title : 'Series / Selection';
+  els.queueTitle.textContent = leaf ? `${leaf.title} Episodes` : (branch ? `${branch.title} Episodes` : 'Episodes');
 
   const isIdle = !appState.currentItem;
   els.playerStage.classList.toggle('is-idle', isIdle);
@@ -1061,7 +1109,6 @@ function renderLeaves() {
 function renderQueue() {
   const queue = buildQueue();
   appState.activeQueue = queue;
-  els.queueTitle.textContent = queue.length ? `${formatCountLabel(queue.length, 'episode', 'episodes')}` : 'Episodes';
   if (!queue.length) {
     const empty = `<div class="empty-state">Choose a bucket with sermons or videos.</div>`;
     els.episodeList.innerHTML = empty;
