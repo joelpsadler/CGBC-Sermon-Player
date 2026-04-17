@@ -294,7 +294,7 @@ function applyInheritedArt(items) {
 }
 
 function readStatsDoc() {
-  const preferred = ["data/stats.json", "stats.json"];
+  const preferred = ["stats/stats.json", "data/stats.json", "stats.json"];
   for (const path of preferred) {
     if (existsSync(path)) return readJson(path);
   }

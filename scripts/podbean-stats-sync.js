@@ -8,19 +8,19 @@ const RSS_URL = config.rssUrl;
 function detectInputPath() {
   const candidates = [
     process.env.PODBEAN_STATS_INPUT,
-    "data/stats.json",
     "stats/stats.json",
+    "data/stats.json",
     "stats.json"
   ].filter(Boolean);
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) return candidate;
   }
-  throw new Error("Missing stats input file. Expected one of: data/stats.json, stats/stats.json, stats.json");
+  throw new Error("Missing stats input file. Expected one of: stats/stats.json, data/stats.json, stats.json");
 }
 
 const INPUT_PATH = detectInputPath();
-const OUTPUT_PATH = process.env.PODBEAN_STATS_OUTPUT || "data/stats.json";
+const OUTPUT_PATH = process.env.PODBEAN_STATS_OUTPUT || "stats/stats.json";
 
 function normalizeTitleKey(value) {
   return clean(value)
@@ -105,11 +105,11 @@ function enrichStats(statsDoc, rssItems) {
       }
     }
 
-    episode.media_url = match?.mediaUrl || "";
-    episode.episode_url = match?.episodeUrl || permalink || "";
-    episode.share_url = episode.episode_url || permalink || "";
-    episode.match_strategy = matchStrategy || "";
-    episode.rss_title = match?.rssTitle || "";
+    episode.media_url = match?.mediaUrl || episode.media_url || "";
+    episode.episode_url = match?.episodeUrl || permalink || episode.episode_url || "";
+    episode.share_url = episode.episode_url || permalink || episode.share_url || "";
+    episode.match_strategy = matchStrategy || episode.match_strategy || "";
+    episode.rss_title = match?.rssTitle || episode.rss_title || "";
   }
 
   return statsDoc;
@@ -127,6 +127,7 @@ async function main() {
 
   writeJson(OUTPUT_PATH, enriched);
   console.log(`Stats input: ${INPUT_PATH}`);
+  console.log(`Stats output: ${OUTPUT_PATH}`);
   console.log(`Enriched stats episodes: ${Object.keys(enriched.episodes || {}).length}`);
 }
 
