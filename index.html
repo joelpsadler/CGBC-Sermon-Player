@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - UI Pass 1</title>
+  <title>CGBC Sermons - UI Pass 3</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <meta name="theme-color" content="#0f0f10" />
@@ -111,10 +111,12 @@
     .desktop-path-actions,.mobile-path-actions{display:flex;gap:8px;flex-wrap:wrap}
     .path-btn{min-width:84px; justify-content:center}
     .rail{min-width:0;min-height:0}
-    .rail-branch,.rail-leaf{opacity:0;transform:translateX(-10px);pointer-events:none;transition:opacity .22s ease, transform .22s ease}
-    .workspace.has-branch .rail-branch,.workspace.has-leaf .rail-leaf{opacity:1;transform:none;pointer-events:auto}
+    .rail-branch,.rail-leaf{display:none;opacity:0;transform:translateX(-10px);pointer-events:none;overflow:hidden;transition:opacity .22s ease, transform .22s ease}
+    .workspace.has-branch .rail-branch{display:flex;opacity:1;transform:none;pointer-events:auto}
+    .workspace.has-leaf .rail-leaf{display:flex;opacity:1;transform:none;pointer-events:auto}
     .rail-queue-head{padding:4px 0 10px}
     .stage-column{min-width:760px}
+    .player-stage.is-idle #videoShell,.player-stage.is-idle #audioStage{display:none}
     
     .panel,.player-stage,.meta-stage{
       border-radius:24px;border:1px solid var(--border);
@@ -223,7 +225,9 @@
       .mode-pill{min-width:0;flex:1}
       .mode-btn-shell{min-height:48px;padding:0 12px;gap:8px}
       .workspace{display:block}
+      .desktop-rails{display:none !important}
       .panel.column{display:none}
+      .desktop-pathbar{display:none !important}
       .stage-column{gap:12px}
       .player-stage{min-height:0;padding:14px}
       .audio-stage{grid-template-columns:1fr;gap:14px}
@@ -243,8 +247,14 @@
       .impact-pill{flex:1 1 0;min-width:0;padding:9px 12px}
       .impact-value{font-size:18px}
       .mobile-panel{display:flex !important;flex-direction:column;gap:12px}
+      .mobile-nav-block{display:none}
+      .mobile-panel.show-root .mobile-root-block{display:block}
+      .mobile-panel.show-branch .mobile-branch-block{display:block}
+      .mobile-panel.show-leaf .mobile-leaf-block{display:block}
+      .mobile-panel.show-queue .mobile-queue-block{display:block}
     }
     .mobile-panel{display:none}
+    .mobile-nav-block{display:none}
   </style>
 </head>
 <body class="mode-audio">
@@ -310,20 +320,20 @@
       </section>
 
       <section class="stage-column">
-        <section class="panel mobile-panel">
+        <section class="panel mobile-panel" id="mobileBrowsePanel">
           <div class="column-head"><p class="eyebrow">Browse</p><h2 class="column-title" id="mobilePathTitle">Navigation</h2></div>
           <div class="column-scroll">
             <div class="mobile-path-actions">
               <button type="button" class="action-btn path-btn" id="mobileBackBtn">Back</button>
               <button type="button" class="action-btn path-btn" id="mobileHomeBtn">Home</button>
             </div>
-            <div id="mobileRootList" class="nav-list"></div>
+            <div class="mobile-nav-block mobile-root-block"><div id="mobileRootList" class="nav-list"></div></div>
             <div style="height:14px"></div>
-            <div id="mobileBranchList" class="nav-list"></div>
+            <div class="mobile-nav-block mobile-branch-block"><div id="mobileBranchList" class="nav-list"></div></div>
             <div style="height:14px"></div>
-            <div id="mobileLeafList" class="nav-list"></div>
+            <div class="mobile-nav-block mobile-leaf-block"><div id="mobileLeafList" class="nav-list"></div></div>
             <div style="height:14px"></div>
-            <div id="mobileEpisodeList"></div>
+            <div class="mobile-nav-block mobile-queue-block"><div id="mobileEpisodeList"></div></div>
           </div>
         </section>
 
@@ -436,6 +446,7 @@ const els = {
   episodeList: document.getElementById('episodeList'),
   queueTitle: document.getElementById('queueTitle'),
   mobilePathTitle: document.getElementById('mobilePathTitle'),
+  mobileBrowsePanel: document.getElementById('mobileBrowsePanel'),
   workspace: document.getElementById('workspace'),
   desktopPathTitle: document.getElementById('desktopPathTitle'),
   branchRailTitle: document.getElementById('branchRailTitle'),
@@ -754,13 +765,13 @@ function getBranchItems() {
   const browse = appState.browse;
   if (!browse || !root) return [];
   if (root === 'livestreams') {
-    return [{ key:'live-collection', title:'Livestreams', meta: formatCountLabel(appState.nativeShelves.livestreams.length, 'video', 'videos'), image:'' }];
+    return [{ key:'live-collection', title:'Livestreams', meta: formatCountLabel(appState.nativeShelves.livestreams.length, 'video', 'videos'), image: getEpisodeArt(appState.nativeShelves.livestreams[0] || {}, 'video') }];
   }
   if (root === 'shorts') {
-    return [{ key:'shorts-collection', title:'CGBC Shorts', meta: formatCountLabel(appState.nativeShelves.shorts.length, 'video', 'videos'), image:'' }];
+    return [{ key:'shorts-collection', title:'CGBC Shorts', meta: formatCountLabel(appState.nativeShelves.shorts.length, 'video', 'videos'), image: getEpisodeArt(appState.nativeShelves.shorts[0] || {}, 'video') }];
   }
   if (root === 'guestSpeakers') {
-    return [{ key:'guest-collection', title:'Guest Speakers', meta: formatCountLabel(appState.nativeShelves.guestSpeakers.length, 'video', 'videos'), image:'' }];
+    return [{ key:'guest-collection', title:'Guest Speakers', meta: formatCountLabel(appState.nativeShelves.guestSpeakers.length, 'video', 'videos'), image: getEpisodeArt(appState.nativeShelves.guestSpeakers[0] || {}, 'video') }];
   }
   if (root === 'current') return browse.buckets.current;
   if (root === 'bibleBooks') {
@@ -927,6 +938,7 @@ function getDesktopPathTitle() {
 function updateWorkspaceState() {
   const hasBranch = !!appState.nav.rootKey && getBranchItems().length > 0;
   const hasLeaf = !!appState.nav.branchKey && getLeafItems().length > 0;
+  const hasQueue = buildQueue().length > 0;
   els.workspace.classList.toggle('has-branch', hasBranch);
   els.workspace.classList.toggle('has-leaf', hasLeaf);
   els.desktopPathTitle.textContent = getDesktopPathTitle();
@@ -936,6 +948,14 @@ function updateWorkspaceState() {
   const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
   els.branchRailTitle.textContent = root ? root.title : 'Series / Branch';
   els.leafRailTitle.textContent = branch ? branch.title : 'Episodes';
+  els.mobilePathTitle.textContent = getDesktopPathTitle();
+  els.playerStage.classList.toggle('is-idle', !appState.currentItem);
+  if (els.mobileBrowsePanel) {
+    els.mobileBrowsePanel.classList.toggle('show-root', true);
+    els.mobileBrowsePanel.classList.toggle('show-branch', !!appState.nav.rootKey);
+    els.mobileBrowsePanel.classList.toggle('show-leaf', !!appState.nav.branchKey && getLeafItems().length > 0);
+    els.mobileBrowsePanel.classList.toggle('show-queue', hasQueue);
+  }
 }
 
 function updatePathButtons() {
@@ -956,6 +976,7 @@ function navigateBack() {
   if (appState.nav.leafKey) appState.nav.leafKey = null;
   else if (appState.nav.branchKey) appState.nav.branchKey = null;
   else if (appState.nav.rootKey) appState.nav.rootKey = null;
+  appState.currentItem = null;
   ensureValidNavigation();
   rerenderAll();
 }
@@ -1016,8 +1037,8 @@ function renderQueue() {
   }).join('');
   els.episodeList.innerHTML = queueHtml;
   els.mobileEpisodeList.innerHTML = queueHtml;
-  if (!appState.currentItem || !queue.find(item => item.stableId === appState.currentItem.stableId)) {
-    selectItem(queue[0]?.stableId || null, false);
+  if (appState.currentItem && !queue.find(item => item.stableId === appState.currentItem.stableId)) {
+    appState.currentItem = null;
   }
 }
 function renderImpactTotals() {
@@ -1189,14 +1210,9 @@ function bindClicks() {
       } else {
         appState.nav.leafKey = key;
       }
+      appState.currentItem = null;
       ensureValidNavigation();
-      renderRoots();
-      renderBranches();
-      renderLeaves();
-      renderQueue();
-      updateWorkspaceState();
-      renderPlayer();
-      renderMeta();
+      rerenderAll();
     });
   }
   [els.rootList, els.mobileRootList].forEach(el => attachListHandler(el, 'root'));
