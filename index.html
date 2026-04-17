@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - UI Pass 8</title>
+  <title>CGBC Sermons - UI Pass 9</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <meta name="theme-color" content="#0f0f10" />
@@ -396,6 +396,42 @@
       display:none !important;
     }
 
+
+    /* Pass 9 simplification */
+    @media (min-width: 981px){
+      .home-btn, .btn-home, [data-role="home"], .share-btn { display:none !important; }
+      .left-stack{
+        display:grid !important;
+        grid-template-columns:minmax(300px, 360px) !important;
+      }
+      .rail.rail-2, .rail.rail-3, .rail[data-step="2"], .rail[data-step="3"]{
+        display:none !important;
+      }
+      .path-strip{
+        display:flex !important;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+      }
+      .search-bar{
+        margin:0 !important;
+        width:min(420px, 100%);
+      }
+      .masthead{
+        grid-template-columns:auto 1fr auto !important;
+      }
+      .detail-card .share-btn, .empty-state .share-btn{display:none !important;}
+      .detail-card{
+        margin-top:10px !important;
+      }
+      .detail-card .detail-actions{
+        display:none !important;
+      }
+      .right-stack{
+        grid-template-rows:auto 1fr !important;
+      }
+    }
+
 </style>
 </head>
 <body class="mode-audio">
@@ -435,7 +471,7 @@
               <h2 class="column-title">Browse</h2>
             </div>
             <div class="desktop-root-actions">
-              <button type="button" class="action-btn path-btn" id="desktopHomeBtn">Home</button>
+              <button type="button" class="action-btn path-btn" id="desktopHomeBtn"></button>
             </div>
           </div>
           <div class="desktop-root-scroll"><div id="rootList" class="nav-list"></div></div>
@@ -475,7 +511,7 @@
           <div class="column-scroll">
             <div class="mobile-path-actions">
               <button type="button" class="action-btn path-btn" id="mobileBackBtn">Back</button>
-              <button type="button" class="action-btn path-btn" id="mobileHomeBtn">Home</button>
+              <button type="button" class="action-btn path-btn" id="mobileHomeBtn"></button>
             </div>
             <div class="mobile-nav-block mobile-root-block"><div id="mobileRootList" class="nav-list"></div></div>
             <div style="height:14px"></div>
