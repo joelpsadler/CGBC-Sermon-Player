@@ -1,16 +1,20 @@
 name: Build Sermon Library
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "0 13,23 * * *"
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-sermon-library
+  cancel-in-progress: false
 
 jobs:
   build-library:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Check out repository
@@ -19,34 +23,41 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Seed stats.json if present
+        shell: bash
         run: |
-          mkdir -p data
-          if [ -f "stats/stats.json" ]; then
-            cp stats/stats.json data/stats.json
-          elif [ -f "stats.json" ]; then
-            cp stats.json data/stats.json
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
           fi
 
-      - name: Build resolved library
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      - name: Seed stats.json if present
+        shell: bash
         run: |
-          node scripts/fetch-rss.js
-          node scripts/podbean-stats-sync.js
-          node scripts/fetch-youtube-data.js
-          node scripts/resolve-library.js
-          node scripts/publish-library.js
+          node scripts/seed-podbean-baseline.js || true
+
+      - name: Sync Podbean stats
+        run: node scripts/podbean-stats-sync.js
+
+      - name: Build resolved library
+        run: npm run build:library
 
       - name: Commit generated files if changed
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/*.json public/*.json
-          git diff --cached --quiet || git commit -m "Update resolved sermon library"
+
+          git add             data/raw-rss.json             data/raw-youtube-data.json             data/library-resolved.json             data/stats.json             public/library-resolved.json             public/stats.json             stats/stats.json             stats/downloads_stats.csv || true
+
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Refresh sermon library"
           git push
