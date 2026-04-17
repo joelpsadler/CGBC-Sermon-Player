@@ -134,11 +134,11 @@
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
 
     .path-row{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.05)
+      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,.05)
     }
     .path-button{
       min-height:46px;padding:0 16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
-      display:inline-flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;white-space:nowrap
+      display:inline-flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;white-space:nowrap;max-width:100%
     }
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
@@ -261,7 +261,7 @@
         </button>
         <div>
           <h1>CGBC Sermons</h1>
-          <p>Top navigation refinement pass.</p>
+          
         </div>
       </div>
       <div class="top-actions">
@@ -280,7 +280,7 @@
       <section class="panel nav-panel">
         <div class="nav-head">
           <p class="eyebrow">Browse</p>
-          <h2 class="title" id="navHeading">Choose a category</h2>
+          <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="top-strip-wrap">
           <div class="top-strip" id="topStrip"></div>
@@ -290,10 +290,6 @@
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
-          <div>
-            <p class="eyebrow" style="margin-bottom:4px">Path</p>
-            <h3 class="path-title" id="pathTitle">Choose a category</h3>
-          </div>
           <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
         </div>
         <div class="stack" id="choiceList"></div>
@@ -393,7 +389,6 @@
       searchInput: document.getElementById('searchInput'),
       searchStatus: document.getElementById('searchStatus'),
       navHeading: document.getElementById('navHeading'),
-      pathTitle: document.getElementById('pathTitle'),
       backBtn: document.getElementById('backBtn'),
       choiceList: document.getElementById('choiceList'),
       topStrip: document.getElementById('topStrip'),
@@ -550,14 +545,17 @@
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
       browse.roots=[
         ...(state.mode==='video' ? [
-          {key:'livestreams',title:'Livestreams',meta:'Live YouTube shelf',image:ASSETS.livestreams},
-          {key:'shorts',title:'Shorts',meta:'Live YouTube shelf',image:ASSETS.shorts},
-          {key:'guestSpeakers',title:'Guest Speakers',meta:'Live YouTube shelf',image:ASSETS.topicalSeries || ASSETS.fallback}
+          {key:'livestreams',title:'Livestreams',meta:'Live YouTube shelf',image:ASSETS.livestreams}
         ] : []),
-        {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current},
+        ...(state.mode==='audio' ? [
+          {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current}
+        ] : []),
         {key:'books',title:'Bible Books / Studies',meta:formatCountLabel(browse.books.size,'book','books'),image:ASSETS.books},
         {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
-        {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date}
+        {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date},
+        ...(state.mode==='video' ? [
+          {key:'shorts',title:'Shorts',meta:'Live YouTube shelf',image:ASSETS.shorts}
+        ] : [])
       ];
       return browse;
     }
@@ -567,7 +565,6 @@
       if(!root) return [];
       if(root==='livestreams') return [{key:'live-all',title:'Livestreams',meta:formatCountLabel(state.nativeShelves.livestreams.length,'video','videos'),image:ASSETS.livestreams}];
       if(root==='shorts') return [{key:'shorts-all',title:'Shorts',meta:formatCountLabel(state.nativeShelves.shorts.length,'video','videos'),image:ASSETS.shorts}];
-      if(root==='guestSpeakers') return [{key:'guests-all',title:'Guest Speakers',meta:formatCountLabel(state.nativeShelves.guestSpeakers.length,'video','videos'),image:ASSETS.topicalSeries || ASSETS.fallback}];
       if(root==='current') return browse.current;
       if(root==='books'){
         return Array.from(browse.books.values()).sort((a,b)=>sortBookName(a.title,b.title)).map(bucket=>({
@@ -577,14 +574,26 @@
           image:bucket.image
         }));
       }
-      if(root==='topical') return Array.from(browse.topical.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
+      if(root==='topical') {
+        const rows = Array.from(browse.topical.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
+        if(state.mode==='video' && state.nativeShelves.guestSpeakers.length){
+          rows.push({
+            key:'guest-speakers-pinned',
+            title:'CGBC Guest Speaker',
+            meta:formatCountLabel(state.nativeShelves.guestSpeakers.length,'video','videos'),
+            image:ASSETS.topicalSeries || ASSETS.fallback,
+            items:state.nativeShelves.guestSpeakers.slice()
+          });
+        }
+        return rows;
+      }
       if(root==='date') return Array.from(browse.date.keys()).sort((a,b)=>b.localeCompare(a)).map(year=>({key:year,title:year,meta:formatCountLabel(browse.date.get(year).size,'month','months'),image:ASSETS.date}));
       return [];
     }
     function leafChoices(){
       const browse=buildBrowse(), root=state.nav.rootKey, branch=state.nav.branchKey;
       if(!root || !branch) return [];
-      if(root==='livestreams' || root==='shorts' || root==='guestSpeakers') return [];
+      if(root==='livestreams' || root==='shorts') return [];
       if(root==='current'){
         const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
         const rows=visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
@@ -613,7 +622,6 @@
       if(!root) return [];
       if(root==='livestreams') return state.nativeShelves.livestreams.slice();
       if(root==='shorts') return state.nativeShelves.shorts.slice();
-      if(root==='guestSpeakers') return state.nativeShelves.guestSpeakers.slice();
       if(root==='current'){
         const selected=browse.current.find(r=>r.key===(leaf||branch)); if(!selected) return [];
         return visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
@@ -624,7 +632,11 @@
         if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortNewestFirst);}
         const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortNewestFirst) : [];
       }
-      if(root==='topical'){const row=browse.topical.get(branch); return row ? row.items.slice().sort(sortNewestFirst) : [];}
+      if(root==='topical'){
+        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice();
+        const row=browse.topical.get(branch);
+        return row ? row.items.slice().sort(sortNewestFirst) : [];
+      }
       if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
       return [];
     }
@@ -698,7 +710,6 @@
     }
     function renderChoices(){
       els.navHeading.textContent = headingText();
-      els.pathTitle.textContent = currentPathTitle();
       els.backBtn.disabled = !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey;
       els.backBtn.querySelector('span').textContent = backLabel();
       updateSearchStatus();
@@ -810,23 +821,29 @@
         </button>`;
       }).join('');
     }
+    function scrollChoiceListToTop(){
+      try{ els.choiceList.scrollTop = 0; }catch(err){}
+      const navPanel = document.querySelector('.nav-panel');
+      if(navPanel){ try{ navPanel.scrollTop = 0; }catch(err){} }
+    }
     function rerender(){
       renderChoices();
       renderPlayer();
       updateModeUI();
       updateImpact();
     }
-    function resetAll(){ state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; rerender(); }
+    function resetAll(){ state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; scrollChoiceListToTop(); rerender(); }
     function goBack(){
       if(state.nav.leafKey) state.nav.leafKey=null;
       else if(state.nav.branchKey) state.nav.branchKey=null;
       else if(state.nav.rootKey) state.nav.rootKey=null;
+      scrollChoiceListToTop();
       rerender();
     }
     function selectChoice(key){
-      if(!state.nav.rootKey){ state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; rerender(); return; }
-      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; rerender(); return; }
-      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; rerender(); return; }
+      if(!state.nav.rootKey){ state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
+      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
+      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); return; }
     }
     function attachEvents(){
       document.body.addEventListener('click', (event)=>{
@@ -835,6 +852,7 @@
           const key=topBtn.dataset.topRoot;
           state.nav={rootKey:key,branchKey:null,leafKey:null};
           state.currentItem=null;
+          scrollChoiceListToTop();
           rerender();
           return;
         }
