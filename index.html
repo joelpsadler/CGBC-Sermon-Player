@@ -97,6 +97,43 @@
       color:var(--text);border-radius:16px;padding:13px 14px;outline:none
     }
     .search-row input::placeholder{color:var(--muted-2)}
+    .context-strip{display:none;padding:12px 14px}
+    .context-row{display:flex;gap:12px;overflow-x:auto}
+    .context-row::-webkit-scrollbar{height:8px}
+    .context-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+    .context-chip{
+      min-width:0;
+      flex:0 0 220px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.04);
+    }
+    .context-chip img{
+      width:68px;height:50px;object-fit:cover;border-radius:12px;flex:0 0 68px;background:rgba(255,255,255,.05)
+    }
+    .context-chip.square img{width:58px;height:58px;flex-basis:58px}
+    .context-chip-copy{min-width:0}
+    .context-chip-label{
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted-2)
+    }
+    .context-chip-title{
+      margin-top:2px;
+      font-family:Poppins,sans-serif;
+      font-size:18px;
+      line-height:1.08;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
 
     .path-row{
@@ -207,6 +244,7 @@
     @media (min-width:1040px){
       .flow{grid-template-columns:minmax(360px,560px) minmax(0,1fr)}
       .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
+      .context-strip{display:block}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
       .transport{margin:0}
@@ -271,12 +309,16 @@
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
+          <button type="button" class="path-button" id="homeBtn"><span>Home</span></button>
           <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
         </div>
         <div class="stack" id="choiceList"></div>
       </section>
 
       <section class="content">
+        <section class="panel context-strip" id="contextStrip">
+          <div class="context-row" id="contextRow"></div>
+        </section>
         <section class="panel player is-idle" id="playerShell">
           <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
@@ -370,6 +412,7 @@
       searchInput: document.getElementById('searchInput'),
       searchStatus: document.getElementById('searchStatus'),
       navHeading: document.getElementById('navHeading'),
+      homeBtn: document.getElementById('homeBtn'),
       backBtn: document.getElementById('backBtn'),
       choiceList: document.getElementById('choiceList'),
       listenBtn: document.getElementById('listenBtn'),
@@ -411,6 +454,8 @@
       detailVideoViews: document.getElementById('detailVideoViews'),
       episodePageLink: document.getElementById('episodePageLink'),
       shareLink: document.getElementById('shareLink'),
+      contextStrip: document.getElementById('contextStrip'),
+      contextRow: document.getElementById('contextRow'),
       relatedWrap: document.getElementById('relatedWrap'),
       relatedRow: document.getElementById('relatedRow')
     };
@@ -725,6 +770,36 @@
       if(root) return `Browse · ${root.title}`;
       return 'Choose a category';
     }
+    function buildContextItems(){
+      const browse=buildBrowse();
+      const items=[];
+      const root=browse.roots.find(r=>r.key===state.nav.rootKey);
+      const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
+      const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(state.currentItem) items.push({label:'Episode', title:state.currentItem?.title?.episodeName || state.currentItem?.title?.display || '', image:getEpisodeArt(state.currentItem, state.mode), square:state.mode==='audio'});
+      return items;
+    }
+    function renderContextStrip(){
+      const items=buildContextItems();
+      if(!items.length){
+        els.contextRow.innerHTML='';
+        els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
+        return;
+      }
+      els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
+      els.contextRow.innerHTML = items.map(item => `
+        <div class="context-chip ${item.square ? 'square' : ''}">
+          <img src="${escapeHtml(item.image)}" alt="">
+          <div class="context-chip-copy">
+            <div class="context-chip-label">${escapeHtml(item.label)}</div>
+            <div class="context-chip-title">${escapeHtml(item.title)}</div>
+          </div>
+        </div>
+      `).join('');
+    }
     function headingText(){
       if(!state.nav.rootKey) return 'Choose a category';
       if(!state.nav.branchKey) return 'Choose a path';
@@ -766,7 +841,9 @@
     }
     function renderChoices(){
       els.navHeading.textContent = headingText();
-      els.backBtn.disabled = !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey;
+      const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
+      els.homeBtn.disabled = !hasPath;
+      els.backBtn.disabled = !hasPath;
       els.backBtn.querySelector('span').textContent = backLabel();
       updateSearchStatus();
 
@@ -891,6 +968,7 @@
     function rerender(){
       renderChoices();
       renderPlayer();
+      renderContextStrip();
       updateModeUI();
       updateImpact();
     }
@@ -928,6 +1006,7 @@
         }
         selectChoice(key);
       });
+      els.homeBtn.addEventListener('click', resetAll);
       els.backBtn.addEventListener('click', goBack);
       els.logoReset.addEventListener('click', resetAll);
       els.listenBtn.addEventListener('click', ()=>{ if(state.mode==='audio') return; state.mode='audio'; resetAll(); });
