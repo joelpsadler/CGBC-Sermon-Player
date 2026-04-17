@@ -456,6 +456,22 @@
       if(mode==='video') return item?.art?.episode?.wide || item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.square || item?.art?.series?.square || ASSETS.fallback;
       return item?.art?.episode?.square || item?.art?.series?.square || item?.art?.study?.square || item?.art?.episode?.wide || item?.art?.series?.wide || ASSETS.fallback;
     }
+    function sortOldestFirst(a,b){
+      const ai=a?.date?.iso||'', bi=b?.date?.iso||'';
+      if(ai && bi) return ai.localeCompare(bi);
+      return (a?.title?.display||'').localeCompare(b?.title?.display||'');
+    }
+    function getSeriesArtFromItem(item, mode=state.mode){
+      if(mode==='video') return item?.art?.series?.wide || item?.art?.series?.square || item?.art?.episode?.wide || item?.art?.episode?.square || item?.art?.study?.wide || item?.art?.study?.square || ASSETS.fallback;
+      return item?.art?.series?.square || item?.art?.series?.wide || item?.art?.episode?.square || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.study?.wide || ASSETS.fallback;
+    }
+    function getStudyArtFromItem(item, mode=state.mode){
+      if(mode==='video') return item?.art?.study?.wide || item?.art?.study?.square || item?.art?.series?.wide || item?.art?.series?.square || item?.art?.episode?.wide || item?.art?.episode?.square || ASSETS.fallback;
+      return item?.art?.study?.square || item?.art?.study?.wide || item?.art?.series?.square || item?.art?.series?.wide || item?.art?.episode?.square || item?.art?.episode?.wide || ASSETS.fallback;
+    }
+    function getFirstEpisode(items){
+      return (Array.isArray(items) ? items.slice().sort(sortOldestFirst)[0] : null) || null;
+    }
     async function loadResolvedData(){
       const paths=['./library-resolved.json','./data/library-resolved.json','./public/library-resolved.json','/library-resolved.json','/data/library-resolved.json','/public/library-resolved.json'];
       let lastError=null;
@@ -510,14 +526,34 @@
     function buildBrowse(){
       const items=visibleItems();
       const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
+
       items.forEach(item=>{
-        const seriesKey=item?.series?.key || '', seriesName=item?.series?.name || 'Untitled Series', studyName=item?.study?.name || '', modeHint=item?.presentation?.bibleBooksMode || 'none', bookKeys=Array.isArray(item?.memberships?.bibleBooks)?item.memberships.bibleBooks:[], isSpecial=/special/i.test(seriesName);
-        if(CURRENT_SERIES_KEYS.has(seriesKey) && !browse.current.find(r=>r.key===seriesKey)){
-          browse.current.push({key:seriesKey,title:seriesName,meta:studyName || 'Current series',image:ASSETS.current});
+        const seriesKey=item?.series?.key || '';
+        const seriesName=item?.series?.name || 'Untitled Series';
+        const studyName=item?.study?.name || '';
+        const modeHint=item?.presentation?.bibleBooksMode || 'none';
+        const bookKeys=Array.isArray(item?.memberships?.bibleBooks)?item.memberships.bibleBooks:[];
+        const isSpecial=/special/i.test(seriesName);
+
+        if(CURRENT_SERIES_KEYS.has(seriesKey)){
+          let row = browse.current.find(r=>r.key===seriesKey);
+          if(!row){
+            row={key:seriesKey,title:seriesName,meta:studyName || 'Current series',image:ASSETS.current,items:[]};
+            browse.current.push(row);
+          }
+          row.items.push(item);
         }
+
         bookKeys.forEach(bookKey=>{
           if(!browse.books.has(bookKey)){
-            browse.books.set(bookKey,{key:bookKey,title:item?.bookTags?.find(t=>t.key===bookKey)?.name || item?.scripture?.book || bookKey,image:ASSETS.books,seriesMap:new Map(),episodes:[],specialsByYear:new Map()});
+            browse.books.set(bookKey,{
+              key:bookKey,
+              title:item?.bookTags?.find(t=>t.key===bookKey)?.name || item?.scripture?.book || bookKey,
+              image:ASSETS.books,
+              seriesMap:new Map(),
+              episodes:[],
+              specialsByYear:new Map()
+            });
           }
           const bucket=browse.books.get(bookKey);
           if(isSpecial){
@@ -525,23 +561,75 @@
             if(!bucket.specialsByYear.has(year)) bucket.specialsByYear.set(year, []);
             bucket.specialsByYear.get(year).push(item);
           } else if(modeHint==='series_group'){
-            if(!bucket.seriesMap.has(seriesKey)) bucket.seriesMap.set(seriesKey,{key:seriesKey,title:seriesName,meta:studyName || 'Series',image:getEpisodeArt(item),items:[]});
+            if(!bucket.seriesMap.has(seriesKey)){
+              bucket.seriesMap.set(seriesKey,{
+                key:seriesKey,
+                title:seriesName,
+                meta:studyName || 'Series',
+                image:ASSETS.books,
+                items:[]
+              });
+            }
             bucket.seriesMap.get(seriesKey).items.push(item);
           } else if(modeHint==='episode_only'){
             bucket.episodes.push(item);
           }
         });
+
         if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial){
-          if(!browse.topical.has(seriesKey)) browse.topical.set(seriesKey,{key:seriesKey,title:seriesName,meta:studyName || 'Topical series',image:ASSETS.topicalSeries || getEpisodeArt(item),items:[]});
+          if(!browse.topical.has(seriesKey)){
+            browse.topical.set(seriesKey,{
+              key:seriesKey,
+              title:seriesName,
+              meta:studyName || 'Topical series',
+              image:ASSETS.topicalSeries || ASSETS.fallback,
+              items:[]
+            });
+          }
           browse.topical.get(seriesKey).items.push(item);
         }
-        const year=String(item?.date?.year || ''), monthKey=item?.date?.iso ? item.date.iso.slice(0,7) : '';
+
+        const year=String(item?.date?.year || '');
+        const monthKey=item?.date?.iso ? item.date.iso.slice(0,7) : '';
         if(year && monthKey){
           if(!browse.date.has(year)) browse.date.set(year, new Map());
           if(!browse.date.get(year).has(monthKey)) browse.date.get(year).set(monthKey, []);
           browse.date.get(year).get(monthKey).push(item);
         }
       });
+
+      // apply art rules after bucketing
+      browse.current.forEach(row=>{
+        const firstEpisode=getFirstEpisode(row.items);
+        row.image=getSeriesArtFromItem(firstEpisode);
+      });
+
+      browse.books.forEach(bucket=>{
+        bucket.seriesMap.forEach(row=>{
+          const firstEpisode=getFirstEpisode(row.items);
+          row.image=getSeriesArtFromItem(firstEpisode);
+        });
+
+        const orderedSeries = Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
+        const firstSeries = orderedSeries[0];
+        if(firstSeries){
+          const firstEpisode=getFirstEpisode(firstSeries.items);
+          bucket.image=getStudyArtFromItem(firstEpisode);
+        } else if(bucket.episodes.length){
+          bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.episodes));
+        } else {
+          const specialYears=Array.from(bucket.specialsByYear.keys()).sort((a,b)=>a.localeCompare(b));
+          const firstSpecialYear=specialYears[0];
+          if(firstSpecialYear){
+            bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.specialsByYear.get(firstSpecialYear)));
+          }
+        }
+      });
+
+      browse.topical.forEach(row=>{
+        row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
+      });
+
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
       browse.roots=[
         ...(state.mode==='video' ? [
@@ -581,7 +669,7 @@
             key:'guest-speakers-pinned',
             title:'CGBC Guest Speaker',
             meta:formatCountLabel(state.nativeShelves.guestSpeakers.length,'video','videos'),
-            image:ASSETS.topicalSeries || ASSETS.fallback,
+            image:getSeriesArtFromItem(getFirstEpisode(state.nativeShelves.guestSpeakers)),
             items:state.nativeShelves.guestSpeakers.slice()
           });
         }
@@ -602,7 +690,7 @@
       if(root==='books'){
         const bucket=browse.books.get(branch); if(!bucket) return [];
         const out=[];
-        Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title)).forEach(row=>out.push({key:row.key,title:row.title,meta:formatCountLabel(row.items.length,'episode','episodes'),image:getEpisodeArt(row.items[0]||{})}));
+        Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title)).forEach(row=>out.push({key:row.key,title:row.title,meta:formatCountLabel(row.items.length,'episode','episodes'),image:row.image || getSeriesArtFromItem(getFirstEpisode(row.items))}));
         if(bucket.episodes.length) out.push({key:`${bucket.key}__episodes`,title:'Individual Sermons',meta:formatCountLabel(bucket.episodes.length,'episode','episodes'),image:getEpisodeArt(bucket.episodes[0]||{})});
         Array.from(bucket.specialsByYear.keys()).sort((a,b)=>b.localeCompare(a)).forEach(year=>{
           const rows=bucket.specialsByYear.get(year)||[];
