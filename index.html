@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - UI Pass 3</title>
+  <title>CGBC Sermons - UI Pass 5</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
   <meta name="theme-color" content="#0f0f10" />
@@ -91,25 +91,53 @@
       display:grid;grid-template-columns:minmax(0,1fr) minmax(760px, 44vw);gap:16px;align-items:stretch;
       min-height:calc(100vh - 118px)
     }
-    .desktop-rails{
+    .desktop-side{
       display:grid;
-      grid-template-columns:minmax(220px,320px) 0 0;
-      grid-template-rows:auto minmax(0,1fr);
+      grid-template-rows:auto auto minmax(0,1fr);
+      gap:16px;
+      min-height:0;
+      align-content:start;
+    }
+    .desktop-rootstrip{
+      padding:14px 16px;
+      display:grid;
+      gap:12px;
+      min-height:108px;
+    }
+    .desktop-rootstrip-head{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .desktop-root-actions,.desktop-path-actions,.mobile-path-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .desktop-root-scroll{overflow:auto;padding-bottom:2px}
+    .desktop-root-scroll .nav-list{
+      display:flex;
+      gap:10px;
+      flex-wrap:nowrap;
+      min-width:max-content;
+    }
+    .desktop-root-scroll .nav-card{
+      width:220px;
+      flex:0 0 220px;
+      align-items:center;
+    }
+    .desktop-root-scroll .thumb-square{width:62px;height:62px;flex-basis:62px}
+    .desktop-root-scroll .thumb-wide{width:92px;height:52px;flex-basis:92px}
+    .desktop-pathbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;
+      min-height:82px;
+    }
+    .path-btn{min-width:84px; justify-content:center}
+    .desktop-lower{
+      display:grid;
+      grid-template-columns:0 0;
       gap:16px;
       min-height:0;
       align-content:start;
       transition:grid-template-columns .24s ease;
     }
-    .workspace.has-branch .desktop-rails{grid-template-columns:minmax(180px,240px) minmax(220px,300px) 0}
-    .workspace.has-leaf .desktop-rails{grid-template-columns:minmax(150px,210px) minmax(190px,250px) minmax(280px,360px)}
-    .desktop-pathbar{
-      grid-column:1 / -1;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px 16px;
-      min-height:90px;
-    }
-    .desktop-path-actions,.mobile-path-actions{display:flex;gap:8px;flex-wrap:wrap}
-    .path-btn{min-width:84px; justify-content:center}
+    .workspace.has-branch .desktop-lower{grid-template-columns:minmax(240px,320px) 0}
+    .workspace.has-leaf .desktop-lower{grid-template-columns:minmax(200px,260px) minmax(320px,420px)}
     .rail{min-width:0;min-height:0}
     .rail-branch,.rail-leaf{display:none;opacity:0;transform:translateX(-10px);pointer-events:none;overflow:hidden;transition:opacity .22s ease, transform .22s ease}
     .workspace.has-branch .rail-branch{display:flex;opacity:1;transform:none;pointer-events:auto}
@@ -225,7 +253,7 @@
       .mode-pill{min-width:0;flex:1}
       .mode-btn-shell{min-height:48px;padding:0 12px;gap:8px}
       .workspace{display:block}
-      .desktop-rails{display:none !important}
+      .desktop-side{display:none !important}
       .panel.column{display:none}
       .desktop-pathbar{display:none !important}
       .stage-column{gap:12px}
@@ -288,36 +316,45 @@
     </header>
 
     <main class="workspace" id="workspace">
-      <section class="desktop-rails">
+      <section class="desktop-side">
+        <section class="panel desktop-rootstrip" id="desktopRootstrip">
+          <div class="desktop-rootstrip-head">
+            <div class="desktop-path-copy">
+              <p class="eyebrow">Browse Modes</p>
+              <h2 class="column-title">Choose how to browse</h2>
+            </div>
+            <div class="desktop-root-actions">
+              <button type="button" class="action-btn path-btn" id="desktopHomeBtn">Home</button>
+            </div>
+          </div>
+          <div class="desktop-root-scroll"><div id="rootList" class="nav-list"></div></div>
+        </section>
+
         <div class="desktop-pathbar panel" id="desktopPathbar">
           <div class="desktop-path-copy">
-            <p class="eyebrow">Browse</p>
+            <p class="eyebrow">Current Path</p>
             <h2 class="column-title" id="desktopPathTitle">Choose a category</h2>
           </div>
           <div class="desktop-path-actions">
             <button type="button" class="action-btn path-btn" id="desktopBackBtn">Back</button>
-            <button type="button" class="action-btn path-btn" id="desktopHomeBtn">Home</button>
           </div>
         </div>
 
-        <section class="panel column rail rail-root" id="rootRail">
-          <div class="column-head"><p class="eyebrow">Step 1</p><h2 class="column-title">Category</h2></div>
-          <div class="column-scroll"><div id="rootList" class="nav-list"></div></div>
-        </section>
+        <section class="desktop-lower">
+          <section class="panel column rail rail-branch" id="branchRail">
+            <div class="column-head"><p class="eyebrow">Step 1</p><h2 class="column-title" id="branchRailTitle">Series / Branch</h2></div>
+            <div class="column-scroll"><div id="branchList" class="nav-list"></div></div>
+          </section>
 
-        <section class="panel column rail rail-branch" id="branchRail">
-          <div class="column-head"><p class="eyebrow">Step 2</p><h2 class="column-title" id="branchRailTitle">Series / Branch</h2></div>
-          <div class="column-scroll"><div id="branchList" class="nav-list"></div></div>
-        </section>
-
-        <section class="panel column rail rail-leaf" id="leafRail">
-          <div class="column-head"><p class="eyebrow">Step 3</p><h2 class="column-title" id="leafRailTitle">Episodes</h2></div>
-          <div class="column-scroll">
-            <div id="leafList" class="nav-list"></div>
-            <div style="height:14px"></div>
-            <div class="rail-queue-head"><p class="eyebrow">Selection</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
-            <div id="episodeList"></div>
-          </div>
+          <section class="panel column rail rail-leaf" id="leafRail">
+            <div class="column-head"><p class="eyebrow">Step 2</p><h2 class="column-title" id="leafRailTitle">Episodes</h2></div>
+            <div class="column-scroll">
+              <div id="leafList" class="nav-list"></div>
+              <div style="height:14px"></div>
+              <div class="rail-queue-head"><p class="eyebrow">Selection</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
+              <div id="episodeList"></div>
+            </div>
+          </section>
         </section>
       </section>
 
