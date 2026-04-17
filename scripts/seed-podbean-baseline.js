@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const PODBEAN_SHOW_URL =
   process.env.PODBEAN_SHOW_URL || "https://brojacobcedargrovebaptist.podbean.com/";
