@@ -34,13 +34,22 @@ jobs:
             npm install
           fi
 
-      - name: Seed stats.json if present
+      - name: Seed Podbean baseline
         shell: bash
         run: |
-          node scripts/seed-podbean-baseline.js || true
+          node scripts/seed-podbean-baseline.js
 
-      - name: Sync Podbean stats
-        run: node scripts/podbean-stats-sync.js
+      - name: Sync Podbean stats metadata
+        shell: bash
+        run: |
+          node scripts/podbean-stats-sync.js
+
+      - name: Mirror canonical stats file
+        shell: bash
+        run: |
+          mkdir -p data public stats
+          cp stats/stats.json data/stats.json
+          cp stats/stats.json public/stats.json
 
       - name: Build resolved library
         run: npm run build:library
