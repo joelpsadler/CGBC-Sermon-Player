@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - Clean UI Pass 1</title>
-  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
-  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1">
+  <title>CGBC Sermons - Mobile First Pass 2</title>
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
+  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <meta name="theme-color" content="#0f0f10" />
   <meta name="apple-mobile-web-app-title" content="CGBC Media" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,155 +13,122 @@
     :root{
       --bg:#0f0f10;
       --panel:rgba(14,14,15,.82);
-      --panel-soft:rgba(255,255,255,.04);
-      --panel-soft-2:rgba(255,255,255,.06);
+      --soft:rgba(255,255,255,.045);
       --border:rgba(255,255,255,.06);
       --text:#f4f4f4;
       --muted:rgba(255,255,255,.72);
       --muted-2:rgba(255,255,255,.52);
       --accent:#8fae9d;
       --accent-ink:#102016;
-      --bg-image-mobile:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230674/Mobile.jpg');
-      --bg-image-desktop:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230673/Desktop.jpg');
-      --shadow:0 8px 24px rgba(0,0,0,.22);
-      --radius:24px;
-      --radius-sm:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.24);
+      --desktop-bg:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230673/Desktop.jpg');
+      --mobile-bg:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230674/Mobile.jpg');
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(12,12,13,.94) 0%, rgba(10,10,11,.98) 100%),
-        var(--bg-image-desktop) center/cover no-repeat fixed;
+        linear-gradient(180deg, rgba(11,11,12,.96) 0%, rgba(9,9,10,.99) 100%),
+        var(--desktop-bg) center/cover no-repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
     button{border:none;background:none;color:inherit;cursor:pointer}
     img{display:block;max-width:100%}
     a{color:inherit;text-decoration:none}
-    .app-shell{width:min(1800px,100%);margin:0 auto;padding:0 12px 16px}
+    .app{width:min(1680px,100%);margin:0 auto;padding:0 10px 16px}
     .masthead{
-      position:sticky;top:0;z-index:30;
-      display:flex;justify-content:space-between;align-items:center;gap:14px;
+      position:sticky;top:0;z-index:20;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
       padding:10px 4px 12px;
-      background:linear-gradient(180deg, rgba(8,8,9,.97), rgba(8,8,9,.88));
-      backdrop-filter:blur(14px);
+      background:linear-gradient(180deg, rgba(8,8,9,.97), rgba(8,8,9,.89));
       border-bottom:1px solid rgba(255,255,255,.05);
+      backdrop-filter:blur(12px);
     }
-    .brand-lockup{display:flex;align-items:center;gap:12px;min-width:0}
-    .brand-logo-btn{
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .logo-btn{
       width:92px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;
       background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow);overflow:hidden
     }
-    .brand-logo-btn img{width:100%;height:100%;object-fit:contain;transform:scale(1.12)}
-    .brand-copy{min-width:0}
-    .brand-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(20px,2vw,30px);line-height:1.02}
-    .brand-subtitle{margin-top:4px;color:var(--muted);font-size:14px}
+    .logo-btn img{width:100%;height:100%;object-fit:contain;transform:scale(1.12)}
+    .brand h1{margin:0;font-family:Poppins,sans-serif;font-size:clamp(20px,2vw,31px);line-height:1.02}
+    .brand p{margin:4px 0 0;color:var(--muted);font-size:14px}
     .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .mode-pill{
-      display:grid;grid-template-columns:1fr 1fr;padding:2px;border-radius:20px;min-width:320px;
-      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05)
+      display:grid;grid-template-columns:1fr 1fr;padding:2px;border-radius:20px;min-width:318px;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
     }
     .mode-btn-shell{
-      min-height:54px;padding:0 18px;display:flex;align-items:center;justify-content:center;gap:10px;
-      border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
+      min-height:54px;padding:0 18px;display:flex;align-items:center;justify-content:center;border-radius:18px;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
     }
     .mode-btn:first-child .mode-btn-shell{border-radius:18px 8px 8px 18px}
     .mode-btn:last-child .mode-btn-shell{border-radius:8px 18px 18px 8px}
     .mode-btn.active .mode-btn-shell{
-      background:linear-gradient(180deg, rgba(143,174,157,.86), rgba(118,147,131,.66));
-      color:var(--accent-ink);
-      border-color:rgba(143,174,157,.16)
+      background:linear-gradient(180deg, rgba(143,174,157,.88), rgba(118,147,131,.66));
+      color:var(--accent-ink);border-color:rgba(143,174,157,.20)
     }
     .btn-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.02;font-family:Poppins,sans-serif}
     .btn-copy .top{font-size:14px;font-weight:700}
     .btn-copy .bottom{font-size:11px;color:var(--muted)}
-    .mode-btn.active .bottom{color:rgba(16,32,22,.72)}
-    .impact-strip{display:flex;gap:10px;flex-wrap:wrap}
+    .mode-btn.active .bottom{color:rgba(17,32,24,.72)}
+    .impact{display:flex;gap:10px;flex-wrap:wrap}
     .impact-pill{
-      min-width:122px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.04);
+      min-width:120px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.06)
     }
     .impact-value{font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1}
     .impact-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
-    .workspace{
-      display:grid;grid-template-columns:minmax(0,1fr) minmax(760px, 44vw);gap:16px;align-items:stretch;
-      min-height:calc(100vh - 118px);height:calc(100vh - 118px);overflow:hidden;
+
+    .flow{display:grid;grid-template-columns:1fr;gap:16px}
+    .panel{
+      border-radius:24px;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);overflow:hidden
     }
-    .desktop-side{
-      display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:16px;height:100%;min-height:0;overflow:hidden
-    }
-    .panel,.player-stage,.meta-stage{
-      border-radius:var(--radius);border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow);overflow:hidden;
-      backdrop-filter:blur(10px)
-    }
-    .desktop-rootstrip{padding:14px 16px;display:grid;gap:12px;min-height:108px}
-    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .nav-head,.section{padding:16px}
     .eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2);font-size:12px}
-    .column-title{margin:0;font-family:Poppins,sans-serif;font-size:18px}
-    .desktop-root-scroll{overflow:auto;padding-bottom:2px}
-    .desktop-root-scroll .nav-list{display:flex;gap:10px;flex-wrap:nowrap;min-width:max-content}
-    .desktop-root-scroll .nav-card{width:220px;flex:0 0 220px}
-    .pathbar{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;min-height:86px
+    .title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,2vw,24px);line-height:1.08}
+    .search-row{display:flex;align-items:center;gap:10px;padding:0 16px 16px}
+    .search-row input{
+      flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
+      color:var(--text);border-radius:16px;padding:13px 14px;outline:none
     }
-    .path-copy{min-width:0}
-    .path-title{margin:0;font-family:Poppins,sans-serif;font-size:20px;line-height:1.08}
-    .path-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .search-row input::placeholder{color:var(--muted-2)}
+    .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
+    .path-row{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.05)
+    }
+    .path-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(17px,1.8vw,22px);line-height:1.08}
     .action-btn{
       min-height:42px;padding:0 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
-      display:inline-flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif
+      display:inline-flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;white-space:nowrap
     }
-    .search-bar{
-      display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;border-radius:18px;background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.05)
+    .stack{display:grid;gap:12px;padding:0 16px 16px}
+    .choice,.episode,.related{
+      width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px;border-radius:20px;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
     }
-    .search-bar input{
-      flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:var(--text);
-      border-radius:14px;padding:12px 14px;outline:none
+    .choice.active,.episode.active{
+      background:linear-gradient(180deg, rgba(143,174,157,.22), rgba(143,174,157,.11));
+      border-color:rgba(143,174,157,.24)
     }
-    .search-bar input::placeholder{color:var(--muted-2)}
-    .search-status{font-size:13px;color:var(--muted)}
-    .desktop-lower{
-      display:grid;grid-template-columns:0 0 0;gap:16px;min-height:0;height:100%;overflow:hidden;transition:grid-template-columns .22s ease
+    .thumb-wide{width:132px;height:74px;flex:0 0 132px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
+    .thumb-square{width:86px;height:82px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
+    .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
+    .copy{min-width:0;flex:1}
+    .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
+    .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
+    .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
+    .empty{
+      margin:0 16px 16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);
+      border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
     }
-    .workspace.has-branch .desktop-lower{grid-template-columns:minmax(240px,300px) 0 0}
-    .workspace.has-leaf .desktop-lower{grid-template-columns:minmax(210px,260px) minmax(210px,280px) 0}
-    .workspace.has-queue .desktop-lower{grid-template-columns:minmax(210px,250px) minmax(210px,260px) minmax(280px,360px)}
-    .column{display:flex;flex-direction:column;min-height:0}
-    .column-head{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
-    .column-scroll{min-height:0;overflow:auto;padding:14px}
-    .rail{min-width:0;min-height:0;height:100%}
-    .rail-branch,.rail-leaf,.rail-queue{display:none;opacity:0;transform:translateX(-10px);pointer-events:none;overflow:hidden;transition:opacity .22s ease, transform .22s ease}
-    .workspace.has-branch .rail-branch,.workspace.has-leaf .rail-leaf,.workspace.has-queue .rail-queue{display:flex;opacity:1;transform:none;pointer-events:auto}
-    .nav-list,.episode-list{display:grid;gap:10px}
-    .nav-card,.episode-card,.related-card{
-      width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px;border-radius:18px;
-      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);transition:transform .16s ease, background .16s ease
-    }
-    .nav-card:hover,.episode-card:hover,.related-card:hover{transform:translateY(-1px);background:rgba(255,255,255,.06)}
-    .is-active{
-      background:linear-gradient(180deg, rgba(143,174,157,.24), rgba(143,174,157,.12)) !important;
-      border-color:rgba(143,174,157,.24) !important;
-    }
-    .thumb-square{width:78px;height:72px;flex:0 0 78px;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05)}
-    .thumb-wide{width:118px;height:66px;flex:0 0 118px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.05)}
-    .thumb-square img,.thumb-wide img{width:100%;height:100%;object-fit:cover}
-    .card-copy{min-width:0;flex:1}
-    .card-title{margin:0;font-family:Poppins,sans-serif;font-size:16px;line-height:1.18}
-    .card-subtitle{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.24}
-    .card-metric{margin-top:7px;color:rgba(255,255,255,.78);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
-    .empty-state{
-      padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);border:1px dashed rgba(255,255,255,.10);
-      font-size:14px;line-height:1.4
-    }
-    .stage-column{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:16px;min-width:760px;min-height:0;height:100%;overflow:hidden}
-    .player-stage{padding:20px;min-height:360px}
-    .player-stage.video-active{padding:0;background:rgba(0,0,0,.28)}
-    .meta-stage{padding:22px 24px;min-height:0;overflow:auto}
-    .player-stage.is-idle #videoShell,.player-stage.is-idle #audioStage{display:none}
+    .content{display:grid;gap:16px}
+    .player{padding:16px}
+    .player.video-active{padding:0;background:rgba(0,0,0,.25)}
+    .player.is-idle #videoShell,.player.is-idle #audioStage{display:none}
     #videoShell,#videoPlaceholder{
-      width:100%;aspect-ratio:16/9;min-height:320px;border-radius:22px;overflow:hidden;background:#000;
+      width:100%;aspect-ratio:16/9;min-height:240px;border-radius:22px;overflow:hidden;background:#000;
       border:1px solid rgba(255,255,255,.06);display:none;align-items:center;justify-content:center;text-align:center;color:var(--muted)
     }
     #videoShell iframe{width:100%;height:100%;border:0;display:block}
@@ -169,243 +136,177 @@
       display:none;min-height:220px;align-items:center;justify-content:center;text-align:center;padding:30px;color:var(--muted);
       border-radius:22px;border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.26)
     }
-    .audio-stage{display:none;grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:24px;align-items:start}
-    .audio-art{width:100%;max-width:330px;aspect-ratio:1/1;border-radius:24px;overflow:hidden}
+    .audio-stage{display:none;grid-template-columns:1fr;gap:14px}
+    .audio-art{width:100%;aspect-ratio:1/1;max-width:380px;border-radius:24px;overflow:hidden;margin:0 auto}
     .audio-art img{width:100%;height:100%;object-fit:cover}
-    .audio-transport{
-      width:100%;max-width:420px;display:grid;grid-template-columns:64px minmax(0,1fr) 64px;gap:8px;align-items:center;
-      padding:6px;border-radius:999px;background:linear-gradient(180deg, rgba(21,21,21,.82), rgba(10,10,10,.58));border:1px solid rgba(255,255,255,.10)
+    .transport{
+      width:100%;max-width:420px;display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:8px;align-items:center;
+      padding:6px;border-radius:999px;background:linear-gradient(180deg, rgba(21,21,21,.82), rgba(10,10,10,.58));border:1px solid rgba(255,255,255,.10);
+      margin:0 auto
     }
-    .transport-btn,.transport-play{
-      min-height:64px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center
+    .transport-btn,.play-btn{
+      min-height:56px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center
     }
-    .transport-play{justify-content:flex-start;padding:0 14px 0 8px;gap:14px;min-width:0;background:linear-gradient(180deg, rgba(80,100,91,.24), rgba(39,49,44,.30));border-color:rgba(143,174,157,.18)}
-    .transport-play-circle{width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex:0 0 48px}
-    .transport-play-copy{display:flex;align-items:center;gap:4px;font-family:Poppins,sans-serif;font-size:15px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-    .audio-content{display:flex;flex-direction:column;gap:6px;padding-top:8px;padding-bottom:12px}
-    .audio-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(28px,3vw,44px);line-height:1.06}
+    .play-btn{justify-content:flex-start;padding:0 12px 0 6px;gap:12px;min-width:0;background:linear-gradient(180deg, rgba(80,100,91,.24), rgba(39,49,44,.30));border-color:rgba(143,174,157,.18)}
+    .play-circle{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
+    .play-copy{display:flex;align-items:center;gap:4px;font-family:Poppins,sans-serif;font-size:14px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+    .audio-copy{display:flex;flex-direction:column;gap:6px}
+    .audio-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(28px,3vw,44px);line-height:1.04}
     .audio-series{color:rgba(255,255,255,.88);font-family:Poppins,sans-serif;font-size:18px}
-    .audio-detail-row{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;color:rgba(255,255,255,.84);font-size:13px}
-    .audio-detail-label,.meta-label{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted-2)}
-    .audio-detail-value,.meta-value{color:rgba(255,255,255,.90);font-weight:600}
-    .audio-time-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:2px}
-    .audio-now{font-family:Poppins,sans-serif;font-size:clamp(30px,4vw,62px);line-height:.92;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+    .detail-row{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;color:rgba(255,255,255,.84);font-size:13px}
+    .label,.meta-label{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted-2)}
+    .value,.meta-value{color:rgba(255,255,255,.90);font-weight:600}
+    .time-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .audio-now{font-family:Poppins,sans-serif;font-size:clamp(30px,4vw,58px);line-height:.92;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
     .audio-total{font-family:Poppins,sans-serif;font-size:20px;color:var(--muted);font-variant-numeric:tabular-nums;padding-bottom:5px}
-    .audio-progress-wrap{display:grid;gap:6px}
-    .audio-progress{appearance:none;width:100%;height:8px;border-radius:999px;background:rgba(255,255,255,.10);outline:none;cursor:pointer}
-    .audio-progress::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:999px;background:#d7eadf;border:2px solid rgba(17,17,17,.84)}
-    .audio-progress-times{display:flex;justify-content:space-between;gap:12px;font-family:Poppins,sans-serif;font-size:12px;color:rgba(255,255,255,.92);font-weight:600;font-variant-numeric:tabular-nums}
+    .progress-wrap{display:grid;gap:6px}
+    .progress{appearance:none;width:100%;height:8px;border-radius:999px;background:rgba(255,255,255,.10);outline:none;cursor:pointer}
+    .progress::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:999px;background:#d7eadf;border:2px solid rgba(17,17,17,.84)}
+    .progress-times{display:flex;justify-content:space-between;gap:12px;font-family:Poppins,sans-serif;font-size:12px;color:rgba(255,255,255,.92);font-weight:600;font-variant-numeric:tabular-nums}
     #audioPlayer{display:none}
-    .meta-title{margin:0 0 8px;font-family:Poppins,sans-serif;font-size:clamp(24px,2.2vw,38px);line-height:1.08}
-    .meta-series{font-family:Poppins,sans-serif;font-size:18px;color:rgba(255,255,255,.90);margin-bottom:18px}
+    .detail{padding:18px}
+    .detail.is-idle{display:none}
+    .detail-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(24px,2.2vw,38px);line-height:1.08}
+    .detail-series{font-family:Poppins,sans-serif;font-size:18px;color:rgba(255,255,255,.90);margin:8px 0 18px}
     .meta-grid{display:grid;gap:10px}
-    .meta-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:start}
-    .meta-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-    .related-shell{display:none;gap:12px}
-    .related-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
-    .related-title{font-family:Poppins,sans-serif;font-size:16px;margin:0}
+    .meta-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:start}
+    .detail-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .related-wrap{display:none;gap:12px;margin-top:18px}
+    .related-title{font-family:Poppins,sans-serif;font-size:16px;margin:0 0 10px}
     .related-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:2px}
-    .related-card{flex:0 0 220px;max-width:220px}
-    .related-card .thumb-square{width:64px;height:64px;flex-basis:64px}
-    .related-card.video .thumb-wide{width:84px;height:48px;flex-basis:84px}
-    .mobile-panel{display:none}
-    .mobile-nav-block{display:none}
-    @media (min-width:981px){
-      html,body{height:100%;overflow:hidden}
-      .app-shell{height:100vh;overflow:hidden}
+    .related{flex:0 0 220px;max-width:220px}
+    .related .thumb-wide{width:84px;height:48px;flex-basis:84px}
+    .related .thumb-square{width:64px;height:64px;flex-basis:64px}
+
+    @media (min-width:1040px){
+      .flow{grid-template-columns:minmax(340px,480px) minmax(0,1fr)}
+      .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
+      .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
+      .audio-art{margin:0;max-width:360px}
+      .transport{margin:0}
+      .meta-row{grid-template-columns:140px minmax(0,1fr)}
     }
-    @media (max-width:980px){
+    @media (max-width:900px){
       body{
         background:
-          linear-gradient(180deg, rgba(10,10,11,.92), rgba(10,10,11,.98)),
-          var(--bg-image-mobile) center/cover no-repeat fixed;
+          linear-gradient(180deg, rgba(11,11,12,.96) 0%, rgba(9,9,10,.99) 100%),
+          var(--mobile-bg) center/cover no-repeat fixed;
         background-blend-mode:multiply;
       }
-      .app-shell{padding:0 8px 14px}
-      .brand-copy{display:none}
-      .brand-logo-btn{width:78px;height:58px;border-radius:0;background:transparent;border:none;box-shadow:none}
-      .brand-logo-btn img{transform:scale(1)}
+      .app{padding:0 8px 14px}
+      .brand p{display:none}
+      .logo-btn{width:78px;height:58px;border-radius:0;background:transparent;border:none;box-shadow:none}
+      .logo-btn img{transform:scale(1)}
       .mode-pill{min-width:0;flex:1}
-      .mode-btn-shell{min-height:48px;padding:0 12px;gap:8px}
-      .workspace{display:block}
-      .desktop-side{display:none !important}
-      .stage-column{display:flex;flex-direction:column;gap:12px;min-width:0}
-      .player-stage{min-height:0;padding:14px}
-      .audio-stage{grid-template-columns:1fr;gap:14px}
-      .audio-art{max-width:292px}
-      .audio-transport{max-width:320px;grid-template-columns:50px minmax(0,1fr) 50px}
-      .transport-btn,.transport-play{min-height:50px}
-      .transport-play{padding:0 10px 0 5px;gap:10px}
-      .transport-play-circle{width:38px;height:38px;flex-basis:38px}
-      .transport-play-copy{font-size:13px}
-      .audio-title{font-size:26px}
-      .audio-series{font-size:15px}
-      .audio-now{font-size:34px}
-      .audio-total{font-size:16px}
-      .meta-stage{padding:18px 16px}
-      .meta-row{grid-template-columns:118px minmax(0,1fr);gap:10px}
-      .impact-strip{width:100%;margin-top:8px;gap:8px}
-      .impact-pill{flex:1 1 0;min-width:0;padding:9px 12px}
-      .impact-value{font-size:18px}
-      .mobile-panel{display:flex !important;flex-direction:column;gap:12px}
-      .mobile-nav-block{display:none}
-      .mobile-panel.show-root .mobile-root-block{display:block}
-      .mobile-panel.show-branch .mobile-branch-block{display:block}
-      .mobile-panel.show-leaf .mobile-leaf-block{display:block}
-      .mobile-panel.show-queue .mobile-queue-block{display:block}
-      .player-stage.is-idle{display:none}
-      .meta-stage.is-idle{display:none}
+      .mode-btn-shell{min-height:48px;padding:0 12px}
+      .impact{width:100%;gap:8px}
+      .impact-pill{flex:1 1 0;min-width:0}
+      .search-row{flex-wrap:wrap}
+      .search-status{width:100%}
+      .thumb-wide{width:108px;height:66px;flex-basis:108px}
+      .thumb-square{width:78px;height:78px;flex-basis:78px}
+      .meta-row{grid-template-columns:100px minmax(0,1fr)}
     }
   </style>
 </head>
 <body class="mode-audio">
-  <div class="app-shell">
+  <div class="app">
     <header class="masthead">
-      <div class="brand-lockup">
-        <button class="brand-logo-btn" id="logoReset" type="button" title="Reset navigation">
+      <div class="brand">
+        <button class="logo-btn" id="logoReset" type="button" title="Reset navigation">
           <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="CGBC logo">
         </button>
-        <div class="brand-copy">
-          <h1 class="brand-title">CGBC Sermons</h1>
-          <div class="brand-subtitle">Clean rebuild around resolved data with live YouTube pinned shelves.</div>
+        <div>
+          <h1>CGBC Sermons</h1>
+          <p>Mobile-first collapsing flow around resolved data and live YouTube shelves.</p>
         </div>
       </div>
       <div class="top-actions">
         <div class="mode-pill">
-          <button class="mode-btn active" id="listenBtn" type="button">
-            <span class="mode-btn-shell"><span class="btn-copy"><span class="top">Listen</span><span class="bottom">Audio</span></span></span>
-          </button>
-          <button class="mode-btn" id="watchBtn" type="button">
-            <span class="mode-btn-shell"><span class="btn-copy"><span class="top">Watch</span><span class="bottom">Video</span></span></span>
-          </button>
+          <button class="mode-btn active" id="listenBtn" type="button"><span class="mode-btn-shell"><span class="btn-copy"><span class="top">Listen</span><span class="bottom">Audio</span></span></span></button>
+          <button class="mode-btn" id="watchBtn" type="button"><span class="mode-btn-shell"><span class="btn-copy"><span class="top">Watch</span><span class="bottom">Video</span></span></span></button>
         </div>
-        <div class="impact-strip">
+        <div class="impact">
           <div class="impact-pill"><div class="impact-value" id="impactPrimaryValue">—</div><div class="impact-label" id="impactPrimaryLabel">Plays</div></div>
           <div class="impact-pill"><div class="impact-value" id="impactSecondaryValue">—</div><div class="impact-label" id="impactSecondaryLabel">Episodes</div></div>
         </div>
       </div>
     </header>
 
-    <main class="workspace" id="workspace">
-      <section class="desktop-side">
-        <section class="panel desktop-rootstrip">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Browse Modes</p>
-              <h2 class="column-title">Browse</h2>
-            </div>
-          </div>
-          <div class="search-bar">
-            <input id="desktopSearchInput" type="search" placeholder="Search title, scripture, series, book, date">
-            <div class="search-status" id="desktopSearchStatus">All items</div>
-          </div>
-          <div class="desktop-root-scroll"><div id="rootList" class="nav-list"></div></div>
-        </section>
-
-        <div class="pathbar panel">
-          <div class="path-copy">
-            <p class="eyebrow">Current Path</p>
-            <h2 class="path-title" id="desktopPathTitle">Choose a category</h2>
-          </div>
-          <div class="path-actions">
-            <button type="button" class="action-btn" id="desktopBackBtn">Back</button>
-          </div>
+    <main class="flow">
+      <section class="panel nav-panel">
+        <div class="nav-head">
+          <p class="eyebrow">Browse</p>
+          <h2 class="title" id="navHeading">Choose a category</h2>
         </div>
-
-        <section class="desktop-lower">
-          <section class="panel column rail rail-branch" id="branchRail">
-            <div class="column-head"><p class="eyebrow">Step 1</p><h2 class="column-title" id="branchRailTitle">Branch</h2></div>
-            <div class="column-scroll"><div id="branchList" class="nav-list"></div></div>
-          </section>
-
-          <section class="panel column rail rail-leaf" id="leafRail">
-            <div class="column-head"><p class="eyebrow">Step 2</p><h2 class="column-title" id="leafRailTitle">Selection</h2></div>
-            <div class="column-scroll"><div id="leafList" class="nav-list"></div></div>
-          </section>
-
-          <section class="panel column rail rail-queue" id="queueRail">
-            <div class="column-head"><p class="eyebrow">Step 3</p><h2 class="column-title" id="queueTitle">Episodes</h2></div>
-            <div class="column-scroll"><div id="episodeList" class="episode-list"></div></div>
-          </section>
-        </section>
+        <div class="search-row">
+          <input id="searchInput" type="search" placeholder="Search title, scripture, series, book, date">
+          <div class="search-status" id="searchStatus">All items</div>
+        </div>
+        <div class="path-row">
+          <div>
+            <p class="eyebrow" style="margin-bottom:4px">Current Path</p>
+            <h3 class="path-title" id="pathTitle">Choose a category</h3>
+          </div>
+          <button type="button" class="action-btn" id="backBtn">Back</button>
+        </div>
+        <div class="stack" id="choiceList"></div>
       </section>
 
-      <section class="stage-column">
-        <section class="panel mobile-panel" id="mobileBrowsePanel">
-          <div class="column-head"><p class="eyebrow">Browse</p><h2 class="column-title" id="mobilePathTitle">Navigation</h2></div>
-          <div class="column-scroll">
-            <div class="search-bar">
-              <input id="mobileSearchInput" type="search" placeholder="Search title, scripture, series, book, date">
-              <div class="search-status" id="mobileSearchStatus">All items</div>
-            </div>
-            <div class="path-actions" style="margin-bottom:12px">
-              <button type="button" class="action-btn" id="mobileBackBtn">Back</button>
-            </div>
-            <div class="mobile-nav-block mobile-root-block"><div id="mobileRootList" class="nav-list"></div></div>
-            <div style="height:14px"></div>
-            <div class="mobile-nav-block mobile-branch-block"><div id="mobileBranchList" class="nav-list"></div></div>
-            <div style="height:14px"></div>
-            <div class="mobile-nav-block mobile-leaf-block"><div id="mobileLeafList" class="nav-list"></div></div>
-            <div style="height:14px"></div>
-            <div class="mobile-nav-block mobile-queue-block"><div id="mobileEpisodeList" class="episode-list"></div></div>
-          </div>
-        </section>
-
-        <section class="player-stage" id="playerStage">
+      <section class="content">
+        <section class="panel player is-idle" id="playerShell">
           <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
           <div id="audioPlaceholder">Select an episode to listen.</div>
 
           <div class="audio-stage" id="audioStage">
-            <div class="audio-art-wrap">
+            <div>
               <div class="audio-art"><img id="audioFeatureArt" alt="Sermon artwork"></div>
-              <div class="audio-transport">
+              <div class="transport">
                 <button class="transport-btn" id="miniSkipBackBtn" type="button">−30</button>
-                <button class="transport-play" id="audioPlayBadge" type="button">
-                  <span class="transport-play-circle">▶</span>
-                  <span class="transport-play-copy"><span id="audioPlayLabel">Tap to Play</span></span>
+                <button class="play-btn" id="audioPlayBadge" type="button">
+                  <span class="play-circle">▶</span>
+                  <span class="play-copy"><span id="audioPlayLabel">Tap to Play</span></span>
                 </button>
                 <button class="transport-btn" id="miniSkipForwardBtn" type="button">+30</button>
               </div>
             </div>
-            <div class="audio-content">
+            <div class="audio-copy">
               <h3 class="audio-title" id="audioFeatureTitle"></h3>
               <div class="audio-series" id="audioFeatureSeries"></div>
-              <div class="audio-detail-row"><span class="audio-detail-label">Scripture</span><span class="audio-detail-value" id="audioFeatureScripture"></span></div>
-              <div class="audio-detail-row"><span class="audio-detail-label">Speaker</span><span class="audio-detail-value" id="audioFeatureSpeaker"></span></div>
-              <div class="audio-detail-row"><span class="audio-detail-label">Date</span><span class="audio-detail-value" id="audioFeatureDate"></span></div>
-              <div class="audio-time-row">
+              <div class="detail-row"><span class="label">Scripture</span><span class="value" id="audioFeatureScripture"></span></div>
+              <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
+              <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
+              <div class="time-row">
                 <div class="audio-now" id="audioClockCurrent">00:00</div>
                 <div class="audio-total" id="audioClockTotal">/ 00:00</div>
               </div>
-              <div class="audio-progress-wrap">
-                <input id="audioProgress" class="audio-progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="Audio progress">
-                <div class="audio-progress-times"><span id="audioElapsedSmall">00:00</span><span id="audioRemainingSmall">00:00</span></div>
+              <div class="progress-wrap">
+                <input id="audioProgress" class="progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="Audio progress">
+                <div class="progress-times"><span id="audioElapsedSmall">00:00</span><span id="audioRemainingSmall">00:00</span></div>
               </div>
             </div>
           </div>
           <audio id="audioPlayer" preload="metadata"></audio>
         </section>
 
-        <section class="meta-stage is-idle" id="metaStage">
-          <div>
-            <h2 class="meta-title" id="metaTitle"></h2>
-            <div class="meta-series" id="metaSeries"></div>
-          </div>
+        <section class="panel detail is-idle" id="detailShell">
+          <h2 class="detail-title" id="detailTitle"></h2>
+          <div class="detail-series" id="detailSeries"></div>
           <div class="meta-grid">
-            <div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value" id="metaScripture"></div></div>
-            <div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value" id="metaSpeaker"></div></div>
-            <div class="meta-row"><div class="meta-label">Date</div><div class="meta-value" id="metaDate"></div></div>
-            <div class="meta-row"><div class="meta-label">Book Tags</div><div class="meta-value" id="metaBookTags"></div></div>
-            <div class="meta-row"><div class="meta-label">Audio Plays</div><div class="meta-value" id="metaAudioPlays"></div></div>
-            <div class="meta-row"><div class="meta-label">Video Views</div><div class="meta-value" id="metaVideoViews"></div></div>
+            <div class="meta-row"><div class="meta-label">Scripture</div><div class="meta-value" id="detailScripture"></div></div>
+            <div class="meta-row"><div class="meta-label">Speaker</div><div class="meta-value" id="detailSpeaker"></div></div>
+            <div class="meta-row"><div class="meta-label">Date</div><div class="meta-value" id="detailDate"></div></div>
+            <div class="meta-row"><div class="meta-label">Book Tags</div><div class="meta-value" id="detailBookTags"></div></div>
+            <div class="meta-row"><div class="meta-label">Audio Plays</div><div class="meta-value" id="detailAudioPlays"></div></div>
+            <div class="meta-row"><div class="meta-label">Video Views</div><div class="meta-value" id="detailVideoViews"></div></div>
           </div>
-          <div class="meta-actions">
+          <div class="detail-actions">
             <a id="episodePageLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Open</a>
             <a id="shareLink" class="action-btn" href="#" target="_blank" rel="noopener noreferrer">Share</a>
           </div>
-          <div class="related-shell" id="relatedShell" style="margin-top:18px">
-            <div class="related-head"><h3 class="related-title">More from this selection</h3></div>
+          <div class="related-wrap" id="relatedWrap">
+            <h3 class="related-title">More from this selection</h3>
             <div class="related-row" id="relatedRow"></div>
           </div>
         </section>
@@ -413,893 +314,526 @@
     </main>
   </div>
 
-<script>
-const LIVESTREAMS = { name: 'Livestreams', playlistId: 'PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv' };
-const GUEST_SPEAKERS = { name: 'CGBC Guest Speaker', playlistId: 'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW' };
-const SHORTS = { name: 'CGBC Shorts', playlistId: 'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
-const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
+  <script>
+    const ASSETS = {
+      fallback:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg',
+      current:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234669/Current.jpg',
+      livestreams:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234668/Livestreams.jpg',
+      books:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234671/Search-Books.jpg',
+      date:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234670/Serach-Date.jpg',
+      shorts:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234699/shorts.jpg',
+      topicalSeries:''
+    };
+    const LIVESTREAMS = { name:'Livestreams', playlistId:'PLKqZ6zXCYxUBu3jzPCTncKPpopFcvlVyv' };
+    const GUEST_SPEAKERS = { name:'CGBC Guest Speaker', playlistId:'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW' };
+    const SHORTS = { name:'CGBC Shorts', playlistId:'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
+    const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
+    const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
+    const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
+    const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
 
-const BIBLE_BOOK_ORDER = [
-  'Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
-  '1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job',
-  'Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel',
-  'Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi',
-  'Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians',
-  '1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter',
-  '1 John','2 John','3 John','Jude','Revelation'
-];
-const BIBLE_BOOK_ORDER_MAP = new Map(BIBLE_BOOK_ORDER.map((name, index) => [name.toLowerCase(), index]));
-const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12', 'the-rapture']);
+    const state = {
+      mode:'audio',
+      data:null,
+      items:[],
+      nativeShelves:{ livestreams:[], guestSpeakers:[], shorts:[] },
+      searchTerm:'',
+      nav:{ rootKey:null, branchKey:null, leafKey:null },
+      currentItem:null,
+      activeQueue:[]
+    };
 
-const appState = {
-  mode: 'audio',
-  data: null,
-  items: [],
-  browse: null,
-  nativeShelves: { livestreams: [], guestSpeakers: [], shorts: [] },
-  nav: { rootKey: null, branchKey: null, leafKey: null },
-  activeQueue: [],
-  currentItem: null,
-  searchTerm: ''
-};
+    const els = {
+      searchInput: document.getElementById('searchInput'),
+      searchStatus: document.getElementById('searchStatus'),
+      navHeading: document.getElementById('navHeading'),
+      pathTitle: document.getElementById('pathTitle'),
+      backBtn: document.getElementById('backBtn'),
+      choiceList: document.getElementById('choiceList'),
+      listenBtn: document.getElementById('listenBtn'),
+      watchBtn: document.getElementById('watchBtn'),
+      logoReset: document.getElementById('logoReset'),
+      impactPrimaryValue: document.getElementById('impactPrimaryValue'),
+      impactPrimaryLabel: document.getElementById('impactPrimaryLabel'),
+      impactSecondaryValue: document.getElementById('impactSecondaryValue'),
+      impactSecondaryLabel: document.getElementById('impactSecondaryLabel'),
+      playerShell: document.getElementById('playerShell'),
+      videoPlaceholder: document.getElementById('videoPlaceholder'),
+      videoShell: document.getElementById('videoShell'),
+      audioPlaceholder: document.getElementById('audioPlaceholder'),
+      audioStage: document.getElementById('audioStage'),
+      audioPlayer: document.getElementById('audioPlayer'),
+      audioFeatureArt: document.getElementById('audioFeatureArt'),
+      audioFeatureTitle: document.getElementById('audioFeatureTitle'),
+      audioFeatureSeries: document.getElementById('audioFeatureSeries'),
+      audioFeatureScripture: document.getElementById('audioFeatureScripture'),
+      audioFeatureSpeaker: document.getElementById('audioFeatureSpeaker'),
+      audioFeatureDate: document.getElementById('audioFeatureDate'),
+      audioClockCurrent: document.getElementById('audioClockCurrent'),
+      audioClockTotal: document.getElementById('audioClockTotal'),
+      audioElapsedSmall: document.getElementById('audioElapsedSmall'),
+      audioRemainingSmall: document.getElementById('audioRemainingSmall'),
+      audioProgress: document.getElementById('audioProgress'),
+      audioPlayBadge: document.getElementById('audioPlayBadge'),
+      audioPlayLabel: document.getElementById('audioPlayLabel'),
+      miniSkipBackBtn: document.getElementById('miniSkipBackBtn'),
+      miniSkipForwardBtn: document.getElementById('miniSkipForwardBtn'),
+      detailShell: document.getElementById('detailShell'),
+      detailTitle: document.getElementById('detailTitle'),
+      detailSeries: document.getElementById('detailSeries'),
+      detailScripture: document.getElementById('detailScripture'),
+      detailSpeaker: document.getElementById('detailSpeaker'),
+      detailDate: document.getElementById('detailDate'),
+      detailBookTags: document.getElementById('detailBookTags'),
+      detailAudioPlays: document.getElementById('detailAudioPlays'),
+      detailVideoViews: document.getElementById('detailVideoViews'),
+      episodePageLink: document.getElementById('episodePageLink'),
+      shareLink: document.getElementById('shareLink'),
+      relatedWrap: document.getElementById('relatedWrap'),
+      relatedRow: document.getElementById('relatedRow')
+    };
 
-const els = {
-  workspace: document.getElementById('workspace'),
-  rootList: document.getElementById('rootList'),
-  branchList: document.getElementById('branchList'),
-  leafList: document.getElementById('leafList'),
-  episodeList: document.getElementById('episodeList'),
-  mobileRootList: document.getElementById('mobileRootList'),
-  mobileBranchList: document.getElementById('mobileBranchList'),
-  mobileLeafList: document.getElementById('mobileLeafList'),
-  mobileEpisodeList: document.getElementById('mobileEpisodeList'),
-  desktopPathTitle: document.getElementById('desktopPathTitle'),
-  mobilePathTitle: document.getElementById('mobilePathTitle'),
-  branchRailTitle: document.getElementById('branchRailTitle'),
-  leafRailTitle: document.getElementById('leafRailTitle'),
-  queueTitle: document.getElementById('queueTitle'),
-  desktopBackBtn: document.getElementById('desktopBackBtn'),
-  mobileBackBtn: document.getElementById('mobileBackBtn'),
-  desktopSearchInput: document.getElementById('desktopSearchInput'),
-  mobileSearchInput: document.getElementById('mobileSearchInput'),
-  desktopSearchStatus: document.getElementById('desktopSearchStatus'),
-  mobileSearchStatus: document.getElementById('mobileSearchStatus'),
-  mobileBrowsePanel: document.getElementById('mobileBrowsePanel'),
-  listenBtn: document.getElementById('listenBtn'),
-  watchBtn: document.getElementById('watchBtn'),
-  logoReset: document.getElementById('logoReset'),
-  impactPrimaryValue: document.getElementById('impactPrimaryValue'),
-  impactPrimaryLabel: document.getElementById('impactPrimaryLabel'),
-  impactSecondaryValue: document.getElementById('impactSecondaryValue'),
-  impactSecondaryLabel: document.getElementById('impactSecondaryLabel'),
-  playerStage: document.getElementById('playerStage'),
-  videoPlaceholder: document.getElementById('videoPlaceholder'),
-  videoShell: document.getElementById('videoShell'),
-  audioPlaceholder: document.getElementById('audioPlaceholder'),
-  audioStage: document.getElementById('audioStage'),
-  audioPlayer: document.getElementById('audioPlayer'),
-  audioFeatureArt: document.getElementById('audioFeatureArt'),
-  audioFeatureTitle: document.getElementById('audioFeatureTitle'),
-  audioFeatureSeries: document.getElementById('audioFeatureSeries'),
-  audioFeatureScripture: document.getElementById('audioFeatureScripture'),
-  audioFeatureSpeaker: document.getElementById('audioFeatureSpeaker'),
-  audioFeatureDate: document.getElementById('audioFeatureDate'),
-  audioClockCurrent: document.getElementById('audioClockCurrent'),
-  audioClockTotal: document.getElementById('audioClockTotal'),
-  audioElapsedSmall: document.getElementById('audioElapsedSmall'),
-  audioRemainingSmall: document.getElementById('audioRemainingSmall'),
-  audioProgress: document.getElementById('audioProgress'),
-  audioPlayBadge: document.getElementById('audioPlayBadge'),
-  audioPlayLabel: document.getElementById('audioPlayLabel'),
-  miniSkipBackBtn: document.getElementById('miniSkipBackBtn'),
-  miniSkipForwardBtn: document.getElementById('miniSkipForwardBtn'),
-  metaStage: document.getElementById('metaStage'),
-  metaTitle: document.getElementById('metaTitle'),
-  metaSeries: document.getElementById('metaSeries'),
-  metaScripture: document.getElementById('metaScripture'),
-  metaSpeaker: document.getElementById('metaSpeaker'),
-  metaDate: document.getElementById('metaDate'),
-  metaBookTags: document.getElementById('metaBookTags'),
-  metaAudioPlays: document.getElementById('metaAudioPlays'),
-  metaVideoViews: document.getElementById('metaVideoViews'),
-  episodePageLink: document.getElementById('episodePageLink'),
-  shareLink: document.getElementById('shareLink'),
-  relatedShell: document.getElementById('relatedShell'),
-  relatedRow: document.getElementById('relatedRow')
-};
-
-function escapeHtml(value) {
-  return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
-}
-function formatNumber(value) {
-  return new Intl.NumberFormat('en-US').format(Number(value || 0));
-}
-function formatCountLabel(value, singular, plural) {
-  const n = Number(value || 0);
-  return `${formatNumber(n)} ${n === 1 ? singular : plural}`;
-}
-function formatClock(seconds) {
-  const safe = Math.max(0, Number(seconds || 0));
-  const h = Math.floor(safe / 3600);
-  const m = Math.floor((safe % 3600) / 60);
-  const s = Math.floor(safe % 60);
-  if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-function formatDate(item) {
-  if (item?.date?.iso) {
-    try {
-      return new Date(item.date.iso + 'T12:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
-    } catch (err) {}
-  }
-  return item?.date?.raw || 'Unknown date';
-}
-function sortNewestFirst(a, b) {
-  const aIso = a?.date?.iso || '';
-  const bIso = b?.date?.iso || '';
-  if (aIso && bIso) return bIso.localeCompare(aIso);
-  return (b?.title?.display || '').localeCompare(a?.title?.display || '');
-}
-function sortSeriesName(a, b) {
-  return String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
-}
-function sortBookName(a, b) {
-  const aKey = String(a || '').toLowerCase();
-  const bKey = String(b || '').toLowerCase();
-  const aIdx = BIBLE_BOOK_ORDER_MAP.has(aKey) ? BIBLE_BOOK_ORDER_MAP.get(aKey) : 999;
-  const bIdx = BIBLE_BOOK_ORDER_MAP.has(bKey) ? BIBLE_BOOK_ORDER_MAP.get(bKey) : 999;
-  if (aIdx !== bIdx) return aIdx - bIdx;
-  return sortSeriesName(a, b);
-}
-function getBookTagsDisplay(item) {
-  const tags = Array.isArray(item?.bookTags) ? item.bookTags.map(tag => tag?.name).filter(Boolean) : [];
-  return tags.length ? tags.join(', ') : '—';
-}
-function getEpisodeArt(item, mode = appState.mode) {
-  if (mode === 'video') {
-    return item?.art?.episode?.wide || item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.square || item?.art?.series?.square || 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1';
-  }
-  return item?.art?.episode?.square || item?.art?.series?.square || item?.art?.study?.square || item?.art?.episode?.wide || item?.art?.series?.wide || 'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg?v=iosfix1';
-}
-function getSeriesArt(item, mode = appState.mode) {
-  if (mode === 'video') {
-    return item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.wide || item?.art?.series?.square || item?.art?.episode?.square || '';
-  }
-  return item?.art?.series?.square || item?.art?.study?.square || item?.art?.episode?.square || item?.art?.series?.wide || item?.art?.episode?.wide || '';
-}
-function isVideoCapable(item) {
-  return !!(item?.video?.hasVideo && item?.flags?.includeInVideoTotals !== false && item?.video?.youtubeId);
-}
-function isAudioCapable(item) {
-  return !!item?.audio?.hasAudio;
-}
-function getModeFilteredItems(mode) {
-  return appState.items.filter(item => mode === 'audio' ? isAudioCapable(item) : isVideoCapable(item));
-}
-function applySearch(items) {
-  const q = appState.searchTerm.trim().toLowerCase();
-  if (!q) return items.slice();
-  return items.filter(item => {
-    const fields = [
-      item?.title?.display,
-      item?.series?.name,
-      item?.study?.name,
-      item?.scripture?.display,
-      item?.speaker,
-      item?.date?.raw,
-      item?.date?.iso,
-      ...(Array.isArray(item?.bookTags) ? item.bookTags.map(tag => tag?.name) : [])
-    ].filter(Boolean).join(' | ').toLowerCase();
-    return fields.includes(q);
-  });
-}
-function getVisibleItems() {
-  return applySearch(getModeFilteredItems(appState.mode));
-}
-function updateSearchStatus() {
-  const total = getModeFilteredItems(appState.mode).length;
-  const visible = getVisibleItems().length;
-  const label = appState.searchTerm.trim() ? `${formatNumber(visible)} of ${formatNumber(total)}` : 'All items';
-  els.desktopSearchStatus.textContent = label;
-  els.mobileSearchStatus.textContent = label;
-}
-async function loadResolvedData() {
-  const candidates = [
-    './library-resolved.json',
-    './data/library-resolved.json',
-    './public/library-resolved.json',
-    '/library-resolved.json',
-    '/data/library-resolved.json',
-    '/public/library-resolved.json'
-  ];
-  let lastError = null;
-  for (const path of candidates) {
-    try {
-      const res = await fetch(path, { cache: 'no-store' });
-      if (!res.ok) continue;
-      const json = await res.json();
-      if (Array.isArray(json?.items)) return json;
-    } catch (err) {
-      lastError = err;
+    function escapeHtml(v){return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
+    function formatNumber(v){return new Intl.NumberFormat('en-US').format(Number(v || 0));}
+    function formatCountLabel(v,s,p){const n=Number(v||0); return `${formatNumber(n)} ${n===1?s:p}`;}
+    function formatClock(sec){const s=Math.max(0,Number(sec||0)); const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), ss=Math.floor(s%60); return h>0?`${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`:`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;}
+    function formatDate(item){if(item?.date?.iso){try{return new Date(item.date.iso+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}catch(err){}} return item?.date?.raw || 'Unknown date';}
+    function sortNewestFirst(a,b){const ai=a?.date?.iso||'', bi=b?.date?.iso||''; if(ai&&bi) return bi.localeCompare(ai); return (b?.title?.display||'').localeCompare(a?.title?.display||'');}
+    function sortSeriesName(a,b){return String(a).localeCompare(String(b), undefined, {numeric:true,sensitivity:'base'});}
+    function sortBookName(a,b){const ai=BOOK_MAP.has(String(a).toLowerCase())?BOOK_MAP.get(String(a).toLowerCase()):999; const bi=BOOK_MAP.has(String(b).toLowerCase())?BOOK_MAP.get(String(b).toLowerCase()):999; return ai!==bi?ai-bi:sortSeriesName(a,b);}
+    function getBookTagsDisplay(item){const tags=Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name).filter(Boolean):[]; return tags.length?tags.join(', '):'—';}
+    function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
+    function isAudioCapable(item){return !!item?.audio?.hasAudio;}
+    function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
+    function applySearch(items){const q=state.searchTerm.trim().toLowerCase(); if(!q) return items.slice(); return items.filter(item=>[
+      item?.title?.display, item?.series?.name, item?.study?.name, item?.scripture?.display, item?.speaker, item?.date?.raw, item?.date?.iso,
+      ...(Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name):[])
+    ].filter(Boolean).join(' | ').toLowerCase().includes(q));}
+    function visibleItems(){return applySearch(getModeItems(state.mode));}
+    function getEpisodeArt(item, mode=state.mode){
+      if(mode==='video') return item?.art?.episode?.wide || item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.square || item?.art?.series?.square || ASSETS.fallback;
+      return item?.art?.episode?.square || item?.art?.series?.square || item?.art?.study?.square || item?.art?.episode?.wide || item?.art?.series?.wide || ASSETS.fallback;
     }
-  }
-  throw lastError || new Error('library-resolved.json could not be loaded.');
-}
-async function fetchPlaylistSeries(config) {
-  const episodes = [];
-  let pageToken = '';
-  for (let attempt = 0; attempt < 6; attempt += 1) {
-    const qs = new URLSearchParams({
-      part: 'snippet',
-      maxResults: '50',
-      playlistId: config.playlistId,
-      key: API_KEY
-    });
-    if (pageToken) qs.set('pageToken', pageToken);
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?${qs.toString()}`);
-    if (!res.ok) throw new Error(`playlistItems ${res.status}`);
-    const data = await res.json();
-    const rows = Array.isArray(data?.items) ? data.items : [];
-    rows.forEach((row, index) => {
-      const snippet = row?.snippet || {};
-      const resourceId = snippet?.resourceId || {};
-      const videoId = resourceId?.videoId;
-      if (!videoId) return;
-      const thumb = snippet?.thumbnails?.maxres?.url || snippet?.thumbnails?.standard?.url || snippet?.thumbnails?.high?.url || snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || '';
-      episodes.push({
-        stableId: `${config.name.toLowerCase().replace(/\s+/g, '-')}-${videoId}`,
-        source: 'youtube-native',
-        title: { episodeName: snippet?.title || 'Untitled', subtitle: '', display: snippet?.title || 'Untitled' },
-        series: { name: config.name, key: config.name.toLowerCase().replace(/\s+/g, '-'), type: 'native_youtube_shelf' },
-        study: { name: '', key: null, type: 'none' },
-        scripture: { raw: '', display: 'YouTube native shelf', book: null, bookKey: null, isVarious: true },
-        bookTags: [],
-        speaker: 'CGBC',
-        date: {
-          raw: snippet?.publishedAt || '',
-          iso: snippet?.publishedAt ? String(snippet.publishedAt).slice(0, 10) : null,
-          year: snippet?.publishedAt ? Number(String(snippet.publishedAt).slice(0, 4)) : null,
-          month: snippet?.publishedAt ? Number(String(snippet.publishedAt).slice(5, 7)) : null,
-          monthName: null,
-          day: snippet?.publishedAt ? Number(String(snippet.publishedAt).slice(8, 10)) : null
-        },
-        links: {
-          episodeUrl: `https://www.youtube.com/watch?v=${videoId}`,
-          shareUrl: `https://www.youtube.com/watch?v=${videoId}`
-        },
-        audio: { hasAudio: false, url: null, plays: 0, durationSeconds: 0 },
-        video: { hasVideo: true, youtubeId: videoId, url: `https://www.youtube.com/watch?v=${videoId}`, views: 0 },
-        art: { episode: { square: thumb, wide: thumb }, series: { square: thumb, wide: thumb }, study: { square: thumb, wide: thumb } },
-        memberships: { series:[config.name.toLowerCase().replace(/\s+/g, '-')], studies:[], bibleBooks:[], byYear:[], byMonth:[] },
-        presentation: { bibleBooksMode: 'none' },
-        flags: { isStandaloneEpisode: true, includeInAudioTotals: false, includeInVideoTotals: true },
-        _sortIndex: index
-      });
-    });
-    if (!data?.nextPageToken) break;
-    pageToken = data.nextPageToken;
-  }
-  return episodes.sort(sortNewestFirst);
-}
-function buildBrowseModel(items) {
-  const model = {
-    roots: [],
-    buckets: {
-      current: [],
-      bibleBooks: new Map(),
-      standaloneSeries: new Map(),
-      byDate: new Map()
-    }
-  };
-
-  items.forEach(item => {
-    const seriesKey = item?.series?.key || '';
-    const seriesName = item?.series?.name || 'Untitled Series';
-    const studyName = item?.study?.name || '';
-    const modeHint = item?.presentation?.bibleBooksMode || 'none';
-
-    if (CURRENT_SERIES_KEYS.has(seriesKey)) {
-      if (!model.buckets.current.find(entry => entry.key === seriesKey)) {
-        model.buckets.current.push({
-          key: seriesKey,
-          title: seriesName,
-          meta: studyName || 'Current series',
-          image: getSeriesArt(item),
-          seriesKey,
-          kind: 'series'
-        });
+    async function loadResolvedData(){
+      const paths=['./library-resolved.json','./data/library-resolved.json','./public/library-resolved.json','/library-resolved.json','/data/library-resolved.json','/public/library-resolved.json'];
+      let lastError=null;
+      for(const path of paths){
+        try{
+          const res=await fetch(path,{cache:'no-store'});
+          if(!res.ok) continue;
+          const json=await res.json();
+          if(Array.isArray(json?.items)) return json;
+        }catch(err){lastError=err;}
       }
+      throw lastError || new Error('library-resolved.json could not be loaded.');
     }
-
-    const bookKeys = Array.isArray(item?.memberships?.bibleBooks) ? item.memberships.bibleBooks : [];
-    bookKeys.forEach(bookKey => {
-      if (!model.buckets.bibleBooks.has(bookKey)) {
-        model.buckets.bibleBooks.set(bookKey, {
-          key: bookKey,
-          title: item?.bookTags?.find(tag => tag.key === bookKey)?.name || item?.scripture?.book || bookKey,
-          seriesMap: new Map(),
-          episodes: [],
-          specials: []
-        });
-      }
-      const bucket = model.buckets.bibleBooks.get(bookKey);
-      const isSpecial = /special/i.test(seriesName);
-
-      if (isSpecial) {
-        bucket.specials.push(item);
-      } else if (modeHint === 'series_group') {
-        if (!bucket.seriesMap.has(seriesKey)) {
-          bucket.seriesMap.set(seriesKey, {
-            key: seriesKey,
-            title: seriesName,
-            meta: studyName || 'Series',
-            image: getSeriesArt(item),
-            items: []
+    async function fetchPlaylistSeries(config){
+      const episodes=[]; let pageToken='';
+      for(let attempt=0;attempt<6;attempt+=1){
+        const qs=new URLSearchParams({part:'snippet',maxResults:'50',playlistId:config.playlistId,key:API_KEY});
+        if(pageToken) qs.set('pageToken', pageToken);
+        const res=await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?${qs.toString()}`);
+        if(!res.ok) throw new Error(`playlistItems ${res.status}`);
+        const data=await res.json();
+        const rows=Array.isArray(data?.items)?data.items:[];
+        rows.forEach((row,index)=>{
+          const snippet=row?.snippet||{}, videoId=snippet?.resourceId?.videoId;
+          if(!videoId) return;
+          const thumb=snippet?.thumbnails?.maxres?.url || snippet?.thumbnails?.standard?.url || snippet?.thumbnails?.high?.url || snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || ASSETS.fallback;
+          episodes.push({
+            stableId:`${config.name.toLowerCase().replace(/\\s+/g,'-')}-${videoId}`,
+            source:'youtube-native',
+            title:{episodeName:snippet?.title||'Untitled',subtitle:'',display:snippet?.title||'Untitled'},
+            series:{name:config.name,key:config.name.toLowerCase().replace(/\\s+/g,'-'),type:'native_youtube_shelf'},
+            study:{name:'',key:null,type:'none'},
+            scripture:{raw:'',display:'YouTube native shelf',book:null,bookKey:null,isVarious:true},
+            bookTags:[],
+            speaker:'CGBC',
+            date:{raw:snippet?.publishedAt||'',iso:snippet?.publishedAt?String(snippet.publishedAt).slice(0,10):null,year:snippet?.publishedAt?Number(String(snippet.publishedAt).slice(0,4)):null},
+            links:{episodeUrl:`https://www.youtube.com/watch?v=${videoId}`,shareUrl:`https://www.youtube.com/watch?v=${videoId}`},
+            audio:{hasAudio:false,url:null,plays:0,durationSeconds:0},
+            video:{hasVideo:true,youtubeId:videoId,url:`https://www.youtube.com/watch?v=${videoId}`,views:0},
+            art:{episode:{square:thumb,wide:thumb},series:{square:thumb,wide:thumb},study:{square:thumb,wide:thumb}},
+            memberships:{series:[config.name.toLowerCase().replace(/\\s+/g,'-')],studies:[],bibleBooks:[],byYear:[],byMonth:[]},
+            presentation:{bibleBooksMode:'none'},
+            flags:{isStandaloneEpisode:true,includeInAudioTotals:false,includeInVideoTotals:true},
+            _sortIndex:index
           });
-        }
-        bucket.seriesMap.get(seriesKey).items.push(item);
-      } else if (modeHint === 'episode_only') {
-        bucket.episodes.push(item);
-      }
-    });
-
-    if ((item?.series?.type === 'topical' || item?.series?.type === 'standalone') && !/special/i.test(seriesName)) {
-      if (!model.buckets.standaloneSeries.has(seriesKey)) {
-        model.buckets.standaloneSeries.set(seriesKey, {
-          key: seriesKey,
-          title: seriesName,
-          meta: studyName || 'Standalone',
-          image: getSeriesArt(item),
-          items: []
         });
+        if(!data?.nextPageToken) break;
+        pageToken=data.nextPageToken;
       }
-      model.buckets.standaloneSeries.get(seriesKey).items.push(item);
+      return episodes.sort(sortNewestFirst);
     }
-
-    const year = item?.date?.year;
-    const monthKey = item?.date?.iso ? item.date.iso.slice(0,7) : null;
-    if (year && monthKey) {
-      if (!model.buckets.byDate.has(String(year))) model.buckets.byDate.set(String(year), new Map());
-      const yearBucket = model.buckets.byDate.get(String(year));
-      if (!yearBucket.has(monthKey)) yearBucket.set(monthKey, []);
-      yearBucket.get(monthKey).push(item);
-    }
-  });
-
-  model.buckets.current.sort((a, b) => sortSeriesName(a.title, b.title));
-  model.roots = [
-    ...(appState.mode === 'video' ? [
-      { key:'livestreams', title:'Livestreams', meta:'Live YouTube shelf', image:'' },
-      { key:'shorts', title:'CGBC Shorts', meta:'Live YouTube shelf', image:'' },
-      { key:'guestSpeakers', title:'Guest Speakers', meta:'Live YouTube shelf', image:'' }
-    ] : []),
-    { key:'current', title:'Current', meta:formatCountLabel(model.buckets.current.length, 'series', 'series'), image:'' },
-    { key:'bibleBooks', title:'By Book / Studies', meta:formatCountLabel(model.buckets.bibleBooks.size, 'book', 'books'), image:'' },
-    { key:'standaloneSeries', title:'By Series', meta:formatCountLabel(model.buckets.standaloneSeries.size, 'series', 'series'), image:'' },
-    { key:'byDate', title:'By Date', meta:'Year → Month', image:'' }
-  ];
-  return model;
-}
-function getRootItems() {
-  return appState.browse?.roots || [];
-}
-function getBranchItems() {
-  const root = appState.nav.rootKey;
-  const browse = appState.browse;
-  if (!browse || !root) return [];
-  if (root === 'livestreams') return [{ key:'live-collection', title:'Livestreams', meta: formatCountLabel(appState.nativeShelves.livestreams.length, 'video', 'videos'), image: getEpisodeArt(appState.nativeShelves.livestreams[0] || {}, 'video') }];
-  if (root === 'shorts') return [{ key:'shorts-collection', title:'CGBC Shorts', meta: formatCountLabel(appState.nativeShelves.shorts.length, 'video', 'videos'), image: getEpisodeArt(appState.nativeShelves.shorts[0] || {}, 'video') }];
-  if (root === 'guestSpeakers') return [{ key:'guest-collection', title:'Guest Speakers', meta: formatCountLabel(appState.nativeShelves.guestSpeakers.length, 'video', 'videos'), image: getEpisodeArt(appState.nativeShelves.guestSpeakers[0] || {}, 'video') }];
-  if (root === 'current') return browse.buckets.current;
-  if (root === 'bibleBooks') {
-    return Array.from(browse.buckets.bibleBooks.values())
-      .sort((a,b) => sortBookName(a.title, b.title))
-      .map(bucket => ({
-        key: bucket.key,
-        title: bucket.title,
-        meta: `${formatCountLabel(bucket.seriesMap.size, 'series', 'series')} · ${formatCountLabel(bucket.episodes.length + bucket.specials.length, 'episode', 'episodes')}`,
-        image: bucket.episodes[0] ? getEpisodeArt(bucket.episodes[0]) : (bucket.specials[0] ? getEpisodeArt(bucket.specials[0]) : (bucket.seriesMap.values().next().value?.image || ''))
-      }));
-  }
-  if (root === 'standaloneSeries') return Array.from(browse.buckets.standaloneSeries.values()).sort((a,b) => sortSeriesName(a.title, b.title));
-  if (root === 'byDate') {
-    return Array.from(browse.buckets.byDate.keys()).sort((a,b) => b.localeCompare(a)).map(year => ({
-      key: year,
-      title: year,
-      meta: formatCountLabel(appState.browse.buckets.byDate.get(year).size, 'month', 'months'),
-      image:''
-    }));
-  }
-  return [];
-}
-function getLeafItems() {
-  const root = appState.nav.rootKey;
-  const branch = appState.nav.branchKey;
-  const browse = appState.browse;
-  if (!browse || !root || !branch) return [];
-  if (root === 'livestreams' || root === 'shorts' || root === 'guestSpeakers') return [];
-  if (root === 'current') {
-    const selected = browse.buckets.current.find(entry => entry.key === branch);
-    if (!selected) return [];
-    const rows = getVisibleItems().filter(item => item?.series?.key === selected.key).sort(sortNewestFirst);
-    return [{ key:selected.key, title:selected.title, meta:formatCountLabel(rows.length, 'episode', 'episodes'), image:selected.image }];
-  }
-  if (root === 'bibleBooks') {
-    const bucket = browse.buckets.bibleBooks.get(branch);
-    if (!bucket) return [];
-    const leaves = [];
-    Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title)).forEach(row => {
-      leaves.push({ key: row.key, title: row.title, meta: formatCountLabel(row.items.length, 'episode', 'episodes'), image: row.image, type:'series' });
-    });
-    if (bucket.episodes.length) {
-      leaves.push({ key: `${bucket.key}__episodes`, title:'Individual Sermons', meta: formatCountLabel(bucket.episodes.length, 'episode', 'episodes'), image: bucket.episodes[0] ? getEpisodeArt(bucket.episodes[0]) : '', type:'episode_bucket' });
-    }
-    if (bucket.specials.length) {
-      const yearMap = new Map();
-      bucket.specials.forEach(item => {
-        const year = String(item?.date?.year || 'Unknown');
-        if (!yearMap.has(year)) yearMap.set(year, []);
-        yearMap.get(year).push(item);
+    function buildBrowse(){
+      const items=visibleItems();
+      const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
+      items.forEach(item=>{
+        const seriesKey=item?.series?.key || '', seriesName=item?.series?.name || 'Untitled Series', studyName=item?.study?.name || '', modeHint=item?.presentation?.bibleBooksMode || 'none', bookKeys=Array.isArray(item?.memberships?.bibleBooks)?item.memberships.bibleBooks:[], isSpecial=/special/i.test(seriesName);
+        if(CURRENT_SERIES_KEYS.has(seriesKey) && !browse.current.find(r=>r.key===seriesKey)){
+          browse.current.push({key:seriesKey,title:seriesName,meta:studyName || 'Current series',image:ASSETS.current});
+        }
+        bookKeys.forEach(bookKey=>{
+          if(!browse.books.has(bookKey)){
+            browse.books.set(bookKey,{key:bookKey,title:item?.bookTags?.find(t=>t.key===bookKey)?.name || item?.scripture?.book || bookKey,image:ASSETS.books,seriesMap:new Map(),episodes:[],specialsByYear:new Map()});
+          }
+          const bucket=browse.books.get(bookKey);
+          if(isSpecial){
+            const year=String(item?.date?.year || 'Unknown');
+            if(!bucket.specialsByYear.has(year)) bucket.specialsByYear.set(year, []);
+            bucket.specialsByYear.get(year).push(item);
+          } else if(modeHint==='series_group'){
+            if(!bucket.seriesMap.has(seriesKey)) bucket.seriesMap.set(seriesKey,{key:seriesKey,title:seriesName,meta:studyName || 'Series',image:getEpisodeArt(item),items:[]});
+            bucket.seriesMap.get(seriesKey).items.push(item);
+          } else if(modeHint==='episode_only'){
+            bucket.episodes.push(item);
+          }
+        });
+        if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial){
+          if(!browse.topical.has(seriesKey)) browse.topical.set(seriesKey,{key:seriesKey,title:seriesName,meta:studyName || 'Topical series',image:ASSETS.topicalSeries || getEpisodeArt(item),items:[]});
+          browse.topical.get(seriesKey).items.push(item);
+        }
+        const year=String(item?.date?.year || ''), monthKey=item?.date?.iso ? item.date.iso.slice(0,7) : '';
+        if(year && monthKey){
+          if(!browse.date.has(year)) browse.date.set(year, new Map());
+          if(!browse.date.get(year).has(monthKey)) browse.date.get(year).set(monthKey, []);
+          browse.date.get(year).get(monthKey).push(item);
+        }
       });
-      Array.from(yearMap.keys()).sort((a,b)=>b.localeCompare(a)).forEach(year => {
-        const rows = yearMap.get(year);
-        leaves.push({ key: `${bucket.key}__specials__${year}`, title:`Single Events / Sermons · ${year}`, meta: formatCountLabel(rows.length, 'episode', 'episodes'), image: rows[0] ? getEpisodeArt(rows[0]) : '', type:'specials_bucket' });
-      });
+      browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
+      browse.roots=[
+        ...(state.mode==='video' ? [
+          {key:'livestreams',title:'Livestreams',meta:'Live YouTube shelf',image:ASSETS.livestreams},
+          {key:'shorts',title:'Shorts',meta:'Live YouTube shelf',image:ASSETS.shorts},
+          {key:'guestSpeakers',title:'Guest Speakers',meta:'Live YouTube shelf',image:ASSETS.topicalSeries || ASSETS.fallback}
+        ] : []),
+        {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current},
+        {key:'books',title:'Bible Books / Studies',meta:formatCountLabel(browse.books.size,'book','books'),image:ASSETS.books},
+        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
+        {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date}
+      ];
+      return browse;
     }
-    return leaves;
-  }
-  if (root === 'standaloneSeries') return [];
-  if (root === 'byDate') {
-    const yearBucket = browse.buckets.byDate.get(branch);
-    if (!yearBucket) return [];
-    return Array.from(yearBucket.keys()).sort((a,b) => b.localeCompare(a)).map(monthKey => ({
-      key: monthKey,
-      title: new Date(monthKey + '-15T12:00:00').toLocaleDateString('en-US', { month:'long', year:'numeric' }),
-      meta: formatCountLabel(yearBucket.get(monthKey).length, 'episode', 'episodes'),
-      image:''
-    }));
-  }
-  return [];
-}
-function buildQueue() {
-  const root = appState.nav.rootKey;
-  const branch = appState.nav.branchKey;
-  const leaf = appState.nav.leafKey;
-  const browse = appState.browse;
-  if (!browse || !root) return [];
-  if (root === 'livestreams') return appState.nativeShelves.livestreams.slice();
-  if (root === 'shorts') return appState.nativeShelves.shorts.slice();
-  if (root === 'guestSpeakers') return appState.nativeShelves.guestSpeakers.slice();
-  if (root === 'current') {
-    const selected = browse.buckets.current.find(entry => entry.key === branch || entry.key === leaf);
-    if (!selected) return [];
-    return getVisibleItems().filter(item => item?.series?.key === selected.key).sort(sortNewestFirst);
-  }
-  if (root === 'bibleBooks') {
-    const bucket = browse.buckets.bibleBooks.get(branch);
-    if (!bucket || !leaf) return [];
-    if (leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortNewestFirst);
-    if (leaf.includes('__specials__')) {
-      const year = leaf.split('__specials__')[1];
-      return bucket.specials.filter(item => String(item?.date?.year || 'Unknown') === year).sort(sortNewestFirst);
+    function rootChoices(){ return buildBrowse().roots; }
+    function branchChoices(){
+      const browse=buildBrowse(), root=state.nav.rootKey;
+      if(!root) return [];
+      if(root==='livestreams') return [{key:'live-all',title:'Livestreams',meta:formatCountLabel(state.nativeShelves.livestreams.length,'video','videos'),image:ASSETS.livestreams}];
+      if(root==='shorts') return [{key:'shorts-all',title:'Shorts',meta:formatCountLabel(state.nativeShelves.shorts.length,'video','videos'),image:ASSETS.shorts}];
+      if(root==='guestSpeakers') return [{key:'guests-all',title:'Guest Speakers',meta:formatCountLabel(state.nativeShelves.guestSpeakers.length,'video','videos'),image:ASSETS.topicalSeries || ASSETS.fallback}];
+      if(root==='current') return browse.current;
+      if(root==='books'){
+        return Array.from(browse.books.values()).sort((a,b)=>sortBookName(a.title,b.title)).map(bucket=>({
+          key:bucket.key,
+          title:bucket.title,
+          meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
+          image:bucket.image
+        }));
+      }
+      if(root==='topical') return Array.from(browse.topical.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
+      if(root==='date') return Array.from(browse.date.keys()).sort((a,b)=>b.localeCompare(a)).map(year=>({key:year,title:year,meta:formatCountLabel(browse.date.get(year).size,'month','months'),image:ASSETS.date}));
+      return [];
     }
-    const row = bucket.seriesMap.get(leaf);
-    return row ? row.items.slice().sort(sortNewestFirst) : [];
-  }
-  if (root === 'standaloneSeries') {
-    const row = browse.buckets.standaloneSeries.get(branch);
-    return row ? row.items.slice().sort(sortNewestFirst) : [];
-  }
-  if (root === 'byDate') {
-    const yearBucket = browse.buckets.byDate.get(branch);
-    if (!yearBucket || !leaf) return [];
-    return (yearBucket.get(leaf) || []).slice().sort(sortNewestFirst);
-  }
-  return [];
-}
-function setDefaultNavigation() {
-  appState.nav.rootKey = null;
-  appState.nav.branchKey = null;
-  appState.nav.leafKey = null;
-}
-function ensureValidNavigation() {
-  const roots = getRootItems();
-  if (appState.nav.rootKey && !roots.find(row => row.key === appState.nav.rootKey)) appState.nav.rootKey = null;
-  const branches = getBranchItems();
-  if (appState.nav.branchKey && !branches.find(row => row.key === appState.nav.branchKey)) appState.nav.branchKey = null;
-  if (!branches.length) appState.nav.branchKey = null;
-  const leaves = getLeafItems();
-  if (appState.nav.leafKey && !leaves.find(row => row.key === appState.nav.leafKey)) appState.nav.leafKey = null;
-  if (!leaves.length) appState.nav.leafKey = null;
-}
-function renderCard(row, selectedKey, variant = 'nav') {
-  const isVideo = appState.mode === 'video';
-  const thumbClass = isVideo ? 'thumb-wide' : 'thumb-square';
-  return `
-    <button type="button" class="${variant}-card ${selectedKey === row.key ? 'is-active' : ''}" data-key="${escapeHtml(row.key)}">
-      <div class="${thumbClass}">${row.image ? `<img src="${escapeHtml(row.image)}" alt="">` : ''}</div>
-      <div class="card-copy">
-        <h3 class="card-title">${escapeHtml(row.title || '')}</h3>
-        <div class="card-subtitle">${escapeHtml(row.meta || '')}</div>
-      </div>
-    </button>
-  `;
-}
-function getDesktopPathTitle() {
-  const root = getRootItems().find(row => row.key === appState.nav.rootKey);
-  const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
-  const leaf = getLeafItems().find(row => row.key === appState.nav.leafKey);
-  if (leaf) return `Episodes · ${leaf.title}`;
-  if (branch) return `${root?.title || 'Browse'} · ${branch.title}`;
-  if (root) return `Browse · ${root.title}`;
-  return 'Choose a category';
-}
-function updateWorkspaceState() {
-  const branchRows = getBranchItems();
-  const leafRows = getLeafItems();
-  const queueRows = buildQueue();
-  const hasBranch = !!appState.nav.rootKey && branchRows.length > 0;
-  const hasLeaf = !!appState.nav.branchKey && leafRows.length > 0;
-  const hasQueue = !!appState.nav.branchKey && queueRows.length > 0;
-
-  els.workspace.classList.toggle('has-branch', hasBranch);
-  els.workspace.classList.toggle('has-leaf', hasLeaf);
-  els.workspace.classList.toggle('has-queue', hasQueue);
-
-  const pathTitle = getDesktopPathTitle();
-  els.desktopPathTitle.textContent = pathTitle;
-  els.mobilePathTitle.textContent = pathTitle;
-  updateBackButtons();
-
-  const root = getRootItems().find(row => row.key === appState.nav.rootKey);
-  const branch = branchRows.find(row => row.key === appState.nav.branchKey);
-  const leaf = leafRows.find(row => row.key === appState.nav.leafKey);
-  els.branchRailTitle.textContent = root ? root.title : 'Branch';
-  els.leafRailTitle.textContent = branch ? branch.title : 'Selection';
-  els.queueTitle.textContent = leaf ? `${leaf.title} Episodes` : (branch ? `${branch.title} Episodes` : 'Episodes');
-
-  const isIdle = !appState.currentItem;
-  els.playerStage.classList.toggle('is-idle', isIdle);
-  els.metaStage.classList.toggle('is-idle', isIdle);
-
-  if (els.mobileBrowsePanel) {
-    els.mobileBrowsePanel.classList.remove('show-root', 'show-branch', 'show-leaf', 'show-queue');
-    let pane = 'root';
-    if (appState.nav.rootKey && !appState.nav.branchKey) pane = 'branch';
-    else if (appState.nav.branchKey) {
-      if (leafRows.length > 0 && !appState.nav.leafKey) pane = 'leaf';
-      else if (queueRows.length > 0) pane = 'queue';
-      else pane = 'leaf';
+    function leafChoices(){
+      const browse=buildBrowse(), root=state.nav.rootKey, branch=state.nav.branchKey;
+      if(!root || !branch) return [];
+      if(root==='livestreams' || root==='shorts' || root==='guestSpeakers') return [];
+      if(root==='current'){
+        const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
+        const rows=visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
+        return [{key:selected.key,title:selected.title,meta:formatCountLabel(rows.length,'episode','episodes'),image:selected.image}];
+      }
+      if(root==='books'){
+        const bucket=browse.books.get(branch); if(!bucket) return [];
+        const out=[];
+        Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title)).forEach(row=>out.push({key:row.key,title:row.title,meta:formatCountLabel(row.items.length,'episode','episodes'),image:getEpisodeArt(row.items[0]||{})}));
+        if(bucket.episodes.length) out.push({key:`${bucket.key}__episodes`,title:'Individual Sermons',meta:formatCountLabel(bucket.episodes.length,'episode','episodes'),image:getEpisodeArt(bucket.episodes[0]||{})});
+        Array.from(bucket.specialsByYear.keys()).sort((a,b)=>b.localeCompare(a)).forEach(year=>{
+          const rows=bucket.specialsByYear.get(year)||[];
+          out.push({key:`${bucket.key}__specials__${year}`,title:`Single Events / Sermons · ${year}`,meta:formatCountLabel(rows.length,'episode','episodes'),image:getEpisodeArt(rows[0]||{})});
+        });
+        return out;
+      }
+      if(root==='topical') return [];
+      if(root==='date'){
+        const yearBucket=browse.date.get(branch); if(!yearBucket) return [];
+        return Array.from(yearBucket.keys()).sort((a,b)=>b.localeCompare(a)).map(monthKey=>({key:monthKey,title:new Date(monthKey+'-15T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}),meta:formatCountLabel(yearBucket.get(monthKey).length,'episode','episodes'),image:ASSETS.date}));
+      }
+      return [];
     }
-    els.mobileBrowsePanel.classList.add('show-' + pane);
-  }
-}
-function updateBackButtons() {
-  const root = getRootItems().find(row => row.key === appState.nav.rootKey);
-  const branch = getBranchItems().find(row => row.key === appState.nav.branchKey);
-  const leaf = getLeafItems().find(row => row.key === appState.nav.leafKey);
-  let backLabel = 'Back';
-  if (leaf) backLabel = `Back to ${branch?.title || 'Branch'}`;
-  else if (branch) backLabel = `Back to ${root?.title || 'Categories'}`;
-  else if (root) backLabel = 'Back to Categories';
-  [els.desktopBackBtn, els.mobileBackBtn].forEach(btn => {
-    btn.textContent = backLabel;
-    btn.disabled = !appState.nav.rootKey && !appState.nav.branchKey && !appState.nav.leafKey;
-  });
-}
-function navigateBack() {
-  if (appState.nav.leafKey) appState.nav.leafKey = null;
-  else if (appState.nav.branchKey) appState.nav.branchKey = null;
-  else if (appState.nav.rootKey) appState.nav.rootKey = null;
-  appState.currentItem = null;
-  ensureValidNavigation();
-  rerenderAll();
-}
-function navigateHome() {
-  setDefaultNavigation();
-  appState.currentItem = null;
-  rerenderAll();
-}
-function renderRoots() {
-  const rows = getRootItems();
-  const html = rows.length ? rows.map(row => renderCard(row, appState.nav.rootKey, 'nav')).join('') : `<div class="empty-state">No root items available.</div>`;
-  els.rootList.innerHTML = html;
-  els.mobileRootList.innerHTML = html;
-}
-function renderBranches() {
-  const rows = getBranchItems();
-  const html = rows.length ? rows.map(row => renderCard(row, appState.nav.branchKey, 'nav')).join('') : `<div class="empty-state">Choose a root bucket to continue.</div>`;
-  els.branchList.innerHTML = html;
-  els.mobileBranchList.innerHTML = html;
-}
-function renderLeaves() {
-  const rows = getLeafItems();
-  const html = rows.length ? rows.map(row => renderCard(row, appState.nav.leafKey, 'nav')).join('') : `<div class="empty-state">This bucket opens directly into the queue.</div>`;
-  els.leafList.innerHTML = html;
-  els.mobileLeafList.innerHTML = html;
-}
-function renderEpisodeCard(item) {
-  const image = getEpisodeArt(item);
-  const isVideo = appState.mode === 'video';
-  const thumbClass = isVideo ? 'thumb-wide' : 'thumb-square';
-  const metric = appState.mode === 'audio'
-    ? `${formatCountLabel(item?.audio?.plays || 0, 'play', 'plays')}`
-    : `${formatCountLabel(item?.video?.views || 0, 'view', 'views')}`;
-  return `
-    <button type="button" class="episode-card ${appState.currentItem?.stableId === item.stableId ? 'is-active' : ''}" data-episode-id="${escapeHtml(item.stableId)}">
-      <div class="${thumbClass}">${image ? `<img src="${escapeHtml(image)}" alt="">` : ''}</div>
-      <div class="card-copy">
-        <h3 class="card-title">${escapeHtml(item?.title?.display || '')}</h3>
-        <div class="card-subtitle">${escapeHtml(item?.series?.name || '')}</div>
-        <div class="card-metric">${escapeHtml(metric)} · ${escapeHtml(formatDate(item))}</div>
-      </div>
-    </button>
-  `;
-}
-function renderQueue() {
-  const queue = buildQueue();
-  appState.activeQueue = queue;
-  const html = queue.length ? queue.map(renderEpisodeCard).join('') : `<div class="empty-state">No episodes found for this selection.</div>`;
-  els.episodeList.innerHTML = html;
-  els.mobileEpisodeList.innerHTML = html;
-  if (!queue.find(item => item.stableId === appState.currentItem?.stableId)) {
-    appState.currentItem = queue[0] || null;
-  }
-}
-function updateImpactStrip() {
-  if (!appState.data) return;
-  if (appState.mode === 'audio') {
-    els.impactPrimaryValue.textContent = formatNumber(appState.data?.totals?.audioPlaysTotal || 0);
-    els.impactPrimaryLabel.textContent = 'Audio Plays';
-    els.impactSecondaryValue.textContent = formatNumber(appState.data?.totals?.audioEpisodesTotal || appState.items.length);
-    els.impactSecondaryLabel.textContent = 'Audio Episodes';
-  } else {
-    const archiveViews = getModeFilteredItems('video').reduce((sum, item) => sum + Number(item?.video?.views || 0), 0);
-    const videoCount = getModeFilteredItems('video').length;
-    els.impactPrimaryValue.textContent = formatNumber(archiveViews);
-    els.impactPrimaryLabel.textContent = 'Archive Views';
-    els.impactSecondaryValue.textContent = formatNumber(videoCount);
-    els.impactSecondaryLabel.textContent = 'Video Episodes';
-  }
-}
-function updateModeButtons() {
-  els.listenBtn.classList.toggle('active', appState.mode === 'audio');
-  els.watchBtn.classList.toggle('active', appState.mode === 'video');
-  document.body.classList.toggle('mode-audio', appState.mode === 'audio');
-  document.body.classList.toggle('mode-video', appState.mode === 'video');
-}
-function updateMeta(item) {
-  if (!item) return;
-  els.metaTitle.textContent = item?.title?.display || '';
-  els.metaSeries.textContent = item?.series?.name || '';
-  els.metaScripture.textContent = item?.scripture?.display || '—';
-  els.metaSpeaker.textContent = item?.speaker || '—';
-  els.metaDate.textContent = formatDate(item);
-  els.metaBookTags.textContent = getBookTagsDisplay(item);
-  els.metaAudioPlays.textContent = formatCountLabel(item?.audio?.plays || 0, 'play', 'plays');
-  els.metaVideoViews.textContent = formatCountLabel(item?.video?.views || 0, 'view', 'views');
-  const shareUrl = item?.links?.shareUrl || item?.links?.episodeUrl || '#';
-  const openUrl = item?.links?.episodeUrl || item?.video?.url || item?.audio?.url || '#';
-  els.episodePageLink.href = openUrl;
-  els.shareLink.href = shareUrl;
-  renderRelated(item);
-}
-function renderRelated(item) {
-  const queue = appState.activeQueue.filter(row => row.stableId !== item?.stableId).slice(0, 8);
-  if (!queue.length) {
-    els.relatedShell.style.display = 'none';
-    els.relatedRow.innerHTML = '';
-    return;
-  }
-  els.relatedShell.style.display = 'grid';
-  els.relatedRow.innerHTML = queue.map(row => {
-    const image = getEpisodeArt(row);
-    const isVideo = appState.mode === 'video';
-    const thumbClass = isVideo ? 'thumb-wide' : 'thumb-square';
-    return `
-      <button type="button" class="related-card ${isVideo ? 'video' : ''}" data-episode-id="${escapeHtml(row.stableId)}">
-        <div class="${thumbClass}">${image ? `<img src="${escapeHtml(image)}" alt="">` : ''}</div>
-        <div class="card-copy">
-          <h3 class="card-title">${escapeHtml(row?.title?.episodeName || row?.title?.display || '')}</h3>
-          <div class="card-subtitle">${escapeHtml(row?.series?.name || '')}</div>
+    function queueItems(){
+      const browse=buildBrowse(), root=state.nav.rootKey, branch=state.nav.branchKey, leaf=state.nav.leafKey;
+      if(!root) return [];
+      if(root==='livestreams') return state.nativeShelves.livestreams.slice();
+      if(root==='shorts') return state.nativeShelves.shorts.slice();
+      if(root==='guestSpeakers') return state.nativeShelves.guestSpeakers.slice();
+      if(root==='current'){
+        const selected=browse.current.find(r=>r.key===(leaf||branch)); if(!selected) return [];
+        return visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
+      }
+      if(root==='books'){
+        const bucket=browse.books.get(branch); if(!bucket || !leaf) return [];
+        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortNewestFirst);
+        if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortNewestFirst);}
+        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortNewestFirst) : [];
+      }
+      if(root==='topical'){const row=browse.topical.get(branch); return row ? row.items.slice().sort(sortNewestFirst) : [];}
+      if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
+      return [];
+    }
+    function choiceRows(){
+      if(!state.nav.rootKey) return {rows:rootChoices(), episodeLevel:false};
+      if(!state.nav.branchKey) return {rows:branchChoices(), episodeLevel:false};
+      const leaves=leafChoices();
+      if(leaves.length && !state.nav.leafKey) return {rows:leaves, episodeLevel:false};
+      return {rows:queueItems(), episodeLevel:true};
+    }
+    function pathTitle(){
+      const browse=buildBrowse();
+      const root=browse.roots.find(r=>r.key===state.nav.rootKey);
+      const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
+      const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
+      if(leaf) return `Episodes · ${leaf.title}`;
+      if(branch) return `${root?.title || 'Browse'} · ${branch.title}`;
+      if(root) return `Browse · ${root.title}`;
+      return 'Choose a category';
+    }
+    function headingText(){
+      if(!state.nav.rootKey) return 'Choose a category';
+      if(!state.nav.branchKey) return 'Choose a path';
+      if(leafChoices().length && !state.nav.leafKey) return 'Choose a selection';
+      return 'Choose an episode';
+    }
+    function updateSearchStatus(){
+      const total=getModeItems(state.mode).length, shown=visibleItems().length;
+      els.searchStatus.textContent = state.searchTerm.trim() ? `${formatNumber(shown)} of ${formatNumber(total)}` : 'All items';
+    }
+    function updateModeUI(){
+      els.listenBtn.classList.toggle('active', state.mode==='audio');
+      els.watchBtn.classList.toggle('active', state.mode==='video');
+      document.body.classList.toggle('mode-audio', state.mode==='audio');
+      document.body.classList.toggle('mode-video', state.mode==='video');
+    }
+    function updateImpact(){
+      if(!state.data) return;
+      if(state.mode==='audio'){
+        els.impactPrimaryValue.textContent = formatNumber(state.data?.totals?.audioPlaysTotal || 0);
+        els.impactPrimaryLabel.textContent = 'Audio Plays';
+        els.impactSecondaryValue.textContent = formatNumber(state.data?.totals?.audioEpisodesTotal || state.items.length);
+        els.impactSecondaryLabel.textContent = 'Audio Episodes';
+      } else {
+        const views=getModeItems('video').reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
+        const count=getModeItems('video').length;
+        els.impactPrimaryValue.textContent = formatNumber(views);
+        els.impactPrimaryLabel.textContent = 'Archive Views';
+        els.impactSecondaryValue.textContent = formatNumber(count);
+        els.impactSecondaryLabel.textContent = 'Video Episodes';
+      }
+    }
+    function updateBack(){
+      els.backBtn.disabled = !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey;
+      els.backBtn.textContent = 'Back';
+    }
+    function renderCard(row, activeKey, episodeLevel){
+      const thumbClass = episodeLevel ? (state.mode==='video' ? 'thumb-wide' : 'thumb-square') : 'thumb-wide';
+      const image = episodeLevel ? getEpisodeArt(row) : (row.image || ASSETS.fallback);
+      const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
+      const sub = episodeLevel ? (row?.series?.name || '') : (row.meta || '');
+      const metric = episodeLevel ? `${formatCountLabel(state.mode==='audio' ? (row?.audio?.plays || 0) : (row?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views')} · ${formatDate(row)}` : '';
+      const key = episodeLevel ? row.stableId : row.key;
+      const cls = episodeLevel ? 'episode' : 'choice';
+      return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
+        <div class="${thumbClass}"><img src="${escapeHtml(image)}" alt=""></div>
+        <div class="copy">
+          <h3 class="card-title">${escapeHtml(title)}</h3>
+          <div class="card-sub">${escapeHtml(sub)}</div>
+          ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
         </div>
-      </button>
-    `;
-  }).join('');
-}
-function renderPlayer(item) {
-  const isIdle = !item;
-  els.playerStage.classList.toggle('is-idle', isIdle);
-  if (!item) return;
-
-  if (appState.mode === 'video' && item?.video?.hasVideo && item?.video?.youtubeId) {
-    els.playerStage.classList.add('video-active');
-    els.videoPlaceholder.style.display = 'none';
-    els.audioPlaceholder.style.display = 'none';
-    els.audioStage.style.display = 'none';
-    els.videoShell.style.display = 'flex';
-    els.videoShell.innerHTML = `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-  } else {
-    els.playerStage.classList.remove('video-active');
-    els.videoShell.innerHTML = '';
-    els.videoShell.style.display = 'none';
-    els.videoPlaceholder.style.display = 'none';
-    els.audioPlaceholder.style.display = 'none';
-    els.audioStage.style.display = 'grid';
-
-    els.audioFeatureArt.src = getEpisodeArt(item, 'audio');
-    els.audioFeatureTitle.textContent = item?.title?.display || '';
-    els.audioFeatureSeries.textContent = item?.series?.name || '';
-    els.audioFeatureScripture.textContent = item?.scripture?.display || '—';
-    els.audioFeatureSpeaker.textContent = item?.speaker || '—';
-    els.audioFeatureDate.textContent = formatDate(item);
-    const duration = Number(item?.audio?.durationSeconds || 0);
-    els.audioClockCurrent.textContent = '00:00';
-    els.audioClockTotal.textContent = `/ ${formatClock(duration)}`;
-    els.audioElapsedSmall.textContent = '00:00';
-    els.audioRemainingSmall.textContent = formatClock(duration);
-    els.audioProgress.value = 0;
-    els.audioProgress.max = duration || 100;
-    if (item?.audio?.url) {
-      if (els.audioPlayer.src !== item.audio.url) {
-        els.audioPlayer.src = item.audio.url;
-      }
-    } else {
-      els.audioPlayer.removeAttribute('src');
-      els.audioPlayer.load();
+      </button>`;
     }
-  }
-}
-function rerenderAll() {
-  appState.browse = buildBrowseModel(getVisibleItems());
-  ensureValidNavigation();
-  renderRoots();
-  renderBranches();
-  renderLeaves();
-  renderQueue();
-  updateWorkspaceState();
-  updateModeButtons();
-  updateImpactStrip();
-  updateSearchStatus();
-  renderPlayer(appState.currentItem);
-  updateMeta(appState.currentItem);
-}
-function selectRoot(key) {
-  if (appState.nav.rootKey === key) {
-    appState.nav.branchKey = null;
-    appState.nav.leafKey = null;
-  } else {
-    appState.nav.rootKey = key;
-    appState.nav.branchKey = null;
-    appState.nav.leafKey = null;
-  }
-  appState.currentItem = null;
-  rerenderAll();
-}
-function selectBranch(key) {
-  if (appState.nav.branchKey === key) {
-    appState.nav.leafKey = null;
-  } else {
-    appState.nav.branchKey = key;
-    appState.nav.leafKey = null;
-  }
-  appState.currentItem = null;
-  rerenderAll();
-}
-function selectLeaf(key) {
-  appState.nav.leafKey = key;
-  appState.currentItem = null;
-  rerenderAll();
-}
-function selectEpisode(stableId) {
-  const next = appState.activeQueue.find(item => item.stableId === stableId);
-  if (!next) return;
-  appState.currentItem = next;
-  renderQueue();
-  renderPlayer(next);
-  updateMeta(next);
-  updateWorkspaceState();
-}
-function attachEvents() {
-  document.body.addEventListener('click', (event) => {
-    const rootBtn = event.target.closest('#rootList .nav-card, #mobileRootList .nav-card');
-    if (rootBtn) return selectRoot(rootBtn.dataset.key);
+    function renderChoices(){
+      els.navHeading.textContent = headingText();
+      els.pathTitle.textContent = pathTitle();
+      updateSearchStatus();
+      updateBack();
 
-    const branchBtn = event.target.closest('#branchList .nav-card, #mobileBranchList .nav-card');
-    if (branchBtn) return selectBranch(branchBtn.dataset.key);
+      const {rows, episodeLevel} = choiceRows();
+      if(episodeLevel){
+        state.activeQueue = rows.slice();
+        if(!state.activeQueue.find(it=>it.stableId===state.currentItem?.stableId)) state.currentItem = state.activeQueue[0] || null;
+      } else {
+        state.activeQueue = [];
+        state.currentItem = null;
+      }
+      const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey || state.nav.rootKey);
+      if(!rows.length){
+        els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
+        return;
+      }
+      els.choiceList.innerHTML = rows.map(row => renderCard(row, activeKey, episodeLevel)).join('');
+    }
+    function renderPlayer(){
+      const item=state.currentItem;
+      const idle=!item;
+      els.playerShell.classList.toggle('is-idle', idle);
+      els.detailShell.classList.toggle('is-idle', idle);
+      if(!item) return;
 
-    const leafBtn = event.target.closest('#leafList .nav-card, #mobileLeafList .nav-card');
-    if (leafBtn) return selectLeaf(leafBtn.dataset.key);
+      if(state.mode==='video' && item?.video?.hasVideo && item?.video?.youtubeId){
+        els.playerShell.classList.add('video-active');
+        els.videoPlaceholder.style.display='none';
+        els.audioPlaceholder.style.display='none';
+        els.audioStage.style.display='none';
+        els.videoShell.style.display='flex';
+        els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      } else {
+        els.playerShell.classList.remove('video-active');
+        els.videoShell.innerHTML='';
+        els.videoShell.style.display='none';
+        els.videoPlaceholder.style.display='none';
+        els.audioPlaceholder.style.display='none';
+        els.audioStage.style.display='grid';
+        els.audioFeatureArt.src=getEpisodeArt(item,'audio');
+        els.audioFeatureTitle.textContent=item?.title?.display || '';
+        els.audioFeatureSeries.textContent=item?.series?.name || '';
+        els.audioFeatureScripture.textContent=item?.scripture?.display || '—';
+        els.audioFeatureSpeaker.textContent=item?.speaker || '—';
+        els.audioFeatureDate.textContent=formatDate(item);
+        const dur=Number(item?.audio?.durationSeconds || 0);
+        els.audioClockCurrent.textContent='00:00';
+        els.audioClockTotal.textContent=`/ ${formatClock(dur)}`;
+        els.audioElapsedSmall.textContent='00:00';
+        els.audioRemainingSmall.textContent=formatClock(dur);
+        els.audioProgress.value=0;
+        els.audioProgress.max=dur || 100;
+        if(item?.audio?.url){
+          if(els.audioPlayer.src !== item.audio.url) els.audioPlayer.src=item.audio.url;
+        } else {
+          els.audioPlayer.removeAttribute('src');
+          els.audioPlayer.load();
+        }
+      }
 
-    const episodeBtn = event.target.closest('[data-episode-id]');
-    if (episodeBtn) return selectEpisode(episodeBtn.dataset.episodeId);
-  });
-
-  [els.desktopBackBtn, els.mobileBackBtn].forEach(btn => btn.addEventListener('click', navigateBack));
-  els.logoReset.addEventListener('click', navigateHome);
-
-  els.listenBtn.addEventListener('click', () => {
-    if (appState.mode === 'audio') return;
-    appState.mode = 'audio';
-    navigateHome();
-  });
-  els.watchBtn.addEventListener('click', () => {
-    if (appState.mode === 'video') return;
-    appState.mode = 'video';
-    navigateHome();
-  });
-
-  [els.desktopSearchInput, els.mobileSearchInput].forEach(input => {
-    input.addEventListener('input', (event) => {
-      appState.searchTerm = event.target.value || '';
-      els.desktopSearchInput.value = appState.searchTerm;
-      els.mobileSearchInput.value = appState.searchTerm;
-      navigateHome();
+      els.detailTitle.textContent=item?.title?.display || '';
+      els.detailSeries.textContent=item?.series?.name || '';
+      els.detailScripture.textContent=item?.scripture?.display || '—';
+      els.detailSpeaker.textContent=item?.speaker || '—';
+      els.detailDate.textContent=formatDate(item);
+      els.detailBookTags.textContent=getBookTagsDisplay(item);
+      els.detailAudioPlays.textContent=formatCountLabel(item?.audio?.plays || 0,'play','plays');
+      els.detailVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
+      const shareUrl=item?.links?.shareUrl || item?.links?.episodeUrl || '#';
+      const openUrl=item?.links?.episodeUrl || item?.video?.url || item?.audio?.url || '#';
+      els.episodePageLink.href=openUrl;
+      els.shareLink.href=shareUrl;
+      renderRelated(item);
+    }
+    function renderRelated(item){
+      const rows=state.activeQueue.filter(r=>r.stableId!==item?.stableId).slice(0,8);
+      if(!rows.length){
+        els.relatedWrap.style.display='none';
+        els.relatedRow.innerHTML='';
+        return;
+      }
+      els.relatedWrap.style.display='block';
+      els.relatedRow.innerHTML=rows.map(row=>{
+        const thumbClass = state.mode==='video' ? 'thumb-wide' : 'thumb-square';
+        return `<button type="button" class="related" data-key="${escapeHtml(row.stableId)}" data-episode="1">
+          <div class="${thumbClass}"><img src="${escapeHtml(getEpisodeArt(row))}" alt=""></div>
+          <div class="copy">
+            <h3 class="card-title">${escapeHtml(row?.title?.episodeName || row?.title?.display || '')}</h3>
+            <div class="card-sub">${escapeHtml(row?.series?.name || '')}</div>
+          </div>
+        </button>`;
+      }).join('');
+    }
+    function rerender(){
+      renderChoices();
+      renderPlayer();
+      updateModeUI();
+      updateImpact();
+    }
+    function goBack(){
+      if(state.nav.leafKey) state.nav.leafKey=null;
+      else if(state.nav.branchKey) state.nav.branchKey=null;
+      else if(state.nav.rootKey) state.nav.rootKey=null;
+      rerender();
+    }
+    function resetAll(){
+      state.nav={rootKey:null,branchKey:null,leafKey:null};
+      state.currentItem=null;
+      rerender();
+    }
+    function selectChoice(key){
+      if(!state.nav.rootKey){ state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; rerender(); return; }
+      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; rerender(); return; }
+      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; rerender(); return; }
+    }
+    function attachEvents(){
+      document.body.addEventListener('click', (event)=>{
+        const btn=event.target.closest('[data-key]');
+        if(!btn) return;
+        const key=btn.dataset.key, episode=btn.dataset.episode==='1';
+        if(episode){
+          const next=state.activeQueue.find(r=>r.stableId===key);
+          if(next){ state.currentItem=next; renderChoices(); renderPlayer(); }
+          return;
+        }
+        selectChoice(key);
+      });
+      els.backBtn.addEventListener('click', goBack);
+      els.logoReset.addEventListener('click', resetAll);
+      els.listenBtn.addEventListener('click', ()=>{ if(state.mode==='audio') return; state.mode='audio'; resetAll(); });
+      els.watchBtn.addEventListener('click', ()=>{ if(state.mode==='video') return; state.mode='video'; resetAll(); });
+      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; resetAll(); });
+      els.audioPlayBadge.addEventListener('click', ()=>{
+        if(!els.audioPlayer.src) return;
+        if(els.audioPlayer.paused) els.audioPlayer.play();
+        else els.audioPlayer.pause();
+      });
+      els.miniSkipBackBtn.addEventListener('click', ()=>{ els.audioPlayer.currentTime=Math.max(0,(els.audioPlayer.currentTime||0)-30); });
+      els.miniSkipForwardBtn.addEventListener('click', ()=>{ const d=Number(els.audioPlayer.duration||0); els.audioPlayer.currentTime=Math.min(d||0,(els.audioPlayer.currentTime||0)+30); });
+      els.audioProgress.addEventListener('input', ()=>{ const d=Number(els.audioPlayer.duration||0); if(!d) return; els.audioPlayer.currentTime=Number(els.audioProgress.value||0); });
+      els.audioPlayer.addEventListener('timeupdate', ()=>{
+        const c=Number(els.audioPlayer.currentTime||0), d=Number(els.audioPlayer.duration||0);
+        els.audioClockCurrent.textContent=formatClock(c);
+        els.audioElapsedSmall.textContent=formatClock(c);
+        els.audioRemainingSmall.textContent=formatClock(Math.max(0,d-c));
+        els.audioProgress.max=d || 100;
+        els.audioProgress.value=c;
+      });
+      els.audioPlayer.addEventListener('loadedmetadata', ()=>{
+        const d=Number(els.audioPlayer.duration||0);
+        els.audioClockTotal.textContent=`/ ${formatClock(d)}`;
+        els.audioRemainingSmall.textContent=formatClock(d);
+        els.audioProgress.max=d || 100;
+      });
+      ['play','pause','ended'].forEach(name=>{
+        els.audioPlayer.addEventListener(name, ()=>{ els.audioPlayLabel.textContent = name==='play' ? 'Pause' : 'Tap to Play'; });
+      });
+    }
+    async function bootstrap(){
+      attachEvents();
+      state.data = await loadResolvedData();
+      state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
+      try{
+        const [livestreams, shorts, guestSpeakers] = await Promise.all([
+          fetchPlaylistSeries(LIVESTREAMS),
+          fetchPlaylistSeries(SHORTS),
+          fetchPlaylistSeries(GUEST_SPEAKERS)
+        ]);
+        state.nativeShelves.livestreams = livestreams;
+        state.nativeShelves.shorts = shorts;
+        state.nativeShelves.guestSpeakers = guestSpeakers;
+      }catch(err){
+        console.warn('Live YouTube shelves failed to load.', err);
+      }
+      rerender();
+    }
+    bootstrap().catch(err=>{
+      console.error(err);
+      els.choiceList.innerHTML = `<div class="empty">Resolved data could not be loaded.</div>`;
     });
-  });
-
-  els.audioPlayBadge.addEventListener('click', () => {
-    if (!els.audioPlayer.src) return;
-    if (els.audioPlayer.paused) els.audioPlayer.play();
-    else els.audioPlayer.pause();
-  });
-  els.miniSkipBackBtn.addEventListener('click', () => {
-    els.audioPlayer.currentTime = Math.max(0, (els.audioPlayer.currentTime || 0) - 30);
-  });
-  els.miniSkipForwardBtn.addEventListener('click', () => {
-    const duration = Number(els.audioPlayer.duration || 0);
-    els.audioPlayer.currentTime = Math.min(duration || 0, (els.audioPlayer.currentTime || 0) + 30);
-  });
-  els.audioProgress.addEventListener('input', () => {
-    const duration = Number(els.audioPlayer.duration || 0);
-    if (!duration) return;
-    els.audioPlayer.currentTime = Number(els.audioProgress.value || 0);
-  });
-  els.audioPlayer.addEventListener('timeupdate', () => {
-    const current = Number(els.audioPlayer.currentTime || 0);
-    const duration = Number(els.audioPlayer.duration || 0);
-    els.audioClockCurrent.textContent = formatClock(current);
-    els.audioElapsedSmall.textContent = formatClock(current);
-    els.audioRemainingSmall.textContent = formatClock(Math.max(0, duration - current));
-    els.audioProgress.max = duration || 100;
-    els.audioProgress.value = current;
-  });
-  els.audioPlayer.addEventListener('loadedmetadata', () => {
-    const duration = Number(els.audioPlayer.duration || 0);
-    els.audioClockTotal.textContent = `/ ${formatClock(duration)}`;
-    els.audioRemainingSmall.textContent = formatClock(duration);
-    els.audioProgress.max = duration || 100;
-  });
-  ['play','pause','ended'].forEach(name => {
-    els.audioPlayer.addEventListener(name, () => {
-      if (name === 'play') els.audioPlayLabel.textContent = 'Pause';
-      else els.audioPlayLabel.textContent = 'Tap to Play';
-    });
-  });
-}
-async function bootstrap() {
-  attachEvents();
-  appState.data = await loadResolvedData();
-  appState.items = Array.isArray(appState.data?.items) ? appState.data.items.slice() : [];
-  try {
-    const [livestreams, shorts, guestSpeakers] = await Promise.all([
-      fetchPlaylistSeries(LIVESTREAMS),
-      fetchPlaylistSeries(SHORTS),
-      fetchPlaylistSeries(GUEST_SPEAKERS)
-    ]);
-    appState.nativeShelves.livestreams = livestreams;
-    appState.nativeShelves.shorts = shorts;
-    appState.nativeShelves.guestSpeakers = guestSpeakers;
-  } catch (err) {
-    console.warn('Live YouTube shelves failed to load.', err);
-  }
-  rerenderAll();
-}
-bootstrap().catch(err => {
-  console.error(err);
-  els.rootList.innerHTML = `<div class="empty-state">Resolved data could not be loaded.</div>`;
-  els.mobileRootList.innerHTML = `<div class="empty-state">Resolved data could not be loaded.</div>`;
-});
-</script>
+  </script>
 </body>
 </html>
