@@ -28,8 +28,8 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.50) 0%, rgba(9,9,10,.68) 100%),
-        var(--desktop-bg) center center/980px auto repeat fixed;
+        linear-gradient(180deg, rgba(11,11,12,.62) 0%, rgba(9,9,10,.78) 100%),
+        var(--desktop-bg) center center/contain repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
@@ -162,13 +162,7 @@
     .stack{display:grid;gap:12px;padding:0 16px 16px}
     .choice,.episode,.related{
       width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px;border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.022));
-      border:1px solid rgba(255,255,255,.075);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.06),
-        0 12px 28px rgba(0,0,0,.16);
-      backdrop-filter:blur(14px) saturate(1.03);
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
     }
     .choice.root-card{
       display:block;
@@ -356,7 +350,7 @@
           <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="CGBC logo">
         </button>
         <div>
-          <h1>CGBC Media Player</h1>
+          <h1>CGBC Sermons</h1>
           
         </div>
       </div>
@@ -952,19 +946,19 @@
       els.watchBtn.classList.toggle('active', state.mode==='video');
     }
     function updateImpact(){
-      const items = getModeItems(state.mode);
+      if(!state.data) return;
       if(state.mode==='audio'){
-        const plays = items.reduce((sum,item)=>sum + Number(item?.audio?.plays || 0), 0);
-        els.impactValue1.textContent = formatCount(plays);
-        els.impactLabel1.textContent = 'PLAYS';
-        els.impactValue2.textContent = formatCount(items.length);
-        els.impactLabel2.textContent = 'EPISODES';
+        els.impactPrimaryValue.textContent = formatNumber(state.data?.totals?.audioPlaysTotal || 0);
+        els.impactPrimaryLabel.textContent = 'Audio Plays';
+        els.impactSecondaryValue.textContent = formatNumber(state.data?.totals?.audioEpisodesTotal || state.items.length);
+        els.impactSecondaryLabel.textContent = 'Audio Episodes';
       } else {
-        const views = items.reduce((sum,item)=>sum + Number(item?.video?.views || 0), 0);
-        els.impactValue1.textContent = formatCount(views);
-        els.impactLabel1.textContent = 'VIEWS';
-        els.impactValue2.textContent = formatCount(items.length);
-        els.impactLabel2.textContent = 'EPISODES';
+        const views=getModeItems('video').reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
+        const count=getModeItems('video').length;
+        els.impactPrimaryValue.textContent = formatNumber(views);
+        els.impactPrimaryLabel.textContent = 'Archive Views';
+        els.impactSecondaryValue.textContent = formatNumber(count);
+        els.impactSecondaryLabel.textContent = 'Video Episodes';
       }
     }
     function renderChoices(){
