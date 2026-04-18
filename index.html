@@ -28,7 +28,7 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.56) 0%, rgba(9,9,10,.74) 100%),
+        linear-gradient(180deg, rgba(11,11,12,.50) 0%, rgba(9,9,10,.68) 100%),
         var(--desktop-bg) center center/980px auto repeat fixed;
       background-blend-mode:multiply;
     }
@@ -952,19 +952,19 @@
       els.watchBtn.classList.toggle('active', state.mode==='video');
     }
     function updateImpact(){
-      if(!state.data) return;
+      const items = getModeItems(state.mode);
       if(state.mode==='audio'){
-        els.impactPrimaryValue.textContent = formatNumber(state.data?.totals?.audioPlaysTotal || 0);
-        els.impactPrimaryLabel.textContent = 'Audio Plays';
-        els.impactSecondaryValue.textContent = formatNumber(state.data?.totals?.audioEpisodesTotal || state.items.length);
-        els.impactSecondaryLabel.textContent = 'Audio Episodes';
+        const plays = items.reduce((sum,item)=>sum + Number(item?.audio?.plays || 0), 0);
+        els.impactValue1.textContent = formatCount(plays);
+        els.impactLabel1.textContent = 'PLAYS';
+        els.impactValue2.textContent = formatCount(items.length);
+        els.impactLabel2.textContent = 'EPISODES';
       } else {
-        const views=getModeItems('video').reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
-        const count=getModeItems('video').length;
-        els.impactPrimaryValue.textContent = formatNumber(views);
-        els.impactPrimaryLabel.textContent = 'Archive Views';
-        els.impactSecondaryValue.textContent = formatNumber(count);
-        els.impactSecondaryLabel.textContent = 'Video Episodes';
+        const views = items.reduce((sum,item)=>sum + Number(item?.video?.views || 0), 0);
+        els.impactValue1.textContent = formatCount(views);
+        els.impactLabel1.textContent = 'VIEWS';
+        els.impactValue2.textContent = formatCount(items.length);
+        els.impactLabel2.textContent = 'EPISODES';
       }
     }
     function renderChoices(){
