@@ -56,13 +56,18 @@
     .top-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
     .mode-pill{
       display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:22px;min-width:360px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 24px rgba(0,0,0,.18)
+      background:linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.024));
+      border:1px solid rgba(255,255,255,.085);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.075),
+        0 12px 26px rgba(0,0,0,.18);
+      backdrop-filter:blur(16px) saturate(1.06)
     }
     .mode-btn-shell{
       min-height:58px;padding:0 20px;display:flex;align-items:center;justify-content:center;gap:12px;border-radius:18px;
-      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.075);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
       transition:transform .18s ease, background .18s ease, box-shadow .18s ease
     }
     .mode-btn:first-child .mode-btn-shell{border-radius:18px 8px 8px 18px}
@@ -102,8 +107,8 @@
       backdrop-filter:blur(12px);overflow:hidden
     }
     .nav-panel{display:grid;gap:0}
-    .nav-head{padding:14px 16px 12px}
-    .nav-head h2{margin:0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
+    .nav-head{padding:14px 16px 18px}
+    .nav-head h2{margin:0 0 10px 0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
     .eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2);font-size:12px}
     .title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,2vw,24px);line-height:1.08}
 
@@ -197,7 +202,7 @@
 
     .stack{display:grid;gap:12px;padding:0 16px 16px;align-content:start;grid-auto-rows:max-content}
     .choice,.episode,.related{
-      width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px;border-radius:20px;
+      width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.07);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 20px rgba(0,0,0,.12)
@@ -227,7 +232,7 @@
     }
     .thumb-wide{width:132px;height:74px;flex:0 0 132px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .choice.branch-card .thumb-wide{width:164px;height:92px;flex-basis:164px;border-radius:18px;}
-    .thumb-square{width:86px;height:82px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
+    .thumb-square{width:86px;height:76px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
     .copy{min-width:0;flex:1}
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
@@ -350,16 +355,16 @@
     
     @media (min-width:1040px){
       .brand .logo-btn img{
-        content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235315/desktop-3-2.png');
-        width:240px;
-        height:82px;
+        content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png');
+        width:228px;
+        height:76px;
         object-fit:contain;
         object-position:left center;
         filter:drop-shadow(0 5px 14px rgba(0,0,0,.14));
       }
       .logo-btn{
-        width:248px;
-        height:82px;
+        width:236px;
+        height:76px;
         align-items:center;
         justify-content:flex-start;
       }
@@ -395,10 +400,12 @@
       .search-row{flex-wrap:wrap}
       .search-status{width:100%}
       .thumb-wide{width:108px;height:66px;flex-basis:108px}
-      .choice.branch-card .thumb-wide{width:132px;height:82px;flex-basis:132px;}
+      .choice.branch-card .thumb-wide{width:132px;height:76px;flex-basis:132px;}
       .thumb-square{width:78px;height:78px;flex-basis:78px}
       .meta-row{grid-template-columns:100px minmax(0,1fr)}
     }
+  
+    .nav-head + .search-row{margin-top:2px}
   </style>
 </head>
 <body class="mode-audio">
