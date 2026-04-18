@@ -28,7 +28,7 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.76) 0%, rgba(9,9,10,.88) 100%),
+        linear-gradient(180deg, rgba(11,11,12,.58) 0%, rgba(9,9,10,.74) 100%),
         var(--desktop-bg) center/cover no-repeat fixed;
       background-blend-mode:multiply;
     }
@@ -355,7 +355,7 @@
           <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="CGBC logo">
         </button>
         <div>
-          <h1>CGBC Sermons</h1>
+          <h1>CGBC Media Player</h1>
           
         </div>
       </div>
@@ -1016,7 +1016,7 @@
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             ${dateTextCard ? '' : `<h3 class="card-title">${escapeHtml(title)}</h3>`}
-            ${sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : ''}
+            ${dateTextCard ? '' : (sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : '')}
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
           </div>
         </button>`;
@@ -1028,6 +1028,8 @@
       els.playerShell.classList.toggle('is-idle', idle);
       els.detailShell.classList.toggle('is-idle', idle);
       if(!item){
+        els.playerShell.classList.remove('player-loaded');
+        stopPlayingDots();
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
@@ -1040,6 +1042,7 @@
         }
         return;
       }
+      els.playerShell.classList.add('player-loaded');
 
       if(state.mode==='video' && item?.video?.hasVideo && item?.video?.youtubeId){
         els.playerShell.classList.add('video-active');
