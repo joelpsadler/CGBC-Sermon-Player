@@ -102,12 +102,16 @@
       backdrop-filter:blur(12px);overflow:hidden
     }
     .nav-panel{display:grid;gap:0}
-    .nav-head{padding:16px 16px 10px}
+    .nav-head{padding:14px 16px 6px}
+    .nav-head h2{margin:0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
     .eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2);font-size:12px}
     .title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,2vw,24px);line-height:1.08}
 
 
-    .search-row{display:flex;align-items:center;gap:10px;padding:0 16px 10px;min-height:0}
+    .search-row{
+      display:flex;align-items:center;gap:10px;padding:0 16px 10px;min-height:0;
+      position:relative;z-index:1;
+    }
     .search-row input{
       flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
       color:var(--text);border-radius:16px;padding:13px 14px;outline:none
@@ -343,9 +347,9 @@
     .related .thumb-square{width:64px;height:64px;flex-basis:64px}
 
     @media (min-width:1040px){
-      .flow{grid-template-columns:minmax(360px,560px) minmax(0,1fr)}
+      .flow{grid-template-columns:minmax(360px,540px) minmax(0,1fr)}
       .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
-      .content{grid-template-rows:96px auto auto}
+      .content{grid-template-rows:96px auto auto;min-width:0}
       .context-strip{display:block}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
@@ -384,7 +388,7 @@
           <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="CGBC logo">
         </button>
         <div>
-          <h1>CGBC A/V Media</h1>
+          <h1>LOVE. LEARN. LIVE. LEAD.</h1>
           
         </div>
       </div>
