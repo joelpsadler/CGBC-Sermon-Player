@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Sermons - Top Nav Pass</title>
+  <title>CGBC Media Player - Top Nav Pass</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <meta name="theme-color" content="#0f0f10" />
@@ -28,7 +28,7 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.90) 0%, rgba(9,9,10,.96) 100%),
+        linear-gradient(180deg, rgba(11,11,12,.76) 0%, rgba(9,9,10,.88) 100%),
         var(--desktop-bg) center/cover no-repeat fixed;
       background-blend-mode:multiply;
     }
@@ -114,6 +114,22 @@
     }
     .context-chip img{
       width:68px;height:50px;object-fit:cover;border-radius:12px;flex:0 0 68px;background:rgba(255,255,255,.05)
+    }
+    .context-chip.date-chip img{display:none}
+    .context-chip-date{
+      width:68px;height:50px;flex:0 0 68px;border-radius:12px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .context-chip-date .mini-label{
+      font-family:Poppins,sans-serif;font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1;
+    }
+    .context-chip-date .mini-value{
+      margin-top:3px;font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1;color:rgba(255,255,255,.96);
+    }
+    .context-chip-date .mini-sub{
+      margin-top:2px;font-family:Poppins,sans-serif;font-size:10px;font-weight:700;line-height:1;color:rgba(255,255,255,.92);
     }
     .context-chip.square img{width:58px;height:58px;flex-basis:58px}
     .context-chip-copy{min-width:0}
@@ -297,9 +313,11 @@
     .related .thumb-square{width:64px;height:64px;flex-basis:64px}
 
     @media (min-width:1040px){
+      .frame{display:grid;grid-template-columns:auto 1fr;align-items:end;column-gap:18px}
       .flow{grid-template-columns:minmax(360px,560px) minmax(0,1fr)}
       .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
       .context-strip{display:block}
+      .topbar{padding-left:0}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
       .transport{margin:0}
@@ -873,9 +891,9 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
-      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
-      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false, dateCardType:root.dateCardType, dateCardValue:root.dateCardValue});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', dateCardType:branch.dateCardType, dateCardValue:branch.dateCardValue});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio', dateCardType:leaf.dateCardType, dateCardValue:leaf.dateCardValue});
       return items;
     }
     function renderContextStrip(){
@@ -886,15 +904,28 @@
         return;
       }
       els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
-      els.contextRow.innerHTML = items.map(item => `
-        <div class="context-chip ${item.square ? 'square' : ''}">
-          <img src="${escapeHtml(item.image)}" alt="">
-          <div class="context-chip-copy">
-            <div class="context-chip-label">${escapeHtml(item.label)}</div>
-            <div class="context-chip-title">${escapeHtml(item.title)}</div>
+      els.contextRow.innerHTML = items.map(item => {
+        const isDateChip = !!item.dateCardType;
+        const media = isDateChip
+          ? `<div class="context-chip-date">${
+              item.dateCardType === 'year'
+                ? `<div class="mini-label">Year</div><div class="mini-value">${escapeHtml(String(item.dateCardValue || item.title || ''))}</div>`
+                : `<div class="mini-label">Month</div><div class="mini-value">${escapeHtml(monthNameOnly(String(item.dateCardValue || '')))}</div>`
+            }</div>`
+          : `<img src="${escapeHtml(item.image)}" alt="">`;
+        const title = isDateChip
+          ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
+          : item.title;
+        return `
+          <div class="context-chip ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}">
+            ${media}
+            <div class="context-chip-copy">
+              <div class="context-chip-label">${escapeHtml(item.label)}</div>
+              <div class="context-chip-title">${escapeHtml(title)}</div>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
     function headingText(){
       if(!state.nav.rootKey) return 'Choose a category';
@@ -977,14 +1008,14 @@
           return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
             <div class="${thumbClass}">${dateCardInner}</div>
             <div class="copy">
-              <h3 class="card-title">${escapeHtml(title)}</h3>
+              ${dateTextCard ? '' : `<h3 class="card-title">${escapeHtml(title)}</h3>`}
             </div>
           </button>`;
         }
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
-            <h3 class="card-title">${escapeHtml(title)}</h3>
+            ${dateTextCard ? '' : `<h3 class="card-title">${escapeHtml(title)}</h3>`}
             ${sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : ''}
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
           </div>
