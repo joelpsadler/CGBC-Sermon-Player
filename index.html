@@ -28,8 +28,8 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.50) 0%, rgba(9,9,10,.68) 100%),
-        var(--desktop-bg) center center/80% auto no-repeat fixed;
+        linear-gradient(180deg, rgba(11,11,12,.46) 0%, rgba(9,9,10,.64) 100%),
+        var(--desktop-bg) center center/cover no-repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
@@ -350,20 +350,21 @@
     
     @media (min-width:1040px){
       .brand .logo-btn img{
-        content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235303/Desktop-logo-Maybe-2-2.png');
-        width:210px;
-        height:72px;
+        content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235315/desktop-3-2.png');
+        width:240px;
+        height:82px;
         object-fit:contain;
         object-position:left center;
         filter:drop-shadow(0 5px 14px rgba(0,0,0,.14));
       }
       .logo-btn{
-        width:220px;
-        height:72px;
+        width:248px;
+        height:82px;
         align-items:center;
         justify-content:flex-start;
       }
-      .brand{gap:12px}
+      .brand{gap:10px}
+      .brand h1{display:none}
     }
 
     @media (min-width:1040px){
@@ -408,7 +409,7 @@
           <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="CGBC logo">
         </button>
         <div>
-          <h1>LOVE. LEARN. LIVE. LEAD.</h1>
+          <h1></h1>
           
         </div>
       </div>
