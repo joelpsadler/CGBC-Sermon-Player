@@ -68,8 +68,7 @@
       background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.075);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-      color:rgba(255,255,255,.96);
-      transition:transform .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease
+      transition:transform .18s ease, background .18s ease, box-shadow .18s ease
     }
     .mode-btn:first-child .mode-btn-shell{border-radius:18px 8px 8px 18px}
     .mode-btn:last-child .mode-btn-shell{border-radius:8px 18px 18px 8px}
@@ -80,15 +79,20 @@
     }
     .btn-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.02;font-family:Poppins,sans-serif}
     .btn-copy .top{font-size:15px;font-weight:700}
-    .btn-copy .bottom{font-size:11px;color:var(--muted)}
-    .mode-btn.active .bottom{color:rgba(17,32,24,.72)}
+    .btn-copy .bottom{font-size:11px;color:rgba(255,255,255,.72)}
+    .mode-btn.active .bottom{color:rgba(17,32,24,.76)}
+    .mode-btn .btn-copy .top{color:rgba(255,255,255,.96)}
+    .mode-btn .btn-copy .bottom{color:rgba(255,255,255,.72)}
+    .mode-btn.active .btn-copy .top{color:#17241d}
+    .mode-btn.active .btn-copy .bottom{color:rgba(23,36,29,.76)}
     .mode-icon{
       width:30px;height:30px;flex:0 0 30px;display:block;
       stroke:rgba(255,255,255,.96);
       stroke-width:2.15;fill:none;opacity:1;
       filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))
     }
-    .mode-btn.active .mode-icon{stroke:#1b2821;filter:none}
+    .mode-btn.active .mode-icon{stroke:#1b2821;filter:none;opacity:1}
+    .mode-btn:not(.active) .mode-icon{stroke:rgba(255,255,255,.96);opacity:1}
     .mode-btn:hover .mode-btn-shell{transform:translateY(-1px);background:rgba(255,255,255,.04)}
 
     .impact{display:flex;gap:12px;flex-wrap:wrap}
@@ -107,17 +111,17 @@
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 14px 32px rgba(0,0,0,.18);
       backdrop-filter:blur(12px);overflow:hidden
     }
-    .nav-panel{display:grid;gap:0}
-    .nav-head{padding:14px 16px 8px}
-    .nav-head h2{margin:0 0 4px 0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
+    .nav-panel{display:grid;grid-template-rows:auto auto auto minmax(0,1fr);gap:0;min-height:0}
+    .nav-head{padding:14px 16px 10px}
+    .nav-head h2{margin:0 0 8px 0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
     .eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2);font-size:12px}
     .title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,2vw,24px);line-height:1.08}
 
 
     .search-row{
-      display:flex;align-items:center;gap:10px;padding:0 16px 12px;min-height:0;
+      display:flex;align-items:center;gap:10px;padding:0 16px 14px;min-height:0;
       position:relative;z-index:1;
-      margin-top:0;
+      margin-top:6px;
     }
     .search-row input{
       flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
@@ -133,10 +137,12 @@
     .context-row{
       display:flex;
       gap:10px;
-      overflow:hidden;
+      overflow:auto hidden;
       flex-wrap:nowrap;
       min-height:88px;
       align-items:stretch;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
     }
     .context-row::-webkit-scrollbar{height:8px}
     .context-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
@@ -190,7 +196,7 @@
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
 
     .path-row{
-      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:10px 16px 12px;border-top:1px solid rgba(255,255,255,.05);
+      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:12px 16px 14px;border-top:1px solid rgba(255,255,255,.05);
       min-height:0;
       flex-wrap:wrap;
     }
@@ -201,7 +207,7 @@
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
 
-    .stack{display:grid;gap:12px;padding:14px 16px 16px;align-content:start;grid-auto-rows:max-content}
+    .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
       width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
@@ -212,6 +218,18 @@
       display:block;
       padding:0;
       overflow:hidden;
+    }
+    .choice.root-card .thumb-square{
+      width:100%;
+      height:auto;
+      aspect-ratio:1/1;
+      flex:0 0 auto;
+      border-radius:20px;
+    }
+    .choice.root-card .thumb-square img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
     .choice.root-card .copy{
       display:block;
@@ -233,6 +251,7 @@
     }
     .thumb-wide{width:132px;height:74px;flex:0 0 132px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .choice.branch-card .thumb-wide{width:164px;height:92px;flex-basis:164px;border-radius:18px;}
+    .choice.branch-card .thumb-square{width:96px;height:96px;flex-basis:96px;border-radius:18px;}
     .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
     .copy{min-width:0;flex:1}
@@ -298,7 +317,7 @@
       border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
     }
 
-    .content{display:grid;gap:16px;align-content:start}
+    .content{display:grid;gap:16px;align-content:start;min-width:0}
     .player{padding:16px}
     .player.video-active{padding:0;background:rgba(0,0,0,.25)}
     .player.is-idle #videoShell,.player.is-idle #audioStage{display:none}
@@ -348,7 +367,7 @@
     .detail-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
     .related-wrap{display:none;gap:12px;margin-top:18px}
     .related-title{font-family:Poppins,sans-serif;font-size:16px;margin:0 0 10px}
-    .related-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:2px}
+    .related-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
     .related{flex:0 0 220px;max-width:220px}
     .related .thumb-wide{width:84px;height:48px;flex-basis:84px}
     .related .thumb-square{width:64px;height:64px;flex-basis:64px}
@@ -374,9 +393,9 @@
     }
 
     @media (min-width:1040px){
-      .flow{grid-template-columns:minmax(360px,540px) minmax(0,1fr)}
-      .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
-      .content{grid-template-rows:96px auto auto;min-width:0}
+      .flow{grid-template-columns:minmax(360px,540px) minmax(0,1fr);align-items:start}
+      .nav-panel{position:sticky;top:98px;height:calc(100vh - 118px);max-height:calc(100vh - 118px);overflow:hidden}
+      .content{grid-template-rows:auto auto auto;min-width:0}
       .context-strip{display:block}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
@@ -400,12 +419,20 @@
       .impact-pill{flex:1 1 0;min-width:0}
       .search-row{flex-wrap:wrap}
       .search-status{width:100%}
+      .path-row{gap:8px}
+      .path-button{flex:1 1 calc(50% - 4px);min-width:0}
       .thumb-wide{width:108px;height:66px;flex-basis:108px}
       .choice.branch-card .thumb-wide{width:132px;height:88px;flex-basis:132px;}
       .thumb-square{width:78px;height:78px;flex-basis:78px}
       .meta-row{grid-template-columns:100px minmax(0,1fr)}
     }
   
+    .context-chip,.choice,.episode,.related,.path-button,.mode-btn{transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease}
+    .context-chip:hover,.choice:hover,.episode:hover,.related:hover,.path-button:hover{transform:translateY(-1px)}
+    .context-chip.is-active{background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));border-color:rgba(143,174,157,.22)}
+    .stack::-webkit-scrollbar,.related-row::-webkit-scrollbar{width:10px;height:10px}
+    .stack::-webkit-scrollbar-thumb,.related-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+    .stack::-webkit-scrollbar-track,.related-row::-webkit-scrollbar-track{background:transparent}
     .nav-head + .search-row{margin-top:2px}
   </style>
 </head>
@@ -533,6 +560,8 @@
   </div>
 
   <script>
+    // CGBC media UI rebuild: keeps the same data model, but tightens nav scrolling,
+    // root/branch card presentation, mobile controls, and media state handling.
     const ASSETS = {
       fallback:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg',
       current:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234669/Current.jpg',
@@ -546,6 +575,7 @@
     const GUEST_SPEAKERS = { name:'CGBC Guest Speaker', playlistId:'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW' };
     const SHORTS = { name:'CGBC Shorts', playlistId:'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
+    // Beginner note: edit this list when the current pinned audio series changes.
     const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
@@ -1071,7 +1101,7 @@
       const isRootLevel = !state.nav.rootKey;
       const isBranchLevel = !!state.nav.rootKey && !state.nav.branchKey;
       els.choiceList.innerHTML = rows.map(row => {
-        const thumbClass = episodeLevel ? (state.mode==='video' ? 'thumb-wide' : 'thumb-square') : 'thumb-wide';
+        const thumbClass = state.mode==='audio' ? 'thumb-square' : 'thumb-wide';
         const image = episodeLevel ? getEpisodeArt(row, state.mode) : (row.image || ASSETS.fallback);
         const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
         const sub = episodeLevel ? searchMetaLine(row, state.searchTerm) : (row.meta || '');
@@ -1128,7 +1158,7 @@
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='none';
         els.videoShell.style.display='flex';
-        els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
       } else {
         els.playerShell.classList.remove('video-active');
         els.videoShell.innerHTML='';
@@ -1195,6 +1225,18 @@
       const navPanel = document.querySelector('.nav-panel');
       if(navPanel){ try{ navPanel.scrollTop = 0; }catch(err){} }
     }
+    function stopAudioPlayback(resetTime=false){
+      try{
+        els.audioPlayer.pause();
+        if(resetTime) els.audioPlayer.currentTime = 0;
+      }catch(err){}
+    }
+    function clearMediaState(){
+      stopAudioPlayback(false);
+      els.videoShell.innerHTML='';
+      els.videoShell.style.display='none';
+      els.playerShell.classList.remove('video-active');
+    }
     function rerender(){
       renderChoices();
       renderPlayer();
@@ -1202,7 +1244,18 @@
       updateModeUI();
       updateImpact();
     }
-    function resetAll(){ state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; scrollChoiceListToTop(); rerender(); }
+    function resetAll(options={}){
+      const { preserveSearch=false, preserveCurrent=false } = options;
+      state.nav={rootKey:null,branchKey:null,leafKey:null};
+      if(!preserveCurrent) state.currentItem=null;
+      if(!preserveSearch){
+        state.searchTerm='';
+        if(els.searchInput) els.searchInput.value='';
+      }
+      clearMediaState();
+      scrollChoiceListToTop();
+      rerender();
+    }
     function goBack(){
       if(searchResultsMode()){
         state.searchTerm='';
@@ -1234,7 +1287,7 @@
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
         if(episode){
           const next=state.activeQueue.find(r=>r.stableId===key);
-          if(next){ state.currentItem=next; renderChoices(); renderPlayer(); }
+          if(next){ state.currentItem=next; renderChoices(); renderPlayer(); if(state.mode==='audio' && next?.audio?.url){ els.audioPlayer.play().catch(()=>{}); } }
           return;
         }
         selectChoice(key);
@@ -1242,9 +1295,29 @@
       els.homeBtn.addEventListener('click', resetAll);
       els.backBtn.addEventListener('click', goBack);
       els.logoReset.addEventListener('click', resetAll);
-      els.listenBtn.addEventListener('click', ()=>{ if(state.mode==='audio') return; state.mode='audio'; resetAll(); });
-      els.watchBtn.addEventListener('click', ()=>{ if(state.mode==='video') return; state.mode='video'; resetAll(); });
-      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; resetAll(); });
+      els.listenBtn.addEventListener('click', ()=>{ if(state.mode==='audio') return; state.mode='audio'; resetAll({ preserveSearch:true }); });
+      els.watchBtn.addEventListener('click', ()=>{ if(state.mode==='video') return; state.mode='video'; resetAll({ preserveSearch:true }); });
+      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; clearMediaState(); scrollChoiceListToTop(); rerender(); });
+      els.contextRow.addEventListener('click', (event)=>{
+        const btn = event.target.closest('[data-context-level]');
+        if(!btn) return;
+        const level = btn.getAttribute('data-context-level');
+        if(level==='root'){
+          state.nav.branchKey=null;
+          state.nav.leafKey=null;
+          state.currentItem=null;
+        } else if(level==='branch'){
+          state.nav.leafKey=null;
+          state.currentItem=null;
+        } else if(level==='leaf'){
+          state.currentItem=null;
+        } else {
+          return;
+        }
+        scrollChoiceListToTop();
+        rerender();
+      });
+      window.addEventListener('resize', ()=>{ renderContextStrip(); });
       els.audioPlayBadge.addEventListener('click', ()=>{
         if(!els.audioPlayer.src) return;
         if(els.audioPlayer.paused) els.audioPlayer.play();
