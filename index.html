@@ -28,8 +28,8 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.58) 0%, rgba(9,9,10,.74) 100%),
-        var(--desktop-bg) center/cover no-repeat fixed;
+        linear-gradient(180deg, rgba(11,11,12,.62) 0%, rgba(9,9,10,.78) 100%),
+        var(--desktop-bg) center center/contain repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
@@ -128,9 +128,6 @@
     .context-chip-date .mini-value{
       margin-top:3px;font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1;color:rgba(255,255,255,.96);
     }
-    .context-chip-date .mini-sub{
-      margin-top:2px;font-family:Poppins,sans-serif;font-size:10px;font-weight:700;line-height:1;color:rgba(255,255,255,.92);
-    }
     .context-chip.square img{width:58px;height:58px;flex-basis:58px}
     .context-chip-copy{min-width:0}
     .context-chip-label{
@@ -199,10 +196,10 @@
     .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
     .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
     .card-meta-line{
-      margin-top:5px;
-      color:rgba(255,255,255,.82);
+      margin-top:6px;
+      color:rgba(255,255,255,.86);
       font-size:13px;
-      line-height:1.3;
+      line-height:1.35;
     }
     .choice.date-text-card{
       align-items:center;
@@ -313,11 +310,9 @@
     .related .thumb-square{width:64px;height:64px;flex-basis:64px}
 
     @media (min-width:1040px){
-      .frame{display:grid;grid-template-columns:auto 1fr;align-items:end;column-gap:18px}
       .flow{grid-template-columns:minmax(360px,560px) minmax(0,1fr)}
       .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
       .context-strip{display:block}
-      .topbar{padding-left:0}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
       .transport{margin:0}
@@ -355,7 +350,7 @@
           <img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="CGBC logo">
         </button>
         <div>
-          <h1>CGBC Media Player</h1>
+          <h1>CGBC Sermons</h1>
           
         </div>
       </div>
@@ -891,9 +886,9 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false, dateCardType:root.dateCardType, dateCardValue:root.dateCardValue});
-      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', dateCardType:branch.dateCardType, dateCardValue:branch.dateCardValue});
-      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio', dateCardType:leaf.dateCardType, dateCardValue:leaf.dateCardValue});
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
       return items;
     }
     function renderContextStrip(){
@@ -1008,15 +1003,15 @@
           return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
             <div class="${thumbClass}">${dateCardInner}</div>
             <div class="copy">
-              ${dateTextCard ? '' : `<h3 class="card-title">${escapeHtml(title)}</h3>`}
+              <h3 class="card-title">${escapeHtml(title)}</h3>
             </div>
           </button>`;
         }
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
-            ${dateTextCard ? '' : `<h3 class="card-title">${escapeHtml(title)}</h3>`}
-            ${dateTextCard ? '' : (sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : '')}
+            <h3 class="card-title">${escapeHtml(title)}</h3>
+            ${sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : ''}
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
           </div>
         </button>`;
@@ -1028,8 +1023,6 @@
       els.playerShell.classList.toggle('is-idle', idle);
       els.detailShell.classList.toggle('is-idle', idle);
       if(!item){
-        els.playerShell.classList.remove('player-loaded');
-        stopPlayingDots();
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
@@ -1042,7 +1035,6 @@
         }
         return;
       }
-      els.playerShell.classList.add('player-loaded');
 
       if(state.mode==='video' && item?.video?.hasVideo && item?.video?.youtubeId){
         els.playerShell.classList.add('video-active');
