@@ -107,8 +107,8 @@
       backdrop-filter:blur(12px);overflow:hidden
     }
     .nav-panel{display:grid;gap:0}
-    .nav-head{padding:14px 16px 18px}
-    .nav-head h2{margin:0 0 10px 0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
+    .nav-head{padding:14px 16px 8px}
+    .nav-head h2{margin:0 0 4px 0;font-family:Poppins,sans-serif;font-size:clamp(20px,2.6vw,28px);line-height:1.06}
     .eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2);font-size:12px}
     .title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(18px,2vw,24px);line-height:1.08}
 
@@ -134,7 +134,7 @@
       gap:10px;
       overflow:hidden;
       flex-wrap:nowrap;
-      min-height:92px;
+      min-height:86px;
       align-items:stretch;
     }
     .context-row::-webkit-scrollbar{height:8px}
@@ -142,7 +142,7 @@
     .context-chip{
       min-width:0;
       flex:0 0 220px;
-      height:92px;
+      height:86px;
       display:flex;
       gap:10px;
       align-items:center;
@@ -189,7 +189,7 @@
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
 
     .path-row{
-      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:8px 16px 14px;border-top:1px solid rgba(255,255,255,.05);
+      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:8px 16px 10px;border-top:1px solid rgba(255,255,255,.05);
       min-height:0;
       flex-wrap:wrap;
     }
@@ -200,7 +200,7 @@
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
 
-    .stack{display:grid;gap:12px;padding:4px 16px 16px;align-content:start;grid-auto-rows:max-content}
+    .stack{display:grid;gap:12px;padding:0 16px 16px;align-content:start;grid-auto-rows:max-content}
     .choice,.episode,.related{
       width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
@@ -232,7 +232,7 @@
     }
     .thumb-wide{width:132px;height:74px;flex:0 0 132px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .choice.branch-card .thumb-wide{width:164px;height:92px;flex-basis:164px;border-radius:18px;}
-    .thumb-square{width:86px;height:92px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
+    .thumb-square{width:86px;height:86px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
     .copy{min-width:0;flex:1}
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
@@ -356,19 +356,19 @@
     @media (min-width:1040px){
       .brand .logo-btn img{
         content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png');
-        width:278px;
-        height:92px;
+        width:310px;
+        height:86px;
         object-fit:contain;
         object-position:left center;
         filter:drop-shadow(0 5px 14px rgba(0,0,0,.14));
       }
       .logo-btn{
-        width:286px;
-        height:92px;
+        width:320px;
+        height:86px;
         align-items:center;
         justify-content:flex-start;
       }
-      .brand{gap:4px}
+      .brand{gap:10px}
       .brand h1{display:none}
     }
 
@@ -400,7 +400,7 @@
       .search-row{flex-wrap:wrap}
       .search-status{width:100%}
       .thumb-wide{width:108px;height:66px;flex-basis:108px}
-      .choice.branch-card .thumb-wide{width:132px;height:92px;flex-basis:132px;}
+      .choice.branch-card .thumb-wide{width:132px;height:86px;flex-basis:132px;}
       .thumb-square{width:78px;height:78px;flex-basis:78px}
       .meta-row{grid-template-columns:100px minmax(0,1fr)}
     }
@@ -681,11 +681,11 @@
     }
     function getSeriesArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.wide || item?.art?.series?.square || item?.art?.episode?.square || ASSETS.fallback;
-      return item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.square || item?.art?.series?.wide || item?.art?.episode?.wide || ASSETS.fallback;
+      return item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.wide || item?.art?.series?.square || item?.art?.episode?.square || ASSETS.fallback;
     }
     function getStudyArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.study?.wide || item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.series?.square || ASSETS.fallback;
-      return item?.art?.study?.square || item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.wide || item?.art?.series?.wide || ASSETS.fallback;
+      return item?.art?.study?.wide || item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.series?.square || ASSETS.fallback;
     }
     function getFirstEpisode(items){
       return (Array.isArray(items) ? items.slice().sort(sortOldestFirst)[0] : null) || null;
@@ -970,9 +970,9 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
-      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
-      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false, level:'root'});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:false, level:'branch'});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:false, level:'leaf'});
       return items;
     }
     function renderContextStrip(){
@@ -983,7 +983,7 @@
         return;
       }
       els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
-      els.contextRow.innerHTML = items.map(item => {
+      els.contextRow.innerHTML = items.map((item, index) => {
         const isDateChip = !!item.dateCardType;
         const media = isDateChip
           ? `<div class="context-chip-date">${
@@ -995,14 +995,15 @@
         const title = isDateChip
           ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
           : item.title;
+        const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
-          <div class="context-chip ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}">
+          <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
             ${media}
             <div class="context-chip-copy">
               <div class="context-chip-label">${escapeHtml(item.label)}</div>
               <div class="context-chip-title">${escapeHtml(title)}</div>
             </div>
-          </div>
+          </button>
         `;
       }).join('');
     }
