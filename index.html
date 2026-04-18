@@ -73,25 +73,25 @@
     .mode-btn:first-child .mode-btn-shell{border-radius:18px 8px 8px 18px}
     .mode-btn:last-child .mode-btn-shell{border-radius:8px 18px 18px 8px}
     .mode-btn.active .mode-btn-shell{
-      background:linear-gradient(180deg, rgba(161,188,171,.98), rgba(143,174,157,.92));
-      color:var(--accent-ink);border-color:rgba(143,174,157,.26);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.24), 0 10px 22px rgba(54,84,69,.18)
+      background:linear-gradient(180deg, rgba(143,174,157,.20), rgba(143,174,157,.12));
+      color:rgba(255,255,255,.98);border-color:rgba(143,174,157,.24);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 22px rgba(0,0,0,.16)
     }
     .btn-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.02;font-family:Poppins,sans-serif}
     .btn-copy .top{font-size:15px;font-weight:700}
     .btn-copy .bottom{font-size:11px;color:rgba(255,255,255,.72)}
-    .mode-btn.active .bottom{color:rgba(17,32,24,.76)}
+    .mode-btn.active .bottom{color:rgba(255,255,255,.78)}
     .mode-btn .btn-copy .top{color:rgba(255,255,255,.96)}
     .mode-btn .btn-copy .bottom{color:rgba(255,255,255,.72)}
-    .mode-btn.active .btn-copy .top{color:#17241d}
-    .mode-btn.active .btn-copy .bottom{color:rgba(23,36,29,.76)}
+    .mode-btn.active .btn-copy .top{color:rgba(255,255,255,.98)}
+    .mode-btn.active .btn-copy .bottom{color:rgba(255,255,255,.78)}
     .mode-icon{
       width:30px;height:30px;flex:0 0 30px;display:block;
       stroke:rgba(255,255,255,.96);
       stroke-width:2.15;fill:none;opacity:1;
       filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))
     }
-    .mode-btn.active .mode-icon{stroke:#1b2821;filter:none;opacity:1}
+    .mode-btn.active .mode-icon{stroke:rgba(255,255,255,.98);filter:none;opacity:1}
     .mode-btn:not(.active) .mode-icon{stroke:rgba(255,255,255,.96);opacity:1}
     .mode-btn:hover .mode-btn-shell{transform:translateY(-1px);background:rgba(255,255,255,.04)}
 
@@ -472,8 +472,8 @@
           </button>
         </div>
         <div class="impact">
-          <div class="impact-pill"><div class="impact-value" id="impactPrimaryValue">—</div><div class="impact-label" id="impactPrimaryLabel">Plays</div></div>
-          <div class="impact-pill"><div class="impact-value" id="impactSecondaryValue">—</div><div class="impact-label" id="impactSecondaryLabel">Episodes</div></div>
+          <div class="impact-pill"><div class="impact-value" id="impactPrimaryValue">—</div><div class="impact-label" id="impactPrimaryLabel">Audio: Plays</div></div>
+          <div class="impact-pill"><div class="impact-value" id="impactSecondaryValue">—</div><div class="impact-label" id="impactSecondaryLabel">Audio: Episodes</div></div>
         </div>
       </div>
     </header>
@@ -676,6 +676,12 @@
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
+    function getVideoArchiveItems(){return state.items.filter(it=>it?.video?.hasVideo && it?.video?.youtubeId && it?.flags?.includeInVideoTotals!==false);}
+    function episodeCardSubline(item){return item?.scripture?.display || '—';}
+    function episodeCardMetric(item){
+      const viewsLabel = formatCountLabel(state.mode==='audio' ? (item?.audio?.plays || 0) : (item?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views');
+      return `${formatDate(item)} · ${viewsLabel}`;
+    }
     function applySearch(items){
       const q=state.searchTerm.trim().toLowerCase();
       if(!q) return items.slice();
@@ -882,8 +888,7 @@
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
       browse.roots=[
         ...(state.mode==='video' ? [
-          {key:'livestreams',title:'Livestreams',meta:'Live YouTube shelf',image:ASSETS.livestreams},
-          ...(browse.current.length ? [{key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current}] : [])
+          {key:'livestreams',title:'Livestreams',meta:'Live YouTube shelf',image:ASSETS.livestreams}
         ] : []),
         ...(state.mode==='audio' ? [
           {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current}
@@ -951,14 +956,7 @@
       if(root==='topical') return [];
       if(root==='date'){
         const yearBucket=browse.date.get(branch); if(!yearBucket) return [];
-        return Array.from(yearBucket.keys()).sort((a,b)=>b.localeCompare(a)).map(monthKey=>({
-          key:monthKey,
-          title:new Date(monthKey+'-15T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}),
-          meta:formatCountLabel(yearBucket.get(monthKey).length,'episode','episodes'),
-          image:null,
-          dateCardType:'month',
-          dateCardValue:monthKey
-        }));
+        return Array.from(yearBucket.keys()).sort((a,b)=>b.localeCompare(a)).map(monthKey=>({key:monthKey,title:new Date(monthKey+'-15T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}),meta:formatCountLabel(yearBucket.get(monthKey).length,'episode','episodes'),image:ASSETS.date}));
       }
       return [];
     }
@@ -1009,33 +1007,9 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(root) items.push({
-        label:'Category',
-        title:root.title,
-        image:root.image || ASSETS.fallback,
-        square:false,
-        level:'root',
-        dateCardType:root.dateCardType,
-        dateCardValue:root.dateCardValue
-      });
-      if(branch) items.push({
-        label:'Selection',
-        title:branch.title,
-        image:branch.image || ASSETS.fallback,
-        square:state.mode==='audio' && state.nav.rootKey!=='date',
-        level:'branch',
-        dateCardType:branch.dateCardType,
-        dateCardValue:branch.dateCardValue
-      });
-      if(leaf) items.push({
-        label:'Series / Group',
-        title:leaf.title,
-        image:leaf.image || ASSETS.fallback,
-        square:state.mode==='audio' && state.nav.rootKey!=='date',
-        level:'leaf',
-        dateCardType:leaf.dateCardType,
-        dateCardValue:leaf.dateCardValue
-      });
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:state.mode==='audio', level:'root'});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio', level:'leaf'});
       return items;
     }
     function renderContextStrip(){
@@ -1097,16 +1071,17 @@
       if(!state.data) return;
       if(state.mode==='audio'){
         els.impactPrimaryValue.textContent = formatNumber(state.data?.totals?.audioPlaysTotal || 0);
-        els.impactPrimaryLabel.textContent = 'Audio Plays';
+        els.impactPrimaryLabel.textContent = 'Audio: Plays';
         els.impactSecondaryValue.textContent = formatNumber(state.data?.totals?.audioEpisodesTotal || state.items.length);
-        els.impactSecondaryLabel.textContent = 'Audio Episodes';
+        els.impactSecondaryLabel.textContent = 'Audio: Episodes';
       } else {
-        const views=getModeItems('video').reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
-        const count=getModeItems('video').length;
+        const archiveItems=getVideoArchiveItems();
+        const views=archiveItems.reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
+        const count=archiveItems.length;
         els.impactPrimaryValue.textContent = formatNumber(views);
-        els.impactPrimaryLabel.textContent = 'Archive Views';
+        els.impactPrimaryLabel.textContent = 'Video: Views';
         els.impactSecondaryValue.textContent = formatNumber(count);
-        els.impactSecondaryLabel.textContent = 'Video Episodes';
+        els.impactSecondaryLabel.textContent = 'Video: Episodes';
       }
     }
     function renderChoices(){
@@ -1133,11 +1108,11 @@
       const isRootLevel = !state.nav.rootKey;
       const isBranchLevel = !!state.nav.rootKey && !state.nav.branchKey;
       els.choiceList.innerHTML = rows.map(row => {
-        const thumbClass = (!episodeLevel && isRootLevel) || row?.dateCardType || state.mode==='video' ? 'thumb-wide' : 'thumb-square';
+        const thumbClass = state.mode==='audio' ? 'thumb-square' : 'thumb-wide';
         const image = episodeLevel ? getEpisodeArt(row, state.mode) : (row.image || ASSETS.fallback);
         const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
-        const sub = episodeLevel ? searchMetaLine(row, state.searchTerm) : (row.meta || '');
-        const metric = episodeLevel ? `${formatCountLabel(state.mode==='audio' ? (row?.audio?.plays || 0) : (row?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views')} · ${formatDate(row)}` : '';
+        const sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
+        const metric = episodeLevel ? episodeCardMetric(row) : '';
         const key = episodeLevel ? row.stableId : row.key;
         const dateTextCard = !!row?.dateCardType;
         const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : ''));
