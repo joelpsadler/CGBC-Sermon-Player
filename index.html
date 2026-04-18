@@ -29,7 +29,7 @@
     body{
       background:
         linear-gradient(180deg, rgba(11,11,12,.50) 0%, rgba(9,9,10,.68) 100%),
-        var(--desktop-bg) center center/cover no-repeat fixed;
+        var(--desktop-bg) center center/80% auto no-repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
@@ -346,6 +346,25 @@
     .related{flex:0 0 220px;max-width:220px}
     .related .thumb-wide{width:84px;height:48px;flex-basis:84px}
     .related .thumb-square{width:64px;height:64px;flex-basis:64px}
+
+    
+    @media (min-width:1040px){
+      .brand .logo-btn img{
+        content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235303/Desktop-logo-Maybe-2-2.png');
+        width:210px;
+        height:72px;
+        object-fit:contain;
+        object-position:left center;
+        filter:drop-shadow(0 5px 14px rgba(0,0,0,.14));
+      }
+      .logo-btn{
+        width:220px;
+        height:72px;
+        align-items:center;
+        justify-content:flex-start;
+      }
+      .brand{gap:12px}
+    }
 
     @media (min-width:1040px){
       .flow{grid-template-columns:minmax(360px,540px) minmax(0,1fr)}
