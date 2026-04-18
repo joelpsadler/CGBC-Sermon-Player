@@ -114,7 +114,7 @@
 
 
     .search-row{
-      display:flex;align-items:center;gap:10px;padding:0 16px 10px;min-height:0;
+      display:flex;align-items:center;gap:10px;padding:0 16px 12px;min-height:0;
       position:relative;z-index:1;
       margin-top:0;
     }
@@ -134,7 +134,7 @@
       gap:10px;
       overflow:hidden;
       flex-wrap:nowrap;
-      min-height:86px;
+      min-height:88px;
       align-items:stretch;
     }
     .context-row::-webkit-scrollbar{height:8px}
@@ -142,7 +142,7 @@
     .context-chip{
       min-width:0;
       flex:0 0 220px;
-      height:86px;
+      height:88px;
       display:flex;
       gap:10px;
       align-items:center;
@@ -189,7 +189,7 @@
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
 
     .path-row{
-      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:8px 16px 10px;border-top:1px solid rgba(255,255,255,.05);
+      display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:10px 16px 12px;border-top:1px solid rgba(255,255,255,.05);
       min-height:0;
       flex-wrap:wrap;
     }
@@ -200,7 +200,7 @@
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
 
-    .stack{display:grid;gap:12px;padding:0 16px 16px;align-content:start;grid-auto-rows:max-content}
+    .stack{display:grid;gap:12px;padding:14px 16px 16px;align-content:start;grid-auto-rows:max-content}
     .choice,.episode,.related{
       width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
@@ -232,7 +232,7 @@
     }
     .thumb-wide{width:132px;height:74px;flex:0 0 132px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .choice.branch-card .thumb-wide{width:164px;height:92px;flex-basis:164px;border-radius:18px;}
-    .thumb-square{width:86px;height:86px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
+    .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
     .copy{min-width:0;flex:1}
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
@@ -356,19 +356,19 @@
     @media (min-width:1040px){
       .brand .logo-btn img{
         content:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png');
-        width:310px;
-        height:86px;
+        width:278px;
+        height:88px;
         object-fit:contain;
         object-position:left center;
         filter:drop-shadow(0 5px 14px rgba(0,0,0,.14));
       }
       .logo-btn{
-        width:320px;
-        height:86px;
+        width:286px;
+        height:88px;
         align-items:center;
         justify-content:flex-start;
       }
-      .brand{gap:10px}
+      .brand{gap:0px}
       .brand h1{display:none}
     }
 
@@ -400,7 +400,7 @@
       .search-row{flex-wrap:wrap}
       .search-status{width:100%}
       .thumb-wide{width:108px;height:66px;flex-basis:108px}
-      .choice.branch-card .thumb-wide{width:132px;height:86px;flex-basis:132px;}
+      .choice.branch-card .thumb-wide{width:132px;height:88px;flex-basis:132px;}
       .thumb-square{width:78px;height:78px;flex-basis:78px}
       .meta-row{grid-template-columns:100px minmax(0,1fr)}
     }
@@ -681,11 +681,11 @@
     }
     function getSeriesArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.wide || item?.art?.series?.square || item?.art?.episode?.square || ASSETS.fallback;
-      return item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.wide || item?.art?.series?.square || item?.art?.episode?.square || ASSETS.fallback;
+      return item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.square || item?.art?.series?.wide || item?.art?.episode?.wide || ASSETS.fallback;
     }
     function getStudyArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.study?.wide || item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.series?.square || ASSETS.fallback;
-      return item?.art?.study?.wide || item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.series?.square || ASSETS.fallback;
+      return item?.art?.study?.square || item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.wide || item?.art?.series?.wide || ASSETS.fallback;
     }
     function getFirstEpisode(items){
       return (Array.isArray(items) ? items.slice().sort(sortOldestFirst)[0] : null) || null;
@@ -970,9 +970,9 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false, level:'root'});
-      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:false, level:'branch'});
-      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:false, level:'leaf'});
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
       return items;
     }
     function renderContextStrip(){
@@ -983,7 +983,7 @@
         return;
       }
       els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
-      els.contextRow.innerHTML = items.map((item, index) => {
+      els.contextRow.innerHTML = items.map(item => {
         const isDateChip = !!item.dateCardType;
         const media = isDateChip
           ? `<div class="context-chip-date">${
@@ -995,15 +995,14 @@
         const title = isDateChip
           ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
           : item.title;
-        const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
-          <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
+          <div class="context-chip ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}">
             ${media}
             <div class="context-chip-copy">
               <div class="context-chip-label">${escapeHtml(item.label)}</div>
               <div class="context-chip-title">${escapeHtml(title)}</div>
             </div>
-          </button>
+          </div>
         `;
       }).join('');
     }
