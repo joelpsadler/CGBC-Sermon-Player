@@ -68,7 +68,8 @@
       background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.075);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-      transition:transform .18s ease, background .18s ease, box-shadow .18s ease
+      color:rgba(255,255,255,.96);
+      transition:transform .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease
     }
     .mode-btn:first-child .mode-btn-shell{border-radius:18px 8px 8px 18px}
     .mode-btn:last-child .mode-btn-shell{border-radius:8px 18px 18px 8px}
@@ -970,9 +971,9 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
-      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
-      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
+      if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:state.mode==='audio', level:'root'});
+      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
+      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio', level:'leaf'});
       return items;
     }
     function renderContextStrip(){
@@ -983,7 +984,7 @@
         return;
       }
       els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
-      els.contextRow.innerHTML = items.map(item => {
+      els.contextRow.innerHTML = items.map((item, index) => {
         const isDateChip = !!item.dateCardType;
         const media = isDateChip
           ? `<div class="context-chip-date">${
@@ -995,14 +996,15 @@
         const title = isDateChip
           ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
           : item.title;
+        const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
-          <div class="context-chip ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}">
+          <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
             ${media}
             <div class="context-chip-copy">
               <div class="context-chip-label">${escapeHtml(item.label)}</div>
               <div class="context-chip-title">${escapeHtml(title)}</div>
             </div>
-          </div>
+          </button>
         `;
       }).join('');
     }
