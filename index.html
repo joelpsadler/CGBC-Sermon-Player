@@ -28,8 +28,8 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.62) 0%, rgba(9,9,10,.78) 100%),
-        var(--desktop-bg) center center/contain repeat fixed;
+        linear-gradient(180deg, rgba(11,11,12,.48) 0%, rgba(9,9,10,.66) 100%),
+        var(--desktop-bg) center center/900px auto repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
@@ -311,7 +311,7 @@
 
     @media (min-width:1040px){
       .flow{grid-template-columns:minmax(360px,560px) minmax(0,1fr)}
-      .nav-panel{position:sticky;top:98px;max-height:calc(100vh - 118px);overflow:auto}
+      .nav-panel{position:sticky;top:96px;max-height:calc(100vh - 116px);overflow:auto}
       .context-strip{display:block}
       .audio-stage{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:start;gap:22px}
       .audio-art{margin:0;max-width:360px}
