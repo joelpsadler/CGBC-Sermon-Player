@@ -193,11 +193,9 @@
       font-family:Poppins,sans-serif;
       font-size:18px;
       line-height:1.08;
-      white-space:normal;
+      white-space:nowrap;
       overflow:hidden;
-      display:-webkit-box;
-      -webkit-box-orient:vertical;
-      -webkit-line-clamp:2;
+      text-overflow:ellipsis;
     }
 
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
@@ -491,7 +489,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search Title, Series, Scripture, Book, Study, Date">
+          <input id="searchInput" type="search" placeholder="Search title, scripture, series, book, date">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
@@ -552,10 +550,6 @@
           <div class="detail-actions detail-actions-only">
             <a id="episodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open Episode</span></a>
             <a id="shareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
-          </div>
-          <div class="related-wrap" id="relatedWrap">
-            <h3 class="related-title">Related Context</h3>
-            <div class="related-row" id="relatedRow"></div>
           </div>
         </section>
       </section>
@@ -675,19 +669,17 @@
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
     function getVideoArchiveItems(){return state.items.filter(it=>it?.video?.hasVideo && it?.video?.youtubeId && it?.flags?.includeInVideoTotals!==false);}
-    function getVideoViews(item){return Number(item?.video?.views || item?.video?.viewCount || item?.videoViews || item?.stats?.videoViews || 0);}
-    function displaySeriesName(name){return String(name || '').replace(/\s+Chapter\s+/i,' ').trim();}
     function queryHasDateIntent(query){
       const q=String(query||'').trim().toLowerCase();
       if(!q) return false;
-      return /\b(date|year|month|day|jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)\b/.test(q) || /\d{1,2}[\/\-]\d{1,2}/.test(q) || /\d{4}/.test(q);
+      return /(date|year|month|day|jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)/.test(q) || /\d{1,2}[\/\-]\d{1,2}/.test(q) || /\d{4}/.test(q);
     }
     function episodeCardSubline(item){
       if(searchResultsMode()) return queryHasDateIntent(state.searchTerm) ? formatDate(item) : (item?.scripture?.display || '—');
       return item?.scripture?.display || '—';
     }
     function episodeCardMetric(item){
-      const viewsLabel = formatCountLabel(state.mode==='audio' ? (item?.audio?.plays || 0) : getVideoViews(item), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views');
+      const viewsLabel = formatCountLabel(state.mode==='audio' ? (item?.audio?.plays || 0) : (item?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views');
       return searchResultsMode() && !queryHasDateIntent(state.searchTerm) ? viewsLabel : `${formatDate(item)} · ${viewsLabel}`;
     }
     function applySearch(items){
@@ -1039,7 +1031,7 @@
           : `<img src="${escapeHtml(item.image)}" alt="">`;
         const title = isDateChip
           ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
-          : ((item.level === 'leaf' || item.label === 'Series / Group') ? displaySeriesName(item.title) : item.title);
+          : item.title;
         const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
           <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
@@ -1084,10 +1076,8 @@
         els.impactSecondaryLabel.textContent = 'Audio: Episodes';
       } else {
         const archiveItems=getVideoArchiveItems();
-        const computedViews=archiveItems.reduce((sum,item)=>sum+getVideoViews(item),0);
-        const totalsViews=Number(state.data?.totals?.videoViewsTotal || state.data?.totals?.archiveViewsTotal || 0);
-        const views=totalsViews || computedViews;
-        const count=Number(state.data?.totals?.videoEpisodesTotal || archiveItems.length || 0);
+        const views=archiveItems.reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
+        const count=archiveItems.length;
         els.impactPrimaryValue.textContent = formatNumber(views);
         els.impactPrimaryLabel.textContent = 'Video: Views';
         els.impactSecondaryValue.textContent = formatNumber(count);
@@ -1155,6 +1145,7 @@
       const item=state.currentItem;
       const idle=!item;
       els.playerShell.classList.toggle('is-idle', idle);
+      els.detailShell.classList.toggle('is-idle', idle);
       if(!item){
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
@@ -1185,7 +1176,7 @@
         els.audioStage.style.display='grid';
         els.audioFeatureArt.src=getEpisodeArt(item,'audio');
         els.audioFeatureTitle.textContent=item?.title?.display || '';
-        els.audioFeatureSeries.textContent=displaySeriesName(item?.series?.name || '');
+        els.audioFeatureSeries.textContent=item?.series?.name || '';
         els.audioFeatureScripture.textContent=item?.scripture?.display || '—';
         els.audioFeatureSpeaker.textContent=item?.speaker || '—';
         els.audioFeatureDate.textContent=formatDate(item);
@@ -1212,62 +1203,8 @@
       if(els.playerShareLink) els.playerShareLink.href=shareUrl;
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
       if(els.audioFeatureAudioPlays) els.audioFeatureAudioPlays.textContent=formatCountLabel(item?.audio?.plays || 0,'play','plays');
-      if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(getVideoViews(item),'view','views');
+      if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
     }
-
-    function buildRelatedItems(item){
-      if(!item) return [];
-      const related=[];
-      const queue=state.activeQueue.filter(it=>it?.stableId!==item?.stableId);
-      if(item?.series?.name) related.push({
-        title:'Series',
-        body:displaySeriesName(item.series.name),
-        image:getSeriesArtFromItem(item, state.mode),
-        square:state.mode==='audio'
-      });
-      if(item?.study?.name) related.push({
-        title:'Study',
-        body:item.study.name,
-        image:getStudyArtFromItem(item, state.mode),
-        square:state.mode==='audio'
-      });
-      const sameSeries=queue.filter(it=>it?.series?.key && it?.series?.key===item?.series?.key).slice(0,3);
-      sameSeries.forEach(it=>related.push({
-        title:'More in Series',
-        body:it?.title?.display || '',
-        image:getEpisodeArt(it, state.mode),
-        square:state.mode==='audio',
-        episodeId:it.stableId
-      }));
-      return related.slice(0,4);
-    }
-    function renderDetailPanel(){
-      const item=state.currentItem;
-      const idle=!item;
-      if(!item){
-        els.relatedWrap.classList.remove('show');
-        els.relatedRow.innerHTML='';
-        return;
-      }
-      const related=buildRelatedItems(item);
-      if(!related.length){
-        els.relatedWrap.classList.remove('show');
-        els.relatedRow.innerHTML='';
-        return;
-      }
-      els.relatedWrap.classList.add('show');
-      els.relatedRow.innerHTML=related.map((row)=>{
-        const thumbClass=(state.mode==='video') ? 'thumb-wide' : 'thumb-square';
-        return `<button type="button" class="related" ${row.episodeId ? `data-episode-id="${escapeHtml(row.episodeId)}"` : ''}>
-          <div class="${thumbClass}"><img src="${escapeHtml(row.image || ASSETS.fallback)}" alt=""></div>
-          <div class="copy">
-            <div class="context-chip-label">${escapeHtml(row.title)}</div>
-            <div class="card-title">${escapeHtml(row.body)}</div>
-          </div>
-        </button>`;
-      }).join('');
-    }
-
     function scrollChoiceListToTop(){
       try{ els.choiceList.scrollTop = 0; }catch(err){}
       const navPanel = document.querySelector('.nav-panel');
@@ -1288,7 +1225,6 @@
     function rerender(){
       renderChoices();
       renderPlayer();
-      renderDetailPanel();
       renderContextStrip();
       updateModeUI();
       updateImpact();
