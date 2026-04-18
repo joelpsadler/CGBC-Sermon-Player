@@ -28,7 +28,7 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.96) 0%, rgba(9,9,10,.99) 100%),
+        linear-gradient(180deg, rgba(11,11,12,.90) 0%, rgba(9,9,10,.96) 100%),
         var(--desktop-bg) center/cover no-repeat fixed;
       background-blend-mode:multiply;
     }
@@ -182,6 +182,60 @@
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
     .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
     .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
+    .card-meta-line{
+      margin-top:5px;
+      color:rgba(255,255,255,.82);
+      font-size:13px;
+      line-height:1.3;
+    }
+    .choice.date-text-card{
+      align-items:center;
+    }
+    .choice.date-text-card .thumb-wide{
+      width:132px;
+      height:92px;
+      flex-basis:132px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .choice.date-text-card .thumb-wide img{display:none;}
+    .date-card-text{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      width:100%;
+      height:100%;
+      padding:8px;
+    }
+    .date-card-label{
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      line-height:1.1;
+    }
+    .date-card-value{
+      margin-top:4px;
+      font-family:Poppins,sans-serif;
+      font-size:28px;
+      font-weight:800;
+      line-height:1;
+      color:rgba(255,255,255,.96);
+    }
+    .date-card-subvalue{
+      margin-top:4px;
+      font-family:Poppins,sans-serif;
+      font-size:16px;
+      font-weight:700;
+      line-height:1.05;
+      color:rgba(255,255,255,.92);
+    }
     .empty{
       margin:0 16px 16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);
       border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
@@ -466,6 +520,27 @@
     function formatCountLabel(v,s,p){const n=Number(v||0); return `${formatNumber(n)} ${n===1?s:p}`;}
     function formatClock(sec){const s=Math.max(0,Number(sec||0)); const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), ss=Math.floor(s%60); return h>0?`${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`:`${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;}
     function formatDate(item){if(item?.date?.iso){try{return new Date(item.date.iso+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}catch(err){}} return item?.date?.raw || 'Unknown date';}
+    function formatMonthYear(monthKey){
+      try{return new Date(monthKey + '-15T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});}catch(err){return monthKey;}
+    }
+    function monthNameOnly(monthKey){
+      try{return new Date(monthKey + '-15T12:00:00').toLocaleDateString('en-US',{month:'long'});}catch(err){return monthKey;}
+    }
+    function searchMetaLine(item, query){
+      const q = String(query || '').trim().toLowerCase();
+      const scripture = item?.scripture?.display || '';
+      const series = item?.series?.name || '';
+      const date = formatDate(item);
+      const books = getBookTagsDisplay(item);
+      const speaker = item?.speaker || '';
+      if(!q) return [series, scripture, date].filter(Boolean).join(' · ');
+      if(scripture.toLowerCase().includes(q)) return scripture;
+      if(date.toLowerCase().includes(q)) return date;
+      if(series.toLowerCase().includes(q)) return series;
+      if(books.toLowerCase().includes(q)) return books;
+      if(speaker.toLowerCase().includes(q)) return speaker;
+      return [series, scripture, date].filter(Boolean).join(' · ');
+    }
     function sortNewestFirst(a,b){const ai=a?.date?.iso||'', bi=b?.date?.iso||''; if(ai&&bi) return bi.localeCompare(ai); return (b?.title?.display||'').localeCompare(a?.title?.display||'');}
     function sortSeriesName(a,b){return String(a).localeCompare(String(b), undefined, {numeric:true,sensitivity:'base'});}
     function sortBookName(a,b){const ai=BOOK_MAP.has(String(a).toLowerCase())?BOOK_MAP.get(String(a).toLowerCase()):999; const bi=BOOK_MAP.has(String(b).toLowerCase())?BOOK_MAP.get(String(b).toLowerCase()):999; return ai!==bi?ai-bi:sortSeriesName(a,b);}
@@ -473,10 +548,29 @@
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
-    function applySearch(items){const q=state.searchTerm.trim().toLowerCase(); if(!q) return items.slice(); return items.filter(item=>[
-      item?.title?.display, item?.series?.name, item?.study?.name, item?.scripture?.display, item?.speaker, item?.date?.raw, item?.date?.iso,
-      ...(Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name):[])
-    ].filter(Boolean).join(' | ').toLowerCase().includes(q));}
+    function applySearch(items){
+      const q=state.searchTerm.trim().toLowerCase();
+      if(!q) return items.slice();
+      return items.filter(item=>{
+        const dateDisplay = formatDate(item);
+        const iso = item?.date?.iso || '';
+        let monthYear = '';
+        let monthOnly = '';
+        try{
+          if(iso){
+            const d = new Date(iso + 'T12:00:00');
+            monthYear = d.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+            monthOnly = d.toLocaleDateString('en-US',{month:'long'});
+          }
+        }catch(err){}
+        const haystack = [
+          item?.title?.display, item?.series?.name, item?.study?.name, item?.scripture?.display,
+          item?.speaker, item?.date?.raw, item?.date?.iso, dateDisplay, monthYear, monthOnly,
+          ...(Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name):[])
+        ].filter(Boolean).join(' | ').toLowerCase();
+        return haystack.includes(q);
+      });
+    }
     function visibleItems(){return applySearch(getModeItems(state.mode));}
     function searchResultsMode(){ return state.searchTerm.trim().length > 0; }
     function getEpisodeArt(item, mode=state.mode){
@@ -702,7 +796,7 @@
         }
         return rows;
       }
-      if(root==='date') return Array.from(browse.date.keys()).sort((a,b)=>b.localeCompare(a)).map(year=>({key:year,title:year,meta:formatCountLabel(browse.date.get(year).size,'month','months'),image:`https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234670/Serach-Date.jpg?v=${encodeURIComponent(year)}`}));
+      if(root==='date') return Array.from(browse.date.keys()).sort((a,b)=>b.localeCompare(a)).map(year=>({key:year,title:year,meta:formatCountLabel(browse.date.get(year).size,'month','months'),image:null,dateCardType:'year',dateCardValue:year}));
       return [];
     }
     function leafChoices(){
@@ -868,23 +962,30 @@
         const thumbClass = episodeLevel ? (state.mode==='video' ? 'thumb-wide' : 'thumb-square') : 'thumb-wide';
         const image = episodeLevel ? getEpisodeArt(row, state.mode) : (row.image || ASSETS.fallback);
         const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
-        const sub = episodeLevel ? (row?.series?.name || '') : (row.meta || '');
+        const sub = episodeLevel ? searchMetaLine(row, state.searchTerm) : (row.meta || '');
         const metric = episodeLevel ? `${formatCountLabel(state.mode==='audio' ? (row?.audio?.plays || 0) : (row?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views')} · ${formatDate(row)}` : '';
         const key = episodeLevel ? row.stableId : row.key;
-        const cls = episodeLevel ? 'episode' : ('choice ' + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : ''));
+        const dateTextCard = !!row?.dateCardType;
+        const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : ''));
+        const dateCardInner = dateTextCard
+          ? (row.dateCardType === 'year'
+              ? `<div class="date-card-text"><div class="date-card-label">Year</div><div class="date-card-value">${escapeHtml(String(row.dateCardValue || ''))}</div></div>`
+              : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div><div class="date-card-subvalue">${escapeHtml(String(row.title || ''))}</div></div>`)
+          : `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}">`;
+
         if(isRootLevel){
           return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
-            <div class="${thumbClass}"><img src="${escapeHtml(image)}" alt="${escapeHtml(title)}"></div>
+            <div class="${thumbClass}">${dateCardInner}</div>
             <div class="copy">
               <h3 class="card-title">${escapeHtml(title)}</h3>
             </div>
           </button>`;
         }
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
-          <div class="${thumbClass}"><img src="${escapeHtml(image)}" alt=""></div>
+          <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             <h3 class="card-title">${escapeHtml(title)}</h3>
-            <div class="card-sub">${escapeHtml(sub)}</div>
+            ${sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : ''}
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
           </div>
         </button>`;
