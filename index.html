@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC Media Player - Top Nav Pass</title>
+  <title>CGBC Media Player</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <meta name="theme-color" content="#0f0f10" />
@@ -28,8 +28,8 @@
     html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
-        linear-gradient(180deg, rgba(11,11,12,.44) 0%, rgba(9,9,10,.62) 100%),
-        var(--desktop-bg) center center/1040px auto repeat fixed;
+        linear-gradient(180deg, rgba(11,11,12,.46) 0%, rgba(9,9,10,.64) 100%),
+        var(--desktop-bg) center center/1120px auto repeat fixed;
       background-blend-mode:multiply;
     }
     button,input{font:inherit}
@@ -39,51 +39,67 @@
     .app{width:min(1680px,100%);margin:0 auto;padding:0 10px 16px}
     .masthead{
       position:sticky;top:0;z-index:20;
-      display:flex;justify-content:space-between;align-items:center;gap:12px;
-      padding:10px 4px 12px;
-      background:linear-gradient(180deg, rgba(8,8,9,.97), rgba(8,8,9,.89));
-      border-bottom:1px solid rgba(255,255,255,.05);
-      backdrop-filter:blur(12px);
+      display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;
+      padding:10px 6px 12px;
+      background:linear-gradient(180deg, rgba(8,8,9,.94), rgba(8,8,9,.82));
+      border-bottom:1px solid rgba(255,255,255,.04);
+      backdrop-filter:blur(10px);
     }
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand{display:flex;align-items:center;gap:18px;min-width:0}
     .logo-btn{
-      width:92px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;
-      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow);overflow:hidden
+      width:94px;height:66px;border-radius:0;display:flex;align-items:center;justify-content:center;
+      background:transparent;border:none;box-shadow:none;overflow:visible;padding:0
     }
-    .logo-btn img{width:100%;height:100%;object-fit:contain;transform:scale(1.12)}
-    .brand h1{margin:0;font-family:Poppins,sans-serif;font-size:clamp(20px,2vw,31px);line-height:1.02}
+    .logo-btn img{width:100%;height:100%;object-fit:contain;transform:none;filter:drop-shadow(0 5px 12px rgba(0,0,0,.15))}
+    .brand h1{margin:0;font-family:Poppins,sans-serif;font-size:clamp(22px,2.15vw,34px);line-height:1.02}
     .brand p{margin:4px 0 0;color:var(--muted);font-size:14px}
-    .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .top-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
     .mode-pill{
-      display:grid;grid-template-columns:1fr 1fr;padding:2px;border-radius:20px;min-width:318px;
-      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
+      display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:22px;min-width:360px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 24px rgba(0,0,0,.18)
     }
     .mode-btn-shell{
-      min-height:54px;padding:0 18px;display:flex;align-items:center;justify-content:center;border-radius:18px;
-      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)
+      min-height:58px;padding:0 22px;display:flex;align-items:center;justify-content:center;gap:12px;border-radius:18px;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+      transition:transform .18s ease, background .18s ease, box-shadow .18s ease
     }
     .mode-btn:first-child .mode-btn-shell{border-radius:18px 8px 8px 18px}
     .mode-btn:last-child .mode-btn-shell{border-radius:8px 18px 18px 8px}
     .mode-btn.active .mode-btn-shell{
-      background:linear-gradient(180deg, rgba(143,174,157,.88), rgba(118,147,131,.66));
-      color:var(--accent-ink);border-color:rgba(143,174,157,.20)
+      background:linear-gradient(180deg, rgba(161,188,171,.98), rgba(143,174,157,.92));
+      color:var(--accent-ink);border-color:rgba(143,174,157,.26);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.24), 0 10px 22px rgba(54,84,69,.18)
     }
     .btn-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.02;font-family:Poppins,sans-serif}
-    .btn-copy .top{font-size:14px;font-weight:700}
+    .btn-copy .top{font-size:15px;font-weight:700}
     .btn-copy .bottom{font-size:11px;color:var(--muted)}
     .mode-btn.active .bottom{color:rgba(17,32,24,.72)}
-    .impact{display:flex;gap:10px;flex-wrap:wrap}
+    .mode-icon{
+      width:24px;height:24px;flex:0 0 24px;display:block;
+      stroke:rgba(255,255,255,.96);
+      stroke-width:2;fill:none;opacity:1;
+      filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))
+    }
+    .mode-btn.active .mode-icon{stroke:#1b2821;filter:none}
+    .mode-btn:hover .mode-btn-shell{transform:translateY(-1px);background:rgba(255,255,255,.04)}
+
+    .impact{display:flex;gap:12px;flex-wrap:wrap}
     .impact-pill{
-      min-width:120px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06)
+      min-width:124px;padding:11px 15px;border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.07);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 22px rgba(0,0,0,.14)
     }
     .impact-value{font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1}
     .impact-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
 
     .flow{display:grid;grid-template-columns:1fr;gap:16px}
     .panel{
-      border-radius:24px;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);overflow:hidden
+      border-radius:24px;border:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg, rgba(14,14,15,.80), rgba(14,14,15,.74));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 14px 32px rgba(0,0,0,.18);
+      backdrop-filter:blur(12px);overflow:hidden
     }
     .nav-panel{display:grid;gap:0}
     .nav-head{padding:16px 16px 12px}
@@ -164,10 +180,7 @@
       width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:12px;border-radius:20px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.07);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 10px 24px rgba(0,0,0,.14);
-      transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 20px rgba(0,0,0,.12)
     }
     .choice.root-card{
       display:block;
@@ -361,8 +374,25 @@
       </div>
       <div class="top-actions">
         <div class="mode-pill">
-          <button class="mode-btn active" id="listenBtn" type="button"><span class="mode-btn-shell"><span class="btn-copy"><span class="top">Listen</span><span class="bottom">Audio</span></span></span></button>
-          <button class="mode-btn" id="watchBtn" type="button"><span class="mode-btn-shell"><span class="btn-copy"><span class="top">Watch</span><span class="bottom">Video</span></span></span></button>
+          <button class="mode-btn active" id="listenBtn" type="button">
+            <span class="mode-btn-shell">
+              <svg class="mode-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4v11" stroke-linecap="round"/>
+                <path d="M8.5 7.5v4.5a3.5 3.5 0 1 0 1.5 2.9V9" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 6c2.2 0 4 1.8 4 4v5" stroke-linecap="round"/>
+              </svg>
+              <span class="btn-copy"><span class="top">Listen</span><span class="bottom">Audio</span></span>
+            </span>
+          </button>
+          <button class="mode-btn" id="watchBtn" type="button">
+            <span class="mode-btn-shell">
+              <svg class="mode-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="6.5" width="12" height="11" rx="2"/>
+                <path d="M15.5 10.2 20 7.8v8.4l-4.5-2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="btn-copy"><span class="top">Watch</span><span class="bottom">Video</span></span>
+            </span>
+          </button>
         </div>
         <div class="impact">
           <div class="impact-pill"><div class="impact-value" id="impactPrimaryValue">—</div><div class="impact-label" id="impactPrimaryLabel">Plays</div></div>
