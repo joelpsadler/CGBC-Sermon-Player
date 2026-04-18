@@ -98,7 +98,7 @@
     }
     .search-row input::placeholder{color:var(--muted-2)}
     .context-strip{display:none;padding:12px 14px}
-    .context-row{display:flex;gap:12px;overflow-x:auto}
+    .context-row{display:flex;gap:12px;overflow:hidden;flex-wrap:wrap}
     .context-row::-webkit-scrollbar{height:8px}
     .context-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
     .context-chip{
@@ -157,7 +157,8 @@
       overflow:hidden;
     }
     .choice.root-card .copy{
-      display:none;
+      display:block;
+      padding:14px 16px 16px;
     }
     .choice.root-card .thumb-wide{
       width:100%;
@@ -477,6 +478,7 @@
       ...(Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name):[])
     ].filter(Boolean).join(' | ').toLowerCase().includes(q));}
     function visibleItems(){return applySearch(getModeItems(state.mode));}
+    function searchResultsMode(){ return state.searchTerm.trim().length > 0; }
     function getEpisodeArt(item, mode=state.mode){
       if(mode==='video') return item?.art?.episode?.wide || item?.art?.series?.wide || item?.art?.study?.wide || item?.art?.episode?.square || item?.art?.series?.square || ASSETS.fallback;
       return item?.art?.episode?.square || item?.art?.series?.square || item?.art?.study?.square || item?.art?.episode?.wide || item?.art?.series?.wide || ASSETS.fallback;
@@ -688,7 +690,7 @@
         }));
       }
       if(root==='topical') {
-        const rows = Array.from(browse.topical.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
+        const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
         if(state.mode==='video' && state.nativeShelves.guestSpeakers.length){
           rows.push({
             key:'guest-speakers-pinned',
@@ -700,7 +702,7 @@
         }
         return rows;
       }
-      if(root==='date') return Array.from(browse.date.keys()).sort((a,b)=>b.localeCompare(a)).map(year=>({key:year,title:year,meta:formatCountLabel(browse.date.get(year).size,'month','months'),image:ASSETS.date}));
+      if(root==='date') return Array.from(browse.date.keys()).sort((a,b)=>b.localeCompare(a)).map(year=>({key:year,title:year,meta:formatCountLabel(browse.date.get(year).size,'month','months'),image:`https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234670/Serach-Date.jpg?v=${encodeURIComponent(year)}`}));
       return [];
     }
     function leafChoices(){
@@ -715,7 +717,7 @@
       if(root==='books'){
         const bucket=browse.books.get(branch); if(!bucket) return [];
         const out=[];
-        Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title)).forEach(row=>out.push({key:row.key,title:row.title,meta:formatCountLabel(row.items.length,'episode','episodes'),image:row.image || getSeriesArtFromItem(getFirstEpisode(row.items))}));
+        Array.from(bucket.seriesMap.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title)).forEach(row=>out.push({key:row.key,title:row.title,meta:formatCountLabel(row.items.length,'episode','episodes'),image:row.image || getSeriesArtFromItem(getFirstEpisode(row.items))}));
         if(bucket.episodes.length) out.push({key:`${bucket.key}__episodes`,title:'Individual Sermons',meta:formatCountLabel(bucket.episodes.length,'episode','episodes'),image:getEpisodeArt(bucket.episodes[0]||{})});
         Array.from(bucket.specialsByYear.keys()).sort((a,b)=>b.localeCompare(a)).forEach(year=>{
           const rows=bucket.specialsByYear.get(year)||[];
@@ -754,6 +756,7 @@
       return [];
     }
     function choiceRows(){
+      if(searchResultsMode()) return {rows:visibleItems().sort(sortNewestFirst), episodeLevel:true, searchResults:true};
       if(!state.nav.rootKey) return {rows:rootChoices(), episodeLevel:false};
       if(!state.nav.branchKey) return {rows:branchChoices(), episodeLevel:false};
       const leaves=leafChoices();
@@ -779,14 +782,13 @@
       if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:false});
       if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio'});
       if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio'});
-      if(state.currentItem) items.push({label:'Episode', title:state.currentItem?.title?.episodeName || state.currentItem?.title?.display || '', image:getEpisodeArt(state.currentItem, state.mode), square:state.mode==='audio'});
       return items;
     }
     function renderContextStrip(){
       const items=buildContextItems();
       if(!items.length){
         els.contextRow.innerHTML='';
-        els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
+        els.contextStrip.style.display = 'none';
         return;
       }
       els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
@@ -840,20 +842,20 @@
       }
     }
     function renderChoices(){
-      els.navHeading.textContent = headingText();
+      els.navHeading.textContent = searchResultsMode() ? 'Search Results' : headingText();
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
-      els.homeBtn.disabled = !hasPath;
-      els.backBtn.disabled = !hasPath;
-      els.backBtn.querySelector('span').textContent = backLabel();
+      els.homeBtn.disabled = !(hasPath || searchResultsMode());
+      els.backBtn.disabled = !(hasPath || searchResultsMode());
+      els.backBtn.querySelector('span').textContent = searchResultsMode() ? 'Clear search' : backLabel();
       updateSearchStatus();
 
-      const {rows, episodeLevel} = choiceRows();
+      const {rows, episodeLevel, searchResults} = choiceRows();
       if(episodeLevel){
         state.activeQueue = rows.slice();
-        if(!state.activeQueue.find(it=>it.stableId===state.currentItem?.stableId)) state.currentItem = state.activeQueue[0] || null;
+        if(!state.activeQueue.find(it=>it.stableId===state.currentItem?.stableId)) state.currentItem = null;
       } else {
         state.activeQueue = [];
-        state.currentItem = null;
+        if(!searchResults) state.currentItem = null;
       }
       if(!rows.length){
         els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
@@ -873,6 +875,9 @@
         if(isRootLevel){
           return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
             <div class="${thumbClass}"><img src="${escapeHtml(image)}" alt="${escapeHtml(title)}"></div>
+            <div class="copy">
+              <h3 class="card-title">${escapeHtml(title)}</h3>
+            </div>
           </button>`;
         }
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
@@ -890,7 +895,19 @@
       const idle=!item;
       els.playerShell.classList.toggle('is-idle', idle);
       els.detailShell.classList.toggle('is-idle', idle);
-      if(!item) return;
+      if(!item){
+        els.videoShell.innerHTML='';
+        els.videoShell.style.display='none';
+        els.audioStage.style.display='none';
+        if(state.mode==='video'){
+          els.videoPlaceholder.style.display='flex';
+          els.audioPlaceholder.style.display='none';
+        } else {
+          els.videoPlaceholder.style.display='none';
+          els.audioPlaceholder.style.display='flex';
+        }
+        return;
+      }
 
       if(state.mode==='video' && item?.video?.hasVideo && item?.video?.youtubeId){
         els.playerShell.classList.add('video-active');
@@ -974,7 +991,10 @@
     }
     function resetAll(){ state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; scrollChoiceListToTop(); rerender(); }
     function goBack(){
-      if(state.nav.leafKey) state.nav.leafKey=null;
+      if(searchResultsMode()){
+        state.searchTerm='';
+        els.searchInput.value='';
+      } else if(state.nav.leafKey) state.nav.leafKey=null;
       else if(state.nav.branchKey) state.nav.branchKey=null;
       else if(state.nav.rootKey) state.nav.rootKey=null;
       scrollChoiceListToTop();
