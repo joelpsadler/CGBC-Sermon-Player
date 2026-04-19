@@ -166,19 +166,39 @@
     .context-chip img{
       width:68px;height:50px;object-fit:cover;border-radius:12px;flex:0 0 68px;background:rgba(255,255,255,.05)
     }
-    .context-chip.date-chip{flex:0 0 122px;justify-content:center}
+    .context-chip.date-chip{
+      flex:0 0 148px;
+      justify-content:center;
+      padding:8px;
+    }
     .context-chip.date-chip img{display:none}
     .context-chip-date{
-      width:82px;height:58px;flex:0 0 82px;border-radius:12px;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      width:100%;
+      height:72px;
+      flex:1 1 auto;
+      border-radius:14px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
       border:1px solid rgba(255,255,255,.08);
     }
     .context-chip-date .mini-label{
-      font-family:Poppins,sans-serif;font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1;
+      font-family:Poppins,sans-serif;
+      font-size:9px;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      line-height:1;
     }
     .context-chip-date .mini-value{
-      margin-top:3px;font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1;color:rgba(255,255,255,.96);
+      margin-top:4px;
+      font-family:Poppins,sans-serif;
+      font-size:28px;
+      font-weight:800;
+      line-height:1;
+      color:rgba(255,255,255,.96);
     }
     .context-chip.square img{width:58px;height:58px;flex-basis:58px}
     .context-chip-copy{min-width:0}
@@ -271,9 +291,9 @@
       align-items:center;
     }
     .choice.date-text-card .thumb-wide{
-      width:164px;
-      height:96px;
-      flex-basis:164px;
+      width:196px;
+      height:104px;
+      flex-basis:196px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -289,26 +309,26 @@
       text-align:center;
       width:100%;
       height:100%;
-      padding:10px 12px;
+      padding:12px 16px;
     }
     .date-card-label{
       font-family:Poppins,sans-serif;
-      font-size:10px;
+      font-size:11px;
       letter-spacing:.12em;
       text-transform:uppercase;
       color:rgba(255,255,255,.55);
       line-height:1.1;
     }
     .date-card-value{
-      margin-top:4px;
+      margin-top:5px;
       font-family:Poppins,sans-serif;
-      font-size:28px;
+      font-size:34px;
       font-weight:800;
       line-height:1;
       color:rgba(255,255,255,.96);
     }
     .date-card-value.month-value{
-      font-size:18px;
+      font-size:24px;
       line-height:1.05;
     }
     .date-card-subvalue{
@@ -923,9 +943,7 @@
         ...(state.mode==='video' ? [
           {key:'livestreams',title:'Livestreams',meta:'Live YouTube shelf',image:ASSETS.livestreams}
         ] : []),
-        ...(state.mode==='audio' ? [
-          {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current}
-        ] : []),
+        {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current},
         {key:'books',title:'Bible Books / Studies',meta:formatCountLabel(browse.books.size,'book','books'),image:ASSETS.books},
         {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
         {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date},
