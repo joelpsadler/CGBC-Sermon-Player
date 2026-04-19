@@ -263,6 +263,18 @@
       animation:livePulse 1.6s infinite ease-out;
       flex:0 0 10px;
     }
+    .live-debug{
+      margin:10px 16px 0;
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px dashed rgba(255,255,255,.14);
+      color:rgba(255,255,255,.78);
+      font:12px/1.45 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space:pre-wrap;
+      display:none;
+    }
+    .live-debug.is-visible{display:block}
     @keyframes livePulse{
       0%{box-shadow:0 0 0 0 rgba(255,77,87,.72)}
       70%{box-shadow:0 0 0 10px rgba(255,77,87,0)}
@@ -761,6 +773,54 @@
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
+    const SHOW_LIVE_DEBUG = true;
+
+    function getLiveBadgeDebug(){
+      const now = new Date();
+      const latest = getLatestLivestreamItem();
+      const minutes = now.getHours() * 60 + now.getMinutes();
+      const start = 10 * 60 + 15;
+      const end = 12 * 60 + 45;
+      const inWindow = minutes >= start && minutes <= end;
+      const isSunday = now.getDay() === 0;
+      const datedToday = latest?.date?.iso ? isSameLocalDate(latest.date.iso) : false;
+      const should = shouldShowLiveBadge();
+      return {
+        now: now.toString(),
+        isSunday,
+        inWindow,
+        latestTitle: latest?.title?.display || latest?.title?.episodeName || '(none)',
+        latestStableId: latest?.stableId || '(none)',
+        latestSeries: latest?.series?.name || '(none)',
+        latestDateIso: latest?.date?.iso || '(none)',
+        datedToday,
+        should
+      };
+    }
+
+    function renderLiveDebug(){
+      if(!els.liveDebug) return;
+      if(!SHOW_LIVE_DEBUG){
+        els.liveDebug.classList.remove('is-visible');
+        els.liveDebug.textContent = '';
+        return;
+      }
+      const d = getLiveBadgeDebug();
+      els.liveDebug.classList.add('is-visible');
+      els.liveDebug.textContent = [
+        'LIVE BADGE DEBUG',
+        `now: ${d.now}`,
+        `isSunday: ${d.isSunday}`,
+        `inWindow(10:15-12:45): ${d.inWindow}`,
+        `latestTitle: ${d.latestTitle}`,
+        `latestStableId: ${d.latestStableId}`,
+        `latestSeries: ${d.latestSeries}`,
+        `latestDateIso: ${d.latestDateIso}`,
+        `datedToday: ${d.datedToday}`,
+        `shouldShowLiveBadge(): ${d.should}`
+      ].join('\n');
+    }
+
     function isSameLocalDate(isoDate){
       if(!isoDate) return false;
       const now = new Date();
