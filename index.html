@@ -166,39 +166,19 @@
     .context-chip img{
       width:68px;height:50px;object-fit:cover;border-radius:12px;flex:0 0 68px;background:rgba(255,255,255,.05)
     }
-    .context-chip.date-chip{
-      flex:0 0 148px;
-      justify-content:center;
-      padding:8px;
-    }
+    .context-chip.date-chip{flex:0 0 122px;justify-content:center}
     .context-chip.date-chip img{display:none}
     .context-chip-date{
-      width:100%;
-      height:72px;
-      flex:1 1 auto;
-      border-radius:14px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
+      width:82px;height:58px;flex:0 0 82px;border-radius:12px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
       border:1px solid rgba(255,255,255,.08);
     }
     .context-chip-date .mini-label{
-      font-family:Poppins,sans-serif;
-      font-size:9px;
-      letter-spacing:.11em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.55);
-      line-height:1;
+      font-family:Poppins,sans-serif;font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1;
     }
     .context-chip-date .mini-value{
-      margin-top:4px;
-      font-family:Poppins,sans-serif;
-      font-size:28px;
-      font-weight:800;
-      line-height:1;
-      color:rgba(255,255,255,.96);
+      margin-top:3px;font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1;color:rgba(255,255,255,.96);
     }
     .context-chip.square img{width:58px;height:58px;flex-basis:58px}
     .context-chip-copy{min-width:0}
@@ -342,6 +322,27 @@
     .empty{
       margin:0 16px 16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);
       border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
+    }
+    .nav-divider{
+      margin:2px 2px 0;
+      padding:10px 2px 2px;
+      display:grid;
+      gap:8px;
+      align-items:center;
+    }
+    .nav-divider-line{
+      height:1px;
+      width:100%;
+      background:linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,.16), rgba(255,255,255,.04));
+      border-radius:999px;
+    }
+    .nav-divider-label{
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.48);
+      padding:0 4px;
     }
 
     .content{display:grid;gap:16px;align-content:start;min-width:0}
@@ -949,7 +950,7 @@
         const firstSeries = orderedSeries[0];
         if(firstSeries){
           const firstEpisode=getFirstEpisode(firstSeries.items);
-          bucket.image=bucket.isStudyBucket ? getStudyArtFromItem(firstEpisode) : getStudyArtFromItem(firstEpisode);
+          bucket.image=getStudyArtFromItem(firstEpisode);
         } else if(bucket.episodes.length){
           bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.episodes));
         } else {
@@ -988,12 +989,23 @@
       if(root==='shorts') return [{key:'shorts-all',title:'Shorts',meta:formatCountLabel(state.nativeShelves.shorts.length,'video','videos'),image:ASSETS.shorts}];
       if(root==='current') return browse.current;
       if(root==='books'){
-        return Array.from(browse.books.values()).sort((a,b)=>sortBookName(a.title,b.title)).map(bucket=>({
+        const allBuckets = Array.from(browse.books.values());
+        const bookBuckets = allBuckets.filter(bucket=>!bucket.isStudyBucket).sort((a,b)=>sortBookName(a.title,b.title));
+        const studyBuckets = allBuckets.filter(bucket=>bucket.isStudyBucket).sort((a,b)=>sortSeriesName(a.title,b.title));
+        const mappedBooks = bookBuckets.map(bucket=>({
           key:bucket.key,
           title:bucket.title,
           meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
           image:bucket.image
         }));
+        const mappedStudies = studyBuckets.map(bucket=>({
+          key:bucket.key,
+          title:bucket.title,
+          meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
+          image:bucket.image,
+          isStudyBucket:true
+        }));
+        return mappedBooks.concat(mappedStudies.length ? [{key:'__divider__studies', isDivider:true, title:'Studies'}] : [], mappedStudies);
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
