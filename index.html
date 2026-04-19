@@ -166,9 +166,10 @@
     .context-chip img{
       width:68px;height:50px;object-fit:cover;border-radius:12px;flex:0 0 68px;background:rgba(255,255,255,.05)
     }
+    .context-chip.date-chip{flex:0 0 122px;justify-content:center}
     .context-chip.date-chip img{display:none}
     .context-chip-date{
-      width:68px;height:50px;flex:0 0 68px;border-radius:12px;
+      width:82px;height:58px;flex:0 0 82px;border-radius:12px;
       display:flex;flex-direction:column;align-items:center;justify-content:center;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
       border:1px solid rgba(255,255,255,.08);
@@ -306,6 +307,10 @@
       line-height:1;
       color:rgba(255,255,255,.96);
     }
+    .date-card-value.month-value{
+      font-size:18px;
+      line-height:1.05;
+    }
     .date-card-subvalue{
       margin-top:4px;
       font-family:Poppins,sans-serif;
@@ -346,6 +351,15 @@
     .play-btn{justify-content:flex-start;padding:0 12px 0 6px;gap:12px;min-width:0;background:linear-gradient(180deg, rgba(80,100,91,.24), rgba(39,49,44,.30));border-color:rgba(143,174,157,.18)}
     .play-circle{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
     .play-copy{display:flex;align-items:center;gap:4px;font-family:Poppins,sans-serif;font-size:14px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+    .play-dots{display:inline-flex;min-width:18px;justify-content:flex-start}
+    .play-dots span{opacity:.28;transform:translateY(0);display:inline-block;animation:none}
+    .play-btn.is-playing .play-dots span{animation:playDots 1s infinite ease-in-out}
+    .play-btn.is-playing .play-dots span:nth-child(2){animation-delay:.15s}
+    .play-btn.is-playing .play-dots span:nth-child(3){animation-delay:.3s}
+    @keyframes playDots{
+      0%, 80%, 100%{opacity:.28;transform:translateY(0) scale(.9)}
+      40%{opacity:1;transform:translateY(-1px) scale(1.05)}
+    }
     .audio-copy{display:flex;flex-direction:column;gap:6px}
     .audio-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(28px,3vw,44px);line-height:1.04}
     .audio-series{color:rgba(255,255,255,.88);font-family:Poppins,sans-serif;font-size:18px}
@@ -521,7 +535,7 @@
                 <button class="transport-btn" id="miniSkipBackBtn" type="button">−30</button>
                 <button class="play-btn" id="audioPlayBadge" type="button">
                   <span class="play-circle">▶</span>
-                  <span class="play-copy"><span id="audioPlayLabel">Tap to Play</span></span>
+                  <span class="play-copy"><span id="audioPlayLabel">Tap to Play</span><span class="play-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></span>
                 </button>
                 <button class="transport-btn" id="miniSkipForwardBtn" type="button">+30</button>
               </div>
@@ -532,9 +546,7 @@
               <div class="detail-row"><span class="label">Scripture</span><span class="value" id="audioFeatureScripture"></span></div>
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
-              <div class="detail-row"><span class="label">Book Tags</span><span class="value" id="audioFeatureBookTags"></span></div>
               <div class="detail-row"><span class="label">Audio Plays</span><span class="value" id="audioFeatureAudioPlays"></span></div>
-              <div class="detail-row"><span class="label">Video Views</span><span class="value" id="audioFeatureVideoViews"></span></div>
               <div class="detail-actions player-actions">
                 <a id="playerEpisodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open</span></a>
                 <a id="playerShareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
@@ -553,9 +565,6 @@
         </section>
 
         <section class="panel detail is-idle" id="detailShell">
-          <div class="detail-actions detail-actions-only">
-            <a id="episodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open Video</span></a>
-          </div>
           <div class="related-wrap" id="relatedWrap">
             <h4 class="related-title" id="relatedTitle">Related in this series</h4>
             <div class="related-row" id="relatedRow"></div>
@@ -623,9 +632,7 @@
       audioFeatureScripture: document.getElementById('audioFeatureScripture'),
       audioFeatureSpeaker: document.getElementById('audioFeatureSpeaker'),
       audioFeatureDate: document.getElementById('audioFeatureDate'),
-      audioFeatureBookTags: document.getElementById('audioFeatureBookTags'),
       audioFeatureAudioPlays: document.getElementById('audioFeatureAudioPlays'),
-      audioFeatureVideoViews: document.getElementById('audioFeatureVideoViews'),
       playerEpisodePageLink: document.getElementById('playerEpisodePageLink'),
       playerShareLink: document.getElementById('playerShareLink'),
       audioClockCurrent: document.getElementById('audioClockCurrent'),
@@ -638,7 +645,6 @@
       miniSkipBackBtn: document.getElementById('miniSkipBackBtn'),
       miniSkipForwardBtn: document.getElementById('miniSkipForwardBtn'),
       detailShell: document.getElementById('detailShell'),
-      episodePageLink: document.getElementById('episodePageLink'),
       relatedWrap: document.getElementById('relatedWrap'),
       relatedTitle: document.getElementById('relatedTitle'),
       relatedRow: document.getElementById('relatedRow'),
@@ -868,6 +874,7 @@
       browse.current.forEach(row=>{
         const firstEpisode=getFirstEpisode(row.items);
         row.image=getSeriesArtFromItem(firstEpisode);
+        row.meta = `${row.meta || ''}${row.meta ? ' · ' : ''}${formatCountLabel(row.items.length,'episode','episodes')}`;
       });
 
       browse.books.forEach(bucket=>{
@@ -949,9 +956,7 @@
       if(!root || !branch) return [];
       if(root==='livestreams' || root==='shorts') return [];
       if(root==='current'){
-        const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
-        const rows=visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
-        return [{key:selected.key,title:selected.title,meta:formatCountLabel(rows.length,'episode','episodes'),image:selected.image}];
+        return [];
       }
       if(root==='books'){
         const bucket=browse.books.get(branch); if(!bucket) return [];
@@ -984,7 +989,7 @@
       if(root==='livestreams') return state.nativeShelves.livestreams.slice();
       if(root==='shorts') return state.nativeShelves.shorts.slice();
       if(root==='current'){
-        const selected=browse.current.find(r=>r.key===(leaf||branch)); if(!selected) return [];
+        const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
         return visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
       }
       if(root==='books'){
@@ -1014,8 +1019,8 @@
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
-      if(leaf) return `Episodes · ${leaf.title}`;
-      if(branch) return `${root?.title || 'Browse'} · ${branch.title}`;
+      if(leaf) return `Episodes · ${compactSeriesLabel(leaf.title)}`;
+      if(branch) return `${compactSeriesLabel(root?.title || 'Browse')} · ${compactSeriesLabel(branch.title)}`;
       if(root) return `Browse · ${root.title}`;
       return 'Choose a category';
     }
@@ -1023,12 +1028,6 @@
       const raw = String(value || '').trim();
       if(!raw) return '';
       return raw.replace(/\bChapter\s+/i, '');
-    }
-    function getDetailPanelLink(item){
-      if(item?.video?.hasVideo && item?.video?.url){
-        return { href: item.video.url, label: 'Open Video' };
-      }
-      return { href: item?.links?.episodeUrl || item?.links?.shareUrl || item?.audio?.url || '#', label: 'Open Episode' };
     }
     function buildRelatedItems(item){
       if(!item) return [];
@@ -1121,10 +1120,10 @@
         return `
           <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
             ${media}
-            <div class="context-chip-copy">
+            ${isDateChip ? '' : `<div class="context-chip-copy">
               <div class="context-chip-label">${escapeHtml(item.label)}</div>
               <div class="context-chip-title">${escapeHtml(title)}</div>
-            </div>
+            </div>`}
           </button>
         `;
       }).join('');
@@ -1139,8 +1138,8 @@
       const browse=buildBrowse();
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
-      if(state.nav.leafKey) return `Back to ${branch?.title || 'selection'}`;
-      if(state.nav.branchKey) return `Back to ${root?.title || 'categories'}`;
+      if(state.nav.leafKey) return `Back to ${compactSeriesLabel(branch?.title || 'selection')}`;
+      if(state.nav.branchKey) return `Back to ${compactSeriesLabel(root?.title || 'categories')}`;
       if(state.nav.rootKey) return 'Back to categories';
       return 'Back';
     }
@@ -1206,7 +1205,7 @@
         const dateCardInner = dateTextCard
           ? (row.dateCardType === 'year'
               ? `<div class="date-card-text"><div class="date-card-label">Year</div><div class="date-card-value">${escapeHtml(String(row.dateCardValue || ''))}</div></div>`
-              : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div></div>`)
+              : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value month-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div></div>`)
           : `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}">`;
 
         if(isRootLevel){
@@ -1418,7 +1417,11 @@
         els.audioProgress.max=d || 100;
       });
       ['play','pause','ended'].forEach(name=>{
-        els.audioPlayer.addEventListener(name, ()=>{ els.audioPlayLabel.textContent = name==='play' ? 'Pause' : 'Tap to Play'; });
+        els.audioPlayer.addEventListener(name, ()=>{
+          const playing = name === 'play';
+          els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
+          els.audioPlayBadge.classList.toggle('is-playing', playing);
+        });
       });
     }
     async function bootstrap(){
