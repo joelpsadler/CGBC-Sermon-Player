@@ -665,9 +665,58 @@
     const SHORTS = { name:'CGBC Shorts', playlistId:'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     // Beginner note: edit this list when the current pinned audio series changes.
-    const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
+    /* ============================================================================
+   ====================== BEGIN EASY SETTINGS: CURRENT SERIES ======================
+   DESKTOP + MOBILE BOTH USE THIS SAME SINGLE LIST.
+   CHANGE CURRENT SERIES HERE ONLY.
+
+   What this does:
+   - Any series key listed below gets the "Current" treatment.
+   - This affects both desktop and mobile.
+   - You do NOT need to change it in two places.
+
+   How to edit:
+   1) Keep each key inside quotes.
+   2) Separate entries with commas.
+   3) Example:
+      const CURRENT_SERIES_KEYS = new Set([
+        'romans-chapter-12',
+        'the-rapture'
+      ]);
+
+   When the next series becomes current:
+   - remove the old key if needed
+   - add the new key here
+   ============================================================================ */
+const CURRENT_SERIES_KEYS = new Set([
+  'romans-chapter-12',
+  'the-rapture'
+]);
+/* ======================= END EASY SETTINGS: CURRENT SERIES ===================== */
     // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
-    const FORCE_LIVE_BADGE_PREVIEW = false; // Beginner note: set to true only when you want to manually force the LIVE NOW badge for testing.
+    /* ============================================================================
+   ================== BEGIN EASY SETTINGS: LIVE BADGE TEST TOGGLE =================
+   THIS IS THE LIVE BADGE TEST SWITCH.
+
+   Set to TRUE:
+   - LIVE NOW badge is forced on anytime for testing
+   - ignores the normal Sunday / time window rules
+
+   Set to FALSE:
+   - forced testing turns off
+   - normal live logic is restored automatically
+
+   Normal live logic:
+   - video mode only
+   - Sunday only
+   - about 10:15 AM to 12:45 PM
+   - newest livestream item must be dated today
+
+   IMPORTANT:
+   Change ONLY true/false on the next line.
+   ============================================================================ */
+const FORCE_LIVE_BADGE_PREVIEW = false;
+/* =================== END EASY SETTINGS: LIVE BADGE TEST TOGGLE ================= */
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
 
@@ -775,7 +824,13 @@
         : [];
       return rows[0] || null;
     }
-    function shouldShowLiveBadge(){
+    /* ============================================================================
+   EASY FIND NOTE:
+   Search this file for either of these exact phrases:
+   - BEGIN EASY SETTINGS: LIVE BADGE TEST TOGGLE
+   - BEGIN EASY SETTINGS: CURRENT SERIES
+   ============================================================================ */
+function shouldShowLiveBadge(){
       if(FORCE_LIVE_BADGE_PREVIEW) return true;
       if(state.mode !== 'video') return false;
       const now = new Date();
