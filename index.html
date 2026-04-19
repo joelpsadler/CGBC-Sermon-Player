@@ -1588,7 +1588,30 @@ function shouldShowLiveBadge(){
       rerender();
     }
     function selectChoice(key){
-      if(!state.nav.rootKey){ state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
+      if(!state.nav.rootKey){
+        /* ============================================================================
+           EASY NOTE: Livestreams and Shorts do NOT need a middle bucket.
+           Clicking them should go straight from the root card to the episode list.
+           If you ever want the old extra-click behavior back, remove the next block.
+           ============================================================================ */
+        if(key === 'livestreams'){
+          state.nav.rootKey = 'livestreams';
+          state.nav.branchKey = 'live-all';
+          state.nav.leafKey = null;
+          scrollChoiceListToTop();
+          rerender();
+          return;
+        }
+        if(key === 'shorts'){
+          state.nav.rootKey = 'shorts';
+          state.nav.branchKey = 'shorts-all';
+          state.nav.leafKey = null;
+          scrollChoiceListToTop();
+          rerender();
+          return;
+        }
+        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return;
+      }
       if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
       if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); return; }
     }
@@ -1597,7 +1620,17 @@ function shouldShowLiveBadge(){
         const topBtn=event.target.closest('[data-top-root]');
         if(topBtn){
           const key=topBtn.dataset.topRoot;
-          state.nav={rootKey:key,branchKey:null,leafKey:null};
+          /* ============================================================================
+             EASY NOTE: Top breadcrumb/root chips should match the same one-click rule
+             used by the main Livestreams and Shorts cards.
+             ============================================================================ */
+          if(key === 'livestreams'){
+            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null};
+          } else if(key === 'shorts'){
+            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null};
+          } else {
+            state.nav={rootKey:key,branchKey:null,leafKey:null};
+          }
           state.currentItem=null;
           scrollChoiceListToTop();
           rerender();
