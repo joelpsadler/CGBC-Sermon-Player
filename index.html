@@ -263,26 +263,6 @@
       animation:livePulse 1.6s infinite ease-out;
       flex:0 0 10px;
     }
-    .force-debug-banner{
-      margin:10px 16px 0;
-      padding:12px 14px;
-      border-radius:16px;
-      background:linear-gradient(180deg, rgba(90,15,15,.95), rgba(52,10,10,.9));
-      border:1px solid rgba(255,110,110,.38);
-      color:rgba(255,245,245,.98);
-      font-family:Poppins,sans-serif;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      display:none;
-      box-shadow:0 10px 22px rgba(0,0,0,.22);
-    }
-    .force-debug-banner.is-visible{display:flex;align-items:center;gap:10px}
-    .force-debug-dot{
-      width:10px;height:10px;border-radius:999px;background:#ff4d57;flex:0 0 10px;
-      box-shadow:0 0 0 0 rgba(255,77,87,.7);animation:livePulse 1.6s infinite ease-out;
-    }
     @keyframes livePulse{
       0%{box-shadow:0 0 0 0 rgba(255,77,87,.72)}
       70%{box-shadow:0 0 0 10px rgba(255,77,87,0)}
@@ -610,7 +590,7 @@
           <button type="button" class="path-button" id="homeBtn"><span>Home</span></button>
           <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
         </div>
-        <div class="force-debug-banner" id="forceDebugBanner">
+        <div class="force-debug-banner">
           <span class="force-debug-dot"></span>
           <span>Debug Mode Active · Live Badge Forced On</span>
         </div>
@@ -691,7 +671,7 @@
     // Beginner note: edit this list when the current pinned audio series changes.
     const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
     // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
-    const FORCE_LIVE_BADGE_PREVIEW = true;
+    const FORCE_LIVE_BADGE_PREVIEW = true; // Beginner note: set to false after livestream testing is finished.
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
 
