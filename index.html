@@ -666,7 +666,7 @@
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     // Beginner note: edit this list when the current pinned audio series changes.
     const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
-    // Beginner note: set this to true if you want to preview the LIVE NOW badge without waiting for Sunday morning.
+    // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
     const FORCE_LIVE_BADGE_PREVIEW = false;
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
@@ -761,10 +761,6 @@
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
-    function getLatestLivestreamItem(){
-      const rows = Array.isArray(state?.nativeShelves?.livestreams) ? state.nativeShelves.livestreams.slice().sort(sortNewestFirst) : [];
-      return rows[0] || null;
-    }
     function isSameLocalDate(isoDate){
       if(!isoDate) return false;
       const now = new Date();
@@ -772,6 +768,18 @@
       const m = String(now.getMonth() + 1).padStart(2, '0');
       const d = String(now.getDate()).padStart(2, '0');
       return String(isoDate).slice(0, 10) === `${y}-${m}-${d}`;
+    }
+    function getLivestreamCandidates(){
+      const allItems = Array.isArray(state?.items) ? state.items : [];
+      return allItems.filter(item=>{
+        const seriesKey = String(item?.series?.key || '').toLowerCase();
+        const seriesName = String(item?.series?.name || '').toLowerCase();
+        return seriesKey === 'livestreams' || seriesName === 'livestreams';
+      }).sort(sortNewestFirst);
+    }
+    function getLatestLivestreamItem(){
+      const rows = getLivestreamCandidates();
+      return rows[0] || null;
     }
     function shouldShowLiveBadge(){
       if(FORCE_LIVE_BADGE_PREVIEW) return true;
@@ -781,9 +789,10 @@
       const minutes = now.getHours() * 60 + now.getMinutes();
       const start = 10 * 60 + 15;
       const end = 12 * 60 + 45;
+      if(minutes < start || minutes > end) return false;
       const latest = getLatestLivestreamItem();
-      const datedToday = latest?.date?.iso ? isSameLocalDate(latest.date.iso) : false;
-      return datedToday && minutes >= start && minutes <= end;
+      if(!latest) return false;
+      return latest?.date?.iso ? isSameLocalDate(latest.date.iso) : false;
     }
     function getVideoArchiveItems(){return state.items.filter(it=>it?.video?.hasVideo && it?.video?.youtubeId && it?.flags?.includeInVideoTotals!==false);}
     function queryHasDateIntent(query){
