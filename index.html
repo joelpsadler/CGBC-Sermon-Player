@@ -229,6 +229,44 @@
       display:block;
       padding:0;
       overflow:hidden;
+      position:relative;
+    }
+    .live-badge{
+      position:absolute;
+      top:12px;
+      left:12px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(24,10,10,.92), rgba(18,8,8,.84));
+      border:1px solid rgba(255,110,110,.34);
+      box-shadow:0 10px 22px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter:blur(12px);
+      font-family:Poppins,sans-serif;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,245,245,.98);
+      pointer-events:none;
+    }
+    .live-badge-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#ff4d57;
+      box-shadow:0 0 0 0 rgba(255,77,87,.7);
+      animation:livePulse 1.6s infinite ease-out;
+      flex:0 0 10px;
+    }
+    @keyframes livePulse{
+      0%{box-shadow:0 0 0 0 rgba(255,77,87,.72)}
+      70%{box-shadow:0 0 0 10px rgba(255,77,87,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,77,87,0)}
     }
     .choice.root-card .thumb-square,
     .choice.root-card .thumb-wide{
@@ -628,6 +666,8 @@
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     // Beginner note: edit this list when the current pinned audio series changes.
     const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
+    // Beginner note: set this to true if you want to preview the LIVE NOW badge without waiting for Sunday morning.
+    const FORCE_LIVE_BADGE_PREVIEW = false;
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
 
@@ -721,6 +761,16 @@
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
+    function shouldShowLiveBadge(){
+      if(FORCE_LIVE_BADGE_PREVIEW) return true;
+      const now = new Date();
+      const day = now.getDay(); // 0 = Sunday
+      if(day !== 0) return false;
+      const minutes = now.getHours() * 60 + now.getMinutes();
+      const start = 10 * 60 + 15;
+      const end = 12 * 60 + 45;
+      return minutes >= start && minutes <= end;
+    }
     function getVideoArchiveItems(){return state.items.filter(it=>it?.video?.hasVideo && it?.video?.youtubeId && it?.flags?.includeInVideoTotals!==false);}
     function queryHasDateIntent(query){
       const q=String(query||'').trim().toLowerCase();
