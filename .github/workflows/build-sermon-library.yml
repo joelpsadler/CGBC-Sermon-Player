@@ -15,6 +15,10 @@ concurrency:
 jobs:
   build-library:
     runs-on: ubuntu-latest
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      PODBEAN_CLIENT_ID: ${{ secrets.PODBEAN_CLIENT_ID }}
+      PODBEAN_CLIENT_SECRET: ${{ secrets.PODBEAN_CLIENT_SECRET }}
 
     steps:
       - name: Check out repository
@@ -52,7 +56,9 @@ jobs:
           cp stats/stats.json public/stats.json
 
       - name: Build resolved library
-        run: npm run build:library
+        shell: bash
+        run: |
+          npm run build:library
 
       - name: Commit generated files if changed
         shell: bash
