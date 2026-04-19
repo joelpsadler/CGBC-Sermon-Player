@@ -883,6 +883,33 @@
           }
         });
 
+        const studyType = item?.study?.type || '';
+        if(studyType === 'topical_study' && studyName){
+          const studyKey = item?.study?.key || studyName.toLowerCase().replace(/\s+/g,'-');
+          if(!browse.books.has(studyKey)){
+            browse.books.set(studyKey,{
+              key:studyKey,
+              title:studyName,
+              image:ASSETS.books,
+              seriesMap:new Map(),
+              episodes:[],
+              specialsByYear:new Map(),
+              isStudyBucket:true
+            });
+          }
+          const studyBucket = browse.books.get(studyKey);
+          if(!studyBucket.seriesMap.has(seriesKey)){
+            studyBucket.seriesMap.set(seriesKey,{
+              key:seriesKey,
+              title:seriesName,
+              meta:'Topical series',
+              image:ASSETS.topicalSeries || ASSETS.fallback,
+              items:[]
+            });
+          }
+          studyBucket.seriesMap.get(seriesKey).items.push(item);
+        }
+
         if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial){
           if(!browse.topical.has(seriesKey)){
             browse.topical.set(seriesKey,{
@@ -922,7 +949,7 @@
         const firstSeries = orderedSeries[0];
         if(firstSeries){
           const firstEpisode=getFirstEpisode(firstSeries.items);
-          bucket.image=getStudyArtFromItem(firstEpisode);
+          bucket.image=bucket.isStudyBucket ? getStudyArtFromItem(firstEpisode) : getStudyArtFromItem(firstEpisode);
         } else if(bucket.episodes.length){
           bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.episodes));
         } else {
