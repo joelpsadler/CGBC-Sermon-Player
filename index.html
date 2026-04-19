@@ -153,7 +153,7 @@
     .context-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
     .context-chip{
       min-width:0;
-      flex:0 0 220px;
+      flex:0 0 248px;
       height:88px;
       display:flex;
       gap:10px;
@@ -191,11 +191,16 @@
     .context-chip-title{
       margin-top:2px;
       font-family:Poppins,sans-serif;
-      font-size:18px;
+      font-size:16px;
       line-height:1.08;
-      white-space:nowrap;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
       overflow:hidden;
       text-overflow:ellipsis;
+      white-space:normal;
+      word-break:break-word;
+      max-height:2.2em;
     }
 
     .search-status{font-size:13px;color:var(--muted);white-space:nowrap}
@@ -364,12 +369,13 @@
     .meta-grid{display:grid;gap:10px}
     .meta-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:start}
     .detail-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-    .related-wrap{display:none;gap:12px;margin-top:18px}
+    .related-wrap{display:none;gap:12px;margin-top:4px}
+    .related-wrap.is-visible{display:block}
     .related-title{font-family:Poppins,sans-serif;font-size:16px;margin:0 0 10px}
     .related-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
-    .related{flex:0 0 220px;max-width:220px}
-    .related .thumb-wide{width:84px;height:48px;flex-basis:84px}
-    .related .thumb-square{width:64px;height:64px;flex-basis:64px}
+    .related{flex:0 0 260px;max-width:260px;align-items:center}
+    .related .thumb-wide{width:90px;height:56px;flex-basis:90px}
+    .related .thumb-square{width:70px;height:70px;flex-basis:70px}
 
     
     @media (min-width:1040px){
@@ -489,7 +495,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search title, scripture, series, book, date">
+          <input id="searchInput" type="search" placeholder="Search Title, Series, Scripture, Book, Study, Date">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
@@ -548,8 +554,11 @@
 
         <section class="panel detail is-idle" id="detailShell">
           <div class="detail-actions detail-actions-only">
-            <a id="episodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open Episode</span></a>
-            <a id="shareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
+            <a id="episodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open Video</span></a>
+          </div>
+          <div class="related-wrap" id="relatedWrap">
+            <h4 class="related-title" id="relatedTitle">Related in this series</h4>
+            <div class="related-row" id="relatedRow"></div>
           </div>
         </section>
       </section>
@@ -630,7 +639,9 @@
       miniSkipForwardBtn: document.getElementById('miniSkipForwardBtn'),
       detailShell: document.getElementById('detailShell'),
       episodePageLink: document.getElementById('episodePageLink'),
-      shareLink: document.getElementById('shareLink'),
+      relatedWrap: document.getElementById('relatedWrap'),
+      relatedTitle: document.getElementById('relatedTitle'),
+      relatedRow: document.getElementById('relatedRow'),
       contextStrip: document.getElementById('contextStrip'),
       contextRow: document.getElementById('contextRow')
     };
@@ -956,7 +967,14 @@
       if(root==='topical') return [];
       if(root==='date'){
         const yearBucket=browse.date.get(branch); if(!yearBucket) return [];
-        return Array.from(yearBucket.keys()).sort((a,b)=>b.localeCompare(a)).map(monthKey=>({key:monthKey,title:new Date(monthKey+'-15T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}),meta:formatCountLabel(yearBucket.get(monthKey).length,'episode','episodes'),image:ASSETS.date}));
+        return Array.from(yearBucket.keys()).sort((a,b)=>b.localeCompare(a)).map(monthKey=>({
+          key:monthKey,
+          title:new Date(monthKey+'-15T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}),
+          meta:formatCountLabel(yearBucket.get(monthKey).length,'episode','episodes'),
+          image:null,
+          dateCardType:'month',
+          dateCardValue:monthKey
+        }));
       }
       return [];
     }
@@ -1001,6 +1019,61 @@
       if(root) return `Browse · ${root.title}`;
       return 'Choose a category';
     }
+    function compactSeriesLabel(value){
+      const raw = String(value || '').trim();
+      if(!raw) return '';
+      return raw.replace(/\bChapter\s+/i, '');
+    }
+    function getDetailPanelLink(item){
+      if(item?.video?.hasVideo && item?.video?.url){
+        return { href: item.video.url, label: 'Open Video' };
+      }
+      return { href: item?.links?.episodeUrl || item?.links?.shareUrl || item?.audio?.url || '#', label: 'Open Episode' };
+    }
+    function buildRelatedItems(item){
+      if(!item) return [];
+      const baseSeries = item?.series?.key || '';
+      const pool = state.activeQueue && state.activeQueue.length
+        ? state.activeQueue.slice()
+        : getModeItems(state.mode).slice();
+      const related = pool.filter(row => row?.stableId !== item?.stableId && (baseSeries ? row?.series?.key === baseSeries : true));
+      return related.slice(0, 10);
+    }
+    function renderRelatedRow(item){
+      if(!els.relatedWrap || !els.relatedRow || !els.relatedTitle){
+        return;
+      }
+      if(!item){
+        els.relatedWrap.classList.remove('is-visible');
+        els.relatedRow.innerHTML = '';
+        return;
+      }
+      const rows = buildRelatedItems(item);
+      if(!rows.length){
+        els.relatedWrap.classList.remove('is-visible');
+        els.relatedRow.innerHTML = '';
+        return;
+      }
+      const labelSource = compactSeriesLabel(item?.series?.name || '') || 'this selection';
+      els.relatedTitle.textContent = `Related in ${labelSource}`;
+      els.relatedRow.innerHTML = rows.map(row => {
+        const img = getEpisodeArt(row, state.mode);
+        const thumbClass = state.mode === 'video' ? 'thumb-wide' : 'thumb-square';
+        const metaLine = row?.scripture?.display || formatDate(row);
+        const metric = state.mode === 'audio'
+          ? formatCountLabel(row?.audio?.plays || 0, 'play', 'plays')
+          : formatCountLabel(row?.video?.views || 0, 'view', 'views');
+        return `<button type="button" class="related" data-key="${escapeHtml(row.stableId)}" data-episode="1">
+          <div class="${thumbClass}"><img src="${escapeHtml(img)}" alt="${escapeHtml(row?.title?.display || '')}"></div>
+          <div class="copy">
+            <h4 class="card-title">${escapeHtml(row?.title?.display || '')}</h4>
+            <div class="card-meta-line">${escapeHtml(metaLine)}</div>
+            <div class="card-metric">${escapeHtml(metric)}</div>
+          </div>
+        </button>`;
+      }).join('');
+      els.relatedWrap.classList.add('is-visible');
+    }
     function buildContextItems(){
       const browse=buildBrowse();
       const items=[];
@@ -1008,8 +1081,20 @@
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
       if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:state.mode==='audio', level:'root'});
-      if(branch) items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
-      if(leaf) items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio', level:'leaf'});
+      if(branch){
+        if(state.nav.rootKey === 'date' && branch.dateCardType === 'year'){
+          items.push({label:'Year', title:branch.title, image:null, square:false, level:'branch', dateCardType:'year', dateCardValue:branch.dateCardValue || branch.title});
+        } else {
+          items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
+        }
+      }
+      if(leaf){
+        if(state.nav.rootKey === 'date' && leaf.dateCardType === 'month'){
+          items.push({label:'Month', title:leaf.title, image:null, square:false, level:'leaf', dateCardType:'month', dateCardValue:leaf.dateCardValue || leaf.title});
+        } else {
+          items.push({label:'Series / Group', title:leaf.title, image:leaf.image || ASSETS.fallback, square:state.mode==='audio', level:'leaf'});
+        }
+      }
       return items;
     }
     function renderContextStrip(){
@@ -1031,7 +1116,7 @@
           : `<img src="${escapeHtml(item.image)}" alt="">`;
         const title = isDateChip
           ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
-          : item.title;
+          : compactSeriesLabel(item.title);
         const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
           <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
@@ -1111,7 +1196,9 @@
         const dateTextCard = !!row?.dateCardType;
         const thumbClass = (state.mode==='video' || isRootLevel || dateTextCard) ? 'thumb-wide' : 'thumb-square';
         const image = episodeLevel ? getEpisodeArt(row, state.mode) : (row.image || ASSETS.fallback);
-        const title = episodeLevel ? (row?.title?.display || '') : (row.title || '');
+        const title = episodeLevel
+          ? (row?.title?.display || '')
+          : (dateTextCard ? '' : (compactSeriesLabel(row.title || '')));
         const sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
         const metric = episodeLevel ? episodeCardMetric(row) : '';
         const key = episodeLevel ? row.stableId : row.key;
@@ -1119,7 +1206,7 @@
         const dateCardInner = dateTextCard
           ? (row.dateCardType === 'year'
               ? `<div class="date-card-text"><div class="date-card-label">Year</div><div class="date-card-value">${escapeHtml(String(row.dateCardValue || ''))}</div></div>`
-              : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div><div class="date-card-subvalue">${escapeHtml(String(row.title || ''))}</div></div>`)
+              : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div></div>`)
           : `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}">`;
 
         if(isRootLevel){
@@ -1150,6 +1237,7 @@
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
+        renderRelatedRow(null);
         if(state.mode==='video'){
           els.videoPlaceholder.style.display='flex';
           els.audioPlaceholder.style.display='none';
@@ -1197,13 +1285,17 @@
 
       const shareUrl=item?.links?.shareUrl || item?.links?.episodeUrl || '#';
       const openUrl=item?.links?.episodeUrl || item?.video?.url || item?.audio?.url || '#';
-      els.episodePageLink.href=openUrl;
-      els.shareLink.href=shareUrl;
+      const detailLink = getDetailPanelLink(item);
+      els.episodePageLink.href=detailLink.href;
+      if(els.episodePageLink && els.episodePageLink.querySelector('span')){
+        els.episodePageLink.querySelector('span').textContent = detailLink.label;
+      }
       if(els.playerEpisodePageLink) els.playerEpisodePageLink.href=openUrl;
       if(els.playerShareLink) els.playerShareLink.href=shareUrl;
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
       if(els.audioFeatureAudioPlays) els.audioFeatureAudioPlays.textContent=formatCountLabel(item?.audio?.plays || 0,'play','plays');
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
+      renderRelatedRow(item);
     }
     function scrollChoiceListToTop(){
       try{ els.choiceList.scrollTop = 0; }catch(err){}
