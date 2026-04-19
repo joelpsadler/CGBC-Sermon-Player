@@ -610,7 +610,7 @@
           <button type="button" class="path-button" id="homeBtn"><span>Home</span></button>
           <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
         </div>
-        <div class="force-debug-banner is-visible" id="forceDebugBanner">
+        <div class="force-debug-banner" id="forceDebugBanner">
           <span class="force-debug-dot"></span>
           <span>Debug Mode Active · Live Badge Forced On</span>
         </div>
@@ -712,6 +712,7 @@
       navHeading: document.getElementById('navHeading'),
       homeBtn: document.getElementById('homeBtn'),
       backBtn: document.getElementById('backBtn'),
+      forceDebugBanner: document.getElementById('forceDebugBanner'),
       choiceList: document.getElementById('choiceList'),
       listenBtn: document.getElementById('listenBtn'),
       watchBtn: document.getElementById('watchBtn'),
@@ -1378,6 +1379,12 @@
         state.activeQueue = [];
         if(!searchResults) state.currentItem = null;
       }
+
+      const debugVisible = !!(FORCE_LIVE_BADGE_PREVIEW && state.mode === 'video');
+      if(els.forceDebugBanner){
+        els.forceDebugBanner.classList.toggle('is-visible', debugVisible);
+      }
+
       if(!rows.length){
         els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
         return;
@@ -1385,6 +1392,7 @@
       const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey || state.nav.rootKey);
       const isRootLevel = !state.nav.rootKey;
       const isBranchLevel = !!state.nav.rootKey && !state.nav.branchKey;
+      const firstEpisodeStableId = episodeLevel && rows.length ? rows[0]?.stableId : null;
       els.choiceList.innerHTML = rows.map(row => {
         const dateTextCard = !!row?.dateCardType;
         const thumbClass = (state.mode==='video' || isRootLevel || dateTextCard) ? 'thumb-wide' : 'thumb-square';
@@ -1408,8 +1416,15 @@
               : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value month-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div></div>`)
           : `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}">`;
 
+        const showRootLivePill = state.mode === 'video' && isRootLevel && row?.key === 'livestreams' && shouldShowLiveBadge();
+        const showEpisodeLivePill = state.mode === 'video' && episodeLevel && state.nav.rootKey === 'livestreams' && row?.stableId === firstEpisodeStableId && shouldShowLiveBadge();
+        const livePill = (showRootLivePill || showEpisodeLivePill)
+          ? `<div class="live-badge"><span class="live-badge-dot"></span><span>Live Now</span></div>`
+          : '';
+
         if(isRootLevel){
           return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
+            ${livePill}
             <div class="${thumbClass}">${dateCardInner}</div>
             <div class="copy">
               <h3 class="card-title">${escapeHtml(title)}</h3>
@@ -1418,6 +1433,7 @@
           </button>`;
         }
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
+          ${livePill}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             <h3 class="card-title">${escapeHtml(title)}</h3>
