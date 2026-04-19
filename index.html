@@ -590,10 +590,6 @@
           <button type="button" class="path-button" id="homeBtn"><span>Home</span></button>
           <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
         </div>
-        <div class="force-debug-banner">
-          <span class="force-debug-dot"></span>
-          <span>Debug Mode Active · Live Badge Forced On</span>
-        </div>
         <div class="stack" id="choiceList"></div>
       </section>
 
@@ -671,7 +667,7 @@
     // Beginner note: edit this list when the current pinned audio series changes.
     const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
     // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
-    const FORCE_LIVE_BADGE_PREVIEW = false; // Beginner note: set to false after livestream testing is finished.
+    const FORCE_LIVE_BADGE_PREVIEW = false; // Beginner note: set to true only when you want to manually force the LIVE NOW badge for testing.
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
 
@@ -692,7 +688,6 @@
       navHeading: document.getElementById('navHeading'),
       homeBtn: document.getElementById('homeBtn'),
       backBtn: document.getElementById('backBtn'),
-      forceDebugBanner: document.getElementById('forceDebugBanner'),
       choiceList: document.getElementById('choiceList'),
       listenBtn: document.getElementById('listenBtn'),
       watchBtn: document.getElementById('watchBtn'),
@@ -774,20 +769,15 @@
       const d = String(now.getDate()).padStart(2, '0');
       return String(isoDate).slice(0, 10) === `${y}-${m}-${d}`;
     }
-    function getLivestreamCandidates(){
-      const allItems = Array.isArray(state?.items) ? state.items : [];
-      return allItems.filter(item=>{
-        const seriesKey = String(item?.series?.key || '').toLowerCase();
-        const seriesName = String(item?.series?.name || '').toLowerCase();
-        return seriesKey === 'livestreams' || seriesName === 'livestreams';
-      }).sort(sortNewestFirst);
-    }
     function getLatestLivestreamItem(){
-      const rows = getLivestreamCandidates();
+      const rows = Array.isArray(state?.nativeShelves?.livestreams)
+        ? state.nativeShelves.livestreams.slice().sort(sortNewestFirst)
+        : [];
       return rows[0] || null;
     }
     function shouldShowLiveBadge(){
       if(FORCE_LIVE_BADGE_PREVIEW) return true;
+      if(state.mode !== 'video') return false;
       const now = new Date();
       const day = now.getDay(); // 0 = Sunday
       if(day !== 0) return false;
