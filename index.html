@@ -793,6 +793,23 @@
       }
       throw lastError || new Error('library-resolved.json could not be loaded.');
     }
+    async function fetchVideoStatistics(videoIds){
+      const out = new Map();
+      const ids = Array.from(new Set((videoIds || []).filter(Boolean)));
+      for(let i=0;i<ids.length;i+=50){
+        const batch = ids.slice(i, i+50);
+        const qs = new URLSearchParams({part:'statistics', id:batch.join(','), key:API_KEY});
+        const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?${qs.toString()}`);
+        if(!res.ok) continue;
+        const data = await res.json();
+        const rows = Array.isArray(data?.items) ? data.items : [];
+        rows.forEach(row=>{
+          out.set(row?.id, Number(row?.statistics?.viewCount || 0));
+        });
+      }
+      return out;
+    }
+
     async function fetchPlaylistSeries(config){
       const episodes=[]; let pageToken='';
       for(let attempt=0;attempt<6;attempt+=1){
@@ -829,6 +846,12 @@
         if(!data?.nextPageToken) break;
         pageToken=data.nextPageToken;
       }
+      const statsMap = await fetchVideoStatistics(episodes.map(ep=>ep?.video?.youtubeId));
+      episodes.forEach(ep=>{
+        if(ep?.video?.youtubeId){
+          ep.video.views = Number(statsMap.get(ep.video.youtubeId) || 0);
+        }
+      });
       return episodes.sort(sortNewestFirst);
     }
     function buildBrowse(){
@@ -1272,7 +1295,10 @@
         const title = episodeLevel
           ? (row?.title?.display || '')
           : (dateTextCard ? '' : (compactSeriesLabel(row.title || '')));
-        const sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
+        let sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
+        if(episodeLevel && row?.source === 'youtube-native' && /native shelf/i.test(String(sub || ''))){
+          sub = '';
+        }
         let metric = episodeLevel ? episodeCardMetric(row) : '';
         if(!episodeLevel && Array.isArray(row.items) && row.items.length){
           metric = formatCountLabel(row.items.length,'episode','episodes');
