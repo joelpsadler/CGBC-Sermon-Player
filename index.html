@@ -271,9 +271,9 @@
       align-items:center;
     }
     .choice.date-text-card .thumb-wide{
-      width:132px;
-      height:92px;
-      flex-basis:132px;
+      width:164px;
+      height:96px;
+      flex-basis:164px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -289,7 +289,7 @@
       text-align:center;
       width:100%;
       height:100%;
-      padding:8px;
+      padding:10px 12px;
     }
     .date-card-label{
       font-family:Poppins,sans-serif;
@@ -351,14 +351,29 @@
     .play-btn{justify-content:flex-start;padding:0 12px 0 6px;gap:12px;min-width:0;background:linear-gradient(180deg, rgba(80,100,91,.24), rgba(39,49,44,.30));border-color:rgba(143,174,157,.18)}
     .play-circle{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;flex:0 0 42px}
     .play-copy{display:flex;align-items:center;gap:4px;font-family:Poppins,sans-serif;font-size:14px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-    .play-dots{display:inline-flex;min-width:18px;justify-content:flex-start}
-    .play-dots span{opacity:.28;transform:translateY(0);display:inline-block;animation:none}
-    .play-btn.is-playing .play-dots span{animation:playDots 1s infinite ease-in-out}
-    .play-btn.is-playing .play-dots span:nth-child(2){animation-delay:.15s}
-    .play-btn.is-playing .play-dots span:nth-child(3){animation-delay:.3s}
+    .play-dots{
+      display:inline-flex;
+      min-width:28px;
+      justify-content:flex-start;
+      overflow:hidden;
+      line-height:1;
+      margin-left:2px
+    }
+    .play-dots span{
+      opacity:.22;
+      transform:translateY(0) scale(.92);
+      display:inline-block;
+      animation:none;
+      font-size:18px;
+      width:8px;
+      text-align:center;
+    }
+    .play-btn.is-playing .play-dots span{animation:playDots 1.05s infinite ease-in-out}
+    .play-btn.is-playing .play-dots span:nth-child(2){animation-delay:.14s}
+    .play-btn.is-playing .play-dots span:nth-child(3){animation-delay:.28s}
     @keyframes playDots{
-      0%, 80%, 100%{opacity:.28;transform:translateY(0) scale(.9)}
-      40%{opacity:1;transform:translateY(-1px) scale(1.05)}
+      0%, 80%, 100%{opacity:.22;transform:translateY(0) scale(.92)}
+      40%{opacity:1;transform:translateY(-2px) scale(1.14)}
     }
     .audio-copy{display:flex;flex-direction:column;gap:6px}
     .audio-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(28px,3vw,44px);line-height:1.04}
@@ -546,7 +561,7 @@
               <div class="detail-row"><span class="label">Scripture</span><span class="value" id="audioFeatureScripture"></span></div>
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
-              <div class="detail-row"><span class="label">Audio Plays</span><span class="value" id="audioFeatureAudioPlays"></span></div>
+              <div class="detail-row"><span class="label">Audio Plays</span><span class="value" id="audioFeatureAudioPlays">—</span></div>
               <div class="detail-actions player-actions">
                 <a id="playerEpisodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open</span></a>
                 <a id="playerShareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
@@ -1051,6 +1066,7 @@
       if(!rows.length){
         els.relatedWrap.classList.remove('is-visible');
         els.relatedRow.innerHTML = '';
+        if(els.detailShell) els.detailShell.classList.add('is-idle');
         return;
       }
       const labelSource = compactSeriesLabel(item?.series?.name || '') || 'this selection';
@@ -1072,6 +1088,7 @@
         </button>`;
       }).join('');
       els.relatedWrap.classList.add('is-visible');
+      if(els.detailShell) els.detailShell.classList.remove('is-idle');
     }
     function buildContextItems(){
       const browse=buildBrowse();
@@ -1199,7 +1216,10 @@
           ? (row?.title?.display || '')
           : (dateTextCard ? '' : (compactSeriesLabel(row.title || '')));
         const sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
-        const metric = episodeLevel ? episodeCardMetric(row) : '';
+        let metric = episodeLevel ? episodeCardMetric(row) : '';
+        if(!episodeLevel && Array.isArray(row.items) && row.items.length){
+          metric = formatCountLabel(row.items.length,'episode','episodes');
+        }
         const key = episodeLevel ? row.stableId : row.key;
         const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : ''));
         const dateCardInner = dateTextCard
@@ -1236,6 +1256,7 @@
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
+        if(els.detailShell) els.detailShell.classList.add('is-idle');
         renderRelatedRow(null);
         if(state.mode==='video'){
           els.videoPlaceholder.style.display='flex';
@@ -1295,6 +1316,9 @@
       if(els.audioFeatureAudioPlays) els.audioFeatureAudioPlays.textContent=formatCountLabel(item?.audio?.plays || 0,'play','plays');
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
       renderRelatedRow(item);
+      if(els.detailShell && (!els.relatedWrap || !els.relatedWrap.classList.contains('is-visible'))){
+        els.detailShell.classList.add('is-idle');
+      }
     }
     function scrollChoiceListToTop(){
       try{ els.choiceList.scrollTop = 0; }catch(err){}
