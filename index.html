@@ -761,6 +761,18 @@
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
     function getModeItems(mode){return state.items.filter(it=>mode==='audio'?isAudioCapable(it):isVideoCapable(it));}
+    function getLatestLivestreamItem(){
+      const rows = Array.isArray(state?.nativeShelves?.livestreams) ? state.nativeShelves.livestreams.slice().sort(sortNewestFirst) : [];
+      return rows[0] || null;
+    }
+    function isSameLocalDate(isoDate){
+      if(!isoDate) return false;
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return String(isoDate).slice(0, 10) === `${y}-${m}-${d}`;
+    }
     function shouldShowLiveBadge(){
       if(FORCE_LIVE_BADGE_PREVIEW) return true;
       const now = new Date();
@@ -769,7 +781,9 @@
       const minutes = now.getHours() * 60 + now.getMinutes();
       const start = 10 * 60 + 15;
       const end = 12 * 60 + 45;
-      return minutes >= start && minutes <= end;
+      const latest = getLatestLivestreamItem();
+      const datedToday = latest?.date?.iso ? isSameLocalDate(latest.date.iso) : false;
+      return datedToday && minutes >= start && minutes <= end;
     }
     function getVideoArchiveItems(){return state.items.filter(it=>it?.video?.hasVideo && it?.video?.youtubeId && it?.flags?.includeInVideoTotals!==false);}
     function queryHasDateIntent(query){
