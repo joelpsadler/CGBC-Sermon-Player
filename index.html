@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC A/V Media</title>
+  <title>CGBC A\V MEDIA</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <meta name="theme-color" content="#0f0f10" />
-  <meta name="apple-mobile-web-app-title" content="CGBC Media" />
+  <meta name="apple-mobile-web-app-title" content="CGBC A\V MEDIA" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -583,7 +583,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search Title, Series, Scripture, Book, Study, Date">
+          <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
@@ -665,58 +665,9 @@
     const SHORTS = { name:'CGBC Shorts', playlistId:'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
     // Beginner note: edit this list when the current pinned audio series changes.
-    /* ============================================================================
-   ====================== BEGIN EASY SETTINGS: CURRENT SERIES ======================
-   DESKTOP + MOBILE BOTH USE THIS SAME SINGLE LIST.
-   CHANGE CURRENT SERIES HERE ONLY.
-
-   What this does:
-   - Any series key listed below gets the "Current" treatment.
-   - This affects both desktop and mobile.
-   - You do NOT need to change it in two places.
-
-   How to edit:
-   1) Keep each key inside quotes.
-   2) Separate entries with commas.
-   3) Example:
-      const CURRENT_SERIES_KEYS = new Set([
-        'romans-chapter-12',
-        'the-rapture'
-      ]);
-
-   When the next series becomes current:
-   - remove the old key if needed
-   - add the new key here
-   ============================================================================ */
-const CURRENT_SERIES_KEYS = new Set([
-  'romans-chapter-12',
-  'the-rapture'
-]);
-/* ======================= END EASY SETTINGS: CURRENT SERIES ===================== */
+    const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
     // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
-    /* ============================================================================
-   ================== BEGIN EASY SETTINGS: LIVE BADGE TEST TOGGLE =================
-   THIS IS THE LIVE BADGE TEST SWITCH.
-
-   Set to TRUE:
-   - LIVE NOW badge is forced on anytime for testing
-   - ignores the normal Sunday / time window rules
-
-   Set to FALSE:
-   - forced testing turns off
-   - normal live logic is restored automatically
-
-   Normal live logic:
-   - video mode only
-   - Sunday only
-   - about 10:15 AM to 12:45 PM
-   - newest livestream item must be dated today
-
-   IMPORTANT:
-   Change ONLY true/false on the next line.
-   ============================================================================ */
-const FORCE_LIVE_BADGE_PREVIEW = false;
-/* =================== END EASY SETTINGS: LIVE BADGE TEST TOGGLE ================= */
+    const FORCE_LIVE_BADGE_PREVIEW = false; // Beginner note: set to true only when you want to manually force the LIVE NOW badge for testing.
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
     const BOOK_MAP = new Map(BOOK_ORDER.map((n,i)=>[n.toLowerCase(), i]));
 
@@ -824,13 +775,7 @@ const FORCE_LIVE_BADGE_PREVIEW = false;
         : [];
       return rows[0] || null;
     }
-    /* ============================================================================
-   EASY FIND NOTE:
-   Search this file for either of these exact phrases:
-   - BEGIN EASY SETTINGS: LIVE BADGE TEST TOGGLE
-   - BEGIN EASY SETTINGS: CURRENT SERIES
-   ============================================================================ */
-function shouldShowLiveBadge(){
+    function shouldShowLiveBadge(){
       if(FORCE_LIVE_BADGE_PREVIEW) return true;
       if(state.mode !== 'video') return false;
       const now = new Date();
@@ -1588,30 +1533,7 @@ function shouldShowLiveBadge(){
       rerender();
     }
     function selectChoice(key){
-      if(!state.nav.rootKey){
-        /* ============================================================================
-           EASY NOTE: Livestreams and Shorts do NOT need a middle bucket.
-           Clicking them should go straight from the root card to the episode list.
-           If you ever want the old extra-click behavior back, remove the next block.
-           ============================================================================ */
-        if(key === 'livestreams'){
-          state.nav.rootKey = 'livestreams';
-          state.nav.branchKey = 'live-all';
-          state.nav.leafKey = null;
-          scrollChoiceListToTop();
-          rerender();
-          return;
-        }
-        if(key === 'shorts'){
-          state.nav.rootKey = 'shorts';
-          state.nav.branchKey = 'shorts-all';
-          state.nav.leafKey = null;
-          scrollChoiceListToTop();
-          rerender();
-          return;
-        }
-        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return;
-      }
+      if(!state.nav.rootKey){ state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
       if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
       if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); return; }
     }
@@ -1620,17 +1542,7 @@ function shouldShowLiveBadge(){
         const topBtn=event.target.closest('[data-top-root]');
         if(topBtn){
           const key=topBtn.dataset.topRoot;
-          /* ============================================================================
-             EASY NOTE: Top breadcrumb/root chips should match the same one-click rule
-             used by the main Livestreams and Shorts cards.
-             ============================================================================ */
-          if(key === 'livestreams'){
-            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null};
-          } else if(key === 'shorts'){
-            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null};
-          } else {
-            state.nav={rootKey:key,branchKey:null,leafKey:null};
-          }
+          state.nav={rootKey:key,branchKey:null,leafKey:null};
           state.currentItem=null;
           scrollChoiceListToTop();
           rerender();
@@ -1699,7 +1611,7 @@ function shouldShowLiveBadge(){
           const playing = name === 'play';
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
           els.audioPlayBadge.classList.toggle('is-playing', playing);
-        });d
+        });
       });
     }
     async function bootstrap(){
