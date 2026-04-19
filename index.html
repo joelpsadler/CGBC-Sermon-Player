@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CGBC A/V Media</title>
+  <title>CGBC A\V MEDIA</title>
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg">
   <meta name="theme-color" content="#0f0f10" />
-  <meta name="apple-mobile-web-app-title" content="CGBC Media" />
+  <meta name="apple-mobile-web-app-title" content="CGBC A\V MEDIA" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -583,7 +583,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search Title, Series, Scripture, Book, Study, Date">
+          <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
@@ -1533,7 +1533,29 @@
       rerender();
     }
     function selectChoice(key){
-      if(!state.nav.rootKey){ state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
+      if(!state.nav.rootKey){
+        /* ============================================================================
+           EASY NOTE: Livestreams and Shorts do NOT need a middle bucket.
+           Clicking them should go straight from the root card to the episode list.
+           ============================================================================ */
+        if(key === 'livestreams'){
+          state.nav.rootKey='livestreams';
+          state.nav.branchKey='live-all';
+          state.nav.leafKey=null;
+          scrollChoiceListToTop();
+          rerender();
+          return;
+        }
+        if(key === 'shorts'){
+          state.nav.rootKey='shorts';
+          state.nav.branchKey='shorts-all';
+          state.nav.leafKey=null;
+          scrollChoiceListToTop();
+          rerender();
+          return;
+        }
+        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return;
+      }
       if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
       if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); return; }
     }
@@ -1542,7 +1564,13 @@
         const topBtn=event.target.closest('[data-top-root]');
         if(topBtn){
           const key=topBtn.dataset.topRoot;
-          state.nav={rootKey:key,branchKey:null,leafKey:null};
+          if(key === 'livestreams'){
+            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null};
+          } else if(key === 'shorts'){
+            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null};
+          } else {
+            state.nav={rootKey:key,branchKey:null,leafKey:null};
+          }
           state.currentItem=null;
           scrollChoiceListToTop();
           rerender();
@@ -1561,8 +1589,18 @@
       els.homeBtn.addEventListener('click', resetAll);
       els.backBtn.addEventListener('click', goBack);
       els.logoReset.addEventListener('click', resetAll);
-      els.listenBtn.addEventListener('click', ()=>{ if(state.mode==='audio') return; state.mode='audio'; resetAll({ preserveSearch:true }); });
-      els.watchBtn.addEventListener('click', ()=>{ if(state.mode==='video') return; state.mode='video'; resetAll({ preserveSearch:true }); });
+      els.listenBtn.addEventListener('click', ()=>{
+        if(state.mode==='audio') return;
+        state.mode='audio';
+        resetAll({ preserveSearch:true });
+        rerender();
+      });
+      els.watchBtn.addEventListener('click', ()=>{
+        if(state.mode==='video') return;
+        state.mode='video';
+        resetAll({ preserveSearch:true });
+        rerender();
+      });
       els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; clearMediaState(); scrollChoiceListToTop(); rerender(); });
       els.contextRow.addEventListener('click', (event)=>{
         const btn = event.target.closest('[data-context-level]');
@@ -1618,6 +1656,7 @@
       attachEvents();
       state.data = await loadResolvedData();
       state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
+      rerender();
       try{
         const [livestreams, shorts, guestSpeakers] = await Promise.all([
           fetchPlaylistSeries(LIVESTREAMS),
