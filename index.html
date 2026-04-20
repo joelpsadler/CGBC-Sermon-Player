@@ -794,7 +794,7 @@
                     <span class="share-btn-label">Site Share</span>
                   </span>
                 </a>
-                <a id="playerPodcastLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer">
+                <a id="playerPodcastLink" class="path-button" href="#">
                   <span class="share-btn-inner">
                     <svg class="share-btn-icon" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M12 18v3"></path>
@@ -1090,6 +1090,33 @@
         alert('Share link copied to clipboard.');
       }catch(err){
         window.prompt('Copy this share link:', url);
+      }
+    }
+
+    async function triggerNativeLinkShare(url, item, fallbackLabel='link'){
+      if(!url || url === '#') return;
+      const title = item?.title?.display || 'CGBC Sermon';
+      const series = item?.series?.name || '';
+      const speaker = item?.speaker || '';
+      const date = formatDate(item);
+      const shareText = [series, speaker, date].filter(Boolean).join(' • ');
+      const files = await buildShareFiles(item);
+
+      if(navigator.share){
+        try{
+          const payload = files.length ? { title, text: shareText, url, files } : { title, text: shareText, url };
+          await navigator.share(payload);
+          return;
+        }catch(err){
+          if(err && err.name === 'AbortError') return;
+        }
+      }
+
+      try{
+        await navigator.clipboard.writeText(url);
+        alert(`${fallbackLabel} copied to clipboard.`);
+      }catch(err){
+        window.prompt(`Copy this ${fallbackLabel}:`, url);
       }
     }
 
@@ -1827,7 +1854,7 @@
               <span class="share-btn-label">Site Share</span>
             </span>
           </button>
-          <a class="path-button" href="${escapeHtml(item?.video?.url || episodeUrl)}" target="_blank" rel="noopener noreferrer">
+          <button class="path-button" type="button" id="videoNativeShareBtnOutside">
             <span class="share-btn-inner">
               <svg viewBox="0 0 24 24" class="share-btn-icon youtube" aria-hidden="true">
                 <rect x="2" y="5" width="20" height="14" rx="4"></rect>
@@ -1837,7 +1864,7 @@
               </svg>
               <span class="share-btn-label">YouTube Share</span>
             </span>
-          </a>`;
+          </button>`;
         els.videoShareHost.classList.add('is-visible');
         applyAudioNowPlaying(null);
         stopMediaSessionHeartbeat();
@@ -1892,6 +1919,12 @@
       if(videoShareBtn){
         videoShareBtn.addEventListener('click', async ()=>{
           await triggerShare(item);
+        }, { once:true });
+      }
+      const videoNativeShareBtn = document.getElementById('videoNativeShareBtnOutside');
+      if(videoNativeShareBtn){
+        videoNativeShareBtn.addEventListener('click', async ()=>{
+          await triggerNativeLinkShare(item?.video?.url || episodeUrl, item, 'YouTube share link');
         }, { once:true });
       }
     }
@@ -2031,6 +2064,14 @@
         if(!state.currentItem) return;
         await triggerShare(state.currentItem);
       });
+      if(els.playerPodcastLink){
+        els.playerPodcastLink.addEventListener('click', async (event)=>{
+          event.preventDefault();
+          if(!state.currentItem) return;
+          const rssUrl = state.currentItem?.links?.episodeUrl || state.currentItem?.links?.shareUrl || state.currentItem?.episode_url || state.currentItem?.share_url || '#';
+          await triggerNativeLinkShare(rssUrl, state.currentItem, 'RSS share link');
+        });
+      }
 
       document.addEventListener('visibilitychange', ()=>{
         refreshActiveMediaSession();
