@@ -741,7 +741,7 @@
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
               <div class="detail-actions player-actions">
                 <a id="playerEpisodeLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Episode</span></a>
-                <a id="playerShareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
+                <a id="playerShareLink" class="path-button" href="#"><span>Share</span></a>
               </div>
               <div class="time-row">
                 <div class="audio-now" id="audioClockCurrent">00:00</div>
@@ -958,6 +958,19 @@
       if(mode==='video') return item?.art?.study?.wide || item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.series?.square || ASSETS.fallback;
       return item?.art?.study?.square || item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.wide || item?.art?.series?.wide || ASSETS.fallback;
     }
+    function getFirstEpisode(items){
+      return (Array.isArray(items) ? items.slice().sort(sortOldestFirst)[0] : null) || null;
+    }
+
+    function getAllShareableItems(){
+      return [
+        ...state.items,
+        ...(Array.isArray(state.nativeShelves?.livestreams) ? state.nativeShelves.livestreams : []),
+        ...(Array.isArray(state.nativeShelves?.shorts) ? state.nativeShelves.shorts : []),
+        ...(Array.isArray(state.nativeShelves?.guestSpeakers) ? state.nativeShelves.guestSpeakers : [])
+      ];
+    }
+
     function buildDeepLink(item, mode=state.mode){
       if(!item?.stableId) return window.location.href;
       const url = new URL(window.location.href);
@@ -965,53 +978,66 @@
       url.searchParams.set('item', item.stableId);
       return url.toString();
     }
-    function applyDeepLinkFromUrl(){
-      try{
-        const params = new URLSearchParams(window.location.search);
-        const itemId = params.get('item');
-        const mode = params.get('mode');
-        if(mode === 'video' || mode === 'audio'){
-          state.mode = mode;
-          document.body.classList.toggle('mode-video', mode === 'video');
-          document.body.classList.toggle('mode-audio', mode !== 'video');
-          els.listenBtn?.classList.toggle('active', mode !== 'video');
-          els.watchBtn?.classList.toggle('active', mode === 'video');
-        }
-        if(!itemId) return;
-        const item = state.items.find(row => row?.stableId === itemId);
-        if(!item) return;
-        state.currentItem = item;
-        state.activeQueue = [];
-        renderAll();
-      applyDeepLinkFromUrl();
-        const wantsVideo = mode === 'video' && isVideoCapable(item);
-        if(wantsVideo){
-          selectItem(item, 'video');
-        }else{
-          selectItem(item, 'audio');
-        }
-      }catch(err){}
-    }
+
     async function triggerShare(item){
       if(!item) return;
       const url = buildDeepLink(item, state.mode);
       const title = item?.title?.display || 'CGBC Sermon';
-      const speaker = item?.speaker || 'CGBC';
-      const date = formatDate(item);
       const series = item?.series?.name || '';
-      const text = [series, speaker, date].filter(Boolean).join(' • ');
+      const speaker = item?.speaker || '';
+      const date = formatDate(item);
+      const shareText = [series, speaker, date].filter(Boolean).join(' • ');
+
       if(navigator.share){
         try{
-          await navigator.share({ title, text, url });
+          await navigator.share({ title, text: shareText, url });
           return;
         }catch(err){
           if(err && err.name === 'AbortError') return;
         }
       }
-      window.open(url, '_blank', 'noopener,noreferrer');
+
+      try{
+        await navigator.clipboard.writeText(url);
+        alert('Share link copied to clipboard.');
+      }catch(err){
+        window.prompt('Copy this share link:', url);
+      }
     }
-    function getFirstEpisode(items){
-      return (Array.isArray(items) ? items.slice().sort(sortOldestFirst)[0] : null) || null;
+
+    function applyDeepLinkFromUrl(){
+      try{
+        const params = new URLSearchParams(window.location.search);
+        const wantedMode = params.get('mode');
+        const wantedId = params.get('item');
+
+        if(wantedMode === 'audio' || wantedMode === 'video'){
+          state.mode = wantedMode;
+        }
+        if(!wantedId) return;
+
+        const match = getAllShareableItems().find(item => item?.stableId === wantedId);
+        if(!match) return;
+
+        const canUseVideo = state.mode === 'video' && (match?.video?.hasVideo || match?.source === 'youtube-native');
+        state.currentItem = match;
+        state.activeQueue = [];
+        rerender();
+
+        if(canUseVideo){
+          state.mode = 'video';
+          state.currentItem = match;
+          rerender();
+        }else{
+          state.mode = 'audio';
+          state.currentItem = match;
+          rerender();
+        }
+
+        try{
+          els.playerShell?.scrollIntoView({ behavior:'smooth', block:'start' });
+        }catch(err){}
+      }catch(err){}
     }
     async function loadResolvedData(){
       const paths=['./library-resolved.json','./data/library-resolved.json','./public/library-resolved.json','/library-resolved.json','/data/library-resolved.json','/public/library-resolved.json'];
@@ -1389,7 +1415,7 @@
       const related = pool.filter(row => row?.stableId !== item?.stableId && (baseSeries ? row?.series?.key === baseSeries : true));
       return related.slice(0, 10);
     }
-    function renderRelatedRow(item){ return; 
+    function renderRelatedRow(item){ return;
 
       if(!els.relatedWrap || !els.relatedRow || !els.relatedTitle){
         return;
@@ -1677,8 +1703,8 @@
         els.playerEpisodeLink.style.display = episodeUrl && episodeUrl !== '#' ? 'inline-flex' : 'none';
       }
       if(els.playerShareLink){
-        els.playerShareLink.href=shareUrl;
-        els.playerShareLink.style.display = shareUrl && shareUrl !== '#' ? 'inline-flex' : 'none';
+        els.playerShareLink.href=buildDeepLink(item, state.mode);
+        els.playerShareLink.style.display = 'inline-flex';
       }
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
@@ -1813,6 +1839,11 @@
       els.homeBtn.addEventListener('click', resetAll);
       els.backBtn.addEventListener('click', goBack);
       els.logoReset.addEventListener('click', resetAll);
+      els.playerShareLink.addEventListener('click', (event)=>{
+        event.preventDefault();
+        if(!state.currentItem) return;
+        triggerShare(state.currentItem);
+      });
       els.listenBtn.addEventListener('click', ()=>{
         if(state.mode==='audio') return;
         state.mode='audio';
@@ -1881,6 +1912,7 @@
       state.data = await loadResolvedData();
       state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
       rerender();
+      applyDeepLinkFromUrl();
       try{
         const [livestreams, shorts, guestSpeakers] = await Promise.all([
           fetchPlaylistSeries(LIVESTREAMS),
@@ -1894,6 +1926,7 @@
         console.warn('Live YouTube shelves failed to load.', err);
       }
       rerender();
+      applyDeepLinkFromUrl();
     }
     bootstrap().catch(err=>{
       console.error(err);
