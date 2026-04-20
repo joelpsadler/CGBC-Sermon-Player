@@ -217,6 +217,49 @@
     }
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
+    .mobile-context-bar{
+      display:none;
+      padding:0 16px 6px;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .mobile-context-chip{
+      min-height:34px;
+      max-width:100%;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      color:rgba(255,255,255,.88);
+      font-family:Poppins,sans-serif;
+      font-size:12px;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .mobile-context-chip.active{
+      background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.09));
+      border-color:rgba(143,174,157,.24);
+      color:rgba(255,255,255,.96);
+    }
+    .mobile-context-label{
+      color:rgba(255,255,255,.52);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:10px;
+      flex:0 0 auto;
+    }
+    .mobile-context-title{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
@@ -540,8 +583,12 @@
       .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
       .search-status{width:100%;font-size:12px}
-      .path-row{gap:8px;padding:10px 14px 12px}
-      .path-button{flex:1 1 calc(50% - 4px);min-width:0;min-height:44px;padding:0 12px}
+      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:nowrap}
+      .path-button{min-width:0;min-height:44px;padding:0 12px}
+      .home-button{flex:0 0 34%}
+      .back-button{flex:1 1 auto}
+      .mobile-context-bar{display:flex;padding:0 14px 10px}
+      .mobile-context-chip{max-width:100%}
       .stack{
         padding:12px 14px 14px;
         gap:10px;
@@ -646,9 +693,10 @@
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
-          <button type="button" class="path-button" id="homeBtn"><span>Home</span></button>
-          <button type="button" class="path-button" id="backBtn"><span>Back</span></button>
+          <button type="button" class="path-button home-button" id="homeBtn"><span>⌂ Home</span></button>
+          <button type="button" class="path-button back-button" id="backBtn"><span>‹ Back</span></button>
         </div>
+        <div class="mobile-context-bar" id="mobileContextBar"></div>
         <div class="stack" id="choiceList"></div>
       </section>
 
@@ -784,7 +832,8 @@
       relatedTitle: document.getElementById('relatedTitle'),
       relatedRow: document.getElementById('relatedRow'),
       contextStrip: document.getElementById('contextStrip'),
-      contextRow: document.getElementById('contextRow')
+      contextRow: document.getElementById('contextRow'),
+      mobileContextBar: document.getElementById('mobileContextBar')
     };
 
     function escapeHtml(v){return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
@@ -1251,6 +1300,29 @@
       if(!raw) return '';
       return raw.replace(/\bChapter\s+/i, '');
     }
+
+    function mobileContextTitle(item){
+      if(!item) return '';
+      if(item.dateCardType === 'year') return String(item.dateCardValue || item.title || '');
+      if(item.dateCardType === 'month') return monthNameOnly(String(item.dateCardValue || item.title || ''));
+      return compactSeriesLabel(item.title || '');
+    }
+    function renderMobileContextBar(){
+      if(!els.mobileContextBar) return;
+      const items = buildContextItems();
+      if(window.innerWidth > 900 || !items.length){
+        els.mobileContextBar.innerHTML = '';
+        els.mobileContextBar.style.display = 'none';
+        return;
+      }
+      els.mobileContextBar.style.display = 'flex';
+      els.mobileContextBar.innerHTML = items.map((item, index) => `
+        <button type="button" class="mobile-context-chip ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
+          <span class="mobile-context-label">${escapeHtml(item.label || 'Path')}</span>
+          <span class="mobile-context-title">${escapeHtml(mobileContextTitle(item))}</span>
+        </button>
+      `).join('');
+    }
     function buildRelatedItems(item){
       if(!item) return [];
       const baseSeries = item?.series?.key || '';
@@ -1362,10 +1434,11 @@
       const browse=buildBrowse();
       const root=browse.roots.find(r=>r.key===state.nav.rootKey);
       const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
-      if(state.nav.leafKey) return `Back to ${compactSeriesLabel(branch?.title || 'selection')}`;
-      if(state.nav.branchKey) return `Back to ${compactSeriesLabel(root?.title || 'categories')}`;
-      if(state.nav.rootKey) return 'Back to categories';
-      return 'Back';
+      if(searchResultsMode()) return '✕ Clear';
+      if(state.nav.leafKey) return `‹ ${compactSeriesLabel(branch?.title || 'Selection')}`;
+      if(state.nav.branchKey) return `‹ ${compactSeriesLabel(root?.title || 'Browse')}`;
+      if(state.nav.rootKey) return '‹ Browse';
+      return '‹ Back';
     }
     function updateSearchStatus(){
       const total=getModeItems(state.mode).length, shown=visibleItems().length;
@@ -1397,7 +1470,8 @@
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
       els.homeBtn.disabled = !(hasPath || searchResultsMode());
       els.backBtn.disabled = !(hasPath || searchResultsMode());
-      els.backBtn.querySelector('span').textContent = searchResultsMode() ? 'Clear search' : backLabel();
+      if(els.homeBtn && els.homeBtn.querySelector('span')) els.homeBtn.querySelector('span').textContent = isMobileViewport() ? '⌂ Home' : 'Home';
+      els.backBtn.querySelector('span').textContent = backLabel();
       updateSearchStatus();
 
       const {rows, episodeLevel, searchResults} = choiceRows();
@@ -1478,6 +1552,7 @@
       els.playerShell.classList.toggle('is-idle', idle);
       els.detailShell.classList.toggle('is-idle', idle);
       if(!item){
+        if(els.audioFeatureAudioPlays) els.audioFeatureAudioPlays.textContent='—';
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
@@ -1538,7 +1613,12 @@
       if(els.playerEpisodePageLink) els.playerEpisodePageLink.href=openUrl;
       if(els.playerShareLink) els.playerShareLink.href=shareUrl;
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
-      if(els.audioFeatureAudioPlays) els.audioFeatureAudioPlays.textContent=formatCountLabel(item?.audio?.plays || 0,'play','plays');
+      const playerAudioPlays = Number(item?.audio?.plays);
+      if(els.audioFeatureAudioPlays){
+        els.audioFeatureAudioPlays.textContent = Number.isFinite(playerAudioPlays)
+          ? formatCountLabel(playerAudioPlays,'play','plays')
+          : '—';
+      }
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
       renderRelatedRow(item);
       if(els.detailShell && (!els.relatedWrap || !els.relatedWrap.classList.contains('is-visible'))){
@@ -1580,6 +1660,7 @@
       renderChoices();
       renderPlayer();
       renderContextStrip();
+      renderMobileContextBar();
       updateModeUI();
       updateImpact();
     }
@@ -1702,7 +1783,7 @@
         scrollChoiceListToTop();
         rerender();
       });
-      window.addEventListener('resize', ()=>{ renderContextStrip(); });
+      window.addEventListener('resize', ()=>{ renderContextStrip(); renderMobileContextBar(); });
       els.audioPlayBadge.addEventListener('click', ()=>{
         if(!els.audioPlayer.src) return;
         if(els.audioPlayer.paused) els.audioPlayer.play();
