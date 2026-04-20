@@ -499,11 +499,21 @@
     .video-action-row{
       display:flex;flex-wrap:wrap;gap:10px;padding:12px 0 0
     }
+    .video-share-host{
+      display:none;
+      padding:12px 16px 0;
+    }
+    .video-share-host.is-visible{
+      display:flex;
+      justify-content:flex-start;
+      flex-wrap:wrap;
+      gap:10px;
+    }
     #audioPlayer{display:none}
     .detail{display:none!important;padding:18px}
     .detail.is-idle{display:none}
     .detail-actions-only{margin-top:0}
-    .player-actions{margin-top:12px}
+    .player-actions{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px}
     .detail-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(24px,2.2vw,38px);line-height:1.08}
     .detail-series{font-family:Poppins,sans-serif;font-size:18px;color:rgba(255,255,255,.90);margin:8px 0 18px}
     .meta-grid{display:grid;gap:10px}
@@ -632,6 +642,7 @@
       .audio-series{font-size:16px}
       .detail-row{font-size:14px;gap:6px}
       .player-actions{gap:8px}
+      .video-share-host{padding:10px 14px 0}
       .time-row{align-items:flex-start;gap:6px;flex-direction:column}
       .audio-now{font-size:clamp(32px,10vw,42px)}
       .audio-total{font-size:16px;padding-bottom:0}
@@ -722,6 +733,7 @@
         <section class="panel player is-idle" id="playerShell">
           <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
+          <div class="video-share-host" id="videoShareHost"></div>
           <div id="audioPlaceholder">Select an episode to listen.</div>
 
           <div class="audio-stage" id="audioStage">
@@ -743,7 +755,6 @@
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
               <div class="detail-actions player-actions">
-                <a id="playerEpisodeLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Episode</span></a>
                 <a id="playerShareLink" class="path-button" href="#"><span>Share</span></a>
               </div>
               <div class="time-row">
@@ -815,6 +826,7 @@
       playerShell: document.getElementById('playerShell'),
       videoPlaceholder: document.getElementById('videoPlaceholder'),
       videoShell: document.getElementById('videoShell'),
+      videoShareHost: document.getElementById('videoShareHost'),
       audioPlaceholder: document.getElementById('audioPlaceholder'),
       audioStage: document.getElementById('audioStage'),
       audioPlayer: document.getElementById('audioPlayer'),
@@ -824,7 +836,6 @@
       audioFeatureScripture: document.getElementById('audioFeatureScripture'),
       audioFeatureSpeaker: document.getElementById('audioFeatureSpeaker'),
       audioFeatureDate: document.getElementById('audioFeatureDate'),
-      playerEpisodeLink: document.getElementById('playerEpisodeLink'),
       playerShareLink: document.getElementById('playerShareLink'),
       audioClockCurrent: document.getElementById('audioClockCurrent'),
       audioClockTotal: document.getElementById('audioClockTotal'),
@@ -1077,6 +1088,31 @@
       try{ navigator.mediaSession.setActionHandler('seekto', (details)=>{ if(typeof details?.seekTime === 'number') els.audioPlayer.currentTime = details.seekTime; }); }catch(err){}
       try{ navigator.mediaSession.setActionHandler('previoustrack', null); }catch(err){}
       try{ navigator.mediaSession.setActionHandler('nexttrack', null); }catch(err){}
+    }
+
+    let mediaSessionHeartbeat = null;
+
+    function refreshActiveMediaSession(){
+      if(state.mode === 'audio' && state.currentItem?.audio?.hasAudio){
+        applyAudioNowPlaying(state.currentItem);
+        updateMediaSessionState();
+      }
+    }
+
+    function startMediaSessionHeartbeat(){
+      stopMediaSessionHeartbeat();
+      mediaSessionHeartbeat = window.setInterval(()=>{
+        if(!els.audioPlayer?.paused && !els.audioPlayer?.ended){
+          refreshActiveMediaSession();
+        }
+      }, 4000);
+    }
+
+    function stopMediaSessionHeartbeat(){
+      if(mediaSessionHeartbeat){
+        window.clearInterval(mediaSessionHeartbeat);
+        mediaSessionHeartbeat = null;
+      }
     }
 
     function applyDeepLinkFromUrl(){
@@ -1696,11 +1732,15 @@
       const idle=!item;
       els.playerShell.classList.toggle('is-idle', idle);
       els.detailShell.classList.toggle('is-idle', idle);
+      els.videoShareHost.classList.remove('is-visible');
+      els.videoShareHost.innerHTML='';
+
       if(!item){
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
         applyAudioNowPlaying(null);
+        stopMediaSessionHeartbeat();
         if(els.detailShell) els.detailShell.classList.add('is-idle');
         renderRelatedRow(null);
         if(state.mode==='video'){
@@ -1723,8 +1763,11 @@
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='none';
         els.videoShell.style.display='block';
-        els.videoShell.innerHTML=`<div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="video-action-row"><a class="path-button" href="${escapeHtml(episodeUrl)}" target="_blank" rel="noopener noreferrer"><span>Episode</span></a><button class="path-button" type="button" id="videoShareBtn"><span>Share</span></button></div></div>`;
+        els.videoShell.innerHTML=`<div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+        els.videoShareHost.innerHTML=`<button class="path-button" type="button" id="videoShareBtnOutside"><span>Share</span></button>`;
+        els.videoShareHost.classList.add('is-visible');
         applyAudioNowPlaying(null);
+        stopMediaSessionHeartbeat();
       } else {
         els.playerShell.classList.remove('video-active');
         els.videoShell.innerHTML='';
@@ -1753,15 +1796,12 @@
         }
         applyAudioNowPlaying(item);
         updateMediaSessionState();
+        if(!els.audioPlayer.paused && !els.audioPlayer.ended) startMediaSessionHeartbeat();
       }
 
-      if(els.playerEpisodeLink){
-        els.playerEpisodeLink.href=episodeUrl;
-        els.playerEpisodeLink.style.display = episodeUrl && episodeUrl !== '#' ? 'inline-flex' : 'none';
-      }
       if(els.playerShareLink){
         els.playerShareLink.href=buildDeepLink(item, state.mode);
-        els.playerShareLink.style.display = 'inline-flex';
+        els.playerShareLink.style.display = state.mode === 'audio' ? 'inline-flex' : 'none';
       }
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
@@ -1770,7 +1810,7 @@
         els.detailShell.classList.add('is-idle');
       }
 
-      const videoShareBtn = document.getElementById('videoShareBtn');
+      const videoShareBtn = document.getElementById('videoShareBtnOutside');
       if(videoShareBtn){
         videoShareBtn.addEventListener('click', async ()=>{
           await triggerShare(item);
@@ -1805,9 +1845,12 @@
     function clearMediaState(){
       stopAudioPlayback(false);
       applyAudioNowPlaying(null);
+      stopMediaSessionHeartbeat();
       els.videoShell.innerHTML='';
       els.videoShell.style.display='none';
       els.playerShell.classList.remove('video-active');
+      els.videoShareHost.classList.remove('is-visible');
+      els.videoShareHost.innerHTML='';
     }
     function rerender(){
       renderChoices();
@@ -1910,6 +1953,18 @@
         if(!state.currentItem) return;
         await triggerShare(state.currentItem);
       });
+
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.visibilityState === 'visible'){
+          refreshActiveMediaSession();
+        }else if(!els.audioPlayer?.paused){
+          refreshActiveMediaSession();
+        }
+      });
+      window.addEventListener('focus', refreshActiveMediaSession);
+      window.addEventListener('pageshow', refreshActiveMediaSession);
+      window.addEventListener('resume', refreshActiveMediaSession);
+
       els.listenBtn.addEventListener('click', ()=>{
         if(state.mode==='audio') return;
         state.mode='audio';
@@ -1972,7 +2027,12 @@
           const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
           els.audioPlayBadge.classList.toggle('is-playing', playing);
-          updateMediaSessionState();
+          refreshActiveMediaSession();
+          if(playing){
+            startMediaSessionHeartbeat();
+          }else{
+            stopMediaSessionHeartbeat();
+          }
           if(name === 'ended') applyAudioNowPlaying(state.currentItem);
         });
       });
