@@ -497,7 +497,7 @@
     .progress::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:999px;background:#d7eadf;border:2px solid rgba(17,17,17,.84)}
     .progress-times{display:flex;justify-content:space-between;gap:12px;font-family:Poppins,sans-serif;font-size:12px;color:rgba(255,255,255,.92);font-weight:600;font-variant-numeric:tabular-nums}
     #audioPlayer{display:none}
-    .detail{padding:18px}
+    .detail{display:none!important;padding:18px}
     .detail.is-idle{display:none}
     .detail-actions-only{margin-top:0}
     .player-actions{margin-top:12px}
@@ -506,7 +506,7 @@
     .meta-grid{display:grid;gap:10px}
     .meta-row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:start}
     .detail-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-    .related-wrap{display:none;gap:12px;margin-top:4px}
+    .related-wrap{display:none!important;gap:12px;margin-top:4px}
     .related-wrap.is-visible{display:block}
     .related-title{font-family:Poppins,sans-serif;font-size:16px;margin:0 0 10px}
     .related-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
@@ -1267,24 +1267,24 @@
     function queueItems(){
       const browse=buildBrowse(), root=state.nav.rootKey, branch=state.nav.branchKey, leaf=state.nav.leafKey;
       if(!root) return [];
-      if(root==='livestreams') return state.nativeShelves.livestreams.slice().sort(sortNewestFirst);
-      if(root==='shorts') return state.nativeShelves.shorts.slice().sort(sortNewestFirst);
+      if(root==='livestreams') return state.nativeShelves.livestreams.slice();
+      if(root==='shorts') return state.nativeShelves.shorts.slice();
       if(root==='current'){
         const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
         return visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
       }
       if(root==='books'){
         const bucket=browse.books.get(branch); if(!bucket || !leaf) return [];
-        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortOldestFirst);
-        if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortOldestFirst);}
-        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortOldestFirst) : [];
+        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortNewestFirst);
+        if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortNewestFirst);}
+        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortNewestFirst) : [];
       }
       if(root==='topical'){
-        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
+        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice();
         const row=browse.topical.get(branch);
-        return row ? row.items.slice().sort(sortOldestFirst) : [];
+        return row ? row.items.slice().sort(sortNewestFirst) : [];
       }
-      if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortOldestFirst);}
+      if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
       return [];
     }
     function choiceRows(){
