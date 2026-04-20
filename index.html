@@ -756,12 +756,7 @@
           <audio id="audioPlayer" preload="metadata"></audio>
         </section>
 
-        <section class="panel detail is-idle" id="detailShell">
-          <div class="related-wrap" id="relatedWrap">
-            <h4 class="related-title" id="relatedTitle">Related in this series</h4>
-            <div class="related-row" id="relatedRow"></div>
-          </div>
-        </section>
+        <section class="panel detail is-idle" id="detailShell" hidden></section>
       </section>
     </main>
   </div>
@@ -962,6 +957,58 @@
     function getStudyArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.study?.wide || item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.square || item?.art?.series?.square || ASSETS.fallback;
       return item?.art?.study?.square || item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.wide || item?.art?.series?.wide || ASSETS.fallback;
+    }
+    function buildDeepLink(item, mode=state.mode){
+      if(!item?.stableId) return window.location.href;
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', mode === 'video' ? 'video' : 'audio');
+      url.searchParams.set('item', item.stableId);
+      return url.toString();
+    }
+    function applyDeepLinkFromUrl(){
+      try{
+        const params = new URLSearchParams(window.location.search);
+        const itemId = params.get('item');
+        const mode = params.get('mode');
+        if(mode === 'video' || mode === 'audio'){
+          state.mode = mode;
+          document.body.classList.toggle('mode-video', mode === 'video');
+          document.body.classList.toggle('mode-audio', mode !== 'video');
+          els.listenBtn?.classList.toggle('active', mode !== 'video');
+          els.watchBtn?.classList.toggle('active', mode === 'video');
+        }
+        if(!itemId) return;
+        const item = state.items.find(row => row?.stableId === itemId);
+        if(!item) return;
+        state.currentItem = item;
+        state.activeQueue = [];
+        renderAll();
+      applyDeepLinkFromUrl();
+        const wantsVideo = mode === 'video' && isVideoCapable(item);
+        if(wantsVideo){
+          selectItem(item, 'video');
+        }else{
+          selectItem(item, 'audio');
+        }
+      }catch(err){}
+    }
+    async function triggerShare(item){
+      if(!item) return;
+      const url = buildDeepLink(item, state.mode);
+      const title = item?.title?.display || 'CGBC Sermon';
+      const speaker = item?.speaker || 'CGBC';
+      const date = formatDate(item);
+      const series = item?.series?.name || '';
+      const text = [series, speaker, date].filter(Boolean).join(' • ');
+      if(navigator.share){
+        try{
+          await navigator.share({ title, text, url });
+          return;
+        }catch(err){
+          if(err && err.name === 'AbortError') return;
+        }
+      }
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
     function getFirstEpisode(items){
       return (Array.isArray(items) ? items.slice().sort(sortOldestFirst)[0] : null) || null;
@@ -1342,7 +1389,8 @@
       const related = pool.filter(row => row?.stableId !== item?.stableId && (baseSeries ? row?.series?.key === baseSeries : true));
       return related.slice(0, 10);
     }
-    function renderRelatedRow(item){
+    function renderRelatedRow(item){ return; 
+
       if(!els.relatedWrap || !els.relatedRow || !els.relatedTitle){
         return;
       }
