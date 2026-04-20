@@ -501,7 +501,7 @@
     }
     .video-share-host{
       display:none;
-      padding:12px 16px 0;
+      padding:10px 16px 0;
     }
     .video-share-host.is-visible{
       display:flex;
@@ -994,7 +994,13 @@
     }
 
     async function buildShareFiles(item){
-      const artUrl = getEpisodeArt(item, state.mode);
+      const artUrl =
+        item?.art?.episode?.square ||
+        item?.art?.series?.square ||
+        item?.art?.study?.square ||
+        item?.art?.episode?.wide ||
+        item?.art?.series?.wide ||
+        getEpisodeArt(item, state.mode);
       if(!artUrl) return [];
       try{
         const res = await fetch(artUrl, { mode:'cors' });
@@ -1102,7 +1108,7 @@
     function startMediaSessionHeartbeat(){
       stopMediaSessionHeartbeat();
       mediaSessionHeartbeat = window.setInterval(()=>{
-        if(!els.audioPlayer?.paused && !els.audioPlayer?.ended){
+        if(state.mode === 'audio' && state.currentItem?.audio?.hasAudio){
           refreshActiveMediaSession();
         }
       }, 4000);
@@ -1763,7 +1769,7 @@
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='none';
         els.videoShell.style.display='block';
-        els.videoShell.innerHTML=`<div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+        els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         els.videoShareHost.innerHTML=`<button class="path-button" type="button" id="videoShareBtnOutside"><span>Share</span></button>`;
         els.videoShareHost.classList.add('is-visible');
         applyAudioNowPlaying(null);
@@ -1796,7 +1802,7 @@
         }
         applyAudioNowPlaying(item);
         updateMediaSessionState();
-        if(!els.audioPlayer.paused && !els.audioPlayer.ended) startMediaSessionHeartbeat();
+        startMediaSessionHeartbeat();
       }
 
       if(els.playerShareLink){
@@ -1955,15 +1961,12 @@
       });
 
       document.addEventListener('visibilitychange', ()=>{
-        if(document.visibilityState === 'visible'){
-          refreshActiveMediaSession();
-        }else if(!els.audioPlayer?.paused){
-          refreshActiveMediaSession();
-        }
+        refreshActiveMediaSession();
       });
       window.addEventListener('focus', refreshActiveMediaSession);
       window.addEventListener('pageshow', refreshActiveMediaSession);
       window.addEventListener('resume', refreshActiveMediaSession);
+      window.addEventListener('pagehide', refreshActiveMediaSession);
 
       els.listenBtn.addEventListener('click', ()=>{
         if(state.mode==='audio') return;
@@ -2028,10 +2031,8 @@
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
           els.audioPlayBadge.classList.toggle('is-playing', playing);
           refreshActiveMediaSession();
-          if(playing){
+          if(state.currentItem?.audio?.hasAudio){
             startMediaSessionHeartbeat();
-          }else{
-            stopMediaSessionHeartbeat();
           }
           if(name === 'ended') applyAudioNowPlaying(state.currentItem);
         });
