@@ -535,6 +535,24 @@
       min-width:0;
       white-space:nowrap;
     }
+    .nav-btn-inner{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-width:0;
+    }
+    .nav-btn-icon{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      display:block;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
     #audioPlayer{display:none}
     .detail{display:none!important;padding:18px}
     .detail.is-idle{display:none}
@@ -745,7 +763,7 @@
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
-          <button type="button" class="path-button home-button" id="homeBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg></span><span class="path-label">Home</span></span></button>
+          <button type="button" class="path-button home-button" id="homeBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg></span><span class="path-label">Reset</span></span></button>
           <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true">‹</span><span class="path-label">Back</span></span></button>
         </div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
@@ -1726,7 +1744,7 @@
       const backGlyph = els.backBtn ? els.backBtn.querySelector('.path-glyph') : null;
       const backLabelEl = els.backBtn ? els.backBtn.querySelector('.path-label') : null;
       if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg>';
-      if(homeLabel) homeLabel.textContent = 'Home';
+      if(homeLabel) homeLabel.textContent = 'Reset';
       if(backGlyph) backGlyph.textContent = '‹';
       if(backLabelEl) backLabelEl.textContent = backLabel();
       updateSearchStatus();
