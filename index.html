@@ -505,23 +505,82 @@
         background-blend-mode:multiply;
       }
       .app{padding:0 8px 14px}
+      .masthead{
+        grid-template-columns:1fr;
+        gap:10px;
+        padding:10px 4px 12px;
+      }
+      .brand{gap:8px}
       .brand-copy p{display:none}
-      .brand-mode-wrap{width:100%;justify-content:space-between;gap:10px}
-      .brand{gap:10px}
-      .logo-btn{width:78px;height:58px;border-radius:0;background:transparent;border:none;box-shadow:none}
+      .brand-mode-wrap{
+        width:100%;
+        justify-content:flex-start;
+        align-items:center;
+        gap:10px;
+        flex-wrap:nowrap;
+      }
+      .logo-btn{width:72px;height:54px;border-radius:0;background:transparent;border:none;box-shadow:none;flex:0 0 72px}
       .logo-btn img{transform:scale(1)}
-      .mode-pill{min-width:0;flex:1 1 220px}
-      .mode-btn-shell{min-height:48px;padding:0 12px}
-      .impact{width:auto;gap:8px;justify-content:flex-end}
-      .impact-pill{flex:1 1 0;min-width:0}
-      .search-row{flex-wrap:wrap}
-      .search-status{width:100%}
-      .path-row{gap:8px}
-      .path-button{flex:1 1 calc(50% - 4px);min-width:0}
-      .thumb-wide{width:108px;height:66px;flex-basis:108px}
-      .choice.branch-card .thumb-wide{width:132px;height:88px;flex-basis:132px;}
-      .thumb-square{width:78px;height:78px;flex-basis:78px}
-      .meta-row{grid-template-columns:100px minmax(0,1fr)}
+      .mode-pill{min-width:0;flex:1 1 auto;width:100%}
+      .mode-btn-shell{min-height:50px;padding:0 10px;gap:10px}
+      .btn-copy .top{font-size:14px}
+      .btn-copy .bottom{font-size:10px}
+      .mode-icon{width:26px;height:26px;flex-basis:26px}
+      .top-actions{width:100%;justify-content:stretch}
+      .impact{width:100%;gap:8px;justify-content:stretch}
+      .impact-pill{flex:1 1 0;min-width:0;padding:10px 12px}
+      .impact-value{font-size:18px}
+      .impact-label{font-size:10px}
+      .flow{gap:12px}
+      .nav-panel{
+        display:block;
+        overflow:visible;
+      }
+      .nav-head{padding:12px 14px 8px}
+      .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
+      .search-row input{padding:12px 13px;border-radius:14px}
+      .search-status{width:100%;font-size:12px}
+      .path-row{gap:8px;padding:10px 14px 12px}
+      .path-button{flex:1 1 calc(50% - 4px);min-width:0;min-height:44px;padding:0 12px}
+      .stack{
+        padding:12px 14px 14px;
+        gap:10px;
+        overflow:visible;
+        max-height:none;
+      }
+      .choice,.episode{padding:12px;gap:10px;border-radius:18px}
+      .choice.root-card .copy{padding:12px 14px 14px}
+      .choice.root-card .thumb-square,
+      .choice.root-card .thumb-wide{border-radius:18px}
+      .thumb-wide{width:112px;height:68px;flex-basis:112px}
+      .choice.branch-card .thumb-wide{width:136px;height:86px;flex-basis:136px;border-radius:16px}
+      .thumb-square{width:80px;height:80px;flex-basis:80px}
+      .card-title{font-size:17px}
+      .card-meta-line{font-size:12px;line-height:1.3}
+      .card-metric{font-size:11px;margin-top:6px}
+      .player{padding:14px}
+      #videoShell,#videoPlaceholder{min-height:210px;border-radius:18px}
+      #audioPlaceholder{min-height:180px;border-radius:18px;padding:24px}
+      .audio-stage{gap:16px}
+      .audio-art{max-width:300px;border-radius:20px}
+      .transport{max-width:none;width:100%;padding:6px;gap:6px}
+      .transport-btn,.play-btn{min-height:54px}
+      .play-btn{padding:0 10px 0 6px;gap:10px}
+      .play-circle{width:40px;height:40px;flex-basis:40px}
+      .play-copy{font-size:13px}
+      .audio-copy{gap:8px}
+      .audio-title{font-size:clamp(24px,7vw,34px);line-height:1.02}
+      .audio-series{font-size:16px}
+      .detail-row{font-size:14px;gap:6px}
+      .player-actions{gap:8px}
+      .time-row{align-items:flex-start;gap:6px;flex-direction:column}
+      .audio-now{font-size:clamp(32px,10vw,42px)}
+      .audio-total{font-size:16px;padding-bottom:0}
+      .progress-wrap{gap:8px}
+      .progress-times{font-size:11px}
+      .detail{padding:14px}
+      .related{flex-basis:220px;max-width:220px}
+      .meta-row{grid-template-columns:96px minmax(0,1fr)}
     }
   
     .context-chip,.choice,.episode,.related,.path-button,.mode-btn{transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease}
@@ -1486,6 +1545,20 @@
         els.detailShell.classList.add('is-idle');
       }
     }
+
+    function isMobileViewport(){
+      return window.innerWidth <= 900;
+    }
+    function scrollPlayerIntoView(){
+      if(!isMobileViewport()) return;
+      try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
+    }
+    function scrollNavIntoView(){
+      if(!isMobileViewport()) return;
+      const navPanel = document.querySelector('.nav-panel');
+      if(!navPanel) return;
+      try{ navPanel.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
+    }
     function scrollChoiceListToTop(){
       try{ els.choiceList.scrollTop = 0; }catch(err){}
       const navPanel = document.querySelector('.nav-panel');
@@ -1544,6 +1617,7 @@
           state.nav.leafKey=null;
           scrollChoiceListToTop();
           rerender();
+          scrollNavIntoView();
           return;
         }
         if(key === 'shorts'){
@@ -1552,12 +1626,13 @@
           state.nav.leafKey=null;
           scrollChoiceListToTop();
           rerender();
+          scrollNavIntoView();
           return;
         }
-        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return;
+        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
       }
-      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); return; }
-      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); return; }
+      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
     }
     function attachEvents(){
       document.body.addEventListener('click', (event)=>{
@@ -1581,7 +1656,13 @@
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
         if(episode){
           const next=state.activeQueue.find(r=>r.stableId===key);
-          if(next){ state.currentItem=next; renderChoices(); renderPlayer(); if(state.mode==='audio' && next?.audio?.url){ els.audioPlayer.play().catch(()=>{}); } }
+          if(next){
+            state.currentItem=next;
+            renderChoices();
+            renderPlayer();
+            scrollPlayerIntoView();
+            if(state.mode==='audio' && next?.audio?.url){ els.audioPlayer.play().catch(()=>{}); }
+          }
           return;
         }
         selectChoice(key);
@@ -1601,7 +1682,7 @@
         resetAll({ preserveSearch:true });
         rerender();
       });
-      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; clearMediaState(); scrollChoiceListToTop(); rerender(); });
+      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; clearMediaState(); scrollChoiceListToTop(); rerender(); scrollNavIntoView(); });
       els.contextRow.addEventListener('click', (event)=>{
         const btn = event.target.closest('[data-context-level]');
         if(!btn) return;
