@@ -509,6 +509,39 @@
       flex-wrap:wrap;
       gap:10px;
     }
+    .share-btn-inner{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-width:0;
+    }
+    .share-btn-icon,
+    .share-btn-logo{
+      width:16px;
+      height:16px;
+      flex:0 0 16px;
+      display:block;
+    }
+    .share-btn-icon{
+      stroke:currentColor;
+      fill:none;
+      stroke-width:2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .share-btn-icon.youtube{
+      fill:#ff0000;
+      stroke:none;
+    }
+    .share-btn-icon.youtube-play{
+      fill:#fff;
+      stroke:none;
+    }
+    .share-btn-label{
+      min-width:0;
+      white-space:nowrap;
+    }
     #audioPlayer{display:none}
     .detail{display:none!important;padding:18px}
     .detail.is-idle{display:none}
@@ -755,7 +788,23 @@
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
               <div class="detail-actions player-actions">
-                <a id="playerShareLink" class="path-button" href="#"><span>Share</span></a>
+                <a id="playerShareLink" class="path-button" href="#">
+                  <span class="share-btn-inner">
+                    <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg" alt="">
+                    <span class="share-btn-label">Share</span>
+                  </span>
+                </a>
+                <a id="playerPodcastLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer">
+                  <span class="share-btn-inner">
+                    <svg class="share-btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 18v3"></path>
+                      <path d="M8.5 21h7"></path>
+                      <path d="M12 4.5a4 4 0 0 1 4 4c0 2.1-1.2 3.3-2.4 4.5-.9.9-1.6 1.7-1.6 3"></path>
+                      <path d="M12 4.5a4 4 0 0 0-4 4c0 2.1 1.2 3.3 2.4 4.5.9.9 1.6 1.7 1.6 3"></path>
+                    </svg>
+                    <span class="share-btn-label">Podcast Page</span>
+                  </span>
+                </a>
               </div>
               <div class="time-row">
                 <div class="audio-now" id="audioClockCurrent">00:00</div>
@@ -837,6 +886,7 @@
       audioFeatureSpeaker: document.getElementById('audioFeatureSpeaker'),
       audioFeatureDate: document.getElementById('audioFeatureDate'),
       playerShareLink: document.getElementById('playerShareLink'),
+      playerPodcastLink: document.getElementById('playerPodcastLink'),
       audioClockCurrent: document.getElementById('audioClockCurrent'),
       audioClockTotal: document.getElementById('audioClockTotal'),
       audioElapsedSmall: document.getElementById('audioElapsedSmall'),
@@ -1770,7 +1820,24 @@
         els.audioStage.style.display='none';
         els.videoShell.style.display='block';
         els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        els.videoShareHost.innerHTML=`<button class="path-button" type="button" id="videoShareBtnOutside"><span>Share</span></button>`;
+        els.videoShareHost.innerHTML=`
+          <button class="path-button" type="button" id="videoShareBtnOutside">
+            <span class="share-btn-inner">
+              <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228836/CGBC_Wheel_Black_Media_Fallback.jpg" alt="">
+              <span class="share-btn-label">Share</span>
+            </span>
+          </button>
+          <a class="path-button" href="${escapeHtml(item?.video?.url || episodeUrl)}" target="_blank" rel="noopener noreferrer">
+            <span class="share-btn-inner">
+              <svg viewBox="0 0 24 24" class="share-btn-icon youtube" aria-hidden="true">
+                <rect x="2" y="5" width="20" height="14" rx="4"></rect>
+              </svg>
+              <svg viewBox="0 0 24 24" class="share-btn-icon youtube-play" aria-hidden="true" style="margin-left:-24px">
+                <path d="M10 8.5v7l6-3.5z"></path>
+              </svg>
+              <span class="share-btn-label">YouTube</span>
+            </span>
+          </a>`;
         els.videoShareHost.classList.add('is-visible');
         applyAudioNowPlaying(null);
         stopMediaSessionHeartbeat();
@@ -1808,6 +1875,11 @@
       if(els.playerShareLink){
         els.playerShareLink.href=buildDeepLink(item, state.mode);
         els.playerShareLink.style.display = state.mode === 'audio' ? 'inline-flex' : 'none';
+      }
+      if(els.playerPodcastLink){
+        const podcastUrl = item?.links?.episodeUrl || item?.links?.shareUrl || item?.episode_url || item?.share_url || '#';
+        els.playerPodcastLink.href = podcastUrl;
+        els.playerPodcastLink.style.display = state.mode === 'audio' && podcastUrl && podcastUrl !== '#' ? 'inline-flex' : 'none';
       }
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
