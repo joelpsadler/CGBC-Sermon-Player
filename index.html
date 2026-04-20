@@ -1267,24 +1267,24 @@
     function queueItems(){
       const browse=buildBrowse(), root=state.nav.rootKey, branch=state.nav.branchKey, leaf=state.nav.leafKey;
       if(!root) return [];
-      if(root==='livestreams') return state.nativeShelves.livestreams.slice();
-      if(root==='shorts') return state.nativeShelves.shorts.slice();
+      if(root==='livestreams') return state.nativeShelves.livestreams.slice().sort(sortNewestFirst);
+      if(root==='shorts') return state.nativeShelves.shorts.slice().sort(sortNewestFirst);
       if(root==='current'){
         const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
         return visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
       }
       if(root==='books'){
         const bucket=browse.books.get(branch); if(!bucket || !leaf) return [];
-        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortNewestFirst);
-        if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortNewestFirst);}
-        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortNewestFirst) : [];
+        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortOldestFirst);
+        if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortOldestFirst);}
+        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortOldestFirst) : [];
       }
       if(root==='topical'){
-        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice();
+        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
         const row=browse.topical.get(branch);
-        return row ? row.items.slice().sort(sortNewestFirst) : [];
+        return row ? row.items.slice().sort(sortOldestFirst) : [];
       }
-      if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
+      if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortOldestFirst);}
       return [];
     }
     function choiceRows(){
