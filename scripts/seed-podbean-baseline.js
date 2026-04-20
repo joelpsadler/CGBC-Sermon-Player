@@ -76,6 +76,8 @@ function parseCsvLine(line) {
 }
 
 function readCsv(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+
   const raw = fs.readFileSync(filePath, "utf8");
   const lines = raw.split(/\r?\n/).filter(Boolean);
   if (!lines.length) return [];
@@ -105,7 +107,7 @@ function readExistingStats(statsPath) {
 async function fetchHtml(url) {
   const res = await fetch(url, {
     headers: {
-      "User-Agent": "CGBCInitialStateSeed/6.0",
+      "User-Agent": "CGBCInitialStateSeed/7.0",
       "Accept": "text/html,application/xhtml+xml",
     },
   });
@@ -247,11 +249,36 @@ async function scrapeInitialStatePages(showUrl) {
   return { baseInfo, pagination, pagesFetched, records: [...byKey.values()] };
 }
 
-async function main() {
-  if (!fs.existsSync(CSV_PATH)) {
-    throw new Error(`Missing CSV at ${CSV_PATH}`);
-  }
+function upsertEpisode(episodes, key, payload) {
+  const current = safeObject(episodes[key]);
 
+  episodes[key] = {
+    ...current,
+    identity_key: current.identity_key || key,
+    episode_url: current.episode_url || payload.episode_url || payload.permalink_url || "",
+    permalink_url: current.permalink_url || payload.permalink_url || payload.episode_url || "",
+    media_url: current.media_url || payload.media_url || "",
+    title: current.title || payload.title || "",
+    publish_time: current.publish_time || payload.publish_time || null,
+    plays_total: Math.max(Number(current.plays_total || current.downloads_total || 0), Number(payload.plays_total || payload.downloads_total || 0)),
+    downloads_total: Math.max(Number(current.downloads_total || current.plays_total || 0), Number(payload.downloads_total || payload.plays_total || 0)),
+    baseline_seeded_at: current.baseline_seeded_at || payload.baseline_seeded_at || null,
+    baseline_source: payload.baseline_source || current.baseline_source || "",
+    baseline_csv_downloads:
+      payload.baseline_csv_downloads ?? current.baseline_csv_downloads ?? null,
+    baseline_public_downloads:
+      payload.baseline_public_downloads ?? current.baseline_public_downloads ?? null,
+    baseline_public_title:
+      payload.baseline_public_title ?? current.baseline_public_title ?? null,
+    baseline_public_title_key:
+      payload.baseline_public_title_key ?? current.baseline_public_title_key ?? null,
+    last_baseline_refresh_at:
+      payload.last_baseline_refresh_at || current.last_baseline_refresh_at || null,
+    downloads_by_date: safeObject(current.downloads_by_date),
+  };
+}
+
+async function main() {
   const existing = readExistingStats(STATS_PATH);
   const rows = readCsv(CSV_PATH);
   const scraped = await scrapeInitialStatePages(PODBEAN_SHOW_URL);
@@ -266,7 +293,10 @@ async function main() {
   let permalinkMatches = 0;
   let titleMatches = 0;
   let csvFallbacks = 0;
+  let scrapedBackfills = 0;
 
+  // Seed from CSV if present. This preserves compatibility with the current workflow,
+  // but the CSV is now optional rather than required.
   for (const row of rows) {
     const permalink = normalizeUrl(String(row["Episode URL"] || ""));
     const mediaUrl = normalizeMediaUrl(String(row["Media URL"] || ""));
@@ -298,29 +328,52 @@ async function main() {
     const key = mediaUrl || permalink;
     if (!key) continue;
 
-    const current = safeObject(episodes[key]);
-
-    episodes[key] = {
-      ...current,
-      identity_key: current.identity_key || key,
-      episode_url: current.episode_url || permalink,
-      permalink_url: current.permalink_url || permalink,
-      media_url: current.media_url || mediaUrl || (publicRecord ? publicRecord.media_url : ""),
-      title: current.title || title || (publicRecord ? publicRecord.title : ""),
-      publish_time: current.publish_time || publishTime || (publicRecord ? publicRecord.publish_time : ""),
-      plays_total: Math.max(Number(current.plays_total || current.downloads_total || 0), Number(chosen || 0)),
-      downloads_total: Math.max(Number(current.downloads_total || current.plays_total || 0), Number(chosen || 0)),
-      baseline_seeded_at: current.baseline_seeded_at || now,
+    upsertEpisode(episodes, key, {
+      episode_url: permalink,
+      permalink_url: permalink,
+      media_url: mediaUrl || (publicRecord ? publicRecord.media_url : ""),
+      title: title || (publicRecord ? publicRecord.title : ""),
+      publish_time: publishTime || (publicRecord ? publicRecord.publish_time : null),
+      plays_total: chosen,
+      downloads_total: chosen,
+      baseline_seeded_at: now,
       baseline_source: source,
       baseline_csv_downloads: csvDownloads,
       baseline_public_downloads: publicRecord ? Number(publicRecord.download_count || 0) : null,
       baseline_public_title: publicRecord ? publicRecord.title : null,
       baseline_public_title_key: publicRecord ? publicRecord.title_key : null,
       last_baseline_refresh_at: now,
-      downloads_by_date: safeObject(current.downloads_by_date),
-    };
+    });
 
     seeded += 1;
+  }
+
+  // Backfill any public Podbean records that are missing from the current stats document.
+  // This fixes newly published episodes that exist in RSS/public pages but are not yet
+  // present in downloads_stats.csv.
+  for (const record of scraped.records) {
+    const key = record.media_url || record.permalink_url;
+    if (!key) continue;
+    if (episodes[key]) continue;
+
+    upsertEpisode(episodes, key, {
+      episode_url: record.permalink_url,
+      permalink_url: record.permalink_url,
+      media_url: record.media_url,
+      title: record.title,
+      publish_time: record.publish_time,
+      plays_total: Number(record.download_count || 0),
+      downloads_total: Number(record.download_count || 0),
+      baseline_seeded_at: now,
+      baseline_source: "podbean_initial_state_backfill",
+      baseline_csv_downloads: null,
+      baseline_public_downloads: Number(record.download_count || 0),
+      baseline_public_title: record.title,
+      baseline_public_title_key: record.title_key,
+      last_baseline_refresh_at: now,
+    });
+
+    scrapedBackfills += 1;
   }
 
   const baseInfo = scraped.baseInfo;
@@ -330,7 +383,7 @@ async function main() {
       ...(safeObject(existing.source)),
       provider: "podbean_public_initial_state_plus_csv",
       metric: "plays",
-      strategy: "window_initial_state_seed_v6",
+      strategy: "window_initial_state_seed_v7",
       show_url: PODBEAN_SHOW_URL,
     },
     podcast_totals: {
@@ -343,7 +396,8 @@ async function main() {
     episodes,
     summary: {
       total_csv_rows_seen: rows.length,
-      total_baseline_seeded: seeded,
+      total_baseline_seeded_from_csv: seeded,
+      total_initial_state_backfills: scrapedBackfills,
       total_initial_state_records_found: scraped.records.length,
       total_initial_state_media_matches: mediaMatches,
       total_initial_state_permalink_matches: permalinkMatches,
@@ -357,9 +411,10 @@ async function main() {
 
   fs.mkdirSync(path.dirname(STATS_PATH), { recursive: true });
   fs.writeFileSync(STATS_PATH, JSON.stringify(output, null, 2), "utf8");
+  fs.writeFileSync(path.resolve(process.cwd(), "stats", "seed-podbean-baseline.patched-preview.json"), JSON.stringify(output.summary, null, 2), "utf8");
   console.log(`Wrote ${STATS_PATH}`);
   console.log(
-    `Summary -> seeded=${seeded}, records=${scraped.records.length}, mediaMatches=${mediaMatches}, permalinkMatches=${permalinkMatches}, titleMatches=${titleMatches}, csvFallbacks=${csvFallbacks}, pagesFetched=${scraped.pagesFetched}`
+    `Summary -> csvSeeded=${seeded}, scrapedBackfills=${scrapedBackfills}, records=${scraped.records.length}, mediaMatches=${mediaMatches}, permalinkMatches=${permalinkMatches}, titleMatches=${titleMatches}, csvFallbacks=${csvFallbacks}, pagesFetched=${scraped.pagesFetched}`
   );
 }
 
