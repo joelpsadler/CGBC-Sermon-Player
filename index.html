@@ -496,6 +496,9 @@
     .progress{appearance:none;width:100%;height:8px;border-radius:999px;background:rgba(255,255,255,.10);outline:none;cursor:pointer}
     .progress::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:999px;background:#d7eadf;border:2px solid rgba(17,17,17,.84)}
     .progress-times{display:flex;justify-content:space-between;gap:12px;font-family:Poppins,sans-serif;font-size:12px;color:rgba(255,255,255,.92);font-weight:600;font-variant-numeric:tabular-nums}
+    .video-action-row{
+      display:flex;flex-wrap:wrap;gap:10px;padding:12px 0 0
+    }
     #audioPlayer{display:none}
     .detail{display:none!important;padding:18px}
     .detail.is-idle{display:none}
@@ -988,11 +991,8 @@
         const blob = await res.blob();
         const mime = blob.type || 'image/jpeg';
         const ext = mime.includes('png') ? 'png' : mime.includes('webp') ? 'webp' : 'jpg';
-        const safeName = String(item?.title?.display || 'CGBC-sermon')
-          .replace(/[^a-z0-9]+/gi, '-')
-          .replace(/^-+|-+$/g, '')
-          .slice(0, 60) || 'cgbc-sermon';
-        const file = new File([blob], `${safeName}.${ext}`, { type: mime });
+        const safeName = String(item?.title?.display || 'CGBC-sermon').replace(/[^a-z0-9]+/gi,'-').replace(/^-+|-+$/g,'').slice(0,60) || 'cgbc-sermon';
+        const file = new File([blob], `${safeName}.${ext}`, { type:mime });
         if(navigator.canShare && navigator.canShare({ files:[file] })) return [file];
       }catch(err){}
       return [];
@@ -1026,27 +1026,72 @@
       }
     }
 
+    function getArtworkSet(item){
+      const square = item?.art?.episode?.square || item?.art?.series?.square || item?.art?.study?.square || ASSETS.fallback;
+      const wide = item?.art?.episode?.wide || item?.art?.series?.wide || item?.art?.study?.wide || square || ASSETS.fallback;
+      return [
+        { src: square, sizes: '512x512', type: 'image/jpeg' },
+        { src: square, sizes: '256x256', type: 'image/jpeg' },
+        { src: wide, sizes: '1280x720', type: 'image/jpeg' }
+      ];
+    }
+
+    function applyAudioNowPlaying(item){
+      if(!('mediaSession' in navigator)) return;
+      if(!item || !item?.audio?.hasAudio){
+        try{ navigator.mediaSession.metadata = null; }catch(err){}
+        return;
+      }
+      try{
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: item?.title?.display || 'CGBC Sermon',
+          artist: item?.speaker || 'CGBC',
+          album: item?.series?.name || 'CGBC A\\V MEDIA',
+          artwork: getArtworkSet(item)
+        });
+      }catch(err){}
+    }
+
+    function updateMediaSessionState(){
+      if(!('mediaSession' in navigator)) return;
+      try{
+        navigator.mediaSession.playbackState = els.audioPlayer && !els.audioPlayer.paused ? 'playing' : 'paused';
+      }catch(err){}
+      try{
+        if('setPositionState' in navigator.mediaSession && els.audioPlayer && Number.isFinite(els.audioPlayer.duration) && els.audioPlayer.duration > 0){
+          navigator.mediaSession.setPositionState({
+            duration: els.audioPlayer.duration,
+            playbackRate: els.audioPlayer.playbackRate || 1,
+            position: els.audioPlayer.currentTime || 0
+          });
+        }
+      }catch(err){}
+    }
+
+    function initMediaSessionControls(){
+      if(!('mediaSession' in navigator)) return;
+      try{ navigator.mediaSession.setActionHandler('play', ()=>els.audioPlayer.play()); }catch(err){}
+      try{ navigator.mediaSession.setActionHandler('pause', ()=>els.audioPlayer.pause()); }catch(err){}
+      try{ navigator.mediaSession.setActionHandler('seekbackward', (details)=>{ els.audioPlayer.currentTime = Math.max(0, (els.audioPlayer.currentTime||0) - Number(details?.seekOffset || 30)); }); }catch(err){}
+      try{ navigator.mediaSession.setActionHandler('seekforward', (details)=>{ els.audioPlayer.currentTime = Math.min(Number(els.audioPlayer.duration||0), (els.audioPlayer.currentTime||0) + Number(details?.seekOffset || 30)); }); }catch(err){}
+      try{ navigator.mediaSession.setActionHandler('seekto', (details)=>{ if(typeof details?.seekTime === 'number') els.audioPlayer.currentTime = details.seekTime; }); }catch(err){}
+      try{ navigator.mediaSession.setActionHandler('previoustrack', null); }catch(err){}
+      try{ navigator.mediaSession.setActionHandler('nexttrack', null); }catch(err){}
+    }
+
     function applyDeepLinkFromUrl(){
       try{
         const params = new URLSearchParams(window.location.search);
         const wantedMode = params.get('mode');
         const wantedId = params.get('item');
-
-        if(wantedMode === 'audio' || wantedMode === 'video'){
-          state.mode = wantedMode;
-        }
+        if(wantedMode === 'audio' || wantedMode === 'video') state.mode = wantedMode;
         if(!wantedId) return;
-
         const item = getAllShareableItems().find(row => row?.stableId === wantedId);
         if(!item) return;
-
         state.currentItem = item;
         updateModeUI();
         renderPlayer();
-
-        try{
-          els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' });
-        }catch(err){}
+        try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
       }catch(err){}
     }
     async function loadResolvedData(){
@@ -1655,6 +1700,7 @@
         els.videoShell.innerHTML='';
         els.videoShell.style.display='none';
         els.audioStage.style.display='none';
+        applyAudioNowPlaying(null);
         if(els.detailShell) els.detailShell.classList.add('is-idle');
         renderRelatedRow(null);
         if(state.mode==='video'){
@@ -1667,13 +1713,18 @@
         return;
       }
 
+      const episodeUrl=(state.mode==='audio'
+        ? (item?.links?.episodeUrl || item?.links?.shareUrl || item?.episode_url || item?.share_url || item?.audio?.url || '#')
+        : (item?.links?.episodeUrl || item?.links?.shareUrl || item?.video?.url || '#'));
+
       if(state.mode==='video' && item?.video?.hasVideo && item?.video?.youtubeId){
         els.playerShell.classList.add('video-active');
         els.videoPlaceholder.style.display='none';
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='none';
-        els.videoShell.style.display='flex';
-        els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        els.videoShell.style.display='block';
+        els.videoShell.innerHTML=`<div class="video-frame-wrap"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="video-action-row"><a class="path-button" href="${escapeHtml(episodeUrl)}" target="_blank" rel="noopener noreferrer"><span>Episode</span></a><button class="path-button" type="button" id="videoShareBtn"><span>Share</span></button></div></div>`;
+        applyAudioNowPlaying(null);
       } else {
         els.playerShell.classList.remove('video-active');
         els.videoShell.innerHTML='';
@@ -1700,14 +1751,10 @@
           els.audioPlayer.removeAttribute('src');
           els.audioPlayer.load();
         }
+        applyAudioNowPlaying(item);
+        updateMediaSessionState();
       }
 
-      const episodeUrl=(state.mode==='audio'
-        ? (item?.links?.episodeUrl || item?.links?.shareUrl || item?.episode_url || item?.share_url || item?.audio?.url || '#')
-        : (item?.links?.episodeUrl || item?.links?.shareUrl || item?.video?.url || '#'));
-      const shareUrl=(state.mode==='audio'
-        ? (item?.links?.shareUrl || item?.links?.episodeUrl || item?.share_url || item?.episode_url || item?.audio?.url || '#')
-        : (item?.links?.shareUrl || item?.links?.episodeUrl || item?.video?.url || '#'));
       if(els.playerEpisodeLink){
         els.playerEpisodeLink.href=episodeUrl;
         els.playerEpisodeLink.style.display = episodeUrl && episodeUrl !== '#' ? 'inline-flex' : 'none';
@@ -1721,6 +1768,13 @@
       renderRelatedRow(item);
       if(els.detailShell && (!els.relatedWrap || !els.relatedWrap.classList.contains('is-visible'))){
         els.detailShell.classList.add('is-idle');
+      }
+
+      const videoShareBtn = document.getElementById('videoShareBtn');
+      if(videoShareBtn){
+        videoShareBtn.addEventListener('click', async ()=>{
+          await triggerShare(item);
+        }, { once:true });
       }
     }
 
@@ -1750,6 +1804,7 @@
     }
     function clearMediaState(){
       stopAudioPlayback(false);
+      applyAudioNowPlaying(null);
       els.videoShell.innerHTML='';
       els.videoShell.style.display='none';
       els.playerShell.classList.remove('video-active');
@@ -1814,6 +1869,7 @@
       if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
     }
     function attachEvents(){
+      initMediaSessionControls();
       document.body.addEventListener('click', (event)=>{
         const topBtn=event.target.closest('[data-top-root]');
         if(topBtn){
@@ -1902,18 +1958,22 @@
         els.audioRemainingSmall.textContent=formatClock(Math.max(0,d-c));
         els.audioProgress.max=d || 100;
         els.audioProgress.value=c;
+        updateMediaSessionState();
       });
       els.audioPlayer.addEventListener('loadedmetadata', ()=>{
         const d=Number(els.audioPlayer.duration||0);
         els.audioClockTotal.textContent=`/ ${formatClock(d)}`;
         els.audioRemainingSmall.textContent=formatClock(d);
         els.audioProgress.max=d || 100;
+        updateMediaSessionState();
       });
-      ['play','pause','ended'].forEach(name=>{
+      ['play','pause','ended','seeked','ratechange'].forEach(name=>{
         els.audioPlayer.addEventListener(name, ()=>{
-          const playing = name === 'play';
+          const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
           els.audioPlayBadge.classList.toggle('is-playing', playing);
+          updateMediaSessionState();
+          if(name === 'ended') applyAudioNowPlaying(state.currentItem);
         });
       });
     }
