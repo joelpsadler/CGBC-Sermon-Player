@@ -218,7 +218,8 @@
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
     .path-btn-inner{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%}
-    .path-glyph{display:inline-flex;align-items:center;justify-content:center;line-height:1;flex:0 0 auto}
+    .path-glyph{display:inline-flex;align-items:center;justify-content:center;line-height:1;flex:0 0 auto;color:rgba(255,255,255,.98)}
+    .path-glyph svg{display:block;width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .path-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .mobile-context-bar{
       display:none;
@@ -590,10 +591,10 @@
       .search-status{width:100%;font-size:12px}
       .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:nowrap}
       .path-button{min-width:0;min-height:44px;padding:0 10px}
-      .home-button{flex:0 0 24%}
+      .home-button{flex:0 0 auto;min-width:108px;padding-inline:12px}
       .back-button{flex:1 1 auto}
-      .home-button .path-label,.back-button .path-label{font-size:17px;line-height:1.05}
-      .home-button .path-glyph{font-size:24px}
+      .home-button .path-label,.back-button .path-label{font-size:15px;line-height:1.05}
+      .home-button .path-glyph{font-size:25px}
       .back-button .path-glyph{font-size:30px}
       .mobile-context-bar{display:flex;padding:0 14px 10px}
       .mobile-context-chip{max-width:100%}
@@ -704,7 +705,7 @@
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
-          <button type="button" class="path-button home-button" id="homeBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true">⌂</span><span class="path-label">Home</span></span></button>
+          <button type="button" class="path-button home-button" id="homeBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg></span><span class="path-label">Home</span></span></button>
           <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true">‹</span><span class="path-label">Back</span></span></button>
         </div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
@@ -739,7 +740,7 @@
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
               <div class="detail-actions player-actions">
-                <a id="playerEpisodePageLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Open</span></a>
+                <a id="playerEpisodeLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Episode</span></a>
                 <a id="playerShareLink" class="path-button" href="#" target="_blank" rel="noopener noreferrer"><span>Share</span></a>
               </div>
               <div class="time-row">
@@ -825,7 +826,7 @@
       audioFeatureScripture: document.getElementById('audioFeatureScripture'),
       audioFeatureSpeaker: document.getElementById('audioFeatureSpeaker'),
       audioFeatureDate: document.getElementById('audioFeatureDate'),
-      playerEpisodePageLink: document.getElementById('playerEpisodePageLink'),
+      playerEpisodeLink: document.getElementById('playerEpisodeLink'),
       playerShareLink: document.getElementById('playerShareLink'),
       audioClockCurrent: document.getElementById('audioClockCurrent'),
       audioClockTotal: document.getElementById('audioClockTotal'),
@@ -1483,7 +1484,7 @@
       const homeLabel = els.homeBtn ? els.homeBtn.querySelector('.path-label') : null;
       const backGlyph = els.backBtn ? els.backBtn.querySelector('.path-glyph') : null;
       const backLabelEl = els.backBtn ? els.backBtn.querySelector('.path-label') : null;
-      if(homeGlyph) homeGlyph.textContent = isMobileViewport() ? '⌂' : '';
+      if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg>';
       if(homeLabel) homeLabel.textContent = 'Home';
       if(backGlyph) backGlyph.textContent = '‹';
       if(backLabelEl) backLabelEl.textContent = backLabel();
@@ -1617,15 +1618,20 @@
         }
       }
 
-      const shareUrl=item?.links?.shareUrl || item?.links?.episodeUrl || '#';
-      const openUrl=item?.links?.episodeUrl || item?.video?.url || item?.audio?.url || '#';
-      const detailLink = getDetailPanelLink(item);
-      els.episodePageLink.href=detailLink.href;
-      if(els.episodePageLink && els.episodePageLink.querySelector('span')){
-        els.episodePageLink.querySelector('span').textContent = detailLink.label;
+      const episodeUrl=(state.mode==='audio'
+        ? (item?.links?.episodeUrl || item?.links?.shareUrl || item?.episode_url || item?.share_url || item?.audio?.url || '#')
+        : (item?.links?.episodeUrl || item?.links?.shareUrl || item?.video?.url || '#'));
+      const shareUrl=(state.mode==='audio'
+        ? (item?.links?.shareUrl || item?.links?.episodeUrl || item?.share_url || item?.episode_url || item?.audio?.url || '#')
+        : (item?.links?.shareUrl || item?.links?.episodeUrl || item?.video?.url || '#'));
+      if(els.playerEpisodeLink){
+        els.playerEpisodeLink.href=episodeUrl;
+        els.playerEpisodeLink.style.display = episodeUrl && episodeUrl !== '#' ? 'inline-flex' : 'none';
       }
-      if(els.playerEpisodePageLink) els.playerEpisodePageLink.href=openUrl;
-      if(els.playerShareLink) els.playerShareLink.href=shareUrl;
+      if(els.playerShareLink){
+        els.playerShareLink.href=shareUrl;
+        els.playerShareLink.style.display = shareUrl && shareUrl !== '#' ? 'inline-flex' : 'none';
+      }
       if(els.audioFeatureBookTags) els.audioFeatureBookTags.textContent=getBookTagsDisplay(item);
       if(els.audioFeatureVideoViews) els.audioFeatureVideoViews.textContent=formatCountLabel(item?.video?.views || 0,'view','views');
       renderRelatedRow(item);
