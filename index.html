@@ -979,6 +979,25 @@
       return url.toString();
     }
 
+    async function buildShareFiles(item){
+      const artUrl = getEpisodeArt(item, state.mode);
+      if(!artUrl) return [];
+      try{
+        const res = await fetch(artUrl, { mode:'cors' });
+        if(!res.ok) return [];
+        const blob = await res.blob();
+        const mime = blob.type || 'image/jpeg';
+        const ext = mime.includes('png') ? 'png' : mime.includes('webp') ? 'webp' : 'jpg';
+        const safeName = String(item?.title?.display || 'CGBC-sermon')
+          .replace(/[^a-z0-9]+/gi, '-')
+          .replace(/^-+|-+$/g, '')
+          .slice(0, 60) || 'cgbc-sermon';
+        const file = new File([blob], `${safeName}.${ext}`, { type: mime });
+        if(navigator.canShare && navigator.canShare({ files:[file] })) return [file];
+      }catch(err){}
+      return [];
+    }
+
     async function triggerShare(item){
       if(!item) return;
       const url = buildDeepLink(item, state.mode);
@@ -986,11 +1005,13 @@
       const series = item?.series?.name || '';
       const speaker = item?.speaker || '';
       const date = formatDate(item);
-      const shareText = [series, speaker, date].filter(Boolean).join(' • ');
+      const text = [series, speaker, date].filter(Boolean).join(' • ');
+      const files = await buildShareFiles(item);
 
       if(navigator.share){
         try{
-          await navigator.share({ title, text: shareText, url });
+          const payload = files.length ? { title, text, url, files } : { title, text, url };
+          await navigator.share(payload);
           return;
         }catch(err){
           if(err && err.name === 'AbortError') return;
@@ -1016,26 +1037,15 @@
         }
         if(!wantedId) return;
 
-        const match = getAllShareableItems().find(item => item?.stableId === wantedId);
-        if(!match) return;
+        const item = getAllShareableItems().find(row => row?.stableId === wantedId);
+        if(!item) return;
 
-        const canUseVideo = state.mode === 'video' && (match?.video?.hasVideo || match?.source === 'youtube-native');
-        state.currentItem = match;
-        state.activeQueue = [];
-        rerender();
-
-        if(canUseVideo){
-          state.mode = 'video';
-          state.currentItem = match;
-          rerender();
-        }else{
-          state.mode = 'audio';
-          state.currentItem = match;
-          rerender();
-        }
+        state.currentItem = item;
+        updateModeUI();
+        renderPlayer();
 
         try{
-          els.playerShell?.scrollIntoView({ behavior:'smooth', block:'start' });
+          els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' });
         }catch(err){}
       }catch(err){}
     }
@@ -1340,22 +1350,22 @@
     function queueItems(){
       const browse=buildBrowse(), root=state.nav.rootKey, branch=state.nav.branchKey, leaf=state.nav.leafKey;
       if(!root) return [];
-      if(root==='livestreams') return state.nativeShelves.livestreams.slice();
-      if(root==='shorts') return state.nativeShelves.shorts.slice();
+      if(root==='livestreams') return state.nativeShelves.livestreams.slice().sort(sortNewestFirst);
+      if(root==='shorts') return state.nativeShelves.shorts.slice().sort(sortNewestFirst);
       if(root==='current'){
         const selected=browse.current.find(r=>r.key===branch); if(!selected) return [];
         return visibleItems().filter(item=>item?.series?.key===selected.key).sort(sortNewestFirst);
       }
       if(root==='books'){
         const bucket=browse.books.get(branch); if(!bucket || !leaf) return [];
-        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortNewestFirst);
+        if(leaf.endsWith('__episodes')) return bucket.episodes.slice().sort(sortOldestFirst);
         if(leaf.includes('__specials__')){const year=leaf.split('__specials__')[1]; return (bucket.specialsByYear.get(year)||[]).slice().sort(sortNewestFirst);}
-        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortNewestFirst) : [];
+        const row=bucket.seriesMap.get(leaf); return row ? row.items.slice().sort(sortOldestFirst) : [];
       }
       if(root==='topical'){
-        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice();
+        if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
         const row=browse.topical.get(branch);
-        return row ? row.items.slice().sort(sortNewestFirst) : [];
+        return row ? row.items.slice().sort(sortOldestFirst) : [];
       }
       if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
       return [];
@@ -1839,10 +1849,10 @@
       els.homeBtn.addEventListener('click', resetAll);
       els.backBtn.addEventListener('click', goBack);
       els.logoReset.addEventListener('click', resetAll);
-      els.playerShareLink.addEventListener('click', (event)=>{
+      els.playerShareLink.addEventListener('click', async (event)=>{
         event.preventDefault();
         if(!state.currentItem) return;
-        triggerShare(state.currentItem);
+        await triggerShare(state.currentItem);
       });
       els.listenBtn.addEventListener('click', ()=>{
         if(state.mode==='audio') return;
