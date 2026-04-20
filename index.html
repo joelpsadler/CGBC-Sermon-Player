@@ -102,32 +102,13 @@
 
     .impact{display:flex;gap:12px;flex-wrap:wrap}
     .impact-pill{
-      min-width:112px;
-      padding:10px 14px;
-      border-radius:18px;
+      min-width:124px;padding:11px 15px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.07);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 22px rgba(0,0,0,.14);
-      display:flex;
-      align-items:baseline;
-      gap:7px;
-      white-space:nowrap;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 22px rgba(0,0,0,.14)
     }
-    .impact-value{
-      font-family:Poppins,sans-serif;
-      font-size:20px;
-      font-weight:800;
-      line-height:1;
-      white-space:nowrap;
-    }
-    .impact-label{
-      font-size:11px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--muted-2);
-      white-space:nowrap;
-      line-height:1;
-    }
+    .impact-value{font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1}
+    .impact-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
 
     .flow{display:grid;grid-template-columns:1fr;gap:16px}
     .panel{
@@ -653,7 +634,7 @@
       .mode-icon{width:26px;height:26px;flex-basis:26px}
       .top-actions{width:100%;justify-content:stretch}
       .impact{width:100%;gap:8px;justify-content:stretch}
-      .impact-pill{flex:1 1 0;min-width:0;padding:10px 12px;gap:6px}
+      .impact-pill{flex:1 1 0;min-width:0;padding:10px 12px}
       .impact-value{font-size:18px}
       .impact-label{font-size:10px}
       .flow{gap:12px}
@@ -705,6 +686,7 @@
       .audio-series{font-size:16px}
       .detail-row{font-size:14px;gap:6px}
       .player-actions{gap:8px}
+      .player-actions-below-timer{margin-top:10px}
       .video-share-host{padding:10px 14px 0}
       .time-row{align-items:flex-start;gap:6px;flex-direction:column}
       .audio-now{font-size:clamp(32px,10vw,42px)}
@@ -716,7 +698,9 @@
       .meta-row{grid-template-columns:96px minmax(0,1fr)}
     }
   
-    
+    @media (min-width:901px){
+      .path-glyph{font-size:0;width:0;opacity:0}
+    }
     .context-chip,.choice,.episode,.related,.path-button,.mode-btn{transition:transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease}
     .context-chip:hover,.choice:hover,.episode:hover,.related:hover,.path-button:hover{transform:translateY(-1px)}
     .context-chip.is-active{background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));border-color:rgba(143,174,157,.22)}
@@ -763,8 +747,8 @@
       </div>
       <div class="top-actions">
         <div class="impact">
-          <div class="impact-pill"><div class="impact-value" id="impactPrimaryValue">—</div><div class="impact-label" id="impactPrimaryLabel">PLAYS</div></div>
-          <div class="impact-pill"><div class="impact-value" id="impactSecondaryValue">—</div><div class="impact-label" id="impactSecondaryLabel">EPISODES</div></div>
+          <div class="impact-pill"><div class="impact-value" id="impactPrimaryValue">—</div><div class="impact-label" id="impactPrimaryLabel">Audio: Plays</div></div>
+          <div class="impact-pill"><div class="impact-value" id="impactSecondaryValue">—</div><div class="impact-label" id="impactSecondaryLabel">Audio: Episodes</div></div>
         </div>
       </div>
     </header>
@@ -781,7 +765,7 @@
         </div>
         <div class="path-row">
           <button type="button" class="path-button home-button" id="homeBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg></span><span class="path-label">Reset</span></span></button>
-          <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></span><span class="path-label">Back</span></span></button>
+          <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true">‹</span><span class="path-label">Back</span></span></button>
         </div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
         <div class="stack" id="choiceList"></div>
@@ -815,7 +799,16 @@
               <div class="detail-row"><span class="label">Scripture</span><span class="value" id="audioFeatureScripture"></span></div>
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
               <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
-              <div class="detail-actions player-actions">
+
+              <div class="time-row">
+                <div class="audio-now" id="audioClockCurrent">00:00</div>
+                <div class="audio-total" id="audioClockTotal">/ 00:00</div>
+              </div>
+              <div class="progress-wrap">
+                <input id="audioProgress" class="progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="Audio progress">
+                <div class="progress-times"><span id="audioElapsedSmall">00:00</span><span id="audioRemainingSmall">00:00</span></div>
+              </div>
+              <div class="detail-actions player-actions player-actions-below-timer">
                 <a id="playerShareLink" class="path-button" href="#">
                   <span class="share-btn-inner">
                     <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="">
@@ -834,14 +827,7 @@
                   </span>
                 </a>
               </div>
-              <div class="time-row">
-                <div class="audio-now" id="audioClockCurrent">00:00</div>
-                <div class="audio-total" id="audioClockTotal">/ 00:00</div>
-              </div>
-              <div class="progress-wrap">
-                <input id="audioProgress" class="progress" type="range" min="0" max="100" step="0.1" value="0" aria-label="Audio progress">
-                <div class="progress-times"><span id="audioElapsedSmall">00:00</span><span id="audioRemainingSmall">00:00</span></div>
-              </div>
+
             </div>
           </div>
           <audio id="audioPlayer" preload="metadata"></audio>
@@ -1738,17 +1724,17 @@
       if(!state.data) return;
       if(state.mode==='audio'){
         els.impactPrimaryValue.textContent = formatNumber(state.data?.totals?.audioPlaysTotal || 0);
-        els.impactPrimaryLabel.textContent = 'PLAYS';
+        els.impactPrimaryLabel.textContent = 'Audio: Plays';
         els.impactSecondaryValue.textContent = formatNumber(state.data?.totals?.audioEpisodesTotal || state.items.length);
-        els.impactSecondaryLabel.textContent = 'EPISODES';
+        els.impactSecondaryLabel.textContent = 'Audio: Episodes';
       } else {
         const archiveItems=getVideoArchiveItems();
         const views=archiveItems.reduce((sum,item)=>sum+Number(item?.video?.views || 0),0);
         const count=archiveItems.length;
         els.impactPrimaryValue.textContent = formatNumber(views);
-        els.impactPrimaryLabel.textContent = 'VIEWS';
+        els.impactPrimaryLabel.textContent = 'Video: Views';
         els.impactSecondaryValue.textContent = formatNumber(count);
-        els.impactSecondaryLabel.textContent = 'EPISODES';
+        els.impactSecondaryLabel.textContent = 'Video: Episodes';
       }
     }
     function renderChoices(){
