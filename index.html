@@ -1493,7 +1493,7 @@
           image:bucket.image,
           isStudyBucket:true
         }));
-        return mappedBooks.concat(mappedStudies.length ? [{key:'__divider__studies', isDivider:true, title:'Studies'}] : [], mappedStudies);
+        return mappedBooks.concat(mappedStudies);
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
