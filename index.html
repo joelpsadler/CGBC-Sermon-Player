@@ -187,22 +187,48 @@
     .context-chip img{
       width:68px;height:50px;object-fit:cover;border-radius:12px;flex:0 0 68px;background:rgba(255,255,255,.05)
     }
-    .context-chip.date-chip{flex:0 0 122px;justify-content:center}
+    .context-chip.date-chip{
+      flex:0 0 156px;
+      justify-content:center;
+      padding-inline:14px;
+    }
     .context-chip.date-chip img{display:none}
     .context-chip-date{
-      width:82px;height:58px;flex:0 0 82px;border-radius:12px;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      width:122px;
+      height:72px;
+      flex:0 0 122px;
+      border-radius:14px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
       border:1px solid rgba(255,255,255,.08);
     }
     .context-chip-date .mini-label{
-      font-family:Poppins,sans-serif;font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1;
+      font-family:Poppins,sans-serif;
+      font-size:9px;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      line-height:1;
     }
     .context-chip-date .mini-value{
-      margin-top:3px;font-family:Poppins,sans-serif;font-size:20px;font-weight:800;line-height:1;color:rgba(255,255,255,.96);
+      margin-top:4px;
+      max-width:100%;
+      padding:0 8px;
+      text-align:center;
+      font-family:Poppins,sans-serif;
+      font-size:18px;
+      font-weight:800;
+      line-height:1.02;
+      color:rgba(255,255,255,.96);
+      white-space:normal;
+      overflow-wrap:anywhere;
     }
     .context-chip.square img{width:58px;height:58px;flex-basis:58px}
     .context-chip-copy{min-width:0}
+    .context-chip.date-chip .context-chip-copy{flex:0 0 54px;min-width:54px}
     .context-chip-badge{
       display:inline-flex;
       align-items:center;
@@ -1764,7 +1790,10 @@
         return `
           <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
             ${isDateChip
-              ? `${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}${media}`
+              ? `<div class="context-chip-copy">
+              ${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}
+              <div class="context-chip-label">${escapeHtml(item.label)}</div>
+            </div>${media}`
               : `${media}
             <div class="context-chip-copy">
               ${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}
