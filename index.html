@@ -1973,13 +1973,6 @@
     function mobileCollapsedCardArt(item){
       if(!item) return null;
 
-      if(item.level === 'leaf' && state.currentItem){
-        return {
-          src: getEpisodeArt(state.currentItem, state.mode),
-          wide: state.mode === 'video'
-        };
-      }
-
       if(item.level === 'branch' && state.nav.branchKey){
         const row = branchChoices().find(r=>r.key===state.nav.branchKey);
         const src = row?.image || item.image || null;
@@ -2004,10 +1997,7 @@
     }
 
     function mobileCollapsedStateBadge(item){
-      if(item?.level !== 'leaf' || !state.currentItem) return '';
-      const isPlaying = state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended;
-      const label = isPlaying ? 'Playing' : 'Loaded';
-      return `<span class="mobile-current-badge"><span class="mobile-current-badge-dot"></span><span>${label}</span></span>`;
+      return '';
     }
 
     function mobileContextTitle(item){
@@ -2269,17 +2259,23 @@
         const collapseTitle = state.nav.leafKey
           ? (leafChoices().find(r=>r.key===state.nav.leafKey)?.title || 'This section')
           : (branchChoices().find(r=>r.key===state.nav.branchKey)?.title || 'This section');
-        const currentArt = getEpisodeArt(state.currentItem, state.mode);
-        const isPlayingNow = state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended;
+        const queue = queueItems();
+        const loadedHere = !!queue.find(row => row?.stableId === state.currentItem?.stableId);
+        const fallbackArt = queue[0] ? getEpisodeArt(queue[0], state.mode) : '';
+        const currentArt = loadedHere ? getEpisodeArt(state.currentItem, state.mode) : fallbackArt;
+        const isPlayingNow = loadedHere && state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended;
+        const badgeMarkup = loadedHere
+          ? `<span class="mobile-current-badge"><span class="mobile-current-badge-dot"></span><span>${isPlayingNow ? 'Playing' : 'Loaded'}</span></span>`
+          : '';
         els.choiceList.innerHTML = `
-          <button type="button" class="episode-collapse-card has-art" data-open-episodes="1">
+          <button type="button" class="episode-collapse-card ${currentArt ? 'has-art' : ''}" data-open-episodes="1">
             <span class="episode-collapse-topline">
               <span class="episode-collapse-badge">Browse</span>
               <span class="episode-collapse-label">Episodes</span>
             </span>
             <span class="episode-collapse-title">${escapeHtml(compactSeriesLabel(collapseTitle))}</span>
             ${currentArt ? `<span class="mobile-context-art"><img src="${escapeHtml(currentArt)}" alt=""></span>` : ''}
-            <span class="mobile-current-badge"><span class="mobile-current-badge-dot"></span><span>${isPlayingNow ? 'Playing' : 'Loaded'}</span></span>
+            ${badgeMarkup}
           </button>
         `;
         return;
