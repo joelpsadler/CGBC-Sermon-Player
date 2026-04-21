@@ -1763,10 +1763,9 @@
         const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
           <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
-            ${isDateChip ? `<div class="context-chip-copy">
-              ${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}
-              <div class="context-chip-label">${escapeHtml(item.label)}</div>
-            </div>${media}` : `${media}
+            ${isDateChip
+              ? `${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}${media}`
+              : `${media}
             <div class="context-chip-copy">
               ${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}
               <div class="context-chip-label">${escapeHtml(item.label)}</div>
