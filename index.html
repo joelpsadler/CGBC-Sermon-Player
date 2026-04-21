@@ -423,21 +423,6 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .choice-list.mobile-browse-open{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
-      padding:10px;
-      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
-    }
-    .choice-list.mobile-browse-open > * + *{
-      margin-top:10px;
-    }
-    .mobile-context-chip{
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
-      touch-action:manipulation;
-    }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
@@ -1880,6 +1865,9 @@
       if(searchResultsMode()) return {rows:visibleItems().sort(sortNewestFirst), episodeLevel:true, searchResults:true};
 
       if(isMobileViewport() && state.mobileBrowseTarget){
+        if(state.mobileBrowseTarget === 'top'){
+          return {rows:rootChoices(), episodeLevel:false, mobileBrowse:true};
+        }
         if(state.mobileBrowseTarget === 'root'){
           return {rows:branchChoices(), episodeLevel:false, mobileBrowse:true};
         }
@@ -1888,7 +1876,7 @@
           if(leaves.length) return {rows:leaves, episodeLevel:false, mobileBrowse:true};
           return {rows:queueItems(), episodeLevel:true, mobileBrowse:true};
         }
-        if(state.mobileBrowseTarget === 'leaf'){
+        if(state.mobileBrowseTarget === 'episodes'){
           return {rows:queueItems(), episodeLevel:true, mobileBrowse:true};
         }
       }
@@ -2149,9 +2137,6 @@
       updateSearchStatus();
 
       const {rows, episodeLevel, searchResults} = choiceRows();
-      if(els.choiceList){
-        els.choiceList.classList.toggle('mobile-browse-open', !!(isMobileViewport() && state.mobileBrowseTarget));
-      }
       if(episodeLevel){
         state.activeQueue = rows.slice();
       } else {
@@ -2452,7 +2437,7 @@
       rerender();
     }
     function selectChoice(key){
-      if(!state.nav.rootKey){
+      if(!state.nav.rootKey || (isMobileViewport() && state.mobileBrowseTarget === 'top')){
         /* ============================================================================
            EASY NOTE: Livestreams and Shorts do NOT need a middle bucket.
            Clicking them should go straight from the root card to the episode list.
@@ -2479,10 +2464,35 @@
           scrollNavIntoView();
           return;
         }
-        state.mobileEpisodeListOpen=false; state.mobileBrowseTarget=null; state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
+        state.mobileEpisodeListOpen=false;
+        state.mobileBrowseTarget=null;
+        state.nav.rootKey=key;
+        state.nav.branchKey=null;
+        state.nav.leafKey=null;
+        scrollChoiceListToTop();
+        rerender();
+        scrollNavIntoView();
+        return;
       }
-      if(!state.nav.branchKey || (isMobileViewport() && state.mobileBrowseTarget === 'root')){ state.mobileEpisodeListOpen=false; state.mobileBrowseTarget=null; state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
-      if((leafChoices().length && !state.nav.leafKey) || (isMobileViewport() && state.mobileBrowseTarget === 'branch')){ state.mobileEpisodeListOpen=false; state.mobileBrowseTarget=null; state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(!state.nav.branchKey || (isMobileViewport() && state.mobileBrowseTarget === 'root')){
+        state.mobileEpisodeListOpen=false;
+        state.mobileBrowseTarget=null;
+        state.nav.branchKey=key;
+        state.nav.leafKey=null;
+        scrollChoiceListToTop();
+        rerender();
+        scrollNavIntoView();
+        return;
+      }
+      if((leafChoices().length && !state.nav.leafKey) || (isMobileViewport() && state.mobileBrowseTarget === 'branch')){
+        state.mobileEpisodeListOpen=false;
+        state.mobileBrowseTarget=null;
+        state.nav.leafKey=key;
+        scrollChoiceListToTop();
+        rerender();
+        scrollNavIntoView();
+        return;
+      }
     }
     function attachEvents(){
       initMediaSessionControls();
@@ -2504,7 +2514,7 @@
         const openEpisodesBtn = event.target.closest('[data-open-episodes]');
         if(openEpisodesBtn){
           state.mobileEpisodeListOpen = true;
-          state.mobileBrowseTarget = 'leaf';
+          state.mobileBrowseTarget = 'episodes';
           renderChoices();
           scrollChoiceListToTop();
           return;
@@ -2637,14 +2647,14 @@
         const level = btn.getAttribute('data-context-level');
 
         if(level==='root'){
-          state.mobileBrowseTarget = state.mobileBrowseTarget === 'root' ? null : 'root';
+          state.mobileBrowseTarget = state.mobileBrowseTarget === 'top' ? null : 'top';
           state.mobileEpisodeListOpen = false;
         } else if(level==='branch'){
-          state.mobileBrowseTarget = state.mobileBrowseTarget === 'branch' ? null : 'branch';
+          state.mobileBrowseTarget = state.mobileBrowseTarget === 'root' ? null : 'root';
           state.mobileEpisodeListOpen = false;
         } else if(level==='leaf'){
-          state.mobileBrowseTarget = state.mobileBrowseTarget === 'leaf' ? null : 'leaf';
-          state.mobileEpisodeListOpen = !!(state.mobileBrowseTarget === 'leaf');
+          state.mobileBrowseTarget = state.mobileBrowseTarget === 'branch' ? null : 'branch';
+          state.mobileEpisodeListOpen = false;
         } else {
           return;
         }
