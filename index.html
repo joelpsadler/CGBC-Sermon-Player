@@ -172,6 +172,22 @@
     }
     .context-row::-webkit-scrollbar{height:8px}
     .context-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+
+    @media (min-width:901px){
+      .context-row{
+        overflow:visible;
+        gap:12px;
+      }
+      .context-row::-webkit-scrollbar{display:none}
+      .context-chip{
+        flex:1 1 0;
+        min-width:0;
+      }
+      .context-chip.date-chip{
+        flex:0 0 122px;
+      }
+    }
+
     .context-chip{
       min-width:0;
       flex:0 0 248px;
