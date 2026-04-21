@@ -297,12 +297,58 @@
     .path-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .player-button{display:none}
     .player-button.is-visible{display:inline-flex !important}
-    .mobile-context-bar{
+    .mobile-context-wrap{
       display:none;
       padding:0 16px 10px;
+    }
+    .mobile-context-shell{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.018));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .mobile-context-toggle{
+      width:100%;
+      min-height:34px;
+      padding:8px 14px;
+      border:0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      background:transparent;
+      color:rgba(255,255,255,.56);
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      text-align:left;
+    }
+    .mobile-context-toggle .toggle-hint{
+      opacity:.9;
+    }
+    .mobile-context-toggle .toggle-glyph{
+      width:16px;
+      height:16px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .2s ease;
+    }
+    .mobile-context-shell.is-collapsed .mobile-context-toggle .toggle-glyph{
+      transform:rotate(-90deg);
+    }
+    .mobile-context-bar{
+      display:flex;
+      padding:10px;
       gap:10px;
       flex-direction:column;
       align-items:stretch;
+    }
+    .mobile-context-shell.is-collapsed .mobile-context-bar{
+      display:none;
     }
     .mobile-context-chip{
       width:100%;
@@ -1085,7 +1131,8 @@
       activeQueue:[],
       playingContext:null,
       playerRenderKey:'',
-      mobileEpisodeListOpen:false
+      mobileEpisodeListOpen:false,
+      mobileContextCollapsed:false
     };
 
     const els = {
@@ -1449,7 +1496,8 @@
             nav: { ...(state.playingContext.nav || {}) }
           } : null,
           paused: !!els.audioPlayer?.paused,
-          currentTime: Number(els.audioPlayer?.currentTime || 0)
+          currentTime: Number(els.audioPlayer?.currentTime || 0),
+          audioSrc: String(state.currentItem?.audio?.url || '')
         };
         localStorage.setItem(snapshotStorageKey(), JSON.stringify(payload));
       }catch(err){}
@@ -1483,6 +1531,19 @@
         state.playerRenderKey = '';
         renderPlayer();
         updatePlayerButton();
+        if(state.mode === 'audio' && payload?.audioSrc){
+          try{
+            els.audioPlayer.src = payload.audioSrc;
+            els.audioPlayer.setAttribute('src', payload.audioSrc);
+            if(Number.isFinite(payload.currentTime) && payload.currentTime > 0){
+              const t = Number(payload.currentTime);
+              els.audioPlayer.addEventListener('loadedmetadata', function restoreOnce(){
+                try{ els.audioPlayer.currentTime = Math.max(0, t); }catch(err){}
+                els.audioPlayer.removeEventListener('loadedmetadata', restoreOnce);
+              });
+            }
+          }catch(err){}
+        }
         return true;
       }catch(err){
         return false;
@@ -1891,14 +1952,18 @@
       return compactSeriesLabel(item.title || '');
     }
     function renderMobileContextBar(){
-      if(!els.mobileContextBar) return;
+      if(!els.mobileContextBar || !els.mobileContextWrap || !els.mobileContextShell || !els.mobileContextToggle) return;
       const items = buildContextItems();
       if(window.innerWidth > 900 || !items.length){
         els.mobileContextBar.innerHTML = '';
-        els.mobileContextBar.style.display = 'none';
+        els.mobileContextWrap.style.display = 'none';
+        els.mobileContextShell.classList.remove('is-collapsed');
+        els.mobileContextToggle.setAttribute('aria-expanded', 'true');
         return;
       }
-      els.mobileContextBar.style.display = 'flex';
+      els.mobileContextWrap.style.display = 'block';
+      els.mobileContextShell.classList.toggle('is-collapsed', !!state.mobileContextCollapsed);
+      els.mobileContextToggle.setAttribute('aria-expanded', state.mobileContextCollapsed ? 'false' : 'true');
       const showAllBrowseBadges = !!state.currentItem;
       els.mobileContextBar.innerHTML = items.map((item, index) => `
         <button type="button" class="mobile-context-chip ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
@@ -2071,6 +2136,7 @@
 
     function goTopPreservePlayer(){
       state.mobileEpisodeListOpen=false;
+      state.mobileContextCollapsed=false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2081,15 +2147,17 @@
 
     function updatePlayerButton(){
       if(!els.playerBtn) return;
+      const hasLoadedMedia = !!(state.currentItem || state.playingContext);
       const show = isMobileViewport()
-        ? !!state.currentItem
+        ? hasLoadedMedia
         : isBrowsingAwayFromCurrent();
       els.playerBtn.style.display = show ? 'inline-flex' : 'none';
       els.playerBtn.classList.toggle('is-visible', show);
-      els.playerBtn.disabled = !state.currentItem && !state.playingContext;
+      els.playerBtn.disabled = !hasLoadedMedia;
     }
     function goTopPreservePlayer(){
       state.mobileEpisodeListOpen=false;
+      state.mobileContextCollapsed=false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2466,6 +2534,7 @@
         const openEpisodesBtn = event.target.closest('[data-open-episodes]');
         if(openEpisodesBtn){
           state.mobileEpisodeListOpen = true;
+          state.mobileContextCollapsed = false;
           renderChoices();
           scrollChoiceListToTop();
           return;
@@ -2480,7 +2549,7 @@
             state.currentItem=next;
             state.playingContext={ mode: state.mode, nav: navSnapshot() };
             state.playerRenderKey='';
-            if(isMobileViewport()) state.mobileEpisodeListOpen = false;
+            if(isMobileViewport()) { state.mobileEpisodeListOpen = false; state.mobileContextCollapsed = false; }
             renderChoices();
             renderPlayer();
             scrollPlayerIntoView();
@@ -2493,12 +2562,18 @@
       els.backBtn.addEventListener('click', ()=>{
         goTopPreservePlayer();
       });
+      if(els.mobileContextToggle){
+        els.mobileContextToggle.addEventListener('click', ()=>{
+          state.mobileContextCollapsed = !state.mobileContextCollapsed;
+          renderMobileContextBar();
+        });
+      }
       if(els.playerBtn){
         els.playerBtn.addEventListener('click', ()=>{
           if(!state.playingContext) return;
           state.mode = state.playingContext.mode;
           state.nav = { ...state.playingContext.nav };
-          if(isMobileViewport()) state.mobileEpisodeListOpen = true;
+          if(isMobileViewport()) { state.mobileEpisodeListOpen = true; state.mobileContextCollapsed = false; }
           rerender();
           scrollPlayerIntoView();
         });
@@ -2525,37 +2600,33 @@
         persistPlaybackSnapshot();
         refreshActiveMediaSession();
         const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
+        if(!restored){
+          refreshAudioMountIfNeeded();
+          ensureCurrentPlaybackMounted();
         }
       });
       window.addEventListener('focus', ()=>{
         refreshActiveMediaSession();
         const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
+        if(!restored){
+          refreshAudioMountIfNeeded();
+          ensureCurrentPlaybackMounted();
         }
       });
       window.addEventListener('pageshow', ()=>{
         refreshActiveMediaSession();
         const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
+        if(!restored){
+          refreshAudioMountIfNeeded();
+          ensureCurrentPlaybackMounted();
         }
       });
       window.addEventListener('resume', ()=>{
         refreshActiveMediaSession();
         const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
+        if(!restored){
+          refreshAudioMountIfNeeded();
+          ensureCurrentPlaybackMounted();
         }
       });
       window.addEventListener('pagehide', ()=>{ persistPlaybackSnapshot(); refreshActiveMediaSession(); });
@@ -2644,7 +2715,7 @@
             persistPlaybackSnapshot();
           }
           if(name === 'pause'){
-            restorePlaybackSnapshotIfNeeded();
+            persistPlaybackSnapshot();
           }
           if(name === 'emptied' || name === 'stalled' || name === 'suspend' || name === 'error'){
             refreshAudioMountIfNeeded();
