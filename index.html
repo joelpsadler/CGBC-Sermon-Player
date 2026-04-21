@@ -25,7 +25,8 @@
       --mobile-bg:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230674/Mobile.jpg');
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
+    html,html,body{max-width:100%;overflow-x:hidden}
+    body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
         linear-gradient(180deg, rgba(11,11,12,.46) 0%, rgba(9,9,10,.64) 100%),
@@ -131,7 +132,12 @@
       flex:0 0 auto;
     }
 
-    .flow{display:grid;grid-template-columns:1fr;gap:16px}
+    .flow{display:grid;grid-template-columns:1fr;gap:16px;min-width:0;max-width:100%}
+    main,section,.content,.nav-panel,.nav-head,.search-row,.path-row,.top-actions,.impact,.masthead,.brand,.brand-mode-wrap{
+      min-width:0;
+      max-width:100%;
+      box-sizing:border-box;
+    }
     .panel{
       border-radius:24px;border:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg, rgba(14,14,15,.80), rgba(14,14,15,.74));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 14px 32px rgba(0,0,0,.18);
@@ -933,8 +939,8 @@
       .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
       .search-status{width:100%;font-size:12px}
-      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap}
-      .path-button{min-width:0;min-height:44px;padding:0 10px}
+      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap;overflow-x:hidden}
+      .path-button{min-width:0;min-height:44px;padding:0 10px;max-width:100%}
       .back-button,.player-button,.reset-button{flex:1 1 calc(33.333% - 6px)}
       .back-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
       .back-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
@@ -1269,8 +1275,27 @@
       const iso = String(item?.date?.iso || '').trim();
       if(/^\d{4}/.test(iso)) return iso.slice(0,4);
       const display = String(item?.date?.display || item?.publishedAt || '').trim();
-      const match = display.match(/(20\d{2}|19\d{2})/);
+      let match = display.match(/(20\d{2}|19\d{2})/);
       if(match) return match[1];
+
+      const yearHints = [
+        item?.series?.name,
+        item?.study?.name,
+        item?.title?.display,
+        item?.title,
+        item?.scripture?.display,
+        item?.notes,
+        item?.description,
+        item?.art?.episode?.square,
+        item?.art?.episode?.wide,
+        item?.art?.series?.square,
+        item?.art?.series?.wide,
+        item?.art?.study?.square,
+        item?.art?.study?.wide
+      ].filter(Boolean).join(' | ');
+      match = String(yearHints).match(/(20\d{2}|19\d{2})/);
+      if(match) return match[1];
+
       return 'Unknown';
     }
     function getBookTagsDisplay(item){const tags=Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name).filter(Boolean):[]; return tags.length?tags.join(', '):'—';}
@@ -1865,9 +1890,16 @@
       browse.topical.forEach(row=>{
         row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
       });
-      browse.specials.forEach(row=>{
+      browse.specials.forEach((row,key)=>{
         row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
         row.meta = formatCountLabel(row.items.length,'episode','episodes');
+        if(String(key) === 'Unknown'){
+          const inferred = getItemYear(getFirstEpisode(row.items));
+          if(inferred && inferred !== 'Unknown'){
+            row.key = `topical-specials-${inferred}`;
+            row.title = `${inferred} Specials`;
+          }
+        }
       });
 
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
