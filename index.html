@@ -1504,6 +1504,22 @@
       return false;
     }
 
+    function refreshAudioMountIfNeeded(){
+      try{
+        if(!state.currentItem || state.mode !== 'audio' || !state.currentItem?.audio?.url) return false;
+        const wanted = String(state.currentItem.audio.url || '');
+        const currentAttr = String(els.audioPlayer?.getAttribute('src') || '');
+        const currentSrc = String(els.audioPlayer?.src || '');
+        if(currentAttr !== wanted && !currentSrc.includes(wanted)){
+          els.audioPlayer.setAttribute('src', wanted);
+          els.audioPlayer.src = wanted;
+          els.audioPlayer.load();
+          return true;
+        }
+      }catch(err){}
+      return false;
+    }
+
     function applyDeepLinkFromUrl(){
       try{
         const params = new URLSearchParams(window.location.search);
@@ -1883,10 +1899,11 @@
         return;
       }
       els.mobileContextBar.style.display = 'flex';
+      const showAllBrowseBadges = !!state.currentItem;
       els.mobileContextBar.innerHTML = items.map((item, index) => `
         <button type="button" class="mobile-context-chip ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
           <span class="mobile-context-topline">
-            ${index === items.length - 1 ? '' : '<span class="mobile-context-badge">Browse</span>'}
+            ${(showAllBrowseBadges || index !== items.length - 1) ? '<span class="mobile-context-badge">Browse</span>' : ''}
             <span class="mobile-context-label">${escapeHtml(item.label || 'Path')}</span>
           </span>
           <span class="mobile-context-title">${escapeHtml(mobileContextTitle(item))}</span>
@@ -2072,6 +2089,7 @@
       els.playerBtn.disabled = !state.currentItem && !state.playingContext;
     }
     function goTopPreservePlayer(){
+      state.mobileEpisodeListOpen=false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2480,6 +2498,7 @@
           if(!state.playingContext) return;
           state.mode = state.playingContext.mode;
           state.nav = { ...state.playingContext.nav };
+          if(isMobileViewport()) state.mobileEpisodeListOpen = true;
           rerender();
           scrollPlayerIntoView();
         });
@@ -2505,19 +2524,39 @@
       document.addEventListener('visibilitychange', ()=>{
         persistPlaybackSnapshot();
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
+        const restored = restorePlaybackSnapshotIfNeeded();
+        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
+        if(restored || remounted){
+          renderPlayer();
+          updatePlayerButton();
+        }
       });
       window.addEventListener('focus', ()=>{
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
+        const restored = restorePlaybackSnapshotIfNeeded();
+        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
+        if(restored || remounted){
+          renderPlayer();
+          updatePlayerButton();
+        }
       });
       window.addEventListener('pageshow', ()=>{
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
+        const restored = restorePlaybackSnapshotIfNeeded();
+        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
+        if(restored || remounted){
+          renderPlayer();
+          updatePlayerButton();
+        }
       });
       window.addEventListener('resume', ()=>{
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
+        const restored = restorePlaybackSnapshotIfNeeded();
+        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
+        if(restored || remounted){
+          renderPlayer();
+          updatePlayerButton();
+        }
       });
       window.addEventListener('pagehide', ()=>{ persistPlaybackSnapshot(); refreshActiveMediaSession(); });
 
@@ -2608,6 +2647,7 @@
             restorePlaybackSnapshotIfNeeded();
           }
           if(name === 'emptied' || name === 'stalled' || name === 'suspend' || name === 'error'){
+            refreshAudioMountIfNeeded();
             if(!document.hidden){
               ensureCurrentPlaybackMounted();
             }
