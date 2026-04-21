@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
-  <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1238149/cgbc_media-player_-Web-App-icon_.jpg">
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png">
   <meta name="theme-color" content="#0f0f10" />
@@ -190,26 +189,25 @@
     }
     .context-chip.date-chip{
       position:relative;
-      flex:0 0 148px;
+      flex:0 0 166px;
       justify-content:center;
       align-items:center;
-      padding:8px;
+      padding:10px;
     }
     .context-chip.date-chip img{display:none}
     .context-chip.date-chip .context-chip-copy{display:none}
     .context-chip.date-chip .context-chip-badge{
       position:absolute;
-      top:3px;
-      left:50%;
-      transform:translateX(-50%);
+      top:8px;
+      left:8px;
       margin-bottom:0;
       z-index:2;
     }
     .context-chip-date{
-      width:120px;
-      height:76px;
-      flex:0 0 120px;
-      border-radius:15px;
+      width:132px;
+      height:84px;
+      flex:0 0 132px;
+      border-radius:16px;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -219,19 +217,19 @@
     }
     .context-chip-date .mini-label{
       font-family:Poppins,sans-serif;
-      font-size:8px;
-      letter-spacing:.10em;
+      font-size:9px;
+      letter-spacing:.11em;
       text-transform:uppercase;
       color:rgba(255,255,255,.55);
       line-height:1;
     }
     .context-chip-date .mini-value{
-      margin-top:4px;
+      margin-top:5px;
       max-width:100%;
-      padding:0 8px;
+      padding:0 10px;
       text-align:center;
       font-family:Poppins,sans-serif;
-      font-size:17px;
+      font-size:18px;
       font-weight:800;
       line-height:1.02;
       color:rgba(255,255,255,.96);
@@ -297,33 +295,28 @@
     .path-glyph svg{display:block;width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .path-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .player-button{display:none}
-    @media (min-width:901px){
-      .player-button.is-visible{display:inline-flex !important}
-    }
+    .player-button.is-visible{display:inline-flex !important}
     .mobile-context-bar{
       display:none;
-      padding:0 16px 6px;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
+      padding:0 16px 10px;
+      gap:10px;
+      flex-direction:column;
+      align-items:stretch;
     }
     .mobile-context-chip{
-      min-height:34px;
-      max-width:100%;
-      padding:0 12px;
-      border-radius:999px;
+      width:100%;
+      min-height:58px;
+      padding:12px 16px;
+      border-radius:18px;
       border:1px solid rgba(255,255,255,.08);
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
-      color:rgba(255,255,255,.88);
-      font-family:Poppins,sans-serif;
-      font-size:12px;
-      line-height:1;
-      display:inline-flex;
-      align-items:center;
+      color:rgba(255,255,255,.9);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
       gap:8px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      text-align:left;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
     }
     .mobile-context-chip.active{
@@ -331,17 +324,48 @@
       border-color:rgba(143,174,157,.24);
       color:rgba(255,255,255,.96);
     }
+    .mobile-context-topline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      width:100%;
+    }
+    .mobile-context-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:26px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(143,174,157,.22);
+      background:linear-gradient(180deg, rgba(143,174,157,.12), rgba(143,174,157,.06));
+      color:rgba(255,255,255,.96);
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      flex:0 0 auto;
+    }
     .mobile-context-label{
-      color:rgba(255,255,255,.52);
+      color:rgba(255,255,255,.58);
       text-transform:uppercase;
       letter-spacing:.08em;
-      font-size:10px;
+      font-size:11px;
       flex:0 0 auto;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
     .mobile-context-title{
       min-width:0;
+      width:100%;
+      font-family:Poppins,sans-serif;
+      font-size:18px;
+      line-height:1.1;
       overflow:hidden;
       text-overflow:ellipsis;
+      white-space:nowrap;
     }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -1321,6 +1345,62 @@
       }
     }
 
+    function snapshotStorageKey(){
+      return 'cgbc-player-snapshot-v1';
+    }
+
+    function clearPlaybackSnapshot(){
+      try{ sessionStorage.removeItem(snapshotStorageKey()); }catch(err){}
+    }
+
+    function persistPlaybackSnapshot(){
+      try{
+        if(!state.currentItem?.stableId) return;
+        const payload = {
+          mode: state.mode,
+          currentItemId: state.currentItem.stableId,
+          nav: { ...(state.nav || {}) },
+          playingContext: state.playingContext ? {
+            mode: state.playingContext.mode,
+            nav: { ...(state.playingContext.nav || {}) }
+          } : null,
+          paused: !!els.audioPlayer?.paused,
+          currentTime: Number(els.audioPlayer?.currentTime || 0)
+        };
+        sessionStorage.setItem(snapshotStorageKey(), JSON.stringify(payload));
+      }catch(err){}
+    }
+
+    function restorePlaybackSnapshotIfNeeded(){
+      try{
+        if(state.currentItem) return;
+        const raw = sessionStorage.getItem(snapshotStorageKey());
+        if(!raw) return;
+        const payload = JSON.parse(raw);
+        if(!payload?.currentItemId) return;
+        const item = getAllShareableItems().find(row => row?.stableId === payload.currentItemId);
+        if(!item) return;
+        state.mode = payload.mode === 'video' ? 'video' : 'audio';
+        state.currentItem = item;
+        if(payload?.playingContext?.nav){
+          state.playingContext = {
+            mode: payload.playingContext.mode === 'video' ? 'video' : 'audio',
+            nav: { ...(payload.playingContext.nav || {}) }
+          };
+        } else {
+          state.playingContext = {
+            mode: state.mode,
+            nav: { ...(payload.nav || state.nav || {}) }
+          };
+        }
+        if(payload?.nav){
+          state.nav = { ...(payload.nav || {}) };
+        }
+        renderPlayer();
+        updatePlayerButton();
+      }catch(err){}
+    }
+
     function applyDeepLinkFromUrl(){
       try{
         const params = new URLSearchParams(window.location.search);
@@ -1702,7 +1782,10 @@
       els.mobileContextBar.style.display = 'flex';
       els.mobileContextBar.innerHTML = items.map((item, index) => `
         <button type="button" class="mobile-context-chip ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
-          <span class="mobile-context-label">${escapeHtml(item.label || 'Path')}</span>
+          <span class="mobile-context-topline">
+            ${index === items.length - 1 ? '' : '<span class="mobile-context-badge">Browse</span>'}
+            <span class="mobile-context-label">${escapeHtml(item.label || 'Path')}</span>
+          </span>
           <span class="mobile-context-title">${escapeHtml(mobileContextTitle(item))}</span>
         </button>
       `).join('');
@@ -1877,9 +1960,12 @@
 
     function updatePlayerButton(){
       if(!els.playerBtn) return;
-      const show = !isMobileViewport() && isBrowsingAwayFromCurrent();
+      const show = isMobileViewport()
+        ? !!state.currentItem
+        : isBrowsingAwayFromCurrent();
       els.playerBtn.style.display = show ? 'inline-flex' : 'none';
       els.playerBtn.classList.toggle('is-visible', show);
+      els.playerBtn.disabled = !state.currentItem && !state.playingContext;
     }
     function goTopPreservePlayer(){
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
@@ -1902,13 +1988,8 @@
       if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg>';
       if(homeLabel) homeLabel.textContent = 'Reset';
 
-      if(desktopUsesTopButton()){
-        if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
-        if(backLabelEl) backLabelEl.textContent = 'Top';
-      } else {
-        if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>';
-        if(backLabelEl) backLabelEl.textContent = backLabel();
-      }
+      if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
+      if(backLabelEl) backLabelEl.textContent = 'Top';
 
       updateSearchStatus();
 
@@ -2079,6 +2160,7 @@
         applyAudioNowPlaying(item);
         updateMediaSessionState();
         startMediaSessionHeartbeat();
+        persistPlaybackSnapshot();
       }
 
       if(els.playerShareLink){
@@ -2162,6 +2244,7 @@
         state.currentItem=null;
         state.playingContext=null;
         state.playerRenderKey='';
+        clearPlaybackSnapshot();
       }
       if(!preserveSearch){
         state.searchTerm='';
@@ -2246,11 +2329,7 @@
         selectChoice(key);
       });
       els.backBtn.addEventListener('click', ()=>{
-        if(desktopUsesTopButton()){
-          goTopPreservePlayer();
-        } else {
-          goBack();
-        }
+        goTopPreservePlayer();
       });
       if(els.playerBtn){
         els.playerBtn.addEventListener('click', ()=>{
@@ -2280,12 +2359,14 @@
       }
 
       document.addEventListener('visibilitychange', ()=>{
+        persistPlaybackSnapshot();
         refreshActiveMediaSession();
+        restorePlaybackSnapshotIfNeeded();
       });
-      window.addEventListener('focus', refreshActiveMediaSession);
-      window.addEventListener('pageshow', refreshActiveMediaSession);
-      window.addEventListener('resume', refreshActiveMediaSession);
-      window.addEventListener('pagehide', refreshActiveMediaSession);
+      window.addEventListener('focus', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
+      window.addEventListener('pageshow', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
+      window.addEventListener('resume', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
+      window.addEventListener('pagehide', ()=>{ persistPlaybackSnapshot(); refreshActiveMediaSession(); });
 
       els.listenBtn.addEventListener('click', ()=>{
         if(state.mode==='audio') return;
@@ -2316,6 +2397,24 @@
         }
         scrollChoiceListToTop();
         rerender();
+      });
+      els.mobileContextBar.addEventListener('click', (event)=>{
+        const btn = event.target.closest('[data-context-level]');
+        if(!btn) return;
+        const level = btn.getAttribute('data-context-level');
+        if(level==='root'){
+          state.nav.branchKey=null;
+          state.nav.leafKey=null;
+        } else if(level==='branch'){
+          state.nav.leafKey=null;
+        } else if(level==='leaf'){
+          state.currentItem=null;
+        } else {
+          return;
+        }
+        scrollChoiceListToTop();
+        rerender();
+        scrollNavIntoView();
       });
       window.addEventListener('resize', ()=>{ renderContextStrip(); renderMobileContextBar(); });
       els.audioPlayBadge.addEventListener('click', ()=>{
@@ -2350,8 +2449,14 @@
           refreshActiveMediaSession();
           if(state.currentItem?.audio?.hasAudio){
             startMediaSessionHeartbeat();
+            persistPlaybackSnapshot();
           }
-          if(name === 'ended') applyAudioNowPlaying(state.currentItem);
+          if(name === 'pause'){
+            restorePlaybackSnapshotIfNeeded();
+          }
+          if(name === 'ended'){
+            applyAudioNowPlaying(state.currentItem);
+          }
         });
       });
     }
