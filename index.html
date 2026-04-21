@@ -160,9 +160,6 @@
       min-height:96px;
       align-content:start;
     }
-    .context-strip.mobile-pinned{
-      margin-top:0;
-    }
     .context-row{
       display:flex;
       gap:10px;
@@ -666,110 +663,33 @@
         display:block;
         overflow:visible;
       }
-      .nav-head{padding:12px 14px 6px}
-      .search-row{
-        display:grid;
-        grid-template-columns:minmax(0,1fr);
-        gap:8px;
-        padding:0 14px 8px;
-        margin-top:0;
-      }
+      .nav-head{padding:12px 14px 8px}
+      .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
-      .search-status{width:100%;font-size:12px;padding-left:2px}
-      .path-row{
-        display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
-        padding:8px 14px 8px;
-      }
-      .path-button{min-width:0;min-height:46px;padding:0 12px;border-radius:14px}
-      .home-button,.back-button{flex:initial;min-width:0;width:100%}
-      .home-button .path-label,.back-button .path-label{font-size:14px;line-height:1.05}
-      .home-button .path-glyph,.back-button .path-glyph{font-size:22px}
-      .mobile-context-bar{display:none !important}
-      .context-strip{
-        display:none;
-        padding:10px 14px 4px;
-        min-height:0;
-      }
-      .context-row{
-        gap:8px;
-        min-height:0;
-      }
-      .context-chip{
-        flex:0 0 188px;
-        height:74px;
-        padding:8px;
-        border-radius:16px;
-      }
-      .context-chip img{
-        width:56px;
-        height:56px;
-        flex-basis:56px;
-        border-radius:12px;
-      }
-      .context-chip.square img{width:56px;height:56px;flex-basis:56px}
-      .context-chip.date-chip{flex:0 0 108px}
-      .context-chip-date{width:74px;height:50px;flex-basis:74px}
-      .context-chip-label{font-size:9px}
-      .context-chip-title{font-size:14px;line-height:1.06;max-height:2.15em}
+      .search-status{width:100%;font-size:12px}
+      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:nowrap}
+      .path-button{min-width:0;min-height:44px;padding:0 10px}
+      .home-button{flex:0 0 auto;min-width:108px;padding-inline:12px}
+      .back-button{flex:1 1 auto}
+      .home-button .path-label,.back-button .path-label{font-size:15px;line-height:1.05}
+      .home-button .path-glyph{font-size:25px}
+      .back-button .path-glyph{font-size:30px}
+      .mobile-context-bar{display:flex;padding:0 14px 10px}
+      .mobile-context-chip{max-width:100%}
       .stack{
-        padding:10px 14px 14px;
+        padding:12px 14px 14px;
         gap:10px;
         overflow:visible;
         max-height:none;
       }
-      .choice,.episode{padding:10px;gap:9px;border-radius:17px}
-      .choice.root-card{
-        display:flex;
-        align-items:center;
-        gap:9px;
-        padding:9px;
-        border-radius:17px;
-        overflow:visible;
-      }
-      .choice.root-card .copy{
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        padding:0;
-        min-width:0;
-      }
+      .choice,.episode{padding:12px;gap:10px;border-radius:18px}
+      .choice.root-card .copy{padding:12px 14px 14px}
       .choice.root-card .thumb-square,
-      .choice.root-card .thumb-wide{
-        width:112px;
-        height:64px;
-        flex:0 0 112px;
-        aspect-ratio:auto;
-        border-radius:15px;
-        overflow:hidden;
-      }
-      .choice.root-card .thumb-square img,
-      .choice.root-card .thumb-wide img{object-fit:cover}
-      .live-badge{
-        top:8px;
-        left:8px;
-        min-height:28px;
-        padding:0 10px;
-        font-size:10px;
-        letter-spacing:.11em;
-      }
-      .live-badge-dot{width:8px;height:8px;flex-basis:8px}
+      .choice.root-card .thumb-wide{border-radius:18px}
       .thumb-wide{width:112px;height:68px;flex-basis:112px}
-      .choice.branch-card .thumb-wide{width:116px;height:72px;flex-basis:116px;border-radius:15px}
-      .choice.branch-card .thumb-square{width:74px;height:74px;flex-basis:74px;border-radius:15px}
-      .thumb-square{width:72px;height:72px;flex-basis:72px}
-      .choice.date-text-card .thumb-wide{
-        width:104px;
-        height:72px;
-        flex-basis:104px;
-      }
-      .date-card-label{font-size:10px}
-      .date-card-value{font-size:28px}
-      .date-card-value.month-value{font-size:20px}
-      .date-card-subvalue{font-size:14px}
-      .card-title{font-size:16px;line-height:1.12}
-      .card-sub{font-size:13px;line-height:1.22}
+      .choice.branch-card .thumb-wide{width:136px;height:86px;flex-basis:136px;border-radius:16px}
+      .thumb-square{width:80px;height:80px;flex-basis:80px}
+      .card-title{font-size:17px}
       .card-meta-line{font-size:12px;line-height:1.3}
       .card-metric{font-size:11px;margin-top:6px}
       .player{padding:14px}
@@ -1679,9 +1599,12 @@
     function renderMobileContextBar(){
       if(!els.mobileContextBar) return;
       const items = buildContextItems();
-      els.mobileContextBar.innerHTML = '';
-      els.mobileContextBar.style.display = 'none';
-      return;
+      if(window.innerWidth > 900 || !items.length){
+        els.mobileContextBar.innerHTML = '';
+        els.mobileContextBar.style.display = 'none';
+        return;
+      }
+      els.mobileContextBar.style.display = 'flex';
       els.mobileContextBar.innerHTML = items.map((item, index) => `
         <button type="button" class="mobile-context-chip ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
           <span class="mobile-context-label">${escapeHtml(item.label || 'Path')}</span>
@@ -1766,8 +1689,7 @@
         els.contextStrip.style.display = 'none';
         return;
       }
-      els.contextStrip.classList.toggle('mobile-pinned', window.innerWidth <= 900);
-      els.contextStrip.style.display = items.length ? 'block' : 'none';
+      els.contextStrip.style.display = window.innerWidth >= 1040 ? 'block' : 'none';
       els.contextRow.innerHTML = items.map((item, index) => {
         const isDateChip = !!item.dateCardType;
         const media = isDateChip
