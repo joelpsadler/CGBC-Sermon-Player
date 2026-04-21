@@ -2597,16 +2597,23 @@
         const btn = event.target.closest('[data-context-level]');
         if(!btn) return;
         const level = btn.getAttribute('data-context-level');
+
         if(level==='root'){
-          state.nav.branchKey=null;
-          state.nav.leafKey=null;
+          state.nav.branchKey = null;
+          state.nav.leafKey = null;
+          state.currentItem = null;
+          state.mobileEpisodeListOpen = false;
         } else if(level==='branch'){
-          state.nav.leafKey=null;
+          state.nav.leafKey = null;
+          state.currentItem = null;
+          state.mobileEpisodeListOpen = false;
         } else if(level==='leaf'){
-          state.currentItem=null;
+          state.currentItem = null;
+          state.mobileEpisodeListOpen = true;
         } else {
           return;
         }
+
         scrollChoiceListToTop();
         rerender();
         scrollNavIntoView();
