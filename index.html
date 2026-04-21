@@ -737,9 +737,9 @@
       .search-status{width:100%;font-size:12px}
       .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap}
       .path-button{min-width:0;min-height:44px;padding:0 10px}
-      .back-button,.player-button,.reset-button{flex:1 1 calc(33.333% - 6px)}
-      .back-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
-      .back-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
+      .top-button,.player-button,.reset-button{flex:1 1 calc(33.333% - 6px)}
+      .top-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
+      .top-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
       .mobile-context-bar{display:flex;padding:0 14px 10px}
       .mobile-context-chip{max-width:100%}
       .stack{
@@ -849,7 +849,7 @@
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row">
-          <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg></span><span class="path-label">Top</span></span></button>
+          <button type="button" class="path-button back-button" id="topBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg></span><span class="path-label">Top</span></span></button>
           <button type="button" class="path-button player-button" id="playerBtn" style="display:none"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M8 7V3L3 8l5 5V9c7 0 10 2 13 7-1-6-4-9-13-9z"/></svg></span><span class="path-label">Player</span></span></button>
           <button type="button" class="path-button reset-button" id="resetBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg></span><span class="path-label">Reset</span></span></button>
         </div>
@@ -963,7 +963,7 @@
       searchInput: document.getElementById('searchInput'),
       searchStatus: document.getElementById('searchStatus'),
       navHeading: document.getElementById('navHeading'),
-      backBtn: document.getElementById('backBtn'),
+      topBtn: document.getElementById('topBtn'),
       playerBtn: document.getElementById('playerBtn'),
       resetBtn: document.getElementById('resetBtn'),
       choiceList: document.getElementById('choiceList'),
@@ -1864,7 +1864,7 @@
       const backLabelEl = els.backBtn ? els.backBtn.querySelector('.path-label') : null;
       if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg>';
       
-      if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>';
+      if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
       if(backLabelEl) backLabelEl.textContent = backLabel();
       updateSearchStatus();
 
@@ -2201,7 +2201,7 @@
         }
         selectChoice(key);
       });
-      els.backBtn.addEventListener('click', goTopPreservePlayer);
+      els.topBtn.addEventListener('click', goTopPreservePlayer);
       if(els.playerBtn){
         els.playerBtn.addEventListener('click', ()=>{
           if(!state.playingContext) return;
