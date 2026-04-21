@@ -423,6 +423,21 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
+    .choice-list.mobile-browse-open{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .choice-list.mobile-browse-open > * + *{
+      margin-top:10px;
+    }
+    .mobile-context-chip{
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action:manipulation;
+    }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
@@ -2134,6 +2149,9 @@
       updateSearchStatus();
 
       const {rows, episodeLevel, searchResults} = choiceRows();
+      if(els.choiceList){
+        els.choiceList.classList.toggle('mobile-browse-open', !!(isMobileViewport() && state.mobileBrowseTarget));
+      }
       if(episodeLevel){
         state.activeQueue = rows.slice();
       } else {
@@ -2626,7 +2644,7 @@
           state.mobileEpisodeListOpen = false;
         } else if(level==='leaf'){
           state.mobileBrowseTarget = state.mobileBrowseTarget === 'leaf' ? null : 'leaf';
-          state.mobileEpisodeListOpen = state.mobileBrowseTarget === 'leaf';
+          state.mobileEpisodeListOpen = !!(state.mobileBrowseTarget === 'leaf');
         } else {
           return;
         }
