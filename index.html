@@ -1794,7 +1794,9 @@
       const firstEpisodeStableId = episodeLevel && rows.length ? rows[0]?.stableId : null;
       els.choiceList.innerHTML = rows.map(row => {
         const dateTextCard = !!row?.dateCardType;
-        const thumbClass = (state.mode==='video' || isRootLevel || dateTextCard) ? 'thumb-wide' : 'thumb-square';
+        const thumbClass = episodeLevel
+          ? (state.mode === 'audio' ? 'thumb-square' : 'thumb-wide')
+          : ((state.mode==='video' || isRootLevel || dateTextCard) ? 'thumb-wide' : 'thumb-square');
         const image = episodeLevel
           ? (state.mode==='audio'
               ? (row?.art?.episode?.square || row?.art?.series?.square || row?.art?.study?.square || getEpisodeArt(row, 'audio'))
