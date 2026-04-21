@@ -306,6 +306,9 @@
     }
     .mobile-context-chip{
       width:100%;
+      max-width:100%;
+      min-width:0;
+      box-sizing:border-box;
       min-height:58px;
       padding:12px 16px;
       border-radius:18px;
@@ -370,6 +373,9 @@
     }
     .episode-collapse-card{
       width:100%;
+      max-width:100%;
+      min-width:0;
+      box-sizing:border-box;
       min-height:60px;
       padding:12px 16px;
       border-radius:18px;
@@ -493,7 +499,11 @@
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
-      width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
+      width:100%;
+      max-width:100%;
+      min-width:0;
+      box-sizing:border-box;
+      display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.07);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 20px rgba(0,0,0,.12)
@@ -599,7 +609,8 @@
     .choice.branch-card .thumb-square{width:96px;height:96px;flex-basis:96px;border-radius:18px;}
     .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
-    .copy{min-width:0;flex:1}
+    .copy{min-width:0;flex:1;width:100%}
+    .stack,.choices,.mobile-context-bar,.mobile-context-wrap,.choice-list,.choice-list.mobile-browse-open{min-width:0;max-width:100%;box-sizing:border-box;overflow-x:hidden;}
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
     .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
     .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
@@ -1679,7 +1690,7 @@
     }
     function buildBrowse(){
       const items=visibleItems();
-      const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
+      const browse={roots:[],current:[],books:new Map(),topical:new Map(),specials:new Map(),date:new Map()};
 
       items.forEach(item=>{
         const seriesKey=item?.series?.key || '';
@@ -1688,6 +1699,20 @@
         const modeHint=item?.presentation?.bibleBooksMode || 'none';
         const bookKeys=Array.isArray(item?.memberships?.bibleBooks)?item.memberships.bibleBooks:[];
         const isSpecial=/special/i.test(seriesName);
+
+        if(isSpecial){
+          const specialYear = String(item?.date?.year || 'Unknown');
+          if(!browse.specials.has(specialYear)){
+            browse.specials.set(specialYear,{
+              key:`topical-specials-${specialYear}`,
+              title:`${specialYear} Specials`,
+              meta:'Specials',
+              image:ASSETS.topicalSeries || ASSETS.fallback,
+              items:[]
+            });
+          }
+          browse.specials.get(specialYear).items.push(item);
+        }
 
         if(CURRENT_SERIES_KEYS.has(seriesKey)){
           let row = browse.current.find(r=>r.key===seriesKey);
@@ -1757,7 +1782,7 @@
           studyBucket.seriesMap.get(seriesKey).items.push(item);
         }
 
-        if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial){
+        if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial && studyType !== 'topical_study'){
           if(!browse.topical.has(seriesKey)){
             browse.topical.set(seriesKey,{
               key:seriesKey,
@@ -1811,6 +1836,10 @@
       browse.topical.forEach(row=>{
         row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
       });
+      browse.specials.forEach(row=>{
+        row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
+        row.meta = formatCountLabel(row.items.length,'episode','episodes');
+      });
 
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
       browse.roots=[
@@ -1819,7 +1848,7 @@
         ] : []),
         {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current},
         {key:'books',title:'Bible Books / Studies',meta:formatCountLabel(browse.books.size,'book','books'),image:ASSETS.books},
-        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
+        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size + (browse.specials.size ? 1 : 0),'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
         {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date},
         ...(state.mode==='video' ? [
           {key:'shorts',title:'Shorts',meta:'',image:ASSETS.shorts}
@@ -1859,6 +1888,8 @@
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
+        const specialRows = Array.from(browse.specials.values()).sort((a,b)=>a.title.localeCompare(b.title));
+        rows.push(...specialRows);
         if(state.mode==='video' && state.nativeShelves.guestSpeakers.length){
           rows.push({
             key:'guest-speakers-pinned',
@@ -1922,7 +1953,7 @@
       }
       if(root==='topical'){
         if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
-        const row=browse.topical.get(branch);
+        const row=browse.topical.get(branch) || browse.specials.get(String(branch).replace('topical-specials-',''));
         return row ? row.items.slice().sort(sortOldestFirst) : [];
       }
       if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
@@ -2234,7 +2265,7 @@
       if(homeLabel) homeLabel.textContent = 'Reset';
 
       if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
-      if(backLabelEl) backLabelEl.textContent = 'Top';
+      if(backLabelEl) backLabelEl.textContent = isMobileViewport() ? 'Home' : 'Top';
 
       updateSearchStatus();
 
@@ -2251,7 +2282,7 @@
       }
 
       if(!rows.length){
-        els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
+        els.choiceList.innerHTML = `<div class="empty">No items found here.</div>`;
         return;
       }
 
