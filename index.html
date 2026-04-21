@@ -803,7 +803,7 @@
       .card-title{font-size:17px}
       .card-meta-line{font-size:12px;line-height:1.3}
       .card-metric{font-size:11px;margin-top:6px}
-      .player{padding:12px}
+      .player{padding:12px;scroll-margin-top:8px}
       #videoShell,#videoPlaceholder{min-height:210px;border-radius:18px}
       #audioPlaceholder{min-height:160px;border-radius:18px;padding:20px}
       .audio-stage{gap:12px}
@@ -1377,7 +1377,7 @@
     }
 
     function clearPlaybackSnapshot(){
-      try{ sessionStorage.removeItem(snapshotStorageKey()); }catch(err){}
+      try{ localStorage.removeItem(snapshotStorageKey()); }catch(err){}
     }
 
     function persistPlaybackSnapshot(){
@@ -1394,19 +1394,19 @@
           paused: !!els.audioPlayer?.paused,
           currentTime: Number(els.audioPlayer?.currentTime || 0)
         };
-        sessionStorage.setItem(snapshotStorageKey(), JSON.stringify(payload));
+        localStorage.setItem(snapshotStorageKey(), JSON.stringify(payload));
       }catch(err){}
     }
 
     function restorePlaybackSnapshotIfNeeded(){
       try{
-        if(state.currentItem) return;
-        const raw = sessionStorage.getItem(snapshotStorageKey());
-        if(!raw) return;
+        if(state.currentItem) return false;
+        const raw = localStorage.getItem(snapshotStorageKey());
+        if(!raw) return false;
         const payload = JSON.parse(raw);
-        if(!payload?.currentItemId) return;
+        if(!payload?.currentItemId) return false;
         const item = getAllShareableItems().find(row => row?.stableId === payload.currentItemId);
-        if(!item) return;
+        if(!item) return false;
         state.mode = payload.mode === 'video' ? 'video' : 'audio';
         state.currentItem = item;
         if(payload?.playingContext?.nav){
@@ -1423,9 +1423,13 @@
         if(payload?.nav){
           state.nav = { ...(payload.nav || {}) };
         }
+        state.playerRenderKey = '';
         renderPlayer();
         updatePlayerButton();
-      }catch(err){}
+        return true;
+      }catch(err){
+        return false;
+      }
     }
 
     function applyDeepLinkFromUrl(){
@@ -2225,7 +2229,12 @@
     }
     function scrollPlayerIntoView(){
       if(!isMobileViewport()) return;
-      try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
+      try{
+        const top = window.scrollY + els.playerShell.getBoundingClientRect().top - 8;
+        window.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
+      }catch(err){
+        try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(innerErr){}
+      }
     }
     function scrollNavIntoView(){
       if(!isMobileViewport()) return;
@@ -2388,11 +2397,20 @@
       document.addEventListener('visibilitychange', ()=>{
         persistPlaybackSnapshot();
         refreshActiveMediaSession();
-        restorePlaybackSnapshotIfNeeded();
+        if(restorePlaybackSnapshotIfNeeded()) rerender();
       });
-      window.addEventListener('focus', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
-      window.addEventListener('pageshow', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
-      window.addEventListener('resume', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
+      window.addEventListener('focus', ()=>{
+        refreshActiveMediaSession();
+        if(restorePlaybackSnapshotIfNeeded()) rerender();
+      });
+      window.addEventListener('pageshow', ()=>{
+        refreshActiveMediaSession();
+        if(restorePlaybackSnapshotIfNeeded()) rerender();
+      });
+      window.addEventListener('resume', ()=>{
+        refreshActiveMediaSession();
+        if(restorePlaybackSnapshotIfNeeded()) rerender();
+      });
       window.addEventListener('pagehide', ()=>{ persistPlaybackSnapshot(); refreshActiveMediaSession(); });
 
       els.listenBtn.addEventListener('click', ()=>{
@@ -2491,6 +2509,7 @@
       attachEvents();
       state.data = await loadResolvedData();
       state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
+      restorePlaybackSnapshotIfNeeded();
       rerender();
       applyDeepLinkFromUrl();
       try{
