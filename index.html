@@ -1823,6 +1823,10 @@
     function isBrowsingAwayFromCurrent(){
       return !!(state.currentItem && state.playingContext && (!sameNav(state.nav, state.playingContext.nav) || state.mode !== state.playingContext.mode));
     }
+    function desktopUsesTopButton(){
+      return !isMobileViewport();
+    }
+
     function updatePlayerButton(){
       if(!els.playerBtn) return;
       const show = !isMobileViewport() && isBrowsingAwayFromCurrent();
@@ -1847,9 +1851,14 @@
       const backGlyph = els.backBtn ? els.backBtn.querySelector('.path-glyph') : null;
       const backLabelEl = els.backBtn ? els.backBtn.querySelector('.path-label') : null;
       if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg>';
-      
-      if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>';
-      if(backLabelEl) backLabelEl.textContent = backLabel();
+
+      if(desktopUsesTopButton()){
+        if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
+        if(backLabelEl) backLabelEl.textContent = 'Top';
+      } else {
+        if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>';
+        if(backLabelEl) backLabelEl.textContent = backLabel();
+      }
       updateSearchStatus();
 
       const {rows, episodeLevel, searchResults} = choiceRows();
@@ -2185,7 +2194,13 @@
         }
         selectChoice(key);
       });
-      els.backBtn.addEventListener('click', goBack);
+      els.backBtn.addEventListener('click', ()=>{
+        if(desktopUsesTopButton()){
+          goTopPreservePlayer();
+        } else {
+          goBack();
+        }
+      });
       if(els.playerBtn){
         els.playerBtn.addEventListener('click', ()=>{
           if(!state.playingContext) return;
