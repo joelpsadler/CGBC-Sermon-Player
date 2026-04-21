@@ -545,6 +545,21 @@
       fill:currentColor;
       stroke:none;
     }
+    .episode-load-badge.is-active-state{
+      background:linear-gradient(180deg, rgba(80,100,91,.30), rgba(39,49,44,.34));
+      border-color:rgba(143,174,157,.28);
+      color:rgba(255,255,255,.98);
+      opacity:1;
+    }
+    .episode-load-badge-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#b9d0c3;
+      flex:0 0 10px;
+      box-shadow:0 0 0 0 rgba(185,208,195,.65);
+      animation:mobileCurrentPulse 1.6s infinite ease-out;
+    }
     .live-badge{
       position:absolute;
       top:12px;
@@ -610,7 +625,7 @@
     .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
     .copy{min-width:0;flex:1;width:100%}
-    .stack,.choices,.mobile-context-bar,.mobile-context-wrap,.choice-list,.choice-list.mobile-browse-open{min-width:0;max-width:100%;box-sizing:border-box;overflow-x:hidden;}
+    .stack,.choices,.mobile-context-bar,.mobile-context-wrap,.choice-list,.choice-list.mobile-browse-open,#videoShell,#videoPlaceholder,#audioStage,.player,#playerCol,.player-wrap,.details,#detailShell{min-width:0;max-width:100%;box-sizing:border-box;overflow-x:hidden;}
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
     .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
     .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
@@ -703,7 +718,11 @@
     .player.video-active{padding:0;background:rgba(0,0,0,.25)}
     .player.is-idle #videoShell,.player.is-idle #audioStage{display:none}
     #videoShell,#videoPlaceholder{
-      width:100%;aspect-ratio:16/9;min-height:240px;border-radius:22px;overflow:hidden;background:#000;
+      width:100%;
+      max-width:100%;
+      min-width:0;
+      box-sizing:border-box;
+      aspect-ratio:16/9;min-height:240px;border-radius:22px;overflow:hidden;background:#000;
       border:1px solid rgba(255,255,255,.06);display:none;align-items:center;justify-content:center;text-align:center;color:var(--muted)
     }
     #videoShell iframe{width:100%;height:100%;border:0;display:block}
@@ -712,7 +731,7 @@
       border-radius:22px;border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.26)
     }
     .audio-stage{display:none;grid-template-columns:1fr;gap:14px}
-    .audio-art{width:100%;aspect-ratio:1/1;max-width:380px;border-radius:24px;overflow:hidden;margin:0 auto}
+    .audio-art{width:100%;max-width:380px;min-width:0;box-sizing:border-box;aspect-ratio:1/1;border-radius:24px;overflow:hidden;margin:0 auto}
     .audio-art img{width:100%;height:100%;object-fit:cover}
     .transport{
       width:100%;max-width:420px;display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:8px;align-items:center;
@@ -1244,6 +1263,16 @@
     function sortNewestFirst(a,b){const ai=a?.date?.iso||'', bi=b?.date?.iso||''; if(ai&&bi) return bi.localeCompare(ai); return (b?.title?.display||'').localeCompare(a?.title?.display||'');}
     function sortSeriesName(a,b){return String(a).localeCompare(String(b), undefined, {numeric:true,sensitivity:'base'});}
     function sortBookName(a,b){const ai=BOOK_MAP.has(String(a).toLowerCase())?BOOK_MAP.get(String(a).toLowerCase()):999; const bi=BOOK_MAP.has(String(b).toLowerCase())?BOOK_MAP.get(String(b).toLowerCase()):999; return ai!==bi?ai-bi:sortSeriesName(a,b);}
+    function getItemYear(item){
+      const direct = item?.date?.year;
+      if(direct !== undefined && direct !== null && String(direct).trim()) return String(direct).trim();
+      const iso = String(item?.date?.iso || '').trim();
+      if(/^\d{4}/.test(iso)) return iso.slice(0,4);
+      const display = String(item?.date?.display || item?.publishedAt || '').trim();
+      const match = display.match(/(20\d{2}|19\d{2})/);
+      if(match) return match[1];
+      return 'Unknown';
+    }
     function getBookTagsDisplay(item){const tags=Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name).filter(Boolean):[]; return tags.length?tags.join(', '):'—';}
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
@@ -1701,7 +1730,7 @@
         const isSpecial=/special/i.test(seriesName);
 
         if(isSpecial){
-          const specialYear = String(item?.date?.year || 'Unknown');
+          const specialYear = getItemYear(item);
           if(!browse.specials.has(specialYear)){
             browse.specials.set(specialYear,{
               key:`topical-specials-${specialYear}`,
@@ -1736,7 +1765,7 @@
           }
           const bucket=browse.books.get(bookKey);
           if(isSpecial){
-            const year=String(item?.date?.year || 'Unknown');
+            const year=getItemYear(item);
             if(!bucket.specialsByYear.has(year)) bucket.specialsByYear.set(year, []);
             bucket.specialsByYear.get(year).push(item);
           } else if(modeHint==='series_group'){
@@ -1795,7 +1824,7 @@
           browse.topical.get(seriesKey).items.push(item);
         }
 
-        const year=String(item?.date?.year || '');
+        const year=getItemYear(item);
         const monthKey=item?.date?.iso ? item.date.iso.slice(0,7) : '';
         if(year && monthKey){
           if(!browse.date.has(year)) browse.date.set(year, new Map());
@@ -2367,9 +2396,19 @@
             </div>
           </button>`;
         }
+        const rowLoaded = episodeLevel && state.currentItem && row?.stableId === state.currentItem?.stableId;
+        const rowPlaying = rowLoaded && (
+          (state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
+          state.mode === 'video'
+        );
+        const loadBadgeMarkup = episodeLevel
+          ? (rowLoaded
+              ? `<div class="episode-load-badge is-active-state"><span class="episode-load-badge-dot"></span><span>${rowPlaying ? 'Playing' : 'Loaded'}</span></div>`
+              : `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
+          : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
-          ${episodeLevel ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>` : ''}
+          ${loadBadgeMarkup}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             <h3 class="card-title">${escapeHtml(title)}</h3>
