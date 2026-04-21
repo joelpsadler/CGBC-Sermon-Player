@@ -903,7 +903,7 @@
           var(--mobile-bg) center/cover no-repeat fixed;
         background-blend-mode:multiply;
       }
-      .app{padding:0 8px 14px}
+      .app{padding:0 8px 14px;overflow-x:hidden}
       .masthead{
         grid-template-columns:1fr;
         gap:10px;
@@ -939,7 +939,7 @@
       .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
       .search-status{width:100%;font-size:12px}
-      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap;overflow-x:hidden}
+      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap;overflow-x:hidden;max-width:100%}
       .path-button{min-width:0;min-height:44px;padding:0 10px;max-width:100%}
       .back-button,.player-button,.reset-button{flex:1 1 calc(33.333% - 6px)}
       .back-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
@@ -1158,7 +1158,7 @@
     // CGBC media UI rebuild: keeps the same data model, but tightens nav scrolling,
     // root/branch card presentation, mobile controls, and media state handling.
     const ASSETS = {
-      fallback:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png',
+      fallback:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1238149/cgbc_media-player_-Web-App-icon_.jpg',
       current:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234669/Current.jpg',
       livestreams:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234668/Livestreams.jpg',
       books:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234671/Search-Books.jpg',
@@ -1538,6 +1538,17 @@
     }
 
     let mediaSessionHeartbeat = null;
+
+    function queuePausedMediaSessionRefresh(){
+      [150, 900, 2400].forEach(delay=>{
+        window.setTimeout(()=>{
+          if(state.mode === 'audio' && state.currentItem?.audio?.hasAudio){
+            applyAudioNowPlaying(state.currentItem);
+            updateMediaSessionState();
+          }
+        }, delay);
+      });
+    }
 
     function refreshActiveMediaSession(){
       if(state.mode === 'audio' && state.currentItem?.audio?.hasAudio){
@@ -2365,13 +2376,20 @@
         const badgeMarkup = loadedHere
           ? `<span class="mobile-current-badge"><span class="mobile-current-badge-dot"></span><span>${isPlayingNow ? 'Playing' : 'Loaded'}</span></span>`
           : '';
+        const contextItems = buildContextItems();
+        const lastContextTitle = compactSeriesLabel(contextItems.length ? contextItems[contextItems.length - 1].title : '');
+        const normalizedCollapseTitle = compactSeriesLabel(collapseTitle);
+        if(normalizedCollapseTitle && lastContextTitle && normalizedCollapseTitle === lastContextTitle){
+          els.choiceList.innerHTML = '';
+          return;
+        }
         els.choiceList.innerHTML = `
           <button type="button" class="episode-collapse-card ${currentArt ? 'has-art' : ''}" data-open-episodes="1">
             <span class="episode-collapse-topline">
               <span class="episode-collapse-badge">Browse</span>
               <span class="episode-collapse-label">Episodes</span>
             </span>
-            <span class="episode-collapse-title">${escapeHtml(compactSeriesLabel(collapseTitle))}</span>
+            <span class="episode-collapse-title">${escapeHtml(normalizedCollapseTitle)}</span>
             ${currentArt ? `<span class="mobile-context-art"><img src="${escapeHtml(currentArt)}" alt=""></span>` : ''}
             ${badgeMarkup}
           </button>
@@ -2919,7 +2937,9 @@
             persistPlaybackSnapshot();
           }
           if(name === 'pause'){
-            restorePlaybackSnapshotIfNeeded();
+            applyAudioNowPlaying(state.currentItem);
+            updateMediaSessionState();
+            queuePausedMediaSessionRefresh();
           }
           if(name === 'emptied' || name === 'stalled' || name === 'suspend' || name === 'error'){
             refreshAudioMountIfNeeded();
