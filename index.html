@@ -242,6 +242,10 @@
     .path-glyph{display:inline-flex;align-items:center;justify-content:center;line-height:1;flex:0 0 auto;color:rgba(255,255,255,.98)}
     .path-glyph svg{display:block;width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .path-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .return-button{display:none}
+    @media (min-width:901px){
+      .return-button.is-visible{display:inline-flex !important}
+    }
     .mobile-context-bar{
       display:none;
       padding:0 16px 6px;
@@ -785,6 +789,7 @@
         <div class="path-row">
           <button type="button" class="path-button home-button" id="homeBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg></span><span class="path-label">Reset</span></span></button>
           <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></span><span class="path-label">Back</span></span></button>
+          <button type="button" class="path-button return-button" id="returnBtn" style="display:none"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M8 7V3L3 8l5 5V9c7 0 10 2 13 7-1-6-4-9-13-9z"/></svg></span><span class="path-label">Return to Player</span></span></button>
         </div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
         <div class="stack" id="choiceList"></div>
@@ -887,7 +892,9 @@
       searchTerm:'',
       nav:{ rootKey:null, branchKey:null, leafKey:null },
       currentItem:null,
-      activeQueue:[]
+      activeQueue:[],
+      playingContext:null,
+      playerRenderKey:''
     };
 
     const els = {
@@ -896,6 +903,7 @@
       navHeading: document.getElementById('navHeading'),
       homeBtn: document.getElementById('homeBtn'),
       backBtn: document.getElementById('backBtn'),
+      returnBtn: document.getElementById('returnBtn'),
       choiceList: document.getElementById('choiceList'),
       listenBtn: document.getElementById('listenBtn'),
       watchBtn: document.getElementById('watchBtn'),
@@ -1493,7 +1501,7 @@
           image:bucket.image,
           isStudyBucket:true
         }));
-        return mappedBooks.concat(mappedStudies);
+        return mappedBooks.concat(mappedStudies.length ? [{key:'__divider__studies', isDivider:true, title:'Studies'}] : [], mappedStudies);
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
@@ -1755,6 +1763,21 @@
         els.impactSecondaryLabel.textContent = 'EPISODES';
       }
     }
+    function navSnapshot(){
+      return { rootKey: state.nav.rootKey, branchKey: state.nav.branchKey, leafKey: state.nav.leafKey };
+    }
+    function sameNav(a,b){
+      return !!a && !!b && a.rootKey===b.rootKey && a.branchKey===b.branchKey && a.leafKey===b.leafKey;
+    }
+    function isBrowsingAwayFromCurrent(){
+      return !!(state.currentItem && state.playingContext && (!sameNav(state.nav, state.playingContext.nav) || state.mode !== state.playingContext.mode));
+    }
+    function updateReturnButton(){
+      if(!els.returnBtn) return;
+      const show = !isMobileViewport() && isBrowsingAwayFromCurrent();
+      els.returnBtn.style.display = show ? 'inline-flex' : 'none';
+      els.returnBtn.classList.toggle('is-visible', show);
+    }
     function renderChoices(){
       els.navHeading.textContent = searchResultsMode() ? 'Search Results' : headingText();
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
@@ -1773,10 +1796,8 @@
       const {rows, episodeLevel, searchResults} = choiceRows();
       if(episodeLevel){
         state.activeQueue = rows.slice();
-        if(!state.activeQueue.find(it=>it.stableId===state.currentItem?.stableId)) state.currentItem = null;
       } else {
         state.activeQueue = [];
-        if(!searchResults) state.currentItem = null;
       }
 
       const debugVisible = !!(FORCE_LIVE_BADGE_PREVIEW && state.mode === 'video');
@@ -1879,12 +1900,16 @@
         : (item?.links?.episodeUrl || item?.links?.shareUrl || item?.video?.url || '#'));
 
       if(state.mode==='video' && item?.video?.hasVideo && item?.video?.youtubeId){
+        const renderKey = `video:${item.stableId}`;
         els.playerShell.classList.add('video-active');
         els.videoPlaceholder.style.display='none';
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='none';
         els.videoShell.style.display='block';
-        els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        if(state.playerRenderKey !== renderKey || !els.videoShell.querySelector('iframe')){
+          els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          state.playerRenderKey = renderKey;
+        }
         els.videoShareHost.innerHTML=`
           <button class="path-button" type="button" id="videoShareBtnOutside">
             <span class="share-btn-inner">
@@ -1924,6 +1949,7 @@
         els.audioRemainingSmall.textContent=formatClock(dur);
         els.audioProgress.value=0;
         els.audioProgress.max=dur || 100;
+        state.playerRenderKey = `audio:${item.stableId}`;
         if(item?.audio?.url){
           if(els.audioPlayer.src !== item.audio.url) els.audioPlayer.src=item.audio.url;
         } else {
@@ -1998,6 +2024,7 @@
       els.playerShell.classList.remove('video-active');
       els.videoShareHost.classList.remove('is-visible');
       els.videoShareHost.innerHTML='';
+      state.playerRenderKey='';
     }
     function rerender(){
       renderChoices();
@@ -2006,11 +2033,16 @@
       renderMobileContextBar();
       updateModeUI();
       updateImpact();
+      updateReturnButton();
     }
     function resetAll(options={}){
       const { preserveSearch=false, preserveCurrent=false } = options;
       state.nav={rootKey:null,branchKey:null,leafKey:null};
-      if(!preserveCurrent) state.currentItem=null;
+      if(!preserveCurrent){
+        state.currentItem=null;
+        state.playingContext=null;
+        state.playerRenderKey='';
+      }
       if(!preserveSearch){
         state.searchTerm='';
         if(els.searchInput) els.searchInput.value='';
@@ -2071,7 +2103,6 @@
           } else {
             state.nav={rootKey:key,branchKey:null,leafKey:null};
           }
-          state.currentItem=null;
           scrollChoiceListToTop();
           rerender();
           return;
@@ -2083,6 +2114,8 @@
           const next=state.activeQueue.find(r=>r.stableId===key);
           if(next){
             state.currentItem=next;
+            state.playingContext={ mode: state.mode, nav: navSnapshot() };
+            state.playerRenderKey='';
             renderChoices();
             renderPlayer();
             scrollPlayerIntoView();
@@ -2094,6 +2127,15 @@
       });
       els.homeBtn.addEventListener('click', resetAll);
       els.backBtn.addEventListener('click', goBack);
+      if(els.returnBtn){
+        els.returnBtn.addEventListener('click', ()=>{
+          if(!state.playingContext) return;
+          state.mode = state.playingContext.mode;
+          state.nav = { ...state.playingContext.nav };
+          rerender();
+          scrollPlayerIntoView();
+        });
+      }
       els.logoReset.addEventListener('click', resetAll);
       els.playerShareLink.addEventListener('click', async (event)=>{
         event.preventDefault();
@@ -2129,7 +2171,7 @@
         resetAll({ preserveSearch:true });
         rerender();
       });
-      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; state.currentItem=null; clearMediaState(); scrollChoiceListToTop(); rerender(); scrollNavIntoView(); });
+      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); });
       els.contextRow.addEventListener('click', (event)=>{
         const btn = event.target.closest('[data-context-level]');
         if(!btn) return;
@@ -2137,10 +2179,8 @@
         if(level==='root'){
           state.nav.branchKey=null;
           state.nav.leafKey=null;
-          state.currentItem=null;
         } else if(level==='branch'){
           state.nav.leafKey=null;
-          state.currentItem=null;
         } else if(level==='leaf'){
           state.currentItem=null;
         } else {
