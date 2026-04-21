@@ -1827,6 +1827,15 @@
       return !isMobileViewport();
     }
 
+    function goTopPreservePlayer(){
+      state.nav = { rootKey:null, branchKey:null, leafKey:null };
+      state.searchTerm = '';
+      if(els.searchInput) els.searchInput.value = '';
+      rerender();
+      scrollChoiceListToTop();
+      scrollNavIntoView();
+    }
+
     function updatePlayerButton(){
       if(!els.playerBtn) return;
       const show = !isMobileViewport() && isBrowsingAwayFromCurrent();
@@ -1850,7 +1859,9 @@
       const homeLabel = els.resetBtn ? els.resetBtn.querySelector('.path-label') : null;
       const backGlyph = els.backBtn ? els.backBtn.querySelector('.path-glyph') : null;
       const backLabelEl = els.backBtn ? els.backBtn.querySelector('.path-label') : null;
-      if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 10.25 12 3.5l8.5 6.75"/><path d="M6.75 9.75V20.5h10.5V9.75"/><path d="M8.75 20.5h6.5"/></svg>';
+
+      if(homeGlyph) homeGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg>';
+      if(homeLabel) homeLabel.textContent = 'Reset';
 
       if(desktopUsesTopButton()){
         if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
@@ -1859,6 +1870,7 @@
         if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg>';
         if(backLabelEl) backLabelEl.textContent = backLabel();
       }
+
       updateSearchStatus();
 
       const {rows, episodeLevel, searchResults} = choiceRows();
