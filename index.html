@@ -203,6 +203,23 @@
     }
     .context-chip.square img{width:58px;height:58px;flex-basis:58px}
     .context-chip-copy{min-width:0}
+    .context-chip-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:22px;
+      padding:0 8px;
+      border-radius:999px;
+      margin-bottom:6px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.94);
+      background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));
+      border:1px solid rgba(143,174,157,.22);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
     .context-chip-label{
       font-family:Poppins,sans-serif;
       font-size:10px;
@@ -302,6 +319,37 @@
       padding:0;
       overflow:hidden;
       position:relative;
+    }
+    .episode{position:relative}
+    .episode-load-badge{
+      position:absolute;
+      top:10px;
+      right:10px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-height:28px;
+      padding:0 10px;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(20,20,20,.82), rgba(12,12,12,.66));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 8px 20px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.05);
+      backdrop-filter:blur(12px);
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.94);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .episode-load-badge svg{
+      width:13px;
+      height:13px;
+      display:block;
+      fill:currentColor;
+      stroke:none;
     }
     .live-badge{
       position:absolute;
@@ -673,9 +721,9 @@
       .search-status{width:100%;font-size:12px}
       .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap}
       .path-button{min-width:0;min-height:44px;padding:0 10px}
-      .back-button,.top-button,.player-button,.reset-button{flex:1 1 calc(50% - 4px)}
-      .back-button .path-label,.top-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
-      .back-button .path-glyph,.top-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
+      .back-button,.player-button,.reset-button{flex:1 1 calc(33.333% - 6px)}
+      .back-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
+      .back-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
       .mobile-context-bar{display:flex;padding:0 14px 10px}
       .mobile-context-chip{max-width:100%}
       .stack{
@@ -786,7 +834,6 @@
         </div>
         <div class="path-row">
           <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></span><span class="path-label">Back</span></span></button>
-          <button type="button" class="path-button top-button" id="topBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg></span><span class="path-label">Top</span></span></button>
           <button type="button" class="path-button player-button" id="playerBtn" style="display:none"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M8 7V3L3 8l5 5V9c7 0 10 2 13 7-1-6-4-9-13-9z"/></svg></span><span class="path-label">Player</span></span></button>
           <button type="button" class="path-button reset-button" id="resetBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg></span><span class="path-label">Reset</span></span></button>
         </div>
@@ -901,7 +948,6 @@
       searchStatus: document.getElementById('searchStatus'),
       navHeading: document.getElementById('navHeading'),
       backBtn: document.getElementById('backBtn'),
-      topBtn: document.getElementById('topBtn'),
       playerBtn: document.getElementById('playerBtn'),
       resetBtn: document.getElementById('resetBtn'),
       choiceList: document.getElementById('choiceList'),
@@ -1488,20 +1534,24 @@
         const allBuckets = Array.from(browse.books.values());
         const bookBuckets = allBuckets.filter(bucket=>!bucket.isStudyBucket).sort((a,b)=>sortBookName(a.title,b.title));
         const studyBuckets = allBuckets.filter(bucket=>bucket.isStudyBucket).sort((a,b)=>sortSeriesName(a.title,b.title));
-        const mappedBooks = bookBuckets.map(bucket=>({
-          key:bucket.key,
-          title:bucket.title,
-          meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
-          image:bucket.image
-        }));
-        const mappedStudies = studyBuckets.map(bucket=>({
-          key:bucket.key,
-          title:bucket.title,
-          meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
-          image:bucket.image,
-          isStudyBucket:true
-        }));
-        return mappedBooks.concat(mappedStudies.length ? [{key:'__divider__studies', isDivider:true, title:'Studies'}] : [], mappedStudies);
+        const mappedBooks = bookBuckets
+          .filter(bucket=>bucket.key!=='current' && String(bucket.title||'').toLowerCase()!=='current')
+          .map(bucket=>({
+            key:bucket.key,
+            title:bucket.title,
+            meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
+            image:bucket.image
+          }));
+        const mappedStudies = studyBuckets
+          .filter(bucket=>bucket.key!=='current' && String(bucket.title||'').toLowerCase()!=='current')
+          .map(bucket=>({
+            key:bucket.key,
+            title:bucket.title,
+            meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
+            image:bucket.image,
+            isStudyBucket:true
+          }));
+        return mappedBooks.concat(mappedStudies);
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
@@ -1715,6 +1765,7 @@
           <button type="button" class="context-chip ${activeClass} ${item.square ? 'square' : ''} ${isDateChip ? 'date-chip' : ''}" data-context-level="${escapeHtml(item.level || '')}">
             ${media}
             ${isDateChip ? '' : `<div class="context-chip-copy">
+              ${index === items.length - 1 ? '' : `<div class="context-chip-badge">Browse</div>`}
               <div class="context-chip-label">${escapeHtml(item.label)}</div>
               <div class="context-chip-title">${escapeHtml(title)}</div>
             </div>`}
@@ -1868,6 +1919,7 @@
         }
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
+          ${episodeLevel ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>` : ''}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             <h3 class="card-title">${escapeHtml(title)}</h3>
@@ -2134,9 +2186,6 @@
         selectChoice(key);
       });
       els.backBtn.addEventListener('click', goBack);
-      if(els.topBtn){
-        els.topBtn.addEventListener('click', goTopPreservePlayer);
-      }
       if(els.playerBtn){
         els.playerBtn.addEventListener('click', ()=>{
           if(!state.playingContext) return;
