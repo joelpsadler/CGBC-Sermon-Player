@@ -189,25 +189,26 @@
     }
     .context-chip.date-chip{
       position:relative;
-      flex:0 0 166px;
+      flex:0 0 150px;
       justify-content:center;
       align-items:center;
-      padding:10px;
+      padding:8px;
     }
     .context-chip.date-chip img{display:none}
     .context-chip.date-chip .context-chip-copy{display:none}
     .context-chip.date-chip .context-chip-badge{
       position:absolute;
-      top:8px;
-      left:8px;
+      top:3px;
+      left:50%;
+      transform:translateX(-50%);
       margin-bottom:0;
       z-index:2;
     }
     .context-chip-date{
-      width:132px;
-      height:84px;
-      flex:0 0 132px;
-      border-radius:16px;
+      width:120px;
+      height:76px;
+      flex:0 0 120px;
+      border-radius:15px;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -217,19 +218,19 @@
     }
     .context-chip-date .mini-label{
       font-family:Poppins,sans-serif;
-      font-size:9px;
-      letter-spacing:.11em;
+      font-size:8px;
+      letter-spacing:.10em;
       text-transform:uppercase;
       color:rgba(255,255,255,.55);
       line-height:1;
     }
     .context-chip-date .mini-value{
-      margin-top:5px;
+      margin-top:4px;
       max-width:100%;
-      padding:0 10px;
+      padding:0 8px;
       text-align:center;
       font-family:Poppins,sans-serif;
-      font-size:18px;
+      font-size:17px;
       font-weight:800;
       line-height:1.02;
       color:rgba(255,255,255,.96);
@@ -366,6 +367,61 @@
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
+    }
+    .episode-collapse-card{
+      width:100%;
+      min-height:60px;
+      padding:12px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      color:rgba(255,255,255,.94);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      gap:8px;
+      text-align:left;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .episode-collapse-topline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:100%;
+      min-width:0;
+    }
+    .episode-collapse-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:26px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(143,174,157,.22);
+      background:linear-gradient(180deg, rgba(143,174,157,.12), rgba(143,174,157,.06));
+      color:rgba(255,255,255,.96);
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      flex:0 0 auto;
+    }
+    .episode-collapse-label{
+      color:rgba(255,255,255,.58);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:11px;
+      flex:0 0 auto;
+    }
+    .episode-collapse-title{
+      width:100%;
+      font-family:Poppins,sans-serif;
+      font-size:18px;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -1028,7 +1084,8 @@
       currentItem:null,
       activeQueue:[],
       playingContext:null,
-      playerRenderKey:''
+      playerRenderKey:'',
+      mobileEpisodeListOpen:false
     };
 
     const els = {
@@ -1430,6 +1487,21 @@
       }catch(err){
         return false;
       }
+    }
+
+    function ensureCurrentPlaybackMounted(){
+      try{
+        if(!state.currentItem || state.mode !== 'audio' || !state.currentItem?.audio?.url) return false;
+        const wanted = String(state.currentItem.audio.url || '');
+        const current = String(els.audioPlayer?.getAttribute('src') || els.audioPlayer?.src || '');
+        if(!current || !current.includes(wanted)){
+          state.playerRenderKey = '';
+          renderPlayer();
+          updatePlayerButton();
+          return true;
+        }
+      }catch(err){}
+      return false;
     }
 
     function applyDeepLinkFromUrl(){
@@ -1981,6 +2053,7 @@
     }
 
     function goTopPreservePlayer(){
+      state.mobileEpisodeListOpen=false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2040,6 +2113,23 @@
         els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
         return;
       }
+
+      if(isMobileViewport() && episodeLevel && state.currentItem && !searchResults && !state.mobileEpisodeListOpen){
+        const collapseTitle = state.nav.leafKey
+          ? (leafChoices().find(r=>r.key===state.nav.leafKey)?.title || 'This section')
+          : (branchChoices().find(r=>r.key===state.nav.branchKey)?.title || 'This section');
+        els.choiceList.innerHTML = `
+          <button type="button" class="episode-collapse-card" data-open-episodes="1">
+            <span class="episode-collapse-topline">
+              <span class="episode-collapse-badge">Browse</span>
+              <span class="episode-collapse-label">Episodes</span>
+            </span>
+            <span class="episode-collapse-title">${escapeHtml(compactSeriesLabel(collapseTitle))}</span>
+          </button>
+        `;
+        return;
+      }
+
       const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey || state.nav.rootKey);
       const isRootLevel = !state.nav.rootKey;
       const isBranchLevel = !!state.nav.rootKey && !state.nav.branchKey;
@@ -2229,11 +2319,18 @@
     }
     function scrollPlayerIntoView(){
       if(!isMobileViewport()) return;
+      const doScroll = ()=>{
+        try{
+          const top = window.scrollY + els.playerShell.getBoundingClientRect().top - 2;
+          window.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
+        }catch(err){
+          try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(innerErr){}
+        }
+      };
       try{
-        const top = window.scrollY + els.playerShell.getBoundingClientRect().top - 8;
-        window.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
+        requestAnimationFrame(()=>requestAnimationFrame(doScroll));
       }catch(err){
-        try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(innerErr){}
+        setTimeout(doScroll, 32);
       }
     }
     function scrollNavIntoView(){
@@ -2307,6 +2404,7 @@
            Clicking them should go straight from the root card to the episode list.
            ============================================================================ */
         if(key === 'livestreams'){
+          state.mobileEpisodeListOpen=false;
           state.nav.rootKey='livestreams';
           state.nav.branchKey='live-all';
           state.nav.leafKey=null;
@@ -2316,6 +2414,7 @@
           return;
         }
         if(key === 'shorts'){
+          state.mobileEpisodeListOpen=false;
           state.nav.rootKey='shorts';
           state.nav.branchKey='shorts-all';
           state.nav.leafKey=null;
@@ -2324,10 +2423,10 @@
           scrollNavIntoView();
           return;
         }
-        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
+        state.mobileEpisodeListOpen=false; state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
       }
-      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
-      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(!state.nav.branchKey){ state.mobileEpisodeListOpen=false; state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(leafChoices().length && !state.nav.leafKey){ state.mobileEpisodeListOpen=false; state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
     }
     function attachEvents(){
       initMediaSessionControls();
@@ -2336,16 +2435,24 @@
         if(topBtn){
           const key=topBtn.dataset.topRoot;
           if(key === 'livestreams'){
-            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null};
+            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null}; state.mobileEpisodeListOpen=false;
           } else if(key === 'shorts'){
-            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null};
+            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null}; state.mobileEpisodeListOpen=false;
           } else {
-            state.nav={rootKey:key,branchKey:null,leafKey:null};
+            state.nav={rootKey:key,branchKey:null,leafKey:null}; state.mobileEpisodeListOpen=false;
           }
           scrollChoiceListToTop();
           rerender();
           return;
         }
+        const openEpisodesBtn = event.target.closest('[data-open-episodes]');
+        if(openEpisodesBtn){
+          state.mobileEpisodeListOpen = true;
+          renderChoices();
+          scrollChoiceListToTop();
+          return;
+        }
+
         const btn=event.target.closest('[data-key]');
         if(!btn) return;
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
@@ -2355,6 +2462,7 @@
             state.currentItem=next;
             state.playingContext={ mode: state.mode, nav: navSnapshot() };
             state.playerRenderKey='';
+            if(isMobileViewport()) state.mobileEpisodeListOpen = false;
             renderChoices();
             renderPlayer();
             scrollPlayerIntoView();
@@ -2397,19 +2505,19 @@
       document.addEventListener('visibilitychange', ()=>{
         persistPlaybackSnapshot();
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded()) rerender();
+        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
       });
       window.addEventListener('focus', ()=>{
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded()) rerender();
+        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
       });
       window.addEventListener('pageshow', ()=>{
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded()) rerender();
+        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
       });
       window.addEventListener('resume', ()=>{
         refreshActiveMediaSession();
-        if(restorePlaybackSnapshotIfNeeded()) rerender();
+        if(restorePlaybackSnapshotIfNeeded() || ensureCurrentPlaybackMounted()) rerender();
       });
       window.addEventListener('pagehide', ()=>{ persistPlaybackSnapshot(); refreshActiveMediaSession(); });
 
@@ -2486,7 +2594,7 @@
         els.audioProgress.max=d || 100;
         updateMediaSessionState();
       });
-      ['play','pause','ended','seeked','ratechange'].forEach(name=>{
+      ['play','pause','ended','seeked','ratechange','emptied','stalled','suspend','error'].forEach(name=>{
         els.audioPlayer.addEventListener(name, ()=>{
           const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
@@ -2498,6 +2606,11 @@
           }
           if(name === 'pause'){
             restorePlaybackSnapshotIfNeeded();
+          }
+          if(name === 'emptied' || name === 'stalled' || name === 'suspend' || name === 'error'){
+            if(!document.hidden){
+              ensureCurrentPlaybackMounted();
+            }
           }
           if(name === 'ended'){
             applyAudioNowPlaying(state.currentItem);
