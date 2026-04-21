@@ -1933,18 +1933,26 @@
 
       if(isMobileViewport() && state.mobileBrowseTarget){
         if(state.mobileBrowseTarget === 'top'){
-          return {rows:rootChoices(), episodeLevel:false, mobileBrowse:true};
+          const rows = rootChoices();
+          if(rows.length) return {rows, episodeLevel:false, mobileBrowse:true};
+          state.mobileBrowseTarget = null;
         }
         if(state.mobileBrowseTarget === 'root'){
-          return {rows:branchChoices(), episodeLevel:false, mobileBrowse:true};
+          const rows = branchChoices();
+          if(rows.length) return {rows, episodeLevel:false, mobileBrowse:true};
+          state.mobileBrowseTarget = null;
         }
         if(state.mobileBrowseTarget === 'branch'){
           const leaves = leafChoices();
           if(leaves.length) return {rows:leaves, episodeLevel:false, mobileBrowse:true};
-          return {rows:queueItems(), episodeLevel:true, mobileBrowse:true};
+          const rows = queueItems();
+          if(rows.length) return {rows, episodeLevel:true, mobileBrowse:true};
+          state.mobileBrowseTarget = null;
         }
         if(state.mobileBrowseTarget === 'episodes'){
-          return {rows:queueItems(), episodeLevel:true, mobileBrowse:true};
+          const rows = queueItems();
+          if(rows.length) return {rows, episodeLevel:true, mobileBrowse:true};
+          state.mobileBrowseTarget = null;
         }
       }
 
@@ -2211,15 +2219,7 @@
       els.playerBtn.classList.toggle('is-visible', show);
       els.playerBtn.disabled = !hasLoadedMedia;
     }
-    function goTopPreservePlayer(){
-      state.mobileEpisodeListOpen=false;
-      state.nav = { rootKey:null, branchKey:null, leafKey:null };
-      state.searchTerm = '';
-      if(els.searchInput) els.searchInput.value = '';
-      rerender();
-      scrollChoiceListToTop();
-      scrollNavIntoView();
-    }
+    
     function renderChoices(){
       els.navHeading.textContent = searchResultsMode() ? 'Search Results' : headingText();
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
@@ -2261,9 +2261,15 @@
           : (branchChoices().find(r=>r.key===state.nav.branchKey)?.title || 'This section');
         const queue = queueItems();
         const loadedHere = !!queue.find(row => row?.stableId === state.currentItem?.stableId);
-        const fallbackArt = queue[0] ? getEpisodeArt(queue[0], state.mode) : '';
-        const currentArt = loadedHere ? getEpisodeArt(state.currentItem, state.mode) : fallbackArt;
-        const isPlayingNow = loadedHere && state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended;
+        const leafArt = state.nav.leafKey ? (leafChoices().find(r=>r.key===state.nav.leafKey)?.image || '') : '';
+        const branchArt = state.nav.branchKey ? (branchChoices().find(r=>r.key===state.nav.branchKey)?.image || '') : '';
+        const currentArt = loadedHere
+          ? getEpisodeArt(state.currentItem, state.mode)
+          : (leafArt || branchArt || '');
+        const isPlayingNow = loadedHere && (
+          (state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
+          (state.mode === 'video')
+        );
         const badgeMarkup = loadedHere
           ? `<span class="mobile-current-badge"><span class="mobile-current-badge-dot"></span><span>${isPlayingNow ? 'Playing' : 'Loaded'}</span></span>`
           : '';
