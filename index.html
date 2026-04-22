@@ -434,6 +434,9 @@
       overflow:hidden;
       text-overflow:ellipsis;
     }
+    .nav-panel > #playerShell{
+      margin:0 16px 10px;
+    }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
@@ -979,7 +982,6 @@
           <button type="button" class="path-button player-button" id="playerBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M8 7V3L3 8l5 5V9c7 0 10 2 13 7-1-6-4-9-13-9z"/></svg></span><span class="path-label">Player</span></span></button>
           <button type="button" class="path-button reset-button" id="resetBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg></span><span class="path-label">Reset</span></span></button>
         </div>
-        <div id="mobilePlayerMount"></div>
         <div class="search-row">
           <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
           <div class="search-status" id="searchStatus">All items</div>
@@ -992,7 +994,6 @@
         <section class="panel context-strip" id="contextStrip">
           <div class="context-row" id="contextRow"></div>
         </section>
-        <div id="desktopPlayerMount"></div>
         <section class="panel player is-idle" id="playerShell">
           <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
@@ -2258,16 +2259,21 @@
       return compactSeriesLabel(leaf?.title || branch?.title || 'Episodes');
     }
     function positionPlayerShell(){
-      if(!els.playerShell || !els.mobilePlayerMount || !els.desktopPlayerMount) return;
+      if(!els.playerShell) return;
+      const navPanel = document.querySelector('.nav-panel');
+      const content = document.querySelector('.content');
+      const searchRow = document.querySelector('.search-row');
+      const contextStrip = document.getElementById('contextStrip');
+      if(!navPanel || !content || !searchRow || !contextStrip) return;
+
       const mobileSelected = isMobileViewport() && !!state.currentItem;
-      const targetParent = mobileSelected ? els.mobilePlayerMount : els.desktopPlayerMount.parentNode;
       if(mobileSelected){
-        if(els.mobilePlayerMount.firstElementChild !== els.playerShell){
-          els.mobilePlayerMount.appendChild(els.playerShell);
+        if(els.playerShell.parentElement !== navPanel || els.playerShell.nextElementSibling !== searchRow){
+          navPanel.insertBefore(els.playerShell, searchRow);
         }
       } else {
-        if(els.desktopPlayerMount.nextElementSibling !== els.playerShell){
-          els.desktopPlayerMount.insertAdjacentElement('afterend', els.playerShell);
+        if(els.playerShell.parentElement !== content || els.playerShell.previousElementSibling !== contextStrip){
+          content.insertBefore(els.playerShell, contextStrip.nextSibling);
         }
       }
     }
