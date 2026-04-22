@@ -292,6 +292,40 @@
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
     .path-btn-inner{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%}
+    .share-btn-inner{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:100%;
+      min-width:0;
+    }
+    .share-btn-label{
+      min-width:0;
+      flex:1;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .share-btn-device{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      color:rgba(255,255,255,.52);
+      opacity:.92;
+    }
+    .share-btn-device svg{
+      width:18px;
+      height:18px;
+      display:block;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.9;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
     .path-glyph{display:inline-flex;align-items:center;justify-content:center;line-height:1;flex:0 0 auto;color:rgba(255,255,255,.98)}
     .path-glyph svg{display:block;width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .path-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -342,6 +376,63 @@
       white-space:nowrap;
       font-size:18px;
       line-height:1.08;
+    }
+    #mobilePlayerMount{display:none}
+    .episode-collapse-card{
+      width:100%;
+      min-height:72px;
+      padding:12px 14px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      color:rgba(255,255,255,.92);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      gap:6px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+      text-align:left;
+    }
+    .episode-collapse-topline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      width:100%;
+    }
+    .episode-collapse-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:22px;
+      padding:0 8px;
+      border-radius:999px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.94);
+      background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));
+      border:1px solid rgba(143,174,157,.22);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .episode-collapse-label{
+      color:rgba(255,255,255,.52);
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:10px;
+      line-height:1;
+      flex:0 0 auto;
+    }
+    .episode-collapse-title{
+      width:100%;
+      font-family:Poppins,sans-serif;
+      font-size:22px;
+      line-height:1.08;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -886,12 +977,13 @@
           <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
-        <div class="path-row">
+        <div class="path-row" id="pathRow">
           <button type="button" class="path-button top-button" id="topBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg></span><span class="path-label">Top</span></span></button>
           <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></span><span class="path-label">Back</span></span></button>
           <button type="button" class="path-button player-button" id="playerBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M8 7V3L3 8l5 5V9c7 0 10 2 13 7-1-6-4-9-13-9z"/></svg></span><span class="path-label">Player</span></span></button>
           <button type="button" class="path-button reset-button" id="resetBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg></span><span class="path-label">Reset</span></span></button>
         </div>
+        <div id="mobilePlayerMount"></div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
         <div class="stack" id="choiceList"></div>
       </section>
@@ -900,6 +992,7 @@
         <section class="panel context-strip" id="contextStrip">
           <div class="context-row" id="contextRow"></div>
         </section>
+        <div id="desktopPlayerMount"></div>
         <section class="panel player is-idle" id="playerShell">
           <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
@@ -937,7 +1030,7 @@
                 <a id="playerShareLink" class="path-button" href="#">
                   <span class="share-btn-inner">
                     <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="">
-                    <span class="share-btn-label">Site Share</span>
+                    <span class="share-btn-label">Site Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
                   </span>
                 </a>
                 <a id="playerPodcastLink" class="path-button" href="#">
@@ -948,7 +1041,7 @@
                       <path d="M12 4.5a4 4 0 0 1 4 4c0 2.1-1.2 3.3-2.4 4.5-.9.9-1.6 1.7-1.6 3"></path>
                       <path d="M12 4.5a4 4 0 0 0-4 4c0 2.1 1.2 3.3 2.4 4.5.9.9 1.6 1.7 1.6 3"></path>
                     </svg>
-                    <span class="share-btn-label">RSS Share</span>
+                    <span class="share-btn-label">RSS Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
                   </span>
                 </a>
               </div>
@@ -994,6 +1087,7 @@
       nav:{ rootKey:null, branchKey:null, leafKey:null },
       currentItem:null,
       activeQueue:[],
+      mobileEpisodeListOpen:false,
       playingContext:null,
       playerRenderKey:''
     };
@@ -1786,10 +1880,13 @@
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
       if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:state.mode==='audio', level:'root'});
       if(branch){
-        if(state.nav.rootKey === 'date' && branch.dateCardType === 'year'){
-          items.push({label:'Year', title:branch.title, image:null, square:false, level:'branch', dateCardType:'year', dateCardValue:branch.dateCardValue || branch.title});
-        } else {
-          items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
+        const suppressDuplicateShelf = (state.nav.rootKey === 'livestreams' || state.nav.rootKey === 'shorts') && root && String(root.title) === String(branch.title);
+        if(!suppressDuplicateShelf){
+          if(state.nav.rootKey === 'date' && branch.dateCardType === 'year'){
+            items.push({label:'Year', title:branch.title, image:null, square:false, level:'branch', dateCardType:'year', dateCardValue:branch.dateCardValue || branch.title});
+          } else {
+            items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
+          }
         }
       }
       if(leaf){
@@ -1930,6 +2027,19 @@
         state.activeQueue = [];
       }
 
+      if(isMobileViewport() && episodeLevel && state.currentItem && !searchResults && !state.mobileEpisodeListOpen){
+        els.choiceList.innerHTML = `
+          <button type="button" class="episode-collapse-card" data-open-episodes="1">
+            <span class="episode-collapse-topline">
+              <span class="episode-collapse-badge">Browse</span>
+              <span class="episode-collapse-label">Episodes</span>
+            </span>
+            <span class="episode-collapse-title">${escapeHtml(mobileEpisodeCollapseTitle())}</span>
+          </button>
+        `;
+        return;
+      }
+
       const debugVisible = !!(FORCE_LIVE_BADGE_PREVIEW && state.mode === 'video');
       if(els.forceDebugBanner){
         els.forceDebugBanner.classList.toggle('is-visible', debugVisible);
@@ -2045,7 +2155,7 @@
           <button class="path-button" type="button" id="videoShareBtnOutside">
             <span class="share-btn-inner">
               <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="">
-              <span class="share-btn-label">Site Share</span>
+              <span class="share-btn-label">Site Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
             </span>
           </button>
           <button class="path-button" type="button" id="videoNativeShareBtnOutside">
@@ -2054,7 +2164,7 @@
                 <rect x="3" y="6" width="18" height="12" rx="3"></rect>
                 <path d="M10 9v6l5-3z" fill="currentColor" stroke="none"></path>
               </svg>
-              <span class="share-btn-label">YouTube Share</span>
+              <span class="share-btn-label">YouTube Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
             </span>
           </button>`;
         els.videoShareHost.classList.add('is-visible');
@@ -2142,6 +2252,25 @@
       if(!navPanel) return;
       try{ navPanel.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
     }
+    function mobileEpisodeCollapseTitle(){
+      const leaf = leafChoices().find(r=>r.key===state.nav.leafKey);
+      const branch = branchChoices().find(r=>r.key===state.nav.branchKey);
+      return compactSeriesLabel(leaf?.title || branch?.title || 'Episodes');
+    }
+    function positionPlayerShell(){
+      if(!els.playerShell || !els.mobilePlayerMount || !els.desktopPlayerMount) return;
+      const mobileSelected = isMobileViewport() && !!state.currentItem;
+      const targetParent = mobileSelected ? els.mobilePlayerMount : els.desktopPlayerMount.parentNode;
+      if(mobileSelected){
+        if(els.mobilePlayerMount.firstElementChild !== els.playerShell){
+          els.mobilePlayerMount.appendChild(els.playerShell);
+        }
+      } else {
+        if(els.desktopPlayerMount.nextElementSibling !== els.playerShell){
+          els.desktopPlayerMount.insertAdjacentElement('afterend', els.playerShell);
+        }
+      }
+    }
     function scrollChoiceListToTop(){
       try{ els.choiceList.scrollTop = 0; }catch(err){}
       const navPanel = document.querySelector('.nav-panel');
@@ -2167,6 +2296,7 @@
     function rerender(){
       renderChoices();
       renderPlayer();
+      positionPlayerShell();
       renderContextStrip();
       renderMobileContextBar();
       updateModeUI();
@@ -2175,6 +2305,7 @@
     }
     function resetAll(options={}){
       const { preserveSearch=false, preserveCurrent=false } = options;
+      state.mobileEpisodeListOpen=false;
       state.nav={rootKey:null,branchKey:null,leafKey:null};
       if(!preserveCurrent){
         state.currentItem=null;
@@ -2190,6 +2321,7 @@
       rerender();
     }
     function goBack(){
+      state.mobileEpisodeListOpen=false;
       if(searchResultsMode()){
         state.searchTerm='';
         els.searchInput.value='';
@@ -2206,6 +2338,7 @@
            Clicking them should go straight from the root card to the episode list.
            ============================================================================ */
         if(key === 'livestreams'){
+          state.mobileEpisodeListOpen=false;
           state.nav.rootKey='livestreams';
           state.nav.branchKey='live-all';
           state.nav.leafKey=null;
@@ -2215,6 +2348,7 @@
           return;
         }
         if(key === 'shorts'){
+          state.mobileEpisodeListOpen=false;
           state.nav.rootKey='shorts';
           state.nav.branchKey='shorts-all';
           state.nav.leafKey=null;
@@ -2223,10 +2357,10 @@
           scrollNavIntoView();
           return;
         }
-        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
+        state.mobileEpisodeListOpen=false; state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
       }
-      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
-      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(!state.nav.branchKey){ state.mobileEpisodeListOpen=false; state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(leafChoices().length && !state.nav.leafKey){ state.mobileEpisodeListOpen=false; state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
     }
     function attachEvents(){
       initMediaSessionControls();
@@ -2235,14 +2369,23 @@
         if(topBtn){
           const key=topBtn.dataset.topRoot;
           if(key === 'livestreams'){
+            state.mobileEpisodeListOpen=false;
             state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null};
           } else if(key === 'shorts'){
+            state.mobileEpisodeListOpen=false;
             state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null};
           } else {
+            state.mobileEpisodeListOpen=false;
             state.nav={rootKey:key,branchKey:null,leafKey:null};
           }
           scrollChoiceListToTop();
           rerender();
+          return;
+        }
+        const openEpisodesBtn = event.target.closest('[data-open-episodes]');
+        if(openEpisodesBtn){
+          state.mobileEpisodeListOpen = true;
+          renderChoices();
           return;
         }
         const btn=event.target.closest('[data-key]');
@@ -2254,6 +2397,7 @@
             state.currentItem=next;
             state.playingContext={ mode: state.mode, nav: navSnapshot() };
             state.playerRenderKey='';
+            state.mobileEpisodeListOpen=false;
             renderChoices();
             renderPlayer();
             scrollPlayerIntoView();
@@ -2332,10 +2476,11 @@
         } else {
           return;
         }
+        state.mobileEpisodeListOpen=false;
         scrollChoiceListToTop();
         rerender();
       });
-      window.addEventListener('resize', ()=>{ renderContextStrip(); renderMobileContextBar(); });
+      window.addEventListener('resize', ()=>{ positionPlayerShell(); renderContextStrip(); renderMobileContextBar(); });
       els.audioPlayBadge.addEventListener('click', ()=>{
         if(!els.audioPlayer.src) return;
         if(els.audioPlayer.paused) els.audioPlayer.play();
