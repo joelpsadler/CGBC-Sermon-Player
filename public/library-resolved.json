@@ -1,16 +1,141 @@
 {
-  "generatedAt": "2026-04-21T23:27:06.148Z",
+  "generatedAt": "2026-04-22T00:44:02.859Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 133,
-    "archiveItems": 133,
-    "videoMatchedItems": 72
+    "rssItems": 134,
+    "archiveItems": 134,
+    "videoMatchedItems": 73
   },
   "totals": {
-    "audioPlaysTotal": 3852,
-    "audioEpisodesTotal": 133
+    "audioPlaysTotal": 3901,
+    "audioEpisodesTotal": 134
   },
   "items": [
+    {
+      "stableId": "media-es8hm8",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/2a1f2b7c-1537-3cdc-8861-cf709f707f93"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-126-8-the-impact-of-the-gospel%c2%a0in-ministry-cont-pt-3-romans-chapter-12/",
+        "shareUrl": "https://broJacobcedargrovebaptist.podbean.com/e/romans-126-8-the-impact-of-the-gospel%c2%a0in-ministry-cont-pt-3-romans-chapter-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel Pt. 3",
+        "subtitle": "In Ministry Cont.",
+        "display": "The Impact of the Gospel Pt. 3 (In Ministry Cont.)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:6-8",
+        "display": "Romans 12:6-8",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        },
+        {
+          "name": "Galatians",
+          "key": "galatians"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        },
+        {
+          "name": "Phillipians",
+          "key": "phillipians"
+        },
+        {
+          "name": "1 Peter",
+          "key": "1-peter"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "04/19/2026",
+        "iso": "2026-04-19",
+        "year": 2026,
+        "month": 4,
+        "monthName": "April",
+        "day": 19
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
+        "plays": 0,
+        "durationSeconds": 1869,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "dB0_XJEUsg4",
+        "url": "https://www.youtube.com/watch?v=dB0_XJEUsg4",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/419_PC7rthk.jpg",
+          "wide": "https://i.ytimg.com/vi/dB0_XJEUsg4/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "1-corinthians",
+          "galatians",
+          "ephesians",
+          "phillipians",
+          "1-peter"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-04"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-cjnc8m",
       "sourceKey": {
@@ -274,7 +399,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gnz7sthiniv3cnvc/408_W_Audioabqf1.mp3",
-        "plays": 24,
+        "plays": 27,
         "durationSeconds": 2010,
         "statsMatchStrategy": "media_url"
       },
@@ -376,7 +501,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cehkc42vzrq4e7dg/01_Romans_12_1-2_The_Impact_of_the_Gospel_Pt_18f2z6.mp3",
-        "plays": 40,
+        "plays": 42,
         "durationSeconds": 1812,
         "statsMatchStrategy": "media_url"
       },
@@ -571,7 +696,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/wfbqciwxvk6wigts/02_The_Rapture_Pt_29huhz.mp3",
-        "plays": 44,
+        "plays": 46,
         "durationSeconds": 1871,
         "statsMatchStrategy": "media_url"
       },
@@ -767,7 +892,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gmd44ikr6uq967w2/06_Romans_11_22-24_A_Necessary_Clarification_Pt_6ac79i.mp3",
-        "plays": 24,
+        "plays": 25,
         "durationSeconds": 2709,
         "statsMatchStrategy": "media_url"
       },
@@ -949,7 +1074,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/utsix8yhngtmpwfy/04_Romans_11_19-21_How_Unsearchable_Pt_46wae8.mp3",
-        "plays": 17,
+        "plays": 18,
         "durationSeconds": 2051,
         "statsMatchStrategy": "media_url"
       },
@@ -1313,7 +1438,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xh5jawzpi76v6qva/04_Romans_10_16-21_Have_You_Heard_Pt_464b2b.mp3",
-        "plays": 18,
+        "plays": 20,
         "durationSeconds": 2553,
         "statsMatchStrategy": "media_url"
       },
@@ -1491,7 +1616,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/k2fwh7s3rc4fccqd/03_Romans_10_14-15_Have_You_Heard_Part_37jeoe.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 2446,
         "statsMatchStrategy": "media_url"
       },
@@ -1582,7 +1707,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/v234yz6x5g9dibty/01_Romans_10_5-13_Have_You_Heard_Pt_2mp3_13-37-36-444b7l9i.mp3",
-        "plays": 37,
+        "plays": 39,
         "durationSeconds": 1727,
         "statsMatchStrategy": "media_url"
       },
@@ -1673,7 +1798,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/bqmxszttqxbwic33/01_Romans_10_1-4_Have_You_Heard_8959m.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 2421,
         "statsMatchStrategy": "media_url"
       },
@@ -1764,7 +1889,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
-        "plays": 91,
+        "plays": 92,
         "durationSeconds": 2370,
         "statsMatchStrategy": "media_url"
       },
@@ -2759,7 +2884,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/9b7drvjvmxzxwnk5/Working_10127t319.mp3",
-        "plays": 15,
+        "plays": 16,
         "durationSeconds": 2003,
         "statsMatchStrategy": "media_url"
       },
@@ -3396,7 +3521,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xizivmumix4arw7q/803pc7mezc.mp3",
-        "plays": 24,
+        "plays": 25,
         "durationSeconds": 1989,
         "statsMatchStrategy": "media_url"
       },
@@ -3856,7 +3981,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/27xycki8as638bm4/615PC28zt1i.mp3",
-        "plays": 33,
+        "plays": 35,
         "durationSeconds": 1829,
         "statsMatchStrategy": "media_url"
       },
@@ -4222,7 +4347,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/asag9r5id7wnq7fr/511Audiobf88q.mp3",
-        "plays": 43,
+        "plays": 44,
         "durationSeconds": 2406,
         "statsMatchStrategy": "media_url"
       },
@@ -5128,7 +5253,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ykig7edwr5r36mea/216PC6uy27.mp3",
-        "plays": 27,
+        "plays": 28,
         "durationSeconds": 1920,
         "statsMatchStrategy": "media_url"
       },
@@ -5310,7 +5435,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/vgvzq8y38zt65u6t/131Audioab43a.mp3",
-        "plays": 30,
+        "plays": 31,
         "durationSeconds": 2380,
         "statsMatchStrategy": "media_url"
       },
@@ -5672,7 +5797,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/79j4gcwwgwxyjab4/128amh7j.mp3",
-        "plays": 21,
+        "plays": 22,
         "durationSeconds": 2102,
         "statsMatchStrategy": "media_url"
       },
@@ -5763,7 +5888,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hka45nqdctuyjfrq/1229PodCast7ajmg.mp3",
-        "plays": 28,
+        "plays": 31,
         "durationSeconds": 2467,
         "statsMatchStrategy": "media_url"
       },
@@ -5854,7 +5979,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6bpiz3vaj3jabwg6/Untitled_Project655yd.mp3",
-        "plays": 20,
+        "plays": 22,
         "durationSeconds": 3293,
         "statsMatchStrategy": "media_url"
       },
@@ -5862,7 +5987,7 @@
         "hasVideo": true,
         "youtubeId": "10Qig1YdKPM",
         "url": "https://www.youtube.com/watch?v=10Qig1YdKPM",
-        "views": 66
+        "views": 67
       },
       "art": {
         "episode": {
@@ -5945,7 +6070,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5nv5wrg24cam4m8n/12_22_24_The_True_Light668zj.mp3",
-        "plays": 17,
+        "plays": 20,
         "durationSeconds": 2403,
         "statsMatchStrategy": "media_url"
       },
@@ -5953,7 +6078,7 @@
         "hasVideo": true,
         "youtubeId": "l3H9G1wgh_E",
         "url": "https://www.youtube.com/watch?v=l3H9G1wgh_E",
-        "views": 18
+        "views": 19
       },
       "art": {
         "episode": {
@@ -6036,7 +6161,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/2fq6ucd6umd8jen2/1215Podcast9dam7.mp3",
-        "plays": 21,
+        "plays": 22,
         "durationSeconds": 2266,
         "statsMatchStrategy": "media_url"
       },
@@ -6226,7 +6351,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/uvvjjckyhzy3fjc4/1216rb5c.mp3",
-        "plays": 24,
+        "plays": 26,
         "durationSeconds": 2412,
         "statsMatchStrategy": "media_url"
       },
@@ -6319,7 +6444,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/iqsgza3eyss9dyns/11_24_24_Thankful_For_The_CAN_T7ek1a.mp3",
-        "plays": 17,
+        "plays": 18,
         "durationSeconds": 1834,
         "statsMatchStrategy": "media_url"
       },
@@ -6505,7 +6630,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8m8d9i2mdxq6tyyc/1110_PodCast9zsht.mp3",
-        "plays": 27,
+        "plays": 28,
         "durationSeconds": 2032,
         "statsMatchStrategy": "media_url"
       },
