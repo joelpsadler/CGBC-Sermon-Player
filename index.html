@@ -1119,8 +1119,13 @@
       return item?.scripture?.display || '—';
     }
     function episodeCardMetric(item){
-      const viewsLabel = formatCountLabel(state.mode==='audio' ? (item?.audio?.plays || 0) : (item?.video?.views || 0), state.mode==='audio' ? 'play' : 'view', state.mode==='audio' ? 'plays' : 'views');
-      return searchResultsMode() && !queryHasDateIntent(state.searchTerm) ? viewsLabel : `${formatDate(item)} · ${viewsLabel}`;
+      const dateLabel = formatDate(item);
+      const isShortsShelf = state.mode === 'video' && state.nav.rootKey === 'shorts';
+      if(isShortsShelf){
+        const viewsLabel = formatCountLabel(item?.video?.views || 0, 'view', 'views');
+        return searchResultsMode() && !queryHasDateIntent(state.searchTerm) ? viewsLabel : `${dateLabel} · ${viewsLabel}`;
+      }
+      return dateLabel;
     }
     function applySearch(items){
       const q=state.searchTerm.trim().toLowerCase();
