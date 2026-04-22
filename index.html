@@ -25,8 +25,7 @@
       --mobile-bg:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230674/Mobile.jpg');
     }
     *{box-sizing:border-box}
-    html,html,body{max-width:100%;overflow-x:hidden}
-    body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
+    html,body{margin:0;padding:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}
     body{
       background:
         linear-gradient(180deg, rgba(11,11,12,.46) 0%, rgba(9,9,10,.64) 100%),
@@ -132,12 +131,7 @@
       flex:0 0 auto;
     }
 
-    .flow{display:grid;grid-template-columns:1fr;gap:16px;min-width:0;max-width:100%}
-    main,section,.content,.nav-panel,.nav-head,.search-row,.path-row,.top-actions,.impact,.masthead,.brand,.brand-mode-wrap{
-      min-width:0;
-      max-width:100%;
-      box-sizing:border-box;
-    }
+    .flow{display:grid;grid-template-columns:1fr;gap:16px}
     .panel{
       border-radius:24px;border:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg, rgba(14,14,15,.80), rgba(14,14,15,.74));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 14px 32px rgba(0,0,0,.18);
@@ -195,26 +189,25 @@
     }
     .context-chip.date-chip{
       position:relative;
-      flex:0 0 150px;
+      flex:0 0 166px;
       justify-content:center;
       align-items:center;
-      padding:8px;
+      padding:10px;
     }
     .context-chip.date-chip img{display:none}
     .context-chip.date-chip .context-chip-copy{display:none}
     .context-chip.date-chip .context-chip-badge{
       position:absolute;
-      top:3px;
-      left:50%;
-      transform:translateX(-50%);
+      top:8px;
+      left:8px;
       margin-bottom:0;
       z-index:2;
     }
     .context-chip-date{
-      width:120px;
-      height:76px;
-      flex:0 0 120px;
-      border-radius:15px;
+      width:132px;
+      height:84px;
+      flex:0 0 132px;
+      border-radius:16px;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -224,19 +217,19 @@
     }
     .context-chip-date .mini-label{
       font-family:Poppins,sans-serif;
-      font-size:8px;
-      letter-spacing:.10em;
+      font-size:9px;
+      letter-spacing:.11em;
       text-transform:uppercase;
       color:rgba(255,255,255,.55);
       line-height:1;
     }
     .context-chip-date .mini-value{
-      margin-top:4px;
+      margin-top:5px;
       max-width:100%;
-      padding:0 8px;
+      padding:0 10px;
       text-align:center;
       font-family:Poppins,sans-serif;
-      font-size:17px;
+      font-size:18px;
       font-weight:800;
       line-height:1.02;
       color:rgba(255,255,255,.96);
@@ -312,9 +305,6 @@
     }
     .mobile-context-chip{
       width:100%;
-      max-width:100%;
-      min-width:0;
-      box-sizing:border-box;
       min-height:58px;
       padding:12px 16px;
       border-radius:18px;
@@ -377,139 +367,10 @@
       text-overflow:ellipsis;
       white-space:nowrap;
     }
-    .episode-collapse-card{
-      width:100%;
-      max-width:100%;
-      min-width:0;
-      box-sizing:border-box;
-      min-height:60px;
-      padding:12px 16px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
-      color:rgba(255,255,255,.94);
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:center;
-      gap:8px;
-      text-align:left;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-    }
-    .episode-collapse-topline{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      width:100%;
-      min-width:0;
-    }
-    .episode-collapse-badge{
-      display:inline-flex;
-      align-items:center;
-      min-height:26px;
-      padding:0 12px;
-      border-radius:999px;
-      border:1px solid rgba(143,174,157,.22);
-      background:linear-gradient(180deg, rgba(143,174,157,.12), rgba(143,174,157,.06));
-      color:rgba(255,255,255,.96);
-      font-family:Poppins,sans-serif;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      flex:0 0 auto;
-    }
-    .episode-collapse-label{
-      color:rgba(255,255,255,.58);
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:11px;
-      flex:0 0 auto;
-    }
-    .episode-collapse-title{
-      width:100%;
-      font-family:Poppins,sans-serif;
-      font-size:18px;
-      line-height:1.1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .mobile-context-chip,
-    .episode-collapse-card{
-      position:relative;
-      overflow:hidden;
-    }
-    .mobile-context-chip.has-art,
-    .episode-collapse-card.has-art{
-      padding-right:88px;
-    }
-    .mobile-context-art{
-      position:absolute;
-      top:10px;
-      right:10px;
-      width:58px;
-      height:58px;
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.05);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:1;
-    }
-    .mobile-context-art img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .mobile-current-badge{
-      position:absolute;
-      right:14px;
-      bottom:12px;
-      z-index:2;
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      min-height:22px;
-      padding:0 9px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(20,20,20,.82), rgba(12,12,12,.66));
-      color:rgba(255,255,255,.95);
-      font-family:Poppins,sans-serif;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      backdrop-filter:blur(10px);
-      box-shadow:0 8px 20px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.05);
-    }
-    .mobile-current-badge-dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:#8fae9d;
-      flex:0 0 8px;
-      box-shadow:0 0 0 0 rgba(143,174,157,.65);
-      animation:mobileCurrentPulse 1.6s infinite ease-out;
-    }
-    @keyframes mobileCurrentPulse{
-      0%{box-shadow:0 0 0 0 rgba(143,174,157,.65)}
-      70%{box-shadow:0 0 0 7px rgba(143,174,157,0)}
-      100%{box-shadow:0 0 0 0 rgba(143,174,157,0)}
-    }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
     .choice,.episode,.related{
-      width:100%;
-      max-width:100%;
-      min-width:0;
-      box-sizing:border-box;
-      display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
+      width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:10px;border-radius:18px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.07);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 10px 20px rgba(0,0,0,.12)
@@ -550,21 +411,6 @@
       display:block;
       fill:currentColor;
       stroke:none;
-    }
-    .episode-load-badge.is-active-state{
-      background:linear-gradient(180deg, rgba(80,100,91,.30), rgba(39,49,44,.34));
-      border-color:rgba(143,174,157,.28);
-      color:rgba(255,255,255,.98);
-      opacity:1;
-    }
-    .episode-load-badge-dot{
-      width:10px;
-      height:10px;
-      border-radius:999px;
-      background:#b9d0c3;
-      flex:0 0 10px;
-      box-shadow:0 0 0 0 rgba(185,208,195,.65);
-      animation:mobileCurrentPulse 1.6s infinite ease-out;
     }
     .live-badge{
       position:absolute;
@@ -630,8 +476,7 @@
     .choice.branch-card .thumb-square{width:96px;height:96px;flex-basis:96px;border-radius:18px;}
     .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
-    .copy{min-width:0;flex:1;width:100%}
-    .stack,.choices,.mobile-context-bar,.mobile-context-wrap,.choice-list,.choice-list.mobile-browse-open,#videoShell,#videoPlaceholder,#audioStage,.player,#playerCol,.player-wrap,.details,#detailShell{min-width:0;max-width:100%;box-sizing:border-box;overflow-x:hidden;}
+    .copy{min-width:0;flex:1}
     .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
     .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
     .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
@@ -724,11 +569,7 @@
     .player.video-active{padding:0;background:rgba(0,0,0,.25)}
     .player.is-idle #videoShell,.player.is-idle #audioStage{display:none}
     #videoShell,#videoPlaceholder{
-      width:100%;
-      max-width:100%;
-      min-width:0;
-      box-sizing:border-box;
-      aspect-ratio:16/9;min-height:240px;border-radius:22px;overflow:hidden;background:#000;
+      width:100%;aspect-ratio:16/9;min-height:240px;border-radius:22px;overflow:hidden;background:#000;
       border:1px solid rgba(255,255,255,.06);display:none;align-items:center;justify-content:center;text-align:center;color:var(--muted)
     }
     #videoShell iframe{width:100%;height:100%;border:0;display:block}
@@ -737,7 +578,7 @@
       border-radius:22px;border:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.26)
     }
     .audio-stage{display:none;grid-template-columns:1fr;gap:14px}
-    .audio-art{width:100%;max-width:380px;min-width:0;box-sizing:border-box;aspect-ratio:1/1;border-radius:24px;overflow:hidden;margin:0 auto}
+    .audio-art{width:100%;aspect-ratio:1/1;max-width:380px;border-radius:24px;overflow:hidden;margin:0 auto}
     .audio-art img{width:100%;height:100%;object-fit:cover}
     .transport{
       width:100%;max-width:420px;display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:8px;align-items:center;
@@ -903,7 +744,7 @@
           var(--mobile-bg) center/cover no-repeat fixed;
         background-blend-mode:multiply;
       }
-      .app{padding:0 8px 14px;overflow-x:hidden}
+      .app{padding:0 8px 14px}
       .masthead{
         grid-template-columns:1fr;
         gap:10px;
@@ -939,8 +780,8 @@
       .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
       .search-status{width:100%;font-size:12px}
-      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap;overflow-x:hidden;max-width:100%}
-      .path-button{min-width:0;min-height:44px;padding:0 10px;max-width:100%}
+      .path-row{gap:8px;padding:10px 14px 8px;flex-wrap:wrap}
+      .path-button{min-width:0;min-height:44px;padding:0 10px}
       .back-button,.player-button,.reset-button{flex:1 1 calc(33.333% - 6px)}
       .back-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
       .back-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
@@ -962,7 +803,7 @@
       .card-title{font-size:17px}
       .card-meta-line{font-size:12px;line-height:1.3}
       .card-metric{font-size:11px;margin-top:6px}
-      .player{padding:12px;scroll-margin-top:8px}
+      .player{padding:12px}
       #videoShell,#videoPlaceholder{min-height:210px;border-radius:18px}
       #audioPlaceholder{min-height:160px;border-radius:18px;padding:20px}
       .audio-stage{gap:12px}
@@ -1158,7 +999,7 @@
     // CGBC media UI rebuild: keeps the same data model, but tightens nav scrolling,
     // root/branch card presentation, mobile controls, and media state handling.
     const ASSETS = {
-      fallback:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1238149/cgbc_media-player_-Web-App-icon_.jpg',
+      fallback:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png',
       current:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234669/Current.jpg',
       livestreams:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234668/Livestreams.jpg',
       books:'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1234671/Search-Books.jpg',
@@ -1187,9 +1028,7 @@
       currentItem:null,
       activeQueue:[],
       playingContext:null,
-      playerRenderKey:'',
-      mobileEpisodeListOpen:false,
-      mobileBrowseTarget:null
+      playerRenderKey:''
     };
 
     const els = {
@@ -1269,35 +1108,6 @@
     function sortNewestFirst(a,b){const ai=a?.date?.iso||'', bi=b?.date?.iso||''; if(ai&&bi) return bi.localeCompare(ai); return (b?.title?.display||'').localeCompare(a?.title?.display||'');}
     function sortSeriesName(a,b){return String(a).localeCompare(String(b), undefined, {numeric:true,sensitivity:'base'});}
     function sortBookName(a,b){const ai=BOOK_MAP.has(String(a).toLowerCase())?BOOK_MAP.get(String(a).toLowerCase()):999; const bi=BOOK_MAP.has(String(b).toLowerCase())?BOOK_MAP.get(String(b).toLowerCase()):999; return ai!==bi?ai-bi:sortSeriesName(a,b);}
-    function getItemYear(item){
-      const direct = item?.date?.year;
-      if(direct !== undefined && direct !== null && String(direct).trim()) return String(direct).trim();
-      const iso = String(item?.date?.iso || '').trim();
-      if(/^\d{4}/.test(iso)) return iso.slice(0,4);
-      const display = String(item?.date?.display || item?.publishedAt || '').trim();
-      let match = display.match(/(20\d{2}|19\d{2})/);
-      if(match) return match[1];
-
-      const yearHints = [
-        item?.series?.name,
-        item?.study?.name,
-        item?.title?.display,
-        item?.title,
-        item?.scripture?.display,
-        item?.notes,
-        item?.description,
-        item?.art?.episode?.square,
-        item?.art?.episode?.wide,
-        item?.art?.series?.square,
-        item?.art?.series?.wide,
-        item?.art?.study?.square,
-        item?.art?.study?.wide
-      ].filter(Boolean).join(' | ');
-      match = String(yearHints).match(/(20\d{2}|19\d{2})/);
-      if(match) return match[1];
-
-      return 'Unknown';
-    }
     function getBookTagsDisplay(item){const tags=Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name).filter(Boolean):[]; return tags.length?tags.join(', '):'—';}
     function isVideoCapable(item){return !!(item?.video?.hasVideo && item?.video?.youtubeId && item?.flags?.includeInVideoTotals!==false);}
     function isAudioCapable(item){return !!item?.audio?.hasAudio;}
@@ -1539,17 +1349,6 @@
 
     let mediaSessionHeartbeat = null;
 
-    function queuePausedMediaSessionRefresh(){
-      [150, 900, 2400].forEach(delay=>{
-        window.setTimeout(()=>{
-          if(state.mode === 'audio' && state.currentItem?.audio?.hasAudio){
-            applyAudioNowPlaying(state.currentItem);
-            updateMediaSessionState();
-          }
-        }, delay);
-      });
-    }
-
     function refreshActiveMediaSession(){
       if(state.mode === 'audio' && state.currentItem?.audio?.hasAudio){
         applyAudioNowPlaying(state.currentItem);
@@ -1578,7 +1377,7 @@
     }
 
     function clearPlaybackSnapshot(){
-      try{ localStorage.removeItem(snapshotStorageKey()); }catch(err){}
+      try{ sessionStorage.removeItem(snapshotStorageKey()); }catch(err){}
     }
 
     function persistPlaybackSnapshot(){
@@ -1595,19 +1394,19 @@
           paused: !!els.audioPlayer?.paused,
           currentTime: Number(els.audioPlayer?.currentTime || 0)
         };
-        localStorage.setItem(snapshotStorageKey(), JSON.stringify(payload));
+        sessionStorage.setItem(snapshotStorageKey(), JSON.stringify(payload));
       }catch(err){}
     }
 
     function restorePlaybackSnapshotIfNeeded(){
       try{
-        if(state.currentItem) return false;
-        const raw = localStorage.getItem(snapshotStorageKey());
-        if(!raw) return false;
+        if(state.currentItem) return;
+        const raw = sessionStorage.getItem(snapshotStorageKey());
+        if(!raw) return;
         const payload = JSON.parse(raw);
-        if(!payload?.currentItemId) return false;
+        if(!payload?.currentItemId) return;
         const item = getAllShareableItems().find(row => row?.stableId === payload.currentItemId);
-        if(!item) return false;
+        if(!item) return;
         state.mode = payload.mode === 'video' ? 'video' : 'audio';
         state.currentItem = item;
         if(payload?.playingContext?.nav){
@@ -1624,44 +1423,9 @@
         if(payload?.nav){
           state.nav = { ...(payload.nav || {}) };
         }
-        state.playerRenderKey = '';
         renderPlayer();
         updatePlayerButton();
-        return true;
-      }catch(err){
-        return false;
-      }
-    }
-
-    function ensureCurrentPlaybackMounted(){
-      try{
-        if(!state.currentItem || state.mode !== 'audio' || !state.currentItem?.audio?.url) return false;
-        const wanted = String(state.currentItem.audio.url || '');
-        const current = String(els.audioPlayer?.getAttribute('src') || els.audioPlayer?.src || '');
-        if(!current || !current.includes(wanted)){
-          state.playerRenderKey = '';
-          renderPlayer();
-          updatePlayerButton();
-          return true;
-        }
       }catch(err){}
-      return false;
-    }
-
-    function refreshAudioMountIfNeeded(){
-      try{
-        if(!state.currentItem || state.mode !== 'audio' || !state.currentItem?.audio?.url) return false;
-        const wanted = String(state.currentItem.audio.url || '');
-        const currentAttr = String(els.audioPlayer?.getAttribute('src') || '');
-        const currentSrc = String(els.audioPlayer?.src || '');
-        if(currentAttr !== wanted && !currentSrc.includes(wanted)){
-          els.audioPlayer.setAttribute('src', wanted);
-          els.audioPlayer.src = wanted;
-          els.audioPlayer.load();
-          return true;
-        }
-      }catch(err){}
-      return false;
     }
 
     function applyDeepLinkFromUrl(){
@@ -1755,7 +1519,7 @@
     }
     function buildBrowse(){
       const items=visibleItems();
-      const browse={roots:[],current:[],books:new Map(),topical:new Map(),specials:new Map(),date:new Map()};
+      const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
 
       items.forEach(item=>{
         const seriesKey=item?.series?.key || '';
@@ -1764,20 +1528,6 @@
         const modeHint=item?.presentation?.bibleBooksMode || 'none';
         const bookKeys=Array.isArray(item?.memberships?.bibleBooks)?item.memberships.bibleBooks:[];
         const isSpecial=/special/i.test(seriesName);
-
-        if(isSpecial){
-          const specialYear = getItemYear(item);
-          if(!browse.specials.has(specialYear)){
-            browse.specials.set(specialYear,{
-              key:`topical-specials-${specialYear}`,
-              title:`${specialYear} Specials`,
-              meta:'Specials',
-              image:ASSETS.topicalSeries || ASSETS.fallback,
-              items:[]
-            });
-          }
-          browse.specials.get(specialYear).items.push(item);
-        }
 
         if(CURRENT_SERIES_KEYS.has(seriesKey)){
           let row = browse.current.find(r=>r.key===seriesKey);
@@ -1801,7 +1551,7 @@
           }
           const bucket=browse.books.get(bookKey);
           if(isSpecial){
-            const year=getItemYear(item);
+            const year=String(item?.date?.year || 'Unknown');
             if(!bucket.specialsByYear.has(year)) bucket.specialsByYear.set(year, []);
             bucket.specialsByYear.get(year).push(item);
           } else if(modeHint==='series_group'){
@@ -1847,7 +1597,7 @@
           studyBucket.seriesMap.get(seriesKey).items.push(item);
         }
 
-        if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial && studyType !== 'topical_study'){
+        if((item?.series?.type==='topical' || item?.series?.type==='standalone') && !isSpecial){
           if(!browse.topical.has(seriesKey)){
             browse.topical.set(seriesKey,{
               key:seriesKey,
@@ -1860,7 +1610,7 @@
           browse.topical.get(seriesKey).items.push(item);
         }
 
-        const year=getItemYear(item);
+        const year=String(item?.date?.year || '');
         const monthKey=item?.date?.iso ? item.date.iso.slice(0,7) : '';
         if(year && monthKey){
           if(!browse.date.has(year)) browse.date.set(year, new Map());
@@ -1901,17 +1651,6 @@
       browse.topical.forEach(row=>{
         row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
       });
-      browse.specials.forEach((row,key)=>{
-        row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
-        row.meta = formatCountLabel(row.items.length,'episode','episodes');
-        if(String(key) === 'Unknown'){
-          const inferred = getItemYear(getFirstEpisode(row.items));
-          if(inferred && inferred !== 'Unknown'){
-            row.key = `topical-specials-${inferred}`;
-            row.title = `${inferred} Specials`;
-          }
-        }
-      });
 
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
       browse.roots=[
@@ -1920,7 +1659,7 @@
         ] : []),
         {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current},
         {key:'books',title:'Bible Books / Studies',meta:formatCountLabel(browse.books.size,'book','books'),image:ASSETS.books},
-        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size + (browse.specials.size ? 1 : 0),'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
+        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
         {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date},
         ...(state.mode==='video' ? [
           {key:'shorts',title:'Shorts',meta:'',image:ASSETS.shorts}
@@ -1960,8 +1699,6 @@
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
-        const specialRows = Array.from(browse.specials.values()).sort((a,b)=>a.title.localeCompare(b.title));
-        rows.push(...specialRows);
         if(state.mode==='video' && state.nativeShelves.guestSpeakers.length){
           rows.push({
             key:'guest-speakers-pinned',
@@ -2025,7 +1762,7 @@
       }
       if(root==='topical'){
         if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
-        const row=browse.topical.get(branch) || browse.specials.get(String(branch).replace('topical-specials-',''));
+        const row=browse.topical.get(branch);
         return row ? row.items.slice().sort(sortOldestFirst) : [];
       }
       if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
@@ -2033,32 +1770,6 @@
     }
     function choiceRows(){
       if(searchResultsMode()) return {rows:visibleItems().sort(sortNewestFirst), episodeLevel:true, searchResults:true};
-
-      if(isMobileViewport() && state.mobileBrowseTarget){
-        if(state.mobileBrowseTarget === 'top'){
-          const rows = rootChoices();
-          if(rows.length) return {rows, episodeLevel:false, mobileBrowse:true};
-          state.mobileBrowseTarget = null;
-        }
-        if(state.mobileBrowseTarget === 'root'){
-          const rows = branchChoices();
-          if(rows.length) return {rows, episodeLevel:false, mobileBrowse:true};
-          state.mobileBrowseTarget = null;
-        }
-        if(state.mobileBrowseTarget === 'branch'){
-          const leaves = leafChoices();
-          if(leaves.length) return {rows:leaves, episodeLevel:false, mobileBrowse:true};
-          const rows = queueItems();
-          if(rows.length) return {rows, episodeLevel:true, mobileBrowse:true};
-          state.mobileBrowseTarget = null;
-        }
-        if(state.mobileBrowseTarget === 'episodes'){
-          const rows = queueItems();
-          if(rows.length) return {rows, episodeLevel:true, mobileBrowse:true};
-          state.mobileBrowseTarget = null;
-        }
-      }
-
       if(!state.nav.rootKey) return {rows:rootChoices(), episodeLevel:false};
       if(!state.nav.branchKey) return {rows:branchChoices(), episodeLevel:false};
       const leaves=leafChoices();
@@ -2081,36 +1792,6 @@
       return raw.replace(/\bChapter\s+/i, '');
     }
 
-    function mobileCollapsedCardArt(item){
-      if(!item) return null;
-
-      if(item.level === 'branch' && state.nav.branchKey){
-        const row = branchChoices().find(r=>r.key===state.nav.branchKey);
-        const src = row?.image || item.image || null;
-        if(src) return { src, wide: state.mode === 'video' };
-      }
-
-      if(item.level === 'leaf' && state.nav.leafKey){
-        const row = leafChoices().find(r=>r.key===state.nav.leafKey);
-        const src = row?.image || item.image || null;
-        if(src) return { src, wide: state.mode === 'video' };
-      }
-
-      if(item.level === 'root' && state.nav.rootKey){
-        const src = item.image || null;
-        if(src) return { src, wide: state.mode === 'video' };
-      }
-
-      if(item.image){
-        return { src: item.image, wide: state.mode === 'video' };
-      }
-      return null;
-    }
-
-    function mobileCollapsedStateBadge(item){
-      return '';
-    }
-
     function mobileContextTitle(item){
       if(!item) return '';
       if(item.dateCardType === 'year') return String(item.dateCardValue || item.title || '');
@@ -2126,21 +1807,15 @@
         return;
       }
       els.mobileContextBar.style.display = 'flex';
-      const showAllBrowseBadges = !!state.currentItem || !!state.nav.branchKey || !!state.nav.leafKey;
-      els.mobileContextBar.innerHTML = items.map((item, index) => {
-        const art = mobileCollapsedCardArt(item);
-        const badge = mobileCollapsedStateBadge(item);
-        return `
-        <button type="button" class="mobile-context-chip ${art ? 'has-art' : ''} ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
+      els.mobileContextBar.innerHTML = items.map((item, index) => `
+        <button type="button" class="mobile-context-chip ${index === items.length - 1 ? 'active' : ''}" data-context-level="${escapeHtml(item.level || '')}">
           <span class="mobile-context-topline">
-            ${(showAllBrowseBadges || index !== items.length - 1) ? '<span class="mobile-context-badge">Browse</span>' : ''}
+            ${index === items.length - 1 ? '' : '<span class="mobile-context-badge">Browse</span>'}
             <span class="mobile-context-label">${escapeHtml(item.label || 'Path')}</span>
           </span>
           <span class="mobile-context-title">${escapeHtml(mobileContextTitle(item))}</span>
-          ${art ? `<span class="mobile-context-art"><img src="${escapeHtml(art.src)}" alt=""></span>` : ''}
-          ${badge}
-        </button>`;
-      }).join('');
+        </button>
+      `).join('');
     }
     function buildRelatedItems(item){
       if(!item) return [];
@@ -2302,8 +1977,6 @@
     }
 
     function goTopPreservePlayer(){
-      state.mobileEpisodeListOpen=false;
-      state.mobileBrowseTarget = null;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2314,15 +1987,21 @@
 
     function updatePlayerButton(){
       if(!els.playerBtn) return;
-      const hasLoadedMedia = !!(state.currentItem || state.playingContext);
       const show = isMobileViewport()
-        ? hasLoadedMedia
+        ? !!state.currentItem
         : isBrowsingAwayFromCurrent();
       els.playerBtn.style.display = show ? 'inline-flex' : 'none';
       els.playerBtn.classList.toggle('is-visible', show);
-      els.playerBtn.disabled = !hasLoadedMedia;
+      els.playerBtn.disabled = !state.currentItem && !state.playingContext;
     }
-    
+    function goTopPreservePlayer(){
+      state.nav = { rootKey:null, branchKey:null, leafKey:null };
+      state.searchTerm = '';
+      if(els.searchInput) els.searchInput.value = '';
+      rerender();
+      scrollChoiceListToTop();
+      scrollNavIntoView();
+    }
     function renderChoices(){
       els.navHeading.textContent = searchResultsMode() ? 'Search Results' : headingText();
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
@@ -2337,7 +2016,7 @@
       if(homeLabel) homeLabel.textContent = 'Reset';
 
       if(backGlyph) backGlyph.innerHTML = '<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg>';
-      if(backLabelEl) backLabelEl.textContent = isMobileViewport() ? 'Home' : 'Top';
+      if(backLabelEl) backLabelEl.textContent = 'Top';
 
       updateSearchStatus();
 
@@ -2354,49 +2033,9 @@
       }
 
       if(!rows.length){
-        els.choiceList.innerHTML = `<div class="empty">No items found here.</div>`;
+        els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
         return;
       }
-
-      if(isMobileViewport() && episodeLevel && state.currentItem && !searchResults && !state.mobileEpisodeListOpen){
-        const collapseTitle = state.nav.leafKey
-          ? (leafChoices().find(r=>r.key===state.nav.leafKey)?.title || 'This section')
-          : (branchChoices().find(r=>r.key===state.nav.branchKey)?.title || 'This section');
-        const queue = queueItems();
-        const loadedHere = !!queue.find(row => row?.stableId === state.currentItem?.stableId);
-        const leafArt = state.nav.leafKey ? (leafChoices().find(r=>r.key===state.nav.leafKey)?.image || '') : '';
-        const branchArt = state.nav.branchKey ? (branchChoices().find(r=>r.key===state.nav.branchKey)?.image || '') : '';
-        const currentArt = loadedHere
-          ? getEpisodeArt(state.currentItem, state.mode)
-          : (leafArt || branchArt || '');
-        const isPlayingNow = loadedHere && (
-          (state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
-          (state.mode === 'video')
-        );
-        const badgeMarkup = loadedHere
-          ? `<span class="mobile-current-badge"><span class="mobile-current-badge-dot"></span><span>${isPlayingNow ? 'Playing' : 'Loaded'}</span></span>`
-          : '';
-        const contextItems = buildContextItems();
-        const lastContextTitle = compactSeriesLabel(contextItems.length ? contextItems[contextItems.length - 1].title : '');
-        const normalizedCollapseTitle = compactSeriesLabel(collapseTitle);
-        if(normalizedCollapseTitle && lastContextTitle && normalizedCollapseTitle === lastContextTitle){
-          els.choiceList.innerHTML = '';
-          return;
-        }
-        els.choiceList.innerHTML = `
-          <button type="button" class="episode-collapse-card ${currentArt ? 'has-art' : ''}" data-open-episodes="1">
-            <span class="episode-collapse-topline">
-              <span class="episode-collapse-badge">Browse</span>
-              <span class="episode-collapse-label">Episodes</span>
-            </span>
-            <span class="episode-collapse-title">${escapeHtml(normalizedCollapseTitle)}</span>
-            ${currentArt ? `<span class="mobile-context-art"><img src="${escapeHtml(currentArt)}" alt=""></span>` : ''}
-            ${badgeMarkup}
-          </button>
-        `;
-        return;
-      }
-
       const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey || state.nav.rootKey);
       const isRootLevel = !state.nav.rootKey;
       const isBranchLevel = !!state.nav.rootKey && !state.nav.branchKey;
@@ -2446,19 +2085,9 @@
             </div>
           </button>`;
         }
-        const rowLoaded = episodeLevel && state.currentItem && row?.stableId === state.currentItem?.stableId;
-        const rowPlaying = rowLoaded && (
-          (state.mode === 'audio' && !!els.audioPlayer?.src && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
-          state.mode === 'video'
-        );
-        const loadBadgeMarkup = episodeLevel
-          ? (rowLoaded
-              ? `<div class="episode-load-badge is-active-state"><span class="episode-load-badge-dot"></span><span>${rowPlaying ? 'Playing' : 'Loaded'}</span></div>`
-              : `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
-          : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
-          ${loadBadgeMarkup}
+          ${episodeLevel ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>` : ''}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             <h3 class="card-title">${escapeHtml(title)}</h3>
@@ -2596,19 +2225,7 @@
     }
     function scrollPlayerIntoView(){
       if(!isMobileViewport()) return;
-      const doScroll = ()=>{
-        try{
-          const top = window.scrollY + els.playerShell.getBoundingClientRect().top - 2;
-          window.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
-        }catch(err){
-          try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(innerErr){}
-        }
-      };
-      try{
-        requestAnimationFrame(()=>requestAnimationFrame(doScroll));
-      }catch(err){
-        setTimeout(doScroll, 32);
-      }
+      try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
     }
     function scrollNavIntoView(){
       if(!isMobileViewport()) return;
@@ -2675,14 +2292,12 @@
       rerender();
     }
     function selectChoice(key){
-      if(!state.nav.rootKey || (isMobileViewport() && state.mobileBrowseTarget === 'top')){
+      if(!state.nav.rootKey){
         /* ============================================================================
            EASY NOTE: Livestreams and Shorts do NOT need a middle bucket.
            Clicking them should go straight from the root card to the episode list.
            ============================================================================ */
         if(key === 'livestreams'){
-          state.mobileEpisodeListOpen=false;
-          state.mobileBrowseTarget=null;
           state.nav.rootKey='livestreams';
           state.nav.branchKey='live-all';
           state.nav.leafKey=null;
@@ -2692,8 +2307,6 @@
           return;
         }
         if(key === 'shorts'){
-          state.mobileEpisodeListOpen=false;
-          state.mobileBrowseTarget=null;
           state.nav.rootKey='shorts';
           state.nav.branchKey='shorts-all';
           state.nav.leafKey=null;
@@ -2702,35 +2315,10 @@
           scrollNavIntoView();
           return;
         }
-        state.mobileEpisodeListOpen=false;
-        state.mobileBrowseTarget=null;
-        state.nav.rootKey=key;
-        state.nav.branchKey=null;
-        state.nav.leafKey=null;
-        scrollChoiceListToTop();
-        rerender();
-        scrollNavIntoView();
-        return;
+        state.nav.rootKey=key; state.nav.branchKey=null; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return;
       }
-      if(!state.nav.branchKey || (isMobileViewport() && state.mobileBrowseTarget === 'root')){
-        state.mobileEpisodeListOpen=false;
-        state.mobileBrowseTarget=null;
-        state.nav.branchKey=key;
-        state.nav.leafKey=null;
-        scrollChoiceListToTop();
-        rerender();
-        scrollNavIntoView();
-        return;
-      }
-      if((leafChoices().length && !state.nav.leafKey) || (isMobileViewport() && state.mobileBrowseTarget === 'branch')){
-        state.mobileEpisodeListOpen=false;
-        state.mobileBrowseTarget=null;
-        state.nav.leafKey=key;
-        scrollChoiceListToTop();
-        rerender();
-        scrollNavIntoView();
-        return;
-      }
+      if(!state.nav.branchKey){ state.nav.branchKey=key; state.nav.leafKey=null; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
+      if(leafChoices().length && !state.nav.leafKey){ state.nav.leafKey=key; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); return; }
     }
     function attachEvents(){
       initMediaSessionControls();
@@ -2739,25 +2327,16 @@
         if(topBtn){
           const key=topBtn.dataset.topRoot;
           if(key === 'livestreams'){
-            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null}; state.mobileEpisodeListOpen=false;
+            state.nav={rootKey:'livestreams',branchKey:'live-all',leafKey:null};
           } else if(key === 'shorts'){
-            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null}; state.mobileEpisodeListOpen=false;
+            state.nav={rootKey:'shorts',branchKey:'shorts-all',leafKey:null};
           } else {
-            state.nav={rootKey:key,branchKey:null,leafKey:null}; state.mobileEpisodeListOpen=false;
+            state.nav={rootKey:key,branchKey:null,leafKey:null};
           }
           scrollChoiceListToTop();
           rerender();
           return;
         }
-        const openEpisodesBtn = event.target.closest('[data-open-episodes]');
-        if(openEpisodesBtn){
-          state.mobileEpisodeListOpen = true;
-          state.mobileBrowseTarget = 'episodes';
-          renderChoices();
-          scrollChoiceListToTop();
-          return;
-        }
-
         const btn=event.target.closest('[data-key]');
         if(!btn) return;
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
@@ -2767,7 +2346,6 @@
             state.currentItem=next;
             state.playingContext={ mode: state.mode, nav: navSnapshot() };
             state.playerRenderKey='';
-            if(isMobileViewport()) { state.mobileEpisodeListOpen = false; state.mobileBrowseTarget = null; }
             renderChoices();
             renderPlayer();
             scrollPlayerIntoView();
@@ -2785,9 +2363,6 @@
           if(!state.playingContext) return;
           state.mode = state.playingContext.mode;
           state.nav = { ...state.playingContext.nav };
-          if(isMobileViewport()){
-            state.mobileEpisodeListOpen = true;
-          }
           rerender();
           scrollPlayerIntoView();
         });
@@ -2813,40 +2388,11 @@
       document.addEventListener('visibilitychange', ()=>{
         persistPlaybackSnapshot();
         refreshActiveMediaSession();
-        const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
-        }
+        restorePlaybackSnapshotIfNeeded();
       });
-      window.addEventListener('focus', ()=>{
-        refreshActiveMediaSession();
-        const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
-        }
-      });
-      window.addEventListener('pageshow', ()=>{
-        refreshActiveMediaSession();
-        const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
-        }
-      });
-      window.addEventListener('resume', ()=>{
-        refreshActiveMediaSession();
-        const restored = restorePlaybackSnapshotIfNeeded();
-        const remounted = refreshAudioMountIfNeeded() || ensureCurrentPlaybackMounted();
-        if(restored || remounted){
-          renderPlayer();
-          updatePlayerButton();
-        }
-      });
+      window.addEventListener('focus', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
+      window.addEventListener('pageshow', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
+      window.addEventListener('resume', ()=>{ refreshActiveMediaSession(); restorePlaybackSnapshotIfNeeded(); });
       window.addEventListener('pagehide', ()=>{ persistPlaybackSnapshot(); refreshActiveMediaSession(); });
 
       els.listenBtn.addEventListener('click', ()=>{
@@ -2883,20 +2429,16 @@
         const btn = event.target.closest('[data-context-level]');
         if(!btn) return;
         const level = btn.getAttribute('data-context-level');
-
         if(level==='root'){
-          state.mobileBrowseTarget = state.mobileBrowseTarget === 'top' ? null : 'top';
-          state.mobileEpisodeListOpen = false;
+          state.nav.branchKey=null;
+          state.nav.leafKey=null;
         } else if(level==='branch'){
-          state.mobileBrowseTarget = state.mobileBrowseTarget === 'root' ? null : 'root';
-          state.mobileEpisodeListOpen = false;
+          state.nav.leafKey=null;
         } else if(level==='leaf'){
-          state.mobileBrowseTarget = state.mobileBrowseTarget === 'branch' ? null : 'branch';
-          state.mobileEpisodeListOpen = false;
+          state.currentItem=null;
         } else {
           return;
         }
-
         scrollChoiceListToTop();
         rerender();
         scrollNavIntoView();
@@ -2926,7 +2468,7 @@
         els.audioProgress.max=d || 100;
         updateMediaSessionState();
       });
-      ['play','pause','ended','seeked','ratechange','emptied','stalled','suspend','error'].forEach(name=>{
+      ['play','pause','ended','seeked','ratechange'].forEach(name=>{
         els.audioPlayer.addEventListener(name, ()=>{
           const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
@@ -2937,15 +2479,7 @@
             persistPlaybackSnapshot();
           }
           if(name === 'pause'){
-            applyAudioNowPlaying(state.currentItem);
-            updateMediaSessionState();
-            queuePausedMediaSessionRefresh();
-          }
-          if(name === 'emptied' || name === 'stalled' || name === 'suspend' || name === 'error'){
-            refreshAudioMountIfNeeded();
-            if(!document.hidden){
-              ensureCurrentPlaybackMounted();
-            }
+            restorePlaybackSnapshotIfNeeded();
           }
           if(name === 'ended'){
             applyAudioNowPlaying(state.currentItem);
@@ -2957,7 +2491,6 @@
       attachEvents();
       state.data = await loadResolvedData();
       state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
-      restorePlaybackSnapshotIfNeeded();
       rerender();
       applyDeepLinkFromUrl();
       try{
