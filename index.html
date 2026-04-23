@@ -389,6 +389,21 @@
       fill:currentColor;
       stroke:none;
     }
+    .episode-load-badge.is-playing{
+      color:#ff5c63;
+      border-color:rgba(255,92,99,.24);
+    }
+    .episode-load-badge.is-loaded{
+      color:rgba(230,236,232,.96);
+    }
+    .episode-load-badge.is-load{
+      color:rgba(255,255,255,.94);
+    }
+    .episode-load-badge.is-playing span,
+    .episode-load-badge.is-loaded span,
+    .episode-load-badge.is-load span{
+      color:rgba(255,255,255,.94);
+    }
     .live-badge{
       position:absolute;
       top:12px;
@@ -847,18 +862,20 @@
       .mode-icon{width:26px;height:26px;flex-basis:26px}
       .top-actions{width:100%;justify-content:stretch}
       .impact{width:100%;gap:8px;justify-content:stretch}
-      .impact-pill{flex:1 1 0;min-width:0;padding:10px 12px;gap:6px}
-      .impact-value{font-size:18px}
+      .impact-pill{flex:1 1 0;min-width:0;padding:8px 12px;gap:6px}
+      .impact-value{font-size:17px}
       .impact-label{font-size:10px}
       .flow{gap:12px}
       .nav-panel{
         display:block;
         overflow:visible;
       }
-      .nav-head{padding:12px 14px 8px}
-      .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
+      .nav-head{padding:10px 14px 6px}
+      .nav-head .eyebrow{display:none}
+      .nav-head h2.title{font-size:clamp(15px,4.7vw,22px);line-height:1.05}
+      .search-row{flex-wrap:wrap;padding:0 14px 8px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
-      .search-status{width:100%;font-size:12px}
+      .search-status{width:100%;font-size:12px;display:none}
       .path-row{gap:6px;padding:8px 14px 8px;flex-wrap:nowrap}
       .path-button{min-width:0;min-height:38px;padding:0 8px;flex:1 1 0}
       .top-button,.back-button,.player-button,.reset-button{flex:1 1 0}
@@ -2017,7 +2034,9 @@
     }
     function goTopPreservePlayer(){
       state.mobileEpisodeListOpen = false;
-      state.mobilePlayerPinnedTop = false;
+      if(!(isMobileViewport() && state.mode === 'video' && state.currentItem)){
+        state.mobilePlayerPinnedTop = false;
+      }
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2144,16 +2163,16 @@
         const isEpisodeCurrent = !!(episodeLevel && state.currentItem && row?.stableId && row.stableId === state.currentItem.stableId);
         const isEpisodePlaying = !!(
           isEpisodeCurrent && (
-            (state.mode === 'audio' && state.audioPlayer && !state.audioPlayer.paused && !state.audioPlayer.ended) ||
-            state.mode === 'video'
+            (state.mode === 'audio' && els.audioPlayer && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
+            (state.mode === 'video' && state.playingContext && state.playingContext.itemId === row?.stableId)
           )
         );
         const episodeBadge = episodeLevel
           ? (isEpisodePlaying
-              ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
+              ? `<div class="episode-load-badge is-playing"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
               : isEpisodeCurrent
-                ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
-                : `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
+                ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
+                : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
@@ -2302,7 +2321,8 @@
     }
     function positionPlayerShell(){
       if(!els.playerShell || !els.mobilePlayerAnchor || !els.desktopPlayerAnchor) return;
-      const mobileTopMode = isMobileViewport() && !!state.currentItem && !!state.mobilePlayerPinnedTop;
+      const keepMobileVideoPinned = isMobileViewport() && state.mode === 'video' && !!state.currentItem;
+      const mobileTopMode = isMobileViewport() && !!state.currentItem && (!!state.mobilePlayerPinnedTop || keepMobileVideoPinned);
       if(mobileTopMode){
         if(els.mobilePlayerAnchor.firstElementChild !== els.playerShell){
           els.mobilePlayerAnchor.appendChild(els.playerShell);
@@ -2382,7 +2402,9 @@
     }
     function goBack(){
       state.mobileEpisodeListOpen=false;
-      state.mobilePlayerPinnedTop=false;
+      if(!(isMobileViewport() && state.mode === 'video' && state.currentItem)){
+        state.mobilePlayerPinnedTop=false;
+      }
       if(searchResultsMode()){
         state.searchTerm='';
         els.searchInput.value='';
@@ -2578,7 +2600,7 @@
         els.audioProgress.max=d || 100;
         updateMediaSessionState();
       });
-      ['play','pause','ended','seeked','ratechange'].forEach(name=>{
+      ['play','pause','ended','seeked','ratechange','loadedmetadata'].forEach(name=>{
         els.audioPlayer.addEventListener(name, ()=>{
           const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
