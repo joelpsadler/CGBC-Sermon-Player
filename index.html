@@ -452,15 +452,33 @@
     .choice.branch-card .thumb-square{width:96px;height:96px;flex-basis:96px;border-radius:18px;}
     .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
-    .copy{min-width:0;flex:1}
-    .card-title{margin:0;font-family:Poppins,sans-serif;font-size:clamp(16px,1.5vw,20px);line-height:1.12}
-    .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25}
-    .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600}
+    .copy{min-width:0;flex:1;width:100%;overflow:hidden}
+    .card-title{
+      margin:0;
+      min-width:0;
+      max-width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-family:Poppins,sans-serif;
+      font-size:clamp(16px,1.5vw,20px);
+      line-height:1.12;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      word-break:break-word;
+    }
+    .card-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.25;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .card-metric{margin-top:7px;color:rgba(255,255,255,.80);font-size:12px;font-family:Poppins,sans-serif;font-weight:600;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .card-meta-line{
       margin-top:6px;
       color:rgba(255,255,255,.86);
       font-size:13px;
       line-height:1.35;
+      min-width:0;
+      max-width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
     .choice.date-text-card{
       align-items:center;
@@ -863,8 +881,9 @@
         overflow:visible;
         max-height:none;
       }
-      .choice,.episode{padding:12px;gap:10px;border-radius:18px}
+      .choice,.episode{padding:12px;gap:10px;border-radius:18px;min-width:0}
       .choice.root-card .copy{padding:12px 14px 14px}
+      .thumb-wide,.thumb-square,.copy,.card-title,.card-sub,.card-meta-line,.card-metric{min-width:0;max-width:100%}
       .choice.root-card .thumb-square,
       .choice.root-card .thumb-wide{border-radius:18px}
       .thumb-wide{width:112px;height:68px;flex-basis:112px}
@@ -2112,7 +2131,12 @@
           </button>`;
         }
         const isEpisodeCurrent = !!(episodeLevel && state.currentItem && row?.stableId && row.stableId === state.currentItem.stableId);
-        const isEpisodePlaying = !!(isEpisodeCurrent && state.audioPlayer && !state.audioPlayer.paused && !state.audioPlayer.ended);
+        const isEpisodePlaying = !!(
+          isEpisodeCurrent && (
+            (state.mode === 'audio' && state.audioPlayer && !state.audioPlayer.paused && !state.audioPlayer.ended) ||
+            state.mode === 'video'
+          )
+        );
         const episodeBadge = episodeLevel
           ? (isEpisodePlaying
               ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
@@ -2365,6 +2389,7 @@
            ============================================================================ */
         if(key === 'livestreams'){
           state.mobileEpisodeListOpen=false;
+          state.mobilePlayerPinnedTop=false;
           state.nav.rootKey='livestreams';
           state.nav.branchKey='live-all';
           state.nav.leafKey=null;
@@ -2375,6 +2400,7 @@
         }
         if(key === 'shorts'){
           state.mobileEpisodeListOpen=false;
+          state.mobilePlayerPinnedTop=false;
           state.nav.rootKey='shorts';
           state.nav.branchKey='shorts-all';
           state.nav.leafKey=null;
@@ -2501,6 +2527,8 @@
         const btn = event.target.closest('[data-context-level]');
         if(!btn) return;
         const level = btn.getAttribute('data-context-level');
+        state.mobileEpisodeListOpen=false;
+        state.mobilePlayerPinnedTop=false;
         if(level==='root'){
           state.nav.branchKey=null;
           state.nav.leafKey=null;
