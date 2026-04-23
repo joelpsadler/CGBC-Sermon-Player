@@ -2034,9 +2034,7 @@
     }
     function goTopPreservePlayer(){
       state.mobileEpisodeListOpen = false;
-      if(!(isMobileViewport() && state.mode === 'video' && state.currentItem)){
-        state.mobilePlayerPinnedTop = false;
-      }
+      state.mobilePlayerPinnedTop = false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2161,10 +2159,18 @@
           </button>`;
         }
         const isEpisodeCurrent = !!(episodeLevel && state.currentItem && row?.stableId && row.stableId === state.currentItem.stableId);
+        const isVideoCurrent = !!(state.mode === 'video' && isEpisodeCurrent);
+        const isVideoPlaying = !!(
+          isVideoCurrent &&
+          state.playingContext &&
+          state.playingContext.itemId === row?.stableId &&
+          state.playingContext.mode === 'video' &&
+          !!state.mobilePlayerPinnedTop
+        );
         const isEpisodePlaying = !!(
           isEpisodeCurrent && (
             (state.mode === 'audio' && els.audioPlayer && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
-            (state.mode === 'video' && state.playingContext && state.playingContext.itemId === row?.stableId)
+            isVideoPlaying
           )
         );
         const episodeBadge = episodeLevel
@@ -2321,8 +2327,7 @@
     }
     function positionPlayerShell(){
       if(!els.playerShell || !els.mobilePlayerAnchor || !els.desktopPlayerAnchor) return;
-      const keepMobileVideoPinned = isMobileViewport() && state.mode === 'video' && !!state.currentItem;
-      const mobileTopMode = isMobileViewport() && !!state.currentItem && (!!state.mobilePlayerPinnedTop || keepMobileVideoPinned);
+      const mobileTopMode = isMobileViewport() && !!state.currentItem && !!state.mobilePlayerPinnedTop;
       if(mobileTopMode){
         if(els.mobilePlayerAnchor.firstElementChild !== els.playerShell){
           els.mobilePlayerAnchor.appendChild(els.playerShell);
@@ -2402,9 +2407,7 @@
     }
     function goBack(){
       state.mobileEpisodeListOpen=false;
-      if(!(isMobileViewport() && state.mode === 'video' && state.currentItem)){
-        state.mobilePlayerPinnedTop=false;
-      }
+      state.mobilePlayerPinnedTop=false;
       if(searchResultsMode()){
         state.searchTerm='';
         els.searchInput.value='';
