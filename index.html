@@ -1991,6 +1991,8 @@
       return !!(state.currentItem && state.playingContext && (!sameNav(state.nav, state.playingContext.nav) || state.mode !== state.playingContext.mode));
     }
     function goTopPreservePlayer(){
+      state.mobileEpisodeListOpen = false;
+      state.mobilePlayerPinnedTop = false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2034,9 +2036,10 @@
         state.activeQueue = [];
       }
 
-      if(isMobileViewport() && episodeLevel && state.currentItem && !searchResults && !state.mobileEpisodeListOpen){
-        els.choiceList.innerHTML = `
-          <button type="button" class="episode-collapse-card" data-open-episodes="1">
+      let mobileEpisodeToggleCard = '';
+      if(isMobileViewport() && episodeLevel && state.currentItem && !searchResults){
+        mobileEpisodeToggleCard = `
+          <button type="button" class="episode-collapse-card" data-open-episodes="1" aria-expanded="${state.mobileEpisodeListOpen ? 'true' : 'false'}">
             <span class="episode-collapse-topline">
               <span class="episode-collapse-badge">Browse</span>
               <span class="episode-collapse-label">Episodes</span>
@@ -2044,7 +2047,10 @@
             <span class="episode-collapse-title">${escapeHtml(mobileEpisodeCollapseTitle())}</span>
           </button>
         `;
-        return;
+        if(!state.mobileEpisodeListOpen){
+          els.choiceList.innerHTML = mobileEpisodeToggleCard;
+          return;
+        }
       }
 
       const debugVisible = !!(FORCE_LIVE_BADGE_PREVIEW && state.mode === 'video');
@@ -2053,7 +2059,7 @@
       }
 
       if(!rows.length){
-        els.choiceList.innerHTML = `<div class="empty">No items found for this path.</div>`;
+        els.choiceList.innerHTML = mobileEpisodeToggleCard || `<div class="empty">No items found for this path.</div>`;
         return;
       }
       const activeKey = episodeLevel ? state.currentItem?.stableId : (state.nav.leafKey || state.nav.branchKey || state.nav.rootKey);
@@ -2105,9 +2111,18 @@
             </div>
           </button>`;
         }
+        const isEpisodeCurrent = !!(episodeLevel && state.currentItem && row?.stableId && row.stableId === state.currentItem.stableId);
+        const isEpisodePlaying = !!(isEpisodeCurrent && state.audioPlayer && !state.audioPlayer.paused && !state.audioPlayer.ended);
+        const episodeBadge = episodeLevel
+          ? (isEpisodePlaying
+              ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
+              : isEpisodeCurrent
+                ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
+                : `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
+          : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
-          ${episodeLevel ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>` : ''}
+          ${episodeBadge}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
             <h3 class="card-title">${escapeHtml(title)}</h3>
@@ -2116,6 +2131,7 @@
           </div>
         </button>`;
       }).join('');
+      if(mobileEpisodeToggleCard) els.choiceList.innerHTML = mobileEpisodeToggleCard + els.choiceList.innerHTML;
     }
     function renderPlayer(){
       const item=state.currentItem;
@@ -2314,6 +2330,7 @@
     function resetAll(options={}){
       const { preserveSearch=false, preserveCurrent=false } = options;
       state.mobileEpisodeListOpen=false;
+      state.mobilePlayerPinnedTop=false;
       state.nav={rootKey:null,branchKey:null,leafKey:null};
       if(!preserveCurrent){
         state.currentItem=null;
@@ -2330,6 +2347,7 @@
     }
     function goBack(){
       state.mobileEpisodeListOpen=false;
+      state.mobilePlayerPinnedTop=false;
       if(searchResultsMode()){
         state.searchTerm='';
         els.searchInput.value='';
@@ -2426,10 +2444,14 @@
       els.backBtn.addEventListener('click', ()=>{ goBack(); });
       if(els.playerBtn){
         els.playerBtn.addEventListener('click', ()=>{
+          state.mobilePlayerPinnedTop = true;
+          state.mobileEpisodeListOpen = false;
           if(state.playingContext){
             state.mode = state.playingContext.mode;
             state.nav = { ...state.playingContext.nav };
             rerender();
+          } else {
+            positionPlayerShell();
           }
           if(state.currentItem){
             scrollPlayerIntoView();
