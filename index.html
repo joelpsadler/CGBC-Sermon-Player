@@ -1556,16 +1556,6 @@
       });
       return episodes.sort(sortNewestFirst);
     }
-    function getBrowseNav(){
-      return state.browseNav || state.nav;
-    }
-    function setBrowseNav(nextNav){
-      state.browseNav = nextNav ? { ...nextNav } : null;
-    }
-    function syncBrowseNavFromState(){
-      state.browseNav = state.nav ? { ...state.nav } : null;
-    }
-
     function buildBrowse(){
       const items=visibleItems();
       const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
@@ -1827,9 +1817,9 @@
     }
     function currentPathTitle(){
       const browse=buildBrowse();
-      const root=browse.roots.find(r=>r.key===getBrowseNav().rootKey);
-      const branch=branchChoices().find(r=>r.key===getBrowseNav().branchKey);
-      const leaf=leafChoices().find(r=>r.key===getBrowseNav().leafKey);
+      const root=browse.roots.find(r=>r.key===state.nav.rootKey);
+      const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
+      const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
       if(leaf) return `Episodes · ${compactSeriesLabel(leaf.title)}`;
       if(branch) return `${compactSeriesLabel(root?.title || 'Browse')} · ${compactSeriesLabel(branch.title)}`;
       if(root) return `Browse · ${root.title}`;
@@ -1913,9 +1903,9 @@
     function buildContextItems(){
       const browse=buildBrowse();
       const items=[];
-      const root=browse.roots.find(r=>r.key===getBrowseNav().rootKey);
-      const branch=branchChoices().find(r=>r.key===getBrowseNav().branchKey);
-      const leaf=leafChoices().find(r=>r.key===getBrowseNav().leafKey);
+      const root=browse.roots.find(r=>r.key===state.nav.rootKey);
+      const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
+      const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
       if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:state.mode==='audio', level:'root'});
       if(branch){
         const suppressTerminalDuplicate = (state.nav.rootKey === 'livestreams' || state.nav.rootKey === 'shorts') && root && String(root.title) === String(branch.title);
@@ -1979,8 +1969,8 @@
     }
     function backLabel(){
       const browse=buildBrowse();
-      const root=browse.roots.find(r=>r.key===getBrowseNav().rootKey);
-      const branch=branchChoices().find(r=>r.key===getBrowseNav().branchKey);
+      const root=browse.roots.find(r=>r.key===state.nav.rootKey);
+      const branch=branchChoices().find(r=>r.key===state.nav.branchKey);
       if(searchResultsMode()) return '✕ Clear';
       if(state.nav.leafKey) return compactSeriesLabel(branch?.title || 'Selection');
       if(state.nav.branchKey) return compactSeriesLabel(root?.title || 'Browse');
@@ -2024,7 +2014,7 @@
     function goTopPreservePlayer(){
       state.mobileEpisodeListOpen = false;
       state.mobilePlayerPinnedTop = false;
-      setBrowseNav({ rootKey:null, branchKey:null, leafKey:null });
+      state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
       rerender();
@@ -2458,7 +2448,6 @@
         const btn=event.target.closest('[data-key]');
         if(!btn) return;
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
-        const uiNav = { ...getBrowseNav() };
         if(episode){
           const next=state.activeQueue.find(r=>r.stableId===key);
           if(next){
@@ -2488,7 +2477,6 @@
           if(state.playingContext){
             state.mode = state.playingContext.mode;
             state.nav = { ...state.playingContext.nav };
-            syncBrowseNavFromState();
             rerender();
           } else {
             positionPlayerShell();
