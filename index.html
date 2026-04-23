@@ -340,8 +340,9 @@
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
-      font-size:18px;
+      font-size:16px;
       line-height:1.08;
+      display:block;
     }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -737,12 +738,15 @@
     }
     .episode-collapse-title{
       width:100%;
+      min-width:0;
+      max-width:100%;
       font-family:Poppins,sans-serif;
-      font-size:22px;
+      font-size:18px;
       line-height:1.08;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      display:block;
     }
     .nav-btn-inner{
       display:inline-flex;
@@ -2058,7 +2062,12 @@
       }
 
       let mobileEpisodeToggleCard = '';
-      if(isMobileViewport() && episodeLevel && state.currentItem && !searchResults){
+      const loadedItemBelongsToCurrentRows = !!(
+        episodeLevel &&
+        state.currentItem &&
+        rows.some(row => row?.stableId && row.stableId === state.currentItem?.stableId)
+      );
+      if(isMobileViewport() && episodeLevel && loadedItemBelongsToCurrentRows && !searchResults){
         mobileEpisodeToggleCard = `
           <button type="button" class="episode-collapse-card" data-open-episodes="1" aria-expanded="${state.mobileEpisodeListOpen ? 'true' : 'false'}">
             <span class="episode-collapse-topline">
@@ -2579,6 +2588,9 @@
             startMediaSessionHeartbeat();
           }
           if(name === 'ended') applyAudioNowPlaying(state.currentItem);
+          if(state.currentItem){
+            renderChoices();
+          }
         });
       });
     }
