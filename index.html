@@ -292,40 +292,6 @@
     .path-button[disabled]{opacity:.48;cursor:default}
     .path-button span{overflow:hidden;text-overflow:ellipsis}
     .path-btn-inner{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:0;width:100%}
-    .share-btn-inner{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      width:100%;
-      min-width:0;
-    }
-    .share-btn-label{
-      min-width:0;
-      flex:1;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .share-btn-device{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:18px;
-      height:18px;
-      flex:0 0 18px;
-      color:rgba(255,255,255,.52);
-      opacity:.92;
-    }
-    .share-btn-device svg{
-      width:18px;
-      height:18px;
-      display:block;
-      stroke:currentColor;
-      fill:none;
-      stroke-width:1.9;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-    }
     .path-glyph{display:inline-flex;align-items:center;justify-content:center;line-height:1;flex:0 0 auto;color:rgba(255,255,255,.98)}
     .path-glyph svg{display:block;width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .path-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -376,66 +342,6 @@
       white-space:nowrap;
       font-size:18px;
       line-height:1.08;
-    }
-    #mobilePlayerMount{display:none}
-    .episode-collapse-card{
-      width:100%;
-      min-height:72px;
-      padding:12px 14px;
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
-      color:rgba(255,255,255,.92);
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:center;
-      gap:6px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-      text-align:left;
-    }
-    .episode-collapse-topline{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-      width:100%;
-    }
-    .episode-collapse-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:22px;
-      padding:0 8px;
-      border-radius:999px;
-      font-family:Poppins,sans-serif;
-      font-size:10px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.94);
-      background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));
-      border:1px solid rgba(143,174,157,.22);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
-    }
-    .episode-collapse-label{
-      color:rgba(255,255,255,.52);
-      text-transform:uppercase;
-      letter-spacing:.10em;
-      font-size:10px;
-      line-height:1;
-      flex:0 0 auto;
-    }
-    .episode-collapse-title{
-      width:100%;
-      font-family:Poppins,sans-serif;
-      font-size:22px;
-      line-height:1.08;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .nav-panel > #playerShell{
-      margin:0 16px 10px;
     }
 
     .stack{display:grid;gap:12px;padding:20px 16px 16px;align-content:start;grid-auto-rows:max-content;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -714,10 +620,10 @@
       gap:10px;
     }
     .share-btn-inner{
-      display:inline-flex;
+      display:flex;
       align-items:center;
-      justify-content:center;
-      gap:8px;
+      gap:10px;
+      width:100%;
       min-width:0;
     }
     .share-btn-icon,
@@ -738,6 +644,87 @@
     .share-btn-label{
       min-width:0;
       white-space:nowrap;
+      flex:1;
+      text-align:left;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .share-btn-device{
+      width:18px;
+      height:18px;
+      flex:0 0 18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(255,255,255,.54);
+      opacity:.94;
+    }
+    .share-btn-device svg{
+      width:18px;
+      height:18px;
+      display:block;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.9;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    #mobilePlayerAnchor{display:none}
+    .episode-collapse-card{
+      width:100%;
+      min-height:72px;
+      padding:12px 14px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      color:rgba(255,255,255,.92);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      gap:6px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+      text-align:left;
+    }
+    .episode-collapse-topline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      width:100%;
+    }
+    .episode-collapse-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:22px;
+      padding:0 8px;
+      border-radius:999px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.94);
+      background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));
+      border:1px solid rgba(143,174,157,.22);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .episode-collapse-label{
+      color:rgba(255,255,255,.52);
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:10px;
+      line-height:1;
+      flex:0 0 auto;
+    }
+    .episode-collapse-title{
+      width:100%;
+      font-family:Poppins,sans-serif;
+      font-size:22px;
+      line-height:1.08;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
     .nav-btn-inner{
       display:inline-flex;
@@ -856,6 +843,19 @@
       .top-button .path-label,.back-button .path-label,.player-button .path-label,.reset-button .path-label{font-size:15px;line-height:1.05}
       .top-button .path-glyph,.back-button .path-glyph,.player-button .path-glyph,.reset-button .path-glyph{font-size:24px}
       .mobile-context-bar{display:flex;padding:0 14px 10px}
+      #mobilePlayerAnchor{
+        display:block;
+        padding:0 14px 10px;
+      }
+      #mobilePlayerAnchor:empty{display:none}
+      #mobilePlayerAnchor #playerShell{
+        margin:0;
+        width:100%;
+        max-width:100%;
+        overflow:hidden;
+      }
+      html,body{overflow-x:hidden}
+      .app,.flow,.content,.nav-panel,.panel,#playerShell,#videoShell,#videoPlaceholder,.video-share-host,.audio-stage{min-width:0;max-width:100%}
       .mobile-context-chip{max-width:100%}
       .stack{
         padding:12px 14px 14px;
@@ -976,16 +976,17 @@
           <p class="eyebrow">Browse</p>
           <h2 class="title" id="navHeading"></h2>
         </div>
+        <div class="search-row">
+          <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
+          <div class="search-status" id="searchStatus">All items</div>
+        </div>
         <div class="path-row" id="pathRow">
           <button type="button" class="path-button top-button" id="topBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg></span><span class="path-label">Top</span></span></button>
           <button type="button" class="path-button back-button" id="backBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15 18 9 12l6-6"/></svg></span><span class="path-label">Back</span></span></button>
           <button type="button" class="path-button player-button" id="playerBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M8 7V3L3 8l5 5V9c7 0 10 2 13 7-1-6-4-9-13-9z"/></svg></span><span class="path-label">Player</span></span></button>
           <button type="button" class="path-button reset-button" id="resetBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg></span><span class="path-label">Reset</span></span></button>
         </div>
-        <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
-          <div class="search-status" id="searchStatus">All items</div>
-        </div>
+        <div id="mobilePlayerAnchor"></div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
         <div class="stack" id="choiceList"></div>
       </section>
@@ -994,6 +995,7 @@
         <section class="panel context-strip" id="contextStrip">
           <div class="context-row" id="contextRow"></div>
         </section>
+        <div id="desktopPlayerAnchor"></div>
         <section class="panel player is-idle" id="playerShell">
           <div id="videoPlaceholder">Select an episode to watch.</div>
           <div id="videoShell"></div>
@@ -1088,9 +1090,9 @@
       nav:{ rootKey:null, branchKey:null, leafKey:null },
       currentItem:null,
       activeQueue:[],
-      mobileEpisodeListOpen:false,
       playingContext:null,
-      playerRenderKey:''
+      playerRenderKey:'',
+      mobileEpisodeListOpen:false
     };
 
     const els = {
@@ -1139,7 +1141,10 @@
       relatedRow: document.getElementById('relatedRow'),
       contextStrip: document.getElementById('contextStrip'),
       contextRow: document.getElementById('contextRow'),
-      mobileContextBar: document.getElementById('mobileContextBar')
+      mobileContextBar: document.getElementById('mobileContextBar'),
+      mobilePlayerAnchor: document.getElementById('mobilePlayerAnchor'),
+      desktopPlayerAnchor: document.getElementById('desktopPlayerAnchor'),
+      pathRow: document.getElementById('pathRow')
     };
 
     function escapeHtml(v){return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
@@ -1881,8 +1886,8 @@
       const leaf=leafChoices().find(r=>r.key===state.nav.leafKey);
       if(root) items.push({label:'Category', title:root.title, image:root.image || ASSETS.fallback, square:state.mode==='audio', level:'root'});
       if(branch){
-        const suppressDuplicateShelf = (state.nav.rootKey === 'livestreams' || state.nav.rootKey === 'shorts') && root && String(root.title) === String(branch.title);
-        if(!suppressDuplicateShelf){
+        const suppressTerminalDuplicate = (state.nav.rootKey === 'livestreams' || state.nav.rootKey === 'shorts') && root && String(root.title) === String(branch.title);
+        if(!suppressTerminalDuplicate){
           if(state.nav.rootKey === 'date' && branch.dateCardType === 'year'){
             items.push({label:'Year', title:branch.title, image:null, square:false, level:'branch', dateCardType:'year', dateCardValue:branch.dateCardValue || branch.title});
           } else {
@@ -2148,6 +2153,8 @@
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='none';
         els.videoShell.style.display='block';
+        els.videoShell.style.width='100%';
+        els.videoShell.style.maxWidth='100%';
         if(state.playerRenderKey !== renderKey || !els.videoShell.querySelector('iframe')){
           els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
           state.playerRenderKey = renderKey;
@@ -2236,6 +2243,24 @@
     function isMobileViewport(){
       return window.innerWidth <= 900;
     }
+    function mobileEpisodeCollapseTitle(){
+      const leaf = leafChoices().find(r=>r.key===state.nav.leafKey);
+      const branch = branchChoices().find(r=>r.key===state.nav.branchKey);
+      return compactSeriesLabel(leaf?.title || branch?.title || 'Episodes');
+    }
+    function positionPlayerShell(){
+      if(!els.playerShell || !els.mobilePlayerAnchor || !els.desktopPlayerAnchor) return;
+      const mobileSelected = isMobileViewport() && !!state.currentItem;
+      if(mobileSelected){
+        if(els.mobilePlayerAnchor.firstElementChild !== els.playerShell){
+          els.mobilePlayerAnchor.appendChild(els.playerShell);
+        }
+      } else {
+        if(els.desktopPlayerAnchor.nextElementSibling !== els.playerShell){
+          els.desktopPlayerAnchor.insertAdjacentElement('afterend', els.playerShell);
+        }
+      }
+    }
     function scrollPlayerIntoView(){
       if(!isMobileViewport()) return;
       try{
@@ -2252,30 +2277,6 @@
       const navPanel = document.querySelector('.nav-panel');
       if(!navPanel) return;
       try{ navPanel.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
-    }
-    function mobileEpisodeCollapseTitle(){
-      const leaf = leafChoices().find(r=>r.key===state.nav.leafKey);
-      const branch = branchChoices().find(r=>r.key===state.nav.branchKey);
-      return compactSeriesLabel(leaf?.title || branch?.title || 'Episodes');
-    }
-    function positionPlayerShell(){
-      if(!els.playerShell) return;
-      const navPanel = document.querySelector('.nav-panel');
-      const content = document.querySelector('.content');
-      const searchRow = document.querySelector('.search-row');
-      const contextStrip = document.getElementById('contextStrip');
-      if(!navPanel || !content || !searchRow || !contextStrip) return;
-
-      const mobileSelected = isMobileViewport() && !!state.currentItem;
-      if(mobileSelected){
-        if(els.playerShell.parentElement !== navPanel || els.playerShell.nextElementSibling !== searchRow){
-          navPanel.insertBefore(els.playerShell, searchRow);
-        }
-      } else {
-        if(els.playerShell.parentElement !== content || els.playerShell.previousElementSibling !== contextStrip){
-          content.insertBefore(els.playerShell, contextStrip.nextSibling);
-        }
-      }
     }
     function scrollChoiceListToTop(){
       try{ els.choiceList.scrollTop = 0; }catch(err){}
@@ -2371,6 +2372,12 @@
     function attachEvents(){
       initMediaSessionControls();
       document.body.addEventListener('click', (event)=>{
+        const openEpisodesBtn=event.target.closest('[data-open-episodes]');
+        if(openEpisodesBtn){
+          state.mobileEpisodeListOpen = true;
+          renderChoices();
+          return;
+        }
         const topBtn=event.target.closest('[data-top-root]');
         if(topBtn){
           const key=topBtn.dataset.topRoot;
@@ -2388,12 +2395,6 @@
           rerender();
           return;
         }
-        const openEpisodesBtn = event.target.closest('[data-open-episodes]');
-        if(openEpisodesBtn){
-          state.mobileEpisodeListOpen = true;
-          renderChoices();
-          return;
-        }
         const btn=event.target.closest('[data-key]');
         if(!btn) return;
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
@@ -2406,6 +2407,7 @@
             state.mobileEpisodeListOpen=false;
             renderChoices();
             renderPlayer();
+            positionPlayerShell();
             scrollPlayerIntoView();
             if(state.mode==='audio' && next?.audio?.url){ els.audioPlayer.play().catch(()=>{}); }
           }
@@ -2482,7 +2484,6 @@
         } else {
           return;
         }
-        state.mobileEpisodeListOpen=false;
         scrollChoiceListToTop();
         rerender();
       });
