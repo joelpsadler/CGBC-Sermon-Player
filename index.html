@@ -389,21 +389,6 @@
       fill:currentColor;
       stroke:none;
     }
-    .episode-load-badge.is-playing{
-      color:#ff5c63;
-      border-color:rgba(255,92,99,.24);
-    }
-    .episode-load-badge.is-loaded{
-      color:rgba(230,236,232,.96);
-    }
-    .episode-load-badge.is-load{
-      color:rgba(255,255,255,.94);
-    }
-    .episode-load-badge.is-playing span,
-    .episode-load-badge.is-loaded span,
-    .episode-load-badge.is-load span{
-      color:rgba(255,255,255,.94);
-    }
     .live-badge{
       position:absolute;
       top:12px;
@@ -862,20 +847,18 @@
       .mode-icon{width:26px;height:26px;flex-basis:26px}
       .top-actions{width:100%;justify-content:stretch}
       .impact{width:100%;gap:8px;justify-content:stretch}
-      .impact-pill{flex:1 1 0;min-width:0;padding:8px 12px;gap:6px}
-      .impact-value{font-size:17px}
+      .impact-pill{flex:1 1 0;min-width:0;padding:10px 12px;gap:6px}
+      .impact-value{font-size:18px}
       .impact-label{font-size:10px}
       .flow{gap:12px}
       .nav-panel{
         display:block;
         overflow:visible;
       }
-      .nav-head{padding:10px 14px 6px}
-      .nav-head .eyebrow{display:none}
-      .nav-head h2.title{font-size:clamp(15px,4.7vw,22px);line-height:1.05}
-      .search-row{flex-wrap:wrap;padding:0 14px 8px;margin-top:0}
+      .nav-head{padding:12px 14px 8px}
+      .search-row{flex-wrap:wrap;padding:0 14px 10px;margin-top:0}
       .search-row input{padding:12px 13px;border-radius:14px}
-      .search-status{width:100%;font-size:12px;display:none}
+      .search-status{width:100%;font-size:12px}
       .path-row{gap:6px;padding:8px 14px 8px;flex-wrap:nowrap}
       .path-button{min-width:0;min-height:38px;padding:0 8px;flex:1 1 0}
       .top-button,.back-button,.player-button,.reset-button{flex:1 1 0}
@@ -894,6 +877,21 @@
         width:100%;
         max-width:100%;
         overflow:hidden;
+      }
+      .player.mobile-video-pinned{
+        position:fixed;
+        z-index:35;
+        margin:0;
+        width:auto;
+        max-width:none;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 18px 34px rgba(0,0,0,.28);
+      }
+      #mobilePlayerAnchor.video-spacer-active{
+        display:block;
+        padding:0 14px 10px;
+      }
+      #mobilePlayerAnchor.video-spacer-active:empty{
+        display:block;
       }
       html,body{overflow-x:hidden}
       .app,.flow,.content,.nav-panel,.panel,#playerShell,#videoShell,#videoPlaceholder,.video-share-host,.audio-stage{min-width:0;max-width:100%}
@@ -1135,7 +1133,8 @@
       playingContext:null,
       playerRenderKey:'',
       mobileEpisodeListOpen:false,
-      mobilePlayerPinnedTop:false
+      mobilePlayerPinnedTop:false,
+      mobileVideoPinnedMetrics:null
     };
 
     const els = {
@@ -2159,26 +2158,18 @@
           </button>`;
         }
         const isEpisodeCurrent = !!(episodeLevel && state.currentItem && row?.stableId && row.stableId === state.currentItem.stableId);
-        const isVideoCurrent = !!(state.mode === 'video' && isEpisodeCurrent);
-        const isVideoPlaying = !!(
-          isVideoCurrent &&
-          state.playingContext &&
-          state.playingContext.itemId === row?.stableId &&
-          state.playingContext.mode === 'video' &&
-          !!state.mobilePlayerPinnedTop
-        );
         const isEpisodePlaying = !!(
           isEpisodeCurrent && (
-            (state.mode === 'audio' && els.audioPlayer && !els.audioPlayer.paused && !els.audioPlayer.ended) ||
-            isVideoPlaying
+            (state.mode === 'audio' && state.audioPlayer && !state.audioPlayer.paused && !state.audioPlayer.ended) ||
+            state.mode === 'video'
           )
         );
         const episodeBadge = episodeLevel
           ? (isEpisodePlaying
-              ? `<div class="episode-load-badge is-playing"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
+              ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
               : isEpisodeCurrent
-                ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
-                : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
+                ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
+                : `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
@@ -2325,8 +2316,48 @@
       const branch = branchChoices().find(r=>r.key===state.nav.branchKey);
       return compactSeriesLabel(leaf?.title || branch?.title || 'Episodes');
     }
+    function updatePinnedVideoLayout(){
+      if(!isMobileViewport() || state.mode !== 'video' || !state.currentItem || !state.mobilePlayerPinnedTop) return;
+      const navPanel = document.querySelector('.nav-panel');
+      const mobileAnchor = els.mobilePlayerAnchor;
+      if(!navPanel || !mobileAnchor || !els.playerShell) return;
+      const anchorRect = mobileAnchor.getBoundingClientRect();
+      const navRect = navPanel.getBoundingClientRect();
+      const top = Math.max(0, anchorRect.top);
+      const left = navRect.left + 14;
+      const width = Math.max(0, navRect.width - 28);
+      els.playerShell.style.top = `${top}px`;
+      els.playerShell.style.left = `${left}px`;
+      els.playerShell.style.width = `${width}px`;
+      els.playerShell.style.maxWidth = `${width}px`;
+      const h = Math.ceil(els.playerShell.getBoundingClientRect().height || 0);
+      if(h > 0){
+        els.mobilePlayerAnchor.style.height = `${h}px`;
+        els.mobilePlayerAnchor.classList.add('video-spacer-active');
+      }
+    }
+
     function positionPlayerShell(){
       if(!els.playerShell || !els.mobilePlayerAnchor || !els.desktopPlayerAnchor) return;
+
+      const mobileVideoPinned = isMobileViewport() && state.mode === 'video' && !!state.currentItem && !!state.mobilePlayerPinnedTop;
+      if(mobileVideoPinned){
+        if(els.desktopPlayerAnchor.nextElementSibling !== els.playerShell){
+          els.desktopPlayerAnchor.insertAdjacentElement('afterend', els.playerShell);
+        }
+        els.playerShell.classList.add('mobile-video-pinned');
+        updatePinnedVideoLayout();
+        return;
+      }
+
+      els.playerShell.classList.remove('mobile-video-pinned');
+      els.playerShell.style.top = '';
+      els.playerShell.style.left = '';
+      els.playerShell.style.width = '';
+      els.playerShell.style.maxWidth = '';
+      els.mobilePlayerAnchor.style.height = '';
+      els.mobilePlayerAnchor.classList.remove('video-spacer-active');
+
       const mobileTopMode = isMobileViewport() && !!state.currentItem && !!state.mobilePlayerPinnedTop;
       if(mobileTopMode){
         if(els.mobilePlayerAnchor.firstElementChild !== els.playerShell){
@@ -2515,6 +2546,7 @@
           } else {
             positionPlayerShell();
           }
+          positionPlayerShell();
           if(state.currentItem){
             scrollPlayerIntoView();
           }
@@ -2579,6 +2611,8 @@
         rerender();
       });
       window.addEventListener('resize', ()=>{ positionPlayerShell(); renderContextStrip(); renderMobileContextBar(); });
+      window.addEventListener('scroll', ()=>{ updatePinnedVideoLayout(); }, { passive:true });
+      window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{ positionPlayerShell(); }, 50); });
       els.audioPlayBadge.addEventListener('click', ()=>{
         if(!els.audioPlayer.src) return;
         if(els.audioPlayer.paused) els.audioPlayer.play();
@@ -2603,7 +2637,7 @@
         els.audioProgress.max=d || 100;
         updateMediaSessionState();
       });
-      ['play','pause','ended','seeked','ratechange','loadedmetadata'].forEach(name=>{
+      ['play','pause','ended','seeked','ratechange'].forEach(name=>{
         els.audioPlayer.addEventListener(name, ()=>{
           const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
           els.audioPlayLabel.textContent = playing ? 'Playing' : 'Tap to Play';
