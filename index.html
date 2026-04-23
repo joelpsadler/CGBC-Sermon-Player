@@ -1003,7 +1003,7 @@
         </div>
         <div class="search-row">
           <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
-          <div class="search-status" id="searchStatus">All items</div>
+          <div class="search-status" id="searchStatus"></div>
         </div>
         <div class="path-row" id="pathRow">
           <button type="button" class="path-button top-button" id="topBtn"><span class="path-btn-inner"><span class="path-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 19V6"/><path d="m6.5 11.5 5.5-5.5 5.5 5.5"/></svg></span><span class="path-label">Top</span></span></button>
@@ -2018,6 +2018,9 @@
     function goTopPreservePlayer(){
       state.mobileEpisodeListOpen = false;
       state.mobilePlayerPinnedTop = false;
+      if(state.currentItem){
+        state.playingContext = { itemId: state.currentItem.stableId, mode: state.mode, nav: navSnapshot() };
+      }
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
       state.searchTerm = '';
       if(els.searchInput) els.searchInput.value = '';
@@ -2171,6 +2174,7 @@
     function renderPlayer(){
       const item=state.currentItem;
       const idle=!item;
+      const sameRenderKey = item ? `${state.mode}:${item.stableId}` === state.playerRenderKey : false;
       els.playerShell.classList.toggle('is-idle', idle);
       els.detailShell.classList.toggle('is-idle', idle);
       els.videoShareHost.classList.remove('is-visible');
@@ -2383,6 +2387,9 @@
     function goBack(){
       state.mobileEpisodeListOpen=false;
       state.mobilePlayerPinnedTop=false;
+      if(state.currentItem){
+        state.playingContext = { itemId: state.currentItem.stableId, mode: state.mode, nav: navSnapshot() };
+      }
       if(searchResultsMode()){
         state.searchTerm='';
         els.searchInput.value='';
@@ -2590,6 +2597,7 @@
           if(name === 'ended') applyAudioNowPlaying(state.currentItem);
           if(state.currentItem){
             renderChoices();
+            renderPlayer();
           }
         });
       });
