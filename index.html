@@ -907,7 +907,7 @@
       }
       #mobilePlayerAnchor.video-spacer-active{
         display:block;
-        padding:0 14px 10px;
+        padding:0 14px 18px;
       }
       #mobilePlayerAnchor.video-spacer-active:empty{
         display:block;
@@ -932,7 +932,7 @@
       .card-title{font-size:17px}
       .card-meta-line{font-size:12px;line-height:1.3}
       .card-metric{font-size:11px;margin-top:6px}
-      .player{padding:14px;margin-bottom:10px}
+      .player{padding:14px;margin-bottom:18px}
       #videoShell,#videoPlaceholder{min-height:210px;border-radius:18px}
       #audioPlaceholder{min-height:180px;border-radius:18px;padding:24px}
       .audio-stage{gap:16px}
@@ -2177,18 +2177,10 @@
           </button>`;
         }
         const isEpisodeCurrent = !!(episodeLevel && state.currentItem && row?.stableId && row.stableId === state.currentItem.stableId);
-        const isEpisodePlaying = !!(
-          isEpisodeCurrent && (
-            (state.mode === 'audio' && state.audioPlayer && !state.audioPlayer.paused && !state.audioPlayer.ended) ||
-            state.mode === 'video'
-          )
-        );
         const episodeBadge = episodeLevel
-          ? (isEpisodePlaying
-              ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Playing</span></div>`
-              : isEpisodeCurrent
-                ? `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
-                : `<div class="episode-load-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
+          ? (isEpisodeCurrent
+                ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
+                : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
