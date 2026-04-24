@@ -943,7 +943,8 @@
       #videoShell,#videoPlaceholder{min-height:210px;border-radius:18px}
       #audioPlaceholder{min-height:180px;border-radius:18px;padding:24px}
       .audio-stage{gap:16px}
-      .audio-art{max-width:300px;border-radius:20px}
+      .audio-stage > div:first-child{width:100%;max-width:100%}
+      .audio-art{width:100%;max-width:none;border-radius:20px}
       .transport{max-width:none;width:100%;padding:6px;gap:6px}
       .transport-btn,.play-btn{min-height:54px}
       .play-btn{padding:0 10px 0 6px;gap:10px}
@@ -956,6 +957,36 @@
       .player-actions{gap:8px}
       .player-actions-below-timer{margin-top:10px}
       .video-share-host{padding:10px 14px 14px}
+      .player-actions-below-timer .path-button,
+      .video-share-host .path-button{
+        flex:1 1 0;
+        min-width:0;
+        padding:0 12px;
+      }
+      .player-actions-below-timer .share-btn-inner,
+      .video-share-host .share-btn-inner{
+        justify-content:center;
+        gap:9px;
+      }
+      .player-actions-below-timer .share-btn-logo,
+      .video-share-host .share-btn-logo,
+      .player-actions-below-timer .share-btn-icon,
+      .video-share-host .share-btn-icon{
+        width:22px;
+        height:22px;
+        flex-basis:22px;
+      }
+      .player-actions-below-timer .share-btn-label,
+      .video-share-host .share-btn-label{
+        flex:0 1 auto;
+        max-width:92px;
+        font-size:15px;
+        text-align:center;
+      }
+      .player-actions-below-timer .share-btn-device,
+      .video-share-host .share-btn-device{
+        display:none;
+      }
       /* Mobile-only player cleanup: keep Scripture/Date on desktop, but hide them in the mobile player. */
       .audio-scripture-row,
       .audio-date-row{display:none}
@@ -968,7 +999,7 @@
       .related{flex-basis:220px;max-width:220px}
       .meta-row{grid-template-columns:96px minmax(0,1fr)}
       .audio-stage{gap:12px}
-      .audio-art{max-width:264px}
+      .audio-art{width:100%;max-width:none}
       .transport{max-width:none;width:100%;grid-template-columns:52px minmax(0,1fr) 52px;gap:5px}
       .transport-btn,.play-btn{min-height:48px}
       .play-btn{padding:0 8px 0 5px;gap:8px}
@@ -1102,18 +1133,17 @@
                 <a id="playerShareLink" class="path-button" href="#">
                   <span class="share-btn-inner">
                     <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="">
-                    <span class="share-btn-label">Site Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
+                    <span class="share-btn-label">Site</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
                   </span>
                 </a>
                 <a id="playerPodcastLink" class="path-button" href="#">
                   <span class="share-btn-inner">
                     <svg class="share-btn-icon" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 18v3"></path>
-                      <path d="M8.5 21h7"></path>
-                      <path d="M12 4.5a4 4 0 0 1 4 4c0 2.1-1.2 3.3-2.4 4.5-.9.9-1.6 1.7-1.6 3"></path>
-                      <path d="M12 4.5a4 4 0 0 0-4 4c0 2.1 1.2 3.3 2.4 4.5.9.9 1.6 1.7 1.6 3"></path>
+                      <path d="M12 3v12"></path>
+                      <path d="m7 8 5-5 5 5"></path>
+                      <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"></path>
                     </svg>
-                    <span class="share-btn-label">RSS Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
+                    <span class="share-btn-label">RSS</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
                   </span>
                 </a>
               </div>
@@ -2326,7 +2356,7 @@
           <button class="path-button" type="button" id="videoShareBtnOutside">
             <span class="share-btn-inner">
               <img class="share-btn-logo" src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png" alt="">
-              <span class="share-btn-label">Site Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
+              <span class="share-btn-label">Site</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
             </span>
           </button>
           <button class="path-button" type="button" id="videoNativeShareBtnOutside">
@@ -2335,7 +2365,7 @@
                 <rect x="3" y="6" width="18" height="12" rx="3"></rect>
                 <path d="M10 9v6l5-3z" fill="currentColor" stroke="none"></path>
               </svg>
-              <span class="share-btn-label">YouTube Share</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
+              <span class="share-btn-label">YouTube</span><span class="share-btn-device" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.75" width="10" height="18.5" rx="2.5"></rect><path d="M10 6.5h4"></path><path d="M12 17.5h.01"></path></svg></span>
             </span>
           </button>`;
         els.videoShareHost.classList.add('is-visible');
