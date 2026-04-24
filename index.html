@@ -832,6 +832,13 @@
       .transport{margin:0}
       .meta-row{grid-template-columns:140px minmax(0,1fr)}
     }
+    @media (min-width:901px){
+      /* Desktop-only cleanup: share buttons are mobile-first, so keep them hidden on desktop. */
+      .player-actions-below-timer,
+      .video-share-host{
+        display:none!important;
+      }
+    }
     @media (max-width:900px){
       body{
         background:
@@ -949,6 +956,9 @@
       .player-actions{gap:8px}
       .player-actions-below-timer{margin-top:10px}
       .video-share-host{padding:10px 14px 14px}
+      /* Mobile-only player cleanup: keep Scripture/Date on desktop, but hide them in the mobile player. */
+      .audio-scripture-row,
+      .audio-date-row{display:none}
       .time-row{align-items:flex-start;gap:6px;flex-direction:column}
       .audio-now{font-size:clamp(32px,10vw,42px)}
       .audio-total{font-size:16px;padding-bottom:0}
@@ -958,7 +968,7 @@
       .related{flex-basis:220px;max-width:220px}
       .meta-row{grid-template-columns:96px minmax(0,1fr)}
       .audio-stage{gap:12px}
-      .audio-art{max-width:240px}
+      .audio-art{max-width:264px}
       .transport{max-width:none;width:100%;grid-template-columns:52px minmax(0,1fr) 52px;gap:5px}
       .transport-btn,.play-btn{min-height:48px}
       .play-btn{padding:0 8px 0 5px;gap:8px}
@@ -1076,9 +1086,9 @@
             <div class="audio-copy">
               <h3 class="audio-title" id="audioFeatureTitle"></h3>
               <div class="audio-series" id="audioFeatureSeries"></div>
-              <div class="detail-row"><span class="label">Scripture</span><span class="value" id="audioFeatureScripture"></span></div>
+              <div class="detail-row audio-scripture-row"><span class="label">Scripture</span><span class="value" id="audioFeatureScripture"></span></div>
               <div class="detail-row"><span class="label">Speaker</span><span class="value" id="audioFeatureSpeaker"></span></div>
-              <div class="detail-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
+              <div class="detail-row audio-date-row"><span class="label">Date</span><span class="value" id="audioFeatureDate"></span></div>
 
               <div class="time-row">
                 <div class="audio-now" id="audioClockCurrent">00:00</div>
