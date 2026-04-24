@@ -1534,18 +1534,77 @@
       }
       throw lastError || new Error('library-resolved.json could not be loaded.');
     }
+    /* ============================================================================
+       BEGINNER NOTE: YouTube private/deleted playlist item filter
+       ---------------------------------------------------------------------------
+       Livestreams, Shorts, and Guest Speaker shelves come directly from YouTube
+       playlists in the browser. YouTube can sometimes leave "Private video" or
+       "Deleted video" placeholders in playlistItems results even after you remove
+       a test stream from a playlist. This block filters those out before they can
+       become cards on the site.
+
+       Safety rules:
+       - skip playlist rows titled "Private video" / "Deleted video"
+       - verify every playlist video with videos.list
+       - skip videos missing from videos.list
+       - skip videos whose status.privacyStatus is "private"
+       - skip non-embeddable videos, because the site player cannot show them
+       ============================================================================ */
+    function isUnavailableYoutubeTitle(title){
+      const t = String(title || '').trim().toLowerCase();
+      if(!t) return true;
+      return (
+        t === 'private video' ||
+        t === 'deleted video' ||
+        t.includes('private video') ||
+        t.includes('deleted video') ||
+        t.includes('video unavailable')
+      );
+    }
+
+    function isUsableYoutubeVideoDetail(detail){
+      if(!detail || !detail.id) return false;
+      const title = detail?.snippet?.title || '';
+      const privacyStatus = String(detail?.status?.privacyStatus || '').toLowerCase();
+      const uploadStatus = String(detail?.status?.uploadStatus || '').toLowerCase();
+
+      if(isUnavailableYoutubeTitle(title)) return false;
+      if(privacyStatus === 'private') return false;
+      if(['deleted','failed','rejected'].includes(uploadStatus)) return false;
+      if(detail?.status && detail.status.embeddable === false) return false;
+
+      return true;
+    }
+
+    function pickYoutubeThumb(thumbnails = {}){
+      return thumbnails?.maxres?.url ||
+        thumbnails?.standard?.url ||
+        thumbnails?.high?.url ||
+        thumbnails?.medium?.url ||
+        thumbnails?.default?.url ||
+        null;
+    }
+
     async function fetchVideoStatistics(videoIds){
       const out = new Map();
       const ids = Array.from(new Set((videoIds || []).filter(Boolean)));
       for(let i=0;i<ids.length;i+=50){
         const batch = ids.slice(i, i+50);
-        const qs = new URLSearchParams({part:'statistics', id:batch.join(','), key:API_KEY});
+        const qs = new URLSearchParams({part:'snippet,statistics,status', id:batch.join(','), key:API_KEY});
         const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?${qs.toString()}`);
         if(!res.ok) continue;
         const data = await res.json();
         const rows = Array.isArray(data?.items) ? data.items : [];
         rows.forEach(row=>{
-          out.set(row?.id, Number(row?.statistics?.viewCount || 0));
+          if(!isUsableYoutubeVideoDetail(row)) return;
+          out.set(row?.id, {
+            views: Number(row?.statistics?.viewCount || 0),
+            title: row?.snippet?.title || '',
+            thumbnailWide: pickYoutubeThumb(row?.snippet?.thumbnails || {}),
+            privacyStatus: row?.status?.privacyStatus || '',
+            uploadStatus: row?.status?.uploadStatus || '',
+            embeddable: row?.status?.embeddable !== false
+          });
         });
       }
       return out;
@@ -1554,7 +1613,7 @@
     async function fetchPlaylistSeries(config){
       const episodes=[]; let pageToken='';
       for(let attempt=0;attempt<6;attempt+=1){
-        const qs=new URLSearchParams({part:'snippet',maxResults:'50',playlistId:config.playlistId,key:API_KEY});
+        const qs=new URLSearchParams({part:'snippet,status',maxResults:'50',playlistId:config.playlistId,key:API_KEY});
         if(pageToken) qs.set('pageToken', pageToken);
         const res=await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?${qs.toString()}`);
         if(!res.ok) throw new Error(`playlistItems ${res.status}`);
@@ -1562,13 +1621,17 @@
         const rows=Array.isArray(data?.items)?data.items:[];
         rows.forEach((row,index)=>{
           const snippet=row?.snippet||{}, videoId=snippet?.resourceId?.videoId;
+          const playlistPrivacy = String(row?.status?.privacyStatus || '').toLowerCase();
           if(!videoId) return;
+          if(playlistPrivacy === 'private') return;
+          if(isUnavailableYoutubeTitle(snippet?.title)) return;
+
           const thumb=snippet?.thumbnails?.maxres?.url || snippet?.thumbnails?.standard?.url || snippet?.thumbnails?.high?.url || snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url || ASSETS.fallback;
           episodes.push({
-            stableId:`${config.name.toLowerCase().replace(/\\s+/g,'-')}-${videoId}`,
+            stableId:`${config.name.toLowerCase().replace(/\s+/g,'-')}-${videoId}`,
             source:'youtube-native',
             title:{episodeName:snippet?.title||'Untitled',subtitle:'',display:snippet?.title||'Untitled'},
-            series:{name:config.name,key:config.name.toLowerCase().replace(/\\s+/g,'-'),type:'native_youtube_shelf'},
+            series:{name:config.name,key:config.name.toLowerCase().replace(/\s+/g,'-'),type:'native_youtube_shelf'},
             study:{name:'',key:null,type:'none'},
             scripture:{raw:'',display:'YouTube native shelf',book:null,bookKey:null,isVarious:true},
             bookTags:[],
@@ -1578,7 +1641,7 @@
             audio:{hasAudio:false,url:null,plays:0,durationSeconds:0},
             video:{hasVideo:true,youtubeId:videoId,url:`https://www.youtube.com/watch?v=${videoId}`,views:0},
             art:{episode:{square:thumb,wide:thumb},series:{square:thumb,wide:thumb},study:{square:thumb,wide:thumb}},
-            memberships:{series:[config.name.toLowerCase().replace(/\\s+/g,'-')],studies:[],bibleBooks:[],byYear:[],byMonth:[]},
+            memberships:{series:[config.name.toLowerCase().replace(/\s+/g,'-')],studies:[],bibleBooks:[],byYear:[],byMonth:[]},
             presentation:{bibleBooksMode:'none'},
             flags:{isStandaloneEpisode:true,includeInAudioTotals:false,includeInVideoTotals:true},
             _sortIndex:index
@@ -1587,14 +1650,25 @@
         if(!data?.nextPageToken) break;
         pageToken=data.nextPageToken;
       }
+
       const statsMap = await fetchVideoStatistics(episodes.map(ep=>ep?.video?.youtubeId));
+      const filteredEpisodes = [];
       episodes.forEach(ep=>{
-        if(ep?.video?.youtubeId){
-          ep.video.views = Number(statsMap.get(ep.video.youtubeId) || 0);
+        const detail = ep?.video?.youtubeId ? statsMap.get(ep.video.youtubeId) : null;
+        if(!detail) return;
+
+        ep.video.views = Number(detail.views || 0);
+        if(detail.thumbnailWide){
+          ep.art.episode.wide = detail.thumbnailWide;
+          ep.art.series.wide = ep.art.series.wide || detail.thumbnailWide;
+          ep.art.study.wide = ep.art.study.wide || detail.thumbnailWide;
         }
+        filteredEpisodes.push(ep);
       });
-      return episodes.sort(sortNewestFirst);
+
+      return filteredEpisodes.sort(sortNewestFirst);
     }
+
     function buildBrowse(){
       const items=visibleItems();
       const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
