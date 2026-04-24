@@ -5,7 +5,6 @@ import path from "path";
 const SCRIPT_LABEL = process.env.PODBEAN_SCRIPT_LABEL || "Seed Podbean Baseline";
 const PODBEAN_SHOW_URL =
   process.env.PODBEAN_SHOW_URL || "https://brojacobcedargrovebaptist.podbean.com/";
-const CSV_PATH = path.resolve(process.cwd(), "stats", "downloads_stats.csv");
 const STATS_PATH = path.resolve(process.cwd(), "stats", "stats.json");
 const MAX_PAGES = Number(process.env.PODBEAN_MAX_PAGES || 10);
 const REQUEST_DELAY_MS = Number(process.env.PODBEAN_REQUEST_DELAY_MS || 500);
@@ -21,6 +20,16 @@ function safeObject(value) {
 function clean(value) {
   if (value === undefined || value === null) return "";
   return String(value).replace(/\s+/g, " ").trim();
+}
+
+function cleanHtmlText(value) {
+  return clean(String(value || "").replace(/<[^>]*>/g, " "));
+}
+
+function parseInteger(value) {
+  const raw = clean(value).replace(/,/g, "");
+  if (!/^\d+$/.test(raw)) return 0;
+  return Number(raw);
 }
 
 function normalizeUrl(url) {
@@ -64,54 +73,6 @@ function toIsoDay(value) {
   return Number.isNaN(dt.getTime()) ? "" : dt.toISOString().slice(0, 10);
 }
 
-function parseCsvLine(line) {
-  const out = [];
-  let cur = "";
-  let inQuotes = false;
-
-  for (let i = 0; i < line.length; i += 1) {
-    const ch = line[i];
-    const next = line[i + 1];
-
-    if (ch === '"' && inQuotes && next === '"') {
-      cur += '"';
-      i += 1;
-      continue;
-    }
-    if (ch === '"') {
-      inQuotes = !inQuotes;
-      continue;
-    }
-    if (ch === "," && !inQuotes) {
-      out.push(cur);
-      cur = "";
-      continue;
-    }
-    cur += ch;
-  }
-
-  out.push(cur);
-  return out.map((s) => s.trim());
-}
-
-function readCsv(filePath) {
-  if (!fs.existsSync(filePath)) return [];
-
-  const raw = fs.readFileSync(filePath, "utf8");
-  const lines = raw.split(/\r?\n/).filter(Boolean);
-  if (!lines.length) return [];
-
-  const headers = parseCsvLine(lines[0]);
-  return lines.slice(1).map((line) => {
-    const cols = parseCsvLine(line);
-    const row = {};
-    headers.forEach((header, idx) => {
-      row[header] = cols[idx] ?? "";
-    });
-    return row;
-  });
-}
-
 function readExistingStats(statsPath) {
   if (!fs.existsSync(statsPath)) {
     return { generated_at: null, source: {}, podcast_totals: {}, episodes: {}, summary: {} };
@@ -123,11 +84,20 @@ function readExistingStats(statsPath) {
   }
 }
 
+function withCacheBust(url) {
+  const marker = `cgbc_stats_ts=${Date.now()}`;
+  return url.includes("?") ? `${url}&${marker}` : `${url}?${marker}`;
+}
+
 async function fetchHtml(url) {
-  const res = await fetch(url, {
+  const requestUrl = withCacheBust(url);
+  const res = await fetch(requestUrl, {
+    cache: "no-store",
     headers: {
-      "User-Agent": "CGBCPodbeanPublicStats/2026.04",
-      "Accept": "text/html,application/xhtml+xml",
+      "User-Agent": "Mozilla/5.0 (compatible; CGBCPodbeanPublicStats/2026.04-v10; +https://cgbclebanontn.org)",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Cache-Control": "no-cache, no-store, max-age=0",
+      "Pragma": "no-cache",
     },
   });
 
@@ -158,6 +128,74 @@ function walk(value, visit) {
     visit(value);
     for (const v of Object.values(value)) walk(v, visit);
   }
+}
+
+function extractHeaderExactCountsFromHtml(html) {
+  // Podbean visibly rounds the show header total, e.g. "3.9K" or "4K", but the
+  // exact public number sits in the title="3961" tooltip on the same counter.
+  // This parser targets the real Podbean markup first:
+  //   <div class="download-data ..."><p title="3961" ...>3.9K</p><p ...>Downloads</p></div>
+  // Then it falls back to nearby title/label searches.
+  const counts = {
+    downloads: 0,
+    episodes: 0,
+    downloads_source: "not_found",
+    episodes_source: "not_found",
+  };
+
+  const downloadBlock = html.match(/<div\b[^>]*class=["'][^"']*download-data[^"']*["'][^>]*>[\s\S]{0,700}?<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]{0,300}?<\/div>/i);
+  if (downloadBlock) {
+    counts.downloads = parseInteger(downloadBlock[1]);
+    counts.downloads_source = "public_header_download_data_title";
+  }
+
+  const episodeBlock = html.match(/<div\b[^>]*class=["'][^"']*episode-data[^"']*["'][^>]*>[\s\S]{0,700}?<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]{0,300}?<\/div>/i);
+  if (episodeBlock) {
+    counts.episodes = parseInteger(episodeBlock[1]);
+    counts.episodes_source = "public_header_episode_data_title";
+  }
+
+  if (!counts.downloads) {
+    const strictDownloads = html.match(/<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]*?<\/p>\s*<p\b[^>]*>[\s\S]*?Downloads[\s\S]*?<\/p>/i);
+    if (strictDownloads) {
+      counts.downloads = parseInteger(strictDownloads[1]);
+      counts.downloads_source = "public_header_title_next_downloads_label";
+    }
+  }
+
+  if (!counts.episodes) {
+    const strictEpisodes = html.match(/<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]*?<\/p>\s*<p\b[^>]*>[\s\S]*?Episodes[\s\S]*?<\/p>/i);
+    if (strictEpisodes) {
+      counts.episodes = parseInteger(strictEpisodes[1]);
+      counts.episodes_source = "public_header_title_next_episodes_label";
+    }
+  }
+
+  if (!counts.downloads) {
+    const idx = html.search(/Downloads/i);
+    if (idx >= 0) {
+      const chunk = html.slice(Math.max(0, idx - 1200), idx + 300);
+      const titles = [...chunk.matchAll(/title=["']([0-9,]+)["']/gi)].map(m => parseInteger(m[1])).filter(Boolean);
+      if (titles.length) {
+        counts.downloads = Math.max(...titles);
+        counts.downloads_source = "public_header_near_downloads_label";
+      }
+    }
+  }
+
+  if (!counts.episodes) {
+    const idx = html.search(/Episodes/i);
+    if (idx >= 0) {
+      const chunk = html.slice(Math.max(0, idx - 1200), idx + 300);
+      const titles = [...chunk.matchAll(/title=["']([0-9,]+)["']/gi)].map(m => parseInteger(m[1])).filter(Boolean);
+      if (titles.length) {
+        counts.episodes = Math.min(...titles);
+        counts.episodes_source = "public_header_near_episodes_label";
+      }
+    }
+  }
+
+  return counts;
 }
 
 function findEpisodeRecords(state, showUrl) {
@@ -259,35 +297,50 @@ function buildPageUrl(showUrl, pageNumber) {
 }
 
 async function scrapePublicPodbeanStats(showUrl) {
-  const rootHtml = await fetchHtml(buildPageUrl(showUrl, 1));
+  const rootUrl = buildPageUrl(showUrl, 1);
+  const rootHtml = await fetchHtml(rootUrl);
   const rootState = extractInitialState(rootHtml);
+  const headerCounts = extractHeaderExactCountsFromHtml(rootHtml);
   const baseInfo = findBaseInfo(rootState);
   const pagination = findPaginationInfo(rootState);
-  const totalPages = Math.max(1, Math.min(MAX_PAGES, Number(pagination.listTotalPage || 1)));
+
+  // Pagination is known today through listTotalPage, but this scraper is careful:
+  // it will fetch the known public pages, never use CSV, and report if fewer
+  // public records are found than Podbean says should exist.
+  const expectedPages = Number(pagination.listTotalPage || 0);
+  const pagesToAttempt = expectedPages > 0 ? Math.min(MAX_PAGES, expectedPages) : MAX_PAGES;
 
   const byKey = new Map();
+  const pageSummaries = [];
   let pagesFetched = 0;
 
-  for (let page = 1; page <= totalPages; page += 1) {
+  for (let page = 1; page <= pagesToAttempt; page += 1) {
     const url = buildPageUrl(showUrl, page);
     const html = page === 1 ? rootHtml : await fetchHtml(url);
     const state = page === 1 ? rootState : extractInitialState(html);
     const records = findEpisodeRecords(state, showUrl);
+    let newUniqueRecords = 0;
 
     for (const record of records) {
       const key = record.media_url || record.permalink_url || record.identity_key;
       if (!key) continue;
       const existing = byKey.get(key);
+      if (!existing) newUniqueRecords += 1;
       if (!existing || record.plays_total >= Number(existing.plays_total || 0)) {
         byKey.set(key, record);
       }
     }
 
     pagesFetched += 1;
-    if (page < totalPages) await sleep(REQUEST_DELAY_MS);
+    pageSummaries.push({ page, url, records_found: records.length, new_unique_records: newUniqueRecords });
+
+    // If Podbean stops returning fresh page data and we have no known total page
+    // count, stop rather than looping through empty/duplicate pages.
+    if (!expectedPages && page > 1 && records.length === 0) break;
+    if (page < pagesToAttempt) await sleep(REQUEST_DELAY_MS);
   }
 
-  return { baseInfo, pagination, pagesFetched, records: [...byKey.values()] };
+  return { baseInfo, pagination, headerCounts, pagesFetched, pageSummaries, records: [...byKey.values()] };
 }
 
 function buildExistingIndexes(existingEpisodes) {
@@ -324,52 +377,14 @@ function findExistingMatch(record, indexes) {
   return {};
 }
 
-function buildCsvIndexes(rows) {
-  const byMedia = new Map();
-  const byPermalink = new Map();
-  const byTitleDay = new Map();
-  const byTitle = new Map();
-
-  for (const row of rows) {
-    const episode = clean(row["Episode"] || row["Title"] || "");
-    const media = normalizeMediaUrl(row["Media URL"] || "");
-    const permalink = normalizeUrl(row["Episode URL"] || "");
-    const day = toIsoDay(row["Release Date"] || row["Date"] || "");
-    const titleKey = normalizeTitleKey(episode);
-    const downloads = Number(row["Downloads"] || 0);
-    const item = { episode, media, permalink, day, titleKey, downloads };
-
-    if (media && !byMedia.has(media)) byMedia.set(media, item);
-    if (permalink && !byPermalink.has(permalink)) byPermalink.set(permalink, item);
-    if (titleKey && day && !byTitleDay.has(`${day}|${titleKey}`)) byTitleDay.set(`${day}|${titleKey}`, item);
-    if (titleKey && !byTitle.has(titleKey)) byTitle.set(titleKey, item);
-  }
-
-  return { byMedia, byPermalink, byTitleDay, byTitle };
-}
-
-function findCsvMatch(record, indexes) {
-  const media = normalizeMediaUrl(record.media_url);
-  const permalink = normalizeUrl(record.permalink_url || record.episode_url || "");
-  const titleKey = normalizeTitleKey(record.title || record.public_listing_title || "");
-  const day = toIsoDay(record.publish_time);
-
-  if (media && indexes.byMedia.has(media)) return indexes.byMedia.get(media);
-  if (permalink && indexes.byPermalink.has(permalink)) return indexes.byPermalink.get(permalink);
-  if (titleKey && day && indexes.byTitleDay.has(`${day}|${titleKey}`)) return indexes.byTitleDay.get(`${day}|${titleKey}`);
-  if (titleKey && indexes.byTitle.has(titleKey)) return indexes.byTitle.get(titleKey);
-  return null;
-}
-
-function finalizeEpisode(record, existingMatch, csvMatch, now) {
+function finalizeEpisode(record, existingMatch, now) {
   const currentPublicCount = Number(record.plays_total || record.downloads_total || 0);
-  const csvDownloads = csvMatch ? Number(csvMatch.downloads || 0) : null;
 
   return {
     ...(safeObject(existingMatch)),
 
-    // Canonical identity for the resolved library lookup. The object is rebuilt fresh
-    // on every run, so old Podbean-ID/permalink duplicate keys are dropped.
+    // Canonical identity for the resolved library lookup. The stats object is
+    // rebuilt fresh on every run, so old Podbean-ID/permalink duplicate keys are dropped.
     identity_key: record.media_url || record.permalink_url || record.identity_key,
     podbean_episode_id: record.podbean_episode_id || existingMatch.podbean_episode_id || "",
 
@@ -385,7 +400,7 @@ function finalizeEpisode(record, existingMatch, csvMatch, now) {
 
     publish_time: record.publish_time || existingMatch.publish_time || null,
 
-    // Current public Podbean listing count is now the source of truth.
+    // Current public Podbean listing count is the per-episode source of truth.
     plays_total: currentPublicCount,
     downloads_total: currentPublicCount,
     public_listing_downloads: currentPublicCount,
@@ -393,8 +408,9 @@ function finalizeEpisode(record, existingMatch, csvMatch, now) {
     podbean_public_download_count: currentPublicCount,
 
     baseline_seeded_at: existingMatch.baseline_seeded_at || now,
-    baseline_source: "podbean_public_initial_state_current",
-    baseline_csv_downloads: csvDownloads,
+    baseline_source: "podbean_public_paginated_episode_cards",
+    baseline_csv_downloads: null,
+    csv_used: false,
     baseline_public_title: record.title || null,
     baseline_public_title_key: normalizeTitleKey(record.title),
     last_baseline_refresh_at: now,
@@ -411,13 +427,58 @@ function finalizeEpisode(record, existingMatch, csvMatch, now) {
   };
 }
 
-function buildCleanStatsDocument(existing, rows, scraped, now) {
+function choosePodcastTotal({ headerDownloads, episodeDownloadsTotal, baseInfoDownloads, previousDownloads, publicRecordsWritten, expectedEpisodeCount }) {
+  if (headerDownloads > 0) {
+    return { value: headerDownloads, source: "public_header_title_tooltip" };
+  }
+
+  // Public episode total is the next-best fallback only when the scrape appears complete.
+  if (episodeDownloadsTotal > 0 && (!expectedEpisodeCount || publicRecordsWritten >= expectedEpisodeCount)) {
+    return { value: episodeDownloadsTotal, source: "public_paginated_episode_sum_complete" };
+  }
+
+  if (baseInfoDownloads > 0) {
+    return { value: baseInfoDownloads, source: "podbean_initial_state_baseInfo_fallback" };
+  }
+
+  if (previousDownloads > 0) {
+    return { value: previousDownloads, source: "previous_stats_fallback" };
+  }
+
+  return { value: 0, source: "none" };
+}
+
+function buildWarnings({ scraped, podcastTotal, publicRecordsWritten, expectedEpisodeCount, episodeDownloadsTotal }) {
+  const warnings = [];
+  const expectedPages = Number(scraped.pagination.listTotalPage || 0);
+
+  if (expectedPages && scraped.pagesFetched < expectedPages) {
+    warnings.push(`Fetched ${scraped.pagesFetched} public pages, but Podbean reported ${expectedPages} pages.`);
+  }
+
+  if (expectedEpisodeCount && publicRecordsWritten !== expectedEpisodeCount) {
+    warnings.push(`Public episode count scrape found ${publicRecordsWritten} episodes, but Podbean reported ${expectedEpisodeCount}.`);
+  }
+
+  if (podcastTotal.source === "public_header_title_tooltip" && episodeDownloadsTotal > 0) {
+    const diff = podcastTotal.value - episodeDownloadsTotal;
+    if (diff !== 0) {
+      warnings.push(`Header tooltip total (${podcastTotal.value}) differs from summed public episode counts (${episodeDownloadsTotal}) by ${diff}.`);
+    }
+  }
+
+  if (!scraped.headerCounts.downloads) {
+    warnings.push("Could not find exact public header downloads tooltip; used fallback total source.");
+  }
+
+  return warnings;
+}
+
+function buildCleanStatsDocument(existing, scraped, now) {
   const existingIndexes = buildExistingIndexes(existing.episodes || {});
-  const csvIndexes = buildCsvIndexes(rows);
   const episodes = {};
 
   let publicRecordsWritten = 0;
-  let csvMatches = 0;
   let existingMatches = 0;
 
   for (const record of scraped.records) {
@@ -425,30 +486,50 @@ function buildCleanStatsDocument(existing, rows, scraped, now) {
     if (!key) continue;
 
     const existingMatch = findExistingMatch(record, existingIndexes);
-    const csvMatch = findCsvMatch(record, csvIndexes);
     if (Object.keys(safeObject(existingMatch)).length) existingMatches += 1;
-    if (csvMatch) csvMatches += 1;
 
-    episodes[key] = finalizeEpisode(record, existingMatch, csvMatch, now);
+    episodes[key] = finalizeEpisode(record, existingMatch, now);
     publicRecordsWritten += 1;
   }
 
   const baseInfo = safeObject(scraped.baseInfo);
-  const podcastDownloads = Number(baseInfo.podcastDownloads || 0);
-  const podcastEpisodes = Number(baseInfo.totalEpisodes || scraped.pagination.listTotalCount || scraped.records.length || 0);
+  const headerDownloads = Number(scraped.headerCounts.downloads || 0);
+  const headerEpisodes = Number(scraped.headerCounts.episodes || 0);
+  const baseInfoDownloads = Number(baseInfo.podcastDownloads || 0);
+  const baseInfoEpisodes = Number(baseInfo.totalEpisodes || 0);
+  const paginationEpisodeCount = Number(scraped.pagination.listTotalCount || 0);
+  const expectedEpisodeCount = headerEpisodes || paginationEpisodeCount || baseInfoEpisodes || publicRecordsWritten;
+  const episodeDownloadsTotal = Object.values(episodes).reduce((sum, ep) => sum + Number(ep.plays_total || 0), 0);
+  const previousDownloads = Number(existing?.podcast_totals?.plays_total || 0);
+  const podcastTotal = choosePodcastTotal({
+    headerDownloads,
+    episodeDownloadsTotal,
+    baseInfoDownloads,
+    previousDownloads,
+    publicRecordsWritten,
+    expectedEpisodeCount,
+  });
+
+  const warnings = buildWarnings({
+    scraped,
+    podcastTotal,
+    publicRecordsWritten,
+    expectedEpisodeCount,
+    episodeDownloadsTotal,
+  });
 
   return {
     generated_at: now,
     source: {
-      provider: "podbean_public_initial_state",
+      provider: "podbean_public_site",
       metric: "plays",
-      strategy: "canonical_public_listing_refresh_v8",
+      strategy: "canonical_public_paginated_refresh_v10_exact_header_total_no_cache",
       show_url: PODBEAN_SHOW_URL,
-      note: "Counts are refreshed from Podbean public window.__INITIAL_STATE__; stats episodes are rebuilt each run to remove duplicate legacy keys.",
+      note: "Top total comes from the exact public Podbean header tooltip/title when available, fetched with no-cache/cache-buster headers. Episode counts come from public paginated episode cards. CSV is not used for current counts.",
     },
     podcast_totals: {
-      plays_total: podcastDownloads || Number(existing?.podcast_totals?.plays_total || 0),
-      episodes_total: podcastEpisodes || Number(existing?.podcast_totals?.episodes_total || publicRecordsWritten),
+      plays_total: podcastTotal.value,
+      episodes_total: expectedEpisodeCount || Number(existing?.podcast_totals?.episodes_total || publicRecordsWritten),
       last_updated: now,
       source_url: PODBEAN_SHOW_URL,
     },
@@ -459,14 +540,30 @@ function buildCleanStatsDocument(existing, rows, scraped, now) {
       public_records_found: scraped.records.length,
       public_records_written: publicRecordsWritten,
       duplicate_legacy_keys_removed: Math.max(0, Object.keys(safeObject(existing.episodes)).length - publicRecordsWritten),
-      csv_rows_seen: rows.length,
-      csv_matches: csvMatches,
       existing_matches: existingMatches,
+
+      csv_used: false,
+      csv_policy: "ignored_for_current_counts",
+
       pages_fetched: scraped.pagesFetched,
+      pages_attempted: scraped.pageSummaries.length,
+      page_summaries: scraped.pageSummaries,
       list_total_page: Number(scraped.pagination.listTotalPage || 0),
-      list_total_count: Number(scraped.pagination.listTotalCount || 0),
-      current_public_podcast_downloads: podcastDownloads || null,
-      current_public_total_episodes: podcastEpisodes || null,
+      list_total_count: paginationEpisodeCount || null,
+
+      podcast_total_source: podcastTotal.source,
+      current_public_podcast_downloads: podcastTotal.value || null,
+      current_public_podcast_downloads_source: podcastTotal.source,
+      current_public_podcast_downloads_from_header_tooltip: headerDownloads || null,
+      current_public_podcast_downloads_from_base_info: baseInfoDownloads || null,
+      current_public_total_episodes: expectedEpisodeCount || null,
+      current_public_total_episodes_from_header_tooltip: headerEpisodes || null,
+      current_public_total_episodes_from_pagination: paginationEpisodeCount || null,
+
+      episode_count_source: "public_paginated_episode_cards",
+      calculated_episode_downloads_total: episodeDownloadsTotal,
+      calculated_episode_downloads_difference_from_header: headerDownloads ? headerDownloads - episodeDownloadsTotal : null,
+      warnings,
     },
   };
 }
@@ -474,17 +571,21 @@ function buildCleanStatsDocument(existing, rows, scraped, now) {
 async function main() {
   const now = new Date().toISOString();
   const existing = readExistingStats(STATS_PATH);
-  const rows = readCsv(CSV_PATH);
   const scraped = await scrapePublicPodbeanStats(PODBEAN_SHOW_URL);
-  const output = buildCleanStatsDocument(existing, rows, scraped, now);
+  const output = buildCleanStatsDocument(existing, scraped, now);
 
   fs.mkdirSync(path.dirname(STATS_PATH), { recursive: true });
   fs.writeFileSync(STATS_PATH, JSON.stringify(output, null, 2), "utf8");
 
   console.log(`${SCRIPT_LABEL}: wrote ${STATS_PATH}`);
   console.log(
-    `Summary -> previousKeys=${output.summary.previous_episode_key_count}, publicRecords=${output.summary.public_records_found}, written=${output.summary.public_records_written}, removedLegacyKeys=${output.summary.duplicate_legacy_keys_removed}, pagesFetched=${output.summary.pages_fetched}, totalPlays=${output.podcast_totals.plays_total}, totalEpisodes=${output.podcast_totals.episodes_total}`
+    `Summary -> previousKeys=${output.summary.previous_episode_key_count}, publicRecords=${output.summary.public_records_found}, written=${output.summary.public_records_written}, removedLegacyKeys=${output.summary.duplicate_legacy_keys_removed}, pagesFetched=${output.summary.pages_fetched}, totalPlays=${output.podcast_totals.plays_total}, totalSource=${output.summary.podcast_total_source}, totalEpisodes=${output.podcast_totals.episodes_total}`
   );
+
+  if (output.summary.warnings.length) {
+    console.warn("Warnings:");
+    for (const warning of output.summary.warnings) console.warn(`- ${warning}`);
+  }
 }
 
 main().catch((err) => {

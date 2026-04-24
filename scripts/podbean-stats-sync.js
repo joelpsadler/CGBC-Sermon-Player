@@ -84,11 +84,20 @@ function readExistingStats(statsPath) {
   }
 }
 
+function withCacheBust(url) {
+  const marker = `cgbc_stats_ts=${Date.now()}`;
+  return url.includes("?") ? `${url}&${marker}` : `${url}?${marker}`;
+}
+
 async function fetchHtml(url) {
-  const res = await fetch(url, {
+  const requestUrl = withCacheBust(url);
+  const res = await fetch(requestUrl, {
+    cache: "no-store",
     headers: {
-      "User-Agent": "CGBCPodbeanPublicStats/2026.04-v9",
-      "Accept": "text/html,application/xhtml+xml",
+      "User-Agent": "Mozilla/5.0 (compatible; CGBCPodbeanPublicStats/2026.04-v10; +https://cgbclebanontn.org)",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Cache-Control": "no-cache, no-store, max-age=0",
+      "Pragma": "no-cache",
     },
   });
 
@@ -122,9 +131,11 @@ function walk(value, visit) {
 }
 
 function extractHeaderExactCountsFromHtml(html) {
-  // Podbean visibly rounds the show header total, e.g. "3.9K", but the exact
-  // public number is placed on the same counter in a title="3961" tooltip.
-  // We only trust a title value when its nearby label says Downloads or Episodes.
+  // Podbean visibly rounds the show header total, e.g. "3.9K" or "4K", but the
+  // exact public number sits in the title="3961" tooltip on the same counter.
+  // This parser targets the real Podbean markup first:
+  //   <div class="download-data ..."><p title="3961" ...>3.9K</p><p ...>Downloads</p></div>
+  // Then it falls back to nearby title/label searches.
   const counts = {
     downloads: 0,
     episodes: 0,
@@ -132,37 +143,55 @@ function extractHeaderExactCountsFromHtml(html) {
     episodes_source: "not_found",
   };
 
-  const counterPattern = /<p\b([^>]*\btitle=["']([0-9,]+)["'][^>]*)>([\s\S]*?)<\/p>\s*<p\b[^>]*class=["'][^"']*data-title[^"']*["'][^>]*>([\s\S]*?)<\/p>/gi;
-  let match;
-  while ((match = counterPattern.exec(html))) {
-    const value = parseInteger(match[2]);
-    const label = cleanHtmlText(match[4]).toLowerCase();
-    if (!value) continue;
-    if (label.includes("download")) {
-      counts.downloads = value;
-      counts.downloads_source = "public_header_title_tooltip";
-    }
-    if (label.includes("episode")) {
-      counts.episodes = value;
-      counts.episodes_source = "public_header_title_tooltip";
-    }
+  const downloadBlock = html.match(/<div\b[^>]*class=["'][^"']*download-data[^"']*["'][^>]*>[\s\S]{0,700}?<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]{0,300}?<\/div>/i);
+  if (downloadBlock) {
+    counts.downloads = parseInteger(downloadBlock[1]);
+    counts.downloads_source = "public_header_download_data_title";
   }
 
-  // Looser fallback for future Podbean markup shifts: find a number title close
-  // to a Downloads label inside the same small chunk of HTML.
+  const episodeBlock = html.match(/<div\b[^>]*class=["'][^"']*episode-data[^"']*["'][^>]*>[\s\S]{0,700}?<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]{0,300}?<\/div>/i);
+  if (episodeBlock) {
+    counts.episodes = parseInteger(episodeBlock[1]);
+    counts.episodes_source = "public_header_episode_data_title";
+  }
+
   if (!counts.downloads) {
-    const looseDownloads = html.match(/title=["']([0-9,]+)["'][\s\S]{0,180}>\s*(?:[0-9.]+K|[0-9,]+)\s*<\/p>[\s\S]{0,180}>\s*Downloads\s*</i);
-    if (looseDownloads) {
-      counts.downloads = parseInteger(looseDownloads[1]);
-      counts.downloads_source = "public_header_title_tooltip_loose";
+    const strictDownloads = html.match(/<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]*?<\/p>\s*<p\b[^>]*>[\s\S]*?Downloads[\s\S]*?<\/p>/i);
+    if (strictDownloads) {
+      counts.downloads = parseInteger(strictDownloads[1]);
+      counts.downloads_source = "public_header_title_next_downloads_label";
     }
   }
 
   if (!counts.episodes) {
-    const looseEpisodes = html.match(/title=["']([0-9,]+)["'][\s\S]{0,180}>\s*[0-9,]+\s*<\/p>[\s\S]{0,180}>\s*Episodes\s*</i);
-    if (looseEpisodes) {
-      counts.episodes = parseInteger(looseEpisodes[1]);
-      counts.episodes_source = "public_header_title_tooltip_loose";
+    const strictEpisodes = html.match(/<p\b[^>]*title=["']([0-9,]+)["'][^>]*>[\s\S]*?<\/p>\s*<p\b[^>]*>[\s\S]*?Episodes[\s\S]*?<\/p>/i);
+    if (strictEpisodes) {
+      counts.episodes = parseInteger(strictEpisodes[1]);
+      counts.episodes_source = "public_header_title_next_episodes_label";
+    }
+  }
+
+  if (!counts.downloads) {
+    const idx = html.search(/Downloads/i);
+    if (idx >= 0) {
+      const chunk = html.slice(Math.max(0, idx - 1200), idx + 300);
+      const titles = [...chunk.matchAll(/title=["']([0-9,]+)["']/gi)].map(m => parseInteger(m[1])).filter(Boolean);
+      if (titles.length) {
+        counts.downloads = Math.max(...titles);
+        counts.downloads_source = "public_header_near_downloads_label";
+      }
+    }
+  }
+
+  if (!counts.episodes) {
+    const idx = html.search(/Episodes/i);
+    if (idx >= 0) {
+      const chunk = html.slice(Math.max(0, idx - 1200), idx + 300);
+      const titles = [...chunk.matchAll(/title=["']([0-9,]+)["']/gi)].map(m => parseInteger(m[1])).filter(Boolean);
+      if (titles.length) {
+        counts.episodes = Math.min(...titles);
+        counts.episodes_source = "public_header_near_episodes_label";
+      }
     }
   }
 
@@ -494,9 +523,9 @@ function buildCleanStatsDocument(existing, scraped, now) {
     source: {
       provider: "podbean_public_site",
       metric: "plays",
-      strategy: "canonical_public_paginated_refresh_v9_header_tooltip_total",
+      strategy: "canonical_public_paginated_refresh_v10_exact_header_total_no_cache",
       show_url: PODBEAN_SHOW_URL,
-      note: "Top total comes from the exact public Podbean header tooltip/title when available. Episode counts come from public paginated episode cards. CSV is not used for current counts.",
+      note: "Top total comes from the exact public Podbean header tooltip/title when available, fetched with no-cache/cache-buster headers. Episode counts come from public paginated episode cards. CSV is not used for current counts.",
     },
     podcast_totals: {
       plays_total: podcastTotal.value,
