@@ -1182,8 +1182,17 @@
     const GUEST_SPEAKERS = { name:'CGBC Guest Speaker', playlistId:'PLKqZ6zXCYxUDfYDWUNzBJFBAQ0rr2b6NW' };
     const SHORTS = { name:'CGBC Shorts', playlistId:'PLKqZ6zXCYxUAbDMGWMPp-HjT3t64V1tnj' };
     const API_KEY = 'AIzaSyCfuZ29lAwSLP8wX3KEt39TTvzKPhiTrWo';
-    // Beginner note: edit this list when the current pinned audio series changes.
-    const CURRENT_SERIES_KEYS = new Set(['romans-chapter-12','the-rapture']);
+    // Beginner note: Current series normally comes from public/library-resolved.json now.
+    // These fallback keys are only used if older generated data is loaded or auto-detection fails.
+    const FALLBACK_CURRENT_SERIES_KEYS = ['romans-chapter-12','the-rapture'];
+
+    function getCurrentSeriesKeys(){
+      const generated = state?.data?.current?.seriesKeys;
+      if(Array.isArray(generated) && generated.length){
+        return new Set(generated.filter(Boolean));
+      }
+      return new Set(FALLBACK_CURRENT_SERIES_KEYS);
+    }
     // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
     const FORCE_LIVE_BADGE_PREVIEW = false; // Beginner note: set to true only when you want to manually force the LIVE NOW badge for testing.
     const BOOK_ORDER = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
@@ -1730,7 +1739,7 @@
         const bookKeys=Array.isArray(item?.memberships?.bibleBooks)?item.memberships.bibleBooks:[];
         const isSpecial=/special/i.test(seriesName);
 
-        if(CURRENT_SERIES_KEYS.has(seriesKey)){
+        if(getCurrentSeriesKeys().has(seriesKey)){
           let row = browse.current.find(r=>r.key===seriesKey);
           if(!row){
             row={key:seriesKey,title:seriesName,meta:studyName || 'Current series',image:ASSETS.current,items:[]};
