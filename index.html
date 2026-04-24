@@ -1520,18 +1520,76 @@
       ].filter(Boolean).join(' | ');
     }
 
+    function bibleBookQueryPrefix(normalizedQuery){
+      const q = String(normalizedQuery || '').trim();
+      if(!q) return '';
+      const books = Array.isArray(BOOK_ORDER) ? BOOK_ORDER : [];
+      let best = '';
+      for(const book of books){
+        const normalizedBook = normalizeSearchText(book);
+        if(!normalizedBook) continue;
+        if(q === normalizedBook || q.startsWith(normalizedBook + ' ')){
+          if(normalizedBook.length > best.length) best = normalizedBook;
+        }
+      }
+      return best;
+    }
+
+    function isSpecificScriptureQuery(query){
+      const normalized = normalizeSearchText(query);
+      if(!normalized) return false;
+      const bookPrefix = bibleBookQueryPrefix(normalized);
+      if(!bookPrefix) return false;
+      const rest = normalized.slice(bookPrefix.length).trim();
+      const numbers = rest.match(/\b\d+\b/g) || [];
+      return numbers.length >= 2;
+    }
+
+    function getItemSearchIndex(item){
+      if(item?.__searchIndex) return item.__searchIndex;
+      const haystackRaw = buildSearchHaystack(item).toLowerCase();
+      const haystackNormalized = normalizeSearchText(haystackRaw);
+      const scriptureParts = [
+        item?.scripture?.raw,
+        item?.scripture?.display,
+        item?.references?.raw,
+        item?.references?.display,
+        ...(Array.isArray(item?.search?.scriptureTokens) ? item.search.scriptureTokens : []),
+        ...(Array.isArray(item?.references?.searchTokens) ? item.references.searchTokens : []),
+        ...(Array.isArray(item?.references?.tokens) ? item.references.tokens : [])
+      ].filter(Boolean);
+      const scriptureExact = new Set(scriptureParts.map(normalizeSearchText).filter(Boolean));
+      const index = { haystackRaw, haystackNormalized, scriptureExact };
+      try{ Object.defineProperty(item, '__searchIndex', { value:index, enumerable:false, configurable:true }); }
+      catch(err){ item.__searchIndex = index; }
+      return index;
+    }
+
+    function prepareSearchIndexes(items){
+      for(const item of items || []) getItemSearchIndex(item);
+    }
+
     function searchMatchesItem(item, query){
       const rawQuery = String(query || '').trim().toLowerCase();
       const normalizedQuery = normalizeSearchText(rawQuery);
       if(!normalizedQuery) return true;
 
-      const haystackRaw = buildSearchHaystack(item).toLowerCase();
-      const haystackNormalized = normalizeSearchText(haystackRaw);
-      if(haystackRaw.includes(rawQuery)) return true;
-      if(haystackNormalized.includes(normalizedQuery)) return true;
+      const index = getItemSearchIndex(item);
 
-      const queryTokens = normalizedQuery.split(' ').filter(Boolean);
-      return queryTokens.length > 1 && queryTokens.every(token => haystackNormalized.includes(token));
+      // Beginner note: specific verse searches should be precise.
+      // Example: "Romans 12:7" should not return every episode that merely contains "Romans".
+      if(isSpecificScriptureQuery(rawQuery)){
+        return index.scriptureExact.has(normalizedQuery);
+      }
+
+      // Fast exact/phrase check first. This helps titles and exact dates feel instant.
+      if(rawQuery.length > 1 && index.haystackRaw.includes(rawQuery)) return true;
+      if(normalizedQuery.length > 1 && index.haystackNormalized.includes(normalizedQuery)) return true;
+
+      // Then use AND matching: every meaningful search word must be present.
+      // This makes "2024 March" and "March 2024" work without letting one loose word flood results.
+      const queryTokens = normalizedQuery.split(' ').filter(token => token.length > 1 || /^\d+$/.test(token));
+      return queryTokens.length > 1 && queryTokens.every(token => index.haystackNormalized.includes(token));
     }
 
     function applySearch(items){
@@ -2912,7 +2970,18 @@
         resetAll({ preserveSearch:true });
         rerender();
       });
-      els.searchInput.addEventListener('input', (e)=>{ state.searchTerm=e.target.value || ''; state.nav={rootKey:null,branchKey:null,leafKey:null}; scrollChoiceListToTop(); rerender(); scrollNavIntoView(); });
+      let searchInputTimer = null;
+      els.searchInput.addEventListener('input', (e)=>{
+        const nextValue = e.target.value || '';
+        window.clearTimeout(searchInputTimer);
+        searchInputTimer = window.setTimeout(()=>{
+          state.searchTerm = nextValue;
+          state.nav = { rootKey:null, branchKey:null, leafKey:null };
+          scrollChoiceListToTop();
+          rerender();
+          scrollNavIntoView();
+        }, 220);
+      });
       els.contextRow.addEventListener('click', (event)=>{
         const btn = event.target.closest('[data-context-level]');
         if(!btn) return;
@@ -2979,6 +3048,7 @@
       attachEvents();
       state.data = await loadResolvedData();
       state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
+      prepareSearchIndexes(state.items);
       rerender();
       applyDeepLinkFromUrl();
       try{
