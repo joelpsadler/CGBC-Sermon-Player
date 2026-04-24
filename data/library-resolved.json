@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-24T20:35:09.971Z",
+  "generatedAt": "2026-04-24T20:54:26.565Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 134,
@@ -9,6 +9,42 @@
   "totals": {
     "audioPlaysTotal": 3973,
     "audioEpisodesTotal": 134
+  },
+  "current": {
+    "strategy": "auto_detect_by_sunday_wednesday_lanes",
+    "note": "Sunday and Wednesday current series are generated from the newest non-special, non-guest series in each lane. Overrides live in config/resolver-config.json.",
+    "overrides": {
+      "sunday": "",
+      "wednesday": ""
+    },
+    "seriesKeys": [
+      "romans-chapter-12",
+      "the-rapture"
+    ],
+    "lanes": {
+      "sunday": {
+        "lane": "sunday",
+        "seriesKey": "romans-chapter-12",
+        "seriesName": "Romans Chapter 12",
+        "studyKey": "romans",
+        "studyName": "Romans",
+        "detectedFromEpisode": "media-es8hm8",
+        "detectedFromDate": "2026-04-19",
+        "detectedFromTitle": "The Impact of the Gospel Pt. 3 (In Ministry Cont.)",
+        "source": "auto_detected_by_publish_day_lane"
+      },
+      "wednesday": {
+        "lane": "wednesday",
+        "seriesKey": "the-rapture",
+        "seriesName": "The Rapture",
+        "studyKey": "eschatology",
+        "studyName": "Eschatology",
+        "detectedFromEpisode": "media-cjnc8m",
+        "detectedFromDate": "2026-04-15",
+        "detectedFromTitle": "The Rapture Pt. 4 (Mid-Tribulation)",
+        "source": "auto_detected_by_publish_day_lane"
+      }
+    }
   },
   "items": [
     {
