@@ -103,6 +103,149 @@ function resolveStudy(record, series) {
   };
 }
 
+
+// -----------------------------------------------------------------------------
+// SCRIPTURE / REFERENCE SEARCH EXPANSION
+// -----------------------------------------------------------------------------
+// Beginner note:
+// "Scripture" stays clean for display. The optional "References" note field can
+// hold all extra cross-references covered in the sermon. These helpers quietly
+// expand ranges like "Matthew 28:18-20" into searchable tokens:
+//   Matthew 28:18, Matthew 28:19, Matthew 28:20
+// This lets somebody search for a verse inside a range without making the cards
+// show a giant block of references.
+
+const BIBLE_BOOK_NAMES = [
+  "Song of Solomon", "1 Thessalonians", "2 Thessalonians", "1 Corinthians", "2 Corinthians",
+  "1 Chronicles", "2 Chronicles", "1 Timothy", "2 Timothy", "1 Samuel", "2 Samuel",
+  "1 Kings", "2 Kings", "1 Peter", "2 Peter", "1 John", "2 John", "3 John",
+  "Deuteronomy", "Ecclesiastes", "Lamentations", "Philippians", "Colossians",
+  "Thessalonians", "Corinthians", "Chronicles", "Revelation", "Zephaniah",
+  "Habakkuk", "Zechariah", "Malachi", "Matthew", "Genesis", "Exodus", "Leviticus",
+  "Numbers", "Joshua", "Judges", "Samuel", "Kings", "Ezra", "Nehemiah", "Esther",
+  "Psalms", "Psalm", "Proverbs", "Isaiah", "Jeremiah", "Ezekiel", "Daniel", "Hosea",
+  "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Haggai", "Mark", "Luke",
+  "John", "Acts", "Romans", "Galatians", "Ephesians", "Timothy", "Titus", "Philemon",
+  "Hebrews", "James", "Peter", "Jude", "Ruth", "Job"
+].sort((a, b) => b.length - a.length);
+
+function normalizeReferenceSpacing(value) {
+  return clean(value)
+    .replace(/[–—]/g, "-")
+    .replace(/\s*:\s*/g, ":")
+    .replace(/\s*-\s*/g, "-")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function findReferenceBook(segment) {
+  const normalized = normalizeReferenceSpacing(segment);
+  const lower = normalized.toLowerCase();
+  for (const book of BIBLE_BOOK_NAMES) {
+    const bookLower = book.toLowerCase();
+    if (lower === bookLower || lower.startsWith(`${bookLower} `)) {
+      return {
+        book,
+        rest: normalized.slice(book.length).trim()
+      };
+    }
+  }
+  return { book: "", rest: normalized };
+}
+
+function addUniqueToken(tokens, value) {
+  const token = normalizeReferenceSpacing(value);
+  if (token && !tokens.includes(token)) tokens.push(token);
+}
+
+function expandVerseExpression(book, chapter, verseExpression, tokens) {
+  const cleanBook = clean(book);
+  const cleanChapter = String(chapter || "").trim();
+  const expr = normalizeReferenceSpacing(verseExpression);
+  if (!cleanBook || !cleanChapter || !expr) return;
+
+  addUniqueToken(tokens, `${cleanBook} ${cleanChapter}:${expr}`);
+
+  for (const piece of expr.split(/\s*,\s*/).map(v => v.trim()).filter(Boolean)) {
+    const range = piece.match(/^(\d+)\s*-\s*(\d+)$/);
+    if (range) {
+      const start = Number(range[1]);
+      const end = Number(range[2]);
+      if (Number.isFinite(start) && Number.isFinite(end) && end >= start && end - start <= 200) {
+        for (let verse = start; verse <= end; verse += 1) {
+          addUniqueToken(tokens, `${cleanBook} ${cleanChapter}:${verse}`);
+        }
+      }
+      continue;
+    }
+
+    const single = piece.match(/^\d+$/);
+    if (single) addUniqueToken(tokens, `${cleanBook} ${cleanChapter}:${piece}`);
+  }
+}
+
+function expandScriptureReferences(rawValue) {
+  const raw = normalizeReferenceSpacing(rawValue);
+  if (!raw || raw.toLowerCase() === "various") return [];
+
+  const tokens = [];
+  let currentBook = "";
+  let currentChapter = "";
+
+  // Split on commas and semicolons. Carry the previous book/chapter forward so
+  // "2 Timothy 2:1-2, 11-15, 3:16-17" expands correctly.
+  for (const originalSegment of raw.split(/[;,]/).map(v => v.trim()).filter(Boolean)) {
+    const found = findReferenceBook(originalSegment);
+    let rest = found.rest;
+    if (found.book) currentBook = found.book;
+    if (!currentBook) continue;
+
+    rest = normalizeReferenceSpacing(rest);
+    if (!rest) {
+      addUniqueToken(tokens, currentBook);
+      continue;
+    }
+
+    const chapterVerse = rest.match(/^(\d+)\s*:\s*(.+)$/);
+    if (chapterVerse) {
+      currentChapter = chapterVerse[1];
+      expandVerseExpression(currentBook, currentChapter, chapterVerse[2], tokens);
+      continue;
+    }
+
+    // Verse-only continuation, such as "11-15" after "2 Timothy 2:1-2".
+    if (currentChapter && /^\d+(?:-\d+)?$/.test(rest)) {
+      expandVerseExpression(currentBook, currentChapter, rest, tokens);
+      continue;
+    }
+
+    // Chapter-only fallback.
+    const chapterOnly = rest.match(/^(\d+)$/);
+    if (chapterOnly) {
+      currentChapter = chapterOnly[1];
+      addUniqueToken(tokens, `${currentBook} ${currentChapter}`);
+    }
+  }
+
+  return tokens;
+}
+
+function resolveReferences(record, scripture) {
+  const rawReferences = clean(record.notesFields?.["References"]);
+  const scriptureTokens = expandScriptureReferences(scripture?.raw || "");
+  const referenceTokens = expandScriptureReferences(rawReferences);
+  const allTokens = [];
+
+  for (const token of [...scriptureTokens, ...referenceTokens]) addUniqueToken(allTokens, token);
+
+  return {
+    raw: rawReferences,
+    display: rawReferences,
+    tokens: referenceTokens,
+    searchTokens: allTokens
+  };
+}
+
 function resolveScripture(record) {
   const raw = clean(record.notesFields?.["Scripture"]);
   if (!raw) return { raw: "", display: "", book: null, bookKey: null, isVarious: false };
@@ -456,6 +599,7 @@ function main() {
     const series = resolveSeries(record);
     const study = resolveStudy(record, series);
     const scripture = resolveScripture(record);
+    const references = resolveReferences(record, scripture);
     const bookTags = resolveBookTags(record);
     const date = resolveDate(record);
     const statsMatch = matchStats(record, statsIndexes);
@@ -480,6 +624,10 @@ function main() {
       series,
       study,
       scripture,
+      references,
+      search: {
+        scriptureTokens: references.searchTokens
+      },
       bookTags,
       speaker: clean(record.notesFields?.["by"]) || null,
       date,
