@@ -268,6 +268,149 @@ function resolveFlags(series, video) {
   };
 }
 
+// -----------------------------------------------------------------------------
+// CURRENT SERIES AUTO-DETECTION
+// -----------------------------------------------------------------------------
+// Beginner note:
+// This replaces the old hand-edited CURRENT_SERIES_KEYS list in index.html.
+// The site usually has two active lanes:
+//   - Sunday lane: newest regular Sunday series wins.
+//   - Wednesday lane: newest regular Wednesday series wins.
+// Specials and guest/one-off buckets are intentionally ignored so they do not
+// accidentally replace an active sermon/study series.
+//
+// Optional override lives in config/resolver-config.json:
+//   "currentSeries": {
+//     "overrides": {
+//       "sunday": null,
+//       "wednesday": null
+//     }
+//   }
+// Set either override to a series key, like "romans-chapter-12", only if the
+// automatic detection ever needs a manual safety valve.
+
+const DEFAULT_CURRENT_IGNORE_PATTERNS = [
+  "special",
+  "single events",
+  "single sermons",
+  "guest speaker",
+  "guest speakers",
+  "livestream",
+  "shorts"
+];
+
+function getCurrentConfig() {
+  return config?.currentSeries || {};
+}
+
+function getCurrentOverrides() {
+  const overrides = getCurrentConfig()?.overrides || {};
+  return {
+    sunday: clean(overrides.sunday),
+    wednesday: clean(overrides.wednesday)
+  };
+}
+
+function currentIgnorePatterns() {
+  const configured = getCurrentConfig()?.ignoreSeriesNamePatterns;
+  const values = Array.isArray(configured) && configured.length ? configured : DEFAULT_CURRENT_IGNORE_PATTERNS;
+  return values.map(v => String(v || "").trim()).filter(Boolean);
+}
+
+function currentLaneFromIsoDate(isoDate) {
+  if (!isoDate) return null;
+  const dt = new Date(`${isoDate}T12:00:00Z`);
+  if (Number.isNaN(dt.getTime())) return null;
+  const day = dt.getUTCDay();
+  if (day === 0) return "sunday";
+  if (day === 3) return "wednesday";
+  return null;
+}
+
+function isIgnoredCurrentSeries(item) {
+  const seriesKey = clean(item?.series?.key);
+  const seriesName = clean(item?.series?.name);
+  if (!seriesKey || !seriesName) return true;
+  if (seriesKey === "current" || seriesName.toLowerCase() === "current") return true;
+  if (item?.series?.type === "native_youtube_shelf") return true;
+
+  const haystack = `${seriesName} ${item?.study?.name || ""} ${item?.title?.display || ""}`.toLowerCase();
+  return currentIgnorePatterns().some(pattern => haystack.includes(pattern.toLowerCase()));
+}
+
+function newestItemsFirst(items) {
+  return [...items].sort((a, b) => {
+    const aDate = a?.date?.iso || "";
+    const bDate = b?.date?.iso || "";
+    if (aDate !== bDate) return bDate.localeCompare(aDate);
+    return clean(b?.title?.display).localeCompare(clean(a?.title?.display));
+  });
+}
+
+function buildCurrentLaneFromItem(lane, item, source) {
+  if (!item) return null;
+  return {
+    lane,
+    seriesKey: item.series.key,
+    seriesName: item.series.name,
+    studyKey: item.study?.key || null,
+    studyName: item.study?.name || null,
+    detectedFromEpisode: item.stableId,
+    detectedFromDate: item.date?.iso || null,
+    detectedFromTitle: item.title?.display || null,
+    source
+  };
+}
+
+function findNewestItemForSeries(items, seriesKey) {
+  return newestItemsFirst(items).find(item => clean(item?.series?.key) === seriesKey) || null;
+}
+
+function detectCurrentSeries(items) {
+  const overrides = getCurrentOverrides();
+  const lanes = { sunday: null, wednesday: null };
+  const candidates = newestItemsFirst(items).filter(item => !isIgnoredCurrentSeries(item));
+
+  for (const lane of ["sunday", "wednesday"]) {
+    if (overrides[lane]) {
+      const overrideItem = findNewestItemForSeries(candidates, overrides[lane]);
+      if (overrideItem) {
+        lanes[lane] = buildCurrentLaneFromItem(lane, overrideItem, "manual_override");
+        continue;
+      }
+      lanes[lane] = {
+        lane,
+        seriesKey: overrides[lane],
+        seriesName: overrides[lane],
+        studyKey: null,
+        studyName: null,
+        detectedFromEpisode: null,
+        detectedFromDate: null,
+        detectedFromTitle: null,
+        source: "manual_override_missing_matching_episode"
+      };
+      continue;
+    }
+
+    const newestInLane = candidates.find(item => currentLaneFromIsoDate(item?.date?.iso) === lane);
+    lanes[lane] = newestInLane ? buildCurrentLaneFromItem(lane, newestInLane, "auto_detected_by_publish_day_lane") : null;
+  }
+
+  const seriesKeys = [];
+  for (const lane of ["sunday", "wednesday"]) {
+    const key = clean(lanes[lane]?.seriesKey);
+    if (key && !seriesKeys.includes(key)) seriesKeys.push(key);
+  }
+
+  return {
+    strategy: "auto_detect_by_sunday_wednesday_lanes",
+    note: "Sunday and Wednesday current series are generated from the newest non-special, non-guest series in each lane. Overrides live in config/resolver-config.json.",
+    overrides,
+    seriesKeys,
+    lanes
+  };
+}
+
 function applyInheritedArt(items) {
   const sorted = [...items].sort((a, b) => {
     const aDate = a.date.iso || "9999-99-99";
@@ -376,6 +519,7 @@ function main() {
       audioPlaysTotal: Number(statsDoc?.podcast_totals?.plays_total || 0),
       audioEpisodesTotal: Number(statsDoc?.podcast_totals?.episodes_total || items.length)
     },
+    current: detectCurrentSeries(items),
     items
   };
 
