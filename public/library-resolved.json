@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-24T10:19:34.762Z",
+  "generatedAt": "2026-04-24T11:51:34.530Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 134,
@@ -7,7 +7,7 @@
     "videoMatchedItems": 73
   },
   "totals": {
-    "audioPlaysTotal": 3970,
+    "audioPlaysTotal": 3971,
     "audioEpisodesTotal": 134
   },
   "items": [
@@ -577,21 +577,26 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 11: 30-36",
-        "display": "Romans 11: 30-36",
+        "raw": "Romans 11:30-36",
+        "display": "Romans 11:30-36",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
       },
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "03/29/26 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "03/29/26",
+        "iso": "2026-03-29",
+        "year": 2026,
+        "month": 3,
+        "monthName": "March",
+        "day": 29
       },
       "audio": {
         "hasAudio": true,
@@ -630,8 +635,12 @@
         "bibleBooks": [
           "romans"
         ],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-03"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -1889,7 +1898,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
-        "plays": 95,
+        "plays": 96,
         "durationSeconds": 2370,
         "statsMatchStrategy": "media_url"
       },
