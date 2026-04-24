@@ -10,6 +10,21 @@
   "displayRules": {
     "variousScriptureDisplay": "Selected Scriptures"
   },
+  "currentSeries": {
+    "overrides": {
+      "sunday": null,
+      "wednesday": null
+    },
+    "ignoreSeriesNamePatterns": [
+      "special",
+      "single events",
+      "single sermons",
+      "guest speaker",
+      "guest speakers",
+      "livestream",
+      "shorts"
+    ]
+  },
   "noteFields": [
     "Title",
     "Subtitle",
