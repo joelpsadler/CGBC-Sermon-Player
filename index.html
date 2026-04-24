@@ -442,6 +442,57 @@
       70%{box-shadow:0 0 0 10px rgba(255,77,87,0)}
       100%{box-shadow:0 0 0 0 rgba(255,77,87,0)}
     }
+
+    .current-lane-card-badge{
+      position:absolute;
+      right:12px;
+      bottom:10px;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:26px;
+      padding:0 10px;
+      border-radius:999px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.94);
+      background:linear-gradient(180deg, rgba(143,174,157,.20), rgba(143,174,157,.09));
+      border:1px solid rgba(143,174,157,.26);
+      box-shadow:0 8px 18px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter:blur(12px);
+      pointer-events:none;
+    }
+    .choice.has-current-lane-badge{position:relative;padding-bottom:42px;}
+    .choice.root-card.has-current-lane-badge .copy{padding-bottom:42px;}
+    .audio-series-line{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .audio-current-lane-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:24px;
+      padding:0 9px;
+      border-radius:999px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.92);
+      background:linear-gradient(180deg, rgba(143,174,157,.18), rgba(143,174,157,.08));
+      border:1px solid rgba(143,174,157,.24);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+      white-space:nowrap;
+      vertical-align:middle;
+    }
     .choice.root-card .thumb-square,
     .choice.root-card .thumb-wide{
       width:100%;
@@ -1001,6 +1052,18 @@
         height:20px;
         stroke-width:2;
       }
+
+      .current-lane-card-badge{
+        right:10px;
+        bottom:9px;
+        min-height:24px;
+        padding:0 9px;
+        font-size:9px;
+        letter-spacing:.11em;
+      }
+      .choice.has-current-lane-badge{padding-bottom:40px;}
+      .audio-series-line{gap:8px;}
+      .audio-current-lane-badge{min-height:22px;padding:0 8px;font-size:9px;}
       /* Mobile-only player cleanup: keep Scripture/Date on desktop, but hide them in the mobile player. */
       .audio-scripture-row,
       .audio-date-row{display:none}
@@ -1192,6 +1255,37 @@
         return new Set(generated.filter(Boolean));
       }
       return new Set(FALLBACK_CURRENT_SERIES_KEYS);
+    }
+    function getCurrentLaneForSeriesKey(seriesKey){
+      const key = String(seriesKey || '').trim();
+      if(!key) return '';
+      const lanes = state?.data?.current?.lanes || {};
+      for(const [laneName, laneData] of Object.entries(lanes)){
+        if(String(laneData?.seriesKey || '').trim() === key) return laneName.toLowerCase();
+      }
+      const fallbackIndex = FALLBACK_CURRENT_SERIES_KEYS.indexOf(key);
+      if(fallbackIndex === 0) return 'sunday';
+      if(fallbackIndex === 1) return 'wednesday';
+      return '';
+    }
+
+    function formatCurrentLaneLabel(lane, compact=false){
+      const normalized = String(lane || '').toLowerCase();
+      if(normalized === 'sunday') return compact ? 'SUN SERIES' : 'SUNDAY SERIES';
+      if(normalized === 'wednesday') return compact ? 'WED SERIES' : 'WEDNESDAY SERIES';
+      return '';
+    }
+
+    function currentSeriesCardBadgeHtml(seriesKey){
+      const lane = getCurrentLaneForSeriesKey(seriesKey);
+      const label = formatCurrentLaneLabel(lane, false).replace(/ SERIES$/, '');
+      return label ? `<span class="current-lane-card-badge">${escapeHtml(label)}</span>` : '';
+    }
+
+    function currentAudioLaneBadgeHtml(item){
+      const lane = getCurrentLaneForSeriesKey(item?.series?.key);
+      const label = formatCurrentLaneLabel(lane, window.innerWidth <= 900);
+      return label ? `<span class="audio-current-lane-badge">${escapeHtml(label)}</span>` : '';
     }
     // Beginner note: set this to true if you want the LIVE NOW badge forced on for testing.
     const FORCE_LIVE_BADGE_PREVIEW = false; // Beginner note: set to true only when you want to manually force the LIVE NOW badge for testing.
@@ -2285,7 +2379,9 @@
           metric = formatCountLabel(row.items.length,'episode','episodes');
         }
         const key = episodeLevel ? row.stableId : row.key;
-        const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : ''));
+        const showCurrentLaneBadge = !episodeLevel && state.nav.rootKey === 'current' && isBranchLevel;
+        const currentLaneBadge = showCurrentLaneBadge ? currentSeriesCardBadgeHtml(row?.key) : '';
+        const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : '') + (showCurrentLaneBadge && currentLaneBadge ? ' has-current-lane-badge' : ''));
         const dateCardInner = dateTextCard
           ? (row.dateCardType === 'year'
               ? `<div class="date-card-text"><div class="date-card-label">Year</div><div class="date-card-value">${escapeHtml(String(row.dateCardValue || ''))}</div></div>`
@@ -2316,6 +2412,7 @@
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
+          ${currentLaneBadge}
           ${episodeBadge}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
@@ -2398,7 +2495,8 @@
         els.audioStage.style.display='grid';
         els.audioFeatureArt.src=getEpisodeArt(item,'audio');
         els.audioFeatureTitle.textContent=item?.title?.display || '';
-        els.audioFeatureSeries.textContent=item?.series?.name || '';
+        els.audioFeatureSeries.classList.add('audio-series-line');
+        els.audioFeatureSeries.innerHTML=`<span>${escapeHtml(item?.series?.name || '')}</span>${currentAudioLaneBadgeHtml(item)}`;
         els.audioFeatureScripture.textContent=item?.scripture?.display || '—';
         els.audioFeatureSpeaker.textContent=item?.speaker || '—';
         els.audioFeatureDate.textContent=formatDate(item);
