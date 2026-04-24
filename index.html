@@ -1062,9 +1062,8 @@
         font-size:9px;
         letter-spacing:.11em;
       }
-      .choice.has-current-lane-badge{padding-bottom:40px;}
-      /* Mobile Current-lane cards have extra vertical room because of the day badge.
-         Let the artwork use more of that room without touching normal episode cards. */
+      .choice.has-current-lane-badge{padding-bottom:12px;}
+      /* Mobile Current-lane cards use a floating day badge so the card does not grow downward. */
       .choice.branch-card.has-current-lane-badge .thumb-wide{
         width:172px;
         height:108px;
@@ -1453,28 +1452,92 @@
       }
       return dateLabel;
     }
+    function normalizeSearchText(value){
+      return String(value || '')
+        .toLowerCase()
+        .replace(/[–—]/g, '-')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function dateObjectFromItem(item){
+      const iso = item?.date?.iso || '';
+      if(iso){
+        const d = new Date(iso + 'T12:00:00');
+        if(!Number.isNaN(d.getTime())) return d;
+      }
+      const raw = String(item?.date?.raw || '');
+      const m = raw.match(/\b(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})\b/);
+      if(m){
+        const month = Number(m[1]);
+        const day = Number(m[2]);
+        let year = Number(m[3]);
+        if(year < 100) year += 2000;
+        const d = new Date(year, month - 1, day, 12, 0, 0);
+        if(!Number.isNaN(d.getTime())) return d;
+      }
+      return null;
+    }
+
+    function buildDateSearchTokens(item){
+      const tokens = [item?.date?.raw, item?.date?.iso, formatDate(item)];
+      const d = dateObjectFromItem(item);
+      if(!d) return tokens.filter(Boolean);
+
+      const year = String(d.getFullYear());
+      const month = d.getMonth() + 1;
+      const day = d.getDate();
+      const mm = String(month).padStart(2, '0');
+      const dd = String(day).padStart(2, '0');
+      const monthLong = d.toLocaleDateString('en-US', { month:'long' });
+      const monthShort = d.toLocaleDateString('en-US', { month:'short' });
+      const fullDate = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+      tokens.push(
+        year, monthLong, monthShort,
+        `${month}/${day}/${year}`, `${mm}/${dd}/${year}`, `${month}/${day}/${year.slice(-2)}`, `${mm}/${dd}/${year.slice(-2)}`,
+        `${month}/${year}`, `${mm}/${year}`, `${year}-${mm}`,
+        `${monthLong} ${year}`, `${year} ${monthLong}`, `${year}, ${monthLong}`,
+        `${monthShort} ${year}`, `${year} ${monthShort}`, `${year}, ${monthShort}`,
+        fullDate
+      );
+      return tokens.filter(Boolean);
+    }
+
+    function buildSearchHaystack(item){
+      return [
+        item?.title?.episodeName, item?.title?.subtitle, item?.title?.display,
+        item?.series?.name, item?.study?.name,
+        item?.scripture?.raw, item?.scripture?.display,
+        item?.references?.raw, item?.references?.display,
+        ...(Array.isArray(item?.search?.scriptureTokens) ? item.search.scriptureTokens : []),
+        ...(Array.isArray(item?.references?.searchTokens) ? item.references.searchTokens : []),
+        ...(Array.isArray(item?.references?.tokens) ? item.references.tokens : []),
+        item?.speaker,
+        ...buildDateSearchTokens(item),
+        ...(Array.isArray(item?.bookTags) ? item.bookTags.map(t => t?.name) : [])
+      ].filter(Boolean).join(' | ');
+    }
+
+    function searchMatchesItem(item, query){
+      const rawQuery = String(query || '').trim().toLowerCase();
+      const normalizedQuery = normalizeSearchText(rawQuery);
+      if(!normalizedQuery) return true;
+
+      const haystackRaw = buildSearchHaystack(item).toLowerCase();
+      const haystackNormalized = normalizeSearchText(haystackRaw);
+      if(haystackRaw.includes(rawQuery)) return true;
+      if(haystackNormalized.includes(normalizedQuery)) return true;
+
+      const queryTokens = normalizedQuery.split(' ').filter(Boolean);
+      return queryTokens.length > 1 && queryTokens.every(token => haystackNormalized.includes(token));
+    }
+
     function applySearch(items){
-      const q=state.searchTerm.trim().toLowerCase();
+      const q = state.searchTerm.trim();
       if(!q) return items.slice();
-      return items.filter(item=>{
-        const dateDisplay = formatDate(item);
-        const iso = item?.date?.iso || '';
-        let monthYear = '';
-        let monthOnly = '';
-        try{
-          if(iso){
-            const d = new Date(iso + 'T12:00:00');
-            monthYear = d.toLocaleDateString('en-US',{month:'long',year:'numeric'});
-            monthOnly = d.toLocaleDateString('en-US',{month:'long'});
-          }
-        }catch(err){}
-        const haystack = [
-          item?.title?.display, item?.series?.name, item?.study?.name, item?.scripture?.display,
-          item?.speaker, item?.date?.raw, item?.date?.iso, dateDisplay, monthYear, monthOnly,
-          ...(Array.isArray(item?.bookTags)?item.bookTags.map(t=>t?.name):[])
-        ].filter(Boolean).join(' | ').toLowerCase();
-        return haystack.includes(q);
-      });
+      return items.filter(item => searchMatchesItem(item, q));
     }
     function visibleItems(){return applySearch(getModeItems(state.mode));}
     function searchResultsMode(){ return state.searchTerm.trim().length > 0; }
