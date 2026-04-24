@@ -516,8 +516,8 @@
       border-color:rgba(143,174,157,.24)
     }
     .thumb-wide{width:132px;height:74px;flex:0 0 132px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
-    .choice.branch-card .thumb-wide{width:164px;height:92px;flex-basis:164px;border-radius:18px;}
-    .choice.branch-card .thumb-square{width:96px;height:96px;flex-basis:96px;border-radius:18px;}
+    .choice.branch-card .thumb-wide{width:184px;height:104px;flex-basis:184px;border-radius:18px;}
+    .choice.branch-card .thumb-square{width:108px;height:108px;flex-basis:108px;border-radius:18px;}
     .thumb-square{width:86px;height:88px;flex:0 0 86px;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.05)}
     .thumb-wide img,.thumb-square img{width:100%;height:100%;object-fit:cover}
     .copy{min-width:0;flex:1;width:100%;overflow:hidden}
@@ -985,7 +985,8 @@
       .choice.root-card .thumb-square,
       .choice.root-card .thumb-wide{border-radius:18px}
       .thumb-wide{width:112px;height:68px;flex-basis:112px}
-      .choice.branch-card .thumb-wide{width:136px;height:86px;flex-basis:136px;border-radius:16px}
+      .choice.branch-card .thumb-wide{width:150px;height:94px;flex-basis:150px;border-radius:16px}
+      .choice.branch-card .thumb-square{width:92px;height:92px;flex-basis:92px;border-radius:16px}
       .thumb-square{width:80px;height:80px;flex-basis:80px}
       .card-title{font-size:17px}
       .card-meta-line{font-size:12px;line-height:1.3}
@@ -2380,6 +2381,11 @@
         }
         const key = episodeLevel ? row.stableId : row.key;
         const showCurrentLaneBadge = !episodeLevel && state.nav.rootKey === 'current' && isBranchLevel;
+        // Current lane cards already include the episode count in their subtitle line
+        // (for example, "Romans · 3 episodes"), so suppress the second metric line there.
+        if(showCurrentLaneBadge){
+          metric = '';
+        }
         const currentLaneBadge = showCurrentLaneBadge ? currentSeriesCardBadgeHtml(row?.key) : '';
         const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : '') + (showCurrentLaneBadge && currentLaneBadge ? ' has-current-lane-badge' : ''));
         const dateCardInner = dateTextCard
