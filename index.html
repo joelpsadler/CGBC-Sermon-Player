@@ -2062,7 +2062,15 @@
               collectionKey,
               title:collection?.name || collectionKey,
               meta:collection?.description || 'Collection',
-              image:(state.mode==='video' ? collection?.art?.wide : collection?.art?.square) || collection?.art?.square || collection?.art?.wide || ASSETS.topicalSeries || ASSETS.fallback,
+              // Keep custom collection art separate from fallback art.
+              // Beginner note: if assets/collections/<key>/square.jpg or wide.jpg exists,
+              // the resolver gives us that path. If it does not exist, leave this blank
+              // here so the later art pass can fall back to the first episode art.
+              collectionArt:{
+                square:collection?.art?.square || null,
+                wide:collection?.art?.wide || null
+              },
+              image:null,
               items:[],
               sortOrder:Number.isFinite(Number(collection?.sortOrder)) ? Number(collection.sortOrder) : 999,
               isCollection:true
@@ -2133,10 +2141,11 @@
 
       browse.collections.forEach(row=>{
         const firstEpisode=getFirstEpisode(row.items);
-        const configuredArt = state.mode==='video'
-          ? (row.image || firstEpisode?.art?.episode?.wide)
-          : (row.image || firstEpisode?.art?.episode?.square);
-        row.image = configuredArt || getEpisodeArt(firstEpisode || {}, state.mode) || ASSETS.topicalSeries || ASSETS.fallback;
+        const customArt = state.mode==='video'
+          ? (row.collectionArt?.wide || row.collectionArt?.square)
+          : (row.collectionArt?.square || row.collectionArt?.wide);
+        const episodeFallback = getEpisodeArt(firstEpisode || {}, state.mode);
+        row.image = customArt || episodeFallback || ASSETS.topicalSeries || ASSETS.fallback;
         row.meta = `${row.meta || 'Collection'}${row.meta ? ' · ' : ''}${formatCountLabel(row.items.length,'episode','episodes')}`;
       });
 
