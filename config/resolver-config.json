@@ -33,9 +33,13 @@
     "Series Type",
     "Scripture",
     "References",
+    "Collections",
     "Book Tags",
     "by",
     "Date",
     "Video"
-  ]
+  ],
+  "collections": {
+    "enabled": true
+  }
 }

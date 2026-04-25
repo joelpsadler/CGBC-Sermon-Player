@@ -1,0 +1,22 @@
+{
+  "collections": {
+    "spiritual-gifts": {
+      "name": "Spiritual Gifts",
+      "description": "Curated sermons and studies related to spiritual gifts, service, and ministry.",
+      "sortOrder": 10,
+      "art": {
+        "square": "assets/collections/spiritual-gifts/square.jpg",
+        "wide": "assets/collections/spiritual-gifts/wide.jpg"
+      }
+    },
+    "church-body": {
+      "name": "Church Body",
+      "description": "Curated sermons and studies related to the life and function of the church body.",
+      "sortOrder": 20,
+      "art": {
+        "square": "assets/collections/church-body/square.jpg",
+        "wide": "assets/collections/church-body/wide.jpg"
+      }
+    }
+  }
+}
