@@ -1509,6 +1509,7 @@
       return [
         item?.title?.episodeName, item?.title?.subtitle, item?.title?.display,
         item?.series?.name, item?.study?.name,
+        ...(Array.isArray(item?.collections) ? item.collections.flatMap(c => [c?.name, c?.description, c?.key]) : []),
         item?.scripture?.raw, item?.scripture?.display,
         item?.references?.raw, item?.references?.display,
         ...(Array.isArray(item?.search?.scriptureTokens) ? item.search.scriptureTokens : []),
@@ -1957,7 +1958,7 @@
 
     function buildBrowse(){
       const items=visibleItems();
-      const browse={roots:[],current:[],books:new Map(),topical:new Map(),date:new Map()};
+      const browse={roots:[],current:[],books:new Map(),topical:new Map(),collections:new Map(),specialSeries:new Map(),date:new Map()};
 
       items.forEach(item=>{
         const seriesKey=item?.series?.key || '';
@@ -2048,6 +2049,46 @@
           browse.topical.get(seriesKey).items.push(item);
         }
 
+        // Curated Collections are optional grouping layers.
+        // They appear under Topical Series without duplicating the original episode.
+        const itemCollections = Array.isArray(item?.collections) ? item.collections : [];
+        itemCollections.forEach(collection=>{
+          const collectionKey = collection?.key || '';
+          if(!collectionKey) return;
+          const rowKey = `collection__${collectionKey}`;
+          if(!browse.collections.has(rowKey)){
+            browse.collections.set(rowKey,{
+              key:rowKey,
+              collectionKey,
+              title:collection?.name || collectionKey,
+              meta:collection?.description || 'Collection',
+              image:(state.mode==='video' ? collection?.art?.wide : collection?.art?.square) || collection?.art?.square || collection?.art?.wide || ASSETS.topicalSeries || ASSETS.fallback,
+              items:[],
+              sortOrder:Number.isFinite(Number(collection?.sortOrder)) ? Number(collection.sortOrder) : 999,
+              isCollection:true
+            });
+          }
+          browse.collections.get(rowKey).items.push(item);
+        });
+
+        // Specials are intentionally kept out of normal topical ordering, then pinned
+        // to the bottom of Topical Series.
+        if(isSpecial && seriesKey){
+          const rowKey = `special__${seriesKey}`;
+          if(!browse.specialSeries.has(rowKey)){
+            browse.specialSeries.set(rowKey,{
+              key:rowKey,
+              seriesKey,
+              title:seriesName,
+              meta:'Specials',
+              image:ASSETS.topicalSeries || ASSETS.fallback,
+              items:[],
+              isSpecialSeries:true
+            });
+          }
+          browse.specialSeries.get(rowKey).items.push(item);
+        }
+
         const year=String(item?.date?.year || '');
         const monthKey=item?.date?.iso ? item.date.iso.slice(0,7) : '';
         if(year && monthKey){
@@ -2090,6 +2131,21 @@
         row.image=getSeriesArtFromItem(getFirstEpisode(row.items));
       });
 
+      browse.collections.forEach(row=>{
+        const firstEpisode=getFirstEpisode(row.items);
+        const configuredArt = state.mode==='video'
+          ? (row.image || firstEpisode?.art?.episode?.wide)
+          : (row.image || firstEpisode?.art?.episode?.square);
+        row.image = configuredArt || getEpisodeArt(firstEpisode || {}, state.mode) || ASSETS.topicalSeries || ASSETS.fallback;
+        row.meta = `${row.meta || 'Collection'}${row.meta ? ' · ' : ''}${formatCountLabel(row.items.length,'episode','episodes')}`;
+      });
+
+      browse.specialSeries.forEach(row=>{
+        const firstEpisode=getFirstEpisode(row.items);
+        row.image=getSeriesArtFromItem(firstEpisode);
+        row.meta=`${row.meta || 'Specials'} · ${formatCountLabel(row.items.length,'episode','episodes')}`;
+      });
+
       browse.current.sort((a,b)=>sortSeriesName(a.title,b.title));
       browse.roots=[
         ...(state.mode==='video' ? [
@@ -2097,7 +2153,7 @@
         ] : []),
         {key:'current',title:'Current',meta:formatCountLabel(browse.current.length,'series','series'),image:ASSETS.current},
         {key:'books',title:'Bible Books / Studies',meta:formatCountLabel(browse.books.size,'book','books'),image:ASSETS.books},
-        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
+        {key:'topical',title:'Topical Series',meta:formatCountLabel(browse.topical.size + browse.collections.size + browse.specialSeries.size,'series','series'),image:ASSETS.topicalSeries || ASSETS.fallback},
         {key:'date',title:'Date',meta:'Year → Month',image:ASSETS.date},
         ...(state.mode==='video' ? [
           {key:'shorts',title:'Shorts',meta:'',image:ASSETS.shorts}
@@ -2137,6 +2193,21 @@
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
+
+        const collectionRows = Array.from(browse.collections.values()).sort((a,b)=>{
+          if((a.sortOrder ?? 999) !== (b.sortOrder ?? 999)) return (a.sortOrder ?? 999) - (b.sortOrder ?? 999);
+          return sortSeriesName(a.title,b.title);
+        });
+        rows.push(...collectionRows);
+
+        const specialRows = Array.from(browse.specialSeries.values()).sort((a,b)=>{
+          const ay = Number(String(a.title||'').match(/\b(20\d{2})\b/)?.[1] || 0);
+          const by = Number(String(b.title||'').match(/\b(20\d{2})\b/)?.[1] || 0);
+          if(ay !== by) return by - ay;
+          return sortSeriesName(a.title,b.title);
+        });
+        rows.push(...specialRows);
+
         if(state.mode==='video' && state.nativeShelves.guestSpeakers.length){
           rows.push({
             key:'guest-speakers-pinned',
@@ -2200,8 +2271,9 @@
       }
       if(root==='topical'){
         if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
-        const row=browse.topical.get(branch);
-        return row ? row.items.slice().sort(sortOldestFirst) : [];
+        const row=browse.topical.get(branch) || browse.collections.get(branch) || browse.specialSeries.get(branch);
+        if(!row) return [];
+        return row.isSpecialSeries ? row.items.slice().sort(sortNewestFirst) : row.items.slice().sort(sortOldestFirst);
       }
       if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
       return [];
