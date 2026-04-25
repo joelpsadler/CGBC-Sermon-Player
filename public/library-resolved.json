@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-25T21:09:34.092Z",
+  "generatedAt": "2026-04-25T21:26:56.038Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 135,
@@ -7,7 +7,7 @@
     "videoMatchedItems": 74
   },
   "totals": {
-    "audioPlaysTotal": 3978,
+    "audioPlaysTotal": 3980,
     "audioEpisodesTotal": 135
   },
   "current": {
@@ -204,7 +204,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 1774,
         "statsMatchStrategy": "media_url"
       },
@@ -360,7 +360,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
-        "plays": 19,
+        "plays": 20,
         "durationSeconds": 1869,
         "statsMatchStrategy": "media_url"
       },
