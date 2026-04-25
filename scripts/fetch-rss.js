@@ -14,41 +14,59 @@ const NOTE_FIELD_MAP = {
   "study": "Study",
   "series type": "Series Type",
   "scripture": "Scripture",
+  "references": "References",
+  "reference": "References",
   "book tags": "Book Tags",
+  "collections": "Collections",
+  "collection": "Collections",
   "by": "by",
   "date": "Date",
   "video": "Video"
 };
 
+const EMPTY_NOTES_FIELDS = {
+  "Title": "",
+  "Subtitle": "",
+  "Series": "",
+  "Study": "",
+  "Series Type": "",
+  "Scripture": "",
+  "References": "",
+  "Book Tags": "",
+  "Collections": "",
+  "by": "",
+  "Date": "",
+  "Video": ""
+};
+
 function parseNotesFields(notesRaw = "") {
-  const result = {
-    "Title": "",
-    "Subtitle": "",
-    "Series": "",
-    "Study": "",
-    "Series Type": "",
-    "Scripture": "",
-    "Book Tags": "",
-    "by": "",
-    "Date": "",
-    "Video": ""
-  };
+  const result = { ...EMPTY_NOTES_FIELDS };
 
   const lines = String(notesRaw).replace(/\r\n/g, "\n").split("\n").map(line => line.trim());
   let currentField = null;
 
   for (const line of lines) {
     if (!line) continue;
+
     const match = line.match(/^([^:]+):\s*(.*)$/);
     if (match) {
       const rawLabel = match[1].trim().toLowerCase();
       const canonicalField = NOTE_FIELD_MAP[rawLabel];
+
       if (canonicalField) {
         currentField = canonicalField;
         result[canonicalField] = clean(match[2] ?? "");
         continue;
       }
+
+      // Beginner note:
+      // If a line looks like "Some Unknown Label:", do not append it to the
+      // previous known field. This keeps future metadata experiments from
+      // accidentally polluting Scripture, Book Tags, Date, etc.
+      currentField = null;
+      continue;
     }
+
     if (currentField) {
       result[currentField] = clean(`${result[currentField]} ${line}`);
     }
@@ -127,10 +145,15 @@ async function main() {
   const withVideo = records.filter(r => clean(r.notesFields["Video"])).length;
   const withSubtitle = records.filter(r => clean(r.notesFields["Subtitle"])).length;
   const withBookTags = records.filter(r => clean(r.notesFields["Book Tags"])).length;
+  const withReferences = records.filter(r => clean(r.notesFields["References"])).length;
+  const withCollections = records.filter(r => clean(r.notesFields["Collections"])).length;
+
   console.log(`RSS items fetched: ${records.length}`);
   console.log(`Items with Video field: ${withVideo}`);
   console.log(`Items with Subtitle field: ${withSubtitle}`);
   console.log(`Items with Book Tags field: ${withBookTags}`);
+  console.log(`Items with References field: ${withReferences}`);
+  console.log(`Items with Collections field: ${withCollections}`);
 }
 
 main().catch(err => {
