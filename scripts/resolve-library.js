@@ -6,6 +6,17 @@ import {
 } from "./utils.js";
 
 const config = JSON.parse(readFileSync(new URL("../config/resolver-config.json", import.meta.url), "utf-8"));
+
+function readOptionalJson(path, fallback = {}) {
+  try {
+    if (existsSync(path)) return readJson(path);
+  } catch (err) {
+    console.warn(`Could not read optional JSON file ${path}: ${err.message}`);
+  }
+  return fallback;
+}
+
+const collectionsConfig = readOptionalJson("config/collections-config.json", { collections: {} });
 const variousDisplay = config?.displayRules?.variousScriptureDisplay || "Selected Scriptures";
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -268,6 +279,76 @@ function resolveBookTags(record) {
   return raw.split(",").map(v => clean(v)).filter(Boolean).map(name => ({ name, key: slugify(name) }));
 }
 
+// -----------------------------------------------------------------------------
+// CURATED COLLECTIONS
+// -----------------------------------------------------------------------------
+// Beginner note:
+// Add optional RSS metadata like:
+//   Collections: Spiritual Gifts, Church Body
+// This does not duplicate the media. It just lets the same episode appear inside
+// curated topical collection paths. Collection art can be stored in GitHub at:
+//   assets/collections/<collection-key>/square.jpg
+//   assets/collections/<collection-key>/wide.jpg
+// Optional display/order overrides live in config/collections-config.json.
+
+function collectionConfigForKey(key) {
+  return collectionsConfig?.collections?.[key] || {};
+}
+
+function collectionArtForKey(key) {
+  const configured = collectionConfigForKey(key)?.art || {};
+  const squarePath = configured.square || `assets/collections/${key}/square.jpg`;
+  const widePath = configured.wide || `assets/collections/${key}/wide.jpg`;
+  return {
+    square: existsSync(squarePath) ? squarePath : (configured.square || null),
+    wide: existsSync(widePath) ? widePath : (configured.wide || null)
+  };
+}
+
+function resolveCollections(record) {
+  const raw = clean(record.notesFields?.["Collections"]);
+  if (!raw) return [];
+  return raw
+    .split(",")
+    .map(v => clean(v))
+    .filter(Boolean)
+    .map(name => {
+      const key = slugify(name);
+      const cfg = collectionConfigForKey(key);
+      return {
+        name: clean(cfg.name) || name,
+        key,
+        description: clean(cfg.description) || "",
+        sortOrder: Number.isFinite(Number(cfg.sortOrder)) ? Number(cfg.sortOrder) : 999,
+        art: collectionArtForKey(key)
+      };
+    });
+}
+
+function buildCollectionsSummary(items) {
+  const map = new Map();
+  for (const item of items) {
+    for (const collection of item.collections || []) {
+      if (!collection?.key) continue;
+      if (!map.has(collection.key)) {
+        map.set(collection.key, {
+          key: collection.key,
+          name: collection.name,
+          description: collection.description || "",
+          sortOrder: collection.sortOrder ?? 999,
+          art: collection.art || { square: null, wide: null },
+          count: 0
+        });
+      }
+      map.get(collection.key).count += 1;
+    }
+  }
+  return Array.from(map.values()).sort((a, b) => {
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+    return String(a.name).localeCompare(String(b.name), undefined, { numeric: true, sensitivity: "base" });
+  });
+}
+
 function resolveDate(record) {
   const raw = clean(record.notesFields?.["Date"]) || clean(record.pubDate);
   const dt = parseFlexibleDate(raw);
@@ -381,7 +462,7 @@ function buildEpisodeArt(audio, video) {
   };
 }
 
-function resolveMemberships(series, study, scripture, bookTags, date) {
+function resolveMemberships(series, study, scripture, bookTags, date, collections = []) {
   const bibleBooks = bookTags.length
     ? bookTags.map(t => t.key)
     : (scripture.bookKey ? [scripture.bookKey] : []);
@@ -390,6 +471,7 @@ function resolveMemberships(series, study, scripture, bookTags, date) {
     series: series.key ? [series.key] : [],
     studies: study.key ? [study.key] : [],
     bibleBooks,
+    collections: collections.map(c => c.key).filter(Boolean),
     byYear: date.year ? [String(date.year)] : [],
     byMonth: (date.year && date.month) ? [`${date.year}-${String(date.month).padStart(2, "0")}`] : []
   };
@@ -601,12 +683,13 @@ function main() {
     const scripture = resolveScripture(record);
     const references = resolveReferences(record, scripture);
     const bookTags = resolveBookTags(record);
+    const collections = resolveCollections(record);
     const date = resolveDate(record);
     const statsMatch = matchStats(record, statsIndexes);
     const audio = resolveAudio(record, statsMatch);
     const video = resolveVideo(record, youtube);
     const art = buildEpisodeArt(audio, video);
-    const memberships = resolveMemberships(series, study, scripture, bookTags, date);
+    const memberships = resolveMemberships(series, study, scripture, bookTags, date, collections);
     const bibleBooksMode = resolveBibleBooksMode(series, study, memberships);
     const flags = resolveFlags(series, video);
 
@@ -628,6 +711,7 @@ function main() {
       search: {
         scriptureTokens: references.searchTokens
       },
+      collections,
       bookTags,
       speaker: clean(record.notesFields?.["by"]) || null,
       date,
@@ -668,6 +752,7 @@ function main() {
       audioEpisodesTotal: Number(statsDoc?.podcast_totals?.episodes_total || items.length)
     },
     current: detectCurrentSeries(items),
+    collections: buildCollectionsSummary(items),
     items
   };
 
