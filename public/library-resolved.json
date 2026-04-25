@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-25T01:43:39.116Z",
+  "generatedAt": "2026-04-25T02:02:51.812Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 134,
@@ -7,7 +7,7 @@
     "videoMatchedItems": 73
   },
   "totals": {
-    "audioPlaysTotal": 3973,
+    "audioPlaysTotal": 3974,
     "audioEpisodesTotal": 134
   },
   "current": {
@@ -46,7 +46,19 @@
       }
     }
   },
-  "collections": [],
+  "collections": [
+    {
+      "key": "grace-gifts-and-service",
+      "name": "Grace gifts and Service",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": null,
+        "wide": null
+      },
+      "count": 1
+    }
+  ],
   "items": [
     {
       "stableId": "media-es8hm8",
@@ -99,7 +111,18 @@
           "Romans 12:8"
         ]
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Grace gifts and Service",
+          "key": "grace-gifts-and-service",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          }
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -138,7 +161,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
-        "plays": 16,
+        "plays": 17,
         "durationSeconds": 1869,
         "statsMatchStrategy": "media_url"
       },
@@ -177,7 +200,9 @@
           "phillipians",
           "1-peter"
         ],
-        "collections": [],
+        "collections": [
+          "grace-gifts-and-service"
+        ],
         "byYear": [
           "2026"
         ],
@@ -4162,7 +4187,7 @@
       "bookTags": [],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "08/24/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead. Videl: https://youtu.be/Do21DY50ldk",
+        "raw": "08/24/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
         "iso": null,
         "year": null,
         "month": null,
