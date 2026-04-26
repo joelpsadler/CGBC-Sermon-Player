@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from "fs";
 import {
   readJson, writeJson, clean, slugify, simpleHash, splitPipeTitle,
   detectBibleBook, parseFlexibleDate, formatISODate, parseDurationToSeconds,
@@ -362,6 +362,214 @@ function resolveDate(record) {
   };
 }
 
+
+// -----------------------------------------------------------------------------
+// TRANSCRIPT INGEST SYSTEM - FCP SRT DROP ZONE
+// -----------------------------------------------------------------------------
+// Beginner note:
+// This is the first transcript data layer. It does NOT change the website UI yet.
+// Weekly workflow:
+//   1. Export an SRT from Final Cut Pro.
+//   2. Put it in GitHub at: transcripts_incoming/YYYY-MM-DD.srt
+//      Example: transcripts_incoming/2026-04-22.srt
+//   3. Run the normal Build Sermon Library workflow.
+//   4. This resolver cleans the SRT, matches it to the RSS episode by date,
+//      writes a canonical clean SRT, and writes timed JSON for the site.
+//
+// Why date-only incoming names?
+// The incoming folder is meant to be easy for humans. The script already knows
+// the real episode title from RSS/Podbean metadata, so it creates the final slug.
+//
+// Why strip tags here?
+// Final Cut Pro may export captions like:
+//   <font color="#ffffff">Turn in your Bibles...</font>
+// That is valid-ish caption styling, but it is bad search data. We strip HTML-ish
+// tags so the transcript can safely become searchable text.
+
+const TRANSCRIPT_INCOMING_DIR = "transcripts_incoming";
+const TRANSCRIPT_CLEAN_DIR = "transcripts_clean";
+const TRANSCRIPT_JSON_DIR = "data/transcripts";
+
+function ensureDirectory(path) {
+  if (!existsSync(path)) mkdirSync(path, { recursive: true });
+}
+
+function cleanTranscriptText(value) {
+  return String(value || "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\s+\n/g, "\n")
+    .replace(/\n\s+/g, "\n")
+    .trim();
+}
+
+function srtTimestampToSeconds(value) {
+  const match = String(value || "").trim().match(/^(\d{2}):(\d{2}):(\d{2}),(\d{3})$/);
+  if (!match) return 0;
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+  const seconds = Number(match[3]);
+  const millis = Number(match[4]);
+  return (hours * 3600) + (minutes * 60) + seconds + (millis / 1000);
+}
+
+function secondsToSrtTimestamp(totalSeconds) {
+  const safe = Math.max(0, Number(totalSeconds) || 0);
+  const hours = Math.floor(safe / 3600);
+  const minutes = Math.floor((safe % 3600) / 60);
+  const seconds = Math.floor(safe % 60);
+  const millis = Math.round((safe - Math.floor(safe)) * 1000);
+
+  return [
+    String(hours).padStart(2, "0"),
+    String(minutes).padStart(2, "0"),
+    String(seconds).padStart(2, "0")
+  ].join(":") + `,${String(millis).padStart(3, "0")}`;
+}
+
+function parseSrt(rawSrt) {
+  const normalized = String(rawSrt || "")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .trim();
+
+  if (!normalized) return [];
+
+  return normalized
+    .split(/\n{2,}/)
+    .map(block => block.trim())
+    .filter(Boolean)
+    .map((block, index) => {
+      const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
+      let cursor = 0;
+
+      // SRT blocks normally begin with a numeric counter. Keep parsing even if
+      // Final Cut or another tool omits/mangles that counter.
+      if (/^\d+$/.test(lines[0] || "")) cursor = 1;
+
+      const timingLine = lines[cursor] || "";
+      const timingMatch = timingLine.match(/^(.+?)\s*-->\s*(.+?)(?:\s+.*)?$/);
+      if (!timingMatch) return null;
+
+      const startRaw = timingMatch[1].trim();
+      const endRaw = timingMatch[2].trim();
+      const text = cleanTranscriptText(lines.slice(cursor + 1).join(" "));
+
+      if (!text) return null;
+
+      return {
+        index: index + 1,
+        start: srtTimestampToSeconds(startRaw),
+        end: srtTimestampToSeconds(endRaw),
+        startTime: startRaw,
+        endTime: endRaw,
+        text
+      };
+    })
+    .filter(Boolean)
+    .map((segment, index) => ({ ...segment, index: index + 1 }));
+}
+
+function buildCleanSrt(segments) {
+  return segments
+    .map((segment, index) => [
+      String(index + 1),
+      `${secondsToSrtTimestamp(segment.start)} --> ${secondsToSrtTimestamp(segment.end)}`,
+      segment.text
+    ].join("\n"))
+    .join("\n\n") + "\n";
+}
+
+function buildTranscriptPlainText(segments) {
+  return cleanTranscriptText(segments.map(segment => segment.text).join(" "));
+}
+
+function blankTranscript() {
+  return {
+    hasTranscript: false,
+    incomingFile: null,
+    cleanFile: null,
+    jsonFile: null,
+    segmentCount: 0
+  };
+}
+
+function resolveTranscript(stableId, title, date) {
+  if (!date?.iso) return { transcript: blankTranscript(), searchText: "" };
+
+  const incomingFile = `${TRANSCRIPT_INCOMING_DIR}/${date.iso}.srt`;
+  if (!existsSync(incomingFile)) return { transcript: blankTranscript(), searchText: "" };
+
+  const titleSlug = slugify(title?.episodeName || title?.display || "episode");
+  const baseName = `${date.iso}_${titleSlug || "episode"}`;
+  const cleanFile = `${TRANSCRIPT_CLEAN_DIR}/${baseName}.srt`;
+  const jsonFile = `${TRANSCRIPT_JSON_DIR}/${baseName}.json`;
+
+  const rawSrt = readFileSync(incomingFile, "utf-8");
+  const segments = parseSrt(rawSrt);
+  const plainText = buildTranscriptPlainText(segments);
+
+  ensureDirectory(TRANSCRIPT_CLEAN_DIR);
+  ensureDirectory(TRANSCRIPT_JSON_DIR);
+
+  writeFileSync(cleanFile, buildCleanSrt(segments), "utf-8");
+  writeJson(jsonFile, {
+    generatedAt: new Date().toISOString(),
+    stableId,
+    title: title?.display || title?.episodeName || "",
+    date: date.iso,
+    source: {
+      type: "fcp_srt",
+      incomingFile,
+      cleanFile
+    },
+    segmentCount: segments.length,
+    plainText,
+    segments
+  });
+
+  return {
+    transcript: {
+      hasTranscript: true,
+      incomingFile,
+      cleanFile,
+      jsonFile,
+      segmentCount: segments.length
+    },
+    searchText: plainText
+  };
+}
+
+function buildTranscriptSearchIndex(items) {
+  ensureDirectory(TRANSCRIPT_JSON_DIR);
+
+  const entries = items
+    .filter(item => item?.transcript?.hasTranscript)
+    .map(item => ({
+      stableId: item.stableId,
+      date: item.date?.iso || null,
+      title: item.title?.display || item.title?.episodeName || "",
+      series: item.series?.name || "",
+      study: item.study?.name || "",
+      scripture: item.scripture?.display || "",
+      transcriptJson: item.transcript?.jsonFile || null,
+      transcriptCleanSrt: item.transcript?.cleanFile || null,
+      text: item.search?.transcriptText || ""
+    }));
+
+  writeJson(`${TRANSCRIPT_JSON_DIR}/search-index.json`, {
+    generatedAt: new Date().toISOString(),
+    count: entries.length,
+    entries
+  });
+
+  return entries.length;
+}
+
 function normalizeTitleKey(value) {
   return clean(value)
     .toLowerCase()
@@ -685,6 +893,7 @@ function main() {
     const bookTags = resolveBookTags(record);
     const collections = resolveCollections(record);
     const date = resolveDate(record);
+    const transcriptResolved = resolveTranscript(stableId, title, date);
     const statsMatch = matchStats(record, statsIndexes);
     const audio = resolveAudio(record, statsMatch);
     const video = resolveVideo(record, youtube);
@@ -709,12 +918,14 @@ function main() {
       scripture,
       references,
       search: {
-        scriptureTokens: references.searchTokens
+        scriptureTokens: references.searchTokens,
+        transcriptText: transcriptResolved.searchText
       },
       collections,
       bookTags,
       speaker: clean(record.notesFields?.["by"]) || null,
       date,
+      transcript: transcriptResolved.transcript,
       audio: {
         hasAudio: audio.hasAudio,
         url: audio.url,
@@ -738,6 +949,7 @@ function main() {
   });
 
   applyInheritedArt(items);
+  const transcriptSearchCount = buildTranscriptSearchIndex(items);
 
   const output = {
     generatedAt: new Date().toISOString(),
@@ -745,7 +957,8 @@ function main() {
     sourceSummary: {
       rssItems: rss.length,
       archiveItems: items.length,
-      videoMatchedItems: items.filter(i => i.video.hasVideo).length
+      videoMatchedItems: items.filter(i => i.video.hasVideo).length,
+      transcriptMatchedItems: transcriptSearchCount
     },
     totals: {
       audioPlaysTotal: Number(statsDoc?.podcast_totals?.plays_total || 0),
