@@ -71,10 +71,12 @@ jobs:
             data/raw-youtube-data.json \
             data/library-resolved.json \
             data/stats.json \
+            data/transcripts \
             public/library-resolved.json \
             public/stats.json \
             stats/stats.json \
-            stats/downloads_stats.csv || true
+            stats/downloads_stats.csv \
+            transcripts_clean || true
 
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
