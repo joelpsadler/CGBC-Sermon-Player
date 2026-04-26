@@ -1,4 +1,4 @@
-import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import {
   readJson, writeJson, clean, slugify, simpleHash, splitPipeTitle,
   detectBibleBook, parseFlexibleDate, formatISODate, parseDurationToSeconds,
@@ -112,268 +112,6 @@ function resolveStudy(record, series) {
     key: slugify(studyName),
     type: deriveStudyType(studyName, series.type)
   };
-}
-
-// -----------------------------------------------------------------------------
-// TRANSCRIPT INGEST SYSTEM - FCP SRT DROP ZONE
-// -----------------------------------------------------------------------------
-// Beginner note:
-// This is the safe first layer for sermon transcripts.
-//
-// Weekly workflow:
-//   1. Export an SRT from Final Cut Pro.
-//   2. Put it in the repo root folder named:
-//        transcripts_incoming/YYYY-MM-DD.srt
-//      Example:
-//        transcripts_incoming/2026-04-22.srt
-//   3. Run the normal library workflow.
-//
-// This resolver then:
-//   - matches that incoming SRT to the RSS episode by resolved episode date
-//   - strips FCP styling tags like <font color="#ffffff">
-//   - writes a clean, canonical SRT file into transcripts_clean/
-//   - writes timed transcript JSON into data/transcripts/
-//   - writes a separate transcript search index into data/transcripts/search-index.json
-//
-// Important architecture note:
-// We intentionally do NOT dump full transcript text into library-resolved.json.
-// That keeps the main site data lightweight. The frontend can later fetch the
-// transcript JSON or transcript search index only when needed.
-
-const TRANSCRIPT_INCOMING_DIR = "transcripts_incoming";
-const TRANSCRIPT_CLEAN_DIR = "transcripts_clean";
-const TRANSCRIPT_JSON_DIR = "data/transcripts";
-
-function ensureDirectory(path) {
-  if (!path) return;
-  if (!existsSync(path)) mkdirSync(path, { recursive: true });
-}
-
-function writeTextFile(path, value) {
-  ensureDirectory(path.split("/").slice(0, -1).join("/"));
-  writeFileSync(path, value, "utf-8");
-}
-
-function stripSubtitleFormatting(value) {
-  return String(value || "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/gi, "'")
-    .replace(/&apos;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/\r\n/g, "\n")
-    .replace(/\r/g, "\n");
-}
-
-function normalizeTranscriptLine(value) {
-  return stripSubtitleFormatting(value)
-    .split("\n")
-    .map(line => clean(line))
-    .filter(Boolean)
-    .join(" ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function srtTimeToSeconds(value) {
-  const match = String(value || "").trim().match(/^(\d{1,2}):(\d{2}):(\d{2})[,.](\d{1,3})$/);
-  if (!match) return 0;
-  const hours = Number(match[1]);
-  const minutes = Number(match[2]);
-  const seconds = Number(match[3]);
-  const millis = Number(match[4].padEnd(3, "0"));
-  return hours * 3600 + minutes * 60 + seconds + millis / 1000;
-}
-
-function secondsToSrtTime(value) {
-  const totalMs = Math.max(0, Math.round(Number(value || 0) * 1000));
-  const hours = Math.floor(totalMs / 3600000);
-  const minutes = Math.floor((totalMs % 3600000) / 60000);
-  const seconds = Math.floor((totalMs % 60000) / 1000);
-  const millis = totalMs % 1000;
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")},${String(millis).padStart(3, "0")}`;
-}
-
-function parseSrt(rawSrt) {
-  const cleaned = stripSubtitleFormatting(rawSrt).trim();
-  if (!cleaned) return [];
-
-  const blocks = cleaned
-    .split(/\n\s*\n+/)
-    .map(block => block.trim())
-    .filter(Boolean);
-
-  const segments = [];
-
-  for (const block of blocks) {
-    const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
-    if (!lines.length) continue;
-
-    const timingLineIndex = lines.findIndex(line => line.includes("-->"));
-    if (timingLineIndex < 0) continue;
-
-    const timing = lines[timingLineIndex];
-    const [startRaw, endRaw] = timing.split("-->").map(v => v.trim());
-    const text = normalizeTranscriptLine(lines.slice(timingLineIndex + 1).join("\n"));
-    if (!text) continue;
-
-    const start = srtTimeToSeconds(startRaw);
-    const end = srtTimeToSeconds(endRaw);
-    segments.push({
-      index: segments.length + 1,
-      start,
-      end,
-      startTime: secondsToSrtTime(start),
-      endTime: secondsToSrtTime(end),
-      text
-    });
-  }
-
-  return segments;
-}
-
-function serializeCleanSrt(segments) {
-  return segments.map((segment, index) => [
-    String(index + 1),
-    `${segment.startTime} --> ${segment.endTime}`,
-    segment.text
-  ].join("\n")).join("\n\n") + (segments.length ? "\n" : "");
-}
-
-function buildTranscriptSlug(date, title) {
-  const titleKey = slugify(title?.episodeName || title?.display || "episode") || "episode";
-  return `${date.iso}_${titleKey}`;
-}
-
-function findIncomingTranscriptFile(date, title) {
-  if (!date?.iso || !existsSync(TRANSCRIPT_INCOMING_DIR)) return null;
-
-  const exact = `${TRANSCRIPT_INCOMING_DIR}/${date.iso}.srt`;
-  if (existsSync(exact)) return exact;
-
-  const titleSlug = slugify(title?.episodeName || title?.display || "");
-  const candidates = readdirSync(TRANSCRIPT_INCOMING_DIR)
-    .filter(name => name.toLowerCase().endsWith(".srt"))
-    .filter(name => name.startsWith(date.iso));
-
-  if (!candidates.length) return null;
-  if (candidates.length === 1) return `${TRANSCRIPT_INCOMING_DIR}/${candidates[0]}`;
-
-  if (titleSlug) {
-    const titleMatch = candidates.find(name => slugify(name.replace(/\.srt$/i, "")).includes(titleSlug));
-    if (titleMatch) return `${TRANSCRIPT_INCOMING_DIR}/${titleMatch}`;
-  }
-
-  console.warn(`Multiple transcript files found for ${date.iso}; use ${date.iso}.srt or add title text to disambiguate.`);
-  return null;
-}
-
-function buildTranscriptSearchText(segments) {
-  return segments.map(segment => segment.text).join(" ").replace(/\s+/g, " ").trim();
-}
-
-function buildTranscriptSearchTokens(searchText) {
-  const tokens = [];
-  const seen = new Set();
-  for (const token of clean(searchText).toLowerCase().split(/[^a-z0-9']+/).filter(Boolean)) {
-    if (token.length < 3) continue;
-    if (seen.has(token)) continue;
-    seen.add(token);
-    tokens.push(token);
-    if (tokens.length >= 500) break;
-  }
-  return tokens;
-}
-
-function resolveTranscript(record, title, date, stableId) {
-  const incomingFile = findIncomingTranscriptFile(date, title);
-
-  if (!incomingFile) {
-    return {
-      hasTranscript: false,
-      source: "",
-      incomingFile: null,
-      cleanFile: null,
-      jsonFile: null,
-      segmentCount: 0,
-      durationSeconds: 0,
-      searchTokens: [],
-      searchText: ""
-    };
-  }
-
-  const rawSrt = readFileSync(incomingFile, "utf-8");
-  const segments = parseSrt(rawSrt);
-  const baseName = buildTranscriptSlug(date, title);
-  const cleanFile = `${TRANSCRIPT_CLEAN_DIR}/${baseName}.srt`;
-  const jsonFile = `${TRANSCRIPT_JSON_DIR}/${baseName}.json`;
-  const searchText = buildTranscriptSearchText(segments);
-  const durationSeconds = segments.length ? Math.max(...segments.map(segment => segment.end || 0)) : 0;
-
-  ensureDirectory(TRANSCRIPT_CLEAN_DIR);
-  ensureDirectory(TRANSCRIPT_JSON_DIR);
-  writeTextFile(cleanFile, serializeCleanSrt(segments));
-  writeJson(jsonFile, {
-    stableId,
-    source: "fcp_srt",
-    incomingFile,
-    cleanFile,
-    generatedAt: new Date().toISOString(),
-    date: date?.iso || null,
-    title: title?.display || title?.episodeName || null,
-    segmentCount: segments.length,
-    durationSeconds,
-    segments
-  });
-
-  return {
-    hasTranscript: segments.length > 0,
-    source: "fcp_srt",
-    incomingFile,
-    cleanFile,
-    jsonFile,
-    segmentCount: segments.length,
-    durationSeconds,
-    searchTokens: buildTranscriptSearchTokens(searchText),
-    searchText
-  };
-}
-
-function publicTranscriptSummary(transcript) {
-  return {
-    hasTranscript: Boolean(transcript?.hasTranscript),
-    source: transcript?.source || "",
-    incomingFile: transcript?.incomingFile || null,
-    cleanFile: transcript?.cleanFile || null,
-    jsonFile: transcript?.jsonFile || null,
-    segmentCount: Number(transcript?.segmentCount || 0),
-    durationSeconds: Number(transcript?.durationSeconds || 0)
-  };
-}
-
-function writeTranscriptSearchIndex(items) {
-  ensureDirectory(TRANSCRIPT_JSON_DIR);
-  const entries = items
-    .filter(item => item?._transcriptSearchText)
-    .map(item => ({
-      stableId: item.stableId,
-      date: item.date?.iso || null,
-      title: item.title?.display || null,
-      series: item.series?.name || null,
-      cleanFile: item.transcript?.cleanFile || null,
-      jsonFile: item.transcript?.jsonFile || null,
-      text: item._transcriptSearchText
-    }));
-
-  writeJson(`${TRANSCRIPT_JSON_DIR}/search-index.json`, {
-    generatedAt: new Date().toISOString(),
-    version: 1,
-    count: entries.length,
-    entries
-  });
 }
 
 
@@ -947,7 +685,6 @@ function main() {
     const bookTags = resolveBookTags(record);
     const collections = resolveCollections(record);
     const date = resolveDate(record);
-    const transcript = resolveTranscript(record, title, date, stableId);
     const statsMatch = matchStats(record, statsIndexes);
     const audio = resolveAudio(record, statsMatch);
     const video = resolveVideo(record, youtube);
@@ -972,8 +709,7 @@ function main() {
       scripture,
       references,
       search: {
-        scriptureTokens: references.searchTokens,
-        transcriptTokens: transcript.searchTokens || []
+        scriptureTokens: references.searchTokens
       },
       collections,
       bookTags,
@@ -992,8 +728,6 @@ function main() {
         url: video.url,
         views: video.views
       },
-      transcript: publicTranscriptSummary(transcript),
-      _transcriptSearchText: transcript.searchText || "",
       art,
       memberships,
       presentation: {
@@ -1004,10 +738,6 @@ function main() {
   });
 
   applyInheritedArt(items);
-  writeTranscriptSearchIndex(items);
-
-  // Remove resolver-only private fields before writing public library data.
-  for (const item of items) delete item._transcriptSearchText;
 
   const output = {
     generatedAt: new Date().toISOString(),
@@ -1015,8 +745,7 @@ function main() {
     sourceSummary: {
       rssItems: rss.length,
       archiveItems: items.length,
-      videoMatchedItems: items.filter(i => i.video.hasVideo).length,
-      transcriptMatchedItems: items.filter(i => i.transcript?.hasTranscript).length
+      videoMatchedItems: items.filter(i => i.video.hasVideo).length
     },
     totals: {
       audioPlaysTotal: Number(statsDoc?.podcast_totals?.plays_total || 0),
