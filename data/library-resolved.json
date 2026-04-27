@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-26T23:29:00.746Z",
+  "generatedAt": "2026-04-27T00:14:38.324Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 135,
@@ -205,10 +205,26 @@
       },
       "transcript": {
         "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-04-22.srt",
+            "cleanFile": "transcripts_clean/en/2026-04-22_the-rapture-pt-5.srt",
+            "displayFile": "transcripts_display/en/2026-04-22_the-rapture-pt-5.srt",
+            "jsonFile": "data/transcripts/en/2026-04-22_the-rapture-pt-5.json",
+            "displayJsonFile": "data/transcripts/en/2026-04-22_the-rapture-pt-5.display.json",
+            "segmentCount": 692,
+            "displaySegmentCount": 590
+          }
+        },
         "incomingFile": "transcripts_incoming/2026-04-22.srt",
-        "cleanFile": "transcripts_clean/2026-04-22_the-rapture-pt-5.srt",
-        "jsonFile": "data/transcripts/2026-04-22_the-rapture-pt-5.json",
-        "segmentCount": 692
+        "cleanFile": "transcripts_clean/en/2026-04-22_the-rapture-pt-5.srt",
+        "displayFile": "transcripts_display/en/2026-04-22_the-rapture-pt-5.srt",
+        "jsonFile": "data/transcripts/en/2026-04-22_the-rapture-pt-5.json",
+        "displayJsonFile": "data/transcripts/en/2026-04-22_the-rapture-pt-5.display.json",
+        "segmentCount": 692,
+        "displaySegmentCount": 590
       },
       "audio": {
         "hasAudio": true,
@@ -221,7 +237,7 @@
         "hasVideo": true,
         "youtubeId": "T-cd2mlwDSk",
         "url": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "views": 11
+        "views": 12
       },
       "art": {
         "episode": {
@@ -369,10 +385,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -503,10 +524,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -633,10 +659,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -649,7 +680,7 @@
         "hasVideo": true,
         "youtubeId": "4vjSIfyWLcs",
         "url": "https://www.youtube.com/watch?v=4vjSIfyWLcs",
-        "views": 55
+        "views": 54
       },
       "art": {
         "episode": {
@@ -764,10 +795,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -893,10 +929,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1030,10 +1071,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1153,10 +1199,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1287,10 +1338,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1411,10 +1467,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1531,10 +1592,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1657,10 +1723,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1777,10 +1848,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -1901,10 +1977,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2035,10 +2116,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2161,10 +2247,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2271,10 +2362,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2385,10 +2481,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2517,10 +2618,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2649,10 +2755,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2781,10 +2892,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -2907,10 +3023,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3043,10 +3164,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3179,10 +3305,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3307,10 +3438,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3431,10 +3567,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3563,10 +3704,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3673,10 +3819,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3801,10 +3952,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -3923,10 +4079,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4041,10 +4202,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4169,10 +4335,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4287,10 +4458,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4413,10 +4589,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4541,10 +4722,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4677,10 +4863,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4807,10 +4998,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -4935,10 +5131,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5049,10 +5250,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5181,10 +5387,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5301,10 +5512,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5423,10 +5639,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5543,10 +5764,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5662,10 +5888,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5786,10 +6017,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -5904,10 +6140,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6018,10 +6259,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6128,10 +6374,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6246,10 +6497,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6360,10 +6616,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6470,10 +6731,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6606,10 +6872,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6728,10 +6999,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6842,10 +7118,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -6956,10 +7237,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7074,10 +7360,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7198,10 +7489,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7328,10 +7624,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7460,10 +7761,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7590,10 +7896,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7710,10 +8021,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7848,10 +8164,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -7958,10 +8279,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8122,10 +8448,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8288,10 +8619,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8398,10 +8734,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8508,10 +8849,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8634,10 +8980,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8764,10 +9115,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -8904,10 +9260,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9020,10 +9381,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9138,10 +9504,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9276,10 +9647,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9390,10 +9766,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9524,10 +9905,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9666,10 +10052,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9780,10 +10171,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -9918,10 +10314,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10036,10 +10437,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10150,10 +10556,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10260,10 +10671,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10370,10 +10786,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10480,10 +10901,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10590,10 +11016,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10704,10 +11135,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10822,10 +11258,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -10940,10 +11381,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11058,10 +11504,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11172,10 +11623,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11318,10 +11774,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11468,10 +11929,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11618,10 +12084,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11754,10 +12225,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11890,10 +12366,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12022,10 +12503,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12140,10 +12626,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12256,10 +12747,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12386,10 +12882,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12528,10 +13029,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12662,10 +13168,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12798,10 +13309,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -12922,10 +13438,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13056,10 +13577,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13192,10 +13718,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13310,10 +13841,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13442,10 +13978,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13574,10 +14115,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13688,10 +14234,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13798,10 +14349,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -13908,10 +14464,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14018,10 +14579,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14128,10 +14694,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14280,10 +14851,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14412,10 +14988,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14544,10 +15125,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14660,10 +15246,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14776,10 +15367,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -14888,10 +15484,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15024,10 +15625,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15136,10 +15742,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15255,10 +15866,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15371,10 +15987,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15483,10 +16104,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15611,10 +16237,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15741,10 +16372,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -15867,10 +16503,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16007,10 +16648,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16123,10 +16769,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16259,10 +16910,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16409,10 +17065,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16521,10 +17182,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16663,10 +17329,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16785,10 +17456,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -16907,10 +17583,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -17114,10 +17795,15 @@
       },
       "transcript": {
         "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
         "incomingFile": null,
         "cleanFile": null,
+        "displayFile": null,
         "jsonFile": null,
-        "segmentCount": 0
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
