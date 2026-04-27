@@ -3244,7 +3244,7 @@
       function sortQuotes(list){ const tier={featured:4,strong:3,study:2,archive:1}; return list.slice().sort((a,b)=>Number(!!b.publicSafe)-Number(!!a.publicSafe)||(tier[b.displayTier]||0)-(tier[a.displayTier]||0)||(b.searchBoost||0)-(a.searchBoost||0)||(b.quotePolishScore||0)-(a.quotePolishScore||0)||(b.score||0)-(a.score||0)); }
       async function loadQuotes(){
         if(reviewState.quotes.length) return reviewState.quotes;
-        for(const path of ['public/random-quotes.json','data/random-quotes.json','random-quotes.json']){
+        for(const path of ['data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json']){
           try{ const r=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'}); if(!r.ok) continue; const data=await r.json(); const q=sortQuotes(Array.isArray(data?.quotes)?data.quotes:[]); if(q.length){ reviewState.quotes=q; return q; } }catch(e){}
         }
         throw new Error('random-quotes.json not found');
