@@ -1531,6 +1531,13 @@ function buildQuoteMediaHooks(item, start, end) {
     audioUrl,
     youtubeId,
     videoUrl,
+    // Beginner note:
+    // Quote timestamps come from the transcript/video timeline. The review page can
+    // compare the browser-loaded audio duration against the transcript duration and
+    // apply a small offset if the Podbean/audio file has extra lead-in time.
+    audioDurationSeconds: item?.audio?.durationSeconds || null,
+    transcriptDisplayJson: item?.transcript?.displayJsonFile || null,
+    transcriptCleanJson: item?.transcript?.jsonFile || null,
     hasAudio: Boolean(audioUrl),
     hasVideo: Boolean(youtubeId || videoUrl)
   };
@@ -2058,6 +2065,10 @@ function buildQuoteBank(items) {
       media: quote.media,
       start: quote.start,
       end: quote.end,
+      startTime: quote.startTime,
+      endTime: quote.endTime,
+      segmentIndexes: quote.segmentIndexes,
+      source: quote.source,
       score: quote.score,
       qualityFlags: quote.qualityFlags,
       quoteCategory: quote.quoteCategory,
