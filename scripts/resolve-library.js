@@ -1305,6 +1305,7 @@ function refineScriptureReadingQuote(value, scriptureMode) {
 }
 
 
+
 function dedupeQuoteSentences(value) {
   const pieces = splitQuoteIntoThoughts(value)
     .map(piece => normalizeQuoteWhitespace(piece))
@@ -1323,8 +1324,6 @@ function dedupeQuoteSentences(value) {
     if (!key) continue;
     if (seen.has(key)) continue;
 
-    // Also catch one sentence accidentally containing a previously kept short
-    // sentence repeated as a tail.
     const alreadyContained = kept.some(existing => {
       const existingKey = existing.toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
       return existingKey && key.includes(existingKey) && existingKey.length > 18;
@@ -1348,7 +1347,6 @@ function isReflectionLeadIn(value) {
 }
 
 function shouldAddSecondForwardContext(currentText, nextText) {
-  const current = normalizeQuoteWhitespace(currentText);
   const next = normalizeQuoteWhitespace(nextText);
 
   if (!next) return false;
@@ -1361,7 +1359,6 @@ function shouldAddSecondForwardContext(currentText, nextText) {
   return hasPastoralCharge(next)
     || /\b(?:faith|ready|truth|word|church|christ|lord|grace|worship|salvation)\b/i.test(next);
 }
-
 
 function recoverQuoteContext(rawText, displayText) {
   const display = dedupeQuoteSentences(normalizeQuoteWhitespace(displayText));
@@ -1401,9 +1398,6 @@ function recoverQuoteContext(rawText, displayText) {
 
   let recoveredText = dedupeQuoteSentences(normalizeQuoteWhitespace(recoveredParts.join(" ")));
 
-  // Special case: a compact theological sentence is followed by a very short
-  // pastoral/application sentence. This catches quotes like:
-  // "He's not just going to lay it out there for us. We still have to live in faith."
   if (useAfter && shouldAddSecondForwardContext(recoveredText, secondAfter)) {
     recoveredText = dedupeQuoteSentences(`${recoveredText} ${secondAfter}`);
     recoveredParts.push(secondAfter);
@@ -1424,6 +1418,53 @@ function recoverQuoteContext(rawText, displayText) {
   };
 }
 
+
+function speechDisfluencyScore(rawText, displayText) {
+  const raw = normalizeQuoteWhitespace(rawText);
+  const display = normalizeQuoteWhitespace(displayText);
+  let score = 0;
+
+  const patterns = [
+    /\ball right\b/gi,
+    /\balright\b/gi,
+    /\bright\?/gi,
+    /\bamen\?/gi,
+    /\bokay\?/gi,
+    /\byou know\b/gi,
+    /\bi mean\b/gi,
+    /\blisten\b/gi,
+    /\blook\b/gi,
+    /\by'all\b/gi,
+    /\bthe,\s*the\b/gi,
+    /\b(\w{1,14})(?:,\s*\1\b){1,4}/gi,
+    /\b(\w{2,14})\s+\1\b/gi
+  ];
+
+  for (const pattern of patterns) {
+    const matches = raw.match(pattern);
+    if (matches) score += matches.length;
+  }
+
+  if (display.length < raw.length * 0.75) score += 1;
+  return score;
+}
+
+function speakerNaturalnessScore(displayText, flags, disfluencyScoreValue) {
+  let score = 100;
+  const words = quoteWordCount(displayText);
+
+  if (words < 10) score -= 20;
+  if (words > 38) score -= 15;
+  if (flags.fillerHeavy) score -= 25;
+  if (!flags.startsCleanly) score -= 20;
+  if (!flags.endsCleanly) score -= 10;
+  score -= Math.min(disfluencyScoreValue * 8, 32);
+
+  if (flags.quoteReady) score += 8;
+  if (flags.doctrinal) score += 5;
+
+  return Math.max(0, Math.min(100, score));
+}
 
 function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
   const text = normalizeQuoteWhitespace(rawText);
@@ -1475,52 +1516,57 @@ function qualityAdjustedQuoteScore(baseScore, flags) {
   return score;
 }
 
-
-function speechDisfluencyScore(rawText, displayText) {
-  const raw = normalizeQuoteWhitespace(rawText);
-  const display = normalizeQuoteWhitespace(displayText);
-  let score = 0;
-
-  const patterns = [
-    /\ball right\b/gi,
-    /\balright\b/gi,
-    /\bright\?/gi,
-    /\bamen\?/gi,
-    /\bokay\?/gi,
-    /\byou know\b/gi,
-    /\bi mean\b/gi,
-    /\blisten\b/gi,
-    /\blook\b/gi,
-    /\by'all\b/gi,
-    /\bthe,\s*the\b/gi,
-    /\b(\w{1,14})(?:,\s*\1\b){1,4}/gi,
-    /\b(\w{2,14})\s+\1\b/gi
-  ];
-
-  for (const pattern of patterns) {
-    const matches = raw.match(pattern);
-    if (matches) score += matches.length;
-  }
-
-  if (display.length < raw.length * 0.75) score += 1;
-  return score;
+function makeQuoteId(item, quoteIndex) {
+  return `${item.stableId || "episode"}-quote-${String(quoteIndex + 1).padStart(4, "0")}`;
 }
 
-function speakerNaturalnessScore(displayText, flags, disfluencyScoreValue) {
-  let score = 100;
-  const words = quoteWordCount(displayText);
+function buildQuoteMediaHooks(item, start, end) {
+  const youtubeId = item?.video?.youtubeId || null;
+  const audioUrl = item?.audio?.url || null;
+  const videoUrl = item?.video?.url || (youtubeId ? `https://www.youtube.com/watch?v=${youtubeId}` : null);
 
-  if (words < 10) score -= 20;
-  if (words > 38) score -= 15;
-  if (flags.fillerHeavy) score -= 25;
-  if (!flags.startsCleanly) score -= 20;
-  if (!flags.endsCleanly) score -= 10;
-  score -= Math.min(disfluencyScoreValue * 8, 32);
+  return {
+    start,
+    end,
+    audioUrl,
+    youtubeId,
+    videoUrl,
+    hasAudio: Boolean(audioUrl),
+    hasVideo: Boolean(youtubeId || videoUrl)
+  };
+}
 
-  if (flags.quoteReady) score += 8;
-  if (flags.doctrinal) score += 5;
+function buildQuoteEpisodePayload(item) {
+  return {
+    stableId: item.stableId,
+    title: item.title?.display || item.title?.episodeName || "",
+    episodeName: item.title?.episodeName || "",
+    subtitle: item.title?.subtitle || "",
+    series: item.series?.name || "",
+    seriesKey: item.series?.key || "",
+    study: item.study?.name || "",
+    studyKey: item.study?.key || "",
+    scripture: item.scripture?.display || "",
+    date: item.date?.iso || null,
+    speaker: item.speaker || null,
+    shareUrl: item.links?.shareUrl || item.links?.episodeUrl || null,
+    episodeUrl: item.links?.episodeUrl || null
+  };
+}
 
-  return Math.max(0, Math.min(100, score));
+function buildQuoteCurationDefaults() {
+  return {
+    status: "candidate",
+    approved: false,
+    featured: false,
+    rejected: false,
+    approvedAt: null,
+    rejectedAt: null,
+    featuredAt: null,
+    reviewedAt: null,
+    reviewedBy: null,
+    note: ""
+  };
 }
 
 function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
@@ -1579,6 +1625,12 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       const displayLowValuePenalty = quoteLowValuePenalty(displayText);
       const qualityFlags = quoteQualityFlags(rawText, displayText, displayStrongTerms, displayLowValuePenalty);
       const hardRejectReason = hardRejectQuoteReason(displayText, qualityFlags);
+      const disfluencyScore = speechDisfluencyScore(rawText, displayText);
+      const speakerNaturalness = speakerNaturalnessScore(displayText, qualityFlags, disfluencyScore);
+      const timelessScoreValue = timelessnessScore(displayText);
+      const contrastBoost = hasContrastLanguage(displayText) ? 12 : 0;
+      const pastoralCharge = hasPastoralCharge(displayText);
+
       if (hardRejectReason) continue;
       if (brandSignature) continue;
       if (metaScore > 0) continue;
@@ -1587,12 +1639,6 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (isReflectionLeadIn(displayText) && timelessScoreValue < 35) continue;
       if (isWeakContextText(displayText) && !qualityFlags.doctrinal && !pastoralCharge) continue;
       if (scriptureMode === "direct_scripture") continue;
-
-      const disfluencyScore = speechDisfluencyScore(rawText, displayText);
-      const speakerNaturalness = speakerNaturalnessScore(displayText, qualityFlags, disfluencyScore);
-      const timelessScoreValue = timelessnessScore(displayText);
-      const contrastBoost = hasContrastLanguage(displayText) ? 12 : 0;
-      const pastoralCharge = hasPastoralCharge(displayText);
 
       // Keep non-quote-ready items only if they are still strong doctrinal/search
       // candidates. The random quote UI can prefer quoteReady later.
@@ -1762,7 +1808,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "nano precision layer: outline/lesson suppression, reflection lead-in suppression, second forward context recovery, duplicate sentence dedupe, and final approval queue polish",
+      qualityPass: "nano precision clean rebuild: outline/lesson suppression, reflection lead-in suppression, second forward context recovery, duplicate sentence dedupe, tested from last working micro layer",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
