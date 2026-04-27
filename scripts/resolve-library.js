@@ -1049,11 +1049,11 @@ function cleanupSpeechDisfluencies(value) {
   text = stripConversationalLeadIns(text);
   text = collapseRepeatedSpeechWords(text);
 
-  return trimTailFillers(normalizeQuoteWhitespace(text)
+  return trimLeadInFillers(trimTailFillers(normalizeQuoteWhitespace(text)
     .replace(/\s+([,.!?;:])/g, "$1")
     .replace(/^(?:[.\-–—,;:!?]\s*)+/g, "")
     .replace(/\s+/g, " ")
-    .trim());
+    .trim()));
 }
 
 function hardRejectQuoteReason(displayText, qualityFlags = {}) {
@@ -1115,17 +1115,29 @@ function isBrandSignatureText(value) {
 function metaTeachingScore(value) {
   const text = normalizeQuoteWhitespace(value).toLowerCase();
   const patterns = [
-    /\bturn your bibles?\b/i,
+    /\bturn (?:in )?your bibles?\b/i,
     /\bgo home and (?:study|read)\b/i,
     /\bread it for yourself\b/i,
+    /\byou can read\b/i,
+    /\bwe can read\b/i,
+    /\bwe're gonna read\b/i,
+    /\bwe are going to read\b/i,
     /\bi(?:'m| am) going to read\b/i,
     /\bi(?:'m| am) gonna read\b/i,
+    /\bi don't want to take the time\b/i,
+    /\blater on\b/i,
     /\blet me get there\b/i,
     /\bif you're there\b/i,
     /\bsay amen\b/i,
     /\bsay read\b/i,
     /\bwrite that down\b/i,
-    /\bwe talked about it last week\b/i,
+    /\bchapter\s+\d+\b/i,
+    /\bverse\s+\d+\b/i,
+    /\bfirst point\b/i,
+    /\bsecond point\b/i,
+    /\bnext strength\b/i,
+    /\bwe talked about\b/i,
+    /\blast week\b/i,
     /\bwe're going to go over\b/i,
     /\bwe will get lost in the weeds\b/i,
     /\bthis chart\b/i,
@@ -1135,6 +1147,29 @@ function metaTeachingScore(value) {
   ];
   return patterns.reduce((score, pattern) => score + (pattern.test(text) ? 1 : 0), 0);
 }
+
+function trimLeadInFillers(value) {
+  let text = normalizeQuoteWhitespace(value);
+
+  const patterns = [
+    /^(?:i'm going to tell you right now[, ]*)/i,
+    /^(?:i will say it like this[, ]*)/i,
+    /^(?:i will say this[, ]*)/i,
+    /^(?:let me tell you[, ]*)/i,
+    /^(?:you see what i'm saying\??[, ]*)/i,
+    /^(?:now[, ]*)/i,
+    /^(?:all right[, ]*)/i,
+    /^(?:okay[, ]*)/i,
+    /^(?:listen[, ]*)/i
+  ];
+
+  for (const pattern of patterns) {
+    text = text.replace(pattern, "");
+  }
+
+  return normalizeQuoteWhitespace(text);
+}
+
 
 function trimTailFillers(value) {
   return normalizeQuoteWhitespace(value)
@@ -1192,6 +1227,8 @@ function quoteCategoryFinal(baseCategory, value, scriptureMode, metaScore, timel
   if (isBrandSignatureText(value)) return "brand_signature";
   if (metaScore > 0) return "meta_teaching";
   if (scriptureMode === "direct_scripture") return "direct_scripture";
+  if (scriptureMode === "reference_only") return "scripture_reference";
+  if (scriptureMode === "exposition") return "scripture_exposition";
   if (hasPastoralCharge(value)) return "pastoral_charge";
   if (timelessScoreValue >= 35) return "featured_candidate";
   return baseCategory;
@@ -1215,6 +1252,7 @@ function recoverQuoteContext(rawText, displayText) {
     if (quoteWordCount(text) < 4 || quoteWordCount(text) > 28) return false;
     if (isBrandSignatureText(text)) return false;
     if (metaTeachingScore(text) > 0) return false;
+    if (/\b(?:next strength|first point|second point|last week|we talked about|chapter|verse|turn your bibles)\b/i.test(text)) return false;
     if (scriptureModeForText(text) === "direct_scripture") return false;
     if (hardRejectQuoteReason(text, {})) return false;
     return true;
@@ -1464,11 +1502,13 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (speakerNaturalness < 55 && !qualityFlags.doctrinal) continue;
 
       const baseScore = quoteCandidateScore(displayText, quoteWordCount(displayText), durationSeconds, displayStrongTerms, displayLowValuePenalty);
+      const scripturePenalty = scriptureMode === "reference_only" ? -18 : 0;
       const score = qualityAdjustedQuoteScore(baseScore, qualityFlags)
         + Math.round((speakerNaturalness - 70) / 5)
         + Math.round(timelessScoreValue / 4)
         + contrastBoost
-        + (pastoralCharge ? 10 : 0);
+        + (pastoralCharge ? 10 : 0)
+        + scripturePenalty;
       if (score < 38) continue;
 
       candidates.push({
@@ -1617,7 +1657,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "final context layer: brand suppression, scripture awareness, meta-teaching suppression, context recovery, tail trim, contrast boost, pastoral charge, approval UI context fields",
+      qualityPass: "precision trim layer: expanded meta suppression, lead-in trimming, smarter context gating, scripture demotion, sharper quote precision, approval UI context fields",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
