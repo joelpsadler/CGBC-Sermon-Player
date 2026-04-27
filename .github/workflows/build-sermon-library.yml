@@ -72,11 +72,13 @@ jobs:
             data/library-resolved.json \
             data/stats.json \
             data/transcripts \
+            data/quotes \
             public/library-resolved.json \
             public/stats.json \
             stats/stats.json \
             stats/downloads_stats.csv \
-            transcripts_clean || true
+            transcripts_clean \
+            transcripts_display || true
 
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
