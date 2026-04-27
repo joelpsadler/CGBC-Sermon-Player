@@ -1265,6 +1265,8 @@ function isWeakContextText(value) {
   if (isInstructionalPrefixText(text)) return true;
   if (metaTeachingScore(text) > 0) return true;
   if (/\b(?:next strength|first point|second point|last week|we talked about|chapter|verse|turn your bibles|say amen|say read|let me get there)\b/i.test(text)) return true;
+  if (isOutlineOrLessonStructure(text)) return true;
+  if (isReflectionLeadIn(text)) return true;
   return false;
 }
 
@@ -1303,10 +1305,69 @@ function refineScriptureReadingQuote(value, scriptureMode) {
 }
 
 
+function dedupeQuoteSentences(value) {
+  const pieces = splitQuoteIntoThoughts(value)
+    .map(piece => normalizeQuoteWhitespace(piece))
+    .filter(Boolean);
+
+  const seen = new Set();
+  const kept = [];
+
+  for (const piece of pieces) {
+    const key = piece
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (!key) continue;
+    if (seen.has(key)) continue;
+
+    // Also catch one sentence accidentally containing a previously kept short
+    // sentence repeated as a tail.
+    const alreadyContained = kept.some(existing => {
+      const existingKey = existing.toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+      return existingKey && key.includes(existingKey) && existingKey.length > 18;
+    });
+
+    if (alreadyContained) continue;
+
+    seen.add(key);
+    kept.push(piece);
+  }
+
+  return normalizeQuoteWhitespace(kept.join(" "));
+}
+
+function isOutlineOrLessonStructure(value) {
+  return /\b(?:last weakness|next weakness|another weakness|the next strength|another strength|first strength|second strength|third strength|another reason|one reason|the last reason|the next reason|first point|second point|third point|we will go over|we'll go over|we have already mentioned|we've already mentioned)\b/i.test(value);
+}
+
+function isReflectionLeadIn(value) {
+  return /\b(?:let's think about|think about this|think about it|notice what we learn|what do we learn|let me ask you)\b/i.test(value);
+}
+
+function shouldAddSecondForwardContext(currentText, nextText) {
+  const current = normalizeQuoteWhitespace(currentText);
+  const next = normalizeQuoteWhitespace(nextText);
+
+  if (!next) return false;
+  if (quoteWordCount(next) > 10) return false;
+  if (isWeakContextText(next)) return false;
+  if (isOutlineOrLessonStructure(next)) return false;
+  if (isReflectionLeadIn(next)) return false;
+  if (scriptureModeForText(next) === "direct_scripture") return false;
+
+  return hasPastoralCharge(next)
+    || /\b(?:faith|ready|truth|word|church|christ|lord|grace|worship|salvation)\b/i.test(next);
+}
+
+
 function recoverQuoteContext(rawText, displayText) {
-  const display = normalizeQuoteWhitespace(displayText);
+  const display = dedupeQuoteSentences(normalizeQuoteWhitespace(displayText));
   const thoughts = splitQuoteIntoThoughts(rawText)
-    .map(thought => trimTailFillers(cleanupSpeechDisfluencies(thought)))
+    .map(thought => trimInstructionalPrefix(cleanupSpeechDisfluencies(thought)))
+    .map(thought => dedupeQuoteSentences(thought))
     .filter(Boolean);
 
   const currentIndex = thoughts.findIndex(thought => {
@@ -1315,12 +1376,15 @@ function recoverQuoteContext(rawText, displayText) {
 
   const before = currentIndex > 0 ? thoughts[currentIndex - 1] : "";
   const after = currentIndex >= 0 && currentIndex < thoughts.length - 1 ? thoughts[currentIndex + 1] : "";
+  const secondAfter = currentIndex >= 0 && currentIndex < thoughts.length - 2 ? thoughts[currentIndex + 2] : "";
 
   function contextAllowed(text) {
     if (!text) return false;
     if (quoteWordCount(text) < 4 || quoteWordCount(text) > 28) return false;
     if (isBrandSignatureText(text)) return false;
     if (isWeakContextText(text)) return false;
+    if (isOutlineOrLessonStructure(text)) return false;
+    if (isReflectionLeadIn(text)) return false;
     if (scriptureModeForText(text) === "direct_scripture") return false;
     if (hardRejectQuoteReason(text, {})) return false;
     return true;
@@ -1329,175 +1393,34 @@ function recoverQuoteContext(rawText, displayText) {
   const useBefore = quoteWordCount(display) < 16 && contextAllowed(before);
   const useAfter = (quoteWordCount(display) < 12 && contextAllowed(after)) || isGoodForwardContext(after);
 
-  const recoveredParts = [
+  let recoveredParts = [
     useBefore ? before : "",
     display,
     useAfter ? after : ""
   ].filter(Boolean);
 
-  const recoveredText = normalizeQuoteWhitespace(recoveredParts.join(" "));
+  let recoveredText = dedupeQuoteSentences(normalizeQuoteWhitespace(recoveredParts.join(" ")));
+
+  // Special case: a compact theological sentence is followed by a very short
+  // pastoral/application sentence. This catches quotes like:
+  // "He's not just going to lay it out there for us. We still have to live in faith."
+  if (useAfter && shouldAddSecondForwardContext(recoveredText, secondAfter)) {
+    recoveredText = dedupeQuoteSentences(`${recoveredText} ${secondAfter}`);
+    recoveredParts.push(secondAfter);
+  }
 
   return {
     contextBefore: before || null,
     contextAfter: after || null,
+    contextSecondAfter: secondAfter || null,
     contextWindow: {
       before: before || null,
       quote: display,
-      after: after || null
+      after: after || null,
+      secondAfter: secondAfter || null
     },
     contextRecoveryUsed: recoveredText !== display,
     recoveredText
-  };
-}
-
-
-function speechDisfluencyScore(rawText, displayText) {
-  const raw = normalizeQuoteWhitespace(rawText);
-  const display = normalizeQuoteWhitespace(displayText);
-  let score = 0;
-
-  const patterns = [
-    /\ball right\b/gi,
-    /\balright\b/gi,
-    /\bright\?/gi,
-    /\bamen\?/gi,
-    /\bokay\?/gi,
-    /\byou know\b/gi,
-    /\bi mean\b/gi,
-    /\blisten\b/gi,
-    /\blook\b/gi,
-    /\by'all\b/gi,
-    /\bthe,\s*the\b/gi,
-    /\b(\w{1,14})(?:,\s*\1\b){1,4}/gi,
-    /\b(\w{2,14})\s+\1\b/gi
-  ];
-
-  for (const pattern of patterns) {
-    const matches = raw.match(pattern);
-    if (matches) score += matches.length;
-  }
-
-  if (display.length < raw.length * 0.75) score += 1;
-  return score;
-}
-
-function speakerNaturalnessScore(displayText, flags, disfluencyScoreValue) {
-  let score = 100;
-  const words = quoteWordCount(displayText);
-
-  if (words < 10) score -= 20;
-  if (words > 38) score -= 15;
-  if (flags.fillerHeavy) score -= 25;
-  if (!flags.startsCleanly) score -= 20;
-  if (!flags.endsCleanly) score -= 10;
-  score -= Math.min(disfluencyScoreValue * 8, 32);
-
-  if (flags.quoteReady) score += 8;
-  if (flags.doctrinal) score += 5;
-
-  return Math.max(0, Math.min(100, score));
-}
-
-function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
-  const text = normalizeQuoteWhitespace(rawText);
-  const displayWordCount = quoteWordCount(displayText);
-  const sentence = quoteSentenceCompleteness(displayText);
-
-  const fillerHeavy = /\b(amen\?|okay|anyway|you know what i'm saying|right\?|does that make sense)\b/i.test(text);
-  const scriptureDense = /\b(?:genesis|exodus|leviticus|numbers|deuteronomy|joshua|judges|ruth|samuel|kings|chronicles|ezra|nehemiah|esther|job|psalm|psalms|proverbs|ecclesiastes|isaiah|jeremiah|lamentations|ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|luke|john|acts|romans|corinthians|galatians|ephesians|philippians|colossians|thessalonians|timothy|titus|philemon|hebrews|james|peter|jude|revelation)\b/i.test(text) || /\b\d+\s*:\s*\d+\b/.test(text);
-  const prayer = /\b(father|lord|pray|amen|thank you for your word|in jesus name)\b/i.test(text);
-  const humor = /\b(ain't|you know what i'm saying|okay\?|amen\?)\b/i.test(text);
-  const doctrinal = strongTerms.length >= 2 || /\b(gospel|salvation|grace|faith|christ|church|wrath|tribulation|rapture|resurrection|truth)\b/i.test(text);
-
-  return {
-    fillerHeavy,
-    scriptureDense,
-    prayer,
-    humor,
-    doctrinal,
-    startsCleanly: sentence.startsCleanly,
-    endsCleanly: sentence.endsCleanly,
-    hasOrphanLeadingPunctuation: sentence.hasOrphanLeadingPunctuation,
-    beginsLowercase: sentence.beginsLowercase,
-    preferredLength: displayWordCount >= 12 && displayWordCount <= 32,
-    longThought: displayWordCount > 38,
-    quoteReady: displayWordCount >= 12
-      && displayWordCount <= 38
-      && lowValuePenalty <= 1
-      && sentence.startsCleanly
-      && sentence.endsCleanly
-      && !fillerHeavy
-      && !prayer
-  };
-}
-
-function qualityAdjustedQuoteScore(baseScore, flags) {
-  let score = baseScore;
-  if (flags.quoteReady) score += 16;
-  if (flags.preferredLength) score += 10;
-  if (flags.doctrinal) score += 8;
-  if (flags.scriptureDense) score += 3;
-  if (flags.prayer) score -= 22;
-  if (flags.longThought) score -= 16;
-  if (flags.fillerHeavy) score -= 18;
-  if (flags.humor) score -= 5;
-  if (!flags.startsCleanly) score -= 24;
-  if (!flags.endsCleanly) score -= 8;
-  if (flags.hasOrphanLeadingPunctuation) score -= 30;
-  if (flags.beginsLowercase) score -= 18;
-  return score;
-}
-
-function makeQuoteId(item, quoteIndex) {
-  return `${item.stableId || "episode"}-quote-${String(quoteIndex + 1).padStart(4, "0")}`;
-}
-
-function buildQuoteMediaHooks(item, start, end) {
-  const youtubeId = item?.video?.youtubeId || null;
-  const audioUrl = item?.audio?.url || null;
-  const videoUrl = item?.video?.url || (youtubeId ? `https://www.youtube.com/watch?v=${youtubeId}` : null);
-
-  return {
-    start,
-    end,
-    audioUrl,
-    youtubeId,
-    videoUrl,
-    hasAudio: Boolean(audioUrl),
-    hasVideo: Boolean(youtubeId || videoUrl)
-  };
-}
-
-function buildQuoteEpisodePayload(item) {
-  return {
-    stableId: item.stableId,
-    title: item.title?.display || item.title?.episodeName || "",
-    episodeName: item.title?.episodeName || "",
-    subtitle: item.title?.subtitle || "",
-    series: item.series?.name || "",
-    seriesKey: item.series?.key || "",
-    study: item.study?.name || "",
-    studyKey: item.study?.key || "",
-    scripture: item.scripture?.display || "",
-    date: item.date?.iso || null,
-    speaker: item.speaker || null,
-    shareUrl: item.links?.shareUrl || item.links?.episodeUrl || null,
-    episodeUrl: item.links?.episodeUrl || null
-  };
-}
-
-function buildQuoteCurationDefaults() {
-  return {
-    status: "candidate",
-    approved: false,
-    featured: false,
-    rejected: false,
-    approvedAt: null,
-    rejectedAt: null,
-    featuredAt: null,
-    reviewedAt: null,
-    reviewedBy: null,
-    note: ""
   };
 }
 
@@ -1545,8 +1468,9 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       displayText = refineScriptureReadingQuote(displayText, scriptureMode);
 
       const contextRecovery = recoverQuoteContext(rawText, displayText);
-      displayText = contextRecovery.recoveredText;
+      displayText = dedupeQuoteSentences(contextRecovery.recoveredText);
       displayText = trimInstructionalPrefix(displayText);
+      displayText = dedupeQuoteSentences(displayText);
 
       scriptureMode = scriptureModeForText(displayText);
       const metaScore = metaTeachingScore(displayText);
@@ -1560,6 +1484,8 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (brandSignature) continue;
       if (metaScore > 0) continue;
       if (isSeriesRecapText(displayText)) continue;
+      if (isOutlineOrLessonStructure(displayText) && timelessScoreValue < 35) continue;
+      if (isReflectionLeadIn(displayText) && timelessScoreValue < 35) continue;
       if (isWeakContextText(displayText) && !qualityFlags.doctrinal && !pastoralCharge) continue;
       if (scriptureMode === "direct_scripture") continue;
 
@@ -1615,10 +1541,14 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         pastoralCharge,
         timelessnessScore: timelessScoreValue,
         seriesRecap: isSeriesRecapText(displayText),
+        outlineOrLessonStructure: isOutlineOrLessonStructure(displayText),
+        reflectionLeadIn: isReflectionLeadIn(displayText),
+        duplicateSentenceDedupe: dedupeQuoteSentences(displayText) !== displayText,
         instructionalPrefixTrimmed: displayText !== polished.displayText && isInstructionalPrefixText(polished.displayText),
         contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
         contextBefore: contextRecovery.contextBefore,
         contextAfter: contextRecovery.contextAfter,
+        contextSecondAfter: contextRecovery.contextSecondAfter,
         contextWindow: contextRecovery.contextWindow,
         approvedText: null,
         expandedText: contextRecovery.recoveredText,
@@ -1733,7 +1663,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "micro precision layer: series recap suppression, instructional prefix trim, forward context recovery, scripture split refinement, sharper approval queue precision",
+      qualityPass: "nano precision layer: outline/lesson suppression, reflection lead-in suppression, second forward context recovery, duplicate sentence dedupe, and final approval queue polish",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1772,10 +1702,14 @@ function buildQuoteBank(items) {
       pastoralCharge: quote.pastoralCharge,
       timelessnessScore: quote.timelessnessScore,
       seriesRecap: quote.seriesRecap,
+      outlineOrLessonStructure: quote.outlineOrLessonStructure,
+      reflectionLeadIn: quote.reflectionLeadIn,
+      duplicateSentenceDedupe: quote.duplicateSentenceDedupe,
       instructionalPrefixTrimmed: quote.instructionalPrefixTrimmed,
       contextRecoveryUsed: quote.contextRecoveryUsed,
       contextBefore: quote.contextBefore,
       contextAfter: quote.contextAfter,
+      contextSecondAfter: quote.contextSecondAfter,
       contextWindow: quote.contextWindow,
       approvedText: quote.approvedText,
       expandedText: quote.expandedText,
