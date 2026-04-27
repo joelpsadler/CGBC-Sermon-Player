@@ -1424,6 +1424,57 @@ function recoverQuoteContext(rawText, displayText) {
   };
 }
 
+
+function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
+  const text = normalizeQuoteWhitespace(rawText);
+  const displayWordCount = quoteWordCount(displayText);
+  const sentence = quoteSentenceCompleteness(displayText);
+
+  const fillerHeavy = /\b(amen\?|okay|anyway|you know what i'm saying|right\?|does that make sense)\b/i.test(text);
+  const scriptureDense = /\b(?:genesis|exodus|leviticus|numbers|deuteronomy|joshua|judges|ruth|samuel|kings|chronicles|ezra|nehemiah|esther|job|psalm|psalms|proverbs|ecclesiastes|isaiah|jeremiah|lamentations|ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|luke|john|acts|romans|corinthians|galatians|ephesians|philippians|colossians|thessalonians|timothy|titus|philemon|hebrews|james|peter|jude|revelation)\b/i.test(text) || /\b\d+\s*:\s*\d+\b/.test(text);
+  const prayer = /\b(father|lord|pray|amen|thank you for your word|in jesus name)\b/i.test(text);
+  const humor = /\b(ain't|you know what i'm saying|okay\?|amen\?)\b/i.test(text);
+  const doctrinal = strongTerms.length >= 2 || /\b(gospel|salvation|grace|faith|christ|church|wrath|tribulation|rapture|resurrection|truth)\b/i.test(text);
+
+  return {
+    fillerHeavy,
+    scriptureDense,
+    prayer,
+    humor,
+    doctrinal,
+    startsCleanly: sentence.startsCleanly,
+    endsCleanly: sentence.endsCleanly,
+    hasOrphanLeadingPunctuation: sentence.hasOrphanLeadingPunctuation,
+    beginsLowercase: sentence.beginsLowercase,
+    preferredLength: displayWordCount >= 12 && displayWordCount <= 32,
+    longThought: displayWordCount > 38,
+    quoteReady: displayWordCount >= 12
+      && displayWordCount <= 38
+      && lowValuePenalty <= 1
+      && sentence.startsCleanly
+      && sentence.endsCleanly
+      && !fillerHeavy
+      && !prayer
+  };
+}
+
+function qualityAdjustedQuoteScore(baseScore, flags) {
+  let score = baseScore;
+  if (flags.quoteReady) score += 16;
+  if (flags.preferredLength) score += 10;
+  if (flags.doctrinal) score += 8;
+  if (flags.scriptureDense) score += 3;
+  if (flags.prayer) score -= 22;
+  if (flags.longThought) score -= 16;
+  if (flags.fillerHeavy) score -= 18;
+  if (flags.humor) score -= 5;
+  if (!flags.startsCleanly) score -= 24;
+  if (!flags.endsCleanly) score -= 8;
+  if (flags.hasOrphanLeadingPunctuation) score -= 30;
+  if (flags.beginsLowercase) score -= 18;
+  return score;
+}
+
 function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
   const displayJsonFile = item?.transcript?.languages?.[language]?.displayJsonFile || item?.transcript?.displayJsonFile;
   if (!displayJsonFile || !existsSync(displayJsonFile)) return [];
