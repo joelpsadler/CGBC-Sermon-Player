@@ -946,6 +946,106 @@ function quoteCategoryFromFlags(flags) {
   return "general";
 }
 
+function normalizeScriptureInQuoteText(value) {
+  let text = normalizeQuoteWhitespace(value);
+
+  // Common ASR/FCP caption issue:
+  //   Revelation 310 -> Revelation 3:10
+  //   Romans 8 one  -> Romans 8:1
+  const bookPattern = "(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalm|Psalms|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation)";
+
+  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d)\\s*(\\d{1,2})\\b`, "gi"), (match, book, chapter, verse) => {
+    // Avoid turning "Revelation 13, 7" style into nonsense here.
+    if (match.includes(",")) return match;
+    return `${book} ${chapter}:${verse}`;
+  });
+
+  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d+)\\s+(one|two|three|four|five|six|seven|eight|nine|ten)\\b`, "gi"), (match, book, chapter, word) => {
+    const map = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+    return `${book} ${chapter}:${map[word.toLowerCase()]}`;
+  });
+
+  return text;
+}
+
+function cleanupSpeechDisfluencies(value) {
+  let text = normalizeQuoteWhitespace(value);
+
+  // Remove common sermon/conversation lead-ins that read poorly as quote cards.
+  text = text
+    .replace(/^(?:all right|alright|right|listen|look|i mean|you know|y'all|yall)[,.?]?\s+/i, "")
+    .replace(/\b(?:all right|alright|you know what i'm saying|you know|i mean)\b[,.?]?\s*/gi, "")
+    .replace(/\b(?:listen|look)\b[,.]?\s+(?=(?:we|you|the|this|that|there|god|christ|jesus|church|scripture|revelation|romans)\b)/gi, "")
+    .replace(/\bRight\?\s*/g, "")
+    .replace(/\bAmen\?\s*/g, "");
+
+  // Collapse repeated short words caused by speech recognition.
+  // Example: "the, the, the church" -> "the church"
+  text = text.replace(/\b(\w{1,8})(?:,\s+\1\b){1,4}/gi, "$1");
+
+  // Collapse doubled words: "is is", "the the"
+  text = text.replace(/\b(\w{2,12})\s+\1\b/gi, "$1");
+
+  // Fix common rough ASR phrase from this transcript family.
+  text = text
+    .replace(/\bpre-rath\b/gi, "pre-wrath")
+    .replace(/\bpost-tribute\b/gi, "post-tribulation")
+    .replace(/\bspirit from\b/gi, "spared from")
+    .replace(/\binjure in your own time\b/gi, "enjoy in your own time");
+
+  text = normalizeScriptureInQuoteText(text);
+
+  return normalizeQuoteWhitespace(text)
+    .replace(/\s+([,.!?;:])/g, "$1")
+    .replace(/^(?:[.\-–—,;:!?]\s*)+/g, "")
+    .trim();
+}
+
+function speechDisfluencyScore(rawText, displayText) {
+  const raw = normalizeQuoteWhitespace(rawText);
+  const display = normalizeQuoteWhitespace(displayText);
+  let score = 0;
+
+  const patterns = [
+    /\ball right\b/gi,
+    /\balright\b/gi,
+    /\bright\?/gi,
+    /\bamen\?/gi,
+    /\byou know\b/gi,
+    /\bi mean\b/gi,
+    /\blisten\b/gi,
+    /\blook\b/gi,
+    /\by'all\b/gi,
+    /\b(\w{1,8})(?:,\s+\1\b){1,4}/gi,
+    /\b(\w{2,12})\s+\1\b/gi
+  ];
+
+  for (const pattern of patterns) {
+    const matches = raw.match(pattern);
+    if (matches) score += matches.length;
+  }
+
+  if (display.length < raw.length * 0.75) score += 1;
+  return score;
+}
+
+function speakerNaturalnessScore(displayText, flags, disfluencyScoreValue) {
+  let score = 100;
+  const words = quoteWordCount(displayText);
+
+  if (words < 10) score -= 20;
+  if (words > 38) score -= 15;
+  if (flags.fillerHeavy) score -= 25;
+  if (!flags.startsCleanly) score -= 20;
+  if (!flags.endsCleanly) score -= 10;
+  score -= Math.min(disfluencyScoreValue * 8, 32);
+
+  if (flags.quoteReady) score += 8;
+  if (flags.doctrinal) score += 5;
+
+  return Math.max(0, Math.min(100, score));
+}
+
 function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
   const text = normalizeQuoteWhitespace(rawText);
   const displayWordCount = quoteWordCount(displayText);
@@ -1084,20 +1184,24 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (lowValuePenalty >= 3 && strongTerms.length === 0) continue;
 
       const rawText = text;
-      const displayText = chooseBestQuoteThought(rawText);
+      const thoughtText = chooseBestQuoteThought(rawText);
+      const displayText = cleanupSpeechDisfluencies(thoughtText);
       if (quoteWordCount(displayText) < 10) continue;
 
       const displayStrongTerms = quoteStrongTermHits(displayText);
       const displayLowValuePenalty = quoteLowValuePenalty(displayText);
       const qualityFlags = quoteQualityFlags(rawText, displayText, displayStrongTerms, displayLowValuePenalty);
+      const disfluencyScore = speechDisfluencyScore(rawText, displayText);
+      const speakerNaturalness = speakerNaturalnessScore(displayText, qualityFlags, disfluencyScore);
 
       // Keep non-quote-ready items only if they are still strong doctrinal/search
       // candidates. The random quote UI can prefer quoteReady later.
       if (!qualityFlags.startsCleanly && !qualityFlags.doctrinal) continue;
       if (qualityFlags.hasOrphanLeadingPunctuation) continue;
+      if (speakerNaturalness < 45 && !qualityFlags.doctrinal) continue;
 
       const baseScore = quoteCandidateScore(displayText, quoteWordCount(displayText), durationSeconds, displayStrongTerms, displayLowValuePenalty);
-      const score = qualityAdjustedQuoteScore(baseScore, qualityFlags);
+      const score = qualityAdjustedQuoteScore(baseScore, qualityFlags) + Math.round((speakerNaturalness - 70) / 5);
       if (score < 30) continue;
 
       candidates.push({
@@ -1117,6 +1221,10 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         durationSeconds,
         score,
         baseScore,
+        disfluencyScore,
+        speakerNaturalness,
+        speechCleaned: displayText !== thoughtText,
+        thoughtText,
         strongTerms: displayStrongTerms,
         lowValuePenalty: displayLowValuePenalty,
         quoteCategory: quoteCategoryFromFlags(qualityFlags),
@@ -1227,7 +1335,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "sentence-boundary filtering, thought chunking, leading filler cleanup, and quoteReady flags",
+      qualityPass: "sentence-boundary filtering, thought chunking, speech cleanup, scripture normalization, and quoteReady flags",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1253,7 +1361,11 @@ function buildQuoteBank(items) {
       score: quote.score,
       qualityFlags: quote.qualityFlags,
       quoteCategory: quote.quoteCategory,
+      disfluencyScore: quote.disfluencyScore,
+      speakerNaturalness: quote.speakerNaturalness,
+      speechCleaned: quote.speechCleaned,
       rawText: quote.rawText,
+      thoughtText: quote.thoughtText,
       displayText: quote.displayText,
       text: quote.displayText || quote.text
     }))
