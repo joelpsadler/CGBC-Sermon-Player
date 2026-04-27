@@ -867,6 +867,85 @@ function quoteSentenceCompleteness(value) {
   };
 }
 
+function splitQuoteIntoThoughts(value) {
+  const text = normalizeQuoteWhitespace(value);
+  if (!text) return [];
+
+  // First split on sentence punctuation, then also split on common sermon
+  // transition phrases. This helps avoid quote-card sprawl.
+  const sentencePieces = text
+    .split(/(?<=[.!?])\s+/)
+    .map(v => normalizeQuoteWhitespace(v))
+    .filter(Boolean);
+
+  const thoughts = [];
+  const transitionPattern = /\b(?:First|Second|Third|Fourth|Therefore|Remember|Again|Now|In other words|Listen|Look)\b[, ]+/g;
+
+  for (const piece of sentencePieces) {
+    let last = 0;
+    let match = null;
+    const startsWithTransition = /^(?:First|Second|Third|Fourth|Therefore|Remember|Again|Now|In other words|Listen|Look)\b/i.test(piece);
+
+    if (!startsWithTransition) {
+      while ((match = transitionPattern.exec(piece)) !== null) {
+        if (match.index > last) {
+          const before = normalizeQuoteWhitespace(piece.slice(last, match.index));
+          if (before) thoughts.push(before);
+        }
+        last = match.index;
+      }
+    }
+
+    const tail = normalizeQuoteWhitespace(piece.slice(last));
+    if (tail) thoughts.push(tail);
+  }
+
+  return thoughts.length ? thoughts : [text];
+}
+
+function chooseBestQuoteThought(rawText) {
+  const thoughts = splitQuoteIntoThoughts(rawText);
+  let best = "";
+  let bestScore = -999;
+
+  for (const thought of thoughts) {
+    const cleaned = buildQuoteDisplayText(thought);
+    const words = quoteWordCount(cleaned);
+    if (words < 8 || words > 38) continue;
+
+    const strongTerms = quoteStrongTermHits(cleaned);
+    const lowPenalty = quoteLowValuePenalty(cleaned);
+    const sentence = quoteSentenceCompleteness(cleaned);
+
+    let score = 0;
+    if (words >= 12 && words <= 30) score += 25;
+    if (sentence.startsCleanly) score += 18;
+    if (sentence.endsCleanly) score += 10;
+    score += Math.min(strongTerms.length * 6, 24);
+    score -= lowPenalty * 12;
+
+    if (/\b(gospel|faith|christ|church|grace|truth|wrath|tribulation|rapture|scripture|word|salvation)\b/i.test(cleaned)) score += 10;
+    if (/\b(let's pray|father|in jesus name|thank you lord)\b/i.test(cleaned)) score -= 18;
+    if (/\b(turn your bibles|we're gonna read|chapter|verse)\b/i.test(cleaned)) score -= 12;
+    if (/^(First|Second|Third|Therefore|Remember|Again|In other words)\b/i.test(cleaned)) score += 4;
+
+    if (score > bestScore) {
+      bestScore = score;
+      best = cleaned;
+    }
+  }
+
+  return best || buildQuoteDisplayText(rawText);
+}
+
+function quoteCategoryFromFlags(flags) {
+  if (flags.prayer) return "prayer";
+  if (flags.doctrinal && flags.scriptureDense) return "scripture_doctrine";
+  if (flags.doctrinal) return "doctrinal";
+  if (flags.scriptureDense) return "scripture";
+  return "general";
+}
+
 function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
   const text = normalizeQuoteWhitespace(rawText);
   const displayWordCount = quoteWordCount(displayText);
@@ -888,21 +967,26 @@ function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
     endsCleanly: sentence.endsCleanly,
     hasOrphanLeadingPunctuation: sentence.hasOrphanLeadingPunctuation,
     beginsLowercase: sentence.beginsLowercase,
+    preferredLength: displayWordCount >= 12 && displayWordCount <= 32,
+    longThought: displayWordCount > 38,
     quoteReady: displayWordCount >= 12
-      && displayWordCount <= 45
+      && displayWordCount <= 38
       && lowValuePenalty <= 1
       && sentence.startsCleanly
       && sentence.endsCleanly
       && !fillerHeavy
+      && !prayer
   };
 }
 
 function qualityAdjustedQuoteScore(baseScore, flags) {
   let score = baseScore;
-  if (flags.quoteReady) score += 14;
+  if (flags.quoteReady) score += 16;
+  if (flags.preferredLength) score += 10;
   if (flags.doctrinal) score += 8;
   if (flags.scriptureDense) score += 3;
-  if (flags.prayer) score -= 7;
+  if (flags.prayer) score -= 22;
+  if (flags.longThought) score -= 16;
   if (flags.fillerHeavy) score -= 18;
   if (flags.humor) score -= 5;
   if (!flags.startsCleanly) score -= 24;
@@ -1000,19 +1084,21 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (lowValuePenalty >= 3 && strongTerms.length === 0) continue;
 
       const rawText = text;
-      const displayText = buildQuoteDisplayText(rawText);
+      const displayText = chooseBestQuoteThought(rawText);
       if (quoteWordCount(displayText) < 10) continue;
 
-      const qualityFlags = quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty);
+      const displayStrongTerms = quoteStrongTermHits(displayText);
+      const displayLowValuePenalty = quoteLowValuePenalty(displayText);
+      const qualityFlags = quoteQualityFlags(rawText, displayText, displayStrongTerms, displayLowValuePenalty);
 
       // Keep non-quote-ready items only if they are still strong doctrinal/search
       // candidates. The random quote UI can prefer quoteReady later.
       if (!qualityFlags.startsCleanly && !qualityFlags.doctrinal) continue;
       if (qualityFlags.hasOrphanLeadingPunctuation) continue;
 
-      const baseScore = quoteCandidateScore(rawText, wordCount, durationSeconds, strongTerms, lowValuePenalty);
+      const baseScore = quoteCandidateScore(displayText, quoteWordCount(displayText), durationSeconds, displayStrongTerms, displayLowValuePenalty);
       const score = qualityAdjustedQuoteScore(baseScore, qualityFlags);
-      if (score < 28) continue;
+      if (score < 30) continue;
 
       candidates.push({
         id: makeQuoteId(item, candidates.length),
@@ -1031,8 +1117,9 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         durationSeconds,
         score,
         baseScore,
-        strongTerms,
-        lowValuePenalty,
+        strongTerms: displayStrongTerms,
+        lowValuePenalty: displayLowValuePenalty,
+        quoteCategory: quoteCategoryFromFlags(qualityFlags),
         qualityFlags,
         source: {
           transcriptDisplayJson: displayJsonFile,
@@ -1140,7 +1227,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "sentence-boundary filtering, leading filler cleanup, and quoteReady flags",
+      qualityPass: "sentence-boundary filtering, thought chunking, leading filler cleanup, and quoteReady flags",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1165,6 +1252,7 @@ function buildQuoteBank(items) {
       end: quote.end,
       score: quote.score,
       qualityFlags: quote.qualityFlags,
+      quoteCategory: quote.quoteCategory,
       rawText: quote.rawText,
       displayText: quote.displayText,
       text: quote.displayText || quote.text
