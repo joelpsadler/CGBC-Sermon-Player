@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-27T03:41:02.643Z",
+  "generatedAt": "2026-04-27T04:15:21.808Z",
   "version": 1,
   "language": "en",
   "count": 75,
@@ -74,14 +74,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 46,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "We must be removed in order to usher his coming.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "We must be removed in order to usher his coming.",
         "quote": "That is the antichrist, making the rapture, and the 2nd coming, I believe, separate events.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "We must be removed in order to usher his coming. That is the antichrist, making the rapture, and the 2nd coming, I believe, separate events.",
@@ -160,14 +165,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "between the 3.5 year mark and the end of the great tribulation.",
       "contextAfter": "the church will be persecuted by the Antichrist, but will be removed before God's wrath takes place.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "between the 3.5 year mark and the end of the great tribulation.",
         "quote": "They separate the persecution of the Antichrist with the pouring out of God's wrath.",
-        "after": "the church will be persecuted by the Antichrist, but will be removed before God's wrath takes place."
+        "after": "the church will be persecuted by the Antichrist, but will be removed before God's wrath takes place.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "They separate the persecution of the Antichrist with the pouring out of God's wrath. The church will be persecuted by the Antichrist, but will be removed before God's wrath takes place.",
@@ -178,6 +188,97 @@
     },
     {
       "id": "media-ll5nku-quote-0003",
+      "status": "candidate",
+      "curation": {
+        "status": "candidate",
+        "approved": false,
+        "featured": false,
+        "rejected": false,
+        "approvedAt": null,
+        "rejectedAt": null,
+        "featuredAt": null,
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "note": ""
+      },
+      "episode": {
+        "stableId": "media-ll5nku",
+        "title": "The Rapture Pt. 5 (Post-Tribulation)",
+        "episodeName": "The Rapture Pt. 5",
+        "subtitle": "Post-Tribulation",
+        "series": "The Rapture",
+        "seriesKey": "the-rapture",
+        "study": "Eschatology",
+        "studyKey": "eschatology",
+        "scripture": "Revelation 3:10",
+        "date": "2026-04-22",
+        "speaker": "Pastor Jacob Lannom",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
+      },
+      "media": {
+        "start": 691.433,
+        "end": 698.45,
+        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
+        "youtubeId": "T-cd2mlwDSk",
+        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
+        "hasAudio": true,
+        "hasVideo": true
+      },
+      "start": 691.433,
+      "end": 698.45,
+      "score": 133,
+      "qualityFlags": {
+        "fillerHeavy": false,
+        "scriptureDense": false,
+        "prayer": false,
+        "humor": false,
+        "doctrinal": true,
+        "startsCleanly": true,
+        "endsCleanly": true,
+        "hasOrphanLeadingPunctuation": false,
+        "beginsLowercase": false,
+        "preferredLength": true,
+        "longThought": false,
+        "quoteReady": true
+      },
+      "quoteCategory": "pastoral_charge",
+      "disfluencyScore": 0,
+      "speakerNaturalness": 100,
+      "speechCleaned": true,
+      "speechCleanPasses": 1,
+      "hardRejectReason": null,
+      "scriptureMode": "application",
+      "metaTeachingScore": 0,
+      "brandSignature": false,
+      "tailTrimmed": true,
+      "contrastBoost": 0,
+      "pastoralCharge": true,
+      "timelessnessScore": 40,
+      "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
+      "instructionalPrefixTrimmed": false,
+      "contextRecoveryUsed": true,
+      "contextBefore": null,
+      "contextAfter": "He's not just going to lay it out there for us.",
+      "contextSecondAfter": "We still have to live in faith.",
+      "contextWindow": {
+        "before": null,
+        "quote": "I think that's what the beauty of God's word is, though.",
+        "after": "He's not just going to lay it out there for us.",
+        "secondAfter": "We still have to live in faith."
+      },
+      "approvedText": null,
+      "expandedText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us. We still have to live in faith.",
+      "rawText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us. We still have to live in faith.",
+      "thoughtText": "I think that's what the beauty of God's word is, though.",
+      "displayText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us. We still have to live in faith.",
+      "text": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us. We still have to live in faith."
+    },
+    {
+      "id": "media-ll5nku-quote-0004",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -246,14 +347,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "that was one of the weaknesses per se that people have for the other 2 is that they separate a 2nd coming and the rapture of the church.",
+      "contextSecondAfter": "We're gonna read Revelation 19, turn your Bibles to Revelation 19.",
       "contextWindow": {
         "before": null,
         "quote": "Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ.",
-        "after": "that was one of the weaknesses per se that people have for the other 2 is that they separate a 2nd coming and the rapture of the church."
+        "after": "that was one of the weaknesses per se that people have for the other 2 is that they separate a 2nd coming and the rapture of the church.",
+        "secondAfter": "We're gonna read Revelation 19, turn your Bibles to Revelation 19."
       },
       "approvedText": null,
       "expandedText": "Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ.",
@@ -263,7 +369,7 @@
       "text": "Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ."
     },
     {
-      "id": "media-ll5nku-quote-0004",
+      "id": "media-ll5nku-quote-0005",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -332,14 +438,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "That stuff is going to happen.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "That stuff is going to happen.",
         "quote": "But it cannot happen until the Holy Spirit is moved, therefore, the church.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "That stuff is going to happen. But it cannot happen until the Holy Spirit is moved, therefore, the church.",
@@ -347,92 +458,6 @@
       "thoughtText": "it cannot happen until the Holy Spirit is moved, therefore, the church.",
       "displayText": "That stuff is going to happen. But it cannot happen until the Holy Spirit is moved, therefore, the church.",
       "text": "That stuff is going to happen. But it cannot happen until the Holy Spirit is moved, therefore, the church."
-    },
-    {
-      "id": "media-ll5nku-quote-0005",
-      "status": "candidate",
-      "curation": {
-        "status": "candidate",
-        "approved": false,
-        "featured": false,
-        "rejected": false,
-        "approvedAt": null,
-        "rejectedAt": null,
-        "featuredAt": null,
-        "reviewedAt": null,
-        "reviewedBy": null,
-        "note": ""
-      },
-      "episode": {
-        "stableId": "media-ll5nku",
-        "title": "The Rapture Pt. 5 (Post-Tribulation)",
-        "episodeName": "The Rapture Pt. 5",
-        "subtitle": "Post-Tribulation",
-        "series": "The Rapture",
-        "seriesKey": "the-rapture",
-        "study": "Eschatology",
-        "studyKey": "eschatology",
-        "scripture": "Revelation 3:10",
-        "date": "2026-04-22",
-        "speaker": "Pastor Jacob Lannom",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
-      },
-      "media": {
-        "start": 883.85,
-        "end": 893.816,
-        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "youtubeId": "T-cd2mlwDSk",
-        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "hasAudio": true,
-        "hasVideo": true
-      },
-      "start": 883.85,
-      "end": 893.816,
-      "score": 123,
-      "qualityFlags": {
-        "fillerHeavy": false,
-        "scriptureDense": false,
-        "prayer": false,
-        "humor": false,
-        "doctrinal": true,
-        "startsCleanly": true,
-        "endsCleanly": true,
-        "hasOrphanLeadingPunctuation": false,
-        "beginsLowercase": false,
-        "preferredLength": true,
-        "longThought": false,
-        "quoteReady": true
-      },
-      "quoteCategory": "featured_candidate",
-      "disfluencyScore": 0,
-      "speakerNaturalness": 100,
-      "speechCleaned": true,
-      "speechCleanPasses": 1,
-      "hardRejectReason": null,
-      "scriptureMode": "application",
-      "metaTeachingScore": 0,
-      "brandSignature": false,
-      "tailTrimmed": true,
-      "contrastBoost": 12,
-      "pastoralCharge": false,
-      "timelessnessScore": 40,
-      "seriesRecap": false,
-      "instructionalPrefixTrimmed": false,
-      "contextRecoveryUsed": true,
-      "contextBefore": null,
-      "contextAfter": "The last weakness we will go over is one we have already mentioned.",
-      "contextWindow": {
-        "before": null,
-        "quote": "I just know what we're told in scripture with the bold judgments, especially.",
-        "after": "The last weakness we will go over is one we have already mentioned."
-      },
-      "approvedText": null,
-      "expandedText": "I just know what we're told in scripture with the bold judgments, especially. The last weakness we will go over is one we have already mentioned.",
-      "rawText": "I just know what we're told in scripture with the bold judgments, especially. The last weakness we will go over is one we have already mentioned. The term church is not used after chapter 3.",
-      "thoughtText": "I just know what we're told in scripture with the bold judgments, especially.",
-      "displayText": "I just know what we're told in scripture with the bold judgments, especially. The last weakness we will go over is one we have already mentioned.",
-      "text": "I just know what we're told in scripture with the bold judgments, especially. The last weakness we will go over is one we have already mentioned."
     },
     {
       "id": "media-ll5nku-quote-0006",
@@ -504,14 +529,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "Let's think about this again.",
       "contextAfter": "We must be removed in order to usher his coming.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "Let's think about this again.",
         "quote": "Something is restraining, the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God.",
-        "after": "We must be removed in order to usher his coming."
+        "after": "We must be removed in order to usher his coming.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Something is restraining, the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God. We must be removed in order to usher his coming.",
@@ -590,14 +620,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": null,
       "contextAfter": "the pre-trib view holds that God calls the church up and keeps them from the wrath to come.",
+      "contextSecondAfter": "The mid-tribulation rapture takes place in Revelation 11.",
       "contextWindow": {
         "before": null,
         "quote": "This text comes before any mention of tribulation or wrath.",
-        "after": "the pre-trib view holds that God calls the church up and keeps them from the wrath to come."
+        "after": "the pre-trib view holds that God calls the church up and keeps them from the wrath to come.",
+        "secondAfter": "The mid-tribulation rapture takes place in Revelation 11."
       },
       "approvedText": null,
       "expandedText": "This text comes before any mention of tribulation or wrath. The pre-trib view holds that God calls the church up and keeps them from the wrath to come.",
@@ -676,14 +711,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "They had city gates and walls.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "They had city gates and walls.",
         "quote": "They were fortified, but yet, because of their sin, God was going to judge them.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "They had city gates and walls. They were fortified, but yet, because of their sin, God was going to judge them.",
@@ -762,14 +802,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "it's not that God is punishing us.",
+      "contextSecondAfter": "It's that God is proving us.",
       "contextWindow": {
         "before": null,
         "quote": "They look at the great tribulation, not as punishment for the saints, but rather a proving and purifying of the saints.",
-        "after": "it's not that God is punishing us."
+        "after": "it's not that God is punishing us.",
+        "secondAfter": "It's that God is proving us."
       },
       "approvedText": null,
       "expandedText": "They look at the great tribulation, not as punishment for the saints, but rather a proving and purifying of the saints.",
@@ -848,14 +893,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "Since this view pushed the rapture following the great tribulation, it would have to occur between chapters 16 and 19 following the bold judgments.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Since this view pushed the rapture following the great tribulation, it would have to occur between chapters 16 and 19 following the bold judgments.",
@@ -934,14 +984,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "can I understand that fully?",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "That is the antichrist, making the rapture, and the 2nd coming, I believe, separate events.",
-        "after": "can I understand that fully?"
+        "after": "can I understand that fully?",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "That is the antichrist, making the rapture, and the 2nd coming, I believe, separate events.",
@@ -1020,14 +1075,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "What if there's 50, 40, 30, 20?",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "What if there's 50, 40, 30, 20?",
         "quote": "I don't know, remember the exact conversation of numbers, but it kept on narrowing down.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "What if there's 50, 40, 30, 20? I don't know, remember the exact conversation of numbers, but it kept on narrowing down.",
@@ -1038,178 +1098,6 @@
     },
     {
       "id": "media-ll5nku-quote-0013",
-      "status": "candidate",
-      "curation": {
-        "status": "candidate",
-        "approved": false,
-        "featured": false,
-        "rejected": false,
-        "approvedAt": null,
-        "rejectedAt": null,
-        "featuredAt": null,
-        "reviewedAt": null,
-        "reviewedBy": null,
-        "note": ""
-      },
-      "episode": {
-        "stableId": "media-ll5nku",
-        "title": "The Rapture Pt. 5 (Post-Tribulation)",
-        "episodeName": "The Rapture Pt. 5",
-        "subtitle": "Post-Tribulation",
-        "series": "The Rapture",
-        "seriesKey": "the-rapture",
-        "study": "Eschatology",
-        "studyKey": "eschatology",
-        "scripture": "Revelation 3:10",
-        "date": "2026-04-22",
-        "speaker": "Pastor Jacob Lannom",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
-      },
-      "media": {
-        "start": 691.433,
-        "end": 698.45,
-        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "youtubeId": "T-cd2mlwDSk",
-        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "hasAudio": true,
-        "hasVideo": true
-      },
-      "start": 691.433,
-      "end": 698.45,
-      "score": 113,
-      "qualityFlags": {
-        "fillerHeavy": false,
-        "scriptureDense": false,
-        "prayer": false,
-        "humor": false,
-        "doctrinal": true,
-        "startsCleanly": true,
-        "endsCleanly": true,
-        "hasOrphanLeadingPunctuation": false,
-        "beginsLowercase": false,
-        "preferredLength": true,
-        "longThought": false,
-        "quoteReady": true
-      },
-      "quoteCategory": "doctrinal",
-      "disfluencyScore": 0,
-      "speakerNaturalness": 100,
-      "speechCleaned": true,
-      "speechCleanPasses": 1,
-      "hardRejectReason": null,
-      "scriptureMode": "application",
-      "metaTeachingScore": 0,
-      "brandSignature": false,
-      "tailTrimmed": true,
-      "contrastBoost": 0,
-      "pastoralCharge": false,
-      "timelessnessScore": 22,
-      "seriesRecap": false,
-      "instructionalPrefixTrimmed": false,
-      "contextRecoveryUsed": true,
-      "contextBefore": null,
-      "contextAfter": "He's not just going to lay it out there for us.",
-      "contextWindow": {
-        "before": null,
-        "quote": "I think that's what the beauty of God's word is, though.",
-        "after": "He's not just going to lay it out there for us."
-      },
-      "approvedText": null,
-      "expandedText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us.",
-      "rawText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us. We still have to live in faith.",
-      "thoughtText": "I think that's what the beauty of God's word is, though.",
-      "displayText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us.",
-      "text": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us."
-    },
-    {
-      "id": "media-ll5nku-quote-0014",
-      "status": "candidate",
-      "curation": {
-        "status": "candidate",
-        "approved": false,
-        "featured": false,
-        "rejected": false,
-        "approvedAt": null,
-        "rejectedAt": null,
-        "featuredAt": null,
-        "reviewedAt": null,
-        "reviewedBy": null,
-        "note": ""
-      },
-      "episode": {
-        "stableId": "media-ll5nku",
-        "title": "The Rapture Pt. 5 (Post-Tribulation)",
-        "episodeName": "The Rapture Pt. 5",
-        "subtitle": "Post-Tribulation",
-        "series": "The Rapture",
-        "seriesKey": "the-rapture",
-        "study": "Eschatology",
-        "studyKey": "eschatology",
-        "scripture": "Revelation 3:10",
-        "date": "2026-04-22",
-        "speaker": "Pastor Jacob Lannom",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
-      },
-      "media": {
-        "start": 1232.816,
-        "end": 1240.433,
-        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "youtubeId": "T-cd2mlwDSk",
-        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "hasAudio": true,
-        "hasVideo": true
-      },
-      "start": 1232.816,
-      "end": 1240.433,
-      "score": 113,
-      "qualityFlags": {
-        "fillerHeavy": false,
-        "scriptureDense": false,
-        "prayer": false,
-        "humor": false,
-        "doctrinal": true,
-        "startsCleanly": true,
-        "endsCleanly": true,
-        "hasOrphanLeadingPunctuation": false,
-        "beginsLowercase": false,
-        "preferredLength": true,
-        "longThought": false,
-        "quoteReady": true
-      },
-      "quoteCategory": "doctrinal",
-      "disfluencyScore": 1,
-      "speakerNaturalness": 100,
-      "speechCleaned": true,
-      "speechCleanPasses": 1,
-      "hardRejectReason": null,
-      "scriptureMode": "none",
-      "metaTeachingScore": 0,
-      "brandSignature": false,
-      "tailTrimmed": true,
-      "contrastBoost": 0,
-      "pastoralCharge": false,
-      "timelessnessScore": 22,
-      "seriesRecap": false,
-      "instructionalPrefixTrimmed": false,
-      "contextRecoveryUsed": true,
-      "contextBefore": null,
-      "contextAfter": "This was not persecution, this was wrath.",
-      "contextWindow": {
-        "before": null,
-        "quote": "Everyone else was not. This was not persecution, this was wrath. Now, that's that's one reason",
-        "after": "This was not persecution, this was wrath."
-      },
-      "approvedText": null,
-      "expandedText": "Everyone else was not. This was not persecution, this was wrath. Now, that's that's one reason This was not persecution, this was wrath.",
-      "rawText": "Everyone else was not. This was not persecution, this was wrath. Now, now, that's that's one reason",
-      "thoughtText": "Everyone else was not. This was not persecution, this was wrath. Now, now, that's that's one reason",
-      "displayText": "Everyone else was not. This was not persecution, this was wrath. Now, that's that's one reason This was not persecution, this was wrath.",
-      "text": "Everyone else was not. This was not persecution, this was wrath. Now, that's that's one reason This was not persecution, this was wrath."
-    },
-    {
-      "id": "media-ll5nku-quote-0015",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1278,14 +1166,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "Let's think about this again.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "Let's think about this again.",
         "quote": "Something is restraining, the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Something is restraining, the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God.",
@@ -1295,7 +1188,7 @@
       "text": "Something is restraining, the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God."
     },
     {
-      "id": "media-ll5nku-quote-0016",
+      "id": "media-ll5nku-quote-0014",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1364,14 +1257,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "are you ready?",
+      "contextSecondAfter": "Is your faith able to stand up to that?",
       "contextWindow": {
         "before": null,
         "quote": "Let's say that it's not pre-trib, and we have to go through the 1st half, and it's mid-trib, or it's pre-wrath.",
-        "after": "are you ready?"
+        "after": "are you ready?",
+        "secondAfter": "Is your faith able to stand up to that?"
       },
       "approvedText": null,
       "expandedText": "Let's say that it's not pre-trib, and we have to go through the 1st half, and it's mid-trib, or it's pre-wrath.",
@@ -1381,7 +1279,7 @@
       "text": "Let's say that it's not pre-trib, and we have to go through the 1st half, and it's mid-trib, or it's pre-wrath."
     },
     {
-      "id": "media-ll5nku-quote-0017",
+      "id": "media-ll5nku-quote-0015",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1450,14 +1348,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
-      "contextAfter": "Well, think about the conversation.",
+      "contextAfter": "the conversation.",
+      "contextSecondAfter": "Abraham have a God.",
       "contextWindow": {
         "before": null,
         "quote": "They were fortified, but yet, because of their sin, God was going to judge them.",
-        "after": "Well, think about the conversation."
+        "after": "the conversation.",
+        "secondAfter": "Abraham have a God."
       },
       "approvedText": null,
       "expandedText": "They were fortified, but yet, because of their sin, God was going to judge them.",
@@ -1467,7 +1370,7 @@
       "text": "They were fortified, but yet, because of their sin, God was going to judge them."
     },
     {
-      "id": "media-ll5nku-quote-0018",
+      "id": "media-ll5nku-quote-0016",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1536,14 +1439,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "if the church is to go through the tribulation, then we have to believe that God desires to pour his wrath on them as well.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "However, if you read what is going to happen, there is no way the saints are not affected.",
-        "after": "if the church is to go through the tribulation, then we have to believe that God desires to pour his wrath on them as well."
+        "after": "if the church is to go through the tribulation, then we have to believe that God desires to pour his wrath on them as well.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "However, if you read what is going to happen, there is no way the saints are not affected.",
@@ -1553,93 +1461,7 @@
       "text": "However, if you read what is going to happen, there is no way the saints are not affected."
     },
     {
-      "id": "media-ll5nku-quote-0019",
-      "status": "candidate",
-      "curation": {
-        "status": "candidate",
-        "approved": false,
-        "featured": false,
-        "rejected": false,
-        "approvedAt": null,
-        "rejectedAt": null,
-        "featuredAt": null,
-        "reviewedAt": null,
-        "reviewedBy": null,
-        "note": ""
-      },
-      "episode": {
-        "stableId": "media-ll5nku",
-        "title": "The Rapture Pt. 5 (Post-Tribulation)",
-        "episodeName": "The Rapture Pt. 5",
-        "subtitle": "Post-Tribulation",
-        "series": "The Rapture",
-        "seriesKey": "the-rapture",
-        "study": "Eschatology",
-        "studyKey": "eschatology",
-        "scripture": "Revelation 3:10",
-        "date": "2026-04-22",
-        "speaker": "Pastor Jacob Lannom",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
-      },
-      "media": {
-        "start": 1426.366,
-        "end": 1437.766,
-        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "youtubeId": "T-cd2mlwDSk",
-        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "hasAudio": true,
-        "hasVideo": true
-      },
-      "start": 1426.366,
-      "end": 1437.766,
-      "score": 110,
-      "qualityFlags": {
-        "fillerHeavy": false,
-        "scriptureDense": false,
-        "prayer": false,
-        "humor": false,
-        "doctrinal": false,
-        "startsCleanly": true,
-        "endsCleanly": true,
-        "hasOrphanLeadingPunctuation": false,
-        "beginsLowercase": false,
-        "preferredLength": true,
-        "longThought": false,
-        "quoteReady": true
-      },
-      "quoteCategory": "pastoral_charge",
-      "disfluencyScore": 0,
-      "speakerNaturalness": 100,
-      "speechCleaned": false,
-      "speechCleanPasses": 1,
-      "hardRejectReason": null,
-      "scriptureMode": "application",
-      "metaTeachingScore": 0,
-      "brandSignature": false,
-      "tailTrimmed": false,
-      "contrastBoost": 0,
-      "pastoralCharge": true,
-      "timelessnessScore": 28,
-      "seriesRecap": false,
-      "instructionalPrefixTrimmed": false,
-      "contextRecoveryUsed": false,
-      "contextBefore": null,
-      "contextAfter": "Notice what we learn here.",
-      "contextWindow": {
-        "before": null,
-        "quote": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who? With them, who is them?",
-        "after": "Notice what we learn here."
-      },
-      "approvedText": null,
-      "expandedText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who? With them, who is them?",
-      "rawText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who? With them, who is them?",
-      "thoughtText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who? With them, who is them?",
-      "displayText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who? With them, who is them?",
-      "text": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who? With them, who is them?"
-    },
-    {
-      "id": "media-ll5nku-quote-0020",
+      "id": "media-ll5nku-quote-0017",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1708,14 +1530,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "The pre-tribulation rapture in order, the order is given, and Revelation comes between Revelation 3 and four.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "The pre-tribulation rapture in order, the order is given, and Revelation comes between Revelation 3 and four.",
@@ -1725,7 +1552,7 @@
       "text": "The pre-tribulation rapture in order, the order is given, and Revelation comes between Revelation 3 and four."
     },
     {
-      "id": "media-ll5nku-quote-0021",
+      "id": "media-ll5nku-quote-0018",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1794,14 +1621,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": null,
       "contextAfter": "We still have to live in faith.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "He's not just going to lay it out there for us.",
-        "after": "We still have to live in faith."
+        "after": "We still have to live in faith.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "He's not just going to lay it out there for us. We still have to live in faith.",
@@ -1811,7 +1643,7 @@
       "text": "He's not just going to lay it out there for us. We still have to live in faith."
     },
     {
-      "id": "media-ll5nku-quote-0022",
+      "id": "media-ll5nku-quote-0019",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1880,14 +1712,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "Until the ending nation be overpassed.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "Until the ending nation be overpassed.",
         "quote": "I don't know if Isaiah even fully understood what he was saying there, but this is obviously a mystery, but I just want to connect some dots here.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I don't know if Isaiah even fully understood what he was saying there, but this is obviously a mystery, but I just want to connect some dots here.",
@@ -1897,7 +1734,7 @@
       "text": "I don't know if Isaiah even fully understood what he was saying there, but this is obviously a mystery, but I just want to connect some dots here."
     },
     {
-      "id": "media-ll5nku-quote-0023",
+      "id": "media-ll5nku-quote-0020",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -1966,14 +1803,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "white horse, and he sat upon him was called faithful and true, and in righteousness, he doesn't judge and make war.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "white horse, and he sat upon him was called faithful and true, and in righteousness, he doesn't judge and make war.",
         "quote": "His eyes were as a flame of fire, and on his head were many crowns, and he had a name written at no man knew, but he himself.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "His eyes were as a flame of fire, and on his head were many crowns, and he had a name written at no man knew, but he himself.",
@@ -1983,7 +1825,7 @@
       "text": "His eyes were as a flame of fire, and on his head were many crowns, and he had a name written at no man knew, but he himself."
     },
     {
-      "id": "media-ll5nku-quote-0024",
+      "id": "media-ll5nku-quote-0021",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2052,14 +1894,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "I didn't want to do this from the beginning.",
       "contextAfter": "Although I'm willing to be wrong.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "I didn't want to do this from the beginning.",
         "quote": "I'm sure you've kind of heard a little bit of where I probably stand when my passion was lying when I was explaining certain things.",
-        "after": "Although I'm willing to be wrong."
+        "after": "Although I'm willing to be wrong.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I'm sure you've kind of heard a little bit of where I probably stand when my passion was lying when I was explaining certain things. Although I'm willing to be wrong.",
@@ -2069,7 +1916,7 @@
       "text": "I'm sure you've kind of heard a little bit of where I probably stand when my passion was lying when I was explaining certain things. Although I'm willing to be wrong."
     },
     {
-      "id": "media-ll5nku-quote-0025",
+      "id": "media-ll5nku-quote-0022",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2138,14 +1985,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "God said, hey, yeah, I'll spare them for that much.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "I don't know, remember the exact conversation of numbers, but it kept on narrowing down.",
-        "after": "God said, hey, yeah, I'll spare them for that much."
+        "after": "God said, hey, yeah, I'll spare them for that much.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I don't know, remember the exact conversation of numbers, but it kept on narrowing down.",
@@ -2155,7 +2007,7 @@
       "text": "I don't know, remember the exact conversation of numbers, but it kept on narrowing down."
     },
     {
-      "id": "media-ll5nku-quote-0026",
+      "id": "media-ll5nku-quote-0023",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2224,14 +2076,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "The church is celebrating the fact and trying to get the 3rd temple built so they can usher in the end times.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "The church is celebrating the fact and trying to get the 3rd temple built so they can usher in the end times.",
@@ -2241,7 +2098,7 @@
       "text": "The church is celebrating the fact and trying to get the 3rd temple built so they can usher in the end times."
     },
     {
-      "id": "media-ll5nku-quote-0027",
+      "id": "media-ll5nku-quote-0024",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2310,14 +2167,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "there is an additional view.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "there is an additional view.",
         "quote": "That's the pre-tribulation, and I understand, there's so much to go over in this that I'm kind of given an overview.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "That's the pre-tribulation, and I understand, there's so much to go over in this that I'm kind of given an overview.",
@@ -2327,7 +2189,7 @@
       "text": "That's the pre-tribulation, and I understand, there's so much to go over in this that I'm kind of given an overview."
     },
     {
-      "id": "media-ll5nku-quote-0028",
+      "id": "media-ll5nku-quote-0025",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2396,14 +2258,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "at scripture, we can study this, we can believe.",
       "contextAfter": "Knowing that when we are absent from the body.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "at scripture, we can study this, we can believe.",
         "quote": "We got to be ready for whatever God has planned for us.",
-        "after": "Knowing that when we are absent from the body."
+        "after": "Knowing that when we are absent from the body.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "We got to be ready for whatever God has planned for us. Knowing that when we are absent from the body.",
@@ -2413,7 +2280,7 @@
       "text": "We got to be ready for whatever God has planned for us. Knowing that when we are absent from the body."
     },
     {
-      "id": "media-ll5nku-quote-0029",
+      "id": "media-ll5nku-quote-0026",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2482,14 +2349,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "God, may this make us more urgent in our faith and in our soul winning.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "God, may this make us more urgent in our faith and in our soul winning.",
@@ -2499,7 +2371,98 @@
       "text": "God, may this make us more urgent in our faith and in our soul winning."
     },
     {
-      "id": "media-ll5nku-quote-0030",
+      "id": "media-ll5nku-quote-0027",
+      "status": "candidate",
+      "curation": {
+        "status": "candidate",
+        "approved": false,
+        "featured": false,
+        "rejected": false,
+        "approvedAt": null,
+        "rejectedAt": null,
+        "featuredAt": null,
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "note": ""
+      },
+      "episode": {
+        "stableId": "media-ll5nku",
+        "title": "The Rapture Pt. 5 (Post-Tribulation)",
+        "episodeName": "The Rapture Pt. 5",
+        "subtitle": "Post-Tribulation",
+        "series": "The Rapture",
+        "seriesKey": "the-rapture",
+        "study": "Eschatology",
+        "studyKey": "eschatology",
+        "scripture": "Revelation 3:10",
+        "date": "2026-04-22",
+        "speaker": "Pastor Jacob Lannom",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
+      },
+      "media": {
+        "start": 680.933,
+        "end": 697.25,
+        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
+        "youtubeId": "T-cd2mlwDSk",
+        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
+        "hasAudio": true,
+        "hasVideo": true
+      },
+      "start": 680.933,
+      "end": 697.25,
+      "score": 103,
+      "qualityFlags": {
+        "fillerHeavy": false,
+        "scriptureDense": false,
+        "prayer": false,
+        "humor": false,
+        "doctrinal": false,
+        "startsCleanly": true,
+        "endsCleanly": true,
+        "hasOrphanLeadingPunctuation": false,
+        "beginsLowercase": false,
+        "preferredLength": true,
+        "longThought": false,
+        "quoteReady": true
+      },
+      "quoteCategory": "general",
+      "disfluencyScore": 2,
+      "speakerNaturalness": 92,
+      "speechCleaned": true,
+      "speechCleanPasses": 2,
+      "hardRejectReason": null,
+      "scriptureMode": "application",
+      "metaTeachingScore": 0,
+      "brandSignature": false,
+      "tailTrimmed": true,
+      "contrastBoost": 0,
+      "pastoralCharge": false,
+      "timelessnessScore": 22,
+      "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
+      "instructionalPrefixTrimmed": false,
+      "contextRecoveryUsed": true,
+      "contextBefore": "we every time I read, I can see what each view is talking about in each text.",
+      "contextAfter": "He's not just going to lay it out there for us.",
+      "contextSecondAfter": null,
+      "contextWindow": {
+        "before": "we every time I read, I can see what each view is talking about in each text.",
+        "quote": "I think that's what the beauty of God's word is, though.",
+        "after": "He's not just going to lay it out there for us.",
+        "secondAfter": null
+      },
+      "approvedText": null,
+      "expandedText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us.",
+      "rawText": "You understand what I'm saying? In other words, listen, we every time I read, I can see what each view is talking about in each text. I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us.",
+      "thoughtText": "In other words, listen, we every time I read, I can see what each view is talking about in each text.",
+      "displayText": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us.",
+      "text": "I think that's what the beauty of God's word is, though. He's not just going to lay it out there for us."
+    },
+    {
+      "id": "media-ll5nku-quote-0028",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2568,14 +2531,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "the church will be persecuted by the Antichrist, but will be removed before God's wrath takes place.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "the church will be persecuted by the Antichrist, but will be removed before God's wrath takes place.",
         "quote": "You have the 7 year tribulation, the 1st 3.5 years, persecution on the church, God's people.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "You have the 7 year tribulation, the 1st 3.5 years, persecution on the church, God's people.",
@@ -2585,7 +2553,7 @@
       "text": "You have the 7 year tribulation, the 1st 3.5 years, persecution on the church, God's people."
     },
     {
-      "id": "media-ll5nku-quote-0031",
+      "id": "media-ll5nku-quote-0029",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2654,14 +2622,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "There is no doubt this is going to happen.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "There is no doubt this is going to happen.",
         "quote": "You cannot get out of the fact that this is going to be an actual event.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "You cannot get out of the fact that this is going to be an actual event.",
@@ -2671,7 +2644,7 @@
       "text": "You cannot get out of the fact that this is going to be an actual event."
     },
     {
-      "id": "media-ll5nku-quote-0032",
+      "id": "media-ll5nku-quote-0030",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2740,14 +2713,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "There is intense persecution and trial even happening now.",
       "contextAfter": "They look at the great tribulation,",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "There is intense persecution and trial even happening now.",
         "quote": "What would make us think that God would not give us more.",
-        "after": "They look at the great tribulation,"
+        "after": "They look at the great tribulation,",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "There is intense persecution and trial even happening now. What would make us think that God would not give us more.",
@@ -2757,7 +2735,7 @@
       "text": "There is intense persecution and trial even happening now. What would make us think that God would not give us more."
     },
     {
-      "id": "media-ll5nku-quote-0033",
+      "id": "media-ll5nku-quote-0031",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2826,14 +2804,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "It was terrible.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "It was terrible.",
         "quote": "It was nothing but sinful and wickedness, but Noah, walk with God was blameless before him.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "It was nothing but sinful and wickedness, but Noah, walk with God was blameless before him.",
@@ -2843,7 +2826,7 @@
       "text": "It was nothing but sinful and wickedness, but Noah, walk with God was blameless before him."
     },
     {
-      "id": "media-ll5nku-quote-0034",
+      "id": "media-ll5nku-quote-0032",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2912,14 +2895,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "Evidently, they were cities that were thriving.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "Evidently, they were cities that were thriving.",
         "quote": "They were sinful and they were wicked, but they were big cities.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Evidently, they were cities that were thriving. They were sinful and they were wicked, but they were big cities.",
@@ -2929,7 +2917,7 @@
       "text": "Evidently, they were cities that were thriving. They were sinful and they were wicked, but they were big cities."
     },
     {
-      "id": "media-ll5nku-quote-0035",
+      "id": "media-ll5nku-quote-0033",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -2998,14 +2986,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "As a matter of fact, it was so bad, the rainbow that we have in the sky when it rains.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "As a matter of fact, it was so bad, the rainbow that we have in the sky when it rains.",
         "quote": "That's literally a promise that God said, I will not destroy the earth with water again.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "That's literally a promise that God said, I will not destroy the earth with water again.",
@@ -3015,93 +3008,7 @@
       "text": "That's literally a promise that God said, I will not destroy the earth with water again."
     },
     {
-      "id": "media-ll5nku-quote-0036",
-      "status": "candidate",
-      "curation": {
-        "status": "candidate",
-        "approved": false,
-        "featured": false,
-        "rejected": false,
-        "approvedAt": null,
-        "rejectedAt": null,
-        "featuredAt": null,
-        "reviewedAt": null,
-        "reviewedBy": null,
-        "note": ""
-      },
-      "episode": {
-        "stableId": "media-ll5nku",
-        "title": "The Rapture Pt. 5 (Post-Tribulation)",
-        "episodeName": "The Rapture Pt. 5",
-        "subtitle": "Post-Tribulation",
-        "series": "The Rapture",
-        "seriesKey": "the-rapture",
-        "study": "Eschatology",
-        "studyKey": "eschatology",
-        "scripture": "Revelation 3:10",
-        "date": "2026-04-22",
-        "speaker": "Pastor Jacob Lannom",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
-      },
-      "media": {
-        "start": 1426.366,
-        "end": 1435.783,
-        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "youtubeId": "T-cd2mlwDSk",
-        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "hasAudio": true,
-        "hasVideo": true
-      },
-      "start": 1426.366,
-      "end": 1435.783,
-      "score": 100,
-      "qualityFlags": {
-        "fillerHeavy": false,
-        "scriptureDense": false,
-        "prayer": false,
-        "humor": false,
-        "doctrinal": false,
-        "startsCleanly": true,
-        "endsCleanly": true,
-        "hasOrphanLeadingPunctuation": false,
-        "beginsLowercase": false,
-        "preferredLength": true,
-        "longThought": false,
-        "quoteReady": true
-      },
-      "quoteCategory": "pastoral_charge",
-      "disfluencyScore": 0,
-      "speakerNaturalness": 100,
-      "speechCleaned": false,
-      "speechCleanPasses": 1,
-      "hardRejectReason": null,
-      "scriptureMode": "application",
-      "metaTeachingScore": 0,
-      "brandSignature": false,
-      "tailTrimmed": false,
-      "contrastBoost": 0,
-      "pastoralCharge": true,
-      "timelessnessScore": 28,
-      "seriesRecap": false,
-      "instructionalPrefixTrimmed": false,
-      "contextRecoveryUsed": false,
-      "contextBefore": null,
-      "contextAfter": "Notice what we learn here.",
-      "contextWindow": {
-        "before": null,
-        "quote": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who?",
-        "after": "Notice what we learn here."
-      },
-      "approvedText": null,
-      "expandedText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who?",
-      "rawText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who?",
-      "thoughtText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who?",
-      "displayText": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who?",
-      "text": "Wherefore comfort one another with these words. Notice what we learn here. Those who are alive will join who?"
-    },
-    {
-      "id": "media-ll5nku-quote-0037",
+      "id": "media-ll5nku-quote-0034",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3170,14 +3077,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "that have the testimony of Jesus, worship God, for the testimony of Jesus is the spirit of prophecy.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "that have the testimony of Jesus, worship God, for the testimony of Jesus is the spirit of prophecy.",
         "quote": "By the way, I believe we should have the same heart posture, hearing what is to happen, we should become on our knees and worship God.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "By the way, I believe we should have the same heart posture, hearing what is to happen, we should become on our knees and worship God.",
@@ -3187,7 +3099,7 @@
       "text": "By the way, I believe we should have the same heart posture, hearing what is to happen, we should become on our knees and worship God."
     },
     {
-      "id": "media-ll5nku-quote-0038",
+      "id": "media-ll5nku-quote-0035",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3256,14 +3168,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "between the 3.5 year mark and the end of the great tribulation.",
       "contextAfter": "the church will be persecuted by the Antichrist, but",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "between the 3.5 year mark and the end of the great tribulation.",
         "quote": "They separate the persecution of the Antichrist with the pouring out of God's wrath.",
-        "after": "the church will be persecuted by the Antichrist, but"
+        "after": "the church will be persecuted by the Antichrist, but",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "They separate the persecution of the Antichrist with the pouring out of God's wrath. The church will be persecuted by the Antichrist, but",
@@ -3273,7 +3190,7 @@
       "text": "They separate the persecution of the Antichrist with the pouring out of God's wrath. The church will be persecuted by the Antichrist, but"
     },
     {
-      "id": "media-ll5nku-quote-0039",
+      "id": "media-ll5nku-quote-0036",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3342,14 +3259,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "When he takes away the salt.",
+      "contextSecondAfter": "A churchless world is a darkness that we cannot even comprehend.",
       "contextWindow": {
         "before": null,
         "quote": "Folks, no one realizes how bad things will get quickly when God removes the church from the earth.",
-        "after": "When he takes away the salt."
+        "after": "When he takes away the salt.",
+        "secondAfter": "A churchless world is a darkness that we cannot even comprehend."
       },
       "approvedText": null,
       "expandedText": "Folks, no one realizes how bad things will get quickly when God removes the church from the earth.",
@@ -3359,7 +3281,7 @@
       "text": "Folks, no one realizes how bad things will get quickly when God removes the church from the earth."
     },
     {
-      "id": "media-ll5nku-quote-0040",
+      "id": "media-ll5nku-quote-0037",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3428,14 +3350,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": null,
       "contextAfter": "if the church is to go through the tribulation,",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "However, if you read what is going to happen, there is no way the saints are not affected.",
-        "after": "if the church is to go through the tribulation,"
+        "after": "if the church is to go through the tribulation,",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "However, if you read what is going to happen, there is no way the saints are not affected. If the church is to go through the tribulation,",
@@ -3445,7 +3372,7 @@
       "text": "However, if you read what is going to happen, there is no way the saints are not affected. If the church is to go through the tribulation,"
     },
     {
-      "id": "media-ll5nku-quote-0041",
+      "id": "media-ll5nku-quote-0038",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3514,14 +3441,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "They were delivered from the wrath of God.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "They were delivered from the wrath of God.",
         "quote": "As a matter of fact, it was so bad, the rainbow that we have in the sky when it rains.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "As a matter of fact, it was so bad, the rainbow that we have in the sky when it rains.",
@@ -3531,7 +3463,7 @@
       "text": "As a matter of fact, it was so bad, the rainbow that we have in the sky when it rains."
     },
     {
-      "id": "media-ll5nku-quote-0042",
+      "id": "media-ll5nku-quote-0039",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3600,14 +3532,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "I don't want to do that.",
       "contextAfter": "And, man, I just, you're crazy, bro.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "I don't want to do that.",
         "quote": "I love people that say, man, we're going through the great tribulation.",
-        "after": "And, man, I just, you're crazy, bro."
+        "after": "And, man, I just, you're crazy, bro.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I don't want to do that. I love people that say, man, we're going through the great tribulation.",
@@ -3617,7 +3554,7 @@
       "text": "I don't want to do that. I love people that say, man, we're going through the great tribulation."
     },
     {
-      "id": "media-ll5nku-quote-0043",
+      "id": "media-ll5nku-quote-0040",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3686,14 +3623,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "The post tribulation people.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "The post tribulation people.",
         "quote": "People will also point out that historically God does not keep his people from intense persecution and trial.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "People will also point out that historically God does not keep his people from intense persecution and trial.",
@@ -3703,7 +3645,7 @@
       "text": "People will also point out that historically God does not keep his people from intense persecution and trial."
     },
     {
-      "id": "media-ll5nku-quote-0044",
+      "id": "media-ll5nku-quote-0041",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3772,14 +3714,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "that the pre-wrath rapture takes place somewhere in a time span between the 3.5 year mark and the end of the great tribulation.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "that the pre-wrath rapture takes place somewhere in a time span between the 3.5 year mark and the end of the great tribulation.",
         "quote": "They separate the persecution of the Antichrist with the pouring out of God's wrath.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "They separate the persecution of the Antichrist with the pouring out of God's wrath.",
@@ -3789,7 +3736,7 @@
       "text": "They separate the persecution of the Antichrist with the pouring out of God's wrath."
     },
     {
-      "id": "media-ll5nku-quote-0045",
+      "id": "media-ll5nku-quote-0042",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3858,14 +3805,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "God removes them, and then there's the persecution, or the wrath poured out, by God upon the rejecting earth.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "God removes them, and then there's the persecution, or the wrath poured out, by God upon the rejecting earth.",
@@ -3875,7 +3827,7 @@
       "text": "God removes them, and then there's the persecution, or the wrath poured out, by God upon the rejecting earth."
     },
     {
-      "id": "media-ll5nku-quote-0046",
+      "id": "media-ll5nku-quote-0043",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -3944,14 +3896,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "That stuff is going to happen.",
+      "contextSecondAfter": "But it cannot happen until the Holy Spirit is moved, therefore, the church.",
       "contextWindow": {
         "before": null,
         "quote": "He is going to sit on a throne and say, you worship me as God or you die.",
-        "after": "That stuff is going to happen."
+        "after": "That stuff is going to happen.",
+        "secondAfter": "But it cannot happen until the Holy Spirit is moved, therefore, the church."
       },
       "approvedText": null,
       "expandedText": "He is going to sit on a throne and say, you worship me as God or you die.",
@@ -3961,7 +3918,7 @@
       "text": "He is going to sit on a throne and say, you worship me as God or you die."
     },
     {
-      "id": "media-ll5nku-quote-0047",
+      "id": "media-ll5nku-quote-0044",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4030,14 +3987,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "that's what the post-tribulation is.",
       "contextAfter": "The church will go through it all.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "that's what the post-tribulation is.",
         "quote": "Only those that persevere to the end will be saved.",
-        "after": "The church will go through it all."
+        "after": "The church will go through it all.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Only those that persevere to the end will be saved. The church will go through it all.",
@@ -4047,7 +4009,7 @@
       "text": "Only those that persevere to the end will be saved. The church will go through it all."
     },
     {
-      "id": "media-ll5nku-quote-0048",
+      "id": "media-ll5nku-quote-0045",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4116,14 +4078,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "The same text, the same chapters, the same books.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "The same text, the same chapters, the same books.",
         "quote": "And it's the same ones that every single view uses for their view.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "The same text, the same chapters, the same books. And it's the same ones that every single view uses for their view.",
@@ -4133,7 +4100,7 @@
       "text": "The same text, the same chapters, the same books. And it's the same ones that every single view uses for their view."
     },
     {
-      "id": "media-ll5nku-quote-0049",
+      "id": "media-ll5nku-quote-0046",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4202,14 +4169,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": null,
       "contextAfter": "But notice this is a temporary situation.",
+      "contextSecondAfter": "back at verse two.",
       "contextWindow": {
         "before": null,
         "quote": "This has to be heaven or paradise at that time.",
-        "after": "But notice this is a temporary situation."
+        "after": "But notice this is a temporary situation.",
+        "secondAfter": "back at verse two."
       },
       "approvedText": null,
       "expandedText": "This has to be heaven or paradise at that time. But notice this is a temporary situation.",
@@ -4219,7 +4191,7 @@
       "text": "This has to be heaven or paradise at that time. But notice this is a temporary situation."
     },
     {
-      "id": "media-ll5nku-quote-0050",
+      "id": "media-ll5nku-quote-0047",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4288,14 +4260,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "He's revealing a mystery to the saints in Thessalonica.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "He's revealing a mystery to the saints in Thessalonica.",
         "quote": "For if we believe that Jesus died and rose again, even so them also which sleep in Jesus, will God bring with him?",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "For if we believe that Jesus died and rose again, even so them also which sleep in Jesus, will God bring with him?",
@@ -4305,7 +4282,7 @@
       "text": "For if we believe that Jesus died and rose again, even so them also which sleep in Jesus, will God bring with him?"
     },
     {
-      "id": "media-ll5nku-quote-0051",
+      "id": "media-ll5nku-quote-0048",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4374,14 +4351,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "Yes.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "Yes.",
         "quote": "I do know that I believe we are the restrainer because the Holy Spirit dwells within us.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I do know that I believe we are the restrainer because the Holy Spirit dwells within us.",
@@ -4391,7 +4373,7 @@
       "text": "I do know that I believe we are the restrainer because the Holy Spirit dwells within us."
     },
     {
-      "id": "media-ll5nku-quote-0052",
+      "id": "media-ll5nku-quote-0049",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4460,14 +4442,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 28,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "what I'm trying to say is, he left the equation.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "what I'm trying to say is, he left the equation.",
         "quote": "As a matter of fact, the angels like, we got to get out of here now.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "As a matter of fact, the angels like, we got to get out of here now.",
@@ -4477,7 +4464,7 @@
       "text": "As a matter of fact, the angels like, we got to get out of here now."
     },
     {
-      "id": "media-ll5nku-quote-0053",
+      "id": "media-ll5nku-quote-0050",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4546,14 +4533,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "There's also no way that the 7th trumpet can be attached to Paul's writing in 1st Corinthians.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "There's also no way that the 7th trumpet can be attached to Paul's writing in 1st Corinthians.",
         "quote": "If the belief is that the church must go through the seven-year tribulation, then how does the bold judgments happen after the 7th Trump trumpet is sounded?",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "If the belief is that the church must go through the seven-year tribulation, then how does the bold judgments happen after the 7th Trump trumpet is sounded?",
@@ -4563,7 +4555,7 @@
       "text": "If the belief is that the church must go through the seven-year tribulation, then how does the bold judgments happen after the 7th Trump trumpet is sounded?"
     },
     {
-      "id": "media-ll5nku-quote-0054",
+      "id": "media-ll5nku-quote-0051",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4632,14 +4624,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "saints will be present.",
+      "contextSecondAfter": "there is an additional view.",
       "contextWindow": {
         "before": null,
         "quote": "People will get saved under great tribulation. Therefore, saints will be present. Now, there is an additional view.",
-        "after": "saints will be present."
+        "after": "saints will be present.",
+        "secondAfter": "there is an additional view."
       },
       "approvedText": null,
       "expandedText": "People will get saved under great tribulation. Therefore, saints will be present. Now, there is an additional view.",
@@ -4649,7 +4646,7 @@
       "text": "People will get saved under great tribulation. Therefore, saints will be present. Now, there is an additional view."
     },
     {
-      "id": "media-ll5nku-quote-0055",
+      "id": "media-ll5nku-quote-0052",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4718,14 +4715,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "Because we've already gone over a lot of it, but the main difference is that the pre-wrath rapture takes place somewhere in a time span between the 3.5 year mark and the end of the great tribulation.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "It's really close to the mid-tri view, so I don't want to spend too much time on it.",
-        "after": "Because we've already gone over a lot of it, but the main difference is that the pre-wrath rapture takes place somewhere in a time span between the 3.5 year mark and the end of the great tribulation."
+        "after": "Because we've already gone over a lot of it, but the main difference is that the pre-wrath rapture takes place somewhere in a time span between the 3.5 year mark and the end of the great tribulation.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "It's really close to the mid-tri view, so I don't want to spend too much time on it.",
@@ -4735,7 +4737,7 @@
       "text": "It's really close to the mid-tri view, so I don't want to spend too much time on it."
     },
     {
-      "id": "media-ll5nku-quote-0056",
+      "id": "media-ll5nku-quote-0053",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4804,14 +4806,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "It's important to note that the marriage supper of lamb is mentioned just before this.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "We go up, then we come back with him, and we're the ones that are with him, the great army with him.",
-        "after": "It's important to note that the marriage supper of lamb is mentioned just before this."
+        "after": "It's important to note that the marriage supper of lamb is mentioned just before this.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "We go up, then we come back with him, and we're the ones that are with him, the great army with him.",
@@ -4821,7 +4828,7 @@
       "text": "We go up, then we come back with him, and we're the ones that are with him, the great army with him."
     },
     {
-      "id": "media-ll5nku-quote-0057",
+      "id": "media-ll5nku-quote-0054",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4890,14 +4897,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "I didn't want to do this from the beginning.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "I didn't want to do this from the beginning.",
         "quote": "I'm sure you've kind of heard a little bit of where I probably stand when my passion was lying when I was explaining certain things.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I'm sure you've kind of heard a little bit of where I probably stand when my passion was lying when I was explaining certain things.",
@@ -4907,7 +4919,7 @@
       "text": "I'm sure you've kind of heard a little bit of where I probably stand when my passion was lying when I was explaining certain things."
     },
     {
-      "id": "media-ll5nku-quote-0058",
+      "id": "media-ll5nku-quote-0055",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -4976,14 +4988,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 12,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "to choose a mid-tribulation rather than post-tribulation rapture.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "to choose a mid-tribulation rather than post-tribulation rapture.",
         "quote": "I say this because I do believe there is a difference between the 1st 3.5 year and the 2nd 3.5 years, the 2nd half being the great tribulation portion when the judgment bowls are poured out.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "I say this because I do believe there is a difference between the 1st 3.5 year and the 2nd 3.5 years, the 2nd half being the great tribulation portion when the judgment bowls are poured out.",
@@ -4993,7 +5010,7 @@
       "text": "I say this because I do believe there is a difference between the 1st 3.5 year and the 2nd 3.5 years, the 2nd half being the great tribulation portion when the judgment bowls are poured out."
     },
     {
-      "id": "media-ll5nku-quote-0059",
+      "id": "media-ll5nku-quote-0056",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5062,14 +5079,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "Everything's gonna die.",
+      "contextSecondAfter": "I need you to build an ark.",
       "contextWindow": {
         "before": null,
         "quote": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
-        "after": "Everything's gonna die."
+        "after": "Everything's gonna die.",
+        "secondAfter": "I need you to build an ark."
       },
       "approvedText": null,
       "expandedText": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
@@ -5079,7 +5101,7 @@
       "text": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark."
     },
     {
-      "id": "media-ll5nku-quote-0060",
+      "id": "media-ll5nku-quote-0057",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5148,14 +5170,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "I need you to build an ark.",
+      "contextSecondAfter": "Here's how to build the ark.",
       "contextWindow": {
         "before": null,
         "quote": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?",
-        "after": "I need you to build an ark."
+        "after": "I need you to build an ark.",
+        "secondAfter": "Here's how to build the ark."
       },
       "approvedText": null,
       "expandedText": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?",
@@ -5165,7 +5192,7 @@
       "text": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?"
     },
     {
-      "id": "media-ll5nku-quote-0061",
+      "id": "media-ll5nku-quote-0058",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5234,14 +5261,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "Here's how to build the ark.",
+      "contextSecondAfter": "Come on into the ark.",
       "contextWindow": {
         "before": null,
         "quote": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened? Knowing his family was what?",
-        "after": "Here's how to build the ark."
+        "after": "Here's how to build the ark.",
+        "secondAfter": "Come on into the ark."
       },
       "approvedText": null,
       "expandedText": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened? Knowing his family was what?",
@@ -5251,7 +5283,7 @@
       "text": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened? Knowing his family was what?"
     },
     {
-      "id": "media-ll5nku-quote-0062",
+      "id": "media-ll5nku-quote-0059",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5320,14 +5352,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "He left the equation and then God judged Sodom and Gomorrah.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "He left the equation and then God judged Sodom and Gomorrah.",
         "quote": "God took out his people and then judged those who rejected him.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "He left the equation and then God judged Sodom and Gomorrah. God took out his people and then judged those who rejected him.",
@@ -5337,7 +5374,7 @@
       "text": "He left the equation and then God judged Sodom and Gomorrah. God took out his people and then judged those who rejected him."
     },
     {
-      "id": "media-ll5nku-quote-0063",
+      "id": "media-ll5nku-quote-0060",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5406,14 +5443,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "For the mystery of lawlessness is already at work, only he who now restrains will do so until he is taken out of the way.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "For the mystery of lawlessness is already at work, only he who now restrains will do so until he is taken out of the way.",
@@ -5423,7 +5465,7 @@
       "text": "For the mystery of lawlessness is already at work, only he who now restrains will do so until he is taken out of the way."
     },
     {
-      "id": "media-ll5nku-quote-0064",
+      "id": "media-ll5nku-quote-0061",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5492,14 +5534,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "No one's gonna be caring about no marriages.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "No one's gonna be caring about no marriages.",
         "quote": "hey, again, I could be I don't know what it's going to look like.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "No one's gonna be caring about no marriages. Hey, again, I could be I don't know what it's going to look like.",
@@ -5509,7 +5556,7 @@
       "text": "No one's gonna be caring about no marriages. Hey, again, I could be I don't know what it's going to look like."
     },
     {
-      "id": "media-ll5nku-quote-0065",
+      "id": "media-ll5nku-quote-0062",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5578,14 +5625,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "People will get saved under great tribulation.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "There's saints, but there's an absence of the church as a whole.",
-        "after": "People will get saved under great tribulation."
+        "after": "People will get saved under great tribulation.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "There's saints, but there's an absence of the church as a whole.",
@@ -5595,93 +5647,7 @@
       "text": "There's saints, but there's an absence of the church as a whole."
     },
     {
-      "id": "media-ll5nku-quote-0066",
-      "status": "candidate",
-      "curation": {
-        "status": "candidate",
-        "approved": false,
-        "featured": false,
-        "rejected": false,
-        "approvedAt": null,
-        "rejectedAt": null,
-        "featuredAt": null,
-        "reviewedAt": null,
-        "reviewedBy": null,
-        "note": ""
-      },
-      "episode": {
-        "stableId": "media-ll5nku",
-        "title": "The Rapture Pt. 5 (Post-Tribulation)",
-        "episodeName": "The Rapture Pt. 5",
-        "subtitle": "Post-Tribulation",
-        "series": "The Rapture",
-        "seriesKey": "the-rapture",
-        "study": "Eschatology",
-        "studyKey": "eschatology",
-        "scripture": "Revelation 3:10",
-        "date": "2026-04-22",
-        "speaker": "Pastor Jacob Lannom",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
-      },
-      "media": {
-        "start": 1172.566,
-        "end": 1177.416,
-        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "youtubeId": "T-cd2mlwDSk",
-        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "hasAudio": true,
-        "hasVideo": true
-      },
-      "start": 1172.566,
-      "end": 1177.416,
-      "score": 88,
-      "qualityFlags": {
-        "fillerHeavy": false,
-        "scriptureDense": false,
-        "prayer": false,
-        "humor": false,
-        "doctrinal": false,
-        "startsCleanly": true,
-        "endsCleanly": true,
-        "hasOrphanLeadingPunctuation": false,
-        "beginsLowercase": false,
-        "preferredLength": true,
-        "longThought": false,
-        "quoteReady": true
-      },
-      "quoteCategory": "general",
-      "disfluencyScore": 1,
-      "speakerNaturalness": 100,
-      "speechCleaned": true,
-      "speechCleanPasses": 1,
-      "hardRejectReason": null,
-      "scriptureMode": "none",
-      "metaTeachingScore": 0,
-      "brandSignature": false,
-      "tailTrimmed": true,
-      "contrastBoost": 12,
-      "pastoralCharge": false,
-      "timelessnessScore": 28,
-      "seriesRecap": false,
-      "instructionalPrefixTrimmed": false,
-      "contextRecoveryUsed": true,
-      "contextBefore": null,
-      "contextAfter": "But there was a lot.",
-      "contextWindow": {
-        "before": null,
-        "quote": "There wasn't that many righteous people. But there was a lot.",
-        "after": "But there was a lot."
-      },
-      "approvedText": null,
-      "expandedText": "There wasn't that many righteous people. But there was a lot. But there was a lot.",
-      "rawText": "There wasn't that many righteous people. But there was a lot. Right?",
-      "thoughtText": "There wasn't that many righteous people. But there was a lot. Right?",
-      "displayText": "There wasn't that many righteous people. But there was a lot. But there was a lot.",
-      "text": "There wasn't that many righteous people. But there was a lot. But there was a lot."
-    },
-    {
-      "id": "media-ll5nku-quote-0067",
+      "id": "media-ll5nku-quote-0063",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5750,14 +5716,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 22,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
-      "contextBefore": "First, you have Romans 8:1.",
+      "contextBefore": "Romans 8:1.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
-        "before": "First, you have Romans 8:1.",
+        "before": "Romans 8:1.",
         "quote": "There is therefore now no condemnation to them which are in Christ Jesus.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "There is therefore now no condemnation to them which are in Christ Jesus.",
@@ -5767,7 +5738,7 @@
       "text": "There is therefore now no condemnation to them which are in Christ Jesus."
     },
     {
-      "id": "media-ll5nku-quote-0068",
+      "id": "media-ll5nku-quote-0064",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5836,14 +5807,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "We're gonna read a lot of verses, but I'm not gonna, I don't want to take the time to read that kind of chunk.",
-      "contextAfter": "Every single time something's been very important to me, I've put the time into it.",
+      "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "We're gonna read a lot of verses, but I'm not gonna, I don't want to take the time to read that kind of chunk.",
         "quote": "Every single time something's been very important to me, I've put the time into it.",
-        "after": "Every single time something's been very important to me, I've put the time into it."
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Every single time something's been very important to me, I've put the time into it.",
@@ -5853,7 +5829,7 @@
       "text": "Every single time something's been very important to me, I've put the time into it."
     },
     {
-      "id": "media-ll5nku-quote-0069",
+      "id": "media-ll5nku-quote-0065",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -5922,14 +5898,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "Well, let me just tell you something.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "Well, let me just tell you something.",
         "quote": "The people that stood what Jesus knew, Jesus was expecting him to return that very day.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "The people that stood what Jesus knew, Jesus was expecting him to return that very day.",
@@ -5939,7 +5920,7 @@
       "text": "The people that stood what Jesus knew, Jesus was expecting him to return that very day."
     },
     {
-      "id": "media-ll5nku-quote-0070",
+      "id": "media-ll5nku-quote-0066",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -6008,14 +5989,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": null,
       "contextAfter": "But at that day and hour knoweth no man, no,",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "24, he speaks of life being normal right before the 2nd coming of Christ.",
-        "after": "But at that day and hour knoweth no man, no,"
+        "after": "But at that day and hour knoweth no man, no,",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "24, he speaks of life being normal right before the 2nd coming of Christ. But at that day and hour knoweth no man, no,",
@@ -6025,7 +6011,7 @@
       "text": "24, he speaks of life being normal right before the 2nd coming of Christ. But at that day and hour knoweth no man, no,"
     },
     {
-      "id": "media-ll5nku-quote-0071",
+      "id": "media-ll5nku-quote-0067",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -6094,14 +6080,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": "It says that he has to be removed.",
       "contextAfter": null,
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "It says that he has to be removed.",
         "quote": "The restrainer has to be removed and taken out of the way for the antichrist to be revealed.",
-        "after": null
+        "after": null,
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "The restrainer has to be removed and taken out of the way for the antichrist to be revealed.",
@@ -6111,7 +6102,7 @@
       "text": "The restrainer has to be removed and taken out of the way for the antichrist to be revealed."
     },
     {
-      "id": "media-ll5nku-quote-0072",
+      "id": "media-ll5nku-quote-0068",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -6180,14 +6171,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 10,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": "to withdraw from the things of God when we don't feel good.",
       "contextAfter": "we had to understand, are we ready?",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": "to withdraw from the things of God when we don't feel good.",
         "quote": "Let alone when literally the antichrist is persecuting the earth.",
-        "after": "we had to understand, are we ready?"
+        "after": "we had to understand, are we ready?",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Let alone when literally the antichrist is persecuting the earth. We had to understand, are we ready?",
@@ -6197,7 +6193,7 @@
       "text": "Let alone when literally the antichrist is persecuting the earth. We had to understand, are we ready?"
     },
     {
-      "id": "media-ll5nku-quote-0073",
+      "id": "media-ll5nku-quote-0069",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -6266,14 +6262,19 @@
       "pastoralCharge": false,
       "timelessnessScore": 30,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": true,
       "contextBefore": null,
       "contextAfter": "Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ.",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "Since this view pushed the rapture following the great tribulation, it would have to occur between chapters 16 and 19 following the bold judgments.",
-        "after": "Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ."
+        "after": "Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ.",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Since this view pushed the rapture following the great tribulation, it would have to occur between chapters 16 and 19 following the bold judgments. Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ.",
@@ -6283,7 +6284,7 @@
       "text": "Since this view pushed the rapture following the great tribulation, it would have to occur between chapters 16 and 19 following the bold judgments. Post-tribulation joins together, the calling up of the church with the 2nd coming of Christ."
     },
     {
-      "id": "media-ll5nku-quote-0074",
+      "id": "media-ll5nku-quote-0070",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -6352,14 +6353,19 @@
       "pastoralCharge": true,
       "timelessnessScore": 40,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "I'm going to hide you.",
+      "contextSecondAfter": "And he said, hey, don't don't come out.",
       "contextWindow": {
         "before": null,
         "quote": "God's people, forgot, he should put her faith, hey, I want to be spirit.",
-        "after": "I'm going to hide you."
+        "after": "I'm going to hide you.",
+        "secondAfter": "And he said, hey, don't don't come out."
       },
       "approvedText": null,
       "expandedText": "God's people, forgot, he should put her faith, hey, I want to be spirit.",
@@ -6369,7 +6375,7 @@
       "text": "God's people, forgot, he should put her faith, hey, I want to be spirit."
     },
     {
-      "id": "media-ll5nku-quote-0075",
+      "id": "media-ll5nku-quote-0071",
       "status": "candidate",
       "curation": {
         "status": "candidate",
@@ -6438,14 +6444,19 @@
       "pastoralCharge": false,
       "timelessnessScore": -20,
       "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
       "instructionalPrefixTrimmed": false,
       "contextRecoveryUsed": false,
       "contextBefore": null,
       "contextAfter": "this view holds, if you kind",
+      "contextSecondAfter": null,
       "contextWindow": {
         "before": null,
         "quote": "Tonight, we're going to look at the 3rd view of the rapture, and this is the post tribulation rapture.",
-        "after": "this view holds, if you kind"
+        "after": "this view holds, if you kind",
+        "secondAfter": null
       },
       "approvedText": null,
       "expandedText": "Tonight, we're going to look at the 3rd view of the rapture, and this is the post tribulation rapture.",
@@ -6453,6 +6464,370 @@
       "thoughtText": "Tonight, we're going to look at the 3rd view of the rapture, and this is the post tribulation rapture.",
       "displayText": "Tonight, we're going to look at the 3rd view of the rapture, and this is the post tribulation rapture.",
       "text": "Tonight, we're going to look at the 3rd view of the rapture, and this is the post tribulation rapture."
+    },
+    {
+      "id": "media-ll5nku-quote-0072",
+      "status": "candidate",
+      "curation": {
+        "status": "candidate",
+        "approved": false,
+        "featured": false,
+        "rejected": false,
+        "approvedAt": null,
+        "rejectedAt": null,
+        "featuredAt": null,
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "note": ""
+      },
+      "episode": {
+        "stableId": "media-ll5nku",
+        "title": "The Rapture Pt. 5 (Post-Tribulation)",
+        "episodeName": "The Rapture Pt. 5",
+        "subtitle": "Post-Tribulation",
+        "series": "The Rapture",
+        "seriesKey": "the-rapture",
+        "study": "Eschatology",
+        "studyKey": "eschatology",
+        "scripture": "Revelation 3:10",
+        "date": "2026-04-22",
+        "speaker": "Pastor Jacob Lannom",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
+      },
+      "media": {
+        "start": 874.799,
+        "end": 878.149,
+        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
+        "youtubeId": "T-cd2mlwDSk",
+        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
+        "hasAudio": true,
+        "hasVideo": true
+      },
+      "start": 874.799,
+      "end": 878.149,
+      "score": 82,
+      "qualityFlags": {
+        "fillerHeavy": false,
+        "scriptureDense": false,
+        "prayer": false,
+        "humor": false,
+        "doctrinal": false,
+        "startsCleanly": true,
+        "endsCleanly": true,
+        "hasOrphanLeadingPunctuation": false,
+        "beginsLowercase": false,
+        "preferredLength": true,
+        "longThought": false,
+        "quoteReady": true
+      },
+      "quoteCategory": "general",
+      "disfluencyScore": 0,
+      "speakerNaturalness": 100,
+      "speechCleaned": false,
+      "speechCleanPasses": 1,
+      "hardRejectReason": null,
+      "scriptureMode": "none",
+      "metaTeachingScore": 0,
+      "brandSignature": false,
+      "tailTrimmed": false,
+      "contrastBoost": 0,
+      "pastoralCharge": false,
+      "timelessnessScore": 10,
+      "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
+      "instructionalPrefixTrimmed": false,
+      "contextRecoveryUsed": false,
+      "contextBefore": null,
+      "contextAfter": "There's going to be famine.",
+      "contextSecondAfter": "There's going to be war.",
+      "contextWindow": {
+        "before": null,
+        "quote": "There's going to be plagues. There's going to be famine. There's going to be war. Is going to be death.",
+        "after": "There's going to be famine.",
+        "secondAfter": "There's going to be war."
+      },
+      "approvedText": null,
+      "expandedText": "There's going to be plagues. There's going to be famine. There's going to be war. Is going to be death.",
+      "rawText": "There's going to be plagues. There's going to be famine. There's going to be war. Is going to be death.",
+      "thoughtText": "There's going to be plagues. There's going to be famine. There's going to be war. Is going to be death.",
+      "displayText": "There's going to be plagues. There's going to be famine. There's going to be war. Is going to be death.",
+      "text": "There's going to be plagues. There's going to be famine. There's going to be war. Is going to be death."
+    },
+    {
+      "id": "media-ll5nku-quote-0073",
+      "status": "candidate",
+      "curation": {
+        "status": "candidate",
+        "approved": false,
+        "featured": false,
+        "rejected": false,
+        "approvedAt": null,
+        "rejectedAt": null,
+        "featuredAt": null,
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "note": ""
+      },
+      "episode": {
+        "stableId": "media-ll5nku",
+        "title": "The Rapture Pt. 5 (Post-Tribulation)",
+        "episodeName": "The Rapture Pt. 5",
+        "subtitle": "Post-Tribulation",
+        "series": "The Rapture",
+        "seriesKey": "the-rapture",
+        "study": "Eschatology",
+        "studyKey": "eschatology",
+        "scripture": "Revelation 3:10",
+        "date": "2026-04-22",
+        "speaker": "Pastor Jacob Lannom",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
+      },
+      "media": {
+        "start": 1095.166,
+        "end": 1099.549,
+        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
+        "youtubeId": "T-cd2mlwDSk",
+        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
+        "hasAudio": true,
+        "hasVideo": true
+      },
+      "start": 1095.166,
+      "end": 1099.549,
+      "score": 82,
+      "qualityFlags": {
+        "fillerHeavy": false,
+        "scriptureDense": false,
+        "prayer": false,
+        "humor": false,
+        "doctrinal": false,
+        "startsCleanly": true,
+        "endsCleanly": true,
+        "hasOrphanLeadingPunctuation": false,
+        "beginsLowercase": false,
+        "preferredLength": true,
+        "longThought": false,
+        "quoteReady": true
+      },
+      "quoteCategory": "general",
+      "disfluencyScore": 0,
+      "speakerNaturalness": 100,
+      "speechCleaned": false,
+      "speechCleanPasses": 1,
+      "hardRejectReason": null,
+      "scriptureMode": "none",
+      "metaTeachingScore": 0,
+      "brandSignature": false,
+      "tailTrimmed": false,
+      "contrastBoost": 0,
+      "pastoralCharge": false,
+      "timelessnessScore": 10,
+      "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
+      "instructionalPrefixTrimmed": false,
+      "contextRecoveryUsed": false,
+      "contextBefore": null,
+      "contextAfter": "Everything's gonna die.",
+      "contextSecondAfter": "I need you to build an ark.",
+      "contextWindow": {
+        "before": null,
+        "quote": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark.",
+        "after": "Everything's gonna die.",
+        "secondAfter": "I need you to build an ark."
+      },
+      "approvedText": null,
+      "expandedText": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark.",
+      "rawText": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark.",
+      "thoughtText": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark.",
+      "displayText": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark.",
+      "text": "I'm gonna bring down a flood. Everything's gonna die. I need you to build an ark. Here's how to build the ark."
+    },
+    {
+      "id": "media-ll5nku-quote-0074",
+      "status": "candidate",
+      "curation": {
+        "status": "candidate",
+        "approved": false,
+        "featured": false,
+        "rejected": false,
+        "approvedAt": null,
+        "rejectedAt": null,
+        "featuredAt": null,
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "note": ""
+      },
+      "episode": {
+        "stableId": "media-ll5nku",
+        "title": "The Rapture Pt. 5 (Post-Tribulation)",
+        "episodeName": "The Rapture Pt. 5",
+        "subtitle": "Post-Tribulation",
+        "series": "The Rapture",
+        "seriesKey": "the-rapture",
+        "study": "Eschatology",
+        "studyKey": "eschatology",
+        "scripture": "Revelation 3:10",
+        "date": "2026-04-22",
+        "speaker": "Pastor Jacob Lannom",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
+      },
+      "media": {
+        "start": 1096.366,
+        "end": 1100.683,
+        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
+        "youtubeId": "T-cd2mlwDSk",
+        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
+        "hasAudio": true,
+        "hasVideo": true
+      },
+      "start": 1096.366,
+      "end": 1100.683,
+      "score": 82,
+      "qualityFlags": {
+        "fillerHeavy": false,
+        "scriptureDense": false,
+        "prayer": false,
+        "humor": false,
+        "doctrinal": false,
+        "startsCleanly": true,
+        "endsCleanly": true,
+        "hasOrphanLeadingPunctuation": false,
+        "beginsLowercase": false,
+        "preferredLength": true,
+        "longThought": false,
+        "quoteReady": true
+      },
+      "quoteCategory": "general",
+      "disfluencyScore": 0,
+      "speakerNaturalness": 100,
+      "speechCleaned": false,
+      "speechCleanPasses": 1,
+      "hardRejectReason": null,
+      "scriptureMode": "none",
+      "metaTeachingScore": 0,
+      "brandSignature": false,
+      "tailTrimmed": false,
+      "contrastBoost": 0,
+      "pastoralCharge": false,
+      "timelessnessScore": 10,
+      "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
+      "instructionalPrefixTrimmed": false,
+      "contextRecoveryUsed": false,
+      "contextBefore": null,
+      "contextAfter": "I need you to build an ark.",
+      "contextSecondAfter": "Here's how to build the ark.",
+      "contextWindow": {
+        "before": null,
+        "quote": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
+        "after": "I need you to build an ark.",
+        "secondAfter": "Here's how to build the ark."
+      },
+      "approvedText": null,
+      "expandedText": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
+      "rawText": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
+      "thoughtText": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
+      "displayText": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark.",
+      "text": "Everything's gonna die. I need you to build an ark. Here's how to build the ark. Come on into the ark."
+    },
+    {
+      "id": "media-ll5nku-quote-0075",
+      "status": "candidate",
+      "curation": {
+        "status": "candidate",
+        "approved": false,
+        "featured": false,
+        "rejected": false,
+        "approvedAt": null,
+        "rejectedAt": null,
+        "featuredAt": null,
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "note": ""
+      },
+      "episode": {
+        "stableId": "media-ll5nku",
+        "title": "The Rapture Pt. 5 (Post-Tribulation)",
+        "episodeName": "The Rapture Pt. 5",
+        "subtitle": "Post-Tribulation",
+        "series": "The Rapture",
+        "seriesKey": "the-rapture",
+        "study": "Eschatology",
+        "studyKey": "eschatology",
+        "scripture": "Revelation 3:10",
+        "date": "2026-04-22",
+        "speaker": "Pastor Jacob Lannom",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa/",
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa/"
+      },
+      "media": {
+        "start": 1097.566,
+        "end": 1102.549,
+        "audioUrl": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
+        "youtubeId": "T-cd2mlwDSk",
+        "videoUrl": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
+        "hasAudio": true,
+        "hasVideo": true
+      },
+      "start": 1097.566,
+      "end": 1102.549,
+      "score": 82,
+      "qualityFlags": {
+        "fillerHeavy": false,
+        "scriptureDense": false,
+        "prayer": false,
+        "humor": false,
+        "doctrinal": false,
+        "startsCleanly": true,
+        "endsCleanly": true,
+        "hasOrphanLeadingPunctuation": false,
+        "beginsLowercase": false,
+        "preferredLength": true,
+        "longThought": false,
+        "quoteReady": true
+      },
+      "quoteCategory": "general",
+      "disfluencyScore": 1,
+      "speakerNaturalness": 100,
+      "speechCleaned": true,
+      "speechCleanPasses": 1,
+      "hardRejectReason": null,
+      "scriptureMode": "none",
+      "metaTeachingScore": 0,
+      "brandSignature": false,
+      "tailTrimmed": false,
+      "contrastBoost": 0,
+      "pastoralCharge": false,
+      "timelessnessScore": 10,
+      "seriesRecap": false,
+      "outlineOrLessonStructure": false,
+      "reflectionLeadIn": false,
+      "duplicateSentenceDedupe": false,
+      "instructionalPrefixTrimmed": false,
+      "contextRecoveryUsed": false,
+      "contextBefore": null,
+      "contextAfter": "Here's how to build the ark.",
+      "contextSecondAfter": "Come on into the ark.",
+      "contextWindow": {
+        "before": null,
+        "quote": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?",
+        "after": "Here's how to build the ark.",
+        "secondAfter": "Come on into the ark."
+      },
+      "approvedText": null,
+      "expandedText": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?",
+      "rawText": "I need you to build an ark. Here's how to build the ark. Come on into the ark. Right? What happened?",
+      "thoughtText": "I need you to build an ark. Here's how to build the ark. Come on into the ark. Right? What happened?",
+      "displayText": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?",
+      "text": "I need you to build an ark. Here's how to build the ark. Come on into the ark. What happened?"
     }
   ]
 }
