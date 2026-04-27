@@ -1638,6 +1638,32 @@ function searchBoostForQuote(quote) {
 }
 
 
+function hydrateQuoteDisplayFields(quote) {
+  const quotePolishScore = quote.quotePolishScore ?? quotePolishScoreForDisplay(quote);
+  const displayTier = quote.displayTier ?? displayTierForQuote({ ...quote, quotePolishScore });
+  const searchBoost = quote.searchBoost ?? searchBoostForQuote({ ...quote, quotePolishScore, displayTier });
+
+  return {
+    ...quote,
+    quotePolishScore,
+    displayTier,
+    searchBoost
+  };
+}
+
+function hydrateQuoteDisplayFieldsList(quotes) {
+  return (quotes || [])
+    .map(hydrateQuoteDisplayFields)
+    .sort((a, b) => {
+      const tierOrder = { featured: 4, strong: 3, study: 2, archive: 1 };
+      return (tierOrder[b.displayTier] || 0) - (tierOrder[a.displayTier] || 0)
+        || (b.searchBoost || 0) - (a.searchBoost || 0)
+        || (b.quotePolishScore || 0) - (a.quotePolishScore || 0)
+        || (b.score || 0) - (a.score || 0);
+    });
+}
+
+
 function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
   const displayJsonFile = item?.transcript?.languages?.[language]?.displayJsonFile || item?.transcript?.displayJsonFile;
   if (!displayJsonFile || !existsSync(displayJsonFile)) return [];
@@ -1918,9 +1944,9 @@ function buildQuoteBank(items) {
       contrastBoost: quote.contrastBoost,
       pastoralCharge: quote.pastoralCharge,
       timelessnessScore: quote.timelessnessScore,
-      quotePolishScore: quote.quotePolishScore,
-      displayTier: quote.displayTier,
-      searchBoost: quote.searchBoost,
+      quotePolishScore: quote.quotePolishScore ?? quotePolishScoreForDisplay(quote),
+      displayTier: quote.displayTier ?? displayTierForQuote({ ...quote, quotePolishScore: quote.quotePolishScore ?? quotePolishScoreForDisplay(quote) }),
+      searchBoost: quote.searchBoost ?? searchBoostForQuote({ ...quote, quotePolishScore: quote.quotePolishScore ?? quotePolishScoreForDisplay(quote), displayTier: quote.displayTier ?? displayTierForQuote({ ...quote, quotePolishScore: quote.quotePolishScore ?? quotePolishScoreForDisplay(quote) }) }),
       seriesRecap: quote.seriesRecap,
       outlineOrLessonStructure: quote.outlineOrLessonStructure,
       reflectionLeadIn: quote.reflectionLeadIn,
