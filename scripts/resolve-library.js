@@ -1478,7 +1478,6 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       const tailTrimmed = displayText !== polished.displayText;
       const displayStrongTerms = quoteStrongTermHits(displayText);
       const displayLowValuePenalty = quoteLowValuePenalty(displayText);
-      const qualityFlags = quoteQualityFlags(rawText, displayText, displayStrongTerms, displayLowValuePenalty);
       const hardRejectReason = hardRejectQuoteReason(displayText, qualityFlags);
       if (hardRejectReason) continue;
       if (brandSignature) continue;
