@@ -386,9 +386,33 @@ function resolveDate(record) {
 // That is valid-ish caption styling, but it is bad search data. We strip HTML-ish
 // tags so the transcript can safely become searchable text.
 
+const TRANSCRIPT_DEFAULT_LANGUAGE = "en";
 const TRANSCRIPT_INCOMING_DIR = "transcripts_incoming";
 const TRANSCRIPT_CLEAN_DIR = "transcripts_clean";
+const TRANSCRIPT_DISPLAY_DIR = "transcripts_display";
 const TRANSCRIPT_JSON_DIR = "data/transcripts";
+
+// -----------------------------------------------------------------------------
+// FUTURE LANGUAGE FOLDER PLAN
+// -----------------------------------------------------------------------------
+// Beginner note:
+// We are keeping today's English workflow simple:
+//   transcripts_incoming/2026-04-22.srt
+//
+// But every generated transcript now lands in a language folder:
+//   transcripts_clean/en/...
+//   transcripts_display/en/...
+//   data/transcripts/en/...
+//
+// Later, translated subtitles can use the same structure:
+//   transcripts_clean/es/...
+//   transcripts_display/es/...
+//   data/transcripts/es/...
+//
+// That means the frontend can eventually load:
+//   episode.transcript.languages.en
+//   episode.transcript.languages.es
+// without redesigning the data model.
 
 function ensureDirectory(path) {
   if (!existsSync(path)) mkdirSync(path, { recursive: true });
@@ -487,39 +511,117 @@ function buildCleanSrt(segments) {
 function buildTranscriptPlainText(segments) {
   return cleanTranscriptText(segments.map(segment => segment.text).join(" "));
 }
+function isFillerOnlyTranscriptText(value) {
+  const normalized = cleanTranscriptText(value)
+    .toLowerCase()
+    .replace(/[.,!?;:"'()\[\]{}]/g, "")
+    .trim();
+
+  return [
+    "uh",
+    "um",
+    "uhm",
+    "ah",
+    "er",
+    "hmm",
+    "mm",
+    "mmm"
+  ].includes(normalized);
+}
+
+function cleanDisplayTranscriptText(value) {
+  return cleanTranscriptText(value)
+    .replace(/\b(?:uh|um|uhm|ah|er)\b[,.]?\s*/gi, "")
+    .replace(/\s+([,.!?;:])/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function buildDisplaySegments(rawSegments) {
+  const displaySegments = [];
+
+  for (const segment of rawSegments || []) {
+    const displayText = cleanDisplayTranscriptText(segment.text);
+
+    // Remove tiny filler-only captions from the display layer only.
+    // The faithful raw/clean transcript stays untouched.
+    if (!displayText || isFillerOnlyTranscriptText(segment.text)) continue;
+
+    const previous = displaySegments[displaySegments.length - 1];
+    const shortFragment = displayText.length < 45;
+    const closeToPrevious = previous && (segment.start - previous.end) <= 1.25;
+    const previousLooksOpen = previous && !/[.!?]$/.test(previous.text);
+
+    if (previous && shortFragment && closeToPrevious && previousLooksOpen) {
+      previous.end = segment.end;
+      previous.endTime = secondsToSrtTimestamp(segment.end);
+      previous.text = cleanTranscriptText(`${previous.text} ${displayText}`);
+      continue;
+    }
+
+    displaySegments.push({
+      ...segment,
+      index: displaySegments.length + 1,
+      text: displayText
+    });
+  }
+
+  return displaySegments.map((segment, index) => ({ ...segment, index: index + 1 }));
+}
+
 
 function blankTranscript() {
   return {
     hasTranscript: false,
+    defaultLanguage: TRANSCRIPT_DEFAULT_LANGUAGE,
+    languages: {},
     incomingFile: null,
     cleanFile: null,
+    displayFile: null,
     jsonFile: null,
-    segmentCount: 0
+    displayJsonFile: null,
+    segmentCount: 0,
+    displaySegmentCount: 0
   };
 }
 
 function resolveTranscript(stableId, title, date) {
   if (!date?.iso) return { transcript: blankTranscript(), searchText: "" };
 
+  const language = TRANSCRIPT_DEFAULT_LANGUAGE;
   const incomingFile = `${TRANSCRIPT_INCOMING_DIR}/${date.iso}.srt`;
   if (!existsSync(incomingFile)) return { transcript: blankTranscript(), searchText: "" };
 
   const titleSlug = slugify(title?.episodeName || title?.display || "episode");
   const baseName = `${date.iso}_${titleSlug || "episode"}`;
-  const cleanFile = `${TRANSCRIPT_CLEAN_DIR}/${baseName}.srt`;
-  const jsonFile = `${TRANSCRIPT_JSON_DIR}/${baseName}.json`;
+
+  const cleanLanguageDir = `${TRANSCRIPT_CLEAN_DIR}/${language}`;
+  const displayLanguageDir = `${TRANSCRIPT_DISPLAY_DIR}/${language}`;
+  const jsonLanguageDir = `${TRANSCRIPT_JSON_DIR}/${language}`;
+
+  const cleanFile = `${cleanLanguageDir}/${baseName}.srt`;
+  const displayFile = `${displayLanguageDir}/${baseName}.srt`;
+  const jsonFile = `${jsonLanguageDir}/${baseName}.json`;
+  const displayJsonFile = `${jsonLanguageDir}/${baseName}.display.json`;
 
   const rawSrt = readFileSync(incomingFile, "utf-8");
   const segments = parseSrt(rawSrt);
-  const plainText = buildTranscriptPlainText(segments);
+  const displaySegments = buildDisplaySegments(segments);
 
-  ensureDirectory(TRANSCRIPT_CLEAN_DIR);
-  ensureDirectory(TRANSCRIPT_JSON_DIR);
+  const plainText = buildTranscriptPlainText(segments);
+  const displayText = buildTranscriptPlainText(displaySegments);
+
+  ensureDirectory(cleanLanguageDir);
+  ensureDirectory(displayLanguageDir);
+  ensureDirectory(jsonLanguageDir);
 
   writeFileSync(cleanFile, buildCleanSrt(segments), "utf-8");
+  writeFileSync(displayFile, buildCleanSrt(displaySegments), "utf-8");
+
   writeJson(jsonFile, {
     generatedAt: new Date().toISOString(),
     stableId,
+    language,
     title: title?.display || title?.episodeName || "",
     date: date.iso,
     source: {
@@ -527,22 +629,64 @@ function resolveTranscript(stableId, title, date) {
       incomingFile,
       cleanFile
     },
+    outputKind: "faithful_clean",
+    note: "Faithful cleaned transcript. FCP formatting tags removed, but filler words and original caption segmentation are preserved.",
     segmentCount: segments.length,
     plainText,
     segments
   });
 
+  writeJson(displayJsonFile, {
+    generatedAt: new Date().toISOString(),
+    stableId,
+    language,
+    title: title?.display || title?.episodeName || "",
+    date: date.iso,
+    source: {
+      type: "derived_from_faithful_clean",
+      incomingFile,
+      cleanFile,
+      displayFile
+    },
+    outputKind: "display_clean",
+    note: "Display-clean transcript. Light filler-only cleanup and small fragment merging for website reading comfort. Do not treat as the archival source.",
+    segmentCount: displaySegments.length,
+    plainText: displayText,
+    segments: displaySegments
+  });
+
+  const languagePayload = {
+    language,
+    incomingFile,
+    cleanFile,
+    displayFile,
+    jsonFile,
+    displayJsonFile,
+    segmentCount: segments.length,
+    displaySegmentCount: displaySegments.length
+  };
+
   return {
     transcript: {
       hasTranscript: true,
+      defaultLanguage: language,
+      languages: {
+        [language]: languagePayload
+      },
+      // Backward-compatible top-level fields for the current frontend/search code.
       incomingFile,
       cleanFile,
+      displayFile,
       jsonFile,
-      segmentCount: segments.length
+      displayJsonFile,
+      segmentCount: segments.length,
+      displaySegmentCount: displaySegments.length
     },
+    // Search uses the faithful transcript so no real words are accidentally lost.
     searchText: plainText
   };
 }
+
 
 function buildTranscriptSearchIndex(items) {
   ensureDirectory(TRANSCRIPT_JSON_DIR);
@@ -556,8 +700,12 @@ function buildTranscriptSearchIndex(items) {
       series: item.series?.name || "",
       study: item.study?.name || "",
       scripture: item.scripture?.display || "",
+      defaultLanguage: item.transcript?.defaultLanguage || TRANSCRIPT_DEFAULT_LANGUAGE,
       transcriptJson: item.transcript?.jsonFile || null,
+      transcriptDisplayJson: item.transcript?.displayJsonFile || null,
       transcriptCleanSrt: item.transcript?.cleanFile || null,
+      transcriptDisplaySrt: item.transcript?.displayFile || null,
+      languages: item.transcript?.languages || {},
       text: item.search?.transcriptText || ""
     }));
 
