@@ -959,23 +959,28 @@ function normalizeScriptureInQuoteText(value) {
   };
 
   // Revelation 13, 7 -> Revelation 13:7
+  // This must run BEFORE compact matching.
   text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d{1,3})\\s*,\\s*(\\d{1,3})\\b`, "gi"), (match, book, chapter, verse) => {
     return `${book} ${chapter}:${verse}`;
   });
 
-  // Revelation 310 -> Revelation 3:10
-  // Romans 81 -> Romans 8:1
-  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d)(\\d{1,2})\\b`, "gi"), (match, book, chapter, verse) => {
-    return `${book} ${chapter}:${verse}`;
-  });
+  // 1st Corinthians 15, 51 -> 1st Corinthians 15:51
+  text = text.replace(/\b(1st|2nd|3rd)\s+(Corinthians|Thessalonians|Timothy|Peter|John)\s+(\d{1,3})\s*,\s*(\d{1,3})\b/gi, "$1 $2 $3:$4");
 
   // Romans 8 one -> Romans 8:1
   text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d{1,3})\\s+(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\\b`, "gi"), (match, book, chapter, word) => {
     return `${book} ${chapter}:${numberWords[word.toLowerCase()]}`;
   });
 
-  // 1st Corinthians 15, 51 -> 1st Corinthians 15:51
-  text = text.replace(/\b(1st|2nd|3rd)\s+(Corinthians|Thessalonians|Timothy|Peter|John)\s+(\d{1,3})\s*,\s*(\d{1,3})\b/gi, "$1 $2 $3:$4");
+  // Revelation 310 -> Revelation 3:10
+  // Only compact-normalize if the number is exactly 2-3 digits and not already
+  // followed by punctuation or another verse marker. This prevents
+  // "Revelation 13:7" from becoming "Revelation 1:3:7".
+  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d{2,3})(?!\\s*[:.,])\\b`, "gi"), (match, book, digits) => {
+    if (digits.length === 2) return `${book} ${digits[0]}:${digits[1]}`;
+    if (digits.length === 3) return `${book} ${digits[0]}:${digits.slice(1)}`;
+    return match;
+  });
 
   return normalizeQuoteWhitespace(text);
 }
@@ -1044,11 +1049,11 @@ function cleanupSpeechDisfluencies(value) {
   text = stripConversationalLeadIns(text);
   text = collapseRepeatedSpeechWords(text);
 
-  return normalizeQuoteWhitespace(text)
+  return trimTailFillers(normalizeQuoteWhitespace(text)
     .replace(/\s+([,.!?;:])/g, "$1")
     .replace(/^(?:[.\-–—,;:!?]\s*)+/g, "")
     .replace(/\s+/g, " ")
-    .trim();
+    .trim());
 }
 
 function hardRejectQuoteReason(displayText, qualityFlags = {}) {
@@ -1097,6 +1102,148 @@ function polishQuoteDisplayText(rawText, thoughtText) {
     hardRejectReason: reason
   };
 }
+
+function isBrandSignatureText(value) {
+  const text = normalizeQuoteWhitespace(value).toLowerCase();
+  return [
+    "never forget why you are the church",
+    "love learn live lead",
+    "cgbc"
+  ].some(signature => text.includes(signature));
+}
+
+function metaTeachingScore(value) {
+  const text = normalizeQuoteWhitespace(value).toLowerCase();
+  const patterns = [
+    /\bturn your bibles?\b/i,
+    /\bgo home and (?:study|read)\b/i,
+    /\bread it for yourself\b/i,
+    /\bi(?:'m| am) going to read\b/i,
+    /\bi(?:'m| am) gonna read\b/i,
+    /\blet me get there\b/i,
+    /\bif you're there\b/i,
+    /\bsay amen\b/i,
+    /\bsay read\b/i,
+    /\bwrite that down\b/i,
+    /\bwe talked about it last week\b/i,
+    /\bwe're going to go over\b/i,
+    /\bwe will get lost in the weeds\b/i,
+    /\bthis chart\b/i,
+    /\btable contents\b/i,
+    /\busing a phone\b/i,
+    /\bnsb 95\b/i
+  ];
+  return patterns.reduce((score, pattern) => score + (pattern.test(text) ? 1 : 0), 0);
+}
+
+function trimTailFillers(value) {
+  return normalizeQuoteWhitespace(value)
+    .replace(/\s*,?\s*(?:right|amen|okay)\?$/i, ".")
+    .replace(/\s*,?\s*(?:right|amen|okay)\.$/i, ".")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function hasContrastLanguage(value) {
+  return /\b(?:cannot|can't|can and|not .* but|rather than|if .* then|although|however|but|instead|separate|together|weakness|strength)\b/i.test(value);
+}
+
+function hasPastoralCharge(value) {
+  return /\b(?:are you ready|we still have to|we got to|we must|let's not forget|be careful|faith|soul winning|urgent|comfort one another|give your life to christ|absent from the body|present with the lord)\b/i.test(value);
+}
+
+function timelessnessScore(value) {
+  const text = normalizeQuoteWhitespace(value);
+  let score = 0;
+
+  if (hasContrastLanguage(text)) score += 18;
+  if (hasPastoralCharge(text)) score += 18;
+  if (/\b(?:truth|faith|church|christ|scripture|word|grace|wrath|salvation|judgment|worship|holy spirit|lord)\b/i.test(text)) score += 12;
+  if (/\b(?:tonight|tomorrow|last week|this week|right here|this chart|online|go home|turn your bibles|i'm reading|i'm going to read)\b/i.test(text)) score -= 30;
+  if (isBrandSignatureText(text)) score -= 100;
+
+  const words = quoteWordCount(text);
+  if (words >= 12 && words <= 34) score += 10;
+  if (words > 44) score -= 10;
+
+  return score;
+}
+
+function scriptureModeForText(value) {
+  const text = normalizeQuoteWhitespace(value);
+  const lower = text.toLowerCase();
+
+  const hasReference = /\b(?:genesis|exodus|leviticus|numbers|deuteronomy|joshua|judges|ruth|samuel|kings|chronicles|ezra|nehemiah|esther|job|psalm|psalms|proverbs|ecclesiastes|isaiah|jeremiah|lamentations|ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|luke|john|acts|romans|corinthians|galatians|ephesians|philippians|colossians|thessalonians|timothy|titus|philemon|hebrews|james|peter|jude|revelation)\s+\d{1,3}[: ,]\s*\d{1,3}/i.test(text);
+  const kjvLanguage = /\b(?:thou|thee|thy|ye|hath|saith|unto|goeth|shalt|shall|behold|verily|wherefore)\b/i.test(text);
+  const readingMarker = /\b(?:turn your bibles|verse|chapter|let us read|i saw heaven open|it is written|the bible says|and he said unto me)\b/i.test(text);
+  const applicationMarker = /\b(?:this means|therefore|so we|what i'm trying to say|the belief is|we believe|i believe|we see|notice|understand|let's think|be careful|are you ready)\b/i.test(text);
+
+  if (readingMarker && kjvLanguage) return "direct_scripture";
+  if (kjvLanguage && quoteWordCount(text) > 14 && !applicationMarker) return "direct_scripture";
+  if (hasReference && kjvLanguage && !applicationMarker) return "direct_scripture";
+  if (hasReference && applicationMarker) return "exposition";
+  if (hasReference) return "reference_only";
+  if (applicationMarker) return "application";
+  if (lower.includes("scripture") || lower.includes("god's word")) return "application";
+  return "none";
+}
+
+function quoteCategoryFinal(baseCategory, value, scriptureMode, metaScore, timelessScoreValue) {
+  if (isBrandSignatureText(value)) return "brand_signature";
+  if (metaScore > 0) return "meta_teaching";
+  if (scriptureMode === "direct_scripture") return "direct_scripture";
+  if (hasPastoralCharge(value)) return "pastoral_charge";
+  if (timelessScoreValue >= 35) return "featured_candidate";
+  return baseCategory;
+}
+
+function recoverQuoteContext(rawText, displayText) {
+  const display = normalizeQuoteWhitespace(displayText);
+  const thoughts = splitQuoteIntoThoughts(rawText)
+    .map(thought => trimTailFillers(cleanupSpeechDisfluencies(thought)))
+    .filter(Boolean);
+
+  const currentIndex = thoughts.findIndex(thought => {
+    return thought === display || thought.includes(display) || display.includes(thought);
+  });
+
+  const before = currentIndex > 0 ? thoughts[currentIndex - 1] : "";
+  const after = currentIndex >= 0 && currentIndex < thoughts.length - 1 ? thoughts[currentIndex + 1] : "";
+
+  function contextAllowed(text) {
+    if (!text) return false;
+    if (quoteWordCount(text) < 4 || quoteWordCount(text) > 28) return false;
+    if (isBrandSignatureText(text)) return false;
+    if (metaTeachingScore(text) > 0) return false;
+    if (scriptureModeForText(text) === "direct_scripture") return false;
+    if (hardRejectQuoteReason(text, {})) return false;
+    return true;
+  }
+
+  const useBefore = quoteWordCount(display) < 16 && contextAllowed(before);
+  const useAfter = quoteWordCount(display) < 12 && contextAllowed(after);
+
+  const recoveredParts = [
+    useBefore ? before : "",
+    display,
+    useAfter ? after : ""
+  ].filter(Boolean);
+
+  const recoveredText = normalizeQuoteWhitespace(recoveredParts.join(" "));
+
+  return {
+    contextBefore: before || null,
+    contextAfter: after || null,
+    contextWindow: {
+      before: before || null,
+      quote: display,
+      after: after || null
+    },
+    contextRecoveryUsed: recoveredText !== display,
+    recoveredText
+  };
+}
+
 
 function speechDisfluencyScore(rawText, displayText) {
   const raw = normalizeQuoteWhitespace(rawText);
@@ -1285,17 +1432,30 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       const rawText = text;
       const thoughtText = chooseBestQuoteThought(rawText);
       const polished = polishQuoteDisplayText(rawText, thoughtText);
-      const displayText = polished.displayText;
+      let displayText = trimTailFillers(polished.displayText);
       if (quoteWordCount(displayText) < 10) continue;
 
+      const contextRecovery = recoverQuoteContext(rawText, displayText);
+      displayText = contextRecovery.recoveredText;
+
+      const scriptureMode = scriptureModeForText(displayText);
+      const metaScore = metaTeachingScore(displayText);
+      const brandSignature = isBrandSignatureText(displayText);
+      const tailTrimmed = displayText !== polished.displayText;
       const displayStrongTerms = quoteStrongTermHits(displayText);
       const displayLowValuePenalty = quoteLowValuePenalty(displayText);
       const qualityFlags = quoteQualityFlags(rawText, displayText, displayStrongTerms, displayLowValuePenalty);
       const hardRejectReason = hardRejectQuoteReason(displayText, qualityFlags);
       if (hardRejectReason) continue;
+      if (brandSignature) continue;
+      if (metaScore > 0) continue;
+      if (scriptureMode === "direct_scripture") continue;
 
       const disfluencyScore = speechDisfluencyScore(rawText, displayText);
       const speakerNaturalness = speakerNaturalnessScore(displayText, qualityFlags, disfluencyScore);
+      const timelessScoreValue = timelessnessScore(displayText);
+      const contrastBoost = hasContrastLanguage(displayText) ? 12 : 0;
+      const pastoralCharge = hasPastoralCharge(displayText);
 
       // Keep non-quote-ready items only if they are still strong doctrinal/search
       // candidates. The random quote UI can prefer quoteReady later.
@@ -1304,8 +1464,12 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (speakerNaturalness < 55 && !qualityFlags.doctrinal) continue;
 
       const baseScore = quoteCandidateScore(displayText, quoteWordCount(displayText), durationSeconds, displayStrongTerms, displayLowValuePenalty);
-      const score = qualityAdjustedQuoteScore(baseScore, qualityFlags) + Math.round((speakerNaturalness - 70) / 5);
-      if (score < 34) continue;
+      const score = qualityAdjustedQuoteScore(baseScore, qualityFlags)
+        + Math.round((speakerNaturalness - 70) / 5)
+        + Math.round(timelessScoreValue / 4)
+        + contrastBoost
+        + (pastoralCharge ? 10 : 0);
+      if (score < 38) continue;
 
       candidates.push({
         id: makeQuoteId(item, candidates.length),
@@ -1329,10 +1493,23 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         speechCleaned: displayText !== thoughtText,
         speechCleanPasses: polished.speechCleanPasses,
         hardRejectReason: null,
+        scriptureMode,
+        metaTeachingScore: metaScore,
+        brandSignature,
+        tailTrimmed,
+        contrastBoost,
+        pastoralCharge,
+        timelessnessScore: timelessScoreValue,
+        contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
+        contextBefore: contextRecovery.contextBefore,
+        contextAfter: contextRecovery.contextAfter,
+        contextWindow: contextRecovery.contextWindow,
+        approvedText: null,
+        expandedText: contextRecovery.recoveredText,
         thoughtText,
         strongTerms: displayStrongTerms,
         lowValuePenalty: displayLowValuePenalty,
-        quoteCategory: quoteCategoryFromFlags(qualityFlags),
+        quoteCategory: quoteCategoryFinal(quoteCategoryFromFlags(qualityFlags), displayText, scriptureMode, metaScore, timelessScoreValue),
         qualityFlags,
         source: {
           transcriptDisplayJson: displayJsonFile,
@@ -1433,14 +1610,14 @@ function buildQuoteBank(items) {
     curationModel: {
       statuses: ["candidate", "approved", "featured", "rejected"],
       futureConfigFile: "config/quote-curation.json",
-      controls: ["Save / Approve", "Dismiss / Reject", "Next Quote", "Jump to Audio", "Jump to Video"]
+      controls: ["Add Previous", "Add Next", "Edit Text", "Save / Approve", "Feature", "Dismiss / Reject", "Next Quote", "Jump to Audio", "Jump to Video"]
     },
     tuning: {
       minWords: 12,
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "hard polish: pre-score speech cleanup, multi-pass repeated-word collapse, strict rejection, scripture normalization, thought chunking, and quoteReady flags",
+      qualityPass: "final context layer: brand suppression, scripture awareness, meta-teaching suppression, context recovery, tail trim, contrast boost, pastoral charge, approval UI context fields",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1471,6 +1648,19 @@ function buildQuoteBank(items) {
       speechCleaned: quote.speechCleaned,
       speechCleanPasses: quote.speechCleanPasses,
       hardRejectReason: quote.hardRejectReason,
+      scriptureMode: quote.scriptureMode,
+      metaTeachingScore: quote.metaTeachingScore,
+      brandSignature: quote.brandSignature,
+      tailTrimmed: quote.tailTrimmed,
+      contrastBoost: quote.contrastBoost,
+      pastoralCharge: quote.pastoralCharge,
+      timelessnessScore: quote.timelessnessScore,
+      contextRecoveryUsed: quote.contextRecoveryUsed,
+      contextBefore: quote.contextBefore,
+      contextAfter: quote.contextAfter,
+      contextWindow: quote.contextWindow,
+      approvedText: quote.approvedText,
+      expandedText: quote.expandedText,
       rawText: quote.rawText,
       thoughtText: quote.thoughtText,
       displayText: quote.displayText,
