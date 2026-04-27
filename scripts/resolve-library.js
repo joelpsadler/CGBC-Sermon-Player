@@ -749,7 +749,8 @@ const QUOTE_STRONG_TERMS = [
 
 const QUOTE_BAD_STARTERS = [
   "and", "but", "so", "because", "then", "now", "well", "okay", "alright",
-  "therefore", "also", "or", "if", "when"
+  "therefore", "also", "or", "if", "when", "right", "amen", "anyway",
+  "listen", "look", "remember"
 ];
 
 const QUOTE_LOW_VALUE_PATTERNS = [
@@ -832,38 +833,82 @@ function buildQuoteDisplayText(value) {
   // wording. It removes common conversational wrappers that look awkward on
   // quote cards while preserving the actual spoken statement.
   return normalizeQuoteWhitespace(value)
-    .replace(/^(amen\??\s*)+/i, "")
-    .replace(/^(okay[,.]?\s*)+/i, "")
-    .replace(/^(anyway[,.]?\s*)+/i, "")
-    .replace(/^(so[,.]?\s*)+/i, "")
-    .replace(/\b(okay|anyway)\b[,.]?\s*/gi, "")
+    .replace(/^(?:[.\-–—,;:!?]\s*)+/g, "")
+    .replace(/^(?:(?:amen|okay|anyway|right|listen|look)\??[,.]?\s*)+/i, "")
+    .replace(/^(?:so|and|but)[,.]?\s+/i, "")
+    .replace(/\b(?:okay|anyway)\b[,.]?\s*/gi, "")
+    .replace(/\s+([,.!?;:])/g, "$1")
+    .replace(/^(?:[.\-–—,;:!?]\s*)+/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
 
+function quoteStartsCleanly(value) {
+  const text = normalizeQuoteWhitespace(value);
+  if (!text) return false;
+
+  const first = firstQuoteWord(text);
+  if (QUOTE_BAD_STARTERS.includes(first)) return false;
+
+  if (/^(?:[.\-–—,;!?]|\d+\s|chapter\s|verse\s)/i.test(text)) return false;
+  if (/^(?:right\?|amen\?|okay\?|you know|does that make sense)\b/i.test(text)) return false;
+  if (/^[a-z]/.test(text)) return false;
+
+  return true;
+}
+
+function quoteSentenceCompleteness(value) {
+  const text = normalizeQuoteWhitespace(value);
+  return {
+    startsCleanly: quoteStartsCleanly(text),
+    endsCleanly: quoteHasSentenceEnding(text),
+    hasOrphanLeadingPunctuation: /^[.\-–—,;:!?]/.test(text),
+    beginsLowercase: /^[a-z]/.test(text)
+  };
+}
+
 function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
   const text = normalizeQuoteWhitespace(rawText);
-  const lower = text.toLowerCase();
   const displayWordCount = quoteWordCount(displayText);
+  const sentence = quoteSentenceCompleteness(displayText);
+
+  const fillerHeavy = /\b(amen\?|okay|anyway|you know what i'm saying|right\?|does that make sense)\b/i.test(text);
+  const scriptureDense = /\b(?:genesis|exodus|leviticus|numbers|deuteronomy|joshua|judges|ruth|samuel|kings|chronicles|ezra|nehemiah|esther|job|psalm|psalms|proverbs|ecclesiastes|isaiah|jeremiah|lamentations|ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|luke|john|acts|romans|corinthians|galatians|ephesians|philippians|colossians|thessalonians|timothy|titus|philemon|hebrews|james|peter|jude|revelation)\b/i.test(text) || /\b\d+\s*:\s*\d+\b/.test(text);
+  const prayer = /\b(father|lord|pray|amen|thank you for your word|in jesus name)\b/i.test(text);
+  const humor = /\b(ain't|you know what i'm saying|okay\?|amen\?)\b/i.test(text);
+  const doctrinal = strongTerms.length >= 2 || /\b(gospel|salvation|grace|faith|christ|church|wrath|tribulation|rapture|resurrection|truth)\b/i.test(text);
 
   return {
-    fillerHeavy: /\b(amen\?|okay|anyway|you know what i'm saying|right\?)\b/i.test(text),
-    scriptureDense: /\b(?:genesis|exodus|leviticus|numbers|deuteronomy|joshua|judges|ruth|samuel|kings|chronicles|ezra|nehemiah|esther|job|psalm|psalms|proverbs|ecclesiastes|isaiah|jeremiah|lamentations|ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|luke|john|acts|romans|corinthians|galatians|ephesians|philippians|colossians|thessalonians|timothy|titus|philemon|hebrews|james|peter|jude|revelation)\b/i.test(text) || /\b\d+\s*:\s*\d+\b/.test(text),
-    prayer: /\b(father|lord|pray|amen|thank you for your word|in jesus name)\b/i.test(text),
-    humor: /\b(ain't|you know what i'm saying|okay\?|amen\?)\b/i.test(text),
-    doctrinal: strongTerms.length >= 2 || /\b(gospel|salvation|grace|faith|christ|church|wrath|tribulation|rapture|resurrection|truth)\b/i.test(text),
-    quoteReady: displayWordCount >= 12 && displayWordCount <= 45 && lowValuePenalty <= 1 && !/^(amen|okay|anyway|so|and|but)\b/i.test(displayText)
+    fillerHeavy,
+    scriptureDense,
+    prayer,
+    humor,
+    doctrinal,
+    startsCleanly: sentence.startsCleanly,
+    endsCleanly: sentence.endsCleanly,
+    hasOrphanLeadingPunctuation: sentence.hasOrphanLeadingPunctuation,
+    beginsLowercase: sentence.beginsLowercase,
+    quoteReady: displayWordCount >= 12
+      && displayWordCount <= 45
+      && lowValuePenalty <= 1
+      && sentence.startsCleanly
+      && sentence.endsCleanly
+      && !fillerHeavy
   };
 }
 
 function qualityAdjustedQuoteScore(baseScore, flags) {
   let score = baseScore;
-  if (flags.quoteReady) score += 10;
+  if (flags.quoteReady) score += 14;
   if (flags.doctrinal) score += 8;
   if (flags.scriptureDense) score += 3;
-  if (flags.prayer) score -= 4;
-  if (flags.fillerHeavy) score -= 10;
-  if (flags.humor) score -= 3;
+  if (flags.prayer) score -= 7;
+  if (flags.fillerHeavy) score -= 18;
+  if (flags.humor) score -= 5;
+  if (!flags.startsCleanly) score -= 24;
+  if (!flags.endsCleanly) score -= 8;
+  if (flags.hasOrphanLeadingPunctuation) score -= 30;
+  if (flags.beginsLowercase) score -= 18;
   return score;
 }
 
@@ -958,10 +1003,16 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       const displayText = buildQuoteDisplayText(rawText);
       if (quoteWordCount(displayText) < 10) continue;
 
-      const baseScore = quoteCandidateScore(rawText, wordCount, durationSeconds, strongTerms, lowValuePenalty);
       const qualityFlags = quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty);
+
+      // Keep non-quote-ready items only if they are still strong doctrinal/search
+      // candidates. The random quote UI can prefer quoteReady later.
+      if (!qualityFlags.startsCleanly && !qualityFlags.doctrinal) continue;
+      if (qualityFlags.hasOrphanLeadingPunctuation) continue;
+
+      const baseScore = quoteCandidateScore(rawText, wordCount, durationSeconds, strongTerms, lowValuePenalty);
       const score = qualityAdjustedQuoteScore(baseScore, qualityFlags);
-      if (score < 18) continue;
+      if (score < 28) continue;
 
       candidates.push({
         id: makeQuoteId(item, candidates.length),
@@ -1089,6 +1140,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
+      qualityPass: "sentence-boundary filtering, leading filler cleanup, and quoteReady flags",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
