@@ -827,6 +827,46 @@ function quoteCandidateScore(text, wordCount, durationSeconds, strongTerms, lowV
   return score;
 }
 
+function buildQuoteDisplayText(value) {
+  // Light presentation cleanup only. This does not rewrite doctrine or invent
+  // wording. It removes common conversational wrappers that look awkward on
+  // quote cards while preserving the actual spoken statement.
+  return normalizeQuoteWhitespace(value)
+    .replace(/^(amen\??\s*)+/i, "")
+    .replace(/^(okay[,.]?\s*)+/i, "")
+    .replace(/^(anyway[,.]?\s*)+/i, "")
+    .replace(/^(so[,.]?\s*)+/i, "")
+    .replace(/\b(okay|anyway)\b[,.]?\s*/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty) {
+  const text = normalizeQuoteWhitespace(rawText);
+  const lower = text.toLowerCase();
+  const displayWordCount = quoteWordCount(displayText);
+
+  return {
+    fillerHeavy: /\b(amen\?|okay|anyway|you know what i'm saying|right\?)\b/i.test(text),
+    scriptureDense: /\b(?:genesis|exodus|leviticus|numbers|deuteronomy|joshua|judges|ruth|samuel|kings|chronicles|ezra|nehemiah|esther|job|psalm|psalms|proverbs|ecclesiastes|isaiah|jeremiah|lamentations|ezekiel|daniel|hosea|joel|amos|obadiah|jonah|micah|nahum|habakkuk|zephaniah|haggai|zechariah|malachi|matthew|mark|luke|john|acts|romans|corinthians|galatians|ephesians|philippians|colossians|thessalonians|timothy|titus|philemon|hebrews|james|peter|jude|revelation)\b/i.test(text) || /\b\d+\s*:\s*\d+\b/.test(text),
+    prayer: /\b(father|lord|pray|amen|thank you for your word|in jesus name)\b/i.test(text),
+    humor: /\b(ain't|you know what i'm saying|okay\?|amen\?)\b/i.test(text),
+    doctrinal: strongTerms.length >= 2 || /\b(gospel|salvation|grace|faith|christ|church|wrath|tribulation|rapture|resurrection|truth)\b/i.test(text),
+    quoteReady: displayWordCount >= 12 && displayWordCount <= 45 && lowValuePenalty <= 1 && !/^(amen|okay|anyway|so|and|but)\b/i.test(displayText)
+  };
+}
+
+function qualityAdjustedQuoteScore(baseScore, flags) {
+  let score = baseScore;
+  if (flags.quoteReady) score += 10;
+  if (flags.doctrinal) score += 8;
+  if (flags.scriptureDense) score += 3;
+  if (flags.prayer) score -= 4;
+  if (flags.fillerHeavy) score -= 10;
+  if (flags.humor) score -= 3;
+  return score;
+}
+
 function makeQuoteId(item, quoteIndex) {
   return `${item.stableId || "episode"}-quote-${String(quoteIndex + 1).padStart(4, "0")}`;
 }
@@ -914,7 +954,13 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (quoteLooksFragmentary(text)) continue;
       if (lowValuePenalty >= 3 && strongTerms.length === 0) continue;
 
-      const score = quoteCandidateScore(text, wordCount, durationSeconds, strongTerms, lowValuePenalty);
+      const rawText = text;
+      const displayText = buildQuoteDisplayText(rawText);
+      if (quoteWordCount(displayText) < 10) continue;
+
+      const baseScore = quoteCandidateScore(rawText, wordCount, durationSeconds, strongTerms, lowValuePenalty);
+      const qualityFlags = quoteQualityFlags(rawText, displayText, strongTerms, lowValuePenalty);
+      const score = qualityAdjustedQuoteScore(baseScore, qualityFlags);
       if (score < 18) continue;
 
       candidates.push({
@@ -930,24 +976,29 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         endTime: group[group.length - 1]?.endTime || secondsToSrtTimestamp(end),
         segmentIndexes: group.map(segment => segment.index).filter(Boolean),
         wordCount,
+        displayWordCount: quoteWordCount(displayText),
         durationSeconds,
         score,
+        baseScore,
         strongTerms,
         lowValuePenalty,
+        qualityFlags,
         source: {
           transcriptDisplayJson: displayJsonFile,
           transcriptCleanJson: item?.transcript?.jsonFile || null,
           transcriptDisplaySrt: item?.transcript?.displayFile || null,
           transcriptCleanSrt: item?.transcript?.cleanFile || null
         },
-        text
+        rawText,
+        displayText,
+        text: displayText
       });
     }
   }
 
   const byKey = new Map();
   for (const candidate of candidates) {
-    const key = candidate.text
+    const key = (candidate.displayText || candidate.text)
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, " ")
       .replace(/\s+/g, " ")
@@ -1037,6 +1088,7 @@ function buildQuoteBank(items) {
       minWords: 12,
       maxWords: 55,
       maxQuotesPerEpisode: 75,
+      displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1060,7 +1112,10 @@ function buildQuoteBank(items) {
       start: quote.start,
       end: quote.end,
       score: quote.score,
-      text: quote.text
+      qualityFlags: quote.qualityFlags,
+      rawText: quote.rawText,
+      displayText: quote.displayText,
+      text: quote.displayText || quote.text
     }))
   });
 
