@@ -33,29 +33,62 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 .media-shell{width:100%;aspect-ratio:16/9;border-radius:22px;border:1px solid var(--border);background:rgba(0,0,0,.36);overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:14px}.media-shell iframe{width:100%;height:100%;border:0;display:block}.audio-box{display:grid;gap:12px;padding:18px;width:100%}.audio-box audio{width:100%}
 .time-row{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-family:Poppins,sans-serif;font-size:13px}.note{padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);font-size:13px;line-height:1.45}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;display:none;max-width:min(720px,calc(100vw - 28px));padding:12px 16px;border-radius:999px;background:rgba(12,12,13,.94);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(0,0,0,.30);color:rgba(255,255,255,.88);font-size:13px}.toast.is-visible{display:block}
+
+.selector-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:0 22px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
+.selector-field{display:grid;gap:5px;min-width:min(420px,100%)}
+.selector-field label{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}
+.selector-field select{height:46px;border-radius:16px;border:1px solid var(--border);background:rgba(0,0,0,.32);color:var(--text);padding:0 14px;outline:none;font-family:Inter,sans-serif}
+.quick-link{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:0 15px;border-radius:16px;background:linear-gradient(180deg,rgba(143,174,157,.20),rgba(143,174,157,.10));border:1px solid rgba(143,174,157,.24);font-family:Poppins,sans-serif;font-weight:700}
+
 @media(max-width:980px){.review{grid-template-columns:1fr}.brand img{width:150px;height:54px}}
 </style>
 </head>
 <body>
 <div class="page">
-<header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><a class="back-link" href="index.html">Back to Media</a></header>
+<header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><div class="actions"><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="index.html">Back to Media</a></div></header>
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
-<section class="panel"><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
-<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio and video both use the exact same SRT timestamp. No audio pre-roll or automatic offset is applied.</div></div></section>
+<section class="panel"><div class="selector-row"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><a class="quick-link" href="quote-review-approved.html">Approved Quote Page</a></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
+<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Review uses the YouTube video timestamp. Audio buttons were removed because browser audio seeking was not precise enough for quote review.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
 const PASSWORD='1813';
 const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
-const state={quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map()};
+const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__"};
 const $=id=>document.getElementById(id);
-const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),loadAudio:$('loadAudio'),loadVideo:$('loadVideo'),openAudio:$('openAudio'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast')};
+const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),episodeFilter:$('episodeFilter'),loadVideo:$('loadVideo'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast')};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
 function fmtDate(v){try{return new Date(v+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});}catch(_){return v||'';}}
 function fmtTime(s){s=Number(s||0);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
 function toast(msg){els.toast.textContent=msg;els.toast.classList.add('is-visible');clearTimeout(toast.t);toast.t=setTimeout(()=>els.toast.classList.remove('is-visible'),2400);}
 function reviewKey(action,q){return `cgbcQuoteReview:${action}:${q?.id||'unknown'}`;}
 function save(action,q,text){try{localStorage.setItem(reviewKey(action,q),JSON.stringify({action,quoteId:q?.id||'',approvedText:text||'',episode:q?.episode||null,media:q?.media||null,savedAt:new Date().toISOString()}));}catch(e){console.warn(e);}}
+function hasReview(q){return ['approved','featured','rejected'].some(action=>!!localStorage.getItem(reviewKey(action,q)));}
+function episodeKey(q){return q?.episode?.stableId||q?.episode?.title||'unknown';}
+function episodeLabel(q){const ep=q?.episode||{};return ep.title||ep.episodeName||'Untitled episode';}
+function buildEpisodeOptions(){
+  if(!els.episodeFilter)return;
+  const groups=new Map();
+  for(const q of state.allQuotes){
+    const key=episodeKey(q);
+    if(!groups.has(key))groups.set(key,{key,label:episodeLabel(q),total:0,reviewed:0});
+    const g=groups.get(key);g.total+=1;if(hasReview(q))g.reviewed+=1;
+  }
+  const allReviewed=state.allQuotes.filter(hasReview).length;
+  const opts=[`<option value="__all__">All episodes — ${allReviewed}/${state.allQuotes.length} reviewed</option>`];
+  Array.from(groups.values()).sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true,sensitivity:'base'})).forEach(g=>{
+    opts.push(`<option value="${esc(g.key)}">${esc(g.label)} — ${g.reviewed}/${g.total} reviewed</option>`);
+  });
+  els.episodeFilter.innerHTML=opts.join('');
+  els.episodeFilter.value=state.episodeFilter;
+}
+function applyEpisodeFilter(){
+  state.quotes=state.episodeFilter==='__all__'?state.allQuotes.slice():state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter);
+  if(!state.quotes.length && state.episodeFilter!=='__all__'){state.episodeFilter='__all__';state.quotes=state.allQuotes.slice();}
+  state.index=0;
+  render();
+}
+
 function sortQuotes(list){const tier={featured:4,strong:3,study:2,archive:1};return list.slice().sort((a,b)=>Number(!!b.publicSafe)-Number(!!a.publicSafe)||(tier[b.displayTier]||0)-(tier[a.displayTier]||0)||(b.searchBoost||0)-(a.searchBoost||0)||(b.quotePolishScore||0)-(a.quotePolishScore||0)||(b.score||0)-(a.score||0));}
 async function loadQuotes(){for(const path of QUOTE_PATHS){try{const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});if(!res.ok)continue;const data=await res.json();const quotes=sortQuotes(Array.isArray(data?.quotes)?data.quotes:[]);if(quotes.length)return quotes;}catch(e){}}throw new Error('Could not load random-quotes.json.');}
 function quoteText(q){return q?.approvedText||q?.displayText||q?.expandedText||q?.text||'';}
@@ -182,7 +215,7 @@ async function transcriptNeighborText(q,which){
 }
 function setApprovalText(value){const text=cleanJoinText(value);els.approvalText.value=text;els.quoteMain.textContent=text || quoteText(state.current);}
 
-function render(){els.quoteMain.classList.remove('is-editing');const q=state.quotes[state.index];state.current=q||null;if(!q)return;const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q);els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;els.quoteBefore.textContent=before;els.quoteBefore.style.display=before?'':'none';els.quoteMain.textContent=main;els.quoteAfter.textContent=after;els.quoteAfter.style.display=after?'':'none';els.approvalText.value=main;els.quoteMeta.innerHTML=[`<span class="pill">${esc(q.displayTier||'candidate')}</span>`,`<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,ep.series?`<span>${esc(ep.series)}</span>`:'',ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',(q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''].filter(Boolean).join('');els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;els.openAudio.disabled=!q.media?.audioUrl;els.loadAudio.disabled=!q.media?.audioUrl;els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.loadVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.mediaTitle.textContent=ep.title||ep.episodeName||'Player';if(state.mediaMode==='audio')loadAudioHere();if(state.mediaMode==='video')loadVideoHere();}
+function render(){els.quoteMain.classList.remove('is-editing');const q=state.quotes[state.index];state.current=q||null;if(!q)return;const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q);els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;els.quoteBefore.textContent=before;els.quoteBefore.style.display=before?'':'none';els.quoteMain.textContent=main;els.quoteAfter.textContent=after;els.quoteAfter.style.display=after?'':'none';els.approvalText.value=main;els.quoteMeta.innerHTML=[`<span class="pill">${esc(q.displayTier||'candidate')}</span>`,`<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,ep.series?`<span>${esc(ep.series)}</span>`:'',ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',(q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''].filter(Boolean).join('');els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.loadVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.mediaTitle.textContent=ep.title||ep.episodeName||'Player';if(state.mediaMode==='video')loadVideoHere();}
 async function addContext(which){
   const q=state.current;if(!q)return;
   const current=els.approvalText.value.trim();
@@ -203,60 +236,10 @@ async function addContext(which){
 
 function nextQuote(){if(!state.quotes.length)return;state.index=(state.index+1)%state.quotes.length;render();}
 function mediaStart(q){return Math.max(0,Number(q?.media?.start||q?.start||0));}
-function calculateAudioSeekStart(q,audio){
-  const requestedStart=mediaStart(q);
-  const duration=Number(audio?.duration||0);
-  // The SRT was exported from the edited video timeline, and the podcast audio
-  // was ripped from that same video. Therefore audio and video must use the same
-  // timestamp. No review pre-roll and no guessed offset.
-  let start=Math.max(0,requestedStart);
-  if(Number.isFinite(duration)&&duration>0)start=Math.min(Math.max(0,duration-1),start);
-  return {start,duration};
-}
-function loadAudioHere(){
-  const q=state.current;if(!q?.media?.audioUrl)return;
-  state.mediaMode='audio';
-  const baseStart=mediaStart(q);
-  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto"></audio><div class="note" id="audioSeekNote">Audio loading at ${esc(fmtTime(baseStart))}. Audio and video use the exact same SRT timestamp; no automatic offset is applied.</div></div>`;
-  const audio=document.getElementById('reviewAudio');
-  const note=document.getElementById('audioSeekNote');
-  let attempts=0;
-  const updateNote=(label,target)=>{
-    if(!note||!audio)return;
-    const actual=Number.isFinite(audio.currentTime)?audio.currentTime:target;
-    note.textContent=`Audio requested ${fmtTime(baseStart)}; player reports ${fmtTime(actual)}. ${label}`;
-  };
-  const seek=(label='seek')=>{
-    if(!audio)return;
-    const result=calculateAudioSeekStart(q,audio);
-    attempts+=1;
-    try{
-      if(typeof audio.fastSeek==='function')audio.fastSeek(result.start);
-      else audio.currentTime=result.start;
-      updateNote(label,result.start);
-    }catch(e){console.warn('Audio seek failed.',e);updateNote('Seek failed; press Load Audio again.',result.start);}
-  };
-
-  // Attach listeners before setting src so the browser cannot load metadata before
-  // our seek handler is ready. Then retry briefly because some browsers accept
-  // currentTime only after enough audio metadata/buffer has arrived.
-  audio.addEventListener('loadedmetadata',()=>seek('loadedmetadata exact seek'),{once:true});
-  audio.addEventListener('durationchange',()=>seek('durationchange exact seek'),{once:true});
-  audio.addEventListener('loadeddata',()=>seek('loadeddata exact seek'),{once:true});
-  audio.addEventListener('canplay',()=>seek('canplay exact seek'),{once:true});
-  audio.addEventListener('seeked',()=>updateNote('Exact seek completed.',baseStart));
-  audio.src=q.media.audioUrl;
-  audio.load();
-  [250,650,1100,1700].forEach(delay=>setTimeout(()=>{
-    if(attempts<8 && Math.abs((audio.currentTime||0)-baseStart)>.75)seek('retry exact seek');
-    else updateNote('Exact timestamp ready.',baseStart);
-  },delay));
-}
 function loadVideoHere(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;state.mediaMode='video';const start=Math.max(0,Math.floor(mediaStart(q)));const id=q.media.youtubeId||'';const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:q.media.videoUrl;els.mediaShell.innerHTML=`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`;}
-function openAudio(){const q=state.current;if(!q?.media?.audioUrl)return;window.open(`${q.media.audioUrl}#t=${Math.max(0,Math.floor(mediaStart(q)))}`,'_blank','noopener');}
 function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;const start=Math.max(0,Math.floor(mediaStart(q)));const url=q.media.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`;window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
-async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}els.gateStatus.textContent='Loading quotes…';try{state.quotes=await loadQuotes();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
-els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);els.loadAudio.addEventListener('click',loadAudioHere);els.loadVideo.addEventListener('click',loadVideoHere);els.openAudio.addEventListener('click',openAudio);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());toast('Saved locally as rejected.');nextQuote();});
+async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}els.gateStatus.textContent='Loading quotes…';try{state.allQuotes=await loadQuotes();state.quotes=state.allQuotes.slice();buildEpisodeOptions();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
+els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as rejected.');nextQuote();});
 </script>
 </body>
 </html>
