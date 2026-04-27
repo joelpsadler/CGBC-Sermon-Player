@@ -1288,7 +1288,11 @@
         <button class="quote-egg-close" id="quoteEggClose" type="button" aria-label="Close quote review">×</button>
       </header>
       <div class="quote-egg-body">
-        <div class="quote-egg-status" id="quoteEggStatus">Loading quotes…</div>
+        <div class="quote-review-box" id="quotePasswordBox">
+          <label for="quotePasswordInput">Review password</label>
+          <textarea id="quotePasswordInput" inputmode="numeric" autocomplete="off" spellcheck="false" style="min-height:52px;resize:none" placeholder="Enter password"></textarea>
+        </div>
+        <div class="quote-egg-status" id="quoteEggStatus">Enter password to open quote review.</div>
         <div class="quote-context" id="quoteEggCard" hidden>
           <div class="quote-context-line" id="quoteBefore"></div>
           <div class="quote-context-line is-active" id="quoteMain"></div>
@@ -1297,7 +1301,7 @@
         <div class="quote-episode-meta" id="quoteMeta" hidden></div>
         <div class="quote-review-box" id="quoteReviewBox" hidden><label for="quoteApprovedText">Approval text</label><textarea id="quoteApprovedText" spellcheck="true"></textarea></div>
       </div>
-      <footer class="quote-egg-actions">
+      <footer class="quote-egg-actions" id="quoteEggActions" hidden>
         <button class="quote-egg-action" id="quoteAddPrevious" type="button">Add Previous</button>
         <button class="quote-egg-action" id="quoteAddNext" type="button">Add Next</button>
         <button class="quote-egg-action primary" id="quoteApprove" type="button">Save / Approve</button>
@@ -3227,7 +3231,7 @@
     // Desktop only: triple-click the CGBC logo to open the quote review desk.
     (function setupQuoteEasterEgg(){
       const reviewState = { quotes: [], index: 0, current: null, logoClicks: 0, logoTimer: null };
-      const ids = ['quoteEggBackdrop','quoteEggClose','quoteEggStatus','quoteEggCard','quoteBefore','quoteMain','quoteAfter','quoteMeta','quoteReviewBox','quoteApprovedText','quoteAddPrevious','quoteAddNext','quoteApprove','quoteFeature','quoteReject','quoteNext','quoteJumpAudio','quoteJumpVideo','quoteToast'];
+      const ids = ['quoteEggBackdrop','quoteEggClose','quoteEggStatus','quotePasswordBox','quotePasswordInput','quoteEggActions','quoteEggCard','quoteBefore','quoteMain','quoteAfter','quoteMeta','quoteReviewBox','quoteApprovedText','quoteAddPrevious','quoteAddNext','quoteApprove','quoteFeature','quoteReject','quoteNext','quoteJumpAudio','quoteJumpVideo','quoteToast'];
       const els = {};
       function getEls(){ ids.forEach(id => els[id] = document.getElementById(id)); }
       function isDesktop(){ return window.matchMedia && window.matchMedia('(min-width:901px)').matches; }
@@ -3284,13 +3288,45 @@
       }
       async function openReview(){
         if(!isDesktop()){ toast('Quote review is desktop-only for now.'); return; }
-        getEls(); els.quoteEggBackdrop.classList.add('is-visible'); els.quoteEggBackdrop.setAttribute('aria-hidden','false'); els.quoteEggStatus.textContent='Loading quotes…';
+        getEls();
+        els.quoteEggBackdrop.classList.add('is-visible');
+        els.quoteEggBackdrop.setAttribute('aria-hidden','false');
+
+        if(sessionStorage.getItem('cgbcQuoteReviewUnlocked') !== 'true'){
+          els.quotePasswordBox.hidden = false;
+          els.quoteEggActions.hidden = true;
+          els.quoteEggCard.hidden = true;
+          els.quoteMeta.hidden = true;
+          els.quoteReviewBox.hidden = true;
+          els.quoteEggStatus.textContent = 'Enter password to open quote review.';
+          els.quotePasswordInput.value = '';
+          setTimeout(() => els.quotePasswordInput.focus(), 80);
+          return;
+        }
+
+        els.quotePasswordBox.hidden = true;
+        els.quoteEggActions.hidden = false;
+        els.quoteEggStatus.textContent='Loading quotes…';
         try{ await loadQuotes(); render(); }catch(e){ els.quoteEggStatus.textContent='Could not load random-quotes.json yet. Deploy quote data first, then reopen this review desk.'; console.warn(e); }
       }
       function closeReview(){ getEls(); if(els.quoteEggBackdrop){ els.quoteEggBackdrop.classList.remove('is-visible'); els.quoteEggBackdrop.setAttribute('aria-hidden','true'); } }
       function wireModal(){
         getEls(); if(!els.quoteEggBackdrop || els.quoteEggBackdrop.dataset.wired==='true') return; els.quoteEggBackdrop.dataset.wired='true';
         els.quoteEggClose.addEventListener('click',closeReview);
+        els.quotePasswordInput.addEventListener('keydown', async (e)=>{
+          if(e.key !== 'Enter') return;
+          e.preventDefault();
+          if(els.quotePasswordInput.value.trim() !== '1813'){
+            els.quoteEggStatus.textContent = 'Wrong password.';
+            toast('Wrong password.');
+            return;
+          }
+          sessionStorage.setItem('cgbcQuoteReviewUnlocked','true');
+          els.quotePasswordBox.hidden = true;
+          els.quoteEggActions.hidden = false;
+          els.quoteEggStatus.textContent = 'Loading quotes…';
+          try{ await loadQuotes(); render(); }catch(err){ els.quoteEggStatus.textContent='Could not load random-quotes.json yet. Deploy quote data first, then reopen this review desk.'; console.warn(err); }
+        });
         els.quoteEggBackdrop.addEventListener('click',e=>{ if(e.target===els.quoteEggBackdrop) closeReview(); });
         document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeReview(); });
         els.quoteAddPrevious.addEventListener('click',()=>add('before')); els.quoteAddNext.addEventListener('click',()=>add('after')); els.quoteNext.addEventListener('click',next);
