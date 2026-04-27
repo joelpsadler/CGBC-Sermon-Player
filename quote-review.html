@@ -29,7 +29,7 @@ h1{margin:0;font-family:Poppins,sans-serif;font-size:clamp(30px,3.2vw,54px);line
 .quote-main{color:rgba(255,255,255,.96);font-family:Poppins,sans-serif;font-size:clamp(28px,3.1vw,46px);font-weight:800;line-height:1.1;text-align:center;padding:8px 6px}
 .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);font-size:13px}.pill{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid var(--border);font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.78)}
 textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1px solid var(--border);background:rgba(0,0,0,.24);color:var(--text);padding:14px;outline:none;line-height:1.45}
-.actions,.media-tabs{display:flex;gap:10px;flex-wrap:wrap}.btn.primary{background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));border-color:rgba(143,174,157,.28)}.btn.danger{background:rgba(255,90,90,.08);border-color:rgba(255,90,90,.22)}.btn[disabled]{opacity:.45;cursor:not-allowed}
+.actions,.media-tabs{display:flex;gap:10px;flex-wrap:wrap}.quote-main.is-editing{outline:2px solid rgba(143,174,157,.38);background:rgba(143,174,157,.08);border-radius:18px}.sync-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}.sync-controls .btn{min-height:36px;padding:0 10px;border-radius:13px;font-size:12px}.sync-readout{width:100%;color:rgba(255,255,255,.62);font-size:12px;text-align:center}.btn.primary{background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));border-color:rgba(143,174,157,.28)}.btn.danger{background:rgba(255,90,90,.08);border-color:rgba(255,90,90,.22)}.btn[disabled]{opacity:.45;cursor:not-allowed}
 .media-shell{width:100%;aspect-ratio:16/9;border-radius:22px;border:1px solid var(--border);background:rgba(0,0,0,.36);overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:14px}.media-shell iframe{width:100%;height:100%;border:0;display:block}.audio-box{display:grid;gap:12px;padding:18px;width:100%}.audio-box audio{width:100%}
 .time-row{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-family:Poppins,sans-serif;font-size:13px}.note{padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);font-size:13px;line-height:1.45}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;display:none;max-width:min(720px,calc(100vw - 28px));padding:12px 16px;border-radius:999px;background:rgba(12,12,13,.94);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(0,0,0,.30);color:rgba(255,255,255,.88);font-size:13px}.toast.is-visible{display:block}
@@ -41,15 +41,15 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 <header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><a class="back-link" href="index.html">Back to Media</a></header>
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
-<section class="panel"><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
-<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio aligns against the transcript length, then starts two seconds before the quote. Video uses YouTube start time.</div></div></section>
+<section class="panel"><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
+<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio and video both use the same SRT timestamp. Audio starts two seconds early for review comfort only.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
 const PASSWORD='1813';
 const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
 const state={quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map()};
 const $=id=>document.getElementById(id);
-const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),loadAudio:$('loadAudio'),loadVideo:$('loadVideo'),openAudio:$('openAudio'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast')};
+const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),loadAudio:$('loadAudio'),loadVideo:$('loadVideo'),openAudio:$('openAudio'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast')};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
 function fmtDate(v){try{return new Date(v+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});}catch(_){return v||'';}}
 function fmtTime(s){s=Number(s||0);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
@@ -100,41 +100,89 @@ function transcriptLastEnd(segments){
   return last;
 }
 async function transcriptAudioOffset(q,audio){
-  const duration=Number(audio?.duration||0);
-  if(!Number.isFinite(duration)||duration<=0)return 0;
-  const segments=await getTranscriptSegments(q);
-  const transcriptEnd=transcriptLastEnd(segments);
-  if(!transcriptEnd)return 0;
-  const diff=duration-transcriptEnd;
-  // If the Podbean/audio file is a little longer than the transcript/video timeline,
-  // the extra time is usually at the front of the ripped audio. Add that offset so
-  // transcript timestamps still land on the matching audio words.
-  if(Math.abs(diff)>=1 && Math.abs(diff)<=180)return diff;
+  // Do not auto-apply a guessed audio offset. The YouTube video timestamp is
+  // trustworthy because the SRT came from the edited video timeline. The RSS/
+  // podcast audio can have a tiny intro, trim, or processing difference, and
+  // guessing from duration can push the cue the wrong direction. Manual sync
+  // controls below store a per-episode correction in this browser.
   return 0;
 }
+function audioOffsetKey(q){return `cgbcQuoteReviewAudioOffset:${q?.media?.audioUrl||q?.id||'unknown'}`;}
+function getSavedAudioOffset(q){try{return Number(localStorage.getItem(audioOffsetKey(q))||0)||0;}catch(_){return 0;}}
+function saveAudioOffset(q,value){try{localStorage.setItem(audioOffsetKey(q),String(Math.round(Number(value)||0)));}catch(e){console.warn(e);}}
+function updateAudioSyncReadout(offset){const node=document.getElementById('audioSyncReadout');if(node)node.textContent=`Manual audio offset: ${offset>0?'+':''}${Math.round(offset)}s. Use this when video is correct but podcast audio lands early/late.`;}
+function focusManualEdit(){
+  els.approvalText.focus();
+  els.approvalText.select();
+  els.quoteMain.classList.add('is-editing');
+  toast('Approval text is editable. Type your correction, then Save / Approve or Feature.');
+}
 
+function quoteTimeRange(q){
+  const start=Number(q?.media?.start ?? q?.start ?? 0);
+  const end=Number(q?.media?.end ?? q?.end ?? start);
+  return {
+    start:Number.isFinite(start)?start:0,
+    end:Number.isFinite(end)?end:(Number.isFinite(start)?start:0)
+  };
+}
+function findQuoteSegmentPositions(q,segments){
+  const {start,end}=quoteTimeRange(q);
+  const positions=[];
+  const rawIndexes=(Array.isArray(q?.segmentIndexes)?q.segmentIndexes:[]).map(Number).filter(Number.isFinite);
+
+  // First try the saved segmentIndexes, but only trust them if their timing is
+  // near this quote. This protects us when quote-bank.json was generated from
+  // display-clean segments, but the page accidentally loads the faithful/clean
+  // transcript JSON where index numbers differ.
+  for(const idx of rawIndexes){
+    const pos=segments.findIndex(seg=>Number(seg?.index)===idx);
+    if(pos>=0){
+      const seg=segments[pos];
+      const segStart=Number(seg?.start||0);
+      const segEnd=Number(seg?.end||segStart);
+      if(Math.abs(segStart-start)<=4 || (segEnd>=start-.5 && segStart<=end+.5))positions.push(pos);
+    }
+  }
+  if(positions.length)return Array.from(new Set(positions)).sort((a,b)=>a-b);
+
+  // Timing fallback: this is the reliable anchor. SRT time == video time ==
+  // audio time. If indexes are from a different transcript layer, use time.
+  segments.forEach((seg,pos)=>{
+    const segStart=Number(seg?.start||0);
+    const segEnd=Number(seg?.end||segStart);
+    if(segEnd>=start-.25 && segStart<=end+.25)positions.push(pos);
+  });
+  if(positions.length)return positions;
+
+  // Last fallback: nearest segment by start time.
+  let best=-1,bestDelta=Infinity;
+  segments.forEach((seg,pos)=>{
+    const delta=Math.abs(Number(seg?.start||0)-start);
+    if(delta<bestDelta){bestDelta=delta;best=pos;}
+  });
+  return best>=0?[best]:[];
+}
 async function transcriptNeighborText(q,which){
-  const indexes=(Array.isArray(q?.segmentIndexes)?q.segmentIndexes:[]).map(Number).filter(Number.isFinite);
-  if(!indexes.length)return '';
   const segments=await getTranscriptSegments(q);
   if(!segments.length)return '';
+  const positions=findQuoteSegmentPositions(q,segments);
+  if(!positions.length)return '';
   const currentText=els.approvalText.value || quoteText(q);
-  const sorted=indexes.slice().sort((a,b)=>a-b);
   const step=which==='before'?-1:1;
-  let cursor=which==='before'?sorted[0]+step:sorted[sorted.length-1]+step;
+  let pos=which==='before'?positions[0]+step:positions[positions.length-1]+step;
   let attempts=0;
-  while(attempts<8){
-    const seg=segmentByIndex(segments,cursor);
-    if(!seg)return '';
-    const text=cleanJoinText(seg.text||'');
+  while(attempts<10 && pos>=0 && pos<segments.length){
+    const seg=segments[pos];
+    const text=cleanJoinText(seg?.text||'');
     if(text && !alreadyContainsText(currentText,text))return text;
-    cursor+=step;attempts+=1;
+    pos+=step;attempts+=1;
   }
   return '';
 }
 function setApprovalText(value){const text=cleanJoinText(value);els.approvalText.value=text;els.quoteMain.textContent=text || quoteText(state.current);}
 
-function render(){const q=state.quotes[state.index];state.current=q||null;if(!q)return;const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q);els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;els.quoteBefore.textContent=before;els.quoteBefore.style.display=before?'':'none';els.quoteMain.textContent=main;els.quoteAfter.textContent=after;els.quoteAfter.style.display=after?'':'none';els.approvalText.value=main;els.quoteMeta.innerHTML=[`<span class="pill">${esc(q.displayTier||'candidate')}</span>`,`<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,ep.series?`<span>${esc(ep.series)}</span>`:'',ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',(q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''].filter(Boolean).join('');els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;els.openAudio.disabled=!q.media?.audioUrl;els.loadAudio.disabled=!q.media?.audioUrl;els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.loadVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.mediaTitle.textContent=ep.title||ep.episodeName||'Player';if(state.mediaMode==='audio')loadAudioHere();if(state.mediaMode==='video')loadVideoHere();}
+function render(){els.quoteMain.classList.remove('is-editing');const q=state.quotes[state.index];state.current=q||null;if(!q)return;const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q);els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;els.quoteBefore.textContent=before;els.quoteBefore.style.display=before?'':'none';els.quoteMain.textContent=main;els.quoteAfter.textContent=after;els.quoteAfter.style.display=after?'':'none';els.approvalText.value=main;els.quoteMeta.innerHTML=[`<span class="pill">${esc(q.displayTier||'candidate')}</span>`,`<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,ep.series?`<span>${esc(ep.series)}</span>`:'',ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',(q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''].filter(Boolean).join('');els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;els.openAudio.disabled=!q.media?.audioUrl;els.loadAudio.disabled=!q.media?.audioUrl;els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.loadVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.mediaTitle.textContent=ep.title||ep.episodeName||'Player';if(state.mediaMode==='audio')loadAudioHere();if(state.mediaMode==='video')loadVideoHere();}
 async function addContext(which){
   const q=state.current;if(!q)return;
   const current=els.approvalText.value.trim();
@@ -155,48 +203,44 @@ async function addContext(which){
 
 function nextQuote(){if(!state.quotes.length)return;state.index=(state.index+1)%state.quotes.length;render();}
 function mediaStart(q){return Math.max(0,Number(q?.media?.start||q?.start||0));}
-function calculateAudioSeekStart(q,audio,offset=0){
+function calculateAudioSeekStart(q,audio){
   const requestedStart=mediaStart(q);
   const duration=Number(audio?.duration||0);
-  let start=Math.max(0,requestedStart+offset-2);
+  // The SRT was exported from the edited video timeline, and the podcast audio
+  // was ripped from that same video. Therefore audio and video must use the same
+  // timestamp. We only subtract two seconds as review pre-roll.
+  let start=Math.max(0,requestedStart-2);
   if(Number.isFinite(duration)&&duration>0)start=Math.min(Math.max(0,duration-1),start);
-  return {start,offset,duration};
+  return {start,duration};
 }
 function loadAudioHere(){
   const q=state.current;if(!q?.media?.audioUrl)return;
   state.mediaMode='audio';
-  const initialStart=Math.max(0,mediaStart(q)-2);
-  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto" src="${esc(q.media.audioUrl)}"></audio><div class="note" id="audioSeekNote">Audio loading near ${esc(fmtTime(initialStart))}. It will align against the transcript timeline when metadata is ready.</div></div>`;
+  const baseStart=Math.max(0,mediaStart(q)-2);
+  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto" src="${esc(q.media.audioUrl)}"></audio><div class="note" id="audioSeekNote">Audio loading at ${esc(fmtTime(baseStart))}. Audio and video use the same SRT timestamp; no automatic offset is applied.</div></div>`;
   const audio=document.getElementById('reviewAudio');
   const note=document.getElementById('audioSeekNote');
   let seeked=false;
-  let resolvedOffset=null;
-  const seek=async(force=false)=>{
+  const seek=(force=false)=>{
     if(!audio)return;
-    if(resolvedOffset===null)resolvedOffset=await transcriptAudioOffset(q,audio);
-    const result=calculateAudioSeekStart(q,audio,resolvedOffset);
+    const result=calculateAudioSeekStart(q,audio);
     if(!force&&seeked&&Math.abs((audio.currentTime||0)-result.start)>3)return;
     try{
       audio.currentTime=result.start;
       seeked=true;
-      if(note){
-        const offsetNote=Math.abs(result.offset)>=1?` Transcript/audio offset applied: ${result.offset>0?'+':''}${Math.round(result.offset)}s.`:'';
-        note.textContent=`Audio cued at ${fmtTime(result.start)}.${offsetNote} Press play to review the quote.`;
-      }
+      if(note)note.textContent=`Audio cued at ${fmtTime(result.start)}. Same timestamp source as video, with 2s review pre-roll.`;
     }catch(e){console.warn('Audio seek failed.',e);}
   };
   audio.addEventListener('loadedmetadata',()=>seek(true),{once:true});
-  audio.addEventListener('durationchange',()=>{resolvedOffset=null;seek(true);},{once:true});
   audio.addEventListener('canplay',()=>seek(false),{once:true});
   audio.addEventListener('play',()=>seek(false),{once:true});
-  setTimeout(()=>seek(true),500);
+  setTimeout(()=>seek(false),450);
 }
-
 function loadVideoHere(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;state.mediaMode='video';const start=Math.max(0,Math.floor(mediaStart(q)-1));const id=q.media.youtubeId||'';const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:q.media.videoUrl;els.mediaShell.innerHTML=`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`;}
 function openAudio(){const q=state.current;if(!q?.media?.audioUrl)return;window.open(`${q.media.audioUrl}#t=${Math.max(0,Math.floor(mediaStart(q)-2))}`,'_blank','noopener');}
 function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;const start=Math.max(0,Math.floor(mediaStart(q)-1));const url=q.media.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`;window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}els.gateStatus.textContent='Loading quotes…';try{state.quotes=await loadQuotes();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
-els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);els.loadAudio.addEventListener('click',loadAudioHere);els.loadVideo.addEventListener('click',loadVideoHere);els.openAudio.addEventListener('click',openAudio);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());toast('Saved locally as rejected.');nextQuote();});
+els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);els.loadAudio.addEventListener('click',loadAudioHere);els.loadVideo.addEventListener('click',loadVideoHere);els.openAudio.addEventListener('click',openAudio);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());toast('Saved locally as rejected.');nextQuote();});
 </script>
 </body>
 </html>
