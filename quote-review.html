@@ -42,11 +42,11 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
 <section class="panel"><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
-<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio now corrects for small Podbean/audio duration offsets. Video uses YouTube start time.</div></div></section>
+<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio aligns against the transcript length, then starts two seconds before the quote. Video uses YouTube start time.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
 const PASSWORD='1813';
-const QUOTE_PATHS=['data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
+const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
 const state={quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map()};
 const $=id=>document.getElementById(id);
 const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),loadAudio:$('loadAudio'),loadVideo:$('loadVideo'),openAudio:$('openAudio'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast')};
@@ -69,9 +69,16 @@ function alreadyContainsText(haystack,needle){
   const n=cleanJoinText(needle).toLowerCase();
   return !!n && (h===n || h.includes(n) || n.includes(h));
 }
-function sourceTranscriptPath(q){return q?.source?.transcriptDisplayJson || q?.source?.transcriptCleanJson || q?.episode?.transcriptDisplayJson || q?.transcriptDisplayJson || '';}
+function sourceTranscriptPath(q){return q?.source?.transcriptDisplayJson || q?.source?.transcriptCleanJson || q?.episode?.transcriptDisplayJson || q?.episode?.transcriptCleanJson || q?.transcriptDisplayJson || q?.transcriptCleanJson || '';}
 async function getTranscriptSegments(q){
-  const path=sourceTranscriptPath(q);
+  let path=sourceTranscriptPath(q);
+  if(!path){
+    const ep=q?.episode||{};
+    const date=ep.date||'';
+    const title=ep.episodeName||ep.title||'';
+    const slug=String(title).toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+    path=(date&&slug)?`data/transcripts/en/${date}_${slug}.display.json`:'';
+  }
   if(!path)return [];
   if(state.transcriptCache.has(path))return state.transcriptCache.get(path);
   try{
@@ -84,6 +91,28 @@ async function getTranscriptSegments(q){
   }catch(err){console.warn('Could not load transcript context.',path,err);state.transcriptCache.set(path,[]);return [];}
 }
 function segmentByIndex(segments,index){const wanted=Number(index);if(!Number.isFinite(wanted))return null;return segments.find(seg=>Number(seg?.index)===wanted) || segments[wanted-1] || null;}
+function transcriptLastEnd(segments){
+  let last=0;
+  for(const seg of segments||[]){
+    const end=Number(seg?.end||0);
+    if(Number.isFinite(end)&&end>last)last=end;
+  }
+  return last;
+}
+async function transcriptAudioOffset(q,audio){
+  const duration=Number(audio?.duration||0);
+  if(!Number.isFinite(duration)||duration<=0)return 0;
+  const segments=await getTranscriptSegments(q);
+  const transcriptEnd=transcriptLastEnd(segments);
+  if(!transcriptEnd)return 0;
+  const diff=duration-transcriptEnd;
+  // If the Podbean/audio file is a little longer than the transcript/video timeline,
+  // the extra time is usually at the front of the ripped audio. Add that offset so
+  // transcript timestamps still land on the matching audio words.
+  if(Math.abs(diff)>=1 && Math.abs(diff)<=180)return diff;
+  return 0;
+}
+
 async function transcriptNeighborText(q,which){
   const indexes=(Array.isArray(q?.segmentIndexes)?q.segmentIndexes:[]).map(Number).filter(Number.isFinite);
   if(!indexes.length)return '';
@@ -126,37 +155,38 @@ async function addContext(which){
 
 function nextQuote(){if(!state.quotes.length)return;state.index=(state.index+1)%state.quotes.length;render();}
 function mediaStart(q){return Math.max(0,Number(q?.media?.start||q?.start||0));}
-function calculateAudioSeekStart(q,audio){
+function calculateAudioSeekStart(q,audio,offset=0){
   const requestedStart=mediaStart(q);
-  const requestedEnd=mediaEnd(q);
-  let start=Math.max(0,requestedStart-2);
-  let detectedOffset=0;
   const duration=Number(audio?.duration||0);
-  if(Number.isFinite(duration) && duration>0){
-    if(requestedEnd>duration+.75){detectedOffset=requestedEnd-duration;start=Math.max(0,requestedStart-detectedOffset-2);}
-    else if(requestedStart>=duration){detectedOffset=requestedStart-duration;start=Math.max(0,duration-8);}
-  }
-  return {start,detectedOffset,duration};
+  let start=Math.max(0,requestedStart+offset-2);
+  if(Number.isFinite(duration)&&duration>0)start=Math.min(Math.max(0,duration-1),start);
+  return {start,offset,duration};
 }
 function loadAudioHere(){
   const q=state.current;if(!q?.media?.audioUrl)return;
   state.mediaMode='audio';
   const initialStart=Math.max(0,mediaStart(q)-2);
-  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto" src="${esc(q.media.audioUrl)}"></audio><div class="note" id="audioSeekNote">Audio loading near ${esc(fmtTime(initialStart))}. It will correct for any Podbean/audio duration offset when metadata is ready.</div></div>`;
+  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto" src="${esc(q.media.audioUrl)}"></audio><div class="note" id="audioSeekNote">Audio loading near ${esc(fmtTime(initialStart))}. It will align against the transcript timeline when metadata is ready.</div></div>`;
   const audio=document.getElementById('reviewAudio');
   const note=document.getElementById('audioSeekNote');
   let seeked=false;
-  const seek=(force=false)=>{
-    if(!audio||(!force&&seeked&&Math.abs((audio.currentTime||0)-calculateAudioSeekStart(q,audio).start)>3))return;
-    const result=calculateAudioSeekStart(q,audio);
+  let resolvedOffset=null;
+  const seek=async(force=false)=>{
+    if(!audio)return;
+    if(resolvedOffset===null)resolvedOffset=await transcriptAudioOffset(q,audio);
+    const result=calculateAudioSeekStart(q,audio,resolvedOffset);
+    if(!force&&seeked&&Math.abs((audio.currentTime||0)-result.start)>3)return;
     try{
       audio.currentTime=result.start;
       seeked=true;
-      if(note){const offsetNote=result.detectedOffset>.75?` Detected audio/video duration offset: ${fmtTime(result.detectedOffset)}.`:'';note.textContent=`Audio cued at ${fmtTime(result.start)}.${offsetNote} Press play to review the quote.`;}
+      if(note){
+        const offsetNote=Math.abs(result.offset)>=1?` Transcript/audio offset applied: ${result.offset>0?'+':''}${Math.round(result.offset)}s.`:'';
+        note.textContent=`Audio cued at ${fmtTime(result.start)}.${offsetNote} Press play to review the quote.`;
+      }
     }catch(e){console.warn('Audio seek failed.',e);}
   };
   audio.addEventListener('loadedmetadata',()=>seek(true),{once:true});
-  audio.addEventListener('durationchange',()=>seek(true),{once:true});
+  audio.addEventListener('durationchange',()=>{resolvedOffset=null;seek(true);},{once:true});
   audio.addEventListener('canplay',()=>seek(false),{once:true});
   audio.addEventListener('play',()=>seek(false),{once:true});
   setTimeout(()=>seek(true),500);
