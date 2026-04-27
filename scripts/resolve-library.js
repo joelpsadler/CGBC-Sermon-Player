@@ -1475,6 +1475,54 @@ function qualityAdjustedQuoteScore(baseScore, flags) {
   return score;
 }
 
+
+function speechDisfluencyScore(rawText, displayText) {
+  const raw = normalizeQuoteWhitespace(rawText);
+  const display = normalizeQuoteWhitespace(displayText);
+  let score = 0;
+
+  const patterns = [
+    /\ball right\b/gi,
+    /\balright\b/gi,
+    /\bright\?/gi,
+    /\bamen\?/gi,
+    /\bokay\?/gi,
+    /\byou know\b/gi,
+    /\bi mean\b/gi,
+    /\blisten\b/gi,
+    /\blook\b/gi,
+    /\by'all\b/gi,
+    /\bthe,\s*the\b/gi,
+    /\b(\w{1,14})(?:,\s*\1\b){1,4}/gi,
+    /\b(\w{2,14})\s+\1\b/gi
+  ];
+
+  for (const pattern of patterns) {
+    const matches = raw.match(pattern);
+    if (matches) score += matches.length;
+  }
+
+  if (display.length < raw.length * 0.75) score += 1;
+  return score;
+}
+
+function speakerNaturalnessScore(displayText, flags, disfluencyScoreValue) {
+  let score = 100;
+  const words = quoteWordCount(displayText);
+
+  if (words < 10) score -= 20;
+  if (words > 38) score -= 15;
+  if (flags.fillerHeavy) score -= 25;
+  if (!flags.startsCleanly) score -= 20;
+  if (!flags.endsCleanly) score -= 10;
+  score -= Math.min(disfluencyScoreValue * 8, 32);
+
+  if (flags.quoteReady) score += 8;
+  if (flags.doctrinal) score += 5;
+
+  return Math.max(0, Math.min(100, score));
+}
+
 function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
   const displayJsonFile = item?.transcript?.languages?.[language]?.displayJsonFile || item?.transcript?.displayJsonFile;
   if (!displayJsonFile || !existsSync(displayJsonFile)) return [];
