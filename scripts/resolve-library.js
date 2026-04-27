@@ -1664,6 +1664,68 @@ function hydrateQuoteDisplayFieldsList(quotes) {
 }
 
 
+function isPublicSafeQuote(quote) {
+  const text = normalizeQuoteWhitespace(quote.displayText || quote.text || "");
+  const tier = quote.displayTier || displayTierForQuote(quote);
+
+  if (quote.curation?.featured || quote.curation?.approved) return true;
+  if (quote.curation?.rejected) return false;
+
+  if (tier !== "featured" && tier !== "strong") return false;
+
+  // Keep highly technical eschatology available for study/search, but avoid
+  // surfacing it as a public random quote unless a human later approves it.
+  if (/\b(?:pre-trib|post-trib|mid-trib|pre-wrath|post-tribulation|mid-tribulation|antichrist|bold judgments|chapter\s+\d+|between chapters|this view|this text)\b/i.test(text)) {
+    return false;
+  }
+
+  // "church" alone is too broad in this sermon set. Prefer public surfacing
+  // when it is paired with devotional or application language.
+  const hasDevotionalSignal = /\b(?:faith|truth|word|grace|salvation|ready|comfort|hope|worship|christ|lord|gospel|pray|love)\b/i.test(text);
+  const hasPastoralSignal = quote.pastoralCharge || /\b(?:we still have to|are you ready|do not forget|be careful|give your life|comfort one another)\b/i.test(text);
+
+  return hasDevotionalSignal || hasPastoralSignal;
+}
+
+function publicSurfaceReasonForQuote(quote) {
+  const text = normalizeQuoteWhitespace(quote.displayText || quote.text || "");
+  const tier = quote.displayTier || displayTierForQuote(quote);
+
+  if (quote.curation?.featured) return "human_featured";
+  if (quote.curation?.approved) return "human_approved";
+  if (quote.curation?.rejected) return "human_rejected";
+  if (tier !== "featured" && tier !== "strong") return "not_public_tier";
+  if (/\b(?:pre-trib|post-trib|mid-trib|pre-wrath|post-tribulation|mid-tribulation|antichrist|bold judgments|chapter\s+\d+|between chapters|this view|this text)\b/i.test(text)) return "study_specific";
+  if (/\b(?:faith|truth|word|grace|salvation|ready|comfort|hope|worship|christ|lord|gospel|pray|love)\b/i.test(text)) return "devotional_signal";
+  if (quote.pastoralCharge) return "pastoral_charge";
+  return "needs_review";
+}
+
+function hydrateQuotePublicSurfaceFields(quote) {
+  const hydrated = hydrateQuoteDisplayFields(quote);
+  const publicSafe = hydrated.publicSafe ?? isPublicSafeQuote(hydrated);
+  const publicSurfaceReason = hydrated.publicSurfaceReason ?? publicSurfaceReasonForQuote({ ...hydrated, publicSafe });
+  return {
+    ...hydrated,
+    publicSafe,
+    publicSurfaceReason
+  };
+}
+
+function hydrateQuotePublicSurfaceFieldsList(quotes) {
+  return (quotes || [])
+    .map(hydrateQuotePublicSurfaceFields)
+    .sort((a, b) => {
+      const tierOrder = { featured: 4, strong: 3, study: 2, archive: 1 };
+      return Number(b.publicSafe) - Number(a.publicSafe)
+        || (tierOrder[b.displayTier] || 0) - (tierOrder[a.displayTier] || 0)
+        || (b.searchBoost || 0) - (a.searchBoost || 0)
+        || (b.quotePolishScore || 0) - (a.quotePolishScore || 0)
+        || (b.score || 0) - (a.score || 0);
+    });
+}
+
+
 function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
   const displayJsonFile = item?.transcript?.languages?.[language]?.displayJsonFile || item?.transcript?.displayJsonFile;
   if (!displayJsonFile || !existsSync(displayJsonFile)) return [];
@@ -1809,6 +1871,46 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
           contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
           speakerNaturalness,
           qualityFlags
+        }),
+        publicSafe: isPublicSafeQuote({
+          score,
+          displayText,
+          text: displayText,
+          timelessnessScore: timelessScoreValue,
+          pastoralCharge,
+          contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
+          speakerNaturalness,
+          qualityFlags,
+          displayTier: displayTierForQuote({
+            score,
+            displayText,
+            text: displayText,
+            timelessnessScore: timelessScoreValue,
+            pastoralCharge,
+            contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
+            speakerNaturalness,
+            qualityFlags
+          })
+        }),
+        publicSurfaceReason: publicSurfaceReasonForQuote({
+          score,
+          displayText,
+          text: displayText,
+          timelessnessScore: timelessScoreValue,
+          pastoralCharge,
+          contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
+          speakerNaturalness,
+          qualityFlags,
+          displayTier: displayTierForQuote({
+            score,
+            displayText,
+            text: displayText,
+            timelessnessScore: timelessScoreValue,
+            pastoralCharge,
+            contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
+            speakerNaturalness,
+            qualityFlags
+          })
         }),
         seriesRecap: isSeriesRecapText(displayText),
         outlineOrLessonStructure: isOutlineOrLessonStructure(displayText),
