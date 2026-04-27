@@ -949,56 +949,153 @@ function quoteCategoryFromFlags(flags) {
 function normalizeScriptureInQuoteText(value) {
   let text = normalizeQuoteWhitespace(value);
 
-  // Common ASR/FCP caption issue:
-  //   Revelation 310 -> Revelation 3:10
-  //   Romans 8 one  -> Romans 8:1
   const bookPattern = "(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalm|Psalms|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation)";
 
-  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d)\\s*(\\d{1,2})\\b`, "gi"), (match, book, chapter, verse) => {
-    // Avoid turning "Revelation 13, 7" style into nonsense here.
-    if (match.includes(",")) return match;
+  const numberWords = {
+    one: 1, two: 2, three: 3, four: 4, five: 5,
+    six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
+    eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15,
+    sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20
+  };
+
+  // Revelation 13, 7 -> Revelation 13:7
+  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d{1,3})\\s*,\\s*(\\d{1,3})\\b`, "gi"), (match, book, chapter, verse) => {
     return `${book} ${chapter}:${verse}`;
   });
 
-  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d+)\\s+(one|two|three|four|five|six|seven|eight|nine|ten)\\b`, "gi"), (match, book, chapter, word) => {
-    const map = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
-    return `${book} ${chapter}:${map[word.toLowerCase()]}`;
+  // Revelation 310 -> Revelation 3:10
+  // Romans 81 -> Romans 8:1
+  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d)(\\d{1,2})\\b`, "gi"), (match, book, chapter, verse) => {
+    return `${book} ${chapter}:${verse}`;
   });
 
+  // Romans 8 one -> Romans 8:1
+  text = text.replace(new RegExp(`\\b${bookPattern}\\s+(\\d{1,3})\\s+(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\\b`, "gi"), (match, book, chapter, word) => {
+    return `${book} ${chapter}:${numberWords[word.toLowerCase()]}`;
+  });
+
+  // 1st Corinthians 15, 51 -> 1st Corinthians 15:51
+  text = text.replace(/\b(1st|2nd|3rd)\s+(Corinthians|Thessalonians|Timothy|Peter|John)\s+(\d{1,3})\s*,\s*(\d{1,3})\b/gi, "$1 $2 $3:$4");
+
+  return normalizeQuoteWhitespace(text);
+}
+
+function collapseRepeatedSpeechWords(value) {
+  let text = normalizeQuoteWhitespace(value);
+  let previous = "";
+
+  // Repeat until stable. This catches:
+  //   "the, the, the church" -> "the church"
+  //   "is is" -> "is"
+  //   "the the" -> "the"
+  let guard = 0;
+  while (text !== previous && guard < 6) {
+    previous = text;
+    text = text
+      .replace(/\b(\w{1,14})(?:,\s*\1\b)+/gi, "$1")
+      .replace(/\b(\w{2,14})\s+\1\b/gi, "$1");
+    guard += 1;
+  }
+
   return text;
+}
+
+function stripConversationalLeadIns(value) {
+  let text = normalizeQuoteWhitespace(value);
+
+  // Remove stacked lead-ins at the beginning.
+  let previous = "";
+  let guard = 0;
+  while (text !== previous && guard < 6) {
+    previous = text;
+    text = text
+      .replace(/^(?:all right|alright|right|amen|okay|anyway|listen|look|i mean|you know|y'all|yall|so|now)[,.?!:;]?\s+/i, "")
+      .replace(/^(?:in other words|again|remember|therefore)[,.?!:;]?\s+/i, "");
+    guard += 1;
+  }
+
+  // Remove awkward in-sentence filler when it is just a speech bridge.
+  text = text
+    .replace(/\b(?:all right|alright|you know what i'm saying|you know|i mean)\b[,.?!]?\s*/gi, "")
+    .replace(/\b(?:listen|look)\b[,.]?\s+(?=(?:we|you|the|this|that|there|god|christ|jesus|church|scripture|revelation|romans|matthew|paul|john|he|they|it|i)\b)/gi, "")
+    .replace(/\bRight\?\s*/g, "")
+    .replace(/\bAmen\?\s*/g, "")
+    .replace(/\bOkay\?\s*/g, "");
+
+  return normalizeQuoteWhitespace(text);
 }
 
 function cleanupSpeechDisfluencies(value) {
   let text = normalizeQuoteWhitespace(value);
 
-  // Remove common sermon/conversation lead-ins that read poorly as quote cards.
-  text = text
-    .replace(/^(?:all right|alright|right|listen|look|i mean|you know|y'all|yall)[,.?]?\s+/i, "")
-    .replace(/\b(?:all right|alright|you know what i'm saying|you know|i mean)\b[,.?]?\s*/gi, "")
-    .replace(/\b(?:listen|look)\b[,.]?\s+(?=(?:we|you|the|this|that|there|god|christ|jesus|church|scripture|revelation|romans)\b)/gi, "")
-    .replace(/\bRight\?\s*/g, "")
-    .replace(/\bAmen\?\s*/g, "");
+  text = stripConversationalLeadIns(text);
+  text = collapseRepeatedSpeechWords(text);
 
-  // Collapse repeated short words caused by speech recognition.
-  // Example: "the, the, the church" -> "the church"
-  text = text.replace(/\b(\w{1,8})(?:,\s+\1\b){1,4}/gi, "$1");
-
-  // Collapse doubled words: "is is", "the the"
-  text = text.replace(/\b(\w{2,12})\s+\1\b/gi, "$1");
-
-  // Fix common rough ASR phrase from this transcript family.
   text = text
     .replace(/\bpre-rath\b/gi, "pre-wrath")
     .replace(/\bpost-tribute\b/gi, "post-tribulation")
     .replace(/\bspirit from\b/gi, "spared from")
-    .replace(/\binjure in your own time\b/gi, "enjoy in your own time");
+    .replace(/\binjure in your own time\b/gi, "enjoy in your own time")
+    .replace(/\bthe preacher of you\b/gi, "the pre-trib view")
+    .replace(/\braptures\b/gi, "rapture")
+    .replace(/\bRevelations\b/g, "Revelation");
 
   text = normalizeScriptureInQuoteText(text);
+  text = stripConversationalLeadIns(text);
+  text = collapseRepeatedSpeechWords(text);
 
   return normalizeQuoteWhitespace(text)
     .replace(/\s+([,.!?;:])/g, "$1")
     .replace(/^(?:[.\-–—,;:!?]\s*)+/g, "")
+    .replace(/\s+/g, " ")
     .trim();
+}
+
+function hardRejectQuoteReason(displayText, qualityFlags = {}) {
+  const text = normalizeQuoteWhitespace(displayText);
+  if (!text) return "empty";
+  if (/^(?:all right|alright|right|amen|okay|anyway|listen|look|i mean|you know|y'all|yall)\b/i.test(text)) return "bad_leading_filler";
+  if (/^(?:in other words,\s*listen|listen,|look,)/i.test(text)) return "bad_transition_filler";
+  if (/\b(\w{1,14})(?:,\s*\1\b)+/i.test(text)) return "repeated_comma_word";
+  if (/\b(\w{2,14})\s+\1\b/i.test(text)) return "repeated_word";
+  if (/\binjure in your own time\b/i.test(text)) return "known_asr_error";
+  if (/\bthe,\s*the\b/i.test(text)) return "unclean_repetition";
+  if (/^[a-z]/.test(text)) return "lowercase_fragment_start";
+  if (qualityFlags.prayer) return "prayer_segment";
+  return null;
+}
+
+function polishQuoteDisplayText(rawText, thoughtText) {
+  let displayText = cleanupSpeechDisfluencies(thoughtText);
+  let reason = hardRejectQuoteReason(displayText, {});
+  let speechCleanPasses = 1;
+
+  // If the chosen thought is still rough, try all smaller thoughts from the raw
+  // candidate and pick the strongest clean one.
+  if (reason) {
+    const alternatives = splitQuoteIntoThoughts(rawText)
+      .map(thought => cleanupSpeechDisfluencies(thought))
+      .filter(Boolean)
+      .filter(thought => quoteWordCount(thought) >= 10 && quoteWordCount(thought) <= 38)
+      .filter(thought => !hardRejectQuoteReason(thought, {}));
+
+    if (alternatives.length) {
+      alternatives.sort((a, b) => {
+        const aScore = quoteStrongTermHits(a).length * 10 + (quoteSentenceCompleteness(a).startsCleanly ? 8 : 0) + (quoteSentenceCompleteness(a).endsCleanly ? 8 : 0);
+        const bScore = quoteStrongTermHits(b).length * 10 + (quoteSentenceCompleteness(b).startsCleanly ? 8 : 0) + (quoteSentenceCompleteness(b).endsCleanly ? 8 : 0);
+        return bScore - aScore;
+      });
+      displayText = alternatives[0];
+      speechCleanPasses += 1;
+      reason = hardRejectQuoteReason(displayText, {});
+    }
+  }
+
+  return {
+    displayText,
+    speechCleanPasses,
+    hardRejectReason: reason
+  };
 }
 
 function speechDisfluencyScore(rawText, displayText) {
@@ -1011,13 +1108,15 @@ function speechDisfluencyScore(rawText, displayText) {
     /\balright\b/gi,
     /\bright\?/gi,
     /\bamen\?/gi,
+    /\bokay\?/gi,
     /\byou know\b/gi,
     /\bi mean\b/gi,
     /\blisten\b/gi,
     /\blook\b/gi,
     /\by'all\b/gi,
-    /\b(\w{1,8})(?:,\s+\1\b){1,4}/gi,
-    /\b(\w{2,12})\s+\1\b/gi
+    /\bthe,\s*the\b/gi,
+    /\b(\w{1,14})(?:,\s*\1\b){1,4}/gi,
+    /\b(\w{2,14})\s+\1\b/gi
   ];
 
   for (const pattern of patterns) {
@@ -1185,12 +1284,16 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
 
       const rawText = text;
       const thoughtText = chooseBestQuoteThought(rawText);
-      const displayText = cleanupSpeechDisfluencies(thoughtText);
+      const polished = polishQuoteDisplayText(rawText, thoughtText);
+      const displayText = polished.displayText;
       if (quoteWordCount(displayText) < 10) continue;
 
       const displayStrongTerms = quoteStrongTermHits(displayText);
       const displayLowValuePenalty = quoteLowValuePenalty(displayText);
       const qualityFlags = quoteQualityFlags(rawText, displayText, displayStrongTerms, displayLowValuePenalty);
+      const hardRejectReason = hardRejectQuoteReason(displayText, qualityFlags);
+      if (hardRejectReason) continue;
+
       const disfluencyScore = speechDisfluencyScore(rawText, displayText);
       const speakerNaturalness = speakerNaturalnessScore(displayText, qualityFlags, disfluencyScore);
 
@@ -1198,11 +1301,11 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       // candidates. The random quote UI can prefer quoteReady later.
       if (!qualityFlags.startsCleanly && !qualityFlags.doctrinal) continue;
       if (qualityFlags.hasOrphanLeadingPunctuation) continue;
-      if (speakerNaturalness < 45 && !qualityFlags.doctrinal) continue;
+      if (speakerNaturalness < 55 && !qualityFlags.doctrinal) continue;
 
       const baseScore = quoteCandidateScore(displayText, quoteWordCount(displayText), durationSeconds, displayStrongTerms, displayLowValuePenalty);
       const score = qualityAdjustedQuoteScore(baseScore, qualityFlags) + Math.round((speakerNaturalness - 70) / 5);
-      if (score < 30) continue;
+      if (score < 34) continue;
 
       candidates.push({
         id: makeQuoteId(item, candidates.length),
@@ -1224,6 +1327,8 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         disfluencyScore,
         speakerNaturalness,
         speechCleaned: displayText !== thoughtText,
+        speechCleanPasses: polished.speechCleanPasses,
+        hardRejectReason: null,
         thoughtText,
         strongTerms: displayStrongTerms,
         lowValuePenalty: displayLowValuePenalty,
@@ -1335,7 +1440,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "sentence-boundary filtering, thought chunking, speech cleanup, scripture normalization, and quoteReady flags",
+      qualityPass: "hard polish: pre-score speech cleanup, multi-pass repeated-word collapse, strict rejection, scripture normalization, thought chunking, and quoteReady flags",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1364,6 +1469,8 @@ function buildQuoteBank(items) {
       disfluencyScore: quote.disfluencyScore,
       speakerNaturalness: quote.speakerNaturalness,
       speechCleaned: quote.speechCleaned,
+      speechCleanPasses: quote.speechCleanPasses,
+      hardRejectReason: quote.hardRejectReason,
       rawText: quote.rawText,
       thoughtText: quote.thoughtText,
       displayText: quote.displayText,
