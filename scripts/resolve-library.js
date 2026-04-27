@@ -718,6 +718,372 @@ function buildTranscriptSearchIndex(items) {
   return entries.length;
 }
 
+// -----------------------------------------------------------------------------
+// QUOTE BANK GENERATOR - HIDDEN / FUTURE FEATURE DATA LAYER
+// -----------------------------------------------------------------------------
+// Beginner note:
+// This creates a reusable "quote candidate" dataset from display-clean
+// transcripts. Nothing on the visible website has to use this yet.
+//
+// Future uses:
+//   - hidden logo-click random quote page
+//   - approval/reject workflow
+//   - jump quote back to audio/video timestamp
+//   - featured quote sections by episode, series, or scripture
+//   - quote cards / share graphics
+//
+// Important:
+// These are quote CANDIDATES, not pastor-approved final quotes. The script scores
+// likely-good moments, then a later UI can save/approve or dismiss/reject them.
+
+const QUOTE_DATA_DIR = "data/quotes";
+const QUOTE_DEFAULT_LANGUAGE = TRANSCRIPT_DEFAULT_LANGUAGE;
+
+const QUOTE_STRONG_TERMS = [
+  "amen", "bible", "christ", "church", "cross", "faith", "father", "gospel",
+  "grace", "holy spirit", "jesus", "lord", "mercy", "promise", "redemption",
+  "repent", "resurrection", "salvation", "scripture", "sin", "truth", "word",
+  "worship", "wrath", "love", "hope", "peace", "righteousness", "sanctification",
+  "tribulation", "rapture", "revelation", "kingdom", "glory"
+];
+
+const QUOTE_BAD_STARTERS = [
+  "and", "but", "so", "because", "then", "now", "well", "okay", "alright",
+  "therefore", "also", "or", "if", "when"
+];
+
+const QUOTE_LOW_VALUE_PATTERNS = [
+  /\bturn (with me )?(in your bibles? )?to\b/i,
+  /\bchapter\s+\d+\b/i,
+  /\bverse\s+\d+\b/i,
+  /\blook at\b/i,
+  /\bas we read\b/i,
+  /\bwe're going to read\b/i,
+  /\bi want to show you\b/i,
+  /\bthis morning\b/i,
+  /\bthis evening\b/i,
+  /\blast week\b/i,
+  /\bnext week\b/i,
+  /\bchart\b/i,
+  /\bslide\b/i
+];
+
+function normalizeQuoteWhitespace(value) {
+  return cleanTranscriptText(value)
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.!?;:])/g, "$1")
+    .replace(/([.!?])\s+([a-z])/g, (_, punc, letter) => `${punc} ${letter.toUpperCase()}`)
+    .trim();
+}
+
+function quoteWordCount(value) {
+  return normalizeQuoteWhitespace(value).split(/\s+/).filter(Boolean).length;
+}
+
+function firstQuoteWord(value) {
+  const match = normalizeQuoteWhitespace(value).toLowerCase().match(/[a-z0-9']+/);
+  return match ? match[0] : "";
+}
+
+function quoteHasSentenceEnding(value) {
+  return /[.!?]["')\]]?$/.test(normalizeQuoteWhitespace(value));
+}
+
+function quoteStrongTermHits(value) {
+  const lower = normalizeQuoteWhitespace(value).toLowerCase();
+  return QUOTE_STRONG_TERMS.filter(term => lower.includes(term)).slice(0, 8);
+}
+
+function quoteLowValuePenalty(value) {
+  return QUOTE_LOW_VALUE_PATTERNS.reduce((score, pattern) => score + (pattern.test(value) ? 1 : 0), 0);
+}
+
+function quoteLooksFragmentary(value) {
+  const text = normalizeQuoteWhitespace(value);
+  const first = firstQuoteWord(text);
+  if (!text) return true;
+  if (QUOTE_BAD_STARTERS.includes(first)) return true;
+  if (/^(it|this|that|these|those|they|he|she|we|you)\b/i.test(text) && !quoteHasSentenceEnding(text)) return true;
+  if (!/[a-z]/i.test(text)) return true;
+  return false;
+}
+
+function quoteCandidateScore(text, wordCount, durationSeconds, strongTerms, lowValuePenalty) {
+  let score = 0;
+
+  if (wordCount >= 15 && wordCount <= 45) score += 25;
+  if (wordCount >= 20 && wordCount <= 34) score += 10;
+  if (quoteHasSentenceEnding(text)) score += 12;
+
+  score += Math.min(strongTerms.length * 6, 24);
+
+  if (durationSeconds >= 6 && durationSeconds <= 24) score += 8;
+  if (durationSeconds > 35) score -= 12;
+
+  score -= lowValuePenalty * 10;
+
+  if (/\b(not|never|always|cannot|must|truth|remember|because|therefore)\b/i.test(text)) score += 6;
+
+  return score;
+}
+
+function makeQuoteId(item, quoteIndex) {
+  return `${item.stableId || "episode"}-quote-${String(quoteIndex + 1).padStart(4, "0")}`;
+}
+
+function buildQuoteMediaHooks(item, start, end) {
+  const youtubeId = item?.video?.youtubeId || null;
+  const audioUrl = item?.audio?.url || null;
+  const videoUrl = item?.video?.url || (youtubeId ? `https://www.youtube.com/watch?v=${youtubeId}` : null);
+
+  return {
+    start,
+    end,
+    audioUrl,
+    youtubeId,
+    videoUrl,
+    hasAudio: Boolean(audioUrl),
+    hasVideo: Boolean(youtubeId || videoUrl)
+  };
+}
+
+function buildQuoteEpisodePayload(item) {
+  return {
+    stableId: item.stableId,
+    title: item.title?.display || item.title?.episodeName || "",
+    episodeName: item.title?.episodeName || "",
+    subtitle: item.title?.subtitle || "",
+    series: item.series?.name || "",
+    seriesKey: item.series?.key || "",
+    study: item.study?.name || "",
+    studyKey: item.study?.key || "",
+    scripture: item.scripture?.display || "",
+    date: item.date?.iso || null,
+    speaker: item.speaker || null,
+    shareUrl: item.links?.shareUrl || item.links?.episodeUrl || null,
+    episodeUrl: item.links?.episodeUrl || null
+  };
+}
+
+function buildQuoteCurationDefaults() {
+  return {
+    status: "candidate",
+    approved: false,
+    featured: false,
+    rejected: false,
+    approvedAt: null,
+    rejectedAt: null,
+    featuredAt: null,
+    reviewedAt: null,
+    reviewedBy: null,
+    note: ""
+  };
+}
+
+function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
+  const displayJsonFile = item?.transcript?.languages?.[language]?.displayJsonFile || item?.transcript?.displayJsonFile;
+  if (!displayJsonFile || !existsSync(displayJsonFile)) return [];
+
+  let transcriptDoc = null;
+  try {
+    transcriptDoc = readJson(displayJsonFile);
+  } catch (err) {
+    console.warn(`Could not read display transcript for quote bank: ${displayJsonFile}: ${err.message}`);
+    return [];
+  }
+
+  const segments = Array.isArray(transcriptDoc?.segments) ? transcriptDoc.segments : [];
+  const candidates = [];
+  const windowSizes = [1, 2, 3, 4, 5, 6];
+
+  for (let i = 0; i < segments.length; i += 1) {
+    for (const size of windowSizes) {
+      const group = segments.slice(i, i + size);
+      if (group.length !== size) continue;
+
+      const text = normalizeQuoteWhitespace(group.map(segment => segment.text).join(" "));
+      const wordCount = quoteWordCount(text);
+      const start = Number(group[0]?.start || 0);
+      const end = Number(group[group.length - 1]?.end || start);
+      const durationSeconds = Math.max(0, end - start);
+      const strongTerms = quoteStrongTermHits(text);
+      const lowValuePenalty = quoteLowValuePenalty(text);
+
+      if (wordCount < 12 || wordCount > 55) continue;
+      if (durationSeconds < 3 || durationSeconds > 45) continue;
+      if (quoteLooksFragmentary(text)) continue;
+      if (lowValuePenalty >= 3 && strongTerms.length === 0) continue;
+
+      const score = quoteCandidateScore(text, wordCount, durationSeconds, strongTerms, lowValuePenalty);
+      if (score < 18) continue;
+
+      candidates.push({
+        id: makeQuoteId(item, candidates.length),
+        language,
+        status: "candidate",
+        curation: buildQuoteCurationDefaults(),
+        episode: buildQuoteEpisodePayload(item),
+        media: buildQuoteMediaHooks(item, start, end),
+        start,
+        end,
+        startTime: group[0]?.startTime || secondsToSrtTimestamp(start),
+        endTime: group[group.length - 1]?.endTime || secondsToSrtTimestamp(end),
+        segmentIndexes: group.map(segment => segment.index).filter(Boolean),
+        wordCount,
+        durationSeconds,
+        score,
+        strongTerms,
+        lowValuePenalty,
+        source: {
+          transcriptDisplayJson: displayJsonFile,
+          transcriptCleanJson: item?.transcript?.jsonFile || null,
+          transcriptDisplaySrt: item?.transcript?.displayFile || null,
+          transcriptCleanSrt: item?.transcript?.cleanFile || null
+        },
+        text
+      });
+    }
+  }
+
+  const byKey = new Map();
+  for (const candidate of candidates) {
+    const key = candidate.text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const existing = byKey.get(key);
+    if (!existing || candidate.score > existing.score) byKey.set(key, candidate);
+  }
+
+  return Array.from(byKey.values())
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.start - b.start;
+    })
+    .slice(0, 75)
+    .map((candidate, index) => ({
+      ...candidate,
+      id: makeQuoteId(item, index),
+      rank: index + 1
+    }));
+}
+
+function buildQuoteBank(items) {
+  const language = QUOTE_DEFAULT_LANGUAGE;
+  const languageQuoteDir = `${QUOTE_DATA_DIR}/${language}`;
+  ensureDirectory(languageQuoteDir);
+
+  const allQuotes = [];
+  const byEpisode = {};
+  const bySeries = {};
+
+  for (const item of items || []) {
+    if (!item?.transcript?.hasTranscript) continue;
+
+    const episodeQuotes = buildQuoteCandidatesForItem(item, language);
+    if (!episodeQuotes.length) continue;
+
+    const episodePayload = buildQuoteEpisodePayload(item);
+    byEpisode[item.stableId] = {
+      ...episodePayload,
+      transcriptDisplayJson: item.transcript?.displayJsonFile || null,
+      quoteCount: episodeQuotes.length,
+      quotes: episodeQuotes
+    };
+
+    const seriesKey = episodePayload.seriesKey || "standalone";
+    if (!bySeries[seriesKey]) {
+      bySeries[seriesKey] = {
+        seriesKey,
+        series: episodePayload.series || "Standalone",
+        quoteCount: 0,
+        episodeStableIds: [],
+        quoteIds: []
+      };
+    }
+    bySeries[seriesKey].quoteCount += episodeQuotes.length;
+    if (!bySeries[seriesKey].episodeStableIds.includes(item.stableId)) {
+      bySeries[seriesKey].episodeStableIds.push(item.stableId);
+    }
+    bySeries[seriesKey].quoteIds.push(...episodeQuotes.map(q => q.id));
+
+    allQuotes.push(...episodeQuotes);
+  }
+
+  allQuotes.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return String(b.episode?.date || "").localeCompare(String(a.episode?.date || ""));
+  });
+
+  const approvedQuotes = allQuotes.filter(q => q.curation?.approved);
+  const featuredQuotes = allQuotes.filter(q => q.curation?.featured);
+
+  const quoteBank = {
+    generatedAt: new Date().toISOString(),
+    version: 1,
+    language,
+    count: allQuotes.length,
+    approvedCount: approvedQuotes.length,
+    featuredCount: featuredQuotes.length,
+    note: "Automatically generated quote candidates from display-clean transcripts. These are candidates, not pastor-approved final quotes.",
+    curationModel: {
+      statuses: ["candidate", "approved", "featured", "rejected"],
+      futureConfigFile: "config/quote-curation.json",
+      controls: ["Save / Approve", "Dismiss / Reject", "Next Quote", "Jump to Audio", "Jump to Video"]
+    },
+    tuning: {
+      minWords: 12,
+      maxWords: 55,
+      maxQuotesPerEpisode: 75,
+      source: "data/transcripts/en/*.display.json"
+    },
+    quotes: allQuotes,
+    byEpisode,
+    bySeries
+  };
+
+  writeJson(`${languageQuoteDir}/quote-bank.json`, quoteBank);
+
+  writeJson(`${languageQuoteDir}/random-quotes.json`, {
+    generatedAt: quoteBank.generatedAt,
+    version: 1,
+    language,
+    count: allQuotes.length,
+    quotes: allQuotes.map(quote => ({
+      id: quote.id,
+      status: quote.status,
+      curation: quote.curation,
+      episode: quote.episode,
+      media: quote.media,
+      start: quote.start,
+      end: quote.end,
+      score: quote.score,
+      text: quote.text
+    }))
+  });
+
+  writeJson(`${languageQuoteDir}/approved-quotes.json`, {
+    generatedAt: quoteBank.generatedAt,
+    version: 1,
+    language,
+    count: approvedQuotes.length,
+    quotes: approvedQuotes
+  });
+
+  writeJson(`${languageQuoteDir}/featured-quotes.json`, {
+    generatedAt: quoteBank.generatedAt,
+    version: 1,
+    language,
+    count: featuredQuotes.length,
+    quotes: featuredQuotes
+  });
+
+  return allQuotes.length;
+}
+
+
 function normalizeTitleKey(value) {
   return clean(value)
     .toLowerCase()
@@ -1098,6 +1464,7 @@ function main() {
 
   applyInheritedArt(items);
   const transcriptSearchCount = buildTranscriptSearchIndex(items);
+  const quoteCandidateCount = buildQuoteBank(items);
 
   const output = {
     generatedAt: new Date().toISOString(),
@@ -1106,7 +1473,8 @@ function main() {
       rssItems: rss.length,
       archiveItems: items.length,
       videoMatchedItems: items.filter(i => i.video.hasVideo).length,
-      transcriptMatchedItems: transcriptSearchCount
+      transcriptMatchedItems: transcriptSearchCount,
+      quoteCandidateCount
     },
     totals: {
       audioPlaysTotal: Number(statsDoc?.podcast_totals?.plays_total || 0),
