@@ -1569,6 +1569,75 @@ function buildQuoteCurationDefaults() {
   };
 }
 
+function quotePolishScoreForDisplay(quote) {
+  let score = quote.score || 0;
+  const text = normalizeQuoteWhitespace(quote.displayText || quote.text || "");
+
+  if (quote.timelessnessScore) score += quote.timelessnessScore;
+  if (quote.pastoralCharge) score += 16;
+  if (quote.contextRecoveryUsed) score += 8;
+  if (quote.speakerNaturalness >= 95) score += 10;
+  if (quote.qualityFlags?.quoteReady) score += 8;
+
+  // Study-specific technical terms are useful, but not always best for a public
+  // random quote surface.
+  if (/\b(?:pre-trib|post-trib|mid-trib|pre-wrath|post-tribulation|mid-tribulation|antichrist|bold judgments|chapter\s+\d+)\b/i.test(text)) {
+    score -= 18;
+  }
+
+  // Lecture-navigation language should stay searchable, but should not dominate
+  // public quote rails.
+  if (/\b(?:this view|this text|following the|between chapters|we have looked|so far|weakness|strength|point)\b/i.test(text)) {
+    score -= 14;
+  }
+
+  // Short, clear, devotional/application thoughts should rise.
+  if (/\b(?:faith|truth|word|church|christ|lord|grace|salvation|ready|comfort|hope|worship)\b/i.test(text)) {
+    score += 10;
+  }
+
+  const words = quoteWordCount(text);
+  if (words >= 14 && words <= 34) score += 8;
+  if (words > 46) score -= 12;
+  if (words < 10) score -= 20;
+
+  return Math.max(0, Math.round(score));
+}
+
+function displayTierForQuote(quote) {
+  const text = normalizeQuoteWhitespace(quote.displayText || quote.text || "");
+  const polish = quotePolishScoreForDisplay(quote);
+
+  const technicalHeavy = /\b(?:pre-trib|post-trib|mid-trib|pre-wrath|post-tribulation|mid-tribulation|antichrist|bold judgments|chapter\s+\d+)\b/i.test(text);
+  const lectureSummary = /\b(?:this view|this text|following the|between chapters|we have looked|so far|weakness|strength|point)\b/i.test(text);
+
+  if (
+    polish >= 155 &&
+    !technicalHeavy &&
+    !lectureSummary &&
+    (quote.pastoralCharge || /\b(?:faith|truth|word|grace|salvation|comfort|hope|ready)\b/i.test(text))
+  ) {
+    return "featured";
+  }
+
+  if (polish >= 105 && !lectureSummary) {
+    return technicalHeavy ? "study" : "strong";
+  }
+
+  if (polish >= 80) return "study";
+  return "archive";
+}
+
+function searchBoostForQuote(quote) {
+  const tier = quote.displayTier || displayTierForQuote(quote);
+  if (quote.curation?.approved || quote.curation?.featured) return 100;
+  if (tier === "featured") return 80;
+  if (tier === "strong") return 60;
+  if (tier === "study") return 35;
+  return 10;
+}
+
+
 function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
   const displayJsonFile = item?.transcript?.languages?.[language]?.displayJsonFile || item?.transcript?.displayJsonFile;
   if (!displayJsonFile || !existsSync(displayJsonFile)) return [];
@@ -1685,6 +1754,9 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         contrastBoost,
         pastoralCharge,
         timelessnessScore: timelessScoreValue,
+        quotePolishScore: null,
+        displayTier: null,
+        searchBoost: null,
         seriesRecap: isSeriesRecapText(displayText),
         outlineOrLessonStructure: isOutlineOrLessonStructure(displayText),
         reflectionLeadIn: isReflectionLeadIn(displayText),
@@ -1846,6 +1918,9 @@ function buildQuoteBank(items) {
       contrastBoost: quote.contrastBoost,
       pastoralCharge: quote.pastoralCharge,
       timelessnessScore: quote.timelessnessScore,
+      quotePolishScore: quote.quotePolishScore,
+      displayTier: quote.displayTier,
+      searchBoost: quote.searchBoost,
       seriesRecap: quote.seriesRecap,
       outlineOrLessonStructure: quote.outlineOrLessonStructure,
       reflectionLeadIn: quote.reflectionLeadIn,
