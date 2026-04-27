@@ -42,7 +42,7 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
 <section class="panel"><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
-<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio and video both use the same SRT timestamp. Audio starts four seconds early for review comfort only.</div></div></section>
+<section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadAudio" type="button">Load Audio Here</button><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openAudio" type="button">Open Audio</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select audio or video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Audio and video both use the exact same SRT timestamp. No audio pre-roll or automatic offset is applied.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
 const PASSWORD='1813';
@@ -208,37 +208,53 @@ function calculateAudioSeekStart(q,audio){
   const duration=Number(audio?.duration||0);
   // The SRT was exported from the edited video timeline, and the podcast audio
   // was ripped from that same video. Therefore audio and video must use the same
-  // timestamp. We only subtract four seconds as review pre-roll.
-  let start=Math.max(0,requestedStart-4);
+  // timestamp. No review pre-roll and no guessed offset.
+  let start=Math.max(0,requestedStart);
   if(Number.isFinite(duration)&&duration>0)start=Math.min(Math.max(0,duration-1),start);
   return {start,duration};
 }
 function loadAudioHere(){
   const q=state.current;if(!q?.media?.audioUrl)return;
   state.mediaMode='audio';
-  const baseStart=Math.max(0,mediaStart(q)-4);
-  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto" src="${esc(q.media.audioUrl)}"></audio><div class="note" id="audioSeekNote">Audio loading at ${esc(fmtTime(baseStart))}. Audio and video use the same SRT timestamp; no automatic offset is applied.</div></div>`;
+  const baseStart=mediaStart(q);
+  els.mediaShell.innerHTML=`<div class="audio-box"><audio id="reviewAudio" controls preload="auto"></audio><div class="note" id="audioSeekNote">Audio loading at ${esc(fmtTime(baseStart))}. Audio and video use the exact same SRT timestamp; no automatic offset is applied.</div></div>`;
   const audio=document.getElementById('reviewAudio');
   const note=document.getElementById('audioSeekNote');
-  let seeked=false;
-  const seek=(force=false)=>{
+  let attempts=0;
+  const updateNote=(label,target)=>{
+    if(!note||!audio)return;
+    const actual=Number.isFinite(audio.currentTime)?audio.currentTime:target;
+    note.textContent=`Audio requested ${fmtTime(baseStart)}; player reports ${fmtTime(actual)}. ${label}`;
+  };
+  const seek=(label='seek')=>{
     if(!audio)return;
     const result=calculateAudioSeekStart(q,audio);
-    if(!force&&seeked&&Math.abs((audio.currentTime||0)-result.start)>3)return;
+    attempts+=1;
     try{
-      audio.currentTime=result.start;
-      seeked=true;
-      if(note)note.textContent=`Audio cued at ${fmtTime(result.start)}. Same timestamp source as video, with 4s review pre-roll.`;
-    }catch(e){console.warn('Audio seek failed.',e);}
+      if(typeof audio.fastSeek==='function')audio.fastSeek(result.start);
+      else audio.currentTime=result.start;
+      updateNote(label,result.start);
+    }catch(e){console.warn('Audio seek failed.',e);updateNote('Seek failed; press Load Audio again.',result.start);}
   };
-  audio.addEventListener('loadedmetadata',()=>seek(true),{once:true});
-  audio.addEventListener('canplay',()=>seek(false),{once:true});
-  audio.addEventListener('play',()=>seek(false),{once:true});
-  setTimeout(()=>seek(false),450);
+
+  // Attach listeners before setting src so the browser cannot load metadata before
+  // our seek handler is ready. Then retry briefly because some browsers accept
+  // currentTime only after enough audio metadata/buffer has arrived.
+  audio.addEventListener('loadedmetadata',()=>seek('loadedmetadata exact seek'),{once:true});
+  audio.addEventListener('durationchange',()=>seek('durationchange exact seek'),{once:true});
+  audio.addEventListener('loadeddata',()=>seek('loadeddata exact seek'),{once:true});
+  audio.addEventListener('canplay',()=>seek('canplay exact seek'),{once:true});
+  audio.addEventListener('seeked',()=>updateNote('Exact seek completed.',baseStart));
+  audio.src=q.media.audioUrl;
+  audio.load();
+  [250,650,1100,1700].forEach(delay=>setTimeout(()=>{
+    if(attempts<8 && Math.abs((audio.currentTime||0)-baseStart)>.75)seek('retry exact seek');
+    else updateNote('Exact timestamp ready.',baseStart);
+  },delay));
 }
-function loadVideoHere(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;state.mediaMode='video';const start=Math.max(0,Math.floor(mediaStart(q)-1));const id=q.media.youtubeId||'';const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:q.media.videoUrl;els.mediaShell.innerHTML=`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`;}
-function openAudio(){const q=state.current;if(!q?.media?.audioUrl)return;window.open(`${q.media.audioUrl}#t=${Math.max(0,Math.floor(mediaStart(q)-4))}`,'_blank','noopener');}
-function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;const start=Math.max(0,Math.floor(mediaStart(q)-1));const url=q.media.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`;window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
+function loadVideoHere(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;state.mediaMode='video';const start=Math.max(0,Math.floor(mediaStart(q)));const id=q.media.youtubeId||'';const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:q.media.videoUrl;els.mediaShell.innerHTML=`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`;}
+function openAudio(){const q=state.current;if(!q?.media?.audioUrl)return;window.open(`${q.media.audioUrl}#t=${Math.max(0,Math.floor(mediaStart(q)))}`,'_blank','noopener');}
+function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;const start=Math.max(0,Math.floor(mediaStart(q)));const url=q.media.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`;window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}els.gateStatus.textContent='Loading quotes…';try{state.quotes=await loadQuotes();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
 els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);els.loadAudio.addEventListener('click',loadAudioHere);els.loadVideo.addEventListener('click',loadVideoHere);els.openAudio.addEventListener('click',openAudio);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());toast('Saved locally as rejected.');nextQuote();});
 </script>
