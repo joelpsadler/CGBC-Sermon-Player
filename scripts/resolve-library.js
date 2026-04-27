@@ -1234,6 +1234,75 @@ function quoteCategoryFinal(baseCategory, value, scriptureMode, metaScore, timel
   return baseCategory;
 }
 
+function isSeriesRecapText(value) {
+  return /\b(?:last several weeks|today we're|tonight we're|we've been talking about|we have looked at so far|so far|we continue our study|we've already gone through|it's all online|we've already talked about)\b/i.test(value);
+}
+
+function isInstructionalPrefixText(value) {
+  return /^(?:first|second|third|next|another|remember|notice|look|listen|now)[,\s]+(?:you have|we see|what|that|there|this|the|in)\b/i.test(normalizeQuoteWhitespace(value))
+    || /^(?:first,?\s+you have|next,?\s+you have|another interesting point|notice what we learn here|remember,?\s+that)\b/i.test(normalizeQuoteWhitespace(value));
+}
+
+function trimInstructionalPrefix(value) {
+  let text = normalizeQuoteWhitespace(value);
+
+  text = text
+    .replace(/^(?:first|second|third|next),?\s+you have\s+/i, "")
+    .replace(/^(?:another interesting point is found in\s+)/i, "")
+    .replace(/^(?:remember,?\s+that\s+)/i, "")
+    .replace(/^(?:notice what we learn here\.?\s*)/i, "")
+    .replace(/^(?:look at|listen to)\s+/i, "")
+    .replace(/^(?:well,?\s+think about\s+)/i, "")
+    .replace(/^(?:the next strength is[^.?!]*[.?!]\s*)/i, "");
+
+  return normalizeQuoteWhitespace(text);
+}
+
+function isWeakContextText(value) {
+  const text = normalizeQuoteWhitespace(value);
+  if (!text) return true;
+  if (isSeriesRecapText(text)) return true;
+  if (isInstructionalPrefixText(text)) return true;
+  if (metaTeachingScore(text) > 0) return true;
+  if (/\b(?:next strength|first point|second point|last week|we talked about|chapter|verse|turn your bibles|say amen|say read|let me get there)\b/i.test(text)) return true;
+  return false;
+}
+
+function isGoodForwardContext(value) {
+  const text = normalizeQuoteWhitespace(value);
+  if (!text) return false;
+  if (quoteWordCount(text) < 4 || quoteWordCount(text) > 18) return false;
+  if (isWeakContextText(text)) return false;
+  if (isBrandSignatureText(text)) return false;
+  if (scriptureModeForText(text) === "direct_scripture") return false;
+
+  return hasPastoralCharge(text)
+    || hasContrastLanguage(text)
+    || /\b(?:faith|truth|word|church|christ|lord|grace|wrath|salvation|worship|ready)\b/i.test(text);
+}
+
+function refineScriptureReadingQuote(value, scriptureMode) {
+  let text = normalizeQuoteWhitespace(value);
+
+  // If a scripture quote plus teaching comment got merged, keep the strongest
+  // short scripture sentence only, and leave approval UI context to expand it.
+  if (scriptureMode === "direct_scripture" || scriptureMode === "exposition") {
+    const pieces = splitQuoteIntoThoughts(text)
+      .map(piece => trimInstructionalPrefix(cleanupSpeechDisfluencies(piece)))
+      .filter(Boolean);
+
+    const scriptureLike = pieces.find(piece =>
+      /\b(?:thou|thee|thy|ye|hath|unto|wherefore|therefore|condemnation|christ jesus)\b/i.test(piece)
+      && quoteWordCount(piece) <= 22
+    );
+
+    if (scriptureLike) return scriptureLike;
+  }
+
+  return text;
+}
+
+
 function recoverQuoteContext(rawText, displayText) {
   const display = normalizeQuoteWhitespace(displayText);
   const thoughts = splitQuoteIntoThoughts(rawText)
@@ -1251,15 +1320,14 @@ function recoverQuoteContext(rawText, displayText) {
     if (!text) return false;
     if (quoteWordCount(text) < 4 || quoteWordCount(text) > 28) return false;
     if (isBrandSignatureText(text)) return false;
-    if (metaTeachingScore(text) > 0) return false;
-    if (/\b(?:next strength|first point|second point|last week|we talked about|chapter|verse|turn your bibles)\b/i.test(text)) return false;
+    if (isWeakContextText(text)) return false;
     if (scriptureModeForText(text) === "direct_scripture") return false;
     if (hardRejectQuoteReason(text, {})) return false;
     return true;
   }
 
   const useBefore = quoteWordCount(display) < 16 && contextAllowed(before);
-  const useAfter = quoteWordCount(display) < 12 && contextAllowed(after);
+  const useAfter = (quoteWordCount(display) < 12 && contextAllowed(after)) || isGoodForwardContext(after);
 
   const recoveredParts = [
     useBefore ? before : "",
@@ -1470,13 +1538,17 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       const rawText = text;
       const thoughtText = chooseBestQuoteThought(rawText);
       const polished = polishQuoteDisplayText(rawText, thoughtText);
-      let displayText = trimTailFillers(polished.displayText);
+      let displayText = trimInstructionalPrefix(trimTailFillers(polished.displayText));
       if (quoteWordCount(displayText) < 10) continue;
+
+      let scriptureMode = scriptureModeForText(displayText);
+      displayText = refineScriptureReadingQuote(displayText, scriptureMode);
 
       const contextRecovery = recoverQuoteContext(rawText, displayText);
       displayText = contextRecovery.recoveredText;
+      displayText = trimInstructionalPrefix(displayText);
 
-      const scriptureMode = scriptureModeForText(displayText);
+      scriptureMode = scriptureModeForText(displayText);
       const metaScore = metaTeachingScore(displayText);
       const brandSignature = isBrandSignatureText(displayText);
       const tailTrimmed = displayText !== polished.displayText;
@@ -1487,6 +1559,8 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
       if (hardRejectReason) continue;
       if (brandSignature) continue;
       if (metaScore > 0) continue;
+      if (isSeriesRecapText(displayText)) continue;
+      if (isWeakContextText(displayText) && !qualityFlags.doctrinal && !pastoralCharge) continue;
       if (scriptureMode === "direct_scripture") continue;
 
       const disfluencyScore = speechDisfluencyScore(rawText, displayText);
@@ -1540,6 +1614,8 @@ function buildQuoteCandidatesForItem(item, language = QUOTE_DEFAULT_LANGUAGE) {
         contrastBoost,
         pastoralCharge,
         timelessnessScore: timelessScoreValue,
+        seriesRecap: isSeriesRecapText(displayText),
+        instructionalPrefixTrimmed: displayText !== polished.displayText && isInstructionalPrefixText(polished.displayText),
         contextRecoveryUsed: contextRecovery.contextRecoveryUsed,
         contextBefore: contextRecovery.contextBefore,
         contextAfter: contextRecovery.contextAfter,
@@ -1657,7 +1733,7 @@ function buildQuoteBank(items) {
       maxWords: 55,
       maxQuotesPerEpisode: 75,
       displayText: "Lightly cleaned presentation copy; rawText preserves the candidate source.",
-      qualityPass: "precision trim layer: expanded meta suppression, lead-in trimming, smarter context gating, scripture demotion, sharper quote precision, approval UI context fields",
+      qualityPass: "micro precision layer: series recap suppression, instructional prefix trim, forward context recovery, scripture split refinement, sharper approval queue precision",
       source: "data/transcripts/en/*.display.json"
     },
     quotes: allQuotes,
@@ -1695,6 +1771,8 @@ function buildQuoteBank(items) {
       contrastBoost: quote.contrastBoost,
       pastoralCharge: quote.pastoralCharge,
       timelessnessScore: quote.timelessnessScore,
+      seriesRecap: quote.seriesRecap,
+      instructionalPrefixTrimmed: quote.instructionalPrefixTrimmed,
       contextRecoveryUsed: quote.contextRecoveryUsed,
       contextBefore: quote.contextBefore,
       contextAfter: quote.contextAfter,
