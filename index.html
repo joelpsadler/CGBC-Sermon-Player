@@ -1220,6 +1220,33 @@
       .transcript-search{width:min(330px,100%)!important;}
     }
 
+  
+    /* === FINAL TIGHT/JITTER-FREE TRANSCRIPT FOLLOW PATCH ===
+       Beginner note: this pass avoids moving transcript scroll every video frame.
+       The reader now glides only when the spoken caption changes, which removes
+       the tiny tug/jitter caused by browser media-clock corrections. */
+    @media (min-width:901px){
+      .content{gap:8px!important;}
+      .flow{gap:8px!important;}
+      .context-row{margin-bottom:0!important;}
+      .player{padding:10px 12px!important;border-radius:24px!important;}
+      .player.video-active{padding:0!important;}
+      .transcript-panel{margin-top:0!important;padding:9px 14px 13px!important;border-radius:24px!important;border:1px solid rgba(255,255,255,.10)!important;}
+      .transcript-head{grid-template-columns:minmax(285px,360px) minmax(0,1fr)!important;gap:14px!important;margin-bottom:4px!important;}
+      .transcript-title-block{grid-template-columns:112px minmax(0,1fr)!important;gap:12px!important;align-items:center!important;}
+      .transcript-art-mini{width:112px!important;border-radius:11px!important;}
+      .transcript-title-block .eyebrow{font-size:clamp(20px,1.75vw,27px)!important;letter-spacing:.055em!important;color:rgba(255,255,255,.92)!important;}
+      .transcript-tools{gap:8px!important;align-items:center!important;justify-content:flex-end!important;}
+      .transcript-search{width:clamp(210px,28vw,370px)!important;}
+      .transcript-lines{max-height:410px!important;padding:132px 18px 176px!important;border-radius:18px!important;scroll-behavior:auto!important;}
+      .transcript-line{padding:2px 12px 2px 18px!important;margin:0 0 2px!important;border-radius:7px!important;transition:opacity .16s ease,color .16s ease!important;}
+      .transcript-line.is-active::before{left:6px;top:.38em;bottom:.38em;width:2px;background:rgba(143,174,157,.48);box-shadow:none;}
+      .idle-episode-label{position:relative;}
+      .idle-episode-label::before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:7px solid rgba(255,255,255,.88);filter:drop-shadow(0 1px 2px rgba(0,0,0,.28));}
+      .episode .subtitle-badge{left:auto!important;top:auto!important;right:76px!important;bottom:16px!important;min-height:21px!important;padding:0 7px!important;font-size:9px!important;background:rgba(0,0,0,.42)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:none!important;}
+      .episode .subtitle-badge svg{width:11px!important;height:11px!important;}
+    }
+
   </style>
 </head>
 <body class="mode-audio">
@@ -2133,6 +2160,7 @@
       const re = q ? new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')+')','ig') : null;
       els.transcriptLines.__smoothScrollTop = null;
       els.transcriptLines.__stableScrollTop = null;
+      els.transcriptLines.__lastFollowIndex = null;
       state.transcript._smoothTime = null;
       els.transcriptLines.innerHTML = segments.map(seg=>{
         const safeText = escapeHtml(seg.text);
@@ -2190,58 +2218,47 @@
         btn.classList.toggle('is-upcoming', idx > activeIndex && idx < activeIndex + 8);
       });
     }
+    function animateTranscriptScrollTo(container, target){
+      if(!container) return;
+      const start = Number(container.scrollTop || 0);
+      const end = Math.max(0, Number(target) || 0);
+      const distance = end - start;
+      if(Math.abs(distance) < 1.5) return;
+      if(container.__transcriptScrollRaf) window.cancelAnimationFrame(container.__transcriptScrollRaf);
+      const duration = Math.min(720, Math.max(360, Math.abs(distance) * 1.15));
+      const started = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      const step = now => {
+        const p = Math.min(1, (now - started) / duration);
+        container.scrollTop = start + (distance * ease(p));
+        if(p < 1) container.__transcriptScrollRaf = window.requestAnimationFrame(step);
+        else container.__transcriptScrollRaf = null;
+      };
+      container.__transcriptScrollRaf = window.requestAnimationFrame(step);
+    }
     function scrollTranscriptWithSpeech(position, progress){
       if(state.transcript.mode !== 'follow' || state.transcript.search) return;
       const container = els.transcriptLines;
       const current = state.transcript.segments[position];
-      const next = state.transcript.segments[position+1];
       if(!container || !current) return;
       const currentEl = container.querySelector('.transcript-line[data-index="'+current.index+'"]');
-      const nextEl = next ? container.querySelector('.transcript-line[data-index="'+next.index+'"]') : null;
       if(!currentEl) return;
 
-      // Stable follow logic:
-      // We still use SRT timing and segment duration, but we smooth the media clock first
-      // and glide toward a computed reading target. The last versions reacted to tiny
-      // browser/audio time jitter every frame, which made the text visibly tremble.
-      const anchorY = container.clientHeight * 0.44;
-      const currentCenter = currentEl.offsetTop + (currentEl.offsetHeight * 0.50);
-      const nextCenter = nextEl ? nextEl.offsetTop + (nextEl.offsetHeight * 0.50) : currentCenter;
-      const p = Math.max(0, Math.min(1, Number(progress)||0));
-      const easedP = p < 0.08 ? 0 : (p > 0.92 ? 1 : (p - 0.08) / 0.84);
-      const targetCenter = currentCenter + ((nextCenter - currentCenter) * easedP);
-      const target = Math.max(0, targetCenter - anchorY);
+      // Jitter-free follow logic:
+      // Earlier versions tried to move the scroll position on every animation frame
+      // based on the exact media currentTime. Browser media clocks wobble slightly,
+      // so the text visibly tugged up/down. This version only glides when the active
+      // transcript segment changes, then leaves the text still while the line is read.
+      if(container.__lastFollowIndex === current.index) return;
+      container.__lastFollowIndex = current.index;
 
-      if(container.__stableScrollTop == null || Math.abs(container.__stableScrollTop - container.scrollTop) > container.clientHeight * 0.65){
-        container.__stableScrollTop = container.scrollTop;
-      }
-      const delta = target - container.__stableScrollTop;
-      if(Math.abs(delta) < 0.35) return;
-      if(Math.abs(delta) > container.clientHeight * 0.70){
-        container.__stableScrollTop = target;
-      } else {
-        container.__stableScrollTop += delta * 0.032;
-      }
-      const rounded = Math.round(container.__stableScrollTop);
-      if(Math.abs(rounded - container.scrollTop) >= 2){
-        container.scrollTop = rounded;
-      }
+      const anchorY = container.clientHeight * 0.38;
+      const target = currentEl.offsetTop - anchorY;
+      animateTranscriptScrollTo(container, target);
     }
     function updateTranscriptActiveLine(time){
       if(!els.transcriptLines || !state.transcript.segments.length) return;
-      const raw = Number(time)||0;
-      const now = performance.now();
-      if(state.transcript._smoothTime == null || Math.abs(raw - state.transcript._smoothTime) > 2.5){
-        state.transcript._smoothTime = raw;
-        state.transcript._smoothStamp = now;
-      } else {
-        // Low-pass filter the noisy media clock, but let it keep moving while playing.
-        const elapsed = Math.max(0, Math.min(.25, (now - (state.transcript._smoothStamp || now)) / 1000));
-        state.transcript._smoothStamp = now;
-        const predicted = state.transcript._smoothTime + elapsed;
-        state.transcript._smoothTime = predicted + ((raw - predicted) * 0.12);
-      }
-      const info = findTranscriptActivePosition(state.transcript._smoothTime);
+      const info = findTranscriptActivePosition(Number(time)||0);
       const activeIndex = info.active ? info.active.index : -1;
       setTranscriptLineClasses(activeIndex);
       scrollTranscriptWithSpeech(info.position, info.progress);
