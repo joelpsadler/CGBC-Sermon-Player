@@ -73,7 +73,48 @@ function youtubeLink(q){const id=q?.media?.youtubeId;const url=q?.media?.videoUr
 function reviewKey(action,q){return `cgbcQuoteReview:${action}:${q?.id||'unknown'}`;}
 function readReview(action,q){try{const raw=localStorage.getItem(reviewKey(action,q));return raw?JSON.parse(raw):null;}catch(_){return null;}}
 function allReviewEntries(){const entries=[];for(const q of state.allQuotes||[]){for(const action of ['featured','approved','rejected']){const saved=readReview(action,q);if(saved){entries.push({quoteId:q.id,status:action,approvedText:cleanQuoteOnly(saved.approvedText||quoteText(q),q),episodeStableId:q?.episode?.stableId||'',episodeTitle:q?.episode?.title||q?.episode?.episodeName||'',start:q?.media?.start??q?.start??null,end:q?.media?.end??q?.end??null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:saved.source||'browser_review',savedAt:saved.savedAt||new Date().toISOString()});}}}return entries;}
-function exportCurationJson(){const entries=allReviewEntries();const payload={version:1,generatedAt:new Date().toISOString(),source:'cgbc_quote_review_browser',targetFile:'config/quote-curation.json',note:'Commit this file to config/quote-curation.json, then run the normal sermon library build workflow.',reviews:entries};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='quote-curation.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('Exported '+entries.length+' quote review decision'+(entries.length===1?'':'s')+' for GitHub.');}
+function downloadExportJson(payload){
+  const json=JSON.stringify(payload,null,2);
+  try{localStorage.setItem('cgbcLastQuoteCurationExport',json);}catch(_){}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).catch(()=>{});}
+  let downloaded=false;
+  try{
+    const blob=new Blob([json],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='quote-curation.json';
+    a.rel='noopener';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    downloaded=true;
+    window.setTimeout(()=>{try{URL.revokeObjectURL(url);a.remove();}catch(_){}},15000);
+  }catch(err){console.warn('Download export failed',err);}
+  showExportFallback(json,payload.reviews?.length||0,downloaded);
+}
+function showExportFallback(json,count,downloaded){
+  const old=document.getElementById('exportFallbackPanel');
+  if(old) old.remove();
+  const wrap=document.createElement('div');
+  wrap.id='exportFallbackPanel';
+  wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(560px,calc(100vw - 36px));max-height:min(620px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif';
+  const safe=json.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div><div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">'+(downloaded?'Download was triggered and ':'')+'JSON was also copied/staged below. Upload this as <b>config/quote-curation.json</b>.</div></div><button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button></div><textarea id="exportFallbackText" readonly style="width:100%;height:220px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" id="exportFallbackCopy" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(143,174,157,.28);background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Copy JSON</button><span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span></div>';
+  document.body.appendChild(wrap);
+  const close=document.getElementById('exportFallbackClose');
+  const copy=document.getElementById('exportFallbackCopy');
+  const text=document.getElementById('exportFallbackText');
+  if(close) close.addEventListener('click',()=>wrap.remove());
+  if(copy) copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(json); if(typeof toast==='function')toast('Copied quote-curation.json.');}catch(_){text.focus();text.select();document.execCommand('copy');}});
+}
+function exportCurationJson(quotes){
+  const sourceQuotes=quotes||state.allQuotes||state.quotes||[];
+  const entries=allReviewEntries(sourceQuotes);
+  const payload={version:1,generatedAt:new Date().toISOString(),source:'cgbc_quote_review_browser',targetFile:'config/quote-curation.json',note:'Commit this file to config/quote-curation.json, then run the normal sermon library build workflow.',reviews:entries};
+  downloadExportJson(payload);
+  if(typeof toast==='function')toast('Export ready: '+entries.length+' review decision'+(entries.length===1?'':'s')+'.');
+}
 function save(action,q,text){try{localStorage.setItem(reviewKey(action,q),JSON.stringify({action,quoteId:q?.id||'',approvedText:text||'',episode:q?.episode||null,media:q?.media||null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:'browser_review',savedAt:new Date().toISOString()}));}catch(e){console.warn(e);}}
 function hasReview(q){return ['approved','featured','rejected'].some(action=>!!localStorage.getItem(reviewKey(action,q)));}
 function episodeKey(q){return q?.episode?.stableId||q?.episode?.title||'unknown';}
