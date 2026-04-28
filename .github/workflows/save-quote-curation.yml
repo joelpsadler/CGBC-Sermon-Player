@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       curation_json:
-        description: 'Full JSON contents for config/quote-curation.json'
+        description: 'Full quote-curation.json payload'
         required: true
         type: string
 
@@ -12,24 +12,27 @@ permissions:
   contents: write
 
 jobs:
-  save-curation:
+  save:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Write curation file
+      - uses: actions/checkout@v4
+      - name: Validate and save quote curation
+        shell: bash
         run: |
           mkdir -p config
-          cat > config/quote-curation.json <<'JSON'
+          cat > /tmp/quote-curation-input.json <<'JSON'
           ${{ inputs.curation_json }}
           JSON
-          node -e "JSON.parse(require('fs').readFileSync('config/quote-curation.json','utf8')); console.log('quote-curation.json is valid JSON')"
-
+          node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('/tmp/quote-curation-input.json','utf8')); if(!Array.isArray(data.reviews)) throw new Error('reviews must be an array'); fs.writeFileSync('config/quote-curation.json', JSON.stringify(data,null,2)+'\n');"
       - name: Commit curation file
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add config/quote-curation.json
-          git diff --cached --quiet && echo "No curation changes to commit" || git commit -m "Update quote curation"
-          git push
+          if git diff --cached --quiet; then
+            echo "No quote curation changes to commit."
+          else
+            git commit -m "Update quote curation"
+            git push
+          fi
