@@ -1329,7 +1329,8 @@
       mobileEpisodeListOpen:false,
       mobilePlayerPinnedTop:false,
       mobileVideoPinnedMetrics:null,
-      deepLinkStart:null
+      deepLinkStart:null,
+      deepLinkAutoplay:true
     };
 
     const els = {
@@ -1813,6 +1814,8 @@
         const wantedMode = params.get('mode');
         const wantedId = params.get('item');
         const wantedStart = Number(params.get('start') || params.get('t') || params.get('time') || 0);
+        const autoplayParam = String(params.get('autoplay') || params.get('play') || '').toLowerCase();
+        state.deepLinkAutoplay = !(autoplayParam === '0' || autoplayParam === 'false' || autoplayParam === 'no');
         if(Number.isFinite(wantedStart) && wantedStart > 0) state.deepLinkStart = Math.floor(wantedStart);
         if(wantedMode === 'audio' || wantedMode === 'video') state.mode = wantedMode;
         if(!wantedId) return;
@@ -2734,7 +2737,8 @@
         if(state.playerRenderKey !== renderKey || !els.videoShell.querySelector('iframe')){
           const deepStart = Number(state.deepLinkStart || 0);
           const startParam = Number.isFinite(deepStart) && deepStart > 0 ? `&start=${Math.floor(deepStart)}` : '';
-          els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1${startParam}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          const autoplayValue = state.deepLinkAutoplay === false ? '0' : '1';
+          els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=${autoplayValue}&rel=0&modestbranding=1&playsinline=1${startParam}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
           state.playerRenderKey = renderKey;
         }
         els.videoShareHost.innerHTML=`
