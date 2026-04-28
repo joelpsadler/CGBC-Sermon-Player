@@ -1818,11 +1818,43 @@
         if(!wantedId) return;
         const item = getAllShareableItems().find(row => row?.stableId === wantedId);
         if(!item) return;
+        const inferredNav = inferNavForDeepLinkItem(item);
+        if(inferredNav){
+          state.nav = inferredNav;
+          state.searchTerm = '';
+          if(els.searchInput) els.searchInput.value = '';
+        }
         state.currentItem = item;
         updateModeUI();
+        rerender();
         renderPlayer();
         try{ els.playerShell.scrollIntoView({ behavior:'smooth', block:'start' }); }catch(err){}
       }catch(err){}
+    }
+
+    function inferNavForDeepLinkItem(item){
+      try{
+        const seriesKey = item?.series?.key || '';
+        const studyKey = item?.study?.key || '';
+        const browse = buildBrowse();
+        if(seriesKey && getCurrentSeriesKeys().has(seriesKey) && browse.current.some(row => row.key === seriesKey)){
+          return { rootKey:'current', branchKey:seriesKey, leafKey:null };
+        }
+        if(seriesKey && browse.topical.has(seriesKey)){
+          return { rootKey:'topical', branchKey:seriesKey, leafKey:null };
+        }
+        if(studyKey && browse.books.has(studyKey) && browse.books.get(studyKey)?.seriesMap?.has(seriesKey)){
+          return { rootKey:'books', branchKey:studyKey, leafKey:seriesKey };
+        }
+        for(const [bookKey,bucket] of browse.books.entries()){
+          if(seriesKey && bucket?.seriesMap?.has(seriesKey)) return { rootKey:'books', branchKey:bookKey, leafKey:seriesKey };
+          if((bucket?.episodes || []).some(row => row?.stableId === item?.stableId)) return { rootKey:'books', branchKey:bookKey, leafKey:`${bookKey}__episodes` };
+        }
+        const year = String(item?.date?.year || '');
+        const monthKey = item?.date?.iso ? item.date.iso.slice(0,7) : '';
+        if(year && monthKey) return { rootKey:'date', branchKey:year, leafKey:monthKey };
+      }catch(err){}
+      return { rootKey:null, branchKey:null, leafKey:null };
     }
     async function loadResolvedData(){
       const paths=['./library-resolved.json','./data/library-resolved.json','./public/library-resolved.json','/library-resolved.json','/data/library-resolved.json','/public/library-resolved.json'];
