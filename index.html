@@ -1159,6 +1159,24 @@
     .transcript-line.is-next-1 .transcript-text,.transcript-line.is-next-2 .transcript-text{color:rgba(255,255,255,.95);font-weight:560!important;}
     .transcript-line.is-upcoming .transcript-text{color:rgba(255,255,255,.84);font-weight:560!important;}
     .transcript-line mark{background:rgba(143,174,157,.22);color:rgba(255,255,255,.98);border-radius:5px;padding:0 2px;}
+
+    /* Transcript reader compact header + smoother follow pass */
+    .transcript-head{display:grid!important;grid-template-columns:146px minmax(0,1fr)!important;align-items:start!important;gap:16px!important;margin-bottom:8px!important;padding-right:0!important;}
+    .transcript-title-block{min-width:0;width:146px;}
+    .transcript-title-block .eyebrow{margin:0 0 6px!important;letter-spacing:.16em;font-size:11px;color:rgba(255,255,255,.58);}
+    .transcript-title,.transcript-subtitle{display:none!important;}
+    .transcript-art-mini{position:static!important;top:auto!important;right:auto!important;width:136px!important;aspect-ratio:16/9!important;margin-top:0!important;border-radius:12px!important;pointer-events:none;}
+    .transcript-tools{display:flex!important;align-items:start!important;justify-content:flex-end!important;gap:8px!important;padding-top:4px!important;min-width:0;flex-wrap:nowrap!important;}
+    .transcript-search{width:clamp(200px,26vw,340px)!important;margin-left:6px!important;}
+    .transcript-select{width:114px!important;min-width:108px!important;}
+    .transcript-lines{padding:112px 18px 158px!important;}
+    .transcript-line{padding-top:2px!important;padding-bottom:2px!important;margin:1px 0!important;}
+    .transcript-line.is-active::before{top:.35em!important;bottom:.35em!important;}
+    .transcript-panel.is-video-search-only .transcript-head{grid-template-columns:1fr!important;}
+    .transcript-panel.is-video-search-only .transcript-title-block{display:none!important;}
+    .transcript-panel.is-video-search-only .transcript-tools{justify-content:flex-start!important;}
+    .transcript-panel.is-video-search-only .transcript-search{margin-left:0!important;width:min(430px,100%)!important;}
+    @media(max-width:1240px){.transcript-head{grid-template-columns:136px minmax(0,1fr)!important}.transcript-title-block{width:136px}.transcript-art-mini{width:126px!important}.transcript-tools{flex-wrap:wrap!important;justify-content:flex-start!important}.transcript-search{margin-left:0!important;width:min(360px,100%)!important}}
 </style>
 </head>
 <body class="mode-audio">
@@ -1298,6 +1316,7 @@
           <div class="transcript-head">
             <div class="transcript-title-block">
               <p class="eyebrow">Transcript</p>
+              <div class="transcript-art-mini" id="transcriptArt" aria-hidden="true"></div>
               <h2 class="transcript-title" id="transcriptTitle">Transcript</h2>
               <p class="transcript-subtitle" id="transcriptSubtitle">Follow along while the media plays.</p>
             </div>
@@ -1308,7 +1327,6 @@
               <input class="transcript-search" id="transcriptSearch" type="search" placeholder="Search transcript">
             </div>
           </div>
-          <div class="transcript-art-mini" id="transcriptArt" aria-hidden="true"></div>
           <div class="transcript-lines" id="transcriptLines"></div>
         </section>
         <section class="panel detail is-idle" id="detailShell" hidden></section>
@@ -2070,6 +2088,7 @@
       if(!segments.length){ els.transcriptLines.innerHTML='<div class="transcript-empty">No transcript lines match.</div>'; return; }
       const q=String(state.transcript.search||'').trim();
       const re = q ? new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')+')','ig') : null;
+      els.transcriptLines.__smoothScrollTop = null;
       els.transcriptLines.innerHTML = segments.map(seg=>{
         const safeText = escapeHtml(seg.text);
         const displayText = re ? safeText.replace(re, '<mark>$1</mark>') : safeText;
@@ -2135,14 +2154,30 @@
       const currentEl = container.querySelector('.transcript-line[data-index="'+current.index+'"]');
       const nextEl = next ? container.querySelector('.transcript-line[data-index="'+next.index+'"]') : null;
       if(!currentEl) return;
-      const centerAnchor = Math.max(0, (container.clientHeight * 0.46) - (currentEl.offsetHeight * 0.5));
-      const startTarget = Math.max(0, currentEl.offsetTop - centerAnchor);
-      const endTarget = nextEl ? Math.max(0, nextEl.offsetTop - centerAnchor) : startTarget;
-      const eased = progress * progress * (3 - 2 * progress);
-      const target = startTarget + ((endTarget - startTarget) * eased);
-      const delta = target - container.scrollTop;
-      if(Math.abs(delta) > container.clientHeight * 0.55) container.scrollTop = target;
-      else container.scrollTop += delta * 0.11;
+
+      // Keep the active spoken line in a calm reading zone instead of snapping.
+      // We calculate a continuous target between this line and the next line, then
+      // low-pass filter the scrollTop so small browser/media-time jitters do not show.
+      const anchorY = container.clientHeight * 0.48;
+      const startTarget = Math.max(0, currentEl.offsetTop + (currentEl.offsetHeight * 0.5) - anchorY);
+      const endTarget = nextEl ? Math.max(0, nextEl.offsetTop + (nextEl.offsetHeight * 0.5) - anchorY) : startTarget;
+      const p = Math.max(0, Math.min(1, Number(progress)||0));
+      const target = startTarget + ((endTarget - startTarget) * p);
+
+      if(container.__smoothScrollTop == null || Math.abs(container.__smoothScrollTop - container.scrollTop) > container.clientHeight * 0.65){
+        container.__smoothScrollTop = container.scrollTop;
+      }
+      const delta = target - container.__smoothScrollTop;
+      if(Math.abs(delta) > container.clientHeight * 0.70){
+        container.__smoothScrollTop = target;
+        container.scrollTop = Math.round(target);
+        return;
+      }
+      container.__smoothScrollTop += delta * 0.055;
+      const nextScroll = Math.round(container.__smoothScrollTop);
+      if(Math.abs(nextScroll - container.scrollTop) >= 1){
+        container.scrollTop = nextScroll;
+      }
     }
     function updateTranscriptActiveLine(time){
       if(!els.transcriptLines || !state.transcript.segments.length) return;
