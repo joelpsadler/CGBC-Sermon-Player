@@ -1177,7 +1177,50 @@
     .transcript-panel.is-video-search-only .transcript-tools{justify-content:flex-start!important;}
     .transcript-panel.is-video-search-only .transcript-search{margin-left:0!important;width:min(430px,100%)!important;}
     @media(max-width:1240px){.transcript-head{grid-template-columns:136px minmax(0,1fr)!important}.transcript-title-block{width:136px}.transcript-art-mini{width:126px!important}.transcript-tools{flex-wrap:wrap!important;justify-content:flex-start!important}.transcript-search{margin-left:0!important;width:min(360px,100%)!important}}
-</style>
+
+
+    /* === FINAL DESKTOP TRANSCRIPT TIGHTEN + STABLE FOLLOW PASS ===
+       Beginner note: this section intentionally overrides earlier transcript styles without
+       touching mobile. The goal is smoother reading, more header room, and subtitle badges. */
+    @media (min-width:901px){
+      .flow{gap:8px!important;}
+      .context-strip{margin-bottom:0!important;border-radius:22px!important;}
+      #playerShell.panel{border-radius:24px!important;border-color:rgba(255,255,255,.085)!important;}
+      .transcript-panel{padding:10px 14px 14px!important;border-radius:24px!important;border-color:rgba(255,255,255,.085)!important;}
+      .transcript-head{display:grid!important;grid-template-columns:minmax(250px,330px) minmax(0,1fr)!important;align-items:center!important;gap:14px!important;margin-bottom:6px!important;padding-right:0!important;}
+      .transcript-title-block{width:auto!important;min-width:0!important;display:grid!important;grid-template-columns:118px minmax(0,1fr)!important;align-items:center!important;gap:12px!important;}
+      .transcript-title-block .eyebrow{margin:0!important;font-size:clamp(18px,1.55vw,24px)!important;line-height:1!important;letter-spacing:.08em!important;color:rgba(255,255,255,.88)!important;align-self:center!important;}
+      .transcript-art-mini{position:static!important;width:118px!important;aspect-ratio:16/9!important;border-radius:12px!important;margin:0!important;grid-column:1!important;grid-row:1!important;pointer-events:none!important;}
+      .transcript-title-block .eyebrow{grid-column:2!important;grid-row:1!important;}
+      .transcript-title,.transcript-subtitle{display:none!important;}
+      .transcript-tools{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;padding:0!important;min-width:0!important;flex-wrap:nowrap!important;}
+      .transcript-select{width:112px!important;min-width:104px!important;height:38px!important;}
+      .transcript-toggle{height:38px!important;min-width:64px!important;}
+      .transcript-search{width:clamp(190px,27vw,350px)!important;margin-left:4px!important;height:38px!important;}
+      .transcript-lines{max-height:405px!important;padding:118px 18px 172px!important;border-radius:20px!important;background:linear-gradient(180deg,rgba(0,0,0,.16),rgba(0,0,0,.07))!important;}
+      .transcript-line{position:relative!important;display:block!important;width:100%!important;text-align:left!important;padding:2px 12px 2px 18px!important;margin:0 0 1px!important;border-radius:8px!important;background:transparent!important;border:0!important;box-shadow:none!important;opacity:.72!important;transition:opacity .18s ease,color .18s ease!important;will-change:auto!important;}
+      .transcript-line:hover{background:transparent!important;box-shadow:none!important;opacity:.92!important;}
+      .transcript-line.is-active{opacity:1!important;background:transparent!important;box-shadow:none!important;}
+      .transcript-line.is-active::before{content:"";position:absolute;left:5px;top:.36em;bottom:.36em;width:2px;border-radius:999px;background:rgba(143,174,157,.55);box-shadow:0 0 10px rgba(143,174,157,.14);}
+      .transcript-text{display:block!important;font-size:16px!important;line-height:1.24!important;color:rgba(255,255,255,.74)!important;letter-spacing:-.012em!important;font-weight:560!important;text-shadow:none!important;}
+      .transcript-line.is-old-past{opacity:.18!important}.transcript-line.is-old-past .transcript-text{color:rgba(255,255,255,.24)!important;}
+      .transcript-line.is-past-2{opacity:.48!important}.transcript-line.is-past-2 .transcript-text{color:rgba(255,255,255,.56)!important;}
+      .transcript-line.is-past-1{opacity:.56!important}.transcript-line.is-past-1 .transcript-text{color:rgba(255,255,255,.62)!important;}
+      .transcript-line.is-active .transcript-text{color:rgba(255,255,255,.99)!important;font-weight:600!important;}
+      .transcript-line.is-next-1,.transcript-line.is-next-2{opacity:.98!important}.transcript-line.is-next-1 .transcript-text,.transcript-line.is-next-2 .transcript-text{color:rgba(255,255,255,.95)!important;font-weight:560!important;}
+      .transcript-line.is-upcoming{opacity:.86!important}.transcript-line.is-upcoming .transcript-text{color:rgba(255,255,255,.84)!important;}
+      .subtitle-badge{position:absolute;left:12px;top:12px;z-index:3;display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0 8px;border-radius:999px;background:linear-gradient(180deg,rgba(15,15,15,.86),rgba(10,10,10,.68));border:1px solid rgba(255,255,255,.13);box-shadow:0 8px 18px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06);font-family:Poppins,sans-serif;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.94);pointer-events:none;}
+      .subtitle-badge svg{width:12px;height:12px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+    }
+    @media (min-width:901px) and (max-width:1240px){
+      .transcript-head{grid-template-columns:minmax(220px,280px) minmax(0,1fr)!important;}
+      .transcript-title-block{grid-template-columns:100px minmax(0,1fr)!important;}
+      .transcript-art-mini{width:100px!important;}
+      .transcript-tools{flex-wrap:wrap!important;justify-content:flex-end!important;}
+      .transcript-search{width:min(330px,100%)!important;}
+    }
+
+  </style>
 </head>
 <body class="mode-audio">
   <div class="app">
@@ -2089,6 +2132,8 @@
       const q=String(state.transcript.search||'').trim();
       const re = q ? new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')+')','ig') : null;
       els.transcriptLines.__smoothScrollTop = null;
+      els.transcriptLines.__stableScrollTop = null;
+      state.transcript._smoothTime = null;
       els.transcriptLines.innerHTML = segments.map(seg=>{
         const safeText = escapeHtml(seg.text);
         const displayText = re ? safeText.replace(re, '<mark>$1</mark>') : safeText;
@@ -2155,33 +2200,48 @@
       const nextEl = next ? container.querySelector('.transcript-line[data-index="'+next.index+'"]') : null;
       if(!currentEl) return;
 
-      // Keep the active spoken line in a calm reading zone instead of snapping.
-      // We calculate a continuous target between this line and the next line, then
-      // low-pass filter the scrollTop so small browser/media-time jitters do not show.
-      const anchorY = container.clientHeight * 0.48;
-      const startTarget = Math.max(0, currentEl.offsetTop + (currentEl.offsetHeight * 0.5) - anchorY);
-      const endTarget = nextEl ? Math.max(0, nextEl.offsetTop + (nextEl.offsetHeight * 0.5) - anchorY) : startTarget;
+      // Stable follow logic:
+      // We still use SRT timing and segment duration, but we smooth the media clock first
+      // and glide toward a computed reading target. The last versions reacted to tiny
+      // browser/audio time jitter every frame, which made the text visibly tremble.
+      const anchorY = container.clientHeight * 0.44;
+      const currentCenter = currentEl.offsetTop + (currentEl.offsetHeight * 0.50);
+      const nextCenter = nextEl ? nextEl.offsetTop + (nextEl.offsetHeight * 0.50) : currentCenter;
       const p = Math.max(0, Math.min(1, Number(progress)||0));
-      const target = startTarget + ((endTarget - startTarget) * p);
+      const easedP = p < 0.08 ? 0 : (p > 0.92 ? 1 : (p - 0.08) / 0.84);
+      const targetCenter = currentCenter + ((nextCenter - currentCenter) * easedP);
+      const target = Math.max(0, targetCenter - anchorY);
 
-      if(container.__smoothScrollTop == null || Math.abs(container.__smoothScrollTop - container.scrollTop) > container.clientHeight * 0.65){
-        container.__smoothScrollTop = container.scrollTop;
+      if(container.__stableScrollTop == null || Math.abs(container.__stableScrollTop - container.scrollTop) > container.clientHeight * 0.65){
+        container.__stableScrollTop = container.scrollTop;
       }
-      const delta = target - container.__smoothScrollTop;
+      const delta = target - container.__stableScrollTop;
+      if(Math.abs(delta) < 0.35) return;
       if(Math.abs(delta) > container.clientHeight * 0.70){
-        container.__smoothScrollTop = target;
-        container.scrollTop = Math.round(target);
-        return;
+        container.__stableScrollTop = target;
+      } else {
+        container.__stableScrollTop += delta * 0.032;
       }
-      container.__smoothScrollTop += delta * 0.055;
-      const nextScroll = Math.round(container.__smoothScrollTop);
-      if(Math.abs(nextScroll - container.scrollTop) >= 1){
-        container.scrollTop = nextScroll;
+      const rounded = Math.round(container.__stableScrollTop);
+      if(Math.abs(rounded - container.scrollTop) >= 2){
+        container.scrollTop = rounded;
       }
     }
     function updateTranscriptActiveLine(time){
       if(!els.transcriptLines || !state.transcript.segments.length) return;
-      const info = findTranscriptActivePosition(time);
+      const raw = Number(time)||0;
+      const now = performance.now();
+      if(state.transcript._smoothTime == null || Math.abs(raw - state.transcript._smoothTime) > 2.5){
+        state.transcript._smoothTime = raw;
+        state.transcript._smoothStamp = now;
+      } else {
+        // Low-pass filter the noisy media clock, but let it keep moving while playing.
+        const elapsed = Math.max(0, Math.min(.25, (now - (state.transcript._smoothStamp || now)) / 1000));
+        state.transcript._smoothStamp = now;
+        const predicted = state.transcript._smoothTime + elapsed;
+        state.transcript._smoothTime = predicted + ((raw - predicted) * 0.12);
+      }
+      const info = findTranscriptActivePosition(state.transcript._smoothTime);
       const activeIndex = info.active ? info.active.index : -1;
       setTranscriptLineClasses(activeIndex);
       scrollTranscriptWithSpeech(info.position, info.progress);
@@ -3096,9 +3156,13 @@
                 ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
                 : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
+        const subtitleBadge = episodeLevel && row?.transcript?.hasTranscript
+          ? `<div class="subtitle-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M7 15h4"></path><path d="M13 15h4"></path></svg><span>Subs</span></div>`
+          : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
           ${currentLaneBadge}
+          ${subtitleBadge}
           ${episodeBadge}
           <div class="${thumbClass}">${dateCardInner}</div>
           <div class="copy">
