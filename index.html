@@ -1328,7 +1328,8 @@
       playerRenderKey:'',
       mobileEpisodeListOpen:false,
       mobilePlayerPinnedTop:false,
-      mobileVideoPinnedMetrics:null
+      mobileVideoPinnedMetrics:null,
+      deepLinkStart:null
     };
 
     const els = {
@@ -1641,11 +1642,13 @@
       ];
     }
 
-    function buildDeepLink(item, mode=state.mode){
+    function buildDeepLink(item, mode=state.mode, startSeconds=null){
       if(!item?.stableId) return window.location.href;
       const url = new URL(window.location.href);
       url.searchParams.set('mode', mode === 'video' ? 'video' : 'audio');
       url.searchParams.set('item', item.stableId);
+      const start = Number(startSeconds);
+      if(Number.isFinite(start) && start > 0) url.searchParams.set('start', String(Math.floor(start)));
       return url.toString();
     }
 
@@ -1809,6 +1812,8 @@
         const params = new URLSearchParams(window.location.search);
         const wantedMode = params.get('mode');
         const wantedId = params.get('item');
+        const wantedStart = Number(params.get('start') || params.get('t') || params.get('time') || 0);
+        if(Number.isFinite(wantedStart) && wantedStart > 0) state.deepLinkStart = Math.floor(wantedStart);
         if(wantedMode === 'audio' || wantedMode === 'video') state.mode = wantedMode;
         if(!wantedId) return;
         const item = getAllShareableItems().find(row => row?.stableId === wantedId);
@@ -2695,7 +2700,9 @@
         els.videoShell.style.width='100%';
         els.videoShell.style.maxWidth='100%';
         if(state.playerRenderKey !== renderKey || !els.videoShell.querySelector('iframe')){
-          els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          const deepStart = Number(state.deepLinkStart || 0);
+          const startParam = Number.isFinite(deepStart) && deepStart > 0 ? `&start=${Math.floor(deepStart)}` : '';
+          els.videoShell.innerHTML=`<iframe src="https://www.youtube.com/embed/${encodeURIComponent(item.video.youtubeId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1${startParam}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
           state.playerRenderKey = renderKey;
         }
         els.videoShareHost.innerHTML=`
@@ -2741,6 +2748,12 @@
         state.playerRenderKey = `audio:${item.stableId}`;
         if(item?.audio?.url){
           if(els.audioPlayer.src !== item.audio.url) els.audioPlayer.src=item.audio.url;
+          const deepStart = Number(state.deepLinkStart || 0);
+          if(Number.isFinite(deepStart) && deepStart > 0){
+            const seekAudio = ()=>{ try{ els.audioPlayer.currentTime = Math.max(0, deepStart); }catch(err){} };
+            if(els.audioPlayer.readyState >= 1) seekAudio();
+            else els.audioPlayer.addEventListener('loadedmetadata', seekAudio, { once:true });
+          }
         } else {
           els.audioPlayer.removeAttribute('src');
           els.audioPlayer.load();
