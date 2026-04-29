@@ -1332,6 +1332,20 @@
   .transcript-line{transition:opacity .20s ease,color .20s ease!important;}
 }
 
+  
+    /* Desktop transcript show/hide: default on, but remembers user choice. */
+    .transcript-visibility-toggle{min-width:118px;}
+    .transcript-panel.is-collapsed{display:block!important;padding:10px 14px!important;}
+    .transcript-panel.is-collapsed .transcript-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin:0!important;padding:0!important;}
+    .transcript-panel.is-collapsed .transcript-title-block,
+    .transcript-panel.is-collapsed .transcript-select,
+    .transcript-panel.is-collapsed .transcript-toggle:not(.transcript-visibility-toggle),
+    .transcript-panel.is-collapsed .transcript-search,
+    .transcript-panel.is-collapsed .transcript-lines{display:none!important;}
+    .transcript-panel.is-collapsed .transcript-tools{display:flex!important;justify-content:space-between!important;align-items:center!important;width:100%!important;padding:0!important;}
+    .transcript-panel.is-collapsed .transcript-tools::before{content:'Transcript available';font-family:Poppins,sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.78);}
+    .transcript-panel.is-collapsed .transcript-visibility-toggle{margin-left:auto;background:linear-gradient(180deg,rgba(143,174,157,.18),rgba(143,174,157,.07));border-color:rgba(143,174,157,.18);color:rgba(255,255,255,.96);}
+
   </style>
 </head>
 <body class="mode-audio">
@@ -1480,6 +1494,7 @@
               <button class="transcript-toggle active" id="transcriptFollowBtn" type="button">Follow</button>
               <button class="transcript-toggle" id="transcriptReadBtn" type="button">Read</button>
               <input class="transcript-search" id="transcriptSearch" type="search" placeholder="Search transcript">
+              <button class="transcript-toggle transcript-visibility-toggle" id="transcriptVisibilityBtn" type="button" aria-expanded="true">Hide Transcript</button>
             </div>
           </div>
           <div class="transcript-lines" id="transcriptLines"></div>
@@ -1572,7 +1587,7 @@
       idleQuoteIndex:0,
       idleQuotePaused:false,
       idleQuoteTimer:null,
-      transcript:{ itemId:null, language:'en', mode:'follow', search:'', segments:[], activeIndex:-1, cache:new Map(), loading:false },
+      transcript:{ itemId:null, language:'en', mode:'follow', search:'', segments:[], activeIndex:-1, cache:new Map(), loading:false, hidden:false },
       youtubePlayer:null,
       youtubePoll:null
     };
@@ -1643,9 +1658,28 @@
       transcriptFollowBtn: document.getElementById('transcriptFollowBtn'),
       transcriptReadBtn: document.getElementById('transcriptReadBtn'),
       transcriptSearch: document.getElementById('transcriptSearch'),
+      transcriptVisibilityBtn: document.getElementById('transcriptVisibilityBtn'),
       transcriptArt: document.getElementById('transcriptArt'),
       transcriptLines: document.getElementById('transcriptLines')
     };
+
+    const TRANSCRIPT_VISIBILITY_KEY = 'cgbcTranscriptHiddenDesktop';
+    try{ state.transcript.hidden = window.localStorage.getItem(TRANSCRIPT_VISIBILITY_KEY) === '1'; }catch(err){}
+    function setTranscriptHidden(hidden){
+      state.transcript.hidden = !!hidden;
+      try{ window.localStorage.setItem(TRANSCRIPT_VISIBILITY_KEY, state.transcript.hidden ? '1' : '0'); }catch(err){}
+      applyTranscriptVisibility();
+    }
+    function applyTranscriptVisibility(){
+      if(!els.transcriptPanel) return;
+      els.transcriptPanel.classList.toggle('is-collapsed', !!state.transcript.hidden);
+      if(els.transcriptVisibilityBtn){
+        els.transcriptVisibilityBtn.textContent = state.transcript.hidden ? 'Show Transcript' : 'Hide Transcript';
+        els.transcriptVisibilityBtn.setAttribute('aria-expanded', state.transcript.hidden ? 'false' : 'true');
+      }
+      if(state.transcript.hidden && typeof stopTranscriptClock === 'function') stopTranscriptClock();
+      else if(!state.transcript.hidden && state.currentItem?.transcript?.hasTranscript && typeof startTranscriptClock === 'function') startTranscriptClock();
+    }
 
     function escapeHtml(v){return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
     function formatNumber(v){return new Intl.NumberFormat('en-US').format(Number(v || 0));}
@@ -2208,6 +2242,7 @@
       const videoSearchOnly = state.mode === 'video';
       els.transcriptPanel.classList.add('is-visible');
       els.transcriptPanel.classList.toggle('is-video-search-only', videoSearchOnly);
+      applyTranscriptVisibility();
       els.transcriptTitle.textContent = item?.title?.display || 'Transcript';
       els.transcriptSubtitle.textContent = videoSearchOnly ? 'Search this message transcript.' : (state.transcript.search ? 'Search results. Clear search or press Follow to resume.' : (state.transcript.mode === 'follow' ? 'Following along with the message.' : 'Read freely, search, or click a line to jump.'));
       if(els.transcriptArt){
@@ -2223,7 +2258,7 @@
           state.transcript.segments = await loadTranscriptForItem(item, state.transcript.language);
         }
         renderTranscriptLines();
-        startTranscriptClock();
+        if(!state.transcript.hidden) startTranscriptClock();
       }catch(err){
         els.transcriptLines.innerHTML='<div class="transcript-empty">Transcript could not be loaded yet.</div>';
       }
@@ -3768,6 +3803,7 @@
       if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{ state.transcript.language=els.transcriptLanguage.value; state.transcript.segments=[]; state.transcript.activeIndex=-1; await renderTranscriptPanel(); });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
       if(els.transcriptReadBtn) els.transcriptReadBtn.addEventListener('click', ()=>{ state.transcript.mode='read'; renderTranscriptPanel(); });
+      if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.addEventListener('click', ()=>{ setTranscriptHidden(!state.transcript.hidden); renderTranscriptPanel(); });
       if(els.transcriptSearch) els.transcriptSearch.addEventListener('input', ()=>{
         state.transcript.search=els.transcriptSearch.value||'';
         if(state.transcript.search){ state.transcript.mode='read'; }
