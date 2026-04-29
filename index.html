@@ -1392,9 +1392,10 @@
       .transcript-title-block .eyebrow{display:block!important;margin:0!important;font-family:Poppins,sans-serif!important;font-size:15px!important;line-height:1!important;letter-spacing:.04em!important;color:rgba(255,255,255,.92)!important;order:2!important;}
       .transcript-art-mini{display:block!important;position:static!important;width:62px!important;aspect-ratio:16/9!important;flex:0 0 62px!important;border-radius:10px!important;margin:0!important;order:1!important;pointer-events:none!important;}
       .transcript-title,.transcript-subtitle{display:none!important;}
-      .transcript-tools{display:grid!important;grid-template-columns:1fr auto auto!important;gap:8px!important;align-items:center!important;justify-content:stretch!important;width:100%!important;padding:0!important;}
+      .transcript-tools{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important;align-items:center!important;justify-content:stretch!important;width:100%!important;padding:0!important;}
       .transcript-select{height:36px!important;width:100%!important;min-width:0!important;border-radius:13px!important;font-size:13px!important;}
       .transcript-toggle{height:36px!important;min-width:54px!important;border-radius:13px!important;padding:0 11px!important;font-size:12px!important;}
+      #transcriptReadBtn{display:none!important;}
       .transcript-search{grid-column:1 / -1!important;width:100%!important;height:38px!important;margin:0!important;border-radius:14px!important;font-size:14px!important;}
       .transcript-visibility-toggle{grid-column:1 / -1!important;width:100%!important;margin-top:0!important;background:linear-gradient(180deg,rgba(143,174,157,.18),rgba(143,174,157,.07))!important;border-color:rgba(143,174,157,.22)!important;color:rgba(255,255,255,.94)!important;}
       .transcript-lines{max-height:42vh!important;min-height:210px!important;padding:82px 9px 118px!important;margin-top:10px!important;border-radius:16px!important;background:linear-gradient(180deg,rgba(0,0,0,.20),rgba(0,0,0,.08))!important;border:1px solid rgba(255,255,255,.045)!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;}
@@ -1409,6 +1410,42 @@
       .transcript-panel.is-collapsed .transcript-tools::before{content:'Transcript available';float:left;font-family:Poppins,sans-serif;font-weight:800;font-size:14px;color:rgba(255,255,255,.84);line-height:36px;}
       .transcript-panel.is-collapsed .transcript-visibility-toggle{float:right;width:auto!important;min-width:132px!important;margin:0!important;}
       .transcript-panel.is-collapsed .transcript-tools::after{content:'';display:block;clear:both;}
+    }
+
+  
+
+    /* === MOBILE TRANSCRIPT CLEANUP PASS ===
+       Beginner note: on phones the transcript belongs to the player, so it is inserted
+       directly after the player shell. The badge is a tiny document icon instead of
+       text, leaving the sermon artwork clean. */
+    @media (max-width:900px){
+      .transcript-panel.is-visible{margin:8px 0 12px!important;}
+      .mobile-player-anchor .player + .transcript-panel{margin-top:8px!important;}
+      .episode.has-subs .thumb-wrap .subtitle-badge,
+      .episode .thumb-wrap .subtitle-badge{display:none!important;}
+      .episode .subtitle-badge.transcript-available-badge{
+        position:absolute!important;
+        right:94px!important;
+        bottom:18px!important;
+        width:25px!important;
+        min-width:25px!important;
+        height:22px!important;
+        min-height:22px!important;
+        padding:0!important;
+        border-radius:999px!important;
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        color:rgba(255,255,255,.94)!important;
+        background:linear-gradient(180deg,rgba(18,20,19,.78),rgba(7,8,8,.56))!important;
+        border:1px solid rgba(255,255,255,.16)!important;
+        box-shadow:0 6px 14px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.07)!important;
+        backdrop-filter:blur(10px)!important;
+        z-index:5!important;
+        pointer-events:none!important;
+      }
+      .episode .subtitle-badge.transcript-available-badge svg{width:14px!important;height:14px!important;margin:0!important;stroke-width:2.1!important;}
+      .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
     }
 
   </style>
@@ -1739,6 +1776,19 @@
       state.transcript.hidden = !!hidden;
       try{ window.localStorage.setItem(isMobileViewport() ? TRANSCRIPT_MOBILE_VISIBILITY_KEY : TRANSCRIPT_VISIBILITY_KEY, state.transcript.hidden ? '1' : '0'); }catch(err){}
       applyTranscriptVisibility();
+    }
+    function collapseMobileTranscriptForNav(){
+      if(!isMobileViewport() || !state.currentItem?.transcript?.hasTranscript) return;
+      // Collapse only for this navigation moment. This keeps the player and browsing
+      // usable on phones without changing the desktop transcript behavior.
+      state.transcript.hidden = true;
+      applyTranscriptVisibility();
+    }
+    function hardResetPage(){
+      // Reset should mean a fresh visitor experience, not a return to a shared
+      // deep-link state. Drop query/hash and reload the clean page.
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.location.assign(cleanUrl);
     }
     function applyTranscriptVisibility(){
       if(!els.transcriptPanel) return;
@@ -2450,11 +2500,13 @@
 
       const currentTop = currentEl.offsetTop - container.scrollTop;
       const currentCenter = currentTop + (currentEl.offsetHeight / 2);
-      const minY = container.clientHeight * 0.34;
-      const maxY = container.clientHeight * 0.70;
+      const minY = container.clientHeight * (isMobileViewport() ? 0.42 : 0.34);
+      const maxY = container.clientHeight * (isMobileViewport() ? 0.76 : 0.70);
       if(currentCenter >= minY && currentCenter <= maxY) return;
 
-      const anchorY = container.clientHeight * 0.54;
+      // Phones need the spoken line lower in the reader so it does not ride up
+      // underneath the top fade while the speaker is still saying it.
+      const anchorY = container.clientHeight * (isMobileViewport() ? 0.64 : 0.54);
       const target = currentEl.offsetTop - anchorY + (currentEl.offsetHeight / 2);
       animateTranscriptScrollTo(container, target);
     }
@@ -3237,6 +3289,7 @@
       return !!(state.currentItem && state.playingContext && (!sameNav(state.nav, state.playingContext.nav) || state.mode !== state.playingContext.mode));
     }
     function goTopPreservePlayer(){
+      collapseMobileTranscriptForNav();
       state.mobileEpisodeListOpen = false;
       state.mobilePlayerPinnedTop = false;
       state.nav = { rootKey:null, branchKey:null, leafKey:null };
@@ -3566,8 +3619,10 @@
     function positionTranscriptPanel(){
       if(!els.transcriptPanel || !els.playerShell || !els.mobilePlayerAnchor) return;
       if(isMobileViewport()){
-        if(els.transcriptPanel.parentElement !== els.mobilePlayerAnchor){
-          els.mobilePlayerAnchor.appendChild(els.transcriptPanel);
+        // On mobile, keep the transcript strip/drawer physically attached to the
+        // player so it never separates while the player moves around the page.
+        if(els.playerShell.nextElementSibling !== els.transcriptPanel){
+          els.playerShell.insertAdjacentElement('afterend', els.transcriptPanel);
         }
       }else{
         if(els.playerShell.nextElementSibling !== els.transcriptPanel){
@@ -3678,6 +3733,7 @@
       rerender();
     }
     function goBack(){
+      collapseMobileTranscriptForNav();
       state.mobileEpisodeListOpen=false;
       state.mobilePlayerPinnedTop=false;
       if(searchResultsMode()){
@@ -3690,6 +3746,7 @@
       rerender();
     }
     function selectChoice(key){
+      collapseMobileTranscriptForNav();
       if(!state.nav.rootKey){
         /* ============================================================================
            EASY NOTE: Livestreams and Shorts do NOT need a middle bucket.
@@ -3733,6 +3790,7 @@
         }
         const topBtn=event.target.closest('[data-top-root]');
         if(topBtn){
+          collapseMobileTranscriptForNav();
           const key=topBtn.dataset.topRoot;
           if(key === 'livestreams'){
             state.mobileEpisodeListOpen=false;
@@ -3794,9 +3852,9 @@
         });
       }
       if(els.resetBtn){
-        els.resetBtn.addEventListener('click', ()=>resetAll());
+        els.resetBtn.addEventListener('click', hardResetPage);
       }
-      els.logoReset.addEventListener('click', ()=>resetAll());
+      els.logoReset.addEventListener('click', hardResetPage);
       els.playerShareLink.addEventListener('click', async (event)=>{
         event.preventDefault();
         if(!state.currentItem) return;
