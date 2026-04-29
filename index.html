@@ -1346,7 +1346,40 @@
     .transcript-panel.is-collapsed .transcript-tools::before{content:'Transcript available';font-family:Poppins,sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.78);}
     .transcript-panel.is-collapsed .transcript-visibility-toggle{margin-left:auto;background:linear-gradient(180deg,rgba(143,174,157,.18),rgba(143,174,157,.07));border-color:rgba(143,174,157,.18);color:rgba(255,255,255,.96);}
 
-  </style>
+  
+
+/* === TRANSCRIPT BUTTON + CARD ICON CLEANUP ===
+   Beginner note: this keeps the desktop transcript controls compact.
+   The episode card uses a document-lines icon instead of a word badge so it
+   reads as “transcript available” without covering the artwork. */
+@media (min-width:901px){
+  .transcript-visibility-toggle{
+    min-width:58px!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  .episode .subtitle-badge.transcript-available-badge{
+    width:26px!important;
+    min-width:26px!important;
+    height:22px!important;
+    min-height:22px!important;
+    padding:0!important;
+    right:126px!important;
+    bottom:15px!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:0!important;
+  }
+  .episode .subtitle-badge.transcript-available-badge svg{
+    width:14px!important;
+    height:14px!important;
+    margin:0!important;
+    stroke-width:2!important;
+  }
+}
+
+</style>
 </head>
 <body class="mode-audio">
   <div class="app">
@@ -1494,7 +1527,7 @@
               <button class="transcript-toggle active" id="transcriptFollowBtn" type="button">Follow</button>
               <button class="transcript-toggle" id="transcriptReadBtn" type="button">Read</button>
               <input class="transcript-search" id="transcriptSearch" type="search" placeholder="Search transcript">
-              <button class="transcript-toggle transcript-visibility-toggle" id="transcriptVisibilityBtn" type="button" aria-expanded="true">Hide Transcript</button>
+              <button class="transcript-toggle transcript-visibility-toggle" id="transcriptVisibilityBtn" type="button" aria-expanded="true">Hide</button>
             </div>
           </div>
           <div class="transcript-lines" id="transcriptLines"></div>
@@ -1674,7 +1707,7 @@
       if(!els.transcriptPanel) return;
       els.transcriptPanel.classList.toggle('is-collapsed', !!state.transcript.hidden);
       if(els.transcriptVisibilityBtn){
-        els.transcriptVisibilityBtn.textContent = state.transcript.hidden ? 'Show Transcript' : 'Hide Transcript';
+        els.transcriptVisibilityBtn.textContent = state.transcript.hidden ? 'Show Transcript' : 'Hide';
         els.transcriptVisibilityBtn.setAttribute('aria-expanded', state.transcript.hidden ? 'false' : 'true');
       }
       if(state.transcript.hidden && typeof stopTranscriptClock === 'function') stopTranscriptClock();
@@ -3299,7 +3332,7 @@
                 : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
         const subtitleBadge = episodeLevel && row?.transcript?.hasTranscript
-          ? `<div class="subtitle-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M7 15h4"></path><path d="M13 15h4"></path></svg><span>Subs</span></div>`
+          ? `<div class="subtitle-badge transcript-available-badge" title="Transcript available" aria-label="Transcript available"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7.35L19 8.4v11.85H7z"></path><path d="M14 3.75V8.5h5"></path><path d="M10 12h6"></path><path d="M10 15h6"></path><path d="M10 18h4"></path></svg></div>`
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
