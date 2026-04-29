@@ -1,7 +1,7 @@
 <!DOCTYPE html>
+<!-- mobile cleanup build: 2026-04-29 compact-featured-quotes-transcript-reset -->
 <html lang="en">
 <head>
-  <!-- mobile cleanup build: 2026-04-29 final-mobile-transcript-quotes-search -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -1449,6 +1449,49 @@
       .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
     }
 
+  
+
+    /* === MOBILE FINAL CLEANUP: transcript header, featured quote discovery, reset polish ===
+       Beginner note: this block intentionally leaves desktop alone and only tightens
+       the mobile experience. */
+    @media (max-width:900px){
+      .mode-pill{background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.026))!important;border-color:rgba(255,255,255,.10)!important;}
+      .mode-btn .mode-btn-shell{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025))!important;border-color:rgba(255,255,255,.085)!important;color:rgba(255,255,255,.96)!important;}
+      .mode-btn.active .mode-btn-shell{background:linear-gradient(180deg, rgba(143,174,157,.21), rgba(143,174,157,.115))!important;border-color:rgba(143,174,157,.28)!important;color:rgba(255,255,255,.98)!important;}
+      .mode-btn .mode-icon,.mode-btn.active .mode-icon{stroke:rgba(255,255,255,.98)!important;opacity:1!important;}
+      #mobilePlayerAnchor #playerShell + .transcript-panel,
+      #playerShell + .transcript-panel{margin-top:4px!important;}
+      .transcript-panel.is-visible{padding:9px 10px 10px!important;margin:4px 0 10px!important;border-radius:18px!important;}
+      .transcript-head{display:grid!important;grid-template-columns:68px 1fr auto!important;grid-template-areas:"art title hide" "tools tools tools"!important;gap:7px 10px!important;align-items:center!important;}
+      .transcript-title-block{display:contents!important;}
+      .transcript-art-mini{grid-area:art!important;width:66px!important;flex:0 0 66px!important;border-radius:9px!important;}
+      .transcript-title-block .eyebrow{grid-area:title!important;font-size:20px!important;letter-spacing:.075em!important;line-height:1!important;color:rgba(255,255,255,.95)!important;}
+      .transcript-title-block::after{content:'Auto Generated';grid-area:title;align-self:end;justify-self:start;margin-top:24px;padding:3px 8px;border-radius:999px;font-family:Poppins,sans-serif;font-size:9px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.68);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.075);}
+      .transcript-tools{grid-area:tools!important;display:grid!important;grid-template-columns:minmax(104px,125px) minmax(0,1fr)!important;gap:7px!important;align-items:center!important;width:100%!important;}
+      #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
+      .transcript-select{height:36px!important;width:100%!important;min-width:0!important;font-size:16px!important;padding:0 10px!important;}
+      .transcript-search{grid-column:auto!important;width:100%!important;height:36px!important;font-size:16px!important;margin:0!important;}
+      .transcript-visibility-toggle{grid-area:hide!important;width:auto!important;min-width:58px!important;height:34px!important;margin:0!important;padding:0 12px!important;border-radius:13px!important;font-size:12px!important;justify-self:end!important;align-self:start!important;}
+      .transcript-lines{margin-top:8px!important;max-height:42vh!important;min-height:200px!important;padding-top:74px!important;padding-bottom:108px!important;}
+      .transcript-panel.is-collapsed{padding:8px 10px!important;margin-top:4px!important;}
+      .transcript-panel.is-collapsed .transcript-head{display:block!important;}
+      .transcript-panel.is-collapsed .transcript-tools::before{font-size:14px!important;color:rgba(255,255,255,.92)!important;}
+      .transcript-panel.is-collapsed .transcript-visibility-toggle{min-width:130px!important;height:36px!important;}
+      .mobile-featured-quote-card{margin-top:12px;padding:14px 14px 12px;border-radius:22px;background:linear-gradient(180deg,rgba(18,18,19,.88),rgba(10,10,11,.78));border:1px solid rgba(255,255,255,.085);box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 28px rgba(0,0,0,.18);overflow:hidden;}
+      .mobile-featured-eyebrow{margin:0 0 8px;font-family:Poppins,sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.46);}
+      .mobile-featured-quote-text{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(26px,8.1vw,36px);line-height:1.08;letter-spacing:-.035em;color:rgba(255,255,255,.96);display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;}
+      .mobile-featured-meta{margin-top:10px;display:flex;gap:5px 9px;flex-wrap:wrap;color:rgba(255,255,255,.64);font-size:12px;line-height:1.18;}
+      .mobile-featured-actions{margin-top:10px;display:grid;grid-template-columns:42px 66px minmax(108px,1fr);gap:8px;align-items:start;}
+      .mobile-featured-action{height:40px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);font-family:Poppins,sans-serif;font-weight:800;font-size:13px;color:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;}
+      .mobile-featured-action svg{width:14px;height:14px;fill:currentColor;display:block;}
+      .mobile-featured-next{background:linear-gradient(180deg,rgba(143,174,157,.22),rgba(143,174,157,.10));border-color:rgba(143,174,157,.24);}
+      .mobile-featured-episode{border-radius:15px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.10);box-shadow:0 10px 22px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06);}
+      .mobile-featured-episode-label{height:34px;display:flex;align-items:center;justify-content:center;gap:7px;font-family:Poppins,sans-serif;font-size:13px;font-weight:800;color:rgba(255,255,255,.95);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));}
+      .mobile-featured-episode-label svg{width:11px;height:11px;fill:currentColor;display:block;}
+      .mobile-featured-episode img{width:100%;aspect-ratio:16/8.2;object-fit:cover;background:rgba(255,255,255,.04);}
+      @media (max-width:390px){.mobile-featured-quote-text{font-size:clamp(24px,7.6vw,32px);-webkit-line-clamp:7}.mobile-featured-actions{grid-template-columns:40px 60px minmax(98px,1fr);gap:7px}.mobile-featured-episode-label{height:32px;font-size:12px}.mobile-featured-action{height:38px}}
+    }
+
   </style>
 </head>
 <body class="mode-audio">
@@ -1787,9 +1830,17 @@
     }
     function hardResetPage(){
       // Reset should mean a fresh visitor experience, not a return to a shared
-      // deep-link state. Drop query/hash and reload the clean page.
+      // deep-link state. It also clears our saved UI state so Safari/GitHub Pages
+      // do not reopen the transcript drawer or a previous language/search choice.
+      try{
+        [TRANSCRIPT_VISIBILITY_KEY, TRANSCRIPT_MOBILE_VISIBILITY_KEY,
+         'cgbcTranscriptLanguage','cgbcTranscriptSearch','cgbcTranscriptMode',
+         'cgbcLastMode','cgbcLastNav','cgbcCurrentItem','cgbcPlayerState']
+          .forEach(key => window.localStorage.removeItem(key));
+      }catch(err){}
+      try{ window.sessionStorage.clear(); }catch(err){}
       const cleanUrl = window.location.origin + window.location.pathname;
-      window.location.assign(cleanUrl);
+      window.location.replace(cleanUrl + '?reset=' + Date.now());
     }
     function applyTranscriptVisibility(){
       if(!els.transcriptPanel) return;
@@ -2309,17 +2360,56 @@
         els.idleEpisodeCard.classList.toggle('is-visible', !!art);
         if(els.idleEpisodeArt && art) els.idleEpisodeArt.src = art;
       }
+      appendMobileFeaturedQuoteCard();
     }
     function nextIdleQuote(){ if(!state.idleQuotes.length) return; state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length); renderIdleQuote(); startIdleQuoteCycle(); }
     function startIdleQuoteCycle(){
       if(state.idleQuoteTimer) window.clearInterval(state.idleQuoteTimer);
       if(state.idleQuotePaused || !state.idleQuotes.length) return;
-      state.idleQuoteTimer = window.setInterval(()=>{ if(!state.currentItem) nextIdleQuote(); }, 12000);
+      // Desktop only shows the big quote wall when the player is idle, but mobile
+      // uses the same approved quote feed as a compact discovery card. Let it cycle
+      // even while an episode is loaded so the mobile card stays alive.
+      state.idleQuoteTimer = window.setInterval(()=>{ nextIdleQuote(); }, 12000);
     }
     function setIdleQuotePaused(value){
       state.idleQuotePaused = !!value;
       if(els.idleQuotePauseBtn){ els.idleQuotePauseBtn.innerHTML = state.idleQuotePaused ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Resume</span>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg><span>Pause</span>'; els.idleQuotePauseBtn.classList.toggle('primary', state.idleQuotePaused); }
       startIdleQuoteCycle();
+    }
+
+    function mobileFeaturedQuoteCardHtml(){
+      if(!isMobileViewport()) return '';
+      if(searchResultsMode()) return '';
+      // Only show on the top category screens. Once users drill into a path/series,
+      // the quote card backs out of the way so browsing stays clean.
+      if(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey) return '';
+      const q = state.idleQuotes[state.idleQuoteIndex];
+      if(!q) return '';
+      const text = idleQuoteText(q);
+      if(!text) return '';
+      const episodeItem = idleQuoteEpisodeItem(q);
+      const art = episodeItem ? getEpisodeArt(episodeItem, 'video') : '';
+      const episodeHref = idleQuoteEpisodeLink(q, false);
+      const metaBits = [idleQuoteSpeaker(q), idleQuoteTitle(q), idleQuoteDate(q) ? formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}) : '', formatClock(idleQuoteStart(q))].filter(Boolean);
+      return `
+        <section class="mobile-featured-quote-card" data-mobile-featured-quotes="1" aria-label="Featured quote">
+          <div class="mobile-featured-eyebrow">Featured Quotes</div>
+          <div class="mobile-featured-quote-text">${escapeHtml(text)}</div>
+          <div class="mobile-featured-meta">${metaBits.map(bit=>`<span>${escapeHtml(bit)}</span>`).join('')}</div>
+          <div class="mobile-featured-actions">
+            <button class="mobile-featured-action mobile-featured-pause" type="button" data-mobile-quote-pause="1" aria-label="Pause quote rotation">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg>
+            </button>
+            <button class="mobile-featured-action mobile-featured-next" type="button" data-mobile-quote-next="1">Next</button>
+            ${art ? `<a class="mobile-featured-episode" href="${escapeHtml(episodeHref)}" aria-label="Open episode"><span class="mobile-featured-episode-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Episode</span></span><img src="${escapeHtml(art)}" alt=""></a>` : ''}
+          </div>
+        </section>`;
+    }
+    function appendMobileFeaturedQuoteCard(){
+      if(!els.choiceList || !isMobileViewport()) return;
+      els.choiceList.querySelectorAll('[data-mobile-featured-quotes]').forEach(node=>node.remove());
+      const html = mobileFeaturedQuoteCardHtml();
+      if(html) els.choiceList.insertAdjacentHTML('beforeend', html);
     }
 
     /* -------------------------------------------------------------------------
@@ -3446,6 +3536,7 @@
         </button>`;
       }).join('');
       if(mobileEpisodeToggleCard) els.choiceList.innerHTML = mobileEpisodeToggleCard + els.choiceList.innerHTML;
+      appendMobileFeaturedQuoteCard();
     }
     function renderPlayer(){
       const item=state.currentItem;
@@ -3952,6 +4043,12 @@
       if(els.idleQuotePauseBtn) els.idleQuotePauseBtn.addEventListener('click', ()=>setIdleQuotePaused(!state.idleQuotePaused));
       if(els.idleQuoteNextBtn) els.idleQuoteNextBtn.addEventListener('click', nextIdleQuote);
       if(els.idleQuoteCopyBtn) els.idleQuoteCopyBtn.addEventListener('click', async ()=>{ const q=state.idleQuotes[state.idleQuoteIndex]; if(!q) return; try{ await navigator.clipboard.writeText(idleQuoteCopy(q)); alert('Quote copied.'); }catch(err){} });
+      document.addEventListener('click', (ev)=>{
+        const next = ev.target.closest('[data-mobile-quote-next]');
+        if(next){ ev.preventDefault(); nextIdleQuote(); return; }
+        const pause = ev.target.closest('[data-mobile-quote-pause]');
+        if(pause){ ev.preventDefault(); setIdleQuotePaused(!state.idleQuotePaused); appendMobileFeaturedQuoteCard(); }
+      });
       if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{ state.transcript.language=els.transcriptLanguage.value; state.transcript.segments=[]; state.transcript.activeIndex=-1; await renderTranscriptPanel(); });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
       if(els.transcriptReadBtn) els.transcriptReadBtn.addEventListener('click', ()=>{ state.transcript.mode='read'; renderTranscriptPanel(); });
@@ -4009,374 +4106,6 @@
       console.error(err);
       els.choiceList.innerHTML = `<div class="empty">Resolved data could not be loaded.</div>`;
     });
-  </script>
-
-
-  <style id="mobile-transcript-final-cleanup-style">
-    /* mobile cleanup build: 2026-04-29 final-mobile-transcript-quotes-search */
-    @media (max-width:900px){
-      /* Keep Listen/Watch from looking washed out after a selection. */
-      .mode-btn .mode-btn-shell,
-      .mode-btn:not(.active) .mode-btn-shell,
-      .mode-btn.active .mode-btn-shell{
-        color:rgba(255,255,255,.98)!important;
-        border-color:rgba(255,255,255,.12)!important;
-        background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.028))!important;
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 22px rgba(0,0,0,.18)!important;
-        opacity:1!important;
-      }
-      .mode-btn.active .mode-btn-shell{
-        background:linear-gradient(180deg, rgba(143,174,157,.25), rgba(143,174,157,.13))!important;
-        border-color:rgba(143,174,157,.30)!important;
-      }
-      .mode-btn .btn-copy .top,
-      .mode-btn .btn-copy .bottom,
-      .mode-btn .mode-icon{opacity:1!important;color:rgba(255,255,255,.96)!important;stroke:rgba(255,255,255,.96)!important;}
-
-      /* Transcript badge: visible but not over the art. */
-      .episode .subtitle-badge.transcript-available-badge{
-        right:88px!important;
-        bottom:10px!important;
-        min-width:29px!important;
-        height:28px!important;
-        padding:0 8px!important;
-        border-radius:999px!important;
-        background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.055))!important;
-        border:1px solid rgba(255,255,255,.17)!important;
-        box-shadow:0 8px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.11)!important;
-        color:rgba(255,255,255,.96)!important;
-        opacity:1!important;
-      }
-      .episode .subtitle-badge.transcript-available-badge svg{width:15px!important;height:15px!important;stroke:currentColor!important;fill:none!important;stroke-width:1.9!important;}
-
-      /* Mobile transcript panel: attached to the player and less crowded. */
-      .transcript-panel.is-visible{
-        margin:6px 0 10px!important;
-        padding:10px 12px 12px!important;
-      }
-      .transcript-panel.is-collapsed{
-        margin:6px 0 10px!important;
-        padding:10px 12px!important;
-        border-radius:20px!important;
-      }
-      .transcript-head{
-        position:relative!important;
-        display:grid!important;
-        grid-template-columns:1fr!important;
-        gap:8px!important;
-        margin:0!important;
-        padding:0!important;
-      }
-      .transcript-title-block{
-        display:flex!important;
-        align-items:center!important;
-        gap:10px!important;
-        padding-right:70px!important;
-        min-height:42px!important;
-      }
-      .transcript-title-block .eyebrow{
-        font-size:18px!important;
-        letter-spacing:.12em!important;
-        color:rgba(255,255,255,.90)!important;
-      }
-      .transcript-art-mini{
-        width:70px!important;
-        flex:0 0 70px!important;
-        border-radius:10px!important;
-      }
-      .transcript-tools{
-        display:grid!important;
-        grid-template-columns:104px minmax(0,1fr)!important;
-        gap:8px!important;
-        align-items:center!important;
-        width:100%!important;
-        padding:0!important;
-      }
-      #transcriptFollowBtn,
-      #transcriptReadBtn{display:none!important;}
-      .transcript-select{
-        width:104px!important;
-        min-width:0!important;
-        height:38px!important;
-        font-size:16px!important;
-      }
-      .transcript-search{
-        grid-column:auto!important;
-        width:100%!important;
-        min-width:0!important;
-        height:38px!important;
-        margin:0!important;
-        font-size:16px!important;
-      }
-      .transcript-visibility-toggle{
-        position:absolute!important;
-        top:0!important;
-        right:0!important;
-        width:auto!important;
-        min-width:58px!important;
-        height:36px!important;
-        padding:0 13px!important;
-        margin:0!important;
-        grid-column:auto!important;
-        z-index:3!important;
-      }
-      .transcript-lines{
-        margin-top:8px!important;
-        max-height:40vh!important;
-        min-height:205px!important;
-        padding-top:86px!important;
-      }
-
-      /* Mobile featured quote card: only appears on top category screens. */
-      .mobile-featured-quotes{
-        display:grid;
-        gap:12px;
-        margin-top:12px;
-        padding:18px 16px 18px;
-        border-radius:22px;
-        background:linear-gradient(180deg, rgba(17,17,18,.92), rgba(10,10,11,.86));
-        border:1px solid rgba(255,255,255,.08);
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 14px 30px rgba(0,0,0,.16);
-      }
-      .mobile-featured-eyebrow{
-        margin:0;
-        font-family:Poppins,sans-serif;
-        font-size:12px;
-        letter-spacing:.16em;
-        text-transform:uppercase;
-        color:rgba(255,255,255,.52);
-      }
-      .mobile-featured-quote-text{
-        font-family:Poppins,sans-serif;
-        font-size:clamp(28px,9.4vw,44px);
-        line-height:1.08;
-        letter-spacing:-.03em;
-        font-weight:800;
-        color:rgba(255,255,255,.96);
-      }
-      .mobile-featured-meta{
-        display:flex;
-        flex-wrap:wrap;
-        gap:6px 10px;
-        color:rgba(255,255,255,.64);
-        font-size:12px;
-        line-height:1.25;
-      }
-      .mobile-featured-meta a{color:rgba(255,255,255,.86);border-bottom:1px solid rgba(143,174,157,.32)}
-      .mobile-featured-controls{
-        display:grid;
-        grid-template-columns:44px 72px minmax(118px,1fr);
-        gap:9px;
-        align-items:start;
-      }
-      .mobile-featured-btn{
-        height:42px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        border-radius:15px;
-        background:rgba(255,255,255,.055);
-        border:1px solid rgba(255,255,255,.09);
-        font-family:Poppins,sans-serif;
-        font-weight:800;
-        color:rgba(255,255,255,.94);
-      }
-      .mobile-featured-btn.primary{
-        background:linear-gradient(180deg,rgba(143,174,157,.23),rgba(143,174,157,.11));
-        border-color:rgba(143,174,157,.26);
-      }
-      .mobile-featured-btn svg{width:16px;height:16px;fill:currentColor;display:block;}
-      .mobile-featured-episode-card{
-        display:block;
-        min-width:0;
-        border-radius:15px;
-        overflow:hidden;
-        background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
-        border:1px solid rgba(255,255,255,.10);
-        box-shadow:0 10px 22px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06);
-      }
-      .mobile-featured-episode-label{
-        height:42px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:8px;
-        padding:0 10px;
-        font-family:Poppins,sans-serif;
-        font-size:14px;
-        font-weight:800;
-        color:rgba(255,255,255,.96);
-        background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
-      }
-      .mobile-featured-episode-label svg{width:12px;height:12px;fill:currentColor;display:block;}
-      .mobile-featured-episode-card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:rgba(255,255,255,.04);}
-
-      /* Clear buttons inside search fields, and iOS no-zoom font sizes. */
-      .search-wrap{position:relative;display:block;min-width:0;flex:1 1 auto;}
-      .search-wrap > input{width:100%;padding-right:44px!important;font-size:16px!important;}
-      .search-clear-btn{
-        position:absolute;
-        top:50%;
-        right:10px;
-        transform:translateY(-50%);
-        width:28px;
-        height:28px;
-        border-radius:999px;
-        display:none;
-        align-items:center;
-        justify-content:center;
-        background:rgba(255,255,255,.07);
-        border:1px solid rgba(255,255,255,.08);
-        color:rgba(255,255,255,.72);
-        font-family:Poppins,sans-serif;
-        font-weight:800;
-        line-height:1;
-      }
-      .search-wrap.has-value .search-clear-btn{display:flex;}
-    }
-
-    @media (min-width:901px){
-      .search-wrap{position:relative;display:block;min-width:0;flex:1 1 auto;}
-      .search-wrap > input{width:100%;padding-right:42px!important;}
-      .search-clear-btn{position:absolute;top:50%;right:10px;transform:translateY(-50%);width:26px;height:26px;border-radius:999px;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.72);font-family:Poppins,sans-serif;font-weight:800;line-height:1;}
-      .search-wrap.has-value .search-clear-btn{display:flex;}
-    }
-  </style>
-
-  <script id="mobile-transcript-final-cleanup-script">
-    (function(){
-      const MOBILE_MQ = window.matchMedia('(max-width:900px)');
-      const playSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>';
-      const pauseSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg>';
-
-      function isMobile(){ return MOBILE_MQ.matches; }
-      function isRootCategoryView(){
-        try{ return isMobile() && !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey && !searchResultsMode(); }
-        catch(err){ return false; }
-      }
-      function currentMobileQuote(){
-        try{ return state.idleQuotes && state.idleQuotes.length ? state.idleQuotes[state.idleQuoteIndex] : null; }
-        catch(err){ return null; }
-      }
-      function mobileQuoteCardHtml(){
-        if(!isRootCategoryView()) return '';
-        const q = currentMobileQuote();
-        if(!q) return '';
-        const text = idleQuoteText(q);
-        if(!text) return '';
-        const scaleClass = text.length > 210 ? ' long' : text.length > 130 ? ' medium' : '';
-        const speaker = idleQuoteSpeaker(q);
-        const title = idleQuoteTitle(q);
-        const date = idleQuoteDate(q);
-        const start = idleQuoteStart(q);
-        const link = idleQuoteSiteDeepLink(q);
-        const episodeLink = idleQuoteEpisodeLink(q, false);
-        const episodeItem = idleQuoteEpisodeItem(q);
-        const art = episodeItem ? getEpisodeArt(episodeItem, 'video') : (q?.episode?.art || q?.art || ASSETS.fallback);
-        const pauseLabel = state.idleQuotePaused ? 'Resume' : 'Pause';
-        const icon = state.idleQuotePaused ? playSvg : pauseSvg;
-        return `<section class="mobile-featured-quotes${scaleClass}" data-mobile-featured-quotes="1">
-          <p class="mobile-featured-eyebrow">Featured Quotes</p>
-          <div class="mobile-featured-quote-text">${escapeHtml(text)}</div>
-          <div class="mobile-featured-meta">
-            ${speaker ? `<a href="${escapeHtml(link)}">${escapeHtml(speaker)}</a>` : ''}
-            ${title ? `<span>${escapeHtml(title)}</span>` : ''}
-            ${date ? `<span>${escapeHtml(formatDate({date:{iso:date,raw:date}}))}</span>` : ''}
-            <span>${escapeHtml(formatClock(start))}</span>
-          </div>
-          <div class="mobile-featured-controls">
-            <button type="button" class="mobile-featured-btn" data-mobile-quote-pause="1" aria-label="${escapeHtml(pauseLabel)}">${icon}</button>
-            <button type="button" class="mobile-featured-btn primary" data-mobile-quote-next="1">Next</button>
-            <a class="mobile-featured-episode-card" href="${escapeHtml(episodeLink)}" aria-label="Open full episode">
-              <span class="mobile-featured-episode-label">${playSvg}<span>Episode</span></span>
-              <img src="${escapeHtml(art || ASSETS.fallback)}" alt="">
-            </a>
-          </div>
-        </section>`;
-      }
-      function appendMobileQuoteCard(){
-        try{
-          if(!els.choiceList) return;
-          const old = els.choiceList.querySelector('[data-mobile-featured-quotes="1"]');
-          if(old) old.remove();
-          const html = mobileQuoteCardHtml();
-          if(!html) return;
-          els.choiceList.insertAdjacentHTML('beforeend', html);
-        }catch(err){ console.warn('Mobile featured quote card failed.', err); }
-      }
-
-      if(typeof renderChoices === 'function'){
-        const baseRenderChoices = renderChoices;
-        renderChoices = function(){
-          baseRenderChoices.apply(this, arguments);
-          appendMobileQuoteCard();
-        };
-      }
-      if(typeof renderIdleQuote === 'function'){
-        const baseRenderIdleQuote = renderIdleQuote;
-        renderIdleQuote = function(){
-          baseRenderIdleQuote.apply(this, arguments);
-          appendMobileQuoteCard();
-        };
-      }
-      if(typeof setIdleQuotePaused === 'function'){
-        const baseSetIdleQuotePaused = setIdleQuotePaused;
-        setIdleQuotePaused = function(value){
-          baseSetIdleQuotePaused.apply(this, arguments);
-          appendMobileQuoteCard();
-        };
-      }
-
-      document.addEventListener('click', function(event){
-        const pauseBtn = event.target.closest && event.target.closest('[data-mobile-quote-pause]');
-        if(pauseBtn){
-          event.preventDefault();
-          event.stopPropagation();
-          if(typeof setIdleQuotePaused === 'function') setIdleQuotePaused(!state.idleQuotePaused);
-          return;
-        }
-        const nextBtn = event.target.closest && event.target.closest('[data-mobile-quote-next]');
-        if(nextBtn){
-          event.preventDefault();
-          event.stopPropagation();
-          if(typeof nextIdleQuote === 'function') nextIdleQuote();
-          appendMobileQuoteCard();
-        }
-      }, true);
-
-      function wrapSearchInput(input){
-        if(!input || input.dataset.clearWrapped === 'true') return;
-        input.dataset.clearWrapped = 'true';
-        const wrap = document.createElement('span');
-        wrap.className = 'search-wrap';
-        input.parentNode.insertBefore(wrap, input);
-        wrap.appendChild(input);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'search-clear-btn';
-        btn.setAttribute('aria-label', 'Clear search');
-        btn.textContent = '×';
-        wrap.appendChild(btn);
-        function sync(){ wrap.classList.toggle('has-value', !!input.value); }
-        input.addEventListener('input', sync);
-        input.addEventListener('change', sync);
-        btn.addEventListener('click', function(ev){
-          ev.preventDefault();
-          input.value = '';
-          input.dispatchEvent(new Event('input', {bubbles:true}));
-          input.dispatchEvent(new Event('change', {bubbles:true}));
-          input.focus();
-          sync();
-        });
-        sync();
-      }
-      function setupSearchClears(){
-        wrapSearchInput(document.getElementById('searchInput'));
-        wrapSearchInput(document.getElementById('transcriptSearch'));
-      }
-      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupSearchClears);
-      else setupSearchClears();
-    })();
   </script>
 
   <script>
