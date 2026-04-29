@@ -1247,6 +1247,31 @@
       .episode .subtitle-badge svg{width:11px!important;height:11px!important;}
     }
 
+  
+/* === FINAL MICRO-POLISH: SPACING + SUBS BADGE + CALMER TRANSCRIPT MOTION === */
+@media (min-width:901px){
+  .content{gap:5px!important;}
+  .flow{gap:6px!important;}
+  .context-row{margin-bottom:0!important;padding-top:2px!important;padding-bottom:2px!important;}
+  .player{margin-top:0!important;margin-bottom:0!important;}
+  .transcript-panel{margin-top:5px!important;}
+  .episode.has-subs .thumb-wrap .subtitle-badge,
+  .episode .thumb-wrap .subtitle-badge{display:none!important;}
+  .episode .subtitle-badge{
+    position:absolute!important;
+    left:auto!important;right:92px!important;bottom:17px!important;top:auto!important;
+    min-height:20px!important;height:20px!important;
+    padding:0 7px!important;border-radius:999px!important;
+    font-size:8.5px!important;letter-spacing:.07em!important;
+    background:rgba(0,0,0,.48)!important;
+    border:1px solid rgba(255,255,255,.14)!important;
+    box-shadow:none!important;z-index:5!important;
+  }
+  .episode .subtitle-badge svg{width:10px!important;height:10px!important;margin-right:3px!important;}
+  .transcript-lines{padding-top:120px!important;padding-bottom:150px!important;}
+  .transcript-line{transition:opacity .22s ease,color .22s ease!important;}
+}
+
   </style>
 </head>
 <body class="mode-audio">
@@ -2225,9 +2250,9 @@
       const distance = end - start;
       if(Math.abs(distance) < 1.5) return;
       if(container.__transcriptScrollRaf) window.cancelAnimationFrame(container.__transcriptScrollRaf);
-      const duration = Math.min(720, Math.max(360, Math.abs(distance) * 1.15));
+      const duration = Math.min(980, Math.max(520, Math.abs(distance) * 1.75));
       const started = performance.now();
-      const ease = t => 1 - Math.pow(1 - t, 3);
+      const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
       const step = now => {
         const p = Math.min(1, (now - started) / duration);
         container.scrollTop = start + (distance * ease(p));
@@ -2244,17 +2269,22 @@
       const currentEl = container.querySelector('.transcript-line[data-index="'+current.index+'"]');
       if(!currentEl) return;
 
-      // Jitter-free follow logic:
-      // Earlier versions tried to move the scroll position on every animation frame
-      // based on the exact media currentTime. Browser media clocks wobble slightly,
-      // so the text visibly tugged up/down. This version only glides when the active
-      // transcript segment changes, then leaves the text still while the line is read.
-      if(container.__lastFollowIndex === current.index) return;
-      container.__lastFollowIndex = current.index;
+// Calm follow logic:
+// Keep the current line inside a generous reading band instead of forcing every
+// new caption to the exact same pixel. This dramatically reduces the amount of
+// motion while still keeping the spoken line easy to find.
+if(container.__lastFollowIndex === current.index) return;
+container.__lastFollowIndex = current.index;
 
-      const anchorY = container.clientHeight * 0.38;
-      const target = currentEl.offsetTop - anchorY;
-      animateTranscriptScrollTo(container, target);
+const currentTop = currentEl.offsetTop - container.scrollTop;
+const currentCenter = currentTop + (currentEl.offsetHeight / 2);
+const minY = container.clientHeight * 0.42;
+const maxY = container.clientHeight * 0.61;
+if(currentCenter >= minY && currentCenter <= maxY) return;
+
+const anchorY = container.clientHeight * 0.50;
+const target = currentEl.offsetTop - anchorY + (currentEl.offsetHeight / 2);
+animateTranscriptScrollTo(container, target);
     }
     function updateTranscriptActiveLine(time){
       if(!els.transcriptLines || !state.transcript.segments.length) return;
