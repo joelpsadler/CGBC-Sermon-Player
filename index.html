@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- mobile cleanup build: 2026-04-29 final-mobile-transcript-quotes-search -->
+  <!-- mobile cleanup build: 2026-04-29 mobile-quote-single-transcript-header-polish -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -1493,6 +1493,39 @@
       .mobile-featured-episode img{aspect-ratio:16/7!important;}
     }
 
+
+
+    /* === 2026-04-29 FINAL MOBILE FIX: single quote card + compact transcript header === */
+    @media (max-width:900px){
+      .mobile-featured-quote-card{display:none!important;}
+      [data-mobile-featured-quotes="1"] + [data-mobile-featured-quotes="1"]{display:none!important;}
+      .mobile-featured-quotes{margin:12px 0 10px!important;padding:12px 12px 13px!important;border-radius:22px!important;}
+      .mobile-featured-eyebrow{margin:0 0 6px!important;font-size:9px!important;letter-spacing:.16em!important;}
+      .mobile-featured-quote-text{font-size:clamp(19px,5.65vw,24px)!important;line-height:1.075!important;letter-spacing:-.035em!important;max-height:8.7em!important;}
+      .mobile-featured-quotes.medium .mobile-featured-quote-text,.mobile-featured-quotes.long .mobile-featured-quote-text{font-size:clamp(18px,5.25vw,22px)!important;line-height:1.08!important;}
+      .mobile-featured-meta{margin-top:7px!important;font-size:10.5px!important;line-height:1.16!important;gap:5px 8px!important;}
+      .mobile-featured-controls{grid-template-columns:34px 54px minmax(104px,132px)!important;gap:7px!important;margin-top:8px!important;align-items:start!important;}
+      .mobile-featured-btn{min-height:32px!important;border-radius:12px!important;font-size:12px!important;padding:0 8px!important;}
+      .mobile-featured-btn svg{width:12px!important;height:12px!important;}
+      .mobile-featured-episode-card{border-radius:12px!important;}
+      .mobile-featured-episode-label{height:27px!important;font-size:11px!important;gap:5px!important;}
+      .mobile-featured-episode-label svg{width:11px!important;height:11px!important;}
+      .mobile-featured-episode-card img{aspect-ratio:16/7.4!important;}
+      .episode .subtitle-badge.transcript-available-badge{right:98px!important;bottom:15px!important;width:28px!important;min-width:28px!important;height:25px!important;min-height:25px!important;padding:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;color:rgba(255,255,255,.98)!important;background:linear-gradient(180deg, rgba(143,174,157,.24), rgba(25,34,30,.78))!important;border-color:rgba(143,174,157,.32)!important;box-shadow:0 7px 16px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.10)!important;}
+      .episode .subtitle-badge.transcript-available-badge svg{width:14px!important;height:14px!important;}
+      .transcript-panel.is-visible{margin-top:3px!important;padding:10px 12px 12px!important;}
+      .transcript-head{position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr) 64px!important;grid-template-areas:"title hide" "tools tools"!important;gap:8px 10px!important;align-items:center!important;margin-bottom:7px!important;padding:0!important;}
+      .transcript-title-block{grid-area:title!important;display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important;width:auto!important;}
+      .transcript-art-mini{position:static!important;width:58px!important;min-width:58px!important;aspect-ratio:16/9!important;border-radius:9px!important;margin:0!important;order:0!important;}
+      .transcript-title-block .eyebrow{order:1!important;display:flex!important;align-items:center!important;gap:6px!important;margin:0!important;font-size:17px!important;line-height:1!important;letter-spacing:.13em!important;color:rgba(255,255,255,.94)!important;white-space:nowrap!important;}
+      .transcript-title-block .eyebrow::after{content:'⚙ Auto'!important;display:inline-flex!important;align-items:center!important;min-height:16px!important;padding:0 5px!important;border-radius:999px!important;font-family:Poppins,sans-serif!important;font-size:8px!important;line-height:1!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:rgba(255,255,255,.70)!important;background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.09)!important;}
+      .transcript-visibility-toggle{grid-area:hide!important;position:static!important;justify-self:end!important;width:62px!important;min-width:62px!important;height:34px!important;margin:0!important;border-radius:13px!important;font-size:12px!important;}
+      .transcript-tools{grid-area:tools!important;display:grid!important;grid-template-columns:76px minmax(0,1fr)!important;gap:8px!important;align-items:center!important;width:100%!important;padding:0!important;}
+      #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
+      .transcript-select{width:76px!important;min-width:0!important;height:34px!important;font-size:12px!important;padding:0 7px!important;}
+      .transcript-search{width:100%!important;min-width:0!important;height:34px!important;margin:0!important;font-size:16px!important;padding:0 34px 0 11px!important;}
+      .transcript-lines{margin-top:4px!important;}
+    }
   </style>
 </head>
 <body class="mode-audio">
@@ -3366,7 +3399,7 @@
       els.playerBtn.disabled = !hasPlayerTarget;
     }
     function shouldShowMobileFeaturedQuote(){
-      return isMobileViewport() && !searchResultsMode() && !state.nav.rootKey && !String(state.searchTerm || '').trim() && Array.isArray(state.idleQuotes) && state.idleQuotes.length > 0;
+      return false;
     }
     function mobileFeaturedQuoteText(q){ return String(q?.__curatedText || q?.approvedText || q?.displayText || q?.expandedText || q?.text || '').trim(); }
     function mobileFeaturedQuoteSpeaker(q){ return q?.episode?.speaker || q?.speaker || 'Pastor Jacob Lannom'; }
@@ -3541,8 +3574,7 @@
         </button>`;
       }).join('');
       if(mobileEpisodeToggleCard) els.choiceList.innerHTML = mobileEpisodeToggleCard + els.choiceList.innerHTML;
-      const mobileQuoteCard = renderMobileFeaturedQuoteCard();
-      if(mobileQuoteCard) els.choiceList.insertAdjacentHTML('beforeend', mobileQuoteCard);
+      // Mobile featured quotes are injected by the final compact quote module below.
     }
     function renderPlayer(){
       const item=state.currentItem;
@@ -4126,7 +4158,7 @@
 
 
   <style id="mobile-transcript-final-cleanup-style">
-    /* mobile cleanup build: 2026-04-29 final-mobile-transcript-quotes-search */
+    /* mobile cleanup build: 2026-04-29 mobile-quote-single-transcript-header-polish */
     @media (max-width:900px){
       /* Keep Listen/Watch from looking washed out after a selection. */
       .mode-btn .mode-btn-shell,
