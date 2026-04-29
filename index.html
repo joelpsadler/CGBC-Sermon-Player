@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- mobile cleanup build: 2026-04-29 final-polish-video-transcript-off-random-quotes -->
+  <!-- mobile cleanup build: 2026-04-29 final-mobile-transcript-quotes-search -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -1449,44 +1449,48 @@
       .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
     }
 
-    /* === FINAL POLISH: VIDEO TRANSCRIPT OFF + MOBILE TRANSCRIPT/QUOTE CLEANUP === */
-    body.mode-video .transcript-panel{display:none!important;}
+
+    /* === FINAL MOBILE/DESKTOP CLEANUP: transcript header, badge spacing, quotes restore === */
+    @media (min-width:901px){
+      body.mode-video .transcript-panel.is-audio-only-notice{display:block!important;margin-top:4px!important;padding:9px 14px!important;border-radius:16px!important;min-height:42px!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-head{display:flex!important;align-items:center!important;margin:0!important;padding:0!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-title-block,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-select,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-search,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-lines,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-visibility-toggle{display:none!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools{display:flex!important;width:100%!important;padding:0!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools::before{content:'Transcript available in Audio';font-family:Poppins,sans-serif;font-weight:800;font-size:14px;color:rgba(255,255,255,.76);line-height:24px;}
+    }
     @media (max-width:900px){
-      .mode-btn .mode-btn-shell,.mode-btn.active .mode-btn-shell{color:rgba(255,255,255,.98)!important;}
-      .mode-btn .mode-icon,.mode-btn.active .mode-icon{stroke:rgba(255,255,255,.98)!important;opacity:1!important;}
-      .mode-btn .btn-copy .top,.mode-btn.active .btn-copy .top{color:rgba(255,255,255,.98)!important;}
-      .mode-btn .btn-copy .bottom,.mode-btn.active .btn-copy .bottom{color:rgba(255,255,255,.78)!important;}
-      #mobilePlayerAnchor .transcript-panel,.player + .transcript-panel{margin-top:4px!important;margin-bottom:10px!important;}
-      .transcript-panel{padding:10px 10px 12px!important;}
-      .transcript-head{position:relative!important;display:grid!important;grid-template-columns:54px minmax(0,1fr) 44px!important;grid-template-rows:auto auto!important;align-items:center!important;gap:7px 9px!important;margin:0 0 7px!important;padding:0!important;}
-      .transcript-title-block{grid-column:1 / 3!important;grid-row:1!important;width:auto!important;min-width:0!important;display:grid!important;grid-template-columns:54px minmax(0,1fr)!important;align-items:center!important;column-gap:9px!important;}
-      .transcript-art-mini{position:static!important;grid-column:1!important;width:54px!important;aspect-ratio:16/9!important;margin:0!important;border-radius:9px!important;}
-      .transcript-title-block .eyebrow{grid-column:2!important;margin:0!important;display:flex!important;align-items:center!important;gap:7px!important;font-family:Poppins,sans-serif!important;font-size:17px!important;line-height:1!important;letter-spacing:.14em!important;color:rgba(255,255,255,.92)!important;}
-      .transcript-title-block .eyebrow::after{content:'⚙ Auto';display:inline-flex;align-items:center;justify-content:center;min-height:17px;padding:0 6px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.66);}
-      .transcript-visibility-toggle{position:absolute!important;top:0!important;right:0!important;width:44px!important;height:31px!important;min-width:44px!important;padding:0!important;border-radius:12px!important;font-size:11px!important;z-index:3!important;}
-      .transcript-tools{grid-column:1 / -1!important;grid-row:2!important;display:grid!important;grid-template-columns:82px minmax(0,1fr)!important;align-items:center!important;gap:7px!important;padding:0!important;justify-content:stretch!important;}
-      .transcript-select{width:82px!important;min-width:0!important;height:36px!important;padding:0 8px!important;font-size:13px!important;}
-      .transcript-search,.transcript-search-wrap{width:100%!important;min-width:0!important;margin:0!important;}
-      .transcript-search{height:36px!important;font-size:16px!important;padding:0 32px 0 11px!important;}
+      body.mode-video .transcript-panel{display:none!important;}
+      #mobilePlayerAnchor #playerShell.player{margin-bottom:4px!important;}
+      #mobilePlayerAnchor #playerShell.player + .transcript-panel{margin-top:4px!important;}
+      .content{gap:6px!important;}
+      .transcript-panel.is-visible{margin-top:4px!important;margin-bottom:10px!important;}
+      .transcript-panel{padding:9px 10px 11px!important;}
+      .transcript-head{grid-template-columns:54px minmax(0,1fr) 56px!important;gap:7px 8px!important;margin-bottom:6px!important;align-items:center!important;}
+      .transcript-title-block{grid-column:1 / 3!important;grid-template-columns:54px minmax(0,1fr)!important;}
+      .transcript-title-block .eyebrow{font-size:17px!important;letter-spacing:.13em!important;white-space:nowrap!important;}
+      .transcript-title-block .eyebrow::after{content:'⚙ Auto'!important;font-size:8px!important;min-height:16px!important;padding:0 5px!important;letter-spacing:.06em!important;}
+      .transcript-visibility-toggle{top:0!important;right:0!important;width:56px!important;min-width:56px!important;height:33px!important;font-size:12px!important;border-radius:13px!important;}
+      .transcript-tools{grid-template-columns:74px minmax(0,1fr)!important;gap:7px!important;width:100%!important;}
+      .transcript-select{width:74px!important;height:35px!important;font-size:12px!important;padding:0 6px!important;}
+      .transcript-search{height:35px!important;font-size:16px!important;width:100%!important;min-width:0!important;padding-left:10px!important;}
       #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
       .transcript-lines{margin-top:4px!important;}
-      .transcript-empty::after{content:'Auto transcripts are not human verified and are provided as a tool only.';display:block;margin-top:12px;font-size:11px;line-height:1.35;color:rgba(255,255,255,.44);}
-      .transcript-panel:not(.is-collapsed) .transcript-lines::after{content:'Auto transcripts are not human verified and are provided as a tool only.';display:block;padding:14px 16px 6px;font-size:11px;line-height:1.35;color:rgba(255,255,255,.42);}
-      .episode .subtitle-badge.transcript-available-badge{right:112px!important;bottom:16px!important;width:28px!important;min-width:28px!important;height:24px!important;min-height:24px!important;border-radius:999px!important;color:rgba(255,255,255,.96)!important;background:linear-gradient(180deg, rgba(143,174,157,.22), rgba(30,42,36,.78))!important;border:1px solid rgba(143,174,157,.28)!important;box-shadow:0 6px 14px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.10)!important;}
-      .episode .subtitle-badge.transcript-available-badge svg{width:14px!important;height:14px!important;stroke:rgba(255,255,255,.98)!important;}
+      .episode .subtitle-badge.transcript-available-badge{right:124px!important;bottom:16px!important;width:28px!important;min-width:28px!important;height:24px!important;min-height:24px!important;color:rgba(255,255,255,.98)!important;background:linear-gradient(180deg, rgba(143,174,157,.26), rgba(30,42,36,.82))!important;border-color:rgba(143,174,157,.34)!important;}
       .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
-      .mobile-featured-quote-card{width:100%;margin:4px 0 10px;padding:14px;border-radius:22px;background:linear-gradient(180deg,rgba(18,18,19,.88),rgba(10,10,11,.78));border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 26px rgba(0,0,0,.16);overflow:hidden;}
-      .mobile-featured-kicker{margin:0 0 7px;font-family:Poppins,sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.50);}
-      .mobile-featured-text{margin:0;font-family:Poppins,sans-serif;font-size:clamp(25px,8.2vw,34px);line-height:1.08;letter-spacing:-.035em;font-weight:800;color:rgba(255,255,255,.96);max-height:8.65em;overflow:hidden;}
-      .mobile-featured-meta{display:grid;gap:2px;margin-top:10px;color:rgba(255,255,255,.62);font-size:12px;line-height:1.25;}
-      .mobile-featured-actions{display:grid;grid-template-columns:44px 72px minmax(116px,1fr);gap:8px;align-items:start;margin-top:10px;}
-      .mobile-featured-btn{min-height:38px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);font-family:Poppins,sans-serif;font-size:13px;font-weight:800;color:rgba(255,255,255,.94);}
-      .mobile-featured-btn.primary{background:linear-gradient(180deg,rgba(143,174,157,.22),rgba(143,174,157,.10));border-color:rgba(143,174,157,.24);}
-      .mobile-featured-btn svg{width:14px;height:14px;display:block;fill:currentColor;}
-      .mobile-featured-episode{display:block;min-width:0;border-radius:13px;overflow:hidden;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);color:rgba(255,255,255,.95);text-align:center;font-family:Poppins,sans-serif;font-weight:800;}
-      .mobile-featured-episode-label{height:34px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));}
-      .mobile-featured-episode-label svg{width:10px;height:10px;fill:currentColor;}
-      .mobile-featured-episode img{width:100%;aspect-ratio:16/7.5;object-fit:cover;background:rgba(255,255,255,.035);}
+      .mobile-featured-quote-card{display:block!important;width:100%!important;margin:12px 0 8px!important;padding:12px!important;border-radius:22px!important;min-height:0!important;}
+      .mobile-featured-kicker{margin:0 0 4px!important;font-size:9px!important;letter-spacing:.14em!important;}
+      .mobile-featured-text{font-size:clamp(21px,6.7vw,28px)!important;line-height:1.06!important;max-height:7.5em!important;margin-top:0!important;}
+      .mobile-featured-meta{margin-top:8px!important;font-size:11px!important;line-height:1.18!important;}
+      .mobile-featured-actions{grid-template-columns:36px 58px minmax(98px,1fr)!important;gap:7px!important;margin-top:8px!important;align-items:start!important;}
+      .mobile-featured-btn{min-height:33px!important;border-radius:12px!important;font-size:12px!important;padding:0 8px!important;}
+      .mobile-featured-pause svg{width:12px!important;height:12px!important;}
+      .mobile-featured-episode{border-radius:12px!important;}
+      .mobile-featured-episode-label{height:29px!important;font-size:11px!important;gap:5px!important;}
+      .mobile-featured-episode img{aspect-ratio:16/7!important;}
     }
 
   </style>
@@ -2400,7 +2404,21 @@
         if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
         return;
       }
-      const videoSearchOnly = state.mode === 'video' && !isMobileViewport();
+      if(state.mode === 'video'){
+        if(isMobileViewport()){
+          els.transcriptPanel.classList.remove('is-visible','is-video-search-only','is-collapsed','is-audio-only-notice');
+          if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
+          return;
+        }
+        positionTranscriptPanel();
+        els.transcriptPanel.classList.add('is-visible','is-collapsed','is-audio-only-notice');
+        els.transcriptPanel.classList.remove('is-video-search-only');
+        if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.style.display = 'none';
+        if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
+        return;
+      }
+      if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.style.display = '';
+      const videoSearchOnly = false;
       if(isMobileViewport()){
         try{
           const storedMobile = window.localStorage.getItem(TRANSCRIPT_MOBILE_VISIBILITY_KEY);
@@ -3347,6 +3365,43 @@
       els.playerBtn.style.display = 'inline-flex';
       els.playerBtn.disabled = !hasPlayerTarget;
     }
+    function shouldShowMobileFeaturedQuote(){
+      return isMobileViewport() && !searchResultsMode() && !state.nav.rootKey && !String(state.searchTerm || '').trim() && Array.isArray(state.idleQuotes) && state.idleQuotes.length > 0;
+    }
+    function mobileFeaturedQuoteText(q){ return String(q?.__curatedText || q?.approvedText || q?.displayText || q?.expandedText || q?.text || '').trim(); }
+    function mobileFeaturedQuoteSpeaker(q){ return q?.episode?.speaker || q?.speaker || 'Pastor Jacob Lannom'; }
+    function mobileFeaturedQuoteTitle(q){ return q?.episode?.title || q?.episode?.episodeName || q?.episodeTitle || 'Episode'; }
+    function mobileFeaturedQuoteDate(q){ return q?.episode?.date || q?.date || ''; }
+    function mobileFeaturedQuoteStart(q){ return Number(q?.media?.start ?? q?.start ?? 0) || 0; }
+    function mobileFeaturedQuoteArt(q){
+      const item = idleQuoteEpisodeItem(q);
+      return (item ? getEpisodeArt(item, 'video') : '') || q?.episode?.art?.wide || q?.art?.wide || q?.thumbnail || ASSETS.fallback;
+    }
+    function renderMobileFeaturedQuoteCard(){
+      if(!els.choiceList) return '';
+      if(!shouldShowMobileFeaturedQuote()) return '';
+      const q = state.idleQuotes[state.idleQuoteIndex % state.idleQuotes.length] || state.idleQuotes[Math.floor(Math.random() * state.idleQuotes.length)];
+      const text = mobileFeaturedQuoteText(q);
+      if(!text) return '';
+      const href = idleQuoteEpisodeLink(q, false);
+      const art = mobileFeaturedQuoteArt(q);
+      const date = mobileFeaturedQuoteDate(q);
+      const start = mobileFeaturedQuoteStart(q);
+      return `<div class="mobile-featured-quote-card" id="mobileFeaturedQuoteCard" aria-live="polite">
+        <div class="mobile-featured-kicker">Featured Quotes</div>
+        <p class="mobile-featured-text">${escapeHtml(text)}</p>
+        <div class="mobile-featured-meta">
+          <span>${escapeHtml(mobileFeaturedQuoteSpeaker(q))}</span>
+          <span>${escapeHtml(mobileFeaturedQuoteTitle(q))}${date ? ' • '+escapeHtml(formatDate({date:{iso:date,raw:date}})) : ''}${start ? ' • '+escapeHtml(formatClock(start)) : ''}</span>
+        </div>
+        <div class="mobile-featured-actions">
+          <button class="mobile-featured-btn mobile-featured-pause" type="button" data-mobile-quote-pause aria-label="Pause featured quotes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg></button>
+          <button class="mobile-featured-btn primary" type="button" data-mobile-quote-next>Next</button>
+          <a class="mobile-featured-episode" href="${escapeHtml(href)}"><span class="mobile-featured-episode-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg> Episode</span>${art ? `<img src="${escapeHtml(art)}" alt="">` : ''}</a>
+        </div>
+      </div>`;
+    }
+
         function renderChoices(){
       els.navHeading.textContent = searchResultsMode() ? 'Search Results' : headingText();
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
@@ -3486,6 +3541,8 @@
         </button>`;
       }).join('');
       if(mobileEpisodeToggleCard) els.choiceList.innerHTML = mobileEpisodeToggleCard + els.choiceList.innerHTML;
+      const mobileQuoteCard = renderMobileFeaturedQuoteCard();
+      if(mobileQuoteCard) els.choiceList.insertAdjacentHTML('beforeend', mobileQuoteCard);
     }
     function renderPlayer(){
       const item=state.currentItem;
@@ -3992,6 +4049,16 @@
       if(els.idleQuotePauseBtn) els.idleQuotePauseBtn.addEventListener('click', ()=>setIdleQuotePaused(!state.idleQuotePaused));
       if(els.idleQuoteNextBtn) els.idleQuoteNextBtn.addEventListener('click', nextIdleQuote);
       if(els.idleQuoteCopyBtn) els.idleQuoteCopyBtn.addEventListener('click', async ()=>{ const q=state.idleQuotes[state.idleQuoteIndex]; if(!q) return; try{ await navigator.clipboard.writeText(idleQuoteCopy(q)); alert('Quote copied.'); }catch(err){} });
+      document.addEventListener('click', (event)=>{
+        if(event.target.closest('[data-mobile-quote-next]')){
+          event.preventDefault();
+          if(state.idleQuotes.length){ state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length); renderIdleQuote(); renderChoices(); }
+        }
+        if(event.target.closest('[data-mobile-quote-pause]')){
+          event.preventDefault();
+          setIdleQuotePaused(!state.idleQuotePaused);
+        }
+      });
       if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{ state.transcript.language=els.transcriptLanguage.value; state.transcript.segments=[]; state.transcript.activeIndex=-1; await renderTranscriptPanel(); });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
       if(els.transcriptReadBtn) els.transcriptReadBtn.addEventListener('click', ()=>{ state.transcript.mode='read'; renderTranscriptPanel(); });
@@ -4029,6 +4096,12 @@
       prepareSearchIndexes(state.items);
       rerender();
       loadIdleQuotes();
+      window.setInterval(()=>{
+        if(shouldShowMobileFeaturedQuote() && !state.idleQuotePaused){
+          state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length);
+          renderChoices();
+        }
+      }, 12000);
       applyDeepLinkFromUrl();
       try{
         const [livestreams, shorts, guestSpeakers] = await Promise.all([
@@ -4051,6 +4124,418 @@
     });
   </script>
 
+
+  <style id="mobile-transcript-final-cleanup-style">
+    /* mobile cleanup build: 2026-04-29 final-mobile-transcript-quotes-search */
+    @media (max-width:900px){
+      /* Keep Listen/Watch from looking washed out after a selection. */
+      .mode-btn .mode-btn-shell,
+      .mode-btn:not(.active) .mode-btn-shell,
+      .mode-btn.active .mode-btn-shell{
+        color:rgba(255,255,255,.98)!important;
+        border-color:rgba(255,255,255,.12)!important;
+        background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.028))!important;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 22px rgba(0,0,0,.18)!important;
+        opacity:1!important;
+      }
+      .mode-btn.active .mode-btn-shell{
+        background:linear-gradient(180deg, rgba(143,174,157,.25), rgba(143,174,157,.13))!important;
+        border-color:rgba(143,174,157,.30)!important;
+      }
+      .mode-btn .btn-copy .top,
+      .mode-btn .btn-copy .bottom,
+      .mode-btn .mode-icon{opacity:1!important;color:rgba(255,255,255,.96)!important;stroke:rgba(255,255,255,.96)!important;}
+
+      /* Transcript badge: visible but not over the art. */
+      .episode .subtitle-badge.transcript-available-badge{
+        right:88px!important;
+        bottom:10px!important;
+        min-width:29px!important;
+        height:28px!important;
+        padding:0 8px!important;
+        border-radius:999px!important;
+        background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.055))!important;
+        border:1px solid rgba(255,255,255,.17)!important;
+        box-shadow:0 8px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.11)!important;
+        color:rgba(255,255,255,.96)!important;
+        opacity:1!important;
+      }
+      .episode .subtitle-badge.transcript-available-badge svg{width:15px!important;height:15px!important;stroke:currentColor!important;fill:none!important;stroke-width:1.9!important;}
+
+      /* Mobile transcript panel: attached to the player and less crowded. */
+      .transcript-panel.is-visible{
+        margin:6px 0 10px!important;
+        padding:10px 12px 12px!important;
+      }
+      .transcript-panel.is-collapsed{
+        margin:6px 0 10px!important;
+        padding:10px 12px!important;
+        border-radius:20px!important;
+      }
+      .transcript-head{
+        position:relative!important;
+        display:grid!important;
+        grid-template-columns:1fr!important;
+        gap:8px!important;
+        margin:0!important;
+        padding:0!important;
+      }
+      .transcript-title-block{
+        display:flex!important;
+        align-items:center!important;
+        gap:10px!important;
+        padding-right:70px!important;
+        min-height:42px!important;
+      }
+      .transcript-title-block .eyebrow{
+        font-size:18px!important;
+        letter-spacing:.12em!important;
+        color:rgba(255,255,255,.90)!important;
+      }
+      .transcript-art-mini{
+        width:70px!important;
+        flex:0 0 70px!important;
+        border-radius:10px!important;
+      }
+      .transcript-tools{
+        display:grid!important;
+        grid-template-columns:104px minmax(0,1fr)!important;
+        gap:8px!important;
+        align-items:center!important;
+        width:100%!important;
+        padding:0!important;
+      }
+      #transcriptFollowBtn,
+      #transcriptReadBtn{display:none!important;}
+      .transcript-select{
+        width:104px!important;
+        min-width:0!important;
+        height:38px!important;
+        font-size:16px!important;
+      }
+      .transcript-search{
+        grid-column:auto!important;
+        width:100%!important;
+        min-width:0!important;
+        height:38px!important;
+        margin:0!important;
+        font-size:16px!important;
+      }
+      .transcript-visibility-toggle{
+        position:absolute!important;
+        top:0!important;
+        right:0!important;
+        width:auto!important;
+        min-width:58px!important;
+        height:36px!important;
+        padding:0 13px!important;
+        margin:0!important;
+        grid-column:auto!important;
+        z-index:3!important;
+      }
+      .transcript-lines{
+        margin-top:8px!important;
+        max-height:40vh!important;
+        min-height:205px!important;
+        padding-top:86px!important;
+      }
+
+      /* Mobile featured quote card: only appears on top category screens. */
+      .mobile-featured-quotes{
+        display:grid;
+        gap:12px;
+        margin-top:12px;
+        padding:18px 16px 18px;
+        border-radius:22px;
+        background:linear-gradient(180deg, rgba(17,17,18,.92), rgba(10,10,11,.86));
+        border:1px solid rgba(255,255,255,.08);
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 14px 30px rgba(0,0,0,.16);
+      }
+      .mobile-featured-eyebrow{
+        margin:0;
+        font-family:Poppins,sans-serif;
+        font-size:12px;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+        color:rgba(255,255,255,.52);
+      }
+      .mobile-featured-quote-text{
+        font-family:Poppins,sans-serif;
+        font-size:clamp(28px,9.4vw,44px);
+        line-height:1.08;
+        letter-spacing:-.03em;
+        font-weight:800;
+        color:rgba(255,255,255,.96);
+      }
+      .mobile-featured-meta{
+        display:flex;
+        flex-wrap:wrap;
+        gap:6px 10px;
+        color:rgba(255,255,255,.64);
+        font-size:12px;
+        line-height:1.25;
+      }
+      .mobile-featured-meta a{color:rgba(255,255,255,.86);border-bottom:1px solid rgba(143,174,157,.32)}
+      .mobile-featured-controls{
+        display:grid;
+        grid-template-columns:44px 72px minmax(118px,1fr);
+        gap:9px;
+        align-items:start;
+      }
+      .mobile-featured-btn{
+        height:42px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:15px;
+        background:rgba(255,255,255,.055);
+        border:1px solid rgba(255,255,255,.09);
+        font-family:Poppins,sans-serif;
+        font-weight:800;
+        color:rgba(255,255,255,.94);
+      }
+      .mobile-featured-btn.primary{
+        background:linear-gradient(180deg,rgba(143,174,157,.23),rgba(143,174,157,.11));
+        border-color:rgba(143,174,157,.26);
+      }
+      .mobile-featured-btn svg{width:16px;height:16px;fill:currentColor;display:block;}
+      .mobile-featured-episode-card{
+        display:block;
+        min-width:0;
+        border-radius:15px;
+        overflow:hidden;
+        background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
+        border:1px solid rgba(255,255,255,.10);
+        box-shadow:0 10px 22px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06);
+      }
+      .mobile-featured-episode-label{
+        height:42px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        padding:0 10px;
+        font-family:Poppins,sans-serif;
+        font-size:14px;
+        font-weight:800;
+        color:rgba(255,255,255,.96);
+        background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
+      }
+      .mobile-featured-episode-label svg{width:12px;height:12px;fill:currentColor;display:block;}
+      .mobile-featured-episode-card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:rgba(255,255,255,.04);}
+
+      /* Clear buttons inside search fields, and iOS no-zoom font sizes. */
+      .search-wrap{position:relative;display:block;min-width:0;flex:1 1 auto;}
+      .search-wrap > input{width:100%;padding-right:44px!important;font-size:16px!important;}
+      .search-clear-btn{
+        position:absolute;
+        top:50%;
+        right:10px;
+        transform:translateY(-50%);
+        width:28px;
+        height:28px;
+        border-radius:999px;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        background:rgba(255,255,255,.07);
+        border:1px solid rgba(255,255,255,.08);
+        color:rgba(255,255,255,.72);
+        font-family:Poppins,sans-serif;
+        font-weight:800;
+        line-height:1;
+      }
+      .search-wrap.has-value .search-clear-btn{display:flex;}
+    }
+
+    @media (min-width:901px){
+      .search-wrap{position:relative;display:block;min-width:0;flex:1 1 auto;}
+      .search-wrap > input{width:100%;padding-right:42px!important;}
+      .search-clear-btn{position:absolute;top:50%;right:10px;transform:translateY(-50%);width:26px;height:26px;border-radius:999px;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.72);font-family:Poppins,sans-serif;font-weight:800;line-height:1;}
+      .search-wrap.has-value .search-clear-btn{display:flex;}
+    }
+
+    /* === FINAL MOBILE/DESKTOP CLEANUP: transcript header, badge spacing, quotes restore === */
+    @media (min-width:901px){
+      body.mode-video .transcript-panel.is-audio-only-notice{display:block!important;margin-top:4px!important;padding:9px 14px!important;border-radius:16px!important;min-height:42px!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-head{display:flex!important;align-items:center!important;margin:0!important;padding:0!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-title-block,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-select,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-search,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-lines,
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-visibility-toggle{display:none!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools{display:flex!important;width:100%!important;padding:0!important;}
+      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools::before{content:'Transcript available in Audio';font-family:Poppins,sans-serif;font-weight:800;font-size:14px;color:rgba(255,255,255,.76);line-height:24px;}
+    }
+    @media (max-width:900px){
+      body.mode-video .transcript-panel{display:none!important;}
+      #mobilePlayerAnchor #playerShell.player{margin-bottom:4px!important;}
+      #mobilePlayerAnchor #playerShell.player + .transcript-panel{margin-top:4px!important;}
+      .content{gap:6px!important;}
+      .transcript-panel.is-visible{margin-top:4px!important;margin-bottom:10px!important;}
+      .transcript-panel{padding:9px 10px 11px!important;}
+      .transcript-head{grid-template-columns:54px minmax(0,1fr) 56px!important;gap:7px 8px!important;margin-bottom:6px!important;align-items:center!important;}
+      .transcript-title-block{grid-column:1 / 3!important;grid-template-columns:54px minmax(0,1fr)!important;}
+      .transcript-title-block .eyebrow{font-size:17px!important;letter-spacing:.13em!important;white-space:nowrap!important;}
+      .transcript-title-block .eyebrow::after{content:'⚙ Auto'!important;font-size:8px!important;min-height:16px!important;padding:0 5px!important;letter-spacing:.06em!important;}
+      .transcript-visibility-toggle{top:0!important;right:0!important;width:56px!important;min-width:56px!important;height:33px!important;font-size:12px!important;border-radius:13px!important;}
+      .transcript-tools{grid-template-columns:74px minmax(0,1fr)!important;gap:7px!important;width:100%!important;}
+      .transcript-select{width:74px!important;height:35px!important;font-size:12px!important;padding:0 6px!important;}
+      .transcript-search{height:35px!important;font-size:16px!important;width:100%!important;min-width:0!important;padding-left:10px!important;}
+      #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
+      .transcript-lines{margin-top:4px!important;}
+      .episode .subtitle-badge.transcript-available-badge{right:124px!important;bottom:16px!important;width:28px!important;min-width:28px!important;height:24px!important;min-height:24px!important;color:rgba(255,255,255,.98)!important;background:linear-gradient(180deg, rgba(143,174,157,.26), rgba(30,42,36,.82))!important;border-color:rgba(143,174,157,.34)!important;}
+      .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
+      .mobile-featured-quote-card{display:block!important;width:100%!important;margin:12px 0 8px!important;padding:12px!important;border-radius:22px!important;min-height:0!important;}
+      .mobile-featured-kicker{margin:0 0 4px!important;font-size:9px!important;letter-spacing:.14em!important;}
+      .mobile-featured-text{font-size:clamp(21px,6.7vw,28px)!important;line-height:1.06!important;max-height:7.5em!important;margin-top:0!important;}
+      .mobile-featured-meta{margin-top:8px!important;font-size:11px!important;line-height:1.18!important;}
+      .mobile-featured-actions{grid-template-columns:36px 58px minmax(98px,1fr)!important;gap:7px!important;margin-top:8px!important;align-items:start!important;}
+      .mobile-featured-btn{min-height:33px!important;border-radius:12px!important;font-size:12px!important;padding:0 8px!important;}
+      .mobile-featured-pause svg{width:12px!important;height:12px!important;}
+      .mobile-featured-episode{border-radius:12px!important;}
+      .mobile-featured-episode-label{height:29px!important;font-size:11px!important;gap:5px!important;}
+      .mobile-featured-episode img{aspect-ratio:16/7!important;}
+    }
+
+  </style>
+
+  <script id="mobile-transcript-final-cleanup-script">
+    (function(){
+      const MOBILE_MQ = window.matchMedia('(max-width:900px)');
+      const playSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>';
+      const pauseSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg>';
+
+      function isMobile(){ return MOBILE_MQ.matches; }
+      function isRootCategoryView(){
+        try{ return isMobile() && !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey && !searchResultsMode(); }
+        catch(err){ return false; }
+      }
+      function currentMobileQuote(){
+        try{ return state.idleQuotes && state.idleQuotes.length ? state.idleQuotes[state.idleQuoteIndex] : null; }
+        catch(err){ return null; }
+      }
+      function mobileQuoteCardHtml(){
+        if(!isRootCategoryView()) return '';
+        const q = currentMobileQuote();
+        if(!q) return '';
+        const text = idleQuoteText(q);
+        if(!text) return '';
+        const scaleClass = text.length > 210 ? ' long' : text.length > 130 ? ' medium' : '';
+        const speaker = idleQuoteSpeaker(q);
+        const title = idleQuoteTitle(q);
+        const date = idleQuoteDate(q);
+        const start = idleQuoteStart(q);
+        const link = idleQuoteSiteDeepLink(q);
+        const episodeLink = idleQuoteEpisodeLink(q, false);
+        const episodeItem = idleQuoteEpisodeItem(q);
+        const art = episodeItem ? getEpisodeArt(episodeItem, 'video') : (q?.episode?.art || q?.art || ASSETS.fallback);
+        const pauseLabel = state.idleQuotePaused ? 'Resume' : 'Pause';
+        const icon = state.idleQuotePaused ? playSvg : pauseSvg;
+        return `<section class="mobile-featured-quotes${scaleClass}" data-mobile-featured-quotes="1">
+          <p class="mobile-featured-eyebrow">Featured Quotes</p>
+          <div class="mobile-featured-quote-text">${escapeHtml(text)}</div>
+          <div class="mobile-featured-meta">
+            ${speaker ? `<a href="${escapeHtml(link)}">${escapeHtml(speaker)}</a>` : ''}
+            ${title ? `<span>${escapeHtml(title)}</span>` : ''}
+            ${date ? `<span>${escapeHtml(formatDate({date:{iso:date,raw:date}}))}</span>` : ''}
+            <span>${escapeHtml(formatClock(start))}</span>
+          </div>
+          <div class="mobile-featured-controls">
+            <button type="button" class="mobile-featured-btn" data-mobile-quote-pause="1" aria-label="${escapeHtml(pauseLabel)}">${icon}</button>
+            <button type="button" class="mobile-featured-btn primary" data-mobile-quote-next="1">Next</button>
+            <a class="mobile-featured-episode-card" href="${escapeHtml(episodeLink)}" aria-label="Open full episode">
+              <span class="mobile-featured-episode-label">${playSvg}<span>Episode</span></span>
+              <img src="${escapeHtml(art || ASSETS.fallback)}" alt="">
+            </a>
+          </div>
+        </section>`;
+      }
+      function appendMobileQuoteCard(){
+        try{
+          if(!els.choiceList) return;
+          const old = els.choiceList.querySelector('[data-mobile-featured-quotes="1"]');
+          if(old) old.remove();
+          const html = mobileQuoteCardHtml();
+          if(!html) return;
+          els.choiceList.insertAdjacentHTML('beforeend', html);
+        }catch(err){ console.warn('Mobile featured quote card failed.', err); }
+      }
+
+      if(typeof renderChoices === 'function'){
+        const baseRenderChoices = renderChoices;
+        renderChoices = function(){
+          baseRenderChoices.apply(this, arguments);
+          appendMobileQuoteCard();
+        };
+      }
+      if(typeof renderIdleQuote === 'function'){
+        const baseRenderIdleQuote = renderIdleQuote;
+        renderIdleQuote = function(){
+          baseRenderIdleQuote.apply(this, arguments);
+          appendMobileQuoteCard();
+        };
+      }
+      if(typeof setIdleQuotePaused === 'function'){
+        const baseSetIdleQuotePaused = setIdleQuotePaused;
+        setIdleQuotePaused = function(value){
+          baseSetIdleQuotePaused.apply(this, arguments);
+          appendMobileQuoteCard();
+        };
+      }
+
+      document.addEventListener('click', function(event){
+        const pauseBtn = event.target.closest && event.target.closest('[data-mobile-quote-pause]');
+        if(pauseBtn){
+          event.preventDefault();
+          event.stopPropagation();
+          if(typeof setIdleQuotePaused === 'function') setIdleQuotePaused(!state.idleQuotePaused);
+          return;
+        }
+        const nextBtn = event.target.closest && event.target.closest('[data-mobile-quote-next]');
+        if(nextBtn){
+          event.preventDefault();
+          event.stopPropagation();
+          if(typeof nextIdleQuote === 'function') nextIdleQuote();
+          appendMobileQuoteCard();
+        }
+      }, true);
+
+      function wrapSearchInput(input){
+        if(!input || input.dataset.clearWrapped === 'true') return;
+        input.dataset.clearWrapped = 'true';
+        const wrap = document.createElement('span');
+        wrap.className = 'search-wrap';
+        input.parentNode.insertBefore(wrap, input);
+        wrap.appendChild(input);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'search-clear-btn';
+        btn.setAttribute('aria-label', 'Clear search');
+        btn.textContent = '×';
+        wrap.appendChild(btn);
+        function sync(){ wrap.classList.toggle('has-value', !!input.value); }
+        input.addEventListener('input', sync);
+        input.addEventListener('change', sync);
+        btn.addEventListener('click', function(ev){
+          ev.preventDefault();
+          input.value = '';
+          input.dispatchEvent(new Event('input', {bubbles:true}));
+          input.dispatchEvent(new Event('change', {bubbles:true}));
+          input.focus();
+          sync();
+        });
+        sync();
+      }
+      function setupSearchClears(){
+        wrapSearchInput(document.getElementById('searchInput'));
+        wrapSearchInput(document.getElementById('transcriptSearch'));
+      }
+      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupSearchClears);
+      else setupSearchClears();
+    })();
+  </script>
+
   <script>
     (function setupQuoteReviewPageShortcut(){
       const logo = document.getElementById('logoReset');
@@ -4065,109 +4550,6 @@
         timer = setTimeout(function(){ clicks = 0; }, 900);
         if(clicks >= 3){ clicks = 0; window.location.href = 'quote-review.html'; }
       });
-    })();
-  </script>
-
-  <script>
-    (function finalMobileTranscriptAndQuotePolish(){
-      function isPhone(){ return window.matchMedia && window.matchMedia('(max-width:900px)').matches; }
-      function safe(fn){ try{return fn();}catch(err){return undefined;} }
-      function shuffleInPlace(arr){ for(let i=arr.length-1;i>0;i-=1){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
-      const originalLoadIdleQuotes = window.loadIdleQuotes;
-      if(typeof originalLoadIdleQuotes === 'function'){
-        window.loadIdleQuotes = async function(){ await originalLoadIdleQuotes.apply(this, arguments); if(Array.isArray(window.state?.idleQuotes) && window.state.idleQuotes.length){ shuffleInPlace(window.state.idleQuotes); window.state.idleQuoteIndex = Math.floor(Math.random() * window.state.idleQuotes.length); if(typeof window.renderIdleQuote === 'function') window.renderIdleQuote(); } renderMobileFeaturedQuote(); startMobileQuoteCycle(); };
-      }
-      const originalRenderTranscriptPanel = window.renderTranscriptPanel;
-      if(typeof originalRenderTranscriptPanel === 'function'){
-        window.renderTranscriptPanel = async function(){
-          if(window.state?.mode === 'video'){
-            if(window.els?.transcriptPanel){ window.els.transcriptPanel.classList.remove('is-visible','is-video-search-only'); window.els.transcriptPanel.style.display='none'; }
-            if(typeof window.stopTranscriptClock === 'function') window.stopTranscriptClock();
-            return;
-          }
-          if(window.els?.transcriptPanel) window.els.transcriptPanel.style.display='';
-          const result = await originalRenderTranscriptPanel.apply(this, arguments);
-          polishTranscriptHeader();
-          return result;
-        };
-      }
-      const originalRenderPlayer = window.renderPlayer;
-      if(typeof originalRenderPlayer === 'function'){
-        window.renderPlayer = function(){
-          const result = originalRenderPlayer.apply(this, arguments);
-          if(window.state?.mode === 'video' && window.els?.transcriptPanel){ window.els.transcriptPanel.classList.remove('is-visible','is-video-search-only'); window.els.transcriptPanel.style.display='none'; }
-          polishTranscriptHeader(); renderMobileFeaturedQuote(); return result;
-        };
-      }
-      const originalRenderChoices = window.renderChoices;
-      if(typeof originalRenderChoices === 'function'){
-        window.renderChoices = function(){ const result = originalRenderChoices.apply(this, arguments); renderMobileFeaturedQuote(); return result; };
-      }
-      const originalRerender = window.rerender;
-      if(typeof originalRerender === 'function'){
-        window.rerender = function(){ const result = originalRerender.apply(this, arguments); renderMobileFeaturedQuote(); polishTranscriptHeader(); return result; };
-      }
-      window.hardResetPage = function(){
-        safe(()=>localStorage.removeItem('cgbcTranscriptHiddenMobile'));
-        safe(()=>localStorage.removeItem('cgbcTranscriptHiddenDesktop'));
-        safe(()=>localStorage.removeItem('cgbcTranscriptLanguage'));
-        safe(()=>sessionStorage.clear());
-        const cleanUrl = window.location.origin + window.location.pathname + '?v=fresh-' + Date.now();
-        window.location.replace(cleanUrl);
-      };
-      function polishTranscriptHeader(){
-        if(!window.els?.transcriptPanel) return;
-        if(isPhone()){
-          if(window.state?.mode === 'video') return;
-          const follow=window.els.transcriptFollowBtn, read=window.els.transcriptReadBtn;
-          if(follow) follow.style.display='none';
-          if(read) read.style.display='none';
-          if(window.state?.transcript) window.state.transcript.mode='follow';
-          const btn=window.els.transcriptVisibilityBtn;
-          if(btn) btn.textContent=window.state?.transcript?.hidden ? 'Show' : 'Hide';
-        }
-      }
-      function shouldShowMobileQuote(){
-        if(!isPhone()) return false;
-        if(!window.els?.choiceList) return false;
-        if(String(window.state?.searchTerm || '').trim()) return false;
-        const nav=window.state?.nav || {};
-        return !nav.rootKey && !nav.branchKey && !nav.leafKey;
-      }
-      function qText(q){ return String(q?.__curatedText || q?.approvedText || q?.displayText || q?.expandedText || q?.text || '').trim(); }
-      function qSpeaker(q){ return q?.episode?.speaker || q?.speaker || 'Pastor Jacob Lannom'; }
-      function qTitle(q){ return q?.episode?.title || q?.episodeTitle || q?.title || ''; }
-      function qDate(q){ return q?.episode?.date || q?.date || ''; }
-      function qStart(q){ return Math.floor(Number(q?.start || q?.startTime || q?.timestamp || 0) || 0); }
-      function mobileQuote(){ const rows=Array.isArray(window.state?.idleQuotes) ? window.state.idleQuotes : []; if(!rows.length) return null; return rows[window.state.idleQuoteIndex % rows.length] || rows[Math.floor(Math.random()*rows.length)] || null; }
-      function quoteEpisodeArt(q){ const item=(typeof window.idleQuoteEpisodeItem === 'function') ? window.idleQuoteEpisodeItem(q) : null; if(item && typeof window.getEpisodeArt === 'function') return window.getEpisodeArt(item, 'video'); return q?.episode?.art?.wide || q?.art?.wide || q?.thumbnail || ''; }
-      function quoteEpisodeHref(q){ return (typeof window.idleQuoteEpisodeLink === 'function') ? window.idleQuoteEpisodeLink(q, false) : '#'; }
-      function h(v){ return window.escapeHtml ? window.escapeHtml(v) : String(v ?? '').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]||c)); }
-      function renderMobileFeaturedQuote(){
-        const old=document.getElementById('mobileFeaturedQuoteCard');
-        if(!shouldShowMobileQuote()){ if(old) old.remove(); return; }
-        const q=mobileQuote(); if(!q || !qText(q)){ if(old) old.remove(); return; }
-        const art=quoteEpisodeArt(q); const date=qDate(q); const start=qStart(q);
-        const html=`<div class="mobile-featured-quote-card" id="mobileFeaturedQuoteCard" aria-live="polite"><div class="mobile-featured-kicker">Featured Quotes</div><p class="mobile-featured-text">${h(qText(q))}</p><div class="mobile-featured-meta"><span>${h(qSpeaker(q))}</span><span>${h(qTitle(q))}${date ? ' • '+h(String(date)) : ''}${start ? ' • '+h(window.formatClock ? window.formatClock(start) : '') : ''}</span></div><div class="mobile-featured-actions"><button class="mobile-featured-btn" type="button" data-mobile-quote-pause aria-label="Pause featured quotes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button><button class="mobile-featured-btn primary" type="button" data-mobile-quote-next>Next</button><a class="mobile-featured-episode" href="${quoteEpisodeHref(q)}"><span class="mobile-featured-episode-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> Episode</span>${art ? `<img src="${h(art)}" alt="">` : ''}</a></div></div>`;
-        if(old) old.outerHTML=html; else window.els.choiceList.insertAdjacentHTML('beforeend', html);
-      }
-      let mobileQuoteTimer=null;
-      function startMobileQuoteCycle(){
-        if(mobileQuoteTimer) clearInterval(mobileQuoteTimer);
-        mobileQuoteTimer=setInterval(()=>{
-          if(!shouldShowMobileQuote()) return;
-          if(!Array.isArray(window.state?.idleQuotes) || !window.state.idleQuotes.length) return;
-          window.state.idleQuoteIndex=Math.floor(Math.random()*window.state.idleQuotes.length);
-          if(typeof window.renderIdleQuote === 'function') window.renderIdleQuote();
-          renderMobileFeaturedQuote();
-        },11000);
-      }
-      document.addEventListener('click', function(event){
-        if(event.target.closest('[data-mobile-quote-next]')){ event.preventDefault(); if(Array.isArray(window.state?.idleQuotes) && window.state.idleQuotes.length){ window.state.idleQuoteIndex=Math.floor(Math.random()*window.state.idleQuotes.length); if(typeof window.renderIdleQuote === 'function') window.renderIdleQuote(); renderMobileFeaturedQuote(); }}
-        if(event.target.closest('[data-mobile-quote-pause]')){ event.preventDefault(); if(typeof window.setIdleQuotePaused === 'function') window.setIdleQuotePaused(!window.state?.idleQuotePaused); if(window.state?.idleQuotePaused && mobileQuoteTimer){ clearInterval(mobileQuoteTimer); mobileQuoteTimer=null; } else startMobileQuoteCycle(); }
-      });
-      window.addEventListener('resize', ()=>{ polishTranscriptHeader(); renderMobileFeaturedQuote(); });
-      startMobileQuoteCycle(); setTimeout(()=>{ polishTranscriptHeader(); renderMobileFeaturedQuote(); }, 600);
     })();
   </script>
 
