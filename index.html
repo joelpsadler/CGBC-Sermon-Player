@@ -1272,66 +1272,6 @@
   .transcript-line{transition:opacity .22s ease,color .22s ease!important;}
 }
 
-  
-
-/* === SAFE RETRY: SUBS BADGE + PANEL GAP + TRANSCRIPT GLIDE POLISH ===
-   Beginner note: this pass starts from the last stable index build. It does not
-   touch quote-review auth, quote wall routing, or curation/export code. */
-@media (min-width:901px){
-  /* Tighten the vertical rhythm by shrinking the context/nav strip, not by growing
-     the player or transcript areas. */
-  .flow{gap:4px!important;}
-  .content{gap:4px!important;}
-  .context-strip{padding:5px 12px 4px!important;min-height:76px!important;}
-  .context-row{min-height:68px!important;gap:8px!important;}
-  .context-chip{height:68px!important;flex-basis:230px!important;padding:7px 9px!important;border-radius:16px!important;}
-  .context-chip img{width:54px!important;height:40px!important;flex-basis:54px!important;border-radius:10px!important;}
-  .context-chip.square img{width:46px!important;height:46px!important;flex-basis:46px!important;}
-  .context-chip-badge{min-height:18px!important;padding:0 7px!important;font-size:9px!important;margin-bottom:4px!important;}
-  .context-chip-title{font-size:15px!important;line-height:1.05!important;}
-  .context-chip-sub{font-size:12px!important;line-height:1.1!important;}
-  .player{margin-top:0!important;margin-bottom:0!important;}
-  .transcript-panel{margin-top:4px!important;}
-
-  /* Put the subtitle indicator in its own lower-middle pocket so it does not sit on
-     thumbnail art and does not collide with Load/Loaded. */
-  .episode.has-subs .thumb-wrap .subtitle-badge,
-  .episode .thumb-wrap .subtitle-badge{display:none!important;}
-  .episode .subtitle-badge{
-    position:absolute!important;
-    top:auto!important;
-    bottom:15px!important;
-    right:122px!important;
-    left:auto!important;
-    height:22px!important;
-    min-height:22px!important;
-    padding:0 8px!important;
-    border-radius:999px!important;
-    display:inline-flex!important;
-    align-items:center!important;
-    gap:4px!important;
-    font-family:Poppins,sans-serif!important;
-    font-size:8.5px!important;
-    font-weight:800!important;
-    letter-spacing:.08em!important;
-    text-transform:uppercase!important;
-    color:rgba(255,255,255,.94)!important;
-    background:linear-gradient(180deg,rgba(18,20,19,.72),rgba(7,8,8,.52))!important;
-    border:1px solid rgba(255,255,255,.15)!important;
-    box-shadow:0 5px 12px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.06)!important;
-    backdrop-filter:blur(10px)!important;
-    z-index:5!important;
-    pointer-events:none!important;
-  }
-  .episode .subtitle-badge svg{width:11px!important;height:11px!important;margin:0!important;stroke-width:2.25!important;}
-  .episode .episode-load-badge{right:10px!important;bottom:12px!important;}
-
-  /* Make the transcript movement less distracting by widening the visible reading
-     cushion and slowing only large scroll jumps. */
-  .transcript-lines{scroll-behavior:auto!important;}
-  .transcript-line{transition:opacity .20s ease,color .20s ease!important;}
-}
-
   </style>
 </head>
 <body class="mode-audio">
@@ -2329,22 +2269,22 @@
       const currentEl = container.querySelector('.transcript-line[data-index="'+current.index+'"]');
       if(!currentEl) return;
 
-      // SAFE FOLLOW LOGIC, PASS 2:
-      // Do not chase the audio clock. Only glide when the active transcript line
-      // leaves a wide comfortable reading band. This avoids the earlier broken
-      // conveyor experiment and keeps quote/auth code untouched.
-      if(container.__lastFollowIndex === current.index) return;
-      container.__lastFollowIndex = current.index;
+// Calm follow logic:
+// Keep the current line inside a generous reading band instead of forcing every
+// new caption to the exact same pixel. This dramatically reduces the amount of
+// motion while still keeping the spoken line easy to find.
+if(container.__lastFollowIndex === current.index) return;
+container.__lastFollowIndex = current.index;
 
-      const currentTop = currentEl.offsetTop - container.scrollTop;
-      const currentCenter = currentTop + (currentEl.offsetHeight / 2);
-      const minY = container.clientHeight * 0.34;
-      const maxY = container.clientHeight * 0.70;
-      if(currentCenter >= minY && currentCenter <= maxY) return;
+const currentTop = currentEl.offsetTop - container.scrollTop;
+const currentCenter = currentTop + (currentEl.offsetHeight / 2);
+const minY = container.clientHeight * 0.42;
+const maxY = container.clientHeight * 0.61;
+if(currentCenter >= minY && currentCenter <= maxY) return;
 
-      const anchorY = container.clientHeight * 0.54;
-      const target = currentEl.offsetTop - anchorY + (currentEl.offsetHeight / 2);
-      animateTranscriptScrollTo(container, target);
+const anchorY = container.clientHeight * 0.50;
+const target = currentEl.offsetTop - anchorY + (currentEl.offsetHeight / 2);
+animateTranscriptScrollTo(container, target);
     }
     function updateTranscriptActiveLine(time){
       if(!els.transcriptLines || !state.transcript.segments.length) return;
