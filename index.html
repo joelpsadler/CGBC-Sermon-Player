@@ -1272,33 +1272,6 @@
   .transcript-line{transition:opacity .22s ease,color .22s ease!important;}
 }
 
-  
-
-/* === CGBC FINAL FOLLOW GLIDE + SUBS BADGE POSITION PASS === */
-@media (min-width:901px){
-  .content{gap:3px!important;}
-  .flow{gap:4px!important;}
-  .context-row{margin-bottom:0!important;padding-top:1px!important;padding-bottom:1px!important;}
-  .player{margin-top:0!important;margin-bottom:0!important;}
-  .transcript-panel{margin-top:3px!important;}
-  .episode .subtitle-badge{
-    right:148px!important;
-    bottom:17px!important;
-    height:21px!important;
-    min-height:21px!important;
-    padding:0 8px!important;
-    gap:4px!important;
-    border-radius:999px!important;
-    background:linear-gradient(180deg,rgba(18,18,18,.78),rgba(5,5,5,.58))!important;
-    border:1px solid rgba(255,255,255,.16)!important;
-    color:rgba(255,255,255,.94)!important;
-    box-shadow:0 6px 14px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.07)!important;
-  }
-  .episode .subtitle-badge svg{width:13px!important;height:13px!important;margin-right:2px!important;fill:none!important;stroke:currentColor!important;}
-  .episode .subtitle-badge span{font-size:8.8px!important;line-height:1!important;}
-  .transcript-lines{scroll-behavior:auto!important;will-change:scroll-position;}
-}
-
   </style>
 </head>
 <body class="mode-audio">
@@ -2214,7 +2187,7 @@
       els.transcriptLines.__stableScrollTop = null;
       els.transcriptLines.__lastFollowIndex = null;
       state.transcript._smoothTime = null;
-      if(els.transcriptLines){ els.transcriptLines.__followScroll = undefined; els.transcriptLines.__lastFollowIndex = null; }\n      state.transcript.followClock = { ready:false, time:0, lastNow:performance.now()/1000 };\n      els.transcriptLines.innerHTML = segments.map(seg=>{
+      els.transcriptLines.innerHTML = segments.map(seg=>{
         const safeText = escapeHtml(seg.text);
         const displayText = re ? safeText.replace(re, '<mark>$1</mark>') : safeText;
         return '<button type="button" class="transcript-line" data-start="'+seg.start+'" data-index="'+seg.index+'"><span class="transcript-time">'+escapeHtml(formatClock(seg.start))+'</span><span class="transcript-text">'+displayText+'</span></button>';
@@ -2229,7 +2202,7 @@
       return Number(state.deepLinkStart || 0) || 0;
     }
     function seekMediaTo(seconds){
-      const t=Math.max(0, Number(seconds)||0);\n      state.transcript.followClock = { ready:false, time:t, lastNow:performance.now()/1000 };\n      if(els.transcriptLines){ els.transcriptLines.__followScroll = undefined; }
+      const t=Math.max(0, Number(seconds)||0);
       if(state.mode === 'audio' && els.audioPlayer){ els.audioPlayer.currentTime=t; return; }
       if(state.mode === 'video'){
         if(state.youtubePlayer && typeof state.youtubePlayer.seekTo === 'function'){
@@ -2270,34 +2243,23 @@
         btn.classList.toggle('is-upcoming', idx > activeIndex && idx < activeIndex + 8);
       });
     }
-    function transcriptMediaIsPlaying(){
-      if(state.mode === 'audio') return !!(els.audioPlayer && !els.audioPlayer.paused && !els.audioPlayer.ended);
-      if(state.mode === 'video' && state.youtubePlayer && typeof state.youtubePlayer.getPlayerState === 'function'){
-        try{ return state.youtubePlayer.getPlayerState() === 1; }catch(err){}
-      }
-      return false;
-    }
-    function stableTranscriptClock(rawTime){
-      const now = performance.now() / 1000;
-      const clock = state.transcript.followClock || (state.transcript.followClock = { ready:false, time:0, lastNow:now });
-      const raw = Number(rawTime) || 0;
-      const playing = transcriptMediaIsPlaying();
-      if(!clock.ready || !playing || Math.abs(raw - clock.time) > 1.25){
-        clock.ready = true;
-        clock.time = raw;
-        clock.lastNow = now;
-        return raw;
-      }
-      const dt = Math.max(0, Math.min(0.075, now - Number(clock.lastNow || now)));
-      clock.lastNow = now;
-      clock.time += dt;
-      const drift = raw - clock.time;
-      // Correct drift gently so browser/media clock wobble does not tug the reader.
-      clock.time += drift * (Math.abs(drift) > 0.20 ? 0.035 : 0.010);
-      return clock.time;
-    }
-    function transcriptLineCenter(container, el){
-      return Number(el?.offsetTop || 0) + (Number(el?.offsetHeight || 0) / 2);
+    function animateTranscriptScrollTo(container, target){
+      if(!container) return;
+      const start = Number(container.scrollTop || 0);
+      const end = Math.max(0, Number(target) || 0);
+      const distance = end - start;
+      if(Math.abs(distance) < 1.5) return;
+      if(container.__transcriptScrollRaf) window.cancelAnimationFrame(container.__transcriptScrollRaf);
+      const duration = Math.min(980, Math.max(520, Math.abs(distance) * 1.75));
+      const started = performance.now();
+      const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+      const step = now => {
+        const p = Math.min(1, (now - started) / duration);
+        container.scrollTop = start + (distance * ease(p));
+        if(p < 1) container.__transcriptScrollRaf = window.requestAnimationFrame(step);
+        else container.__transcriptScrollRaf = null;
+      };
+      container.__transcriptScrollRaf = window.requestAnimationFrame(step);
     }
     function scrollTranscriptWithSpeech(position, progress){
       if(state.transcript.mode !== 'follow' || state.transcript.search) return;
@@ -2306,37 +2268,27 @@
       if(!container || !current) return;
       const currentEl = container.querySelector('.transcript-line[data-index="'+current.index+'"]');
       if(!currentEl) return;
-      const next = state.transcript.segments[position + 1];
-      const nextEl = next ? container.querySelector('.transcript-line[data-index="'+next.index+'"]') : null;
 
-      // Conveyor follow: instead of snapping each caption into place, interpolate from
-      // the current line toward the next line over the spoken duration. This gives the
-      // transcript that slow, steady "credits rolling" feel while still staying synced.
-      const p = Math.max(0, Math.min(1, Number(progress) || 0));
-      const easedProgress = p < 0.12 ? 0 : (p > 0.92 ? 1 : (p - 0.12) / 0.80);
-      const currentCenter = transcriptLineCenter(container, currentEl);
-      const nextCenter = nextEl ? transcriptLineCenter(container, nextEl) : currentCenter;
-      const desiredCenter = currentCenter + ((nextCenter - currentCenter) * easedProgress);
-      const anchorY = container.clientHeight * 0.50;
-      const maxScroll = Math.max(0, container.scrollHeight - container.clientHeight);
-      const target = Math.max(0, Math.min(maxScroll, desiredCenter - anchorY));
+// Calm follow logic:
+// Keep the current line inside a generous reading band instead of forcing every
+// new caption to the exact same pixel. This dramatically reduces the amount of
+// motion while still keeping the spoken line easy to find.
+if(container.__lastFollowIndex === current.index) return;
+container.__lastFollowIndex = current.index;
 
-      if(container.__followScroll === undefined || Math.abs(container.__followScroll - container.scrollTop) > 90){
-        container.__followScroll = container.scrollTop;
-      }
-      const delta = target - container.__followScroll;
-      if(Math.abs(delta) < 0.15) return;
-      // Smaller factor = smoother, slower glide; large seeks still catch up cleanly.
-      const factor = Math.abs(delta) > 160 ? 0.055 : 0.026;
-      container.__followScroll += delta * factor;
-      container.scrollTop = container.__followScroll;
+const currentTop = currentEl.offsetTop - container.scrollTop;
+const currentCenter = currentTop + (currentEl.offsetHeight / 2);
+const minY = container.clientHeight * 0.42;
+const maxY = container.clientHeight * 0.61;
+if(currentCenter >= minY && currentCenter <= maxY) return;
+
+const anchorY = container.clientHeight * 0.50;
+const target = currentEl.offsetTop - anchorY + (currentEl.offsetHeight / 2);
+animateTranscriptScrollTo(container, target);
     }
     function updateTranscriptActiveLine(time){
       if(!els.transcriptLines || !state.transcript.segments.length) return;
-      const followTime = state.transcript.mode === 'follow' && !state.transcript.search
-        ? stableTranscriptClock(time)
-        : (Number(time) || 0);
-      const info = findTranscriptActivePosition(followTime);
+      const info = findTranscriptActivePosition(Number(time)||0);
       const activeIndex = info.active ? info.active.index : -1;
       setTranscriptLineClasses(activeIndex);
       scrollTranscriptWithSpeech(info.position, info.progress);
@@ -3252,7 +3204,7 @@
                 : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
         const subtitleBadge = episodeLevel && row?.transcript?.hasTranscript
-          ? `<div class="subtitle-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M10.2 10.2c-.55-.55-1.2-.82-1.95-.82-1.52 0-2.65 1.16-2.65 2.65s1.13 2.65 2.65 2.65c.75 0 1.4-.27 1.95-.82" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path><path d="M18.4 10.2c-.55-.55-1.2-.82-1.95-.82-1.52 0-2.65 1.16-2.65 2.65s1.13 2.65 2.65 2.65c.75 0 1.4-.27 1.95-.82" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg><span>Subs</span></div>`
+          ? `<div class="subtitle-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M7 15h4"></path><path d="M13 15h4"></path></svg><span>Subs</span></div>`
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
