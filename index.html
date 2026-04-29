@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
+  <!-- mobile cleanup build: 2026-04-29 search-clear/mobile-quotes/transcript-attached -->
   <link rel="icon" type="image/jpeg" sizes="512x512" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png">
   <link rel="apple-touch-icon" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1238149/cgbc_media-player_-Web-App-icon_.jpg">
   <meta name="theme-color" content="#0f0f10" />
@@ -1448,6 +1449,76 @@
       .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
     }
 
+  
+
+    /* === FINAL MOBILE CLEANUP: attached transcript, visible transcript badge, search clear buttons, mobile quote wall === */
+    .search-box{position:relative;min-width:0;display:block;}
+    .nav-search-box{flex:1 1 auto;}
+    .search-box input{width:100%;padding-right:42px!important;}
+    .search-clear{
+      position:absolute;right:9px;top:50%;transform:translateY(-50%);
+      width:26px;height:26px;border-radius:999px;display:none;align-items:center;justify-content:center;
+      background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.76);font-family:Poppins,sans-serif;font-size:18px;line-height:1;
+      z-index:4;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .search-box.has-value .search-clear{display:flex;}
+    .search-clear:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.95);}
+    .transcript-search-wrap{width:clamp(180px,25vw,300px);margin-left:8px;}
+    .transcript-search-wrap .transcript-search{width:100%!important;margin-left:0!important;}
+
+    .mobile-quote-wall{display:none;}
+
+    @media(max-width:900px){
+      /* Prevent iOS/Safari from zooming into text fields. */
+      input, select, textarea, .search-row input, .transcript-search, .transcript-select{font-size:16px!important;}
+      .search-row{align-items:center;}
+      .nav-search-box{width:100%;}
+      .search-clear{width:28px;height:28px;right:8px;font-size:20px;}
+
+      /* Keep the mobile transcript visibly attached to the player instead of floating below it. */
+      .player{margin-bottom:4px!important;}
+      .player + .transcript-panel,
+      #playerShell + .transcript-panel,
+      #mobilePlayerAnchor .player + .transcript-panel,
+      .mobile-player-anchor .player + .transcript-panel{
+        margin-top:4px!important;
+        border-top-left-radius:14px!important;
+        border-top-right-radius:14px!important;
+      }
+      .transcript-panel.is-visible{margin:4px 0 10px!important;}
+      .transcript-panel.is-collapsed{margin:4px 0 10px!important;}
+      .transcript-panel.is-collapsed .transcript-tools::before{color:rgba(255,255,255,.94)!important;text-shadow:0 0 14px rgba(255,255,255,.10)!important;}
+      .transcript-panel.is-collapsed .transcript-visibility-toggle{min-width:124px!important;}
+
+      /* Make the transcript indicator readable and separated from Load/Loaded. */
+      .episode .subtitle-badge.transcript-available-badge{
+        right:88px!important;bottom:16px!important;
+        width:30px!important;min-width:30px!important;height:24px!important;min-height:24px!important;
+        color:rgba(255,255,255,.98)!important;
+        background:linear-gradient(180deg,rgba(143,174,157,.30),rgba(143,174,157,.13))!important;
+        border:1px solid rgba(143,174,157,.34)!important;
+        box-shadow:0 7px 16px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.12)!important;
+      }
+      .episode .subtitle-badge.transcript-available-badge svg{width:15px!important;height:15px!important;stroke-width:2.25!important;}
+      .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
+
+      /* Mobile quote wall lives below the browse/category cards in Listen and Watch. */
+      .mobile-quote-wall{
+        display:block;margin:4px 14px 22px;padding:18px 16px 16px;border-radius:22px;
+        background:linear-gradient(180deg,rgba(18,18,19,.88),rgba(9,9,10,.78));
+        border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 14px 32px rgba(0,0,0,.20);
+      }
+      .mobile-quote-kicker{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.48);margin-bottom:10px;}
+      .mobile-quote-text{font-family:Poppins,sans-serif;font-size:clamp(22px,7vw,34px);font-weight:800;line-height:1.16;letter-spacing:-.03em;color:rgba(255,255,255,.96);}
+      .mobile-quote-meta{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:10px;font-size:12px;line-height:1.25;color:rgba(255,255,255,.62);}
+      .mobile-quote-meta a{color:rgba(255,255,255,.86);border-bottom:1px solid rgba(143,174,157,.32);}
+      .mobile-quote-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+      .mobile-quote-btn{min-height:38px;padding:0 12px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);font-family:Poppins,sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.92);}
+      .mobile-quote-btn.primary{background:linear-gradient(180deg,rgba(143,174,157,.22),rgba(143,174,157,.10));border-color:rgba(143,174,157,.25);}
+      .stack + .mobile-quote-wall:empty{display:none;}
+    }
+
   </style>
 </head>
 <body class="mode-audio">
@@ -1500,7 +1571,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
+          <div class="search-box nav-search-box"><input id="searchInput" type="search" placeholder="Search: scripture, title, date"><button class="search-clear" id="searchClearBtn" type="button" aria-label="Clear search">×</button></div>
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row" id="pathRow">
@@ -1512,6 +1583,16 @@
         <div id="mobilePlayerAnchor"></div>
         <div class="mobile-context-bar" id="mobileContextBar"></div>
         <div class="stack" id="choiceList"></div>
+        <div class="mobile-quote-wall" id="mobileQuoteWall" aria-live="polite">
+          <div class="mobile-quote-kicker">Featured Quotes</div>
+          <div class="mobile-quote-text" id="mobileQuoteText">Loading featured quotes…</div>
+          <div class="mobile-quote-meta" id="mobileQuoteMeta"></div>
+          <div class="mobile-quote-actions">
+            <button class="mobile-quote-btn" id="mobileQuotePauseBtn" type="button">Pause</button>
+            <button class="mobile-quote-btn primary" id="mobileQuoteNextBtn" type="button">Next Quote</button>
+            <button class="mobile-quote-btn" id="mobileQuoteCopyBtn" type="button">Copy</button>
+          </div>
+        </div>
       </section>
 
       <section class="content">
@@ -1595,7 +1676,7 @@
               <select class="transcript-select" id="transcriptLanguage" aria-label="Transcript language"></select>
               <button class="transcript-toggle active" id="transcriptFollowBtn" type="button">Follow</button>
               <button class="transcript-toggle" id="transcriptReadBtn" type="button">Read</button>
-              <input class="transcript-search" id="transcriptSearch" type="search" placeholder="Search transcript">
+              <div class="search-box transcript-search-wrap"><input class="transcript-search" id="transcriptSearch" type="search" placeholder="Search transcript"><button class="search-clear transcript-search-clear" id="transcriptSearchClearBtn" type="button" aria-label="Clear transcript search">×</button></div>
               <button class="transcript-toggle transcript-visibility-toggle" id="transcriptVisibilityBtn" type="button" aria-expanded="true">Hide</button>
             </div>
           </div>
@@ -1696,6 +1777,7 @@
 
     const els = {
       searchInput: document.getElementById('searchInput'),
+      searchClearBtn: document.getElementById('searchClearBtn'),
       searchStatus: document.getElementById('searchStatus'),
       navHeading: document.getElementById('navHeading'),
       topBtn: document.getElementById('topBtn'),
@@ -1751,6 +1833,12 @@
       idleQuotePauseBtn: document.getElementById('idleQuotePauseBtn'),
       idleQuoteNextBtn: document.getElementById('idleQuoteNextBtn'),
       idleQuoteCopyBtn: document.getElementById('idleQuoteCopyBtn'),
+      mobileQuoteWall: document.getElementById('mobileQuoteWall'),
+      mobileQuoteText: document.getElementById('mobileQuoteText'),
+      mobileQuoteMeta: document.getElementById('mobileQuoteMeta'),
+      mobileQuotePauseBtn: document.getElementById('mobileQuotePauseBtn'),
+      mobileQuoteNextBtn: document.getElementById('mobileQuoteNextBtn'),
+      mobileQuoteCopyBtn: document.getElementById('mobileQuoteCopyBtn'),
       idleEpisodeCard: document.getElementById('idleEpisodeCard'),
       idleEpisodeArt: document.getElementById('idleEpisodeArt'),
       transcriptPanel: document.getElementById('transcriptPanel'),
@@ -1760,6 +1848,7 @@
       transcriptFollowBtn: document.getElementById('transcriptFollowBtn'),
       transcriptReadBtn: document.getElementById('transcriptReadBtn'),
       transcriptSearch: document.getElementById('transcriptSearch'),
+      transcriptSearchClearBtn: document.getElementById('transcriptSearchClearBtn'),
       transcriptVisibilityBtn: document.getElementById('transcriptVisibilityBtn'),
       transcriptArt: document.getElementById('transcriptArt'),
       transcriptLines: document.getElementById('transcriptLines')
@@ -2288,10 +2377,37 @@
         else renderIdleQuote();
       }catch(err){ console.warn('Idle quote wall could not load.',err); renderIdleQuote(); }
     }
+    function updateSearchClearButtons(){
+      try{
+        const navBox = els.searchInput ? els.searchInput.closest('.search-box') : null;
+        if(navBox) navBox.classList.toggle('has-value', !!String(els.searchInput.value || '').trim());
+        const transcriptBox = els.transcriptSearch ? els.transcriptSearch.closest('.search-box') : null;
+        if(transcriptBox) transcriptBox.classList.toggle('has-value', !!String(els.transcriptSearch.value || '').trim());
+      }catch(err){}
+    }
+    function renderMobileQuote(){
+      if(!els.mobileQuoteWall || !els.mobileQuoteText || !els.mobileQuoteMeta) return;
+      const q = state.idleQuotes[state.idleQuoteIndex];
+      if(!q){
+        els.mobileQuoteText.textContent = 'Approved quotes will appear here after export.';
+        els.mobileQuoteMeta.innerHTML = '';
+        return;
+      }
+      const text = idleQuoteText(q);
+      els.mobileQuoteText.textContent = text;
+      const link = idleQuoteSiteDeepLink(q);
+      els.mobileQuoteMeta.innerHTML = [
+        idleQuoteSpeaker(q) ? '<a href="'+escapeHtml(link)+'">'+escapeHtml(idleQuoteSpeaker(q))+'</a>' : '',
+        idleQuoteTitle(q) ? '<span>'+escapeHtml(idleQuoteTitle(q))+'</span>' : '',
+        idleQuoteDate(q) ? '<span>'+escapeHtml(formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}))+'</span>' : '',
+        '<span>'+escapeHtml(formatClock(idleQuoteStart(q)))+'</span>'
+      ].filter(Boolean).join(' ');
+      if(els.mobileQuotePauseBtn) els.mobileQuotePauseBtn.textContent = state.idleQuotePaused ? 'Resume' : 'Pause';
+    }
     function renderIdleQuote(){
       if(!els.idleQuoteText || !els.idleQuoteMeta) return;
       const q = state.idleQuotes[state.idleQuoteIndex];
-      if(!q){ els.idleQuoteText.textContent='Select an episode, or publish approved quotes to show them here.'; els.idleQuoteMeta.innerHTML=''; if(els.idleEpisodeCard) els.idleEpisodeCard.classList.remove('is-visible'); return; }
+      if(!q){ els.idleQuoteText.textContent='Select an episode, or publish approved quotes to show them here.'; els.idleQuoteMeta.innerHTML=''; if(els.idleEpisodeCard) els.idleEpisodeCard.classList.remove('is-visible'); renderMobileQuote(); return; }
       if(els.idleQuoteBox){ els.idleQuoteBox.classList.remove('idle-quote-box'); void els.idleQuoteBox.offsetWidth; els.idleQuoteBox.classList.add('idle-quote-box'); }
       const text = idleQuoteText(q);
       els.idleQuoteText.textContent = text;
@@ -2308,6 +2424,7 @@
         els.idleEpisodeCard.classList.toggle('is-visible', !!art);
         if(els.idleEpisodeArt && art) els.idleEpisodeArt.src = art;
       }
+      renderMobileQuote();
     }
     function nextIdleQuote(){ if(!state.idleQuotes.length) return; state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length); renderIdleQuote(); startIdleQuoteCycle(); }
     function startIdleQuoteCycle(){
@@ -2318,6 +2435,7 @@
     function setIdleQuotePaused(value){
       state.idleQuotePaused = !!value;
       if(els.idleQuotePauseBtn){ els.idleQuotePauseBtn.innerHTML = state.idleQuotePaused ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Resume</span>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg><span>Pause</span>'; els.idleQuotePauseBtn.classList.toggle('primary', state.idleQuotePaused); }
+      renderMobileQuote();
       startIdleQuoteCycle();
     }
 
@@ -3727,6 +3845,7 @@
       if(!preserveSearch){
         state.searchTerm='';
         if(els.searchInput) els.searchInput.value='';
+        updateSearchClearButtons();
       }
       clearMediaState();
       scrollChoiceListToTop();
@@ -3892,9 +4011,11 @@
       let searchInputTimer = null;
       els.searchInput.addEventListener('input', (e)=>{
         const nextValue = e.target.value || '';
+        updateSearchClearButtons();
         window.clearTimeout(searchInputTimer);
         searchInputTimer = window.setTimeout(()=>{
           state.searchTerm = nextValue;
+          updateSearchClearButtons();
           state.nav = { rootKey:null, branchKey:null, leafKey:null };
           scrollChoiceListToTop();
           rerender();
@@ -3951,12 +4072,18 @@
       if(els.idleQuotePauseBtn) els.idleQuotePauseBtn.addEventListener('click', ()=>setIdleQuotePaused(!state.idleQuotePaused));
       if(els.idleQuoteNextBtn) els.idleQuoteNextBtn.addEventListener('click', nextIdleQuote);
       if(els.idleQuoteCopyBtn) els.idleQuoteCopyBtn.addEventListener('click', async ()=>{ const q=state.idleQuotes[state.idleQuoteIndex]; if(!q) return; try{ await navigator.clipboard.writeText(idleQuoteCopy(q)); alert('Quote copied.'); }catch(err){} });
+      if(els.mobileQuotePauseBtn) els.mobileQuotePauseBtn.addEventListener('click', ()=>setIdleQuotePaused(!state.idleQuotePaused));
+      if(els.mobileQuoteNextBtn) els.mobileQuoteNextBtn.addEventListener('click', nextIdleQuote);
+      if(els.mobileQuoteCopyBtn) els.mobileQuoteCopyBtn.addEventListener('click', async ()=>{ const q=state.idleQuotes[state.idleQuoteIndex]; if(!q) return; try{ await navigator.clipboard.writeText(idleQuoteCopy(q)); alert('Quote copied.'); }catch(err){} });
+      if(els.searchClearBtn) els.searchClearBtn.addEventListener('click', ()=>{ els.searchInput.value=''; state.searchTerm=''; state.nav={rootKey:null,branchKey:null,leafKey:null}; updateSearchClearButtons(); scrollChoiceListToTop(); rerender(); els.searchInput.focus(); });
+      if(els.transcriptSearchClearBtn) els.transcriptSearchClearBtn.addEventListener('click', ()=>{ els.transcriptSearch.value=''; state.transcript.search=''; updateSearchClearButtons(); renderTranscriptLines(); els.transcriptSearch.focus(); });
       if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{ state.transcript.language=els.transcriptLanguage.value; state.transcript.segments=[]; state.transcript.activeIndex=-1; await renderTranscriptPanel(); });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
       if(els.transcriptReadBtn) els.transcriptReadBtn.addEventListener('click', ()=>{ state.transcript.mode='read'; renderTranscriptPanel(); });
       if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.addEventListener('click', ()=>{ setTranscriptHidden(!state.transcript.hidden); renderTranscriptPanel(); });
       if(els.transcriptSearch) els.transcriptSearch.addEventListener('input', ()=>{
         state.transcript.search=els.transcriptSearch.value||'';
+        updateSearchClearButtons();
         if(state.transcript.search){ state.transcript.mode='read'; }
         if(els.transcriptFollowBtn) els.transcriptFollowBtn.classList.toggle('active', state.transcript.mode === 'follow');
         if(els.transcriptReadBtn) els.transcriptReadBtn.classList.toggle('active', state.transcript.mode !== 'follow');
@@ -3965,6 +4092,7 @@
       });
       if(els.transcriptLines) els.transcriptLines.addEventListener('click', async (event)=>{ const line=event.target.closest('.transcript-line'); if(!line) return; const t=Number(line.dataset.start||0); if(event.target.closest('[data-copy]')){ const text=line.querySelector('.transcript-text')?.textContent||''; try{ await navigator.clipboard.writeText(text); }catch(err){} return; } seekMediaTo(t); updateTranscriptActiveLine(t); });
 
+      updateSearchClearButtons();
       ['play','pause','ended','seeked','ratechange'].forEach(name=>{
         els.audioPlayer.addEventListener(name, ()=>{
           const playing = !els.audioPlayer.paused && !els.audioPlayer.ended;
