@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- mobile cleanup build: 2026-04-29 mobile-quote-auto-info-compact-polish -->
+  <!-- mobile cleanup build: 2026-04-29 final-video-transcript-off-copy-polish -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -3476,6 +3476,7 @@
         <div class="mobile-featured-actions">
           <button class="mobile-featured-btn mobile-featured-pause" type="button" data-mobile-quote-pause aria-label="Pause featured quotes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg></button>
           <button class="mobile-featured-btn primary" type="button" data-mobile-quote-next>Next</button>
+          <button class="mobile-featured-btn" type="button" data-mobile-quote-copy="1">Copy</button>
           <a class="mobile-featured-episode" href="${escapeHtml(href)}"><span class="mobile-featured-episode-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg> Episode</span>${art ? `<img src="${escapeHtml(art)}" alt="">` : ''}</a>
         </div>
       </div>`;
@@ -3603,7 +3604,7 @@
                 ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
                 : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
-        const subtitleBadge = episodeLevel && row?.transcript?.hasTranscript
+        const subtitleBadge = episodeLevel && state.mode === 'audio' && row?.transcript?.hasTranscript
           ? `<div class="subtitle-badge transcript-available-badge" title="Transcript available" aria-label="Transcript available"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7.35L19 8.4v11.85H7z"></path><path d="M14 3.75V8.5h5"></path><path d="M10 12h6"></path><path d="M10 15h6"></path><path d="M10 18h4"></path></svg></div>`
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
@@ -4522,7 +4523,139 @@
       .mobile-featured-episode-label svg{width:10px!important;height:10px!important;}
       .mobile-featured-episode-card img{aspect-ratio:16/7.8!important;}
     }
-  </style>
+  
+
+    /* -------------------------------------------------------------------------
+       FINAL PIXEL PASS — video transcript off, mobile header/quote balance
+       Beginner note: this is an override layer only; it does not disturb the
+       stable desktop player code above it.
+       ------------------------------------------------------------------------- */
+    body.mode-video .transcript-panel{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;}
+    body.mode-video .subtitle-badge.transcript-available-badge{display:none!important;}
+    body.mode-video .episode .episode-load-badge{right:12px!important;}
+
+    @media (max-width:900px){
+      body.mode-video .transcript-panel{display:none!important;}
+      body.mode-video .subtitle-badge.transcript-available-badge{display:none!important;}
+      body.mode-audio .episode .subtitle-badge.transcript-available-badge{
+        right:116px!important;
+        bottom:15px!important;
+        width:24px!important;
+        height:24px!important;
+        min-height:24px!important;
+        padding:0!important;
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        background:linear-gradient(180deg, rgba(143,174,157,.22), rgba(23,31,27,.82))!important;
+        border-color:rgba(143,174,157,.30)!important;
+        box-shadow:0 8px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06)!important;
+      }
+      body.mode-audio .episode .subtitle-badge.transcript-available-badge svg{width:13px!important;height:13px!important;}
+      body.mode-audio .episode .episode-load-badge{right:12px!important;}
+
+      .transcript-panel.is-visible{margin-top:3px!important;}
+      #mobilePlayerAnchor #playerShell.player{margin-bottom:2px!important;}
+      #mobilePlayerAnchor #playerShell.player + .transcript-panel,
+      #playerShell + .transcript-panel{margin-top:3px!important;}
+
+      .transcript-head{
+        display:grid!important;
+        grid-template-columns:1fr auto!important;
+        grid-template-areas:"title hide" "tools tools"!important;
+        align-items:start!important;
+        gap:7px 8px!important;
+        margin-bottom:6px!important;
+        padding-right:0!important;
+      }
+      .transcript-title-block{
+        grid-area:title!important;
+        display:flex!important;
+        align-items:center!important;
+        gap:8px!important;
+        min-width:0!important;
+        width:auto!important;
+      }
+      .transcript-art-mini{width:54px!important;min-width:54px!important;border-radius:9px!important;margin:0!important;}
+      .transcript-title-block .eyebrow{
+        font-size:14.2px!important;
+        letter-spacing:.115em!important;
+        line-height:1!important;
+        display:inline-flex!important;
+        align-items:center!important;
+        gap:6px!important;
+        min-width:0!important;
+        max-width:calc(100vw - 170px)!important;
+        white-space:nowrap!important;
+      }
+      .transcript-title-block .eyebrow::after{display:none!important;content:''!important;}
+      .mobile-auto-badge{
+        display:inline-flex!important;
+        align-items:center!important;
+        gap:3px!important;
+        min-height:16px!important;
+        padding:0 4px!important;
+        border-radius:999px!important;
+        font-size:7.6px!important;
+        letter-spacing:.055em!important;
+        flex:0 0 auto!important;
+        white-space:nowrap!important;
+      }
+      .mobile-auto-gear{font-size:8px!important;line-height:1!important;}
+      .mobile-auto-info-btn{width:13px!important;height:13px!important;font-size:8px!important;margin-left:1px!important;}
+      .transcript-visibility-toggle{
+        grid-area:hide!important;
+        justify-self:end!important;
+        align-self:start!important;
+        width:72px!important;
+        min-width:72px!important;
+        height:36px!important;
+        font-size:12px!important;
+        margin:0!important;
+      }
+      .transcript-tools{
+        grid-area:tools!important;
+        display:grid!important;
+        grid-template-columns:76px minmax(0,1fr)!important;
+        gap:8px!important;
+        width:100%!important;
+        align-items:center!important;
+        padding:0!important;
+      }
+      .transcript-select{width:76px!important;min-width:0!important;height:38px!important;font-size:15px!important;}
+      .transcript-search{width:100%!important;min-width:0!important;height:38px!important;font-size:16px!important;margin:0!important;}
+      .mobile-auto-note{margin:7px 0 8px!important;font-size:12px!important;}
+
+      .mobile-featured-quotes{
+        margin:12px 0 12px!important;
+        padding:12px 12px 13px!important;
+        border-radius:22px!important;
+      }
+      .mobile-featured-eyebrow{margin:0 0 5px!important;font-size:8.5px!important;letter-spacing:.16em!important;}
+      .mobile-featured-quote-text{
+        font-size:clamp(17px,5.05vw,22px)!important;
+        line-height:1.095!important;
+        letter-spacing:-.035em!important;
+        max-height:10.2em!important;
+      }
+      .mobile-featured-quotes.medium .mobile-featured-quote-text,
+      .mobile-featured-quotes.long .mobile-featured-quote-text{font-size:clamp(16px,4.85vw,20.5px)!important;line-height:1.1!important;}
+      .mobile-featured-meta{margin-top:7px!important;font-size:10.5px!important;line-height:1.16!important;}
+      .mobile-featured-controls{
+        display:grid!important;
+        grid-template-columns:34px 54px 56px minmax(112px,138px)!important;
+        gap:7px!important;
+        align-items:start!important;
+        margin-top:8px!important;
+      }
+      .mobile-featured-btn{min-height:31px!important;height:31px!important;border-radius:11px!important;font-size:12px!important;padding:0 8px!important;}
+      .mobile-featured-btn svg{width:12px!important;height:12px!important;}
+      .mobile-featured-episode-card,.mobile-featured-episode{width:min(138px,100%)!important;justify-self:end!important;margin-left:auto!important;border-radius:12px!important;}
+      .mobile-featured-episode-label{height:26px!important;font-size:10.5px!important;gap:5px!important;}
+      .mobile-featured-episode-label svg{width:10px!important;height:10px!important;}
+      .mobile-featured-episode-card img,.mobile-featured-episode img{aspect-ratio:16/7.8!important;object-fit:cover!important;}
+    }
+</style>
 
   <script id="mobile-transcript-final-cleanup-script">
     (function(){
@@ -4568,6 +4701,7 @@
           <div class="mobile-featured-controls">
             <button type="button" class="mobile-featured-btn" data-mobile-quote-pause="1" aria-label="${escapeHtml(pauseLabel)}">${icon}</button>
             <button type="button" class="mobile-featured-btn primary" data-mobile-quote-next="1">Next</button>
+            <button type="button" class="mobile-featured-btn" data-mobile-quote-copy="1">Copy</button>
             <a class="mobile-featured-episode-card" href="${escapeHtml(episodeLink)}" aria-label="Open full episode">
               <span class="mobile-featured-episode-label">${playSvg}<span>Episode</span></span>
               <img src="${escapeHtml(art || ASSETS.fallback)}" alt="">
@@ -4622,6 +4756,17 @@
           event.stopPropagation();
           if(typeof nextIdleQuote === 'function') nextIdleQuote();
           appendMobileQuoteCard();
+          return;
+        }
+        const copyBtn = event.target.closest && event.target.closest('[data-mobile-quote-copy]');
+        if(copyBtn){
+          event.preventDefault();
+          event.stopPropagation();
+          const q = currentMobileQuote();
+          if(q){
+            const text = (typeof idleQuoteCopy === 'function') ? idleQuoteCopy(q) : idleQuoteText(q);
+            if(navigator.clipboard && text){ navigator.clipboard.writeText(text).catch(function(){}); }
+          }
         }
       }, true);
 
@@ -4714,6 +4859,105 @@
       document.addEventListener('DOMContentLoaded', ensureMobileAutoBadge);
       setTimeout(ensureMobileAutoBadge, 200);
       setTimeout(ensureMobileAutoBadge, 1000);
+    })();
+  </script>
+
+
+  <script id="final-video-off-mobile-quote-copy-pass">
+    (function(){
+      const mq = window.matchMedia('(max-width:900px)');
+      const COPY_LABEL = 'Copy';
+      function isMobile(){ return mq.matches; }
+      function hardHideVideoTranscript(){
+        try{
+          const panel = document.getElementById('transcriptPanel');
+          if(window.state && state.mode === 'video' && panel){
+            panel.classList.remove('is-visible');
+            panel.classList.remove('is-video-search-only');
+            panel.style.display = 'none';
+          } else if(panel){
+            panel.style.display = '';
+          }
+          document.querySelectorAll('.episode .subtitle-badge.transcript-available-badge').forEach(function(badge){
+            if(window.state && state.mode === 'video') badge.remove();
+          });
+        }catch(err){}
+      }
+      if(typeof renderTranscriptPanel === 'function'){
+        const baseRenderTranscriptPanel = renderTranscriptPanel;
+        renderTranscriptPanel = async function(){
+          if(window.state && state.mode === 'video'){
+            const panel = document.getElementById('transcriptPanel');
+            if(panel){
+              panel.classList.remove('is-visible');
+              panel.classList.remove('is-video-search-only');
+              panel.style.display = 'none';
+            }
+            if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
+            return;
+          }
+          const result = await baseRenderTranscriptPanel.apply(this, arguments);
+          const panel = document.getElementById('transcriptPanel');
+          if(panel) panel.style.display = '';
+          return result;
+        };
+      }
+      if(typeof renderPlayer === 'function'){
+        const baseRenderPlayer = renderPlayer;
+        renderPlayer = function(){
+          const result = baseRenderPlayer.apply(this, arguments);
+          setTimeout(hardHideVideoTranscript, 0);
+          return result;
+        };
+      }
+      if(typeof renderChoices === 'function'){
+        const baseRenderChoicesFinal = renderChoices;
+        renderChoices = function(){
+          const result = baseRenderChoicesFinal.apply(this, arguments);
+          setTimeout(hardHideVideoTranscript, 0);
+          return result;
+        };
+      }
+      function addCopyToMobileQuoteCards(){
+        if(!isMobile()) return;
+        document.querySelectorAll('[data-mobile-featured-quotes="1"]').forEach(function(card){
+          const controls = card.querySelector('.mobile-featured-controls, .mobile-featured-actions');
+          if(!controls || controls.querySelector('[data-mobile-quote-copy]')) return;
+          const next = controls.querySelector('[data-mobile-quote-next]');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'mobile-featured-btn';
+          btn.setAttribute('data-mobile-quote-copy','1');
+          btn.textContent = COPY_LABEL;
+          if(next && next.nextSibling) controls.insertBefore(btn, next.nextSibling);
+          else if(next) controls.insertBefore(btn, next.nextElementSibling);
+          else controls.appendChild(btn);
+        });
+      }
+      if(typeof renderIdleQuote === 'function'){
+        const baseRenderIdleQuoteFinal = renderIdleQuote;
+        renderIdleQuote = function(){
+          const result = baseRenderIdleQuoteFinal.apply(this, arguments);
+          setTimeout(addCopyToMobileQuoteCards, 0);
+          return result;
+        };
+      }
+      const mo = new MutationObserver(function(){ addCopyToMobileQuoteCards(); hardHideVideoTranscript(); });
+      mo.observe(document.documentElement, { childList:true, subtree:true });
+      document.addEventListener('click', function(event){
+        const copy = event.target.closest && event.target.closest('[data-mobile-quote-copy]');
+        if(copy){
+          event.preventDefault();
+          event.stopPropagation();
+          try{
+            const q = window.state && state.idleQuotes && state.idleQuotes.length ? state.idleQuotes[state.idleQuoteIndex] : null;
+            const text = q ? ((typeof idleQuoteCopy === 'function') ? idleQuoteCopy(q) : (typeof idleQuoteText === 'function' ? idleQuoteText(q) : '')) : '';
+            if(navigator.clipboard && text) navigator.clipboard.writeText(text).catch(function(){});
+          }catch(err){}
+        }
+      }, true);
+      document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){ hardHideVideoTranscript(); addCopyToMobileQuoteCards(); }, 250); });
+      window.addEventListener('resize', function(){ setTimeout(function(){ hardHideVideoTranscript(); addCopyToMobileQuoteCards(); }, 150); }, {passive:true});
     })();
   </script>
 </body>
