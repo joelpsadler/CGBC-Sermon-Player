@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- mobile cleanup build: 2026-04-29 final-video-transcript-off-copy-polish -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -1449,154 +1448,7 @@
       .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
     }
 
-
-    /* === FINAL MOBILE/DESKTOP CLEANUP: transcript header, badge spacing, quotes restore === */
-    @media (min-width:901px){
-      body.mode-video .transcript-panel.is-audio-only-notice{display:block!important;margin-top:4px!important;padding:9px 14px!important;border-radius:16px!important;min-height:42px!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-head{display:flex!important;align-items:center!important;margin:0!important;padding:0!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-title-block,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-select,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-search,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-lines,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-visibility-toggle{display:none!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools{display:flex!important;width:100%!important;padding:0!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools::before{content:'Transcript available in Audio';font-family:Poppins,sans-serif;font-weight:800;font-size:14px;color:rgba(255,255,255,.76);line-height:24px;}
-    }
-    @media (max-width:900px){
-      body.mode-video .transcript-panel{display:none!important;}
-      #mobilePlayerAnchor #playerShell.player{margin-bottom:4px!important;}
-      #mobilePlayerAnchor #playerShell.player + .transcript-panel{margin-top:4px!important;}
-      .content{gap:6px!important;}
-      .transcript-panel.is-visible{margin-top:4px!important;margin-bottom:10px!important;}
-      .transcript-panel{padding:9px 10px 11px!important;}
-      .transcript-head{grid-template-columns:54px minmax(0,1fr) 56px!important;gap:7px 8px!important;margin-bottom:6px!important;align-items:center!important;}
-      .transcript-title-block{grid-column:1 / 3!important;grid-template-columns:54px minmax(0,1fr)!important;}
-      .transcript-title-block .eyebrow{font-size:17px!important;letter-spacing:.13em!important;white-space:nowrap!important;}
-      .transcript-title-block .eyebrow::after{content:'⚙ Auto'!important;font-size:8px!important;min-height:16px!important;padding:0 5px!important;letter-spacing:.06em!important;}
-      .transcript-visibility-toggle{top:0!important;right:0!important;width:56px!important;min-width:56px!important;height:33px!important;font-size:12px!important;border-radius:13px!important;}
-      .transcript-tools{grid-template-columns:74px minmax(0,1fr)!important;gap:7px!important;width:100%!important;}
-      .transcript-select{width:74px!important;height:35px!important;font-size:12px!important;padding:0 6px!important;}
-      .transcript-search{height:35px!important;font-size:16px!important;width:100%!important;min-width:0!important;padding-left:10px!important;}
-      #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
-      .transcript-lines{margin-top:4px!important;}
-      .episode .subtitle-badge.transcript-available-badge{right:124px!important;bottom:16px!important;width:28px!important;min-width:28px!important;height:24px!important;min-height:24px!important;color:rgba(255,255,255,.98)!important;background:linear-gradient(180deg, rgba(143,174,157,.26), rgba(30,42,36,.82))!important;border-color:rgba(143,174,157,.34)!important;}
-      .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
-      .mobile-featured-quote-card{display:block!important;width:100%!important;margin:12px 0 8px!important;padding:12px!important;border-radius:22px!important;min-height:0!important;}
-      .mobile-featured-kicker{margin:0 0 4px!important;font-size:9px!important;letter-spacing:.14em!important;}
-      .mobile-featured-text{font-size:clamp(21px,6.7vw,28px)!important;line-height:1.06!important;max-height:7.5em!important;margin-top:0!important;}
-      .mobile-featured-meta{margin-top:8px!important;font-size:11px!important;line-height:1.18!important;}
-      .mobile-featured-actions{grid-template-columns:36px 58px minmax(98px,1fr)!important;gap:7px!important;margin-top:8px!important;align-items:start!important;}
-      .mobile-featured-btn{min-height:33px!important;border-radius:12px!important;font-size:12px!important;padding:0 8px!important;}
-      .mobile-featured-pause svg{width:12px!important;height:12px!important;}
-      .mobile-featured-episode{border-radius:12px!important;}
-      .mobile-featured-episode-label{height:29px!important;font-size:11px!important;gap:5px!important;}
-      .mobile-featured-episode img{aspect-ratio:16/7!important;}
-    }
-
-
-
-    /* === 2026-04-29 FINAL MOBILE FIX: single quote card + compact transcript header === */
-    @media (max-width:900px){
-      .mobile-featured-quote-card{display:none!important;}
-      [data-mobile-featured-quotes="1"] + [data-mobile-featured-quotes="1"]{display:none!important;}
-      .mobile-featured-quotes{margin:12px 0 10px!important;padding:12px 12px 13px!important;border-radius:22px!important;}
-      .mobile-featured-eyebrow{margin:0 0 6px!important;font-size:9px!important;letter-spacing:.16em!important;}
-      .mobile-featured-quote-text{font-size:clamp(19px,5.65vw,24px)!important;line-height:1.075!important;letter-spacing:-.035em!important;max-height:8.7em!important;}
-      .mobile-featured-quotes.medium .mobile-featured-quote-text,.mobile-featured-quotes.long .mobile-featured-quote-text{font-size:clamp(18px,5.25vw,22px)!important;line-height:1.08!important;}
-      .mobile-featured-meta{margin-top:7px!important;font-size:10.5px!important;line-height:1.16!important;gap:5px 8px!important;}
-      .mobile-featured-controls{grid-template-columns:34px 54px minmax(104px,132px)!important;gap:7px!important;margin-top:8px!important;align-items:start!important;}
-      .mobile-featured-btn{min-height:32px!important;border-radius:12px!important;font-size:12px!important;padding:0 8px!important;}
-      .mobile-featured-btn svg{width:12px!important;height:12px!important;}
-      .mobile-featured-episode-card{border-radius:12px!important;}
-      .mobile-featured-episode-label{height:27px!important;font-size:11px!important;gap:5px!important;}
-      .mobile-featured-episode-label svg{width:11px!important;height:11px!important;}
-      .mobile-featured-episode-card img{aspect-ratio:16/7.4!important;}
-      .episode .subtitle-badge.transcript-available-badge{right:98px!important;bottom:15px!important;width:28px!important;min-width:28px!important;height:25px!important;min-height:25px!important;padding:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;color:rgba(255,255,255,.98)!important;background:linear-gradient(180deg, rgba(143,174,157,.24), rgba(25,34,30,.78))!important;border-color:rgba(143,174,157,.32)!important;box-shadow:0 7px 16px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.10)!important;}
-      .episode .subtitle-badge.transcript-available-badge svg{width:14px!important;height:14px!important;}
-      .transcript-panel.is-visible{margin-top:3px!important;padding:10px 12px 12px!important;}
-      .transcript-head{position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr) 64px!important;grid-template-areas:"title hide" "tools tools"!important;gap:8px 10px!important;align-items:center!important;margin-bottom:7px!important;padding:0!important;}
-      .transcript-title-block{grid-area:title!important;display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important;width:auto!important;}
-      .transcript-art-mini{position:static!important;width:58px!important;min-width:58px!important;aspect-ratio:16/9!important;border-radius:9px!important;margin:0!important;order:0!important;}
-      .transcript-title-block .eyebrow{order:1!important;display:flex!important;align-items:center!important;gap:6px!important;margin:0!important;font-size:17px!important;line-height:1!important;letter-spacing:.13em!important;color:rgba(255,255,255,.94)!important;white-space:nowrap!important;}
-      .transcript-title-block .eyebrow::after{content:'⚙ Auto'!important;display:inline-flex!important;align-items:center!important;min-height:16px!important;padding:0 5px!important;border-radius:999px!important;font-family:Poppins,sans-serif!important;font-size:8px!important;line-height:1!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:rgba(255,255,255,.70)!important;background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.09)!important;}
-      .transcript-visibility-toggle{grid-area:hide!important;position:static!important;justify-self:end!important;width:62px!important;min-width:62px!important;height:34px!important;margin:0!important;border-radius:13px!important;font-size:12px!important;}
-      .transcript-tools{grid-area:tools!important;display:grid!important;grid-template-columns:76px minmax(0,1fr)!important;gap:8px!important;align-items:center!important;width:100%!important;padding:0!important;}
-      #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
-      .transcript-select{width:76px!important;min-width:0!important;height:34px!important;font-size:12px!important;padding:0 7px!important;}
-      .transcript-search{width:100%!important;min-width:0!important;height:34px!important;margin:0!important;font-size:16px!important;padding:0 34px 0 11px!important;}
-      .transcript-lines{margin-top:4px!important;}
-    }
-
-    /* === 2026-04-29 MOBILE QUOTE + TRANSCRIPT AUTO INFO POLISH ===
-       Beginner note: these rules are intentionally mobile-only and override the
-       earlier cleanup layers without disturbing desktop. */
-    @media (max-width:900px){
-      body.mode-video .episode .subtitle-badge.transcript-available-badge{display:none!important;}
-      body.mode-video .episode .episode-load-badge{right:12px!important;}
-      body.mode-audio .episode .subtitle-badge.transcript-available-badge{
-        right:112px!important; bottom:15px!important;
-        background:linear-gradient(180deg, rgba(143,174,157,.22), rgba(25,34,30,.76))!important;
-        border-color:rgba(143,174,157,.30)!important;
-      }
-      body.mode-audio .episode .episode-load-badge{right:12px!important;}
-      #mobilePlayerAnchor #playerShell.player{margin-bottom:2px!important;}
-      #mobilePlayerAnchor #playerShell.player + .transcript-panel,
-      #playerShell + .transcript-panel{margin-top:2px!important;}
-      .transcript-panel.is-visible{margin-top:2px!important;}
-      .transcript-head{position:relative!important;grid-template-columns:minmax(0,1fr) 64px!important;grid-template-areas:"title hide" "tools tools"!important;gap:7px 9px!important;margin-bottom:6px!important;}
-      .transcript-title-block{grid-area:title!important;display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;}
-      .transcript-art-mini{width:56px!important;min-width:56px!important;border-radius:9px!important;}
-      .transcript-title-block .eyebrow{font-size:15.5px!important;letter-spacing:.115em!important;gap:6px!important;white-space:nowrap!important;overflow:visible!important;}
-      .transcript-title-block .eyebrow::after{display:none!important;content:''!important;}
-      .mobile-auto-badge{display:inline-flex;align-items:center;gap:4px;min-height:16px;padding:0 5px;border-radius:999px;font-family:Poppins,sans-serif;font-size:8px;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.72);background:rgba(255,255,255,.058);border:1px solid rgba(255,255,255,.09);vertical-align:middle;flex:0 0 auto;}
-      .mobile-auto-gear{font-size:9px;line-height:1;opacity:.88;}
-      .mobile-auto-info-btn{width:14px;height:14px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;margin-left:1px;padding:0;background:rgba(143,174,157,.16);border:1px solid rgba(143,174,157,.28);color:rgba(255,255,255,.86);font-family:Poppins,sans-serif;font-size:9px;font-weight:800;line-height:1;}
-      .transcript-visibility-toggle{grid-area:hide!important;justify-self:end!important;align-self:start!important;width:66px!important;min-width:66px!important;height:35px!important;font-size:12px!important;}
-      .transcript-tools{grid-area:tools!important;display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;gap:8px!important;width:100%!important;}
-      .transcript-select{width:72px!important;min-width:0!important;}
-      .transcript-search{width:100%!important;min-width:0!important;}
-      .mobile-auto-note{position:relative;margin:7px 0 8px;padding:10px 36px 10px 12px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.76);font-size:12px;line-height:1.34;}
-      .mobile-auto-note-close{position:absolute;top:7px;right:8px;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.82);font-family:Poppins,sans-serif;font-weight:800;line-height:1;}
-      .mobile-featured-quote-card{display:none!important;}
-      [data-mobile-featured-quotes="1"] + [data-mobile-featured-quotes="1"]{display:none!important;}
-      .mobile-featured-quotes{margin:12px 0 12px!important;padding:12px 12px 14px!important;border-radius:22px!important;}
-      .mobile-featured-eyebrow{margin:0 0 5px!important;font-size:8.5px!important;letter-spacing:.16em!important;}
-      .mobile-featured-quote-text{font-size:clamp(18px,5.3vw,23px)!important;line-height:1.085!important;letter-spacing:-.035em!important;max-height:10.4em!important;margin-top:0!important;}
-      .mobile-featured-quotes.medium .mobile-featured-quote-text,.mobile-featured-quotes.long .mobile-featured-quote-text{font-size:clamp(17px,5vw,21px)!important;line-height:1.09!important;max-height:11em!important;}
-      .mobile-featured-meta{margin-top:7px!important;font-size:10.5px!important;line-height:1.16!important;}
-      .mobile-featured-controls{display:grid!important;grid-template-columns:34px 56px minmax(112px,136px)!important;gap:8px 12px!important;align-items:start!important;margin-top:8px!important;}
-      .mobile-featured-btn{min-height:31px!important;height:31px!important;border-radius:11px!important;font-size:12px!important;padding:0 8px!important;}
-      .mobile-featured-btn svg{width:12px!important;height:12px!important;}
-      .mobile-featured-episode-card{width:min(136px,100%)!important;justify-self:end!important;margin-left:auto!important;border-radius:12px!important;}
-      .mobile-featured-episode-label{height:26px!important;font-size:10.5px!important;gap:5px!important;}
-      .mobile-featured-episode-label svg{width:10px!important;height:10px!important;}
-      .mobile-featured-episode-card img{aspect-ratio:16/7.8!important;}
-    }
   </style>
-<style id="final-last-mile-video-off-copy-link-polish">
-  /* Last-mile cleanup: video mode should not show transcript UI at all. */
-  body.mode-video #transcriptPanel,
-  body.mode-video .transcript-panel{
-    display:none!important;
-    visibility:hidden!important;
-    height:0!important;
-    min-height:0!important;
-    margin:0!important;
-    padding:0!important;
-    border:0!important;
-    overflow:hidden!important;
-  }
-  body.mode-video .subtitle-badge.transcript-available-badge,
-  body.mode-video .episode .subtitle-badge.transcript-available-badge{display:none!important;}
-
-  @media(max-width:900px){
-    .transcript-title-block .eyebrow{font-size:10.5px!important;letter-spacing:.22em!important;}
-    .mobile-auto-badge{margin-left:6px!important;margin-right:14px!important;}
-    .mobile-auto-info-btn{margin-left:3px!important;}
-    .transcript-visibility-toggle{margin-left:12px!important;}
-  }
-</style>
-
 </head>
 <body class="mode-audio">
   <div class="app">
@@ -2386,13 +2238,15 @@
       return null;
     }
     function idleQuoteSiteDeepLink(q){
+      // Copy/share quote links open the full episode at the beginning.
+      // The Pastor Jacob Lannom citation link keeps the exact quote timestamp.
       const url = new URL(window.location.href);
       url.searchParams.set('mode','video');
       const id = q?.episode?.stableId || q?.episodeStableId || '';
       if(id) url.searchParams.set('item', id);
-      const start = Math.floor(Number(q?.media?.start ?? q?.start ?? 0) || 0);
-      if(start > 0) url.searchParams.set('start', String(start));
+      url.searchParams.set('start', '0');
       url.searchParams.set('autoplay','0');
+      url.searchParams.set('path','episode');
       return url.toString();
     }
     function idleQuoteText(q){ return String(q?.__curatedText || q?.approvedText || q?.displayText || q?.expandedText || q?.text || '').trim(); }
@@ -2417,7 +2271,7 @@
       url.searchParams.set('path','episode');
       return url.toString();
     }
-    function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
+    function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteSiteDeepLink(q)].filter(Boolean).join('\n'); }
     async function loadIdleQuotes(){
       try{
         const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
@@ -2501,27 +2355,21 @@
     async function renderTranscriptPanel(){
       const item = state.currentItem;
       if(!els.transcriptPanel || !els.transcriptLines) return;
+      if(state.mode === 'video'){
+        els.transcriptPanel.classList.remove('is-visible','is-video-search-only','is-collapsed','is-audio-only-notice');
+        els.transcriptPanel.style.display = 'none';
+        if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
+        return;
+      } else {
+        els.transcriptPanel.style.display = '';
+      }
       if(!item || !item?.transcript?.hasTranscript){
         els.transcriptPanel.classList.remove('is-visible');
         els.transcriptPanel.classList.remove('is-video-search-only');
         if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
         return;
       }
-      if(state.mode === 'video'){
-        if(isMobileViewport()){
-          els.transcriptPanel.classList.remove('is-visible','is-video-search-only','is-collapsed','is-audio-only-notice');
-          if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
-          return;
-        }
-        positionTranscriptPanel();
-        els.transcriptPanel.classList.add('is-visible','is-collapsed','is-audio-only-notice');
-        els.transcriptPanel.classList.remove('is-video-search-only');
-        if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.style.display = 'none';
-        if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
-        return;
-      }
-      if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.style.display = '';
-      const videoSearchOnly = false;
+      const videoSearchOnly = state.mode === 'video' && !isMobileViewport();
       if(isMobileViewport()){
         try{
           const storedMobile = window.localStorage.getItem(TRANSCRIPT_MOBILE_VISIBILITY_KEY);
@@ -3423,6 +3271,8 @@
     function updateModeUI(){
       els.listenBtn.classList.toggle('active', state.mode==='audio');
       els.watchBtn.classList.toggle('active', state.mode==='video');
+      document.body.classList.toggle('mode-audio', state.mode === 'audio');
+      document.body.classList.toggle('mode-video', state.mode === 'video');
     }
     function updateImpact(){
       if(!state.data) return;
@@ -3468,44 +3318,6 @@
       els.playerBtn.style.display = 'inline-flex';
       els.playerBtn.disabled = !hasPlayerTarget;
     }
-    function shouldShowMobileFeaturedQuote(){
-      return false;
-    }
-    function mobileFeaturedQuoteText(q){ return String(q?.__curatedText || q?.approvedText || q?.displayText || q?.expandedText || q?.text || '').trim(); }
-    function mobileFeaturedQuoteSpeaker(q){ return q?.episode?.speaker || q?.speaker || 'Pastor Jacob Lannom'; }
-    function mobileFeaturedQuoteTitle(q){ return q?.episode?.title || q?.episode?.episodeName || q?.episodeTitle || 'Episode'; }
-    function mobileFeaturedQuoteDate(q){ return q?.episode?.date || q?.date || ''; }
-    function mobileFeaturedQuoteStart(q){ return Number(q?.media?.start ?? q?.start ?? 0) || 0; }
-    function mobileFeaturedQuoteArt(q){
-      const item = idleQuoteEpisodeItem(q);
-      return (item ? getEpisodeArt(item, 'video') : '') || q?.episode?.art?.wide || q?.art?.wide || q?.thumbnail || ASSETS.fallback;
-    }
-    function renderMobileFeaturedQuoteCard(){
-      if(!els.choiceList) return '';
-      if(!shouldShowMobileFeaturedQuote()) return '';
-      const q = state.idleQuotes[state.idleQuoteIndex % state.idleQuotes.length] || state.idleQuotes[Math.floor(Math.random() * state.idleQuotes.length)];
-      const text = mobileFeaturedQuoteText(q);
-      if(!text) return '';
-      const href = idleQuoteEpisodeLink(q, false);
-      const art = mobileFeaturedQuoteArt(q);
-      const date = mobileFeaturedQuoteDate(q);
-      const start = mobileFeaturedQuoteStart(q);
-      return `<div class="mobile-featured-quote-card" id="mobileFeaturedQuoteCard" aria-live="polite">
-        <div class="mobile-featured-kicker">Featured Quotes</div>
-        <p class="mobile-featured-text">${escapeHtml(text)}</p>
-        <div class="mobile-featured-meta">
-          <span>${escapeHtml(mobileFeaturedQuoteSpeaker(q))}</span>
-          <span>${escapeHtml(mobileFeaturedQuoteTitle(q))}${date ? ' • '+escapeHtml(formatDate({date:{iso:date,raw:date}})) : ''}${start ? ' • '+escapeHtml(formatClock(start)) : ''}</span>
-        </div>
-        <div class="mobile-featured-actions">
-          <button class="mobile-featured-btn mobile-featured-pause" type="button" data-mobile-quote-pause aria-label="Pause featured quotes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg></button>
-          <button class="mobile-featured-btn primary" type="button" data-mobile-quote-next>Next</button>
-          <button class="mobile-featured-btn" type="button" data-mobile-quote-copy="1">Copy</button>
-          <a class="mobile-featured-episode" href="${escapeHtml(href)}"><span class="mobile-featured-episode-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg> Episode</span>${art ? `<img src="${escapeHtml(art)}" alt="">` : ''}</a>
-        </div>
-      </div>`;
-    }
-
         function renderChoices(){
       els.navHeading.textContent = searchResultsMode() ? 'Search Results' : headingText();
       const hasPath = !!(state.nav.rootKey || state.nav.branchKey || state.nav.leafKey);
@@ -3628,7 +3440,7 @@
                 ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
                 : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
-        const subtitleBadge = episodeLevel && state.mode === 'audio' && row?.transcript?.hasTranscript
+        const subtitleBadge = episodeLevel && row?.transcript?.hasTranscript
           ? `<div class="subtitle-badge transcript-available-badge" title="Transcript available" aria-label="Transcript available"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7.35L19 8.4v11.85H7z"></path><path d="M14 3.75V8.5h5"></path><path d="M10 12h6"></path><path d="M10 15h6"></path><path d="M10 18h4"></path></svg></div>`
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
@@ -3645,7 +3457,6 @@
         </button>`;
       }).join('');
       if(mobileEpisodeToggleCard) els.choiceList.innerHTML = mobileEpisodeToggleCard + els.choiceList.innerHTML;
-      // Mobile featured quotes are injected by the final compact quote module below.
     }
     function renderPlayer(){
       const item=state.currentItem;
@@ -4152,16 +3963,6 @@
       if(els.idleQuotePauseBtn) els.idleQuotePauseBtn.addEventListener('click', ()=>setIdleQuotePaused(!state.idleQuotePaused));
       if(els.idleQuoteNextBtn) els.idleQuoteNextBtn.addEventListener('click', nextIdleQuote);
       if(els.idleQuoteCopyBtn) els.idleQuoteCopyBtn.addEventListener('click', async ()=>{ const q=state.idleQuotes[state.idleQuoteIndex]; if(!q) return; try{ await navigator.clipboard.writeText(idleQuoteCopy(q)); alert('Quote copied.'); }catch(err){} });
-      document.addEventListener('click', (event)=>{
-        if(event.target.closest('[data-mobile-quote-next]')){
-          event.preventDefault();
-          if(state.idleQuotes.length){ state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length); renderIdleQuote(); renderChoices(); }
-        }
-        if(event.target.closest('[data-mobile-quote-pause]')){
-          event.preventDefault();
-          setIdleQuotePaused(!state.idleQuotePaused);
-        }
-      });
       if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{ state.transcript.language=els.transcriptLanguage.value; state.transcript.segments=[]; state.transcript.activeIndex=-1; await renderTranscriptPanel(); });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
       if(els.transcriptReadBtn) els.transcriptReadBtn.addEventListener('click', ()=>{ state.transcript.mode='read'; renderTranscriptPanel(); });
@@ -4199,12 +4000,6 @@
       prepareSearchIndexes(state.items);
       rerender();
       loadIdleQuotes();
-      window.setInterval(()=>{
-        if(shouldShowMobileFeaturedQuote() && !state.idleQuotePaused){
-          state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length);
-          renderChoices();
-        }
-      }, 12000);
       applyDeepLinkFromUrl();
       try{
         const [livestreams, shorts, guestSpeakers] = await Promise.all([
@@ -4227,608 +4022,6 @@
     });
   </script>
 
-
-  <style id="mobile-transcript-final-cleanup-style">
-    /* mobile cleanup build: 2026-04-29 mobile-quote-single-transcript-header-polish */
-    @media (max-width:900px){
-      /* Keep Listen/Watch from looking washed out after a selection. */
-      .mode-btn .mode-btn-shell,
-      .mode-btn:not(.active) .mode-btn-shell,
-      .mode-btn.active .mode-btn-shell{
-        color:rgba(255,255,255,.98)!important;
-        border-color:rgba(255,255,255,.12)!important;
-        background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.028))!important;
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 22px rgba(0,0,0,.18)!important;
-        opacity:1!important;
-      }
-      .mode-btn.active .mode-btn-shell{
-        background:linear-gradient(180deg, rgba(143,174,157,.25), rgba(143,174,157,.13))!important;
-        border-color:rgba(143,174,157,.30)!important;
-      }
-      .mode-btn .btn-copy .top,
-      .mode-btn .btn-copy .bottom,
-      .mode-btn .mode-icon{opacity:1!important;color:rgba(255,255,255,.96)!important;stroke:rgba(255,255,255,.96)!important;}
-
-      /* Transcript badge: visible but not over the art. */
-      .episode .subtitle-badge.transcript-available-badge{
-        right:88px!important;
-        bottom:10px!important;
-        min-width:29px!important;
-        height:28px!important;
-        padding:0 8px!important;
-        border-radius:999px!important;
-        background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.055))!important;
-        border:1px solid rgba(255,255,255,.17)!important;
-        box-shadow:0 8px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.11)!important;
-        color:rgba(255,255,255,.96)!important;
-        opacity:1!important;
-      }
-      .episode .subtitle-badge.transcript-available-badge svg{width:15px!important;height:15px!important;stroke:currentColor!important;fill:none!important;stroke-width:1.9!important;}
-
-      /* Mobile transcript panel: attached to the player and less crowded. */
-      .transcript-panel.is-visible{
-        margin:6px 0 10px!important;
-        padding:10px 12px 12px!important;
-      }
-      .transcript-panel.is-collapsed{
-        margin:6px 0 10px!important;
-        padding:10px 12px!important;
-        border-radius:20px!important;
-      }
-      .transcript-head{
-        position:relative!important;
-        display:grid!important;
-        grid-template-columns:1fr!important;
-        gap:8px!important;
-        margin:0!important;
-        padding:0!important;
-      }
-      .transcript-title-block{
-        display:flex!important;
-        align-items:center!important;
-        gap:10px!important;
-        padding-right:70px!important;
-        min-height:42px!important;
-      }
-      .transcript-title-block .eyebrow{
-        font-size:18px!important;
-        letter-spacing:.12em!important;
-        color:rgba(255,255,255,.90)!important;
-      }
-      .transcript-art-mini{
-        width:70px!important;
-        flex:0 0 70px!important;
-        border-radius:10px!important;
-      }
-      .transcript-tools{
-        display:grid!important;
-        grid-template-columns:104px minmax(0,1fr)!important;
-        gap:8px!important;
-        align-items:center!important;
-        width:100%!important;
-        padding:0!important;
-      }
-      #transcriptFollowBtn,
-      #transcriptReadBtn{display:none!important;}
-      .transcript-select{
-        width:104px!important;
-        min-width:0!important;
-        height:38px!important;
-        font-size:16px!important;
-      }
-      .transcript-search{
-        grid-column:auto!important;
-        width:100%!important;
-        min-width:0!important;
-        height:38px!important;
-        margin:0!important;
-        font-size:16px!important;
-      }
-      .transcript-visibility-toggle{
-        position:absolute!important;
-        top:0!important;
-        right:0!important;
-        width:auto!important;
-        min-width:58px!important;
-        height:36px!important;
-        padding:0 13px!important;
-        margin:0!important;
-        grid-column:auto!important;
-        z-index:3!important;
-      }
-      .transcript-lines{
-        margin-top:8px!important;
-        max-height:40vh!important;
-        min-height:205px!important;
-        padding-top:86px!important;
-      }
-
-      /* Mobile featured quote card: only appears on top category screens. */
-      .mobile-featured-quotes{
-        display:grid;
-        gap:12px;
-        margin-top:12px;
-        padding:18px 16px 18px;
-        border-radius:22px;
-        background:linear-gradient(180deg, rgba(17,17,18,.92), rgba(10,10,11,.86));
-        border:1px solid rgba(255,255,255,.08);
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 14px 30px rgba(0,0,0,.16);
-      }
-      .mobile-featured-eyebrow{
-        margin:0;
-        font-family:Poppins,sans-serif;
-        font-size:12px;
-        letter-spacing:.16em;
-        text-transform:uppercase;
-        color:rgba(255,255,255,.52);
-      }
-      .mobile-featured-quote-text{
-        font-family:Poppins,sans-serif;
-        font-size:clamp(28px,9.4vw,44px);
-        line-height:1.08;
-        letter-spacing:-.03em;
-        font-weight:800;
-        color:rgba(255,255,255,.96);
-      }
-      .mobile-featured-meta{
-        display:flex;
-        flex-wrap:wrap;
-        gap:6px 10px;
-        color:rgba(255,255,255,.64);
-        font-size:12px;
-        line-height:1.25;
-      }
-      .mobile-featured-meta a{color:rgba(255,255,255,.86);border-bottom:1px solid rgba(143,174,157,.32)}
-      .mobile-featured-controls{
-        display:grid;
-        grid-template-columns:44px 72px minmax(118px,1fr);
-        gap:9px;
-        align-items:start;
-      }
-      .mobile-featured-btn{
-        height:42px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        border-radius:15px;
-        background:rgba(255,255,255,.055);
-        border:1px solid rgba(255,255,255,.09);
-        font-family:Poppins,sans-serif;
-        font-weight:800;
-        color:rgba(255,255,255,.94);
-      }
-      .mobile-featured-btn.primary{
-        background:linear-gradient(180deg,rgba(143,174,157,.23),rgba(143,174,157,.11));
-        border-color:rgba(143,174,157,.26);
-      }
-      .mobile-featured-btn svg{width:16px;height:16px;fill:currentColor;display:block;}
-      .mobile-featured-episode-card{
-        display:block;
-        min-width:0;
-        border-radius:15px;
-        overflow:hidden;
-        background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
-        border:1px solid rgba(255,255,255,.10);
-        box-shadow:0 10px 22px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06);
-      }
-      .mobile-featured-episode-label{
-        height:42px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:8px;
-        padding:0 10px;
-        font-family:Poppins,sans-serif;
-        font-size:14px;
-        font-weight:800;
-        color:rgba(255,255,255,.96);
-        background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
-      }
-      .mobile-featured-episode-label svg{width:12px;height:12px;fill:currentColor;display:block;}
-      .mobile-featured-episode-card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:rgba(255,255,255,.04);}
-
-      /* Clear buttons inside search fields, and iOS no-zoom font sizes. */
-      .search-wrap{position:relative;display:block;min-width:0;flex:1 1 auto;}
-      .search-wrap > input{width:100%;padding-right:44px!important;font-size:16px!important;}
-      .search-clear-btn{
-        position:absolute;
-        top:50%;
-        right:10px;
-        transform:translateY(-50%);
-        width:28px;
-        height:28px;
-        border-radius:999px;
-        display:none;
-        align-items:center;
-        justify-content:center;
-        background:rgba(255,255,255,.07);
-        border:1px solid rgba(255,255,255,.08);
-        color:rgba(255,255,255,.72);
-        font-family:Poppins,sans-serif;
-        font-weight:800;
-        line-height:1;
-      }
-      .search-wrap.has-value .search-clear-btn{display:flex;}
-    }
-
-    @media (min-width:901px){
-      .search-wrap{position:relative;display:block;min-width:0;flex:1 1 auto;}
-      .search-wrap > input{width:100%;padding-right:42px!important;}
-      .search-clear-btn{position:absolute;top:50%;right:10px;transform:translateY(-50%);width:26px;height:26px;border-radius:999px;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.72);font-family:Poppins,sans-serif;font-weight:800;line-height:1;}
-      .search-wrap.has-value .search-clear-btn{display:flex;}
-    }
-
-    /* === FINAL MOBILE/DESKTOP CLEANUP: transcript header, badge spacing, quotes restore === */
-    @media (min-width:901px){
-      body.mode-video .transcript-panel.is-audio-only-notice{display:block!important;margin-top:4px!important;padding:9px 14px!important;border-radius:16px!important;min-height:42px!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-head{display:flex!important;align-items:center!important;margin:0!important;padding:0!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-title-block,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-select,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-search,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-lines,
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-visibility-toggle{display:none!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools{display:flex!important;width:100%!important;padding:0!important;}
-      body.mode-video .transcript-panel.is-audio-only-notice .transcript-tools::before{content:'Transcript available in Audio';font-family:Poppins,sans-serif;font-weight:800;font-size:14px;color:rgba(255,255,255,.76);line-height:24px;}
-    }
-    @media (max-width:900px){
-      body.mode-video .transcript-panel{display:none!important;}
-      #mobilePlayerAnchor #playerShell.player{margin-bottom:4px!important;}
-      #mobilePlayerAnchor #playerShell.player + .transcript-panel{margin-top:4px!important;}
-      .content{gap:6px!important;}
-      .transcript-panel.is-visible{margin-top:4px!important;margin-bottom:10px!important;}
-      .transcript-panel{padding:9px 10px 11px!important;}
-      .transcript-head{grid-template-columns:54px minmax(0,1fr) 56px!important;gap:7px 8px!important;margin-bottom:6px!important;align-items:center!important;}
-      .transcript-title-block{grid-column:1 / 3!important;grid-template-columns:54px minmax(0,1fr)!important;}
-      .transcript-title-block .eyebrow{font-size:17px!important;letter-spacing:.13em!important;white-space:nowrap!important;}
-      .transcript-title-block .eyebrow::after{content:'⚙ Auto'!important;font-size:8px!important;min-height:16px!important;padding:0 5px!important;letter-spacing:.06em!important;}
-      .transcript-visibility-toggle{top:0!important;right:0!important;width:56px!important;min-width:56px!important;height:33px!important;font-size:12px!important;border-radius:13px!important;}
-      .transcript-tools{grid-template-columns:74px minmax(0,1fr)!important;gap:7px!important;width:100%!important;}
-      .transcript-select{width:74px!important;height:35px!important;font-size:12px!important;padding:0 6px!important;}
-      .transcript-search{height:35px!important;font-size:16px!important;width:100%!important;min-width:0!important;padding-left:10px!important;}
-      #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
-      .transcript-lines{margin-top:4px!important;}
-      .episode .subtitle-badge.transcript-available-badge{right:124px!important;bottom:16px!important;width:28px!important;min-width:28px!important;height:24px!important;min-height:24px!important;color:rgba(255,255,255,.98)!important;background:linear-gradient(180deg, rgba(143,174,157,.26), rgba(30,42,36,.82))!important;border-color:rgba(143,174,157,.34)!important;}
-      .episode .episode-load-badge{right:12px!important;bottom:15px!important;}
-      .mobile-featured-quote-card{display:block!important;width:100%!important;margin:12px 0 8px!important;padding:12px!important;border-radius:22px!important;min-height:0!important;}
-      .mobile-featured-kicker{margin:0 0 4px!important;font-size:9px!important;letter-spacing:.14em!important;}
-      .mobile-featured-text{font-size:clamp(21px,6.7vw,28px)!important;line-height:1.06!important;max-height:7.5em!important;margin-top:0!important;}
-      .mobile-featured-meta{margin-top:8px!important;font-size:11px!important;line-height:1.18!important;}
-      .mobile-featured-actions{grid-template-columns:36px 58px minmax(98px,1fr)!important;gap:7px!important;margin-top:8px!important;align-items:start!important;}
-      .mobile-featured-btn{min-height:33px!important;border-radius:12px!important;font-size:12px!important;padding:0 8px!important;}
-      .mobile-featured-pause svg{width:12px!important;height:12px!important;}
-      .mobile-featured-episode{border-radius:12px!important;}
-      .mobile-featured-episode-label{height:29px!important;font-size:11px!important;gap:5px!important;}
-      .mobile-featured-episode img{aspect-ratio:16/7!important;}
-    }
-
-
-    /* === 2026-04-29 MOBILE QUOTE + TRANSCRIPT AUTO INFO POLISH ===
-       Beginner note: these rules are intentionally mobile-only and override the
-       earlier cleanup layers without disturbing desktop. */
-    @media (max-width:900px){
-      body.mode-video .episode .subtitle-badge.transcript-available-badge{display:none!important;}
-      body.mode-video .episode .episode-load-badge{right:12px!important;}
-      body.mode-audio .episode .subtitle-badge.transcript-available-badge{
-        right:112px!important; bottom:15px!important;
-        background:linear-gradient(180deg, rgba(143,174,157,.22), rgba(25,34,30,.76))!important;
-        border-color:rgba(143,174,157,.30)!important;
-      }
-      body.mode-audio .episode .episode-load-badge{right:12px!important;}
-      #mobilePlayerAnchor #playerShell.player{margin-bottom:2px!important;}
-      #mobilePlayerAnchor #playerShell.player + .transcript-panel,
-      #playerShell + .transcript-panel{margin-top:2px!important;}
-      .transcript-panel.is-visible{margin-top:2px!important;}
-      .transcript-head{position:relative!important;grid-template-columns:minmax(0,1fr) 64px!important;grid-template-areas:"title hide" "tools tools"!important;gap:7px 9px!important;margin-bottom:6px!important;}
-      .transcript-title-block{grid-area:title!important;display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;}
-      .transcript-art-mini{width:56px!important;min-width:56px!important;border-radius:9px!important;}
-      .transcript-title-block .eyebrow{font-size:15.5px!important;letter-spacing:.115em!important;gap:6px!important;white-space:nowrap!important;overflow:visible!important;}
-      .transcript-title-block .eyebrow::after{display:none!important;content:''!important;}
-      .mobile-auto-badge{display:inline-flex;align-items:center;gap:4px;min-height:16px;padding:0 5px;border-radius:999px;font-family:Poppins,sans-serif;font-size:8px;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.72);background:rgba(255,255,255,.058);border:1px solid rgba(255,255,255,.09);vertical-align:middle;flex:0 0 auto;}
-      .mobile-auto-gear{font-size:9px;line-height:1;opacity:.88;}
-      .mobile-auto-info-btn{width:14px;height:14px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;margin-left:1px;padding:0;background:rgba(143,174,157,.16);border:1px solid rgba(143,174,157,.28);color:rgba(255,255,255,.86);font-family:Poppins,sans-serif;font-size:9px;font-weight:800;line-height:1;}
-      .transcript-visibility-toggle{grid-area:hide!important;justify-self:end!important;align-self:start!important;width:66px!important;min-width:66px!important;height:35px!important;font-size:12px!important;}
-      .transcript-tools{grid-area:tools!important;display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;gap:8px!important;width:100%!important;}
-      .transcript-select{width:72px!important;min-width:0!important;}
-      .transcript-search{width:100%!important;min-width:0!important;}
-      .mobile-auto-note{position:relative;margin:7px 0 8px;padding:10px 36px 10px 12px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.76);font-size:12px;line-height:1.34;}
-      .mobile-auto-note-close{position:absolute;top:7px;right:8px;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.82);font-family:Poppins,sans-serif;font-weight:800;line-height:1;}
-      .mobile-featured-quote-card{display:none!important;}
-      [data-mobile-featured-quotes="1"] + [data-mobile-featured-quotes="1"]{display:none!important;}
-      .mobile-featured-quotes{margin:12px 0 12px!important;padding:12px 12px 14px!important;border-radius:22px!important;}
-      .mobile-featured-eyebrow{margin:0 0 5px!important;font-size:8.5px!important;letter-spacing:.16em!important;}
-      .mobile-featured-quote-text{font-size:clamp(18px,5.3vw,23px)!important;line-height:1.085!important;letter-spacing:-.035em!important;max-height:10.4em!important;margin-top:0!important;}
-      .mobile-featured-quotes.medium .mobile-featured-quote-text,.mobile-featured-quotes.long .mobile-featured-quote-text{font-size:clamp(17px,5vw,21px)!important;line-height:1.09!important;max-height:11em!important;}
-      .mobile-featured-meta{margin-top:7px!important;font-size:10.5px!important;line-height:1.16!important;}
-      .mobile-featured-controls{display:grid!important;grid-template-columns:34px 56px minmax(112px,136px)!important;gap:8px 12px!important;align-items:start!important;margin-top:8px!important;}
-      .mobile-featured-btn{min-height:31px!important;height:31px!important;border-radius:11px!important;font-size:12px!important;padding:0 8px!important;}
-      .mobile-featured-btn svg{width:12px!important;height:12px!important;}
-      .mobile-featured-episode-card{width:min(136px,100%)!important;justify-self:end!important;margin-left:auto!important;border-radius:12px!important;}
-      .mobile-featured-episode-label{height:26px!important;font-size:10.5px!important;gap:5px!important;}
-      .mobile-featured-episode-label svg{width:10px!important;height:10px!important;}
-      .mobile-featured-episode-card img{aspect-ratio:16/7.8!important;}
-    }
-  
-
-    /* -------------------------------------------------------------------------
-       FINAL PIXEL PASS — video transcript off, mobile header/quote balance
-       Beginner note: this is an override layer only; it does not disturb the
-       stable desktop player code above it.
-       ------------------------------------------------------------------------- */
-    body.mode-video .transcript-panel{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;}
-    body.mode-video .subtitle-badge.transcript-available-badge{display:none!important;}
-    body.mode-video .episode .episode-load-badge{right:12px!important;}
-
-    @media (max-width:900px){
-      body.mode-video .transcript-panel{display:none!important;}
-      body.mode-video .subtitle-badge.transcript-available-badge{display:none!important;}
-      body.mode-audio .episode .subtitle-badge.transcript-available-badge{
-        right:116px!important;
-        bottom:15px!important;
-        width:24px!important;
-        height:24px!important;
-        min-height:24px!important;
-        padding:0!important;
-        display:inline-flex!important;
-        align-items:center!important;
-        justify-content:center!important;
-        background:linear-gradient(180deg, rgba(143,174,157,.22), rgba(23,31,27,.82))!important;
-        border-color:rgba(143,174,157,.30)!important;
-        box-shadow:0 8px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06)!important;
-      }
-      body.mode-audio .episode .subtitle-badge.transcript-available-badge svg{width:13px!important;height:13px!important;}
-      body.mode-audio .episode .episode-load-badge{right:12px!important;}
-
-      .transcript-panel.is-visible{margin-top:3px!important;}
-      #mobilePlayerAnchor #playerShell.player{margin-bottom:2px!important;}
-      #mobilePlayerAnchor #playerShell.player + .transcript-panel,
-      #playerShell + .transcript-panel{margin-top:3px!important;}
-
-      .transcript-head{
-        display:grid!important;
-        grid-template-columns:1fr auto!important;
-        grid-template-areas:"title hide" "tools tools"!important;
-        align-items:start!important;
-        gap:7px 8px!important;
-        margin-bottom:6px!important;
-        padding-right:0!important;
-      }
-      .transcript-title-block{
-        grid-area:title!important;
-        display:flex!important;
-        align-items:center!important;
-        gap:8px!important;
-        min-width:0!important;
-        width:auto!important;
-      }
-      .transcript-art-mini{width:54px!important;min-width:54px!important;border-radius:9px!important;margin:0!important;}
-      .transcript-title-block .eyebrow{
-        font-size:14.2px!important;
-        letter-spacing:.115em!important;
-        line-height:1!important;
-        display:inline-flex!important;
-        align-items:center!important;
-        gap:6px!important;
-        min-width:0!important;
-        max-width:calc(100vw - 170px)!important;
-        white-space:nowrap!important;
-      }
-      .transcript-title-block .eyebrow::after{display:none!important;content:''!important;}
-      .mobile-auto-badge{
-        display:inline-flex!important;
-        align-items:center!important;
-        gap:3px!important;
-        min-height:16px!important;
-        padding:0 4px!important;
-        border-radius:999px!important;
-        font-size:7.6px!important;
-        letter-spacing:.055em!important;
-        flex:0 0 auto!important;
-        white-space:nowrap!important;
-      }
-      .mobile-auto-gear{font-size:8px!important;line-height:1!important;}
-      .mobile-auto-info-btn{width:13px!important;height:13px!important;font-size:8px!important;margin-left:1px!important;}
-      .transcript-visibility-toggle{
-        grid-area:hide!important;
-        justify-self:end!important;
-        align-self:start!important;
-        width:72px!important;
-        min-width:72px!important;
-        height:36px!important;
-        font-size:12px!important;
-        margin:0!important;
-      }
-      .transcript-tools{
-        grid-area:tools!important;
-        display:grid!important;
-        grid-template-columns:76px minmax(0,1fr)!important;
-        gap:8px!important;
-        width:100%!important;
-        align-items:center!important;
-        padding:0!important;
-      }
-      .transcript-select{width:76px!important;min-width:0!important;height:38px!important;font-size:15px!important;}
-      .transcript-search{width:100%!important;min-width:0!important;height:38px!important;font-size:16px!important;margin:0!important;}
-      .mobile-auto-note{margin:7px 0 8px!important;font-size:12px!important;}
-
-      .mobile-featured-quotes{
-        margin:12px 0 12px!important;
-        padding:12px 12px 13px!important;
-        border-radius:22px!important;
-      }
-      .mobile-featured-eyebrow{margin:0 0 5px!important;font-size:8.5px!important;letter-spacing:.16em!important;}
-      .mobile-featured-quote-text{
-        font-size:clamp(17px,5.05vw,22px)!important;
-        line-height:1.095!important;
-        letter-spacing:-.035em!important;
-        max-height:10.2em!important;
-      }
-      .mobile-featured-quotes.medium .mobile-featured-quote-text,
-      .mobile-featured-quotes.long .mobile-featured-quote-text{font-size:clamp(16px,4.85vw,20.5px)!important;line-height:1.1!important;}
-      .mobile-featured-meta{margin-top:7px!important;font-size:10.5px!important;line-height:1.16!important;}
-      .mobile-featured-controls{
-        display:grid!important;
-        grid-template-columns:34px 54px 56px minmax(112px,138px)!important;
-        gap:7px!important;
-        align-items:start!important;
-        margin-top:8px!important;
-      }
-      .mobile-featured-btn{min-height:31px!important;height:31px!important;border-radius:11px!important;font-size:12px!important;padding:0 8px!important;}
-      .mobile-featured-btn svg{width:12px!important;height:12px!important;}
-      .mobile-featured-episode-card,.mobile-featured-episode{width:min(138px,100%)!important;justify-self:end!important;margin-left:auto!important;border-radius:12px!important;}
-      .mobile-featured-episode-label{height:26px!important;font-size:10.5px!important;gap:5px!important;}
-      .mobile-featured-episode-label svg{width:10px!important;height:10px!important;}
-      .mobile-featured-episode-card img,.mobile-featured-episode img{aspect-ratio:16/7.8!important;object-fit:cover!important;}
-    }
-</style>
-
-  <script id="mobile-transcript-final-cleanup-script">
-    (function(){
-      const MOBILE_MQ = window.matchMedia('(max-width:900px)');
-      const playSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>';
-      const pauseSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg>';
-
-      function isMobile(){ return MOBILE_MQ.matches; }
-      function isRootCategoryView(){
-        try{ return isMobile() && !state.nav.rootKey && !state.nav.branchKey && !state.nav.leafKey && !searchResultsMode(); }
-        catch(err){ return false; }
-      }
-      function currentMobileQuote(){
-        try{ return state.idleQuotes && state.idleQuotes.length ? state.idleQuotes[state.idleQuoteIndex] : null; }
-        catch(err){ return null; }
-      }
-      function mobileQuoteCardHtml(){
-        if(!isRootCategoryView()) return '';
-        const q = currentMobileQuote();
-        if(!q) return '';
-        const text = idleQuoteText(q);
-        if(!text) return '';
-        const scaleClass = text.length > 210 ? ' long' : text.length > 130 ? ' medium' : '';
-        const speaker = idleQuoteSpeaker(q);
-        const title = idleQuoteTitle(q);
-        const date = idleQuoteDate(q);
-        const start = idleQuoteStart(q);
-        const link = idleQuoteSiteDeepLink(q);
-        const episodeLink = idleQuoteEpisodeLink(q, false);
-        const episodeItem = idleQuoteEpisodeItem(q);
-        const art = episodeItem ? getEpisodeArt(episodeItem, 'video') : (q?.episode?.art || q?.art || ASSETS.fallback);
-        const pauseLabel = state.idleQuotePaused ? 'Resume' : 'Pause';
-        const icon = state.idleQuotePaused ? playSvg : pauseSvg;
-        return `<section class="mobile-featured-quotes${scaleClass}" data-mobile-featured-quotes="1">
-          <p class="mobile-featured-eyebrow">Featured Quotes</p>
-          <div class="mobile-featured-quote-text">${escapeHtml(text)}</div>
-          <div class="mobile-featured-meta">
-            ${speaker ? `<a href="${escapeHtml(link)}">${escapeHtml(speaker)}</a>` : ''}
-            ${title ? `<span>${escapeHtml(title)}</span>` : ''}
-            ${date ? `<span>${escapeHtml(formatDate({date:{iso:date,raw:date}}))}</span>` : ''}
-            <span>${escapeHtml(formatClock(start))}</span>
-          </div>
-          <div class="mobile-featured-controls">
-            <button type="button" class="mobile-featured-btn" data-mobile-quote-pause="1" aria-label="${escapeHtml(pauseLabel)}">${icon}</button>
-            <button type="button" class="mobile-featured-btn primary" data-mobile-quote-next="1">Next</button>
-            <button type="button" class="mobile-featured-btn" data-mobile-quote-copy="1">Copy</button>
-            <a class="mobile-featured-episode-card" href="${escapeHtml(episodeLink)}" aria-label="Open full episode">
-              <span class="mobile-featured-episode-label">${playSvg}<span>Episode</span></span>
-              <img src="${escapeHtml(art || ASSETS.fallback)}" alt="">
-            </a>
-          </div>
-        </section>`;
-      }
-      function appendMobileQuoteCard(){
-        try{
-          if(!els.choiceList) return;
-          const old = els.choiceList.querySelector('[data-mobile-featured-quotes="1"]');
-          if(old) old.remove();
-          const html = mobileQuoteCardHtml();
-          if(!html) return;
-          els.choiceList.insertAdjacentHTML('beforeend', html);
-        }catch(err){ console.warn('Mobile featured quote card failed.', err); }
-      }
-
-      if(typeof renderChoices === 'function'){
-        const baseRenderChoices = renderChoices;
-        renderChoices = function(){
-          baseRenderChoices.apply(this, arguments);
-          appendMobileQuoteCard();
-        };
-      }
-      if(typeof renderIdleQuote === 'function'){
-        const baseRenderIdleQuote = renderIdleQuote;
-        renderIdleQuote = function(){
-          baseRenderIdleQuote.apply(this, arguments);
-          appendMobileQuoteCard();
-        };
-      }
-      if(typeof setIdleQuotePaused === 'function'){
-        const baseSetIdleQuotePaused = setIdleQuotePaused;
-        setIdleQuotePaused = function(value){
-          baseSetIdleQuotePaused.apply(this, arguments);
-          appendMobileQuoteCard();
-        };
-      }
-
-      document.addEventListener('click', function(event){
-        const pauseBtn = event.target.closest && event.target.closest('[data-mobile-quote-pause]');
-        if(pauseBtn){
-          event.preventDefault();
-          event.stopPropagation();
-          if(typeof setIdleQuotePaused === 'function') setIdleQuotePaused(!state.idleQuotePaused);
-          return;
-        }
-        const nextBtn = event.target.closest && event.target.closest('[data-mobile-quote-next]');
-        if(nextBtn){
-          event.preventDefault();
-          event.stopPropagation();
-          if(typeof nextIdleQuote === 'function') nextIdleQuote();
-          appendMobileQuoteCard();
-          return;
-        }
-        const copyBtn = event.target.closest && event.target.closest('[data-mobile-quote-copy]');
-        if(copyBtn){
-          event.preventDefault();
-          event.stopPropagation();
-          const q = currentMobileQuote();
-          if(q){
-            const text = (typeof idleQuoteCopy === 'function') ? idleQuoteCopy(q) : idleQuoteText(q);
-            if(navigator.clipboard && text){ navigator.clipboard.writeText(text).catch(function(){}); }
-          }
-        }
-      }, true);
-
-      function wrapSearchInput(input){
-        if(!input || input.dataset.clearWrapped === 'true') return;
-        input.dataset.clearWrapped = 'true';
-        const wrap = document.createElement('span');
-        wrap.className = 'search-wrap';
-        input.parentNode.insertBefore(wrap, input);
-        wrap.appendChild(input);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'search-clear-btn';
-        btn.setAttribute('aria-label', 'Clear search');
-        btn.textContent = '×';
-        wrap.appendChild(btn);
-        function sync(){ wrap.classList.toggle('has-value', !!input.value); }
-        input.addEventListener('input', sync);
-        input.addEventListener('change', sync);
-        btn.addEventListener('click', function(ev){
-          ev.preventDefault();
-          input.value = '';
-          input.dispatchEvent(new Event('input', {bubbles:true}));
-          input.dispatchEvent(new Event('change', {bubbles:true}));
-          input.focus();
-          sync();
-        });
-        sync();
-      }
-      function setupSearchClears(){
-        wrapSearchInput(document.getElementById('searchInput'));
-        wrapSearchInput(document.getElementById('transcriptSearch'));
-      }
-      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupSearchClears);
-      else setupSearchClears();
-    })();
-  </script>
-
   <script>
     (function setupQuoteReviewPageShortcut(){
       const logo = document.getElementById('logoReset');
@@ -4847,206 +4040,228 @@
   </script>
 
 
-  <script id="mobile-auto-info-polish-script">
-    (function(){
-      const mq = window.matchMedia('(max-width:900px)');
-      const NOTE_TEXT = 'Auto translations are not human verified, they are a tool and can make mistakes. Use actual audio or video file for accuracy when required.';
-      function ensureMobileAutoBadge(){
-        if(!mq.matches) return;
-        const eyebrow = document.querySelector('.transcript-panel .transcript-title-block .eyebrow');
-        if(!eyebrow || eyebrow.querySelector('.mobile-auto-badge')) return;
-        const badge = document.createElement('span');
-        badge.className = 'mobile-auto-badge';
-        badge.innerHTML = '<span class="mobile-auto-gear" aria-hidden="true">⚙</span><span>Auto</span><button type="button" class="mobile-auto-info-btn" aria-label="About auto transcripts">i</button>';
-        eyebrow.appendChild(badge);
-      }
-      function toggleAutoNote(btn){
-        const panel = btn && btn.closest ? btn.closest('.transcript-panel') : document.querySelector('.transcript-panel');
-        if(!panel) return;
-        const existing = panel.querySelector('.mobile-auto-note');
-        if(existing){ existing.remove(); return; }
-        const note = document.createElement('div');
-        note.className = 'mobile-auto-note';
-        note.innerHTML = '<button type="button" class="mobile-auto-note-close" aria-label="Close auto transcript note">×</button><span>'+NOTE_TEXT+'</span>';
-        const head = panel.querySelector('.transcript-head');
-        if(head && head.parentNode){ head.insertAdjacentElement('afterend', note); }
-      }
-      document.addEventListener('click', function(event){
-        const info = event.target.closest && event.target.closest('.mobile-auto-info-btn');
-        if(info){ event.preventDefault(); event.stopPropagation(); toggleAutoNote(info); return; }
-        const close = event.target.closest && event.target.closest('.mobile-auto-note-close');
-        if(close){ event.preventDefault(); const note = close.closest('.mobile-auto-note'); if(note) note.remove(); }
-      }, true);
-      const observer = new MutationObserver(ensureMobileAutoBadge);
-      observer.observe(document.documentElement, {childList:true, subtree:true});
-      window.addEventListener('resize', ensureMobileAutoBadge, {passive:true});
-      document.addEventListener('DOMContentLoaded', ensureMobileAutoBadge);
-      setTimeout(ensureMobileAutoBadge, 200);
-      setTimeout(ensureMobileAutoBadge, 1000);
-    })();
-  </script>
-
-
-  <script id="final-video-off-mobile-quote-copy-pass">
-    (function(){
-      const mq = window.matchMedia('(max-width:900px)');
-      const COPY_LABEL = 'Copy';
-      function isMobile(){ return mq.matches; }
-      function hardHideVideoTranscript(){
-        try{
-          const panel = document.getElementById('transcriptPanel');
-          if(window.state && state.mode === 'video' && panel){
-            panel.classList.remove('is-visible');
-            panel.classList.remove('is-video-search-only');
-            panel.style.display = 'none';
-          } else if(panel){
-            panel.style.display = '';
-          }
-          document.querySelectorAll('.episode .subtitle-badge.transcript-available-badge').forEach(function(badge){
-            if(window.state && state.mode === 'video') badge.remove();
-          });
-        }catch(err){}
-      }
-      if(typeof renderTranscriptPanel === 'function'){
-        const baseRenderTranscriptPanel = renderTranscriptPanel;
-        renderTranscriptPanel = async function(){
-          if(window.state && state.mode === 'video'){
-            const panel = document.getElementById('transcriptPanel');
-            if(panel){
-              panel.classList.remove('is-visible');
-              panel.classList.remove('is-video-search-only');
-              panel.style.display = 'none';
-            }
-            if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
-            return;
-          }
-          const result = await baseRenderTranscriptPanel.apply(this, arguments);
-          const panel = document.getElementById('transcriptPanel');
-          if(panel) panel.style.display = '';
-          return result;
-        };
-      }
-      if(typeof renderPlayer === 'function'){
-        const baseRenderPlayer = renderPlayer;
-        renderPlayer = function(){
-          const result = baseRenderPlayer.apply(this, arguments);
-          setTimeout(hardHideVideoTranscript, 0);
-          return result;
-        };
-      }
-      if(typeof renderChoices === 'function'){
-        const baseRenderChoicesFinal = renderChoices;
-        renderChoices = function(){
-          const result = baseRenderChoicesFinal.apply(this, arguments);
-          setTimeout(hardHideVideoTranscript, 0);
-          return result;
-        };
-      }
-      function addCopyToMobileQuoteCards(){
-        if(!isMobile()) return;
-        document.querySelectorAll('[data-mobile-featured-quotes="1"]').forEach(function(card){
-          const controls = card.querySelector('.mobile-featured-controls, .mobile-featured-actions');
-          if(!controls || controls.querySelector('[data-mobile-quote-copy]')) return;
-          const next = controls.querySelector('[data-mobile-quote-next]');
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'mobile-featured-btn';
-          btn.setAttribute('data-mobile-quote-copy','1');
-          btn.textContent = COPY_LABEL;
-          if(next && next.nextSibling) controls.insertBefore(btn, next.nextSibling);
-          else if(next) controls.insertBefore(btn, next.nextElementSibling);
-          else controls.appendChild(btn);
-        });
-      }
-      if(typeof renderIdleQuote === 'function'){
-        const baseRenderIdleQuoteFinal = renderIdleQuote;
-        renderIdleQuote = function(){
-          const result = baseRenderIdleQuoteFinal.apply(this, arguments);
-          setTimeout(addCopyToMobileQuoteCards, 0);
-          return result;
-        };
-      }
-      const mo = new MutationObserver(function(){ addCopyToMobileQuoteCards(); hardHideVideoTranscript(); });
-      mo.observe(document.documentElement, { childList:true, subtree:true });
-      document.addEventListener('click', function(event){
-        const copy = event.target.closest && event.target.closest('[data-mobile-quote-copy]');
-        if(copy){
-          event.preventDefault();
-          event.stopPropagation();
-          try{
-            const q = window.state && state.idleQuotes && state.idleQuotes.length ? state.idleQuotes[state.idleQuoteIndex] : null;
-            const text = q ? ((typeof idleQuoteCopy === 'function') ? idleQuoteCopy(q) : (typeof idleQuoteText === 'function' ? idleQuoteText(q) : '')) : '';
-            if(navigator.clipboard && text) navigator.clipboard.writeText(text).catch(function(){});
-          }catch(err){}
-        }
-      }, true);
-      document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){ hardHideVideoTranscript(); addCopyToMobileQuoteCards(); }, 250); });
-      window.addEventListener('resize', function(){ setTimeout(function(){ hardHideVideoTranscript(); addCopyToMobileQuoteCards(); }, 150); }, {passive:true});
-    })();
-  </script>
-<script id="final-last-mile-video-off-copy-link-polish-script">
+<style id="deep-scan-final-fixes">
+  body.mode-video #transcriptPanel,
+  body.mode-video .transcript-panel,
+  body.mode-video .transcript-panel.is-visible,
+  body.mode-video .transcript-panel.is-collapsed,
+  body.mode-video .transcript-panel.is-audio-only-notice{
+    display:none!important;
+    visibility:hidden!important;
+    height:0!important;
+    min-height:0!important;
+    max-height:0!important;
+    overflow:hidden!important;
+    padding:0!important;
+    margin:0!important;
+    border:0!important;
+  }
+  body.mode-video .transcript-available-badge,
+  body.mode-video .subtitle-badge.transcript-available-badge{
+    display:none!important;
+  }
+  @media (max-width:900px){
+    .transcript-head{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) auto 74px!important;
+      grid-template-areas:"title auto hide" "tools tools tools"!important;
+      align-items:start!important;
+      column-gap:8px!important;
+      row-gap:8px!important;
+    }
+    .transcript-title-block{
+      grid-area:title!important;
+      min-width:0!important;
+      max-width:100%!important;
+    }
+    .transcript-title-block .eyebrow{
+      font-size:12.6px!important;
+      letter-spacing:.10em!important;
+      white-space:nowrap!important;
+      overflow:hidden!important;
+      text-overflow:clip!important;
+      max-width:100%!important;
+    }
+    .transcript-title-block .eyebrow .mobile-auto-badge{display:none!important;}
+    .transcript-head > .mobile-auto-badge{
+      grid-area:auto!important;
+      justify-self:end!important;
+      align-self:start!important;
+      margin-right:10px!important;
+      margin-top:1px!important;
+      display:inline-flex!important;
+      position:relative!important;
+      z-index:2!important;
+      transform:none!important;
+    }
+    .transcript-visibility-toggle{
+      grid-area:hide!important;
+      justify-self:end!important;
+      align-self:start!important;
+      width:68px!important;
+      min-width:68px!important;
+      height:36px!important;
+      margin:0!important;
+      position:relative!important;
+      z-index:3!important;
+    }
+    .transcript-tools{
+      grid-area:tools!important;
+      display:grid!important;
+      grid-template-columns:74px minmax(0,1fr)!important;
+      gap:8px!important;
+      width:100%!important;
+    }
+  }
+</style>
+<script id="deep-scan-final-fixes">
 (function(){
-  function hideVideoTranscriptNow(){
-    try{
-      if(!(window.state && state.mode === 'video')) return;
-      var panel = document.getElementById('transcriptPanel');
-      if(panel){
-        panel.classList.remove('is-visible','is-collapsed','is-video-search-only','is-audio-only-notice');
-        panel.style.display = 'none';
-        panel.setAttribute('hidden','hidden');
-      }
-      document.querySelectorAll('.subtitle-badge.transcript-available-badge').forEach(function(node){ node.remove(); });
-      if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
-    }catch(err){}
+  function getMode(){ try{return state && state.mode || '';}catch(_){return '';} }
+  function syncModeClasses(){
+    var m = getMode();
+    document.body.classList.toggle('mode-audio', m === 'audio');
+    document.body.classList.toggle('mode-video', m === 'video');
   }
-  if(typeof idleQuoteCopy === 'function' && typeof idleQuoteEpisodeLink === 'function'){
-    idleQuoteCopy = function(q){
-      var quote = (typeof idleQuoteText === 'function') ? idleQuoteText(q) : '';
-      var speaker = (typeof idleQuoteSpeaker === 'function') ? idleQuoteSpeaker(q) : '';
-      var title = (typeof idleQuoteTitle === 'function') ? idleQuoteTitle(q) : '';
-      var date = (typeof idleQuoteDate === 'function') ? idleQuoteDate(q) : '';
-      var dateText = '';
-      try{ dateText = date && typeof formatDate === 'function' ? formatDate({date:{iso:date,raw:date}}) : ''; }catch(err){}
-      var timeText = '';
-      try{ timeText = typeof formatClock === 'function' && typeof idleQuoteStart === 'function' ? formatClock(idleQuoteStart(q)) : ''; }catch(err){}
-      var meta = [speaker, title, dateText, timeText].filter(Boolean).join(' • ');
-      var link = idleQuoteEpisodeLink(q, false);
-      return [quote, meta ? '— ' + meta : '', link].filter(Boolean).join('\n');
-    };
+  function hideVideoTranscript(){
+    syncModeClasses();
+    if(getMode() !== 'video') return;
+    var panel = document.getElementById('transcriptPanel');
+    if(panel){
+      panel.classList.remove('is-visible','is-video-search-only','is-collapsed','is-audio-only-notice');
+      panel.style.display = 'none';
+      panel.style.visibility = 'hidden';
+      panel.style.height = '0px';
+      panel.style.minHeight = '0px';
+      panel.style.maxHeight = '0px';
+      panel.style.margin = '0px';
+      panel.style.padding = '0px';
+      panel.style.borderWidth = '0px';
+    }
+    document.querySelectorAll('.transcript-available-badge,.subtitle-badge.transcript-available-badge').forEach(function(el){
+      el.style.display = 'none';
+    });
+    try{ if(typeof stopTranscriptClock === 'function') stopTranscriptClock(); }catch(_){}
   }
-  if(typeof renderTranscriptPanel === 'function'){
-    var baseRenderTranscriptPanelLastMile = renderTranscriptPanel;
-    renderTranscriptPanel = async function(){
-      if(window.state && state.mode === 'video'){
-        hideVideoTranscriptNow();
+  function restoreAudioTranscript(){
+    syncModeClasses();
+    if(getMode() !== 'audio') return;
+    var panel = document.getElementById('transcriptPanel');
+    if(panel){
+      panel.style.display = '';
+      panel.style.visibility = '';
+      panel.style.height = '';
+      panel.style.minHeight = '';
+      panel.style.maxHeight = '';
+      panel.style.margin = '';
+      panel.style.padding = '';
+      panel.style.borderWidth = '';
+    }
+    document.querySelectorAll('.transcript-available-badge,.subtitle-badge.transcript-available-badge').forEach(function(el){
+      el.style.display = '';
+    });
+  }
+  try{
+    if(typeof renderTranscriptPanel === 'function' && !renderTranscriptPanel.__deepVideoOffWrapped){
+      var origRenderTranscriptPanel = renderTranscriptPanel;
+      renderTranscriptPanel = function(){
+        syncModeClasses();
+        if(getMode() === 'video'){
+          hideVideoTranscript();
+          return;
+        }
+        restoreAudioTranscript();
+        return origRenderTranscriptPanel.apply(this, arguments);
+      };
+      renderTranscriptPanel.__deepVideoOffWrapped = true;
+    }
+  }catch(e){ console.warn('Deep transcript wrapper failed', e); }
+
+  (function(){
+    var logo = document.getElementById('logoReset');
+    if(!logo || logo.dataset.deepTripleReview === 'true') return;
+    logo.dataset.deepTripleReview = 'true';
+    var clicks = 0, timer = null, resetTimer = null;
+    function isDesktop(){ return window.matchMedia && window.matchMedia('(min-width:901px)').matches; }
+    logo.addEventListener('click', function(ev){
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      clearTimeout(resetTimer);
+      if(!isDesktop()){
+        if(typeof hardResetPage === 'function') hardResetPage();
         return;
       }
-      var panel = document.getElementById('transcriptPanel');
-      if(panel){ panel.removeAttribute('hidden'); panel.style.display = ''; }
-      return await baseRenderTranscriptPanelLastMile.apply(this, arguments);
-    };
+      clicks += 1;
+      clearTimeout(timer);
+      timer = setTimeout(function(){ clicks = 0; }, 850);
+      if(clicks >= 3){
+        clicks = 0;
+        clearTimeout(timer);
+        window.location.href = 'quote-review.html';
+        return;
+      }
+      resetTimer = setTimeout(function(){
+        if(clicks > 0 && clicks < 3){
+          clicks = 0;
+          if(typeof hardResetPage === 'function') hardResetPage();
+        }
+      }, 900);
+    }, true);
+  })();
+
+  function normalizeAutoBadge(){
+    if(!window.matchMedia || !window.matchMedia('(max-width:900px)').matches) return;
+    var head = document.querySelector('#transcriptPanel .transcript-head');
+    var eyebrow = document.querySelector('#transcriptPanel .transcript-title-block .eyebrow');
+    if(!head || !eyebrow) return;
+    var badge = head.querySelector(':scope > .mobile-auto-badge') || eyebrow.querySelector('.mobile-auto-badge');
+    if(badge && badge.parentElement !== head){
+      head.insertBefore(badge, head.querySelector('.transcript-visibility-toggle') || null);
+    }
+    head.querySelectorAll(':scope > .mobile-auto-badge').forEach(function(el, idx){
+      if(idx > 0) el.remove();
+    });
   }
-  if(typeof renderPlayer === 'function'){
-    var baseRenderPlayerLastMile = renderPlayer;
-    renderPlayer = function(){
-      var result = baseRenderPlayerLastMile.apply(this, arguments);
-      setTimeout(hideVideoTranscriptNow, 0);
-      setTimeout(hideVideoTranscriptNow, 80);
-      return result;
-    };
-  }
-  if(typeof renderChoices === 'function'){
-    var baseRenderChoicesLastMile = renderChoices;
-    renderChoices = function(){
-      var result = baseRenderChoicesLastMile.apply(this, arguments);
-      setTimeout(hideVideoTranscriptNow, 0);
-      return result;
-    };
-  }
-  document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideVideoTranscriptNow, 100); });
-  try{ new MutationObserver(hideVideoTranscriptNow).observe(document.documentElement, {childList:true, subtree:true}); }catch(err){}
+  try{
+    if(typeof updateModeUI === 'function' && !updateModeUI.__deepModeWrapped){
+      var origUpdateModeUI = updateModeUI;
+      updateModeUI = function(){
+        var out = origUpdateModeUI.apply(this, arguments);
+        syncModeClasses();
+        if(getMode() === 'video') hideVideoTranscript();
+        else restoreAudioTranscript();
+        return out;
+      };
+      updateModeUI.__deepModeWrapped = true;
+    }
+  }catch(_){}
+
+  ['load','resize','orientationchange'].forEach(function(evt){
+    window.addEventListener(evt, function(){
+      syncModeClasses();
+      normalizeAutoBadge();
+      if(getMode() === 'video') hideVideoTranscript();
+      else restoreAudioTranscript();
+    });
+  });
+  document.addEventListener('click', function(){
+    setTimeout(function(){
+      syncModeClasses();
+      normalizeAutoBadge();
+      if(getMode() === 'video') hideVideoTranscript();
+      else restoreAudioTranscript();
+    }, 50);
+  }, true);
+  var mo = new MutationObserver(function(){
+    normalizeAutoBadge();
+    if(getMode() === 'video') hideVideoTranscript();
+  });
+  try{ mo.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']}); }catch(_){}
+  syncModeClasses();
+  normalizeAutoBadge();
+  if(getMode() === 'video') hideVideoTranscript();
 })();
 </script>
+<!-- mobile cleanup build: 2026-04-29 final-deep-scan-video-off-triple-review-auto-spacing -->
 
 </body>
 </html>
