@@ -5530,5 +5530,220 @@
 })();
 </script>
 
+
+<!-- === 2026-04-30 FINAL MICROFIX: transcript header controls only ===
+     Beginner note: This block is intentionally tiny and appended last so it only
+     overrides the transcript header UI. It does not touch player, routing, stats,
+     quote links, transcript timing, or search logic. -->
+<style id="final-transcript-header-microfix-css">
+  /* Bigger, readable Auto badge icons. The i is visual; the whole badge opens the note. */
+  .transcript-auto-badge{
+    min-height:29px!important;
+    padding:0 12px!important;
+    gap:8px!important;
+    font-size:13px!important;
+    cursor:pointer!important;
+    user-select:none!important;
+  }
+  .transcript-auto-badge > span:first-child{
+    font-size:21px!important;
+    line-height:1!important;
+    opacity:1!important;
+  }
+  .transcript-auto-info-btn{
+    width:23px!important;
+    height:23px!important;
+    min-width:23px!important;
+    font-size:15px!important;
+    line-height:1!important;
+    pointer-events:none!important;
+  }
+
+  /* Keep the collapsed helper text on one line. */
+  .transcript-panel.is-collapsed .transcript-tools::before{
+    white-space:nowrap!important;
+    min-width:170px!important;
+  }
+
+  /* Safari/Chrome adds its own clear X for type=search; keep only our custom clear X. */
+  #transcriptSearch::-webkit-search-cancel-button,
+  #transcriptSearch::-webkit-search-decoration,
+  #transcriptSearch::-webkit-search-results-button,
+  #transcriptSearch::-webkit-search-results-decoration{
+    -webkit-appearance:none!important;
+    appearance:none!important;
+    display:none!important;
+  }
+
+  .transcript-auto-note{
+    position:relative!important;
+    margin:0 0 10px!important;
+    padding:12px 44px 12px 14px!important;
+    border-radius:16px!important;
+    background:linear-gradient(180deg, rgba(143,174,157,.16), rgba(16,20,18,.88))!important;
+    border:1px solid rgba(143,174,157,.26)!important;
+    color:rgba(255,255,255,.88)!important;
+    font-size:13px!important;
+    line-height:1.35!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 12px 24px rgba(0,0,0,.16)!important;
+  }
+  .transcript-auto-note-close{
+    position:absolute!important;
+    top:8px!important;
+    right:8px!important;
+    width:28px!important;
+    height:28px!important;
+    border-radius:999px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    background:rgba(255,255,255,.07)!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    color:rgba(255,255,255,.92)!important;
+    font-size:18px!important;
+    line-height:1!important;
+  }
+
+  @media (max-width:900px){
+    /* Row 1: thumbnail + TRANSCRIPT + Hide. Row 1b: Auto badge under the title, not under Hide. */
+    .transcript-panel.is-visible .transcript-head{
+      display:block!important;
+      position:relative!important;
+      padding:0!important;
+      margin:0 0 9px!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block{
+      display:flex!important;
+      align-items:flex-start!important;
+      gap:9px!important;
+      width:100%!important;
+      min-height:62px!important;
+      padding-right:76px!important;
+      overflow:visible!important;
+    }
+    .transcript-panel.is-visible .transcript-art-mini{
+      width:58px!important;
+      min-width:58px!important;
+      flex:0 0 58px!important;
+      margin:0!important;
+      position:static!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block .eyebrow{
+      position:relative!important;
+      display:block!important;
+      min-width:0!important;
+      padding-top:5px!important;
+      margin:0!important;
+      font-size:15px!important;
+      line-height:1!important;
+      letter-spacing:.105em!important;
+      white-space:nowrap!important;
+      overflow:visible!important;
+    }
+    .transcript-panel.is-visible .transcript-auto-badge{
+      position:absolute!important;
+      left:0!important;
+      top:25px!important;
+      min-height:25px!important;
+      padding:0 9px!important;
+      gap:7px!important;
+      margin:0!important;
+      font-size:11px!important;
+      z-index:1!important;
+    }
+    .transcript-panel.is-visible .transcript-auto-badge > span:first-child{font-size:20px!important;}
+    .transcript-panel.is-visible .transcript-auto-info-btn{
+      width:21px!important;height:21px!important;min-width:21px!important;font-size:14px!important;
+    }
+    .transcript-panel.is-visible #transcriptVisibilityBtn{
+      position:absolute!important;
+      top:0!important;
+      right:0!important;
+      width:70px!important;
+      min-width:70px!important;
+      height:38px!important;
+      z-index:4!important;
+    }
+
+    /* Row 2: language + search side-by-side. Follow/Read stay desktop-only. */
+    .transcript-panel.is-visible .transcript-tools{
+      display:grid!important;
+      grid-template-columns:minmax(116px,128px) minmax(0,1fr)!important;
+      gap:8px!important;
+      align-items:center!important;
+      justify-content:stretch!important;
+      margin-top:10px!important;
+      padding:0!important;
+      min-width:0!important;
+    }
+    .transcript-panel.is-visible #transcriptFollowBtn,
+    .transcript-panel.is-visible #transcriptReadBtn{display:none!important;}
+    .transcript-panel.is-visible #transcriptLanguage{
+      grid-column:1!important;
+      grid-row:1!important;
+      width:100%!important;
+      min-width:0!important;
+      height:38px!important;
+      margin:0!important;
+      padding:0 10px!important;
+      font-size:14px!important;
+    }
+    .transcript-panel.is-visible .transcript-tools > .search-wrap{
+      grid-column:2!important;
+      grid-row:1!important;
+      width:100%!important;
+      min-width:0!important;
+      margin:0!important;
+      flex:none!important;
+    }
+    .transcript-panel.is-visible #transcriptSearch{
+      width:100%!important;
+      min-width:0!important;
+      height:38px!important;
+      margin:0!important;
+      padding:0 38px 0 12px!important;
+      font-size:14px!important;
+    }
+  }
+</style>
+<script id="final-transcript-header-microfix-script">
+(function(){
+  var NOTE_TEXT = 'Auto translations and captions are machine generated and may include mistakes. Please verify important wording against the original audio or video.';
+
+  function getPanel(){ return document.getElementById('transcriptPanel') || document.querySelector('.transcript-panel'); }
+
+  function removeNote(panel){
+    (panel || document).querySelectorAll('.transcript-auto-note,.mobile-auto-note').forEach(function(n){ n.remove(); });
+  }
+
+  function toggleNote(panel){
+    panel = panel || getPanel();
+    if(!panel) return;
+    var existing = panel.querySelector('.transcript-auto-note,.mobile-auto-note');
+    if(existing){ existing.remove(); return; }
+    var note = document.createElement('div');
+    note.className = 'transcript-auto-note mobile-auto-note';
+    note.innerHTML = '<button type="button" class="transcript-auto-note-close mobile-auto-note-close" aria-label="Close auto transcript note">×</button><span>'+NOTE_TEXT+'</span>';
+    var head = panel.querySelector('.transcript-head');
+    if(head) head.insertAdjacentElement('afterend', note);
+  }
+
+  document.addEventListener('click', function(event){
+    var close = event.target.closest && event.target.closest('.transcript-auto-note-close,.mobile-auto-note-close');
+    if(close){
+      event.preventDefault();
+      event.stopPropagation();
+      removeNote(close.closest('.transcript-panel') || getPanel());
+      return;
+    }
+    var badge = event.target.closest && event.target.closest('.transcript-auto-badge,.mobile-auto-badge');
+    if(!badge) return;
+    event.preventDefault();
+    event.stopPropagation();
+    toggleNote(badge.closest('.transcript-panel') || getPanel());
+  }, false);
+})();
+</script>
+
 </body>
 </html>
