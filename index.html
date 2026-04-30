@@ -1573,6 +1573,30 @@
       .mobile-featured-episode-card img{aspect-ratio:16/7.8!important;}
     }
   </style>
+<style id="final-last-mile-video-off-copy-link-polish">
+  /* Last-mile cleanup: video mode should not show transcript UI at all. */
+  body.mode-video #transcriptPanel,
+  body.mode-video .transcript-panel{
+    display:none!important;
+    visibility:hidden!important;
+    height:0!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    overflow:hidden!important;
+  }
+  body.mode-video .subtitle-badge.transcript-available-badge,
+  body.mode-video .episode .subtitle-badge.transcript-available-badge{display:none!important;}
+
+  @media(max-width:900px){
+    .transcript-title-block .eyebrow{font-size:10.5px!important;letter-spacing:.22em!important;}
+    .mobile-auto-badge{margin-left:6px!important;margin-right:14px!important;}
+    .mobile-auto-info-btn{margin-left:3px!important;}
+    .transcript-visibility-toggle{margin-left:12px!important;}
+  }
+</style>
+
 </head>
 <body class="mode-audio">
   <div class="app">
@@ -2393,7 +2417,7 @@
       url.searchParams.set('path','episode');
       return url.toString();
     }
-    function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteSiteDeepLink(q)].filter(Boolean).join('\n'); }
+    function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
     async function loadIdleQuotes(){
       try{
         const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
@@ -4960,5 +4984,69 @@
       window.addEventListener('resize', function(){ setTimeout(function(){ hardHideVideoTranscript(); addCopyToMobileQuoteCards(); }, 150); }, {passive:true});
     })();
   </script>
+<script id="final-last-mile-video-off-copy-link-polish-script">
+(function(){
+  function hideVideoTranscriptNow(){
+    try{
+      if(!(window.state && state.mode === 'video')) return;
+      var panel = document.getElementById('transcriptPanel');
+      if(panel){
+        panel.classList.remove('is-visible','is-collapsed','is-video-search-only','is-audio-only-notice');
+        panel.style.display = 'none';
+        panel.setAttribute('hidden','hidden');
+      }
+      document.querySelectorAll('.subtitle-badge.transcript-available-badge').forEach(function(node){ node.remove(); });
+      if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
+    }catch(err){}
+  }
+  if(typeof idleQuoteCopy === 'function' && typeof idleQuoteEpisodeLink === 'function'){
+    idleQuoteCopy = function(q){
+      var quote = (typeof idleQuoteText === 'function') ? idleQuoteText(q) : '';
+      var speaker = (typeof idleQuoteSpeaker === 'function') ? idleQuoteSpeaker(q) : '';
+      var title = (typeof idleQuoteTitle === 'function') ? idleQuoteTitle(q) : '';
+      var date = (typeof idleQuoteDate === 'function') ? idleQuoteDate(q) : '';
+      var dateText = '';
+      try{ dateText = date && typeof formatDate === 'function' ? formatDate({date:{iso:date,raw:date}}) : ''; }catch(err){}
+      var timeText = '';
+      try{ timeText = typeof formatClock === 'function' && typeof idleQuoteStart === 'function' ? formatClock(idleQuoteStart(q)) : ''; }catch(err){}
+      var meta = [speaker, title, dateText, timeText].filter(Boolean).join(' • ');
+      var link = idleQuoteEpisodeLink(q, false);
+      return [quote, meta ? '— ' + meta : '', link].filter(Boolean).join('\n');
+    };
+  }
+  if(typeof renderTranscriptPanel === 'function'){
+    var baseRenderTranscriptPanelLastMile = renderTranscriptPanel;
+    renderTranscriptPanel = async function(){
+      if(window.state && state.mode === 'video'){
+        hideVideoTranscriptNow();
+        return;
+      }
+      var panel = document.getElementById('transcriptPanel');
+      if(panel){ panel.removeAttribute('hidden'); panel.style.display = ''; }
+      return await baseRenderTranscriptPanelLastMile.apply(this, arguments);
+    };
+  }
+  if(typeof renderPlayer === 'function'){
+    var baseRenderPlayerLastMile = renderPlayer;
+    renderPlayer = function(){
+      var result = baseRenderPlayerLastMile.apply(this, arguments);
+      setTimeout(hideVideoTranscriptNow, 0);
+      setTimeout(hideVideoTranscriptNow, 80);
+      return result;
+    };
+  }
+  if(typeof renderChoices === 'function'){
+    var baseRenderChoicesLastMile = renderChoices;
+    renderChoices = function(){
+      var result = baseRenderChoicesLastMile.apply(this, arguments);
+      setTimeout(hideVideoTranscriptNow, 0);
+      return result;
+    };
+  }
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideVideoTranscriptNow, 100); });
+  try{ new MutationObserver(hideVideoTranscriptNow).observe(document.documentElement, {childList:true, subtree:true}); }catch(err){}
+})();
+</script>
+
 </body>
 </html>
