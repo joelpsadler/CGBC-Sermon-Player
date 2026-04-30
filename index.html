@@ -5138,5 +5138,289 @@
   window.addEventListener('pageshow',function(){setTimeout(restoreAudioTranscriptStyle,50);});
 })();
 </script>
+
+<!-- === 2026-04-30 SAFE TRANSCRIPT HEADER MICRO-PASS ===
+     Beginner note: This is intentionally sandboxed to transcript header elements only.
+     It does not touch playback, quote links, stats, routing, media loading, or transcript parsing. -->
+<style id="safe-transcript-header-micro-pass-css">
+  .transcript-auto-badge{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:5px!important;
+    min-height:20px!important;
+    padding:0 7px!important;
+    margin-left:8px!important;
+    border-radius:999px!important;
+    font-family:Poppins,sans-serif!important;
+    font-size:9px!important;
+    line-height:1!important;
+    letter-spacing:.06em!important;
+    text-transform:uppercase!important;
+    color:rgba(255,255,255,.76)!important;
+    background:rgba(255,255,255,.06)!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    vertical-align:middle!important;
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+  }
+  .transcript-auto-info-btn{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:15px!important;
+    height:15px!important;
+    min-width:15px!important;
+    padding:0!important;
+    margin-left:1px!important;
+    border-radius:999px!important;
+    background:rgba(143,174,157,.16)!important;
+    border:1px solid rgba(143,174,157,.32)!important;
+    color:rgba(255,255,255,.88)!important;
+    font-family:Poppins,sans-serif!important;
+    font-size:10px!important;
+    font-weight:800!important;
+    line-height:1!important;
+    cursor:pointer!important;
+  }
+  .transcript-auto-note{
+    position:relative!important;
+    margin:7px 0 9px!important;
+    padding:10px 38px 10px 13px!important;
+    border-radius:14px!important;
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025))!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    color:rgba(255,255,255,.78)!important;
+    font-size:12px!important;
+    line-height:1.35!important;
+  }
+  .transcript-auto-note-close{
+    position:absolute!important;
+    top:7px!important;
+    right:8px!important;
+    width:23px!important;
+    height:23px!important;
+    border-radius:999px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    background:rgba(255,255,255,.06)!important;
+    border:1px solid rgba(255,255,255,.09)!important;
+    color:rgba(255,255,255,.86)!important;
+    font-family:Poppins,sans-serif!important;
+    font-weight:800!important;
+    line-height:1!important;
+  }
+
+  @media (min-width:901px){
+    .transcript-title-block .eyebrow::after{display:none!important;content:none!important;}
+    .transcript-panel.is-visible .transcript-head{
+      display:grid!important;
+      grid-template-columns:126px auto auto minmax(170px,1fr) 78px!important;
+      grid-template-areas:
+        "title title title title hide"
+        "lang follow read search search"!important;
+      gap:9px 10px!important;
+      align-items:center!important;
+      margin-bottom:8px!important;
+      padding:0!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block{
+      grid-area:title!important;
+      display:grid!important;
+      grid-template-columns:118px minmax(0,max-content)!important;
+      align-items:center!important;
+      justify-content:start!important;
+      gap:14px!important;
+      width:auto!important;
+      min-width:0!important;
+    }
+    .transcript-panel.is-visible .transcript-art-mini{
+      position:static!important;
+      grid-column:1!important;
+      grid-row:1!important;
+      width:118px!important;
+      min-width:118px!important;
+      aspect-ratio:16/9!important;
+      margin:0!important;
+      border-radius:12px!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block .eyebrow{
+      grid-column:2!important;
+      grid-row:1!important;
+      display:flex!important;
+      align-items:center!important;
+      gap:8px!important;
+      margin:0!important;
+      min-width:0!important;
+      white-space:nowrap!important;
+      overflow:visible!important;
+      font-size:clamp(28px,2.6vw,46px)!important;
+      line-height:1!important;
+      letter-spacing:.12em!important;
+      color:rgba(255,255,255,.94)!important;
+    }
+    .transcript-panel.is-visible .transcript-tools{display:contents!important;}
+    .transcript-panel.is-visible #transcriptLanguage{grid-area:lang!important;width:126px!important;min-width:0!important;height:38px!important;margin:0!important;}
+    .transcript-panel.is-visible #transcriptFollowBtn{grid-area:follow!important;width:auto!important;min-width:76px!important;height:38px!important;margin:0!important;}
+    .transcript-panel.is-visible #transcriptReadBtn{grid-area:read!important;width:auto!important;min-width:76px!important;height:38px!important;margin:0!important;}
+    .transcript-panel.is-visible #transcriptSearch{grid-area:search!important;width:100%!important;min-width:0!important;height:38px!important;margin:0!important;}
+    .transcript-panel.is-visible #transcriptVisibilityBtn{grid-area:hide!important;justify-self:end!important;width:74px!important;min-width:74px!important;height:38px!important;margin:0!important;}
+  }
+
+  @media (max-width:900px){
+    .transcript-title-block .eyebrow::after{display:none!important;content:none!important;}
+    .transcript-panel.is-visible .transcript-head{
+      position:relative!important;
+      display:grid!important;
+      grid-template-columns:104px minmax(0,1fr) 66px!important;
+      grid-template-areas:
+        "title title hide"
+        "lang search search"!important;
+      gap:8px!important;
+      align-items:center!important;
+      margin:0 0 7px!important;
+      padding:0!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block{
+      grid-area:title!important;
+      display:flex!important;
+      align-items:center!important;
+      gap:8px!important;
+      width:auto!important;
+      min-width:0!important;
+      overflow:hidden!important;
+    }
+    .transcript-panel.is-visible .transcript-art-mini{
+      position:static!important;
+      display:block!important;
+      width:58px!important;
+      min-width:58px!important;
+      aspect-ratio:16/9!important;
+      margin:0!important;
+      border-radius:9px!important;
+      order:0!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block .eyebrow{
+      order:1!important;
+      display:flex!important;
+      align-items:center!important;
+      gap:5px!important;
+      min-width:0!important;
+      margin:0!important;
+      font-size:15px!important;
+      line-height:1!important;
+      letter-spacing:.105em!important;
+      white-space:nowrap!important;
+      overflow:visible!important;
+      color:rgba(255,255,255,.94)!important;
+    }
+    .transcript-panel.is-visible .transcript-auto-badge{
+      min-height:17px!important;
+      padding:0 5px!important;
+      margin-left:2px!important;
+      gap:4px!important;
+      font-size:8px!important;
+      letter-spacing:.055em!important;
+    }
+    .transcript-panel.is-visible .transcript-auto-info-btn{
+      width:14px!important;
+      height:14px!important;
+      min-width:14px!important;
+      font-size:9px!important;
+    }
+    .transcript-panel.is-visible .transcript-tools{display:contents!important;}
+    .transcript-panel.is-visible #transcriptFollowBtn,
+    .transcript-panel.is-visible #transcriptReadBtn{display:none!important;}
+    .transcript-panel.is-visible #transcriptLanguage{
+      grid-area:lang!important;
+      width:104px!important;
+      min-width:0!important;
+      height:36px!important;
+      margin:0!important;
+      padding:0 9px!important;
+      font-size:13px!important;
+      border-radius:14px!important;
+    }
+    .transcript-panel.is-visible #transcriptSearch{
+      grid-area:search!important;
+      width:100%!important;
+      min-width:0!important;
+      height:36px!important;
+      margin:0!important;
+      padding:0 12px!important;
+      font-size:15px!important;
+      border-radius:14px!important;
+    }
+    .transcript-panel.is-visible #transcriptVisibilityBtn{
+      grid-area:hide!important;
+      justify-self:end!important;
+      width:66px!important;
+      min-width:66px!important;
+      height:35px!important;
+      margin:0!important;
+      font-size:12px!important;
+      border-radius:14px!important;
+    }
+  }
+</style>
+<script id="safe-transcript-header-micro-pass-script">
+(function(){
+  var NOTE_TEXT = 'Auto translations are not human verified. They are a tool and can make mistakes. Use the actual audio or video for accuracy when required.';
+
+  function makeBadge(){
+    var badge = document.createElement('span');
+    badge.className = 'mobile-auto-badge transcript-auto-badge';
+    badge.innerHTML = '<span aria-hidden="true">⚙</span><span>Auto</span><button type="button" class="mobile-auto-info-btn transcript-auto-info-btn" aria-label="About auto transcripts">i</button>';
+    return badge;
+  }
+
+  function ensureAutoBadge(){
+    var eyebrow = document.querySelector('.transcript-panel .transcript-title-block .eyebrow');
+    if(!eyebrow) return;
+    var existing = eyebrow.querySelector('.transcript-auto-badge') || eyebrow.querySelector('.mobile-auto-badge');
+    if(existing){
+      existing.classList.add('transcript-auto-badge');
+      var btn = existing.querySelector('button');
+      if(btn) btn.classList.add('transcript-auto-info-btn');
+      return;
+    }
+    eyebrow.appendChild(makeBadge());
+  }
+
+  function removeAutoNote(panel){
+    var oldNotes = panel ? panel.querySelectorAll('.transcript-auto-note,.mobile-auto-note') : [];
+    oldNotes.forEach(function(note){ note.remove(); });
+  }
+
+  function toggleAutoNote(btn){
+    var panel = btn && btn.closest ? btn.closest('.transcript-panel') : document.querySelector('.transcript-panel');
+    if(!panel) return;
+    var existing = panel.querySelector('.transcript-auto-note,.mobile-auto-note');
+    if(existing){ existing.remove(); return; }
+    var note = document.createElement('div');
+    note.className = 'transcript-auto-note mobile-auto-note';
+    note.innerHTML = '<button type="button" class="transcript-auto-note-close mobile-auto-note-close" aria-label="Close auto transcript note">×</button><span>'+NOTE_TEXT+'</span>';
+    var head = panel.querySelector('.transcript-head');
+    if(head) head.insertAdjacentElement('afterend', note);
+  }
+
+  document.addEventListener('click', function(event){
+    var info = event.target.closest && event.target.closest('.transcript-auto-info-btn,.mobile-auto-info-btn');
+    if(info){ event.preventDefault(); event.stopPropagation(); toggleAutoNote(info); return; }
+    var close = event.target.closest && event.target.closest('.transcript-auto-note-close,.mobile-auto-note-close');
+    if(close){ event.preventDefault(); var panel = close.closest('.transcript-panel'); removeAutoNote(panel); }
+  }, true);
+
+  document.addEventListener('DOMContentLoaded', ensureAutoBadge);
+  window.addEventListener('resize', ensureAutoBadge, {passive:true});
+  try{
+    new MutationObserver(ensureAutoBadge).observe(document.documentElement, {childList:true, subtree:true});
+  }catch(err){}
+  setTimeout(ensureAutoBadge, 100);
+  setTimeout(ensureAutoBadge, 600);
+  setTimeout(ensureAutoBadge, 1400);
+})();
+</script>
 </body>
 </html>
