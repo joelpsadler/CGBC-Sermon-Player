@@ -5422,5 +5422,113 @@
   setTimeout(ensureAutoBadge, 1400);
 })();
 </script>
+
+
+<!-- === 2026-04-30 ULTRA-SAFE TRANSCRIPT HEADER REFINEMENT ===
+     Beginner note: This patch is intentionally narrow. It only refines the transcript
+     header, the Auto badge popup, and desktop Read-mode transcript colors. It does not
+     touch player loading, quote links, stats, routes, media seeking, or transcript data. -->
+<style id="ultra-safe-transcript-header-refinement-css">
+  .transcript-auto-badge{
+    min-height:26px!important; padding:0 10px!important; gap:7px!important; font-size:12px!important;
+    letter-spacing:.075em!important; cursor:pointer!important;
+  }
+  .transcript-auto-badge > span:first-child{font-size:16px!important;line-height:1!important;opacity:.96!important;}
+  .transcript-auto-info-btn{
+    width:20px!important;height:20px!important;min-width:20px!important;font-size:13px!important;margin-left:1px!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;
+  }
+  @media (min-width:901px){
+    .transcript-panel.is-visible .transcript-head{grid-template-columns:126px auto auto minmax(170px,1fr) 132px!important;}
+    .transcript-panel.is-visible #transcriptVisibilityBtn{
+      width:auto!important;min-width:106px!important;max-width:none!important;padding:0 16px!important;
+      justify-self:end!important;overflow:visible!important;text-overflow:clip!important;
+    }
+    .transcript-panel.transcript-read-mode .transcript-lines{scroll-behavior:auto!important;}
+    .transcript-panel.transcript-read-mode .transcript-line,
+    .transcript-panel.transcript-read-mode .transcript-line.is-old-past,
+    .transcript-panel.transcript-read-mode .transcript-line.is-past-1,
+    .transcript-panel.transcript-read-mode .transcript-line.is-past-2,
+    .transcript-panel.transcript-read-mode .transcript-line.is-next-1,
+    .transcript-panel.transcript-read-mode .transcript-line.is-next-2,
+    .transcript-panel.transcript-read-mode .transcript-line.is-upcoming{opacity:1!important;background:transparent!important;box-shadow:none!important;}
+    .transcript-panel.transcript-read-mode .transcript-text,
+    .transcript-panel.transcript-read-mode .transcript-line.is-old-past .transcript-text,
+    .transcript-panel.transcript-read-mode .transcript-line.is-past-1 .transcript-text,
+    .transcript-panel.transcript-read-mode .transcript-line.is-past-2 .transcript-text,
+    .transcript-panel.transcript-read-mode .transcript-line.is-next-1 .transcript-text,
+    .transcript-panel.transcript-read-mode .transcript-line.is-next-2 .transcript-text,
+    .transcript-panel.transcript-read-mode .transcript-line.is-upcoming .transcript-text{
+      color:rgba(255,255,255,.92)!important;font-weight:560!important;text-shadow:none!important;
+    }
+    .transcript-panel.transcript-read-mode .transcript-line.is-active .transcript-text{color:rgba(255,255,255,.98)!important;font-weight:610!important;}
+  }
+  @media (max-width:900px){
+    .transcript-panel.is-visible .transcript-head{display:block!important;position:relative!important;margin:0 0 8px!important;padding:0!important;}
+    .transcript-panel.is-visible .transcript-title-block{
+      display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;min-width:0!important;
+      padding-right:76px!important;overflow:visible!important;
+    }
+    .transcript-panel.is-visible .transcript-art-mini{
+      position:static!important;display:block!important;width:58px!important;min-width:58px!important;aspect-ratio:16/9!important;
+      margin:0!important;border-radius:9px!important;flex:0 0 58px!important;
+    }
+    .transcript-panel.is-visible .transcript-title-block .eyebrow{
+      display:flex!important;align-items:center!important;gap:6px!important;min-width:0!important;margin:0!important;
+      font-size:15px!important;line-height:1!important;letter-spacing:.105em!important;white-space:nowrap!important;
+      overflow:visible!important;color:rgba(255,255,255,.94)!important;
+    }
+    .transcript-panel.is-visible .transcript-auto-badge{min-height:22px!important;padding:0 8px!important;margin-left:4px!important;gap:6px!important;font-size:10px!important;}
+    .transcript-panel.is-visible .transcript-auto-badge > span:first-child{font-size:15px!important;}
+    .transcript-panel.is-visible .transcript-auto-info-btn{width:18px!important;height:18px!important;min-width:18px!important;font-size:12px!important;}
+    .transcript-panel.is-visible .transcript-tools{
+      display:grid!important;grid-template-columns:minmax(120px,140px) minmax(0,1fr)!important;gap:8px!important;
+      align-items:center!important;justify-content:stretch!important;margin-top:10px!important;padding:0!important;min-width:0!important;
+    }
+    .transcript-panel.is-visible #transcriptFollowBtn,.transcript-panel.is-visible #transcriptReadBtn{display:none!important;}
+    .transcript-panel.is-visible #transcriptVisibilityBtn{
+      position:absolute!important;top:0!important;right:0!important;width:68px!important;min-width:68px!important;height:36px!important;
+      margin:0!important;padding:0 8px!important;font-size:12px!important;border-radius:14px!important;z-index:3!important;
+    }
+    .transcript-panel.is-visible #transcriptLanguage{
+      grid-column:1!important;width:100%!important;min-width:0!important;height:38px!important;margin:0!important;padding:0 10px!important;
+      font-size:14px!important;border-radius:14px!important;
+    }
+    .transcript-panel.is-visible #transcriptSearch{
+      grid-column:2!important;width:100%!important;min-width:0!important;height:38px!important;margin:0!important;padding:0 12px!important;
+      font-size:14px!important;border-radius:14px!important;
+    }
+  }
+</style>
+<script id="ultra-safe-transcript-header-refinement-script">
+(function(){
+  function panel(){ return document.getElementById('transcriptPanel'); }
+  function syncReadModeClass(){
+    var p = panel(); if(!p) return;
+    var isRead = false;
+    try{ isRead = !!(window.state && state.transcript && state.transcript.mode !== 'follow'); }catch(err){}
+    var readBtn = document.getElementById('transcriptReadBtn');
+    if(readBtn && readBtn.classList.contains('active')) isRead = true;
+    p.classList.toggle('transcript-read-mode', !!isRead);
+    p.classList.toggle('transcript-follow-mode', !isRead);
+  }
+  document.addEventListener('click', function(event){
+    var badge = event.target.closest && event.target.closest('.transcript-auto-badge');
+    if(!badge) return;
+    if(event.target.closest('.transcript-auto-info-btn')) return;
+    event.preventDefault();
+    var info = badge.querySelector('.transcript-auto-info-btn');
+    if(info) info.click();
+  }, true);
+  document.addEventListener('DOMContentLoaded', syncReadModeClass);
+  document.addEventListener('click', function(){ setTimeout(syncReadModeClass, 0); setTimeout(syncReadModeClass, 80); }, true);
+  document.addEventListener('input', function(){ setTimeout(syncReadModeClass, 0); }, true);
+  window.addEventListener('resize', syncReadModeClass, {passive:true});
+  try{ new MutationObserver(syncReadModeClass).observe(document.documentElement, {childList:true, subtree:true, attributes:true, attributeFilter:['class']}); }catch(err){}
+  setTimeout(syncReadModeClass, 100);
+  setTimeout(syncReadModeClass, 700);
+})();
+</script>
+
 </body>
 </html>
