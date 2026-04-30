@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- mobile cleanup build: 2026-04-29 final-video-transcript-off-copy-polish -->
+  <!-- final cleanup build: 2026-04-30 transcript-audio-only-quote-zero-triple-click -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -1573,6 +1573,140 @@
       .mobile-featured-episode-card img{aspect-ratio:16/7.8!important;}
     }
   </style>
+
+<style id="final-audio-only-transcript-cleanup">
+  /* Final rule: transcript UI belongs to Listen/Audio only. */
+  body.mode-video #transcriptPanel,
+  body.mode-video .transcript-panel,
+  body.mode-video .transcript-panel.is-visible,
+  body.mode-video .transcript-panel.is-collapsed,
+  body.mode-video .transcript-panel.is-audio-only-notice{
+    display:none!important;
+    visibility:hidden!important;
+    height:0!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    overflow:hidden!important;
+  }
+  body.mode-video .subtitle-badge.transcript-available-badge{display:none!important;}
+  @media (max-width:900px){
+    .transcript-head{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) auto!important;
+      grid-template-rows:auto auto!important;
+      column-gap:8px!important;
+      row-gap:8px!important;
+      align-items:center!important;
+      padding:0!important;
+      margin:0!important;
+    }
+    .transcript-title-block{
+      grid-column:1 / 2!important;
+      grid-row:1!important;
+      min-width:0!important;
+      width:auto!important;
+      display:flex!important;
+      align-items:center!important;
+      gap:8px!important;
+    }
+    .transcript-title-block .eyebrow{
+      display:flex!important;
+      align-items:center!important;
+      gap:6px!important;
+      font-size:13px!important;
+      letter-spacing:.13em!important;
+      white-space:nowrap!important;
+      min-width:0!important;
+    }
+    .transcript-title-block .eyebrow::after{display:none!important;content:none!important;}
+    .transcript-art-mini{width:58px!important;flex:0 0 58px!important;border-radius:9px!important;}
+    .transcript-tools{display:contents!important;}
+    #transcriptFollowBtn,#transcriptReadBtn{display:none!important;}
+    .transcript-visibility-toggle{
+      grid-column:2!important;
+      grid-row:1!important;
+      justify-self:end!important;
+      width:auto!important;
+      min-width:66px!important;
+      height:36px!important;
+      padding:0 14px!important;
+      margin:0!important;
+      border-radius:14px!important;
+      font-size:12px!important;
+      position:relative!important;
+      z-index:4!important;
+    }
+    .transcript-select{
+      grid-column:1!important;
+      grid-row:2!important;
+      width:86px!important;
+      min-width:78px!important;
+      height:38px!important;
+      font-size:13px!important;
+      border-radius:14px!important;
+    }
+    .transcript-search{
+      grid-column:2!important;
+      grid-row:2!important;
+      width:100%!important;
+      min-width:0!important;
+      height:38px!important;
+      margin:0!important;
+      border-radius:14px!important;
+      font-size:16px!important;
+    }
+    .mobile-auto-badge{
+      display:inline-flex!important;
+      align-items:center!important;
+      gap:4px!important;
+      height:18px!important;
+      padding:0 5px!important;
+      margin-left:4px!important;
+      border-radius:999px!important;
+      font-size:8px!important;
+      letter-spacing:.05em!important;
+      color:rgba(255,255,255,.72)!important;
+      background:rgba(255,255,255,.06)!important;
+      border:1px solid rgba(255,255,255,.10)!important;
+      flex:0 0 auto!important;
+    }
+    .mobile-auto-info-btn{
+      width:14px!important;
+      height:14px!important;
+      min-width:14px!important;
+      padding:0!important;
+      margin-left:2px!important;
+      border-radius:999px!important;
+      font-size:9px!important;
+      line-height:14px!important;
+      text-align:center!important;
+      background:rgba(255,255,255,.08)!important;
+      border:1px solid rgba(255,255,255,.12)!important;
+    }
+  }
+  @media (min-width:901px){
+    .transcript-title-block .eyebrow::after{
+      content:'⚙ Auto'!important;
+      display:inline-flex!important;
+      align-items:center!important;
+      min-height:18px!important;
+      padding:0 7px!important;
+      margin-left:8px!important;
+      border-radius:999px!important;
+      font-family:Poppins,sans-serif!important;
+      font-size:9px!important;
+      line-height:1!important;
+      letter-spacing:.06em!important;
+      text-transform:uppercase!important;
+      color:rgba(255,255,255,.70)!important;
+      background:rgba(255,255,255,.06)!important;
+      border:1px solid rgba(255,255,255,.09)!important;
+      vertical-align:middle!important;
+    }
+  }
+</style>
 </head>
 <body class="mode-audio">
   <div class="app">
@@ -2393,7 +2527,7 @@
       url.searchParams.set('path','episode');
       return url.toString();
     }
-    function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteSiteDeepLink(q)].filter(Boolean).join('\n'); }
+    function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
     async function loadIdleQuotes(){
       try{
         const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
@@ -2484,15 +2618,9 @@
         return;
       }
       if(state.mode === 'video'){
-        if(isMobileViewport()){
-          els.transcriptPanel.classList.remove('is-visible','is-video-search-only','is-collapsed','is-audio-only-notice');
-          if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
-          return;
-        }
-        positionTranscriptPanel();
-        els.transcriptPanel.classList.add('is-visible','is-collapsed','is-audio-only-notice');
-        els.transcriptPanel.classList.remove('is-video-search-only');
-        if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.style.display = 'none';
+        // Watch mode is for watching. Keep transcripts/audio tools out of the video player area.
+        els.transcriptPanel.classList.remove('is-visible','is-video-search-only','is-collapsed','is-audio-only-notice');
+        if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.style.display = '';
         if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
         return;
       }
@@ -4812,13 +4940,23 @@
       logo.dataset.quoteReviewShortcut = 'true';
       let clicks = 0, timer = null;
       function isDesktop(){ return window.matchMedia && window.matchMedia('(min-width:901px)').matches; }
-      logo.addEventListener('click', function(){
+      logo.addEventListener('click', function(event){
         if(!isDesktop()) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
         clicks += 1;
         clearTimeout(timer);
-        timer = setTimeout(function(){ clicks = 0; }, 900);
-        if(clicks >= 3){ clicks = 0; window.location.href = 'quote-review.html'; }
-      });
+        if(clicks >= 3){
+          clicks = 0;
+          window.location.href = 'quote-review.html';
+          return;
+        }
+        timer = setTimeout(function(){
+          clicks = 0;
+          if(typeof hardResetPage === 'function') hardResetPage();
+          else window.location.href = window.location.origin + window.location.pathname;
+        }, 420);
+      }, true);
     })();
   </script>
 
@@ -4960,5 +5098,45 @@
       window.addEventListener('resize', function(){ setTimeout(function(){ hardHideVideoTranscript(); addCopyToMobileQuoteCards(); }, 150); }, {passive:true});
     })();
   </script>
+
+<script id="final-last-mile-guard">
+(function(){
+  function currentMode(){ try{return (window.state && state.mode) || (document.body.classList.contains('mode-video') ? 'video' : 'audio');}catch(e){return 'audio';} }
+  function syncModeClasses(){
+    var mode=currentMode();
+    document.body.classList.toggle('mode-video', mode==='video');
+    document.body.classList.toggle('mode-audio', mode!=='video');
+  }
+  function stripVideoTranscript(){
+    syncModeClasses();
+    if(currentMode() !== 'video') return;
+    var panel=document.getElementById('transcriptPanel');
+    if(panel){
+      panel.classList.remove('is-visible','is-collapsed','is-video-search-only','is-audio-only-notice');
+      panel.style.display='none';
+      panel.style.visibility='hidden';
+      panel.style.height='0';
+      panel.style.minHeight='0';
+      panel.style.margin='0';
+      panel.style.padding='0';
+      panel.style.border='0';
+    }
+    document.querySelectorAll('.subtitle-badge.transcript-available-badge').forEach(function(el){el.remove();});
+  }
+  function restoreAudioTranscriptStyle(){
+    syncModeClasses();
+    if(currentMode() === 'video') stripVideoTranscript();
+    else {
+      var panel=document.getElementById('transcriptPanel');
+      if(panel){ panel.style.display=''; panel.style.visibility=''; panel.style.height=''; panel.style.minHeight=''; panel.style.margin=''; panel.style.padding=''; panel.style.border=''; }
+    }
+  }
+  ['click','input','change'].forEach(function(type){document.addEventListener(type,function(){setTimeout(restoreAudioTranscriptStyle,0);setTimeout(restoreAudioTranscriptStyle,120);},true);});
+  var obs=new MutationObserver(function(){ restoreAudioTranscriptStyle(); });
+  obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']});
+  document.addEventListener('DOMContentLoaded',function(){setTimeout(restoreAudioTranscriptStyle,50);setTimeout(restoreAudioTranscriptStyle,500);});
+  window.addEventListener('pageshow',function(){setTimeout(restoreAudioTranscriptStyle,50);});
+})();
+</script>
 </body>
 </html>
