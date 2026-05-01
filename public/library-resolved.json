@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-01T14:12:49.938Z",
+  "generatedAt": "2026-05-01T15:19:11.195Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 137,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 150
   },
   "totals": {
-    "audioPlaysTotal": 4206,
+    "audioPlaysTotal": 4208,
     "audioEpisodesTotal": 137
   },
   "current": {
@@ -32,7 +32,7 @@
         "studyName": "The Book of Romans",
         "detectedFromEpisode": "media-m04f9j",
         "detectedFromDate": "2026-04-26",
-        "detectedFromTitle": "The Impact of the Gospel Pt. 4 (In Ministry: Grace Gifts)",
+        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -427,9 +427,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdafsdf/"
       },
       "title": {
-        "episodeName": "The Impact of the Gospel Pt. 4",
-        "subtitle": "In Ministry: Grace Gifts",
-        "display": "The Impact of the Gospel Pt. 4 (In Ministry: Grace Gifts)"
+        "episodeName": "The Impact of the Gospel in Ministry Pt. 4",
+        "subtitle": "Grace Gifts: Teaching",
+        "display": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)"
       },
       "series": {
         "name": "Romans Chapter 12",
@@ -562,7 +562,11 @@
           "art": {
             "square": null,
             "wide": null
-          }
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
         }
       ],
       "bookTags": [
@@ -619,26 +623,26 @@
           "en": {
             "language": "en",
             "incomingFile": "transcripts_incoming/2026-04-26.srt",
-            "cleanFile": "transcripts_clean/en/2026-04-26_the-impact-of-the-gospel-pt-4.srt",
-            "displayFile": "transcripts_display/en/2026-04-26_the-impact-of-the-gospel-pt-4.srt",
-            "jsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-pt-4.json",
-            "displayJsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-pt-4.display.json",
+            "cleanFile": "transcripts_clean/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.srt",
+            "displayFile": "transcripts_display/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.srt",
+            "jsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.json",
+            "displayJsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.display.json",
             "segmentCount": 827,
             "displaySegmentCount": 705
           }
         },
         "incomingFile": "transcripts_incoming/2026-04-26.srt",
-        "cleanFile": "transcripts_clean/en/2026-04-26_the-impact-of-the-gospel-pt-4.srt",
-        "displayFile": "transcripts_display/en/2026-04-26_the-impact-of-the-gospel-pt-4.srt",
-        "jsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-pt-4.json",
-        "displayJsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-pt-4.display.json",
+        "cleanFile": "transcripts_clean/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.srt",
+        "displayFile": "transcripts_display/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.srt",
+        "jsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.json",
+        "displayJsonFile": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.display.json",
         "segmentCount": 827,
         "displaySegmentCount": 705
       },
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8wjwp38qj5wj6ph5/42626_S_PC78jah.mp3",
-        "plays": 17,
+        "plays": 19,
         "durationSeconds": 2159,
         "statsMatchStrategy": "media_url"
       },
@@ -933,9 +937,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/romans-126-8-the-impact-of-the-gospel%c2%a0in-ministry-cont-pt-3-romans-chapter-12/"
       },
       "title": {
-        "episodeName": "The Impact of the Gospel Pt. 3",
-        "subtitle": "In Ministry",
-        "display": "The Impact of the Gospel Pt. 3 (In Ministry)"
+        "episodeName": "The Impact of the Gospel in Ministry Pt. 3",
+        "subtitle": "Grace Gifts: Prophecy & Service",
+        "display": "The Impact of the Gospel in Ministry Pt. 3 (Grace Gifts: Prophecy & Service)"
       },
       "series": {
         "name": "Romans Chapter 12",
@@ -983,7 +987,11 @@
           "art": {
             "square": null,
             "wide": null
-          }
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
         }
       ],
       "bookTags": [
@@ -1238,9 +1246,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/romans-123-5-the-impact-of-the-gospel-pt-2-in-ministry-romans-chapter-12/"
       },
       "title": {
-        "episodeName": "The Impact of the Gospel Pt. 2",
-        "subtitle": "In Ministry",
-        "display": "The Impact of the Gospel Pt. 2 (In Ministry)"
+        "episodeName": "The Impact of the Gospel in Ministry Pt. 2",
+        "subtitle": "",
+        "display": "The Impact of the Gospel in Ministry Pt. 2"
       },
       "series": {
         "name": "Romans Chapter 12",
@@ -1511,8 +1519,8 @@
       },
       "title": {
         "episodeName": "The Impact of the Gospel Pt. 1",
-        "subtitle": "In Ministry",
-        "display": "The Impact of the Gospel Pt. 1 (In Ministry)"
+        "subtitle": "",
+        "display": "The Impact of the Gospel Pt. 1"
       },
       "series": {
         "name": "Romans Chapter 12",
