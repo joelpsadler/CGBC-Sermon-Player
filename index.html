@@ -2196,7 +2196,7 @@
       return [
         item?.title?.episodeName, item?.title?.subtitle, item?.title?.display,
         item?.series?.name, item?.study?.name,
-        ...(Array.isArray(item?.collections) ? item.collections.flatMap(c => [c?.name, c?.description, c?.key]) : []),
+        ...(Array.isArray(item?.collections) ? item.collections.flatMap(c => [c?.name, c?.description, c?.key, c?.itemTitle, c?.collectionItemTitle]) : []),
         item?.scripture?.raw, item?.scripture?.display,
         item?.references?.raw, item?.references?.display,
         ...(Array.isArray(item?.search?.scriptureTokens) ? item.search.scriptureTokens : []),
@@ -2295,6 +2295,42 @@
       const ai=a?.date?.iso||'', bi=b?.date?.iso||'';
       if(ai && bi) return ai.localeCompare(bi);
       return (a?.title?.display||'').localeCompare(b?.title?.display||'');
+    }
+
+    function collectionKeyFromRowKey(rowKey){
+      return String(rowKey || '').replace(/^collection__/, '');
+    }
+    function collectionEntryForItem(item, collectionKeyOrRowKey){
+      const collectionKey = collectionKeyFromRowKey(collectionKeyOrRowKey);
+      if(!collectionKey || !Array.isArray(item?.collections)) return null;
+      return item.collections.find(c => String(c?.key || '') === collectionKey) || null;
+    }
+    function collectionItemTitleForItem(item, collectionKeyOrRowKey){
+      const entry = collectionEntryForItem(item, collectionKeyOrRowKey);
+      return entry?.collectionItemTitle || entry?.itemTitle || '';
+    }
+    function collectionItemOrderForItem(item, collectionKeyOrRowKey){
+      const entry = collectionEntryForItem(item, collectionKeyOrRowKey);
+      const raw = entry?.collectionItemOrder ?? entry?.itemSortOrder;
+      const n = Number(raw);
+      return Number.isFinite(n) ? n : null;
+    }
+    function sortCollectionItemsForRow(items, collectionKeyOrRowKey){
+      return (Array.isArray(items) ? items.slice() : []).sort((a,b)=>{
+        const ao = collectionItemOrderForItem(a, collectionKeyOrRowKey);
+        const bo = collectionItemOrderForItem(b, collectionKeyOrRowKey);
+        if(ao !== null && bo !== null && ao !== bo) return ao - bo;
+        if(ao !== null && bo === null) return -1;
+        if(ao === null && bo !== null) return 1;
+        return sortOldestFirst(a,b);
+      });
+    }
+    function episodeTitleForCurrentBrowse(row){
+      if(state.nav.rootKey === 'topical' && state.nav.branchKey && String(state.nav.branchKey).startsWith('collection__')){
+        const collectionTitle = collectionItemTitleForItem(row, state.nav.branchKey);
+        if(collectionTitle) return collectionTitle;
+      }
+      return row?.title?.display || '';
     }
     function getSeriesArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.wide || item?.art?.series?.square || item?.art?.episode?.square || ASSETS.fallback;
@@ -3345,7 +3381,9 @@
         if(branch==='guest-speakers-pinned') return state.nativeShelves.guestSpeakers.slice().sort(sortNewestFirst);
         const row=browse.topical.get(branch) || browse.collections.get(branch) || browse.specialSeries.get(branch);
         if(!row) return [];
-        return row.isSpecialSeries ? row.items.slice().sort(sortNewestFirst) : row.items.slice().sort(sortOldestFirst);
+        if(row.isSpecialSeries) return row.items.slice().sort(sortNewestFirst);
+        if(row.isCollection) return sortCollectionItemsForRow(row.items, row.collectionKey || branch);
+        return row.items.slice().sort(sortOldestFirst);
       }
       if(root==='date'){const yearBucket=browse.date.get(branch); if(!yearBucket || !leaf) return []; return (yearBucket.get(leaf)||[]).slice().sort(sortNewestFirst);}
       return [];
@@ -3685,7 +3723,7 @@
               : getEpisodeArt(row, 'video'))
           : (row.image || ASSETS.fallback);
         const title = episodeLevel
-          ? (row?.title?.display || '')
+          ? episodeTitleForCurrentBrowse(row)
           : (dateTextCard ? '' : (compactSeriesLabel(row.title || '')));
         let sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
         if(episodeLevel && row?.source === 'youtube-native' && /native shelf/i.test(String(sub || ''))){
