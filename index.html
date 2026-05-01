@@ -6135,5 +6135,58 @@
   document.addEventListener('click', function(){ setTimeout(syncLabel, 0); }, true);
 })();
 </script>
+
+<!-- === 2026-05-01 MOBILE TRANSCRIPT AUTO ROW FIX ===
+     Beginner note: Mobile-only header patch. Desktop is intentionally untouched.
+     This restores the Auto badge as its own row without changing transcript body,
+     playback, routing, stats, quote links, or media loading. -->
+<style id="mobile-transcript-auto-row-fix-css">
+  @media (max-width:900px){
+    #transcriptPanel .transcript-title-block .transcript-auto-badge,
+    #transcriptPanel .transcript-title-block .mobile-auto-badge{display:none!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-head{min-height:164px!important;overflow:visible!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-head{min-height:116px!important;overflow:visible!important;}
+    .mobile-auto-dedicated-row{display:flex!important;align-items:center!important;justify-content:center!important;position:absolute!important;left:0!important;right:0!important;top:58px!important;z-index:7!important;pointer-events:none!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .mobile-auto-dedicated-row{top:56px!important;}
+    .mobile-auto-dedicated-badge{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;min-height:38px!important;padding:0 14px!important;border-radius:999px!important;background:linear-gradient(180deg,rgba(255,255,255,.070),rgba(255,255,255,.028))!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 18px rgba(0,0,0,.16)!important;font-family:Poppins,sans-serif!important;font-size:13px!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:rgba(255,255,255,.84)!important;line-height:1!important;white-space:nowrap!important;pointer-events:auto!important;}
+    .mobile-auto-dedicated-gear{font-size:28px!important;line-height:1!important;opacity:1!important;transform:translateY(.5px)!important;}
+    .mobile-auto-dedicated-info,.mobile-auto-dedicated-badge .mobile-auto-info-btn,.mobile-auto-dedicated-badge .transcript-auto-info-btn{width:31px!important;height:31px!important;min-width:31px!important;padding:0!important;border-radius:999px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;background:linear-gradient(180deg,rgba(143,174,157,.26),rgba(143,174,157,.14))!important;border:1px solid rgba(143,174,157,.34)!important;color:rgba(255,255,255,.96)!important;font-family:Poppins,sans-serif!important;font-size:18px!important;font-weight:800!important;line-height:1!important;cursor:pointer!important;pointer-events:auto!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-tools{margin:58px 0 0!important;}
+  }
+</style>
+<script id="mobile-transcript-auto-row-fix-script">
+(function(){
+  function isMobile(){ return window.matchMedia && window.matchMedia('(max-width:900px)').matches; }
+  function panel(){ return document.getElementById('transcriptPanel') || document.querySelector('.transcript-panel'); }
+  function ensureAutoRow(){
+    try{
+      var root = panel();
+      if(!root || !isMobile()) return;
+      var head = root.querySelector('.transcript-head');
+      if(!head) return;
+      var existing = head.querySelector('.mobile-auto-dedicated-row');
+      if(existing) return;
+      var row = document.createElement('div');
+      row.className = 'mobile-auto-dedicated-row';
+      row.innerHTML = '<span class="mobile-auto-dedicated-badge" aria-label="Automatic transcript notice"><span class="mobile-auto-dedicated-gear" aria-hidden="true">⚙</span><span>AUTO</span><button type="button" class="mobile-auto-dedicated-info mobile-auto-info-btn transcript-auto-info-btn" aria-label="About auto transcripts">i</button></span>';
+      head.appendChild(row);
+    }catch(err){}
+  }
+  function sync(){ setTimeout(ensureAutoRow,0); setTimeout(ensureAutoRow,80); setTimeout(ensureAutoRow,250); }
+  if(typeof renderTranscriptPanel === 'function'){
+    var previousRenderTranscriptPanelAutoRowFix = renderTranscriptPanel;
+    renderTranscriptPanel = async function(){
+      var result = await previousRenderTranscriptPanelAutoRowFix.apply(this, arguments);
+      sync();
+      return result;
+    };
+  }
+  document.addEventListener('DOMContentLoaded', sync);
+  document.addEventListener('click', sync, true);
+  window.addEventListener('resize', sync, {passive:true});
+  sync();
+})();
+</script>
+
 </body>
 </html>
