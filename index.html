@@ -2332,6 +2332,22 @@
       }
       return row?.title?.display || '';
     }
+
+    function collectionPlayerTitleForItem(item){
+      const contextNav = state.playingContext?.nav || state.nav || {};
+      const contextMode = state.playingContext?.mode || state.mode;
+      const branchKey = contextNav?.branchKey || '';
+      if(contextMode !== state.mode) return '';
+      if(contextNav?.rootKey !== 'topical' || !String(branchKey).startsWith('collection__')) return '';
+      const entry = collectionEntryForItem(item, branchKey);
+      if(!entry) return '';
+      const title = entry?.collectionItemTitle || entry?.itemTitle || '';
+      const order = collectionItemOrderForItem(item, branchKey);
+      const orderText = order !== null ? `${String(order).padStart(2, '0')} ` : '';
+      const parent = entry?.name || '';
+      const base = `${orderText}${title || item?.title?.display || ''}`.trim();
+      return base ? `${base}${parent ? ` (${parent})` : ''}` : '';
+    }
     function getSeriesArtFromItem(item, mode=state.mode){
       if(mode==='video') return item?.art?.series?.wide || item?.art?.episode?.wide || item?.art?.study?.wide || item?.art?.series?.square || item?.art?.episode?.square || ASSETS.fallback;
       return item?.art?.series?.square || item?.art?.episode?.square || item?.art?.study?.square || item?.art?.series?.wide || item?.art?.episode?.wide || ASSETS.fallback;
@@ -3868,7 +3884,7 @@
         els.audioPlaceholder.style.display='none';
         els.audioStage.style.display='grid';
         els.audioFeatureArt.src=getEpisodeArt(item,'audio');
-        els.audioFeatureTitle.textContent=item?.title?.display || '';
+        els.audioFeatureTitle.textContent=collectionPlayerTitleForItem(item) || item?.title?.display || '';
         els.audioFeatureSeries.classList.add('audio-series-line');
         els.audioFeatureSeries.innerHTML=`<span>${escapeHtml(item?.series?.name || '')}</span>${currentAudioLaneBadgeHtml(item)}`;
         els.audioFeatureScripture.textContent=item?.scripture?.display || '—';
@@ -6225,6 +6241,31 @@
   sync();
 })();
 </script>
+
+
+
+<!-- === 2026-05-01 MOBILE AUTO BADGE SIZE TUNE + COLLECTION PLAYER TITLE === -->
+<style id="mobile-auto-badge-final-size-tune">
+  @media (max-width:900px){
+    .mobile-auto-dedicated-badge{
+      min-height:33px!important;
+      padding:0 12px!important;
+      gap:8px!important;
+      font-size:12px!important;
+    }
+    .mobile-auto-dedicated-gear{
+      font-size:23px!important;
+    }
+    .mobile-auto-dedicated-info,
+    .mobile-auto-dedicated-badge .mobile-auto-info-btn,
+    .mobile-auto-dedicated-badge .transcript-auto-info-btn{
+      width:27px!important;
+      height:27px!important;
+      min-width:27px!important;
+      font-size:16px!important;
+    }
+  }
+</style>
 
 </body>
 </html>
