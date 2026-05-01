@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-01T15:19:11.195Z",
+  "generatedAt": "2026-05-01T15:33:15.285Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 137,
@@ -50,26 +50,15 @@
   },
   "collections": [
     {
-      "key": "grace-gifts-prophecy-and-service",
-      "name": "Grace Gifts: Prophecy & Service",
+      "key": "grace-gifts",
+      "name": "Grace Gifts",
       "description": "",
       "sortOrder": 999,
       "art": {
         "square": null,
         "wide": null
       },
-      "count": 1
-    },
-    {
-      "key": "grace-grifts-teaching",
-      "name": "Grace Grifts: Teaching",
-      "description": "",
-      "sortOrder": 999,
-      "art": {
-        "square": null,
-        "wide": null
-      },
-      "count": 1
+      "count": 2
     }
   ],
   "items": [
@@ -555,18 +544,18 @@
       },
       "collections": [
         {
-          "name": "Grace Grifts: Teaching",
-          "key": "grace-grifts-teaching",
+          "name": "Grace Gifts",
+          "key": "grace-gifts",
           "description": "",
           "sortOrder": 999,
           "art": {
             "square": null,
             "wide": null
           },
-          "itemTitle": "",
-          "itemSortOrder": null,
-          "collectionItemTitle": "",
-          "collectionItemOrder": null
+          "itemTitle": "Teaching",
+          "itemSortOrder": 2,
+          "collectionItemTitle": "Teaching",
+          "collectionItemOrder": 2
         }
       ],
       "bookTags": [
@@ -685,7 +674,7 @@
           "1-peter"
         ],
         "collections": [
-          "grace-grifts-teaching"
+          "grace-gifts"
         ],
         "byYear": [
           "2026"
@@ -980,18 +969,18 @@
       },
       "collections": [
         {
-          "name": "Grace Gifts: Prophecy & Service",
-          "key": "grace-gifts-prophecy-and-service",
+          "name": "Grace Gifts",
+          "key": "grace-gifts",
           "description": "",
           "sortOrder": 999,
           "art": {
             "square": null,
             "wide": null
           },
-          "itemTitle": "",
-          "itemSortOrder": null,
-          "collectionItemTitle": "",
-          "collectionItemOrder": null
+          "itemTitle": "Prophecy & Service",
+          "itemSortOrder": 1,
+          "collectionItemTitle": "Prophecy & Service",
+          "collectionItemOrder": 1
         }
       ],
       "bookTags": [
@@ -1084,7 +1073,7 @@
           "1-peter"
         ],
         "collections": [
-          "grace-gifts-prophecy-and-service"
+          "grace-gifts"
         ],
         "byYear": [
           "2026"
