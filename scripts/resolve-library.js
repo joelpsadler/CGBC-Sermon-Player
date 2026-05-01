@@ -285,6 +285,17 @@ function resolveBookTags(record) {
 // Beginner note:
 // Add optional RSS metadata like:
 //   Collections: Spiritual Gifts, Church Body
+//
+// You can also give an episode a collection-specific title/order using the
+// familiar pipe pattern:
+//   Collections: 01 Teaching | Grace Gifts
+//   Collections: 02 Prophecy & Service | Grace Gifts, Church Body
+//
+// In that pattern:
+//   - Left of the pipe is the title shown inside that collection.
+//   - An optional leading number controls the order inside that collection.
+//   - Right of the pipe is the parent collection/card.
+//
 // This does not duplicate the media. It just lets the same episode appear inside
 // curated topical collection paths. Collection art can be stored in GitHub at:
 //   assets/collections/<collection-key>/square.jpg
@@ -305,24 +316,64 @@ function collectionArtForKey(key) {
   };
 }
 
+function parseCollectionEntry(rawEntry) {
+  const entry = clean(rawEntry);
+  if (!entry) return null;
+
+  const parts = splitPipeTitle(entry);
+  const hasPipe = entry.includes("|") && clean(parts.right);
+
+  // Default / backward-compatible form:
+  //   Collections: Grace Gifts
+  // Pipe form for a collection-specific item label:
+  //   Collections: 01 Teaching | Grace Gifts
+  const collectionName = hasPipe ? clean(parts.right) : entry;
+  let itemTitle = hasPipe ? clean(parts.left) : "";
+  let itemSortOrder = null;
+
+  // Optional collection item ordering. The visible label drops the number:
+  //   01 Teaching | Grace Gifts  ->  itemSortOrder: 1, itemTitle: Teaching
+  const orderMatch = itemTitle.match(/^(\d{1,4})(?:[.)-]|\s+)\s*(.+)$/);
+  if (orderMatch) {
+    const parsedOrder = Number(orderMatch[1]);
+    if (Number.isFinite(parsedOrder)) {
+      itemSortOrder = parsedOrder;
+      itemTitle = clean(orderMatch[2]);
+    }
+  }
+
+  if (!collectionName) return null;
+
+  const key = slugify(collectionName);
+  const cfg = collectionConfigForKey(key);
+  const resolvedName = clean(cfg.name) || collectionName;
+
+  return {
+    name: resolvedName,
+    key,
+    description: clean(cfg.description) || "",
+    sortOrder: Number.isFinite(Number(cfg.sortOrder)) ? Number(cfg.sortOrder) : 999,
+    art: collectionArtForKey(key),
+
+    // Collection-specific episode display fields. These are intentionally
+    // additive/backward-compatible so existing collection behavior keeps working
+    // until the frontend chooses to use them.
+    itemTitle,
+    itemSortOrder,
+
+    // Explicit aliases for future frontend code/readability.
+    collectionItemTitle: itemTitle,
+    collectionItemOrder: itemSortOrder
+  };
+}
+
 function resolveCollections(record) {
   const raw = clean(record.notesFields?.["Collections"]);
   if (!raw) return [];
   return raw
     .split(",")
-    .map(v => clean(v))
-    .filter(Boolean)
-    .map(name => {
-      const key = slugify(name);
-      const cfg = collectionConfigForKey(key);
-      return {
-        name: clean(cfg.name) || name,
-        key,
-        description: clean(cfg.description) || "",
-        sortOrder: Number.isFinite(Number(cfg.sortOrder)) ? Number(cfg.sortOrder) : 999,
-        art: collectionArtForKey(key)
-      };
-    });
+    .map(parseCollectionEntry)
+    .filter(Boolean);
 }
 
 function buildCollectionsSummary(items) {
