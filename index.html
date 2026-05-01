@@ -6483,3 +6483,21 @@
 
 </body>
 </html>
+<!-- CGBC final mobile no-zoom input patch: appended after body; valid CSS still applies. -->
+<style id="cgbc-mobile-no-zoom-inputs">
+  @media (max-width: 900px){
+    .transcript-panel .transcript-search,
+    .transcript-panel .transcript-select,
+    .transcript-panel input[type="search"],
+    .transcript-panel input[type="text"],
+    .transcript-panel select{
+      font-size:16px!important;
+      line-height:1.2!important;
+      -webkit-text-size-adjust:100%;
+    }
+    .transcript-panel .transcript-search,
+    .transcript-panel .transcript-select{
+      min-height:44px!important;
+    }
+  }
+</style>
