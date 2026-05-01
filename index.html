@@ -6279,5 +6279,207 @@
   }
 </style>
 
+
+
+<!-- === 2026-05-01 MOBILE AUTO FOOTER BADGE EXPERIMENT ===
+     Beginner note: Mobile-only relocation of the Auto warning control.
+     Desktop stays locked. This hides the crowded mobile header Auto row and
+     adds a small left-aligned Auto info badge beneath the expanded transcript. -->
+<style id="mobile-auto-footer-badge-css">
+  @media (max-width:900px){
+    /* Remove Auto from the mobile header area entirely. */
+    #transcriptPanel .mobile-auto-dedicated-row,
+    #transcriptPanel .transcript-title-block .transcript-auto-badge,
+    #transcriptPanel .transcript-title-block .mobile-auto-badge{
+      display:none!important;
+      visibility:hidden!important;
+      opacity:0!important;
+      pointer-events:none!important;
+    }
+
+    /* Give the mobile header back the space that the Auto row was using. */
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-head{
+      min-height:116px!important;
+      overflow:visible!important;
+    }
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-head{
+      min-height:76px!important;
+      overflow:visible!important;
+    }
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-tools{
+      margin:14px 0 0!important;
+    }
+
+    /* Footer Auto badge: available, but out of the way. */
+    .mobile-auto-footer-row{
+      display:flex!important;
+      align-items:center!important;
+      justify-content:flex-start!important;
+      width:100%!important;
+      margin:12px 0 2px!important;
+      padding:0 2px!important;
+    }
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .mobile-auto-footer-row,
+    #transcriptPanel:not(.is-visible) .mobile-auto-footer-row{
+      display:none!important;
+    }
+    .mobile-auto-footer-badge{
+      display:inline-flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      gap:6px!important;
+      min-height:28px!important;
+      padding:0 10px!important;
+      border-radius:999px!important;
+      background:linear-gradient(180deg,rgba(255,255,255,.060),rgba(255,255,255,.024))!important;
+      border:1px solid rgba(255,255,255,.10)!important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+      font-family:Poppins,sans-serif!important;
+      font-size:10px!important;
+      font-weight:700!important;
+      letter-spacing:.08em!important;
+      text-transform:uppercase!important;
+      color:rgba(255,255,255,.76)!important;
+      line-height:1!important;
+      white-space:nowrap!important;
+      cursor:default!important;
+    }
+    .mobile-auto-footer-gear{
+      font-size:16px!important;
+      line-height:1!important;
+      opacity:.86!important;
+      transform:translateY(.25px)!important;
+    }
+    .mobile-auto-footer-info{
+      width:22px!important;
+      height:22px!important;
+      min-width:22px!important;
+      padding:0!important;
+      border-radius:999px!important;
+      display:inline-flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12))!important;
+      border:1px solid rgba(143,174,157,.32)!important;
+      color:rgba(255,255,255,.94)!important;
+      font-family:Poppins,sans-serif!important;
+      font-size:13px!important;
+      font-weight:800!important;
+      line-height:1!important;
+      cursor:pointer!important;
+      pointer-events:auto!important;
+    }
+
+    /* Warning message now belongs near the footer control on mobile. */
+    #transcriptPanel .mobile-auto-footer-note{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) auto!important;
+      gap:10px!important;
+      align-items:start!important;
+      margin:12px 0 0!important;
+      padding:12px 12px!important;
+      border-radius:16px!important;
+      background:linear-gradient(180deg,rgba(143,174,157,.14),rgba(143,174,157,.06))!important;
+      border:1px solid rgba(143,174,157,.22)!important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.055)!important;
+      color:rgba(255,255,255,.88)!important;
+      font-size:13px!important;
+      line-height:1.28!important;
+    }
+    .mobile-auto-footer-note .mobile-auto-footer-note-close{
+      width:26px!important;
+      height:26px!important;
+      min-width:26px!important;
+      border-radius:999px!important;
+      display:inline-flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      background:rgba(255,255,255,.10)!important;
+      border:1px solid rgba(255,255,255,.10)!important;
+      color:rgba(255,255,255,.92)!important;
+      font-size:18px!important;
+      line-height:1!important;
+      font-weight:800!important;
+    }
+  }
+</style>
+<script id="mobile-auto-footer-badge-script">
+(function(){
+  var NOTE_TEXT = 'Auto translations and captions are machine generated and may include mistakes. Please verify important wording against the original audio or video.';
+  function isMobile(){ return window.matchMedia && window.matchMedia('(max-width:900px)').matches; }
+  function panel(){ return document.getElementById('transcriptPanel') || document.querySelector('.transcript-panel'); }
+  function removeFooterNotes(root){
+    (root || document).querySelectorAll('.mobile-auto-footer-note').forEach(function(n){ n.remove(); });
+  }
+  function removeHeaderMobileAuto(root){
+    try{
+      (root || document).querySelectorAll('.mobile-auto-dedicated-row').forEach(function(n){ n.remove(); });
+    }catch(err){}
+  }
+  function ensureFooter(){
+    try{
+      var root = panel();
+      if(!root || !isMobile()) return;
+      removeHeaderMobileAuto(root);
+      var lines = root.querySelector('.transcript-lines');
+      if(!lines) return;
+      var footer = root.querySelector('.mobile-auto-footer-row');
+      if(!footer){
+        footer = document.createElement('div');
+        footer.className = 'mobile-auto-footer-row';
+        footer.innerHTML = '<span class="mobile-auto-footer-badge" aria-label="Automatic transcript notice"><span class="mobile-auto-footer-gear" aria-hidden="true">⚙</span><span>Auto</span><button type="button" class="mobile-auto-footer-info" aria-label="About auto transcripts">i</button></span>';
+      }
+      if(footer.previousElementSibling !== lines){
+        lines.insertAdjacentElement('afterend', footer);
+      }
+    }catch(err){}
+  }
+  function toggleFooterNote(btn){
+    try{
+      var root = (btn && btn.closest && btn.closest('.transcript-panel')) || panel();
+      if(!root) return;
+      var footer = root.querySelector('.mobile-auto-footer-row');
+      if(!footer) return;
+      var existing = root.querySelector('.mobile-auto-footer-note');
+      if(existing){ existing.remove(); return; }
+      root.querySelectorAll('.transcript-auto-note,.mobile-auto-note').forEach(function(n){ n.remove(); });
+      var note = document.createElement('div');
+      note.className = 'mobile-auto-footer-note';
+      note.innerHTML = '<span>'+NOTE_TEXT+'</span><button type="button" class="mobile-auto-footer-note-close" aria-label="Close auto transcript note">×</button>';
+      footer.insertAdjacentElement('beforebegin', note);
+    }catch(err){}
+  }
+  function sync(){ setTimeout(ensureFooter,0); setTimeout(ensureFooter,80); setTimeout(ensureFooter,250); }
+  if(typeof renderTranscriptPanel === 'function'){
+    var previousRenderTranscriptPanelMobileAutoFooter = renderTranscriptPanel;
+    renderTranscriptPanel = async function(){
+      var result = await previousRenderTranscriptPanelMobileAutoFooter.apply(this, arguments);
+      sync();
+      return result;
+    };
+  }
+  document.addEventListener('click', function(event){
+    var info = event.target.closest && event.target.closest('.mobile-auto-footer-info');
+    if(info){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      toggleFooterNote(info);
+      return;
+    }
+    var close = event.target.closest && event.target.closest('.mobile-auto-footer-note-close');
+    if(close){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      removeFooterNotes(close.closest('.transcript-panel') || panel());
+      return;
+    }
+  }, true);
+  document.addEventListener('DOMContentLoaded', sync);
+  document.addEventListener('click', sync, true);
+  window.addEventListener('resize', sync, {passive:true});
+  sync();
+})();
+</script>
+
 </body>
 </html>
