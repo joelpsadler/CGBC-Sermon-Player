@@ -6073,5 +6073,67 @@
 })();
 </script>
 
+
+<!-- === 2026-04-30 MOBILE TRANSCRIPT FINAL ROW TUNE: Auto visible + default closed ===
+     Beginner note: This is a mobile-only override. It does not touch desktop,
+     playback, routing, quote links, transcript timing, stats, or media loading. -->
+<style id="mobile-transcript-final-row-tune-css">
+  @media (max-width:900px){
+    #transcriptPanel.transcript-panel.is-visible .transcript-title-block .eyebrow{overflow:visible!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-head{min-height:164px!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-auto-badge{display:inline-flex!important;visibility:visible!important;opacity:1!important;position:absolute!important;left:50%!important;top:62px!important;transform:translateX(-50%)!important;min-height:38px!important;padding:0 14px!important;gap:10px!important;margin:0!important;max-width:none!important;z-index:7!important;font-size:13px!important;line-height:1!important;white-space:nowrap!important;cursor:default!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-auto-badge > span:first-child{font-size:28px!important;line-height:1!important;opacity:1!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-auto-info-btn{width:31px!important;height:31px!important;min-width:31px!important;font-size:18px!important;pointer-events:auto!important;cursor:pointer!important;}
+    #transcriptPanel.transcript-panel.is-visible:not(.is-collapsed) .transcript-tools{margin:58px 0 0!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-head{min-height:104px!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-auto-badge{display:inline-flex!important;visibility:visible!important;opacity:1!important;position:absolute!important;left:50%!important;top:57px!important;transform:translateX(-50%)!important;min-height:35px!important;padding:0 13px!important;gap:9px!important;margin:0!important;max-width:none!important;z-index:7!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important;cursor:default!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-auto-badge > span:first-child{font-size:26px!important;line-height:1!important;opacity:1!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-auto-info-btn{width:30px!important;height:30px!important;min-width:30px!important;font-size:18px!important;pointer-events:auto!important;cursor:pointer!important;}
+    #transcriptPanel.transcript-panel.is-visible.is-collapsed .transcript-tools::before{bottom:-1px!important;}
+  }
+</style>
+<script id="mobile-transcript-default-closed-final-script">
+(function(){
+  var seenItemId = null;
+  function isMobile(){ return window.matchMedia && window.matchMedia('(max-width:900px)').matches; }
+  function currentId(){
+    try{
+      var item = window.state && state.currentItem;
+      return item ? String(item.stableId || item.id || item.guid || (item.title && item.title.display) || '') : '';
+    }catch(err){ return ''; }
+  }
+  function forceClosedForNewMobileItem(){
+    try{
+      if(!isMobile() || typeof state === 'undefined' || !state.transcript) return;
+      var id = currentId();
+      if(!id) return;
+      if(id !== seenItemId){
+        seenItemId = id;
+        state.transcript.hidden = true;
+        try{ window.localStorage.setItem('cgbcTranscriptHiddenMobile','1'); }catch(err){}
+      }
+    }catch(err){}
+  }
+  function syncLabel(){
+    try{
+      var btn = document.getElementById('transcriptVisibilityBtn');
+      if(btn && typeof state !== 'undefined' && state.transcript){
+        btn.textContent = state.transcript.hidden ? 'Show Transcript' : 'Hide';
+      }
+    }catch(err){}
+  }
+  if(typeof renderTranscriptPanel === 'function'){
+    var previousRenderTranscriptPanelMobileFinal = renderTranscriptPanel;
+    renderTranscriptPanel = async function(){
+      forceClosedForNewMobileItem();
+      var result = await previousRenderTranscriptPanelMobileFinal.apply(this, arguments);
+      syncLabel();
+      setTimeout(syncLabel, 0);
+      return result;
+    };
+  }
+  document.addEventListener('click', function(){ setTimeout(syncLabel, 0); }, true);
+})();
+</script>
 </body>
 </html>
