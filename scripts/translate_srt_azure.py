@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 """
-Translate CGBC transcript SRT files with Azure Translator while preserving subtitle timing.
+Translate CGBC display transcript files with Azure Translator while preserving subtitle timing.
 
 Beginner notes:
-- This script reads English .srt files and display-clean JSON transcript files.
+- This version intentionally translates ONLY user-facing display transcripts.
+- It scans:
+    transcripts_display/en/
+- It does NOT scan:
+    transcripts_clean/en/
+  because that can double-count the same sermon and burn quota faster.
 - It sends ONLY the cue text to Azure, not the timestamps.
-- It writes translated .srt files into matching language folders.
-- Example:
+- It writes translated .srt files into matching display language folders.
+
+Example:
     transcripts_display/en/example.srt
-  becomes:
+becomes:
     transcripts_display/es/example.srt
     transcripts_display/fr/example.srt
     transcripts_display/de/example.srt
@@ -42,16 +48,15 @@ import requests
 # Main configuration
 # -----------------------------
 
+# IMPORTANT:
+# Only translate display transcripts, not clean/archive transcripts.
+# This prevents duplicate billable translation for the same episode.
 DEFAULT_SOURCE_DIRS = [
     Path("transcripts_display/en"),
-    Path("transcripts_clean/en"),
 ]
 
-# This helps avoid accidental runaway use.
-# Azure F0 is generous, but guardrails are still wise.
 DEFAULT_MAX_RUN_CHARACTERS = 550_000
 
-# Azure accepts many texts in one call, but batching keeps requests stable.
 MAX_TEXTS_PER_REQUEST = 75
 MAX_CHARS_PER_REQUEST = 35_000
 
@@ -84,12 +89,6 @@ def get_required_env(name: str) -> str:
 
 
 def parse_srt(content: str) -> List[Cue]:
-    """
-    Parse a normal SRT file into cues.
-
-    This parser is intentionally forgiving because real subtitle files often
-    have harmless spacing differences.
-    """
     content = content.replace("\r\n", "\n").replace("\r", "\n").strip()
     if not content:
         return []
@@ -106,11 +105,7 @@ def parse_srt(content: str) -> List[Cue]:
         time_line_index = 1
 
         if not idx_line.isdigit():
-            # Some SRT-like files omit the numeric index.
             time_line_index = 0
-            cue_index = len(cues) + 1
-        else:
-            cue_index = int(idx_line)
 
         if time_line_index >= len(lines):
             continue
@@ -137,21 +132,6 @@ def parse_srt(content: str) -> List[Cue]:
 
 
 def cues_from_display_json(content: str) -> List[Cue]:
-    """
-    Convert one of our display transcript JSON files into SRT cues.
-
-    Expected shape:
-    {
-      "segments": [
-        {
-          "index": 1,
-          "startTime": "00:00:00,000",
-          "endTime": "00:00:04,849",
-          "text": "Never forget why you are the church."
-        }
-      ]
-    }
-    """
     data = json.loads(content)
     segments = data.get("segments", [])
     cues: List[Cue] = []
@@ -190,25 +170,17 @@ def write_srt(path: Path, cues: List[Cue]) -> None:
 
     chunks = []
     for i, cue in enumerate(cues, start=1):
-        text = cue.text.strip()
-        chunks.append(f"{i}\n{cue.start_time} --> {cue.end_time}\n{text}\n")
+        chunks.append(f"{i}\n{cue.start_time} --> {cue.end_time}\n{cue.text.strip()}\n")
 
     path.write_text("\n".join(chunks).strip() + "\n", encoding="utf-8")
 
 
 def output_path_for(source_path: Path, target_lang: str) -> Path:
-    """
-    Preserve your repo structure by replacing /en/ with /target_lang/.
-
-    Also converts .json input into .srt output, because the website can consume
-    the translated subtitles as normal SRT files.
-    """
     parts = list(source_path.parts)
     try:
         en_index = parts.index("en")
         parts[en_index] = target_lang
     except ValueError:
-        # Fallback if someone passes a file outside transcripts_display/en.
         parts.insert(-1, target_lang)
 
     out = Path(*parts)
@@ -264,7 +236,6 @@ def translate_batch(
     }
     body = [{"text": text} for text in texts]
 
-    # Simple retry for temporary service hiccups.
     for attempt in range(1, 5):
         response = requests.post(url, params=params, headers=headers, json=body, timeout=60)
 
@@ -334,7 +305,7 @@ def find_source_files(source_path: str) -> List[Path]:
             files.extend(sorted(source_dir.glob("*.srt")))
             files.extend(sorted(source_dir.glob("*.json")))
 
-    # Avoid double-processing matching .json/.srt pairs with the same stem in the same folder.
+    # Avoid double-processing matching .json/.srt pairs with the same stem.
     # Prefer .srt if both exist, otherwise use .json.
     best = {}
     for path in files:
@@ -364,10 +335,10 @@ def main() -> None:
 
     source_files = find_source_files(source_path)
     if not source_files:
-        print("No English SRT/JSON transcript files found. Nothing to translate.")
+        print("No English display SRT/JSON transcript files found. Nothing to translate.")
         return
 
-    print(f"Found {len(source_files)} source transcript file(s).")
+    print(f"Found {len(source_files)} source display transcript file(s).")
     print(f"Targets: {', '.join(args.targets)}")
     print(f"Force translate: {force}")
 
@@ -437,7 +408,7 @@ def main() -> None:
 
             write_srt(out_path, translated_cues)
 
-    print("\nDone. Translated SRT files are ready to commit.")
+    print("\nDone. Translated display SRT files are ready to commit.")
 
 
 if __name__ == "__main__":
