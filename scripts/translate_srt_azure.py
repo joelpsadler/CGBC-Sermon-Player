@@ -2,11 +2,13 @@
 """
 Translate CGBC display subtitle files with Azure Translator while preserving timing.
 
+This script is designed to run inside the Build Sermon Library workflow.
+
 Beginner notes:
-- This version scans only:
+- It scans only:
     transcripts_display/en/
 - It prefers .srt files.
-- If .srt files exist, matching/all .json display files are ignored to avoid translating
+- If .srt files exist, display .json files are ignored to avoid translating
   the same episode twice.
 - If no .srt files exist, it can fall back to display .json files.
 - It writes translated .srt files into:
@@ -43,7 +45,7 @@ DEFAULT_SOURCE_DIRS = [
     Path("transcripts_display/en"),
 ]
 
-DEFAULT_MAX_RUN_CHARACTERS = 550_000
+DEFAULT_MAX_RUN_CHARACTERS = 750_000
 
 MAX_TEXTS_PER_REQUEST = 75
 MAX_CHARS_PER_REQUEST = 35_000
@@ -281,9 +283,10 @@ def find_source_files(source_path: str) -> List[Path]:
     """
     Find source transcripts.
 
-    Key guardrail:
+    Guardrail:
     - If any .srt files exist in transcripts_display/en, use ONLY those .srt files.
     - Only fall back to .json if there are no .srt files.
+
     This prevents duplicate translation charges when the repo contains both
     display SRT and display JSON versions of the same sermon.
     """
