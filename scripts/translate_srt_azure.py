@@ -1,25 +1,20 @@
 #!/usr/bin/env python3
 """
-Translate CGBC display transcript files with Azure Translator while preserving subtitle timing.
+Translate CGBC display subtitle files with Azure Translator while preserving timing.
 
 Beginner notes:
-- This version intentionally translates ONLY user-facing display transcripts.
-- It scans:
+- This version scans only:
     transcripts_display/en/
-- It does NOT scan:
-    transcripts_clean/en/
-  because that can double-count the same sermon and burn quota faster.
-- It sends ONLY the cue text to Azure, not the timestamps.
-- It writes translated .srt files into matching display language folders.
-
-Example:
-    transcripts_display/en/example.srt
-becomes:
-    transcripts_display/es/example.srt
-    transcripts_display/fr/example.srt
-    transcripts_display/de/example.srt
-    transcripts_display/nl/example.srt
-    transcripts_display/pt/example.srt
+- It prefers .srt files.
+- If .srt files exist, matching/all .json display files are ignored to avoid translating
+  the same episode twice.
+- If no .srt files exist, it can fall back to display .json files.
+- It writes translated .srt files into:
+    transcripts_display/es/
+    transcripts_display/fr/
+    transcripts_display/de/
+    transcripts_display/nl/
+    transcripts_display/pt/
 
 Required GitHub Secrets:
 - AZURE_TRANSLATOR_KEY
@@ -44,13 +39,6 @@ from typing import Iterable, List
 import requests
 
 
-# -----------------------------
-# Main configuration
-# -----------------------------
-
-# IMPORTANT:
-# Only translate display transcripts, not clean/archive transcripts.
-# This prevents duplicate billable translation for the same episode.
 DEFAULT_SOURCE_DIRS = [
     Path("transcripts_display/en"),
 ]
@@ -102,10 +90,7 @@ def parse_srt(content: str) -> List[Cue]:
             continue
 
         idx_line = lines[0].strip()
-        time_line_index = 1
-
-        if not idx_line.isdigit():
-            time_line_index = 0
+        time_line_index = 1 if idx_line.isdigit() else 0
 
         if time_line_index >= len(lines):
             continue
@@ -293,30 +278,35 @@ def translate_texts(
 
 
 def find_source_files(source_path: str) -> List[Path]:
+    """
+    Find source transcripts.
+
+    Key guardrail:
+    - If any .srt files exist in transcripts_display/en, use ONLY those .srt files.
+    - Only fall back to .json if there are no .srt files.
+    This prevents duplicate translation charges when the repo contains both
+    display SRT and display JSON versions of the same sermon.
+    """
     if source_path.strip():
         path = Path(source_path.strip())
         if not path.exists():
             die(f"SOURCE_PATH does not exist: {path}")
         return [path]
 
-    files: List[Path] = []
+    srt_files: List[Path] = []
+    json_files: List[Path] = []
+
     for source_dir in DEFAULT_SOURCE_DIRS:
         if source_dir.exists():
-            files.extend(sorted(source_dir.glob("*.srt")))
-            files.extend(sorted(source_dir.glob("*.json")))
+            srt_files.extend(sorted(source_dir.glob("*.srt")))
+            json_files.extend(sorted(source_dir.glob("*.json")))
 
-    # Avoid double-processing matching .json/.srt pairs with the same stem.
-    # Prefer .srt if both exist, otherwise use .json.
-    best = {}
-    for path in files:
-        key = (path.parent, path.stem)
-        existing = best.get(key)
-        if existing is None:
-            best[key] = path
-        elif existing.suffix.lower() == ".json" and path.suffix.lower() == ".srt":
-            best[key] = path
+    if srt_files:
+        print("SRT files found; ignoring display JSON files to avoid duplicate translation.")
+        return sorted(srt_files)
 
-    return sorted(best.values())
+    print("No display SRT files found; falling back to display JSON files.")
+    return sorted(json_files)
 
 
 def main() -> None:
