@@ -2,21 +2,12 @@
 """
 Translate CGBC display subtitle files with Azure Translator while preserving timing.
 
-This script is designed to run inside the Build Sermon Library workflow.
-
-Beginner notes:
-- It scans only:
-    transcripts_display/en/
-- It prefers .srt files.
-- If .srt files exist, display .json files are ignored to avoid translating
-  the same episode twice.
-- If no .srt files exist, it can fall back to display .json files.
-- It writes translated .srt files into:
-    transcripts_display/es/
-    transcripts_display/fr/
-    transcripts_display/de/
-    transcripts_display/nl/
-    transcripts_display/pt/
+Rate-safe version:
+- Scans only transcripts_display/en/
+- Prefers .srt files and ignores display .json files when SRTs exist
+- Uses smaller Azure batches
+- Pauses between requests
+- Handles Azure 429 rate limits with longer backoff and Retry-After support
 
 Required GitHub Secrets:
 - AZURE_TRANSLATOR_KEY
@@ -47,8 +38,15 @@ DEFAULT_SOURCE_DIRS = [
 
 DEFAULT_MAX_RUN_CHARACTERS = 750_000
 
-MAX_TEXTS_PER_REQUEST = 75
-MAX_CHARS_PER_REQUEST = 35_000
+# Azure F0 can rate-limit if we move too fast.
+# Smaller batches are slower, but much more reliable for GitHub Actions.
+MAX_TEXTS_PER_REQUEST = 20
+MAX_CHARS_PER_REQUEST = 8_000
+REQUEST_PAUSE_SECONDS = 2.5
+
+# 429 backoff. We would rather wait a few minutes than fail a whole workflow.
+MAX_RETRY_ATTEMPTS = 10
+DEFAULT_429_BACKOFF_SECONDS = [15, 30, 45, 60, 90, 120, 150, 180, 210, 240]
 
 
 @dataclass
@@ -200,6 +198,15 @@ def chunk_texts(texts: List[str]) -> Iterable[List[str]]:
         yield batch
 
 
+def retry_after_seconds(response: requests.Response, attempt: int) -> int:
+    header_value = response.headers.get("Retry-After", "").strip()
+    if header_value.isdigit():
+        return max(5, int(header_value))
+
+    index = min(attempt - 1, len(DEFAULT_429_BACKOFF_SECONDS) - 1)
+    return DEFAULT_429_BACKOFF_SECONDS[index]
+
+
 def translate_batch(
     texts: List[str],
     target_lang: str,
@@ -223,12 +230,24 @@ def translate_batch(
     }
     body = [{"text": text} for text in texts]
 
-    for attempt in range(1, 5):
-        response = requests.post(url, params=params, headers=headers, json=body, timeout=60)
+    for attempt in range(1, MAX_RETRY_ATTEMPTS + 1):
+        response = requests.post(url, params=params, headers=headers, json=body, timeout=90)
 
-        if response.status_code == 429 or 500 <= response.status_code < 600:
-            wait_seconds = min(2 * attempt, 10)
-            print(f"Azure returned {response.status_code}; retrying in {wait_seconds}s...")
+        if response.status_code == 429:
+            wait_seconds = retry_after_seconds(response, attempt)
+            print(
+                f"Azure returned 429 for target {target_lang}; "
+                f"attempt {attempt}/{MAX_RETRY_ATTEMPTS}. Waiting {wait_seconds}s..."
+            )
+            time.sleep(wait_seconds)
+            continue
+
+        if 500 <= response.status_code < 600:
+            wait_seconds = min(15 * attempt, 120)
+            print(
+                f"Azure returned {response.status_code} for target {target_lang}; "
+                f"attempt {attempt}/{MAX_RETRY_ATTEMPTS}. Waiting {wait_seconds}s..."
+            )
             time.sleep(wait_seconds)
             continue
 
@@ -242,9 +261,16 @@ def translate_batch(
         for item in payload:
             translated_text = item["translations"][0]["text"]
             translated.append(html.unescape(translated_text))
+
+        # Gentle pacing after successful requests too.
+        time.sleep(REQUEST_PAUSE_SECONDS)
         return translated
 
-    die(f"Azure translation failed repeatedly for target language {target_lang}.")
+    die(
+        f"Azure translation failed repeatedly for target language {target_lang}. "
+        "This is usually a temporary F0 rate limit. Re-running the workflow later should continue "
+        "because already-created translated SRT files are skipped when FORCE_TRANSLATE=false."
+    )
     return []
 
 
@@ -257,8 +283,12 @@ def translate_texts(
     region: str,
 ) -> List[str]:
     translated_all: List[str] = []
+    batches = list(chunk_texts(texts))
 
-    for batch in chunk_texts(texts):
+    print(f"    Azure batches for {target_lang}: {len(batches)}")
+
+    for batch_index, batch in enumerate(batches, start=1):
+        print(f"    Batch {batch_index}/{len(batches)} for {target_lang} ({sum(len(t) for t in batch):,} chars)")
         translated_all.extend(
             translate_batch(
                 texts=batch,
@@ -280,16 +310,6 @@ def translate_texts(
 
 
 def find_source_files(source_path: str) -> List[Path]:
-    """
-    Find source transcripts.
-
-    Guardrail:
-    - If any .srt files exist in transcripts_display/en, use ONLY those .srt files.
-    - Only fall back to .json if there are no .srt files.
-
-    This prevents duplicate translation charges when the repo contains both
-    display SRT and display JSON versions of the same sermon.
-    """
     if source_path.strip():
         path = Path(source_path.strip())
         if not path.exists():
