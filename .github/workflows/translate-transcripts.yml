@@ -12,15 +12,13 @@ on:
           - "false"
           - "true"
       source_path:
-        description: "Optional single English transcript file to translate"
+        description: "Optional single English display transcript file to translate"
         required: false
         default: ""
   push:
     paths:
       - "transcripts_display/en/**.srt"
       - "transcripts_display/en/**.json"
-      - "transcripts_clean/en/**.srt"
-      - "transcripts_clean/en/**.json"
       - "scripts/translate_srt_azure.py"
       - ".github/workflows/translate-transcripts.yml"
 
@@ -45,7 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install requests
 
-      - name: Translate English transcripts
+      - name: Translate English display transcripts
         env:
           AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
           AZURE_TRANSLATOR_ENDPOINT: ${{ secrets.AZURE_TRANSLATOR_ENDPOINT }}
@@ -58,12 +56,11 @@ jobs:
             --source-lang en \
             --max-run-characters 550000
 
-      - name: Commit translated subtitles
+      - name: Commit translated display subtitles
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add transcripts_display/es transcripts_display/fr transcripts_display/de transcripts_display/nl transcripts_display/pt || true
-          git add transcripts_clean/es transcripts_clean/fr transcripts_clean/de transcripts_clean/nl transcripts_clean/pt || true
           if git diff --cached --quiet; then
             echo "No translated subtitle changes to commit."
           else
