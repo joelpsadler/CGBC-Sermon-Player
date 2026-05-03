@@ -39,6 +39,7 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 .selector-field label{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}
 .selector-field select{height:46px;border-radius:16px;border:1px solid var(--border);background:rgba(0,0,0,.32);color:var(--text);padding:0 14px;outline:none;font-family:Inter,sans-serif}
 .quick-link{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:0 15px;border-radius:16px;background:linear-gradient(180deg,rgba(143,174,157,.20),rgba(143,174,157,.10));border:1px solid rgba(143,174,157,.24);font-family:Poppins,sans-serif;font-weight:700}
+.review-selector-row{display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(220px,.9fr) auto;align-items:end}.selector-links{display:flex;gap:10px;flex-wrap:wrap;align-items:end;justify-content:flex-start}.review-status-field{min-width:min(300px,100%)}@media(max-width:1120px){.review-selector-row{grid-template-columns:1fr}.selector-links{justify-content:flex-start}}
 
 @media(max-width:980px){.review{grid-template-columns:1fr}.brand img{width:150px;height:54px}}
 </style>
@@ -48,7 +49,7 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 <header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><div class="actions"><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="quote-review-denied.html">Denied Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path><path d="M5 17v4"></path><path d="M19 17v4"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></div></header>
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
-<section class="panel"><div class="selector-row"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><div class="selector-field"><label for="reviewStatusFilter">Review status</label><select id="reviewStatusFilter"><option value="unreviewed">Unreviewed only</option><option value="all">All quotes</option><option value="approved">Approved</option><option value="featured">Featured</option><option value="rejected">Rejected</option></select></div><a class="quick-link" href="quote-review-approved.html">Approved Quote Page</a><a class="quick-link" href="quote-review-denied.html">Denied Quote Page</a></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
+<section class="panel"><div class="selector-row review-selector-row"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><div class="selector-field review-status-field"><label for="reviewStatusFilter">Review status</label><select id="reviewStatusFilter"><option value="unreviewed">Unreviewed only</option><option value="all">All quotes</option><option value="approved">Approved</option><option value="featured">Featured</option><option value="rejected">Rejected</option></select></div><div class="selector-links"><a class="quick-link" href="quote-review-approved.html">Approved Quote Page</a><a class="quick-link" href="quote-review-denied.html">Denied Quote Page</a></div></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
 <section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Review uses the YouTube video timestamp. Audio buttons were removed because browser audio seeking was not precise enough for quote review.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
@@ -56,7 +57,8 @@ const PASSWORD='1813';
 const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
 const AUTH_TTL_MS=12*60*60*1000;
 const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
-const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__",reviewFilter:"unreviewed"};
+const CURATION_PATHS=['config/quote-curation.json','quote-curation.json'];
+const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__",reviewStatus:"unreviewed",repoReviews:new Map()};
 const $=id=>document.getElementById(id);
 const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),episodeFilter:$('episodeFilter'),reviewStatusFilter:$('reviewStatusFilter'),loadVideo:$('loadVideo'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast'),exportCurationBtn:$('exportCurationBtn')};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
@@ -70,146 +72,126 @@ function siteBase(){const path=location.pathname.replace(/[^/]*$/,'');return loc
 function siteDeepLink(q){const item=encodeURIComponent(q?.episode?.stableId||q?.episodeStableId||'');const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));return `${siteBase()}index.html?mode=video&item=${item}${start?`&start=${start}`:''}`;}
 function youtubeLink(q){const id=q?.media?.youtubeId;const url=q?.media?.videoUrl || (id?`https://www.youtube.com/watch?v=${id}`:'');if(!url)return '';return `${url}${url.includes('?')?'&':'?'}t=${Math.floor(q?.media?.start??q?.start??0)}s`;}
 
+function normalizeReviewStatus(value){
+  const status=String(value||'').toLowerCase();
+  if(status==='feature'||status==='featured')return 'featured';
+  if(status==='approve'||status==='approved')return 'approved';
+  if(status==='deny'||status==='denied'||status==='dismissed'||status==='reject'||status==='rejected')return 'rejected';
+  return '';
+}
 function reviewKey(action,q){return `cgbcQuoteReview:${action}:${q?.id||'unknown'}`;}
 function readReview(action,q){try{const raw=localStorage.getItem(reviewKey(action,q));return raw?JSON.parse(raw):null;}catch(_){return null;}}
-function allReviewEntries(){const entries=[];for(const q of state.allQuotes||[]){for(const action of ['featured','approved','rejected']){const saved=readReview(action,q);if(saved){entries.push({quoteId:q.id,status:action,approvedText:cleanQuoteOnly(saved.approvedText||quoteText(q),q),episodeStableId:q?.episode?.stableId||'',episodeTitle:q?.episode?.title||q?.episode?.episodeName||'',start:q?.media?.start??q?.start??null,end:q?.media?.end??q?.end??null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:saved.source||'browser_review',savedAt:saved.savedAt||new Date().toISOString()});}}}return entries;}
+function clearLocalReview(q){for(const action of ['featured','approved','rejected']){try{localStorage.removeItem(reviewKey(action,q));}catch(_){}}}
+function localReview(q){for(const action of ['featured','approved','rejected']){const saved=readReview(action,q);if(saved)return {...saved,status:action,action};}return null;}
+function repoReview(q){return state.repoReviews.get(q?.id)||null;}
+function effectiveReview(q){return localReview(q)||repoReview(q)||null;}
+function effectiveStatus(q){return normalizeReviewStatus(effectiveReview(q)?.status||effectiveReview(q)?.action||q?.curation?.status||'');}
+function hasReview(q){return ['featured','approved','rejected'].includes(effectiveStatus(q));}
+function buildRepoReviewMap(reviews){
+  const map=new Map();
+  for(const entry of Array.isArray(reviews)?reviews:[]){
+    const quoteId=entry?.quoteId||entry?.id;
+    const status=normalizeReviewStatus(entry?.status||entry?.action);
+    if(quoteId&&status)map.set(quoteId,{...entry,status,action:status,source:entry?.source||'repo_curation'});
+  }
+  return map;
+}
+async function fetchFirstJson(paths){
+  for(const path of paths){
+    try{const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});if(res.ok)return await res.json();}catch(e){}
+  }
+  return null;
+}
+async function loadRepoCuration(){
+  const json=await fetchFirstJson(CURATION_PATHS);
+  return Array.isArray(json?.reviews)?json.reviews:[];
+}
+function allReviewEntries(){
+  const entries=[];
+  for(const q of state.allQuotes||[]){
+    const saved=effectiveReview(q);
+    const status=normalizeReviewStatus(saved?.status||saved?.action);
+    if(!status)continue;
+    entries.push({
+      quoteId:q.id,
+      status,
+      approvedText:cleanQuoteOnly(saved.approvedText||quoteText(q),q),
+      episodeStableId:q?.episode?.stableId||'',
+      episodeTitle:q?.episode?.title||q?.episode?.episodeName||'',
+      start:q?.media?.start??q?.start??null,
+      end:q?.media?.end??q?.end??null,
+      siteDeepLink:siteDeepLink(q),
+      youtubeLink:youtubeLink(q),
+      source:saved.source||'browser_review',
+      savedAt:saved.savedAt||new Date().toISOString()
+    });
+  }
+  return entries;
+}
 /* EXPORT PATCH: keep this download/fallback path simple and browser-safe. */
 function triggerJsonDownload(json,filename='quote-curation.json'){
   try{
     const blob=new Blob([json],{type:'application/json;charset=utf-8'});
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');
-    a.href=url;
-    a.download=filename;
-    a.rel='noopener';
-    a.style.position='fixed';
-    a.style.left='-9999px';
-    a.style.top='-9999px';
-    document.body.appendChild(a);
-    a.click();
+    a.href=url;a.download=filename;a.rel='noopener';a.style.position='fixed';a.style.left='-9999px';a.style.top='-9999px';
+    document.body.appendChild(a);a.click();
     window.setTimeout(()=>{try{URL.revokeObjectURL(url);a.remove();}catch(_){}},15000);
     return true;
   }catch(err){
     console.warn('Blob download failed, trying data URL fallback.',err);
-    try{
-      const a=document.createElement('a');
-      a.href='data:application/json;charset=utf-8,'+encodeURIComponent(json);
-      a.download=filename;
-      a.rel='noopener';
-      a.style.position='fixed';
-      a.style.left='-9999px';
-      document.body.appendChild(a);
-      a.click();
-      window.setTimeout(()=>{try{a.remove();}catch(_){}},15000);
-      return true;
-    }catch(err2){
-      console.warn('Data URL download failed.',err2);
-      return false;
-    }
+    try{const a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(json);a.download=filename;a.rel='noopener';a.style.position='fixed';a.style.left='-9999px';document.body.appendChild(a);a.click();window.setTimeout(()=>{try{a.remove();}catch(_){}},15000);return true;}catch(err2){console.warn('Data URL download failed.',err2);return false;}
   }
 }
-
 function downloadExportJson(payload){
   const json=JSON.stringify(payload,null,2);
   try{localStorage.setItem('cgbcLastQuoteCurationExport',json);}catch(_){}
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).catch(()=>{});}
   showExportFallback(json,payload.reviews?.length||0);
   const downloaded=triggerJsonDownload(json,'quote-curation.json');
-  if(typeof toast==='function'){
-    toast(downloaded
-      ? 'Export ready: quote-curation.json download started.'
-      : 'Export ready: use Download JSON or Copy JSON in the panel.');
-  }
+  if(typeof toast==='function')toast(downloaded?'Export ready: quote-curation.json download started.':'Export ready: use Download JSON or Copy JSON in the panel.');
 }
-
 function showExportFallback(json,count){
-  const old=document.getElementById('exportFallbackPanel');
-  if(old) old.remove();
-
-  const wrap=document.createElement('div');
-  wrap.id='exportFallbackPanel';
+  const old=document.getElementById('exportFallbackPanel');if(old)old.remove();
+  const wrap=document.createElement('div');wrap.id='exportFallbackPanel';
   wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif;overflow:auto';
-
   const safe=json.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">'
-    +'<div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div>'
-    +'<div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>. If your browser blocks the automatic download, use the Download JSON button below.</div></div>'
-    +'<button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button>'
-    +'</div>'
-    +'<textarea id="exportFallbackText" readonly style="width:100%;height:260px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea>'
-    +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">'
-    +'<button type="button" id="exportFallbackDownload" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(143,174,157,.28);background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Download JSON</button>'
-    +'<button type="button" id="exportFallbackCopy" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Copy JSON</button>'
-    +'<button type="button" id="exportFallbackSelect" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Select All</button>'
-    +'<span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span>'
-    +'</div>';
-
+  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div><div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>. If your browser blocks the automatic download, use the Download JSON button below.</div></div><button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button></div><textarea id="exportFallbackText" readonly style="width:100%;height:260px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button type="button" id="exportFallbackDownload" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(143,174,157,.28);background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Download JSON</button><button type="button" id="exportFallbackCopy" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Copy JSON</button><button type="button" id="exportFallbackSelect" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Select All</button><span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span></div>';
   document.body.appendChild(wrap);
-
-  const close=document.getElementById('exportFallbackClose');
-  const download=document.getElementById('exportFallbackDownload');
-  const copy=document.getElementById('exportFallbackCopy');
-  const select=document.getElementById('exportFallbackSelect');
-  const text=document.getElementById('exportFallbackText');
-
-  if(close) close.addEventListener('click',()=>wrap.remove());
-  if(download) download.addEventListener('click',()=>triggerJsonDownload(json,'quote-curation.json'));
-  if(copy) copy.addEventListener('click',async()=>{
-    try{
-      await navigator.clipboard.writeText(json);
-      if(typeof toast==='function')toast('Copied quote-curation.json.');
-    }catch(_){
-      text.focus();
-      text.select();
-      document.execCommand('copy');
-      if(typeof toast==='function')toast('Selected/copied quote-curation.json.');
-    }
-  });
-  if(select) select.addEventListener('click',()=>{
-    text.focus();
-    text.select();
-    if(typeof toast==='function')toast('JSON selected. Copy it if needed.');
-  });
+  const close=document.getElementById('exportFallbackClose'),download=document.getElementById('exportFallbackDownload'),copy=document.getElementById('exportFallbackCopy'),select=document.getElementById('exportFallbackSelect'),textarea=document.getElementById('exportFallbackText');
+  if(close)close.addEventListener('click',()=>wrap.remove());
+  if(download)download.addEventListener('click',()=>triggerJsonDownload(json,'quote-curation.json'));
+  if(copy)copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(json);toast('Copied quote-curation.json.');}catch(_){textarea.focus();textarea.select();document.execCommand('copy');toast('Selected/copied quote-curation.json.');}});
+  if(select)select.addEventListener('click',()=>{textarea.focus();textarea.select();toast('JSON selected. Copy it if needed.');});
 }
 function exportCurationJson(quotes){
-  const sourceQuotes=quotes||state.allQuotes||state.quotes||[];
-  const entries=allReviewEntries(sourceQuotes);
+  const entries=allReviewEntries(quotes||state.allQuotes||state.quotes||[]);
   const payload={version:1,generatedAt:new Date().toISOString(),source:'cgbc_quote_review_browser',targetFile:'config/quote-curation.json',note:'Commit this file to config/quote-curation.json, then run the normal sermon library build workflow.',reviews:entries};
   downloadExportJson(payload);
-  if(typeof toast==='function')toast('Export ready: '+entries.length+' review decision'+(entries.length===1?'':'s')+'.');
+  toast('Export ready: '+entries.length+' review decision'+(entries.length===1?'':'s')+'.');
 }
-function clearReview(q){
-  for(const action of ['approved','featured','rejected']){
-    try{localStorage.removeItem(reviewKey(action,q));}catch(_){}
-  }
-}
-function save(action,q,text){
-  if(!q)return;
-  try{
-    clearReview(q);
-    localStorage.setItem(reviewKey(action,q),JSON.stringify({action,quoteId:q?.id||'',approvedText:text||'',episode:q?.episode||null,media:q?.media||null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:'browser_review',savedAt:new Date().toISOString()}));
-  }catch(e){console.warn(e);}
-}
-function reviewStatus(q){
-  if(readReview('featured',q))return 'featured';
-  if(readReview('approved',q))return 'approved';
-  if(readReview('rejected',q))return 'rejected';
-  return 'unreviewed';
-}
-function hasReview(q){return reviewStatus(q)!=='unreviewed';}
-function reviewStatusLabel(status){
-  return status==='featured'?'Featured':status==='approved'?'Approved':status==='rejected'?'Rejected':'Unreviewed';
-}
-function matchesReviewFilter(q){
-  const status=reviewStatus(q);
-  return state.reviewFilter==='all' || status===state.reviewFilter;
-}
+function save(action,q,text){try{clearLocalReview(q);localStorage.setItem(reviewKey(action,q),JSON.stringify({action,status:action,quoteId:q?.id||'',approvedText:cleanQuoteOnly(text||quoteText(q),q),episode:q?.episode||null,media:q?.media||null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:'browser_review',savedAt:new Date().toISOString()}));}catch(e){console.warn(e);}}
 function episodeKey(q){return q?.episode?.stableId||q?.episode?.title||'unknown';}
 function episodeLabel(q){const ep=q?.episode||{};return ep.title||ep.episodeName||'Untitled episode';}
-function activeBaseQuotes(){
-  return state.episodeFilter==='__all__'
-    ? state.allQuotes.slice()
-    : state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter);
+function reviewCounts(list=state.allQuotes){
+  const counts={total:list.length,reviewed:0,unreviewed:0,approved:0,featured:0,rejected:0};
+  for(const q of list){const s=effectiveStatus(q);if(s&&counts[s]!=null){counts[s]+=1;counts.reviewed+=1;}else counts.unreviewed+=1;}
+  return counts;
+}
+function statusOptionLabel(value,counts){
+  if(value==='unreviewed')return `Unreviewed only — ${counts.unreviewed}`;
+  if(value==='all')return `All quotes — ${counts.total}`;
+  if(value==='approved')return `Approved — ${counts.approved}`;
+  if(value==='featured')return `Featured — ${counts.featured}`;
+  if(value==='rejected')return `Rejected — ${counts.rejected}`;
+  return value;
+}
+function buildReviewStatusOptions(){
+  if(!els.reviewStatusFilter)return;
+  const counts=reviewCounts(state.episodeFilter==='__all__'?state.allQuotes:state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter));
+  const values=['unreviewed','all','approved','featured','rejected'];
+  els.reviewStatusFilter.innerHTML=values.map(v=>`<option value="${v}">${esc(statusOptionLabel(v,counts))}</option>`).join('');
+  els.reviewStatusFilter.value=state.reviewStatus;
 }
 function buildEpisodeOptions(){
   if(!els.episodeFilter)return;
@@ -217,62 +199,35 @@ function buildEpisodeOptions(){
   for(const q of state.allQuotes){
     const key=episodeKey(q);
     if(!groups.has(key))groups.set(key,{key,label:episodeLabel(q),total:0,reviewed:0,unreviewed:0});
-    const g=groups.get(key);
-    g.total+=1;
-    if(hasReview(q))g.reviewed+=1;
-    else g.unreviewed+=1;
+    const g=groups.get(key);g.total+=1;if(hasReview(q))g.reviewed+=1;else g.unreviewed+=1;
   }
-  const allReviewed=state.allQuotes.filter(hasReview).length;
-  const allUnreviewed=state.allQuotes.length-allReviewed;
-  const opts=[`<option value="__all__">All episodes — ${allReviewed}/${state.allQuotes.length} reviewed • ${allUnreviewed} left</option>`];
+  const all=reviewCounts(state.allQuotes);
+  const opts=[`<option value="__all__">All episodes — ${all.reviewed}/${all.total} reviewed • ${all.unreviewed} left</option>`];
   Array.from(groups.values()).sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true,sensitivity:'base'})).forEach(g=>{
     opts.push(`<option value="${esc(g.key)}">${esc(g.label)} — ${g.reviewed}/${g.total} reviewed • ${g.unreviewed} left</option>`);
   });
   els.episodeFilter.innerHTML=opts.join('');
   els.episodeFilter.value=state.episodeFilter;
-}
-function buildReviewStatusOptions(){
-  if(!els.reviewStatusFilter)return;
-  const base=activeBaseQuotes();
-  const counts={
-    all:base.length,
-    unreviewed:base.filter(q=>reviewStatus(q)==='unreviewed').length,
-    approved:base.filter(q=>reviewStatus(q)==='approved').length,
-    featured:base.filter(q=>reviewStatus(q)==='featured').length,
-    rejected:base.filter(q=>reviewStatus(q)==='rejected').length
-  };
-  els.reviewStatusFilter.innerHTML=[
-    `<option value="unreviewed">Unreviewed only — ${counts.unreviewed}</option>`,
-    `<option value="all">All quotes — ${counts.all}</option>`,
-    `<option value="approved">Approved — ${counts.approved}</option>`,
-    `<option value="featured">Featured — ${counts.featured}</option>`,
-    `<option value="rejected">Rejected — ${counts.rejected}</option>`
-  ].join('');
-  els.reviewStatusFilter.value=state.reviewFilter;
-}
-function applyReviewFilters(options={}){
-  const keepIndex=!!options.keepIndex;
-  const nextIndex=keepIndex?state.index:0;
-  let base=activeBaseQuotes();
-  state.quotes=base.filter(matchesReviewFilter);
-  state.index=Math.min(nextIndex,Math.max(0,state.quotes.length-1));
-  render();
-}
-function refreshReviewView(options={}){
-  buildEpisodeOptions();
   buildReviewStatusOptions();
-  applyReviewFilters(options);
+}
+function filteredQuotes(){
+  let list=state.episodeFilter==='__all__'?state.allQuotes.slice():state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter);
+  const status=state.reviewStatus||'unreviewed';
+  if(status==='unreviewed')list=list.filter(q=>!hasReview(q));
+  else if(status!=='all')list=list.filter(q=>effectiveStatus(q)===status);
+  return list;
 }
 function applyEpisodeFilter(){
-  if(state.episodeFilter!=='__all__' && !state.allQuotes.some(q=>episodeKey(q)===state.episodeFilter)){
-    state.episodeFilter='__all__';
+  state.quotes=filteredQuotes();
+  if(!state.quotes.length&&state.episodeFilter!=='__all__'){
+    // Stay in the selected episode and show Review Complete instead of silently jumping away.
   }
-  refreshReviewView({keepIndex:false});
+  state.index=Math.min(state.index,Math.max(0,state.quotes.length-1));
+  render();
 }
-
 function sortQuotes(list){const tier={featured:4,strong:3,study:2,archive:1};return list.slice().sort((a,b)=>Number(!!b.publicSafe)-Number(!!a.publicSafe)||(tier[b.displayTier]||0)-(tier[a.displayTier]||0)||(b.searchBoost||0)-(a.searchBoost||0)||(b.quotePolishScore||0)-(a.quotePolishScore||0)||(b.score||0)-(a.score||0));}
 async function loadQuotes(){for(const path of QUOTE_PATHS){try{const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});if(!res.ok)continue;const data=await res.json();const quotes=sortQuotes(Array.isArray(data?.quotes)?data.quotes:[]);if(quotes.length)return quotes;}catch(e){}}throw new Error('Could not load random-quotes.json.');}
-function quoteText(q){return q?.approvedText||q?.displayText||q?.expandedText||q?.text||'';}
+function quoteText(q){const saved=effectiveReview(q);return cleanQuoteOnly(saved?.approvedText||q?.approvedText||q?.displayText||q?.expandedText||q?.text||'',q);}
 function contextBefore(q){return q?.contextBefore||q?.contextWindow?.before||'';}
 function contextAfter(q){return q?.contextAfter||q?.contextWindow?.after||'';}
 function contextSecondAfter(q){return q?.contextSecondAfter||q?.contextWindow?.secondAfter||'';}
@@ -396,57 +351,34 @@ async function transcriptNeighborText(q,which){
 }
 function setApprovalText(value){const text=cleanJoinText(value);els.approvalText.value=text;els.quoteMain.textContent=text || quoteText(state.current);}
 
+function renderEmpty(){
+  state.current=null;
+  const statusText=statusOptionLabel(state.reviewStatus||'unreviewed',reviewCounts(state.episodeFilter==='__all__'?state.allQuotes:state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter)));
+  els.quoteHeading.textContent='Review complete';
+  els.quoteCounter.textContent='0 of 0';
+  els.quoteBefore.textContent='';els.quoteBefore.style.display='none';
+  els.quoteMain.textContent=state.allQuotes.length?'No quotes match this filter.':'No quote data loaded.';
+  els.quoteAfter.textContent='';els.quoteAfter.style.display='none';
+  els.approvalText.value='';
+  els.quoteMeta.innerHTML=`<span class="pill">${esc(statusText)}</span>`;
+  els.startTime.textContent='Start —';els.endTime.textContent='End —';
+  els.openVideo.disabled=true;els.loadVideo.disabled=true;
+  els.mediaTitle.textContent='Player';
+  els.mediaShell.innerHTML='Select another filter or episode to review more quotes.';
+}
 function render(){
   els.quoteMain.classList.remove('is-editing');
   const q=state.quotes[state.index];
   state.current=q||null;
-  if(!q){
-    const base=activeBaseQuotes();
-    const reviewed=base.filter(hasReview).length;
-    const total=base.length;
-    const label=state.reviewFilter==='unreviewed'
-      ? 'Review complete'
-      : `No ${reviewStatusLabel(state.reviewFilter).toLowerCase()} quotes`;
-    els.quoteHeading.textContent=label;
-    els.quoteCounter.textContent=total?`${reviewed}/${total} reviewed`:'No quotes available';
-    els.quoteBefore.textContent='';
-    els.quoteBefore.style.display='none';
-    els.quoteMain.textContent=state.reviewFilter==='unreviewed'
-      ? 'No unreviewed quotes remain for this filter.'
-      : 'No quotes match the current review status filter.';
-    els.quoteAfter.textContent='';
-    els.quoteAfter.style.display='none';
-    els.approvalText.value='';
-    els.quoteMeta.innerHTML=[
-      `<span class="pill">${esc(reviewStatusLabel(state.reviewFilter))}</span>`,
-      total?`<span>${esc(String(total))} total in selected episode filter</span>`:''
-    ].filter(Boolean).join('');
-    els.startTime.textContent='Start —';
-    els.endTime.textContent='End —';
-    els.openVideo.disabled=true;
-    els.loadVideo.disabled=true;
-    els.mediaTitle.textContent='Player';
-    els.mediaShell.innerHTML='Select a quote to load its video timestamp.';
-    return;
-  }
-  const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q),status=reviewStatus(q);
+  if(!q){renderEmpty();return;}
+  const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q),status=effectiveStatus(q)||'unreviewed';
   els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';
   els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;
-  els.quoteBefore.textContent=before;
-  els.quoteBefore.style.display=before?'':'none';
+  els.quoteBefore.textContent=before;els.quoteBefore.style.display=before?'':'none';
   els.quoteMain.textContent=main;
-  els.quoteAfter.textContent=after;
-  els.quoteAfter.style.display=after?'':'none';
+  els.quoteAfter.textContent=after;els.quoteAfter.style.display=after?'':'none';
   els.approvalText.value=main;
-  els.quoteMeta.innerHTML=[
-    `<span class="pill">${esc(reviewStatusLabel(status))}</span>`,
-    `<span class="pill">${esc(q.displayTier||'candidate')}</span>`,
-    `<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,
-    ep.series?`<span>${esc(ep.series)}</span>`:'',
-    ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',
-    ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',
-    (q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''
-  ].filter(Boolean).join('');
+  els.quoteMeta.innerHTML=[`<span class="pill">${esc(status)}</span>`,`<span class="pill">${esc(q.displayTier||'candidate')}</span>`,`<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,ep.series?`<span>${esc(ep.series)}</span>`:'',ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',(q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''].filter(Boolean).join('');
   els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;
   els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;
   els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);
@@ -476,10 +408,10 @@ function nextQuote(){if(!state.quotes.length){render();return;}state.index=(stat
 function mediaStart(q){return Math.max(0,Number(q?.media?.start||q?.start||0));}
 function loadVideoHere(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;state.mediaMode='video';const start=Math.max(0,Math.floor(mediaStart(q)));const id=q.media.youtubeId||'';const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:q.media.videoUrl;els.mediaShell.innerHTML=`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`;}
 function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;const start=Math.max(0,Math.floor(mediaStart(q)));const url=q.media.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`;window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
-async function openReviewApp(){try{state.allQuotes=await loadQuotes();refreshReviewView({keepIndex:false});els.gate.style.display='none';els.reviewApp.classList.add('is-visible');}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
+async function openReviewApp(){try{state.allQuotes=await loadQuotes();state.repoReviews=buildRepoReviewMap(await loadRepoCuration());state.index=0;buildEpisodeOptions();state.quotes=filteredQuotes();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}try{markUnlocked();}catch(_){}els.gateStatus.textContent='Loading quotes…';await openReviewApp();}
 els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
-try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}exportCurationJson();};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});if(els.reviewStatusFilter)els.reviewStatusFilter.addEventListener('change',()=>{state.reviewFilter=els.reviewStatusFilter.value;refreshReviewView({keepIndex:false});});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());toast('Saved locally as approved.');refreshReviewView({keepIndex:true});});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());toast('Saved locally as featured.');refreshReviewView({keepIndex:true});});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());toast('Saved locally as rejected.');refreshReviewView({keepIndex:true});});
+try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}exportCurationJson();};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;state.index=0;buildReviewStatusOptions();applyEpisodeFilter();});if(els.reviewStatusFilter)els.reviewStatusFilter.addEventListener('change',()=>{state.reviewStatus=els.reviewStatusFilter.value;state.index=0;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});function afterSave(status){buildEpisodeOptions();state.quotes=filteredQuotes();state.index=Math.min(state.index,Math.max(0,state.quotes.length-1));toast('Saved locally as '+status+'.');render();}els.approveBtn.addEventListener('click',()=>{if(!state.current)return;save('approved',state.current,els.approvalText.value.trim());afterSave('approved');});els.featureBtn.addEventListener('click',()=>{if(!state.current)return;save('featured',state.current,els.approvalText.value.trim());afterSave('featured');});els.rejectBtn.addEventListener('click',()=>{if(!state.current)return;save('rejected',state.current,els.approvalText.value.trim());afterSave('rejected');});
 </script>
 </body>
 </html>
