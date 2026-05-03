@@ -48,7 +48,7 @@ textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1
 <header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><div class="actions"><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="quote-review-denied.html">Denied Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path><path d="M5 17v4"></path><path d="M19 17v4"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></div></header>
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
-<section class="panel"><div class="selector-row"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><a class="quick-link" href="quote-review-approved.html">Approved Quote Page</a><a class="quick-link" href="quote-review-denied.html">Denied Quote Page</a></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
+<section class="panel"><div class="selector-row"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><div class="selector-field"><label for="reviewStatusFilter">Review status</label><select id="reviewStatusFilter"><option value="unreviewed">Unreviewed only</option><option value="all">All quotes</option><option value="approved">Approved</option><option value="featured">Featured</option><option value="rejected">Rejected</option></select></div><a class="quick-link" href="quote-review-approved.html">Approved Quote Page</a><a class="quick-link" href="quote-review-denied.html">Denied Quote Page</a></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="actions"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><button class="btn" id="editTextBtn" type="button">Manual Edit</button><button class="btn primary" id="approveBtn" type="button">Save / Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button><button class="btn danger" id="rejectBtn" type="button">Dismiss / Reject</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="note">Saves are local to this browser for this test build. Later this can write into a repo-backed curation file.</div></div></section>
 <section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Review uses the YouTube video timestamp. Audio buttons were removed because browser audio seeking was not precise enough for quote review.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
@@ -56,9 +56,9 @@ const PASSWORD='1813';
 const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
 const AUTH_TTL_MS=12*60*60*1000;
 const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
-const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__"};
+const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__",reviewFilter:"unreviewed"};
 const $=id=>document.getElementById(id);
-const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),episodeFilter:$('episodeFilter'),loadVideo:$('loadVideo'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast'),exportCurationBtn:$('exportCurationBtn')};
+const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),episodeFilter:$('episodeFilter'),reviewStatusFilter:$('reviewStatusFilter'),loadVideo:$('loadVideo'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast'),exportCurationBtn:$('exportCurationBtn')};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
 function fmtDate(v){try{return new Date(v+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});}catch(_){return v||'';}}
 function fmtTime(s){s=Number(s||0);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
@@ -178,31 +178,96 @@ function exportCurationJson(quotes){
   downloadExportJson(payload);
   if(typeof toast==='function')toast('Export ready: '+entries.length+' review decision'+(entries.length===1?'':'s')+'.');
 }
-function save(action,q,text){try{localStorage.setItem(reviewKey(action,q),JSON.stringify({action,quoteId:q?.id||'',approvedText:text||'',episode:q?.episode||null,media:q?.media||null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:'browser_review',savedAt:new Date().toISOString()}));}catch(e){console.warn(e);}}
-function hasReview(q){return ['approved','featured','rejected'].some(action=>!!localStorage.getItem(reviewKey(action,q)));}
+function clearReview(q){
+  for(const action of ['approved','featured','rejected']){
+    try{localStorage.removeItem(reviewKey(action,q));}catch(_){}
+  }
+}
+function save(action,q,text){
+  if(!q)return;
+  try{
+    clearReview(q);
+    localStorage.setItem(reviewKey(action,q),JSON.stringify({action,quoteId:q?.id||'',approvedText:text||'',episode:q?.episode||null,media:q?.media||null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:'browser_review',savedAt:new Date().toISOString()}));
+  }catch(e){console.warn(e);}
+}
+function reviewStatus(q){
+  if(readReview('featured',q))return 'featured';
+  if(readReview('approved',q))return 'approved';
+  if(readReview('rejected',q))return 'rejected';
+  return 'unreviewed';
+}
+function hasReview(q){return reviewStatus(q)!=='unreviewed';}
+function reviewStatusLabel(status){
+  return status==='featured'?'Featured':status==='approved'?'Approved':status==='rejected'?'Rejected':'Unreviewed';
+}
+function matchesReviewFilter(q){
+  const status=reviewStatus(q);
+  return state.reviewFilter==='all' || status===state.reviewFilter;
+}
 function episodeKey(q){return q?.episode?.stableId||q?.episode?.title||'unknown';}
 function episodeLabel(q){const ep=q?.episode||{};return ep.title||ep.episodeName||'Untitled episode';}
+function activeBaseQuotes(){
+  return state.episodeFilter==='__all__'
+    ? state.allQuotes.slice()
+    : state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter);
+}
 function buildEpisodeOptions(){
   if(!els.episodeFilter)return;
   const groups=new Map();
   for(const q of state.allQuotes){
     const key=episodeKey(q);
-    if(!groups.has(key))groups.set(key,{key,label:episodeLabel(q),total:0,reviewed:0});
-    const g=groups.get(key);g.total+=1;if(hasReview(q))g.reviewed+=1;
+    if(!groups.has(key))groups.set(key,{key,label:episodeLabel(q),total:0,reviewed:0,unreviewed:0});
+    const g=groups.get(key);
+    g.total+=1;
+    if(hasReview(q))g.reviewed+=1;
+    else g.unreviewed+=1;
   }
   const allReviewed=state.allQuotes.filter(hasReview).length;
-  const opts=[`<option value="__all__">All episodes — ${allReviewed}/${state.allQuotes.length} reviewed</option>`];
+  const allUnreviewed=state.allQuotes.length-allReviewed;
+  const opts=[`<option value="__all__">All episodes — ${allReviewed}/${state.allQuotes.length} reviewed • ${allUnreviewed} left</option>`];
   Array.from(groups.values()).sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true,sensitivity:'base'})).forEach(g=>{
-    opts.push(`<option value="${esc(g.key)}">${esc(g.label)} — ${g.reviewed}/${g.total} reviewed</option>`);
+    opts.push(`<option value="${esc(g.key)}">${esc(g.label)} — ${g.reviewed}/${g.total} reviewed • ${g.unreviewed} left</option>`);
   });
   els.episodeFilter.innerHTML=opts.join('');
   els.episodeFilter.value=state.episodeFilter;
 }
-function applyEpisodeFilter(){
-  state.quotes=state.episodeFilter==='__all__'?state.allQuotes.slice():state.allQuotes.filter(q=>episodeKey(q)===state.episodeFilter);
-  if(!state.quotes.length && state.episodeFilter!=='__all__'){state.episodeFilter='__all__';state.quotes=state.allQuotes.slice();}
-  state.index=0;
+function buildReviewStatusOptions(){
+  if(!els.reviewStatusFilter)return;
+  const base=activeBaseQuotes();
+  const counts={
+    all:base.length,
+    unreviewed:base.filter(q=>reviewStatus(q)==='unreviewed').length,
+    approved:base.filter(q=>reviewStatus(q)==='approved').length,
+    featured:base.filter(q=>reviewStatus(q)==='featured').length,
+    rejected:base.filter(q=>reviewStatus(q)==='rejected').length
+  };
+  els.reviewStatusFilter.innerHTML=[
+    `<option value="unreviewed">Unreviewed only — ${counts.unreviewed}</option>`,
+    `<option value="all">All quotes — ${counts.all}</option>`,
+    `<option value="approved">Approved — ${counts.approved}</option>`,
+    `<option value="featured">Featured — ${counts.featured}</option>`,
+    `<option value="rejected">Rejected — ${counts.rejected}</option>`
+  ].join('');
+  els.reviewStatusFilter.value=state.reviewFilter;
+}
+function applyReviewFilters(options={}){
+  const keepIndex=!!options.keepIndex;
+  const nextIndex=keepIndex?state.index:0;
+  let base=activeBaseQuotes();
+  state.quotes=base.filter(matchesReviewFilter);
+  state.index=Math.min(nextIndex,Math.max(0,state.quotes.length-1));
   render();
+}
+function refreshReviewView(options={}){
+  buildEpisodeOptions();
+  buildReviewStatusOptions();
+  applyReviewFilters(options);
+}
+function applyEpisodeFilter(){
+  if(state.episodeFilter!=='__all__' && !state.allQuotes.some(q=>episodeKey(q)===state.episodeFilter)){
+    state.episodeFilter='__all__';
+  }
+  refreshReviewView({keepIndex:false});
 }
 
 function sortQuotes(list){const tier={featured:4,strong:3,study:2,archive:1};return list.slice().sort((a,b)=>Number(!!b.publicSafe)-Number(!!a.publicSafe)||(tier[b.displayTier]||0)-(tier[a.displayTier]||0)||(b.searchBoost||0)-(a.searchBoost||0)||(b.quotePolishScore||0)-(a.quotePolishScore||0)||(b.score||0)-(a.score||0));}
@@ -331,7 +396,64 @@ async function transcriptNeighborText(q,which){
 }
 function setApprovalText(value){const text=cleanJoinText(value);els.approvalText.value=text;els.quoteMain.textContent=text || quoteText(state.current);}
 
-function render(){els.quoteMain.classList.remove('is-editing');const q=state.quotes[state.index];state.current=q||null;if(!q)return;const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q);els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;els.quoteBefore.textContent=before;els.quoteBefore.style.display=before?'':'none';els.quoteMain.textContent=main;els.quoteAfter.textContent=after;els.quoteAfter.style.display=after?'':'none';els.approvalText.value=main;els.quoteMeta.innerHTML=[`<span class="pill">${esc(q.displayTier||'candidate')}</span>`,`<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,ep.series?`<span>${esc(ep.series)}</span>`:'',ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',(q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''].filter(Boolean).join('');els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.loadVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);els.mediaTitle.textContent=ep.title||ep.episodeName||'Player';if(state.mediaMode==='video')loadVideoHere();}
+function render(){
+  els.quoteMain.classList.remove('is-editing');
+  const q=state.quotes[state.index];
+  state.current=q||null;
+  if(!q){
+    const base=activeBaseQuotes();
+    const reviewed=base.filter(hasReview).length;
+    const total=base.length;
+    const label=state.reviewFilter==='unreviewed'
+      ? 'Review complete'
+      : `No ${reviewStatusLabel(state.reviewFilter).toLowerCase()} quotes`;
+    els.quoteHeading.textContent=label;
+    els.quoteCounter.textContent=total?`${reviewed}/${total} reviewed`:'No quotes available';
+    els.quoteBefore.textContent='';
+    els.quoteBefore.style.display='none';
+    els.quoteMain.textContent=state.reviewFilter==='unreviewed'
+      ? 'No unreviewed quotes remain for this filter.'
+      : 'No quotes match the current review status filter.';
+    els.quoteAfter.textContent='';
+    els.quoteAfter.style.display='none';
+    els.approvalText.value='';
+    els.quoteMeta.innerHTML=[
+      `<span class="pill">${esc(reviewStatusLabel(state.reviewFilter))}</span>`,
+      total?`<span>${esc(String(total))} total in selected episode filter</span>`:''
+    ].filter(Boolean).join('');
+    els.startTime.textContent='Start —';
+    els.endTime.textContent='End —';
+    els.openVideo.disabled=true;
+    els.loadVideo.disabled=true;
+    els.mediaTitle.textContent='Player';
+    els.mediaShell.innerHTML='Select a quote to load its video timestamp.';
+    return;
+  }
+  const ep=q.episode||{},before=contextBefore(q),after=contextAfter(q),main=quoteText(q),status=reviewStatus(q);
+  els.quoteHeading.textContent=ep.episodeName||ep.title||'Quote';
+  els.quoteCounter.textContent=`${state.index+1} of ${state.quotes.length}`;
+  els.quoteBefore.textContent=before;
+  els.quoteBefore.style.display=before?'':'none';
+  els.quoteMain.textContent=main;
+  els.quoteAfter.textContent=after;
+  els.quoteAfter.style.display=after?'':'none';
+  els.approvalText.value=main;
+  els.quoteMeta.innerHTML=[
+    `<span class="pill">${esc(reviewStatusLabel(status))}</span>`,
+    `<span class="pill">${esc(q.displayTier||'candidate')}</span>`,
+    `<span class="pill">${q.publicSafe?'Public Safe':'Review Only'}</span>`,
+    ep.series?`<span>${esc(ep.series)}</span>`:'',
+    ep.subtitle?`<span>• ${esc(ep.subtitle)}</span>`:'',
+    ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:'',
+    (q.media?.start||q.start)?`<span>• ${esc(fmtTime(q.media?.start||q.start))}</span>`:''
+  ].filter(Boolean).join('');
+  els.startTime.textContent=`Start ${fmtTime(q.media?.start||q.start||0)}`;
+  els.endTime.textContent=`End ${fmtTime(q.media?.end||q.end||0)}`;
+  els.openVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);
+  els.loadVideo.disabled=!(q.media?.videoUrl||q.media?.youtubeId);
+  els.mediaTitle.textContent=ep.title||ep.episodeName||'Player';
+  if(state.mediaMode==='video')loadVideoHere();
+}
 async function addContext(which){
   const q=state.current;if(!q)return;
   const current=els.approvalText.value.trim();
@@ -350,14 +472,14 @@ async function addContext(which){
   else setApprovalText(`${current} ${addition}`);
 }
 
-function nextQuote(){if(!state.quotes.length)return;state.index=(state.index+1)%state.quotes.length;render();}
+function nextQuote(){if(!state.quotes.length){render();return;}state.index=(state.index+1)%state.quotes.length;render();}
 function mediaStart(q){return Math.max(0,Number(q?.media?.start||q?.start||0));}
 function loadVideoHere(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;state.mediaMode='video';const start=Math.max(0,Math.floor(mediaStart(q)));const id=q.media.youtubeId||'';const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:q.media.videoUrl;els.mediaShell.innerHTML=`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`;}
 function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.youtubeId))return;const start=Math.max(0,Math.floor(mediaStart(q)));const url=q.media.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`;window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
-async function openReviewApp(){try{state.allQuotes=await loadQuotes();state.quotes=state.allQuotes.slice();buildEpisodeOptions();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
+async function openReviewApp(){try{state.allQuotes=await loadQuotes();refreshReviewView({keepIndex:false});els.gate.style.display='none';els.reviewApp.classList.add('is-visible');}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}try{markUnlocked();}catch(_){}els.gateStatus.textContent='Loading quotes…';await openReviewApp();}
 els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
-try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}exportCurationJson();};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as rejected.');nextQuote();});
+try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}exportCurationJson();};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});if(els.reviewStatusFilter)els.reviewStatusFilter.addEventListener('change',()=>{state.reviewFilter=els.reviewStatusFilter.value;refreshReviewView({keepIndex:false});});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());toast('Saved locally as approved.');refreshReviewView({keepIndex:true});});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());toast('Saved locally as featured.');refreshReviewView({keepIndex:true});});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());toast('Saved locally as rejected.');refreshReviewView({keepIndex:true});});
 </script>
 </body>
 </html>
