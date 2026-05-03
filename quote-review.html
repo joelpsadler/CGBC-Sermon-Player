@@ -73,40 +73,103 @@ function youtubeLink(q){const id=q?.media?.youtubeId;const url=q?.media?.videoUr
 function reviewKey(action,q){return `cgbcQuoteReview:${action}:${q?.id||'unknown'}`;}
 function readReview(action,q){try{const raw=localStorage.getItem(reviewKey(action,q));return raw?JSON.parse(raw):null;}catch(_){return null;}}
 function allReviewEntries(){const entries=[];for(const q of state.allQuotes||[]){for(const action of ['featured','approved','rejected']){const saved=readReview(action,q);if(saved){entries.push({quoteId:q.id,status:action,approvedText:cleanQuoteOnly(saved.approvedText||quoteText(q),q),episodeStableId:q?.episode?.stableId||'',episodeTitle:q?.episode?.title||q?.episode?.episodeName||'',start:q?.media?.start??q?.start??null,end:q?.media?.end??q?.end??null,siteDeepLink:siteDeepLink(q),youtubeLink:youtubeLink(q),source:saved.source||'browser_review',savedAt:saved.savedAt||new Date().toISOString()});}}}return entries;}
-function downloadExportJson(payload){
-  const json=JSON.stringify(payload,null,2);
-  try{localStorage.setItem('cgbcLastQuoteCurationExport',json);}catch(_){}
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).catch(()=>{});}
-  let downloaded=false;
+/* EXPORT PATCH: keep this download/fallback path simple and browser-safe. */
+function triggerJsonDownload(json,filename='quote-curation.json'){
   try{
     const blob=new Blob([json],{type:'application/json;charset=utf-8'});
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');
     a.href=url;
-    a.download='quote-curation.json';
+    a.download=filename;
     a.rel='noopener';
-    a.style.display='none';
+    a.style.position='fixed';
+    a.style.left='-9999px';
+    a.style.top='-9999px';
     document.body.appendChild(a);
     a.click();
-    downloaded=true;
     window.setTimeout(()=>{try{URL.revokeObjectURL(url);a.remove();}catch(_){}},15000);
-  }catch(err){console.warn('Download export failed',err);}
-  showExportFallback(json,payload.reviews?.length||0,downloaded);
+    return true;
+  }catch(err){
+    console.warn('Blob download failed, trying data URL fallback.',err);
+    try{
+      const a=document.createElement('a');
+      a.href='data:application/json;charset=utf-8,'+encodeURIComponent(json);
+      a.download=filename;
+      a.rel='noopener';
+      a.style.position='fixed';
+      a.style.left='-9999px';
+      document.body.appendChild(a);
+      a.click();
+      window.setTimeout(()=>{try{a.remove();}catch(_){}},15000);
+      return true;
+    }catch(err2){
+      console.warn('Data URL download failed.',err2);
+      return false;
+    }
+  }
 }
-function showExportFallback(json,count,downloaded){
+
+function downloadExportJson(payload){
+  const json=JSON.stringify(payload,null,2);
+  try{localStorage.setItem('cgbcLastQuoteCurationExport',json);}catch(_){}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).catch(()=>{});}
+  showExportFallback(json,payload.reviews?.length||0);
+  const downloaded=triggerJsonDownload(json,'quote-curation.json');
+  if(typeof toast==='function'){
+    toast(downloaded
+      ? 'Export ready: quote-curation.json download started.'
+      : 'Export ready: use Download JSON or Copy JSON in the panel.');
+  }
+}
+
+function showExportFallback(json,count){
   const old=document.getElementById('exportFallbackPanel');
   if(old) old.remove();
+
   const wrap=document.createElement('div');
   wrap.id='exportFallbackPanel';
-  wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(560px,calc(100vw - 36px));max-height:min(620px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif';
+  wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif;overflow:auto';
+
   const safe=json.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div><div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">'+(downloaded?'Download was triggered and ':'')+'JSON was also copied/staged below. Upload this as <b>config/quote-curation.json</b>.</div></div><button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button></div><textarea id="exportFallbackText" readonly style="width:100%;height:220px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" id="exportFallbackCopy" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(143,174,157,.28);background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Copy JSON</button><span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span></div>';
+  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">'
+    +'<div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div>'
+    +'<div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>. If your browser blocks the automatic download, use the Download JSON button below.</div></div>'
+    +'<button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button>'
+    +'</div>'
+    +'<textarea id="exportFallbackText" readonly style="width:100%;height:260px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">'
+    +'<button type="button" id="exportFallbackDownload" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(143,174,157,.28);background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Download JSON</button>'
+    +'<button type="button" id="exportFallbackCopy" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Copy JSON</button>'
+    +'<button type="button" id="exportFallbackSelect" style="min-height:40px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:800;cursor:pointer">Select All</button>'
+    +'<span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span>'
+    +'</div>';
+
   document.body.appendChild(wrap);
+
   const close=document.getElementById('exportFallbackClose');
+  const download=document.getElementById('exportFallbackDownload');
   const copy=document.getElementById('exportFallbackCopy');
+  const select=document.getElementById('exportFallbackSelect');
   const text=document.getElementById('exportFallbackText');
+
   if(close) close.addEventListener('click',()=>wrap.remove());
-  if(copy) copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(json); if(typeof toast==='function')toast('Copied quote-curation.json.');}catch(_){text.focus();text.select();document.execCommand('copy');}});
+  if(download) download.addEventListener('click',()=>triggerJsonDownload(json,'quote-curation.json'));
+  if(copy) copy.addEventListener('click',async()=>{
+    try{
+      await navigator.clipboard.writeText(json);
+      if(typeof toast==='function')toast('Copied quote-curation.json.');
+    }catch(_){
+      text.focus();
+      text.select();
+      document.execCommand('copy');
+      if(typeof toast==='function')toast('Selected/copied quote-curation.json.');
+    }
+  });
+  if(select) select.addEventListener('click',()=>{
+    text.focus();
+    text.select();
+    if(typeof toast==='function')toast('JSON selected. Copy it if needed.');
+  });
 }
 function exportCurationJson(quotes){
   const sourceQuotes=quotes||state.allQuotes||state.quotes||[];
@@ -294,7 +357,7 @@ function openVideo(){const q=state.current;if(!(q?.media?.videoUrl||q?.media?.yo
 async function openReviewApp(){try{state.allQuotes=await loadQuotes();state.quotes=state.allQuotes.slice();buildEpisodeOptions();els.gate.style.display='none';els.reviewApp.classList.add('is-visible');render();}catch(e){els.gateStatus.textContent='Could not load quote data. Make sure data/quotes/en/random-quotes.json is deployed.';console.warn(e);}}
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}try{markUnlocked();}catch(_){}els.gateStatus.textContent='Loading quotes…';await openReviewApp();}
 els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
-try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn)els.exportCurationBtn.addEventListener('click',exportCurationJson);els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as rejected.');nextQuote();});
+try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}exportCurationJson();};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as approved.');nextQuote();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as featured.');nextQuote();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Saved locally as rejected.');nextQuote();});
 </script>
 </body>
 </html>
