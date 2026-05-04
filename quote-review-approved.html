@@ -192,18 +192,49 @@ function showScoringKey(){
   overlay.classList.add('is-visible');
 }
 
-const state={all:[],items:[],query:'',episodeFilter:'__all__'};function include(q){return ['approved','featured'].includes(q.finalStatus);}function card(q){const img=youtubeThumb(q);return `<article class="quote-item" data-id="${esc(q.id)}">${img?`<img class="thumb" src="${esc(img)}" alt="">`:`<div class="thumb"></div>`}<div class="item-body"><div class="meta"><span class="pill">${esc(q.finalStatus)}</span><span>${esc(fmtDate(quoteDate(q)))}</span><span>${esc(q?.episode?.series||'')}</span></div><h2 class="item-title">${esc(quoteTitle(q))}</h2><p class="item-quote">${esc(q.approvedText||q.displayText||q.text||'')}</p><div class="score-mini">${scoreMiniHtml(q)}</div><button class="btn subtle" data-score="${esc(q.id)}" type="button">Show Scoring Details</button><div class="score-details" id="score-${esc(q.id)}">${scoreDetailsHtml(q)}</div><textarea data-edit="${esc(q.id)}">${esc(q.approvedText||q.displayText||q.text||'')}</textarea><div class="item-actions"><button class="btn primary" data-save="${esc(q.id)}">Save Edit</button><button class="btn" data-copy="${esc(q.id)}">Copy Quote</button><button class="btn danger" data-reject="${esc(q.id)}">Reject</button><button class="btn primary" data-feature="${esc(q.id)}">Feature</button><a class="btn" href="${esc(playerLink(q))}" target="_blank" rel="noopener">Open Site</a></div></div></article>`;}
+const PAGE_REVIEW_STATUSES=['approved','featured'];
+const state={all:[],items:[],query:'',episodeFilter:'__all__'};function include(q){return PAGE_REVIEW_STATUSES.includes(q.finalStatus);}function card(q){const img=youtubeThumb(q);return `<article class="quote-item" data-id="${esc(q.id)}">${img?`<img class="thumb" src="${esc(img)}" alt="">`:`<div class="thumb"></div>`}<div class="item-body"><div class="meta"><span class="pill">${esc(q.finalStatus)}</span><span>${esc(fmtDate(quoteDate(q)))}</span><span>${esc(q?.episode?.series||'')}</span></div><h2 class="item-title">${esc(quoteTitle(q))}</h2><p class="item-quote">${esc(q.approvedText||q.displayText||q.text||'')}</p><div class="score-mini">${scoreMiniHtml(q)}</div><button class="btn subtle" data-score="${esc(q.id)}" type="button">Show Scoring Details</button><div class="score-details" id="score-${esc(q.id)}">${scoreDetailsHtml(q)}</div><textarea data-edit="${esc(q.id)}">${esc(q.approvedText||q.displayText||q.text||'')}</textarea><div class="item-actions"><button class="btn primary" data-save="${esc(q.id)}">Save Edit</button><button class="btn" data-copy="${esc(q.id)}">Copy Quote</button><button class="btn danger" data-reject="${esc(q.id)}">Reject</button><button class="btn primary" data-feature="${esc(q.id)}">Feature</button><a class="btn" href="${esc(playerLink(q))}" target="_blank" rel="noopener">Open Site</a></div></div></article>`;}
+
+function listEpisodeOptionLabel(q){
+  const title=quoteTitle(q);
+  const date=fmtDate(q?.episode?.date||q?.date||'');
+  return date?`${title} — ${date}`:title;
+}
+function allLocallyReviewedQuotes(){
+  const out=[];
+  for(const q of state.all||[]){
+    for(const action of ['approved','featured','rejected']){
+      const row=readLocal(action,q);
+      if(row){
+        out.push({...q,localReview:row,finalReview:row,finalStatus:action,approvedText:row.approvedText||q.approvedText||q.displayText||q.text||''});
+      }
+    }
+  }
+  return out;
+}
+
 function buildEpisodeFilter(){
+  if(!$('episodeFilter'))return;
+  const wanted=new Set(PAGE_REVIEW_STATUSES);
+  const localOptionItems=allLocallyReviewedQuotes().filter(q=>wanted.has(q.finalStatus));
+  const source=[...state.items,...localOptionItems];
+  const byId=new Map();
+  for(const q of source){
+    const id=q?.id||q?.quoteId;
+    if(id&&!byId.has(id))byId.set(id,q);
+  }
   const groups=new Map();
-  for(const q of state.items){
+  for(const q of byId.values()){
     const key=q?.episode?.stableId||q?.episodeStableId||'unknown';
-    const label=quoteTitle(q);
+    const label=listEpisodeOptionLabel(q);
     if(!groups.has(key))groups.set(key,{key,label,count:0});
     groups.get(key).count++;
   }
-  if(!$('episodeFilter'))return;
-  $('episodeFilter').innerHTML=[`<option value="__all__">All episodes — ${state.items.length}</option>`].concat([...groups.values()].sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true})).map(g=>`<option value="${esc(g.key)}">${esc(g.label)} — ${g.count}</option>`)).join('');
-  if(!groups.has(state.episodeFilter)&&state.episodeFilter!=='__all__')state.episodeFilter='__all__';
+  const options=[`<option value="__all__">All episodes — ${byId.size}</option>`]
+    .concat([...groups.values()].sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true}))
+    .map(g=>`<option value="${esc(g.key)}">${esc(g.label)} — ${g.count}</option>`));
+  $('episodeFilter').innerHTML=options.join('');
+  if(state.episodeFilter!=='__all__'&&!groups.has(state.episodeFilter))state.episodeFilter='__all__';
   $('episodeFilter').value=state.episodeFilter;
 }
 function itemEpisodeMatch(item){
