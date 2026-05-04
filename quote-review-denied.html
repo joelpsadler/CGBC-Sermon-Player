@@ -21,7 +21,32 @@ select{
   display:none!important;
 }
 
-</style></head><body><div class="page"><header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Denied Quotes</h1></div></div><div class="actions"><a class="back-link" href="quote-review.html">Quote Review</a><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path><path d="M5 17v4"></path><path d="M19 17v4"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></div></header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="toolbar" style="margin-top:14px"><button class="btn primary" id="unlockBtn" type="button">Open Denied Quotes</button><span class="status" id="gateStatus"></span></div></section><main class="app" id="app"><section class="panel"><header class="panel-head"><p class="eyebrow">Episodes</p><h2 class="panel-title">Quote Episodes</h2></header><div class="body"><div class="toolbar"><select id="episodeSelect"><option value="__all__">All episodes</option></select></div><div class="episode-list" id="episodeList"></div></div></section><section class="panel"><header class="panel-head"><p class="eyebrow">Denied / Rejected</p><h2 class="panel-title" id="quoteListTitle">Denied Quotes</h2></header><div class="body"><div class="toolbar"><span class="status" id="summaryText"></span></div><div class="quote-list" id="quoteList"></div></div></section></main></div><div class="toast" id="toast"></div><script>
+
+/* UNIFIED QUOTE PAGE HEADER PATCH */
+.topbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+}
+.actions .btn,.actions .back-link{
+  min-height:44px;
+  white-space:nowrap;
+}
+@media(max-width:980px){
+  .topbar{align-items:flex-start;}
+  .actions{justify-content:flex-start;}
+}
+
+</style></head><body><div class="page"><header class="topbar"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A/V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Denied Quotes</h1></div></div><nav class="actions" aria-label="Quote review navigation"><a class="btn" href="quote-review.html">Quote Review</a><a class="btn" href="quote-review-approved.html">Approved Quotes</a><a class="btn" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></nav></header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="toolbar" style="margin-top:14px"><button class="btn primary" id="unlockBtn" type="button">Open Denied Quotes</button><span class="status" id="gateStatus"></span></div></section><main class="app" id="app"><section class="panel"><header class="panel-head"><p class="eyebrow">Episodes</p><h2 class="panel-title">Quote Episodes</h2></header><div class="body"><div class="toolbar"><select id="episodeSelect"><option value="__all__">All episodes</option></select></div><div class="episode-list" id="episodeList"></div></div></section><section class="panel"><header class="panel-head"><p class="eyebrow">Denied / Rejected</p><h2 class="panel-title" id="quoteListTitle">Denied Quotes</h2></header><div class="body"><div class="toolbar"><span class="status" id="summaryText"></span></div><div class="quote-list" id="quoteList"></div></div></section></main></div><div class="toast" id="toast"></div><script>
 const PASSWORD='1813';
 const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
 const AUTH_TTL_MS=12*60*60*1000;
@@ -120,4 +145,34 @@ async function openApp(){const [quotes,library,repo]=await Promise.all([loadQuot
 if(els.episodeSelect)els.episodeSelect.addEventListener('change',()=>{state.episodeKey=els.episodeSelect.value;render();});if(els.copyAllBtn)els.copyAllBtn.addEventListener('click',async()=>{await navigator.clipboard.writeText(visibleQuotes().map(copyTextFor).join('\n\n'));toast('Copied visible quotes.');});if(els.exportCurationBtn)els.exportCurationBtn.addEventListener('click',()=>exportCurationJson(state.quotes));bootstrapAuth(openApp);
 /* DENIED_SHARED_AUTH_BOOT */
 try{if(isUnlocked()){const gs=$('gateStatus');if(gs)gs.textContent='Loading denied quotes…';openApp();}}catch(e){console.warn(e);}
+
+function triggerJsonDownload(json,filename='quote-curation.json'){
+  try{const blob=new Blob([json],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.rel='noopener';a.style.position='fixed';a.style.left='-9999px';document.body.appendChild(a);a.click();setTimeout(()=>{try{URL.revokeObjectURL(url);a.remove();}catch(_){}},15000);return true;}catch(_){return false;}
+}
+function showExportFallback(json,count){
+  const old=document.getElementById('exportFallbackPanel');if(old)old.remove();
+  const wrap=document.createElement('div');wrap.id='exportFallbackPanel';wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif;overflow:auto';
+  const safe=json.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div><div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>.</div></div><button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button></div><textarea id="exportFallbackText" readonly style="width:100%;height:260px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button type="button" id="exportFallbackDownload" class="btn primary">Download JSON</button><button type="button" id="exportFallbackCopy" class="btn">Copy JSON</button><button type="button" id="exportFallbackSelect" class="btn">Select All</button><span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span></div>';
+  document.body.appendChild(wrap);
+  document.getElementById('exportFallbackClose')?.addEventListener('click',()=>wrap.remove());
+  document.getElementById('exportFallbackDownload')?.addEventListener('click',()=>triggerJsonDownload(json,'quote-curation.json'));
+  document.getElementById('exportFallbackCopy')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(json);if(typeof toast==='function')toast('Copied quote-curation.json.');}catch(_){document.getElementById('exportFallbackText')?.select();document.execCommand('copy');}});
+  document.getElementById('exportFallbackSelect')?.addEventListener('click',()=>{document.getElementById('exportFallbackText')?.focus();document.getElementById('exportFallbackText')?.select();});
+}
+function pageReviewEntries(){
+  const byId=new Map();
+  if(state?.repoReviews instanceof Map){for(const r of state.repoReviews.values()){if(r?.quoteId)byId.set(r.quoteId,r);}}
+  for(const q of state?.quotes||[]){
+    for(const action of ['featured','approved','rejected']){
+      const saved=typeof readReview==='function'?readReview(action,q):null;
+      if(saved){byId.set(q.id,{quoteId:q.id,status:action,approvedText:saved.approvedText||q?.approvedText||q?.displayText||q?.text||'',episodeStableId:q?.episode?.stableId||'',episodeTitle:q?.episode?.title||q?.episode?.episodeName||'',start:q?.media?.start??q?.start??null,end:q?.media?.end??q?.end??null,source:'browser_review',savedAt:saved.savedAt||new Date().toISOString()});}
+    }
+  }
+  return Array.from(byId.values());
+}
+function exportCurationJson(){const payload={version:1,generatedAt:new Date().toISOString(),targetFile:'config/quote-curation.json',reviews:pageReviewEntries()};const json=JSON.stringify(payload,null,2);try{localStorage.setItem('cgbcLastQuoteCurationExport',json);}catch(_){}showExportFallback(json,payload.reviews.length);triggerJsonDownload(json,'quote-curation.json');}
+
+/* EXPORT_HEADER_BIND */
+try{document.getElementById('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCurationJson();});}catch(e){console.warn(e);}
 </script></body></html>
