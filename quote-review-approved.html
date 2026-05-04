@@ -1,290 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>CGBC Approved Quotes</title>
-<link rel="icon" type="image/jpeg" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#0f0f10;--text:#f4f4f4;--muted:rgba(255,255,255,.68);--muted2:rgba(255,255,255,.48);--accent:#8fae9d;--border:rgba(255,255,255,.09);--desktop-bg:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230673/Desktop.jpg')}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,sans-serif}body{background:linear-gradient(180deg,rgba(8,8,9,.78),rgba(8,8,9,.92)),var(--desktop-bg) center/cover no-repeat fixed;background-blend-mode:multiply}button,input,textarea,select{font:inherit}button{border:none;background:none;color:inherit;cursor:pointer}a{color:inherit;text-decoration:none}.page{width:min(1680px,100%);margin:0 auto;padding:16px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px 18px}.brand{display:flex;align-items:center;gap:16px;min-width:0}.brand img{width:240px;max-width:35vw;height:72px;object-fit:contain;object-position:left center;filter:drop-shadow(0 5px 14px rgba(0,0,0,.18))}.eyebrow{margin:0 0 5px;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2)}h1{margin:0;font-family:Poppins,sans-serif;font-size:clamp(30px,3.2vw,54px);line-height:.98;letter-spacing:-.03em}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.btn,.back-link{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 15px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid var(--border);font-family:Poppins,sans-serif;font-weight:700}.btn.primary{background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));border-color:rgba(143,174,157,.28)}.gate{width:min(640px,calc(100vw - 32px));margin:10vh auto 0;padding:26px;border-radius:28px;background:linear-gradient(180deg,rgba(18,18,19,.92),rgba(10,10,11,.88));border:1px solid var(--border);box-shadow:0 28px 80px rgba(0,0,0,.44),inset 0 1px 0 rgba(255,255,255,.06)}.gate label{display:block;margin:20px 0 8px;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}.gate input{width:100%;height:56px;border-radius:18px;border:1px solid var(--border);background:rgba(0,0,0,.28);color:var(--text);padding:0 16px;outline:none;font-size:18px}.status{color:var(--muted);font-size:14px;line-height:1.45}.app{display:none;grid-template-columns:minmax(360px,.75fr) minmax(520px,1.25fr);gap:16px;align-items:start}.app.is-visible{display:grid}.panel{border-radius:28px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(18,18,19,.88),rgba(10,10,11,.80));box-shadow:0 18px 60px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.055);overflow:hidden;backdrop-filter:blur(16px) saturate(1.04)}.panel-head{padding:20px 22px 14px;border-bottom:1px solid rgba(255,255,255,.07)}.panel-title{margin:0;font-family:Poppins,sans-serif;font-size:22px;line-height:1.05}.body{padding:18px;display:grid;gap:14px}.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar select{height:44px;min-width:240px;border-radius:15px;border:1px solid var(--border);background:rgba(0,0,0,.28);color:var(--text);padding:0 12px;outline:none}.episode-list{display:grid;gap:12px;max-height:calc(100vh - 250px);overflow:auto;padding-right:4px}.episode-card{width:100%;text-align:left;display:grid;grid-template-columns:126px 1fr;gap:12px;padding:10px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--border)}.episode-card.active{background:linear-gradient(180deg,rgba(143,174,157,.20),rgba(143,174,157,.09));border-color:rgba(143,174,157,.25)}.thumb{width:126px;aspect-ratio:16/9;border-radius:14px;background:rgba(255,255,255,.05);object-fit:cover}.card-title{font-family:Poppins,sans-serif;font-weight:800;line-height:1.12;margin:2px 0 6px}.card-sub{color:var(--muted);font-size:13px;line-height:1.3}.pill{display:inline-flex;align-items:center;min-height:26px;padding:0 9px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid var(--border);font-family:Poppins,sans-serif;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-top:8px}.quote-list{display:grid;gap:12px;max-height:calc(100vh - 260px);overflow:auto;padding-right:4px}.quote-card{border-radius:22px;border:1px solid var(--border);background:rgba(255,255,255,.035);padding:15px;display:grid;gap:10px}.quote-text{font-size:18px;line-height:1.45;color:rgba(255,255,255,.96)}.quote-meta{color:var(--muted);font-size:13px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.copy-box{width:100%;min-height:78px;resize:vertical;border-radius:16px;border:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.28);color:var(--text);padding:12px;line-height:1.45}.empty{padding:16px;border-radius:18px;background:rgba(255,255,255,.035);border:1px dashed rgba(255,255,255,.13);color:var(--muted);line-height:1.45}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;display:none;max-width:min(720px,calc(100vw - 28px));padding:12px 16px;border-radius:999px;background:rgba(12,12,13,.94);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(0,0,0,.30);color:rgba(255,255,255,.88);font-size:13px}.toast.is-visible{display:block}@media(max-width:980px){.app{grid-template-columns:1fr}.brand img{width:150px;height:54px}.episode-list,.quote-list{max-height:none}.episode-card{grid-template-columns:110px 1fr}.thumb{width:110px}}
-
-/* QUOTE PAGE CLEANUP: selectable dropdowns and shared review auth. */
-select{
-  appearance:auto;
-  -webkit-appearance:auto;
-  cursor:pointer;
-  background-color:rgba(0,0,0,.32);
-}
-.toolbar select{padding-right:36px;}
-
-
-/* UNIFIED QUOTE PAGE HEADER PATCH */
-.topbar{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:18px;
-  flex-wrap:wrap;
-}
-.actions{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:flex-end;
-  flex-wrap:wrap;
-}
-.actions .btn,.actions .back-link{
-  min-height:44px;
-  white-space:nowrap;
-}
-@media(max-width:980px){
-  .topbar{align-items:flex-start;}
-  .actions{justify-content:flex-start;}
-}
-
-</style>
-</head>
-<body>
-<div class="page"><header class="topbar"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A/V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Approved Quotes</h1></div></div><nav class="actions" aria-label="Quote review navigation"><a class="btn" href="quote-review.html">Quote Review</a><a class="btn" href="quote-review-denied.html">Denied Quotes</a><a class="btn" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></nav></header>
-<section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="actions" style="margin-top:14px"><button class="btn primary" id="unlockBtn" type="button">Open Approved Quotes</button><span class="status" id="gateStatus"></span></div></section>
-<main class="app" id="approvedApp"><section class="panel"><header class="panel-head"><p class="eyebrow">Episodes</p><h2 class="panel-title">Quote Episodes</h2></header><div class="body"><div class="toolbar"><select id="episodeSelect"><option value="__all__">All episodes</option></select></div><div class="episode-list" id="episodeList"></div></div></section><section class="panel"><header class="panel-head"><p class="eyebrow">Approved / Featured</p><h2 class="panel-title" id="quoteListTitle">Approved Quotes</h2></header><div class="body"><div class="toolbar"><button class="btn" id="copyAllBtn" type="button">Copy Visible Quotes</button><span class="status" id="summaryText"></span></div><div class="quote-list" id="quoteList"></div></div></section></main></div><div class="toast" id="toast"></div>
-<script>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /><title>CGBC Approved Quotes</title><link rel="icon" type="image/jpeg" href="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--bg:#0f0f10;--text:#f4f4f4;--muted:rgba(255,255,255,.70);--muted2:rgba(255,255,255,.48);--accent:#8fae9d;--border:rgba(255,255,255,.09);--desktop-bg:url('https://tithely-media-prod.s3.us-west-1.wasabisys.com/1230673/Desktop.jpg')}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{background:linear-gradient(180deg,rgba(8,8,9,.78),rgba(8,8,9,.92)),var(--desktop-bg) center/cover no-repeat fixed;background-blend-mode:multiply}button,input,textarea,select{font:inherit}button{border:none;background:none;color:inherit;cursor:pointer}a{color:inherit;text-decoration:none}.page{width:min(1680px,100%);margin:0 auto;padding:16px}.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:10px 8px 18px}.brand{display:flex;align-items:center;gap:16px;min-width:0}.brand img{width:230px;max-width:38vw;height:70px;object-fit:contain;object-position:left center;filter:drop-shadow(0 5px 14px rgba(0,0,0,.18))}.eyebrow{margin:0 0 6px;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2)}h1{margin:0;font-family:Poppins,sans-serif;font-size:clamp(30px,3.1vw,52px);line-height:.98;letter-spacing:-.03em}.nav-actions,.actions,.button-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.nav-actions{justify-content:flex-end}.btn,.back-link{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 14px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid var(--border);font-family:Poppins,sans-serif;font-weight:750;font-size:14px;white-space:nowrap}.btn.primary{background:linear-gradient(180deg,rgba(143,174,157,.24),rgba(143,174,157,.12));border-color:rgba(143,174,157,.30)}.btn.danger{background:rgba(255,90,90,.08);border-color:rgba(255,90,90,.24)}.btn.subtle{color:rgba(255,255,255,.72)}.btn[disabled]{opacity:.45;cursor:not-allowed}.gate{width:min(640px,calc(100vw - 32px));margin:12vh auto 0;padding:26px;border-radius:28px;background:linear-gradient(180deg,rgba(18,18,19,.92),rgba(10,10,11,.88));border:1px solid var(--border);box-shadow:0 28px 80px rgba(0,0,0,.44),inset 0 1px 0 rgba(255,255,255,.06)}.gate label{display:block;margin:20px 0 8px;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}.gate input{width:100%;height:56px;border-radius:18px;border:1px solid var(--border);background:rgba(0,0,0,.28);color:var(--text);padding:0 16px;outline:none;font-size:18px}.gate-actions{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}.status{color:var(--muted);font-size:14px;line-height:1.45}.app-view{display:none}.app-view.is-visible{display:block}.review-grid{display:grid;grid-template-columns:minmax(430px,.94fr) minmax(440px,1.06fr);gap:16px;align-items:start}.panel{border-radius:28px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(18,18,19,.88),rgba(10,10,11,.80));box-shadow:0 18px 60px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.055);overflow:hidden;backdrop-filter:blur(16px) saturate(1.04)}.panel-head{padding:18px 22px 14px;border-bottom:1px solid rgba(255,255,255,.07)}.panel-title{margin:0;font-family:Poppins,sans-serif;font-size:22px;line-height:1.1}.panel-body{padding:18px 22px;display:grid;gap:16px}.filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,260px);gap:12px;padding:0 22px 14px;border-bottom:1px solid rgba(255,255,255,.07);align-items:end}.field{display:grid;gap:6px;min-width:0}.field label,.mini-label{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}.field select,.field input{height:46px;border-radius:16px;border:1px solid var(--border);background:rgba(0,0,0,.32);color:var(--text);padding:0 14px;outline:none;min-width:0;width:100%}.quote-counter{color:var(--muted);font-size:14px}.quote-card{border-radius:24px;border:1px solid var(--border);background:rgba(255,255,255,.035);padding:18px;display:grid;gap:14px}.context-line{color:rgba(255,255,255,.55);font-size:16px;line-height:1.45}.context-line:empty{display:none}.quote-main{color:rgba(255,255,255,.96);font-family:Poppins,sans-serif;font-size:clamp(26px,2.8vw,42px);font-weight:800;line-height:1.12;text-align:center;padding:8px 6px}.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);font-size:13px}.pill{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.055);border:1px solid var(--border);font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.78)}textarea{width:100%;min-height:118px;resize:vertical;border-radius:20px;border:1px solid var(--border);background:rgba(0,0,0,.24);color:var(--text);padding:14px;outline:none;line-height:1.45}.review-actions{display:grid;gap:10px}.review-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.divider{width:1px;height:34px;background:rgba(255,255,255,.18);flex:0 0 1px}.media-shell{width:100%;aspect-ratio:16/9;border-radius:22px;border:1px solid var(--border);background:rgba(0,0,0,.36);overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:14px}.media-shell iframe{width:100%;height:100%;border:0;display:block}.time-row{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-family:Poppins,sans-serif;font-size:13px}.note{padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);font-size:13px;line-height:1.45}.list-panel{display:grid;gap:14px}.toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.07);align-items:end}.search{height:46px;border-radius:16px;border:1px solid var(--border);background:rgba(0,0,0,.32);color:var(--text);padding:0 14px;outline:none;min-width:0;width:100%}.cards{display:grid;gap:12px;padding:16px 22px 22px}.quote-item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;border-radius:24px;border:1px solid var(--border);background:rgba(255,255,255,.035);padding:14px}.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.06)}.item-body{display:grid;gap:10px;min-width:0}.item-title{margin:0;font-family:Poppins,sans-serif;font-size:18px;line-height:1.15}.item-quote{margin:0;color:rgba(255,255,255,.88);line-height:1.5}.item-actions{display:flex;gap:8px;flex-wrap:wrap}.small{font-size:12px;color:var(--muted)}.empty{padding:28px;border-radius:24px;background:rgba(255,255,255,.035);border:1px solid var(--border);color:var(--muted);text-align:center}.export-panel{position:fixed;right:18px;bottom:18px;z-index:9999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;overflow:auto}.export-panel textarea{height:260px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;border-radius:14px}.export-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:10000;display:none;max-width:min(720px,calc(100vw - 28px));padding:12px 16px;border-radius:999px;background:rgba(12,12,13,.94);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 32px rgba(0,0,0,.30);color:rgba(255,255,255,.88);font-size:13px}.toast.is-visible{display:block}@media(max-width:980px){.review-grid{grid-template-columns:1fr}.brand img{width:150px;height:54px}.toolbar,.filters{grid-template-columns:1fr}.quote-item{grid-template-columns:1fr}.thumb{max-width:260px}.divider{display:none}}
+</style></head><body><div class="page"><header class="topbar"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Approved Quotes</h1></div></div><nav class="nav-actions" aria-label="Quote tools navigation"><a class="back-link" href="quote-review.html">Quote Review</a><a class="back-link" href="quote-review-denied.html">Denied Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><a class="back-link" href="index.html">Back to Media</a></nav></header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open</button><span class="status" id="gateStatus"></span></div></section><main class="app-view" id="appView"><section class="panel list-panel"><div class="toolbar"><div class="field"><label for="searchBox">Filter quotes</label><input class="search" id="searchBox" placeholder="Search quote, episode, series, date…"></div><button class="btn primary" id="exportCurationBtn" type="button">Export GitHub JSON</button></div><div class="cards" id="cards"></div></section></main></div><div class="toast" id="toast"></div><script>
 const PASSWORD='1813';
 const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
 const AUTH_TTL_MS=12*60*60*1000;
-const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','random-quotes.json'];
-const LIBRARY_PATHS=['data/library-resolved.json','library-resolved.json','public/library-resolved.json'];
+const QUOTE_PATHS=['data/quotes/en/random-quotes.json','data/quotes/en/quote-bank.json','random-quotes.json','quote-bank.json'];
 const CURATION_PATHS=['config/quote-curation.json','quote-curation.json'];
-const state={quotes:[],items:[],episodeKey:'__all__',library:new Map(),repoReviews:new Map()};
 const $=id=>document.getElementById(id);
-const els={gate:$('gate'),app:$('approvedApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),episodeSelect:$('episodeSelect'),episodeList:$('episodeList'),quoteList:$('quoteList'),quoteListTitle:$('quoteListTitle'),copyAllBtn:$('copyAllBtn'),summaryText:$('summaryText'),toast:$('toast')};
-
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
+function fmtDate(v){if(!v)return '';try{return new Date(v+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});}catch(_){return v||'';}}
+function fmtTime(s){s=Number(s||0);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
+function toast(msg){const node=$('toast');if(!node)return;node.textContent=msg;node.classList.add('is-visible');clearTimeout(toast.t);toast.t=setTimeout(()=>node.classList.remove('is-visible'),2400);}
+function siteBase(){const path=location.pathname.replace(/[^/]*$/,'');return location.origin+path;}
+function playerLink(q){const id=q?.episode?.stableId||q?.episodeStableId||q?.episodeId||'';return `${siteBase()}index.html?mode=video&item=${encodeURIComponent(id)}`;}
+function timeLink(q){const id=q?.episode?.stableId||q?.episodeStableId||q?.episodeId||'';const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));return `${siteBase()}index.html?mode=video&item=${encodeURIComponent(id)}${start?`&start=${start}`:''}`;}
+function quoteSpeaker(q){return q?.speaker||q?.by||q?.episode?.speaker||q?.episode?.by||'Pastor Jacob Lannom';}
+function quoteTitle(q){const ep=q?.episode||{};return ep.title||ep.episodeName||q?.episodeTitle||'Quote';}
+function quoteDate(q){return q?.episode?.date||q?.date||'';}
+function copyText(q){const text=clean(q?.approvedText||q?.displayText||q?.expandedText||q?.text||'');return `${text}\n${quoteSpeaker(q)} — ${quoteTitle(q)}${quoteDate(q)?`, ${fmtDate(quoteDate(q))}`:''}\n${playerLink(q)}`;}
+function youtubeThumb(q){const id=q?.media?.youtubeId||q?.youtubeId||q?.episode?.youtubeId||'';return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:'';}
 function markUnlocked(){const payload=JSON.stringify({ok:true,at:Date.now()});for(const key of AUTH_KEYS){try{localStorage.setItem(key,payload);sessionStorage.setItem(key,payload);}catch(_){}}}
 function isUnlocked(){for(const key of AUTH_KEYS){try{const raw=sessionStorage.getItem(key)||localStorage.getItem(key);if(!raw)continue;if(raw==='yes'||raw==='true'||raw==='1813'){markUnlocked();return true;}const data=JSON.parse(raw);if(data?.ok&&(Date.now()-Number(data.at||0))<AUTH_TTL_MS){markUnlocked();return true;}}catch(_){}}return false;}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
-function fmtDate(v){try{return new Date(v+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});}catch(_){return v||'';}}
-function fmtTime(s){s=Number(s||0);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
-function toast(msg){els.toast.textContent=msg;els.toast.classList.add('is-visible');clearTimeout(toast.t);toast.t=setTimeout(()=>els.toast.classList.remove('is-visible'),2400);}
-function reviewKey(action,q){return `cgbcQuoteReview:${action}:${q?.id||'unknown'}`;}
-function readReview(action,q){try{const raw=localStorage.getItem(reviewKey(action,q));return raw?JSON.parse(raw):null;}catch(_){return null;}}
-
-async function loadRepoCuration(){const json=await fetchFirst(CURATION_PATHS);return Array.isArray(json?.reviews)?json.reviews:[];}
-function buildRepoReviewMap(rows){const map=new Map();for(const r of rows||[]){if(r?.quoteId)map.set(r.quoteId,r);}return map;}
-function repoReview(q){return state.repoReviews.get(q?.id)||null;}
-function savedStatus(q){return readReview('featured',q)?'featured':readReview('approved',q)?'approved':repoReview(q)?.status==='featured'?'featured':repoReview(q)?.status==='approved'?'approved':null;}
-function savedPayload(q){return readReview('featured',q)||readReview('approved',q)||repoReview(q)||null;}
-function quoteText(q){const saved=savedPayload(q);return saved?.approvedText||q?.approvedText||q?.displayText||q?.expandedText||q?.text||'';}
-function epKey(q){return q?.episode?.stableId||q?.episode?.title||'unknown';}
-function epTitle(q){return q?.episode?.title||q?.episode?.episodeName||'Untitled episode';}
-function epSub(q){const ep=q?.episode||{};return [ep.series,ep.subtitle,ep.date?fmtDate(ep.date):''].filter(Boolean).join(' • ');}
-function mediaStart(q){return Number(q?.media?.start||q?.start||0)||0;}
-async function fetchFirst(paths){for(const path of paths){try{const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});if(!res.ok)continue;return await res.json();}catch(e){}}return null;}
-async function loadData(){const [qData,lData,repo]=await Promise.all([fetchFirst(QUOTE_PATHS),fetchFirst(LIBRARY_PATHS),loadRepoCuration()]);state.quotes=Array.isArray(qData?.quotes)?qData.quotes:[];state.repoReviews=buildRepoReviewMap(repo);for(const item of (Array.isArray(lData?.items)?lData.items:[])){state.library.set(item.stableId,item);}buildEpisodeSelect();render();}
-function artForEpisode(key,library,quotes=[]){
-  const item=library.get(key);
-  const fromQuote=quotes.find(q=>epKey(q)===key) || {};
-  const qEp=fromQuote?.episode||{};
-  const yt=item?.video?.youtubeId||fromQuote?.media?.youtubeId||qEp?.youtubeId;
-  const candidates=[
-    item?.art?.episode?.wide,
-    item?.art?.episode?.square,
-    item?.art?.series?.wide,
-    item?.art?.series?.square,
-    item?.art?.study?.wide,
-    item?.art?.study?.square,
-    item?.video?.thumbnail,
-    item?.videoThumbnail,
-    item?.youtubeThumbnail,
-    item?.image,
-    item?.artwork,
-    qEp?.art?.episode?.wide,
-    qEp?.art?.episode?.square,
-    qEp?.art?.series?.wide,
-    qEp?.art?.series?.square,
-    qEp?.art?.study?.wide,
-    qEp?.art?.study?.square,
-    qEp?.thumbnail,
-    qEp?.image,
-    qEp?.artwork,
-    fromQuote?.media?.thumbnail,
-    fromQuote?.thumbnail
-  ].filter(Boolean);
-  return candidates[0] || (yt?`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`:'');
-}
-function approvedQuotes(){return state.quotes.filter(q=>!!savedStatus(q));}
-function groupedEpisodes(){const map=new Map();for(const q of state.quotes){const key=epKey(q);if(!map.has(key))map.set(key,{key,title:epTitle(q),sub:epSub(q),total:0,approved:0});const g=map.get(key);g.total++;if(savedStatus(q))g.approved++;}return Array.from(map.values()).filter(g=>g.approved>0).sort((a,b)=>a.title.localeCompare(b.title,undefined,{numeric:true,sensitivity:'base'}));}
-function buildEpisodeSelect(){const groups=groupedEpisodes();const allApproved=approvedQuotes().length;els.episodeSelect.innerHTML=[`<option value="__all__">All episodes — ${allApproved} approved</option>`,...groups.map(g=>`<option value="${esc(g.key)}">${esc(g.title)} — ${g.approved}/${g.total}</option>`)].join('');els.episodeSelect.value=state.episodeKey;}
-function visibleQuotes(){return approvedQuotes().filter(q=>state.episodeKey==='__all__'||epKey(q)===state.episodeKey);}
-function episodeDeepLink(q){const base=location.href.replace(/[^/]*$/, '');const item=encodeURIComponent(epKey(q));return `${base}index.html?mode=video&item=${item}&start=0&autoplay=0&path=episode`;}
-
-/* REBUILT CGBC PLAYER ZERO COPY LINK */
-function quoteSpeaker(q){return q?.speaker||q?.by||q?.episode?.speaker||q?.episode?.by||'Pastor Jacob Lannom';}
-function copyCitationLine(q){const ep=q?.episode||{};const title=ep.episodeName||ep.title||q?.episodeTitle||'Quote';const dateValue=ep.date||q?.date||'';const date=(typeof fmtDate==='function')?fmtDate(dateValue):dateValue;return `${quoteSpeaker(q)} — ${title}${date?`, ${date}`:''}`;}
-function cgbcPlayerEpisodeLink(q){const key=(typeof epKey==='function')?epKey(q):(q?.episode?.stableId||q?.episodeStableId||q?.id||'');return `${siteBase()}index.html?mode=video&item=${encodeURIComponent(key)}`;}
-function copyQuoteWithCitation(q){const text=(q?.approvedText||q?.displayText||q?.expandedText||q?.text||'').replace(/\s+/g,' ').trim();return `${text}\n${copyCitationLine(q)}\n${cgbcPlayerEpisodeLink(q)}`;}
+async function fetchFirst(paths,kind='data'){const errors=[];for(const path of paths){try{const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});if(!res.ok){errors.push(`${path}: HTTP ${res.status}`);continue;}return await res.json();}catch(e){errors.push(`${path}: ${e.message||e}`);}}throw new Error(`Could not load ${kind}. ${errors.join(' | ')}`);}
+async function loadQuotes(){const data=await fetchFirst(QUOTE_PATHS,'quote candidates');const quotes=Array.isArray(data?.quotes)?data.quotes:(Array.isArray(data)?data:[]);return quotes.slice().sort((a,b)=>(Number(!!b.publicSafe)-Number(!!a.publicSafe))||((b.searchBoost||0)-(a.searchBoost||0))||((b.quotePolishScore||0)-(a.quotePolishScore||0))||((b.score||0)-(a.score||0)));}
+async function loadCuration(){try{const data=await fetchFirst(CURATION_PATHS,'curation');return Array.isArray(data?.reviews)?data.reviews:(Array.isArray(data)?data:[]);}catch(_){return [];}}
+function localKey(action,q){return `cgbcQuoteReview:${action}:${q?.id||q?.quoteId||'unknown'}`;}
+function readLocal(action,q){try{const raw=localStorage.getItem(localKey(action,q));return raw?JSON.parse(raw):null;}catch(_){return null;}}
+function saveLocal(action,q,text){const row={quoteId:q?.id||q?.quoteId||'',status:action,approvedText:clean(text||q?.approvedText||q?.displayText||q?.text||''),episodeStableId:q?.episode?.stableId||q?.episodeStableId||'',episodeTitle:q?.episode?.title||q?.episode?.episodeName||q?.episodeTitle||'',start:q?.media?.start??q?.start??null,end:q?.media?.end??q?.end??null,siteDeepLink:timeLink(q),youtubeLink:q?.media?.youtubeId?`https://www.youtube.com/watch?v=${q.media.youtubeId}&t=${Math.floor(q?.media?.start??q?.start??0)}s`:'',source:'browser_review',savedAt:new Date().toISOString()};try{localStorage.setItem(localKey(action,q),JSON.stringify(row));}catch(e){console.warn(e);}return row;}
+function removeLocalAll(q){for(const action of ['approved','featured','rejected']){try{localStorage.removeItem(localKey(action,q));}catch(_){}}}
+function mergeQuotesWithReviews(quotes,reviews){const byId=new Map(quotes.map(q=>[q.id,{...q}]));for(const r of reviews||[]){if(!r?.quoteId)continue;const q=byId.get(r.quoteId)||{id:r.quoteId,episode:{stableId:r.episodeStableId,title:r.episodeTitle},media:{start:r.start,end:r.end}};byId.set(r.quoteId,{...q,repoReview:r});}const merged=[...byId.values()];for(const q of merged){let local=null;for(const action of ['featured','approved','rejected']){const row=readLocal(action,q);if(row)local=row;}q.localReview=local;const final=local||q.repoReview||null;q.finalReview=final;q.finalStatus=final?.status||q?.curation?.status||q.status||'candidate';if(final?.approvedText)q.approvedText=final.approvedText;}return merged;}
+function allReviewEntries(quotes){const rows=new Map();for(const q of quotes||[]){if(q.repoReview?.quoteId)rows.set(q.repoReview.quoteId,{...q.repoReview,source:q.repoReview.source||'repo_curation'});if(q.localReview?.quoteId)rows.set(q.localReview.quoteId,{...q.localReview,source:q.localReview.source||'browser_review'});}return [...rows.values()];}
+function exportCuration(quotes){const reviews=allReviewEntries(quotes);const payload={version:1,generatedAt:new Date().toISOString(),source:'cgbc_quote_review_browser',targetFile:'config/quote-curation.json',note:'Commit this file to config/quote-curation.json, then run the normal sermon library build workflow.',reviews};const json=JSON.stringify(payload,null,2);showExport(json,reviews.length);try{const blob=new Blob([json],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='quote-curation.json';a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},15000);}catch(e){console.warn(e);}}
+function showExport(json,count){const old=$('exportPanel');if(old)old.remove();const wrap=document.createElement('div');wrap.id='exportPanel';wrap.className='export-panel';wrap.innerHTML=`<div class="export-head"><div><p class="eyebrow">GitHub export</p><h3 style="margin:0;font-family:Poppins,sans-serif">quote-curation.json ready</h3><p class="small">Upload this as <b>config/quote-curation.json</b>. ${count} review decision${count===1?'':'s'} included.</p></div><button class="btn" id="closeExport" type="button">Close</button></div><textarea id="exportText" readonly>${esc(json)}</textarea><div class="actions"><button class="btn primary" id="downloadExport" type="button">Download JSON</button><button class="btn" id="copyExport" type="button">Copy JSON</button><button class="btn" id="selectExport" type="button">Select All</button></div>`;document.body.appendChild(wrap);$('closeExport').onclick=()=>wrap.remove();$('downloadExport').onclick=()=>{const blob=new Blob([json],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='quote-curation.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},15000);};$('copyExport').onclick=async()=>{try{await navigator.clipboard.writeText(json);toast('Copied quote-curation.json.');}catch(_){$('exportText').select();document.execCommand('copy');}};$('selectExport').onclick=()=>{$('exportText').focus();$('exportText').select();};}
+function bindGate(onOpen){const gate=$('gate'),app=$('appView'),input=$('passwordInput'),btn=$('unlockBtn'),status=$('gateStatus');async function open(){if(input.value.trim()!==PASSWORD){status.textContent='Wrong password.';return;}markUnlocked();status.textContent='Loading…';await onOpen();gate.style.display='none';app.classList.add('is-visible');}btn?.addEventListener('click',()=>open().catch(e=>{console.error(e);status.textContent=`Could not load: ${e.message||e}`;}));input?.addEventListener('keydown',e=>{if(e.key==='Enter')open().catch(err=>{console.error(err);status.textContent=`Could not load: ${err.message||err}`;});});if(isUnlocked()){status.textContent='Loading…';onOpen().then(()=>{gate.style.display='none';app.classList.add('is-visible');}).catch(e=>{console.error(e);status.textContent=`Could not load: ${e.message||e}`;});}}
 
 
-/* FINAL CGBC PLAYER COPY LINK */
-function quoteSpeaker(q){return q?.speaker||q?.by||q?.episode?.speaker||q?.episode?.by||'Pastor Jacob Lannom';}
-function copyCitationLine(q){
-  const ep=q?.episode||{};
-  const title=ep.episodeName||ep.title||q?.episodeTitle||'Quote';
-  const dateValue=ep.date||q?.date||'';
-  const date=(typeof fmtDate==='function')?fmtDate(dateValue):dateValue;
-  return `${quoteSpeaker(q)} — ${title}${date?`, ${date}`:''}`;
-}
-function cgbcPlayerEpisodeLink(q){
-  const key=(typeof epKey==='function')?epKey(q):(q?.episode?.stableId||q?.episodeStableId||q?.id||'');
-  return `${siteBase()}index.html?mode=video&item=${encodeURIComponent(key)}`;
-}
-function copyQuoteWithCitation(q){
-  const text=(q?.approvedText||q?.displayText||q?.expandedText||q?.text||'').replace(/\s+/g,' ').trim();
-  return `${text}\n${copyCitationLine(q)}\n${cgbcPlayerEpisodeLink(q)}`;
-}
-
-function copyTextFor(q){return copyQuoteWithCitation(q);}
-function renderEpisodes(){const groups=groupedEpisodes();if(!groups.length){els.episodeList.innerHTML='<div class="empty">No approved or featured quotes found yet. Approve quotes locally or upload config/quote-curation.json, then return here.</div>';return;}els.episodeList.innerHTML=groups.map(g=>{const art=artForEpisode(g.key,state.library,state.quotes);return `<button class="episode-card ${state.episodeKey===g.key?'active':''}" type="button" data-key="${esc(g.key)}">${`<img class="thumb" src="${esc(art||'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png')}" alt="">`}<div><div class="card-title">${esc(g.title)}</div><div class="card-sub">${esc(g.sub)}</div><span class="pill">${g.approved}/${g.total} approved</span></div></button>`;}).join('');els.episodeList.querySelectorAll('[data-key]').forEach(btn=>btn.addEventListener('click',()=>{state.episodeKey=btn.dataset.key;els.episodeSelect.value=state.episodeKey;render();}));}
-function renderQuotes(){const list=visibleQuotes();const groups=groupedEpisodes();const active=groups.find(g=>g.key===state.episodeKey);els.quoteListTitle.textContent=state.episodeKey==='__all__'?'Approved Quotes':active?.title||'Approved Quotes';els.summaryText.textContent=`${list.length} visible quote${list.length===1?'':'s'}.`;if(!list.length){els.quoteList.innerHTML='<div class="empty">No approved quotes for this selection yet.</div>';return;}els.quoteList.innerHTML=list.map(q=>{const ep=q.episode||{};const status=savedStatus(q)||'approved';const start=fmtTime(mediaStart(q));const url=(q.media?.videoUrl||q.media?.youtubeId)?`${q.media?.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`}${(q.media?.videoUrl||'').includes('?')?'&':'?'}t=${Math.floor(mediaStart(q))}s`:'';const copy=copyTextFor(q);return `<article class="quote-card"><div class="quote-text">${esc(quoteText(q))}</div><div class="quote-meta"><span class="pill">${esc(status)}</span><span>${esc(ep.title||ep.episodeName||'')}</span>${start?`<span>• ${esc(start)}</span>`:''}${ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:''}${url?`<a class="pill" href="${esc(url)}" target="_blank" rel="noopener">Open Video</a>`:''}</div><textarea class="copy-box" readonly>${esc(copy)}</textarea><div class="actions"><button class="btn" type="button" data-copy="${esc(q.id)}">Copy Quote</button></div></article>`;}).join('');els.quoteList.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{const q=list.find(item=>item.id===btn.dataset.copy);if(!q)return;await navigator.clipboard.writeText(copyTextFor(q));toast('Copied quote.');}));}
-function render(){buildEpisodeSelect();renderEpisodes();renderQuotes();}
-async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}markUnlocked();els.gateStatus.textContent='Loading approved quotes…';await loadData();els.gate.style.display='none';els.app.classList.add('is-visible');}
-els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});try{if(isUnlocked()){els.gateStatus.textContent='Loading approved quotes…';loadData().then(()=>{els.gate.style.display='none';els.app.classList.add('is-visible');});}}catch(_){}els.episodeSelect.addEventListener('change',()=>{state.episodeKey=els.episodeSelect.value;render();});els.copyAllBtn.addEventListener('click',async()=>{const text=visibleQuotes().map(copyTextFor).join('\n\n');if(!text){toast('No visible quotes to copy.');return;}await navigator.clipboard.writeText(text);toast('Copied visible quotes.');});
-
-function triggerJsonDownload(json,filename='quote-curation.json'){
-  try{const blob=new Blob([json],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.rel='noopener';a.style.position='fixed';a.style.left='-9999px';document.body.appendChild(a);a.click();setTimeout(()=>{try{URL.revokeObjectURL(url);a.remove();}catch(_){}},15000);return true;}catch(_){return false;}
-}
-function showExportFallback(json,count){
-  const old=document.getElementById('exportFallbackPanel');if(old)old.remove();
-  const wrap=document.createElement('div');wrap.id='exportFallbackPanel';wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif;overflow:auto';
-  const safe=json.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-  wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div><div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>.</div></div><button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button></div><textarea id="exportFallbackText" readonly style="width:100%;height:260px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button type="button" id="exportFallbackDownload" class="btn primary">Download JSON</button><button type="button" id="exportFallbackCopy" class="btn">Copy JSON</button><button type="button" id="exportFallbackSelect" class="btn">Select All</button><span style="align-self:center;color:rgba(255,255,255,.68);font-size:13px">'+count+' review decision'+(count===1?'':'s')+'</span></div>';
-  document.body.appendChild(wrap);
-  document.getElementById('exportFallbackClose')?.addEventListener('click',()=>wrap.remove());
-  document.getElementById('exportFallbackDownload')?.addEventListener('click',()=>triggerJsonDownload(json,'quote-curation.json'));
-  document.getElementById('exportFallbackCopy')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(json);if(typeof toast==='function')toast('Copied quote-curation.json.');}catch(_){document.getElementById('exportFallbackText')?.select();document.execCommand('copy');}});
-  document.getElementById('exportFallbackSelect')?.addEventListener('click',()=>{document.getElementById('exportFallbackText')?.focus();document.getElementById('exportFallbackText')?.select();});
-}
-function pageReviewEntries(){
-  const byId=new Map();
-  if(state?.repoReviews instanceof Map){for(const r of state.repoReviews.values()){if(r?.quoteId)byId.set(r.quoteId,r);}}
-  for(const q of state?.quotes||[]){
-    for(const action of ['featured','approved','rejected']){
-      const saved=typeof readReview==='function'?readReview(action,q):null;
-      if(saved){byId.set(q.id,{quoteId:q.id,status:action,approvedText:saved.approvedText||q?.approvedText||q?.displayText||q?.text||'',episodeStableId:q?.episode?.stableId||'',episodeTitle:q?.episode?.title||q?.episode?.episodeName||'',start:q?.media?.start??q?.start??null,end:q?.media?.end??q?.end??null,source:'browser_review',savedAt:saved.savedAt||new Date().toISOString()});}
-    }
-  }
-  return Array.from(byId.values());
-}
-function exportCurationJson(){const payload={version:1,generatedAt:new Date().toISOString(),targetFile:'config/quote-curation.json',reviews:pageReviewEntries()};const json=JSON.stringify(payload,null,2);try{localStorage.setItem('cgbcLastQuoteCurationExport',json);}catch(_){}showExportFallback(json,payload.reviews.length);triggerJsonDownload(json,'quote-curation.json');}
-
-/* EXPORT_HEADER_BIND */
-try{document.getElementById('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCurationJson();});}catch(e){console.warn(e);}
-/* APPROVED_AUTO_UNLOCK_REBUILT */
-try{if(typeof isUnlocked==='function'&&isUnlocked()){els.gateStatus.textContent='Loading approved quotes…';loadData().then(()=>{els.gate.style.display='none';els.app.classList.add('is-visible');});}}catch(e){console.warn(e);}
-/* APPROVED_AUTO_UNLOCK_FINAL */
-try{if(typeof isUnlocked==='function'&&isUnlocked()){els.gateStatus.textContent='Loading approved quotes…';loadData().then(()=>{els.gate.style.display='none';els.app.classList.add('is-visible');});}}catch(e){console.warn(e);}
-
-/* CURRENT REPAIR: shared auth boot fallback */
-(function(){
-  const AUTH_KEYS_FALLBACK=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
-  const AUTH_TTL_FALLBACK=12*60*60*1000;
-  function fallbackUnlocked(){
-    for(const key of AUTH_KEYS_FALLBACK){
-      try{
-        const raw=sessionStorage.getItem(key)||localStorage.getItem(key);
-        if(!raw) continue;
-        if(raw==='yes'||raw==='true'||raw==='1813') return true;
-        const data=JSON.parse(raw);
-        if(data?.ok && (Date.now()-Number(data.at||0))<AUTH_TTL_FALLBACK) return true;
-      }catch(_){}
-    }
-    return false;
-  }
-  async function openApprovedAfterAuth(){
-    try{
-      if(typeof loadData==='function') await loadData();
-      const gate=document.getElementById('gate')||document.querySelector('.gate,.password-gate');
-      const app=document.getElementById('app')||document.getElementById('approvedApp')||document.querySelector('main.app,main.approved,.approved-app');
-      if(gate) gate.style.display='none';
-      if(app) app.classList.add('is-visible');
-      const status=document.getElementById('gateStatus');
-      if(status) status.textContent='';
-    }catch(e){
-      console.warn('Approved auto-open failed',e);
-    }
-  }
-  function markAllUnlocked(){
-    const payload=JSON.stringify({ok:true,at:Date.now()});
-    for(const key of AUTH_KEYS_FALLBACK){
-      try{localStorage.setItem(key,payload);sessionStorage.setItem(key,payload);}catch(_){}
-    }
-  }
-  window.addEventListener('DOMContentLoaded',()=>{
-    if(fallbackUnlocked()){
-      markAllUnlocked();
-      openApprovedAfterAuth();
-    }
-    const btn=[...document.querySelectorAll('button')].find(b=>/open approved/i.test(b.textContent||''));
-    const input=document.querySelector('input[type="password"],#passwordInput');
-    if(btn && input){
-      btn.addEventListener('click',e=>{
-        if((input.value||'').trim()==='1813'){
-          e.preventDefault();
-          markAllUnlocked();
-          openApprovedAfterAuth();
-        }
-      },true);
-    }
-  });
-})();
-
-
-/* DEPLOYED BASELINE REPAIR: approved shared-auth boot */
-(function(){
-  const KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
-  const TTL=12*60*60*1000;
-  function unlocked(){
-    for(const k of KEYS){
-      try{
-        const raw=sessionStorage.getItem(k)||localStorage.getItem(k);
-        if(!raw)continue;
-        if(raw==='yes'||raw==='true'||raw==='1813')return true;
-        const data=JSON.parse(raw);
-        if(data?.ok&&(Date.now()-Number(data.at||0))<TTL)return true;
-      }catch(_){}
-    }
-    return false;
-  }
-  function mark(){
-    const payload=JSON.stringify({ok:true,at:Date.now()});
-    for(const k of KEYS){try{localStorage.setItem(k,payload);sessionStorage.setItem(k,payload);}catch(_){}}
-  }
-  async function openApproved(){
-    try{
-      if(typeof loadData==='function')await loadData();
-      const gate=document.getElementById('gate')||document.querySelector('.gate');
-      const app=document.getElementById('app')||document.getElementById('approvedApp')||document.querySelector('main');
-      if(gate)gate.style.display='none';
-      if(app)app.classList.add('is-visible');
-      const status=document.getElementById('gateStatus');
-      if(status)status.textContent='';
-    }catch(e){console.warn(e);const status=document.getElementById('gateStatus');if(status)status.textContent=`Could not load approved quotes: ${e.message||e}`;}
-  }
-  window.addEventListener('DOMContentLoaded',()=>{
-    if(unlocked()){mark();openApproved();}
-    const btn=[...document.querySelectorAll('button')].find(b=>/open approved/i.test(b.textContent||''));
-    const input=document.querySelector('#passwordInput,input[type="password"]');
-    if(btn&&input){
-      btn.addEventListener('click',e=>{
-        if((input.value||'').trim()==='1813'){
-          e.preventDefault();mark();openApproved();
-        }
-      },true);
-    }
-  });
-})();
-
-</script>
-</body>
-</html>
+const state={all:[],items:[],query:''};function include(q){return ['approved','featured'].includes(q.finalStatus);}function card(q){const img=youtubeThumb(q);return `<article class="quote-item" data-id="${esc(q.id)}">${img?`<img class="thumb" src="${esc(img)}" alt="">`:`<div class="thumb"></div>`}<div class="item-body"><div class="meta"><span class="pill">${esc(q.finalStatus)}</span><span>${esc(fmtDate(quoteDate(q)))}</span><span>${esc(q?.episode?.series||'')}</span></div><h2 class="item-title">${esc(quoteTitle(q))}</h2><p class="item-quote">${esc(q.approvedText||q.displayText||q.text||'')}</p><textarea data-edit="${esc(q.id)}">${esc(q.approvedText||q.displayText||q.text||'')}</textarea><div class="item-actions"><button class="btn primary" data-save="${esc(q.id)}">Save Edit</button><button class="btn" data-copy="${esc(q.id)}">Copy Quote</button><button class="btn danger" data-reject="${esc(q.id)}">Reject</button><button class="btn primary" data-feature="${esc(q.id)}">Feature</button><a class="btn" href="${esc(playerLink(q))}" target="_blank" rel="noopener">Open Site</a></div></div></article>`;}function render(){const q=clean(state.query).toLowerCase();const list=state.items.filter(item=>!q||clean([item.approvedText,item.displayText,item.text,quoteTitle(item),item?.episode?.series,item?.episode?.date].join(' ')).toLowerCase().includes(q));$('cards').innerHTML=list.length?list.map(card).join(''):`<div class="empty">No approved or featured quotes found.</div>`;}function byId(id){return state.all.find(q=>q.id===id);}function updateDecision(id,action,text){const q=byId(id);if(!q)return;removeLocalAll(q);saveLocal(action,q,text||q.approvedText||q.displayText||q.text||'');q.localReview=readLocal(action,q);q.finalReview=q.localReview;q.finalStatus=action;q.approvedText=q.localReview.approvedText;state.items=state.all.filter(include);render();}async function openApp(){const [quotes,reviews]=await Promise.all([loadQuotes(),loadCuration()]);state.all=mergeQuotesWithReviews(quotes,reviews);state.items=state.all.filter(include);render();}$('searchBox')?.addEventListener('input',()=>{state.query=$('searchBox').value;render();});$('cards')?.addEventListener('click',async e=>{const id=e.target.dataset.save||e.target.dataset.copy||e.target.dataset.reject||e.target.dataset.feature;if(!id)return;const q=byId(id);if(!q)return;const text=document.querySelector(`textarea[data-edit="${CSS.escape(id)}"]`)?.value||'';if(e.target.dataset.save){updateDecision(id,q.finalStatus||'approved',text);toast('Saved.');}if(e.target.dataset.copy){try{await navigator.clipboard.writeText(copyText({...q,approvedText:text}));toast('Copied quote.');}catch(_){toast('Could not copy.');}}if(e.target.dataset.reject){updateDecision(id,'rejected',text);toast('Rejected.');}if(e.target.dataset.feature){updateDecision(id,'featured',text);toast('Featured.');}});$('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCuration(state.all);});bindGate(openApp);
+</script></body></html>
