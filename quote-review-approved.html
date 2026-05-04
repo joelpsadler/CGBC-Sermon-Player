@@ -57,14 +57,44 @@ function epSub(q){const ep=q?.episode||{};return [ep.series,ep.subtitle,ep.date?
 function mediaStart(q){return Number(q?.media?.start||q?.start||0)||0;}
 async function fetchFirst(paths){for(const path of paths){try{const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});if(!res.ok)continue;return await res.json();}catch(e){}}return null;}
 async function loadData(){const [qData,lData,repo]=await Promise.all([fetchFirst(QUOTE_PATHS),fetchFirst(LIBRARY_PATHS),loadRepoCuration()]);state.quotes=Array.isArray(qData?.quotes)?qData.quotes:[];state.repoReviews=buildRepoReviewMap(repo);for(const item of (Array.isArray(lData?.items)?lData.items:[])){state.library.set(item.stableId,item);}buildEpisodeSelect();render();}
-function artForEpisode(key){const item=state.library.get(key);return item?.art?.wide||item?.video?.thumbnail||item?.art?.square||item?.image||'';}
+function artForEpisode(key,library,quotes=[]){
+  const item=library.get(key);
+  const fromQuote=quotes.find(q=>epKey(q)===key) || {};
+  const qEp=fromQuote?.episode||{};
+  const yt=item?.video?.youtubeId||fromQuote?.media?.youtubeId||qEp?.youtubeId;
+  const candidates=[
+    item?.art?.episode?.wide,
+    item?.art?.episode?.square,
+    item?.art?.series?.wide,
+    item?.art?.series?.square,
+    item?.art?.study?.wide,
+    item?.art?.study?.square,
+    item?.video?.thumbnail,
+    item?.videoThumbnail,
+    item?.youtubeThumbnail,
+    item?.image,
+    item?.artwork,
+    qEp?.art?.episode?.wide,
+    qEp?.art?.episode?.square,
+    qEp?.art?.series?.wide,
+    qEp?.art?.series?.square,
+    qEp?.art?.study?.wide,
+    qEp?.art?.study?.square,
+    qEp?.thumbnail,
+    qEp?.image,
+    qEp?.artwork,
+    fromQuote?.media?.thumbnail,
+    fromQuote?.thumbnail
+  ].filter(Boolean);
+  return candidates[0] || (yt?`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`:'');
+}
 function approvedQuotes(){return state.quotes.filter(q=>!!savedStatus(q));}
 function groupedEpisodes(){const map=new Map();for(const q of state.quotes){const key=epKey(q);if(!map.has(key))map.set(key,{key,title:epTitle(q),sub:epSub(q),total:0,approved:0});const g=map.get(key);g.total++;if(savedStatus(q))g.approved++;}return Array.from(map.values()).filter(g=>g.approved>0).sort((a,b)=>a.title.localeCompare(b.title,undefined,{numeric:true,sensitivity:'base'}));}
 function buildEpisodeSelect(){const groups=groupedEpisodes();const allApproved=approvedQuotes().length;els.episodeSelect.innerHTML=[`<option value="__all__">All episodes — ${allApproved} approved</option>`,...groups.map(g=>`<option value="${esc(g.key)}">${esc(g.title)} — ${g.approved}/${g.total}</option>`)].join('');els.episodeSelect.value=state.episodeKey;}
 function visibleQuotes(){return approvedQuotes().filter(q=>state.episodeKey==='__all__'||epKey(q)===state.episodeKey);}
 function episodeDeepLink(q){const base=location.href.replace(/[^/]*$/, '');const item=encodeURIComponent(epKey(q));return `${base}index.html?mode=video&item=${item}&start=0&autoplay=0&path=episode`;}
 function copyTextFor(q){const ep=q.episode||{};const start=fmtTime(mediaStart(q));return `${quoteText(q)}\n— ${ep.title||ep.episodeName||''}${start?` (${start})`:''}${ep.date?`, ${fmtDate(ep.date)}`:''}\n${episodeDeepLink(q)}`.trim();}
-function renderEpisodes(){const groups=groupedEpisodes();if(!groups.length){els.episodeList.innerHTML='<div class="empty">No approved or featured quotes found yet. Approve quotes locally or upload config/quote-curation.json, then return here.</div>';return;}els.episodeList.innerHTML=groups.map(g=>{const art=artForEpisode(g.key);return `<button class="episode-card ${state.episodeKey===g.key?'active':''}" type="button" data-key="${esc(g.key)}">${art?`<img class="thumb" src="${esc(art)}" alt="">`:`<div class="thumb"></div>`}<div><div class="card-title">${esc(g.title)}</div><div class="card-sub">${esc(g.sub)}</div><span class="pill">${g.approved}/${g.total} approved</span></div></button>`;}).join('');els.episodeList.querySelectorAll('[data-key]').forEach(btn=>btn.addEventListener('click',()=>{state.episodeKey=btn.dataset.key;els.episodeSelect.value=state.episodeKey;render();}));}
+function renderEpisodes(){const groups=groupedEpisodes();if(!groups.length){els.episodeList.innerHTML='<div class="empty">No approved or featured quotes found yet. Approve quotes locally or upload config/quote-curation.json, then return here.</div>';return;}els.episodeList.innerHTML=groups.map(g=>{const art=artForEpisode(g.key);return `<button class="episode-card ${state.episodeKey===g.key?'active':''}" type="button" data-key="${esc(g.key)}">${art?`<img class="thumb" src="${esc(art||'https://tithely-media-prod.s3.us-west-1.wasabisys.com/1228713/GCBC_ORIGWHT.png')}" alt="">`:`<div class="thumb"></div>`}<div><div class="card-title">${esc(g.title)}</div><div class="card-sub">${esc(g.sub)}</div><span class="pill">${g.approved}/${g.total} approved</span></div></button>`;}).join('');els.episodeList.querySelectorAll('[data-key]').forEach(btn=>btn.addEventListener('click',()=>{state.episodeKey=btn.dataset.key;els.episodeSelect.value=state.episodeKey;render();}));}
 function renderQuotes(){const list=visibleQuotes();const groups=groupedEpisodes();const active=groups.find(g=>g.key===state.episodeKey);els.quoteListTitle.textContent=state.episodeKey==='__all__'?'Approved Quotes':active?.title||'Approved Quotes';els.summaryText.textContent=`${list.length} visible quote${list.length===1?'':'s'}.`;if(!list.length){els.quoteList.innerHTML='<div class="empty">No approved quotes for this selection yet.</div>';return;}els.quoteList.innerHTML=list.map(q=>{const ep=q.episode||{};const status=savedStatus(q)||'approved';const start=fmtTime(mediaStart(q));const url=(q.media?.videoUrl||q.media?.youtubeId)?`${q.media?.videoUrl||`https://www.youtube.com/watch?v=${q.media.youtubeId}`}${(q.media?.videoUrl||'').includes('?')?'&':'?'}t=${Math.floor(mediaStart(q))}s`:'';const copy=copyTextFor(q);return `<article class="quote-card"><div class="quote-text">${esc(quoteText(q))}</div><div class="quote-meta"><span class="pill">${esc(status)}</span><span>${esc(ep.title||ep.episodeName||'')}</span>${start?`<span>• ${esc(start)}</span>`:''}${ep.date?`<span>• ${esc(fmtDate(ep.date))}</span>`:''}${url?`<a class="pill" href="${esc(url)}" target="_blank" rel="noopener">Open Video</a>`:''}</div><textarea class="copy-box" readonly>${esc(copy)}</textarea><div class="actions"><button class="btn" type="button" data-copy="${esc(q.id)}">Copy Quote</button></div></article>`;}).join('');els.quoteList.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{const q=list.find(item=>item.id===btn.dataset.copy);if(!q)return;await navigator.clipboard.writeText(copyTextFor(q));toast('Copied quote.');}));}
 function render(){buildEpisodeSelect();renderEpisodes();renderQuotes();}
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}markUnlocked();els.gateStatus.textContent='Loading approved quotes…';await loadData();els.gate.style.display='none';els.app.classList.add('is-visible');}

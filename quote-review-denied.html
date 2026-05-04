@@ -91,7 +91,7 @@ function exportCurationJson(quotes){
   downloadExportJson(payload);
   if(typeof toast==='function')toast('Export ready: '+entries.length+' review decision'+(entries.length===1?'':'s')+'.');
 }
-async function bootstrapAuth(openFn){const gate=$('gate'),password=$('passwordInput'),btn=$('unlockBtn'),status=$('gateStatus');async function unlock(){if(String(password.value||'').trim()!==PASSWORD){status.textContent='Wrong password.';return;}markUnlocked();status.textContent='Loading…';await openFn();}if(btn)btn.addEventListener('click',unlock);if(password)password.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});if(isUnlocked()){if(status)status.textContent='Loading…';await openFn();}}
+async function bootstrapAuth(openFn){const gate=$('gate'),password=$('passwordInput'),btn=$('unlockBtn'),status=$('gateStatus');async function unlock(){if($('passwordInput').value.trim()!==PASSWORD){$('gateStatus').textContent='Wrong password.';return;}markUnlocked();$('gateStatus').textContent='Loading denied quotes…';await openApp();}if(btn)btn.addEventListener('click',unlock);if(password)password.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});if(isUnlocked()){if(status)status.textContent='Loading…';await openFn();}}
 function buildRepoReviewMap(rows){const map=new Map();for(const r of rows||[]){if(r?.quoteId)map.set(r.quoteId,r);}return map;}
 
 const PAGE_MODE='denied';
@@ -109,4 +109,6 @@ function renderQuotes(){const list=visibleQuotes();const groups=groupedEpisodes(
 function render(){buildEpisodeSelect();renderEpisodes();renderQuotes();}
 async function openApp(){const [quotes,library,repo]=await Promise.all([loadQuotes(),loadLibrary(),loadRepoCuration()]);state.quotes=quotes;state.library=library;window.__repoReviews=buildRepoReviewMap(repo);els.gate.style.display='none';els.app.classList.add('is-visible');render();}
 els.episodeSelect.addEventListener('change',()=>{state.episodeKey=els.episodeSelect.value;render();});els.copyAllBtn.addEventListener('click',async()=>{await navigator.clipboard.writeText(visibleQuotes().map(copyTextFor).join('\n\n'));toast('Copied visible quotes.');});els.exportCurationBtn.addEventListener('click',()=>exportCurationJson(state.quotes));bootstrapAuth(openApp);
+/* DENIED_SHARED_AUTH_BOOT */
+try{if(isUnlocked()){const gs=$('gateStatus');if(gs)gs.textContent='Loading denied quotes…';openApp();}}catch(e){console.warn(e);}
 </script></body></html>
