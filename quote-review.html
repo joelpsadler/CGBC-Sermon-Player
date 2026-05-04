@@ -304,6 +304,40 @@ main#reviewApp.review.is-visible > section.media-review-panel{grid-column:2!impo
   main#reviewApp.review.is-visible > section.media-review-panel{grid-column:auto!important;grid-row:auto!important;}
 }
 
+
+/* CURRENT REPAIR: force media/player panel beside review panel */
+main#reviewApp.review.is-visible{
+  display:grid!important;
+  grid-template-columns:minmax(420px,0.92fr) minmax(440px,1fr)!important;
+  gap:16px!important;
+  align-items:start!important;
+}
+main#reviewApp.review.is-visible > section.panel{
+  min-width:0!important;
+  max-width:100%!important;
+}
+main#reviewApp.review.is-visible > section.panel:first-of-type{
+  grid-column:1!important;
+  grid-row:1!important;
+}
+main#reviewApp.review.is-visible > section.media-review-panel,
+main#reviewApp.review.is-visible > section[data-review-media-panel="true"]{
+  grid-column:2!important;
+  grid-row:1!important;
+  display:block!important;
+}
+@media(max-width:860px){
+  main#reviewApp.review.is-visible{
+    grid-template-columns:1fr!important;
+  }
+  main#reviewApp.review.is-visible > section.panel:first-of-type,
+  main#reviewApp.review.is-visible > section.media-review-panel,
+  main#reviewApp.review.is-visible > section[data-review-media-panel="true"]{
+    grid-column:auto!important;
+    grid-row:auto!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -311,7 +345,7 @@ main#reviewApp.review.is-visible > section.media-review-panel{grid-column:2!impo
 <header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><div class="actions"><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="quote-review-denied.html">Denied Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path><path d="M5 17v4"></path><path d="M19 17v4"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></div></header>
 <section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section>
 <main class="review" id="reviewApp">
-<section class="panel"><div class="selector-row review-tools"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><div class="selector-field"><label for="statusFilter">Review status</label><select id="statusFilter"><option value="unreviewed">Unreviewed only</option><option value="all">All quotes</option><option value="approved">Approved</option><option value="featured">Featured</option><option value="rejected">Rejected</option></select></div></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="review-action-stack"><div class="review-action-row"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><span class="review-action-divider" aria-hidden="true"></span><button class="btn" id="prevBtn" type="button">Previous Quote</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="review-action-row"><button class="btn danger" id="rejectBtn" type="button">Reject</button><button class="btn primary" id="approveBtn" type="button">Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button></div></div></div></div></section><section class="panel media-review-panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Review uses the YouTube video timestamp. Audio buttons were removed because browser audio seeking was not precise enough for quote review.</div></div></section>
+<section class="panel"><div class="selector-row review-tools"><div class="selector-field"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div><div class="selector-field"><label for="statusFilter">Review status</label><select id="statusFilter"><option value="unreviewed">Unreviewed only</option><option value="all">All quotes</option><option value="approved">Approved</option><option value="featured">Featured</option><option value="rejected">Rejected</option></select></div></div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="quote-panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="review-action-stack"><div class="review-action-row"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><span class="review-action-divider" aria-hidden="true"></span><button class="btn" id="prevBtn" type="button">Previous Quote</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="review-action-row"><button class="btn danger" id="rejectBtn" type="button">Reject</button><button class="btn primary" id="approveBtn" type="button">Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button></div></div></div></section><section class="panel media-review-panel" data-review-media-panel="true"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="media-body"><div class="media-tabs"><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note" id="mediaNote">Review uses the YouTube video timestamp. Audio buttons were removed because browser audio seeking was not precise enough for quote review.</div></div></section>
 </main></div><div class="toast" id="toast"></div>
 <script>
 const PASSWORD='1813';
@@ -319,7 +353,7 @@ const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuo
 const AUTH_TTL_MS=12*60*60*1000;
 const QUOTE_PATHS=['data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','data/quotes/random-quotes.json','data/transcripts/random-quotes.json','public/random-quotes.json','data/random-quotes.json','random-quotes.json'];
 const CURATION_PATHS=['config/quote-curation.json','quote-curation.json'];
-const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__",statusFilter:"unreviewed",repoReviews:new Map()};
+const state={allQuotes:[],quotes:[],index:0,current:null,mediaMode:null,transcriptCache:new Map(),episodeFilter:"__all__",statusFilter:"unreviewed",repoReviews:new Map(),contextCursor:new Map()};
 const $=id=>document.getElementById(id);
 const els={gate:$('gate'),reviewApp:$('reviewApp'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),gateStatus:$('gateStatus'),quoteHeading:$('quoteHeading'),quoteCounter:$('quoteCounter'),quoteBefore:$('quoteBefore'),quoteMain:$('quoteMain'),quoteAfter:$('quoteAfter'),quoteMeta:$('quoteMeta'),approvalText:$('approvalText'),addPrevious:$('addPrevious'),addNext:$('addNext'),editTextBtn:$('editTextBtn'),approveBtn:$('approveBtn'),featureBtn:$('featureBtn'),rejectBtn:$('rejectBtn'),prevBtn:$('prevBtn'),nextBtn:$('nextBtn'),mediaTitle:$('mediaTitle'),mediaShell:$('mediaShell'),episodeFilter:$('episodeFilter'),statusFilter:$('statusFilter'),loadVideo:$('loadVideo'),openVideo:$('openVideo'),startTime:$('startTime'),endTime:$('endTime'),mediaNote:$('mediaNote'),toast:$('toast'),exportCurationBtn:$('exportCurationBtn')};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
@@ -790,30 +824,72 @@ function render(){
   els.endTime.textContent=`End ${fmtTime(mediaEnd(q))}`;
   if(state.mediaMode==='video')loadVideoHere();
 }
+async 
+/* CURRENT REPAIR: Add Previous / Add Next walk outward through context */
+function sentencePieces(text){
+  return (text||'').replace(/\s+/g,' ').trim().match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g)||[];
+}
+function contextPartsForQuote(q){
+  const main=(basePreviewMain(q)||quoteText(q)||'').replace(/\s+/g,' ').trim();
+  const full=(q?.expandedText||q?.context||q?.windowText||'').replace(/\s+/g,' ').trim();
+  const directBefore=(q?.before||q?.previous||q?.contextBefore||q?.prevText||'').replace(/\s+/g,' ').trim();
+  const directAfter=(q?.after||q?.next||q?.contextAfter||q?.nextText||'').replace(/\s+/g,' ').trim();
+
+  if(full && main){
+    const idx=full.toLowerCase().indexOf(main.toLowerCase());
+    if(idx>=0){
+      const beforeText=full.slice(0,idx).trim();
+      const afterText=full.slice(idx+main.length).trim();
+      return {before:sentencePieces(beforeText), after:sentencePieces(afterText)};
+    }
+  }
+  return {
+    before: directBefore ? sentencePieces(directBefore) : [],
+    after: directAfter ? sentencePieces(directAfter) : []
+  };
+}
+function ensureContextCursor(q){
+  if(!state.contextCursor) state.contextCursor=new Map();
+  const id=q?.id||'current';
+  if(!state.contextCursor.has(id)){
+    state.contextCursor.set(id,{before:0,after:0});
+  }
+  return state.contextCursor.get(id);
+}
+
 async function addContext(side){
   const q=state.current;
   if(!q)return;
+
+  const parts=contextPartsForQuote(q);
+  const cursor=ensureContextCursor(q);
+
   if(side==='before'){
-    const previous=basePreviewBefore(q);
+    const available=parts.before;
+    const idx=available.length-1-cursor.before;
+    const previous=idx>=0 ? available[idx].trim() : '';
     if(previous){
       const existing=(els.quoteBefore.textContent||'').trim();
-      els.quoteBefore.textContent=existing?`${previous} ${existing}`.trim():previous;
+      els.quoteBefore.textContent=existing ? `${previous} ${existing}`.trim() : previous;
       els.quoteBefore.style.display='';
+      cursor.before+=1;
       syncApprovalTextFromVisibleQuote();
       toast('Previous sentence added.');
     }else{
-      toast('No previous sentence found.');
+      toast('No more previous sentences found.');
     }
   }else{
-    const next=basePreviewAfter(q);
+    const available=parts.after;
+    const next=available[cursor.after] ? available[cursor.after].trim() : '';
     if(next){
       const existing=(els.quoteAfter.textContent||'').trim();
-      els.quoteAfter.textContent=existing?`${existing} ${next}`.trim():next;
+      els.quoteAfter.textContent=existing ? `${existing} ${next}`.trim() : next;
       els.quoteAfter.style.display='';
+      cursor.after+=1;
       syncApprovalTextFromVisibleQuote();
       toast('Next sentence added.');
     }else{
-      toast('No next sentence found.');
+      toast('No more next sentences found.');
     }
   }
 }

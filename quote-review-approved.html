@@ -184,6 +184,61 @@ try{document.getElementById('exportCurationBtn')?.addEventListener('click',e=>{e
 try{if(typeof isUnlocked==='function'&&isUnlocked()){els.gateStatus.textContent='Loading approved quotes…';loadData().then(()=>{els.gate.style.display='none';els.app.classList.add('is-visible');});}}catch(e){console.warn(e);}
 /* APPROVED_AUTO_UNLOCK_FINAL */
 try{if(typeof isUnlocked==='function'&&isUnlocked()){els.gateStatus.textContent='Loading approved quotes…';loadData().then(()=>{els.gate.style.display='none';els.app.classList.add('is-visible');});}}catch(e){console.warn(e);}
+
+/* CURRENT REPAIR: shared auth boot fallback */
+(function(){
+  const AUTH_KEYS_FALLBACK=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
+  const AUTH_TTL_FALLBACK=12*60*60*1000;
+  function fallbackUnlocked(){
+    for(const key of AUTH_KEYS_FALLBACK){
+      try{
+        const raw=sessionStorage.getItem(key)||localStorage.getItem(key);
+        if(!raw) continue;
+        if(raw==='yes'||raw==='true'||raw==='1813') return true;
+        const data=JSON.parse(raw);
+        if(data?.ok && (Date.now()-Number(data.at||0))<AUTH_TTL_FALLBACK) return true;
+      }catch(_){}
+    }
+    return false;
+  }
+  async function openApprovedAfterAuth(){
+    try{
+      if(typeof loadData==='function') await loadData();
+      const gate=document.getElementById('gate')||document.querySelector('.gate,.password-gate');
+      const app=document.getElementById('app')||document.getElementById('approvedApp')||document.querySelector('main.app,main.approved,.approved-app');
+      if(gate) gate.style.display='none';
+      if(app) app.classList.add('is-visible');
+      const status=document.getElementById('gateStatus');
+      if(status) status.textContent='';
+    }catch(e){
+      console.warn('Approved auto-open failed',e);
+    }
+  }
+  function markAllUnlocked(){
+    const payload=JSON.stringify({ok:true,at:Date.now()});
+    for(const key of AUTH_KEYS_FALLBACK){
+      try{localStorage.setItem(key,payload);sessionStorage.setItem(key,payload);}catch(_){}
+    }
+  }
+  window.addEventListener('DOMContentLoaded',()=>{
+    if(fallbackUnlocked()){
+      markAllUnlocked();
+      openApprovedAfterAuth();
+    }
+    const btn=[...document.querySelectorAll('button')].find(b=>/open approved/i.test(b.textContent||''));
+    const input=document.querySelector('input[type="password"],#passwordInput');
+    if(btn && input){
+      btn.addEventListener('click',e=>{
+        if((input.value||'').trim()==='1813'){
+          e.preventDefault();
+          markAllUnlocked();
+          openApprovedAfterAuth();
+        }
+      },true);
+    }
+  });
+})();
+
 </script>
 </body>
 </html>

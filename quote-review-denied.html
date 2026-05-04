@@ -31,6 +31,24 @@ select{
 .denied-copy-preview,.copy-preview,.copy-box,.quote-copy{display:none!important;}
 #copyAllBtn{display:none!important;}
 
+
+/* CURRENT REPAIR: denied edit field visible */
+.quote-edit,
+textarea[data-edit]{
+  display:block!important;
+  width:100%!important;
+  min-height:76px!important;
+  margin-top:10px!important;
+  margin-bottom:10px!important;
+  border-radius:14px!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  background:rgba(0,0,0,.30)!important;
+  color:#fff!important;
+  padding:12px!important;
+  font:inherit!important;
+  resize:vertical!important;
+}
+
 </style></head><body><div class="page"><header class="topbar"><div class="brand"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC"><div><p class="eyebrow">Hidden Review Desk</p><h1>Denied Quotes</h1></div></div><div class="actions"><a class="back-link" href="quote-review.html">Quote Review</a><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path><path d="M5 17v4"></path><path d="M19 17v4"></path></svg>Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a></div></header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="toolbar" style="margin-top:14px"><button class="btn primary" id="unlockBtn" type="button">Open Denied Quotes</button><span class="status" id="gateStatus"></span></div></section><main class="app" id="app"><section class="panel"><header class="panel-head"><p class="eyebrow">Episodes</p><h2 class="panel-title">Quote Episodes</h2></header><div class="body"><div class="toolbar"><select id="episodeSelect"><option value="__all__">All episodes</option></select></div><div class="episode-list" id="episodeList"></div></div></section><section class="panel"><header class="panel-head"><p class="eyebrow">Denied / Rejected</p><h2 class="panel-title" id="quoteListTitle">Denied Quotes</h2></header><div class="body"><div class="toolbar"><span class="status" id="summaryText"></span></div><div class="quote-list" id="quoteList"></div></div></section></main></div><div class="toast" id="toast"></div><script>
 const PASSWORD='1813';
 const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
