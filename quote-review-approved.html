@@ -42,7 +42,7 @@ function approvedQuotes(){return state.quotes.filter(q=>!!savedStatus(q));}
 function groupedEpisodes(){const map=new Map();for(const q of state.quotes){const key=epKey(q);if(!map.has(key))map.set(key,{key,title:epTitle(q),sub:epSub(q),total:0,approved:0});const g=map.get(key);g.total++;if(savedStatus(q))g.approved++;}return Array.from(map.values()).filter(g=>g.approved>0).sort((a,b)=>a.title.localeCompare(b.title,undefined,{numeric:true,sensitivity:'base'}));}
 function buildEpisodeSelect(){const groups=groupedEpisodes();const allApproved=approvedQuotes().length;els.episodeSelect.innerHTML=[`<option value="__all__">All episodes — ${allApproved} approved</option>`,...groups.map(g=>`<option value="${esc(g.key)}">${esc(g.title)} — ${g.approved}/${g.total}</option>`)].join('');els.episodeSelect.value=state.episodeKey;}
 function visibleQuotes(){return approvedQuotes().filter(q=>state.episodeKey==='__all__'||epKey(q)===state.episodeKey);}
-function episodeDeepLink(q){const base=location.href.replace(/[^/]*$/, '');const item=encodeURIComponent(epKey(q));return `${base}index.html?mode=video&item=${item}&start=0&autoplay=0&path=episode`;}
+function episodeDeepLink(q){return cgbcPlayerEpisodeLink(q);}
 
 /* COPY CITATION PATCH:
    Copy buttons include Pastor Jacob Lannom before the citation.
@@ -106,8 +106,16 @@ function siteFullEpisodeLink(q){
   }
   return '';
 }
+
+/* CGBC PLAYER ZERO LINK PATCH:
+   Copy buttons point to the full episode inside the CGBC player, video mode, starting at zero.
+   This mirrors index.html's buildDeepLink(item,'video') behavior: mode=video + item, no timestamp.
+*/
+function cgbcPlayerEpisodeLink(q){const item=encodeURIComponent(epKey(q));return `${siteBase()}index.html?mode=video&item=${item}`;}
+function fullEpisodeCopyLink(q){return cgbcPlayerEpisodeLink(q);}
+
 function fullEpisodeCopyLink(q){
-  return youtubeFullEpisodeLink(q) || siteFullEpisodeLink(q) || '';
+  return cgbcPlayerEpisodeLink(q);
 }
 
 function copyQuoteWithCitation(q){

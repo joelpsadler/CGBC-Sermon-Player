@@ -34,7 +34,7 @@ function mediaStart(q){return Number(q?.media?.start??q?.start??0)||0;}
 function mediaEnd(q){return Number(q?.media?.end??q?.end??0)||0;}
 function siteBase(){const path=location.pathname.replace(/[^/]*$/,'');return location.origin+path;}
 function siteDeepLink(q){const item=encodeURIComponent(epKey(q));const start=Math.max(0,Math.floor(mediaStart(q)));return `${siteBase()}index.html?mode=video&item=${item}${start?`&start=${start}`:''}&autoplay=0`;}
-function episodeDeepLink(q){const item=encodeURIComponent(epKey(q));return `${siteBase()}index.html?mode=video&item=${item}&start=0&autoplay=0`;}
+function episodeDeepLink(q){return cgbcPlayerEpisodeLink(q);}
 function youtubeLink(q){const id=q?.media?.youtubeId;const url=q?.media?.videoUrl || (id?`https://www.youtube.com/watch?v=${id}`:'');if(!url)return '';const sep=url.includes('?')?'&':'?';return `${url}${sep}t=${Math.floor(mediaStart(q))}s`;}
 function artForEpisode(key,library,quotes=[]){const item=library.get(key);const fromQuote=quotes.find(q=>epKey(q)===key);const yt=item?.video?.youtubeId||fromQuote?.media?.youtubeId;return item?.art?.episode?.wide||item?.video?.thumbnail||item?.art?.series?.wide||item?.art?.study?.wide||item?.art?.episode?.square||item?.art?.series?.square||item?.art?.study?.square||(yt?`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`:'')||'';}
 
@@ -100,8 +100,16 @@ function siteFullEpisodeLink(q){
   }
   return '';
 }
+
+/* CGBC PLAYER ZERO LINK PATCH:
+   Copy buttons point to the full episode inside the CGBC player, video mode, starting at zero.
+   This mirrors index.html's buildDeepLink(item,'video') behavior: mode=video + item, no timestamp.
+*/
+function cgbcPlayerEpisodeLink(q){const item=encodeURIComponent(epKey(q));return `${siteBase()}index.html?mode=video&item=${item}`;}
+function fullEpisodeCopyLink(q){return cgbcPlayerEpisodeLink(q);}
+
 function fullEpisodeCopyLink(q){
-  return youtubeFullEpisodeLink(q) || siteFullEpisodeLink(q) || '';
+  return cgbcPlayerEpisodeLink(q);
 }
 
 function copyQuoteWithCitation(q){
