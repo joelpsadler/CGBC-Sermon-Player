@@ -239,6 +239,52 @@ try{if(typeof isUnlocked==='function'&&isUnlocked()){els.gateStatus.textContent=
   });
 })();
 
+
+/* DEPLOYED BASELINE REPAIR: approved shared-auth boot */
+(function(){
+  const KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
+  const TTL=12*60*60*1000;
+  function unlocked(){
+    for(const k of KEYS){
+      try{
+        const raw=sessionStorage.getItem(k)||localStorage.getItem(k);
+        if(!raw)continue;
+        if(raw==='yes'||raw==='true'||raw==='1813')return true;
+        const data=JSON.parse(raw);
+        if(data?.ok&&(Date.now()-Number(data.at||0))<TTL)return true;
+      }catch(_){}
+    }
+    return false;
+  }
+  function mark(){
+    const payload=JSON.stringify({ok:true,at:Date.now()});
+    for(const k of KEYS){try{localStorage.setItem(k,payload);sessionStorage.setItem(k,payload);}catch(_){}}
+  }
+  async function openApproved(){
+    try{
+      if(typeof loadData==='function')await loadData();
+      const gate=document.getElementById('gate')||document.querySelector('.gate');
+      const app=document.getElementById('app')||document.getElementById('approvedApp')||document.querySelector('main');
+      if(gate)gate.style.display='none';
+      if(app)app.classList.add('is-visible');
+      const status=document.getElementById('gateStatus');
+      if(status)status.textContent='';
+    }catch(e){console.warn(e);const status=document.getElementById('gateStatus');if(status)status.textContent=`Could not load approved quotes: ${e.message||e}`;}
+  }
+  window.addEventListener('DOMContentLoaded',()=>{
+    if(unlocked()){mark();openApproved();}
+    const btn=[...document.querySelectorAll('button')].find(b=>/open approved/i.test(b.textContent||''));
+    const input=document.querySelector('#passwordInput,input[type="password"]');
+    if(btn&&input){
+      btn.addEventListener('click',e=>{
+        if((input.value||'').trim()==='1813'){
+          e.preventDefault();mark();openApproved();
+        }
+      },true);
+    }
+  });
+})();
+
 </script>
 </body>
 </html>
