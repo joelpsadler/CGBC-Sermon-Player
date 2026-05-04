@@ -36,22 +36,149 @@ function showExport(json,count){const old=$('exportPanel');if(old)old.remove();c
 function bindGate(onOpen){const gate=$('gate'),app=$('appView'),input=$('passwordInput'),btn=$('unlockBtn'),status=$('gateStatus');async function open(){if(input.value.trim()!==PASSWORD){status.textContent='Wrong password.';return;}markUnlocked();status.textContent='Loading…';await onOpen();gate.style.display='none';app.classList.add('is-visible');}btn?.addEventListener('click',()=>open().catch(e=>{console.error(e);status.textContent=`Could not load: ${e.message||e}`;}));input?.addEventListener('keydown',e=>{if(e.key==='Enter')open().catch(err=>{console.error(err);status.textContent=`Could not load: ${err.message||err}`;});});if(isUnlocked()){status.textContent='Loading…';onOpen().then(()=>{gate.style.display='none';app.classList.add('is-visible');}).catch(e=>{console.error(e);status.textContent=`Could not load: ${e.message||e}`;});}}
 
 
-const state={all:[],filtered:[],index:0,current:null,episodeFilter:'__all__',statusFilter:'unreviewed',context:new Map(),mediaMode:null};
+const state={all:[],filtered:[],index:0,current:null,episodeFilter:'__all__',statusFilter:'unreviewed',context:new Map(),transcriptCache:new Map(),mediaMode:null};
 function mainQuote(q){return clean(q?.approvedText||q?.contextWindow?.quote||q?.thoughtText||q?.displayText||q?.text||'');}
+
+/* REFINEMENT: transcript-backed context expansion */
+function transcriptPath(q){
+  return q?.media?.transcriptDisplayJson||q?.source?.transcriptDisplayJson||q?.media?.transcriptCleanJson||q?.source?.transcriptCleanJson||'';
+}
+function cueText(cue){
+  if(!cue)return '';
+  if(typeof cue==='string')return clean(cue);
+  if(Array.isArray(cue.words))return clean(cue.words.map(w=>typeof w==='string'?w:(w?.text||w?.word||'')).join(' '));
+  return clean(cue.displayText||cue.text||cue.line||cue.caption||cue.transcript||cue.rawText||'');
+}
+function normalizeTranscriptRows(data){
+  const rows=Array.isArray(data)?data:(data?.segments||data?.cues||data?.items||data?.transcript||data?.entries||[]);
+  return rows.map((row,i)=>({...row,__index:i,__text:cueText(row)})).filter(row=>row.__text);
+}
+async function getTranscriptRows(q){
+  const path=transcriptPath(q);
+  if(!path)return [];
+  if(state.transcriptCache.has(path))return state.transcriptCache.get(path);
+  try{
+    const res=await fetch(`${path}?v=${Date.now()}`,{cache:'no-store'});
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const rows=normalizeTranscriptRows(await res.json());
+    state.transcriptCache.set(path,rows);
+    return rows;
+  }catch(e){
+    console.warn('Could not load transcript context',path,e);
+    state.transcriptCache.set(path,[]);
+    return [];
+  }
+}
+function quoteSegmentBounds(q,rows){
+  const indexes=(q?.segmentIndexes||q?.segments||[]).map(Number).filter(n=>Number.isFinite(n));
+  if(indexes.length)return {first:Math.max(0,Math.min(...indexes)),last:Math.min(rows.length-1,Math.max(...indexes))};
+  const start=Number(q?.media?.start??q?.start??0);
+  const end=Number(q?.media?.end??q?.end??start);
+  const timed=rows.map((row,i)=>({i,start:Number(row.start??row.startTimeSeconds??row.t0??row.from??0),end:Number(row.end??row.endTimeSeconds??row.t1??row.to??0)}))
+    .filter(row=>Number.isFinite(row.start)&&Number.isFinite(row.end)&&row.end>=start&&row.start<=end);
+  if(timed.length)return {first:timed[0].i,last:timed[timed.length-1].i};
+  const main=mainQuote(q).toLowerCase();
+  if(main){
+    const found=rows.findIndex(row=>main.includes(row.__text.toLowerCase())||row.__text.toLowerCase().includes(main.slice(0,50)));
+    if(found>=0)return {first:found,last:found};
+  }
+  return {first:0,last:0};
+}
+async function transcriptContextSentence(q,side){
+  const rows=await getTranscriptRows(q);
+  if(!rows.length)return '';
+  const cur=contextCursor(q);
+  const bounds=quoteSegmentBounds(q,rows);
+  if(side==='before'){
+    let idx=bounds.first-1-cur.transcriptBefore;
+    while(idx>=0){
+      const text=clean(rows[idx]?.__text);
+      cur.transcriptBefore++;
+      idx--;
+      if(text)return text;
+    }
+  }else{
+    let idx=bounds.last+1+cur.transcriptAfter;
+    while(idx<rows.length){
+      const text=clean(rows[idx]?.__text);
+      cur.transcriptAfter++;
+      idx++;
+      if(text)return text;
+    }
+  }
+  return '';
+}
+
 function sentencePieces(text){return clean(text).match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g)||[];}
 function contextParts(q){const before=[],after=[];for(const v of [q?.contextBefore,q?.contextWindow?.before])if(clean(v))before.push(...sentencePieces(v));for(const v of [q?.contextAfter,q?.contextWindow?.after,q?.contextSecondAfter,q?.contextWindow?.secondAfter])if(clean(v))after.push(...sentencePieces(v));const raw=clean(q?.rawText||q?.expandedText||''),main=mainQuote(q);if(raw&&main){const idx=raw.toLowerCase().indexOf(main.toLowerCase());if(idx>=0){before.unshift(...sentencePieces(raw.slice(0,idx)));after.push(...sentencePieces(raw.slice(idx+main.length)));}}return {before:[...new Set(before.map(clean).filter(Boolean))],after:[...new Set(after.map(clean).filter(Boolean))]};}
-function contextCursor(q){const id=q?.id||'current';if(!state.context.has(id))state.context.set(id,{before:0,after:0});return state.context.get(id);}
+function contextCursor(q){
+  const id=q?.id||'current';
+  if(!state.context.has(id))state.context.set(id,{before:0,after:0,transcriptBefore:0,transcriptAfter:0});
+  const cur=state.context.get(id);
+  cur.transcriptBefore=cur.transcriptBefore||0;
+  cur.transcriptAfter=cur.transcriptAfter||0;
+  return cur;
+}
 function syncApproval(){ $('approvalText').value=[$('quoteBefore').textContent,$('quoteMain').textContent,$('quoteAfter').textContent].map(clean).filter(Boolean).join(' '); }
-function addContext(side){const q=state.current;if(!q)return;const parts=contextParts(q),cur=contextCursor(q);if(side==='before'){const idx=parts.before.length-1-cur.before;const text=idx>=0?parts.before[idx]:'';if(!text){toast('No more previous sentences found.');return;}$('quoteBefore').textContent=clean(`${text} ${$('quoteBefore').textContent}`);cur.before++;}else{const text=parts.after[cur.after]||'';if(!text){toast('No more next sentences found.');return;}$('quoteAfter').textContent=clean(`${$('quoteAfter').textContent} ${text}`);cur.after++;}syncApproval();}
+async function addContext(side){
+  const q=state.current;if(!q)return;
+  const parts=contextParts(q),cur=contextCursor(q);
+  let text='';
+  if(side==='before'){
+    const idx=parts.before.length-1-cur.before;
+    text=idx>=0?parts.before[idx]:'';
+    if(text){
+      cur.before++;
+    }else{
+      text=await transcriptContextSentence(q,'before');
+    }
+    if(!text){toast('No more previous sentences found.');return;}
+    $('quoteBefore').textContent=clean(`${text} ${$('quoteBefore').textContent}`);
+  }else{
+    text=parts.after[cur.after]||'';
+    if(text){
+      cur.after++;
+    }else{
+      text=await transcriptContextSentence(q,'after');
+    }
+    if(!text){toast('No more next sentences found.');return;}
+    $('quoteAfter').textContent=clean(`${$('quoteAfter').textContent} ${text}`);
+  }
+  syncApproval();
+}
 function finalStatus(q){return q.finalStatus||'candidate';}
 function statusMatch(q){const s=finalStatus(q);if(state.statusFilter==='all')return true;if(state.statusFilter==='unreviewed')return !['approved','featured','rejected'].includes(s);return s===state.statusFilter;}
 function episodeKey(q){return q?.episode?.stableId||q?.episodeStableId||'unknown';}function episodeLabel(q){const ep=q?.episode||{};return ep.title||ep.episodeName||q?.episodeTitle||'Untitled episode';}
-function buildFilters(){const groups=new Map();for(const q of state.all){const key=episodeKey(q);if(!groups.has(key))groups.set(key,{key,label:episodeLabel(q),total:0,reviewed:0});const g=groups.get(key);g.total++;if(['approved','featured','rejected'].includes(finalStatus(q)))g.reviewed++;}const allReviewed=state.all.filter(q=>['approved','featured','rejected'].includes(finalStatus(q))).length;$('episodeFilter').innerHTML=[`<option value="__all__">All episodes — ${allReviewed}/${state.all.length} reviewed</option>`].concat([...groups.values()].sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true})).map(g=>`<option value="${esc(g.key)}">${esc(g.label)} — ${g.reviewed}/${g.total} reviewed</option>`)).join('');$('episodeFilter').value=state.episodeFilter;const counts={all:state.all.length,approved:0,featured:0,rejected:0,unreviewed:0};for(const q of state.all){const s=finalStatus(q);if(counts[s]!==undefined)counts[s]++;if(!['approved','featured','rejected'].includes(s))counts.unreviewed++;}$('statusFilter').innerHTML=`<option value="unreviewed">Unreviewed only — ${counts.unreviewed}</option><option value="all">All quotes — ${counts.all}</option><option value="approved">Approved — ${counts.approved}</option><option value="featured">Featured — ${counts.featured}</option><option value="rejected">Rejected — ${counts.rejected}</option>`;$('statusFilter').value=state.statusFilter;}
+function buildFilters(){
+  const groups=new Map();
+  for(const q of state.all){
+    const key=episodeKey(q);
+    if(!groups.has(key))groups.set(key,{key,label:episodeLabel(q),total:0,reviewed:0});
+    const g=groups.get(key);g.total++;
+    if(['approved','featured','rejected'].includes(finalStatus(q)))g.reviewed++;
+  }
+  const allReviewed=state.all.filter(q=>['approved','featured','rejected'].includes(finalStatus(q))).length;
+  $('episodeFilter').innerHTML=[`<option value="__all__">All episodes — ${allReviewed}/${state.all.length} reviewed</option>`].concat([...groups.values()].sort((a,b)=>a.label.localeCompare(b.label,undefined,{numeric:true})).map(g=>`<option value="${esc(g.key)}">${esc(g.label)} — ${g.reviewed}/${g.total} reviewed</option>`)).join('');
+  $('episodeFilter').value=state.episodeFilter;
+
+  const scoped=state.all.filter(q=>state.episodeFilter==='__all__'||episodeKey(q)===state.episodeFilter);
+  const counts={all:scoped.length,approved:0,featured:0,rejected:0,unreviewed:0};
+  for(const q of scoped){
+    const s=finalStatus(q);
+    if(counts[s]!==undefined)counts[s]++;
+    if(!['approved','featured','rejected'].includes(s))counts.unreviewed++;
+  }
+  if(state.statusFilter!=='all' && counts[state.statusFilter]===0){
+    state.statusFilter=counts.unreviewed>0?'unreviewed':'all';
+  }
+  $('statusFilter').innerHTML=`<option value="unreviewed">Unreviewed only — ${counts.unreviewed}</option><option value="all">All quotes — ${counts.all}</option><option value="approved">Approved — ${counts.approved}</option><option value="featured">Featured — ${counts.featured}</option><option value="rejected">Rejected — ${counts.rejected}</option>`;
+  $('statusFilter').value=state.statusFilter;
+}
 function applyFilters(reset=true){state.filtered=state.all.filter(q=>(state.episodeFilter==='__all__'||episodeKey(q)===state.episodeFilter)&&statusMatch(q));if(reset)state.index=0;if(state.index>=state.filtered.length)state.index=Math.max(0,state.filtered.length-1);render();}
 function render(){const q=state.filtered[state.index]||null;state.current=q;if(!q){$('quoteHeading').textContent=state.statusFilter==='unreviewed'?'Review complete':'No quotes match this filter';$('quoteCounter').textContent='—';$('quoteBefore').textContent='';$('quoteMain').textContent=state.statusFilter==='unreviewed'?'Everything in this selection has been reviewed.':'No quote is available for the current filters.';$('quoteAfter').textContent='';$('quoteMeta').innerHTML='';$('approvalText').value='';$('mediaTitle').textContent='Player';$('startTime').textContent='Start —';$('endTime').textContent='End —';$('mediaShell').textContent='Select video to load this quote at its timestamp.';return;}$('quoteHeading').textContent=episodeLabel(q);$('quoteCounter').textContent=`${state.index+1} of ${state.filtered.length}`;$('quoteBefore').textContent='';$('quoteMain').textContent=mainQuote(q);$('quoteAfter').textContent='';$('approvalText').value=mainQuote(q);const ep=q.episode||{},status=finalStatus(q);$('quoteMeta').innerHTML=[`<span class="pill">${esc(status==='candidate'?'unreviewed':status)}</span>`,q.publicSafe?'<span class="pill">Public Safe</span>':'',ep.series,ep.subtitle,ep.scripture,fmtDate(ep.date),fmtTime(q?.media?.start??q?.start??0)].filter(Boolean).join(' • ');$('mediaTitle').textContent=episodeLabel(q);$('startTime').textContent=`Start ${fmtTime(q?.media?.start??q?.start??0)}`;$('endTime').textContent=`End ${fmtTime(q?.media?.end??q?.end??0)}`;if(state.mediaMode==='video')loadVideoHere();}
 function loadVideoHere(){const q=state.current;if(!q)return;state.mediaMode='video';const id=q?.media?.youtubeId;const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:(q?.media?.videoUrl||'');$('mediaShell').innerHTML=src?`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`:'No video URL available.';}
 function openVideo(){const q=state.current;if(!q)return;const url=q?.media?.videoUrl||(q?.media?.youtubeId?`https://www.youtube.com/watch?v=${q.media.youtubeId}`:'');if(!url)return;const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
 function decision(action){const q=state.current;if(!q)return;removeLocalAll(q);saveLocal(action,q,$('approvalText').value);q.localReview=readLocal(action,q);q.finalReview=q.localReview;q.finalStatus=action;const old=state.index;buildFilters();applyFilters(false);state.index=Math.min(old,Math.max(0,state.filtered.length-1));render();toast(action==='rejected'?'Rejected.':action==='featured'?'Featured.':'Approved.');}
 async function openApp(){const [quotes,reviews]=await Promise.all([loadQuotes(),loadCuration()]);state.all=mergeQuotesWithReviews(quotes,reviews);buildFilters();applyFilters(true);}
-$('episodeFilter')?.addEventListener('change',()=>{state.episodeFilter=$('episodeFilter').value;applyFilters(true);});$('statusFilter')?.addEventListener('change',()=>{state.statusFilter=$('statusFilter').value;applyFilters(true);});$('addPrevious')?.addEventListener('click',()=>addContext('before'));$('addNext')?.addEventListener('click',()=>addContext('after'));$('prevBtn')?.addEventListener('click',()=>{state.index=Math.max(0,state.index-1);render();});$('nextBtn')?.addEventListener('click',()=>{state.index=Math.min(state.filtered.length-1,state.index+1);render();});$('rejectBtn')?.addEventListener('click',()=>decision('rejected'));$('approveBtn')?.addEventListener('click',()=>decision('approved'));$('featureBtn')?.addEventListener('click',()=>decision('featured'));$('loadVideo')?.addEventListener('click',loadVideoHere);$('openVideo')?.addEventListener('click',openVideo);$('approvalText')?.addEventListener('input',()=>{$('quoteMain').textContent=$('approvalText').value.trim()||mainQuote(state.current);});$('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCuration(state.all);});bindGate(openApp);
+$('episodeFilter')?.addEventListener('change',()=>{state.episodeFilter=$('episodeFilter').value;buildFilters();applyFilters(true);});$('statusFilter')?.addEventListener('change',()=>{state.statusFilter=$('statusFilter').value;applyFilters(true);});$('addPrevious')?.addEventListener('click',()=>addContext('before').catch(e=>{console.warn(e);toast('Could not add previous sentence.');}));$('addNext')?.addEventListener('click',()=>addContext('after').catch(e=>{console.warn(e);toast('Could not add next sentence.');}));$('prevBtn')?.addEventListener('click',()=>{state.index=Math.max(0,state.index-1);render();});$('nextBtn')?.addEventListener('click',()=>{state.index=Math.min(state.filtered.length-1,state.index+1);render();});$('rejectBtn')?.addEventListener('click',()=>decision('rejected'));$('approveBtn')?.addEventListener('click',()=>decision('approved'));$('featureBtn')?.addEventListener('click',()=>decision('featured'));$('loadVideo')?.addEventListener('click',loadVideoHere);$('openVideo')?.addEventListener('click',openVideo);$('approvalText')?.addEventListener('input',()=>{$('quoteMain').textContent=$('approvalText').value.trim()||mainQuote(state.current);});$('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCuration(state.all);});bindGate(openApp);
 </script></body></html>
