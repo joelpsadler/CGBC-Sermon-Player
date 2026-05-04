@@ -34,25 +34,15 @@ function mediaStart(q){return Number(q?.media?.start??q?.start??0)||0;}
 function mediaEnd(q){return Number(q?.media?.end??q?.end??0)||0;}
 function siteBase(){const path=location.pathname.replace(/[^/]*$/,'');return location.origin+path;}
 function siteDeepLink(q){const item=encodeURIComponent(epKey(q));const start=Math.max(0,Math.floor(mediaStart(q)));return `${siteBase()}index.html?mode=video&item=${item}${start?`&start=${start}`:''}&autoplay=0`;}
-function episodeDeepLink(q){return cgbcPlayerEpisodeLink(q);}
+function episodeDeepLink(q){const item=encodeURIComponent(epKey(q));return `${siteBase()}index.html?mode=video&item=${item}&start=0&autoplay=0`;}
 function youtubeLink(q){const id=q?.media?.youtubeId;const url=q?.media?.videoUrl || (id?`https://www.youtube.com/watch?v=${id}`:'');if(!url)return '';const sep=url.includes('?')?'&':'?';return `${url}${sep}t=${Math.floor(mediaStart(q))}s`;}
 function artForEpisode(key,library,quotes=[]){const item=library.get(key);const fromQuote=quotes.find(q=>epKey(q)===key);const yt=item?.video?.youtubeId||fromQuote?.media?.youtubeId;return item?.art?.episode?.wide||item?.video?.thumbnail||item?.art?.series?.wide||item?.art?.study?.wide||item?.art?.episode?.square||item?.art?.series?.square||item?.art?.study?.square||(yt?`https://i.ytimg.com/vi/${yt}/maxresdefault.jpg`:'')||'';}
 
 /* COPY CITATION PATCH:
    Copy buttons include Pastor Jacob Lannom before the citation.
 */
-function quoteSpeaker(q){
-  return q?.speaker || q?.by || q?.episode?.speaker || q?.episode?.by || 'Pastor Jacob Lannom';
-}
-function copyCitationLine(q){
-  const ep=q?.episode||{};
-  const title=ep.episodeName||ep.title||q?.episodeTitle||'Quote';
-  const start=q?.media?.start??q?.start??0;
-  const when=(typeof fmtTime==='function') ? fmtTime(start) : '';
-  const dateValue=ep.date||q?.date||'';
-  const date=(typeof fmtDate==='function') ? fmtDate(dateValue) : dateValue;
-  return `${quoteSpeaker(q)} — ${title}${when?` (${when})`:''}${date?`, ${date}`:''}`;
-}
+function quoteSpeaker(q){return q?.speaker||q?.by||q?.episode?.speaker||q?.episode?.by||'Pastor Jacob Lannom';}
+function copyCitationLine(q){const ep=q?.episode||{};const title=ep.episodeName||ep.title||q?.episodeTitle||'Quote';const dateValue=ep.date||q?.date||'';const date=(typeof fmtDate==='function')?fmtDate(dateValue):dateValue;return `${quoteSpeaker(q)} — ${title}${date?`, ${date}`:''}`;}
 
 /* FULL EPISODE COPY LINK PATCH:
    Copy buttons share the full episode/media link, not the quote timestamp/deep-link.
@@ -100,22 +90,34 @@ function siteFullEpisodeLink(q){
   }
   return '';
 }
-
-/* CGBC PLAYER ZERO LINK PATCH:
-   Copy buttons point to the full episode inside the CGBC player, video mode, starting at zero.
-   This mirrors index.html's buildDeepLink(item,'video') behavior: mode=video + item, no timestamp.
-*/
-function cgbcPlayerEpisodeLink(q){const item=encodeURIComponent(epKey(q));return `${siteBase()}index.html?mode=video&item=${item}`;}
 function fullEpisodeCopyLink(q){return cgbcPlayerEpisodeLink(q);}
 
-function fullEpisodeCopyLink(q){
-  return cgbcPlayerEpisodeLink(q);
-}
+function copyQuoteWithCitation(q){const text=(q?.approvedText||q?.displayText||q?.expandedText||q?.text||'').replace(/\s+/g,' ').trim();return `${text}\n${copyCitationLine(q)}\n${cgbcPlayerEpisodeLink(q)}`;}
 
+
+/* REBUILT CGBC PLAYER ZERO COPY LINK */
+function quoteSpeaker(q){return q?.speaker||q?.by||q?.episode?.speaker||q?.episode?.by||'Pastor Jacob Lannom';}
+function copyCitationLine(q){const ep=q?.episode||{};const title=ep.episodeName||ep.title||q?.episodeTitle||'Quote';const dateValue=ep.date||q?.date||'';const date=(typeof fmtDate==='function')?fmtDate(dateValue):dateValue;return `${quoteSpeaker(q)} — ${title}${date?`, ${date}`:''}`;}
+function cgbcPlayerEpisodeLink(q){const key=(typeof epKey==='function')?epKey(q):(q?.episode?.stableId||q?.episodeStableId||q?.id||'');return `${siteBase()}index.html?mode=video&item=${encodeURIComponent(key)}`;}
+function copyQuoteWithCitation(q){const text=(q?.approvedText||q?.displayText||q?.expandedText||q?.text||'').replace(/\s+/g,' ').trim();return `${text}\n${copyCitationLine(q)}\n${cgbcPlayerEpisodeLink(q)}`;}
+
+
+/* FINAL CGBC PLAYER COPY LINK */
+function quoteSpeaker(q){return q?.speaker||q?.by||q?.episode?.speaker||q?.episode?.by||'Pastor Jacob Lannom';}
+function copyCitationLine(q){
+  const ep=q?.episode||{};
+  const title=ep.episodeName||ep.title||q?.episodeTitle||'Quote';
+  const dateValue=ep.date||q?.date||'';
+  const date=(typeof fmtDate==='function')?fmtDate(dateValue):dateValue;
+  return `${quoteSpeaker(q)} — ${title}${date?`, ${date}`:''}`;
+}
+function cgbcPlayerEpisodeLink(q){
+  const key=(typeof epKey==='function')?epKey(q):(q?.episode?.stableId||q?.episodeStableId||q?.id||'');
+  return `${siteBase()}index.html?mode=video&item=${encodeURIComponent(key)}`;
+}
 function copyQuoteWithCitation(q){
   const text=(q?.approvedText||q?.displayText||q?.expandedText||q?.text||'').replace(/\s+/g,' ').trim();
-  const link=fullEpisodeCopyLink(q);
-  return `${text}\n${copyCitationLine(q)}${link?`\n${link}`:''}`;
+  return `${text}\n${copyCitationLine(q)}\n${cgbcPlayerEpisodeLink(q)}`;
 }
 
 function copyTextFor(q){return copyQuoteWithCitation(q);}
