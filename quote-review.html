@@ -191,6 +191,30 @@ select{
   }
 }
 
+
+/* FINAL REVIEW GRID OVERRIDE:
+   The older stylesheet stacks .review at 980px, which is too aggressive
+   for desktop Safari windows. Keep the media panel beside the quote review
+   until the viewport is genuinely narrow.
+*/
+#reviewApp.review.is-visible{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(360px,.95fr)!important;
+  gap:16px!important;
+  align-items:start!important;
+}
+#reviewApp.review.is-visible > .panel{
+  min-width:0!important;
+}
+#reviewApp.review.is-visible .media-shell{
+  min-height:320px!important;
+}
+@media(max-width:760px){
+  #reviewApp.review.is-visible{
+    grid-template-columns:1fr!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -632,6 +656,44 @@ async function openReviewApp(){
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}try{markUnlocked();}catch(_){}els.gateStatus.textContent='Loading quotes…';await openReviewApp();}
 els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
 try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}try{exportCurationJson();}catch(err){console.error(err);downloadExportJson({version:1,generatedAt:new Date().toISOString(),targetFile:'config/quote-curation.json',reviews:[]});}};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}if(els.editTextBtn)els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));if(els.prevBtn)els.prevBtn.addEventListener('click',previousQuote);els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});if(els.statusFilter)els.statusFilter.addEventListener('change',()=>{state.statusFilter=els.statusFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Approved.');stayAtCurrentSlotAfterDecision();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Featured for quote wall.');stayAtCurrentSlotAfterDecision();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Rejected.');stayAtCurrentSlotAfterDecision();});
+
+/* EXPORT SAFETY BIND FINAL */
+try{
+  const exportBtnFinal=document.getElementById('exportCurationBtn');
+  if(exportBtnFinal){
+    exportBtnFinal.addEventListener('click',function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      try{
+        if(typeof exportCurationJson==='function'){
+          exportCurationJson();
+        }else if(typeof allReviewEntries==='function' && typeof downloadExportJson==='function'){
+          downloadExportJson({
+            version:1,
+            generatedAt:new Date().toISOString(),
+            targetFile:'config/quote-curation.json',
+            reviews:allReviewEntries()
+          });
+        }
+      }catch(err){
+        console.error(err);
+        try{
+          const rows=(typeof allReviewEntries==='function')?allReviewEntries():[];
+          const json=JSON.stringify({version:1,generatedAt:new Date().toISOString(),targetFile:'config/quote-curation.json',reviews:rows},null,2);
+          const blob=new Blob([json],{type:'application/json;charset=utf-8'});
+          const url=URL.createObjectURL(blob);
+          const a=document.createElement('a');
+          a.href=url;
+          a.download='quote-curation.json';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},15000);
+        }catch(err2){console.error(err2);}
+      }
+    },true);
+  }
+}catch(e){console.warn(e);}
+
 </script>
 </body>
 </html>
