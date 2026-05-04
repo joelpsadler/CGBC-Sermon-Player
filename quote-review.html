@@ -155,6 +155,42 @@ select{
   .review-action-divider{display:none;}
 }
 
+
+/* MEDIA LAYOUT FIX:
+   Keep the review panel and media panel side-by-side on desktop-sized windows.
+   Only stack them on genuinely narrow/mobile widths.
+*/
+.workspace,
+.review-layout,
+.review-grid,
+.app-grid,
+.review-columns,
+.shell-grid{
+  display:grid!important;
+  grid-template-columns:minmax(440px,0.95fr) minmax(420px,1fr)!important;
+  gap:16px!important;
+  align-items:start!important;
+}
+.media-panel,
+.review-media,
+#mediaPanel{
+  position:relative!important;
+  z-index:1!important;
+  align-self:start!important;
+  min-width:0!important;
+}
+.panel{min-width:0!important;}
+@media(max-width:1050px){
+  .workspace,
+  .review-layout,
+  .review-grid,
+  .app-grid,
+  .review-columns,
+  .shell-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -299,11 +335,11 @@ function showExportFallback(json,count){
   if(old) old.remove();
   const wrap=document.createElement('div');
   wrap.id='exportFallbackPanel';
-  wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:9999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif;overflow:auto';
+  wrap.style.cssText='position:fixed;right:18px;bottom:18px;z-index:99999;width:min(620px,calc(100vw - 36px));max-height:min(680px,calc(100vh - 36px));display:grid;gap:10px;padding:14px;border-radius:22px;background:rgba(10,10,11,.96);border:1px solid rgba(255,255,255,.16);box-shadow:0 24px 80px rgba(0,0,0,.45);backdrop-filter:blur(18px);color:#f4f4f4;font-family:Inter,sans-serif;overflow:auto';
   const safe=json.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
   wrap.innerHTML='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">'
     +'<div><div style="font-family:Poppins,sans-serif;font-weight:800;font-size:16px">GitHub export ready</div>'
-    +'<div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>. If your browser blocks the automatic download, use the Download JSON button below.</div></div>'
+    +'<div style="font-size:12px;color:rgba(255,255,255,.66);line-height:1.35">Upload this file as <b>config/quote-curation.json</b>. If Safari blocks the automatic download, use Download JSON or Copy JSON below.</div></div>'
     +'<button type="button" id="exportFallbackClose" style="min-height:36px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-family:Poppins,sans-serif;font-weight:700;cursor:pointer">Close</button></div>'
     +'<textarea id="exportFallbackText" readonly style="width:100%;height:260px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.34);color:#fff;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace">'+safe+'</textarea>'
     +'<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">'
@@ -595,7 +631,7 @@ async function openReviewApp(){
 }
 async function unlock(){if(els.passwordInput.value.trim()!==PASSWORD){els.gateStatus.textContent='Wrong password.';return;}try{markUnlocked();}catch(_){}els.gateStatus.textContent='Loading quotes…';await openReviewApp();}
 els.unlockBtn.addEventListener('click',unlock);els.passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
-try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}try{exportCurationJson();}catch(err){console.error(err);toast('Export failed. Check console for details.');}};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}if(els.editTextBtn)els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));if(els.prevBtn)els.prevBtn.addEventListener('click',previousQuote);els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});if(els.statusFilter)els.statusFilter.addEventListener('change',()=>{state.statusFilter=els.statusFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Approved.');stayAtCurrentSlotAfterDecision();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Featured for quote wall.');stayAtCurrentSlotAfterDecision();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Rejected.');stayAtCurrentSlotAfterDecision();});
+try{if(isUnlocked()){els.gateStatus.textContent='Loading quotes…';openReviewApp();}}catch(_){ }if(els.exportCurationBtn){const runExport=e=>{if(e){e.preventDefault();e.stopPropagation();}try{exportCurationJson();}catch(err){console.error(err);downloadExportJson({version:1,generatedAt:new Date().toISOString(),targetFile:'config/quote-curation.json',reviews:[]});}};els.exportCurationBtn.addEventListener('click',runExport);els.exportCurationBtn.onclick=runExport;}if(els.editTextBtn)els.editTextBtn.addEventListener('click',focusManualEdit);els.addPrevious.addEventListener('click',()=>addContext('before').catch(err=>{console.warn(err);toast('Could not add previous context.');}));els.addNext.addEventListener('click',()=>addContext('after').catch(err=>{console.warn(err);toast('Could not add next context.');}));if(els.prevBtn)els.prevBtn.addEventListener('click',previousQuote);els.nextBtn.addEventListener('click',nextQuote);if(els.episodeFilter)els.episodeFilter.addEventListener('change',()=>{state.episodeFilter=els.episodeFilter.value;applyEpisodeFilter();});if(els.statusFilter)els.statusFilter.addEventListener('change',()=>{state.statusFilter=els.statusFilter.value;applyEpisodeFilter();});els.loadVideo.addEventListener('click',loadVideoHere);els.openVideo.addEventListener('click',openVideo);els.approvalText.addEventListener('input',()=>{els.quoteMain.textContent=els.approvalText.value.trim()||quoteText(state.current);});els.approveBtn.addEventListener('click',()=>{save('approved',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Approved.');stayAtCurrentSlotAfterDecision();});els.featureBtn.addEventListener('click',()=>{save('featured',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Featured for quote wall.');stayAtCurrentSlotAfterDecision();});els.rejectBtn.addEventListener('click',()=>{save('rejected',state.current,els.approvalText.value.trim());buildEpisodeOptions();toast('Rejected.');stayAtCurrentSlotAfterDecision();});
 </script>
 </body>
 </html>
