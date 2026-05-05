@@ -790,6 +790,19 @@ textarea,
   display:none !important;
 }
 
+
+/* SIMILAR QUOTE REVIEW WARNING */
+.similar-quote-warning-note{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:16px;
+  border:1px solid rgba(255,210,120,.22);
+  background:rgba(255,210,120,.08);
+  color:rgba(255,255,255,.82);
+  font-size:13px;
+  line-height:1.45;
+}
+
 </style></head><body><div class="page"><header class="topbar quote-review-image-art-header"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><nav class="nav-actions quote-review-nav-rows" aria-label="Quote tools navigation">
     <div class="nav-row nav-row-primary">
       <a class="back-link" href="quote-review-approved.html">Approved Quotes</a>
@@ -1472,7 +1485,88 @@ function render(){const q=state.filtered[state.index]||null;state.current=q;if(!
   if(typeof setSelectedEpisodeArt==='function')setSelectedEpisodeArt(q);$('startTime').textContent=`Start ${fmtTime(q?.media?.start??q?.start??0)}`;$('endTime').textContent=`End ${fmtTime(q?.media?.end??q?.end??0)}`;if(state.mediaMode==='video')loadVideoHere();}
 function loadVideoHere(){const q=state.current;if(!q)return;state.mediaMode='video';const id=q?.media?.youtubeId;const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:(q?.media?.videoUrl||'');$('mediaShell').innerHTML=src?`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`:'No video URL available.';}
 function openVideo(){const q=state.current;if(!q)return;const url=q?.media?.videoUrl||(q?.media?.youtubeId?`https://www.youtube.com/watch?v=${q.media.youtubeId}`:'');if(!url)return;const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
-function decision(action){const q=state.current;if(!q)return;removeLocalAll(q);saveLocal(action,q,$('approvalText').value);q.localReview=readLocal(action,q);q.finalReview=q.localReview;q.finalStatus=action;const old=state.index;buildFilters();applyFilters(false);state.index=Math.min(old,Math.max(0,state.filtered.length-1));render();toast(action==='rejected'?'Rejected.':action==='featured'?'Featured.':'Approved.');}
+
+/* SIMILAR QUOTE REVIEW WARNING HELPERS */
+const SIMILAR_QUOTE_APPROVAL_THRESHOLD = 0.86;
+
+function similarQuoteNormalize(text){
+  return clean(text)
+    .toLowerCase()
+    .replace(/[“”"']/g,'')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function similarQuoteTokens(text){
+  const norm = similarQuoteNormalize(text);
+  if(!norm) return [];
+  const words = norm.split(/\s+/).filter(w=>w.length>2);
+  if(words.length < 4) return words;
+  const grams = [];
+  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
+  return grams.length ? grams : words;
+}
+function similarQuoteScore(a,b){
+  const A = new Set(similarQuoteTokens(a));
+  const B = new Set(similarQuoteTokens(b));
+  if(!A.size || !B.size) return 0;
+  let hit = 0;
+  for(const item of A){ if(B.has(item)) hit++; }
+  return (2 * hit) / (A.size + B.size);
+}
+function approvedTextForSimilarity(q){
+  return clean(q?.localReview?.approvedText || q?.repoReview?.approvedText || q?.finalReview?.approvedText || q?.approvedText || q?.displayText || q?.text || q?.quote || '');
+}
+function similarApprovedQuote(candidate,current){
+  const text = clean(candidate || '');
+  if(!text || !current || !Array.isArray(state?.all)) return null;
+  let best = null;
+  for(const q of state.all){
+    if((q?.id || q?.quoteId) === (current?.id || current?.quoteId)) continue;
+    const status = String(q?.finalStatus || q?.localReview?.status || q?.repoReview?.status || q?.status || '').toLowerCase();
+    if(status !== 'approved' && status !== 'featured') continue;
+    const other = approvedTextForSimilarity(q);
+    if(!other) continue;
+    const score = similarQuoteScore(text, other);
+    if(!best || score > best.score) best = {q, score, text: other};
+  }
+  return best && best.score >= SIMILAR_QUOTE_APPROVAL_THRESHOLD ? best : null;
+}
+function confirmSimilarQuoteApproval(action,q,text){
+  if(action !== 'approved' && action !== 'featured') return true;
+  const match = similarApprovedQuote(text,q);
+  if(!match) return true;
+  const title = match.q?.episode?.title || match.q?.episode?.episodeName || match.q?.episodeTitle || 'another approved quote';
+  const percent = Math.round(match.score * 100);
+  return window.confirm(
+    `Similar approved/featured quote found (${percent}% similar):\n\n` +
+    `"${match.text.slice(0,220)}${match.text.length>220?'…':''}"\n\n` +
+    `Episode: ${title}\n\n` +
+    `Approve this ${action === 'featured' ? 'featured quote' : 'quote'} anyway?`
+  );
+}
+
+function decision(action){
+  const q=state.current;
+  if(!q)return;
+  const text=$('approvalText').value;
+  if(!confirmSimilarQuoteApproval(action,q,text)){
+    toast('Approval paused so you can compare the similar quote.');
+    return;
+  }
+  removeLocalAll(q);
+  saveLocal(action,q,text);
+  q.localReview=readLocal(action,q);
+  q.finalReview=q.localReview;
+  q.finalStatus=action;
+  const old=state.index;
+  buildFilters();
+  applyFilters(false);
+  state.index=Math.min(old,Math.max(0,state.filtered.length-1));
+  render();
+  toast(action==='rejected'?'Rejected.':action==='featured'?'Featured.':'Approved.');
+}
 async function openApp(){const [quotes,reviews]=await Promise.all([loadQuotes(),loadCuration()]);state.all=mergeQuotesWithReviews(quotes,reviews);buildFilters();applyFilters(true);}
 $('episodeFilter')?.addEventListener('change',()=>{state.episodeFilter=$('episodeFilter').value;buildFilters();applyFilters(true);});
 $('depthFilter')?.addEventListener('change',()=>{state.depthCap=Number($('depthFilter').value)||40;applyFilters(true);});

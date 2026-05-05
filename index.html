@@ -1947,7 +1947,7 @@
       idleQuoteIndex:0,
       idleQuotePaused:false,
       idleQuoteTimer:null,
-      transcript:{ itemId:null, language:'en', mode:'follow', search:'', segments:[], activeIndex:-1, cache:new Map(), languageDiscoveryCache:new Map(), languageIndex:null, languageIndexPromise:null, languageIndexLoaded:false, languageFolderCodes:null, languageFolderPromise:null, languageFolderCodesLoaded:false, loading:false, hidden:false },
+      transcript:{ itemId:null, language:'en', mode:'follow', search:'', segments:[], activeIndex:-1, cache:new Map(), loading:false, hidden:false },
       youtubePlayer:null,
       youtubePoll:null
     };
@@ -2580,7 +2580,74 @@
       return url.toString();
     }
     function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
-    async function loadIdleQuotes(){
+    
+/* IDLE QUOTE SIMILARITY SPACING
+   Keeps approved/featured quote variations available, but avoids showing similar quotes too close together.
+   This feeds the shared idle quote display used by desktop and mobile layouts. */
+const IDLE_QUOTE_SIMILARITY_THRESHOLD = 0.86;
+const IDLE_QUOTE_RECENT_WINDOW = 8;
+
+function idleQuoteNormalizeForSpacing(text){
+  return String(text||'')
+    .toLowerCase()
+    .replace(/[“”"']/g,'')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function idleQuoteSpacingTokens(text){
+  const norm = idleQuoteNormalizeForSpacing(text);
+  if(!norm) return [];
+  const words = norm.split(/\s+/).filter(w=>w.length>2);
+  if(words.length < 4) return words;
+  const grams = [];
+  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
+  return grams.length ? grams : words;
+}
+function idleQuoteSimilarity(a,b){
+  const A = new Set(idleQuoteSpacingTokens(a));
+  const B = new Set(idleQuoteSpacingTokens(b));
+  if(!A.size || !B.size) return 0;
+  let hit = 0;
+  for(const item of A){ if(B.has(item)) hit++; }
+  return (2 * hit) / (A.size + B.size);
+}
+function idleQuoteSpacingKey(q){
+  return idleQuoteNormalizeForSpacing(idleQuoteText(q));
+}
+function idleQuoteTooSimilarToRecent(q){
+  const recent = state.idleQuoteRecent || [];
+  const key = idleQuoteSpacingKey(q);
+  if(!key) return false;
+  return recent.some(prior => idleQuoteSimilarity(key, prior.key) >= IDLE_QUOTE_SIMILARITY_THRESHOLD || (prior.episode && prior.episode === (q?.episode?.stableId||q?.episodeStableId||'')));
+}
+function rememberIdleQuoteForSpacing(q){
+  if(!q) return;
+  if(!Array.isArray(state.idleQuoteRecent)) state.idleQuoteRecent = [];
+  state.idleQuoteRecent.unshift({
+    key: idleQuoteSpacingKey(q),
+    episode: q?.episode?.stableId || q?.episodeStableId || '',
+    id: q?.id || q?.quoteId || ''
+  });
+  state.idleQuoteRecent = state.idleQuoteRecent.filter(item=>item.key).slice(0, IDLE_QUOTE_RECENT_WINDOW);
+}
+function chooseSpacedIdleQuoteIndex(){
+  const quotes = state.idleQuotes || [];
+  if(!quotes.length) return 0;
+  if(quotes.length === 1) return 0;
+
+  const current = state.idleQuoteIndex;
+  const candidates = quotes.map((q,i)=>({q,i}))
+    .filter(item => item.i !== current);
+
+  const ideal = candidates.filter(item => !idleQuoteTooSimilarToRecent(item.q));
+  const pool = ideal.length ? ideal : candidates;
+
+  return pool[Math.floor(Math.random() * pool.length)].i;
+}
+
+async function loadIdleQuotes(){
       try{
         const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
         const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
@@ -2594,7 +2661,13 @@
           if(idleQuoteText(clone)) approved.push(clone);
         }
         state.idleQuotes = approved;
-        if(approved.length){ state.idleQuoteIndex = Math.floor(Math.random() * approved.length); renderIdleQuote(); startIdleQuoteCycle(); }
+        state.idleQuoteRecent = [];
+        if(approved.length){
+          state.idleQuoteIndex = Math.floor(Math.random() * approved.length);
+          renderIdleQuote();
+          rememberIdleQuoteForSpacing(state.idleQuotes[state.idleQuoteIndex]);
+          startIdleQuoteCycle();
+        }
         else renderIdleQuote();
       }catch(err){ console.warn('Idle quote wall could not load.',err); renderIdleQuote(); }
     }
@@ -2619,7 +2692,13 @@
         if(els.idleEpisodeArt && art) els.idleEpisodeArt.src = art;
       }
     }
-    function nextIdleQuote(){ if(!state.idleQuotes.length) return; state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length); renderIdleQuote(); startIdleQuoteCycle(); }
+    function nextIdleQuote(){
+      if(!state.idleQuotes.length) return;
+      state.idleQuoteIndex = chooseSpacedIdleQuoteIndex();
+      renderIdleQuote();
+      rememberIdleQuoteForSpacing(state.idleQuotes[state.idleQuoteIndex]);
+      startIdleQuoteCycle();
+    }
     function startIdleQuoteCycle(){
       if(state.idleQuoteTimer) window.clearInterval(state.idleQuoteTimer);
       if(state.idleQuotePaused || !state.idleQuotes.length) return;
@@ -2634,283 +2713,31 @@
     /* -------------------------------------------------------------------------
        DESKTOP TRANSCRIPT PANEL
        ------------------------------------------------------------------------- */
-    // -------------------------------------------------------------------------
-    // TRANSCRIPT LANGUAGE DISCOVERY
-    // -------------------------------------------------------------------------
-    // Beginner note:
-    // The build workflow can add translated SRT files later without changing this
-    // page. This code first trusts transcript metadata if it exists, then looks for
-    // an optional generated language index, then safely probes common language
-    // folders that match the current English display SRT filename.
-    const TRANSCRIPT_LANGUAGE_LABELS = {
-      en:'English',
-      es:'Spanish',
-      fr:'French',
-      de:'German',
-      nl:'Dutch',
-      pt:'Portuguese',
-      it:'Italian',
-      ro:'Romanian',
-      ar:'Arabic',
-      zh:'Chinese',
-      'zh-hans':'Chinese (Simplified)',
-      'zh-hant':'Chinese (Traditional)',
-      ko:'Korean',
-      ja:'Japanese',
-      vi:'Vietnamese',
-      tl:'Tagalog',
-      ru:'Russian',
-      uk:'Ukrainian',
-      hi:'Hindi'
-    };
-    const TRANSCRIPT_LANGUAGE_PROBE_CODES = [
-      'en','es','fr','de','nl','pt','it','ro','ar','zh-Hans','zh-Hant','ko','ja','vi','tl','ru','uk','hi'
-    ];
-    const TRANSCRIPT_LANGUAGE_INDEX_PATH = 'data/transcripts/language-index.json';
-    const TRANSCRIPT_GITHUB_CONTENTS_LANG_DIR_URL = 'https://api.github.com/repos/joelpsadler/CGBC-Sermon-Player/contents/transcripts_display?ref=main';
-
-    function normalizeTranscriptLanguageCode(code){
-      const raw = String(code || '').trim();
-      if(!raw) return '';
-      const lower = raw.toLowerCase();
-      if(lower === 'zh-hans') return 'zh-Hans';
-      if(lower === 'zh-hant') return 'zh-Hant';
-      return lower;
-    }
-    function transcriptLanguageLabel(code){
-      const normalized = normalizeTranscriptLanguageCode(code);
-      const label = TRANSCRIPT_LANGUAGE_LABELS[normalized.toLowerCase()] || TRANSCRIPT_LANGUAGE_LABELS[normalized] || '';
-      if(label) return label;
-      try{
-        if(typeof Intl !== 'undefined' && Intl.DisplayNames){
-          const displayNames = new Intl.DisplayNames(['en'], { type:'language' });
-          const guessed = displayNames.of(normalized);
-          if(guessed) return guessed;
-        }
-      }catch(err){}
-      return String(code || 'Transcript').toUpperCase();
-    }
-    function sortTranscriptLanguages(langs){
-      const preferred = ['en','es','fr','de','nl','pt'];
-      return Array.from(new Set((langs || []).map(normalizeTranscriptLanguageCode).filter(Boolean))).sort((a,b)=>{
-        const ia = preferred.indexOf(a);
-        const ib = preferred.indexOf(b);
-        if(ia !== -1 || ib !== -1) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
-        return transcriptLanguageLabel(a).localeCompare(transcriptLanguageLabel(b), undefined, { sensitivity:'base' });
-      });
-    }
-    function transcriptLanguages(item){
-      const langs=item?.transcript?.languages || {};
-      const keys = Object.keys(langs || {}).map(normalizeTranscriptLanguageCode).filter(Boolean);
-      if(keys.length) return sortTranscriptLanguages(keys);
-      return item?.transcript?.jsonFile || item?.transcript?.displayJsonFile || item?.transcript?.displayFile ? ['en'] : [];
-    }
-    function transcriptConfig(item, lang){
-      const normalized = normalizeTranscriptLanguageCode(lang);
-      const langs=item?.transcript?.languages || {};
-      return langs[normalized] || langs[String(lang || '')] || (normalized==='en' ? item?.transcript : null) || {};
-    }
-    function transcriptEnglishDisplaySrtPath(item){
-      const transcript = item?.transcript || {};
-      const langCfg = transcriptConfig(item, 'en') || {};
-      const candidates = [
-        langCfg.displayFile,
-        transcript.displayFile,
-        transcript.transcriptDisplaySrt,
-        transcript.displaySrt,
-        langCfg.cleanFile,
-        transcript.cleanFile,
-        transcript.transcriptCleanSrt,
-        transcript.jsonFile,
-        transcript.displayJsonFile
-      ].filter(Boolean);
-
-      for(const candidate of candidates){
-        let path = String(candidate || '').replace(/\\/g,'/');
-        if(!path) continue;
-        if(path.includes('/en/')){
-          path = path.replace(/\.display\.json$/i, '.srt').replace(/\.json$/i, '.srt');
-          if(path.includes('/data/transcripts/en/')) path = path.replace('/data/transcripts/en/', '/transcripts_display/en/');
-          if(path.includes('/transcripts_clean/en/')) path = path.replace('/transcripts_clean/en/', '/transcripts_display/en/');
-          return path;
-        }
-      }
-      return '';
-    }
-    function transcriptDerivedDisplaySrtPath(item, lang){
-      const normalized = normalizeTranscriptLanguageCode(lang);
-      const englishPath = transcriptEnglishDisplaySrtPath(item);
-      if(!englishPath || !normalized) return '';
-      if(normalized === 'en') return englishPath;
-      return englishPath.replace('/en/', '/' + normalized + '/');
-    }
-    function transcriptPath(item, lang){
-      const normalized = normalizeTranscriptLanguageCode(lang);
-      const cfg=transcriptConfig(item, normalized);
-
-      // English keeps the original JSON behavior so the current working transcript
-      // reader does not regress. Translated languages usually arrive as SRT only.
-      if(normalized === 'en'){
-        return cfg?.jsonFile || cfg?.displayJsonFile || item?.transcript?.jsonFile || item?.transcript?.displayJsonFile || cfg?.displayFile || cfg?.cleanFile || transcriptDerivedDisplaySrtPath(item, normalized) || '';
-      }
-
-      return cfg?.jsonFile || cfg?.displayJsonFile || cfg?.displayFile || cfg?.cleanFile || transcriptDerivedDisplaySrtPath(item, normalized) || '';
-    }
-    function srtTimestampToSeconds(value){
-      const match = String(value || '').trim().match(/^(\d{2}):(\d{2}):(\d{2}),(\d{3})$/);
-      if(!match) return 0;
-      return (Number(match[1]) * 3600) + (Number(match[2]) * 60) + Number(match[3]) + (Number(match[4]) / 1000);
-    }
-    function parseTranscriptSrt(rawSrt){
-      const normalized = String(rawSrt || '').replace(/\r\n/g,'\n').replace(/\r/g,'\n').trim();
-      if(!normalized) return [];
-      return normalized.split(/\n{2,}/).map((block,index)=>{
-        const lines = block.split('\n').map(line=>line.trim()).filter(Boolean);
-        if(lines.length < 2) return null;
-        let cursor = /^\d+$/.test(lines[0] || '') ? 1 : 0;
-        const timing = lines[cursor] || '';
-        const match = timing.match(/^(.+?)\s*-->\s*(.+?)(?:\s+.*)?$/);
-        if(!match) return null;
-        const text = lines.slice(cursor + 1).join(' ').trim();
-        if(!text) return null;
-        return {
-          index:index + 1,
-          start:srtTimestampToSeconds(match[1]),
-          end:srtTimestampToSeconds(match[2]),
-          text
-        };
-      }).filter(Boolean).map((seg,index)=>({ ...seg, index:index + 1 }));
-    }
-    async function fetchTranscriptLanguageIndex(){
-      if(state.transcript.languageIndexLoaded) return state.transcript.languageIndex || null;
-      if(state.transcript.languageIndexPromise) return state.transcript.languageIndexPromise;
-      state.transcript.languageIndexPromise = fetch(TRANSCRIPT_LANGUAGE_INDEX_PATH, {cache:'no-store'})
-        .then(res=>res.ok ? res.json() : null)
-        .then(json=>{
-          state.transcript.languageIndexLoaded = true;
-          state.transcript.languageIndex = json || null;
-          return state.transcript.languageIndex;
-        })
-        .catch(()=>{
-          state.transcript.languageIndexLoaded = true;
-          state.transcript.languageIndex = null;
-          return null;
-        });
-      return state.transcript.languageIndexPromise;
-    }
-    async function fetchTranscriptLanguageFolderCodes(){
-      if(state.transcript.languageFolderCodesLoaded) return state.transcript.languageFolderCodes || [];
-      if(state.transcript.languageFolderPromise) return state.transcript.languageFolderPromise;
-      state.transcript.languageFolderPromise = fetch(TRANSCRIPT_GITHUB_CONTENTS_LANG_DIR_URL, {cache:'no-store'})
-        .then(res=>res.ok ? res.json() : [])
-        .then(items=>{
-          const codes = Array.isArray(items)
-            ? items.filter(item=>item && item.type === 'dir' && item.name).map(item=>normalizeTranscriptLanguageCode(item.name)).filter(Boolean)
-            : [];
-          state.transcript.languageFolderCodesLoaded = true;
-          state.transcript.languageFolderCodes = codes;
-          return codes;
-        })
-        .catch(()=>{
-          state.transcript.languageFolderCodesLoaded = true;
-          state.transcript.languageFolderCodes = [];
-          return [];
-        });
-      return state.transcript.languageFolderPromise;
-    }
-    function languageIndexEntryForItem(index, item){
-      if(!index || !item) return null;
-      if(Array.isArray(index.entries)){
-        return index.entries.find(entry=>entry && entry.stableId === item.stableId) || null;
-      }
-      return index[item.stableId] || null;
-    }
-    function languageCodesFromIndexEntry(entry){
-      if(!entry) return [];
-      if(Array.isArray(entry.languages)) return entry.languages;
-      if(entry.languages && typeof entry.languages === 'object') return Object.keys(entry.languages);
-      return [];
-    }
-    async function transcriptFileExists(path){
-      if(!path) return false;
-      try{
-        const head = await fetch(path, {method:'HEAD', cache:'no-store'});
-        if(head.ok) return true;
-        // Some static hosts do not love HEAD. If the file looks plausible and
-        // HEAD is rejected for method reasons, use one light GET fallback.
-        if(head.status === 405 || head.status === 501){
-          const get = await fetch(path, {cache:'no-store'});
-          return get.ok;
-        }
-      }catch(err){}
-      return false;
-    }
-    async function detectTranscriptLanguages(item){
-      const cacheKey = String(item?.stableId || '') + '|' + transcriptEnglishDisplaySrtPath(item);
-      if(cacheKey && state.transcript.languageDiscoveryCache?.has(cacheKey)){
-        return state.transcript.languageDiscoveryCache.get(cacheKey);
-      }
-
-      const found = new Set(transcriptLanguages(item));
-      const index = await fetchTranscriptLanguageIndex();
-      const indexEntry = languageIndexEntryForItem(index, item);
-      languageCodesFromIndexEntry(indexEntry).forEach(code=>found.add(normalizeTranscriptLanguageCode(code)));
-
-      // GitHub Pages cannot list folders by itself, so this optional public GitHub
-      // contents lookup lets the site discover new transcript_display/<language>/
-      // folders automatically after the workflow creates them.
-      const githubFolderCodes = await fetchTranscriptLanguageFolderCodes();
-      githubFolderCodes.forEach(code=>found.add(normalizeTranscriptLanguageCode(code)));
-
-      const candidates = sortTranscriptLanguages([
-        ...Array.from(found),
-        ...TRANSCRIPT_LANGUAGE_PROBE_CODES
-      ]);
-
-      const checks = await Promise.all(candidates.map(async code=>{
-        const normalized = normalizeTranscriptLanguageCode(code);
-        const path = transcriptPath(item, normalized);
-        if(normalized === 'en' && path) return normalized;
-        return await transcriptFileExists(path) ? normalized : '';
-      }));
-
-      const langs = sortTranscriptLanguages(checks.filter(Boolean));
-      if(cacheKey && state.transcript.languageDiscoveryCache) state.transcript.languageDiscoveryCache.set(cacheKey, langs);
-      return langs;
-    }
+    function transcriptLanguageLabel(code){ const labels={en:'English',es:'Spanish',fr:'French',de:'German',pt:'Portuguese',zh:'Chinese',ko:'Korean'}; return labels[String(code||'').toLowerCase()] || String(code||'Transcript').toUpperCase(); }
+    function transcriptLanguages(item){ const langs=item?.transcript?.languages || {}; return Object.keys(langs).length ? Object.keys(langs) : (item?.transcript?.jsonFile ? ['en'] : []); }
+    function transcriptConfig(item, lang){ const langs=item?.transcript?.languages || {}; return langs[lang] || (lang==='en' ? item?.transcript : null) || {}; }
+    function transcriptPath(item, lang){ const cfg=transcriptConfig(item, lang); return cfg?.jsonFile || cfg?.displayJsonFile || item?.transcript?.jsonFile || item?.transcript?.displayJsonFile || ''; }
     async function loadTranscriptForItem(item, lang){
-      const normalized = normalizeTranscriptLanguageCode(lang);
       if(!item || !item?.transcript?.hasTranscript) return [];
-      const path = transcriptPath(item, normalized);
+      const path = transcriptPath(item, lang);
       if(!path) return [];
-      const key = item.stableId + ':' + normalized + ':' + path;
+      const key = item.stableId + ':' + lang + ':' + path;
       if(state.transcript.cache.has(key)) return state.transcript.cache.get(key);
       const res = await fetch(path, {cache:'no-store'});
       if(!res.ok) throw new Error('Transcript not found.');
-      let segments = [];
-      if(/\.srt(?:$|\?)/i.test(path)){
-        const rawSrt = await res.text();
-        segments = parseTranscriptSrt(rawSrt);
-      }else{
-        const json = await res.json();
-        segments = Array.isArray(json?.segments) ? json.segments.map((seg,i)=>({
-          index: Number(seg.index || i+1), start:Number(seg.start || 0), end:Number(seg.end || seg.start || 0), text:String(seg.text || '').trim()
-        })).filter(seg=>seg.text) : [];
-      }
+      const json = await res.json();
+      const segments = Array.isArray(json?.segments) ? json.segments.map((seg,i)=>({
+        index: Number(seg.index || i+1), start:Number(seg.start || 0), end:Number(seg.end || seg.start || 0), text:String(seg.text || '').trim()
+      })).filter(seg=>seg.text) : [];
       state.transcript.cache.set(key, segments);
       return segments;
     }
-    async function renderTranscriptLanguageOptions(item){
+    function renderTranscriptLanguageOptions(item){
       if(!els.transcriptLanguage) return;
-      const langs = await detectTranscriptLanguages(item);
+      const langs = transcriptLanguages(item);
       els.transcriptLanguage.innerHTML = langs.map(lang=>'<option value="'+escapeHtml(lang)+'">'+escapeHtml(transcriptLanguageLabel(lang))+'</option>').join('');
       if(langs.includes(state.transcript.language)) els.transcriptLanguage.value = state.transcript.language;
-      else if(langs[0]){
-        state.transcript.language = langs[0];
-        els.transcriptLanguage.value = langs[0];
-        state.transcript.segments = [];
-        state.transcript.activeIndex = -1;
-      }
+      else if(langs[0]){ state.transcript.language = langs[0]; els.transcriptLanguage.value = langs[0]; }
     }
     async function renderTranscriptPanel(){
       const item = state.currentItem;
@@ -2946,7 +2773,7 @@
         const art = getEpisodeArt(item, 'video') || getEpisodeArt(item, state.mode);
         els.transcriptArt.innerHTML = art ? '<img src="'+escapeHtml(art)+'" alt="">' : '';
       }
-      await renderTranscriptLanguageOptions(item);
+      renderTranscriptLanguageOptions(item);
       els.transcriptFollowBtn.classList.toggle('active', state.transcript.mode === 'follow');
       els.transcriptReadBtn.classList.toggle('active', state.transcript.mode !== 'follow');
       try{
