@@ -668,6 +668,102 @@ textarea,
   }
 }
 
+
+/* FINAL QUOTE REVIEW POLISH
+   Candidate title removed; selected art/filter now identify the episode. */
+#candidateTitle,
+#quoteTitle,
+.candidate-title{
+  display:none !important;
+}
+.candidate-head,
+.candidate-title-row{
+  display:none !important;
+}
+
+/* Shrink top-right episode art around 20% and keep breathing room. */
+.image-art-card,
+.top-right-art-card{
+  width:min(240px,18vw) !important;
+  min-width:150px !important;
+  border-radius:18px !important;
+}
+.image-art-img,
+.top-right-art-img{
+  width:100% !important;
+  aspect-ratio:16 / 9 !important;
+  object-fit:cover !important;
+}
+.image-art-divider,
+.top-right-art-divider{
+  height:70px !important;
+}
+.quote-review-image-art-header,
+.quote-review-top-header{
+  grid-template-columns:minmax(430px,1fr) auto 1px minmax(150px,240px) !important;
+  padding-right:28px !important;
+}
+
+/* Give the work area more priority now that the art/player side is smaller. */
+.review-grid{
+  grid-template-columns:minmax(0,1.88fr) minmax(300px,.72fr) !important;
+  gap:16px !important;
+}
+.review-grid .media-panel{
+  min-width:300px !important;
+}
+
+/* Keep player preview true widescreen and crop/fill the YouTube frame cleanly. */
+.media-shell{
+  width:100% !important;
+  aspect-ratio:16 / 9 !important;
+  min-height:0 !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow:hidden !important;
+  background:#111 !important;
+}
+.media-shell iframe{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  aspect-ratio:16 / 9 !important;
+  border:0 !important;
+}
+.media-shell iframe[src*="youtube.com"]{
+  transform:scale(1.12);
+  transform-origin:center center;
+}
+
+/* Slightly tighten media panel vertical bulk. */
+.media-panel .panel-body{
+  gap:12px !important;
+}
+.media-panel .actions{
+  margin-bottom:0 !important;
+}
+.quote-card{
+  margin-top:6px !important;
+}
+@media(max-width:1450px){
+  .quote-review-image-art-header,
+  .quote-review-top-header{
+    grid-template-columns:minmax(350px,1fr) auto !important;
+  }
+  .image-art-card,
+  .top-right-art-card{
+    width:min(250px,36vw) !important;
+  }
+}
+@media(max-width:1120px){
+  .review-grid{
+    grid-template-columns:1fr !important;
+  }
+  .review-grid .media-panel{
+    min-width:0 !important;
+  }
+}
+
 </style></head><body><div class="page"><header class="topbar quote-review-image-art-header"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><nav class="nav-actions quote-review-nav-rows" aria-label="Quote tools navigation">
     <div class="nav-row nav-row-primary">
       <a class="back-link" href="quote-review-approved.html">Approved Quotes</a>
