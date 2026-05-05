@@ -485,15 +485,125 @@ textarea,
   }
 }
 
-</style></head><body><div class="page"><header class="topbar quote-review-top-header"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><nav class="nav-actions" aria-label="Quote tools navigation"><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="quote-review-denied.html">Denied Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button">Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a><button class="btn" id="scoringKeyBtn" type="button">Scoring Key</button></nav>
-  <span class="top-right-art-divider" aria-hidden="true"></span>
-  <aside class="top-right-art-card" id="topRightEpisodeArtCard" aria-label="Selected episode art">
-    <img class="top-right-art-img" id="topRightEpisodeArtImg" alt="" loading="lazy">
-    <div class="top-right-art-placeholder" id="topRightEpisodeArtPlaceholder">Episode<br>Art</div>
-    <div class="top-right-art-caption">
-      <p class="eyebrow">Selected episode</p>
-      <p id="topRightEpisodeArtTitle">Choose an episode</p>
-    </div>
+
+/* IMAGE-ONLY TOP RIGHT EPISODE ART */
+.quote-review-image-art-header{
+  display:grid !important;
+  grid-template-columns:minmax(390px,1fr) auto 1px minmax(180px,300px) !important;
+  align-items:center !important;
+  gap:14px !important;
+  padding-right:24px !important;
+}
+.quote-review-image-art-header .brand{
+  min-width:390px;
+}
+.quote-review-image-art-header .nav-actions{
+  justify-self:end;
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  gap:8px !important;
+}
+.quote-review-image-art-header .nav-actions .btn,
+.quote-review-image-art-header .nav-actions .back-link{
+  min-height:38px;
+  padding:0 11px;
+  font-size:13px;
+  border-radius:14px;
+}
+.image-art-divider{
+  width:1px;
+  height:82px;
+  background:rgba(255,255,255,.24);
+  justify-self:center;
+  display:none;
+}
+.image-art-card{
+  display:none;
+  justify-self:end;
+  width:min(300px,22vw);
+  min-width:180px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+  box-shadow:0 14px 38px rgba(0,0,0,.22);
+}
+.image-art-card.is-visible{
+  display:block;
+}
+.image-art-divider.is-visible{
+  display:block;
+}
+.image-art-img{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:rgba(0,0,0,.18);
+}
+@media(max-width:1450px){
+  .quote-review-image-art-header{
+    grid-template-columns:minmax(350px,1fr) auto !important;
+  }
+  .image-art-divider{display:none!important}
+  .image-art-card{
+    grid-column:1/-1;
+    justify-self:end;
+    width:min(320px,42vw);
+  }
+}
+@media(max-width:980px){
+  .quote-review-image-art-header{
+    grid-template-columns:1fr !important;
+    padding-right:18px !important;
+  }
+  .quote-review-image-art-header .brand{min-width:0}
+  .quote-review-image-art-header .nav-actions{
+    justify-self:start;
+    flex-wrap:wrap !important;
+  }
+  .image-art-card{
+    justify-self:start;
+    width:min(330px,100%);
+  }
+}
+
+
+/* LEFT PRIORITY REVIEW LAYOUT
+   The media player is only a rough preview, so the quote review side gets more room. */
+.review-grid{
+  grid-template-columns:minmax(0,1.62fr) minmax(360px,.95fr) !important;
+  gap:18px !important;
+}
+.review-grid .panel:first-child{
+  min-width:0;
+}
+.review-grid .media-panel{
+  min-width:340px;
+}
+.media-shell{
+  min-height:clamp(260px,34vw,470px) !important;
+}
+.quote-card{
+  padding-left:clamp(18px,2.2vw,34px) !important;
+  padding-right:clamp(18px,2.2vw,34px) !important;
+}
+.quote-main{
+  font-size:clamp(36px,3.35vw,62px) !important;
+}
+@media(max-width:1120px){
+  .review-grid{
+    grid-template-columns:1fr !important;
+  }
+  .review-grid .media-panel{
+    min-width:0;
+  }
+}
+
+</style></head><body><div class="page"><header class="topbar quote-review-image-art-header"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><nav class="nav-actions" aria-label="Quote tools navigation"><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="quote-review-denied.html">Denied Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><button class="btn primary" id="exportCurationBtn" type="button">Export GitHub JSON</button><a class="back-link" href="index.html">Back to Media</a><button class="btn" id="scoringKeyBtn" type="button">Scoring Key</button></nav>
+  <span class="image-art-divider" id="imageArtDivider" aria-hidden="true"></span>
+  <aside class="image-art-card" id="imageArtCard" aria-label="Selected episode artwork">
+    <img class="image-art-img" id="topRightEpisodeArtImageOnly" alt="" loading="lazy">
   </aside>
 </header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section><main class="app-view" id="appView"><div class="review-grid"><section class="panel"><div class="filters">
         <div class="field review-filter-top"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div>
@@ -1088,7 +1198,64 @@ function updateTopRightEpisodeArt(q){
   if(title)title.textContent=episodeLabel(q);
 }
 
-function render(){const q=state.filtered[state.index]||null;state.current=q;if(!q){$('quoteHeading').textContent=state.statusFilter==='unreviewed'?'Review complete':'No quotes match this filter';$('quoteCounter').textContent='—';$('quoteBefore').textContent='';$('quoteMain').textContent=state.statusFilter==='unreviewed'?'Everything in this selection has been reviewed.':'No quote is available for the current filters.';$('quoteAfter').textContent='';$('quoteMeta').innerHTML='';if($('scoreStrip'))$('scoreStrip').innerHTML='';if($('scoreDetails')){$('scoreDetails').innerHTML='';$('scoreDetails').classList.remove('is-visible');}if($('scoreToggle'))$('scoreToggle').textContent='Show Scoring Details';$('approvalText').value='';$('mediaTitle').textContent='Player';if(typeof updateTopRightEpisodeArt==='function')updateTopRightEpisodeArt(null);if(typeof updateInlineHeaderArt==='function')updateInlineHeaderArt(null);if(typeof updateReviewMediaArt==='function')updateReviewMediaArt(null);if(typeof setSelectedEpisodeArt==='function')setSelectedEpisodeArt(null);$('startTime').textContent='Start —';$('endTime').textContent='End —';$('mediaShell').textContent='Select video to load this quote at its timestamp.';return;}$('quoteHeading').textContent=episodeLabel(q);$('quoteCounter').textContent=`${state.index+1} of ${state.filtered.length}`;$('quoteBefore').textContent='';$('quoteMain').textContent=mainQuote(q);$('quoteAfter').textContent='';$('approvalText').value=mainQuote(q);const ep=q.episode||{},status=finalStatus(q);$('quoteMeta').innerHTML=[`<span class="pill">${esc(status==='candidate'?'unreviewed':status)}</span>`,q.publicSafe?'<span class="pill">Public Safe</span>':'',ep.series,ep.subtitle,ep.scripture,fmtDate(ep.date),fmtTime(q?.media?.start??q?.start??0)].filter(Boolean).join(' • ');$('mediaTitle').textContent=episodeLabel(q);
+
+/* IMAGE-ONLY TOP RIGHT EPISODE ART HELPERS */
+function imageOnlyClean(values){
+  for(const value of values){
+    const s=clean(value);
+    if(s)return s;
+  }
+  return '';
+}
+function imageOnlyYoutubeId(value){
+  const s=clean(value);
+  if(!s)return '';
+  if(/^[a-zA-Z0-9_-]{11}$/.test(s))return s;
+  const match=s.match(/(?:youtube\.com\/watch\?[^#]*v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
+  return match?match[1]:'';
+}
+function imageOnlyQuoteVideoId(q){
+  const values=[
+    q?.media?.youtubeId,q?.youtubeId,q?.videoId,q?.ytId,
+    q?.episode?.youtubeId,q?.episode?.videoId,q?.episode?.ytId,
+    q?.media?.videoUrl,q?.media?.youtubeUrl,q?.videoUrl,q?.youtubeUrl,
+    q?.episode?.videoUrl,q?.episode?.youtubeUrl,q?.episode?.shareUrl
+  ];
+  for(const value of values){
+    const id=imageOnlyYoutubeId(value);
+    if(id)return id;
+  }
+  return '';
+}
+function imageOnlyEpisodeArt(q){
+  const id=imageOnlyQuoteVideoId(q);
+  return imageOnlyClean([
+    q?.episode?.wideArt,q?.episode?.wideImage,q?.episode?.imageWide,q?.episode?.thumbnailWide,
+    q?.episode?.artWide,q?.episode?.artworkWide,q?.episode?.poster,q?.episode?.posterUrl,
+    q?.episode?.thumbnail,q?.episode?.thumbnailUrl,q?.episode?.image,q?.episode?.imageUrl,
+    q?.episode?.art,q?.episode?.artUrl,q?.episode?.artwork,q?.episode?.artworkUrl,
+    q?.media?.thumbnail,q?.media?.thumbnailUrl,q?.media?.image,q?.media?.imageUrl,
+    q?.thumbnail,q?.thumbnailUrl,q?.image,q?.imageUrl,q?.artwork,q?.artworkUrl,
+    id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:''
+  ]);
+}
+function updateImageOnlyEpisodeArt(q){
+  const card=$('imageArtCard'),divider=$('imageArtDivider'),img=$('topRightEpisodeArtImageOnly');
+  if(!card||!img)return;
+  const art=q?imageOnlyEpisodeArt(q):'';
+  if(art){
+    img.src=art;
+    card.classList.add('is-visible');
+    if(divider)divider.classList.add('is-visible');
+  }else{
+    img.removeAttribute('src');
+    card.classList.remove('is-visible');
+    if(divider)divider.classList.remove('is-visible');
+  }
+}
+
+function render(){const q=state.filtered[state.index]||null;state.current=q;if(!q){$('quoteHeading').textContent=state.statusFilter==='unreviewed'?'Review complete':'No quotes match this filter';$('quoteCounter').textContent='—';$('quoteBefore').textContent='';$('quoteMain').textContent=state.statusFilter==='unreviewed'?'Everything in this selection has been reviewed.':'No quote is available for the current filters.';$('quoteAfter').textContent='';$('quoteMeta').innerHTML='';if($('scoreStrip'))$('scoreStrip').innerHTML='';if($('scoreDetails')){$('scoreDetails').innerHTML='';$('scoreDetails').classList.remove('is-visible');}if($('scoreToggle'))$('scoreToggle').textContent='Show Scoring Details';$('approvalText').value='';$('mediaTitle').textContent='Player';if(typeof updateImageOnlyEpisodeArt==='function')updateImageOnlyEpisodeArt(null);if(typeof updateTopRightEpisodeArt==='function')updateTopRightEpisodeArt(null);if(typeof updateInlineHeaderArt==='function')updateInlineHeaderArt(null);if(typeof updateReviewMediaArt==='function')updateReviewMediaArt(null);if(typeof setSelectedEpisodeArt==='function')setSelectedEpisodeArt(null);$('startTime').textContent='Start —';$('endTime').textContent='End —';$('mediaShell').textContent='Select video to load this quote at its timestamp.';return;}$('quoteHeading').textContent=episodeLabel(q);$('quoteCounter').textContent=`${state.index+1} of ${state.filtered.length}`;$('quoteBefore').textContent='';$('quoteMain').textContent=mainQuote(q);$('quoteAfter').textContent='';$('approvalText').value=mainQuote(q);const ep=q.episode||{},status=finalStatus(q);$('quoteMeta').innerHTML=[`<span class="pill">${esc(status==='candidate'?'unreviewed':status)}</span>`,q.publicSafe?'<span class="pill">Public Safe</span>':'',ep.series,ep.subtitle,ep.scripture,fmtDate(ep.date),fmtTime(q?.media?.start??q?.start??0)].filter(Boolean).join(' • ');$('mediaTitle').textContent=episodeLabel(q);
+  if(typeof updateImageOnlyEpisodeArt==='function')updateImageOnlyEpisodeArt(q);
   if(typeof updateTopRightEpisodeArt==='function')updateTopRightEpisodeArt(q);
   if(typeof updateInlineHeaderArt==='function')updateInlineHeaderArt(q);
   if(typeof updateReviewMediaArt==='function')updateReviewMediaArt(q);
