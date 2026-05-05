@@ -101,6 +101,75 @@
   .score-details-grid,.scoring-key-row{grid-template-columns:1fr}
 }
 
+
+/* LIGHTER ADMIN READING SURFACE PATCH
+   Applies only to quote admin/review pages. Quote Wall is untouched. */
+:root{
+  --bg:#2b2b2d;
+  --panel:rgba(48,48,50,.88);
+  --border:rgba(255,255,255,.13);
+}
+body{
+  background:
+    radial-gradient(circle at top left,rgba(128,159,144,.10),transparent 34%),
+    linear-gradient(180deg,rgba(42,42,44,.92),rgba(34,34,36,.96)),
+    var(--desktop-bg) center/cover no-repeat fixed !important;
+  background-blend-mode:normal,multiply,normal !important;
+}
+.panel{
+  background:linear-gradient(180deg,rgba(58,58,60,.90),rgba(42,42,44,.88)) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+.gate{
+  background:linear-gradient(180deg,rgba(60,60,62,.94),rgba(42,42,44,.92)) !important;
+  border-color:rgba(255,255,255,.15) !important;
+}
+.quote-card,
+.quote-item,
+.note,
+.score-details,
+.score-detail-item,
+.empty{
+  background:rgba(255,255,255,.055) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+.media-shell,
+textarea,
+.field select,
+.field input,
+.search,
+.episode-select,
+.gate input{
+  background:rgba(22,22,24,.54) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+.btn,
+.back-link{
+  background:rgba(255,255,255,.075) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+.btn.primary{
+  background:linear-gradient(180deg,rgba(143,174,157,.30),rgba(143,174,157,.17)) !important;
+  border-color:rgba(143,174,157,.36) !important;
+}
+.pill,
+.score-pill{
+  background:rgba(255,255,255,.085) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+.panel-head,
+.filters,
+.toolbar{
+  border-color:rgba(255,255,255,.10) !important;
+}
+.context-line,
+.status,
+.small,
+.note,
+.meta{
+  color:rgba(255,255,255,.78) !important;
+}
+
 </style></head><body><div class="page"><header class="topbar"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Denied Quotes</h1></div></div><nav class="nav-actions" aria-label="Quote tools navigation"><a class="back-link" href="quote-review.html">Quote Review</a><a class="back-link" href="quote-review-approved.html">Approved Quotes</a><a class="back-link" href="approved-quotes-random.html">Quote Wall</a><a class="back-link" href="index.html">Back to Media</a><button class="btn" id="scoringKeyBtn" type="button">Scoring Key</button></nav></header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open</button><span class="status" id="gateStatus"></span></div></section><main class="app-view" id="appView"><section class="panel list-panel"><div class="toolbar"><div class="field"><label for="searchBox">Filter quotes</label><input class="search" id="searchBox" placeholder="Search quote, episode, series, date…"></div><div class="field"><label for="episodeFilter">Episode filter</label><select class="episode-select" id="episodeFilter"><option value="__all__">All episodes</option></select></div>
       <button class="btn primary" id="exportCurationBtn" type="button">Export GitHub JSON</button></div><div class="cards" id="cards"></div></section></main></div><div class="toast" id="toast"></div><script>
 const PASSWORD='1813';
