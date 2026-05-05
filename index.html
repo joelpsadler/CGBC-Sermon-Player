@@ -2885,9 +2885,18 @@ async function renderTranscriptLanguageOptions(item){
       const entries = await transcriptRuntimeLanguageEntries(item);
       if(item) item.__runtimeTranscriptLanguages = entries;
       const langs = Object.keys(entries);
-      els.transcriptLanguage.innerHTML = langs.map(lang=>'<option value="'+escapeHtml(lang)+'">'+escapeHtml(transcriptLanguageLabel(lang))+'</option>').join('');
-      if(langs.includes(state.transcript.language)) els.transcriptLanguage.value = state.transcript.language;
-      else if(langs[0]){ state.transcript.language = langs[0]; els.transcriptLanguage.value = langs[0]; }
+      const selectedBefore = normalizeTranscriptLangCode(state.transcript.language || els.transcriptLanguage.value || 'en');
+      els.transcriptLanguage.innerHTML = langs.map(lang=>{
+        const path = transcriptPathFromConfig(entries[lang]);
+        return '<option value="'+escapeHtml(lang)+'" data-path="'+escapeHtml(path)+'">'+escapeHtml(transcriptLanguageLabel(lang))+'</option>';
+      }).join('');
+      if(langs.includes(selectedBefore)){
+        state.transcript.language = selectedBefore;
+        els.transcriptLanguage.value = selectedBefore;
+      }else if(langs[0]){
+        state.transcript.language = langs[0];
+        els.transcriptLanguage.value = langs[0];
+      }
     }
     async function renderTranscriptPanel(){
       const item = state.currentItem;
@@ -2924,6 +2933,7 @@ async function renderTranscriptLanguageOptions(item){
         els.transcriptArt.innerHTML = art ? '<img src="'+escapeHtml(art)+'" alt="">' : '';
       }
       await renderTranscriptLanguageOptions(item);
+      if(els.transcriptLanguage && state.transcript.language) els.transcriptLanguage.value = state.transcript.language;
       els.transcriptFollowBtn.classList.toggle('active', state.transcript.mode === 'follow');
       els.transcriptReadBtn.classList.toggle('active', state.transcript.mode !== 'follow');
       try{
@@ -4573,12 +4583,15 @@ async function forceSelectedTranscriptLanguage(lang){
   if(!item || !els.transcriptLanguage) return false;
 
   const selectedLang = normalizeTranscriptLangCode(lang || els.transcriptLanguage.value || state.transcript.language || 'en');
+  const selectedOption = [...els.transcriptLanguage.options].find(opt=>normalizeTranscriptLangCode(opt.value)===selectedLang);
+  let path = selectedOption?.dataset?.path || '';
 
-  const entries = item.__runtimeTranscriptLanguages || await transcriptRuntimeLanguageEntries(item);
-  item.__runtimeTranscriptLanguages = entries;
-
-  const cfg = entries[selectedLang] || transcriptConfig(item, selectedLang);
-  const path = transcriptPathFromConfig(cfg);
+  if(!path){
+    const entries = item.__runtimeTranscriptLanguages || await transcriptRuntimeLanguageEntries(item);
+    item.__runtimeTranscriptLanguages = entries;
+    const cfg = entries[selectedLang] || transcriptConfig(item, selectedLang);
+    path = transcriptPathFromConfig(cfg);
+  }
 
   if(!path){
     toast('Transcript file not found for '+transcriptLanguageLabel(selectedLang)+'.');
@@ -4586,9 +4599,9 @@ async function forceSelectedTranscriptLanguage(lang){
   }
 
   state.transcript.language = selectedLang;
+  state.transcript.loadedLanguage = selectedLang;
   els.transcriptLanguage.value = selectedLang;
   state.transcript.itemId = item.stableId;
-  state.transcript.loadedLanguage = selectedLang;
   state.transcript.activeIndex = -1;
   state.transcript.segments = await loadTranscriptSegmentsFromPath(path);
   state.transcript.cache.set(item.stableId + ':' + selectedLang + ':' + path, state.transcript.segments);
@@ -4598,24 +4611,36 @@ async function forceSelectedTranscriptLanguage(lang){
   }
   renderTranscriptLines();
   if(!state.transcript.hidden && typeof startTranscriptClock === 'function') startTranscriptClock();
+
+  // Re-assert after render in case browser/UI styling tries to restore old value.
+  state.transcript.language = selectedLang;
+  els.transcriptLanguage.value = selectedLang;
   return true;
 }
 
 if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{
         const selectedLang = els.transcriptLanguage.value;
+        const priorSegments = state.transcript.segments || [];
         try{
+          els.transcriptLanguage.disabled = true;
           const loaded = await forceSelectedTranscriptLanguage(selectedLang);
           if(!loaded){
             state.transcript.language = selectedLang;
-            state.transcript.segments = [];
+            state.transcript.segments = priorSegments;
             state.transcript.activeIndex = -1;
-            await renderTranscriptPanel();
+            if(els.transcriptLanguage) els.transcriptLanguage.value = selectedLang;
           }
         }catch(err){
           console.warn('Selected transcript language could not load.', err);
           toast('Could not load '+transcriptLanguageLabel(selectedLang)+' transcript.');
           state.transcript.language = selectedLang;
+          state.transcript.segments = priorSegments;
           if(els.transcriptLanguage) els.transcriptLanguage.value = selectedLang;
+        }finally{
+          if(els.transcriptLanguage){
+            els.transcriptLanguage.disabled = false;
+            els.transcriptLanguage.value = selectedLang;
+          }
         }
       });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
