@@ -2787,8 +2787,10 @@ function transcriptLanguages(item){
   return Object.keys(transcriptLanguageEntries(item));
 }
 function transcriptConfig(item, lang){
-  const entries = transcriptLanguageEntries(item);
   const code = normalizeTranscriptLangCode(lang || state?.transcript?.language || 'en');
+  const runtime = item?.__runtimeTranscriptLanguages || {};
+  if(runtime[code]) return runtime[code];
+  const entries = transcriptLanguageEntries(item);
   return entries[code] || entries.en || {};
 }
 function transcriptPath(item, lang){
@@ -2820,9 +2822,71 @@ function transcriptLanguages(item){ const langs=item?.transcript?.languages || {
       state.transcript.cache.set(key, segments);
       return segments;
     }
-    function renderTranscriptLanguageOptions(item){
+    
+/* RUNTIME TRANSCRIPT LANGUAGE PROBE
+   Beginner note: this is intentionally front-end only. If the item only advertises
+   English, we use the English transcript path to try likely translated paths such
+   as /es/, /fr/, /de/, and /pt/. Only files that actually load are shown. */
+const TRANSCRIPT_PROBE_LANGS = ['en','es','fr','de','pt'];
+const transcriptLanguageProbeCache = new Map();
+
+function uniqueTranscriptProbePaths(paths){
+  const seen = new Set();
+  return paths.map(p=>String(p||'').trim()).filter(Boolean).filter(p=>{
+    if(seen.has(p)) return false;
+    seen.add(p);
+    return true;
+  });
+}
+function transcriptProbeCandidatePaths(basePath, lang){
+  const p = String(basePath||'').trim();
+  if(!p || lang === 'en') return p ? [p] : [];
+
+  const candidates = [];
+  candidates.push(p.replace(/\/en\//i, `/${lang}/`));
+  candidates.push(p.replace(/(^|[._-])en(?=\.json$)/i, `$1${lang}`));
+  candidates.push(p.replace(/\.en\.json$/i, `.${lang}.json`));
+  candidates.push(p.replace(/_en\.json$/i, `_${lang}.json`));
+  candidates.push(p.replace(/-en\.json$/i, `-${lang}.json`));
+  candidates.push(p.replace(/\/transcripts\//i, `/transcripts/${lang}/`));
+  candidates.push(p.replace(/\/transcript\//i, `/transcript/${lang}/`));
+  candidates.push(p.replace(/\/quotes\//i, `/quotes/${lang}/`));
+
+  return uniqueTranscriptProbePaths(candidates);
+}
+async function transcriptProbeExists(path){
+  const key = String(path||'').trim();
+  if(!key) return false;
+  if(transcriptLanguageProbeCache.has(key)) return transcriptLanguageProbeCache.get(key);
+  const promise = fetch(key, {cache:'no-store'})
+    .then(res=>res.ok)
+    .catch(()=>false);
+  transcriptLanguageProbeCache.set(key, promise);
+  return promise;
+}
+async function transcriptRuntimeLanguageEntries(item){
+  const entries = {...transcriptLanguageEntries(item)};
+  const basePath = transcriptPathFromConfig(entries.en) || transcriptPath(item,'en') || transcriptPathFromConfig(item?.transcript);
+  if(!basePath) return entries;
+
+  for(const lang of TRANSCRIPT_PROBE_LANGS){
+    if(entries[lang] && transcriptPathFromConfig(entries[lang])) continue;
+    const paths = transcriptProbeCandidatePaths(basePath, lang);
+    for(const path of paths){
+      if(await transcriptProbeExists(path)){
+        entries[lang] = {jsonFile:path};
+        break;
+      }
+    }
+  }
+  return entries;
+}
+
+async function renderTranscriptLanguageOptions(item){
       if(!els.transcriptLanguage) return;
-      const langs = transcriptLanguages(item);
+      const entries = await transcriptRuntimeLanguageEntries(item);
+      if(item) item.__runtimeTranscriptLanguages = entries;
+      const langs = Object.keys(entries);
       els.transcriptLanguage.innerHTML = langs.map(lang=>'<option value="'+escapeHtml(lang)+'">'+escapeHtml(transcriptLanguageLabel(lang))+'</option>').join('');
       if(langs.includes(state.transcript.language)) els.transcriptLanguage.value = state.transcript.language;
       else if(langs[0]){ state.transcript.language = langs[0]; els.transcriptLanguage.value = langs[0]; }
@@ -2861,7 +2925,7 @@ function transcriptLanguages(item){ const langs=item?.transcript?.languages || {
         const art = getEpisodeArt(item, 'video') || getEpisodeArt(item, state.mode);
         els.transcriptArt.innerHTML = art ? '<img src="'+escapeHtml(art)+'" alt="">' : '';
       }
-      renderTranscriptLanguageOptions(item);
+      await renderTranscriptLanguageOptions(item);
       els.transcriptFollowBtn.classList.toggle('active', state.transcript.mode === 'follow');
       els.transcriptReadBtn.classList.toggle('active', state.transcript.mode !== 'follow');
       try{
