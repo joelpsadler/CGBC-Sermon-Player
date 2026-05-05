@@ -764,6 +764,32 @@ textarea,
   }
 }
 
+
+/* REMOVE CANDIDATE TITLE BLOCK
+   The episode is already identified by the episode selector and artwork. */
+#candidateTitle,
+#candidateEpisodeTitle,
+#quoteTitle,
+.candidate-title,
+.candidate-title-row{
+  display:none !important;
+}
+
+/* Hide the entire section only when it is the Candidate Quote title band. */
+.panel-section:has(#candidateTitle),
+.panel-section:has(#candidateEpisodeTitle),
+.panel-section:has(#quoteTitle),
+.candidate-heading,
+.candidate-episode-heading{
+  display:none !important;
+}
+
+/* Safari-friendly fallback for the current markup:
+   hide the first section after filters, which is the Candidate Quote title band. */
+.filters + .panel-section{
+  display:none !important;
+}
+
 </style></head><body><div class="page"><header class="topbar quote-review-image-art-header"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><nav class="nav-actions quote-review-nav-rows" aria-label="Quote tools navigation">
     <div class="nav-row nav-row-primary">
       <a class="back-link" href="quote-review-approved.html">Approved Quotes</a>
@@ -787,6 +813,15 @@ textarea,
           <div class="field"><label for="depthFilter">Review depth</label><select id="depthFilter"><option value="25">Quick — 25 per episode</option><option value="40" selected>Standard — 40 per episode</option><option value="75">In-Depth — 75 per episode</option></select></div>
         </div>
       </div><header class="panel-head"><p class="eyebrow">Candidate quote</p><h2 class="panel-title" id="quoteHeading">Loading…</h2></header><div class="panel-body"><div class="quote-counter" id="quoteCounter">—</div><article class="quote-card"><div class="context-line" id="quoteBefore"></div><div class="quote-main" id="quoteMain"></div><div class="context-line" id="quoteAfter"></div></article><div class="meta" id="quoteMeta"></div><div><p class="eyebrow">Approval text</p><textarea id="approvalText"></textarea></div><div class="review-actions"><div class="review-row"><button class="btn" id="addPrevious" type="button">Add Previous</button><button class="btn" id="addNext" type="button">Add Next</button><span class="divider" aria-hidden="true"></span><button class="btn" id="prevBtn" type="button">Previous Quote</button><button class="btn" id="nextBtn" type="button">Next Quote</button></div><div class="review-row"><button class="btn danger" id="rejectBtn" type="button">Reject</button><button class="btn primary" id="approveBtn" type="button">Approve</button><button class="btn primary" id="featureBtn" type="button">Feature</button></div></div></div></section><section class="panel"><header class="panel-head"><p class="eyebrow">Review media</p><h2 class="panel-title" id="mediaTitle">Player</h2></header><div class="panel-body"><div class="actions"><button class="btn primary" id="loadVideo" type="button">Load Video Here</button><button class="btn" id="openVideo" type="button">Open Video</button></div><div class="media-shell" id="mediaShell">Select video to load this quote at its timestamp.</div><div class="time-row"><span id="startTime">Start —</span><span id="endTime">End —</span></div><div class="note">Review uses the YouTube video timestamp. Audio preview is intentionally omitted for accuracy.</div></div></section></div></main></div><div class="toast" id="toast"></div><script>
+
+function removeCandidateTitleBlock(){
+  const labels=[...document.querySelectorAll('.eyebrow,p,div,span')].filter(el=>clean(el.textContent).toLowerCase()==='candidate quote');
+  for(const label of labels){
+    const block=label.closest('.panel-section')||label.parentElement;
+    if(block)block.style.display='none';
+  }
+}
+
 const PASSWORD='1813';
 const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuoteReviewAuth'];
 const AUTH_TTL_MS=12*60*60*1000;
@@ -1443,4 +1478,8 @@ $('episodeFilter')?.addEventListener('change',()=>{state.episodeFilter=$('episod
 $('depthFilter')?.addEventListener('change',()=>{state.depthCap=Number($('depthFilter').value)||40;applyFilters(true);});
 $('scoreToggle')?.addEventListener('click',()=>{state.scoreOpen=!state.scoreOpen;render();});$('statusFilter')?.addEventListener('change',()=>{state.statusFilter=$('statusFilter').value;applyFilters(true);});$('addPrevious')?.addEventListener('click',()=>addContext('before').catch(e=>{console.warn(e);toast('Could not add previous sentence.');}));$('addNext')?.addEventListener('click',()=>addContext('after').catch(e=>{console.warn(e);toast('Could not add next sentence.');}));$('prevBtn')?.addEventListener('click',()=>{state.index=Math.max(0,state.index-1);render();});$('nextBtn')?.addEventListener('click',()=>{state.index=Math.min(state.filtered.length-1,state.index+1);render();});$('rejectBtn')?.addEventListener('click',()=>decision('rejected'));$('approveBtn')?.addEventListener('click',()=>decision('approved'));$('featureBtn')?.addEventListener('click',()=>decision('featured'));$('loadVideo')?.addEventListener('click',loadVideoHere);$('openVideo')?.addEventListener('click',openVideo);$('approvalText')?.addEventListener('input',()=>{$('quoteMain').textContent=$('approvalText').value.trim()||mainQuote(state.current);});$('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCuration(state.all);});$('scoringKeyBtn')?.addEventListener('click',showScoringKey);
 bindGate(openApp);
+
+document.addEventListener('DOMContentLoaded',()=>setTimeout(removeCandidateTitleBlock,0));
+setInterval(removeCandidateTitleBlock,750);
+
 </script></body></html>
