@@ -2036,7 +2036,7 @@
       applyTranscriptVisibility();
     }
     function collapseMobileTranscriptForNav(){
-      if(!isMobileViewport() || !state.currentItem?.transcript?.hasTranscript) return;
+      if(!isMobileViewport() || !itemHasTranscript(state.currentItem)) return;
       // Collapse only for this navigation moment. This keeps the player and browsing
       // usable on phones without changing the desktop transcript behavior.
       state.transcript.hidden = true;
@@ -2056,7 +2056,7 @@
         els.transcriptVisibilityBtn.setAttribute('aria-expanded', state.transcript.hidden ? 'false' : 'true');
       }
       if(state.transcript.hidden && typeof stopTranscriptClock === 'function') stopTranscriptClock();
-      else if(!state.transcript.hidden && state.currentItem?.transcript?.hasTranscript && typeof startTranscriptClock === 'function') startTranscriptClock();
+      else if(!state.transcript.hidden && itemHasTranscript(state.currentItem) && typeof startTranscriptClock === 'function') startTranscriptClock();
     }
 
     function escapeHtml(v){return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
@@ -2594,7 +2594,7 @@
           if(idleQuoteText(clone)) approved.push(clone);
         }
         state.idleQuotes = approved;
-        if(approved.length){ state.idleQuoteIndex = Math.floor(Math.random() * approved.length); renderIdleQuote(); startIdleQuoteCycle(); }
+        if(approved.length){ state.idleQuoteIndex = Math.floor(Math.random() * approved.length); renderIdleQuote(); safeRememberIdleQuote(state.idleQuotes[state.idleQuoteIndex]); startIdleQuoteCycle(); }
         else renderIdleQuote();
       }catch(err){ console.warn('Idle quote wall could not load.',err); renderIdleQuote(); }
     }
@@ -2619,7 +2619,87 @@
         if(els.idleEpisodeArt && art) els.idleEpisodeArt.src = art;
       }
     }
-    function nextIdleQuote(){ if(!state.idleQuotes.length) return; state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length); renderIdleQuote(); startIdleQuoteCycle(); }
+    
+/* SAFE IDLE QUOTE SIMILARITY SPACING
+   Narrow patch: only affects choosing the next idle quote.
+   Desktop/mobile share this idle quote rotation. */
+const SAFE_IDLE_QUOTE_SIMILARITY_THRESHOLD = 0.86;
+const SAFE_IDLE_QUOTE_RECENT_WINDOW = 8;
+
+function safeIdleQuoteNormalizeForSpacing(text){
+  return String(text||'')
+    .toLowerCase()
+    .replace(/[“”"']/g,'')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function safeIdleQuoteSpacingTokens(text){
+  const norm = safeIdleQuoteNormalizeForSpacing(text);
+  if(!norm) return [];
+  const words = norm.split(/\s+/).filter(w=>w.length>2);
+  if(words.length < 4) return words;
+  const grams = [];
+  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
+  return grams.length ? grams : words;
+}
+function safeIdleQuoteSimilarity(a,b){
+  const A = new Set(safeIdleQuoteSpacingTokens(a));
+  const B = new Set(safeIdleQuoteSpacingTokens(b));
+  if(!A.size || !B.size) return 0;
+  let hit = 0;
+  for(const item of A){ if(B.has(item)) hit++; }
+  return (2 * hit) / (A.size + B.size);
+}
+function safeIdleQuoteTextForSpacing(q){
+  try{return safeIdleQuoteNormalizeForSpacing(idleQuoteText(q));}
+  catch(_){return '';}
+}
+function safeIdleQuoteEpisodeForSpacing(q){
+  return q?.episode?.stableId || q?.episodeStableId || q?.stableId || '';
+}
+function safeRememberIdleQuote(q){
+  if(!q) return;
+  if(!Array.isArray(state.safeIdleQuoteRecent)) state.safeIdleQuoteRecent = [];
+  state.safeIdleQuoteRecent.unshift({
+    id:q?.id||q?.quoteId||'',
+    key:safeIdleQuoteTextForSpacing(q),
+    episode:safeIdleQuoteEpisodeForSpacing(q)
+  });
+  state.safeIdleQuoteRecent = state.safeIdleQuoteRecent.filter(item=>item.key).slice(0, SAFE_IDLE_QUOTE_RECENT_WINDOW);
+}
+function safeIdleQuoteTooClose(q, strictEpisode=true){
+  const recent = Array.isArray(state.safeIdleQuoteRecent) ? state.safeIdleQuoteRecent : [];
+  const key = safeIdleQuoteTextForSpacing(q);
+  const episode = safeIdleQuoteEpisodeForSpacing(q);
+  if(!key) return false;
+  return recent.some(prior=>{
+    if(prior.id && prior.id === (q?.id||q?.quoteId||'')) return true;
+    if(safeIdleQuoteSimilarity(key, prior.key) >= SAFE_IDLE_QUOTE_SIMILARITY_THRESHOLD) return true;
+    if(strictEpisode && prior.episode && episode && prior.episode === episode) return true;
+    return false;
+  });
+}
+function safeChooseIdleQuoteIndex(){
+  const quotes = state.idleQuotes || [];
+  if(!quotes.length) return 0;
+  if(quotes.length === 1) return 0;
+  const current = state.idleQuoteIndex;
+  const candidates = quotes.map((q,i)=>({q,i})).filter(item=>item.i !== current);
+  let pool = candidates.filter(item=>!safeIdleQuoteTooClose(item.q,true));
+  if(!pool.length) pool = candidates.filter(item=>!safeIdleQuoteTooClose(item.q,false));
+  if(!pool.length) pool = candidates;
+  return pool[Math.floor(Math.random() * pool.length)].i;
+}
+
+function nextIdleQuote(){
+      if(!state.idleQuotes.length) return;
+      state.idleQuoteIndex = safeChooseIdleQuoteIndex();
+      renderIdleQuote();
+      safeRememberIdleQuote(state.idleQuotes[state.idleQuoteIndex]);
+      startIdleQuoteCycle();
+    }
     function startIdleQuoteCycle(){
       if(state.idleQuoteTimer) window.clearInterval(state.idleQuoteTimer);
       if(state.idleQuotePaused || !state.idleQuotes.length) return;
@@ -2634,12 +2714,95 @@
     /* -------------------------------------------------------------------------
        DESKTOP TRANSCRIPT PANEL
        ------------------------------------------------------------------------- */
-    function transcriptLanguageLabel(code){ const labels={en:'English',es:'Spanish',fr:'French',de:'German',pt:'Portuguese',zh:'Chinese',ko:'Korean'}; return labels[String(code||'').toLowerCase()] || String(code||'Transcript').toUpperCase(); }
-    function transcriptLanguages(item){ const langs=item?.transcript?.languages || {}; return Object.keys(langs).length ? Object.keys(langs) : (item?.transcript?.jsonFile ? ['en'] : []); }
+    function transcriptLanguageLabel(code){
+  const labels={
+    en:'English',eng:'English',
+    es:'Spanish',spa:'Spanish',
+    fr:'French',fra:'French',fre:'French',
+    de:'German',deu:'German',ger:'German',
+    pt:'Portuguese',por:'Portuguese',
+    zh:'Chinese',zho:'Chinese',chi:'Chinese',
+    ko:'Korean',kor:'Korean',
+    it:'Italian',ita:'Italian',
+    ja:'Japanese',jpn:'Japanese'
+  };
+  return labels[String(code||'').toLowerCase()] || String(code||'Transcript').toUpperCase();
+}
+    function normalizeTranscriptLangCode(code){
+  const raw=String(code||'').trim().toLowerCase();
+  const aliases={eng:'en',spa:'es',fra:'fr',fre:'fr',deu:'de',ger:'de',por:'pt',zho:'zh',chi:'zh',kor:'ko',jpn:'ja',ita:'it'};
+  return aliases[raw] || raw;
+}
+function transcriptPathFromConfig(cfg){
+  if(!cfg) return '';
+  if(typeof cfg === 'string') return cfg;
+  return cfg.jsonFile || cfg.displayJsonFile || cfg.path || cfg.file || cfg.url ||
+         cfg.transcriptJson || cfg.transcriptPath || cfg.displayPath ||
+         cfg.displayJson || cfg.cleanJson || cfg.cleanJsonFile ||
+         cfg.translatedJson || cfg.translatedJsonFile || cfg.segmentsJson || '';
+}
+function addTranscriptLanguageEntry(out, code, cfg){
+  const lang = normalizeTranscriptLangCode(code);
+  if(!lang) return;
+  const path = transcriptPathFromConfig(cfg);
+  if(!path) return;
+  out[lang] = (typeof cfg === 'string') ? {jsonFile:cfg} : {...cfg};
+}
+function transcriptLanguageEntries(item){
+  const t = item?.transcript || {};
+  const out = {};
+
+  // English/base transcript fallback.
+  addTranscriptLanguageEntry(out, 'en', t);
+
+  // Most likely current shape: transcript.languages = { en:{...}, es:{...}, ... }
+  for(const [code,cfg] of Object.entries(t.languages || {})) addTranscriptLanguageEntry(out, code, cfg);
+
+  // Common alternate names from translation/script outputs.
+  for(const containerName of ['translations','translated','languageFiles','files','byLanguage','langs','available','availableTranslations']){
+    const container = t[containerName];
+    if(Array.isArray(container)){
+      for(const entry of container){
+        if(typeof entry === 'string') continue;
+        const code = entry?.lang || entry?.language || entry?.code || entry?.locale;
+        addTranscriptLanguageEntry(out, code, entry);
+      }
+    }else if(container && typeof container === 'object'){
+      for(const [code,cfg] of Object.entries(container)) addTranscriptLanguageEntry(out, code, cfg);
+    }
+  }
+
+  // Last-resort scan: direct transcript.es / transcript.fr / transcript.de style keys.
+  for(const [code,cfg] of Object.entries(t)){
+    if(/^[a-z]{2,3}(-[a-z]{2})?$/i.test(code)) addTranscriptLanguageEntry(out, code, cfg);
+  }
+
+  const order = ['en','es','fr','de','pt','zh','ko','it','ja'];
+  const sorted = {};
+  for(const code of order){ if(out[code]) sorted[code]=out[code]; }
+  for(const code of Object.keys(out).sort()){ if(!sorted[code]) sorted[code]=out[code]; }
+  return sorted;
+}
+function transcriptLanguages(item){
+  return Object.keys(transcriptLanguageEntries(item));
+}
+function transcriptConfig(item, lang){
+  const entries = transcriptLanguageEntries(item);
+  const code = normalizeTranscriptLangCode(lang || state?.transcript?.language || 'en');
+  return entries[code] || entries.en || {};
+}
+function transcriptPath(item, lang){
+  return transcriptPathFromConfig(transcriptConfig(item, lang));
+}
+function itemHasTranscript(item){
+  return transcriptLanguages(item).some(lang=>!!transcriptPath(item, lang));
+}
+
+function transcriptLanguages(item){ const langs=item?.transcript?.languages || {}; return Object.keys(langs).length ? Object.keys(langs) : (item?.transcript?.jsonFile ? ['en'] : []); }
     function transcriptConfig(item, lang){ const langs=item?.transcript?.languages || {}; return langs[lang] || (lang==='en' ? item?.transcript : null) || {}; }
     function transcriptPath(item, lang){ const cfg=transcriptConfig(item, lang); return cfg?.jsonFile || cfg?.displayJsonFile || item?.transcript?.jsonFile || item?.transcript?.displayJsonFile || ''; }
     async function loadTranscriptForItem(item, lang){
-      if(!item || !item?.transcript?.hasTranscript) return [];
+      if(!item || !itemHasTranscript(item)) return [];
       const path = transcriptPath(item, lang);
       if(!path) return [];
       const key = item.stableId + ':' + lang + ':' + path;
@@ -2647,8 +2810,12 @@
       const res = await fetch(path, {cache:'no-store'});
       if(!res.ok) throw new Error('Transcript not found.');
       const json = await res.json();
-      const segments = Array.isArray(json?.segments) ? json.segments.map((seg,i)=>({
-        index: Number(seg.index || i+1), start:Number(seg.start || 0), end:Number(seg.end || seg.start || 0), text:String(seg.text || '').trim()
+      const raw = Array.isArray(json) ? json : (json?.segments || json?.cues || json?.items || json?.transcript || json?.entries || json?.lines || []);
+      const segments = Array.isArray(raw) ? raw.map((seg,i)=>({
+        index: Number(seg.index || i+1),
+        start: Number(seg.start ?? seg.startSeconds ?? seg.startTimeSeconds ?? seg.t0 ?? seg.from ?? 0),
+        end: Number(seg.end ?? seg.endSeconds ?? seg.endTimeSeconds ?? seg.t1 ?? seg.to ?? seg.start ?? 0),
+        text: String(seg.text || seg.displayText || seg.line || seg.caption || seg.transcript || '').trim()
       })).filter(seg=>seg.text) : [];
       state.transcript.cache.set(key, segments);
       return segments;
@@ -2663,7 +2830,7 @@
     async function renderTranscriptPanel(){
       const item = state.currentItem;
       if(!els.transcriptPanel || !els.transcriptLines) return;
-      if(!item || !item?.transcript?.hasTranscript){
+      if(!item || !itemHasTranscript(item)){
         els.transcriptPanel.classList.remove('is-visible');
         els.transcriptPanel.classList.remove('is-video-search-only');
         if(typeof stopTranscriptClock === 'function') stopTranscriptClock();
@@ -2846,7 +3013,7 @@
     function startTranscriptClock(){
       stopTranscriptClock();
       const tick = ()=>{
-        if(state.currentItem?.transcript?.hasTranscript) updateTranscriptActiveLine(currentMediaTime());
+        if(itemHasTranscript(state.currentItem)) updateTranscriptActiveLine(currentMediaTime());
         transcriptRaf = window.requestAnimationFrame(tick);
       };
       transcriptRaf = window.requestAnimationFrame(tick);
@@ -3786,7 +3953,7 @@
                 ? `<div class="episode-load-badge is-loaded"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle></svg><span>Loaded</span></div>`
                 : `<div class="episode-load-badge is-load"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span>Load</span></div>`)
           : '';
-        const subtitleBadge = episodeLevel && state.mode === 'audio' && row?.transcript?.hasTranscript
+        const subtitleBadge = episodeLevel && state.mode === 'audio' && itemHasTranscript(row)
           ? `<div class="subtitle-badge transcript-available-badge" title="Transcript available" aria-label="Transcript available"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7.35L19 8.4v11.85H7z"></path><path d="M14 3.75V8.5h5"></path><path d="M10 12h6"></path><path d="M10 15h6"></path><path d="M10 18h4"></path></svg></div>`
           : '';
         return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
