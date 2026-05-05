@@ -2800,14 +2800,12 @@ function itemHasTranscript(item){
   return transcriptLanguages(item).some(lang=>!!transcriptPath(item, lang));
 }
 
-function transcriptLanguages(item){ const langs=item?.transcript?.languages || {}; return Object.keys(langs).length ? Object.keys(langs) : (item?.transcript?.jsonFile ? ['en'] : []); }
-    function transcriptConfig(item, lang){ const langs=item?.transcript?.languages || {}; return langs[lang] || (lang==='en' ? item?.transcript : null) || {}; }
-    function transcriptPath(item, lang){ const cfg=transcriptConfig(item, lang); return cfg?.jsonFile || cfg?.displayJsonFile || item?.transcript?.jsonFile || item?.transcript?.displayJsonFile || ''; }
-    async function loadTranscriptForItem(item, lang){
+async function loadTranscriptForItem(item, lang){
       if(!item || !itemHasTranscript(item)) return [];
-      const path = transcriptPath(item, lang);
+      const selectedLang = normalizeTranscriptLangCode(lang || state?.transcript?.language || 'en');
+      const path = transcriptPath(item, selectedLang);
       if(!path) return [];
-      const key = item.stableId + ':' + lang + ':' + path;
+      const key = item.stableId + ':' + selectedLang + ':' + path;
       if(state.transcript.cache.has(key)) return state.transcript.cache.get(key);
       const res = await fetch(path, {cache:'no-store'});
       if(!res.ok) throw new Error('Transcript not found.');
@@ -4551,7 +4549,24 @@ async function renderTranscriptLanguageOptions(item){
           setIdleQuotePaused(!state.idleQuotePaused);
         }
       });
-      if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{ state.transcript.language=els.transcriptLanguage.value; state.transcript.segments=[]; state.transcript.activeIndex=-1; await renderTranscriptPanel(); });
+      if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{
+        const selectedLang = els.transcriptLanguage.value;
+        state.transcript.language = selectedLang;
+        state.transcript.segments = [];
+        state.transcript.activeIndex = -1;
+        if(state.currentItem){
+          // Preserve and use the selected runtime/probed language path.
+          await renderTranscriptLanguageOptions(state.currentItem);
+          state.transcript.language = selectedLang;
+          if(els.transcriptLanguage) els.transcriptLanguage.value = selectedLang;
+          try{
+            state.transcript.segments = await loadTranscriptForItem(state.currentItem, selectedLang);
+          }catch(_){
+            state.transcript.segments = [];
+          }
+        }
+        await renderTranscriptPanel();
+      });
       if(els.transcriptFollowBtn) els.transcriptFollowBtn.addEventListener('click', ()=>{ state.transcript.mode='follow'; renderTranscriptPanel(); });
       if(els.transcriptReadBtn) els.transcriptReadBtn.addEventListener('click', ()=>{ state.transcript.mode='read'; renderTranscriptPanel(); });
       if(els.transcriptVisibilityBtn) els.transcriptVisibilityBtn.addEventListener('click', ()=>{ setTranscriptHidden(!state.transcript.hidden); renderTranscriptPanel(); });
