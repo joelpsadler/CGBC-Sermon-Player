@@ -2580,74 +2580,7 @@
       return url.toString();
     }
     function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
-    
-/* IDLE QUOTE SIMILARITY SPACING
-   Keeps approved/featured quote variations available, but avoids showing similar quotes too close together.
-   This feeds the shared idle quote display used by desktop and mobile layouts. */
-const IDLE_QUOTE_SIMILARITY_THRESHOLD = 0.86;
-const IDLE_QUOTE_RECENT_WINDOW = 8;
-
-function idleQuoteNormalizeForSpacing(text){
-  return String(text||'')
-    .toLowerCase()
-    .replace(/[“”"']/g,'')
-    .replace(/[^a-z0-9\s]/g,' ')
-    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
-    .replace(/\s+/g,' ')
-    .trim();
-}
-function idleQuoteSpacingTokens(text){
-  const norm = idleQuoteNormalizeForSpacing(text);
-  if(!norm) return [];
-  const words = norm.split(/\s+/).filter(w=>w.length>2);
-  if(words.length < 4) return words;
-  const grams = [];
-  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
-  return grams.length ? grams : words;
-}
-function idleQuoteSimilarity(a,b){
-  const A = new Set(idleQuoteSpacingTokens(a));
-  const B = new Set(idleQuoteSpacingTokens(b));
-  if(!A.size || !B.size) return 0;
-  let hit = 0;
-  for(const item of A){ if(B.has(item)) hit++; }
-  return (2 * hit) / (A.size + B.size);
-}
-function idleQuoteSpacingKey(q){
-  return idleQuoteNormalizeForSpacing(idleQuoteText(q));
-}
-function idleQuoteTooSimilarToRecent(q){
-  const recent = state.idleQuoteRecent || [];
-  const key = idleQuoteSpacingKey(q);
-  if(!key) return false;
-  return recent.some(prior => idleQuoteSimilarity(key, prior.key) >= IDLE_QUOTE_SIMILARITY_THRESHOLD || (prior.episode && prior.episode === (q?.episode?.stableId||q?.episodeStableId||'')));
-}
-function rememberIdleQuoteForSpacing(q){
-  if(!q) return;
-  if(!Array.isArray(state.idleQuoteRecent)) state.idleQuoteRecent = [];
-  state.idleQuoteRecent.unshift({
-    key: idleQuoteSpacingKey(q),
-    episode: q?.episode?.stableId || q?.episodeStableId || '',
-    id: q?.id || q?.quoteId || ''
-  });
-  state.idleQuoteRecent = state.idleQuoteRecent.filter(item=>item.key).slice(0, IDLE_QUOTE_RECENT_WINDOW);
-}
-function chooseSpacedIdleQuoteIndex(){
-  const quotes = state.idleQuotes || [];
-  if(!quotes.length) return 0;
-  if(quotes.length === 1) return 0;
-
-  const current = state.idleQuoteIndex;
-  const candidates = quotes.map((q,i)=>({q,i}))
-    .filter(item => item.i !== current);
-
-  const ideal = candidates.filter(item => !idleQuoteTooSimilarToRecent(item.q));
-  const pool = ideal.length ? ideal : candidates;
-
-  return pool[Math.floor(Math.random() * pool.length)].i;
-}
-
-async function loadIdleQuotes(){
+    async function loadIdleQuotes(){
       try{
         const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
         const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
@@ -2661,13 +2594,7 @@ async function loadIdleQuotes(){
           if(idleQuoteText(clone)) approved.push(clone);
         }
         state.idleQuotes = approved;
-        state.idleQuoteRecent = [];
-        if(approved.length){
-          state.idleQuoteIndex = Math.floor(Math.random() * approved.length);
-          renderIdleQuote();
-          rememberIdleQuoteForSpacing(state.idleQuotes[state.idleQuoteIndex]);
-          startIdleQuoteCycle();
-        }
+        if(approved.length){ state.idleQuoteIndex = Math.floor(Math.random() * approved.length); renderIdleQuote(); safeRememberIdleQuote(state.idleQuotes[state.idleQuoteIndex]); startIdleQuoteCycle(); }
         else renderIdleQuote();
       }catch(err){ console.warn('Idle quote wall could not load.',err); renderIdleQuote(); }
     }
@@ -2692,11 +2619,91 @@ async function loadIdleQuotes(){
         if(els.idleEpisodeArt && art) els.idleEpisodeArt.src = art;
       }
     }
-    function nextIdleQuote(){
+    
+/* SAFE IDLE QUOTE SIMILARITY SPACING
+   Narrow patch: only affects choosing the next idle quote.
+   Does not touch transcript loading, transcript language detection, or player logic. */
+const SAFE_IDLE_QUOTE_SIMILARITY_THRESHOLD = 0.86;
+const SAFE_IDLE_QUOTE_RECENT_WINDOW = 8;
+
+function safeIdleQuoteNormalizeForSpacing(text){
+  return String(text||'')
+    .toLowerCase()
+    .replace(/[“”"']/g,'')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function safeIdleQuoteSpacingTokens(text){
+  const norm = safeIdleQuoteNormalizeForSpacing(text);
+  if(!norm) return [];
+  const words = norm.split(/\s+/).filter(w=>w.length>2);
+  if(words.length < 4) return words;
+  const grams = [];
+  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
+  return grams.length ? grams : words;
+}
+function safeIdleQuoteSimilarity(a,b){
+  const A = new Set(safeIdleQuoteSpacingTokens(a));
+  const B = new Set(safeIdleQuoteSpacingTokens(b));
+  if(!A.size || !B.size) return 0;
+  let hit = 0;
+  for(const item of A){ if(B.has(item)) hit++; }
+  return (2 * hit) / (A.size + B.size);
+}
+function safeIdleQuoteTextForSpacing(q){
+  try{
+    return safeIdleQuoteNormalizeForSpacing(idleQuoteText(q));
+  }catch(_){
+    return '';
+  }
+}
+function safeIdleQuoteEpisodeForSpacing(q){
+  return q?.episode?.stableId || q?.episodeStableId || q?.stableId || '';
+}
+function safeRememberIdleQuote(q){
+  if(!q) return;
+  if(!Array.isArray(state.safeIdleQuoteRecent)) state.safeIdleQuoteRecent = [];
+  state.safeIdleQuoteRecent.unshift({
+    id:q?.id||q?.quoteId||'',
+    key:safeIdleQuoteTextForSpacing(q),
+    episode:safeIdleQuoteEpisodeForSpacing(q)
+  });
+  state.safeIdleQuoteRecent = state.safeIdleQuoteRecent.filter(item=>item.key).slice(0, SAFE_IDLE_QUOTE_RECENT_WINDOW);
+}
+function safeIdleQuoteTooClose(q, strictEpisode=true){
+  const recent = Array.isArray(state.safeIdleQuoteRecent) ? state.safeIdleQuoteRecent : [];
+  const key = safeIdleQuoteTextForSpacing(q);
+  const episode = safeIdleQuoteEpisodeForSpacing(q);
+  if(!key) return false;
+  return recent.some(prior=>{
+    if(prior.id && prior.id === (q?.id||q?.quoteId||'')) return true;
+    if(safeIdleQuoteSimilarity(key, prior.key) >= SAFE_IDLE_QUOTE_SIMILARITY_THRESHOLD) return true;
+    if(strictEpisode && prior.episode && episode && prior.episode === episode) return true;
+    return false;
+  });
+}
+function safeChooseIdleQuoteIndex(){
+  const quotes = state.idleQuotes || [];
+  if(!quotes.length) return 0;
+  if(quotes.length === 1) return 0;
+
+  const current = state.idleQuoteIndex;
+  const candidates = quotes.map((q,i)=>({q,i})).filter(item=>item.i !== current);
+
+  let pool = candidates.filter(item=>!safeIdleQuoteTooClose(item.q,true));
+  if(!pool.length) pool = candidates.filter(item=>!safeIdleQuoteTooClose(item.q,false));
+  if(!pool.length) pool = candidates;
+
+  return pool[Math.floor(Math.random() * pool.length)].i;
+}
+
+function nextIdleQuote(){
       if(!state.idleQuotes.length) return;
-      state.idleQuoteIndex = chooseSpacedIdleQuoteIndex();
+      state.idleQuoteIndex = safeChooseIdleQuoteIndex();
       renderIdleQuote();
-      rememberIdleQuoteForSpacing(state.idleQuotes[state.idleQuoteIndex]);
+      safeRememberIdleQuote(state.idleQuotes[state.idleQuoteIndex]);
       startIdleQuoteCycle();
     }
     function startIdleQuoteCycle(){
