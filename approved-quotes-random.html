@@ -126,16 +126,119 @@ function exportCurationJson(quotes){const entries=allReviewEntries(quotes);const
 async function bootstrapAuth(openFn){const gate=$('gate'),password=$('passwordInput'),btn=$('unlockBtn'),status=$('gateStatus');async function unlock(){if(String(password.value||'').trim()!==PASSWORD){status.textContent='Wrong password.';return;}markUnlocked();status.textContent='Loading…';await openFn();}if(btn)btn.addEventListener('click',unlock);if(password)password.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});if(isUnlocked()){if(status)status.textContent='Loading…';await openFn();}}
 function buildRepoReviewMap(rows){const map=new Map();for(const r of rows||[]){if(r?.quoteId)map.set(r.quoteId,r);}return map;}
 
+
+/* QUOTE WALL SIMILARITY SPACING
+   Keeps all approved/featured quotes available, but avoids showing similar quotes
+   or the same episode too close together when possible. */
+const WALL_SIMILARITY_THRESHOLD = 0.86;
+const WALL_RECENT_WINDOW = 8;
+let recentWallQuotes = [];
+
+function wallNormalizeQuoteText(text){
+  return String(text||'')
+    .toLowerCase()
+    .replace(/[“”"']/g,'')
+    .replace(/[^a-z0-9\s]/g,' ')
+    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function wallQuoteTokens(text){
+  const norm = wallNormalizeQuoteText(text);
+  if(!norm) return [];
+  const words = norm.split(/\s+/).filter(w=>w.length>2);
+  if(words.length < 4) return words;
+  const grams = [];
+  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
+  return grams.length ? grams : words;
+}
+function wallQuoteSimilarity(a,b){
+  const A = new Set(wallQuoteTokens(a));
+  const B = new Set(wallQuoteTokens(b));
+  if(!A.size || !B.size) return 0;
+  let hit = 0;
+  for(const item of A){ if(B.has(item)) hit++; }
+  return (2 * hit) / (A.size + B.size);
+}
+function wallQuoteSpacingKey(q){
+  return wallNormalizeQuoteText(quoteText(q));
+}
+function wallQuoteEpisodeKey(q){
+  return epKey(q);
+}
+function rememberWallQuote(q){
+  if(!q) return;
+  recentWallQuotes.unshift({
+    id:q?.id||q?.quoteId||'',
+    key:wallQuoteSpacingKey(q),
+    episode:wallQuoteEpisodeKey(q)
+  });
+  recentWallQuotes = recentWallQuotes.filter(item=>item.key).slice(0, WALL_RECENT_WINDOW);
+}
+function wallQuoteTooClose(q, strictEpisode=true){
+  const key = wallQuoteSpacingKey(q);
+  const episode = wallQuoteEpisodeKey(q);
+  if(!key) return false;
+  return recentWallQuotes.some(prior=>{
+    if(prior.id && prior.id === (q?.id||q?.quoteId||'')) return true;
+    if(wallQuoteSimilarity(key, prior.key) >= WALL_SIMILARITY_THRESHOLD) return true;
+    if(strictEpisode && prior.episode && episode && prior.episode === episode) return true;
+    return false;
+  });
+}
+function chooseWallQuoteIndex(){
+  if(!quotes.length) return 0;
+  if(quotes.length === 1) return 0;
+
+  const current = idx;
+  const candidates = quotes.map((q,i)=>({q,i})).filter(item=>item.i !== current);
+
+  // Best case: avoid similar text and same episode.
+  let pool = candidates.filter(item=>!wallQuoteTooClose(item.q,true));
+
+  // If the approved pool is small, relax same-episode spacing but keep text similarity spacing.
+  if(!pool.length) pool = candidates.filter(item=>!wallQuoteTooClose(item.q,false));
+
+  // Last resort: keep the wall moving rather than freezing.
+  if(!pool.length) pool = candidates;
+
+  return pool[Math.floor(Math.random()*pool.length)].i;
+}
+
 let quotes=[],idx=0,libraryMap=new Map(),cycleTimer=null,isPaused=false;
 function approved(q){const st=effectiveStatus(q);return ['approved','featured'].includes(st);}
-function chooseNext(){if(!quotes.length)return;idx=(idx+1)%quotes.length;renderQuote();}
+function chooseNext(){
+  if(!quotes.length)return;
+  idx=chooseWallQuoteIndex();
+  renderQuote();
+  rememberWallQuote(quotes[idx]);
+}
 function renderQuote(){const q=quotes[idx];const box=$('quoteBox');box.classList.remove('fade');void box.offsetWidth;box.classList.add('fade');const qt=quoteText(q);$('quoteText').textContent=qt;const words=qt.split(/\s+/).filter(Boolean).length;const chars=qt.length;const scale=chars>260?.66:chars>220?.72:words>46?.74:words>38?.82:words>28?.9:1;$('quoteText').style.setProperty('--quote-scale',scale);const ep=q.episode||{};const markerLink=siteDeepLink(q);$('quoteMeta').innerHTML=[ep.speaker?`<a href="${esc(markerLink)}" target="_blank" rel="noopener">${esc(ep.speaker)}</a>`:'',ep.title?`<span>${esc(ep.title)}</span>`:'',ep.date?`<span>${esc(fmtDate(ep.date))}</span>`:'',`<span>${esc(fmtTime(mediaStart(q)))}</span>`].filter(Boolean).join(' ');$('episodeLink').href=episodeDeepLink(q);
 const art=artForEpisode(epKey(q),libraryMap,quotes);
 const artEl=$('episodeArt');
 if(artEl){artEl.src=art||'https://i.ytimg.com/vi/'+(q?.media?.youtubeId||'')+'/hqdefault.jpg';artEl.alt=`${epTitle(q)} artwork`;}
 }
-async function start(){const [all,repo,lib]=await Promise.all([loadQuotes(),loadRepoCuration(),loadLibrary()]);libraryMap=lib;window.__repoReviews=buildRepoReviewMap(repo);quotes=all.filter(approved);if(!quotes.length){$('quoteText').textContent='No approved quotes are published yet.';return;}idx=Math.floor(Math.random()*quotes.length);renderQuote();restartCycle();}
-function restartCycle(){clearInterval(cycleTimer);if(!isPaused){cycleTimer=setInterval(()=>{idx=Math.floor(Math.random()*quotes.length);renderQuote();},12000);}}
+async function start(){
+  const [all,repo,lib]=await Promise.all([loadQuotes(),loadRepoCuration(),loadLibrary()]);
+  libraryMap=lib;
+  window.__repoReviews=buildRepoReviewMap(repo);
+  quotes=all.filter(approved);
+  recentWallQuotes=[];
+  if(!quotes.length){
+    $('quoteText').textContent='No approved quotes are published yet.';
+    return;
+  }
+  idx=Math.floor(Math.random()*quotes.length);
+  renderQuote();
+  rememberWallQuote(quotes[idx]);
+  restartCycle();
+}
+function restartCycle(){
+  clearInterval(cycleTimer);
+  if(!isPaused){
+    cycleTimer=setInterval(()=>{chooseNext();},12000);
+  }
+}
 function setPaused(value){isPaused=!!value;const btn=$('pauseBtn');if(btn){btn.innerHTML=isPaused?'<svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Resume</span>':'<svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg><span>Pause</span>';btn.classList.toggle('primary',isPaused);}restartCycle();}
-$('pauseBtn').addEventListener('click',()=>setPaused(!isPaused));$('nextBtn').addEventListener('click',()=>{idx=Math.floor(Math.random()*quotes.length);renderQuote();restartCycle();});$('copyBtn').addEventListener('click',async()=>{if(!quotes.length)return;await navigator.clipboard.writeText(copyTextFor(quotes[idx]));toast('Copied quote.');});start();
+$('pauseBtn').addEventListener('click',()=>setPaused(!isPaused));$('nextBtn').addEventListener('click',()=>{chooseNext();restartCycle();});$('copyBtn').addEventListener('click',async()=>{if(!quotes.length)return;await navigator.clipboard.writeText(copyTextFor(quotes[idx]));toast('Copied quote.');});start();
 </script></body></html>
