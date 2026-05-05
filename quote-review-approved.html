@@ -159,11 +159,25 @@ function quoteBoostValue(q){
   return scoreNum(q?.searchBoost)??scoreNum(q?.boost)??null;
 }
 function quoteRankValue(q){
-  return scoreNum(q?.rank)??scoreNum(q?.episodeRank)??scoreNum(q?.displayRank)??null;
+  return scoreNum(q?.rank)??scoreNum(q?.episodeRank)??scoreNum(q?.displayRank)??scoreNum(q?.rankInEpisode)??scoreNum(q?.episodeQuoteRank)??scoreNum(q?.recommendationRank)??scoreNum(q?.selectionRank)??scoreNum(q?.index)??scoreNum(q?.ordinal)??computedEpisodeRank(q);
 }
 function quoteDisplayTier(q){
   return q?.displayTier||q?.tier||q?.recommendationTier||'';
 }
+
+/* CONTEXT/RANK FIX: computed rank fallback */
+function computedEpisodeRank(q){
+  try{
+    const source=Array.isArray(state?.all)?state.all:[];
+    const key=(q?.episode?.stableId||q?.episodeStableId||'unknown');
+    const episode=source.filter(item=>(item?.episode?.stableId||item?.episodeStableId||'unknown')===key)
+      .slice()
+      .sort((a,b)=>(quoteScoreValue(b)-quoteScoreValue(a))||((Number(b?.quotePolishScore||0))-(Number(a?.quotePolishScore||0)))||((Number(b?.searchBoost||0))-(Number(a?.searchBoost||0))));
+    const idx=episode.findIndex(item=>(item?.id||item?.quoteId)===(q?.id||q?.quoteId));
+    return idx>=0?idx+1:null;
+  }catch(_){return null;}
+}
+
 function scoreMiniHtml(q){
   return `<span class="score-pill">Score <strong>${fmtScore(quoteScoreValue(q))}</strong></span><span class="score-pill">Polish <strong>${fmtScore(quotePolishValue(q))}</strong></span><span class="score-pill">Boost <strong>${fmtScore(quoteBoostValue(q))}</strong></span><span class="score-pill">Rank <strong>${quoteRankValue(q)===null?'—':esc(quoteRankValue(q))}</strong></span>`;
 }

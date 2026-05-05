@@ -180,11 +180,25 @@ function quoteBoostValue(q){
   return scoreNum(q?.searchBoost)??scoreNum(q?.boost)??null;
 }
 function quoteRankValue(q){
-  return scoreNum(q?.rank)??scoreNum(q?.episodeRank)??scoreNum(q?.displayRank)??null;
+  return scoreNum(q?.rank)??scoreNum(q?.episodeRank)??scoreNum(q?.displayRank)??scoreNum(q?.rankInEpisode)??scoreNum(q?.episodeQuoteRank)??scoreNum(q?.recommendationRank)??scoreNum(q?.selectionRank)??scoreNum(q?.index)??scoreNum(q?.ordinal)??computedEpisodeRank(q);
 }
 function quoteDisplayTier(q){
   return q?.displayTier||q?.tier||q?.recommendationTier||'';
 }
+
+/* CONTEXT/RANK FIX: computed rank fallback */
+function computedEpisodeRank(q){
+  try{
+    const source=Array.isArray(state?.all)?state.all:[];
+    const key=(q?.episode?.stableId||q?.episodeStableId||'unknown');
+    const episode=source.filter(item=>(item?.episode?.stableId||item?.episodeStableId||'unknown')===key)
+      .slice()
+      .sort((a,b)=>(quoteScoreValue(b)-quoteScoreValue(a))||((Number(b?.quotePolishScore||0))-(Number(a?.quotePolishScore||0)))||((Number(b?.searchBoost||0))-(Number(a?.searchBoost||0))));
+    const idx=episode.findIndex(item=>(item?.id||item?.quoteId)===(q?.id||q?.quoteId));
+    return idx>=0?idx+1:null;
+  }catch(_){return null;}
+}
+
 function scoreMiniHtml(q){
   return `<span class="score-pill">Score <strong>${fmtScore(quoteScoreValue(q))}</strong></span><span class="score-pill">Polish <strong>${fmtScore(quotePolishValue(q))}</strong></span><span class="score-pill">Boost <strong>${fmtScore(quoteBoostValue(q))}</strong></span><span class="score-pill">Rank <strong>${quoteRankValue(q)===null?'—':esc(quoteRankValue(q))}</strong></span>`;
 }
@@ -217,18 +231,68 @@ const state={all:[],filtered:[],index:0,current:null,episodeFilter:'__all__',sta
 function mainQuote(q){return clean(q?.approvedText||q?.contextWindow?.quote||q?.thoughtText||q?.displayText||q?.text||'');}
 
 /* REFINEMENT: transcript-backed context expansion */
+
+/* CONTEXT/RANK FIX: robust previous/next lookup */
+function contextValue(q,keys){
+  for(const key of keys){
+    const parts=key.split('.');
+    let cur=q;
+    for(const part of parts){
+      if(cur==null)break;
+      cur=cur[part];
+    }
+    if(Array.isArray(cur)){
+      const text=cur.map(x=>typeof x==='string'?x:(x?.text||x?.displayText||x?.line||'')).join(' ');
+      if(clean(text))return clean(text);
+    }else if(clean(cur)){
+      return clean(cur);
+    }
+  }
+  return '';
+}
+function robustBeforeText(q){
+  return contextValue(q,[
+    'contextBefore','before','previous','previousSentence','prevSentence','prevText',
+    'context.before','context.prev','context.previous',
+    'contextWindow.before','contextWindow.previous','contextWindow.prev',
+    'display.before','display.previous','source.before','source.previous'
+  ]);
+}
+function robustAfterText(q){
+  return contextValue(q,[
+    'contextAfter','after','next','nextSentence','nextText',
+    'context.after','context.next',
+    'contextWindow.after','contextWindow.next',
+    'display.after','display.next','source.after','source.next'
+  ]);
+}
+function robustSecondAfterText(q){
+  return contextValue(q,['contextSecondAfter','secondAfter','contextWindow.secondAfter','context.secondAfter']);
+}
+function transcriptPathCandidates(q){
+  return [
+    q?.media?.transcriptDisplayJson,q?.media?.transcriptJson,q?.media?.transcriptCleanJson,q?.media?.srtJson,
+    q?.source?.transcriptDisplayJson,q?.source?.transcriptJson,q?.source?.transcriptCleanJson,
+    q?.transcriptDisplayJson,q?.transcriptJson,q?.transcriptPath,
+    q?.episode?.transcriptDisplayJson,q?.episode?.transcriptJson,q?.episode?.transcriptPath
+  ].map(clean).filter(Boolean);
+}
+
 function transcriptPath(q){
-  return q?.media?.transcriptDisplayJson||q?.source?.transcriptDisplayJson||q?.media?.transcriptCleanJson||q?.source?.transcriptCleanJson||'';
+  const paths=transcriptPathCandidates(q);
+  return paths[0]||'';
 }
 function cueText(cue){
   if(!cue)return '';
   if(typeof cue==='string')return clean(cue);
-  if(Array.isArray(cue.words))return clean(cue.words.map(w=>typeof w==='string'?w:(w?.text||w?.word||'')).join(' '));
-  return clean(cue.displayText||cue.text||cue.line||cue.caption||cue.transcript||cue.rawText||'');
+  if(Array.isArray(cue.words))return clean(cue.words.map(w=>typeof w==='string'?w:(w?.text||w?.word||w?.value||'')).join(' '));
+  if(Array.isArray(cue.lines))return clean(cue.lines.map(line=>typeof line==='string'?line:(line?.text||line?.displayText||'')).join(' '));
+  return clean(cue.displayText||cue.text||cue.line||cue.caption||cue.transcript||cue.rawText||cue.value||'');
 }
 function normalizeTranscriptRows(data){
-  const rows=Array.isArray(data)?data:(data?.segments||data?.cues||data?.items||data?.transcript||data?.entries||[]);
-  return rows.map((row,i)=>({...row,__index:i,__text:cueText(row)})).filter(row=>row.__text);
+  let rows=Array.isArray(data)?data:(data?.segments||data?.cues||data?.items||data?.transcript||data?.entries||data?.lines||[]);
+  if(!Array.isArray(rows)&&data&&typeof data==='object')rows=Object.values(data);
+  return (rows||[]).map((row,i)=>({...row,__index:i,__text:cueText(row)})).filter(row=>row.__text);
 }
 async function getTranscriptRows(q){
   const path=transcriptPath(q);
@@ -247,16 +311,21 @@ async function getTranscriptRows(q){
   }
 }
 function quoteSegmentBounds(q,rows){
-  const indexes=(q?.segmentIndexes||q?.segments||[]).map(Number).filter(n=>Number.isFinite(n));
+  const indexes=(q?.segmentIndexes||q?.segmentIndexList||q?.cueIndexes||q?.cues||q?.segments||[]).map(Number).filter(n=>Number.isFinite(n));
   if(indexes.length)return {first:Math.max(0,Math.min(...indexes)),last:Math.min(rows.length-1,Math.max(...indexes))};
-  const start=Number(q?.media?.start??q?.start??0);
-  const end=Number(q?.media?.end??q?.end??start);
-  const timed=rows.map((row,i)=>({i,start:Number(row.start??row.startTimeSeconds??row.t0??row.from??0),end:Number(row.end??row.endTimeSeconds??row.t1??row.to??0)}))
+
+  const start=Number(q?.media?.start??q?.start??q?.startSeconds??0);
+  const end=Number(q?.media?.end??q?.end??q?.endSeconds??start);
+  const timed=rows.map((row,i)=>({i,start:Number(row.start??row.startSeconds??row.startTimeSeconds??row.t0??row.from??0),end:Number(row.end??row.endSeconds??row.endTimeSeconds??row.t1??row.to??0)}))
     .filter(row=>Number.isFinite(row.start)&&Number.isFinite(row.end)&&row.end>=start&&row.start<=end);
   if(timed.length)return {first:timed[0].i,last:timed[timed.length-1].i};
+
   const main=mainQuote(q).toLowerCase();
   if(main){
-    const found=rows.findIndex(row=>main.includes(row.__text.toLowerCase())||row.__text.toLowerCase().includes(main.slice(0,50)));
+    const found=rows.findIndex(row=>{
+      const txt=(row.__text||'').toLowerCase();
+      return main.includes(txt)||txt.includes(main.slice(0,40));
+    });
     if(found>=0)return {first:found,last:found};
   }
   return {first:0,last:0};
@@ -287,7 +356,32 @@ async function transcriptContextSentence(q,side){
 }
 
 function sentencePieces(text){return clean(text).match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g)||[];}
-function contextParts(q){const before=[],after=[];for(const v of [q?.contextBefore,q?.contextWindow?.before])if(clean(v))before.push(...sentencePieces(v));for(const v of [q?.contextAfter,q?.contextWindow?.after,q?.contextSecondAfter,q?.contextWindow?.secondAfter])if(clean(v))after.push(...sentencePieces(v));const raw=clean(q?.rawText||q?.expandedText||''),main=mainQuote(q);if(raw&&main){const idx=raw.toLowerCase().indexOf(main.toLowerCase());if(idx>=0){before.unshift(...sentencePieces(raw.slice(0,idx)));after.push(...sentencePieces(raw.slice(idx+main.length)));}}return {before:[...new Set(before.map(clean).filter(Boolean))],after:[...new Set(after.map(clean).filter(Boolean))]};}
+function contextParts(q){
+  const before=[],after=[];
+  const b=robustBeforeText(q);
+  const a=robustAfterText(q);
+  const a2=robustSecondAfterText(q);
+  if(b)before.push(...sentencePieces(b));
+  if(a)after.push(...sentencePieces(a));
+  if(a2&&a2!==a)after.push(...sentencePieces(a2));
+
+  const raw=clean(q?.rawText||q?.expandedText||q?.contextText||q?.fullText||q?.transcriptWindow||q?.contextWindow?.full||'');
+  const main=mainQuote(q);
+  if(raw&&main){
+    const idx=raw.toLowerCase().indexOf(main.toLowerCase());
+    if(idx>=0){
+      before.unshift(...sentencePieces(raw.slice(0,idx)));
+      after.push(...sentencePieces(raw.slice(idx+main.length)));
+    }
+  }
+
+  const seenBefore=new Set();
+  const seenAfter=new Set();
+  return {
+    before:before.map(clean).filter(Boolean).filter(t=>{const k=t.toLowerCase();if(seenBefore.has(k))return false;seenBefore.add(k);return true;}),
+    after:after.map(clean).filter(Boolean).filter(t=>{const k=t.toLowerCase();if(seenAfter.has(k))return false;seenAfter.add(k);return true;})
+  };
+}
 function contextCursor(q){
   const id=q?.id||'current';
   if(!state.context.has(id))state.context.set(id,{before:0,after:0,transcriptBefore:0,transcriptAfter:0});
@@ -306,19 +400,19 @@ async function addContext(side){
     text=idx>=0?parts.before[idx]:'';
     if(text){
       cur.before++;
-    }else{
+    }else if(typeof transcriptContextSentence==='function'){
       text=await transcriptContextSentence(q,'before');
     }
-    if(!text){toast('No more previous sentences found.');return;}
+    if(!text){toast('No previous context found for this quote.');return;}
     $('quoteBefore').textContent=clean(`${text} ${$('quoteBefore').textContent}`);
   }else{
     text=parts.after[cur.after]||'';
     if(text){
       cur.after++;
-    }else{
+    }else if(typeof transcriptContextSentence==='function'){
       text=await transcriptContextSentence(q,'after');
     }
-    if(!text){toast('No more next sentences found.');return;}
+    if(!text){toast('No next context found for this quote.');return;}
     $('quoteAfter').textContent=clean(`${$('quoteAfter').textContent} ${text}`);
   }
   syncApproval();
