@@ -1724,7 +1724,11 @@
       .mobile-featured-episode-label svg{width:10px!important;height:10px!important;}
       .mobile-featured-episode-card img{aspect-ratio:16/7.8!important;}
     }
-  </style>
+  
+    .quote-hit-kind{color:rgba(255,255,255,.70)}
+    .quote-hit-snippet{background:linear-gradient(180deg,rgba(143,174,157,.145),rgba(143,174,157,.065));border-color:rgba(143,174,157,.18)}
+    .quote-hit-snippet:hover{background:linear-gradient(180deg,rgba(143,174,157,.20),rgba(143,174,157,.09));border-color:rgba(143,174,157,.30)}
+</style>
 
 <style id="final-audio-only-transcript-cleanup">
   /* Final rule: transcript UI belongs to Listen/Audio only. */
@@ -1910,7 +1914,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="text" placeholder="Search: scripture, title, date" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <input id="searchInput" type="text" placeholder="Sermon search:" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row" id="pathRow">
@@ -2087,6 +2091,8 @@
       searchIndexMap:new Map(),
       searchSnippetCache:new Map(),
       searchSnippetPending:new Set(),
+      quoteSearchMap:new Map(),
+      quoteSearchLoaded:false,
       nativeShelves:{ livestreams:[], guestSpeakers:[], shorts:[] },
       searchTerm:'',
       nav:{ rootKey:null, branchKey:null, leafKey:null },
@@ -2398,7 +2404,8 @@
         externalSearch.searchText,
         ...(Array.isArray(externalSearch.preview) ? externalSearch.preview.flatMap(row => [row?.keywords, row?.text]) : [])
       ].filter(Boolean).join(' | ') : '';
-      const haystackRaw = [buildSearchHaystack(item), externalSearchText].filter(Boolean).join(' | ').toLowerCase();
+      const quoteSearchText = quoteSearchTextForItem(item);
+      const haystackRaw = [buildSearchHaystack(item), externalSearchText, quoteSearchText].filter(Boolean).join(' | ').toLowerCase();
       const haystackNormalized = normalizeSearchText(haystackRaw);
       const scriptureParts = [
         item?.scripture?.raw,
@@ -2510,7 +2517,66 @@
         .filter(token => /^\d+$/.test(token) || (token.length > 1 && !SEARCH_STOP_WORDS.has(token)));
     }
 
-    function searchMatchesItem(item, query){
+    
+    function quoteSearchRowsForItem(item){
+      const key = item?.stableId || '';
+      if(!key || !(state.quoteSearchMap instanceof Map)) return [];
+      return state.quoteSearchMap.get(key) || [];
+    }
+
+    function quoteSearchTextForItem(item){
+      return quoteSearchRowsForItem(item).map(q => [
+        q?.text,
+        q?.approvedText,
+        q?.episodeTitle,
+        q?.series,
+        q?.study,
+        q?.scripture
+      ].filter(Boolean).join(' | ')).join(' | ');
+    }
+
+    function quoteMatchesForItem(item, query){
+      if(!searchResultsMode()) return [];
+      const q = String(query || '').trim();
+      if(!q) return [];
+      const rows = quoteSearchRowsForItem(item);
+      if(!rows.length) return [];
+      const scored = [];
+      for(const quote of rows){
+        const text = String(quote?.text || quote?.approvedText || '').replace(/\s+/g,' ').trim();
+        if(!text) continue;
+        const combined = [text, quote?.episodeTitle, quote?.series, quote?.study, quote?.scripture].filter(Boolean).join(' ');
+        const score = scoreTranscriptSegmentForQuery(combined, q);
+        const normalizedCombined = normalizeSearchText(combined);
+        const queryTokens = meaningfulQueryTokens(normalizeSearchText(q));
+        const looseMatches = queryTokens.filter(token => haystackContainsAny({haystackNormalized:normalizedCombined, haystackRaw:normalizedCombined}, queryTokenAlternates(token))).length;
+        if(score > 0 || looseMatches > 0){
+          scored.push({
+            start: Number(quote?.start || 0) || 0,
+            text: compactSnippetText(text, 190),
+            score: score || looseMatches,
+            featured: String(quote?.status || '').toLowerCase() === 'featured'
+          });
+        }
+      }
+      scored.sort((a,b)=> (b.featured === a.featured ? 0 : (b.featured ? 1 : -1)) || (b.score - a.score) || (a.start - b.start));
+      return scored.slice(0, 2);
+    }
+
+    function quoteSearchHtmlForItem(item){
+      if(!searchResultsMode()) return '';
+      const hits = quoteMatchesForItem(item, state.searchTerm);
+      if(!hits.length) return '';
+      const rows = hits.map(hit => `
+        <span class="search-hit-snippet quote-hit-snippet" role="button" tabindex="0" data-search-hit="1" data-key="${escapeHtml(item.stableId)}" data-start="${escapeHtml(String(Math.floor(Number(hit.start || 0))))}">
+          <span class="search-hit-time">${escapeHtml(formatClock(hit.start || 0))}</span>
+          <span class="search-hit-text">${escapeHtml(hit.text || '')}</span>
+        </span>
+      `).join('');
+      return `<div class="search-hit-kind quote-hit-kind">Quote matches</div><div class="search-hit-snippets quote-hit-snippets">${rows}</div>`;
+    }
+
+function searchMatchesItem(item, query){
       const rawQuery = String(query || '').trim().toLowerCase();
       const normalizedQuery = normalizeSearchText(rawQuery);
       if(!normalizedQuery) return true;
@@ -3006,11 +3072,18 @@
        ------------------------------------------------------------------------- */
     function quoteCurationPaths(){ return ['config/quote-curation.json','./config/quote-curation.json','quote-curation.json','./quote-curation.json']; }
     function quoteBankPaths(){ return ['data/quotes/en/quote-bank.json','./data/quotes/en/quote-bank.json','data/quotes/en/random-quotes.json','./data/quotes/en/random-quotes.json']; }
+    const JSON_PROMISE_CACHE = new Map();
     async function fetchFirstJson(paths){
-      for(const path of paths){
-        try{ const res=await fetch(path,{cache:'no-store'}); if(res.ok) return await res.json(); }catch(err){}
-      }
-      return null;
+      const cacheKey = (paths || []).join('|');
+      if(cacheKey && JSON_PROMISE_CACHE.has(cacheKey)) return JSON_PROMISE_CACHE.get(cacheKey);
+      const promise = (async()=>{
+        for(const path of paths){
+          try{ const res=await fetch(path,{cache:'no-store'}); if(res.ok) return await res.json(); }catch(err){}
+        }
+        return null;
+      })();
+      if(cacheKey) JSON_PROMISE_CACHE.set(cacheKey, promise);
+      return promise;
     }
     function idleQuoteSiteDeepLink(q){
       const url = new URL(window.location.href);
@@ -3063,6 +3136,53 @@
         else renderIdleQuote();
       }catch(err){ console.warn('Idle quote wall could not load.',err); renderIdleQuote(); }
     }
+
+    async function loadQuoteSearchIndex(){
+      try{
+        const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
+        const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
+        const reviewMap = new Map((Array.isArray(curation?.reviews) ? curation.reviews : []).filter(r => r?.quoteId).map(r => [r.quoteId, r]));
+        const map = new Map();
+        for(const q of rows){
+          const review = reviewMap.get(q?.id);
+          const status = String(review?.status || q?.curation?.status || q?.status || '').toLowerCase();
+          if(status !== 'approved' && status !== 'featured') continue;
+          const episodeStableId = review?.episodeStableId || q?.episode?.stableId || q?.episodeStableId || '';
+          const text = String(review?.approvedText || q?.approvedText || q?.displayText || q?.expandedText || q?.text || '').replace(/\s+/g,' ').trim();
+          if(!episodeStableId || !text) continue;
+          const payload = {
+            id:q?.id || review?.quoteId || '',
+            status,
+            text,
+            approvedText:text,
+            start:Number(review?.start ?? q?.media?.start ?? q?.start ?? 0) || 0,
+            end:Number(review?.end ?? q?.media?.end ?? q?.end ?? 0) || 0,
+            episodeTitle:review?.episodeTitle || q?.episode?.title || q?.episode?.episodeName || '',
+            series:q?.episode?.series || '',
+            study:q?.episode?.study || '',
+            scripture:q?.episode?.scripture || ''
+          };
+          if(!map.has(episodeStableId)) map.set(episodeStableId, []);
+          map.get(episodeStableId).push(payload);
+        }
+        for(const list of map.values()){
+          list.sort((a,b)=> (String(b.status)==='featured' ? 1 : 0) - (String(a.status)==='featured' ? 1 : 0) || a.start - b.start);
+        }
+        state.quoteSearchMap = map;
+        state.quoteSearchLoaded = true;
+        // Clear cached item haystacks so approved quote text can help search matching.
+        for(const item of state.items || []){
+          try{ delete item.__searchIndex; }catch(err){ try{ Object.defineProperty(item, '__searchIndex', { value:null, enumerable:false, configurable:true }); }catch(_){ item.__searchIndex = null; } }
+        }
+        prepareSearchIndexes(state.items);
+        if(state.searchTerm && state.searchTerm.trim()) rerender();
+      }catch(err){
+        console.warn('Quote search index could not load.', err);
+        state.quoteSearchMap = new Map();
+        state.quoteSearchLoaded = true;
+      }
+    }
+
     function renderIdleQuote(){
       if(!els.idleQuoteText || !els.idleQuoteMeta) return;
       const q = state.idleQuotes[state.idleQuoteIndex];
@@ -4631,7 +4751,9 @@ function nextIdleQuote(){
         const subtitleBadge = episodeLevel && state.mode === 'audio' && row?.transcript?.hasTranscript
           ? `<div class="subtitle-badge transcript-available-badge" title="Transcript available" aria-label="Transcript available"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7.35L19 8.4v11.85H7z"></path><path d="M14 3.75V8.5h5"></path><path d="M10 12h6"></path><path d="M10 15h6"></path><path d="M10 18h4"></path></svg></div>`
           : '';
+        const quoteSnippetBlock = episodeLevel ? quoteSearchHtmlForItem(row) : '';
         const searchSnippetBlock = episodeLevel ? searchSnippetHtmlForItem(row) : '';
+        const combinedSnippetBlock = [quoteSnippetBlock, searchSnippetBlock].filter(Boolean).join('');
         const episodeOrChoiceCard = `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
           ${currentLaneBadge}
@@ -4644,8 +4766,8 @@ function nextIdleQuote(){
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
           </div>
         </button>`;
-        if(episodeLevel && searchResults && searchSnippetBlock){
-          return `<div class="search-result-card-wrap">${episodeOrChoiceCard}${searchSnippetBlock}</div>`;
+        if(episodeLevel && searchResults && combinedSnippetBlock){
+          return `<div class="search-result-card-wrap">${episodeOrChoiceCard}${combinedSnippetBlock}</div>`;
         }
         return episodeOrChoiceCard;
       }).join('');
@@ -5233,6 +5355,7 @@ function nextIdleQuote(){
       prepareSearchIndexes(state.items);
       rerender();
       loadIdleQuotes();
+      loadQuoteSearchIndex();
       window.setInterval(()=>{
         if(shouldShowMobileFeaturedQuote() && !state.idleQuotePaused){
           state.idleQuoteIndex = Math.floor(Math.random() * state.idleQuotes.length);
