@@ -2532,6 +2532,9 @@
           if(!res.ok) continue;
           const json = await res.json();
           if(Array.isArray(json?.segments)) return json.segments;
+          if(Array.isArray(json)) return json;
+          if(Array.isArray(json?.lines)) return json.lines;
+          if(Array.isArray(json?.items)) return json.items;
         }catch(err){}
       }
       return [];
@@ -2580,6 +2583,26 @@
       return clean.slice(0, maxChars - 1).replace(/\s+\S*$/,'').trim() + '…';
     }
 
+    function previewSearchSnippetsForItem(item, query){
+      const external = searchIndexEntryForItem(item);
+      const previewRows = Array.isArray(external?.preview) ? external.preview : [];
+      const scored = [];
+      for(const row of previewRows){
+        const text = String(row?.text || '').trim();
+        if(!text) continue;
+        const combined = [text, row?.keywords].filter(Boolean).join(' ');
+        const score = scoreTranscriptSegmentForQuery(combined, query);
+        if(score <= 0) continue;
+        scored.push({
+          start: Number(row.start || 0) || 0,
+          text: compactSnippetText(text),
+          score
+        });
+      }
+      scored.sort((a,b)=> (b.score - a.score) || (a.start - b.start));
+      return scored.slice(0, 3);
+    }
+
     async function loadSearchSnippetsForItem(item, query, cacheKey){
       const segments = await fetchTranscriptSegmentsForItem(item);
       const scored = [];
@@ -2619,6 +2642,23 @@
       if(Array.isArray(cached)){
         if(!cached.length) return '';
         const rows = cached.map(hit => `
+          <span class="search-hit-snippet" role="button" tabindex="0" data-search-hit="1" data-key="${escapeHtml(item.stableId)}" data-start="${escapeHtml(String(Math.floor(Number(hit.start || 0))))}">
+            <span class="search-hit-time">${escapeHtml(formatClock(hit.start || 0))}</span>
+            <span class="search-hit-text">${escapeHtml(hit.text || '')}</span>
+          </span>
+        `).join('');
+        return `<div class="search-hit-kind">Transcript matches</div><div class="search-hit-snippets">${rows}</div>`;
+      }
+      const previewHits = previewSearchSnippetsForItem(item, q);
+      if(previewHits.length){
+        if(state.searchSnippetCache instanceof Map) state.searchSnippetCache.set(cacheKey, previewHits);
+        if(state.searchSnippetPending instanceof Set && !state.searchSnippetPending.has(cacheKey)){
+          state.searchSnippetPending.add(cacheKey);
+          loadSearchSnippetsForItem(item, q, cacheKey).catch(()=>{
+            if(state.searchSnippetPending instanceof Set) state.searchSnippetPending.delete(cacheKey);
+          });
+        }
+        const rows = previewHits.map(hit => `
           <span class="search-hit-snippet" role="button" tabindex="0" data-search-hit="1" data-key="${escapeHtml(item.stableId)}" data-start="${escapeHtml(String(Math.floor(Number(hit.start || 0))))}">
             <span class="search-hit-time">${escapeHtml(formatClock(hit.start || 0))}</span>
             <span class="search-hit-text">${escapeHtml(hit.text || '')}</span>
