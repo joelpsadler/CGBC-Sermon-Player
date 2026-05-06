@@ -560,6 +560,56 @@
       text-overflow:ellipsis;
       white-space:nowrap;
     }
+    .search-hit-snippets{
+      margin-top:9px;
+      display:grid;
+      gap:6px;
+      width:100%;
+    }
+    .search-hit-snippet{
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr);
+      align-items:start;
+      gap:8px;
+      width:100%;
+      padding:7px 9px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(143,174,157,.11), rgba(143,174,157,.045));
+      border:1px solid rgba(143,174,157,.16);
+      color:rgba(255,255,255,.86);
+      font-size:12px;
+      line-height:1.25;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+      cursor:pointer;
+    }
+    .search-hit-snippet:hover{
+      background:linear-gradient(180deg, rgba(143,174,157,.17), rgba(143,174,157,.07));
+      border-color:rgba(143,174,157,.25);
+    }
+    .search-hit-time{
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      font-weight:800;
+      color:rgba(255,255,255,.94);
+      white-space:nowrap;
+      line-height:1.25;
+    }
+    .search-hit-text{
+      min-width:0;
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      color:rgba(255,255,255,.76);
+    }
+    .search-hit-kind{
+      margin-top:7px;
+      font-family:Poppins,sans-serif;
+      font-size:10px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.48);
+    }
     .choice.date-text-card{
       align-items:center;
     }
@@ -1994,6 +2044,8 @@
       items:[],
       searchIndex:null,
       searchIndexMap:new Map(),
+      searchSnippetCache:new Map(),
+      searchSnippetPending:new Set(),
       nativeShelves:{ livestreams:[], guestSpeakers:[], shorts:[] },
       searchTerm:'',
       nav:{ rootKey:null, branchKey:null, leafKey:null },
@@ -2444,6 +2496,144 @@
       }
 
       return queryTokens.every(token => haystackContainsAny(index, queryTokenAlternates(token)));
+    }
+
+    function searchSnippetCacheKey(item, query){
+      return `${item?.stableId || ''}|${normalizeSearchText(query || '')}|${state.mode || 'audio'}`;
+    }
+
+    function searchIndexEntryForItem(item){
+      return state.searchIndexMap instanceof Map ? (state.searchIndexMap.get(item?.stableId) || null) : null;
+    }
+
+    function transcriptDisplayJsonPathForItem(item){
+      const external = searchIndexEntryForItem(item);
+      return external?.transcriptDisplayJson || item?.transcript?.displayJsonFile || external?.transcriptJson || item?.transcript?.jsonFile || '';
+    }
+
+    function transcriptFetchCandidates(path){
+      const p = String(path || '').trim();
+      if(!p) return [];
+      const cleanPath = p.replace(/^\.\//,'');
+      return Array.from(new Set([
+        cleanPath,
+        './' + cleanPath,
+        '/' + cleanPath,
+        cleanPath.startsWith('data/') ? './' + cleanPath : './data/transcripts/' + cleanPath
+      ]));
+    }
+
+    async function fetchTranscriptSegmentsForItem(item){
+      const path = transcriptDisplayJsonPathForItem(item);
+      const candidates = transcriptFetchCandidates(path);
+      for(const candidate of candidates){
+        try{
+          const res = await fetch(candidate, { cache:'no-store' });
+          if(!res.ok) continue;
+          const json = await res.json();
+          if(Array.isArray(json?.segments)) return json.segments;
+        }catch(err){}
+      }
+      return [];
+    }
+
+    function scoreTranscriptSegmentForQuery(segmentText, query){
+      const normalizedQuery = normalizeSearchText(query || '');
+      const normalizedText = normalizeSearchText(segmentText || '');
+      if(!normalizedQuery || !normalizedText) return 0;
+
+      let score = 0;
+      if(normalizedText.includes(normalizedQuery)) score += 18;
+
+      const tokens = meaningfulQueryTokens(normalizedQuery);
+      if(!tokens.length) return score;
+
+      let ideasMatched = 0;
+      for(const token of tokens){
+        const alternates = queryTokenAlternates(token);
+        let matchedThisIdea = false;
+        for(const alt of alternates){
+          if(!alt) continue;
+          if(normalizedText.includes(alt)){
+            matchedThisIdea = true;
+            score += alt === token ? 5 : 3;
+            break;
+          }
+        }
+        if(matchedThisIdea) ideasMatched += 1;
+      }
+
+      if(tokens.length === 1 && ideasMatched < 1) return 0;
+      if(tokens.length === 2 && ideasMatched < 2 && score < 18) return 0;
+      if(tokens.length >= 3 && ideasMatched < Math.min(2, tokens.length) && score < 18) return 0;
+
+      // Prefer concise, useful snippets over very long merged captions.
+      const wordCount = String(segmentText || '').trim().split(/\s+/).filter(Boolean).length;
+      if(wordCount >= 6 && wordCount <= 36) score += 2;
+      if(wordCount > 70) score -= 3;
+      return Math.max(0, score);
+    }
+
+    function compactSnippetText(text, maxChars=175){
+      const clean = String(text || '').replace(/\s+/g,' ').trim();
+      if(clean.length <= maxChars) return clean;
+      return clean.slice(0, maxChars - 1).replace(/\s+\S*$/,'').trim() + '…';
+    }
+
+    async function loadSearchSnippetsForItem(item, query, cacheKey){
+      const segments = await fetchTranscriptSegmentsForItem(item);
+      const scored = [];
+      for(const seg of segments || []){
+        const text = String(seg?.text || '').trim();
+        if(!text) continue;
+        const score = scoreTranscriptSegmentForQuery(text, query);
+        if(score <= 0) continue;
+        scored.push({
+          start: Number(seg.start || 0) || 0,
+          text: compactSnippetText(text),
+          score
+        });
+      }
+      scored.sort((a,b)=> (b.score - a.score) || (a.start - b.start));
+      const picked = [];
+      const seenTimes = new Set();
+      for(const row of scored){
+        const bucket = Math.floor(row.start / 20);
+        if(seenTimes.has(bucket)) continue;
+        seenTimes.add(bucket);
+        picked.push(row);
+        if(picked.length >= 3) break;
+      }
+      if(state.searchSnippetCache instanceof Map) state.searchSnippetCache.set(cacheKey, picked);
+      if(state.searchSnippetPending instanceof Set) state.searchSnippetPending.delete(cacheKey);
+      if(normalizeSearchText(state.searchTerm || '') && document.body.contains(els.choiceList)) renderChoices();
+      return picked;
+    }
+
+    function searchSnippetHtmlForItem(item){
+      if(!searchResultsMode() || !item?.transcript?.hasTranscript) return '';
+      const q = state.searchTerm.trim();
+      if(!q || !transcriptDisplayJsonPathForItem(item)) return '';
+      const cacheKey = searchSnippetCacheKey(item, q);
+      const cached = state.searchSnippetCache instanceof Map ? state.searchSnippetCache.get(cacheKey) : null;
+      if(Array.isArray(cached)){
+        if(!cached.length) return '';
+        const rows = cached.map(hit => `
+          <span class="search-hit-snippet" role="button" tabindex="0" data-search-hit="1" data-key="${escapeHtml(item.stableId)}" data-start="${escapeHtml(String(Math.floor(Number(hit.start || 0))))}">
+            <span class="search-hit-time">${escapeHtml(formatClock(hit.start || 0))}</span>
+            <span class="search-hit-text">${escapeHtml(hit.text || '')}</span>
+          </span>
+        `).join('');
+        return `<div class="search-hit-kind">Transcript matches</div><div class="search-hit-snippets">${rows}</div>`;
+      }
+      if(state.searchSnippetPending instanceof Set && !state.searchSnippetPending.has(cacheKey)){
+        state.searchSnippetPending.add(cacheKey);
+        loadSearchSnippetsForItem(item, q, cacheKey).catch(()=>{
+          if(state.searchSnippetCache instanceof Map) state.searchSnippetCache.set(cacheKey, []);
+          if(state.searchSnippetPending instanceof Set) state.searchSnippetPending.delete(cacheKey);
+        });
+      }
+      return '';
     }
 
     function applySearch(items){
@@ -4337,6 +4527,7 @@ function nextIdleQuote(){
             <h3 class="card-title">${escapeHtml(title)}</h3>
             ${sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : ''}
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
+            ${episodeLevel ? searchSnippetHtmlForItem(row) : ''}
           </div>
         </button>`;
       }).join('');
@@ -4706,6 +4897,28 @@ function nextIdleQuote(){
           rerender();
           return;
         }
+        const searchHit=event.target.closest('[data-search-hit]');
+        if(searchHit){
+          event.preventDefault();
+          event.stopPropagation();
+          const key = searchHit.dataset.key || '';
+          const start = Math.max(0, Number(searchHit.dataset.start || 0) || 0);
+          const next = getAllShareableItems().find(row => row?.stableId === key) || state.items.find(row => row?.stableId === key);
+          if(next){
+            state.currentItem = next;
+            state.deepLinkStart = Math.floor(start);
+            state.deepLinkAutoplay = false;
+            state.playingContext = { mode: state.mode, nav: navSnapshot() };
+            state.playerRenderKey = '';
+            state.mobileEpisodeListOpen = false;
+            state.mobilePlayerPinnedTop = true;
+            renderChoices();
+            renderPlayer();
+            positionPlayerShell();
+            scrollPlayerIntoView();
+          }
+          return;
+        }
         const btn=event.target.closest('[data-key]');
         if(!btn) return;
         const key=btn.dataset.key, episode=btn.dataset.episode==='1';
@@ -4792,6 +5005,8 @@ function nextIdleQuote(){
         window.clearTimeout(searchInputTimer);
         searchInputTimer = window.setTimeout(()=>{
           state.searchTerm = nextValue;
+          if(state.searchSnippetCache instanceof Map) state.searchSnippetCache.clear();
+          if(state.searchSnippetPending instanceof Set) state.searchSnippetPending.clear();
           state.nav = { rootKey:null, branchKey:null, leafKey:null };
           scrollChoiceListToTop();
           rerender();
