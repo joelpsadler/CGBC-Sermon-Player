@@ -626,12 +626,28 @@
     }
     .search-result-card-wrap > .search-hit-snippets{
       margin:0 10px 4px 108px;
+      width:auto;
+      max-width:calc(100% - 118px);
     }
     @media(max-width:900px){
-      .search-result-card-wrap > .search-hit-kind,
-      .search-result-card-wrap > .search-hit-snippets{
+      .search-result-card-wrap > .search-hit-kind{
         margin-left:102px;
         margin-right:8px;
+      }
+      .search-result-card-wrap > .search-hit-snippets{
+        margin:2px 0 8px 0;
+        width:100%;
+        max-width:100%;
+      }
+      .search-result-card-wrap .search-hit-snippet{
+        grid-template-columns:54px minmax(0,1fr);
+        padding:8px 10px;
+        overflow:hidden;
+      }
+      .search-result-card-wrap .search-hit-text{
+        -webkit-line-clamp:2;
+        white-space:normal;
+        overflow-wrap:break-word;
       }
     }
 
@@ -5028,6 +5044,10 @@ function nextIdleQuote(){
           const next=state.activeQueue.find(r=>r.stableId===key);
           if(next){
             state.currentItem=next;
+            // Normal episode-card clicks intentionally load from the beginning.
+            // Transcript snippet clicks use their own handler above and keep the snippet timestamp.
+            state.deepLinkStart = 0;
+            state.deepLinkAutoplay = true;
             state.playingContext={ mode: state.mode, nav: navSnapshot() };
             state.playerRenderKey='';
             state.mobileEpisodeListOpen=false;
