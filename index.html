@@ -665,6 +665,9 @@
       white-space:normal;
       overflow-wrap:break-word;
     }
+    @media (min-width:901px){
+      .book-card-value{font-size:36px;}
+    }
     .empty{
       margin:0 16px 16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);
       border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
@@ -3704,7 +3707,7 @@ function nextIdleQuote(){
             image:bucket.image,
             isStudyBucket:true
           }));
-        return mappedBooks.concat(mappedStudies);
+        return mappedBooks.concat(mappedStudies.length ? [{dividerType:'section', label:'Studies'}] : [], mappedStudies);
       }
       if(root==='topical') {
         const rows = Array.from(browse.topical.values()).sort((a,b)=>(getFirstEpisode(a.items)?.date?.iso||'').localeCompare(getFirstEpisode(b.items)?.date?.iso||'') || sortSeriesName(a.title,b.title));
@@ -4125,6 +4128,9 @@ function nextIdleQuote(){
       const isBranchLevel = !!state.nav.rootKey && !state.nav.branchKey;
       const firstEpisodeStableId = episodeLevel && rows.length ? rows[0]?.stableId : null;
       els.choiceList.innerHTML = rows.map(row => {
+        if(row?.dividerType){
+          return `<div class="nav-divider" aria-hidden="true"><div class="nav-divider-line"></div><div class="nav-divider-label">${escapeHtml(row.label || 'Studies')}</div></div>`;
+        }
         const dateTextCard = !!row?.dateCardType;
         const bookTextCard = !!row?.bookCardType;
         const thumbClass = episodeLevel
