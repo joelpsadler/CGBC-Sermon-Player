@@ -739,32 +739,221 @@ function resolveTranscript(stableId, title, date) {
 }
 
 
+// -----------------------------------------------------------------------------
+// LIGHTWEIGHT SEARCH INDEX
+// -----------------------------------------------------------------------------
+// Beginner note:
+// The full transcript is great for the reader, but it is too heavy to treat like
+// normal card metadata in the browser. This index compresses each transcript into
+// a small searchable fingerprint so people can search for remembered phrases
+// without loading every full SRT/JSON transcript up front.
+//
+// Search index goals:
+//   - metadata stays the strongest signal
+//   - scripture/reference tokens stay exact enough for Bible searches
+//   - transcript text becomes forgiving keywords/phrases
+//   - common repeated church/service phrases are removed so they do not dominate
+
+const SEARCH_INDEX_PUBLIC_PATH = "public/search-index.json";
+const SEARCH_INDEX_DATA_PATH = `${TRANSCRIPT_JSON_DIR}/search-index.json`;
+
+const TRANSCRIPT_SEARCH_STOPWORDS = new Set([
+  "a","about","above","after","again","against","all","almost","also","am","amen","an","and","any","are","as","at","be","because","been","before","being","below","between","both","but","by","can","cannot","could","did","do","does","doing","done","down","during","each","few","for","from","further","get","go","going","got","had","has","have","having","he","her","here","hers","him","his","how","i","if","in","into","is","it","its","just","kind","know","like","ll","lord","me","more","most","much","must","my","no","nor","not","now","of","off","on","once","one","only","or","other","our","ours","out","over","own","really","right","same","say","see","she","should","so","some","such","than","that","the","their","them","then","there","these","they","thing","things","this","those","through","to","too","under","until","up","us","use","very","was","we","well","were","what","when","where","which","while","who","why","will","with","would","yall","you","your","youre","youve"
+]);
+
+const TRANSCRIPT_SEARCH_NOISE_PATTERNS = [
+  /\bnever\s+forget\s+why\s+you\s+are\s+the\s+church\b/gi,
+  /\bif\s+you\s+(?:have|love)\s+the\s+lord\s+say\s+amen\b/gi,
+  /\bwith\s+heads\s+bowed\s+and\s+eyes\s+closed\s+all\s+over\s+this\s+place\b/gi,
+  /\byou\s+are\s+rel(?:eased|ease|ase)\s+bye[-\s]?bye\b/gi,
+  /\byou\s+are\s+released\s+by[-\s]?bye\b/gi,
+  /\bfurr?[-\s]?fill?ed\b/gi,
+  /\bfur[-\s]?fild\b/gi,
+  /\bplasma\s+mode\b/gi
+];
+
+function normalizeSearchIndexText(value) {
+  return String(value || "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, " and ")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/[’‘]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[–—]/g, "-")
+    .toLowerCase();
+}
+
+function stripTranscriptSearchNoise(value) {
+  let text = normalizeSearchIndexText(value);
+  for (const pattern of TRANSCRIPT_SEARCH_NOISE_PATTERNS) text = text.replace(pattern, " ");
+  return text.replace(/\s+/g, " ").trim();
+}
+
+function stemSearchToken(token) {
+  let t = String(token || "").toLowerCase();
+  if (t.length > 6 && t.endsWith("ingly")) t = t.slice(0, -5);
+  else if (t.length > 5 && t.endsWith("edly")) t = t.slice(0, -4);
+  else if (t.length > 5 && t.endsWith("ing")) t = t.slice(0, -3);
+  else if (t.length > 4 && t.endsWith("ed")) t = t.slice(0, -2);
+  else if (t.length > 4 && t.endsWith("es")) t = t.slice(0, -2);
+  else if (t.length > 3 && t.endsWith("s")) t = t.slice(0, -1);
+  return t;
+}
+
+function tokenizeSearchIndexText(value) {
+  const cleaned = stripTranscriptSearchNoise(value)
+    .replace(/[^a-z0-9:\-\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!cleaned) return [];
+
+  const tokens = [];
+  for (const raw of cleaned.split(" ")) {
+    const token = raw.trim();
+    if (!token) continue;
+    if (token.length < 3 && !/^\d+$/.test(token)) continue;
+    if (TRANSCRIPT_SEARCH_STOPWORDS.has(token)) continue;
+    tokens.push(token);
+    const stemmed = stemSearchToken(token);
+    if (stemmed && stemmed !== token && !TRANSCRIPT_SEARCH_STOPWORDS.has(stemmed)) tokens.push(stemmed);
+  }
+  return tokens.filter(Boolean);
+}
+
+function uniqueSearchValues(values) {
+  const out = [];
+  const seen = new Set();
+  for (const value of values || []) {
+    const v = clean(value);
+    if (!v) continue;
+    const key = v.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(v);
+  }
+  return out;
+}
+
+function buildTranscriptKeywordText(text, maxKeywords = 260) {
+  const counts = new Map();
+  for (const token of tokenizeSearchIndexText(text)) {
+    counts.set(token, (counts.get(token) || 0) + 1);
+  }
+
+  return Array.from(counts.entries())
+    .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0]))
+    .slice(0, maxKeywords)
+    .map(([token]) => token)
+    .join(" ");
+}
+
+function readTranscriptDisplaySegments(item) {
+  const path = item?.transcript?.displayJsonFile || item?.transcript?.jsonFile;
+  if (!path || !existsSync(path)) return [];
+  try {
+    const doc = readJson(path);
+    return Array.isArray(doc?.segments) ? doc.segments : [];
+  } catch (err) {
+    console.warn(`Could not read transcript segments for search index: ${path} (${err.message})`);
+    return [];
+  }
+}
+
+function buildTranscriptSearchPreview(segments, maxSegments = 16) {
+  const chosen = [];
+  for (const segment of segments || []) {
+    const text = clean(segment?.text);
+    if (!text) continue;
+    const normalized = stripTranscriptSearchNoise(text);
+    const tokens = tokenizeSearchIndexText(normalized);
+    if (tokens.length < 5) continue;
+    chosen.push({
+      start: Number(segment.start || 0),
+      text: text.length > 220 ? `${text.slice(0, 217).trim()}...` : text,
+      keywords: buildTranscriptKeywordText(text, 24)
+    });
+    if (chosen.length >= maxSegments) break;
+  }
+  return chosen;
+}
+
+function buildMetadataSearchText(item) {
+  const values = uniqueSearchValues([
+    item?.title?.episodeName,
+    item?.title?.subtitle,
+    item?.title?.display,
+    item?.series?.name,
+    item?.series?.key,
+    item?.study?.name,
+    item?.study?.key,
+    item?.scripture?.raw,
+    item?.scripture?.display,
+    item?.references?.raw,
+    item?.references?.display,
+    ...(Array.isArray(item?.references?.tokens) ? item.references.tokens : []),
+    ...(Array.isArray(item?.references?.searchTokens) ? item.references.searchTokens : []),
+    ...(Array.isArray(item?.search?.scriptureTokens) ? item.search.scriptureTokens : []),
+    ...(Array.isArray(item?.bookTags) ? item.bookTags.flatMap(tag => [tag?.name, tag?.key]) : []),
+    ...(Array.isArray(item?.collections) ? item.collections.flatMap(c => [c?.name, c?.key, c?.description, c?.itemTitle, c?.collectionItemTitle]) : []),
+    item?.speaker,
+    item?.date?.raw,
+    item?.date?.iso,
+    item?.date?.year ? String(item.date.year) : "",
+    item?.date?.monthName
+  ]);
+
+  return values.join(" | ");
+}
+
+function buildTranscriptSearchIndexEntry(item) {
+  const transcriptText = item._transcriptSearchText || item.search?.transcriptText || "";
+  const segments = readTranscriptDisplaySegments(item);
+  const metadataText = buildMetadataSearchText(item);
+  const transcriptKeywordText = buildTranscriptKeywordText(transcriptText);
+  const preview = buildTranscriptSearchPreview(segments);
+
+  return {
+    stableId: item.stableId,
+    date: item.date?.iso || null,
+    title: item.title?.display || item.title?.episodeName || "",
+    episodeName: item.title?.episodeName || "",
+    subtitle: item.title?.subtitle || "",
+    series: item.series?.name || "",
+    study: item.study?.name || "",
+    scripture: item.scripture?.display || "",
+    speaker: item.speaker || "",
+    defaultLanguage: item.transcript?.defaultLanguage || TRANSCRIPT_DEFAULT_LANGUAGE,
+    transcriptJson: item.transcript?.jsonFile || null,
+    transcriptDisplayJson: item.transcript?.displayJsonFile || null,
+    transcriptCleanSrt: item.transcript?.cleanFile || null,
+    transcriptDisplaySrt: item.transcript?.displayFile || null,
+    languages: item.transcript?.languages || {},
+    metadataText,
+    transcriptKeywordText,
+    searchText: [metadataText, transcriptKeywordText, preview.map(row => row.keywords).join(" ")].filter(Boolean).join(" | "),
+    preview
+  };
+}
+
 function buildTranscriptSearchIndex(items) {
   ensureDirectory(TRANSCRIPT_JSON_DIR);
+  ensureDirectory("public");
 
   const entries = items
     .filter(item => item?.transcript?.hasTranscript)
-    .map(item => ({
-      stableId: item.stableId,
-      date: item.date?.iso || null,
-      title: item.title?.display || item.title?.episodeName || "",
-      series: item.series?.name || "",
-      study: item.study?.name || "",
-      scripture: item.scripture?.display || "",
-      defaultLanguage: item.transcript?.defaultLanguage || TRANSCRIPT_DEFAULT_LANGUAGE,
-      transcriptJson: item.transcript?.jsonFile || null,
-      transcriptDisplayJson: item.transcript?.displayJsonFile || null,
-      transcriptCleanSrt: item.transcript?.cleanFile || null,
-      transcriptDisplaySrt: item.transcript?.displayFile || null,
-      languages: item.transcript?.languages || {},
-      text: item.search?.transcriptText || ""
-    }));
+    .map(buildTranscriptSearchIndexEntry);
 
-  writeJson(`${TRANSCRIPT_JSON_DIR}/search-index.json`, {
+  const payload = {
     generatedAt: new Date().toISOString(),
+    version: 2,
+    note: "Lightweight transcript search index. Full transcripts stay in data/transcripts/<lang>/ and are loaded only when an episode opens.",
     count: entries.length,
     entries
-  });
+  };
+
+  writeJson(SEARCH_INDEX_DATA_PATH, payload);
+  writeJson(SEARCH_INDEX_PUBLIC_PATH, payload);
 
   return entries.length;
 }
@@ -2526,8 +2715,11 @@ function main() {
       references,
       search: {
         scriptureTokens: references.searchTokens,
-        transcriptText: transcriptResolved.searchText
+        hasTranscriptText: Boolean(transcriptResolved.searchText)
       },
+      // Internal build-only field. Kept out of the public JSON below so the
+      // main library stays fast; transcript search uses public/search-index.json.
+      _transcriptSearchText: transcriptResolved.searchText,
       collections,
       bookTags,
       speaker: clean(record.notesFields?.["by"]) || null,
@@ -2558,6 +2750,8 @@ function main() {
   applyInheritedArt(items);
   const transcriptSearchCount = buildTranscriptSearchIndex(items);
   const quoteCandidateCount = buildQuoteBank(items);
+
+  for (const item of items) delete item._transcriptSearchText;
 
   const output = {
     generatedAt: new Date().toISOString(),
