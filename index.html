@@ -610,6 +610,31 @@
       text-transform:uppercase;
       color:rgba(255,255,255,.48);
     }
+
+    /* Search transcript snippets live outside the episode button so mobile player/card hooks do not swallow them. */
+    .search-result-card-wrap{
+      display:grid;
+      gap:6px;
+      width:100%;
+    }
+    .search-result-card-wrap > .episode{
+      width:100%;
+      margin:0;
+    }
+    .search-result-card-wrap > .search-hit-kind{
+      margin:0 10px 0 108px;
+    }
+    .search-result-card-wrap > .search-hit-snippets{
+      margin:0 10px 4px 108px;
+    }
+    @media(max-width:900px){
+      .search-result-card-wrap > .search-hit-kind,
+      .search-result-card-wrap > .search-hit-snippets{
+        margin-left:102px;
+        margin-right:8px;
+      }
+    }
+
     .choice.date-text-card{
       align-items:center;
     }
@@ -2614,7 +2639,19 @@
       scored.sort((a,b)=> (b.score - a.score) || (a.start - b.start));
       if(scored.length) return scored.slice(0, 3);
       loose.sort((a,b)=> (b.score - a.score) || (a.start - b.start));
-      return loose.slice(0, 2);
+      if(loose.length) return loose.slice(0, 2);
+      // Last-resort display fallback: if the search index has timestamp previews for this
+      // episode, show the first relevant-looking preview rather than hiding the feature.
+      // The episode itself already matched search, so this only adds context; it does not
+      // change the search ranking or results.
+      if(previewRows.length && String(query || '').trim()){
+        return previewRows.slice(0, 2).map(row => ({
+          start: Number(row.start ?? row.t ?? row.time ?? row.startSeconds ?? 0) || 0,
+          text: compactSnippetText(String(row?.text || row?.txt || row?.snippet || '').trim()),
+          score: 0
+        })).filter(row => row.text);
+      }
+      return [];
     }
 
     async function loadSearchSnippetsForItem(item, query, cacheKey){
@@ -4578,7 +4615,8 @@ function nextIdleQuote(){
         const subtitleBadge = episodeLevel && state.mode === 'audio' && row?.transcript?.hasTranscript
           ? `<div class="subtitle-badge transcript-available-badge" title="Transcript available" aria-label="Transcript available"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7.35L19 8.4v11.85H7z"></path><path d="M14 3.75V8.5h5"></path><path d="M10 12h6"></path><path d="M10 15h6"></path><path d="M10 18h4"></path></svg></div>`
           : '';
-        return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
+        const searchSnippetBlock = episodeLevel ? searchSnippetHtmlForItem(row) : '';
+        const episodeOrChoiceCard = `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="${episodeLevel ? '1' : '0'}">
           ${livePill}
           ${currentLaneBadge}
           ${subtitleBadge}
@@ -4588,9 +4626,12 @@ function nextIdleQuote(){
             <h3 class="card-title">${escapeHtml(title)}</h3>
             ${sub ? `<div class="card-meta-line">${escapeHtml(sub)}</div>` : ''}
             ${metric ? `<div class="card-metric">${escapeHtml(metric)}</div>` : ''}
-            ${episodeLevel ? searchSnippetHtmlForItem(row) : ''}
           </div>
         </button>`;
+        if(episodeLevel && searchResults && searchSnippetBlock){
+          return `<div class="search-result-card-wrap">${episodeOrChoiceCard}${searchSnippetBlock}</div>`;
+        }
+        return episodeOrChoiceCard;
       }).join('');
       if(mobileEpisodeToggleCard) els.choiceList.innerHTML = mobileEpisodeToggleCard + els.choiceList.innerHTML;
       // Mobile featured quotes are injected by the final compact quote module below.
