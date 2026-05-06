@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- final cleanup build: 2026-04-30 transcript-audio-only-quote-zero-triple-click -->
+  <!-- final cleanup build: 2026-05-06 bible-book-static-cards-transcript-audio-only-quote-zero-triple-click -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CGBC A\V MEDIA</title>
@@ -612,6 +612,59 @@
       line-height:1.05;
       color:rgba(255,255,255,.92);
     }
+
+    /* Bible book level uses a generated static text card, not inherited episode/series art. */
+    .choice.book-text-card{
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      padding:0;
+      min-height:124px;
+      overflow:hidden;
+    }
+    .book-card-text{
+      width:100%;
+      min-height:122px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:22px 24px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.024));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.055);
+    }
+    .book-card-label{
+      font-family:Poppins,sans-serif;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      line-height:1.1;
+    }
+    .book-card-value{
+      margin-top:6px;
+      max-width:100%;
+      font-family:Poppins,sans-serif;
+      font-size:32px;
+      font-weight:800;
+      line-height:1.03;
+      color:rgba(255,255,255,.97);
+      white-space:normal;
+      overflow-wrap:break-word;
+    }
+    .book-card-meta{
+      margin-top:9px;
+      font-family:Poppins,sans-serif;
+      font-size:13px;
+      font-weight:600;
+      line-height:1.15;
+      color:rgba(255,255,255,.68);
+      white-space:normal;
+      overflow-wrap:break-word;
+    }
     .empty{
       margin:0 16px 16px;padding:16px;border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);
       border:1px dashed rgba(255,255,255,.10);font-size:14px;line-height:1.4
@@ -1003,6 +1056,11 @@
       .card-title{font-size:17px}
       .card-meta-line{font-size:12px;line-height:1.3}
       .card-metric{font-size:11px;margin-top:6px}
+      .choice.book-text-card{min-height:112px;padding:0;}
+      .book-card-text{min-height:110px;padding:18px 18px;border-radius:18px;}
+      .book-card-label{font-size:10px;letter-spacing:.13em;}
+      .book-card-value{font-size:28px;line-height:1.04;}
+      .book-card-meta{font-size:12px;margin-top:7px;}
       .player{padding:14px;margin-bottom:22px}
       #videoShell,#videoPlaceholder{min-height:210px;border-radius:18px}
       #audioPlaceholder{min-height:180px;border-radius:18px;padding:24px}
@@ -3566,19 +3624,19 @@ function nextIdleQuote(){
           row.image=getSeriesArtFromItem(firstEpisode);
         });
 
-        const orderedSeries = Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
-        const firstSeries = orderedSeries[0];
-        if(firstSeries){
-          const firstEpisode=getFirstEpisode(firstSeries.items);
-          bucket.image=getStudyArtFromItem(firstEpisode);
-        } else if(bucket.episodes.length){
-          bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.episodes));
-        } else {
-          const specialYears=Array.from(bucket.specialsByYear.keys()).sort((a,b)=>a.localeCompare(b));
-          const firstSpecialYear=specialYears[0];
-          if(firstSpecialYear){
-            bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.specialsByYear.get(firstSpecialYear)));
+        // Bible book level is a static/generated text card in renderChoices.
+        // Do not inherit episode or series artwork here; those art rules start one level down.
+        if(bucket.isStudyBucket){
+          const orderedSeries = Array.from(bucket.seriesMap.values()).sort((a,b)=>sortSeriesName(a.title,b.title));
+          const firstSeries = orderedSeries[0];
+          if(firstSeries){
+            const firstEpisode=getFirstEpisode(firstSeries.items);
+            bucket.image=getStudyArtFromItem(firstEpisode);
+          } else if(bucket.episodes.length){
+            bucket.image=getStudyArtFromItem(getFirstEpisode(bucket.episodes));
           }
+        } else {
+          bucket.image=null;
         }
       });
 
@@ -3634,7 +3692,8 @@ function nextIdleQuote(){
             key:bucket.key,
             title:bucket.title,
             meta:`${formatCountLabel(bucket.seriesMap.size,'series','series')} · ${formatCountLabel(bucket.episodes.length + Array.from(bucket.specialsByYear.values()).reduce((s,a)=>s+a.length,0),'episode','episodes')}`,
-            image:bucket.image
+            image:null,
+            bookCardType:'book'
           }));
         const mappedStudies = studyBuckets
           .filter(bucket=>bucket.key!=='current' && String(bucket.title||'').toLowerCase()!=='current')
@@ -3764,6 +3823,7 @@ function nextIdleQuote(){
       if(!item) return '';
       if(item.dateCardType === 'year') return String(item.dateCardValue || item.title || '');
       if(item.dateCardType === 'month') return monthNameOnly(String(item.dateCardValue || item.title || ''));
+      if(item.dateCardType === 'book') return String(item.dateCardValue || item.title || '');
       return compactSeriesLabel(item.title || '');
     }
     function renderMobileContextBar(){
@@ -3841,6 +3901,8 @@ function nextIdleQuote(){
         if(!suppressTerminalDuplicate){
           if(state.nav.rootKey === 'date' && branch.dateCardType === 'year'){
             items.push({label:'Year', title:branch.title, image:null, square:false, level:'branch', dateCardType:'year', dateCardValue:branch.dateCardValue || branch.title});
+          } else if(state.nav.rootKey === 'books' && branch.bookCardType === 'book') {
+            items.push({label:'Book', title:branch.title, image:null, square:false, level:'branch', dateCardType:'book', dateCardValue:branch.title});
           } else {
             items.push({label:'Selection', title:branch.title, image:branch.image || ASSETS.fallback, square:state.mode==='audio', level:'branch'});
           }
@@ -3869,11 +3931,13 @@ function nextIdleQuote(){
           ? `<div class="context-chip-date">${
               item.dateCardType === 'year'
                 ? `<div class="mini-label">Year</div><div class="mini-value">${escapeHtml(String(item.dateCardValue || item.title || ''))}</div>`
-                : `<div class="mini-label">Month</div><div class="mini-value">${escapeHtml(monthNameOnly(String(item.dateCardValue || '')))}</div>`
+                : (item.dateCardType === 'book'
+                    ? `<div class="mini-label">Book</div><div class="mini-value">${escapeHtml(String(item.dateCardValue || item.title || ''))}</div>`
+                    : `<div class="mini-label">Month</div><div class="mini-value">${escapeHtml(monthNameOnly(String(item.dateCardValue || '')))}</div>`)
             }</div>`
           : `<img src="${escapeHtml(item.image)}" alt="">`;
         const title = isDateChip
-          ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || '')))
+          ? (item.dateCardType === 'year' ? String(item.dateCardValue || item.title || '') : (item.dateCardType === 'book' ? String(item.dateCardValue || item.title || '') : monthNameOnly(String(item.dateCardValue || ''))))
           : compactSeriesLabel(item.title);
         const activeClass = index === items.length - 1 ? 'is-active' : '';
         return `
@@ -4062,6 +4126,7 @@ function nextIdleQuote(){
       const firstEpisodeStableId = episodeLevel && rows.length ? rows[0]?.stableId : null;
       els.choiceList.innerHTML = rows.map(row => {
         const dateTextCard = !!row?.dateCardType;
+        const bookTextCard = !!row?.bookCardType;
         const thumbClass = episodeLevel
           ? (state.mode === 'audio' ? 'thumb-square' : 'thumb-wide')
           : ((state.mode==='video' || isRootLevel || dateTextCard) ? 'thumb-wide' : 'thumb-square');
@@ -4072,7 +4137,7 @@ function nextIdleQuote(){
           : (row.image || ASSETS.fallback);
         const title = episodeLevel
           ? episodeTitleForCurrentBrowse(row)
-          : (dateTextCard ? '' : (compactSeriesLabel(row.title || '')));
+          : ((dateTextCard || bookTextCard) ? '' : (compactSeriesLabel(row.title || '')));
         let sub = episodeLevel ? episodeCardSubline(row) : (row.meta || '');
         if(episodeLevel && row?.source === 'youtube-native' && /native shelf/i.test(String(sub || ''))){
           sub = '';
@@ -4089,18 +4154,27 @@ function nextIdleQuote(){
           metric = '';
         }
         const currentLaneBadge = showCurrentLaneBadge ? currentSeriesCardBadgeHtml(row?.key) : '';
-        const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (isRootLevel ? 'root-card' : isBranchLevel ? 'branch-card' : '') + (showCurrentLaneBadge && currentLaneBadge ? ' has-current-lane-badge' : ''));
+        const cls = episodeLevel ? 'episode' : ('choice ' + (dateTextCard ? 'date-text-card ' : '') + (bookTextCard ? 'book-text-card ' : '') + (isRootLevel ? 'root-card' : ((isBranchLevel && !bookTextCard) ? 'branch-card' : '')) + (showCurrentLaneBadge && currentLaneBadge ? ' has-current-lane-badge' : ''));
         const dateCardInner = dateTextCard
           ? (row.dateCardType === 'year'
               ? `<div class="date-card-text"><div class="date-card-label">Year</div><div class="date-card-value">${escapeHtml(String(row.dateCardValue || ''))}</div></div>`
               : `<div class="date-card-text"><div class="date-card-label">Month</div><div class="date-card-value month-value">${escapeHtml(monthNameOnly(String(row.dateCardValue || '')))}</div></div>`)
           : `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}">`;
+        const bookCardInner = bookTextCard
+          ? `<div class="book-card-text"><div class="book-card-label">Book</div><div class="book-card-value">${escapeHtml(compactSeriesLabel(row.title || ''))}</div>${sub ? `<div class="book-card-meta">${escapeHtml(sub)}</div>` : ''}</div>`
+          : '';
 
         const showRootLivePill = state.mode === 'video' && isRootLevel && row?.key === 'livestreams' && shouldShowLiveBadge();
         const showEpisodeLivePill = state.mode === 'video' && episodeLevel && state.nav.rootKey === 'livestreams' && row?.stableId === firstEpisodeStableId && shouldShowLiveBadge();
         const livePill = (showRootLivePill || showEpisodeLivePill)
           ? `<div class="live-badge"><span class="live-badge-dot"></span><span>Live Now</span></div>`
           : '';
+
+        if(bookTextCard){
+          return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
+            ${bookCardInner}
+          </button>`;
+        }
 
         if(isRootLevel){
           return `<button type="button" class="${cls} ${activeKey===key ? 'active' : ''}" data-key="${escapeHtml(key)}" data-episode="0">
