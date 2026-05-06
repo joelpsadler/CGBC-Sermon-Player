@@ -1992,6 +1992,8 @@
       mode:'audio',
       data:null,
       items:[],
+      searchIndex:null,
+      searchIndexMap:new Map(),
       nativeShelves:{ livestreams:[], guestSpeakers:[], shorts:[] },
       searchTerm:'',
       nav:{ rootKey:null, branchKey:null, leafKey:null },
@@ -2296,7 +2298,14 @@
 
     function getItemSearchIndex(item){
       if(item?.__searchIndex) return item.__searchIndex;
-      const haystackRaw = buildSearchHaystack(item).toLowerCase();
+      const externalSearch = state.searchIndexMap instanceof Map ? (state.searchIndexMap.get(item?.stableId) || null) : null;
+      const externalSearchText = externalSearch ? [
+        externalSearch.metadataText,
+        externalSearch.transcriptKeywordText,
+        externalSearch.searchText,
+        ...(Array.isArray(externalSearch.preview) ? externalSearch.preview.flatMap(row => [row?.keywords, row?.text]) : [])
+      ].filter(Boolean).join(' | ') : '';
+      const haystackRaw = [buildSearchHaystack(item), externalSearchText].filter(Boolean).join(' | ').toLowerCase();
       const haystackNormalized = normalizeSearchText(haystackRaw);
       const scriptureParts = [
         item?.scripture?.raw,
@@ -3328,6 +3337,27 @@ function nextIdleQuote(){
         }catch(err){lastError=err;}
       }
       throw lastError || new Error('library-resolved.json could not be loaded.');
+    }
+
+    async function loadSearchIndex(){
+      const paths=['./search-index.json','./data/transcripts/search-index.json','./public/search-index.json','/search-index.json','/data/transcripts/search-index.json','/public/search-index.json'];
+      for(const path of paths){
+        try{
+          const res = await fetch(path,{cache:'no-store'});
+          if(!res.ok) continue;
+          const json = await res.json();
+          if(Array.isArray(json?.entries)){
+            state.searchIndex = json;
+            state.searchIndexMap = new Map(json.entries.filter(row=>row?.stableId).map(row=>[row.stableId,row]));
+            return json;
+          }
+        }catch(err){
+          console.warn('Transcript search index failed to load from', path, err);
+        }
+      }
+      state.searchIndex = null;
+      state.searchIndexMap = new Map();
+      return null;
     }
     /* ============================================================================
        BEGINNER NOTE: YouTube private/deleted playlist item filter
@@ -4766,6 +4796,7 @@ function nextIdleQuote(){
       attachEvents();
       state.data = await loadResolvedData();
       state.items = Array.isArray(state.data?.items) ? state.data.items.slice() : [];
+      await loadSearchIndex();
       prepareSearchIndexes(state.items);
       rerender();
       loadIdleQuotes();
