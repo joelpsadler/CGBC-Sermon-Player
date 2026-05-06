@@ -104,6 +104,7 @@ jobs:
             data/transcripts \
             data/quotes \
             public/library-resolved.json \
+            public/search-index.json \
             public/stats.json \
             stats/stats.json \
             stats/downloads_stats.csv \
