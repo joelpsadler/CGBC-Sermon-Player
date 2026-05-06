@@ -1869,7 +1869,7 @@
           <h2 class="title" id="navHeading"></h2>
         </div>
         <div class="search-row">
-          <input id="searchInput" type="search" placeholder="Search: scripture, title, date">
+          <input id="searchInput" type="text" placeholder="Search: scripture, title, date" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           <div class="search-status" id="searchStatus">All items</div>
         </div>
         <div class="path-row" id="pathRow">
@@ -2514,13 +2514,19 @@
     function transcriptFetchCandidates(path){
       const p = String(path || '').trim();
       if(!p) return [];
-      const cleanPath = p.replace(/^\.\//,'');
-      return Array.from(new Set([
+      const cleanPath = p.replace(/^\.\//,'').replace(/^\//,'');
+      const candidates = [
         cleanPath,
         './' + cleanPath,
-        '/' + cleanPath,
-        cleanPath.startsWith('data/') ? './' + cleanPath : './data/transcripts/' + cleanPath
-      ]));
+        'public/' + cleanPath,
+        './public/' + cleanPath,
+        cleanPath.startsWith('data/') ? './' + cleanPath : './data/transcripts/' + cleanPath,
+        cleanPath.startsWith('data/') ? './public/' + cleanPath : './public/data/transcripts/' + cleanPath
+      ];
+      // Beginner note: GitHub Pages can serve the same generated file from a few
+      // different relative paths depending on whether the build publishes repo root
+      // or the public folder. Trying these keeps transcript snippets resilient.
+      return Array.from(new Set(candidates.filter(Boolean)));
     }
 
     async function fetchTranscriptSegmentsForItem(item){
@@ -2585,22 +2591,30 @@
 
     function previewSearchSnippetsForItem(item, query){
       const external = searchIndexEntryForItem(item);
-      const previewRows = Array.isArray(external?.preview) ? external.preview : [];
+      const previewRows = Array.isArray(external?.preview) ? external.preview
+        : (Array.isArray(external?.hits) ? external.hits
+        : (Array.isArray(external?.snippets) ? external.snippets : []));
       const scored = [];
+      const loose = [];
       for(const row of previewRows){
-        const text = String(row?.text || '').trim();
+        const text = String(row?.text || row?.txt || row?.snippet || '').trim();
         if(!text) continue;
-        const combined = [text, row?.keywords].filter(Boolean).join(' ');
+        const start = Number(row.start ?? row.t ?? row.time ?? row.startSeconds ?? 0) || 0;
+        const combined = [text, row?.keywords, row?.terms].filter(Boolean).join(' ');
         const score = scoreTranscriptSegmentForQuery(combined, query);
-        if(score <= 0) continue;
-        scored.push({
-          start: Number(row.start || 0) || 0,
-          text: compactSnippetText(text),
-          score
-        });
+        const normalizedCombined = normalizeSearchText(combined);
+        const queryTokens = meaningfulQueryTokens(normalizeSearchText(query || ''));
+        const looseMatches = queryTokens.filter(token => haystackContainsAny({haystackNormalized:normalizedCombined, haystackRaw:normalizedCombined}, queryTokenAlternates(token))).length;
+        if(score > 0){
+          scored.push({ start, text: compactSnippetText(text), score });
+        }else if(looseMatches > 0){
+          loose.push({ start, text: compactSnippetText(text), score: looseMatches });
+        }
       }
       scored.sort((a,b)=> (b.score - a.score) || (a.start - b.start));
-      return scored.slice(0, 3);
+      if(scored.length) return scored.slice(0, 3);
+      loose.sort((a,b)=> (b.score - a.score) || (a.start - b.start));
+      return loose.slice(0, 2);
     }
 
     async function loadSearchSnippetsForItem(item, query, cacheKey){
@@ -2612,7 +2626,7 @@
         const score = scoreTranscriptSegmentForQuery(text, query);
         if(score <= 0) continue;
         scored.push({
-          start: Number(seg.start || 0) || 0,
+          start: Number(seg.start ?? seg.t ?? seg.time ?? seg.startSeconds ?? 0) || 0,
           text: compactSnippetText(text),
           score
         });
@@ -2634,9 +2648,11 @@
     }
 
     function searchSnippetHtmlForItem(item){
-      if(!searchResultsMode() || !item?.transcript?.hasTranscript) return '';
+      if(!searchResultsMode()) return '';
       const q = state.searchTerm.trim();
-      if(!q || !transcriptDisplayJsonPathForItem(item)) return '';
+      const external = searchIndexEntryForItem(item);
+      const hasTranscriptSearchData = !!(item?.transcript?.hasTranscript || external || transcriptDisplayJsonPathForItem(item));
+      if(!q || !hasTranscriptSearchData) return '';
       const cacheKey = searchSnippetCacheKey(item, q);
       const cached = state.searchSnippetCache instanceof Map ? state.searchSnippetCache.get(cacheKey) : null;
       if(Array.isArray(cached)){
@@ -2673,7 +2689,7 @@
           if(state.searchSnippetPending instanceof Set) state.searchSnippetPending.delete(cacheKey);
         });
       }
-      return '';
+      return '<div class="search-hit-kind">Checking transcript…</div>';
     }
 
     function applySearch(items){
@@ -3666,16 +3682,21 @@ function nextIdleQuote(){
     }
 
     async function loadSearchIndex(){
-      const paths=['./search-index.json','./data/transcripts/search-index.json','./public/search-index.json','/search-index.json','/data/transcripts/search-index.json','/public/search-index.json'];
+      const paths=['./search-index.json','./data/transcripts/search-index.json','./public/search-index.json','./public/data/transcripts/search-index.json','/search-index.json','/data/transcripts/search-index.json','/public/search-index.json','/public/data/transcripts/search-index.json'];
       for(const path of paths){
         try{
           const res = await fetch(path,{cache:'no-store'});
           if(!res.ok) continue;
           const json = await res.json();
-          if(Array.isArray(json?.entries)){
-            state.searchIndex = json;
-            state.searchIndexMap = new Map(json.entries.filter(row=>row?.stableId).map(row=>[row.stableId,row]));
-            return json;
+          const entries = Array.isArray(json?.entries) ? json.entries
+            : (Array.isArray(json?.items) ? json.items
+            : (Array.isArray(json?.index) ? json.index
+            : (Array.isArray(json) ? json : [])));
+          if(entries.length){
+            const normalized = { ...(typeof json === 'object' && !Array.isArray(json) ? json : {}), entries };
+            state.searchIndex = normalized;
+            state.searchIndexMap = new Map(entries.filter(row=>row?.stableId).map(row=>[row.stableId,row]));
+            return normalized;
           }
         }catch(err){
           console.warn('Transcript search index failed to load from', path, err);
