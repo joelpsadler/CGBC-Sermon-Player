@@ -2788,14 +2788,8 @@ function transcriptLanguages(item){
 }
 function transcriptConfig(item, lang){
   const code = normalizeTranscriptLangCode(lang || state?.transcript?.language || 'en');
-
-  if(transcriptLanguageSwitch.active && transcriptLanguageSwitch.lang === code && transcriptLanguageSwitch.path){
-    return {jsonFile: transcriptLanguageSwitch.path};
-  }
-
   const runtime = item?.__runtimeTranscriptLanguages || {};
   if(runtime[code]) return runtime[code];
-
   const entries = transcriptLanguageEntries(item);
   return entries[code] || entries.en || {};
 }
@@ -2891,19 +2885,15 @@ async function renderTranscriptLanguageOptions(item){
       const entries = await transcriptRuntimeLanguageEntries(item);
       if(item) item.__runtimeTranscriptLanguages = entries;
       const langs = Object.keys(entries);
-
-      const lockedLang = transcriptLanguageSwitch.active ? transcriptLanguageSwitch.lang : '';
-      const selectedBefore = normalizeTranscriptLangCode(lockedLang || state.transcript.language || els.transcriptLanguage.value || 'en');
-
+      const selectedBefore = normalizeTranscriptLangCode(state.transcript.language || els.transcriptLanguage.value || 'en');
       els.transcriptLanguage.innerHTML = langs.map(lang=>{
         const path = transcriptPathFromConfig(entries[lang]);
         return '<option value="'+escapeHtml(lang)+'" data-path="'+escapeHtml(path)+'">'+escapeHtml(transcriptLanguageLabel(lang))+'</option>';
       }).join('');
-
       if(langs.includes(selectedBefore)){
         state.transcript.language = selectedBefore;
         els.transcriptLanguage.value = selectedBefore;
-      }else if(langs[0] && !transcriptLanguageSwitch.active){
+      }else if(langs[0]){
         state.transcript.language = langs[0];
         els.transcriptLanguage.value = langs[0];
       }
@@ -2947,19 +2937,9 @@ async function renderTranscriptLanguageOptions(item){
       els.transcriptFollowBtn.classList.toggle('active', state.transcript.mode === 'follow');
       els.transcriptReadBtn.classList.toggle('active', state.transcript.mode !== 'follow');
       try{
-        if(transcriptLanguageSwitch.active && transcriptLanguageSwitch.path){
-          state.transcript.itemId = item.stableId;
-          state.transcript.language = transcriptLanguageSwitch.lang;
-          state.transcript.loadedLanguage = transcriptLanguageSwitch.lang;
-          state.transcript.loadedPath = transcriptLanguageSwitch.path;
-          if(els.transcriptLanguage) els.transcriptLanguage.value = transcriptLanguageSwitch.lang;
-          if(!state.transcript.segments.length){
-            state.transcript.segments = await loadTranscriptSegmentsFromPath(transcriptLanguageSwitch.path);
-          }
-        }else if(state.transcript.itemId !== item.stableId || state.transcript.loadedLanguage !== state.transcript.language || !state.transcript.segments.length){
+        if(state.transcript.itemId !== item.stableId || state.transcript.loadedLanguage !== state.transcript.language || !state.transcript.segments.length){
           state.transcript.itemId = item.stableId;
           state.transcript.loadedLanguage = state.transcript.language;
-          state.transcript.loadedPath = transcriptPath(item, state.transcript.language);
           state.transcript.segments = await loadTranscriptForItem(item, state.transcript.language);
         }
         renderTranscriptLines();
@@ -4584,23 +4564,6 @@ async function renderTranscriptLanguageOptions(item){
 /* DIRECT SELECTED TRANSCRIPT LOAD
    Beginner note: this bypasses the normal panel refresh only when the language
    dropdown changes, so the selected language cannot be overwritten by English. */
-
-/* TRANSCRIPT LANGUAGE SWITCH GUARD
-   Beginner note: during a language change, the normal transcript panel refresh can
-   race the selected-language load and restore English. This guard lets the chosen
-   path win until the selected transcript has rendered. */
-const transcriptLanguageSwitch = {active:false, lang:'', path:''};
-
-function selectedTranscriptOptionPath(){
-  if(!els.transcriptLanguage) return '';
-  const opt = els.transcriptLanguage.options[els.transcriptLanguage.selectedIndex];
-  return opt?.dataset?.path || '';
-}
-function selectedTranscriptOptionLang(){
-  if(!els.transcriptLanguage) return '';
-  return normalizeTranscriptLangCode(els.transcriptLanguage.value || '');
-}
-
 async function loadTranscriptSegmentsFromPath(path){
   const cleanPath = String(path||'').trim();
   if(!cleanPath) return [];
@@ -4619,14 +4582,15 @@ async function forceSelectedTranscriptLanguage(lang){
   const item = state.currentItem;
   if(!item || !els.transcriptLanguage) return false;
 
-  const selectedLang = normalizeTranscriptLangCode(lang || selectedTranscriptOptionLang() || state.transcript.language || 'en');
+  const selectedLang = normalizeTranscriptLangCode(lang || els.transcriptLanguage.value || state.transcript.language || 'en');
   const selectedOption = [...els.transcriptLanguage.options].find(opt=>normalizeTranscriptLangCode(opt.value)===selectedLang);
-  let path = selectedOption?.dataset?.path || selectedTranscriptOptionPath() || '';
+  let path = selectedOption?.dataset?.path || '';
 
   if(!path){
     const entries = item.__runtimeTranscriptLanguages || await transcriptRuntimeLanguageEntries(item);
     item.__runtimeTranscriptLanguages = entries;
-    path = transcriptPathFromConfig(entries[selectedLang] || transcriptConfig(item, selectedLang));
+    const cfg = entries[selectedLang] || transcriptConfig(item, selectedLang);
+    path = transcriptPathFromConfig(cfg);
   }
 
   if(!path){
@@ -4634,51 +4598,29 @@ async function forceSelectedTranscriptLanguage(lang){
     return false;
   }
 
-  transcriptLanguageSwitch.active = true;
-  transcriptLanguageSwitch.lang = selectedLang;
-  transcriptLanguageSwitch.path = path;
-
   state.transcript.language = selectedLang;
   state.transcript.loadedLanguage = selectedLang;
-  state.transcript.loadedPath = path;
   els.transcriptLanguage.value = selectedLang;
   state.transcript.itemId = item.stableId;
   state.transcript.activeIndex = -1;
-
-  const segments = await loadTranscriptSegmentsFromPath(path);
-  state.transcript.segments = segments;
-  state.transcript.cache.set(item.stableId + ':' + selectedLang + ':' + path, segments);
-
-  renderTranscriptLines();
+  state.transcript.segments = await loadTranscriptSegmentsFromPath(path);
+  state.transcript.cache.set(item.stableId + ':' + selectedLang + ':' + path, state.transcript.segments);
 
   if(els.transcriptSubtitle){
     els.transcriptSubtitle.textContent = transcriptLanguageLabel(selectedLang)+' transcript loaded.';
   }
+  renderTranscriptLines();
   if(!state.transcript.hidden && typeof startTranscriptClock === 'function') startTranscriptClock();
 
-  window.setTimeout(()=>{
-    state.transcript.language = selectedLang;
-    state.transcript.loadedLanguage = selectedLang;
-    state.transcript.loadedPath = path;
-    if(els.transcriptLanguage) els.transcriptLanguage.value = selectedLang;
-    transcriptLanguageSwitch.active = false;
-  }, 250);
-
+  // Re-assert after render in case browser/UI styling tries to restore old value.
+  state.transcript.language = selectedLang;
+  els.transcriptLanguage.value = selectedLang;
   return true;
 }
 
 if(els.transcriptLanguage) els.transcriptLanguage.addEventListener('change', async ()=>{
-        const selectedLang = selectedTranscriptOptionLang();
-        const selectedPath = selectedTranscriptOptionPath();
+        const selectedLang = els.transcriptLanguage.value;
         const priorSegments = state.transcript.segments || [];
-
-        transcriptLanguageSwitch.active = true;
-        transcriptLanguageSwitch.lang = selectedLang;
-        transcriptLanguageSwitch.path = selectedPath;
-        state.transcript.language = selectedLang;
-        state.transcript.loadedLanguage = selectedLang;
-        state.transcript.loadedPath = selectedPath;
-
         try{
           els.transcriptLanguage.disabled = true;
           const loaded = await forceSelectedTranscriptLanguage(selectedLang);
