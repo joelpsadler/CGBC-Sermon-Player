@@ -2327,6 +2327,96 @@
       for(const item of items || []) getItemSearchIndex(item);
     }
 
+    // ---------------------------------------------------------------------------
+    // FORGIVING SERMON SEARCH MATCHING
+    // ---------------------------------------------------------------------------
+    // Beginner note:
+    // Transcript search is not just exact phrase search. People usually remember
+    // the idea, not the exact wording. This helper keeps exact matches fast, but
+    // also lets searches like "serve the church" find "service", "serving",
+    // "ministry", "body", etc. without loading full transcript files.
+    const SEARCH_STOP_WORDS = new Set([
+      'a','an','and','are','as','at','be','but','by','for','from','he','her','his','i','if','in','into','is','it','its','of','on','or','our','she','so','that','the','their','them','then','there','these','this','to','was','we','with','you','your'
+    ]);
+
+    const SEARCH_SYNONYM_GROUPS = [
+      ['serve','serves','served','serving','service','services','ministry','minister','ministering','helps','help','body'],
+      ['gift','gifts','gifted','giftedness','spiritual','grace','charism','charisma'],
+      ['church','body','congregation','believers','saints','assembly'],
+      ['pray','prayer','praying','intercede','intercession'],
+      ['disciple','disciples','discipleship','teach','teaching','teacher'],
+      ['prophecy','prophetic','prophet','prophesy'],
+      ['exhort','exhortation','encourage','encouragement'],
+      ['mercy','merciful','compassion'],
+      ['give','giving','giver','generosity','generous'],
+      ['lead','leading','leader','leadership'],
+      ['tribulation','seventieth','seventy','weeks','daniel'],
+      ['antichrist','anti','christ','lawless','lawlessness'],
+      ['covenant','peace','agreement','treaty'],
+      ['atonement','atone','iniquity','sin','sins','righteousness']
+    ];
+
+    const SEARCH_EQUIVALENTS = (() => {
+      const map = new Map();
+      const add = (key, values) => {
+        const k = normalizeSearchText(key);
+        if(!k) return;
+        if(!map.has(k)) map.set(k, new Set([k]));
+        for(const value of values || []){
+          const v = normalizeSearchText(value);
+          if(v) map.get(k).add(v);
+        }
+      };
+      for(const group of SEARCH_SYNONYM_GROUPS){
+        for(const word of group) add(word, group);
+      }
+      return map;
+    })();
+
+    function simpleSearchStem(token){
+      let t = String(token || '').trim().toLowerCase();
+      if(t.length > 5 && t.endsWith('ies')) return t.slice(0,-3) + 'y';
+      if(t.length > 5 && t.endsWith('ing')) return t.slice(0,-3);
+      if(t.length > 4 && t.endsWith('ed')) return t.slice(0,-2);
+      if(t.length > 4 && t.endsWith('es')) return t.slice(0,-2);
+      if(t.length > 3 && t.endsWith('s')) return t.slice(0,-1);
+      return t;
+    }
+
+    function queryTokenAlternates(token){
+      const normalized = normalizeSearchText(token);
+      if(!normalized) return [];
+      const out = new Set([normalized]);
+      const stem = simpleSearchStem(normalized);
+      if(stem) out.add(stem);
+
+      const mapped = SEARCH_EQUIVALENTS.get(normalized) || SEARCH_EQUIVALENTS.get(stem);
+      if(mapped){
+        for(const value of mapped){
+          out.add(value);
+          const valueStem = simpleSearchStem(value);
+          if(valueStem) out.add(valueStem);
+        }
+      }
+      return Array.from(out).filter(Boolean);
+    }
+
+    function haystackContainsAny(index, alternates){
+      const haystack = index?.haystackNormalized || '';
+      for(const alt of alternates || []){
+        if(alt && haystack.includes(alt)) return true;
+      }
+      return false;
+    }
+
+    function meaningfulQueryTokens(normalizedQuery){
+      return normalizedQuery
+        .split(' ')
+        .map(token => token.trim())
+        .filter(Boolean)
+        .filter(token => /^\d+$/.test(token) || (token.length > 1 && !SEARCH_STOP_WORDS.has(token)));
+    }
+
     function searchMatchesItem(item, query){
       const rawQuery = String(query || '').trim().toLowerCase();
       const normalizedQuery = normalizeSearchText(rawQuery);
@@ -2344,10 +2434,16 @@
       if(rawQuery.length > 1 && index.haystackRaw.includes(rawQuery)) return true;
       if(normalizedQuery.length > 1 && index.haystackNormalized.includes(normalizedQuery)) return true;
 
-      // Then use AND matching: every meaningful search word must be present.
-      // This makes "2024 March" and "March 2024" work without letting one loose word flood results.
-      const queryTokens = normalizedQuery.split(' ').filter(token => token.length > 1 || /^\d+$/.test(token));
-      return queryTokens.length > 1 && queryTokens.every(token => index.haystackNormalized.includes(token));
+      const queryTokens = meaningfulQueryTokens(normalizedQuery);
+      if(queryTokens.length <= 0) return false;
+
+      // Single meaningful words should stay reasonably strict, with basic stems and
+      // equivalents. Multi-word searches are forgiving but still require every idea.
+      if(queryTokens.length === 1){
+        return haystackContainsAny(index, queryTokenAlternates(queryTokens[0]));
+      }
+
+      return queryTokens.every(token => haystackContainsAny(index, queryTokenAlternates(token)));
     }
 
     function applySearch(items){
