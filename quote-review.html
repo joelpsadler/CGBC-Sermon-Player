@@ -791,18 +791,24 @@ textarea,
 }
 
 
-/* SIMILAR QUOTE REVIEW WARNING */
-.similar-quote-warning-note{
-  margin-top:10px;
-  padding:10px 12px;
-  border-radius:16px;
-  border:1px solid rgba(255,210,120,.22);
-  background:rgba(255,210,120,.08);
-  color:rgba(255,255,255,.82);
-  font-size:13px;
-  line-height:1.45;
-}
 
+/* PRIVATE TRANSCRIPT SEARCH WORKSTATION
+   Private quote-review page only. Public media search remains unchanged. */
+.review-search-panel{margin:0 0 16px;}
+.review-search-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.10);align-items:end;}
+.review-search-results{display:grid;gap:12px;padding:16px 22px 22px;}
+.review-search-result{border-radius:22px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);padding:14px;display:grid;gap:10px;}
+.review-search-title{margin:0;font-family:Poppins,sans-serif;font-size:18px;line-height:1.18;}
+.review-search-meta{display:flex;gap:8px;flex-wrap:wrap;color:rgba(255,255,255,.72);font-size:12px;}
+.review-search-hit{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.18);}
+.review-search-time{font-family:Poppins,sans-serif;font-weight:800;color:#fff;white-space:nowrap;}
+.review-search-text{color:rgba(255,255,255,.84);line-height:1.35;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.review-search-empty{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);text-align:center;}
+@media(max-width:760px){
+  .review-search-toolbar{grid-template-columns:1fr;}
+  .review-search-hit{grid-template-columns:1fr;align-items:start;}
+  .review-search-hit .btn{justify-self:start;}
+}
 </style></head><body><div class="page"><header class="topbar quote-review-image-art-header"><div class="brand"><a href="index.html" aria-label="Back to CGBC media"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a><div><p class="eyebrow">Hidden Review Desk</p><h1>Quote Approval</h1></div></div><nav class="nav-actions quote-review-nav-rows" aria-label="Quote tools navigation">
     <div class="nav-row nav-row-primary">
       <a class="back-link" href="quote-review-approved.html">Approved Quotes</a>
@@ -819,7 +825,7 @@ textarea,
   <aside class="image-art-card" id="imageArtCard" aria-label="Selected episode artwork">
     <img class="image-art-img" id="topRightEpisodeArtImageOnly" alt="" loading="lazy">
   </aside>
-</header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section><main class="app-view" id="appView"><div class="review-grid"><section class="panel"><div class="filters">
+</header><section class="gate" id="gate"><p class="eyebrow">Private review</p><h1>Enter Password</h1><label for="passwordInput">Review password</label><input id="passwordInput" inputmode="numeric" autocomplete="off" type="password" placeholder="Password"><div class="gate-actions"><button class="btn primary" id="unlockBtn" type="button">Open Review</button><span class="status" id="gateStatus"></span></div></section><main class="app-view" id="appView"><section class="panel review-search-panel" id="reviewSearchPanel"><header class="panel-head"><p class="eyebrow">Private sermon search</p><h2 class="panel-title">Find Transcript Moments</h2></header><div class="review-search-toolbar"><div class="field"><label for="reviewSearchBox">Search transcripts</label><input class="search" id="reviewSearchBox" placeholder="Search phrase, topic, scripture, or remembered words…"></div><button class="btn" id="clearReviewSearch" type="button">Clear</button></div><div class="review-search-results" id="reviewSearchResults"><div class="review-search-empty">Search transcript moments here, then use <b>Review Quote</b> to create a private review candidate.</div></div></section><div class="review-grid"><section class="panel"><div class="filters">
         <div class="field review-filter-top"><label for="episodeFilter">Episode filter</label><select id="episodeFilter"><option value="__all__">All episodes</option></select></div>
         <div class="review-filter-bottom">
           <div class="field"><label for="statusFilter">Review status</label><select id="statusFilter"><option value="unreviewed">Unreviewed only</option><option value="all">All quotes</option><option value="approved">Approved</option><option value="featured">Featured</option><option value="rejected">Rejected</option></select></div>
@@ -840,6 +846,7 @@ const AUTH_KEYS=['cgbcQuoteReviewUnlocked','cgbc_quote_review_unlocked','cgbcQuo
 const AUTH_TTL_MS=12*60*60*1000;
 const QUOTE_PATHS=['data/quotes/en/random-quotes.json','data/quotes/en/quote-bank.json','random-quotes.json','quote-bank.json'];
 const CURATION_PATHS=['config/quote-curation.json','quote-curation.json'];
+const SEARCH_INDEX_PATHS=['search-index.json','public/search-index.json','data/search-index.json'];
 const $=id=>document.getElementById(id);
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
 function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
@@ -938,7 +945,7 @@ function showScoringKey(){
   overlay.classList.add('is-visible');
 }
 
-const state={all:[],filtered:[],index:0,current:null,episodeFilter:'__all__',statusFilter:'unreviewed',depthCap:40,scoreOpen:false,context:new Map(),transcriptCache:new Map(),mediaMode:null};
+const state={all:[],filtered:[],index:0,current:null,episodeFilter:'__all__',statusFilter:'unreviewed',depthCap:40,scoreOpen:false,context:new Map(),transcriptCache:new Map(),mediaMode:null,searchIndex:[],reviewSearchQuery:''};
 function mainQuote(q){return clean(q?.approvedText||q?.contextWindow?.quote||q?.thoughtText||q?.displayText||q?.text||'');}
 
 /* REFINEMENT: transcript-backed context expansion */
@@ -1485,92 +1492,112 @@ function render(){const q=state.filtered[state.index]||null;state.current=q;if(!
   if(typeof setSelectedEpisodeArt==='function')setSelectedEpisodeArt(q);$('startTime').textContent=`Start ${fmtTime(q?.media?.start??q?.start??0)}`;$('endTime').textContent=`End ${fmtTime(q?.media?.end??q?.end??0)}`;if(state.mediaMode==='video')loadVideoHere();}
 function loadVideoHere(){const q=state.current;if(!q)return;state.mediaMode='video';const id=q?.media?.youtubeId;const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));const src=id?`https://www.youtube.com/embed/${encodeURIComponent(id)}?start=${start}&rel=0`:(q?.media?.videoUrl||'');$('mediaShell').innerHTML=src?`<iframe title="Quote video preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen src="${esc(src)}"></iframe>`:'No video URL available.';}
 function openVideo(){const q=state.current;if(!q)return;const url=q?.media?.videoUrl||(q?.media?.youtubeId?`https://www.youtube.com/watch?v=${q.media.youtubeId}`:'');if(!url)return;const start=Math.max(0,Math.floor(q?.media?.start??q?.start??0));window.open(`${url}${url.includes('?')?'&':'?'}t=${start}s`,'_blank','noopener');}
+function decision(action){const q=state.current;if(!q)return;removeLocalAll(q);saveLocal(action,q,$('approvalText').value);q.localReview=readLocal(action,q);q.finalReview=q.localReview;q.finalStatus=action;const old=state.index;buildFilters();applyFilters(false);state.index=Math.min(old,Math.max(0,state.filtered.length-1));render();toast(action==='rejected'?'Rejected.':action==='featured'?'Featured.':'Approved.');}
 
-/* SIMILAR QUOTE REVIEW WARNING HELPERS */
-const SIMILAR_QUOTE_APPROVAL_THRESHOLD = 0.86;
 
-function similarQuoteNormalize(text){
-  return clean(text)
-    .toLowerCase()
-    .replace(/[“”"']/g,'')
-    .replace(/[^a-z0-9\s]/g,' ')
-    .replace(/\b(the|a|an|and|or|but|so|to|of|in|on|for|with|that|this|is|are|was|were|be|been|being|we|you|they|it|he|she|i)\b/g,' ')
-    .replace(/\s+/g,' ')
-    .trim();
+/* PRIVATE SEARCH -> REVIEW QUOTE BRIDGE */
+async function loadSearchIndex(){
+  try{
+    const data=await fetchFirst(SEARCH_INDEX_PATHS,'search index');
+    return Array.isArray(data?.entries)?data.entries:[];
+  }catch(e){console.warn(e);return [];}
 }
-function similarQuoteTokens(text){
-  const norm = similarQuoteNormalize(text);
-  if(!norm) return [];
-  const words = norm.split(/\s+/).filter(w=>w.length>2);
-  if(words.length < 4) return words;
-  const grams = [];
-  for(let i=0;i<words.length-2;i++) grams.push(words.slice(i,i+3).join(' '));
-  return grams.length ? grams : words;
-}
-function similarQuoteScore(a,b){
-  const A = new Set(similarQuoteTokens(a));
-  const B = new Set(similarQuoteTokens(b));
-  if(!A.size || !B.size) return 0;
-  let hit = 0;
-  for(const item of A){ if(B.has(item)) hit++; }
-  return (2 * hit) / (A.size + B.size);
-}
-function approvedTextForSimilarity(q){
-  return clean(q?.localReview?.approvedText || q?.repoReview?.approvedText || q?.finalReview?.approvedText || q?.approvedText || q?.displayText || q?.text || q?.quote || '');
-}
-function similarApprovedQuote(candidate,current){
-  const text = clean(candidate || '');
-  if(!text || !current || !Array.isArray(state?.all)) return null;
-  let best = null;
-  for(const q of state.all){
-    if((q?.id || q?.quoteId) === (current?.id || current?.quoteId)) continue;
-    const status = String(q?.finalStatus || q?.localReview?.status || q?.repoReview?.status || q?.status || '').toLowerCase();
-    if(status !== 'approved' && status !== 'featured') continue;
-    const other = approvedTextForSimilarity(q);
-    if(!other) continue;
-    const score = similarQuoteScore(text, other);
-    if(!best || score > best.score) best = {q, score, text: other};
+function reviewSearchWords(value){return clean(value).toLowerCase().split(/[^a-z0-9]+/).filter(w=>w&&w.length>1&&!['the','and','for','with','that','this','into','from','your','you','are','our','was','were','have','has','had','not','but','all','any'].includes(w));}
+function textHasReviewSearch(text,words){const hay=clean(text).toLowerCase();return words.every(w=>hay.includes(w)||hay.includes(w.replace(/s$/,'')));}
+function reviewEntryEpisodeLabel(entry){return entry?.title||entry?.episodeName||'Sermon';}
+function reviewEntryDate(entry){return entry?.date||'';}
+function findEpisodeSeed(stableId){return (state.all||[]).find(q=>episodeKey(q)===stableId)||null;}
+function searchHitId(entry,hit){return `manual-${entry.stableId||'episode'}-${Math.max(0,Math.floor(Number(hit?.start||hit?.t||0)))}`;}
+function renderReviewSearch(){
+  const box=$('reviewSearchBox'),out=$('reviewSearchResults');
+  if(!box||!out)return;
+  const query=clean(box.value);
+  state.reviewSearchQuery=query;
+  const words=reviewSearchWords(query);
+  if(!words.length){out.innerHTML='<div class="review-search-empty">Search transcript moments here, then use <b>Review Quote</b> to create a private review candidate.</div>';return;}
+  const results=[];
+  for(const entry of state.searchIndex||[]){
+    const searchable=[entry.searchText,entry.metadataText,entry.transcriptKeywordText,entry.title,entry.series,entry.study,entry.scripture].filter(Boolean).join(' ');
+    const strong=textHasReviewSearch(searchable,words);
+    const hits=(entry.preview||[]).filter(hit=>textHasReviewSearch([hit.text,hit.keywords].join(' '),words));
+    const useHits=hits.length?hits:(strong?(entry.preview||[]).slice(0,3):[]);
+    if(useHits.length)results.push({entry,hits:useHits.slice(0,3),score:(strong?10:0)+hits.length});
   }
-  return best && best.score >= SIMILAR_QUOTE_APPROVAL_THRESHOLD ? best : null;
+  results.sort((a,b)=>b.score-a.score);
+  if(!results.length){out.innerHTML='<div class="review-search-empty">No transcript moments found for that search.</div>';return;}
+  out.innerHTML=results.slice(0,8).map(({entry,hits})=>`<article class="review-search-result"><h3 class="review-search-title">${esc(reviewEntryEpisodeLabel(entry))}</h3><div class="review-search-meta"><span>${esc(entry.series||entry.study||'')}</span><span>${esc(entry.scripture||'')}</span><span>${esc(fmtDate(reviewEntryDate(entry)))}</span></div>${hits.map(hit=>`<div class="review-search-hit"><span class="review-search-time">${esc(fmtTime(hit.start||hit.t||0))}</span><span class="review-search-text">${esc(hit.text||'')}</span><button class="btn primary" type="button" data-review-quote="1" data-stable-id="${esc(entry.stableId||'')}" data-hit-start="${esc(hit.start||hit.t||0)}" data-hit-text="${esc(hit.text||'')}">Review Quote</button></div>`).join('')}</article>`).join('');
 }
-function confirmSimilarQuoteApproval(action,q,text){
-  if(action !== 'approved' && action !== 'featured') return true;
-  const match = similarApprovedQuote(text,q);
-  if(!match) return true;
-  const title = match.q?.episode?.title || match.q?.episode?.episodeName || match.q?.episodeTitle || 'another approved quote';
-  const percent = Math.round(match.score * 100);
-  return window.confirm(
-    `Similar approved/featured quote found (${percent}% similar):\n\n` +
-    `"${match.text.slice(0,220)}${match.text.length>220?'…':''}"\n\n` +
-    `Episode: ${title}\n\n` +
-    `Approve this ${action === 'featured' ? 'featured quote' : 'quote'} anyway?`
-  );
+function makeManualReviewQuote(stableId,start,text){
+  const entry=(state.searchIndex||[]).find(e=>e.stableId===stableId)||{};
+  const seed=findEpisodeSeed(stableId)||{};
+  const seedEp=seed.episode||{};
+  const seedMedia=seed.media||{};
+  const s=Math.max(0,Number(start)||0);
+  const quoteText=clean(text)||'Transcript search moment';
+  return {
+    id:searchHitId(entry,{start:s}),
+    language:'en',
+    status:'candidate',
+    curation:{status:'candidate',approved:false,featured:false,rejected:false},
+    episode:{
+      stableId:stableId,
+      title:entry.title||seedEp.title||seed.episodeTitle||'Transcript Search Quote',
+      episodeName:entry.episodeName||seedEp.episodeName||entry.title||seedEp.title||'Transcript Search Quote',
+      subtitle:entry.subtitle||seedEp.subtitle||'',
+      series:entry.series||seedEp.series||'',
+      study:entry.study||seedEp.study||'',
+      scripture:entry.scripture||seedEp.scripture||'',
+      date:entry.date||seedEp.date||'',
+      speaker:entry.speaker||seedEp.speaker||quoteSpeaker(seed)||'Pastor Jacob Lannom',
+      shareUrl:seedEp.shareUrl||seedEp.episodeUrl||''
+    },
+    media:{
+      start:s,
+      end:s+12,
+      youtubeId:seedMedia.youtubeId||seed.youtubeId||'',
+      videoUrl:seedMedia.videoUrl||seed.videoUrl||'',
+      audioUrl:seedMedia.audioUrl||seed.audioUrl||'',
+      hasVideo:seedMedia.hasVideo!==false,
+      hasAudio:seedMedia.hasAudio!==false,
+      transcriptDisplayJson:entry.transcriptDisplayJson||seedMedia.transcriptDisplayJson||'',
+      transcriptCleanJson:entry.transcriptJson||seedMedia.transcriptCleanJson||''
+    },
+    start:s,
+    end:s+12,
+    displayText:quoteText,
+    text:quoteText,
+    approvedText:quoteText,
+    source:{kind:'private_transcript_search',createdAt:new Date().toISOString()},
+    publicSafe:false,
+    searchBoost:50,
+    score:100,
+    quotePolishScore:100,
+    rank:0,
+    manualSearchCandidate:true
+  };
 }
-
-function decision(action){
-  const q=state.current;
-  if(!q)return;
-  const text=$('approvalText').value;
-  if(!confirmSimilarQuoteApproval(action,q,text)){
-    toast('Approval paused so you can compare the similar quote.');
-    return;
-  }
-  removeLocalAll(q);
-  saveLocal(action,q,text);
-  q.localReview=readLocal(action,q);
-  q.finalReview=q.localReview;
-  q.finalStatus=action;
-  const old=state.index;
+function createReviewQuoteFromSearch(stableId,start,text){
+  const q=makeManualReviewQuote(stableId,start,text);
+  const existingIndex=state.all.findIndex(item=>(item.id||item.quoteId)===q.id);
+  if(existingIndex>=0)state.all[existingIndex]=q; else state.all.unshift(q);
+  state.episodeFilter=episodeKey(q);
+  state.statusFilter='all';
   buildFilters();
-  applyFilters(false);
-  state.index=Math.min(old,Math.max(0,state.filtered.length-1));
+  applyFilters(true);
+  const idx=state.filtered.findIndex(item=>(item.id||item.quoteId)===q.id);
+  if(idx>=0)state.index=idx;
   render();
-  toast(action==='rejected'?'Rejected.':action==='featured'?'Featured.':'Approved.');
+  toast('Search moment loaded as a review quote. Edit, approve, feature, or reject it.');
 }
-async function openApp(){const [quotes,reviews]=await Promise.all([loadQuotes(),loadCuration()]);state.all=mergeQuotesWithReviews(quotes,reviews);buildFilters();applyFilters(true);}
+
+async function openApp(){const [quotes,reviews,searchEntries]=await Promise.all([loadQuotes(),loadCuration(),loadSearchIndex()]);state.all=mergeQuotesWithReviews(quotes,reviews);state.searchIndex=searchEntries;buildFilters();applyFilters(true);renderReviewSearch();}
 $('episodeFilter')?.addEventListener('change',()=>{state.episodeFilter=$('episodeFilter').value;buildFilters();applyFilters(true);});
 $('depthFilter')?.addEventListener('change',()=>{state.depthCap=Number($('depthFilter').value)||40;applyFilters(true);});
 $('scoreToggle')?.addEventListener('click',()=>{state.scoreOpen=!state.scoreOpen;render();});$('statusFilter')?.addEventListener('change',()=>{state.statusFilter=$('statusFilter').value;applyFilters(true);});$('addPrevious')?.addEventListener('click',()=>addContext('before').catch(e=>{console.warn(e);toast('Could not add previous sentence.');}));$('addNext')?.addEventListener('click',()=>addContext('after').catch(e=>{console.warn(e);toast('Could not add next sentence.');}));$('prevBtn')?.addEventListener('click',()=>{state.index=Math.max(0,state.index-1);render();});$('nextBtn')?.addEventListener('click',()=>{state.index=Math.min(state.filtered.length-1,state.index+1);render();});$('rejectBtn')?.addEventListener('click',()=>decision('rejected'));$('approveBtn')?.addEventListener('click',()=>decision('approved'));$('featureBtn')?.addEventListener('click',()=>decision('featured'));$('loadVideo')?.addEventListener('click',loadVideoHere);$('openVideo')?.addEventListener('click',openVideo);$('approvalText')?.addEventListener('input',()=>{$('quoteMain').textContent=$('approvalText').value.trim()||mainQuote(state.current);});$('exportCurationBtn')?.addEventListener('click',e=>{e.preventDefault();exportCuration(state.all);});$('scoringKeyBtn')?.addEventListener('click',showScoringKey);
+
+$('reviewSearchBox')?.addEventListener('input',()=>renderReviewSearch());
+$('clearReviewSearch')?.addEventListener('click',()=>{if($('reviewSearchBox'))$('reviewSearchBox').value='';renderReviewSearch();});
+$('reviewSearchResults')?.addEventListener('click',e=>{const btn=e.target.closest('[data-review-quote]');if(!btn)return;createReviewQuoteFromSearch(btn.dataset.stableId,btn.dataset.hitStart,btn.dataset.hitText);});
 bindGate(openApp);
 
 document.addEventListener('DOMContentLoaded',()=>setTimeout(removeCandidateTitleBlock,0));
