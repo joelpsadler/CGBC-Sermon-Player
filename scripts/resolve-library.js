@@ -1816,6 +1816,244 @@ function buildQuoteCurationDefaults() {
   };
 }
 
+
+// -----------------------------------------------------------------------------
+// QUOTE CURATION MERGE
+// -----------------------------------------------------------------------------
+// Beginner note:
+// The quote review pages export decisions to config/quote-curation.json. Some
+// decisions point at auto-generated quote candidates. Others may come from the
+// private transcript search tool and therefore do NOT exist in the auto quote
+// bank yet. These helpers make the build honor both kinds:
+//   1) apply approved/featured/rejected status to generated candidates
+//   2) inject manually discovered approved/featured transcript moments into the
+//      quote bank so they can appear on Approved Quotes, Quote Wall, and search.
+
+const QUOTE_CURATION_PATH = "config/quote-curation.json";
+
+function readQuoteCurationReviews() {
+  try {
+    if (!existsSync(QUOTE_CURATION_PATH)) return [];
+    const data = readJson(QUOTE_CURATION_PATH);
+    return Array.isArray(data?.reviews) ? data.reviews : (Array.isArray(data) ? data : []);
+  } catch (err) {
+    console.warn(`Could not read ${QUOTE_CURATION_PATH}: ${err.message}`);
+    return [];
+  }
+}
+
+function normalizeQuoteReviewStatus(value) {
+  const status = clean(value).toLowerCase();
+  if (status === "featured") return "featured";
+  if (status === "approved") return "approved";
+  if (status === "rejected") return "rejected";
+  return "candidate";
+}
+
+function buildReviewMap(reviews) {
+  const byId = new Map();
+  for (const review of reviews || []) {
+    const quoteId = clean(review?.quoteId);
+    if (!quoteId) continue;
+    // Last row wins. This matches the browser export behavior where later local
+    // decisions should override older decisions for the same quote id.
+    byId.set(quoteId, review);
+  }
+  return byId;
+}
+
+function curationFromReview(review, existing = {}) {
+  const status = normalizeQuoteReviewStatus(review?.status || existing.status || "candidate");
+  const savedAt = review?.savedAt || existing.reviewedAt || null;
+  return {
+    ...buildQuoteCurationDefaults(),
+    ...existing,
+    status,
+    approved: status === "approved" || status === "featured",
+    featured: status === "featured",
+    rejected: status === "rejected",
+    approvedAt: (status === "approved" || status === "featured") ? (existing.approvedAt || savedAt) : null,
+    rejectedAt: status === "rejected" ? (existing.rejectedAt || savedAt) : null,
+    featuredAt: status === "featured" ? (existing.featuredAt || savedAt) : null,
+    reviewedAt: savedAt,
+    reviewedBy: review?.reviewedBy || existing.reviewedBy || null,
+    note: review?.note || existing.note || ""
+  };
+}
+
+function applyReviewToQuote(quote, review) {
+  if (!quote || !review) return quote;
+  const status = normalizeQuoteReviewStatus(review.status);
+  const approvedText = normalizeQuoteWhitespace(review.approvedText || quote.approvedText || quote.displayText || quote.text || "");
+  const start = Number.isFinite(Number(review.start)) ? Number(review.start) : (quote.start ?? quote.media?.start ?? null);
+  const end = Number.isFinite(Number(review.end)) ? Number(review.end) : (quote.end ?? quote.media?.end ?? null);
+  const media = {
+    ...(quote.media || {}),
+    start: start ?? quote.media?.start ?? null,
+    end: end ?? quote.media?.end ?? null
+  };
+
+  const updated = hydrateQuotePublicSurfaceFields({
+    ...quote,
+    status,
+    curation: curationFromReview(review, quote.curation || {}),
+    approvedText,
+    displayText: approvedText || quote.displayText || quote.text || "",
+    text: approvedText || quote.displayText || quote.text || "",
+    start: start ?? quote.start ?? media.start,
+    end: end ?? quote.end ?? media.end,
+    media,
+    reviewSource: review.source || "repo_curation",
+    reviewedAt: review.savedAt || quote.reviewedAt || null
+  });
+
+  return updated;
+}
+
+function makeManualQuoteFromReview(review, item) {
+  const status = normalizeQuoteReviewStatus(review?.status);
+  if (status !== "approved" && status !== "featured") return null;
+
+  const stableId = clean(review?.episodeStableId || item?.stableId || "manual");
+  const start = Math.max(0, Number(review?.start || 0));
+  const end = Number.isFinite(Number(review?.end)) && Number(review.end) > start ? Number(review.end) : start + 12;
+  const text = normalizeQuoteWhitespace(review?.approvedText || "");
+  if (!text) return null;
+
+  const episode = item ? buildQuoteEpisodePayload(item) : {
+    stableId,
+    title: clean(review?.episodeTitle) || "Manual Review Quote",
+    episodeName: clean(review?.episodeTitle) || "Manual Review Quote",
+    subtitle: "",
+    series: "",
+    seriesKey: "",
+    study: "",
+    studyKey: "",
+    scripture: "",
+    date: null,
+    speaker: "Pastor Jacob Lannom",
+    shareUrl: null,
+    episodeUrl: null
+  };
+  if (review?.episodeTitle && !episode.title) episode.title = clean(review.episodeTitle);
+
+  const media = item ? buildQuoteMediaHooks(item, start, end) : {
+    start,
+    end,
+    audioUrl: null,
+    youtubeId: extractYoutubeId(review?.youtubeLink || "") || null,
+    videoUrl: review?.youtubeLink || null,
+    audioDurationSeconds: null,
+    transcriptDisplayJson: null,
+    transcriptCleanJson: null,
+    hasAudio: false,
+    hasVideo: Boolean(review?.youtubeLink)
+  };
+
+  const base = {
+    id: clean(review?.quoteId) || `manual-${stableId}-${Math.floor(start)}`,
+    language: QUOTE_DEFAULT_LANGUAGE,
+    status,
+    curation: curationFromReview(review),
+    episode,
+    media,
+    start,
+    end,
+    startTime: null,
+    endTime: null,
+    segmentIndexes: [],
+    wordCount: quoteWordCount(text),
+    displayWordCount: quoteWordCount(text),
+    durationSeconds: Math.max(0, end - start),
+    score: 100,
+    baseScore: 100,
+    disfluencyScore: 0,
+    speakerNaturalness: 100,
+    speechCleaned: true,
+    speechCleanPasses: 0,
+    hardRejectReason: null,
+    scriptureMode: "manual_review",
+    metaTeachingScore: 0,
+    brandSignature: false,
+    tailTrimmed: false,
+    contrastBoost: 0,
+    pastoralCharge: /\b(?:we|you|church|faith|grace|truth|word|lord|christ|god)\b/i.test(text),
+    timelessnessScore: 40,
+    seriesRecap: false,
+    outlineOrLessonStructure: false,
+    reflectionLeadIn: false,
+    duplicateSentenceDedupe: false,
+    instructionalPrefixTrimmed: false,
+    contextRecoveryUsed: false,
+    contextBefore: null,
+    contextAfter: null,
+    contextSecondAfter: null,
+    contextWindow: { before: null, quote: text, after: null, secondAfter: null },
+    approvedText: text,
+    expandedText: text,
+    thoughtText: text,
+    strongTerms: quoteStrongTermHits(text),
+    lowValuePenalty: quoteLowValuePenalty(text),
+    quoteCategory: "manual_review",
+    qualityFlags: quoteQualityFlags(text, text, quoteStrongTermHits(text), quoteLowValuePenalty(text)),
+    source: {
+      kind: "manual_transcript_search_review",
+      quoteCurationJson: QUOTE_CURATION_PATH,
+      siteDeepLink: review?.siteDeepLink || null,
+      youtubeLink: review?.youtubeLink || null,
+      transcriptDisplayJson: media.transcriptDisplayJson || null,
+      transcriptCleanJson: media.transcriptCleanJson || null
+    },
+    rawText: text,
+    displayText: text,
+    text,
+    manualSearchCandidate: true
+  };
+
+  return hydrateQuotePublicSurfaceFields({
+    ...base,
+    quotePolishScore: quotePolishScoreForDisplay(base),
+    displayTier: status === "featured" ? "featured" : displayTierForQuote(base),
+    searchBoost: 100,
+    publicSafe: true,
+    publicSurfaceReason: status === "featured" ? "human_featured" : "human_approved"
+  });
+}
+
+function rebuildQuoteIndexes(quotes) {
+  const byEpisode = {};
+  const bySeries = {};
+  for (const quote of quotes || []) {
+    const episode = quote.episode || {};
+    const stableId = episode.stableId || "unknown";
+    if (!byEpisode[stableId]) {
+      byEpisode[stableId] = {
+        ...episode,
+        transcriptDisplayJson: quote.media?.transcriptDisplayJson || quote.source?.transcriptDisplayJson || null,
+        quoteCount: 0,
+        quotes: []
+      };
+    }
+    byEpisode[stableId].quoteCount += 1;
+    byEpisode[stableId].quotes.push(quote);
+
+    const seriesKey = episode.seriesKey || slugify(episode.series || "standalone") || "standalone";
+    if (!bySeries[seriesKey]) {
+      bySeries[seriesKey] = {
+        seriesKey,
+        series: episode.series || "Standalone",
+        quoteCount: 0,
+        episodeStableIds: [],
+        quoteIds: []
+      };
+    }
+    bySeries[seriesKey].quoteCount += 1;
+    if (!bySeries[seriesKey].episodeStableIds.includes(stableId)) bySeries[seriesKey].episodeStableIds.push(stableId);
+    bySeries[seriesKey].quoteIds.push(quote.id);
+  }
+  return { byEpisode, bySeries };
+}
+
 function quotePolishScoreForDisplay(quote) {
   let score = quote.score || 0;
   const text = normalizeQuoteWhitespace(quote.displayText || quote.text || "");
@@ -2219,9 +2457,13 @@ function buildQuoteBank(items) {
   const languageQuoteDir = `${QUOTE_DATA_DIR}/${language}`;
   ensureDirectory(languageQuoteDir);
 
-  const allQuotes = [];
-  const byEpisode = {};
-  const bySeries = {};
+  const curationReviews = readQuoteCurationReviews();
+  const reviewById = buildReviewMap(curationReviews);
+  const itemByStableId = new Map((items || []).map(item => [item.stableId, item]));
+
+  let allQuotes = [];
+  let byEpisode = {};
+  let bySeries = {};
 
   for (const item of items || []) {
     if (!item?.transcript?.hasTranscript) continue;
@@ -2256,13 +2498,32 @@ function buildQuoteBank(items) {
     allQuotes.push(...episodeQuotes);
   }
 
-  allQuotes.sort((a, b) => {
-    if (b.score !== a.score) return b.score - a.score;
+  const finalById = new Map();
+  for (const quote of allQuotes) {
+    const review = reviewById.get(quote.id);
+    finalById.set(quote.id, review ? applyReviewToQuote(quote, review) : hydrateQuotePublicSurfaceFields(quote));
+  }
+
+  for (const review of curationReviews) {
+    const quoteId = clean(review?.quoteId);
+    if (!quoteId || finalById.has(quoteId)) continue;
+    const manualQuote = makeManualQuoteFromReview(review, itemByStableId.get(review?.episodeStableId));
+    if (manualQuote) finalById.set(manualQuote.id, manualQuote);
+  }
+
+  allQuotes = Array.from(finalById.values()).sort((a, b) => {
+    const statusBoost = Number(Boolean(b.curation?.featured)) - Number(Boolean(a.curation?.featured))
+      || Number(Boolean(b.curation?.approved)) - Number(Boolean(a.curation?.approved))
+      || Number(Boolean(a.curation?.rejected)) - Number(Boolean(b.curation?.rejected));
+    if (statusBoost) return statusBoost;
+    if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
     return String(b.episode?.date || "").localeCompare(String(a.episode?.date || ""));
   });
 
-  const approvedQuotes = allQuotes.filter(q => q.curation?.approved);
-  const featuredQuotes = allQuotes.filter(q => q.curation?.featured);
+  ({ byEpisode, bySeries } = rebuildQuoteIndexes(allQuotes));
+
+  const approvedQuotes = allQuotes.filter(q => q.curation?.approved && !q.curation?.rejected);
+  const featuredQuotes = allQuotes.filter(q => q.curation?.featured && !q.curation?.rejected);
 
   const quoteBank = {
     generatedAt: new Date().toISOString(),
