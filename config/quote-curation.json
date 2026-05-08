@@ -1,10 +1,40 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-07T17:56:47.708Z",
+  "generatedAt": "2026-05-08T12:44:28.083Z",
   "source": "cgbc_quote_review_browser",
   "targetFile": "config/quote-curation.json",
   "note": "Commit this file to config/quote-curation.json, then run the normal sermon library build workflow.",
   "reviews": [
+    {
+      "quoteId": "manual-media-m04f9j-1947-1pjtzvw",
+      "status": "approved",
+      "approvedText": "We need teachers. Gifted men and women of God operating in their biblical role of teaching. You don't need a pulpit to teach.",
+      "episodeStableId": "media-m04f9j",
+      "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
+      "episodeSeries": "Romans Chapter 12",
+      "episodeStudy": "The Book of Romans",
+      "episodeScripture": "Romans 12:6-8",
+      "episodeDate": "2026-04-26",
+      "speaker": "Pastor Jacob Lannom",
+      "start": 1943.716,
+      "end": 1954.4,
+      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=1943",
+      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j",
+      "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=1943s",
+      "source": "private_transcript_search",
+      "manualSearchCandidate": true,
+      "manualTranscriptIndex": 633,
+      "manualFirstTranscriptIndex": 632,
+      "manualLastTranscriptIndex": 634,
+      "segmentIndexes": [
+        632,
+        633,
+        634
+      ],
+      "transcriptDisplayJson": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.display.json",
+      "transcriptCleanJson": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.json",
+      "savedAt": "2026-05-08T12:44:28.069Z"
+    },
     {
       "quoteId": "media-m04f9j-quote-0001",
       "status": "rejected",
@@ -2929,6 +2959,35 @@
       "youtubeLink": "https://www.youtube.com/watch?v=T-cd2mlwDSk&t=219s",
       "source": "browser_review",
       "savedAt": "2026-05-05T10:45:51.427Z"
+    },
+    {
+      "quoteId": "manual-media-m04f9j-69-x67eg",
+      "status": "featured",
+      "approvedText": "If your gift does not contribute to the unity of the church, you are not operating by the Holy Spirit or the grace of God.",
+      "episodeStableId": "media-m04f9j",
+      "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
+      "episodeSeries": "Romans Chapter 12",
+      "episodeStudy": "The Book of Romans",
+      "episodeScripture": "Romans 12:6-8",
+      "episodeDate": "2026-04-26",
+      "speaker": "Pastor Jacob Lannom",
+      "start": 66.549,
+      "end": 75.366,
+      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=66",
+      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j",
+      "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=66s",
+      "source": "private_transcript_search",
+      "manualSearchCandidate": true,
+      "manualTranscriptIndex": 14,
+      "manualFirstTranscriptIndex": 13,
+      "manualLastTranscriptIndex": 14,
+      "segmentIndexes": [
+        13,
+        14
+      ],
+      "transcriptDisplayJson": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.display.json",
+      "transcriptCleanJson": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.json",
+      "savedAt": "2026-05-08T01:18:39.906Z"
     }
   ]
 }
