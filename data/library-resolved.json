@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-09T14:21:47.806Z",
+  "generatedAt": "2026-05-09T14:34:42.386Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 139,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 377
   },
   "totals": {
-    "audioPlaysTotal": 4274,
+    "audioPlaysTotal": 4275,
     "audioEpisodesTotal": 139
   },
   "current": {
@@ -28,8 +28,8 @@
         "lane": "sunday",
         "seriesKey": "romans-chapter-12",
         "seriesName": "Romans Chapter 12",
-        "studyKey": "the-book-of-romans-series",
-        "studyName": "The Book of Romans Series",
+        "studyKey": "romans",
+        "studyName": "Romans",
         "detectedFromEpisode": "media-4so01z",
         "detectedFromDate": "2026-05-03",
         "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 5 (Grace Gifts: Encouragement)",
@@ -58,18 +58,7 @@
         "square": null,
         "wide": null
       },
-      "count": 2
-    },
-    {
-      "key": "grace-gifts-by-pastor-jacob-lannom-date-05-03-2026",
-      "name": "Grace Gifts by: Pastor Jacob Lannom Date: 05/03/2026",
-      "description": "",
-      "sortOrder": 999,
-      "art": {
-        "square": null,
-        "wide": null
-      },
-      "count": 1
+      "count": 3
     }
   ],
   "items": [
@@ -351,8 +340,8 @@
         "type": "expositional"
       },
       "study": {
-        "name": "The Book of Romans Series",
-        "key": "the-book-of-romans-series",
+        "name": "Romans",
+        "key": "romans",
         "type": "book_study"
       },
       "scripture": {
@@ -502,8 +491,8 @@
       },
       "collections": [
         {
-          "name": "Grace Gifts by: Pastor Jacob Lannom Date: 05/03/2026",
-          "key": "grace-gifts-by-pastor-jacob-lannom-date-05-03-2026",
+          "name": "Grace Gifts",
+          "key": "grace-gifts",
           "description": "",
           "sortOrder": 999,
           "art": {
@@ -558,7 +547,7 @@
           "key": "isaiah"
         }
       ],
-      "speaker": null,
+      "speaker": "Pastor Jacob Lannom Date: 05/03/2026",
       "date": {
         "raw": "Sun, 03 May 2026 11:00:00 -0600",
         "iso": "2026-05-03",
@@ -593,7 +582,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cu5tqhj3wyqdmxy7/50326_S_PC9krg5.mp3",
-        "plays": 2,
+        "plays": 3,
         "durationSeconds": 2447,
         "statsMatchStrategy": "media_url"
       },
@@ -613,8 +602,8 @@
           "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/503_PC7i3ee.jpg",
-          "wide": "https://i.ytimg.com/vi/QYhdu-bGyi8/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "wide": null
         }
       },
       "memberships": {
@@ -622,7 +611,7 @@
           "romans-chapter-12"
         ],
         "studies": [
-          "the-book-of-romans-series"
+          "romans"
         ],
         "bibleBooks": [
           "romans",
@@ -637,7 +626,7 @@
           "isaiah"
         ],
         "collections": [
-          "grace-gifts-by-pastor-jacob-lannom-date-05-03-2026"
+          "grace-gifts"
         ],
         "byYear": [
           "2026"
