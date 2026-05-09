@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-05-09T12:51:00.786Z",
+  "generatedAt": "2026-05-09T13:01:14.559Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 137,
-    "archiveItems": 137,
-    "videoMatchedItems": 76,
-    "transcriptMatchedItems": 3,
-    "quoteCandidateCount": 227
+    "rssItems": 138,
+    "archiveItems": 138,
+    "videoMatchedItems": 77,
+    "transcriptMatchedItems": 4,
+    "quoteCandidateCount": 302
   },
   "totals": {
     "audioPlaysTotal": 4272,
-    "audioEpisodesTotal": 137
+    "audioEpisodesTotal": 138
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -28,11 +28,11 @@
         "lane": "sunday",
         "seriesKey": "romans-chapter-12",
         "seriesName": "Romans Chapter 12",
-        "studyKey": "the-book-of-romans",
-        "studyName": "The Book of Romans",
-        "detectedFromEpisode": "media-m04f9j",
-        "detectedFromDate": "2026-04-26",
-        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
+        "studyKey": "the-book-of-romans-series",
+        "studyName": "The Book of Romans Series",
+        "detectedFromEpisode": "media-4so01z",
+        "detectedFromDate": "2026-05-03",
+        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 5 (Grace Gifts: Encouragement)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -59,9 +59,345 @@
         "wide": null
       },
       "count": 2
+    },
+    {
+      "key": "grace-gifts-by-pastor-jacob-lannom-date-05-03-2026",
+      "name": "Grace Gifts by: Pastor Jacob Lannom Date: 05/03/2026",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": null,
+        "wide": null
+      },
+      "count": 1
     }
   ],
   "items": [
+    {
+      "stableId": "media-4so01z",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/cu5tqhj3wyqdmxy7/50326_S_PC9krg5.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/e918c4a3-8d31-3d22-ac6d-a4f33a338d79"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdf-1778330892/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdf-1778330892/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel in Ministry Pt. 5",
+        "subtitle": "Grace Gifts: Encouragement",
+        "display": "The Impact of the Gospel in Ministry Pt. 5 (Grace Gifts: Encouragement)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "The Book of Romans Series",
+        "key": "the-book-of-romans-series",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:6-8",
+        "display": "Romans 12:6-8",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "1 Corinthians 4:14, 1 Thessalonians 4:1, 1 Thessalonians, 5:11 2 Corinthians 5:20, John 14:16, 26, John 15:26, Hebrews 10:24-25, Hebrews 3:13, Proverbs 12:25, Isaiah 50:4, Acts 8:3, Acts 9:11-14, Acts 9:20-27, Acts 4:36-37, Acts 11:19-24, 2 Timothy 4:11",
+        "display": "1 Corinthians 4:14, 1 Thessalonians 4:1, 1 Thessalonians, 5:11 2 Corinthians 5:20, John 14:16, 26, John 15:26, Hebrews 10:24-25, Hebrews 3:13, Proverbs 12:25, Isaiah 50:4, Acts 8:3, Acts 9:11-14, Acts 9:20-27, Acts 4:36-37, Acts 11:19-24, 2 Timothy 4:11",
+        "tokens": [
+          "1 Corinthians 4:14",
+          "1 Thessalonians 4:1",
+          "1 Thessalonians",
+          "1 Thessalonians 5:11 2 Corinthians 5:20",
+          "John 14:16",
+          "John 14:26",
+          "John 15:26",
+          "Hebrews 10:24-25",
+          "Hebrews 10:24",
+          "Hebrews 10:25",
+          "Hebrews 3:13",
+          "Proverbs 12:25",
+          "Isaiah 50:4",
+          "Acts 8:3",
+          "Acts 9:11-14",
+          "Acts 9:11",
+          "Acts 9:12",
+          "Acts 9:13",
+          "Acts 9:14",
+          "Acts 9:20-27",
+          "Acts 9:20",
+          "Acts 9:21",
+          "Acts 9:22",
+          "Acts 9:23",
+          "Acts 9:24",
+          "Acts 9:25",
+          "Acts 9:26",
+          "Acts 9:27",
+          "Acts 4:36-37",
+          "Acts 4:36",
+          "Acts 4:37",
+          "Acts 11:19-24",
+          "Acts 11:19",
+          "Acts 11:20",
+          "Acts 11:21",
+          "Acts 11:22",
+          "Acts 11:23",
+          "Acts 11:24",
+          "2 Timothy 4:11"
+        ],
+        "searchTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "1 Corinthians 4:14",
+          "1 Thessalonians 4:1",
+          "1 Thessalonians",
+          "1 Thessalonians 5:11 2 Corinthians 5:20",
+          "John 14:16",
+          "John 14:26",
+          "John 15:26",
+          "Hebrews 10:24-25",
+          "Hebrews 10:24",
+          "Hebrews 10:25",
+          "Hebrews 3:13",
+          "Proverbs 12:25",
+          "Isaiah 50:4",
+          "Acts 8:3",
+          "Acts 9:11-14",
+          "Acts 9:11",
+          "Acts 9:12",
+          "Acts 9:13",
+          "Acts 9:14",
+          "Acts 9:20-27",
+          "Acts 9:20",
+          "Acts 9:21",
+          "Acts 9:22",
+          "Acts 9:23",
+          "Acts 9:24",
+          "Acts 9:25",
+          "Acts 9:26",
+          "Acts 9:27",
+          "Acts 4:36-37",
+          "Acts 4:36",
+          "Acts 4:37",
+          "Acts 11:19-24",
+          "Acts 11:19",
+          "Acts 11:20",
+          "Acts 11:21",
+          "Acts 11:22",
+          "Acts 11:23",
+          "Acts 11:24",
+          "2 Timothy 4:11"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "1 Corinthians 4:14",
+          "1 Thessalonians 4:1",
+          "1 Thessalonians",
+          "1 Thessalonians 5:11 2 Corinthians 5:20",
+          "John 14:16",
+          "John 14:26",
+          "John 15:26",
+          "Hebrews 10:24-25",
+          "Hebrews 10:24",
+          "Hebrews 10:25",
+          "Hebrews 3:13",
+          "Proverbs 12:25",
+          "Isaiah 50:4",
+          "Acts 8:3",
+          "Acts 9:11-14",
+          "Acts 9:11",
+          "Acts 9:12",
+          "Acts 9:13",
+          "Acts 9:14",
+          "Acts 9:20-27",
+          "Acts 9:20",
+          "Acts 9:21",
+          "Acts 9:22",
+          "Acts 9:23",
+          "Acts 9:24",
+          "Acts 9:25",
+          "Acts 9:26",
+          "Acts 9:27",
+          "Acts 4:36-37",
+          "Acts 4:36",
+          "Acts 4:37",
+          "Acts 11:19-24",
+          "Acts 11:19",
+          "Acts 11:20",
+          "Acts 11:21",
+          "Acts 11:22",
+          "Acts 11:23",
+          "Acts 11:24",
+          "2 Timothy 4:11"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [
+        {
+          "name": "Grace Gifts by: Pastor Jacob Lannom Date: 05/03/2026",
+          "key": "grace-gifts-by-pastor-jacob-lannom-date-05-03-2026",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "Encouragement",
+          "itemSortOrder": 3,
+          "collectionItemTitle": "Encouragement",
+          "collectionItemOrder": 3
+        }
+      ],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        },
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "2 Timothy",
+          "key": "2-timothy"
+        },
+        {
+          "name": "Hebrews",
+          "key": "hebrews"
+        },
+        {
+          "name": "Proverbs",
+          "key": "proverbs"
+        },
+        {
+          "name": "Isaiah",
+          "key": "isaiah"
+        }
+      ],
+      "speaker": null,
+      "date": {
+        "raw": "Sun, 03 May 2026 11:00:00 -0600",
+        "iso": "2026-05-03",
+        "year": 2026,
+        "month": 5,
+        "monthName": "May",
+        "day": 3
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-05-03.srt",
+            "cleanFile": "transcripts_clean/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.srt",
+            "displayFile": "transcripts_display/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.srt",
+            "jsonFile": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.json",
+            "displayJsonFile": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.display.json",
+            "segmentCount": 953,
+            "displaySegmentCount": 816
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-05-03.srt",
+        "cleanFile": "transcripts_clean/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.srt",
+        "displayFile": "transcripts_display/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.srt",
+        "jsonFile": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.json",
+        "displayJsonFile": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.display.json",
+        "segmentCount": 953,
+        "displaySegmentCount": 816
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/cu5tqhj3wyqdmxy7/50326_S_PC9krg5.mp3",
+        "plays": 0,
+        "durationSeconds": 2447,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "QYhdu-bGyi8",
+        "url": "https://www.youtube.com/watch?v=QYhdu-bGyi8",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/503_PC7i3ee.jpg",
+          "wide": "https://i.ytimg.com/vi/QYhdu-bGyi8/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/503_PC7i3ee.jpg",
+          "wide": "https://i.ytimg.com/vi/QYhdu-bGyi8/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "the-book-of-romans-series"
+        ],
+        "bibleBooks": [
+          "romans",
+          "john",
+          "acts",
+          "1-corinthians",
+          "2-corinthians",
+          "philippians",
+          "2-timothy",
+          "hebrews",
+          "proverbs",
+          "isaiah"
+        ],
+        "collections": [
+          "grace-gifts-by-pastor-jacob-lannom-date-05-03-2026"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-05"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-vfxc2v",
       "sourceKey": {
@@ -437,8 +773,8 @@
         "type": "expositional"
       },
       "study": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
+        "name": "Romans",
+        "key": "romans",
         "type": "book_study"
       },
       "scripture": {
@@ -662,8 +998,8 @@
           "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/426_PC9sllv.jpg",
-          "wide": "https://i.ytimg.com/vi/_BMEKDplftQ/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "wide": null
         }
       },
       "memberships": {
@@ -671,7 +1007,7 @@
           "romans-chapter-12"
         ],
         "studies": [
-          "the-book-of-romans"
+          "romans"
         ],
         "bibleBooks": [
           "romans",
