@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-05-09T13:01:14.559Z",
+  "generatedAt": "2026-05-09T13:52:43.234Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 138,
-    "archiveItems": 138,
-    "videoMatchedItems": 77,
-    "transcriptMatchedItems": 4,
-    "quoteCandidateCount": 302
+    "rssItems": 139,
+    "archiveItems": 139,
+    "videoMatchedItems": 78,
+    "transcriptMatchedItems": 5,
+    "quoteCandidateCount": 377
   },
   "totals": {
-    "audioPlaysTotal": 4272,
-    "audioEpisodesTotal": 138
+    "audioPlaysTotal": 4274,
+    "audioEpisodesTotal": 139
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -21,7 +21,7 @@
     },
     "seriesKeys": [
       "romans-chapter-12",
-      "the-study-of-the-end-times-eschatology"
+      "the-tribulation"
     ],
     "lanes": {
       "sunday": {
@@ -37,13 +37,13 @@
       },
       "wednesday": {
         "lane": "wednesday",
-        "seriesKey": "the-study-of-the-end-times-eschatology",
-        "seriesName": "The Study of the End Times (Eschatology)",
+        "seriesKey": "the-tribulation",
+        "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-vfxc2v",
-        "detectedFromDate": "2026-04-29",
-        "detectedFromTitle": "The Tribulation Pt. 1 (Prophecy of the Seventy Weeks)",
+        "detectedFromEpisode": "media-lf06f3",
+        "detectedFromDate": "2026-05-06",
+        "detectedFromTitle": "The Tribulation Pt. 2 (The Antichrist)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -73,6 +73,263 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-lf06f3",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/k7qr6ueuf68pdhm5/50626_Wajlts.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/be01afcb-1a1b-3f97-b9e3-3391d0b25784"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-2-the-antichrist-eschatology-the-tribulation/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-2-the-antichrist-eschatology-the-tribulation/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 2",
+        "subtitle": "The Antichrist",
+        "display": "The Tribulation Pt. 2 (The Antichrist)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "Daniel 9:24-27, Isaiah 13:6-9, Zephaniah 1:15-16, 1 Thessalonians 5:2-3, 2 Thessalonians 2:3-4, 1 John 4:1-3, 1 John 2:18, Galatians 1:8-9, John 1:1",
+        "display": "Daniel 9:24-27, Isaiah 13:6-9, Zephaniah 1:15-16, 1 Thessalonians 5:2-3, 2 Thessalonians 2:3-4, 1 John 4:1-3, 1 John 2:18, Galatians 1:8-9, John 1:1",
+        "tokens": [
+          "Daniel 9:24-27",
+          "Daniel 9:24",
+          "Daniel 9:25",
+          "Daniel 9:26",
+          "Daniel 9:27",
+          "Isaiah 13:6-9",
+          "Isaiah 13:6",
+          "Isaiah 13:7",
+          "Isaiah 13:8",
+          "Isaiah 13:9",
+          "Zephaniah 1:15-16",
+          "Zephaniah 1:15",
+          "Zephaniah 1:16",
+          "1 Thessalonians 5:2-3",
+          "1 Thessalonians 5:2",
+          "1 Thessalonians 5:3",
+          "2 Thessalonians 2:3-4",
+          "2 Thessalonians 2:3",
+          "2 Thessalonians 2:4",
+          "1 John 4:1-3",
+          "1 John 4:1",
+          "1 John 4:2",
+          "1 John 4:3",
+          "1 John 2:18",
+          "Galatians 1:8-9",
+          "Galatians 1:8",
+          "Galatians 1:9",
+          "John 1:1"
+        ],
+        "searchTokens": [
+          "Daniel 9:24-27",
+          "Daniel 9:24",
+          "Daniel 9:25",
+          "Daniel 9:26",
+          "Daniel 9:27",
+          "Isaiah 13:6-9",
+          "Isaiah 13:6",
+          "Isaiah 13:7",
+          "Isaiah 13:8",
+          "Isaiah 13:9",
+          "Zephaniah 1:15-16",
+          "Zephaniah 1:15",
+          "Zephaniah 1:16",
+          "1 Thessalonians 5:2-3",
+          "1 Thessalonians 5:2",
+          "1 Thessalonians 5:3",
+          "2 Thessalonians 2:3-4",
+          "2 Thessalonians 2:3",
+          "2 Thessalonians 2:4",
+          "1 John 4:1-3",
+          "1 John 4:1",
+          "1 John 4:2",
+          "1 John 4:3",
+          "1 John 2:18",
+          "Galatians 1:8-9",
+          "Galatians 1:8",
+          "Galatians 1:9",
+          "John 1:1"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Daniel 9:24-27",
+          "Daniel 9:24",
+          "Daniel 9:25",
+          "Daniel 9:26",
+          "Daniel 9:27",
+          "Isaiah 13:6-9",
+          "Isaiah 13:6",
+          "Isaiah 13:7",
+          "Isaiah 13:8",
+          "Isaiah 13:9",
+          "Zephaniah 1:15-16",
+          "Zephaniah 1:15",
+          "Zephaniah 1:16",
+          "1 Thessalonians 5:2-3",
+          "1 Thessalonians 5:2",
+          "1 Thessalonians 5:3",
+          "2 Thessalonians 2:3-4",
+          "2 Thessalonians 2:3",
+          "2 Thessalonians 2:4",
+          "1 John 4:1-3",
+          "1 John 4:1",
+          "1 John 4:2",
+          "1 John 4:3",
+          "1 John 2:18",
+          "Galatians 1:8-9",
+          "Galatians 1:8",
+          "Galatians 1:9",
+          "John 1:1"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Daniel",
+          "key": "daniel"
+        },
+        {
+          "name": "Isaiah",
+          "key": "isaiah"
+        },
+        {
+          "name": "Zephaniah",
+          "key": "zephaniah"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "2 Thessalonians",
+          "key": "2-thessalonians"
+        },
+        {
+          "name": "1 John",
+          "key": "1-john"
+        },
+        {
+          "name": "Galatians",
+          "key": "galatians"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "05/06/2026",
+        "iso": "2026-05-06",
+        "year": 2026,
+        "month": 5,
+        "monthName": "May",
+        "day": 6
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-05-06.srt",
+            "cleanFile": "transcripts_clean/en/2026-05-06_the-tribulation-pt-2.srt",
+            "displayFile": "transcripts_display/en/2026-05-06_the-tribulation-pt-2.srt",
+            "jsonFile": "data/transcripts/en/2026-05-06_the-tribulation-pt-2.json",
+            "displayJsonFile": "data/transcripts/en/2026-05-06_the-tribulation-pt-2.display.json",
+            "segmentCount": 680,
+            "displaySegmentCount": 552
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-05-06.srt",
+        "cleanFile": "transcripts_clean/en/2026-05-06_the-tribulation-pt-2.srt",
+        "displayFile": "transcripts_display/en/2026-05-06_the-tribulation-pt-2.srt",
+        "jsonFile": "data/transcripts/en/2026-05-06_the-tribulation-pt-2.json",
+        "displayJsonFile": "data/transcripts/en/2026-05-06_the-tribulation-pt-2.display.json",
+        "segmentCount": 680,
+        "displaySegmentCount": 552
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/k7qr6ueuf68pdhm5/50626_Wajlts.mp3",
+        "plays": 0,
+        "durationSeconds": 1832,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "8ACPLxQPzYo",
+        "url": "https://www.youtube.com/watch?v=8ACPLxQPzYo",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/18.jpg",
+          "wide": "https://i.ytimg.com/vi/8ACPLxQPzYo/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "daniel",
+          "isaiah",
+          "zephaniah",
+          "1-thessalonians",
+          "2-thessalonians",
+          "1-john",
+          "galatians",
+          "john"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-05"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-4so01z",
       "sourceKey": {
@@ -336,7 +593,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cu5tqhj3wyqdmxy7/50326_S_PC9krg5.mp3",
-        "plays": 0,
+        "plays": 2,
         "durationSeconds": 2447,
         "statsMatchStrategy": "media_url"
       },
@@ -414,8 +671,8 @@
         "display": "The Tribulation Pt. 1 (Prophecy of the Seventy Weeks)"
       },
       "series": {
-        "name": "The Study of the End Times (Eschatology)",
-        "key": "the-study-of-the-end-times-eschatology",
+        "name": "The Tribulation",
+        "key": "the-tribulation",
         "type": "topical"
       },
       "study": {
@@ -721,7 +978,7 @@
       },
       "memberships": {
         "series": [
-          "the-study-of-the-end-times-eschatology"
+          "the-tribulation"
         ],
         "studies": [
           "eschatology"
