@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-10T17:41:50.588Z",
+  "generatedAt": "2026-05-10T18:44:12.887Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 139,
@@ -1710,16 +1710,18 @@
         "type": "topical_study"
       },
       "scripture": {
-        "raw": "1 Thessalonians 5:9",
-        "display": "1 Thessalonians 5:9",
-        "book": "1 Thessalonians",
-        "bookKey": "1-thessalonians",
-        "isVarious": false
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
       },
       "references": {
-        "raw": "",
-        "display": "",
-        "tokens": [],
+        "raw": "1 Thessalonians 5:9",
+        "display": "1 Thessalonians 5:9",
+        "tokens": [
+          "1 Thessalonians 5:9"
+        ],
         "searchTokens": [
           "1 Thessalonians 5:9"
         ]
@@ -1977,16 +1979,18 @@
         "type": "topical_study"
       },
       "scripture": {
-        "raw": "Daniel 9:27",
-        "display": "Daniel 9:27",
-        "book": "Daniel",
-        "bookKey": "daniel",
-        "isVarious": false
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
       },
       "references": {
-        "raw": "",
-        "display": "",
-        "tokens": [],
+        "raw": "Daniel 9:27",
+        "display": "Daniel 9:27",
+        "tokens": [
+          "Daniel 9:27"
+        ],
         "searchTokens": [
           "Daniel 9:27"
         ]
@@ -2014,7 +2018,7 @@
       ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Wednesday, 4/08/26",
+        "raw": "04/08/26",
         "iso": "2026-04-08",
         "year": 2026,
         "month": 4,
