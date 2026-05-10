@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-10T22:35:25.013Z",
+  "generatedAt": "2026-05-10T23:40:02.587Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 139,
     "archiveItems": 139,
-    "videoMatchedItems": 78,
+    "videoMatchedItems": 79,
     "transcriptMatchedItems": 5,
     "quoteCandidateCount": 379
   },
@@ -1910,7 +1910,7 @@
         "hasVideo": true,
         "youtubeId": "4vjSIfyWLcs",
         "url": "https://www.youtube.com/watch?v=4vjSIfyWLcs",
-        "views": 114
+        "views": 115
       },
       "art": {
         "episode": {
@@ -2182,7 +2182,7 @@
         "hasVideo": true,
         "youtubeId": "j_xzfVXBG9M",
         "url": "https://www.youtube.com/watch?v=j_xzfVXBG9M",
-        "views": 74
+        "views": 75
       },
       "art": {
         "episode": {
@@ -4242,8 +4242,8 @@
           "wide": "https://i.ytimg.com/vi/60O3pTP3ZR4/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/PC2.jpg",
-          "wide": "https://i.ytimg.com/vi/jyib5mH7OhE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_9_PC_Art_Final.jpg",
+          "wide": "https://i.ytimg.com/vi/yYIYfY9KKVU/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -4382,8 +4382,8 @@
           "wide": "https://i.ytimg.com/vi/gdbxr5T6-nk/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/PC2.jpg",
-          "wide": "https://i.ytimg.com/vi/jyib5mH7OhE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_9_PC_Art_Final.jpg",
+          "wide": "https://i.ytimg.com/vi/yYIYfY9KKVU/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -4532,8 +4532,8 @@
           "wide": "https://i.ytimg.com/vi/2jNeL3b8pIo/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/PC2.jpg",
-          "wide": "https://i.ytimg.com/vi/jyib5mH7OhE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_9_PC_Art_Final.jpg",
+          "wide": "https://i.ytimg.com/vi/yYIYfY9KKVU/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -4824,8 +4824,8 @@
           "wide": "https://i.ytimg.com/vi/jyib5mH7OhE/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/PC2.jpg",
-          "wide": "https://i.ytimg.com/vi/jyib5mH7OhE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_9_PC_Art_Final.jpg",
+          "wide": "https://i.ytimg.com/vi/yYIYfY9KKVU/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -4916,15 +4916,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "11/16/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "11/16/25",
+        "iso": "2025-11-16",
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 16
       },
       "transcript": {
         "hasTranscript": false,
@@ -4957,8 +4962,8 @@
           "wide": "https://i.ytimg.com/vi/yYIYfY9KKVU/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/PC2.jpg",
-          "wide": "https://i.ytimg.com/vi/jyib5mH7OhE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_9_PC_Art_Final.jpg",
+          "wide": "https://i.ytimg.com/vi/yYIYfY9KKVU/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -4976,8 +4981,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-11"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -5053,15 +5062,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "11/09/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "11/09/25",
+        "iso": "2025-11-09",
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 9
       },
       "transcript": {
         "hasTranscript": false,
@@ -5094,8 +5108,8 @@
           "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -5113,8 +5127,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-11"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -5136,14 +5154,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/"
       },
       "title": {
-        "episodeName": "Worship Night Nov. 2, 2025",
+        "episodeName": "Worship Night",
         "subtitle": "",
-        "display": "Worship Night Nov. 2, 2025"
+        "display": "Worship Night"
       },
       "series": {
         "name": "2025 Specials",
         "key": "2025-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -5169,14 +5187,14 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": null,
+      "speaker": "CGBC",
       "date": {
-        "raw": "11/02/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "11/02/25",
+        "iso": "2025-11-02",
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 2
       },
       "transcript": {
         "hasTranscript": false,
@@ -5198,15 +5216,15 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "JO_WOgMdaWA",
+        "url": "https://www.youtube.com/watch?v=JO_WOgMdaWA",
+        "views": 33
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/3.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/JO_WOgMdaWA/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/2025_Specials_4x3_3Kx3K_Web.jpg",
@@ -5224,16 +5242,20 @@
         "studies": [],
         "bibleBooks": [],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-11"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -5301,15 +5323,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "11/02/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "11/02/25",
+        "iso": "2025-11-02",
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 2
       },
       "transcript": {
         "hasTranscript": false,
@@ -5342,8 +5369,8 @@
           "wide": "https://i.ytimg.com/vi/PhOjZ7cykso/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -5361,8 +5388,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-11"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -5428,15 +5459,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "10/26/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "10/26/25",
+        "iso": "2025-10-26",
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 26
       },
       "transcript": {
         "hasTranscript": false,
@@ -5469,8 +5505,8 @@
           "wide": "https://i.ytimg.com/vi/tB8vfdHOvI0/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -5488,8 +5524,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-10"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -5551,15 +5591,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "10/19/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "10/19/25",
+        "iso": "2025-10-19",
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 19
       },
       "transcript": {
         "hasTranscript": false,
@@ -5592,8 +5637,8 @@
           "wide": "https://i.ytimg.com/vi/EGn0g0ZaJLY/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -5611,8 +5656,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-10"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -5684,15 +5733,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "10/12/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "10/12/25",
+        "iso": "2025-10-12",
+        "year": 2025,
+        "month": 10,
+        "monthName": "October",
+        "day": 12
       },
       "transcript": {
         "hasTranscript": false,
@@ -5725,8 +5779,8 @@
           "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -5744,8 +5798,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-10"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -5848,8 +5906,8 @@
           "wide": "https://i.ytimg.com/vi/3cFdD-YgIDs/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -5979,8 +6037,8 @@
           "wide": "https://i.ytimg.com/vi/jbqKmcehAME/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -6112,8 +6170,8 @@
           "wide": "https://i.ytimg.com/vi/3U7Tab1u_AY/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-11-12_at_919247zkq8.jpg",
-          "wide": "https://i.ytimg.com/vi/N5axIGbvTXg/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-10-21_at_434236ut0k.jpg",
+          "wide": "https://i.ytimg.com/vi/yV8J4sIohsI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
