@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T12:58:05.338Z",
+  "generatedAt": "2026-05-11T13:42:36.045Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 139,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 379
   },
   "totals": {
-    "audioPlaysTotal": 4310,
+    "audioPlaysTotal": 4311,
     "audioEpisodesTotal": 139
   },
   "current": {
@@ -55,8 +55,8 @@
       "description": "",
       "sortOrder": 999,
       "art": {
-        "square": null,
-        "wide": null
+        "square": "assets/collections/grace-gifts/square.jpg",
+        "wide": "assets/collections/grace-gifts/wide.jpg"
       },
       "count": 3
     }
@@ -261,7 +261,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/k7qr6ueuf68pdhm5/50626_Wajlts.mp3",
-        "plays": 10,
+        "plays": 11,
         "durationSeconds": 1832,
         "statsMatchStrategy": "media_url"
       },
@@ -496,8 +496,8 @@
           "description": "",
           "sortOrder": 999,
           "art": {
-            "square": null,
-            "wide": null
+            "square": "assets/collections/grace-gifts/square.jpg",
+            "wide": "assets/collections/grace-gifts/wide.jpg"
           },
           "itemTitle": "Encouragement",
           "itemSortOrder": 3,
@@ -1142,8 +1142,8 @@
           "description": "",
           "sortOrder": 999,
           "art": {
-            "square": null,
-            "wide": null
+            "square": "assets/collections/grace-gifts/square.jpg",
+            "wide": "assets/collections/grace-gifts/wide.jpg"
           },
           "itemTitle": "Teaching",
           "itemSortOrder": 2,
@@ -1567,8 +1567,8 @@
           "description": "",
           "sortOrder": 999,
           "art": {
-            "square": null,
-            "wide": null
+            "square": "assets/collections/grace-gifts/square.jpg",
+            "wide": "assets/collections/grace-gifts/wide.jpg"
           },
           "itemTitle": "Prophecy & Service",
           "itemSortOrder": 1,
