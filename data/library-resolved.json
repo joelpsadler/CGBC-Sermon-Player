@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T19:25:54.566Z",
+  "generatedAt": "2026-05-11T21:09:26.507Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 379
   },
   "totals": {
-    "audioPlaysTotal": 4318,
+    "audioPlaysTotal": 4320,
     "audioEpisodesTotal": 140
   },
   "current": {
@@ -213,7 +213,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gyw4gge5b5mvmv8q/51026_S_PCal3l2.mp3",
-        "plays": 3,
+        "plays": 4,
         "durationSeconds": 1442,
         "statsMatchStrategy": "media_url"
       },
@@ -221,7 +221,7 @@
         "hasVideo": true,
         "youtubeId": "nhGQTEQEbWM",
         "url": "https://www.youtube.com/watch?v=nhGQTEQEbWM",
-        "views": 0
+        "views": 4
       },
       "art": {
         "episode": {
@@ -793,7 +793,7 @@
         "hasVideo": true,
         "youtubeId": "QYhdu-bGyi8",
         "url": "https://www.youtube.com/watch?v=QYhdu-bGyi8",
-        "views": 3
+        "views": 6
       },
       "art": {
         "episode": {
@@ -2377,7 +2377,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cehkc42vzrq4e7dg/01_Romans_12_1-2_The_Impact_of_the_Gospel_Pt_18f2z6.mp3",
-        "plays": 43,
+        "plays": 44,
         "durationSeconds": 1812,
         "statsMatchStrategy": "media_url"
       },
@@ -2527,7 +2527,7 @@
         "hasVideo": true,
         "youtubeId": "jE-R_niCk2w",
         "url": "https://www.youtube.com/watch?v=jE-R_niCk2w",
-        "views": 64
+        "views": 65
       },
       "art": {
         "episode": {
@@ -7072,15 +7072,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "07/13/25 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "07/13/2025",
+        "iso": "2025-07-13",
+        "year": 2025,
+        "month": 7,
+        "monthName": "July",
+        "day": 13
       },
       "transcript": {
         "hasTranscript": false,
@@ -7132,8 +7137,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-07"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
