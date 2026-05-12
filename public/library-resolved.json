@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T23:40:57.470Z",
+  "generatedAt": "2026-05-12T23:49:41.659Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
@@ -10137,8 +10137,8 @@
         "display": "Reprioritize 2025 Pt. 3 (Prideful Problems)"
       },
       "series": {
-        "name": "CGBC Guest Speaker",
-        "key": "cgbc-guest-speaker",
+        "name": "Guest Speaker",
+        "key": "guest-speaker",
         "type": "topical"
       },
       "study": {
@@ -10215,7 +10215,7 @@
       },
       "memberships": {
         "series": [
-          "cgbc-guest-speaker"
+          "guest-speaker"
         ],
         "studies": [],
         "bibleBooks": [],
@@ -10607,14 +10607,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/christmas-in-the-grove-2024/"
       },
       "title": {
-        "episodeName": "Christmas in the Grove 2024",
+        "episodeName": "Christmas in the Grove",
         "subtitle": "",
-        "display": "Christmas in the Grove 2024"
+        "display": "Christmas in the Grove"
       },
       "series": {
         "name": "2024 Specials",
         "key": "2024-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -10640,9 +10640,9 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Pastor Jacob Lannom & CGBC",
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "12/24/24",
+        "raw": "12/24/2024",
         "iso": "2024-12-24",
         "year": 2024,
         "month": 12,
@@ -10706,7 +10706,7 @@
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": true
       }
@@ -10757,7 +10757,7 @@
       "bookTags": [],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "12/22/24",
+        "raw": "12/22/2024",
         "iso": "2024-12-22",
         "year": 2024,
         "month": 12,
@@ -10885,10 +10885,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 15 Dec 2024 09:00:00 -0700",
+        "raw": "12/15/2024",
         "iso": "2024-12-15",
         "year": 2024,
         "month": 12,
