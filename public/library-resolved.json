@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T23:49:41.659Z",
+  "generatedAt": "2026-05-12T23:50:56.023Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
@@ -11025,10 +11025,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 08 Dec 2024 09:00:00 -0700",
+        "raw": "12/08/2024",
         "iso": "2024-12-08",
         "year": 2024,
         "month": 12,
