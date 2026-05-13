@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-05-12T23:50:56.023Z",
+  "generatedAt": "2026-05-13T01:15:03.350Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 81,
+    "videoMatchedItems": 84,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
   "totals": {
-    "audioPlaysTotal": 4338,
+    "audioPlaysTotal": 4339,
     "audioEpisodesTotal": 140
   },
   "current": {
@@ -224,7 +224,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gyw4gge5b5mvmv8q/51026_S_PCal3l2.mp3",
-        "plays": 10,
+        "plays": 11,
         "durationSeconds": 1442,
         "statsMatchStrategy": "media_url"
       },
@@ -10205,8 +10205,8 @@
           "wide": "https://i.ytimg.com/vi/PUZh2GoXrkM/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2025-01-13_at_707267a31z.jpg",
-          "wide": "https://i.ytimg.com/vi/PUZh2GoXrkM/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-29_at_93752_PMa7k7l.png",
+          "wide": "https://i.ytimg.com/vi/BjRHBElhXSE/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -10931,8 +10931,8 @@
           "wide": "https://i.ytimg.com/vi/6SCHe8uWFqI/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -11071,8 +11071,8 @@
           "wide": "https://i.ytimg.com/vi/b5sGXFb-loo/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -11117,14 +11117,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/stand-up-in-the-battle-9th-edition/"
       },
       "title": {
-        "episodeName": "Stand Up In the Battle 9th Edition",
-        "subtitle": "",
-        "display": "Stand Up In the Battle 9th Edition"
+        "episodeName": "Stand Up In the Battle",
+        "subtitle": "9th Edition",
+        "display": "Stand Up In the Battle (9th Edition)"
       },
       "series": {
         "name": "2024 Specials",
         "key": "2024-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -11175,10 +11175,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 01 Dec 2024 09:00:00 -0700",
+        "raw": "12/01/2024",
         "iso": "2024-12-01",
         "year": 2024,
         "month": 12,
@@ -11244,7 +11249,7 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": true
       }
@@ -11275,8 +11280,8 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 3",
-        "display": "Romans 3",
+        "raw": "Romans",
+        "display": "Romans",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -11286,20 +11291,25 @@
         "display": "",
         "tokens": [],
         "searchTokens": [
-          "Romans 3"
+          "Romans"
         ]
       },
       "search": {
         "scriptureTokens": [
-          "Romans 3"
+          "Romans"
         ],
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 24 Nov 2024 09:00:00 -0700",
+        "raw": "11/24/2024",
         "iso": "2024-11-24",
         "year": 2024,
         "month": 11,
@@ -11337,8 +11347,8 @@
           "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -11383,9 +11393,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/11172024-the-gospel-answer-for-obtaining-righteousness/"
       },
       "title": {
-        "episodeName": "The Gospel Answer for: Obtaining Righteousness",
-        "subtitle": "",
-        "display": "The Gospel Answer for: Obtaining Righteousness"
+        "episodeName": "Obtaining Righteousness",
+        "subtitle": "The Gospel Answer",
+        "display": "Obtaining Righteousness (The Gospel Answer)"
       },
       "series": {
         "name": "Romans Chapter 3",
@@ -11398,8 +11408,8 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 3",
-        "display": "Romans 3",
+        "raw": "Romans",
+        "display": "Romans",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -11409,25 +11419,30 @@
         "display": "",
         "tokens": [],
         "searchTokens": [
-          "Romans 3"
+          "Romans"
         ]
       },
       "search": {
         "scriptureTokens": [
-          "Romans 3"
+          "Romans"
         ],
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "11/17/24 CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "11/17/2024",
+        "iso": "2024-11-17",
+        "year": 2024,
+        "month": 11,
+        "monthName": "November",
+        "day": 17
       },
       "transcript": {
         "hasTranscript": false,
@@ -11460,8 +11475,8 @@
           "wide": "https://i.ytimg.com/vi/DpYGEvJn_VI/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -11479,8 +11494,12 @@
           "romans"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2024"
+        ],
+        "byMonth": [
+          "2024-11"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "series_group"
@@ -11562,10 +11581,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 10 Nov 2024 09:00:00 -0700",
+        "raw": "11/10/2024",
         "iso": "2024-11-10",
         "year": 2024,
         "month": 11,
@@ -11603,8 +11627,8 @@
           "wide": "https://i.ytimg.com/vi/MY7gWgjQTLg/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -11656,7 +11680,7 @@
       "series": {
         "name": "2024 Specials",
         "key": "2024-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -11684,12 +11708,12 @@
       "bookTags": [],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "10/27/24 CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "10/27/2024",
+        "iso": "2024-10-27",
+        "year": 2024,
+        "month": 10,
+        "monthName": "October",
+        "day": 27
       },
       "transcript": {
         "hasTranscript": false,
@@ -11737,14 +11761,18 @@
         "studies": [],
         "bibleBooks": [],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2024"
+        ],
+        "byMonth": [
+          "2024-10"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": true
       }
@@ -11820,10 +11848,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC - Lebanon, TN | Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 13 Oct 2024 10:30:00 -0600",
+        "raw": "10/13/2024",
         "iso": "2024-10-13",
         "year": 2024,
         "month": 10,
@@ -11861,8 +11894,8 @@
           "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-22_at_63827_PMa0aj9.png",
-          "wide": "https://i.ytimg.com/vi/mHnwDzgXsAE/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -11912,276 +11945,14 @@
         "display": "All Menas \"ALL\" Pt. 2"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 3",
+        "key": "romans-chapter-3",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
-      },
-      "scripture": {
-        "raw": "Romans 3: 9-20",
-        "display": "Romans 3: 9-20",
-        "book": "Romans",
-        "bookKey": "romans",
-        "isVarious": false
-      },
-      "references": {
-        "raw": "",
-        "display": "",
-        "tokens": [],
-        "searchTokens": [
-          "Romans 3:9-20",
-          "Romans 3:9",
-          "Romans 3:10",
-          "Romans 3:11",
-          "Romans 3:12",
-          "Romans 3:13",
-          "Romans 3:14",
-          "Romans 3:15",
-          "Romans 3:16",
-          "Romans 3:17",
-          "Romans 3:18",
-          "Romans 3:19",
-          "Romans 3:20"
-        ]
-      },
-      "search": {
-        "scriptureTokens": [
-          "Romans 3:9-20",
-          "Romans 3:9",
-          "Romans 3:10",
-          "Romans 3:11",
-          "Romans 3:12",
-          "Romans 3:13",
-          "Romans 3:14",
-          "Romans 3:15",
-          "Romans 3:16",
-          "Romans 3:17",
-          "Romans 3:18",
-          "Romans 3:19",
-          "Romans 3:20"
-        ],
-        "hasTranscriptText": false
-      },
-      "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
-      "date": {
-        "raw": "Sun, 06 Oct 2024 10:30:00 -0600",
-        "iso": "2024-10-06",
-        "year": 2024,
-        "month": 10,
-        "monthName": "October",
-        "day": 6
-      },
-      "transcript": {
-        "hasTranscript": false,
-        "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
-      },
-      "audio": {
-        "hasAudio": true,
-        "url": "https://mcdn.podbean.com/mf/web/miu7mny56p9ivtnx/10_06_24_All_Means_ALL_Pt_2bbbdt.mp3",
-        "plays": 24,
-        "durationSeconds": 2581,
-        "statsMatchStrategy": "media_url"
-      },
-      "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
-      },
-      "art": {
-        "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-10_at_918139de8t.png",
-          "wide": null
-        },
-        "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
-          "wide": null
-        },
-        "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
-          "wide": null
-        }
-      },
-      "memberships": {
-        "series": [
-          "the-book-of-romans"
-        ],
-        "studies": [
-          "romans"
-        ],
-        "bibleBooks": [
-          "romans"
-        ],
-        "collections": [],
-        "byYear": [
-          "2024"
-        ],
-        "byMonth": [
-          "2024-10"
-        ]
-      },
-      "presentation": {
-        "bibleBooksMode": "episode_only"
-      },
-      "flags": {
-        "isStandaloneEpisode": true,
-        "includeInAudioTotals": true,
-        "includeInVideoTotals": false
-      }
-    },
-    {
-      "stableId": "media-izm0b6",
-      "sourceKey": {
-        "mediaUrl": "https://mcdn.podbean.com/mf/web/z4g7pyft6it4zs5j/9_29_24_Faith_Without_Love8u5el.mp3",
-        "rssGuid": "broJacobcedargrovebaptist.podbean.com/a3868d01-a3db-3960-8ab0-6f69eded725b"
-      },
-      "links": {
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/92924-faith-without-love/",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/92924-faith-without-love/"
-      },
-      "title": {
-        "episodeName": "Faith Without Love",
-        "subtitle": "",
-        "display": "Faith Without Love"
-      },
-      "series": {
-        "name": "2024 Specials",
-        "key": "2024-specials",
-        "type": "standalone"
-      },
-      "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
-      },
-      "scripture": {
-        "raw": "Various",
-        "display": "Selected Scriptures",
-        "book": null,
-        "bookKey": null,
-        "isVarious": true
-      },
-      "references": {
-        "raw": "",
-        "display": "",
-        "tokens": [],
-        "searchTokens": []
-      },
-      "search": {
-        "scriptureTokens": [],
-        "hasTranscriptText": false
-      },
-      "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Nick Sackman Sunday 09/29/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
-      "date": {
-        "raw": "Sun, 29 Sep 2024 10:30:00 -0600",
-        "iso": "2024-09-29",
-        "year": 2024,
-        "month": 9,
-        "monthName": "September",
-        "day": 29
-      },
-      "transcript": {
-        "hasTranscript": false,
-        "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
-      },
-      "audio": {
-        "hasAudio": true,
-        "url": "https://mcdn.podbean.com/mf/web/z4g7pyft6it4zs5j/9_29_24_Faith_Without_Love8u5el.mp3",
-        "plays": 29,
-        "durationSeconds": 2371,
-        "statsMatchStrategy": "media_url"
-      },
-      "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
-      },
-      "art": {
-        "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-29_at_93752_PMa7k7l.png",
-          "wide": null
-        },
-        "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-01-15_at_10201bi38m.jpg",
-          "wide": null
-        },
-        "study": {
-          "square": null,
-          "wide": null
-        }
-      },
-      "memberships": {
-        "series": [
-          "2024-specials"
-        ],
-        "studies": [],
-        "bibleBooks": [],
-        "collections": [],
-        "byYear": [
-          "2024"
-        ],
-        "byMonth": [
-          "2024-09"
-        ]
-      },
-      "presentation": {
-        "bibleBooksMode": "none"
-      },
-      "flags": {
-        "isStandaloneEpisode": true,
-        "includeInAudioTotals": true,
-        "includeInVideoTotals": false
-      }
-    },
-    {
-      "stableId": "media-d1vy7r",
-      "sourceKey": {
-        "mediaUrl": "https://mcdn.podbean.com/mf/web/595yiy2fxtfw635p/9_22_24_All_Means_ALL8lhdr.mp3",
-        "rssGuid": "broJacobcedargrovebaptist.podbean.com/a394f3d7-395f-38f7-9af8-b7201970a3f0"
-      },
-      "links": {
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/9222024-all-means-all/",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/9222024-all-means-all/"
-      },
-      "title": {
-        "episodeName": "All Menas \"ALL\" Pt.1",
-        "subtitle": "",
-        "display": "All Menas \"ALL\" Pt.1"
-      },
-      "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
-      },
-      "study": {
-        "name": "Romans",
-        "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Romans 3:9-20",
@@ -12229,10 +12000,282 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 22 Sep 2024 10:30:00 -0600",
+        "raw": "10/06/2024",
+        "iso": "2024-10-06",
+        "year": 2024,
+        "month": 10,
+        "monthName": "October",
+        "day": 6
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/miu7mny56p9ivtnx/10_06_24_All_Means_ALL_Pt_2bbbdt.mp3",
+        "plays": 24,
+        "durationSeconds": 2581,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "pUFo7jsINAk",
+        "url": "https://www.youtube.com/watch?v=pUFo7jsINAk",
+        "views": 4
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-10-10_at_918139de8t.png",
+          "wide": "https://i.ytimg.com/vi/pUFo7jsINAk/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-3"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans"
+        ],
+        "collections": [],
+        "byYear": [
+          "2024"
+        ],
+        "byMonth": [
+          "2024-10"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-izm0b6",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/z4g7pyft6it4zs5j/9_29_24_Faith_Without_Love8u5el.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/a3868d01-a3db-3960-8ab0-6f69eded725b"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/92924-faith-without-love/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/92924-faith-without-love/"
+      },
+      "title": {
+        "episodeName": "Faith Without Love",
+        "subtitle": "",
+        "display": "Faith Without Love"
+      },
+      "series": {
+        "name": "Guest Speaker",
+        "key": "guest-speaker",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Pastor Nick Sackman",
+      "date": {
+        "raw": "09/29/2024",
+        "iso": "2024-09-29",
+        "year": 2024,
+        "month": 9,
+        "monthName": "September",
+        "day": 29
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/z4g7pyft6it4zs5j/9_29_24_Faith_Without_Love8u5el.mp3",
+        "plays": 29,
+        "durationSeconds": 2371,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "BjRHBElhXSE",
+        "url": "https://www.youtube.com/watch?v=BjRHBElhXSE",
+        "views": 12
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-29_at_93752_PMa7k7l.png",
+          "wide": "https://i.ytimg.com/vi/BjRHBElhXSE/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-29_at_93752_PMa7k7l.png",
+          "wide": "https://i.ytimg.com/vi/BjRHBElhXSE/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "guest-speaker"
+        ],
+        "studies": [],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2024"
+        ],
+        "byMonth": [
+          "2024-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-d1vy7r",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/595yiy2fxtfw635p/9_22_24_All_Means_ALL8lhdr.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/a394f3d7-395f-38f7-9af8-b7201970a3f0"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/9222024-all-means-all/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/9222024-all-means-all/"
+      },
+      "title": {
+        "episodeName": "All Menas \"ALL\" Pt.1",
+        "subtitle": "",
+        "display": "All Menas \"ALL\" Pt.1"
+      },
+      "series": {
+        "name": "Romans Chapter 3",
+        "key": "romans-chapter-3",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 3:9-20",
+        "display": "Romans 3:9-20",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": [
+          "Romans 3:9-20",
+          "Romans 3:9",
+          "Romans 3:10",
+          "Romans 3:11",
+          "Romans 3:12",
+          "Romans 3:13",
+          "Romans 3:14",
+          "Romans 3:15",
+          "Romans 3:16",
+          "Romans 3:17",
+          "Romans 3:18",
+          "Romans 3:19",
+          "Romans 3:20"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 3:9-20",
+          "Romans 3:9",
+          "Romans 3:10",
+          "Romans 3:11",
+          "Romans 3:12",
+          "Romans 3:13",
+          "Romans 3:14",
+          "Romans 3:15",
+          "Romans 3:16",
+          "Romans 3:17",
+          "Romans 3:18",
+          "Romans 3:19",
+          "Romans 3:20"
+        ],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "09/22/2024",
         "iso": "2024-09-22",
         "year": 2024,
         "month": 9,
@@ -12259,19 +12302,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "RTB0LBB3Abw",
+        "url": "https://www.youtube.com/watch?v=RTB0LBB3Abw",
+        "views": 18
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-09-23_at_61305b9lgs.jpg",
+          "wide": "https://i.ytimg.com/vi/RTB0LBB3Abw/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -12280,7 +12323,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-3"
         ],
         "studies": [
           "romans"
@@ -12297,12 +12340,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
