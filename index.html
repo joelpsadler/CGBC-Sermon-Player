@@ -4276,24 +4276,14 @@ function nextIdleQuote(){
         });
         rows.push(...specialRows);
 
-        if(state.nativeShelves.guestSpeakers.length){
-          const guestSpeakerItems = state.mode==='video'
-            ? state.nativeShelves.guestSpeakers.slice()
-            : items.filter(item=>item?.series?.key==='guest-speaker');
-
-          if(guestSpeakerItems.length){
-            rows.push({
-              key:'guest-speakers-pinned',
-              title:'Guest Speaker',
-              meta:formatCountLabel(
-                guestSpeakerItems.length,
-                state.mode==='video' ? 'video' : 'episode',
-                state.mode==='video' ? 'videos' : 'episodes'
-              ),
-              image:getSeriesArtFromItem(getFirstEpisode(guestSpeakerItems)),
-              items:guestSpeakerItems
-            });
-          }
+        if(state.mode==='video' && state.nativeShelves.guestSpeakers.length){
+          rows.push({
+            key:'guest-speakers-pinned',
+            title:'CGBC Guest Speaker',
+            meta:formatCountLabel(state.nativeShelves.guestSpeakers.length,'video','videos'),
+            image:getSeriesArtFromItem(getFirstEpisode(state.nativeShelves.guestSpeakers)),
+            items:state.nativeShelves.guestSpeakers.slice()
+          });
         }
         return rows;
       }
