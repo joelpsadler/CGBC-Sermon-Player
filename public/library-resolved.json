@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T16:17:05.640Z",
+  "generatedAt": "2026-05-13T16:24:31.960Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 455
   },
   "totals": {
-    "audioPlaysTotal": 4346,
+    "audioPlaysTotal": 4347,
     "audioEpisodesTotal": 140
   },
   "current": {
@@ -10137,8 +10137,8 @@
         "display": "Reprioritize 2025 Pt. 3 (Prideful Problems)"
       },
       "series": {
-        "name": "~ CGBC Guest Speaker",
-        "key": "cgbc-guest-speaker",
+        "name": "zz CGBC Guest Speaker",
+        "key": "zz-cgbc-guest-speaker",
         "type": "topical"
       },
       "study": {
@@ -10189,7 +10189,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/km7qptqgj8c9cthw/112Nick9lnlm.mp3",
-        "plays": 26,
+        "plays": 27,
         "durationSeconds": 2165,
         "statsMatchStrategy": "media_url"
       },
@@ -10215,7 +10215,7 @@
       },
       "memberships": {
         "series": [
-          "cgbc-guest-speaker"
+          "zz-cgbc-guest-speaker"
         ],
         "studies": [],
         "bibleBooks": [],
