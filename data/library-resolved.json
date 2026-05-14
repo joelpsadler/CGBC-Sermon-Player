@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-14T21:59:44.254Z",
+  "generatedAt": "2026-05-14T22:57:17.148Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 92,
+    "videoMatchedItems": 94,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -13136,8 +13136,8 @@
           "wide": "https://i.ytimg.com/vi/92WK7dj5MRo/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-23_at_615048oxn7.jpg",
-          "wide": "https://i.ytimg.com/vi/e3-LqjiuYu8/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-10_at_552326j1qd.jpg",
+          "wide": "https://i.ytimg.com/vi/5KRHm5uV6QI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -13280,8 +13280,8 @@
           "wide": "https://i.ytimg.com/vi/e3-LqjiuYu8/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-23_at_615048oxn7.jpg",
-          "wide": "https://i.ytimg.com/vi/e3-LqjiuYu8/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-10_at_552326j1qd.jpg",
+          "wide": "https://i.ytimg.com/vi/5KRHm5uV6QI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -13331,18 +13331,18 @@
         "display": "The Danger of Unfaithfulness Pt. 2"
       },
       "series": {
-        "name": "Romans",
-        "key": "romans",
-        "type": "standalone"
+        "name": "Romans Chapter 2",
+        "key": "romans-chapter-2",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 2:16-3:18, B",
-        "display": "Romans 2:16-3:18, B",
+        "raw": "Romans 2:16-18",
+        "display": "Romans 2:16-18",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -13352,20 +13352,31 @@
         "display": "",
         "tokens": [],
         "searchTokens": [
-          "Romans 2:16-3:18"
+          "Romans 2:16-18",
+          "Romans 2:16",
+          "Romans 2:17",
+          "Romans 2:18"
         ]
       },
       "search": {
         "scriptureTokens": [
-          "Romans 2:16-3:18"
+          "Romans 2:16-18",
+          "Romans 2:16",
+          "Romans 2:17",
+          "Romans 2:18"
         ],
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 7/14/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 14 Jul 2024 10:00:00 -0600",
+        "raw": "07/14/2024",
         "iso": "2024-07-14",
         "year": 2024,
         "month": 7,
@@ -13392,19 +13403,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "RT50UvlLpA0",
+        "url": "https://www.youtube.com/watch?v=RT50UvlLpA0",
+        "views": 21
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-16_at_359077qx09.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/RT50UvlLpA0/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-10_at_552326j1qd.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/5KRHm5uV6QI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -13413,7 +13424,7 @@
       },
       "memberships": {
         "series": [
-          "romans"
+          "romans-chapter-2"
         ],
         "studies": [
           "romans"
@@ -13430,12 +13441,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -13454,18 +13465,18 @@
         "display": "The Danger of Unfaithfulness Pt. 1"
       },
       "series": {
-        "name": "Romans",
-        "key": "romans",
-        "type": "standalone"
+        "name": "Romans Chapter 2",
+        "key": "romans-chapter-2",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 2:17 - 3:8, A",
-        "display": "Romans 2:17 - 3:8, A",
+        "raw": "Romans 2:17-3:8",
+        "display": "Romans 2:17-3:8",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -13485,10 +13496,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 7/7/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 07 Jul 2024 10:00:00 -0600",
+        "raw": "07/07/2024",
         "iso": "2024-07-07",
         "year": 2024,
         "month": 7,
@@ -13515,19 +13531,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "5KRHm5uV6QI",
+        "url": "https://www.youtube.com/watch?v=5KRHm5uV6QI",
+        "views": 34
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-10_at_552326j1qd.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/5KRHm5uV6QI/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-10_at_552326j1qd.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/5KRHm5uV6QI/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -13536,7 +13552,7 @@
       },
       "memberships": {
         "series": [
-          "romans"
+          "romans-chapter-2"
         ],
         "studies": [
           "romans"
@@ -13553,12 +13569,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -13572,13 +13588,13 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/63024-the-one-and-only/"
       },
       "title": {
-        "episodeName": "The One and Only",
-        "subtitle": "",
-        "display": "The One and Only"
+        "episodeName": "Jesus in the One and Only",
+        "subtitle": "The Way, Truth, & Life",
+        "display": "Jesus in the One and Only (The Way, Truth, & Life)"
       },
       "series": {
-        "name": "2024 Specials",
-        "key": "2024-specials",
+        "name": "Specials CGBC Guest Speaker",
+        "key": "specials-cgbc-guest-speaker",
         "type": "standalone"
       },
       "study": {
@@ -13587,11 +13603,11 @@
         "type": "none"
       },
       "scripture": {
-        "raw": "Various",
-        "display": "Selected Scriptures",
+        "raw": "",
+        "display": "",
         "book": null,
         "bookKey": null,
-        "isVarious": true
+        "isVarious": false
       },
       "references": {
         "raw": "",
@@ -13605,7 +13621,7 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Student Pastor Nick Sackman Sunday 06/30/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "speaker": null,
       "date": {
         "raw": "Sun, 30 Jun 2024 10:00:00 -0600",
         "iso": "2024-06-30",
@@ -13645,7 +13661,7 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-01-15_at_10201bi38m.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-07-01_at_801406bugu.jpg",
           "wide": null
         },
         "study": {
@@ -13655,7 +13671,7 @@
       },
       "memberships": {
         "series": [
-          "2024-specials"
+          "specials-cgbc-guest-speaker"
         ],
         "studies": [],
         "bibleBooks": [],
