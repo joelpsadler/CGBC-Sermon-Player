@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-05-15T13:25:56.633Z",
+  "generatedAt": "2026-05-15T15:54:21.095Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 98,
+    "videoMatchedItems": 101,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
   "totals": {
-    "audioPlaysTotal": 4372,
+    "audioPlaysTotal": 4376,
     "audioEpisodesTotal": 140
   },
   "current": {
@@ -1840,7 +1840,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
-        "plays": 38,
+        "plays": 39,
         "durationSeconds": 1869,
         "statsMatchStrategy": "media_url"
       },
@@ -9212,7 +9212,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/b6gbr9rdesdwz6ys/32FullWideSF_PCbhzf9.mp3",
-        "plays": 30,
+        "plays": 31,
         "durationSeconds": 2337,
         "statsMatchStrategy": "media_url"
       },
@@ -10539,7 +10539,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hka45nqdctuyjfrq/1229PodCast7ajmg.mp3",
-        "plays": 36,
+        "plays": 37,
         "durationSeconds": 2467,
         "statsMatchStrategy": "media_url"
       },
@@ -12996,7 +12996,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/c7em5x5a5p3kyg62/84_Podcastakqka.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 2595,
         "statsMatchStrategy": "media_url"
       },
@@ -13197,8 +13197,8 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 2:17-24",
-        "display": "Romans 2:17-24",
+        "raw": "Romans 2:17-3:8",
+        "display": "Romans 2:17-3:8",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -13208,28 +13208,12 @@
         "display": "",
         "tokens": [],
         "searchTokens": [
-          "Romans 2:17-24",
-          "Romans 2:17",
-          "Romans 2:18",
-          "Romans 2:19",
-          "Romans 2:20",
-          "Romans 2:21",
-          "Romans 2:22",
-          "Romans 2:23",
-          "Romans 2:24"
+          "Romans 2:17-3:8"
         ]
       },
       "search": {
         "scriptureTokens": [
-          "Romans 2:17-24",
-          "Romans 2:17",
-          "Romans 2:18",
-          "Romans 2:19",
-          "Romans 2:20",
-          "Romans 2:21",
-          "Romans 2:22",
-          "Romans 2:23",
-          "Romans 2:24"
+          "Romans 2:17-3:8"
         ],
         "hasTranscriptText": false
       },
@@ -13341,8 +13325,8 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 2:16-18",
-        "display": "Romans 2:16-18",
+        "raw": "Romans 2:17-3:8",
+        "display": "Romans 2:17-3:8",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -13352,18 +13336,12 @@
         "display": "",
         "tokens": [],
         "searchTokens": [
-          "Romans 2:16-18",
-          "Romans 2:16",
-          "Romans 2:17",
-          "Romans 2:18"
+          "Romans 2:17-3:8"
         ]
       },
       "search": {
         "scriptureTokens": [
-          "Romans 2:16-18",
-          "Romans 2:16",
-          "Romans 2:17",
-          "Romans 2:18"
+          "Romans 2:17-3:8"
         ],
         "hasTranscriptText": false
       },
@@ -14188,18 +14166,18 @@
         "display": "Results of the Merciful Wrath of God Pt. 2"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 1",
+        "key": "romans-chapter-1",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 1:24-32, B",
-        "display": "Romans 1:24-32, B",
+        "raw": "Romans 1:24-32",
+        "display": "Romans 1:24-32",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -14237,10 +14215,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 06/02/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 02 Jun 2024 10:00:00 -0600",
+        "raw": "06/02/2024",
         "iso": "2024-06-02",
         "year": 2024,
         "month": 6,
@@ -14267,19 +14250,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "myNo8XDF0JM",
+        "url": "https://www.youtube.com/watch?v=myNo8XDF0JM",
+        "views": 12
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-06-08_at_83822bn7zb.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/myNo8XDF0JM/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-23_at_703067oywj.jpg",
+          "wide": "https://i.ytimg.com/vi/w5VnSageSio/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -14288,7 +14271,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-1"
         ],
         "studies": [
           "romans"
@@ -14305,12 +14288,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -14329,18 +14312,18 @@
         "display": "Results of the Merciful Wrath of God Pt. 1"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 1",
+        "key": "romans-chapter-1",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 1:24-32, A",
-        "display": "Romans 1:24-32, A",
+        "raw": "Romans 1:24-32",
+        "display": "Romans 1:24-32",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -14378,10 +14361,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 05/26/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 26 May 2024 10:00:00 -0600",
+        "raw": "05/26/2024",
         "iso": "2024-05-26",
         "year": 2024,
         "month": 5,
@@ -14408,19 +14396,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "XtklIBRrwxU",
+        "url": "https://www.youtube.com/watch?v=XtklIBRrwxU",
+        "views": 10
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-26_at_84749aobxf.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/XtklIBRrwxU/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-23_at_703067oywj.jpg",
+          "wide": "https://i.ytimg.com/vi/w5VnSageSio/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -14429,7 +14417,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-1"
         ],
         "studies": [
           "romans"
@@ -14446,12 +14434,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -14465,23 +14453,23 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/gods-merciful-wrath-pt2/"
       },
       "title": {
-        "episodeName": "God's Merciful Wrath Pt. 2",
+        "episodeName": "Gods Merciful Wrath Pt. 2",
         "subtitle": "",
-        "display": "God's Merciful Wrath Pt. 2"
+        "display": "Gods Merciful Wrath Pt. 2"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 1",
+        "key": "romans-chapter-1",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 1:17-23, B",
-        "display": "Romans 1:17-23, B",
+        "raw": "Romans 1:17-23",
+        "display": "Romans 1:17-23",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -14515,10 +14503,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 05/19/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 19 May 2024 10:00:00 -0600",
+        "raw": "05/19/2024",
         "iso": "2024-05-19",
         "year": 2024,
         "month": 5,
@@ -14545,19 +14538,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "w5VnSageSio",
+        "url": "https://www.youtube.com/watch?v=w5VnSageSio",
+        "views": 11
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-23_at_703067oywj.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/w5VnSageSio/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-23_at_703067oywj.jpg",
+          "wide": "https://i.ytimg.com/vi/w5VnSageSio/maxresdefault.jpg"
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -14566,7 +14559,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-1"
         ],
         "studies": [
           "romans"
@@ -14583,12 +14576,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
