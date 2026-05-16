@@ -3120,7 +3120,7 @@ function searchMatchesItem(item, query){
     function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
     async function loadIdleQuotes(){
       try{
-        const [bank, curation] = await Promise.allSettled([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
+        const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
         const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
         const reviewMap = new Map((Array.isArray(curation?.reviews)?curation.reviews:[]).filter(r=>r?.quoteId).map(r=>[r.quoteId,r]));
         const approved = [];
@@ -3139,7 +3139,7 @@ function searchMatchesItem(item, query){
 
     async function loadQuoteSearchIndex(){
       try{
-        const [bank, curation] = await Promise.allSettled([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
+        const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
         const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
         const reviewMap = new Map((Array.isArray(curation?.reviews) ? curation.reviews : []).filter(r => r?.quoteId).map(r => [r.quoteId, r]));
         const map = new Map();
@@ -5367,11 +5367,31 @@ function nextIdleQuote(){
       }, 12000);
       applyDeepLinkFromUrl();
       try{
-        const [livestreams, shorts, guestSpeakers] = await Promise.allSettled([
+        const shelfResults = await Promise.allSettled([
           fetchPlaylistSeries(LIVESTREAMS),
           fetchPlaylistSeries(SHORTS),
           fetchPlaylistSeries(GUEST_SPEAKERS)
         ]);
+
+        const livestreams =
+          shelfResults[0].status === 'fulfilled'
+            ? shelfResults[0].value
+            : [];
+
+        const shorts =
+          shelfResults[1].status === 'fulfilled'
+            ? shelfResults[1].value
+            : [];
+
+        const guestSpeakers =
+          shelfResults[2].status === 'fulfilled'
+            ? shelfResults[2].value
+            : [];
+
+        if(shelfResults[2].status === 'rejected'){
+          console.warn('Guest Speakers shelf unavailable:', shelfResults[2].reason);
+        }
+
         state.nativeShelves.livestreams = livestreams;
         state.nativeShelves.shorts = shorts;
         state.nativeShelves.guestSpeakers = guestSpeakers;
@@ -7593,11 +7613,6 @@ function nextIdleQuote(){
 })();
 </script>
 
-<script>
-window.__SAFE_PLAYLIST_FILTER__ = function(arr){
-  return Array.isArray(arr) ? arr.filter(Boolean) : [];
-};
-</script>
 </body>
 </html>
 <!-- CGBC final mobile no-zoom input patch: appended after body; valid CSS still applies. -->
