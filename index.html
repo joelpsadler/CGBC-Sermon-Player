@@ -4000,7 +4000,10 @@ function nextIdleQuote(){
       const filteredEpisodes = [];
       episodes.forEach(ep=>{
         const detail = ep?.video?.youtubeId ? statsMap.get(ep.video.youtubeId) : null;
-        if(!detail) return;
+        if(!detail){   
+          filteredEpisodes.push(ep);   
+          return; 
+        }
 
         ep.video.views = Number(detail.views || 0);
         if(detail.thumbnailWide){
