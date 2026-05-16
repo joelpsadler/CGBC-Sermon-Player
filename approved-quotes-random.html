@@ -306,6 +306,129 @@ body{
 
 </style>
 
+
+<style id="final-balanced-layout">
+
+/* ===== DESKTOP ===== */
+
+@media (min-width:761px){
+
+  .controls-row{
+    display:grid !important;
+    grid-template-columns:1fr 210px !important;
+    align-items:end !important;
+    gap:22px !important;
+  }
+
+  .meta{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:10px !important;
+
+    margin:0 0 22px !important;
+
+    font-size:13px !important;
+    line-height:1.2 !important;
+  }
+
+  .episode-card{
+    width:210px !important;
+    align-self:end !important;
+  }
+
+  .episode-art{
+    width:100% !important;
+    height:auto !important;
+    border-radius:16px !important;
+  }
+
+  .tools{
+    justify-content:center !important;
+    padding-bottom:2px !important;
+  }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width:760px){
+
+  .quote-wall{
+    padding:12px 12px 14px !important;
+    min-height:calc(100svh - 12px) !important;
+  }
+
+  .quote-text{
+    line-height:0.94 !important;
+    letter-spacing:-0.045em !important;
+
+    max-height:46vh !important;
+    overflow:hidden !important;
+
+    margin-bottom:10px !important;
+  }
+
+  .meta{
+    margin-bottom:10px !important;
+
+    font-size:11px !important;
+    line-height:1.15 !important;
+  }
+
+  .controls-row{
+    margin-top:auto !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+
+    gap:10px !important;
+  }
+
+  .episode-card{
+    width:min(160px,42vw) !important;
+
+    margin:0 auto !important;
+  }
+
+  .episode-art{
+    width:100% !important;
+    aspect-ratio:16/9 !important;
+    object-fit:cover !important;
+
+    border-radius:18px !important;
+  }
+
+  .tools{
+    width:100% !important;
+
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+
+    gap:10px !important;
+  }
+
+  .tools .btn{
+    width:64px !important;
+    min-width:64px !important;
+    height:44px !important;
+    min-height:44px !important;
+
+    border-radius:999px !important;
+
+    flex:0 0 auto !important;
+  }
+
+  .tools .btn svg{
+    width:18px !important;
+    height:18px !important;
+  }
+}
+
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
