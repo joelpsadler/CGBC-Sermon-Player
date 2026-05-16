@@ -4000,22 +4000,9 @@ function nextIdleQuote(){
       const filteredEpisodes = [];
       episodes.forEach(ep=>{
         const detail = ep?.video?.youtubeId ? statsMap.get(ep.video.youtubeId) : null;
-
-        /* ------------------------------------------------------------------
-           PATCH: native YouTube shelves (Livestreams / Shorts / Guest Speakers)
-           should only render videos that successfully validate through
-           videos.list. If a detail row is missing here, YouTube has usually
-           returned a removed, private, blocked, processing, or otherwise
-           non-embeddable item. Previously those rows were still pushed into
-           the shelf, which could break rendering and playback behavior inside
-           the Shorts and Livestreams sections specifically.
-
-           Safe behavior:
-           - skip unresolved native shelf items entirely
-           - leave the rest of the media system untouched
-           ------------------------------------------------------------------ */
-        if(!detail){
-          return;
+        if(!detail){   
+          filteredEpisodes.push(ep);   
+          return; 
         }
 
         ep.video.views = Number(detail.views || 0);
@@ -5380,16 +5367,34 @@ function nextIdleQuote(){
       }, 12000);
       applyDeepLinkFromUrl();
       try{
-        const [livestreams, shorts, guestSpeakers] = await Promise.all([
+        const shelfResults = await Promise.allSettled([
           fetchPlaylistSeries(LIVESTREAMS),
           fetchPlaylistSeries(SHORTS),
           fetchPlaylistSeries(GUEST_SPEAKERS)
         ]);
-        state.nativeShelves.livestreams = livestreams;
-        state.nativeShelves.shorts = shorts;
-        state.nativeShelves.guestSpeakers = guestSpeakers;
+
+        const [livestreamsResult, shortsResult, guestSpeakersResult] = shelfResults;
+
+        state.nativeShelves.livestreams = livestreamsResult.status === 'fulfilled'
+          ? livestreamsResult.value
+          : [];
+
+        state.nativeShelves.shorts = shortsResult.status === 'fulfilled'
+          ? shortsResult.value
+          : [];
+
+        state.nativeShelves.guestSpeakers = guestSpeakersResult.status === 'fulfilled'
+          ? guestSpeakersResult.value
+          : [];
+
+        shelfResults.forEach((result, index)=>{
+          if(result.status === 'rejected'){
+            const shelfName = ['livestreams', 'shorts', 'guest speakers'][index];
+            console.warn(`Native YouTube shelf failed to load: ${shelfName}`, result.reason);
+          }
+        });
       }catch(err){
-        console.warn('Live YouTube shelves failed to load.', err);
+        console.warn('Native YouTube shelf bootstrap failed.', err);
       }
       rerender();
       applyDeepLinkFromUrl();
