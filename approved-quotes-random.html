@@ -600,6 +600,101 @@ height:22px !important;
 
 </style>
 
+
+<style id="vertical-balance-v2">
+@media(max-width:760px){
+
+.quote-wall{
+min-height:690px !important;
+padding-top:2px !important;
+padding-bottom:12px !important;
+}
+
+.quote-head{
+margin-bottom:-4px !important;
+}
+
+#quoteBox{
+padding-top:0 !important;
+justify-content:flex-start !important;
+}
+
+.quote-text{
+margin-top:0 !important;
+padding-top:0 !important;
+line-height:.92 !important;
+letter-spacing:-0.065em !important;
+}
+
+.meta{
+padding-top:2px !important;
+padding-bottom:0 !important;
+margin-bottom:0 !important;
+line-height:1.15 !important;
+}
+
+.controls-row{
+margin-top:-8px !important;
+gap:8px !important;
+padding-bottom:0 !important;
+}
+
+.episode-card{
+width:min(230px,66vw) !important;
+margin-top:0 !important;
+margin-bottom:2px !important;
+}
+
+.tools{
+gap:12px !important;
+padding:0 12px !important 4px !important;
+justify-content:space-between !important;
+max-width:360px !important;
+}
+
+.tools .btn{
+width:72px !important;
+height:72px !important;
+min-width:72px !important;
+min-height:72px !important;
+border-radius:22px !important;
+}
+
+.tools .btn svg{
+width:28px !important;
+height:28px !important;
+}
+
+}
+</style>
+
+
+<style id="svg-scale-v3">
+@media(max-width:760px){
+
+.tools .btn{
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+padding:0 !important;
+}
+
+.tools .btn svg{
+width:36px !important;
+height:36px !important;
+stroke-width:1.8 !important;
+max-width:none !important;
+max-height:none !important;
+}
+
+.tools .btn.copy-btn svg{
+width:34px !important;
+height:34px !important;
+}
+
+}
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -1161,6 +1256,67 @@ window.addEventListener('resize', aggressiveMobileFit);
 
 requestAnimationFrame(()=>{
   aggressiveMobileFit();
+});
+
+})();
+</script>
+
+
+<script id="aggressive-fit-v2">
+(function(){
+
+function ultraFit(){
+
+if(window.innerWidth > 760) return;
+
+const qt = document.getElementById('quoteText');
+const wall = document.querySelector('.quote-wall');
+
+if(!qt || !wall) return;
+
+const chars = (qt.textContent || '').trim().length;
+
+let size =
+chars > 520 ? 1.82 :
+chars > 470 ? 1.95 :
+chars > 430 ? 2.08 :
+chars > 390 ? 2.22 :
+chars > 350 ? 2.38 :
+chars > 310 ? 2.58 :
+chars > 270 ? 2.85 :
+chars > 230 ? 3.15 :
+chars > 190 ? 3.55 :
+chars > 150 ? 4.0 :
+4.5;
+
+qt.style.fontSize = size + 'vw';
+
+requestAnimationFrame(()=>{
+
+const maxHeight = window.innerHeight * 0.38;
+
+while(qt.scrollHeight > maxHeight && size > 1.62){
+size -= 0.05;
+qt.style.fontSize = size + 'vw';
+}
+
+});
+
+}
+
+const oldRender = renderQuote;
+
+renderQuote = function(){
+oldRender();
+requestAnimationFrame(()=>{
+ultraFit();
+});
+};
+
+window.addEventListener('resize', ultraFit);
+
+requestAnimationFrame(()=>{
+ultraFit();
 });
 
 })();
