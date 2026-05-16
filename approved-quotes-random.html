@@ -137,6 +137,185 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center}.qu
 }
 </style>
 
+
+<style id="production-embed-polish">
+
+html,body{
+overflow-x:hidden;
+}
+
+body{
+padding:0 !important;
+margin:0 !important;
+}
+
+body.embed-mode{
+background:transparent !important;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0 !important;
+}
+
+body.embed-mode::before{
+display:none !important;
+}
+
+body.embed-mode .quote-wall{
+background:linear-gradient(180deg,rgba(14,14,15,.82),rgba(8,8,9,.74)) !important;
+backdrop-filter:blur(18px) saturate(1.08);
+box-shadow:
+0 18px 48px rgba(0,0,0,.30),
+inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.quote-wall{
+width:min(1120px,calc(100vw - 18px)) !important;
+min-height:min(720px,calc(100vh - 20px)) !important;
+padding:20px 22px 18px !important;
+display:grid !important;
+grid-template-rows:auto 1fr auto !important;
+gap:8px !important;
+overflow:hidden;
+}
+
+.quote-head{
+top:18px !important;
+left:20px !important;
+}
+
+.quote-brand img{
+width:200px !important;
+height:64px !important;
+}
+
+#quoteBox{
+display:flex;
+flex-direction:column;
+justify-content:center;
+min-height:0;
+}
+
+.quote-text{
+padding:52px 4px 6px !important;
+max-width:1020px !important;
+margin:0 auto !important;
+line-height:1.08 !important;
+}
+
+.meta{
+margin-top:4px !important;
+font-size:13px !important;
+}
+
+.controls-row{
+align-items:end !important;
+gap:14px !important;
+margin-top:0 !important;
+}
+
+.tools{
+min-height:66px !important;
+gap:10px !important;
+}
+
+.tools .btn{
+width:50px !important;
+min-width:50px !important;
+height:50px !important;
+min-height:50px !important;
+border-radius:16px !important;
+}
+
+.tools .btn svg{
+width:21px !important;
+height:21px !important;
+}
+
+.episode-card{
+width:185px !important;
+grid-template-rows:36px auto !important;
+border-radius:14px !important;
+}
+
+.episode-label{
+height:36px !important;
+min-height:36px !important;
+font-size:13px !important;
+}
+
+@media(max-width:760px){
+
+body.embed-mode{
+align-items:flex-start;
+}
+
+.quote-wall{
+width:calc(100vw - 8px) !important;
+min-height:calc(100vh - 8px) !important;
+padding:10px 10px 12px !important;
+border-radius:22px !important;
+gap:4px !important;
+}
+
+.quote-head{
+top:10px !important;
+left:10px !important;
+}
+
+.quote-brand img{
+width:138px !important;
+height:44px !important;
+}
+
+.quote-text{
+padding:48px 0 2px !important;
+line-height:1.02 !important;
+letter-spacing:-.04em !important;
+}
+
+.meta{
+font-size:11px !important;
+gap:2px 8px !important;
+}
+
+.controls-row{
+grid-template-columns:1fr !important;
+justify-items:center !important;
+gap:8px !important;
+}
+
+.tools{
+gap:8px !important;
+min-height:54px !important;
+}
+
+.tools .btn{
+width:46px !important;
+min-width:46px !important;
+height:46px !important;
+min-height:46px !important;
+border-radius:14px !important;
+}
+
+.tools .btn svg{
+width:18px !important;
+height:18px !important;
+}
+
+.episode-card{
+width:min(220px,64vw) !important;
+}
+
+.episode-label{
+height:30px !important;
+min-height:30px !important;
+font-size:12px !important;
+}
+
+}
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -426,4 +605,62 @@ $('nextBtn').addEventListener('click',()=>{chooseNext();restartCycle();});
 $('prevBtn').addEventListener('click',()=>{previousQuote();restartCycle();});
 $('copyBtn').addEventListener('click',async()=>{if(!quotes.length)return;await navigator.clipboard.writeText(copyTextFor(quotes[idx]));toast('Copied quote.');});
 start();
-</script></body></html>
+</script>
+<script id="embed-production-script">
+(function(){
+
+const embedded = window.self !== window.top;
+
+if(embedded){
+  document.body.classList.add('embed-mode');
+}
+
+const originalRenderQuote = renderQuote;
+
+renderQuote = function(){
+  originalRenderQuote();
+
+  const q = quotes[idx];
+  const text = quoteText(q || {});
+  const chars = text.length;
+  const words = text.split(/\s+/).filter(Boolean).length;
+
+  const mobile = window.innerWidth <= 760;
+
+  let scale = 1;
+
+  if(mobile){
+    scale =
+      chars > 340 ? 0.50 :
+      chars > 300 ? 0.54 :
+      chars > 260 ? 0.60 :
+      chars > 220 ? 0.66 :
+      chars > 180 ? 0.74 :
+      chars > 140 ? 0.84 :
+      1;
+  }else{
+    scale =
+      chars > 340 ? 0.62 :
+      chars > 280 ? 0.72 :
+      chars > 220 ? 0.82 :
+      chars > 170 ? 0.90 :
+      1;
+  }
+
+  const qt = document.getElementById('quoteText');
+
+  if(qt){
+    qt.style.setProperty('--quote-scale', scale);
+  }
+};
+
+window.addEventListener('resize', () => {
+  try{
+    renderQuote();
+  }catch(e){}
+});
+
+})();
+</script>
+
+</body></html>
