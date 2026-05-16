@@ -361,6 +361,57 @@ margin-top:6px !important;
 }
 </style>
 
+
+<style id="mobile-stability-pass">
+
+@media(max-width:760px){
+
+.quote-wall{
+height:calc(100vh - 10px) !important;
+min-height:calc(100vh - 10px) !important;
+max-height:calc(100vh - 10px) !important;
+overflow:hidden !important;
+display:grid !important;
+grid-template-rows:auto minmax(0,1fr) auto !important;
+}
+
+#quoteBox{
+height:100% !important;
+min-height:0 !important;
+display:grid !important;
+grid-template-rows:minmax(0,1fr) auto !important;
+align-content:start !important;
+overflow:hidden !important;
+}
+
+.quote-text{
+display:flex !important;
+align-items:flex-start !important;
+justify-content:center !important;
+overflow:hidden !important;
+text-wrap:balance;
+max-height:52vh !important;
+}
+
+.meta{
+min-height:52px !important;
+align-content:start !important;
+}
+
+.controls-row{
+margin-top:2px !important;
+padding-top:0 !important;
+position:relative !important;
+z-index:5;
+}
+
+.episode-card{
+margin-top:4px !important;
+}
+
+}
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -704,6 +755,67 @@ window.addEventListener('resize', () => {
     renderQuote();
   }catch(e){}
 });
+
+})();
+</script>
+
+
+<script id="mobile-layout-stability">
+
+(function(){
+
+function stabilizeMobileQuoteSizing(){
+
+  if(window.innerWidth > 760) return;
+
+  const qt = document.getElementById('quoteText');
+  if(!qt) return;
+
+  const text = (qt.textContent || '').trim();
+  const chars = text.length;
+
+  let size =
+    chars > 420 ? 2.7 :
+    chars > 360 ? 3.0 :
+    chars > 320 ? 3.25 :
+    chars > 280 ? 3.55 :
+    chars > 240 ? 3.9 :
+    chars > 200 ? 4.25 :
+    chars > 170 ? 4.7 :
+    5.2;
+
+  qt.style.fontSize = size + 'vw';
+
+  requestAnimationFrame(() => {
+
+    const maxHeight = window.innerHeight * 0.52;
+
+    if(qt.scrollHeight > maxHeight){
+
+      let current = size;
+
+      while(qt.scrollHeight > maxHeight && current > 2.3){
+        current -= 0.08;
+        qt.style.fontSize = current + 'vw';
+      }
+
+    }
+
+  });
+
+}
+
+const originalRenderQuoteStable = renderQuote;
+
+renderQuote = function(){
+  originalRenderQuoteStable();
+
+  requestAnimationFrame(() => {
+    stabilizeMobileQuoteSizing();
+  });
+};
+
+window.addEventListener('resize', stabilizeMobileQuoteSizing);
 
 })();
 </script>
