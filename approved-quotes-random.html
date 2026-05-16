@@ -514,6 +514,92 @@ pointer-events:none !important;
 }
 </style>
 
+
+<style id="mobile-bottom-controls-pass">
+
+@media(max-width:760px){
+
+.quote-wall{
+padding-top:6px !important;
+min-height:760px !important;
+display:grid !important;
+grid-template-rows:auto minmax(0,1fr) auto auto auto !important;
+align-content:start !important;
+gap:0 !important;
+}
+
+.quote-head{
+margin-bottom:0 !important;
+}
+
+#quoteBox{
+justify-content:flex-start !important;
+align-items:stretch !important;
+padding-top:0 !important;
+min-height:0 !important;
+}
+
+.quote-text{
+padding:2px 0 4px !important;
+margin:0 !important;
+max-width:100% !important;
+text-align:left !important;
+line-height:.98 !important;
+letter-spacing:-.05em !important;
+}
+
+.meta{
+justify-content:flex-start !important;
+text-align:left !important;
+padding-top:6px !important;
+padding-bottom:10px !important;
+}
+
+.controls-row{
+display:flex !important;
+flex-direction:column !important;
+align-items:center !important;
+justify-content:flex-end !important;
+gap:10px !important;
+margin-top:auto !important;
+padding-top:4px !important;
+}
+
+.episode-card{
+order:1 !important;
+width:min(220px,64vw) !important;
+margin-top:0 !important;
+margin-bottom:8px !important;
+}
+
+.tools{
+order:2 !important;
+width:100% !important;
+display:flex !important;
+justify-content:space-evenly !important;
+align-items:center !important;
+padding:0 8px !important;
+gap:16px !important;
+min-height:70px !important;
+}
+
+.tools .btn{
+width:58px !important;
+min-width:58px !important;
+height:58px !important;
+min-height:58px !important;
+border-radius:18px !important;
+}
+
+.tools .btn svg{
+width:22px !important;
+height:22px !important;
+}
+
+}
+
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -1008,6 +1094,74 @@ renderQuote = function(){
 window.addEventListener('resize', stabilizeMobileTypography);
 
 requestAnimationFrame(stabilizeMobileTypography);
+
+})();
+</script>
+
+
+<script id="mobile-final-tuning">
+
+(function(){
+
+function aggressiveMobileFit(){
+
+  if(window.innerWidth > 760) return;
+
+  const qt = document.getElementById('quoteText');
+  if(!qt) return;
+
+  const chars = (qt.textContent || '').trim().length;
+
+  let vw =
+    chars > 480 ? 2.15 :
+    chars > 420 ? 2.35 :
+    chars > 360 ? 2.55 :
+    chars > 320 ? 2.85 :
+    chars > 280 ? 3.15 :
+    chars > 240 ? 3.45 :
+    chars > 200 ? 3.85 :
+    chars > 170 ? 4.25 :
+    chars > 140 ? 4.7 :
+    5.2;
+
+  qt.style.fontSize = vw + 'vw';
+
+  requestAnimationFrame(()=>{
+
+    const maxHeight = window.innerHeight * 0.46;
+
+    if(qt.scrollHeight > maxHeight){
+
+      let current = vw;
+
+      while(qt.scrollHeight > maxHeight && current > 1.95){
+        current -= 0.06;
+        qt.style.fontSize = current + 'vw';
+      }
+
+    }
+
+  });
+
+}
+
+const originalRenderFinal = renderQuote;
+
+renderQuote = function(){
+
+  originalRenderFinal();
+
+  requestAnimationFrame(()=>{
+    aggressiveMobileFit();
+  });
+
+};
+
+window.addEventListener('resize', aggressiveMobileFit);
+
+requestAnimationFrame(()=>{
+  aggressiveMobileFit();
+});
 
 })();
 </script>
