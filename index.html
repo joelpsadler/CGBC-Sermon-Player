@@ -1863,36 +1863,6 @@
     }
   }
 </style>
-
-<style id="debug-overlay-style">
-#ytDebugOverlay{
-position:fixed;
-right:12px;
-bottom:12px;
-z-index:999999;
-width:min(420px,92vw);
-max-height:42vh;
-overflow:auto;
-padding:12px;
-border-radius:14px;
-background:rgba(0,0,0,.88);
-color:#d7eadf;
-font:12px/1.4 monospace;
-border:1px solid rgba(255,255,255,.18);
-box-shadow:0 10px 30px rgba(0,0,0,.45);
-}
-#ytDebugOverlay .dbg-title{
-font-weight:bold;
-margin-bottom:8px;
-color:#fff;
-}
-#ytDebugOverlay .dbg-line{
-padding:2px 0;
-border-bottom:1px solid rgba(255,255,255,.06);
-word-break:break-word;
-}
-</style>
-
 </head>
 <body class="mode-audio">
   <div class="app">
@@ -3150,7 +3120,7 @@ function searchMatchesItem(item, query){
     function idleQuoteCopy(q){ return [idleQuoteText(q), '— ' + [idleQuoteSpeaker(q), idleQuoteTitle(q), formatDate({date:{iso:idleQuoteDate(q),raw:idleQuoteDate(q)}}), formatClock(idleQuoteStart(q))].filter(Boolean).join(' • '), idleQuoteEpisodeLink(q, false)].filter(Boolean).join('\n'); }
     async function loadIdleQuotes(){
       try{
-        const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
+        const [bank, curation] = await Promise.allSettled([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
         const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
         const reviewMap = new Map((Array.isArray(curation?.reviews)?curation.reviews:[]).filter(r=>r?.quoteId).map(r=>[r.quoteId,r]));
         const approved = [];
@@ -3169,7 +3139,7 @@ function searchMatchesItem(item, query){
 
     async function loadQuoteSearchIndex(){
       try{
-        const [bank, curation] = await Promise.all([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
+        const [bank, curation] = await Promise.allSettled([fetchFirstJson(quoteBankPaths()), fetchFirstJson(quoteCurationPaths())]);
         const rows = Array.isArray(bank?.quotes) ? bank.quotes : [];
         const reviewMap = new Map((Array.isArray(curation?.reviews) ? curation.reviews : []).filter(r => r?.quoteId).map(r => [r.quoteId, r]));
         const map = new Map();
@@ -5397,7 +5367,7 @@ function nextIdleQuote(){
       }, 12000);
       applyDeepLinkFromUrl();
       try{
-        const [livestreams, shorts, guestSpeakers] = await Promise.all([
+        const [livestreams, shorts, guestSpeakers] = await Promise.allSettled([
           fetchPlaylistSeries(LIVESTREAMS),
           fetchPlaylistSeries(SHORTS),
           fetchPlaylistSeries(GUEST_SPEAKERS)
@@ -7623,95 +7593,11 @@ function nextIdleQuote(){
 })();
 </script>
 
-
-<script id="yt-debug-script">
-(function(){
-  function ensurePanel(){
-    let panel = document.getElementById('ytDebugOverlay');
-    if(panel) return panel;
-    panel = document.createElement('div');
-    panel.id = 'ytDebugOverlay';
-    panel.innerHTML = '<div class="dbg-title">YT Shelf Debug</div>';
-    document.body.appendChild(panel);
-    return panel;
-  }
-
-  window.__YTDBG = function(msg,obj){
-    try{
-      console.log('[YTDBG]',msg,obj||'');
-      const panel = ensurePanel();
-      const line = document.createElement('div');
-      line.className = 'dbg-line';
-      line.textContent =
-        new Date().toLocaleTimeString() + ' | ' + msg +
-        (obj ? ' | ' + JSON.stringify(obj).slice(0,300) : '');
-      panel.appendChild(line);
-      panel.scrollTop = panel.scrollHeight;
-    }catch(e){}
-  };
-
-  window.addEventListener('error', function(e){
-    window.__YTDBG('WINDOW ERROR', {
-      message:e.message,
-      source:e.filename,
-      line:e.lineno
-    });
-  });
-
-  const origFetch = window.fetch;
-  window.fetch = async function(...args){
-    const url = args && args[0] ? String(args[0]) : '';
-    const isYT = /youtube|googleapis|ytimg/i.test(url);
-
-    if(isYT){
-      window.__YTDBG('FETCH START', {url});
-    }
-
-    try{
-      const res = await origFetch.apply(this,args);
-
-      if(isYT){
-        window.__YTDBG('FETCH RESPONSE', {
-          url,
-          status:res.status,
-          ok:res.ok
-        });
-
-        try{
-          const clone = res.clone();
-          const data = await clone.json();
-
-          if(data && Array.isArray(data.items)){
-            window.__YTDBG('YT ITEMS RETURNED', {
-              url,
-              count:data.items.length
-            });
-          }
-
-          if(data && data.error){
-            window.__YTDBG('YT API ERROR', data.error);
-          }
-        }catch(err){}
-      }
-
-      return res;
-    }catch(err){
-      if(isYT){
-        window.__YTDBG('FETCH FAILED', {
-          url,
-          error:String(err)
-        });
-      }
-      throw err;
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded', function(){
-    window.__YTDBG('Debug instrumentation active');
-  });
-})();
+<script>
+window.__SAFE_PLAYLIST_FILTER__ = function(arr){
+  return Array.isArray(arr) ? arr.filter(Boolean) : [];
+};
 </script>
-
 </body>
 </html>
 <!-- CGBC final mobile no-zoom input patch: appended after body; valid CSS still applies. -->
