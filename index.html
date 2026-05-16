@@ -5373,28 +5373,33 @@ function nextIdleQuote(){
           fetchPlaylistSeries(GUEST_SPEAKERS)
         ]);
 
-        const [livestreamsResult, shortsResult, guestSpeakersResult] = shelfResults;
-
-        state.nativeShelves.livestreams = livestreamsResult.status === 'fulfilled'
-          ? livestreamsResult.value
+        const livestreams = shelfResults[0]?.status === 'fulfilled' && Array.isArray(shelfResults[0].value)
+          ? shelfResults[0].value
           : [];
 
-        state.nativeShelves.shorts = shortsResult.status === 'fulfilled'
-          ? shortsResult.value
+        const shorts = shelfResults[1]?.status === 'fulfilled' && Array.isArray(shelfResults[1].value)
+          ? shelfResults[1].value
           : [];
 
-        state.nativeShelves.guestSpeakers = guestSpeakersResult.status === 'fulfilled'
-          ? guestSpeakersResult.value
+        const guestSpeakers = shelfResults[2]?.status === 'fulfilled' && Array.isArray(shelfResults[2].value)
+          ? shelfResults[2].value
           : [];
 
-        shelfResults.forEach((result, index)=>{
-          if(result.status === 'rejected'){
-            const shelfName = ['livestreams', 'shorts', 'guest speakers'][index];
-            console.warn(`Native YouTube shelf failed to load: ${shelfName}`, result.reason);
-          }
-        });
+        if(shelfResults[0]?.status === 'rejected'){
+          console.warn('Livestream shelf failed to load.', shelfResults[0].reason);
+        }
+        if(shelfResults[1]?.status === 'rejected'){
+          console.warn('Shorts shelf failed to load.', shelfResults[1].reason);
+        }
+        if(shelfResults[2]?.status === 'rejected'){
+          console.warn('Guest speaker shelf failed to load.', shelfResults[2].reason);
+        }
+
+        state.nativeShelves.livestreams = livestreams;
+        state.nativeShelves.shorts = shorts;
+        state.nativeShelves.guestSpeakers = guestSpeakers;
       }catch(err){
-        console.warn('Native YouTube shelf bootstrap failed.', err);
+        console.warn('Live YouTube shelves failed to load.', err);
       }
       rerender();
       applyDeepLinkFromUrl();
