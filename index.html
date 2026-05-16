@@ -4000,9 +4000,22 @@ function nextIdleQuote(){
       const filteredEpisodes = [];
       episodes.forEach(ep=>{
         const detail = ep?.video?.youtubeId ? statsMap.get(ep.video.youtubeId) : null;
-        if(!detail){   
-          filteredEpisodes.push(ep);   
-          return; 
+
+        /* ------------------------------------------------------------------
+           PATCH: native YouTube shelves (Livestreams / Shorts / Guest Speakers)
+           should only render videos that successfully validate through
+           videos.list. If a detail row is missing here, YouTube has usually
+           returned a removed, private, blocked, processing, or otherwise
+           non-embeddable item. Previously those rows were still pushed into
+           the shelf, which could break rendering and playback behavior inside
+           the Shorts and Livestreams sections specifically.
+
+           Safe behavior:
+           - skip unresolved native shelf items entirely
+           - leave the rest of the media system untouched
+           ------------------------------------------------------------------ */
+        if(!detail){
+          return;
         }
 
         ep.video.views = Number(detail.views || 0);
