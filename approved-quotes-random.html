@@ -695,6 +695,95 @@ height:34px !important;
 }
 </style>
 
+
+<style id="mobile-balance-v4">
+@media (max-width:760px){
+
+/* overall card tighter for mobile safari */
+.quote-shell,
+.player-shell,
+.quote-card{
+min-height:78svh !important;
+height:78svh !important;
+max-height:78svh !important;
+padding-bottom:18px !important;
+overflow:hidden !important;
+}
+
+/* push all content upward */
+.quote-content{
+justify-content:flex-start !important;
+padding-top:18px !important;
+padding-bottom:10px !important;
+gap:10px !important;
+}
+
+/* quote text scales down a bit more */
+.quote-text{
+font-size:clamp(2.35rem, 7.2vw, 4.15rem) !important;
+line-height:.92 !important;
+margin-bottom:10px !important;
+}
+
+/* meta tighter */
+.quote-meta{
+margin-top:2px !important;
+margin-bottom:4px !important;
+font-size:0.9rem !important;
+line-height:1.15 !important;
+}
+
+/* art higher */
+.episode-card,
+.episode-art,
+.album-card{
+margin-top:auto !important;
+margin-bottom:8px !important;
+transform:translateY(-18px) !important;
+max-width:64% !important;
+}
+
+/* controls closer and higher */
+.tools,
+.player-controls{
+margin-top:0 !important;
+padding-top:0 !important;
+gap:12px !important;
+transform:translateY(-16px) !important;
+}
+
+/* pill style buttons */
+.tools .btn,
+.player-controls .btn{
+width:92px !important;
+height:56px !important;
+border-radius:24px !important;
+padding:0 !important;
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+flex:0 0 auto !important;
+}
+
+/* svg scaled to pill buttons */
+.tools .btn svg,
+.player-controls .btn svg{
+width:28px !important;
+height:28px !important;
+max-width:none !important;
+max-height:none !important;
+}
+
+/* copy slightly smaller */
+.tools .copy-btn svg,
+.player-controls .copy-btn svg{
+width:26px !important;
+height:26px !important;
+}
+
+}
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
