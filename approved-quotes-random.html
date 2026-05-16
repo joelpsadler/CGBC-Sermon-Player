@@ -515,23 +515,45 @@ pointer-events:none !important;
 </style>
 
 
-<style id="mobile-bottom-controls-pass">
+<style id="final-github-ready-mobile-pass">
 
-@media(max-width:760px){
+/* ===== EMBED SCROLL FIX ===== */
+
+html, body{
+overscroll-behavior-y:auto !important;
+}
+
+.quote-wall,
+.quote-shell,
+.player-shell{
+touch-action:pan-y pinch-zoom !important;
+overscroll-behavior-y:contain !important;
+}
+
+/* ===== MOBILE FINAL ===== */
+
+@media (max-width:760px){
+
+body{
+align-items:flex-start !important;
+}
 
 .quote-wall{
-padding-top:6px !important;
-min-height:760px !important;
+width:calc(100vw - 8px) !important;
+min-height:74svh !important;
+padding:8px 10px 10px !important;
+border-radius:24px !important;
+
 display:grid !important;
 grid-template-rows:auto minmax(0,1fr) auto auto auto !important;
-align-content:start !important;
+
 gap:0 !important;
+align-content:start !important;
+
+overflow:hidden !important;
 }
 
-.quote-head{
-margin-bottom:0 !important;
-}
-
+/* push everything upward */
 #quoteBox{
 justify-content:flex-start !important;
 align-items:stretch !important;
@@ -539,449 +561,186 @@ padding-top:0 !important;
 min-height:0 !important;
 }
 
-.quote-text{
-padding:2px 0 4px !important;
-margin:0 !important;
-max-width:100% !important;
-text-align:left !important;
-line-height:.98 !important;
-letter-spacing:-.05em !important;
+.quote-head{
+margin-bottom:-2px !important;
 }
 
+.quote-brand img{
+width:148px !important;
+height:48px !important;
+}
+
+/* aggressive mobile fitting */
+.quote-text{
+padding:0 !important;
+margin:0 !important;
+
+text-align:left !important;
+
+font-size:clamp(2rem,6.8vw,4rem) !important;
+line-height:.91 !important;
+letter-spacing:-0.06em !important;
+
+max-height:42svh !important;
+overflow:hidden !important;
+}
+
+/* tighter metadata */
 .meta{
 justify-content:flex-start !important;
 text-align:left !important;
-padding-top:6px !important;
-padding-bottom:10px !important;
+
+padding-top:4px !important;
+padding-bottom:4px !important;
+
+font-size:11px !important;
+line-height:1.1 !important;
 }
 
+/* media stack */
 .controls-row{
 display:flex !important;
 flex-direction:column !important;
 align-items:center !important;
 justify-content:flex-end !important;
-gap:10px !important;
+
+gap:8px !important;
+
 margin-top:auto !important;
-padding-top:4px !important;
+padding-top:2px !important;
 }
 
+/* artwork itself becomes the frame */
 .episode-card{
 order:1 !important;
-width:min(220px,64vw) !important;
-margin-top:0 !important;
-margin-bottom:8px !important;
-}
 
-.tools{
-order:2 !important;
-width:100% !important;
-display:flex !important;
-justify-content:space-evenly !important;
-align-items:center !important;
-padding:0 8px !important;
-gap:16px !important;
-min-height:70px !important;
-}
+width:min(64vw,240px) !important;
+margin:0 auto 4px !important;
 
-.tools .btn{
-width:58px !important;
-min-width:58px !important;
-height:58px !important;
-min-height:58px !important;
-border-radius:18px !important;
-}
-
-.tools .btn svg{
-width:22px !important;
-height:22px !important;
-}
-
-}
-
-</style>
-
-
-<style id="vertical-balance-v2">
-@media(max-width:760px){
-
-.quote-wall{
-min-height:690px !important;
-padding-top:2px !important;
-padding-bottom:12px !important;
-}
-
-.quote-head{
-margin-bottom:-4px !important;
-}
-
-#quoteBox{
-padding-top:0 !important;
-justify-content:flex-start !important;
-}
-
-.quote-text{
-margin-top:0 !important;
-padding-top:0 !important;
-line-height:.92 !important;
-letter-spacing:-0.065em !important;
-}
-
-.meta{
-padding-top:2px !important;
-padding-bottom:0 !important;
-margin-bottom:0 !important;
-line-height:1.15 !important;
-}
-
-.controls-row{
-margin-top:-8px !important;
-gap:8px !important;
-padding-bottom:0 !important;
-}
-
-.episode-card{
-width:min(230px,66vw) !important;
-margin-top:0 !important;
-margin-bottom:2px !important;
-}
-
-.tools{
-gap:12px !important;
-padding:0 12px !important 4px !important;
-justify-content:space-between !important;
-max-width:360px !important;
-}
-
-.tools .btn{
-width:72px !important;
-height:72px !important;
-min-width:72px !important;
-min-height:72px !important;
 border-radius:22px !important;
-}
-
-.tools .btn svg{
-width:28px !important;
-height:28px !important;
-}
-
-}
-</style>
-
-
-<style id="svg-scale-v3">
-@media(max-width:760px){
-
-.tools .btn{
-display:flex !important;
-align-items:center !important;
-justify-content:center !important;
-padding:0 !important;
-}
-
-.tools .btn svg{
-width:36px !important;
-height:36px !important;
-stroke-width:1.8 !important;
-max-width:none !important;
-max-height:none !important;
-}
-
-.tools .btn.copy-btn svg{
-width:34px !important;
-height:34px !important;
-}
-
-}
-</style>
-
-
-<style id="mobile-balance-v4">
-@media (max-width:760px){
-
-/* overall card tighter for mobile safari */
-.quote-shell,
-.player-shell,
-.quote-card{
-min-height:78svh !important;
-height:78svh !important;
-max-height:78svh !important;
-padding-bottom:18px !important;
 overflow:hidden !important;
-}
 
-/* push all content upward */
-.quote-content{
-justify-content:flex-start !important;
-padding-top:18px !important;
-padding-bottom:10px !important;
-gap:10px !important;
-}
+background:rgba(255,255,255,.04) !important;
+border:1px solid rgba(255,255,255,.08) !important;
 
-/* quote text scales down a bit more */
-.quote-text{
-font-size:clamp(2.35rem, 7.2vw, 4.15rem) !important;
-line-height:.92 !important;
-margin-bottom:10px !important;
-}
+display:block !important;
+padding:0 !important;
 
-/* meta tighter */
-.quote-meta{
-margin-top:2px !important;
-margin-bottom:4px !important;
-font-size:0.9rem !important;
-line-height:1.15 !important;
-}
-
-/* art higher */
-.episode-card,
-.episode-art,
-.album-card{
-margin-top:auto !important;
-margin-bottom:8px !important;
-transform:translateY(-18px) !important;
-max-width:64% !important;
-}
-
-/* controls closer and higher */
-.tools,
-.player-controls{
-margin-top:0 !important;
-padding-top:0 !important;
-gap:12px !important;
 transform:translateY(-16px) !important;
 }
 
-/* pill style buttons */
-.tools .btn,
-.player-controls .btn{
-width:92px !important;
-height:56px !important;
-border-radius:24px !important;
-padding:0 !important;
-display:flex !important;
-align-items:center !important;
-justify-content:center !important;
-flex:0 0 auto !important;
+/* remove phantom label space */
+.episode-label{
+display:none !important;
 }
 
-/* svg scaled to pill buttons */
-.tools .btn svg,
-.player-controls .btn svg{
-width:28px !important;
-height:28px !important;
-max-width:none !important;
-max-height:none !important;
-}
-
-/* copy slightly smaller */
-.tools .copy-btn svg,
-.player-controls .copy-btn svg{
-width:26px !important;
-height:26px !important;
-}
-
-}
-</style>
-
-
-<style id="desktop-scroll-fix">
-/* Restore parent page scrolling in embedded webviews */
-.quote-shell,
-.quote-card,
-.player-shell,
-.quote-content{
-overscroll-behavior-y:auto !important;
-touch-action:pan-y pinch-zoom !important;
-}
-
-/* Prevent hover wheel trapping */
-.quote-shell *,
-.quote-card *,
-.player-shell *{
-touch-action:manipulation;
-}
-
-/* Do not globally trap gestures */
-html,
-body{
-overscroll-behavior-y:auto !important;
-}
-
-/* safer embedded behavior */
-iframe,
-embed{
-overscroll-behavior:contain;
-}
-</style>
-
-<script id="desktop-scroll-script-fix">
-(function(){
-
-const blocked = ['wheel','mousewheel'];
-
-blocked.forEach(type=>{
-document.querySelectorAll('.quote-shell,.quote-card,.player-shell').forEach(el=>{
-el.addEventListener(type,function(e){
-/* explicitly allow bubbling */
-e.stopPropagation = function(){};
-},{passive:true});
-});
-});
-
-/* remove accidental touch-action:none */
-document.querySelectorAll('*').forEach(el=>{
-const style = window.getComputedStyle(el);
-if(style.touchAction === 'none'){
-el.style.touchAction = 'pan-y pinch-zoom';
-}
-});
-
-})();
-</script>
-
-
-<style id="dvd-player-mobile-controls-v6">
-@media (max-width:760px){
-
-/* overall vertical compression */
-.quote-shell,
-.quote-card,
-.player-shell{
-min-height:74svh !important;
-height:74svh !important;
-max-height:74svh !important;
-padding-bottom:8px !important;
-}
-
-/* push entire content upward */
-.quote-content{
-padding-top:14px !important;
-gap:6px !important;
-}
-
-/* stronger mobile font scaling */
-.quote-text{
-font-size:clamp(2.05rem, 6.6vw, 3.75rem) !important;
-line-height:.90 !important;
-letter-spacing:-0.045em !important;
-margin-bottom:6px !important;
-}
-
-/* tighter meta */
-.quote-meta{
-font-size:.82rem !important;
-line-height:1.08 !important;
-margin-bottom:0 !important;
-}
-
-/* art much higher */
-.episode-card,
-.episode-art,
-.album-card{
-transform:translateY(-42px) !important;
-margin-bottom:-28px !important;
-max-width:62% !important;
-}
-
-/* dvd player style controls */
-.tools,
-.player-controls{
-gap:10px !important;
-transform:translateY(-34px) !important;
-margin-top:0 !important;
-padding-top:0 !important;
-}
-
-/* long horizontal dvd buttons */
-.tools .btn,
-.player-controls .btn{
-width:86px !important;
-height:42px !important;
-border-radius:18px !important;
-padding:0 !important;
-backdrop-filter:blur(10px) !important;
-display:flex !important;
-align-items:center !important;
-justify-content:center !important;
-}
-
-/* smaller icon inside */
-.tools .btn svg,
-.player-controls .btn svg{
-width:22px !important;
-height:22px !important;
-}
-
-/* copy icon slightly smaller */
-.tools .copy-btn svg,
-.player-controls .copy-btn svg{
-width:20px !important;
-height:20px !important;
-}
-
-}
-</style>
-
-
-<style id="episode-art-ratio-lock-v7">
-
-/* lock episode artwork ratio everywhere */
-.episode-card,
-.album-card,
+/* art ratio lock */
 .episode-art{
-overflow:hidden !important;
-position:relative !important;
-}
-
-/* preserve artwork aspect ratio */
-.episode-card img,
-.album-card img,
-.episode-art img{
 display:block !important;
 width:100% !important;
 height:auto !important;
 aspect-ratio:16/9 !important;
 object-fit:cover !important;
 object-position:center center !important;
-}
 
-/* safari/webview stabilization */
-.episode-card picture,
-.album-card picture,
-.episode-art picture{
-display:block !important;
-width:100% !important;
-}
-
-/* prevent flexbox collapse */
-.episode-card *,
-.album-card *,
-.episode-art *{
-min-width:0 !important;
-}
-
-/* mobile sizing refinement */
-@media (max-width:760px){
-
-.episode-card,
-.album-card,
-.episode-art{
-width:min(62vw, 420px) !important;
-max-width:min(62vw, 420px) !important;
-min-width:min(62vw, 420px) !important;
 border-radius:22px !important;
 }
 
-.episode-card img,
-.album-card img,
-.episode-art img{
-border-radius:18px !important;
+/* dvd controls */
+.tools{
+order:2 !important;
+
+width:100% !important;
+
+display:flex !important;
+justify-content:center !important;
+align-items:center !important;
+
+gap:10px !important;
+
+transform:translateY(-14px) !important;
+
+padding-bottom:max(6px,env(safe-area-inset-bottom)) !important;
+}
+
+/* slim dvd player buttons */
+.tools .btn{
+width:82px !important;
+height:44px !important;
+
+min-width:82px !important;
+min-height:44px !important;
+
+border-radius:999px !important;
+
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+
+padding:0 !important;
+
+background:
+linear-gradient(
+to bottom,
+rgba(255,255,255,.08),
+rgba(255,255,255,.03)
+) !important;
+
+border:1px solid rgba(255,255,255,.10) !important;
+
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.08),
+0 6px 18px rgba(0,0,0,.22) !important;
+}
+
+/* active button */
+.tools .btn.primary{
+background:
+linear-gradient(
+to bottom,
+rgba(118,154,131,.26),
+rgba(118,154,131,.14)
+) !important;
+}
+
+/* icon sizing */
+.tools .btn svg{
+width:24px !important;
+height:24px !important;
+
+margin:0 !important;
+stroke-width:2 !important;
+}
+
+/* interaction safety */
+.tools .btn,
+.tools .btn *{
+touch-action:manipulation !important;
+-webkit-tap-highlight-color:transparent !important;
 }
 
 }
 
 </style>
+
+<script id="final-mobile-js">
+
+/* prevent rapid safari zoom */
+let lastTouchEnd = 0;
+
+document.addEventListener('touchend', function(event){
+
+const now = (new Date()).getTime();
+
+if(now - lastTouchEnd <= 300){
+event.preventDefault();
+}
+
+lastTouchEnd = now;
+
+}, { passive:false });
+
+</script>
 
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
@@ -1477,135 +1236,6 @@ renderQuote = function(){
 window.addEventListener('resize', stabilizeMobileTypography);
 
 requestAnimationFrame(stabilizeMobileTypography);
-
-})();
-</script>
-
-
-<script id="mobile-final-tuning">
-
-(function(){
-
-function aggressiveMobileFit(){
-
-  if(window.innerWidth > 760) return;
-
-  const qt = document.getElementById('quoteText');
-  if(!qt) return;
-
-  const chars = (qt.textContent || '').trim().length;
-
-  let vw =
-    chars > 480 ? 2.15 :
-    chars > 420 ? 2.35 :
-    chars > 360 ? 2.55 :
-    chars > 320 ? 2.85 :
-    chars > 280 ? 3.15 :
-    chars > 240 ? 3.45 :
-    chars > 200 ? 3.85 :
-    chars > 170 ? 4.25 :
-    chars > 140 ? 4.7 :
-    5.2;
-
-  qt.style.fontSize = vw + 'vw';
-
-  requestAnimationFrame(()=>{
-
-    const maxHeight = window.innerHeight * 0.46;
-
-    if(qt.scrollHeight > maxHeight){
-
-      let current = vw;
-
-      while(qt.scrollHeight > maxHeight && current > 1.95){
-        current -= 0.06;
-        qt.style.fontSize = current + 'vw';
-      }
-
-    }
-
-  });
-
-}
-
-const originalRenderFinal = renderQuote;
-
-renderQuote = function(){
-
-  originalRenderFinal();
-
-  requestAnimationFrame(()=>{
-    aggressiveMobileFit();
-  });
-
-};
-
-window.addEventListener('resize', aggressiveMobileFit);
-
-requestAnimationFrame(()=>{
-  aggressiveMobileFit();
-});
-
-})();
-</script>
-
-
-<script id="aggressive-fit-v2">
-(function(){
-
-function ultraFit(){
-
-if(window.innerWidth > 760) return;
-
-const qt = document.getElementById('quoteText');
-const wall = document.querySelector('.quote-wall');
-
-if(!qt || !wall) return;
-
-const chars = (qt.textContent || '').trim().length;
-
-let size =
-chars > 520 ? 1.82 :
-chars > 470 ? 1.95 :
-chars > 430 ? 2.08 :
-chars > 390 ? 2.22 :
-chars > 350 ? 2.38 :
-chars > 310 ? 2.58 :
-chars > 270 ? 2.85 :
-chars > 230 ? 3.15 :
-chars > 190 ? 3.55 :
-chars > 150 ? 4.0 :
-4.5;
-
-qt.style.fontSize = size + 'vw';
-
-requestAnimationFrame(()=>{
-
-const maxHeight = window.innerHeight * 0.38;
-
-while(qt.scrollHeight > maxHeight && size > 1.62){
-size -= 0.05;
-qt.style.fontSize = size + 'vw';
-}
-
-});
-
-}
-
-const oldRender = renderQuote;
-
-renderQuote = function(){
-oldRender();
-requestAnimationFrame(()=>{
-ultraFit();
-});
-};
-
-window.addEventListener('resize', ultraFit);
-
-requestAnimationFrame(()=>{
-ultraFit();
-});
 
 })();
 </script>
