@@ -816,6 +816,115 @@ z-index:1 !important;
 </style>
 
 
+
+<style id="final-refinement-pass">
+
+/* ===== DESKTOP REFINEMENT ===== */
+@media (min-width: 761px){
+
+.controls-and-art{
+  align-items:flex-end !important;
+  gap:72px !important;
+  padding-bottom:12px !important;
+}
+
+.episode-card,
+.episode-art,
+.art-wrapper{
+  transform-origin:bottom right !important;
+}
+
+.episode-card{
+  width:min(280px,20vw) !important;
+  transform:translate(-10px,-8px) scale(1.18) !important;
+}
+
+.controls{
+  margin-bottom:8px !important;
+}
+
+.meta{
+  margin-bottom:28px !important;
+}
+
+}
+
+/* ===== MOBILE REFINEMENT ===== */
+@media (max-width:760px){
+
+.quote-card,
+.player-shell,
+.embed-shell{
+  overflow:hidden !important;
+}
+
+.quote-content{
+  display:flex !important;
+  flex-direction:column !important;
+  min-height:100% !important;
+}
+
+/* reserve hard space for art + controls */
+.quote-text-wrap{
+  flex:1 1 auto !important;
+  min-height:0 !important;
+  max-height:calc(100% - 360px) !important;
+  overflow:hidden !important;
+}
+
+.quote-text{
+  line-height:.93 !important;
+  letter-spacing:-0.035em !important;
+  overflow:hidden !important;
+  word-break:break-word !important;
+  hyphens:auto !important;
+  padding-right:10px !important;
+}
+
+/* aggressive responsive scaling */
+.quote-text.long,
+.quote-text[data-length="long"]{
+  font-size:clamp(42px,8vw,72px) !important;
+}
+
+.meta{
+  position:relative !important;
+  z-index:4 !important;
+  margin-top:10px !important;
+  margin-bottom:18px !important;
+}
+
+.controls-and-art{
+  margin-top:auto !important;
+  gap:18px !important;
+  padding-bottom:14px !important;
+}
+
+.episode-card{
+  width:min(68vw,520px) !important;
+  margin:0 auto !important;
+  transform:none !important;
+}
+
+.controls{
+  gap:14px !important;
+}
+
+.control-btn{
+  width:108px !important;
+  height:58px !important;
+  border-radius:999px !important;
+}
+
+.control-btn svg{
+  width:30px !important;
+  height:30px !important;
+}
+
+}
+
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
