@@ -925,6 +925,113 @@ z-index:1 !important;
 
 </style>
 
+
+<style id="ios-safari-final-fix">
+
+/* ===== FINAL SAFARI FLEX CONTAINMENT FIX ===== */
+
+@media (max-width:760px){
+
+html, body{
+overflow-x:hidden !important;
+}
+
+.quote-card,
+.player-shell,
+.embed-shell,
+.quote-content{
+display:flex !important;
+flex-direction:column !important;
+min-height:0 !important;
+height:100% !important;
+overflow:hidden !important;
+}
+
+/* reserve lower media zone FIRST */
+.controls-and-art{
+flex:0 0 330px !important;
+min-height:330px !important;
+max-height:330px !important;
+display:flex !important;
+flex-direction:column !important;
+justify-content:flex-end !important;
+gap:18px !important;
+padding-bottom:16px !important;
+margin-top:auto !important;
+position:relative !important;
+z-index:2 !important;
+}
+
+/* quote region gets ONLY remaining space */
+.quote-text-wrap{
+flex:1 1 auto !important;
+min-height:0 !important;
+overflow:hidden !important;
+display:flex !important;
+flex-direction:column !important;
+justify-content:flex-start !important;
+}
+
+/* safari-safe text containment */
+.quote-text{
+display:block !important;
+overflow:hidden !important;
+max-height:100% !important;
+line-height:0.94 !important;
+letter-spacing:-0.032em !important;
+word-break:break-word !important;
+overflow-wrap:anywhere !important;
+
+/* more aggressive responsive scaling */
+font-size:clamp(34px,7.2vw,72px) !important;
+}
+
+/* metadata locked above media zone */
+.meta{
+flex:0 0 auto !important;
+position:relative !important;
+z-index:5 !important;
+margin-top:10px !important;
+margin-bottom:20px !important;
+}
+
+/* art containment */
+.episode-card,
+.episode-art,
+.art-wrapper{
+position:relative !important;
+z-index:1 !important;
+overflow:hidden !important;
+}
+
+.episode-card{
+width:min(68vw,520px) !important;
+margin:0 auto !important;
+transform:none !important;
+}
+
+/* controls */
+.controls{
+display:flex !important;
+justify-content:center !important;
+gap:14px !important;
+}
+
+.control-btn{
+width:108px !important;
+height:58px !important;
+border-radius:999px !important;
+}
+
+.control-btn svg{
+width:28px !important;
+height:28px !important;
+}
+
+}
+
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
