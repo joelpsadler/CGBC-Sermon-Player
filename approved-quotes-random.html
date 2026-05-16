@@ -1032,6 +1032,84 @@ height:28px !important;
 
 </style>
 
+
+<style id="ultimate-balance-fix">
+
+/* ===== DESKTOP ART / META SEPARATION ===== */
+@media (min-width: 761px){
+
+.meta,
+.quote-meta{
+position:relative !important;
+z-index:5 !important;
+padding-right:380px !important;
+}
+
+.episode-card{
+position:absolute !important;
+right:34px !important;
+bottom:36px !important;
+width:300px !important;
+z-index:2 !important;
+}
+
+.controls{
+margin-top:70px !important;
+}
+
+}
+
+/* ===== MOBILE BIG QUOTE STABILIZATION ===== */
+@media (max-width:760px){
+
+.quote-text{
+font-size:clamp(26px,5.9vw,58px) !important;
+line-height:0.92 !important;
+letter-spacing:-0.045em !important;
+max-height:520px !important;
+overflow:hidden !important;
+hyphens:none !important;
+word-break:normal !important;
+overflow-wrap:normal !important;
+}
+
+.meta,
+.quote-meta{
+margin-top:18px !important;
+margin-bottom:24px !important;
+position:relative !important;
+z-index:5 !important;
+}
+
+.controls{
+padding:0 12px !important;
+gap:10px !important;
+flex-wrap:nowrap !important;
+}
+
+.control-btn{
+width:22vw !important;
+max-width:108px !important;
+min-width:74px !important;
+height:58px !important;
+flex:1 1 auto !important;
+}
+
+.episode-card{
+width:min(66vw,520px) !important;
+margin-top:10px !important;
+margin-bottom:8px !important;
+}
+
+.controls-and-art{
+min-height:300px !important;
+max-height:300px !important;
+}
+
+}
+
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
