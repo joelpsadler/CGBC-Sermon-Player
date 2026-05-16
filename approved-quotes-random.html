@@ -840,6 +840,149 @@ el.style.touchAction = 'pan-y pinch-zoom';
 })();
 </script>
 
+
+<style id="dvd-player-mobile-controls-v6">
+@media (max-width:760px){
+
+/* overall vertical compression */
+.quote-shell,
+.quote-card,
+.player-shell{
+min-height:74svh !important;
+height:74svh !important;
+max-height:74svh !important;
+padding-bottom:8px !important;
+}
+
+/* push entire content upward */
+.quote-content{
+padding-top:14px !important;
+gap:6px !important;
+}
+
+/* stronger mobile font scaling */
+.quote-text{
+font-size:clamp(2.05rem, 6.6vw, 3.75rem) !important;
+line-height:.90 !important;
+letter-spacing:-0.045em !important;
+margin-bottom:6px !important;
+}
+
+/* tighter meta */
+.quote-meta{
+font-size:.82rem !important;
+line-height:1.08 !important;
+margin-bottom:0 !important;
+}
+
+/* art much higher */
+.episode-card,
+.episode-art,
+.album-card{
+transform:translateY(-42px) !important;
+margin-bottom:-28px !important;
+max-width:62% !important;
+}
+
+/* dvd player style controls */
+.tools,
+.player-controls{
+gap:10px !important;
+transform:translateY(-34px) !important;
+margin-top:0 !important;
+padding-top:0 !important;
+}
+
+/* long horizontal dvd buttons */
+.tools .btn,
+.player-controls .btn{
+width:86px !important;
+height:42px !important;
+border-radius:18px !important;
+padding:0 !important;
+backdrop-filter:blur(10px) !important;
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+}
+
+/* smaller icon inside */
+.tools .btn svg,
+.player-controls .btn svg{
+width:22px !important;
+height:22px !important;
+}
+
+/* copy icon slightly smaller */
+.tools .copy-btn svg,
+.player-controls .copy-btn svg{
+width:20px !important;
+height:20px !important;
+}
+
+}
+</style>
+
+
+<style id="episode-art-ratio-lock-v7">
+
+/* lock episode artwork ratio everywhere */
+.episode-card,
+.album-card,
+.episode-art{
+overflow:hidden !important;
+position:relative !important;
+}
+
+/* preserve artwork aspect ratio */
+.episode-card img,
+.album-card img,
+.episode-art img{
+display:block !important;
+width:100% !important;
+height:auto !important;
+aspect-ratio:16/9 !important;
+object-fit:cover !important;
+object-position:center center !important;
+}
+
+/* safari/webview stabilization */
+.episode-card picture,
+.album-card picture,
+.episode-art picture{
+display:block !important;
+width:100% !important;
+}
+
+/* prevent flexbox collapse */
+.episode-card *,
+.album-card *,
+.episode-art *{
+min-width:0 !important;
+}
+
+/* mobile sizing refinement */
+@media (max-width:760px){
+
+.episode-card,
+.album-card,
+.episode-art{
+width:min(62vw, 420px) !important;
+max-width:min(62vw, 420px) !important;
+min-width:min(62vw, 420px) !important;
+border-radius:22px !important;
+}
+
+.episode-card img,
+.album-card img,
+.episode-art img{
+border-radius:18px !important;
+}
+
+}
+
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
