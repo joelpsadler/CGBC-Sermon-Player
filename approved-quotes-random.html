@@ -1110,6 +1110,99 @@ max-height:300px !important;
 
 </style>
 
+
+<style id="final-spacing-fixes">
+
+/* ===== MOBILE ===== */
+@media (max-width:760px){
+
+.quote-text{
+font-size:clamp(25px,5.7vw,52px) !important;
+line-height:0.94 !important;
+letter-spacing:-0.048em !important;
+max-height:none !important;
+overflow:visible !important;
+}
+
+.meta,
+.quote-meta{
+margin-top:8px !important;
+margin-bottom:12px !important;
+line-height:1.08 !important;
+}
+
+.episode-card{
+margin-top:4px !important;
+margin-bottom:2px !important;
+width:min(70vw,520px) !important;
+}
+
+.controls{
+margin-top:6px !important;
+gap:10px !important;
+padding:0 10px !important;
+}
+
+.controls-and-art{
+gap:4px !important;
+min-height:auto !important;
+max-height:none !important;
+}
+
+}
+
+</style>
+
+
+<style id="desktop-art-anchor-fix">
+@media (min-width:761px){
+
+/* reserve clean bottom area */
+.quote-content,
+.quote-wrapper,
+.player-content{
+padding-bottom:240px !important;
+box-sizing:border-box !important;
+}
+
+/* metadata stays above artwork */
+.meta,
+.quote-meta{
+position:relative !important;
+z-index:10 !important;
+margin-bottom:24px !important;
+display:block !important;
+}
+
+/* artwork pinned true bottom-right */
+.episode-card{
+position:absolute !important;
+right:34px !important;
+bottom:34px !important;
+width:340px !important;
+z-index:2 !important;
+}
+
+/* controls centered at bottom */
+.controls{
+position:absolute !important;
+left:50% !important;
+bottom:46px !important;
+transform:translateX(-50%) !important;
+margin:0 !important;
+z-index:4 !important;
+}
+
+/* remove any inherited layout conflicts */
+.controls-and-art{
+position:static !important;
+display:block !important;
+min-height:0 !important;
+}
+
+}
+</style>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
