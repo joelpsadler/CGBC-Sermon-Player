@@ -784,6 +784,62 @@ height:26px !important;
 }
 </style>
 
+
+<style id="desktop-scroll-fix">
+/* Restore parent page scrolling in embedded webviews */
+.quote-shell,
+.quote-card,
+.player-shell,
+.quote-content{
+overscroll-behavior-y:auto !important;
+touch-action:pan-y pinch-zoom !important;
+}
+
+/* Prevent hover wheel trapping */
+.quote-shell *,
+.quote-card *,
+.player-shell *{
+touch-action:manipulation;
+}
+
+/* Do not globally trap gestures */
+html,
+body{
+overscroll-behavior-y:auto !important;
+}
+
+/* safer embedded behavior */
+iframe,
+embed{
+overscroll-behavior:contain;
+}
+</style>
+
+<script id="desktop-scroll-script-fix">
+(function(){
+
+const blocked = ['wheel','mousewheel'];
+
+blocked.forEach(type=>{
+document.querySelectorAll('.quote-shell,.quote-card,.player-shell').forEach(el=>{
+el.addEventListener(type,function(e){
+/* explicitly allow bubbling */
+e.stopPropagation = function(){};
+},{passive:true});
+});
+});
+
+/* remove accidental touch-action:none */
+document.querySelectorAll('*').forEach(el=>{
+const style = window.getComputedStyle(el);
+if(style.touchAction === 'none'){
+el.style.touchAction = 'pan-y pinch-zoom';
+}
+});
+
+})();
+</script>
+
 </head><body><main class="quote-wall"><div class="quote-head"><a class="quote-brand" href="index.html" aria-label="Open CGBC media player"><img src="https://tithely-media-prod.s3.us-west-1.wasabisys.com/1235337/Desktop-White-2-2.png" alt="CGBC A\V Media"></a></div><div id="quoteBox" class="fade"><div class="quote-text" id="quoteText">Loading approved quotes…</div><div class="meta" id="quoteMeta"></div></div><div class="controls-row"><div class="tools">
 <button class="btn" id="prevBtn" type="button" aria-label="Previous Quote">
 <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
