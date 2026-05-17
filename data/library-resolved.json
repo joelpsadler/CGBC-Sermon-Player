@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-17T19:59:16.511Z",
+  "generatedAt": "2026-05-17T20:51:25.693Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 106,
+    "videoMatchedItems": 109,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -14261,8 +14261,8 @@
           "wide": "https://i.ytimg.com/vi/myNo8XDF0JM/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-21_at_81239an5vg.jpg",
-          "wide": "https://i.ytimg.com/vi/-GUlgpS4y2A/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
+          "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -14407,8 +14407,8 @@
           "wide": "https://i.ytimg.com/vi/XtklIBRrwxU/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-21_at_81239an5vg.jpg",
-          "wide": "https://i.ytimg.com/vi/-GUlgpS4y2A/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
+          "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -14549,8 +14549,8 @@
           "wide": "https://i.ytimg.com/vi/w5VnSageSio/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-21_at_81239an5vg.jpg",
-          "wide": "https://i.ytimg.com/vi/-GUlgpS4y2A/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
+          "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -14932,8 +14932,8 @@
           "wide": "https://i.ytimg.com/vi/ZBT024ZRx3Y/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-21_at_81239an5vg.jpg",
-          "wide": "https://i.ytimg.com/vi/-GUlgpS4y2A/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
+          "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -15228,8 +15228,8 @@
           "wide": "https://i.ytimg.com/vi/-GUlgpS4y2A/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-21_at_81239an5vg.jpg",
-          "wide": "https://i.ytimg.com/vi/-GUlgpS4y2A/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
+          "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
@@ -15279,18 +15279,18 @@
         "display": "How Are You Known? Pt. 3"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 1",
+        "key": "romans-chapter-1",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 1:8-16, C",
-        "display": "Romans 1:8-16, C",
+        "raw": "Romans 1:8-16",
+        "display": "Romans 1:8-16",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -15328,10 +15328,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 04/07/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 07 Apr 2024 10:00:00 -0600",
+        "raw": "04/07/2024",
         "iso": "2024-04-07",
         "year": 2024,
         "month": 4,
@@ -15358,18 +15363,18 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "0UGPP8KnN7c",
+        "url": "https://www.youtube.com/watch?v=0UGPP8KnN7c",
+        "views": 16
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_942417btrf.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/0UGPP8KnN7c/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
           "wide": null
         },
         "study": {
@@ -15379,7 +15384,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-1"
         ],
         "studies": [
           "romans"
@@ -15396,12 +15401,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -15422,7 +15427,7 @@
       "series": {
         "name": "2024 Specials",
         "key": "2024-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -15457,10 +15462,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 03/31/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 31 Mar 2024 10:00:00 -0600",
+        "raw": "03/31/2024",
         "iso": "2024-03-31",
         "year": 2024,
         "month": 3,
@@ -15487,15 +15497,15 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "5DVCY7gKQL4",
+        "url": "https://www.youtube.com/watch?v=5DVCY7gKQL4",
+        "views": 9
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-10_at_9264099c5u.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/5DVCY7gKQL4/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-01-15_at_10201bi38m.jpg",
@@ -15526,9 +15536,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -15547,18 +15557,18 @@
         "display": "How Are You Known? Pt.2"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 1",
+        "key": "romans-chapter-1",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 1:8-16, B",
-        "display": "Romans 1:8-16, B",
+        "raw": "Romans 1:8-16",
+        "display": "Romans 1:8-16",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -15596,10 +15606,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 03/24/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 24 Mar 2024 10:00:00 -0600",
+        "raw": "03/24/2024",
         "iso": "2024-03-24",
         "year": 2024,
         "month": 3,
@@ -15626,18 +15641,18 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "xv8p3SYMovU",
+        "url": "https://www.youtube.com/watch?v=xv8p3SYMovU",
+        "views": 16
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9422068lxx.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/xv8p3SYMovU/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
           "wide": null
         },
         "study": {
@@ -15647,7 +15662,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-1"
         ],
         "studies": [
           "romans"
@@ -15664,12 +15679,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -15688,18 +15703,18 @@
         "display": "How Are You Known? Pt.1"
       },
       "series": {
-        "name": "The Book of Romans",
-        "key": "the-book-of-romans",
-        "type": "standalone"
+        "name": "Romans Chapter 1",
+        "key": "romans-chapter-1",
+        "type": "expositional"
       },
       "study": {
         "name": "Romans",
         "key": "romans",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 1:8-16, A",
-        "display": "Romans 1:8-16, A",
+        "raw": "Romans 1:8-16",
+        "display": "Romans 1:8-16",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -15737,10 +15752,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 03/10/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 10 Mar 2024 10:00:00 -0600",
+        "raw": "03/10/2024",
         "iso": "2024-03-10",
         "year": 2024,
         "month": 3,
@@ -15778,7 +15798,7 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/A_Art.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-04-07_at_9415961jgr.jpg",
           "wide": null
         },
         "study": {
@@ -15788,7 +15808,7 @@
       },
       "memberships": {
         "series": [
-          "the-book-of-romans"
+          "romans-chapter-1"
         ],
         "studies": [
           "romans"
@@ -15805,10 +15825,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
