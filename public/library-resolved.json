@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-17T22:42:11.732Z",
+  "generatedAt": "2026-05-17T23:45:49.229Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 115,
+    "videoMatchedItems": 116,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -1848,7 +1848,7 @@
         "hasVideo": true,
         "youtubeId": "dB0_XJEUsg4",
         "url": "https://www.youtube.com/watch?v=dB0_XJEUsg4",
-        "views": 60
+        "views": 61
       },
       "art": {
         "episode": {
@@ -16344,7 +16344,7 @@
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/MP3_Artamkhg.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/bY6aHSiy_co/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -16459,7 +16459,7 @@
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/MP3_Artamkhg.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/bY6aHSiy_co/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -16500,14 +16500,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/do-not-let-your-past-sins-control-you/"
       },
       "title": {
-        "episodeName": "Do Not Let Your Past Sins Control You",
-        "subtitle": "",
-        "display": "Do Not Let Your Past Sins Control You"
+        "episodeName": "Pt. 1",
+        "subtitle": "Do Not Allow Past Sin to Control Today",
+        "display": "Pt. 1 (Do Not Allow Past Sin to Control Today)"
       },
       "series": {
         "name": "Expect Victory",
         "key": "expect-victory",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -16515,11 +16515,11 @@
         "type": "none"
       },
       "scripture": {
-        "raw": "Selected Scriptures",
+        "raw": "Various",
         "display": "Selected Scriptures",
         "book": null,
         "bookKey": null,
-        "isVarious": false
+        "isVarious": true
       },
       "references": {
         "raw": "",
@@ -16533,9 +16533,9 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 01/28/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 28 Jan 2024 09:00:00 -0700",
+        "raw": "01/28/2024",
         "iso": "2024-01-28",
         "year": 2024,
         "month": 1,
@@ -16562,19 +16562,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "bY6aHSiy_co",
+        "url": "https://www.youtube.com/watch?v=bY6aHSiy_co",
+        "views": 16
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/MP3_Artamkhg.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/bY6aHSiy_co/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/MP3_Artamkhg.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/bY6aHSiy_co/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -16599,9 +16599,9 @@
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
