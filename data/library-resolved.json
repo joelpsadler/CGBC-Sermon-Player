@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-05-17T21:43:54.946Z",
+  "generatedAt": "2026-05-17T22:42:11.732Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 114,
+    "videoMatchedItems": 115,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
   "totals": {
-    "audioPlaysTotal": 4404,
+    "audioPlaysTotal": 4405,
     "audioEpisodesTotal": 140
   },
   "current": {
@@ -3339,7 +3339,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8bu8yypw2pqmuais/03_Romans_11_16-18_How_Unsearchable_Pt_39xc2y.mp3",
-        "plays": 23,
+        "plays": 24,
         "durationSeconds": 2369,
         "statsMatchStrategy": "media_url"
       },
@@ -16385,14 +16385,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/have-a-mind-to-work/"
       },
       "title": {
-        "episodeName": "Part 2 - Have A Mind to Work",
-        "subtitle": "",
-        "display": "Part 2 - Have A Mind to Work"
+        "episodeName": "Pt. 2",
+        "subtitle": "Have A Mind to Work",
+        "display": "Pt. 2 (Have A Mind to Work)"
       },
       "series": {
         "name": "Expect Victory",
         "key": "expect-victory",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -16400,11 +16400,11 @@
         "type": "none"
       },
       "scripture": {
-        "raw": "Selected Scriptures",
+        "raw": "Various",
         "display": "Selected Scriptures",
         "book": null,
         "bookKey": null,
-        "isVarious": false
+        "isVarious": true
       },
       "references": {
         "raw": "",
@@ -16418,9 +16418,9 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 02/04/24 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 04 Feb 2024 09:00:00 -0700",
+        "raw": "02/04/2024",
         "iso": "2024-02-04",
         "year": 2024,
         "month": 2,
@@ -16447,15 +16447,15 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "Q7nxC3cbYzk",
+        "url": "https://www.youtube.com/watch?v=Q7nxC3cbYzk",
+        "views": 15
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/MP3_Art_26jkai.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/Q7nxC3cbYzk/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/MP3_Artamkhg.jpg",
@@ -16484,9 +16484,9 @@
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
