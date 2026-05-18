@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-18T17:23:56.963Z",
+  "generatedAt": "2026-05-18T19:22:33.858Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 121,
+    "videoMatchedItems": 125,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -804,7 +804,7 @@
         "hasVideo": true,
         "youtubeId": "QYhdu-bGyi8",
         "url": "https://www.youtube.com/watch?v=QYhdu-bGyi8",
-        "views": 20
+        "views": 21
       },
       "art": {
         "episode": {
@@ -1675,7 +1675,7 @@
         "hasVideo": true,
         "youtubeId": "T-cd2mlwDSk",
         "url": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "views": 269
+        "views": 270
       },
       "art": {
         "episode": {
@@ -1989,7 +1989,7 @@
         "hasVideo": true,
         "youtubeId": "Vs6W99ieh-k",
         "url": "https://www.youtube.com/watch?v=Vs6W99ieh-k",
-        "views": 35
+        "views": 36
       },
       "art": {
         "episode": {
@@ -2666,7 +2666,7 @@
         "hasVideo": true,
         "youtubeId": "M9RQAT9yc2Q",
         "url": "https://www.youtube.com/watch?v=M9RQAT9yc2Q",
-        "views": 1026
+        "views": 1027
       },
       "art": {
         "episode": {
@@ -17107,8 +17107,8 @@
           "wide": "https://i.ytimg.com/vi/2HrUsgUnjMA/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_121107x3l6.jpg",
-          "wide": "https://i.ytimg.com/vi/2HrUsgUnjMA/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-21_at_805067gbla.jpg",
+          "wide": "https://i.ytimg.com/vi/l9H3GxvTN2E/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17249,8 +17249,8 @@
           "wide": "https://i.ytimg.com/vi/wCgF2JoSLhA/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_121107x3l6.jpg",
-          "wide": "https://i.ytimg.com/vi/2HrUsgUnjMA/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-21_at_805067gbla.jpg",
+          "wide": "https://i.ytimg.com/vi/l9H3GxvTN2E/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17293,14 +17293,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/god-s-christmas-list-steadfastness/"
       },
       "title": {
-        "episodeName": "God's Christmas List - Steadfastness",
-        "subtitle": "",
-        "display": "God's Christmas List - Steadfastness"
+        "episodeName": "Pt. 1",
+        "subtitle": "Steadfastness",
+        "display": "Pt. 1 (Steadfastness)"
       },
       "series": {
-        "name": "Sunday Night Specials",
-        "key": "sunday-night-specials",
-        "type": "standalone"
+        "name": "God's Christmas List",
+        "key": "god-s-christmas-list",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17329,10 +17329,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom 12/17/23 Sunday Night Service Cedar Grove Baptist Church, Lebanon TN",
+      "bookTags": [
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 17 Dec 2023 16:00:00 -0700",
+        "raw": "12/17/2023",
         "iso": "2023-12-17",
         "year": 2023,
         "month": 12,
@@ -17359,19 +17364,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "l9H3GxvTN2E",
+        "url": "https://www.youtube.com/watch?v=l9H3GxvTN2E",
+        "views": 8
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-21_at_805067gbla.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/l9H3GxvTN2E/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-21_at_805067gbla.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/l9H3GxvTN2E/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17380,7 +17385,7 @@
       },
       "memberships": {
         "series": [
-          "sunday-night-specials"
+          "god-s-christmas-list"
         ],
         "studies": [],
         "bibleBooks": [
@@ -17398,9 +17403,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -17414,14 +17419,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/god-honoring-health/"
       },
       "title": {
-        "episodeName": "God Honoring Health",
-        "subtitle": "",
-        "display": "God Honoring Health"
+        "episodeName": "Health",
+        "subtitle": "God Honoring Health",
+        "display": "Health (God Honoring Health)"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17450,10 +17455,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 12/17/23 @ Cedar Grove Baptist Church in Lebanon, TN",
+      "bookTags": [
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 17 Dec 2023 09:00:00 -0700",
+        "raw": "12/17/2023",
         "iso": "2023-12-17",
         "year": 2023,
         "month": 12,
@@ -17480,19 +17490,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "NbWFH7xOIhs",
+        "url": "https://www.youtube.com/watch?v=NbWFH7xOIhs",
+        "views": 18
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-18_at_1271561tas.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/NbWFH7xOIhs/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-13_at_95348790zp.jpg",
+          "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17501,7 +17511,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -17519,9 +17529,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -17535,14 +17545,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/small-adjustments-make-big-changes/"
       },
       "title": {
-        "episodeName": "Small Adjustments Make Big Change",
-        "subtitle": "",
-        "display": "Small Adjustments Make Big Change"
+        "episodeName": "Finances",
+        "subtitle": "Small Adjustments Make Big Change",
+        "display": "Finances (Small Adjustments Make Big Change)"
       },
       "series": {
-        "name": "Picking Up the Pieces in Your Family (Finances)",
-        "key": "picking-up-the-pieces-in-your-family-finances",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17568,9 +17578,9 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 12/10/23 @ Cedar Grove Baptist Church in Lebanon, TN",
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 10 Dec 2023 09:00:00 -0700",
+        "raw": "12/10/2023",
         "iso": "2023-12-10",
         "year": 2023,
         "month": 12,
@@ -17597,19 +17607,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "Me8yeXaV-ss",
+        "url": "https://www.youtube.com/watch?v=Me8yeXaV-ss",
+        "views": 26
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-13_at_95348790zp.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-13_at_95348790zp.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17618,7 +17628,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces-in-your-family-finances"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [],
@@ -17634,9 +17644,9 @@
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -17655,9 +17665,9 @@
         "display": "Stand Up In the Battle (2023 Edition)"
       },
       "series": {
-        "name": "Specials",
-        "key": "specials",
-        "type": "standalone"
+        "name": "2023 Specials",
+        "key": "2023-specials",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17708,10 +17718,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 11/26/23 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Love. Learn. Live. Lead",
+      "bookTags": [
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 26 Nov 2023 09:00:00 -0700",
+        "raw": "11/26/2023",
         "iso": "2023-11-26",
         "year": 2023,
         "month": 11,
@@ -17738,18 +17753,18 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "iFEYW8DJ9fY",
+        "url": "https://www.youtube.com/watch?v=iFEYW8DJ9fY",
+        "views": 21
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-06_at_950319d5pj.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/iFEYW8DJ9fY/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-06_at_950319d5pj.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
           "wide": null
         },
         "study": {
@@ -17759,7 +17774,7 @@
       },
       "memberships": {
         "series": [
-          "specials"
+          "2023-specials"
         ],
         "studies": [],
         "bibleBooks": [
@@ -17777,9 +17792,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
