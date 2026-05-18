@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-18T21:01:19.043Z",
+  "generatedAt": "2026-05-18T21:44:37.757Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 126,
+    "videoMatchedItems": 132,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -16966,7 +16966,7 @@
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/u--NYmT03XE/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17501,8 +17501,8 @@
           "wide": "https://i.ytimg.com/vi/NbWFH7xOIhs/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
-          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17618,8 +17618,8 @@
           "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
-          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17765,7 +17765,7 @@
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/u--NYmT03XE/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17881,8 +17881,8 @@
           "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
-          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17923,13 +17923,13 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/in-your-family-part-2-family-problems/"
       },
       "title": {
-        "episodeName": "In Your Family Pt. 2",
+        "episodeName": "Pt. 2",
         "subtitle": "Family Problems",
-        "display": "In Your Family Pt. 2 (Family Problems)"
+        "display": "Pt. 2 (Family Problems)"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
         "type": "topical"
       },
       "study": {
@@ -17967,7 +17967,7 @@
       ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "11/12/23",
+        "raw": "11/12/2023",
         "iso": "2023-11-12",
         "year": 2023,
         "month": 11,
@@ -18006,7 +18006,7 @@
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18015,7 +18015,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -18049,14 +18049,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/in-your-family-family-problems/"
       },
       "title": {
-        "episodeName": "In Your Family",
+        "episodeName": "Pt. 1",
         "subtitle": "Family Problems",
-        "display": "In Your Family (Family Problems)"
+        "display": "Pt. 1 (Family Problems)"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -18085,10 +18085,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 11/05/23 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "2 Samuel",
+          "key": "2-samuel"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 05 Nov 2023 09:00:00 -0700",
+        "raw": "11/05/2023",
         "iso": "2023-11-05",
         "year": 2023,
         "month": 11,
@@ -18115,19 +18120,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "zizpEeAr6k0",
+        "url": "https://www.youtube.com/watch?v=zizpEeAr6k0",
+        "views": 24
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-17_at_51343alfw3.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/zizpEeAr6k0/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18136,7 +18141,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -18154,9 +18159,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -18177,7 +18182,7 @@
       "series": {
         "name": "2023 Specials",
         "key": "2023-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -18203,9 +18208,9 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 10/29/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 29 Oct 2023 10:00:00 -0600",
+        "raw": "10/29/2023",
         "iso": "2023-10-29",
         "year": 2023,
         "month": 10,
@@ -18232,19 +18237,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "u--NYmT03XE",
+        "url": "https://www.youtube.com/watch?v=u--NYmT03XE",
+        "views": 39
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/u--NYmT03XE/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/u--NYmT03XE/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18269,9 +18274,9 @@
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -18285,14 +18290,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/20231022/"
       },
       "title": {
-        "episodeName": "04 | Healing a Broken Marriage Part 2",
-        "subtitle": "",
-        "display": "04 | Healing a Broken Marriage Part 2"
+        "episodeName": "Pt. 2",
+        "subtitle": "Healing a Broken Marriage",
+        "display": "Pt. 2 (Healing a Broken Marriage)"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -18335,10 +18340,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 10/22/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "1 Peter",
+          "key": "1-peter"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 22 Oct 2023 10:00:00 -0600",
+        "raw": "10/22/2023",
         "iso": "2023-10-22",
         "year": 2023,
         "month": 10,
@@ -18365,19 +18375,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "WFlplA2y3t8",
+        "url": "https://www.youtube.com/watch?v=WFlplA2y3t8",
+        "views": 18
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-10-30_at_94255b83xk.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/WFlplA2y3t8/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18386,7 +18396,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -18404,9 +18414,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -18420,14 +18430,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/20231008/"
       },
       "title": {
-        "episodeName": "03 | Healing a Broken Marriage Part 1",
-        "subtitle": "",
-        "display": "03 | Healing a Broken Marriage Part 1"
+        "episodeName": "Pt. 1",
+        "subtitle": "Healing a Broken Marriage",
+        "display": "Pt. 1 (Healing a Broken Marriage)"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -18470,10 +18480,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 10/08/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "1 Peter",
+          "key": "1-peter"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 08 Oct 2023 10:00:00 -0600",
+        "raw": "10/08/2023",
         "iso": "2023-10-08",
         "year": 2023,
         "month": 10,
@@ -18500,19 +18515,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "_0ivSilfhAA",
+        "url": "https://www.youtube.com/watch?v=_0ivSilfhAA",
+        "views": 59
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Art9929x.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/_0ivSilfhAA/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18521,7 +18536,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -18539,9 +18554,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -18555,13 +18570,13 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/maintaining-integrity/"
       },
       "title": {
-        "episodeName": "02 | Maintaining Integrity",
+        "episodeName": "Maintaining Integrity",
         "subtitle": "",
-        "display": "02 | Maintaining Integrity"
+        "display": "Maintaining Integrity"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
         "type": "standalone"
       },
       "study": {
@@ -18601,10 +18616,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 10/01/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "1 Peter",
+          "key": "1-peter"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 01 Oct 2023 10:00:00 -0600",
+        "raw": "10/01/2023",
         "iso": "2023-10-01",
         "year": 2023,
         "month": 10,
@@ -18631,19 +18651,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "rWCIS4dN-6o",
+        "url": "https://www.youtube.com/watch?v=rWCIS4dN-6o",
+        "views": 51
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_ART6kjwi.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/rWCIS4dN-6o/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18652,7 +18672,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -18672,7 +18692,7 @@
       "flags": {
         "isStandaloneEpisode": true,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -18686,14 +18706,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/setting-the-table/"
       },
       "title": {
-        "episodeName": "01 | Setting the Table",
+        "episodeName": "Setting the Table",
         "subtitle": "",
-        "display": "01 | Setting the Table"
+        "display": "Setting the Table"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -18746,10 +18766,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 09/24/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "James",
+          "key": "james"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 24 Sep 2023 10:00:00 -0600",
+        "raw": "09/24/2023",
         "iso": "2023-09-24",
         "year": 2023,
         "month": 9,
@@ -18776,19 +18801,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "frgE9NUPAdw",
+        "url": "https://www.youtube.com/watch?v=frgE9NUPAdw",
+        "views": 25
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/frgE9NUPAdw/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -18797,7 +18822,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [
@@ -18815,9 +18840,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
