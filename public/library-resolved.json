@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-18T19:22:33.858Z",
+  "generatedAt": "2026-05-18T21:01:19.043Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 125,
+    "videoMatchedItems": 126,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -3073,7 +3073,7 @@
         "hasVideo": true,
         "youtubeId": "v4DtMae4Igo",
         "url": "https://www.youtube.com/watch?v=v4DtMae4Igo",
-        "views": 23
+        "views": 24
       },
       "art": {
         "episode": {
@@ -3213,7 +3213,7 @@
         "hasVideo": true,
         "youtubeId": "yVd_r3p7BQU",
         "url": "https://www.youtube.com/watch?v=yVd_r3p7BQU",
-        "views": 59
+        "views": 60
       },
       "art": {
         "episode": {
@@ -17501,8 +17501,8 @@
           "wide": "https://i.ytimg.com/vi/NbWFH7xOIhs/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-13_at_95348790zp.jpg",
-          "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
+          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17618,8 +17618,8 @@
           "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-13_at_95348790zp.jpg",
-          "wide": "https://i.ytimg.com/vi/Me8yeXaV-ss/maxresdefault.jpg"
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
+          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17808,14 +17808,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/in-your-family-part-3-family-problems/"
       },
       "title": {
-        "episodeName": "In Your Family Part 3",
+        "episodeName": "Pt. 3",
         "subtitle": "Family Problems",
-        "display": "In Your Family Part 3 (Family Problems)"
+        "display": "Pt. 3 (Family Problems)"
       },
       "series": {
-        "name": "Picking Up the Pieces",
-        "key": "picking-up-the-pieces",
-        "type": "standalone"
+        "name": "Picking Up the Pieces In Your Family",
+        "key": "picking-up-the-pieces-in-your-family",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17841,9 +17841,9 @@
       },
       "collections": [],
       "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 11/19/23 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN Love. Learn. Live. Lead.",
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 19 Nov 2023 09:00:00 -0700",
+        "raw": "11/19/2023",
         "iso": "2023-11-19",
         "year": 2023,
         "month": 11,
@@ -17870,19 +17870,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "1JYdnVhHRtQ",
+        "url": "https://www.youtube.com/watch?v=1JYdnVhHRtQ",
+        "views": 39
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Album_Arta23j2.png",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-11-27_at_10334b74dy.jpg",
+          "wide": "https://i.ytimg.com/vi/1JYdnVhHRtQ/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17891,7 +17891,7 @@
       },
       "memberships": {
         "series": [
-          "picking-up-the-pieces"
+          "picking-up-the-pieces-in-your-family"
         ],
         "studies": [],
         "bibleBooks": [],
@@ -17907,9 +17907,9 @@
         "bibleBooksMode": "none"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
