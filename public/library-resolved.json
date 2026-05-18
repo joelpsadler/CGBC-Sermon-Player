@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-18T22:02:34.517Z",
+  "generatedAt": "2026-05-18T22:03:56.393Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 141,
     "archiveItems": 141,
     "videoMatchedItems": 133,
-    "transcriptMatchedItems": 6,
-    "quoteCandidateCount": 455
+    "transcriptMatchedItems": 7,
+    "quoteCandidateCount": 530
   },
   "totals": {
     "audioPlaysTotal": 4411,
@@ -177,7 +177,7 @@
           "Daniel 2:44",
           "Daniel 2:45"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -200,16 +200,27 @@
         "day": 13
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-05-13.srt",
+            "cleanFile": "transcripts_clean/en/2026-05-13_the-antichrist-pt-3.srt",
+            "displayFile": "transcripts_display/en/2026-05-13_the-antichrist-pt-3.srt",
+            "jsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.json",
+            "displayJsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.display.json",
+            "segmentCount": 535,
+            "displaySegmentCount": 440
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-05-13.srt",
+        "cleanFile": "transcripts_clean/en/2026-05-13_the-antichrist-pt-3.srt",
+        "displayFile": "transcripts_display/en/2026-05-13_the-antichrist-pt-3.srt",
+        "jsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.json",
+        "displayJsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.display.json",
+        "segmentCount": 535,
+        "displaySegmentCount": 440
       },
       "audio": {
         "hasAudio": true,
