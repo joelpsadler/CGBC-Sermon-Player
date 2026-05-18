@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-18T14:25:02.488Z",
+  "generatedAt": "2026-05-18T17:23:56.963Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 140,
     "archiveItems": 140,
-    "videoMatchedItems": 118,
+    "videoMatchedItems": 121,
     "transcriptMatchedItems": 6,
     "quoteCandidateCount": 455
   },
@@ -483,7 +483,7 @@
         "hasVideo": true,
         "youtubeId": "8ACPLxQPzYo",
         "url": "https://www.youtube.com/watch?v=8ACPLxQPzYo",
-        "views": 16
+        "views": 17
       },
       "art": {
         "episode": {
@@ -1163,7 +1163,7 @@
         "hasVideo": true,
         "youtubeId": "on7PfLd0Tcc",
         "url": "https://www.youtube.com/watch?v=on7PfLd0Tcc",
-        "views": 26
+        "views": 27
       },
       "art": {
         "episode": {
@@ -16852,7 +16852,7 @@
       "series": {
         "name": "2023 Specials",
         "key": "2023-specials",
-        "type": "standalone"
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -16919,10 +16919,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 12/31/23 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 31 Dec 2023 09:00:00 -0700",
+        "raw": "12/31/2023",
         "iso": "2023-12-31",
         "year": 2023,
         "month": 12,
@@ -16949,15 +16954,15 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "Cxk7_MCV5Y4",
+        "url": "https://www.youtube.com/watch?v=Cxk7_MCV5Y4",
+        "views": 23
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-01-01_at_51947ahvx0.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/Cxk7_MCV5Y4/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
@@ -16988,9 +16993,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -17004,14 +17009,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/why-christmas-came/"
       },
       "title": {
-        "episodeName": "Why Christmas Came",
-        "subtitle": "",
-        "display": "Why Christmas Came"
+        "episodeName": "Pt. 3",
+        "subtitle": "Why Christmas Came",
+        "display": "Pt. 3 (Why Christmas Came)"
       },
       "series": {
-        "name": "2023 Specials",
-        "key": "2023-specials",
-        "type": "standalone"
+        "name": "God's Christmas List",
+        "key": "god-s-christmas-list",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17056,10 +17061,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom 12/24/23 Sunday Night at Cedar Gove Baptist Church CGBC | Lebanon, TN - Love. Learn. Live. Lead",
+      "bookTags": [
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 24 Dec 2023 16:30:00 -0700",
+        "raw": "12/24/2023",
         "iso": "2023-12-24",
         "year": 2023,
         "month": 12,
@@ -17086,19 +17096,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "2HrUsgUnjMA",
+        "url": "https://www.youtube.com/watch?v=2HrUsgUnjMA",
+        "views": 11
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_121107x3l6.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/2HrUsgUnjMA/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/mp3_ART90kl3.png",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_121107x3l6.jpg",
+          "wide": "https://i.ytimg.com/vi/2HrUsgUnjMA/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17107,7 +17117,7 @@
       },
       "memberships": {
         "series": [
-          "2023-specials"
+          "god-s-christmas-list"
         ],
         "studies": [],
         "bibleBooks": [
@@ -17125,9 +17135,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -17141,14 +17151,14 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/what-he-desires-and-why-we-give-it/"
       },
       "title": {
-        "episodeName": "What He Desires and Why We Give it",
-        "subtitle": "",
-        "display": "What He Desires and Why We Give it"
+        "episodeName": "Pt. 2",
+        "subtitle": "What He Desires and Why We Give It",
+        "display": "Pt. 2 (What He Desires and Why We Give It)"
       },
       "series": {
-        "name": "2023 Specials - God's Christmas List",
-        "key": "2023-specials-god-s-christmas-list",
-        "type": "standalone"
+        "name": "God's Christmas List",
+        "key": "god-s-christmas-list",
+        "type": "topical"
       },
       "study": {
         "name": "",
@@ -17193,10 +17203,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 12/24/23 @ Cedar Grove Baptist Church in Lebanon, TN CGBC | Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Luke",
+          "key": "luke"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 24 Dec 2023 09:00:00 -0700",
+        "raw": "12/24/2023",
         "iso": "2023-12-24",
         "year": 2023,
         "month": 12,
@@ -17223,19 +17238,19 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
-        "views": 0
+        "hasVideo": true,
+        "youtubeId": "wCgF2JoSLhA",
+        "url": "https://www.youtube.com/watch?v=wCgF2JoSLhA",
+        "views": 11
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_115738r231.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/wCgF2JoSLhA/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_115738r231.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-27_at_121107x3l6.jpg",
+          "wide": "https://i.ytimg.com/vi/2HrUsgUnjMA/maxresdefault.jpg"
         },
         "study": {
           "square": null,
@@ -17244,7 +17259,7 @@
       },
       "memberships": {
         "series": [
-          "2023-specials-god-s-christmas-list"
+          "god-s-christmas-list"
         ],
         "studies": [],
         "bibleBooks": [
@@ -17262,9 +17277,9 @@
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
