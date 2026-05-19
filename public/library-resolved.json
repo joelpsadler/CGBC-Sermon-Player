@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T02:12:02.557Z",
+  "generatedAt": "2026-05-19T06:38:26.881Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 142,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 604
   },
   "totals": {
-    "audioPlaysTotal": 4421,
+    "audioPlaysTotal": 4424,
     "audioEpisodesTotal": 142
   },
   "current": {
@@ -43,7 +43,7 @@
         "studyName": "Eschatology",
         "detectedFromEpisode": "media-xdygcx",
         "detectedFromDate": "2026-05-13",
-        "detectedFromTitle": "The Antichrist Pt. 3",
+        "detectedFromTitle": "The Tribulation Pt. 3 (The Antichrist Pt. 3)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -356,7 +356,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/kttiyx6gpxw83jw7/051726_S_PCaj011.mp3",
-        "plays": 1,
+        "plays": 3,
         "durationSeconds": 2400,
         "statsMatchStrategy": "media_url"
       },
@@ -364,7 +364,7 @@
         "hasVideo": true,
         "youtubeId": "bhj8jUW5QdU",
         "url": "https://www.youtube.com/watch?v=bhj8jUW5QdU",
-        "views": 0
+        "views": 2
       },
       "art": {
         "episode": {
@@ -424,9 +424,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdf-1779101402/"
       },
       "title": {
-        "episodeName": "The Antichrist Pt. 3",
-        "subtitle": "",
-        "display": "The Antichrist Pt. 3"
+        "episodeName": "The Tribulation Pt. 3",
+        "subtitle": "The Antichrist Pt. 3",
+        "display": "The Tribulation Pt. 3 (The Antichrist Pt. 3)"
       },
       "series": {
         "name": "The Tribulation",
@@ -557,19 +557,19 @@
           "en": {
             "language": "en",
             "incomingFile": "transcripts_incoming/2026-05-13.srt",
-            "cleanFile": "transcripts_clean/en/2026-05-13_the-antichrist-pt-3.srt",
-            "displayFile": "transcripts_display/en/2026-05-13_the-antichrist-pt-3.srt",
-            "jsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.json",
-            "displayJsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.display.json",
+            "cleanFile": "transcripts_clean/en/2026-05-13_the-tribulation-pt-3.srt",
+            "displayFile": "transcripts_display/en/2026-05-13_the-tribulation-pt-3.srt",
+            "jsonFile": "data/transcripts/en/2026-05-13_the-tribulation-pt-3.json",
+            "displayJsonFile": "data/transcripts/en/2026-05-13_the-tribulation-pt-3.display.json",
             "segmentCount": 535,
             "displaySegmentCount": 440
           }
         },
         "incomingFile": "transcripts_incoming/2026-05-13.srt",
-        "cleanFile": "transcripts_clean/en/2026-05-13_the-antichrist-pt-3.srt",
-        "displayFile": "transcripts_display/en/2026-05-13_the-antichrist-pt-3.srt",
-        "jsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.json",
-        "displayJsonFile": "data/transcripts/en/2026-05-13_the-antichrist-pt-3.display.json",
+        "cleanFile": "transcripts_clean/en/2026-05-13_the-tribulation-pt-3.srt",
+        "displayFile": "transcripts_display/en/2026-05-13_the-tribulation-pt-3.srt",
+        "jsonFile": "data/transcripts/en/2026-05-13_the-tribulation-pt-3.json",
+        "displayJsonFile": "data/transcripts/en/2026-05-13_the-tribulation-pt-3.display.json",
         "segmentCount": 535,
         "displaySegmentCount": 440
       },
@@ -584,7 +584,7 @@
         "hasVideo": true,
         "youtubeId": "GBq_TV1szuw",
         "url": "https://www.youtube.com/watch?v=GBq_TV1szuw",
-        "views": 1
+        "views": 3
       },
       "art": {
         "episode": {
@@ -2241,7 +2241,7 @@
         "hasVideo": true,
         "youtubeId": "T-cd2mlwDSk",
         "url": "https://www.youtube.com/watch?v=T-cd2mlwDSk",
-        "views": 270
+        "views": 271
       },
       "art": {
         "episode": {
@@ -4868,7 +4868,7 @@
         "hasVideo": true,
         "youtubeId": "vUupnSTNsrg",
         "url": "https://www.youtube.com/watch?v=vUupnSTNsrg",
-        "views": 41
+        "views": 44
       },
       "art": {
         "episode": {
@@ -5588,7 +5588,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rs8nzz7gt33yxy8r/1123_Save_for_Dupe_12086jyp4.mp3",
-        "plays": 22,
+        "plays": 23,
         "durationSeconds": 2110,
         "statsMatchStrategy": "media_url"
       },
