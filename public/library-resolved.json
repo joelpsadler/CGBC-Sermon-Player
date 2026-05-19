@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T13:48:13.837Z",
+  "generatedAt": "2026-05-19T14:43:07.074Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 141,
@@ -20063,8 +20063,8 @@
           "wide": null
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-31_at_122737h8c5.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
+          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
         }
       },
       "memberships": {
@@ -20190,8 +20190,8 @@
           "wide": null
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-31_at_122737h8c5.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
+          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
         }
       },
       "memberships": {
@@ -20232,19 +20232,19 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/jonah-the-prophet/"
       },
       "title": {
-        "episodeName": "Jonah the Prophet",
+        "episodeName": "The Dangers of Saying No to God",
         "subtitle": "",
-        "display": "Jonah the Prophet"
+        "display": "The Dangers of Saying No to God"
       },
       "series": {
-        "name": "Jonah: The Dangers of Saying No to God",
-        "key": "jonah-the-dangers-of-saying-no-to-god",
-        "type": "topical"
+        "name": "Jonah",
+        "key": "jonah",
+        "type": "standalone"
       },
       "study": {
         "name": "Jonah",
         "key": "jonah",
-        "type": "topical_study"
+        "type": "none"
       },
       "scripture": {
         "raw": "Jonah 1:1-2",
@@ -20272,15 +20272,20 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sunday 08/06/23 CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
-        "iso": null,
-        "year": null,
-        "month": null,
-        "monthName": null,
-        "day": null
+        "raw": "08/06/2023",
+        "iso": "2023-08-06",
+        "year": 2023,
+        "month": 8,
+        "monthName": "August",
+        "day": 6
       },
       "transcript": {
         "hasTranscript": false,
@@ -20313,17 +20318,17 @@
           "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-31_at_122737h8c5.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
+          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-31_at_122737h8c5.jpg",
-          "wide": null
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
+          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
         }
       },
       "memberships": {
         "series": [
-          "jonah-the-dangers-of-saying-no-to-god"
+          "jonah"
         ],
         "studies": [
           "jonah"
@@ -20332,14 +20337,18 @@
           "jonah"
         ],
         "collections": [],
-        "byYear": [],
-        "byMonth": []
+        "byYear": [
+          "2023"
+        ],
+        "byMonth": [
+          "2023-08"
+        ]
       },
       "presentation": {
         "bibleBooksMode": "episode_only"
       },
       "flags": {
-        "isStandaloneEpisode": false,
+        "isStandaloneEpisode": true,
         "includeInAudioTotals": true,
         "includeInVideoTotals": true
       }
