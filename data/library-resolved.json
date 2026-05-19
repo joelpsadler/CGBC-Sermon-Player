@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-05-19T14:43:07.074Z",
+  "generatedAt": "2026-05-19T16:23:57.968Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 141,
     "archiveItems": 141,
-    "videoMatchedItems": 134,
+    "videoMatchedItems": 133,
     "transcriptMatchedItems": 8,
     "quoteCandidateCount": 604
   },
   "totals": {
-    "audioPlaysTotal": 4424,
+    "audioPlaysTotal": 4426,
     "audioEpisodesTotal": 141
   },
   "current": {
@@ -19422,23 +19422,23 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-saying-yes-to-god/"
       },
       "title": {
-        "episodeName": "07 | The Selfish Prophet",
-        "subtitle": "",
-        "display": "07 | The Selfish Prophet"
+        "episodeName": "Pt. 7",
+        "subtitle": "The Selfish Prophet",
+        "display": "Pt. 7 (The Selfish Prophet)"
       },
       "series": {
         "name": "The Dangers of Saying NO to God",
         "key": "the-dangers-of-saying-no-to-god",
-        "type": "standalone"
+        "type": "expositional"
       },
       "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
+        "name": "Jonah",
+        "key": "jonah",
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Jonah 3:1 - 4:11",
-        "display": "Jonah 3:1 - 4:11",
+        "raw": "Jonah 3:1-4:11",
+        "display": "Jonah 3:1-4:11",
         "book": "Jonah",
         "bookKey": "jonah",
         "isVarious": false
@@ -19458,10 +19458,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 09/17/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 17 Sep 2023 10:00:00 -0600",
+        "raw": "09/17/2023",
         "iso": "2023-09-17",
         "year": 2023,
         "month": 9,
@@ -19499,11 +19504,11 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/230827_mp3_ARTa3370.png",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         },
         "study": {
-          "square": null,
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         }
       },
@@ -19511,7 +19516,9 @@
         "series": [
           "the-dangers-of-saying-no-to-god"
         ],
-        "studies": [],
+        "studies": [
+          "jonah"
+        ],
         "bibleBooks": [
           "jonah"
         ],
@@ -19524,10 +19531,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
@@ -19543,19 +19550,19 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/recommissioned/"
       },
       "title": {
-        "episodeName": "Recommissioned",
-        "subtitle": "",
-        "display": "Recommissioned"
+        "episodeName": "Pt. 6",
+        "subtitle": "Recommissioned",
+        "display": "Pt. 6 (Recommissioned)"
       },
       "series": {
         "name": "The Dangers of Saying NO to God",
         "key": "the-dangers-of-saying-no-to-god",
-        "type": "standalone"
+        "type": "expositional"
       },
       "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
+        "name": "Jonah",
+        "key": "jonah",
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Jonah 3:1-10",
@@ -19599,10 +19606,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 09/10/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 10 Sep 2023 10:00:00 -0600",
+        "raw": "09/10/2023",
         "iso": "2023-09-10",
         "year": 2023,
         "month": 9,
@@ -19640,11 +19652,11 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/230827_mp3_ARTa3370.png",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         },
         "study": {
-          "square": null,
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         }
       },
@@ -19652,7 +19664,9 @@
         "series": [
           "the-dangers-of-saying-no-to-god"
         ],
-        "studies": [],
+        "studies": [
+          "jonah"
+        ],
         "bibleBooks": [
           "jonah"
         ],
@@ -19665,10 +19679,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
@@ -19684,19 +19698,19 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/signs-of-a-repentant-prophet/"
       },
       "title": {
-        "episodeName": "Signs of a Repentant Prophet",
-        "subtitle": "",
-        "display": "Signs of a Repentant Prophet"
+        "episodeName": "Pt. 5",
+        "subtitle": "Signs of a Repentant Prophet",
+        "display": "Pt. 5 (Signs of a Repentant Prophet)"
       },
       "series": {
         "name": "The Dangers of Saying NO to God",
         "key": "the-dangers-of-saying-no-to-god",
-        "type": "standalone"
+        "type": "expositional"
       },
       "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
+        "name": "Jonah",
+        "key": "jonah",
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Jonah 1:1-17",
@@ -19754,10 +19768,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 09/03/2023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 03 Sep 2023 10:00:00 -0600",
+        "raw": "09/03/2023",
         "iso": "2023-09-03",
         "year": 2023,
         "month": 9,
@@ -19795,11 +19814,11 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/230827_mp3_ARTa3370.png",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         },
         "study": {
-          "square": null,
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         }
       },
@@ -19807,7 +19826,9 @@
         "series": [
           "the-dangers-of-saying-no-to-god"
         ],
-        "studies": [],
+        "studies": [
+          "jonah"
+        ],
         "bibleBooks": [
           "jonah"
         ],
@@ -19820,10 +19841,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
@@ -19839,23 +19860,23 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/repentance/"
       },
       "title": {
-        "episodeName": "Repentance",
-        "subtitle": "",
-        "display": "Repentance"
+        "episodeName": "Pt. 4",
+        "subtitle": "Repentance",
+        "display": "Pt. 4 (Repentance)"
       },
       "series": {
         "name": "The Dangers of Saying NO to God",
         "key": "the-dangers-of-saying-no-to-god",
-        "type": "standalone"
+        "type": "expositional"
       },
       "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
+        "name": "Jonah",
+        "key": "jonah",
+        "type": "book_study"
       },
       "scripture": {
-        "raw": "Jonah Jonah 1:11-12",
-        "display": "Jonah Jonah 1:11-12",
+        "raw": "Jonah 1:11-12",
+        "display": "Jonah 1:11-12",
         "book": "Jonah",
         "bookKey": "jonah",
         "isVarious": false
@@ -19864,17 +19885,30 @@
         "raw": "",
         "display": "",
         "tokens": [],
-        "searchTokens": []
+        "searchTokens": [
+          "Jonah 1:11-12",
+          "Jonah 1:11",
+          "Jonah 1:12"
+        ]
       },
       "search": {
-        "scriptureTokens": [],
+        "scriptureTokens": [
+          "Jonah 1:11-12",
+          "Jonah 1:11",
+          "Jonah 1:12"
+        ],
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 08/272023 @ Cedar Grove Baptist Church - Lebanon, TN.",
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 27 Aug 2023 10:00:00 -0600",
+        "raw": "08/27/2023",
         "iso": "2023-08-27",
         "year": 2023,
         "month": 8,
@@ -19912,11 +19946,11 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/230827_mp3_ARTa3370.png",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         },
         "study": {
-          "square": null,
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         }
       },
@@ -19924,7 +19958,9 @@
         "series": [
           "the-dangers-of-saying-no-to-god"
         ],
-        "studies": [],
+        "studies": [
+          "jonah"
+        ],
         "bibleBooks": [
           "jonah"
         ],
@@ -19937,10 +19973,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
@@ -19956,19 +19992,19 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-indifferent-man-of-god/"
       },
       "title": {
-        "episodeName": "The Indifferent Man of God",
-        "subtitle": "",
-        "display": "The Indifferent Man of God"
+        "episodeName": "Pt. 3",
+        "subtitle": "The Indifferent Man of God",
+        "display": "Pt. 3 (The Indifferent Man of God)"
       },
       "series": {
-        "name": "Jonah - The Dangers of Saying No to God",
-        "key": "jonah-the-dangers-of-saying-no-to-god",
-        "type": "standalone"
+        "name": "The Dangers of Saying No to God",
+        "key": "the-dangers-of-saying-no-to-god",
+        "type": "expositional"
       },
       "study": {
         "name": "Jonah",
         "key": "jonah",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Jonah 1:1-13",
@@ -20018,10 +20054,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 08/20/23 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN - Love. Learn. Live. Lead.",
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 20 Aug 2023 10:00:00 -0600",
+        "raw": "08/20/2023",
         "iso": "2023-08-20",
         "year": 2023,
         "month": 8,
@@ -20043,7 +20084,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/jbgecz/The_Indifferent_Man_of_Godbllqf.mp3",
-        "plays": 64,
+        "plays": 65,
         "durationSeconds": 2960,
         "statsMatchStrategy": "media_url"
       },
@@ -20059,17 +20100,17 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-31_at_122737h8c5.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
-          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
+          "wide": null
         }
       },
       "memberships": {
         "series": [
-          "jonah-the-dangers-of-saying-no-to-god"
+          "the-dangers-of-saying-no-to-god"
         ],
         "studies": [
           "jonah"
@@ -20086,10 +20127,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
@@ -20105,19 +20146,19 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-backslidden-prophet/"
       },
       "title": {
-        "episodeName": "The Backslidden Prophet",
-        "subtitle": "",
-        "display": "The Backslidden Prophet"
+        "episodeName": "Pt. 2",
+        "subtitle": "The Backslidden Prophet",
+        "display": "Pt. 2 (The Backslidden Prophet)"
       },
       "series": {
-        "name": "Jonah - The Dangers of Saying No to God",
-        "key": "jonah-the-dangers-of-saying-no-to-god",
-        "type": "standalone"
+        "name": "The Dangers of Saying No to God",
+        "key": "the-dangers-of-saying-no-to-god",
+        "type": "expositional"
       },
       "study": {
         "name": "Jonah",
         "key": "jonah",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Jonah 1:1-2",
@@ -20145,10 +20186,15 @@
         "hasTranscriptText": false
       },
       "collections": [],
-      "bookTags": [],
-      "speaker": "Pastor Jacob Lannom Sunday 08/13/23 at Cedar Grove Baptist Church in Lebanon, TN CGBC | Lebanon, TN",
+      "bookTags": [
+        {
+          "name": "Jonah",
+          "key": "jonah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "Sun, 13 Aug 2023 10:00:00 -0600",
+        "raw": "08/13/2023",
         "iso": "2023-08-13",
         "year": 2023,
         "month": 8,
@@ -20170,7 +20216,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/v6d6n9/230813_Audio_Enhanced.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 2235,
         "statsMatchStrategy": "media_url"
       },
@@ -20186,17 +20232,17 @@
           "wide": null
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-31_at_122737h8c5.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
-          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
+          "wide": null
         }
       },
       "memberships": {
         "series": [
-          "jonah-the-dangers-of-saying-no-to-god"
+          "the-dangers-of-saying-no-to-god"
         ],
         "studies": [
           "jonah"
@@ -20213,10 +20259,10 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
         "includeInVideoTotals": false
       }
@@ -20232,19 +20278,19 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/jonah-the-prophet/"
       },
       "title": {
-        "episodeName": "The Dangers of Saying No to God",
-        "subtitle": "",
-        "display": "The Dangers of Saying No to God"
+        "episodeName": "Pt. 1",
+        "subtitle": "Jonah The Prophet",
+        "display": "Pt. 1 (Jonah The Prophet)"
       },
       "series": {
-        "name": "Jonah",
-        "key": "jonah",
-        "type": "standalone"
+        "name": "The Dangers of Saying No to God",
+        "key": "the-dangers-of-saying-no-to-god",
+        "type": "expositional"
       },
       "study": {
         "name": "Jonah",
         "key": "jonah",
-        "type": "none"
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Jonah 1:1-2",
@@ -20307,28 +20353,28 @@
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": true,
-        "youtubeId": "SYwoouacSio",
-        "url": "https://www.youtube.com/watch?v=SYwoouacSio",
-        "views": 15
+        "hasVideo": false,
+        "youtubeId": null,
+        "url": null,
+        "views": 0
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
-          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
+          "wide": null
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
-          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
+          "wide": null
         },
         "study": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
-          "wide": "https://i.ytimg.com/vi/SYwoouacSio/maxresdefault.jpg"
+          "wide": null
         }
       },
       "memberships": {
         "series": [
-          "jonah"
+          "the-dangers-of-saying-no-to-god"
         ],
         "studies": [
           "jonah"
@@ -20345,12 +20391,12 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
-        "isStandaloneEpisode": true,
+        "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": true
+        "includeInVideoTotals": false
       }
     }
   ]
