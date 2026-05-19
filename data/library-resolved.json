@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-05-19T01:01:22.111Z",
+  "generatedAt": "2026-05-19T02:07:01.342Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 142,
     "archiveItems": 142,
-    "videoMatchedItems": 133,
+    "videoMatchedItems": 134,
     "transcriptMatchedItems": 8,
     "quoteCandidateCount": 604
   },
   "totals": {
-    "audioPlaysTotal": 4417,
+    "audioPlaysTotal": 4421,
     "audioEpisodesTotal": 142
   },
   "current": {
@@ -356,20 +356,20 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/kttiyx6gpxw83jw7/051726_S_PCaj011.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 2400,
         "statsMatchStrategy": "media_url"
       },
       "video": {
-        "hasVideo": false,
-        "youtubeId": null,
-        "url": null,
+        "hasVideo": true,
+        "youtubeId": "bhj8jUW5QdU",
+        "url": "https://www.youtube.com/watch?v=bhj8jUW5QdU",
         "views": 0
       },
       "art": {
         "episode": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/051726_S_PC6tah2.jpg",
-          "wide": null
+          "wide": "https://i.ytimg.com/vi/bhj8jUW5QdU/maxresdefault.jpg"
         },
         "series": {
           "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
@@ -410,7 +410,7 @@
       "flags": {
         "isStandaloneEpisode": false,
         "includeInAudioTotals": true,
-        "includeInVideoTotals": false
+        "includeInVideoTotals": true
       }
     },
     {
@@ -2233,7 +2233,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "plays": 55,
+        "plays": 56,
         "durationSeconds": 1774,
         "statsMatchStrategy": "media_url"
       },
@@ -5006,7 +5006,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
-        "plays": 120,
+        "plays": 121,
         "durationSeconds": 2370,
         "statsMatchStrategy": "media_url"
       },
@@ -19076,7 +19076,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5aggta/03_Healing_a_Broken_Marriage_Part_1.mp3",
-        "plays": 44,
+        "plays": 45,
         "durationSeconds": 2384,
         "statsMatchStrategy": "media_url"
       },
