@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T18:20:27.330Z",
+  "generatedAt": "2026-05-19T18:51:48.142Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 141,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 604
   },
   "totals": {
-    "audioPlaysTotal": 4426,
+    "audioPlaysTotal": 4429,
     "audioEpisodesTotal": 141
   },
   "current": {
@@ -43,7 +43,7 @@
         "studyName": "Eschatology",
         "detectedFromEpisode": "media-xdygcx",
         "detectedFromDate": "2026-05-13",
-        "detectedFromTitle": "The Tribulation Pt. 3 (The Antichrist Pt. 3)",
+        "detectedFromTitle": "The Tribulation Pt. 3 (The Antichrist)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -425,8 +425,8 @@
       },
       "title": {
         "episodeName": "The Tribulation Pt. 3",
-        "subtitle": "The Antichrist Pt. 3",
-        "display": "The Tribulation Pt. 3 (The Antichrist Pt. 3)"
+        "subtitle": "The Antichrist",
+        "display": "The Tribulation Pt. 3 (The Antichrist)"
       },
       "series": {
         "name": "The Tribulation",
@@ -2004,7 +2004,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8wjwp38qj5wj6ph5/42626_S_PC78jah.mp3",
-        "plays": 58,
+        "plays": 59,
         "durationSeconds": 2159,
         "statsMatchStrategy": "media_url"
       },
@@ -2406,7 +2406,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
-        "plays": 41,
+        "plays": 42,
         "durationSeconds": 1869,
         "statsMatchStrategy": "media_url"
       },
@@ -13175,11 +13175,11 @@
         "type": "none"
       },
       "scripture": {
-        "raw": "",
-        "display": "",
+        "raw": "Various",
+        "display": "Selected Scriptures",
         "book": null,
         "bookKey": null,
-        "isVarious": false
+        "isVarious": true
       },
       "references": {
         "raw": "",
@@ -13217,7 +13217,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/hrdmyk2tr77dpbgj/09_01_24_Disciplines_Of_a_Victorious_Believer_Pt_4bamx3.mp3",
-        "plays": 32,
+        "plays": 33,
         "durationSeconds": 2461,
         "statsMatchStrategy": "media_url"
       },
@@ -19084,7 +19084,7 @@
         "hasVideo": true,
         "youtubeId": "_0ivSilfhAA",
         "url": "https://www.youtube.com/watch?v=_0ivSilfhAA",
-        "views": 59
+        "views": 61
       },
       "art": {
         "episode": {
