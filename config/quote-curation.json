@@ -1,41 +1,10 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-12T13:22:35.542Z",
+  "generatedAt": "2026-05-19T00:59:04.932Z",
   "source": "cgbc_quote_review_browser",
   "targetFile": "config/quote-curation.json",
   "note": "Commit this file to config/quote-curation.json, then run the normal sermon library build workflow.",
   "reviews": [
-    {
-      "quoteId": "manual-media-qpv88z-1208-1c0eoq8",
-      "status": "rejected",
-      "approvedText": "Does your faith have generational impact?",
-      "episodeStableId": "media-qpv88z",
-      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
-      "episodeSeries": "2026 Specials",
-      "episodeStudy": "",
-      "episodeScripture": "Selected Scriptures",
-      "episodeDate": "2026-05-10",
-      "speaker": "Pastor Jacob Lannom",
-      "start": 1202.716,
-      "end": 1219.866,
-      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=1202",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z",
-      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=1202s",
-      "source": "private_transcript_search",
-      "manualSearchCandidate": true,
-      "manualTranscriptIndex": 372,
-      "manualFirstTranscriptIndex": 370,
-      "manualLastTranscriptIndex": 373,
-      "segmentIndexes": [
-        370,
-        371,
-        372,
-        373
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
-      "savedAt": "2026-05-12T13:21:40.491Z"
-    },
     {
       "quoteId": "manual-media-qpv88z-1175-y9jp38",
       "status": "approved",
@@ -96,62 +65,29 @@
     },
     {
       "quoteId": "manual-media-m04f9j-1947-1pjtzvw",
-      "status": "approved",
+      "status": "rejected",
       "approvedText": "We need teachers. Gifted men and women of God operating in their biblical role of teaching. You don't need a pulpit to teach.",
       "episodeStableId": "media-m04f9j",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
-      "episodeSeries": "Romans Chapter 12",
-      "episodeStudy": "The Book of Romans",
-      "episodeScripture": "Romans 12:6-8",
-      "episodeDate": "2026-04-26",
-      "speaker": "Pastor Jacob Lannom",
       "start": 1943.716,
       "end": 1954.4,
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=1943",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j",
       "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=1943s",
-      "source": "private_transcript_search",
-      "manualSearchCandidate": true,
-      "manualTranscriptIndex": 633,
-      "manualFirstTranscriptIndex": 632,
-      "manualLastTranscriptIndex": 634,
-      "segmentIndexes": [
-        632,
-        633,
-        634
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-04-26_the-impact-of-the-gospel-in-ministry-pt-4.json",
-      "savedAt": "2026-05-08T12:45:10.865Z"
+      "source": "browser_review",
+      "savedAt": "2026-05-19T00:48:18.491Z"
     },
     {
       "quoteId": "manual-media-4so01z-469-1fobixt",
       "status": "featured",
-      "approvedText": "But again, we need to understand that reproof and rebuke without encouragement is more condemning than it is restoring.",
+      "approvedText": "We need to understand that reproof and rebuke without encouragement is more condemning than it is restoring.",
       "episodeStableId": "media-4so01z",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 5 (Grace Gifts: Encouragement)",
-      "episodeSeries": "Romans Chapter 12",
-      "episodeStudy": "Romans",
-      "episodeScripture": "Romans 12:6-8",
-      "episodeDate": "2026-05-03",
-      "speaker": "Pastor Jacob Lannom Date: 05/03/2026",
       "start": 465.55,
       "end": 474.183,
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4so01z&start=465",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4so01z",
       "youtubeLink": "https://www.youtube.com/watch?v=QYhdu-bGyi8&t=465s",
-      "source": "private_transcript_search",
-      "manualSearchCandidate": true,
-      "manualTranscriptIndex": 138,
-      "manualFirstTranscriptIndex": 137,
-      "manualLastTranscriptIndex": 138,
-      "segmentIndexes": [
-        137,
-        138
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.json",
-      "savedAt": "2026-05-10T03:06:18.379Z"
+      "source": "browser_review",
+      "savedAt": "2026-05-19T00:48:28.343Z"
     },
     {
       "quoteId": "manual-media-4so01z-1983-1213646",
@@ -682,6 +618,35 @@
       "savedAt": "2026-05-10T03:24:42.016Z"
     },
     {
+      "quoteId": "media-qpv88z-quote-0022",
+      "status": "featured",
+      "approvedText": "Eunice did not let her husband's lack of faith hinder her abundance of faith.",
+      "episodeStableId": "media-qpv88z",
+      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
+      "episodeSeries": "2026 Specials",
+      "episodeStudy": "",
+      "episodeScripture": "Selected Scriptures",
+      "episodeDate": "2026-05-10",
+      "speaker": "Pastor Jacob Lannom",
+      "start": 1058.416,
+      "end": 1067.583,
+      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=1058",
+      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z",
+      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=1058s",
+      "source": "browser_review",
+      "manualSearchCandidate": false,
+      "manualTranscriptIndex": null,
+      "manualFirstTranscriptIndex": null,
+      "manualLastTranscriptIndex": null,
+      "segmentIndexes": [
+        325,
+        326
+      ],
+      "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
+      "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
+      "savedAt": "2026-05-12T02:21:43.498Z"
+    },
+    {
       "quoteId": "media-qpv88z-quote-0020",
       "status": "rejected",
       "approvedText": "Eunice had the faith that contributed to the faith of others.",
@@ -710,35 +675,6 @@
       "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
       "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
       "savedAt": "2026-05-12T02:21:36.731Z"
-    },
-    {
-      "quoteId": "media-qpv88z-quote-0022",
-      "status": "featured",
-      "approvedText": "Eunice did not let her husband's lack of faith hinder her abundance of faith.",
-      "episodeStableId": "media-qpv88z",
-      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
-      "episodeSeries": "2026 Specials",
-      "episodeStudy": "",
-      "episodeScripture": "Selected Scriptures",
-      "episodeDate": "2026-05-10",
-      "speaker": "Pastor Jacob Lannom",
-      "start": 1058.416,
-      "end": 1067.583,
-      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=1058",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z",
-      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=1058s",
-      "source": "browser_review",
-      "manualSearchCandidate": false,
-      "manualTranscriptIndex": null,
-      "manualFirstTranscriptIndex": null,
-      "manualLastTranscriptIndex": null,
-      "segmentIndexes": [
-        325,
-        326
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
-      "savedAt": "2026-05-12T02:21:43.498Z"
     },
     {
       "quoteId": "media-lf06f3-quote-0023",
@@ -1402,7 +1338,7 @@
     },
     {
       "quoteId": "media-ll5nku-quote-0026",
-      "status": "approved",
+      "status": "rejected",
       "approvedText": "... it takes faith to follow you, God, even in studying the end time. So may this humble us. God, may this make us more urgent in our faith and in our soul winning.",
       "episodeStableId": "media-ll5nku",
       "episodeTitle": "The Rapture Pt. 5 (Post-Tribulation)",
@@ -1411,7 +1347,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-ll5nku&start=257",
       "youtubeLink": "https://www.youtube.com/watch?v=T-cd2mlwDSk&t=257s",
       "source": "browser_review",
-      "savedAt": "2026-04-28T13:44:46.497Z"
+      "savedAt": "2026-05-19T00:49:13.508Z"
     },
     {
       "quoteId": "media-qpv88z-quote-0043",
@@ -1826,33 +1762,15 @@
     {
       "quoteId": "media-lf06f3-quote-0017",
       "status": "approved",
-      "approvedText": "the church age or age of grace that we're in right now during this gap was a mystery to the Old Testament prophets and writers.",
+      "approvedText": "The church age or age of grace that we're in right now during this gap was a mystery to the Old Testament prophets and writers.",
       "episodeStableId": "media-lf06f3",
       "episodeTitle": "The Tribulation Pt. 2 (The Antichrist)",
-      "episodeSeries": "The Tribulation",
-      "episodeStudy": "Eschatology",
-      "episodeScripture": "Selected Scriptures",
-      "episodeDate": "2026-05-06",
-      "speaker": "Pastor Jacob Lannom",
       "start": 648.85,
       "end": 663.666,
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-lf06f3&start=648",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-lf06f3",
       "youtubeLink": "https://www.youtube.com/watch?v=8ACPLxQPzYo&t=648s",
       "source": "browser_review",
-      "manualSearchCandidate": false,
-      "manualTranscriptIndex": null,
-      "manualFirstTranscriptIndex": null,
-      "manualLastTranscriptIndex": null,
-      "segmentIndexes": [
-        180,
-        181,
-        182,
-        183
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-05-06_the-tribulation-pt-2.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-05-06_the-tribulation-pt-2.json",
-      "savedAt": "2026-05-09T20:03:03.284Z"
+      "savedAt": "2026-05-19T00:50:08.859Z"
     },
     {
       "quoteId": "media-lf06f3-quote-0020",
@@ -1951,7 +1869,7 @@
     {
       "quoteId": "media-m04f9j-quote-0037",
       "status": "featured",
-      "approvedText": "Grace, the grace of God that you have received has gifted you for the benefit of those around you.",
+      "approvedText": "The grace of God that you have received has gifted you for the benefit of those around you.",
       "episodeStableId": "media-m04f9j",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
       "start": 121.216,
@@ -1959,7 +1877,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=121",
       "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=121s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T16:04:42.163Z"
+      "savedAt": "2026-05-19T00:50:22.308Z"
     },
     {
       "quoteId": "media-qpv88z-quote-0037",
@@ -5906,7 +5824,7 @@
     },
     {
       "quoteId": "media-m04f9j-quote-0057",
-      "status": "featured",
+      "status": "rejected",
       "approvedText": "Instead of looking down upon those who simply are just trying, who simply desire to learn more, how about we teach them?",
       "episodeStableId": "media-m04f9j",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
@@ -5915,39 +5833,20 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=2055",
       "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=2055s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T16:12:53.546Z"
+      "savedAt": "2026-05-19T00:53:04.186Z"
     },
     {
       "quoteId": "media-4so01z-quote-0064",
-      "status": "approved",
+      "status": "rejected",
       "approvedText": "Once someone comes alongside you, there's nothing that we can't do. It's motivating. It's encouraging.",
       "episodeStableId": "media-4so01z",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 5 (Grace Gifts: Encouragement)",
-      "episodeSeries": "Romans Chapter 12",
-      "episodeStudy": "Romans",
-      "episodeScripture": "Romans 12:6-8",
-      "episodeDate": "2026-05-03",
-      "speaker": "Pastor Jacob Lannom Date: 05/03/2026",
       "start": 655.033,
       "end": 662.883,
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4so01z&start=655",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4so01z",
       "youtubeLink": "https://www.youtube.com/watch?v=QYhdu-bGyi8&t=655s",
       "source": "browser_review",
-      "manualSearchCandidate": false,
-      "manualTranscriptIndex": null,
-      "manualFirstTranscriptIndex": null,
-      "manualLastTranscriptIndex": null,
-      "segmentIndexes": [
-        194,
-        195,
-        196,
-        197,
-        198
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-05-03_the-impact-of-the-gospel-in-ministry-pt-5.json",
-      "savedAt": "2026-05-09T19:52:24.330Z"
+      "savedAt": "2026-05-19T00:53:11.126Z"
     },
     {
       "quoteId": "media-4so01z-quote-0067",
@@ -6538,7 +6437,7 @@
     {
       "quoteId": "media-m04f9j-quote-0019",
       "status": "featured",
-      "approvedText": "...warning against false teaching is emphasized and mention more than any other single theme in the New Testament?",
+      "approvedText": "...warning against false teaching is emphasized and mentioned more than any other single theme in the New Testament.",
       "episodeStableId": "media-m04f9j",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
       "start": 1839.616,
@@ -6546,7 +6445,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=1839",
       "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=1839s",
       "source": "browser_review",
-      "savedAt": "2026-05-07T17:28:44.372Z"
+      "savedAt": "2026-05-19T00:53:41.844Z"
     },
     {
       "quoteId": "media-ll5nku-quote-0043",
@@ -7202,7 +7101,7 @@
     {
       "quoteId": "media-m04f9j-quote-0062",
       "status": "approved",
-      "approvedText": "I need us to realize this giftedness does not make you better, does not make you a higher rank than any other believer. The grace gift that I'm using right here in this moment, I did not earn.",
+      "approvedText": "I need us to realize this giftedness does not make you better, does not make you a higher rank than any other believer.",
       "episodeStableId": "media-m04f9j",
       "episodeTitle": "The Impact of the Gospel in Ministry Pt. 4 (Grace Gifts: Teaching)",
       "start": 69.733,
@@ -7210,7 +7109,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-m04f9j&start=69",
       "youtubeLink": "https://www.youtube.com/watch?v=_BMEKDplftQ&t=69s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T16:14:00.201Z"
+      "savedAt": "2026-05-19T00:55:59.928Z"
     },
     {
       "quoteId": "media-m04f9j-quote-0063",
@@ -7514,7 +7413,7 @@
     },
     {
       "quoteId": "media-vfxc2v-quote-0030",
-      "status": "approved",
+      "status": "rejected",
       "approvedText": "I believe that when God's messenger said to Daniel, know and discern the time. I believe we should do that as well.",
       "episodeStableId": "media-vfxc2v",
       "episodeTitle": "The Tribulation Pt. 1 (Prophecy of the Seventy Weeks)",
@@ -7523,7 +7422,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-vfxc2v&start=1692",
       "youtubeLink": "https://www.youtube.com/watch?v=on7PfLd0Tcc&t=1692s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T14:13:45.104Z"
+      "savedAt": "2026-05-19T00:55:20.429Z"
     },
     {
       "quoteId": "media-qpv88z-quote-0050",
@@ -7864,6 +7763,19 @@
       "savedAt": "2026-04-28T13:46:33.265Z"
     },
     {
+      "quoteId": "media-qpv88z-quote-0065",
+      "status": "approved",
+      "approvedText": "There was no competition between man and woman before sin corrupted the world.",
+      "episodeStableId": "media-qpv88z",
+      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
+      "start": 230.166,
+      "end": 239.716,
+      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=230",
+      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=230s",
+      "source": "browser_review",
+      "savedAt": "2026-05-12T02:50:58.309Z"
+    },
+    {
       "quoteId": "media-qpv88z-quote-0062",
       "status": "rejected",
       "approvedText": "The progressive feminism and liberals of the day tells us that being a traditional woman, or being a traditional mama is outdated and inferior and not how we should be teaching.",
@@ -7892,19 +7804,6 @@
       "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
       "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
       "savedAt": "2026-05-12T02:43:06.277Z"
-    },
-    {
-      "quoteId": "media-qpv88z-quote-0065",
-      "status": "approved",
-      "approvedText": "There was no competition between man and woman before sin corrupted the world.",
-      "episodeStableId": "media-qpv88z",
-      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
-      "start": 230.166,
-      "end": 239.716,
-      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=230",
-      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=230s",
-      "source": "browser_review",
-      "savedAt": "2026-05-12T02:50:58.309Z"
     },
     {
       "quoteId": "media-qpv88z-quote-0066",
@@ -8192,36 +8091,6 @@
       "savedAt": "2026-05-05T16:14:24.018Z"
     },
     {
-      "quoteId": "media-qpv88z-quote-0070",
-      "status": "rejected",
-      "approvedText": "I believe that as well, because look, a certain woman, which was a Jewish and believed.",
-      "episodeStableId": "media-qpv88z",
-      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
-      "episodeSeries": "2026 Specials",
-      "episodeStudy": "",
-      "episodeScripture": "Selected Scriptures",
-      "episodeDate": "2026-05-10",
-      "speaker": "Pastor Jacob Lannom",
-      "start": 865.75,
-      "end": 874.566,
-      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=865",
-      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z",
-      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=865s",
-      "source": "browser_review",
-      "manualSearchCandidate": false,
-      "manualTranscriptIndex": null,
-      "manualFirstTranscriptIndex": null,
-      "manualLastTranscriptIndex": null,
-      "segmentIndexes": [
-        258,
-        259,
-        260
-      ],
-      "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
-      "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
-      "savedAt": "2026-05-12T02:44:10.870Z"
-    },
-    {
       "quoteId": "media-qpv88z-quote-0071",
       "status": "approved",
       "approvedText": "We got plenty of moms who want everything the world has to offer their kids, yet miss out on what God has to offer.",
@@ -8252,6 +8121,36 @@
       "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
       "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
       "savedAt": "2026-05-12T02:44:18.055Z"
+    },
+    {
+      "quoteId": "media-qpv88z-quote-0070",
+      "status": "rejected",
+      "approvedText": "I believe that as well, because look, a certain woman, which was a Jewish and believed.",
+      "episodeStableId": "media-qpv88z",
+      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
+      "episodeSeries": "2026 Specials",
+      "episodeStudy": "",
+      "episodeScripture": "Selected Scriptures",
+      "episodeDate": "2026-05-10",
+      "speaker": "Pastor Jacob Lannom",
+      "start": 865.75,
+      "end": 874.566,
+      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=865",
+      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z",
+      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=865s",
+      "source": "browser_review",
+      "manualSearchCandidate": false,
+      "manualTranscriptIndex": null,
+      "manualFirstTranscriptIndex": null,
+      "manualLastTranscriptIndex": null,
+      "segmentIndexes": [
+        258,
+        259,
+        260
+      ],
+      "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
+      "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
+      "savedAt": "2026-05-12T02:44:10.870Z"
     },
     {
       "quoteId": "media-vfxc2v-quote-0043",
@@ -8573,7 +8472,7 @@
     },
     {
       "quoteId": "media-vfxc2v-quote-0058",
-      "status": "approved",
+      "status": "rejected",
       "approvedText": "...there's enough atonement for everyone who would want to be saved or desire to be saved.",
       "episodeStableId": "media-vfxc2v",
       "episodeTitle": "The Tribulation Pt. 1 (Prophecy of the Seventy Weeks)",
@@ -8582,7 +8481,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-vfxc2v&start=1029",
       "youtubeLink": "https://www.youtube.com/watch?v=on7PfLd0Tcc&t=1029s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T14:18:20.890Z"
+      "savedAt": "2026-05-19T00:56:24.694Z"
     },
     {
       "quoteId": "media-vfxc2v-quote-0059",
@@ -8709,7 +8608,7 @@
     },
     {
       "quoteId": "media-vfxc2v-quote-0060",
-      "status": "approved",
+      "status": "rejected",
       "approvedText": "A temple in a city without any fortification is not a threat to any king.",
       "episodeStableId": "media-vfxc2v",
       "episodeTitle": "The Tribulation Pt. 1 (Prophecy of the Seventy Weeks)",
@@ -8718,7 +8617,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-vfxc2v&start=501",
       "youtubeLink": "https://www.youtube.com/watch?v=on7PfLd0Tcc&t=501s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T14:18:45.472Z"
+      "savedAt": "2026-05-19T00:56:35.512Z"
     },
     {
       "quoteId": "media-vfxc2v-quote-0063",
@@ -8957,7 +8856,7 @@
     {
       "quoteId": "media-ll5nku-quote-0006",
       "status": "featured",
-      "approvedText": "Something is restraining, the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God.",
+      "approvedText": "Something is restraining the revealing of the antichrist, what could restrain such evil other than the spirit filled church of the living God.",
       "episodeStableId": "media-ll5nku",
       "episodeTitle": "The Rapture Pt. 5 (Post-Tribulation)",
       "start": 1647.833,
@@ -8965,7 +8864,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-ll5nku&start=1647",
       "youtubeLink": "https://www.youtube.com/watch?v=T-cd2mlwDSk&t=1647s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T10:44:13.107Z"
+      "savedAt": "2026-05-19T00:56:53.446Z"
     },
     {
       "quoteId": "media-ll5nku-quote-0002",
@@ -9759,7 +9658,7 @@
     {
       "quoteId": "media-vfxc2v-quote-0056",
       "status": "featured",
-      "approvedText": "By the way, a Spirit of the Antichrist is anyone who rejects Christ for who he is.",
+      "approvedText": "A Spirit of the Antichrist is anyone who rejects Christ for who he is.",
       "episodeStableId": "media-vfxc2v",
       "episodeTitle": "The Tribulation Pt. 1 (Prophecy of the Seventy Weeks)",
       "start": 1324.333,
@@ -9767,7 +9666,7 @@
       "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-vfxc2v&start=1324",
       "youtubeLink": "https://www.youtube.com/watch?v=on7PfLd0Tcc&t=1324s",
       "source": "browser_review",
-      "savedAt": "2026-05-05T14:21:50.806Z"
+      "savedAt": "2026-05-19T00:58:04.229Z"
     },
     {
       "quoteId": "media-ll5nku-quote-0068",
@@ -9846,6 +9745,37 @@
       "youtubeLink": "https://www.youtube.com/watch?v=T-cd2mlwDSk&t=219s",
       "source": "browser_review",
       "savedAt": "2026-05-05T10:45:51.427Z"
+    },
+    {
+      "quoteId": "manual-media-qpv88z-1208-1c0eoq8",
+      "status": "rejected",
+      "approvedText": "Does your faith have generational impact?",
+      "episodeStableId": "media-qpv88z",
+      "episodeTitle": "A Certain Woman (The Mother of Timothy)",
+      "episodeSeries": "2026 Specials",
+      "episodeStudy": "",
+      "episodeScripture": "Selected Scriptures",
+      "episodeDate": "2026-05-10",
+      "speaker": "Pastor Jacob Lannom",
+      "start": 1202.716,
+      "end": 1219.866,
+      "siteDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z&start=1202",
+      "episodeDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-qpv88z",
+      "youtubeLink": "https://www.youtube.com/watch?v=nhGQTEQEbWM&t=1202s",
+      "source": "private_transcript_search",
+      "manualSearchCandidate": true,
+      "manualTranscriptIndex": 372,
+      "manualFirstTranscriptIndex": 370,
+      "manualLastTranscriptIndex": 373,
+      "segmentIndexes": [
+        370,
+        371,
+        372,
+        373
+      ],
+      "transcriptDisplayJson": "data/transcripts/en/2026-05-10_a-certain-woman.display.json",
+      "transcriptCleanJson": "data/transcripts/en/2026-05-10_a-certain-woman.json",
+      "savedAt": "2026-05-12T13:21:40.491Z"
     }
   ]
 }
