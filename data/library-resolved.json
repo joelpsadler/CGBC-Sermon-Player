@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-05-18T23:54:54.482Z",
+  "generatedAt": "2026-05-19T01:01:22.111Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 141,
-    "archiveItems": 141,
+    "rssItems": 142,
+    "archiveItems": 142,
     "videoMatchedItems": 133,
-    "transcriptMatchedItems": 7,
-    "quoteCandidateCount": 530
+    "transcriptMatchedItems": 8,
+    "quoteCandidateCount": 604
   },
   "totals": {
-    "audioPlaysTotal": 4413,
-    "audioEpisodesTotal": 141
+    "audioPlaysTotal": 4417,
+    "audioEpisodesTotal": 142
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-4so01z",
-        "detectedFromDate": "2026-05-03",
-        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 5 (Grace Gifts: Encouragement)",
+        "detectedFromEpisode": "media-8mlvv4",
+        "detectedFromDate": "2026-05-17",
+        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 6 (Gift of Giving)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -58,10 +58,361 @@
         "square": "assets/collections/grace-gifts/square.jpg",
         "wide": "assets/collections/grace-gifts/wide.jpg"
       },
-      "count": 3
+      "count": 4
     }
   ],
   "items": [
+    {
+      "stableId": "media-8mlvv4",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/kttiyx6gpxw83jw7/051726_S_PCaj011.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/f729444a-6a15-3ff7-8d1b-902cabe7a00f"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-in-ministry-pt-6-romans-chapter-12/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-in-ministry-pt-6-romans-chapter-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel in Ministry Pt. 6",
+        "subtitle": "Gift of Giving",
+        "display": "The Impact of the Gospel in Ministry Pt. 6 (Gift of Giving)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:6-8",
+        "display": "Romans 12:6-8",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Romans 11:13-15, Acts 2:40-47, Acts 5:1-11, Acts 4:32-37, 1 Corinthians 16:2, Acts 16:11-15, Acts 16:40, Philippians 4:10-23, 2 Corinthians 9:7",
+        "display": "Romans 11:13-15, Acts 2:40-47, Acts 5:1-11, Acts 4:32-37, 1 Corinthians 16:2, Acts 16:11-15, Acts 16:40, Philippians 4:10-23, 2 Corinthians 9:7",
+        "tokens": [
+          "Romans 11:13-15",
+          "Romans 11:13",
+          "Romans 11:14",
+          "Romans 11:15",
+          "Acts 2:40-47",
+          "Acts 2:40",
+          "Acts 2:41",
+          "Acts 2:42",
+          "Acts 2:43",
+          "Acts 2:44",
+          "Acts 2:45",
+          "Acts 2:46",
+          "Acts 2:47",
+          "Acts 5:1-11",
+          "Acts 5:1",
+          "Acts 5:2",
+          "Acts 5:3",
+          "Acts 5:4",
+          "Acts 5:5",
+          "Acts 5:6",
+          "Acts 5:7",
+          "Acts 5:8",
+          "Acts 5:9",
+          "Acts 5:10",
+          "Acts 5:11",
+          "Acts 4:32-37",
+          "Acts 4:32",
+          "Acts 4:33",
+          "Acts 4:34",
+          "Acts 4:35",
+          "Acts 4:36",
+          "Acts 4:37",
+          "1 Corinthians 16:2",
+          "Acts 16:11-15",
+          "Acts 16:11",
+          "Acts 16:12",
+          "Acts 16:13",
+          "Acts 16:14",
+          "Acts 16:15",
+          "Acts 16:40",
+          "Philippians 4:10-23",
+          "Philippians 4:10",
+          "Philippians 4:11",
+          "Philippians 4:12",
+          "Philippians 4:13",
+          "Philippians 4:14",
+          "Philippians 4:15",
+          "Philippians 4:16",
+          "Philippians 4:17",
+          "Philippians 4:18",
+          "Philippians 4:19",
+          "Philippians 4:20",
+          "Philippians 4:21",
+          "Philippians 4:22",
+          "Philippians 4:23",
+          "2 Corinthians 9:7"
+        ],
+        "searchTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "Romans 11:13-15",
+          "Romans 11:13",
+          "Romans 11:14",
+          "Romans 11:15",
+          "Acts 2:40-47",
+          "Acts 2:40",
+          "Acts 2:41",
+          "Acts 2:42",
+          "Acts 2:43",
+          "Acts 2:44",
+          "Acts 2:45",
+          "Acts 2:46",
+          "Acts 2:47",
+          "Acts 5:1-11",
+          "Acts 5:1",
+          "Acts 5:2",
+          "Acts 5:3",
+          "Acts 5:4",
+          "Acts 5:5",
+          "Acts 5:6",
+          "Acts 5:7",
+          "Acts 5:8",
+          "Acts 5:9",
+          "Acts 5:10",
+          "Acts 5:11",
+          "Acts 4:32-37",
+          "Acts 4:32",
+          "Acts 4:33",
+          "Acts 4:34",
+          "Acts 4:35",
+          "Acts 4:36",
+          "Acts 4:37",
+          "1 Corinthians 16:2",
+          "Acts 16:11-15",
+          "Acts 16:11",
+          "Acts 16:12",
+          "Acts 16:13",
+          "Acts 16:14",
+          "Acts 16:15",
+          "Acts 16:40",
+          "Philippians 4:10-23",
+          "Philippians 4:10",
+          "Philippians 4:11",
+          "Philippians 4:12",
+          "Philippians 4:13",
+          "Philippians 4:14",
+          "Philippians 4:15",
+          "Philippians 4:16",
+          "Philippians 4:17",
+          "Philippians 4:18",
+          "Philippians 4:19",
+          "Philippians 4:20",
+          "Philippians 4:21",
+          "Philippians 4:22",
+          "Philippians 4:23",
+          "2 Corinthians 9:7"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "Romans 11:13-15",
+          "Romans 11:13",
+          "Romans 11:14",
+          "Romans 11:15",
+          "Acts 2:40-47",
+          "Acts 2:40",
+          "Acts 2:41",
+          "Acts 2:42",
+          "Acts 2:43",
+          "Acts 2:44",
+          "Acts 2:45",
+          "Acts 2:46",
+          "Acts 2:47",
+          "Acts 5:1-11",
+          "Acts 5:1",
+          "Acts 5:2",
+          "Acts 5:3",
+          "Acts 5:4",
+          "Acts 5:5",
+          "Acts 5:6",
+          "Acts 5:7",
+          "Acts 5:8",
+          "Acts 5:9",
+          "Acts 5:10",
+          "Acts 5:11",
+          "Acts 4:32-37",
+          "Acts 4:32",
+          "Acts 4:33",
+          "Acts 4:34",
+          "Acts 4:35",
+          "Acts 4:36",
+          "Acts 4:37",
+          "1 Corinthians 16:2",
+          "Acts 16:11-15",
+          "Acts 16:11",
+          "Acts 16:12",
+          "Acts 16:13",
+          "Acts 16:14",
+          "Acts 16:15",
+          "Acts 16:40",
+          "Philippians 4:10-23",
+          "Philippians 4:10",
+          "Philippians 4:11",
+          "Philippians 4:12",
+          "Philippians 4:13",
+          "Philippians 4:14",
+          "Philippians 4:15",
+          "Philippians 4:16",
+          "Philippians 4:17",
+          "Philippians 4:18",
+          "Philippians 4:19",
+          "Philippians 4:20",
+          "Philippians 4:21",
+          "Philippians 4:22",
+          "Philippians 4:23",
+          "2 Corinthians 9:7"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [
+        {
+          "name": "Grace Gifts",
+          "key": "grace-gifts",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/grace-gifts/square.jpg",
+            "wide": "assets/collections/grace-gifts/wide.jpg"
+          },
+          "itemTitle": "Giving",
+          "itemSortOrder": 4,
+          "collectionItemTitle": "Giving",
+          "collectionItemOrder": 4
+        }
+      ],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        },
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "05/17/2026",
+        "iso": "2026-05-17",
+        "year": 2026,
+        "month": 5,
+        "monthName": "May",
+        "day": 17
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-05-17.srt",
+            "cleanFile": "transcripts_clean/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.srt",
+            "displayFile": "transcripts_display/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.srt",
+            "jsonFile": "data/transcripts/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.json",
+            "displayJsonFile": "data/transcripts/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.display.json",
+            "segmentCount": 897,
+            "displaySegmentCount": 755
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-05-17.srt",
+        "cleanFile": "transcripts_clean/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.srt",
+        "displayFile": "transcripts_display/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.srt",
+        "jsonFile": "data/transcripts/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.json",
+        "displayJsonFile": "data/transcripts/en/2026-05-17_the-impact-of-the-gospel-in-ministry-pt-6.display.json",
+        "segmentCount": 897,
+        "displaySegmentCount": 755
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/kttiyx6gpxw83jw7/051726_S_PCaj011.mp3",
+        "plays": 0,
+        "durationSeconds": 2400,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": false,
+        "youtubeId": null,
+        "url": null,
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/051726_S_PC6tah2.jpg",
+          "wide": null
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "acts",
+          "1-corinthians",
+          "2-corinthians",
+          "philippians"
+        ],
+        "collections": [
+          "grace-gifts"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-05"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": false
+      }
+    },
     {
       "stableId": "media-xdygcx",
       "sourceKey": {
@@ -225,7 +576,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/97x7drqkeafd6ez2/51326_W_PCbq84u.mp3",
-        "plays": 2,
+        "plays": 3,
         "durationSeconds": 1531,
         "statsMatchStrategy": "media_url"
       },
@@ -233,7 +584,7 @@
         "hasVideo": true,
         "youtubeId": "GBq_TV1szuw",
         "url": "https://www.youtube.com/watch?v=GBq_TV1szuw",
-        "views": 0
+        "views": 1
       },
       "art": {
         "episode": {
@@ -1653,7 +2004,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8wjwp38qj5wj6ph5/42626_S_PC78jah.mp3",
-        "plays": 57,
+        "plays": 58,
         "durationSeconds": 2159,
         "statsMatchStrategy": "media_url"
       },
@@ -2055,7 +2406,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dbad3kuc655d4afw/419_S_PCbhpkb.mp3",
-        "plays": 40,
+        "plays": 41,
         "durationSeconds": 1869,
         "statsMatchStrategy": "media_url"
       },
@@ -18265,8 +18616,8 @@
       },
       "title": {
         "episodeName": "Family Problems Pt. 1",
-        "subtitle": "Family Problems",
-        "display": "Family Problems Pt. 1 (Family Problems)"
+        "subtitle": "",
+        "display": "Family Problems Pt. 1"
       },
       "series": {
         "name": "Picking Up the Pieces In Your Family",
@@ -20158,7 +20509,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/m5gpyk/03_All_the_Difference.mp3",
-        "plays": 35,
+        "plays": 36,
         "durationSeconds": 1446,
         "statsMatchStrategy": "media_url"
       },
