@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-19T16:44:03.620Z",
+  "generatedAt": "2026-05-19T18:20:27.330Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 141,
@@ -19432,9 +19432,9 @@
         "type": "expositional"
       },
       "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
+        "name": "Jonah",
+        "key": "jonah",
+        "type": "book_study"
       },
       "scripture": {
         "raw": "Jonah 3:1-4:11",
@@ -19508,7 +19508,7 @@
           "wide": null
         },
         "study": {
-          "square": null,
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2023-12-29_at_61203bjhtc.jpg",
           "wide": null
         }
       },
@@ -19516,7 +19516,9 @@
         "series": [
           "the-dangers-of-saying-no-to-god"
         ],
-        "studies": [],
+        "studies": [
+          "jonah"
+        ],
         "bibleBooks": [
           "jonah"
         ],
@@ -19529,7 +19531,7 @@
         ]
       },
       "presentation": {
-        "bibleBooksMode": "episode_only"
+        "bibleBooksMode": "series_group"
       },
       "flags": {
         "isStandaloneEpisode": false,
