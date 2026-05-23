@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-05-23T14:26:20.022Z",
+  "generatedAt": "2026-05-23T15:28:57.441Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 141,
-    "archiveItems": 141,
-    "videoMatchedItems": 133,
+    "rssItems": 142,
+    "archiveItems": 142,
+    "videoMatchedItems": 134,
     "transcriptMatchedItems": 8,
     "quoteCandidateCount": 604
   },
   "totals": {
     "audioPlaysTotal": 4460,
-    "audioEpisodesTotal": 141
+    "audioEpisodesTotal": 142
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -62,6 +62,121 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-x3e9w",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/t4kzpr99hcgggmm9/52026_W_Loda8yal.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/4dcd6231-6332-3727-aa49-24593df34cdf"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/living-in-his-rest-specials-cgbc-guest-speaker/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/living-in-his-rest-specials-cgbc-guest-speaker/"
+      },
+      "title": {
+        "episodeName": "Living In His Rest",
+        "subtitle": "",
+        "display": "Living In His Rest"
+      },
+      "series": {
+        "name": "Specials CGBC Guest Speaker",
+        "key": "specials-cgbc-guest-speaker",
+        "type": "standalone"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Bro. Lod Hayes",
+      "date": {
+        "raw": "05/20/2026",
+        "iso": "2026-05-20",
+        "year": 2026,
+        "month": 5,
+        "monthName": "May",
+        "day": 20
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/t4kzpr99hcgggmm9/52026_W_Loda8yal.mp3",
+        "plays": 0,
+        "durationSeconds": 1835,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "ZTmiyZyPoik",
+        "url": "https://www.youtube.com/watch?v=ZTmiyZyPoik",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/21.jpg",
+          "wide": "https://i.ytimg.com/vi/ZTmiyZyPoik/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-14_at_353167lfjf.jpg",
+          "wide": "https://i.ytimg.com/vi/93V3NrKr2iY/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "specials-cgbc-guest-speaker"
+        ],
+        "studies": [],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-05"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": true,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-8mlvv4",
       "sourceKey": {
