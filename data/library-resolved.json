@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-06-02T21:40:11.175Z",
+  "generatedAt": "2026-06-02T23:25:53.766Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 145,
     "archiveItems": 145,
     "videoMatchedItems": 137,
     "transcriptMatchedItems": 10,
-    "quoteCandidateCount": 754
+    "quoteCandidateCount": 756
   },
   "totals": {
-    "audioPlaysTotal": 4540,
+    "audioPlaysTotal": 4541,
     "audioEpisodesTotal": 145
   },
   "current": {
@@ -488,7 +488,7 @@
         "hasVideo": true,
         "youtubeId": "7DjSSwlNN4Y",
         "url": "https://www.youtube.com/watch?v=7DjSSwlNN4Y",
-        "views": 8
+        "views": 12
       },
       "art": {
         "episode": {
@@ -5995,7 +5995,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/qbhkhc32nui5dsuz/12079cno0.mp3",
-        "plays": 34,
+        "plays": 35,
         "durationSeconds": 2343,
         "statsMatchStrategy": "media_url"
       },
