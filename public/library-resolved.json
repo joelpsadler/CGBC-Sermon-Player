@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-06-02T01:30:44.018Z",
+  "generatedAt": "2026-06-02T02:02:00.334Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 144,
-    "archiveItems": 144,
-    "videoMatchedItems": 136,
-    "transcriptMatchedItems": 9,
-    "quoteCandidateCount": 679
+    "rssItems": 145,
+    "archiveItems": 145,
+    "videoMatchedItems": 137,
+    "transcriptMatchedItems": 10,
+    "quoteCandidateCount": 754
   },
   "totals": {
-    "audioPlaysTotal": 4527,
-    "audioEpisodesTotal": 144
+    "audioPlaysTotal": 4529,
+    "audioEpisodesTotal": 145
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-8mlvv4",
-        "detectedFromDate": "2026-05-17",
-        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 6 (Gift of Giving)",
+        "detectedFromEpisode": "media-fowixu",
+        "detectedFromDate": "2026-05-31",
+        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 7 (Gift of Leadership)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -58,10 +58,296 @@
         "square": "assets/collections/grace-gifts/square.jpg",
         "wide": "assets/collections/grace-gifts/wide.jpg"
       },
-      "count": 4
+      "count": 5
     }
   ],
   "items": [
+    {
+      "stableId": "media-fowixu",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/44x3ygu3u9mgdhiz/053126_S7v81y.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/72e8db7b-65a5-3c11-ad58-de5b4e9e5e47"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdf-1780364108/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdf-1780364108/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel in Ministry Pt. 7",
+        "subtitle": "Gift of Leadership",
+        "display": "The Impact of the Gospel in Ministry Pt. 7 (Gift of Leadership)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:6-8",
+        "display": "Romans 12:6-8",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "1 Thessalonians 5:12-13, Hebrews 13:17, Galatians 6:9-10, 1 Timothy 3:4-5, 1 Timothy 3:12, Romans 1:1, 1 Corinthians 1:1, James 1:1, Philippians 2:5-8, James 4:10, Philippians 2:17, 2 Timothy 4:6-7, Genesis 35:14, Luke 22:20",
+        "display": "1 Thessalonians 5:12-13, Hebrews 13:17, Galatians 6:9-10, 1 Timothy 3:4-5, 1 Timothy 3:12, Romans 1:1, 1 Corinthians 1:1, James 1:1, Philippians 2:5-8, James 4:10, Philippians 2:17, 2 Timothy 4:6-7, Genesis 35:14, Luke 22:20",
+        "tokens": [
+          "1 Thessalonians 5:12-13",
+          "1 Thessalonians 5:12",
+          "1 Thessalonians 5:13",
+          "Hebrews 13:17",
+          "Galatians 6:9-10",
+          "Galatians 6:9",
+          "Galatians 6:10",
+          "1 Timothy 3:4-5",
+          "1 Timothy 3:4",
+          "1 Timothy 3:5",
+          "1 Timothy 3:12",
+          "Romans 1:1",
+          "1 Corinthians 1:1",
+          "James 1:1",
+          "Philippians 2:5-8",
+          "Philippians 2:5",
+          "Philippians 2:6",
+          "Philippians 2:7",
+          "Philippians 2:8",
+          "James 4:10",
+          "Philippians 2:17",
+          "2 Timothy 4:6-7",
+          "2 Timothy 4:6",
+          "2 Timothy 4:7",
+          "Genesis 35:14",
+          "Luke 22:20"
+        ],
+        "searchTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "1 Thessalonians 5:12-13",
+          "1 Thessalonians 5:12",
+          "1 Thessalonians 5:13",
+          "Hebrews 13:17",
+          "Galatians 6:9-10",
+          "Galatians 6:9",
+          "Galatians 6:10",
+          "1 Timothy 3:4-5",
+          "1 Timothy 3:4",
+          "1 Timothy 3:5",
+          "1 Timothy 3:12",
+          "Romans 1:1",
+          "1 Corinthians 1:1",
+          "James 1:1",
+          "Philippians 2:5-8",
+          "Philippians 2:5",
+          "Philippians 2:6",
+          "Philippians 2:7",
+          "Philippians 2:8",
+          "James 4:10",
+          "Philippians 2:17",
+          "2 Timothy 4:6-7",
+          "2 Timothy 4:6",
+          "2 Timothy 4:7",
+          "Genesis 35:14",
+          "Luke 22:20"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "1 Thessalonians 5:12-13",
+          "1 Thessalonians 5:12",
+          "1 Thessalonians 5:13",
+          "Hebrews 13:17",
+          "Galatians 6:9-10",
+          "Galatians 6:9",
+          "Galatians 6:10",
+          "1 Timothy 3:4-5",
+          "1 Timothy 3:4",
+          "1 Timothy 3:5",
+          "1 Timothy 3:12",
+          "Romans 1:1",
+          "1 Corinthians 1:1",
+          "James 1:1",
+          "Philippians 2:5-8",
+          "Philippians 2:5",
+          "Philippians 2:6",
+          "Philippians 2:7",
+          "Philippians 2:8",
+          "James 4:10",
+          "Philippians 2:17",
+          "2 Timothy 4:6-7",
+          "2 Timothy 4:6",
+          "2 Timothy 4:7",
+          "Genesis 35:14",
+          "Luke 22:20"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [
+        {
+          "name": "Grace Gifts",
+          "key": "grace-gifts",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/grace-gifts/square.jpg",
+            "wide": "assets/collections/grace-gifts/wide.jpg"
+          },
+          "itemTitle": "Leadership",
+          "itemSortOrder": 5,
+          "collectionItemTitle": "Leadership",
+          "collectionItemOrder": 5
+        }
+      ],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        },
+        {
+          "name": "1 Timothy",
+          "key": "1-timothy"
+        },
+        {
+          "name": "2 Timothy",
+          "key": "2-timothy"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "Galatians",
+          "key": "galatians"
+        },
+        {
+          "name": "Genesis",
+          "key": "genesis"
+        },
+        {
+          "name": "Luke",
+          "key": "luke"
+        },
+        {
+          "name": "James",
+          "key": "james"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "05/31/2026",
+        "iso": "2026-05-31",
+        "year": 2026,
+        "month": 5,
+        "monthName": "May",
+        "day": 31
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-05-31.srt",
+            "cleanFile": "transcripts_clean/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.srt",
+            "displayFile": "transcripts_display/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.srt",
+            "jsonFile": "data/transcripts/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.json",
+            "displayJsonFile": "data/transcripts/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.display.json",
+            "segmentCount": 690,
+            "displaySegmentCount": 591
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-05-31.srt",
+        "cleanFile": "transcripts_clean/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.srt",
+        "displayFile": "transcripts_display/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.srt",
+        "jsonFile": "data/transcripts/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.json",
+        "displayJsonFile": "data/transcripts/en/2026-05-31_the-impact-of-the-gospel-in-ministry-pt-7.display.json",
+        "segmentCount": 690,
+        "displaySegmentCount": 591
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/44x3ygu3u9mgdhiz/053126_S7v81y.mp3",
+        "plays": 0,
+        "durationSeconds": 1876,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "Ag2GGloiKNE",
+        "url": "https://www.youtube.com/watch?v=Ag2GGloiKNE",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/ROMANS_1229fqio.jpg",
+          "wide": "https://i.ytimg.com/vi/Ag2GGloiKNE/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "1-thessalonians",
+          "1-corinthians",
+          "1-timothy",
+          "2-timothy",
+          "philippians",
+          "galatians",
+          "genesis",
+          "luke",
+          "james"
+        ],
+        "collections": [
+          "grace-gifts"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-05"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-gofdaj",
       "sourceKey": {
@@ -194,7 +480,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ixhq6ebmih5tzfxz/052726_W7xe3n.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 1871,
         "statsMatchStrategy": "media_url"
       },
@@ -313,7 +599,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ggke978k4bgrnpkn/David.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 2630,
         "statsMatchStrategy": "media_url"
       },
