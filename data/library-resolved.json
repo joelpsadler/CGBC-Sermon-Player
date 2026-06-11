@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-11T16:21:04.346Z",
+  "generatedAt": "2026-06-11T16:23:59.314Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 146,
     "archiveItems": 146,
     "videoMatchedItems": 138,
-    "transcriptMatchedItems": 10,
-    "quoteCandidateCount": 756
+    "transcriptMatchedItems": 11,
+    "quoteCandidateCount": 831
   },
   "totals": {
     "audioPlaysTotal": 4671,
@@ -198,7 +198,7 @@
           "1 Peter 2:9",
           "1 Peter 2:10"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [
         {
@@ -256,16 +256,27 @@
         "day": 7
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-06-07.srt",
+            "cleanFile": "transcripts_clean/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.srt",
+            "displayFile": "transcripts_display/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.srt",
+            "jsonFile": "data/transcripts/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.json",
+            "displayJsonFile": "data/transcripts/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.display.json",
+            "segmentCount": 787,
+            "displaySegmentCount": 673
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-06-07.srt",
+        "cleanFile": "transcripts_clean/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.srt",
+        "displayFile": "transcripts_display/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.srt",
+        "jsonFile": "data/transcripts/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.json",
+        "displayJsonFile": "data/transcripts/en/2026-06-07_the-impact-of-the-gospel-in-ministry-pt-8.display.json",
+        "segmentCount": 787,
+        "displaySegmentCount": 673
       },
       "audio": {
         "hasAudio": true,
