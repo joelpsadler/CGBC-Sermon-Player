@@ -1,9 +1,122 @@
 {
-  "generatedAt": "2026-06-18T07:25:13.322Z",
+  "generatedAt": "2026-06-18T10:50:34.762Z",
   "version": 2,
   "note": "Lightweight transcript search index. Full transcripts stay in data/transcripts/<lang>/ and are loaded only when an episode opens.",
-  "count": 11,
+  "count": 12,
   "entries": [
+    {
+      "stableId": "media-avg1rg",
+      "date": "2026-06-14",
+      "title": "Same God (How to Endure Change)",
+      "episodeName": "Same God",
+      "subtitle": "How to Endure Change",
+      "series": "2026 Specials",
+      "study": "",
+      "scripture": "Selected Scriptures",
+      "speaker": "Pastor Jacob Lannom",
+      "defaultLanguage": "en",
+      "transcriptJson": "data/transcripts/en/2026-06-14_same-god.json",
+      "transcriptDisplayJson": "data/transcripts/en/2026-06-14_same-god.display.json",
+      "transcriptCleanSrt": "transcripts_clean/en/2026-06-14_same-god.srt",
+      "transcriptDisplaySrt": "transcripts_display/en/2026-06-14_same-god.srt",
+      "languages": {
+        "en": {
+          "language": "en",
+          "incomingFile": "transcripts_incoming/2026-06-14.srt",
+          "cleanFile": "transcripts_clean/en/2026-06-14_same-god.srt",
+          "displayFile": "transcripts_display/en/2026-06-14_same-god.srt",
+          "jsonFile": "data/transcripts/en/2026-06-14_same-god.json",
+          "displayJsonFile": "data/transcripts/en/2026-06-14_same-god.display.json",
+          "segmentCount": 471,
+          "displaySegmentCount": 403
+        }
+      },
+      "metadataText": "Same God | How to Endure Change | Same God (How to Endure Change) | 2026 Specials | 2026-specials | Various | Selected Scriptures | Psalm 102:27, Malachi 3:6, James 1:17, Hebrews 13:8, Isaiah 40:8 | Psalm 102:27 | Malachi 3:6 | James 1:17 | Hebrews 13:8 | Isaiah 40:8 | Psalm | Malachi | James | Hebrews | Isaiah | Pastor Jacob Lannom | 06/14/2026 | 2026-06-14 | 2026 | June",
+      "transcriptKeywordText": "god don life man change even think today word want listen look forever though year years trust church says way yesterday chang didn mean pray said song talk tim times chapter every feel hebrew hebrews matter never people thinking verse 13 chair fact happen preach roman romans sav saved saying serv 3 answer back big call chairs changes children christ find good hear hey jesu jesus little need serving set sing someth something songs stand tomorrow try trying worship able ago awesome believe better called came doubt ever forget guy list looks lot make may means might morn morning pastor provid provide put remember runn running singing situation talking thought whatever 2 8 anyway attach brother car cares come day deliver greek guys heart let long longer maybe mike move music old remain scripture separate serve shift sit sometim sometimes tell time walk water 10 12 40 5 age alway always another answered anyone anywhere ask auction away baby bad beaten best bible bound box broken care changing character circumstance com consum consumed couldn creat created deal decid decided decision delivered destruction different discouragement doesn either encourage endur everyth everything exampl examples faithful father flower gave gett getting girl girls give gonna gospel grace hand happened healer healthy heard help joke knew lawnmower lead liv love mercy michael month mov moved name nervou nervous new okay ourselv ourselves paul persecut persecuting peter place plan play played possible power prayer prayers preaching provided providing remains repeat rest sang savior script scriptur scriptures seem sett setting simply single sitt sitting sleep son",
+      "searchText": "Same God | How to Endure Change | Same God (How to Endure Change) | 2026 Specials | 2026-specials | Various | Selected Scriptures | Psalm 102:27, Malachi 3:6, James 1:17, Hebrews 13:8, Isaiah 40:8 | Psalm 102:27 | Malachi 3:6 | James 1:17 | Hebrews 13:8 | Isaiah 40:8 | Psalm | Malachi | James | Hebrews | Isaiah | Pastor Jacob Lannom | 06/14/2026 | 2026-06-14 | 2026 | June | god don life man change even think today word want listen look forever though year years trust church says way yesterday chang didn mean pray said song talk tim times chapter every feel hebrew hebrews matter never people thinking verse 13 chair fact happen preach roman romans sav saved saying serv 3 answer back big call chairs changes children christ find good hear hey jesu jesus little need serving set sing someth something songs stand tomorrow try trying worship able ago awesome believe better called came doubt ever forget guy list looks lot make may means might morn morning pastor provid provide put remember runn running singing situation talking thought whatever 2 8 anyway attach brother car cares come day deliver greek guys heart let long longer maybe mike move music old remain scripture separate serve shift sit sometim sometimes tell time walk water 10 12 40 5 age alway always another answered anyone anywhere ask auction away baby bad beaten best bible bound box broken care changing character circumstance com consum consumed couldn creat created deal decid decided decision delivered destruction different discouragement doesn either encourage endur everyth everything exampl examples faithful father flower gave gett getting girl girls give gonna gospel grace hand happened healer healthy heard help joke knew lawnmower lead liv love mercy michael month mov moved name nervou nervous new okay ourselv ourselves paul persecut persecuting peter place plan play played possible power prayer prayers preaching provided providing remains repeat rest sang savior script scriptur scriptures seem sett setting simply single sitt sitting sleep son | 12 chapter roman romans typically 5 7 last roman romans year years fact joke matter runn running 23 burn burns elijah man name old year years young pastor association beaten lead longer way youngest 3 ago month months roman romans start started brother dismiss dismissing preach preaching read reading scripture word anyway joke long preach preaching runn running take 12 9 roman romans verse word yesterday hot house mow mowing parent parents way yard hand give help raise big brother deal led wesley list listen month set sing singing song songs throughout worship list set song songs week lot don song songs tim times song songs maybe newer older people whatever",
+      "preview": [
+        {
+          "start": 8.9,
+          "text": "So, Typically would be in Romans, Chapter 12.",
+          "keywords": "12 chapter roman romans typically"
+        },
+        {
+          "start": 25.699,
+          "text": "because we've been in Romans for the last 7.5 years.",
+          "keywords": "5 7 last roman romans year years"
+        },
+        {
+          "start": 33.733,
+          "text": "As a matter of fact, the running joke.",
+          "keywords": "fact joke matter runn running"
+        },
+        {
+          "start": 36.25,
+          "text": "We had a young man, his name's Elijah Burns, 23 years old.",
+          "keywords": "23 burn burns elijah man name old year years young"
+        },
+        {
+          "start": 40.1,
+          "text": "I'm no longer the youngest pastor, lead pastor in the association, by the way, that's been beaten.",
+          "keywords": "pastor association beaten lead longer way youngest"
+        },
+        {
+          "start": 49.149,
+          "text": "And he started Romans like 3 months ago.",
+          "keywords": "3 ago month months roman romans start started"
+        },
+        {
+          "start": 57.666,
+          "text": "I'm like, brother, are you reading scripture and dismissing or are you like preaching the word?",
+          "keywords": "brother dismiss dismissing preach preaching read reading scripture word"
+        },
+        {
+          "start": 61.399,
+          "text": "So anyway, the running joke is, you know, that I take too long in preaching the",
+          "keywords": "anyway joke long preach preaching runn running take"
+        },
+        {
+          "start": 68.65,
+          "text": "word, but we were going to go over Romans 12, verse 9, and Then,",
+          "keywords": "12 9 roman romans verse word"
+        },
+        {
+          "start": 74.766,
+          "text": "yesterday I was mowing the yard at my parents' house, by the way, was it not hot yesterday?",
+          "keywords": "yesterday hot house mow mowing parent parents way yard"
+        },
+        {
+          "start": 83.766,
+          "text": "Raise your hand if you help it, give them a hand because,",
+          "keywords": "hand give help raise"
+        },
+        {
+          "start": 90.916,
+          "text": "And so, you know, that's that's a big deal led my brother Wesley.",
+          "keywords": "big brother deal led wesley"
+        },
+        {
+          "start": 105.849,
+          "text": "can listen to the set list and the worship songs that we're going to be singing throughout this month.",
+          "keywords": "list listen month set sing singing song songs throughout worship"
+        },
+        {
+          "start": 113.299,
+          "text": "all the songs that we're going to do each week are on that set list.",
+          "keywords": "list set song songs week"
+        },
+        {
+          "start": 116,
+          "text": "So a lot of times if you don't know the songs, a lot of",
+          "keywords": "lot don song songs tim times"
+        },
+        {
+          "start": 119.466,
+          "text": "people, maybe newer songs, older songs, whatever, but",
+          "keywords": "song songs maybe newer older people whatever"
+        }
+      ]
+    },
     {
       "stableId": "media-cabbb5",
       "date": "2026-06-07",

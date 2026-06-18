@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-06-18T07:25:25.590Z",
+  "generatedAt": "2026-06-18T10:50:51.577Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 146,
-    "archiveItems": 146,
-    "videoMatchedItems": 138,
-    "transcriptMatchedItems": 11,
-    "quoteCandidateCount": 831
+    "rssItems": 147,
+    "archiveItems": 147,
+    "videoMatchedItems": 139,
+    "transcriptMatchedItems": 12,
+    "quoteCandidateCount": 906
   },
   "totals": {
     "audioPlaysTotal": 4816,
-    "audioEpisodesTotal": 146
+    "audioEpisodesTotal": 147
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -62,6 +62,177 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-avg1rg",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/5k5rrxnbqyeveq79/61426_S_Same_God_PC9j6bx.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/3059922b-f901-32aa-bfb3-23557ede75d0"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/same-god-2026-specials/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/same-god-2026-specials/"
+      },
+      "title": {
+        "episodeName": "Same God",
+        "subtitle": "How to Endure Change",
+        "display": "Same God (How to Endure Change)"
+      },
+      "series": {
+        "name": "2026 Specials",
+        "key": "2026-specials",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "Psalm 102:27, Malachi 3:6, James 1:17, Hebrews 13:8, Isaiah 40:8",
+        "display": "Psalm 102:27, Malachi 3:6, James 1:17, Hebrews 13:8, Isaiah 40:8",
+        "tokens": [
+          "Psalm 102:27",
+          "Malachi 3:6",
+          "James 1:17",
+          "Hebrews 13:8",
+          "Isaiah 40:8"
+        ],
+        "searchTokens": [
+          "Psalm 102:27",
+          "Malachi 3:6",
+          "James 1:17",
+          "Hebrews 13:8",
+          "Isaiah 40:8"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Psalm 102:27",
+          "Malachi 3:6",
+          "James 1:17",
+          "Hebrews 13:8",
+          "Isaiah 40:8"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Psalm",
+          "key": "psalm"
+        },
+        {
+          "name": "Malachi",
+          "key": "malachi"
+        },
+        {
+          "name": "James",
+          "key": "james"
+        },
+        {
+          "name": "Hebrews",
+          "key": "hebrews"
+        },
+        {
+          "name": "Isaiah",
+          "key": "isaiah"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "06/14/2026",
+        "iso": "2026-06-14",
+        "year": 2026,
+        "month": 6,
+        "monthName": "June",
+        "day": 14
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-06-14.srt",
+            "cleanFile": "transcripts_clean/en/2026-06-14_same-god.srt",
+            "displayFile": "transcripts_display/en/2026-06-14_same-god.srt",
+            "jsonFile": "data/transcripts/en/2026-06-14_same-god.json",
+            "displayJsonFile": "data/transcripts/en/2026-06-14_same-god.display.json",
+            "segmentCount": 471,
+            "displaySegmentCount": 403
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-06-14.srt",
+        "cleanFile": "transcripts_clean/en/2026-06-14_same-god.srt",
+        "displayFile": "transcripts_display/en/2026-06-14_same-god.srt",
+        "jsonFile": "data/transcripts/en/2026-06-14_same-god.json",
+        "displayJsonFile": "data/transcripts/en/2026-06-14_same-god.display.json",
+        "segmentCount": 471,
+        "displaySegmentCount": 403
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/5k5rrxnbqyeveq79/61426_S_Same_God_PC9j6bx.mp3",
+        "plays": 0,
+        "durationSeconds": 1315,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "W6F7uuBem14",
+        "url": "https://www.youtube.com/watch?v=W6F7uuBem14",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/5.jpg",
+          "wide": "https://i.ytimg.com/vi/W6F7uuBem14/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2026-01-20_at_10200bkqn6.jpg",
+          "wide": "https://i.ytimg.com/vi/XNjmYEn25xY/sddefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "2026-specials"
+        ],
+        "studies": [],
+        "bibleBooks": [
+          "psalm",
+          "malachi",
+          "james",
+          "hebrews",
+          "isaiah"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-06"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-cabbb5",
       "sourceKey": {
