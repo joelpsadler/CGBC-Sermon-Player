@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-06-23T13:35:04.613Z",
+  "generatedAt": "2026-06-23T16:09:09.122Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 148,
-    "archiveItems": 148,
-    "videoMatchedItems": 140,
-    "transcriptMatchedItems": 13,
-    "quoteCandidateCount": 981
+    "rssItems": 149,
+    "archiveItems": 149,
+    "videoMatchedItems": 141,
+    "transcriptMatchedItems": 14,
+    "quoteCandidateCount": 1056
   },
   "totals": {
-    "audioPlaysTotal": 4882,
-    "audioEpisodesTotal": 148
+    "audioPlaysTotal": 4884,
+    "audioEpisodesTotal": 149
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-cabbb5",
-        "detectedFromDate": "2026-06-07",
-        "detectedFromTitle": "The Impact of the Gospel in Ministry Pt. 8 (Gift of Mercy)",
+        "detectedFromEpisode": "media-tbue0g",
+        "detectedFromDate": "2026-06-21",
+        "detectedFromTitle": "The Impact of the Gospel Pt. 9 (In Relationships)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -62,6 +62,256 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-tbue0g",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/ts2qj3p7sfpp2mjn/62126_S6omeh.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/9a2e46d4-d854-3617-8383-e69f09dfb034"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel%c2%a0pt-9-romans-12/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel%c2%a0pt-9-romans-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel Pt. 9",
+        "subtitle": "In Relationships",
+        "display": "The Impact of the Gospel Pt. 9 (In Relationships)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:6-8",
+        "display": "Romans 12:6-8",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Genesis 1:26, Genesis 2:18, Genesis 1:28, Romans 12:9-21, Romans 5:1-5, John 3:16, Isaiah 5:20, 1 Thessalonians 5:21-22",
+        "display": "Genesis 1:26, Genesis 2:18, Genesis 1:28, Romans 12:9-21, Romans 5:1-5, John 3:16, Isaiah 5:20, 1 Thessalonians 5:21-22",
+        "tokens": [
+          "Genesis 1:26",
+          "Genesis 2:18",
+          "Genesis 1:28",
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 5:1-5",
+          "Romans 5:1",
+          "Romans 5:2",
+          "Romans 5:3",
+          "Romans 5:4",
+          "Romans 5:5",
+          "John 3:16",
+          "Isaiah 5:20",
+          "1 Thessalonians 5:21-22",
+          "1 Thessalonians 5:21",
+          "1 Thessalonians 5:22"
+        ],
+        "searchTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "Genesis 1:26",
+          "Genesis 2:18",
+          "Genesis 1:28",
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 5:1-5",
+          "Romans 5:1",
+          "Romans 5:2",
+          "Romans 5:3",
+          "Romans 5:4",
+          "Romans 5:5",
+          "John 3:16",
+          "Isaiah 5:20",
+          "1 Thessalonians 5:21-22",
+          "1 Thessalonians 5:21",
+          "1 Thessalonians 5:22"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:6-8",
+          "Romans 12:6",
+          "Romans 12:7",
+          "Romans 12:8",
+          "Genesis 1:26",
+          "Genesis 2:18",
+          "Genesis 1:28",
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 5:1-5",
+          "Romans 5:1",
+          "Romans 5:2",
+          "Romans 5:3",
+          "Romans 5:4",
+          "Romans 5:5",
+          "John 3:16",
+          "Isaiah 5:20",
+          "1 Thessalonians 5:21-22",
+          "1 Thessalonians 5:21",
+          "1 Thessalonians 5:22"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "Genesis",
+          "key": "genesis"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        },
+        {
+          "name": "Isaiah",
+          "key": "isaiah"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "06/21/2026",
+        "iso": "2026-06-21",
+        "year": 2026,
+        "month": 6,
+        "monthName": "June",
+        "day": 21
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-06-21.srt",
+            "cleanFile": "transcripts_clean/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
+            "displayFile": "transcripts_display/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
+            "jsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.json",
+            "displayJsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.display.json",
+            "segmentCount": 813,
+            "displaySegmentCount": 704
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-06-21.srt",
+        "cleanFile": "transcripts_clean/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
+        "displayFile": "transcripts_display/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
+        "jsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.json",
+        "displayJsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.display.json",
+        "segmentCount": 813,
+        "displaySegmentCount": 704
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/ts2qj3p7sfpp2mjn/62126_S6omeh.mp3",
+        "plays": 0,
+        "durationSeconds": 2065,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "rz1yS9LE_FA",
+        "url": "https://www.youtube.com/watch?v=rz1yS9LE_FA",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/3asdfasdfasdfsdafvv8.jpg",
+          "wide": "https://i.ytimg.com/vi/rz1yS9LE_FA/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "genesis",
+          "john",
+          "isaiah",
+          "1-thessalonians"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-06"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-f0zw2z",
       "sourceKey": {
@@ -379,7 +629,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5k5rrxnbqyeveq79/61426_S_Same_God_PC9j6bx.mp3",
-        "plays": 8,
+        "plays": 9,
         "durationSeconds": 1315,
         "statsMatchStrategy": "media_url"
       },
@@ -1247,7 +1497,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ggke978k4bgrnpkn/David.mp3",
-        "plays": 6,
+        "plays": 7,
         "durationSeconds": 2630,
         "statsMatchStrategy": "media_url"
       },
