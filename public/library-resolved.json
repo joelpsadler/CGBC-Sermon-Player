@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-26T13:59:33.177Z",
+  "generatedAt": "2026-06-26T14:02:04.578Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 149,
-    "archiveItems": 149,
-    "videoMatchedItems": 141,
+    "rssItems": 150,
+    "archiveItems": 150,
+    "videoMatchedItems": 142,
     "transcriptMatchedItems": 14,
     "quoteCandidateCount": 1056
   },
@@ -62,6 +62,121 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-qggwcd",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/7rgcvhfmu64rimcr/62426_W_Guestbmd3f.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/bc69c8ad-16a2-3f43-a86f-42edfddb6635"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/let-us-not-grow-weary-specials-cgbc-guest-speaker/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/let-us-not-grow-weary-specials-cgbc-guest-speaker/"
+      },
+      "title": {
+        "episodeName": "Let Us Not Grow Weary",
+        "subtitle": "",
+        "display": "Let Us Not Grow Weary"
+      },
+      "series": {
+        "name": "Specials CGBC Guest Speaker",
+        "key": "specials-cgbc-guest-speaker",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Bro. Mark Crawford",
+      "date": {
+        "raw": "06/24/26",
+        "iso": "2026-06-24",
+        "year": 2026,
+        "month": 6,
+        "monthName": "June",
+        "day": 24
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/7rgcvhfmu64rimcr/62426_W_Guestbmd3f.mp3",
+        "plays": 0,
+        "durationSeconds": 741,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "YFb8W_sX9L0",
+        "url": "https://www.youtube.com/watch?v=YFb8W_sX9L0",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/30.jpg",
+          "wide": "https://i.ytimg.com/vi/YFb8W_sX9L0/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2024-05-14_at_353167lfjf.jpg",
+          "wide": "https://i.ytimg.com/vi/93V3NrKr2iY/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "specials-cgbc-guest-speaker"
+        ],
+        "studies": [],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-06"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-tbue0g",
       "sourceKey": {
