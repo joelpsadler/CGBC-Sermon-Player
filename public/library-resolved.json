@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-07-11T14:17:19.424Z",
+  "generatedAt": "2026-07-11T15:12:32.427Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 152,
-    "archiveItems": 152,
-    "videoMatchedItems": 144,
+    "rssItems": 154,
+    "archiveItems": 154,
+    "videoMatchedItems": 146,
     "transcriptMatchedItems": 14,
     "quoteCandidateCount": 1056
   },
   "totals": {
     "audioPlaysTotal": 5099,
-    "audioEpisodesTotal": 152
+    "audioEpisodesTotal": 154
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-tbue0g",
-        "detectedFromDate": "2026-06-21",
-        "detectedFromTitle": "The Impact of the Gospel Pt. 9 (In Relationships)",
+        "detectedFromEpisode": "media-6w18b6",
+        "detectedFromDate": "2026-07-05",
+        "detectedFromTitle": "The Impact of the Gospel (In Relationships Pt. 2)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-f0zw2z",
-        "detectedFromDate": "2026-06-17",
-        "detectedFromTitle": "The Tribulation Pt. 5 (The Prayer of the Saints - The Golden Censer)",
+        "detectedFromEpisode": "media-ms9yo0",
+        "detectedFromDate": "2026-07-08",
+        "detectedFromTitle": "The Tribulation Pt. 6 (Trust His Seal - The 144,000 and the Great Multitude)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -62,6 +62,556 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-ms9yo0",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/43caphgrw385ts3u/70826_Wbgr13.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/feac157b-7cba-3e43-8e5b-d07b2a514714"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdasdfad/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdasdfad/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 6",
+        "subtitle": "Trust His Seal - The 144,000 and the Great Multitude",
+        "display": "The Tribulation Pt. 6 (Trust His Seal - The 144,000 and the Great Multitude)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "Revelation 7:1-8, Revelation 4:1-2, Revelation 14:1-3, Daniel 9:27, Ephesians 1:13-14, Matthew 10:16-20, Matthew 10:28, 2 Corinthians 5:8, Philippians 1:21, Revelation 7:9-17, Revelation 21:4, John 14:26-27",
+        "display": "Revelation 7:1-8, Revelation 4:1-2, Revelation 14:1-3, Daniel 9:27, Ephesians 1:13-14, Matthew 10:16-20, Matthew 10:28, 2 Corinthians 5:8, Philippians 1:21, Revelation 7:9-17, Revelation 21:4, John 14:26-27",
+        "tokens": [
+          "Revelation 7:1-8",
+          "Revelation 7:1",
+          "Revelation 7:2",
+          "Revelation 7:3",
+          "Revelation 7:4",
+          "Revelation 7:5",
+          "Revelation 7:6",
+          "Revelation 7:7",
+          "Revelation 7:8",
+          "Revelation 4:1-2",
+          "Revelation 4:1",
+          "Revelation 4:2",
+          "Revelation 14:1-3",
+          "Revelation 14:1",
+          "Revelation 14:2",
+          "Revelation 14:3",
+          "Daniel 9:27",
+          "Ephesians 1:13-14",
+          "Ephesians 1:13",
+          "Ephesians 1:14",
+          "Matthew 10:16-20",
+          "Matthew 10:16",
+          "Matthew 10:17",
+          "Matthew 10:18",
+          "Matthew 10:19",
+          "Matthew 10:20",
+          "Matthew 10:28",
+          "2 Corinthians 5:8",
+          "Philippians 1:21",
+          "Revelation 7:9-17",
+          "Revelation 7:9",
+          "Revelation 7:10",
+          "Revelation 7:11",
+          "Revelation 7:12",
+          "Revelation 7:13",
+          "Revelation 7:14",
+          "Revelation 7:15",
+          "Revelation 7:16",
+          "Revelation 7:17",
+          "Revelation 21:4",
+          "John 14:26-27",
+          "John 14:26",
+          "John 14:27"
+        ],
+        "searchTokens": [
+          "Revelation 7:1-8",
+          "Revelation 7:1",
+          "Revelation 7:2",
+          "Revelation 7:3",
+          "Revelation 7:4",
+          "Revelation 7:5",
+          "Revelation 7:6",
+          "Revelation 7:7",
+          "Revelation 7:8",
+          "Revelation 4:1-2",
+          "Revelation 4:1",
+          "Revelation 4:2",
+          "Revelation 14:1-3",
+          "Revelation 14:1",
+          "Revelation 14:2",
+          "Revelation 14:3",
+          "Daniel 9:27",
+          "Ephesians 1:13-14",
+          "Ephesians 1:13",
+          "Ephesians 1:14",
+          "Matthew 10:16-20",
+          "Matthew 10:16",
+          "Matthew 10:17",
+          "Matthew 10:18",
+          "Matthew 10:19",
+          "Matthew 10:20",
+          "Matthew 10:28",
+          "2 Corinthians 5:8",
+          "Philippians 1:21",
+          "Revelation 7:9-17",
+          "Revelation 7:9",
+          "Revelation 7:10",
+          "Revelation 7:11",
+          "Revelation 7:12",
+          "Revelation 7:13",
+          "Revelation 7:14",
+          "Revelation 7:15",
+          "Revelation 7:16",
+          "Revelation 7:17",
+          "Revelation 21:4",
+          "John 14:26-27",
+          "John 14:26",
+          "John 14:27"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 7:1-8",
+          "Revelation 7:1",
+          "Revelation 7:2",
+          "Revelation 7:3",
+          "Revelation 7:4",
+          "Revelation 7:5",
+          "Revelation 7:6",
+          "Revelation 7:7",
+          "Revelation 7:8",
+          "Revelation 4:1-2",
+          "Revelation 4:1",
+          "Revelation 4:2",
+          "Revelation 14:1-3",
+          "Revelation 14:1",
+          "Revelation 14:2",
+          "Revelation 14:3",
+          "Daniel 9:27",
+          "Ephesians 1:13-14",
+          "Ephesians 1:13",
+          "Ephesians 1:14",
+          "Matthew 10:16-20",
+          "Matthew 10:16",
+          "Matthew 10:17",
+          "Matthew 10:18",
+          "Matthew 10:19",
+          "Matthew 10:20",
+          "Matthew 10:28",
+          "2 Corinthians 5:8",
+          "Philippians 1:21",
+          "Revelation 7:9-17",
+          "Revelation 7:9",
+          "Revelation 7:10",
+          "Revelation 7:11",
+          "Revelation 7:12",
+          "Revelation 7:13",
+          "Revelation 7:14",
+          "Revelation 7:15",
+          "Revelation 7:16",
+          "Revelation 7:17",
+          "Revelation 21:4",
+          "John 14:26-27",
+          "John 14:26",
+          "John 14:27"
+        ],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "Daniel",
+          "key": "daniel"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        },
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "07/08/2026",
+        "iso": "2026-07-08",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 8
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/43caphgrw385ts3u/70826_Wbgr13.mp3",
+        "plays": 0,
+        "durationSeconds": 1913,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "watXulgUw4U",
+        "url": "https://www.youtube.com/watch?v=watXulgUw4U",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/39.jpg",
+          "wide": "https://i.ytimg.com/vi/watXulgUw4U/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "daniel",
+          "ephesians",
+          "matthew",
+          "2-corinthians",
+          "philippians",
+          "john"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-6w18b6",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/w63t8p4pj74t9xs2/70526_S5ypj9.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/d3cb64d8-6653-34be-a057-864396d26f4a"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/070526_s/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/070526_s/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel",
+        "subtitle": "In Relationships Pt. 2",
+        "display": "The Impact of the Gospel (In Relationships Pt. 2)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:9-21",
+        "display": "Romans 12:9-21",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Genesis Romans 12:6-8, Romans 12:9, Romans 12:10-13, Colossians 4:6, Galatians 6:1, Matthew 18:15-17, Matthew 12:46-50, Matthew 20:16, Philippians 2:3, 1 Thessalonians 4:9, Ephesians 5:25-29, 1 John 2:11",
+        "display": "Genesis Romans 12:6-8, Romans 12:9, Romans 12:10-13, Colossians 4:6, Galatians 6:1, Matthew 18:15-17, Matthew 12:46-50, Matthew 20:16, Philippians 2:3, 1 Thessalonians 4:9, Ephesians 5:25-29, 1 John 2:11",
+        "tokens": [
+          "Romans 12:9",
+          "Romans 12:10-13",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Colossians 4:6",
+          "Galatians 6:1",
+          "Matthew 18:15-17",
+          "Matthew 18:15",
+          "Matthew 18:16",
+          "Matthew 18:17",
+          "Matthew 12:46-50",
+          "Matthew 12:46",
+          "Matthew 12:47",
+          "Matthew 12:48",
+          "Matthew 12:49",
+          "Matthew 12:50",
+          "Matthew 20:16",
+          "Philippians 2:3",
+          "1 Thessalonians 4:9",
+          "Ephesians 5:25-29",
+          "Ephesians 5:25",
+          "Ephesians 5:26",
+          "Ephesians 5:27",
+          "Ephesians 5:28",
+          "Ephesians 5:29",
+          "1 John 2:11"
+        ],
+        "searchTokens": [
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 12:10-13",
+          "Colossians 4:6",
+          "Galatians 6:1",
+          "Matthew 18:15-17",
+          "Matthew 18:15",
+          "Matthew 18:16",
+          "Matthew 18:17",
+          "Matthew 12:46-50",
+          "Matthew 12:46",
+          "Matthew 12:47",
+          "Matthew 12:48",
+          "Matthew 12:49",
+          "Matthew 12:50",
+          "Matthew 20:16",
+          "Philippians 2:3",
+          "1 Thessalonians 4:9",
+          "Ephesians 5:25-29",
+          "Ephesians 5:25",
+          "Ephesians 5:26",
+          "Ephesians 5:27",
+          "Ephesians 5:28",
+          "Ephesians 5:29",
+          "1 John 2:11"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 12:10-13",
+          "Colossians 4:6",
+          "Galatians 6:1",
+          "Matthew 18:15-17",
+          "Matthew 18:15",
+          "Matthew 18:16",
+          "Matthew 18:17",
+          "Matthew 12:46-50",
+          "Matthew 12:46",
+          "Matthew 12:47",
+          "Matthew 12:48",
+          "Matthew 12:49",
+          "Matthew 12:50",
+          "Matthew 20:16",
+          "Philippians 2:3",
+          "1 Thessalonians 4:9",
+          "Ephesians 5:25-29",
+          "Ephesians 5:25",
+          "Ephesians 5:26",
+          "Ephesians 5:27",
+          "Ephesians 5:28",
+          "Ephesians 5:29",
+          "1 John 2:11"
+        ],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "Galatians",
+          "key": "galatians"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        },
+        {
+          "name": "1 John",
+          "key": "1-john"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "Colossians",
+          "key": "colossians"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "07/05/2026",
+        "iso": "2026-07-05",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 5
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/w63t8p4pj74t9xs2/70526_S5ypj9.mp3",
+        "plays": 0,
+        "durationSeconds": 2284,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "-KuBBD0o2C4",
+        "url": "https://www.youtube.com/watch?v=-KuBBD0o2C4",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/42.jpg",
+          "wide": "https://i.ytimg.com/vi/-KuBBD0o2C4/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "matthew",
+          "1-thessalonians",
+          "galatians",
+          "ephesians",
+          "1-john",
+          "philippians",
+          "colossians"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-ozr27d",
       "sourceKey": {
@@ -418,9 +968,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel%c2%a0pt-9-romans-12/"
       },
       "title": {
-        "episodeName": "The Impact of the Gospel Pt. 9",
-        "subtitle": "In Relationships",
-        "display": "The Impact of the Gospel Pt. 9 (In Relationships)"
+        "episodeName": "The Impact of the Gospel",
+        "subtitle": "In Relationships Pt. 1",
+        "display": "The Impact of the Gospel (In Relationships Pt. 1)"
       },
       "series": {
         "name": "Romans Chapter 12",
@@ -573,19 +1123,19 @@
           "en": {
             "language": "en",
             "incomingFile": "transcripts_incoming/2026-06-21.srt",
-            "cleanFile": "transcripts_clean/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
-            "displayFile": "transcripts_display/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
-            "jsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.json",
-            "displayJsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.display.json",
+            "cleanFile": "transcripts_clean/en/2026-06-21_the-impact-of-the-gospel.srt",
+            "displayFile": "transcripts_display/en/2026-06-21_the-impact-of-the-gospel.srt",
+            "jsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel.json",
+            "displayJsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel.display.json",
             "segmentCount": 813,
             "displaySegmentCount": 704
           }
         },
         "incomingFile": "transcripts_incoming/2026-06-21.srt",
-        "cleanFile": "transcripts_clean/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
-        "displayFile": "transcripts_display/en/2026-06-21_the-impact-of-the-gospel-pt-9.srt",
-        "jsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.json",
-        "displayJsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel-pt-9.display.json",
+        "cleanFile": "transcripts_clean/en/2026-06-21_the-impact-of-the-gospel.srt",
+        "displayFile": "transcripts_display/en/2026-06-21_the-impact-of-the-gospel.srt",
+        "jsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel.json",
+        "displayJsonFile": "data/transcripts/en/2026-06-21_the-impact-of-the-gospel.display.json",
         "segmentCount": 813,
         "displaySegmentCount": 704
       },
