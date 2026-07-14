@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-07-14T21:45:18.522Z",
+  "generatedAt": "2026-07-14T21:53:37.249Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 154,
-    "archiveItems": 154,
-    "videoMatchedItems": 146,
-    "transcriptMatchedItems": 16,
-    "quoteCandidateCount": 1206
+    "rssItems": 155,
+    "archiveItems": 155,
+    "videoMatchedItems": 147,
+    "transcriptMatchedItems": 17,
+    "quoteCandidateCount": 1281
   },
   "totals": {
-    "audioPlaysTotal": 5216,
-    "audioEpisodesTotal": 154
+    "audioPlaysTotal": 5217,
+    "audioEpisodesTotal": 155
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-6w18b6",
-        "detectedFromDate": "2026-07-05",
-        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 2",
+        "detectedFromEpisode": "media-ddtx8x",
+        "detectedFromDate": "2026-07-12",
+        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 3 (Biblical Attitude Check)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -62,6 +62,295 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-ddtx8x",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/sbkr8rq3v378wpcw/07-12-2026.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/00fc1bfb-f7cb-3d0d-9f9e-13fec9f9ce6d"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdfa-1784065356/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdfa-1784065356/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel In Relationships Pt. 3",
+        "subtitle": "Biblical Attitude Check",
+        "display": "The Impact of the Gospel In Relationships Pt. 3 (Biblical Attitude Check)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:9-21",
+        "display": "Romans 12:9-21",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Romans 12:10-13, Romans 12:1-2, Proverbs 19:15, Proverbs 20:4, Proverbs 26:14-15, Ecclesiastes 10:18, 2 Thessalonians 3:10, Titus 2:11-12, Proverbs 6:6, Proverbs 10:4, John 14:12-14, Ephesians 3:21-21, Acts 18:24-28",
+        "display": "Romans 12:10-13, Romans 12:1-2, Proverbs 19:15, Proverbs 20:4, Proverbs 26:14-15, Ecclesiastes 10:18, 2 Thessalonians 3:10, Titus 2:11-12, Proverbs 6:6, Proverbs 10:4, John 14:12-14, Ephesians 3:21-21, Acts 18:24-28",
+        "tokens": [
+          "Romans 12:10-13",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:1-2",
+          "Romans 12:1",
+          "Romans 12:2",
+          "Proverbs 19:15",
+          "Proverbs 20:4",
+          "Proverbs 26:14-15",
+          "Proverbs 26:14",
+          "Proverbs 26:15",
+          "Ecclesiastes 10:18",
+          "2 Thessalonians 3:10",
+          "Titus 2:11-12",
+          "Titus 2:11",
+          "Titus 2:12",
+          "Proverbs 6:6",
+          "Proverbs 10:4",
+          "John 14:12-14",
+          "John 14:12",
+          "John 14:13",
+          "John 14:14",
+          "Ephesians 3:21-21",
+          "Ephesians 3:21",
+          "Acts 18:24-28",
+          "Acts 18:24",
+          "Acts 18:25",
+          "Acts 18:26",
+          "Acts 18:27",
+          "Acts 18:28"
+        ],
+        "searchTokens": [
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 12:10-13",
+          "Romans 12:1-2",
+          "Romans 12:1",
+          "Romans 12:2",
+          "Proverbs 19:15",
+          "Proverbs 20:4",
+          "Proverbs 26:14-15",
+          "Proverbs 26:14",
+          "Proverbs 26:15",
+          "Ecclesiastes 10:18",
+          "2 Thessalonians 3:10",
+          "Titus 2:11-12",
+          "Titus 2:11",
+          "Titus 2:12",
+          "Proverbs 6:6",
+          "Proverbs 10:4",
+          "John 14:12-14",
+          "John 14:12",
+          "John 14:13",
+          "John 14:14",
+          "Ephesians 3:21-21",
+          "Ephesians 3:21",
+          "Acts 18:24-28",
+          "Acts 18:24",
+          "Acts 18:25",
+          "Acts 18:26",
+          "Acts 18:27",
+          "Acts 18:28"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:9-21",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "Romans 12:13",
+          "Romans 12:14",
+          "Romans 12:15",
+          "Romans 12:16",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Romans 12:10-13",
+          "Romans 12:1-2",
+          "Romans 12:1",
+          "Romans 12:2",
+          "Proverbs 19:15",
+          "Proverbs 20:4",
+          "Proverbs 26:14-15",
+          "Proverbs 26:14",
+          "Proverbs 26:15",
+          "Ecclesiastes 10:18",
+          "2 Thessalonians 3:10",
+          "Titus 2:11-12",
+          "Titus 2:11",
+          "Titus 2:12",
+          "Proverbs 6:6",
+          "Proverbs 10:4",
+          "John 14:12-14",
+          "John 14:12",
+          "John 14:13",
+          "John 14:14",
+          "Ephesians 3:21-21",
+          "Ephesians 3:21",
+          "Acts 18:24-28",
+          "Acts 18:24",
+          "Acts 18:25",
+          "Acts 18:26",
+          "Acts 18:27",
+          "Acts 18:28"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "2 Thessalonians",
+          "key": "2-thessalonians"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        },
+        {
+          "name": "Titus",
+          "key": "titus"
+        },
+        {
+          "name": "Proverbs",
+          "key": "proverbs"
+        },
+        {
+          "name": "Ecclesiastes",
+          "key": "ecclesiastes"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "07/12/2026",
+        "iso": "2026-07-12",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 12
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-07-12.srt",
+            "cleanFile": "transcripts_clean/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.srt",
+            "displayFile": "transcripts_display/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.srt",
+            "jsonFile": "data/transcripts/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.json",
+            "displayJsonFile": "data/transcripts/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.display.json",
+            "segmentCount": 768,
+            "displaySegmentCount": 692
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-07-12.srt",
+        "cleanFile": "transcripts_clean/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.srt",
+        "displayFile": "transcripts_display/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.srt",
+        "jsonFile": "data/transcripts/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.json",
+        "displayJsonFile": "data/transcripts/en/2026-07-12_the-impact-of-the-gospel-in-relationships-pt-3.display.json",
+        "segmentCount": 768,
+        "displaySegmentCount": 692
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/sbkr8rq3v378wpcw/07-12-2026.mp3",
+        "plays": 0,
+        "durationSeconds": 2239,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "TOReWYSNm3U",
+        "url": "https://www.youtube.com/watch?v=TOReWYSNm3U",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/46.jpg",
+          "wide": "https://i.ytimg.com/vi/TOReWYSNm3U/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "2-thessalonians",
+          "acts",
+          "titus",
+          "proverbs",
+          "ecclesiastes",
+          "ephesians",
+          "john"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-ms9yo0",
       "sourceKey": {
@@ -18428,7 +18717,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5i2qu7q4m47xzddk/4_7_24_How_Are_You_Known_Pt393j4c.mp3",
-        "plays": 28,
+        "plays": 29,
         "durationSeconds": 1950,
         "statsMatchStrategy": "media_url"
       },
