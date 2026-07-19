@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-07-19T13:28:56.812Z",
+  "generatedAt": "2026-07-19T14:09:52.212Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 157,
     "archiveItems": 157,
     "videoMatchedItems": 149,
-    "transcriptMatchedItems": 19,
-    "quoteCandidateCount": 1431
+    "transcriptMatchedItems": 18,
+    "quoteCandidateCount": 1356
   },
   "totals": {
-    "audioPlaysTotal": 5300,
+    "audioPlaysTotal": 5302,
     "audioEpisodesTotal": 157
   },
   "current": {
@@ -227,7 +227,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/edbjr3bpkmrf3t3e/71526_Wbe00f.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 1821,
         "statsMatchStrategy": "media_url"
       },
@@ -235,7 +235,7 @@
         "hasVideo": true,
         "youtubeId": "oVcwJOsjV5Y",
         "url": "https://www.youtube.com/watch?v=oVcwJOsjV5Y",
-        "views": 1
+        "views": 0
       },
       "art": {
         "episode": {
@@ -908,46 +908,35 @@
       },
       "search": {
         "scriptureTokens": [],
-        "hasTranscriptText": true
+        "hasTranscriptText": false
       },
       "collections": [],
       "bookTags": [],
       "speaker": "CGBC",
       "date": {
-        "raw": "07/05/2026",
-        "iso": "2026-07-05",
+        "raw": "07/06/2026",
+        "iso": "2026-07-06",
         "year": 2026,
         "month": 7,
         "monthName": "July",
-        "day": 5
+        "day": 6
       },
       "transcript": {
-        "hasTranscript": true,
+        "hasTranscript": false,
         "defaultLanguage": "en",
-        "languages": {
-          "en": {
-            "language": "en",
-            "incomingFile": "transcripts_incoming/2026-07-05.srt",
-            "cleanFile": "transcripts_clean/en/2026-07-05_worship-night-july-5-2026.srt",
-            "displayFile": "transcripts_display/en/2026-07-05_worship-night-july-5-2026.srt",
-            "jsonFile": "data/transcripts/en/2026-07-05_worship-night-july-5-2026.json",
-            "displayJsonFile": "data/transcripts/en/2026-07-05_worship-night-july-5-2026.display.json",
-            "segmentCount": 814,
-            "displaySegmentCount": 737
-          }
-        },
-        "incomingFile": "transcripts_incoming/2026-07-05.srt",
-        "cleanFile": "transcripts_clean/en/2026-07-05_worship-night-july-5-2026.srt",
-        "displayFile": "transcripts_display/en/2026-07-05_worship-night-july-5-2026.srt",
-        "jsonFile": "data/transcripts/en/2026-07-05_worship-night-july-5-2026.json",
-        "displayJsonFile": "data/transcripts/en/2026-07-05_worship-night-july-5-2026.display.json",
-        "segmentCount": 814,
-        "displaySegmentCount": 737
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/2kjtzz4ay8xpkgis/70826_Worship_night_aditf.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 3276,
         "statsMatchStrategy": "media_url"
       },
@@ -955,7 +944,7 @@
         "hasVideo": true,
         "youtubeId": "Uf9Aj0DbO4c",
         "url": "https://www.youtube.com/watch?v=Uf9Aj0DbO4c",
-        "views": 0
+        "views": 1
       },
       "art": {
         "episode": {
