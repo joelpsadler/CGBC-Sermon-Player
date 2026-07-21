@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-07-21T10:13:13.130Z",
+  "generatedAt": "2026-07-21T10:46:09.198Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 157,
-    "archiveItems": 157,
-    "videoMatchedItems": 149,
-    "transcriptMatchedItems": 18,
-    "quoteCandidateCount": 1356
+    "rssItems": 158,
+    "archiveItems": 158,
+    "videoMatchedItems": 150,
+    "transcriptMatchedItems": 19,
+    "quoteCandidateCount": 1431
   },
   "totals": {
-    "audioPlaysTotal": 5327,
-    "audioEpisodesTotal": 157
+    "audioPlaysTotal": 5328,
+    "audioEpisodesTotal": 158
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-ddtx8x",
-        "detectedFromDate": "2026-07-12",
-        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 3 (Biblical Attitude Check)",
+        "detectedFromEpisode": "media-9nnzx1",
+        "detectedFromDate": "2026-07-19",
+        "detectedFromTitle": "The Impact of the Gospel in Relationships Pt. 4 (Rejoice! Again, I say, Rejoice!)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -62,6 +62,252 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-9nnzx1",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/d98yrkiigem536ft/7_19_26_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/4c749a14-860a-3160-b5a5-01438fb51694"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-in-relationships-pt-4-romans-chapter-12/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-in-relationships-pt-4-romans-chapter-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel in Relationships Pt. 4",
+        "subtitle": "Rejoice! Again, I say, Rejoice!",
+        "display": "The Impact of the Gospel in Relationships Pt. 4 (Rejoice! Again, I say, Rejoice!)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:12",
+        "display": "Romans 12:12",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Romans 12:10-11, John 17:17-19, Romans 5:2, Isaiah 65:18, Philippians 4:4, 1 Thesslaonians 5:16, Ecclesiastes 5:4-5, Numbers 30:2, Psalm 76:11, James 5:12, Psalm 30:1-5",
+        "display": "Romans 12:10-11, John 17:17-19, Romans 5:2, Isaiah 65:18, Philippians 4:4, 1 Thesslaonians 5:16, Ecclesiastes 5:4-5, Numbers 30:2, Psalm 76:11, James 5:12, Psalm 30:1-5",
+        "tokens": [
+          "Romans 12:10-11",
+          "Romans 12:10",
+          "Romans 12:11",
+          "John 17:17-19",
+          "John 17:17",
+          "John 17:18",
+          "John 17:19",
+          "Romans 5:2",
+          "Isaiah 65:18",
+          "Philippians 4:4",
+          "Ecclesiastes 5:4-5",
+          "Ecclesiastes 5:4",
+          "Ecclesiastes 5:5",
+          "Numbers 30:2",
+          "Psalm 76:11",
+          "James 5:12",
+          "Psalm 30:1-5",
+          "Psalm 30:1",
+          "Psalm 30:2",
+          "Psalm 30:3",
+          "Psalm 30:4",
+          "Psalm 30:5"
+        ],
+        "searchTokens": [
+          "Romans 12:12",
+          "Romans 12:10-11",
+          "Romans 12:10",
+          "Romans 12:11",
+          "John 17:17-19",
+          "John 17:17",
+          "John 17:18",
+          "John 17:19",
+          "Romans 5:2",
+          "Isaiah 65:18",
+          "Philippians 4:4",
+          "Ecclesiastes 5:4-5",
+          "Ecclesiastes 5:4",
+          "Ecclesiastes 5:5",
+          "Numbers 30:2",
+          "Psalm 76:11",
+          "James 5:12",
+          "Psalm 30:1-5",
+          "Psalm 30:1",
+          "Psalm 30:2",
+          "Psalm 30:3",
+          "Psalm 30:4",
+          "Psalm 30:5"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:12",
+          "Romans 12:10-11",
+          "Romans 12:10",
+          "Romans 12:11",
+          "John 17:17-19",
+          "John 17:17",
+          "John 17:18",
+          "John 17:19",
+          "Romans 5:2",
+          "Isaiah 65:18",
+          "Philippians 4:4",
+          "Ecclesiastes 5:4-5",
+          "Ecclesiastes 5:4",
+          "Ecclesiastes 5:5",
+          "Numbers 30:2",
+          "Psalm 76:11",
+          "James 5:12",
+          "Psalm 30:1-5",
+          "Psalm 30:1",
+          "Psalm 30:2",
+          "Psalm 30:3",
+          "Psalm 30:4",
+          "Psalm 30:5"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "James",
+          "key": "james"
+        },
+        {
+          "name": "Psalm",
+          "key": "psalm"
+        },
+        {
+          "name": "Isaiah",
+          "key": "isaiah"
+        },
+        {
+          "name": "Ecclesiastes",
+          "key": "ecclesiastes"
+        },
+        {
+          "name": "Numbers",
+          "key": "numbers"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "07/19/2026",
+        "iso": "2026-07-19",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 19
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-07-19.srt",
+            "cleanFile": "transcripts_clean/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.srt",
+            "displayFile": "transcripts_display/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.srt",
+            "jsonFile": "data/transcripts/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.json",
+            "displayJsonFile": "data/transcripts/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.display.json",
+            "segmentCount": 760,
+            "displaySegmentCount": 694
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-07-19.srt",
+        "cleanFile": "transcripts_clean/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.srt",
+        "displayFile": "transcripts_display/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.srt",
+        "jsonFile": "data/transcripts/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.json",
+        "displayJsonFile": "data/transcripts/en/2026-07-19_the-impact-of-the-gospel-in-relationships-pt-4.display.json",
+        "segmentCount": 760,
+        "displaySegmentCount": 694
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/d98yrkiigem536ft/7_19_26_S.mp3",
+        "plays": 0,
+        "durationSeconds": 2040,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "hEUHosiQNGM",
+        "url": "https://www.youtube.com/watch?v=hEUHosiQNGM",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/53.jpg",
+          "wide": "https://i.ytimg.com/vi/hEUHosiQNGM/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "john",
+          "philippians",
+          "1-thessalonians",
+          "james",
+          "psalm",
+          "isaiah",
+          "ecclesiastes",
+          "numbers"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-hc3aj7",
       "sourceKey": {
@@ -8134,7 +8380,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
-        "plays": 178,
+        "plays": 179,
         "durationSeconds": 2370,
         "statsMatchStrategy": "media_url"
       },
