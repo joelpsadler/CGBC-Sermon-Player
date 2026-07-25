@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-07-25T14:26:05.298Z",
+  "generatedAt": "2026-07-25T15:31:46.076Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 158,
-    "archiveItems": 158,
-    "videoMatchedItems": 150,
-    "transcriptMatchedItems": 19,
-    "quoteCandidateCount": 1431
+    "rssItems": 159,
+    "archiveItems": 159,
+    "videoMatchedItems": 151,
+    "transcriptMatchedItems": 20,
+    "quoteCandidateCount": 1506
   },
   "totals": {
-    "audioPlaysTotal": 5436,
-    "audioEpisodesTotal": 158
+    "audioPlaysTotal": 5437,
+    "audioEpisodesTotal": 159
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-hc3aj7",
-        "detectedFromDate": "2026-07-15",
-        "detectedFromTitle": "The Tribulation Pt. 7 (Trust His Seal Pt. 2)",
+        "detectedFromEpisode": "media-ljdzkp",
+        "detectedFromDate": "2026-07-22",
+        "detectedFromTitle": "The Tribulation Pt. 8 (God's Wrath Announced and Active - The Seven Trumpets)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -62,6 +62,182 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-ljdzkp",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/kdrwh2r97p26gbds/7_22_26_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/de141074-df9a-37bf-a818-8ee8a02f5c18"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdsaf/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdsaf/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 8",
+        "subtitle": "God's Wrath Announced and Active - The Seven Trumpets",
+        "display": "The Tribulation Pt. 8 (God's Wrath Announced and Active - The Seven Trumpets)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "Revelation 8, Matthew 24:21, Joshua 6:10, Zephaniah 1:16, Matthew 24:31, Joel 2:30",
+        "display": "Revelation 8, Matthew 24:21, Joshua 6:10, Zephaniah 1:16, Matthew 24:31, Joel 2:30",
+        "tokens": [
+          "Revelation 8",
+          "Matthew 24:21",
+          "Joshua 6:10",
+          "Zephaniah 1:16",
+          "Matthew 24:31",
+          "Joel 2:30"
+        ],
+        "searchTokens": [
+          "Revelation 8",
+          "Matthew 24:21",
+          "Joshua 6:10",
+          "Zephaniah 1:16",
+          "Matthew 24:31",
+          "Joel 2:30"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 8",
+          "Matthew 24:21",
+          "Joshua 6:10",
+          "Zephaniah 1:16",
+          "Matthew 24:31",
+          "Joel 2:30"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "Joshua",
+          "key": "joshua"
+        },
+        {
+          "name": "Zephaniah",
+          "key": "zephaniah"
+        },
+        {
+          "name": "Joel",
+          "key": "joel"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "07/22/2026",
+        "iso": "2026-07-22",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 22
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-07-22.srt",
+            "cleanFile": "transcripts_clean/en/2026-07-22_the-tribulation-pt-8.srt",
+            "displayFile": "transcripts_display/en/2026-07-22_the-tribulation-pt-8.srt",
+            "jsonFile": "data/transcripts/en/2026-07-22_the-tribulation-pt-8.json",
+            "displayJsonFile": "data/transcripts/en/2026-07-22_the-tribulation-pt-8.display.json",
+            "segmentCount": 642,
+            "displaySegmentCount": 544
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-07-22.srt",
+        "cleanFile": "transcripts_clean/en/2026-07-22_the-tribulation-pt-8.srt",
+        "displayFile": "transcripts_display/en/2026-07-22_the-tribulation-pt-8.srt",
+        "jsonFile": "data/transcripts/en/2026-07-22_the-tribulation-pt-8.json",
+        "displayJsonFile": "data/transcripts/en/2026-07-22_the-tribulation-pt-8.display.json",
+        "segmentCount": 642,
+        "displaySegmentCount": 544
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/kdrwh2r97p26gbds/7_22_26_W.mp3",
+        "plays": 0,
+        "durationSeconds": 1800,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "6gbz93v6wS4",
+        "url": "https://www.youtube.com/watch?v=6gbz93v6wS4",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/asdfasbvewthyawSgfw.jpg",
+          "wide": "https://i.ytimg.com/vi/6gbz93v6wS4/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "matthew",
+          "joshua",
+          "zephaniah",
+          "joel"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-9nnzx1",
       "sourceKey": {
@@ -1057,7 +1233,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/43caphgrw385ts3u/70826_Wbgr13.mp3",
-        "plays": 9,
+        "plays": 10,
         "durationSeconds": 1913,
         "statsMatchStrategy": "media_url"
       },
