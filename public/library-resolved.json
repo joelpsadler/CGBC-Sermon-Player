@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T22:52:03.327Z",
+  "generatedAt": "2026-07-28T23:49:40.408Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 161,
@@ -32,7 +32,7 @@
         "studyName": "Romans",
         "detectedFromEpisode": "media-wgl2w7",
         "detectedFromDate": "2026-07-26",
-        "detectedFromTitle": "The Impact of the Gospel Pt. 13 (A Biblical Response to Difficult Times)",
+        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 5 (A Biblical Response to Difficult Times)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -50,6 +50,17 @@
   },
   "collections": [
     {
+      "key": "04-rejoice-again",
+      "name": "04 Rejoice! Again",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": null,
+        "wide": null
+      },
+      "count": 1
+    },
+    {
       "key": "grace-gifts",
       "name": "Grace Gifts",
       "description": "",
@@ -59,126 +70,31 @@
         "wide": "assets/collections/grace-gifts/wide.jpg"
       },
       "count": 6
+    },
+    {
+      "key": "i-say",
+      "name": "I Say",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": null,
+        "wide": null
+      },
+      "count": 1
+    },
+    {
+      "key": "the-impact-of-the-gospel-in-relationships",
+      "name": "The Impact of the Gospel In Relationships",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": null,
+        "wide": null
+      },
+      "count": 5
     }
   ],
   "items": [
-    {
-      "stableId": "media-6cnuci",
-      "sourceKey": {
-        "mediaUrl": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
-        "rssGuid": "broJacobcedargrovebaptist.podbean.com/6f6ff09c-945a-348c-9bf5-6eb859925e0d"
-      },
-      "links": {
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/emd-2026-block-2-kickoff-every-man-discipleship-block-2/",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/emd-2026-block-2-kickoff-every-man-discipleship-block-2/"
-      },
-      "title": {
-        "episodeName": "Block 2 Kickoff",
-        "subtitle": "featuring Peter Demos",
-        "display": "Block 2 Kickoff (featuring Peter Demos)"
-      },
-      "series": {
-        "name": "2026 Every Man Discipleship Block 2",
-        "key": "2026-every-man-discipleship-block-2",
-        "type": "topical"
-      },
-      "study": {
-        "name": "CGBC - Every Man Discipleship",
-        "key": "cgbc-every-man-discipleship",
-        "type": "topical_study"
-      },
-      "scripture": {
-        "raw": "Various",
-        "display": "Selected Scriptures",
-        "book": null,
-        "bookKey": null,
-        "isVarious": true
-      },
-      "references": {
-        "raw": "",
-        "display": "",
-        "tokens": [],
-        "searchTokens": []
-      },
-      "search": {
-        "scriptureTokens": [],
-        "hasTranscriptText": false
-      },
-      "collections": [],
-      "bookTags": [],
-      "speaker": "Peter Demos & Pastor Jacob Lannom",
-      "date": {
-        "raw": "07/27/2026",
-        "iso": "2026-07-27",
-        "year": 2026,
-        "month": 7,
-        "monthName": "July",
-        "day": 27
-      },
-      "transcript": {
-        "hasTranscript": false,
-        "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
-      },
-      "audio": {
-        "hasAudio": true,
-        "url": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
-        "plays": 3,
-        "durationSeconds": 3341,
-        "statsMatchStrategy": "media_url"
-      },
-      "video": {
-        "hasVideo": true,
-        "youtubeId": "17DvOs9vHNs",
-        "url": "https://www.youtube.com/watch?v=17DvOs9vHNs",
-        "views": 4
-      },
-      "art": {
-        "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
-          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
-        },
-        "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
-          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
-        },
-        "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
-          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
-        }
-      },
-      "memberships": {
-        "series": [
-          "2026-every-man-discipleship-block-2"
-        ],
-        "studies": [
-          "cgbc-every-man-discipleship"
-        ],
-        "bibleBooks": [],
-        "collections": [],
-        "byYear": [
-          "2026"
-        ],
-        "byMonth": [
-          "2026-07"
-        ]
-      },
-      "presentation": {
-        "bibleBooksMode": "none"
-      },
-      "flags": {
-        "isStandaloneEpisode": false,
-        "includeInAudioTotals": true,
-        "includeInVideoTotals": true
-      }
-    },
     {
       "stableId": "media-wgl2w7",
       "sourceKey": {
@@ -190,9 +106,9 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-pt-13-romans-chapter-12/"
       },
       "title": {
-        "episodeName": "The Impact of the Gospel Pt. 13",
+        "episodeName": "The Impact of the Gospel In Relationships Pt. 5",
         "subtitle": "A Biblical Response to Difficult Times",
-        "display": "The Impact of the Gospel Pt. 13 (A Biblical Response to Difficult Times)"
+        "display": "The Impact of the Gospel In Relationships Pt. 5 (A Biblical Response to Difficult Times)"
       },
       "series": {
         "name": "Romans Chapter 12",
@@ -329,7 +245,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "A Biblical Response to Difficult Times",
+          "itemSortOrder": 5,
+          "collectionItemTitle": "A Biblical Response to Difficult Times",
+          "collectionItemOrder": 5
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -388,19 +319,19 @@
           "en": {
             "language": "en",
             "incomingFile": "transcripts_incoming/2026-07-26.srt",
-            "cleanFile": "transcripts_clean/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
-            "displayFile": "transcripts_display/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
-            "jsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.json",
-            "displayJsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.display.json",
+            "cleanFile": "transcripts_clean/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.srt",
+            "displayFile": "transcripts_display/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.srt",
+            "jsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.json",
+            "displayJsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.display.json",
             "segmentCount": 862,
             "displaySegmentCount": 792
           }
         },
         "incomingFile": "transcripts_incoming/2026-07-26.srt",
-        "cleanFile": "transcripts_clean/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
-        "displayFile": "transcripts_display/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
-        "jsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.json",
-        "displayJsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.display.json",
+        "cleanFile": "transcripts_clean/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.srt",
+        "displayFile": "transcripts_display/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.srt",
+        "jsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.json",
+        "displayJsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-in-relationships-pt-5.display.json",
         "segmentCount": 862,
         "displaySegmentCount": 792
       },
@@ -450,7 +381,9 @@
           "joshua",
           "ephesians"
         ],
-        "collections": [],
+        "collections": [
+          "the-impact-of-the-gospel-in-relationships"
+        ],
         "byYear": [
           "2026"
         ],
@@ -460,6 +393,123 @@
       },
       "presentation": {
         "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-6cnuci",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/6f6ff09c-945a-348c-9bf5-6eb859925e0d"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/emd-2026-block-2-kickoff-every-man-discipleship-block-2/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/emd-2026-block-2-kickoff-every-man-discipleship-block-2/"
+      },
+      "title": {
+        "episodeName": "Block 2 Kickoff",
+        "subtitle": "featuring Peter Demos",
+        "display": "Block 2 Kickoff (featuring Peter Demos)"
+      },
+      "series": {
+        "name": "2026 Every Man Discipleship Block 2",
+        "key": "2026-every-man-discipleship-block-2",
+        "type": "topical"
+      },
+      "study": {
+        "name": "CGBC - Every Man Discipleship",
+        "key": "cgbc-every-man-discipleship",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Peter Demos & Pastor Jacob Lannom",
+      "date": {
+        "raw": "07/27/2026",
+        "iso": "2026-07-27",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 27
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
+        "plays": 3,
+        "durationSeconds": 3341,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "17DvOs9vHNs",
+        "url": "https://www.youtube.com/watch?v=17DvOs9vHNs",
+        "views": 4
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "2026-every-man-discipleship-block-2"
+        ],
+        "studies": [
+          "cgbc-every-man-discipleship"
+        ],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
       },
       "flags": {
         "isStandaloneEpisode": false,
@@ -756,7 +806,50 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "04 Rejoice! Again",
+          "key": "04-rejoice-again",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
+        },
+        {
+          "name": "I Say",
+          "key": "i-say",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
+        },
+        {
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "Rejoice!",
+          "itemSortOrder": null,
+          "collectionItemTitle": "Rejoice!",
+          "collectionItemOrder": null
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -872,7 +965,11 @@
           "ecclesiastes",
           "numbers"
         ],
-        "collections": [],
+        "collections": [
+          "04-rejoice-again",
+          "i-say",
+          "the-impact-of-the-gospel-in-relationships"
+        ],
         "byYear": [
           "2026"
         ],
@@ -1270,7 +1367,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "Biblical Attitude Check",
+          "itemSortOrder": 3,
+          "collectionItemTitle": "Biblical Attitude Check",
+          "collectionItemOrder": 3
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -1381,7 +1493,9 @@
           "ephesians",
           "john"
         ],
-        "collections": [],
+        "collections": [
+          "the-impact-of-the-gospel-in-relationships"
+        ],
         "byYear": [
           "2026"
         ],
@@ -1957,7 +2071,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "The Impact of the Gospel In Relationships Pt. 2",
+          "itemSortOrder": 2,
+          "collectionItemTitle": "The Impact of the Gospel In Relationships Pt. 2",
+          "collectionItemOrder": 2
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -2068,7 +2197,9 @@
           "philippians",
           "colossians"
         ],
-        "collections": [],
+        "collections": [
+          "the-impact-of-the-gospel-in-relationships"
+        ],
         "byYear": [
           "2026"
         ],
@@ -2557,7 +2688,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "The Impact of the Gospel In Relationships Pt. 1",
+          "itemSortOrder": 1,
+          "collectionItemTitle": "The Impact of the Gospel In Relationships Pt. 1",
+          "collectionItemOrder": 1
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -2653,7 +2799,9 @@
           "isaiah",
           "1-thessalonians"
         ],
-        "collections": [],
+        "collections": [
+          "the-impact-of-the-gospel-in-relationships"
+        ],
         "byYear": [
           "2026"
         ],
@@ -16946,7 +17094,7 @@
         "hasVideo": true,
         "youtubeId": "-uVBwzxY5M4",
         "url": "https://www.youtube.com/watch?v=-uVBwzxY5M4",
-        "views": 17
+        "views": 18
       },
       "art": {
         "episode": {
