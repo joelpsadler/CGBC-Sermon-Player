@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-07-28T00:41:34.822Z",
+  "generatedAt": "2026-07-28T00:49:26.893Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 160,
     "archiveItems": 160,
     "videoMatchedItems": 152,
-    "transcriptMatchedItems": 21,
-    "quoteCandidateCount": 1581
+    "transcriptMatchedItems": 20,
+    "quoteCandidateCount": 1506
   },
   "totals": {
-    "audioPlaysTotal": 5448,
+    "audioPlaysTotal": 5449,
     "audioEpisodesTotal": 160
   },
   "current": {
@@ -20,19 +20,19 @@
       "wednesday": ""
     },
     "seriesKeys": [
-      "every-man-discipleship-block-2",
+      "romans-chapter-12",
       "the-tribulation"
     ],
     "lanes": {
       "sunday": {
         "lane": "sunday",
-        "seriesKey": "every-man-discipleship-block-2",
-        "seriesName": "Every Man Discipleship Block 2",
-        "studyKey": "cgbc-every-man-discipleship",
-        "studyName": "CGBC - Every Man Discipleship",
-        "detectedFromEpisode": "media-6cnuci",
-        "detectedFromDate": "2026-07-26",
-        "detectedFromTitle": "2026 Block 2 Kickoff (featuring Peter Demos)",
+        "seriesKey": "romans-chapter-12",
+        "seriesName": "Romans Chapter 12",
+        "studyKey": "romans",
+        "studyName": "Romans",
+        "detectedFromEpisode": "media-9nnzx1",
+        "detectedFromDate": "2026-07-19",
+        "detectedFromTitle": "The Impact of the Gospel in Relationships Pt. 4 (Rejoice! Again, I say, Rejoice!)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -102,46 +102,35 @@
       },
       "search": {
         "scriptureTokens": [],
-        "hasTranscriptText": true
+        "hasTranscriptText": false
       },
       "collections": [],
       "bookTags": [],
       "speaker": "Peter Demos & Pastor Jacob Lannom",
       "date": {
-        "raw": "07/26/2026",
-        "iso": "2026-07-26",
+        "raw": "07/27/2026",
+        "iso": "2026-07-27",
         "year": 2026,
         "month": 7,
         "monthName": "July",
-        "day": 26
+        "day": 27
       },
       "transcript": {
-        "hasTranscript": true,
+        "hasTranscript": false,
         "defaultLanguage": "en",
-        "languages": {
-          "en": {
-            "language": "en",
-            "incomingFile": "transcripts_incoming/2026-07-26.srt",
-            "cleanFile": "transcripts_clean/en/2026-07-26_2026-block-2-kickoff.srt",
-            "displayFile": "transcripts_display/en/2026-07-26_2026-block-2-kickoff.srt",
-            "jsonFile": "data/transcripts/en/2026-07-26_2026-block-2-kickoff.json",
-            "displayJsonFile": "data/transcripts/en/2026-07-26_2026-block-2-kickoff.display.json",
-            "segmentCount": 862,
-            "displaySegmentCount": 792
-          }
-        },
-        "incomingFile": "transcripts_incoming/2026-07-26.srt",
-        "cleanFile": "transcripts_clean/en/2026-07-26_2026-block-2-kickoff.srt",
-        "displayFile": "transcripts_display/en/2026-07-26_2026-block-2-kickoff.srt",
-        "jsonFile": "data/transcripts/en/2026-07-26_2026-block-2-kickoff.json",
-        "displayJsonFile": "data/transcripts/en/2026-07-26_2026-block-2-kickoff.display.json",
-        "segmentCount": 862,
-        "displaySegmentCount": 792
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 3341,
         "statsMatchStrategy": "media_url"
       },
