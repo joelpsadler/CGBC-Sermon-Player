@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-07-28T00:55:43.073Z",
+  "generatedAt": "2026-07-28T11:09:08.676Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 160,
-    "archiveItems": 160,
-    "videoMatchedItems": 152,
-    "transcriptMatchedItems": 20,
-    "quoteCandidateCount": 1506
+    "rssItems": 161,
+    "archiveItems": 161,
+    "videoMatchedItems": 153,
+    "transcriptMatchedItems": 21,
+    "quoteCandidateCount": 1581
   },
   "totals": {
-    "audioPlaysTotal": 5449,
-    "audioEpisodesTotal": 160
+    "audioPlaysTotal": 5451,
+    "audioEpisodesTotal": 161
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-9nnzx1",
-        "detectedFromDate": "2026-07-19",
-        "detectedFromTitle": "The Impact of the Gospel in Relationships Pt. 4 (Rejoice! Again, I say, Rejoice!)",
+        "detectedFromEpisode": "media-wgl2w7",
+        "detectedFromDate": "2026-07-26",
+        "detectedFromTitle": "The Impact of the Gospel Pt. 13 (A Biblical Response to Difficult Times)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -130,7 +130,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
-        "plays": 1,
+        "plays": 2,
         "durationSeconds": 3341,
         "statsMatchStrategy": "media_url"
       },
@@ -138,7 +138,7 @@
         "hasVideo": true,
         "youtubeId": "17DvOs9vHNs",
         "url": "https://www.youtube.com/watch?v=17DvOs9vHNs",
-        "views": 2
+        "views": 4
       },
       "art": {
         "episode": {
@@ -172,6 +172,294 @@
       },
       "presentation": {
         "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-wgl2w7",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/c7vi3yargmfxxv6r/7_26_26_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/9baa2ed5-893d-3e24-9b7e-4b5f755a9d2b"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-pt-13-romans-chapter-12/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-pt-13-romans-chapter-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel Pt. 13",
+        "subtitle": "A Biblical Response to Difficult Times",
+        "display": "The Impact of the Gospel Pt. 13 (A Biblical Response to Difficult Times)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:12",
+        "display": "Romans 12:12",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Romans 12:9-12, 2 Corinthians 9:8, Philippians 4;19, Psalm 23:5, Genesis 39:6-20, Proverbs 4:14-15, 1 Corinthians 10:13, 2 Timothy 2:22, James 4:7, Joshua 5:13-14, Ephesians 6:16",
+        "display": "Romans 12:9-12, 2 Corinthians 9:8, Philippians 4;19, Psalm 23:5, Genesis 39:6-20, Proverbs 4:14-15, 1 Corinthians 10:13, 2 Timothy 2:22, James 4:7, Joshua 5:13-14, Ephesians 6:16",
+        "tokens": [
+          "Romans 12:9-12",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "Romans 12:12",
+          "2 Corinthians 9:8",
+          "Philippians 9:4",
+          "Philippians 9:19",
+          "Psalm 23:5",
+          "Genesis 39:6-20",
+          "Genesis 39:6",
+          "Genesis 39:7",
+          "Genesis 39:8",
+          "Genesis 39:9",
+          "Genesis 39:10",
+          "Genesis 39:11",
+          "Genesis 39:12",
+          "Genesis 39:13",
+          "Genesis 39:14",
+          "Genesis 39:15",
+          "Genesis 39:16",
+          "Genesis 39:17",
+          "Genesis 39:18",
+          "Genesis 39:19",
+          "Genesis 39:20",
+          "Proverbs 4:14-15",
+          "Proverbs 4:14",
+          "Proverbs 4:15",
+          "1 Corinthians 10:13",
+          "2 Timothy 2:22",
+          "James 4:7",
+          "Joshua 5:13-14",
+          "Joshua 5:13",
+          "Joshua 5:14",
+          "Ephesians 6:16"
+        ],
+        "searchTokens": [
+          "Romans 12:12",
+          "Romans 12:9-12",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "2 Corinthians 9:8",
+          "Philippians 9:4",
+          "Philippians 9:19",
+          "Psalm 23:5",
+          "Genesis 39:6-20",
+          "Genesis 39:6",
+          "Genesis 39:7",
+          "Genesis 39:8",
+          "Genesis 39:9",
+          "Genesis 39:10",
+          "Genesis 39:11",
+          "Genesis 39:12",
+          "Genesis 39:13",
+          "Genesis 39:14",
+          "Genesis 39:15",
+          "Genesis 39:16",
+          "Genesis 39:17",
+          "Genesis 39:18",
+          "Genesis 39:19",
+          "Genesis 39:20",
+          "Proverbs 4:14-15",
+          "Proverbs 4:14",
+          "Proverbs 4:15",
+          "1 Corinthians 10:13",
+          "2 Timothy 2:22",
+          "James 4:7",
+          "Joshua 5:13-14",
+          "Joshua 5:13",
+          "Joshua 5:14",
+          "Ephesians 6:16"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:12",
+          "Romans 12:9-12",
+          "Romans 12:9",
+          "Romans 12:10",
+          "Romans 12:11",
+          "2 Corinthians 9:8",
+          "Philippians 9:4",
+          "Philippians 9:19",
+          "Psalm 23:5",
+          "Genesis 39:6-20",
+          "Genesis 39:6",
+          "Genesis 39:7",
+          "Genesis 39:8",
+          "Genesis 39:9",
+          "Genesis 39:10",
+          "Genesis 39:11",
+          "Genesis 39:12",
+          "Genesis 39:13",
+          "Genesis 39:14",
+          "Genesis 39:15",
+          "Genesis 39:16",
+          "Genesis 39:17",
+          "Genesis 39:18",
+          "Genesis 39:19",
+          "Genesis 39:20",
+          "Proverbs 4:14-15",
+          "Proverbs 4:14",
+          "Proverbs 4:15",
+          "1 Corinthians 10:13",
+          "2 Timothy 2:22",
+          "James 4:7",
+          "Joshua 5:13-14",
+          "Joshua 5:13",
+          "Joshua 5:14",
+          "Ephesians 6:16"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "James",
+          "key": "james"
+        },
+        {
+          "name": "Psalm",
+          "key": "psalm"
+        },
+        {
+          "name": "Genesis",
+          "key": "genesis"
+        },
+        {
+          "name": "Proverbs",
+          "key": "proverbs"
+        },
+        {
+          "name": "2 Timothy",
+          "key": "2-timothy"
+        },
+        {
+          "name": "Joshua",
+          "key": "joshua"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "07/26/2026",
+        "iso": "2026-07-26",
+        "year": 2026,
+        "month": 7,
+        "monthName": "July",
+        "day": 26
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-07-26.srt",
+            "cleanFile": "transcripts_clean/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
+            "displayFile": "transcripts_display/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
+            "jsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.json",
+            "displayJsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.display.json",
+            "segmentCount": 862,
+            "displaySegmentCount": 792
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-07-26.srt",
+        "cleanFile": "transcripts_clean/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
+        "displayFile": "transcripts_display/en/2026-07-26_the-impact-of-the-gospel-pt-13.srt",
+        "jsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.json",
+        "displayJsonFile": "data/transcripts/en/2026-07-26_the-impact-of-the-gospel-pt-13.display.json",
+        "segmentCount": 862,
+        "displaySegmentCount": 792
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/c7vi3yargmfxxv6r/7_26_26_S.mp3",
+        "plays": 1,
+        "durationSeconds": 2424,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "D16m7kbq3-w",
+        "url": "https://www.youtube.com/watch?v=D16m7kbq3-w",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/52.jpg",
+          "wide": "https://i.ytimg.com/vi/D16m7kbq3-w/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "2-corinthians",
+          "philippians",
+          "james",
+          "psalm",
+          "genesis",
+          "proverbs",
+          "2-timothy",
+          "joshua",
+          "ephesians"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-07"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
       },
       "flags": {
         "isStandaloneEpisode": false,
