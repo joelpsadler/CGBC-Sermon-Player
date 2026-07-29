@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T10:35:43.152Z",
+  "generatedAt": "2026-07-29T10:58:02.269Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 161,
@@ -58,7 +58,7 @@
         "square": null,
         "wide": null
       },
-      "count": 5
+      "count": 4
     },
     {
       "key": "grace-gifts",
@@ -70,6 +70,17 @@
         "wide": "assets/collections/grace-gifts/wide.jpg"
       },
       "count": 6
+    },
+    {
+      "key": "the-impact-of-the-gospel-in-relationships",
+      "name": "The Impact of the Gospel In Relationships",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": null,
+        "wide": null
+      },
+      "count": 1
     }
   ],
   "items": [
@@ -225,8 +236,8 @@
       },
       "collections": [
         {
-          "name": "Godly Relationships",
-          "key": "godly-relationships",
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
           "description": "",
           "sortOrder": 999,
           "art": {
@@ -360,7 +371,7 @@
           "ephesians"
         ],
         "collections": [
-          "godly-relationships"
+          "the-impact-of-the-gospel-in-relationships"
         ],
         "byYear": [
           "2026"
