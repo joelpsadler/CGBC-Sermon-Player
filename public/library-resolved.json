@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T01:24:54.599Z",
+  "generatedAt": "2026-07-29T02:56:50.910Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 161,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 1581
   },
   "totals": {
-    "audioPlaysTotal": 5455,
+    "audioPlaysTotal": 5457,
     "audioEpisodesTotal": 161
   },
   "current": {
@@ -50,15 +50,15 @@
   },
   "collections": [
     {
-      "key": "04-rejoice-again",
-      "name": "04 Rejoice! Again",
+      "key": "godly-relationships",
+      "name": "Godly Relationships",
       "description": "",
       "sortOrder": 999,
       "art": {
         "square": null,
         "wide": null
       },
-      "count": 1
+      "count": 5
     },
     {
       "key": "grace-gifts",
@@ -70,28 +70,6 @@
         "wide": "assets/collections/grace-gifts/wide.jpg"
       },
       "count": 6
-    },
-    {
-      "key": "i-say",
-      "name": "I Say",
-      "description": "",
-      "sortOrder": 999,
-      "art": {
-        "square": null,
-        "wide": null
-      },
-      "count": 1
-    },
-    {
-      "key": "the-impact-of-the-gospel-in-relationships",
-      "name": "The Impact of the Gospel In Relationships",
-      "description": "",
-      "sortOrder": 999,
-      "art": {
-        "square": null,
-        "wide": null
-      },
-      "count": 5
     }
   ],
   "items": [
@@ -247,17 +225,17 @@
       },
       "collections": [
         {
-          "name": "The Impact of the Gospel In Relationships",
-          "key": "the-impact-of-the-gospel-in-relationships",
+          "name": "Godly Relationships",
+          "key": "godly-relationships",
           "description": "",
           "sortOrder": 999,
           "art": {
             "square": null,
             "wide": null
           },
-          "itemTitle": "A Biblical Response to Difficult Times",
+          "itemTitle": "Difficult Times",
           "itemSortOrder": 5,
-          "collectionItemTitle": "A Biblical Response to Difficult Times",
+          "collectionItemTitle": "Difficult Times",
           "collectionItemOrder": 5
         }
       ],
@@ -382,7 +360,7 @@
           "ephesians"
         ],
         "collections": [
-          "the-impact-of-the-gospel-in-relationships"
+          "godly-relationships"
         ],
         "byYear": [
           "2026"
@@ -808,46 +786,18 @@
       },
       "collections": [
         {
-          "name": "04 Rejoice! Again",
-          "key": "04-rejoice-again",
+          "name": "Godly Relationships",
+          "key": "godly-relationships",
           "description": "",
           "sortOrder": 999,
           "art": {
             "square": null,
             "wide": null
           },
-          "itemTitle": "",
-          "itemSortOrder": null,
-          "collectionItemTitle": "",
-          "collectionItemOrder": null
-        },
-        {
-          "name": "I Say",
-          "key": "i-say",
-          "description": "",
-          "sortOrder": 999,
-          "art": {
-            "square": null,
-            "wide": null
-          },
-          "itemTitle": "",
-          "itemSortOrder": null,
-          "collectionItemTitle": "",
-          "collectionItemOrder": null
-        },
-        {
-          "name": "The Impact of the Gospel In Relationships",
-          "key": "the-impact-of-the-gospel-in-relationships",
-          "description": "",
-          "sortOrder": 999,
-          "art": {
-            "square": null,
-            "wide": null
-          },
-          "itemTitle": "Rejoice!",
-          "itemSortOrder": null,
-          "collectionItemTitle": "Rejoice!",
-          "collectionItemOrder": null
+          "itemTitle": "Rejoice",
+          "itemSortOrder": 4,
+          "collectionItemTitle": "Rejoice",
+          "collectionItemOrder": 4
         }
       ],
       "bookTags": [
@@ -923,7 +873,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/d98yrkiigem536ft/7_19_26_S.mp3",
-        "plays": 3,
+        "plays": 4,
         "durationSeconds": 2040,
         "statsMatchStrategy": "media_url"
       },
@@ -966,9 +916,7 @@
           "numbers"
         ],
         "collections": [
-          "04-rejoice-again",
-          "i-say",
-          "the-impact-of-the-gospel-in-relationships"
+          "godly-relationships"
         ],
         "byYear": [
           "2026"
@@ -1369,17 +1317,17 @@
       },
       "collections": [
         {
-          "name": "The Impact of the Gospel In Relationships",
-          "key": "the-impact-of-the-gospel-in-relationships",
+          "name": "Godly Relationships",
+          "key": "godly-relationships",
           "description": "",
           "sortOrder": 999,
           "art": {
             "square": null,
             "wide": null
           },
-          "itemTitle": "Biblical Attitude Check",
+          "itemTitle": "Attitude Check",
           "itemSortOrder": 3,
-          "collectionItemTitle": "Biblical Attitude Check",
+          "collectionItemTitle": "Attitude Check",
           "collectionItemOrder": 3
         }
       ],
@@ -1494,7 +1442,7 @@
           "john"
         ],
         "collections": [
-          "the-impact-of-the-gospel-in-relationships"
+          "godly-relationships"
         ],
         "byYear": [
           "2026"
@@ -2073,8 +2021,8 @@
       },
       "collections": [
         {
-          "name": "The Impact of the Gospel In Relationships",
-          "key": "the-impact-of-the-gospel-in-relationships",
+          "name": "Godly Relationships",
+          "key": "godly-relationships",
           "description": "",
           "sortOrder": 999,
           "art": {
@@ -2198,7 +2146,7 @@
           "colossians"
         ],
         "collections": [
-          "the-impact-of-the-gospel-in-relationships"
+          "godly-relationships"
         ],
         "byYear": [
           "2026"
@@ -2690,8 +2638,8 @@
       },
       "collections": [
         {
-          "name": "The Impact of the Gospel In Relationships",
-          "key": "the-impact-of-the-gospel-in-relationships",
+          "name": "Godly Relationships",
+          "key": "godly-relationships",
           "description": "",
           "sortOrder": 999,
           "art": {
@@ -2800,7 +2748,7 @@
           "1-thessalonians"
         ],
         "collections": [
-          "the-impact-of-the-gospel-in-relationships"
+          "godly-relationships"
         ],
         "byYear": [
           "2026"
@@ -6107,7 +6055,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8wjwp38qj5wj6ph5/42626_S_PC78jah.mp3",
-        "plays": 65,
+        "plays": 66,
         "durationSeconds": 2159,
         "statsMatchStrategy": "media_url"
       },
