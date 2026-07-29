@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T22:35:38.559Z",
+  "generatedAt": "2026-07-29T22:38:12.450Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 161,
@@ -50,17 +50,6 @@
   },
   "collections": [
     {
-      "key": "04-rejoice-again",
-      "name": "04 Rejoice! Again",
-      "description": "",
-      "sortOrder": 999,
-      "art": {
-        "square": null,
-        "wide": null
-      },
-      "count": 1
-    },
-    {
       "key": "grace-gifts",
       "name": "Grace Gifts",
       "description": "",
@@ -70,17 +59,6 @@
         "wide": "assets/collections/grace-gifts/wide.jpg"
       },
       "count": 6
-    },
-    {
-      "key": "i-say",
-      "name": "I Say",
-      "description": "",
-      "sortOrder": 999,
-      "art": {
-        "square": null,
-        "wide": null
-      },
-      "count": 1
     },
     {
       "key": "the-impact-of-the-gospel-in-relationships",
@@ -808,34 +786,6 @@
       },
       "collections": [
         {
-          "name": "04 Rejoice! Again",
-          "key": "04-rejoice-again",
-          "description": "",
-          "sortOrder": 999,
-          "art": {
-            "square": null,
-            "wide": null
-          },
-          "itemTitle": "",
-          "itemSortOrder": null,
-          "collectionItemTitle": "",
-          "collectionItemOrder": null
-        },
-        {
-          "name": "I Say",
-          "key": "i-say",
-          "description": "",
-          "sortOrder": 999,
-          "art": {
-            "square": null,
-            "wide": null
-          },
-          "itemTitle": "",
-          "itemSortOrder": null,
-          "collectionItemTitle": "",
-          "collectionItemOrder": null
-        },
-        {
           "name": "The Impact of the Gospel in Relationships",
           "key": "the-impact-of-the-gospel-in-relationships",
           "description": "",
@@ -844,10 +794,10 @@
             "square": "assets/collections/the-impact-of-the-gospel-in-relationships/square.jpg",
             "wide": "assets/collections/the-impact-of-the-gospel-in-relationships/wide.jpg"
           },
-          "itemTitle": "Rejoice!",
-          "itemSortOrder": null,
-          "collectionItemTitle": "Rejoice!",
-          "collectionItemOrder": null
+          "itemTitle": "Rejoice",
+          "itemSortOrder": 4,
+          "collectionItemTitle": "Rejoice",
+          "collectionItemOrder": 4
         }
       ],
       "bookTags": [
@@ -966,8 +916,6 @@
           "numbers"
         ],
         "collections": [
-          "04-rejoice-again",
-          "i-say",
           "the-impact-of-the-gospel-in-relationships"
         ],
         "byYear": [
