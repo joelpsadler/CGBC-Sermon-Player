@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-04T18:21:53.239Z",
+  "generatedAt": "2026-08-04T19:10:05.204Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 162,
-    "archiveItems": 162,
-    "videoMatchedItems": 154,
+    "rssItems": 163,
+    "archiveItems": 163,
+    "videoMatchedItems": 155,
     "transcriptMatchedItems": 21,
     "quoteCandidateCount": 1581
   },
   "totals": {
-    "audioPlaysTotal": 5499,
-    "audioEpisodesTotal": 162
+    "audioPlaysTotal": 5500,
+    "audioEpisodesTotal": 163
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -73,6 +73,123 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-9bl8u",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/mrkajthrmp4vs3cr/8_02_26_EMD_B2E6aeepe.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/859978c3-26b9-324c-8776-ffb4032f7035"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/frthdcjgygtyj/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/frthdcjgygtyj/"
+      },
+      "title": {
+        "episodeName": "A Man and His Faithfulness",
+        "subtitle": "Part 6 of 10",
+        "display": "A Man and His Faithfulness (Part 6 of 10)"
+      },
+      "series": {
+        "name": "EMD 2026 Block 2",
+        "key": "emd-2026-block-2",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Every Man Discipleship",
+        "key": "every-man-discipleship",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "08/01/2026",
+        "iso": "2026-08-01",
+        "year": 2026,
+        "month": 8,
+        "monthName": "August",
+        "day": 1
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/mrkajthrmp4vs3cr/8_02_26_EMD_B2E6aeepe.mp3",
+        "plays": 0,
+        "durationSeconds": 1566,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "4ZJxn5bw0iw",
+        "url": "https://www.youtube.com/watch?v=4ZJxn5bw0iw",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/sfvbgbfdcvfdc.jpg",
+          "wide": "https://i.ytimg.com/vi/4ZJxn5bw0iw/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "emd-2026-block-2"
+        ],
+        "studies": [
+          "every-man-discipleship"
+        ],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-08"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-od2ofm",
       "sourceKey": {
@@ -509,7 +626,7 @@
         "display": "Block 2 Kickoff Event (featuring Peter Demos)"
       },
       "series": {
-        "name": "EMD - 2026 Block 2",
+        "name": "EMD 2026 Block 2",
         "key": "emd-2026-block-2",
         "type": "topical"
       },
@@ -988,7 +1105,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/d98yrkiigem536ft/7_19_26_S.mp3",
-        "plays": 8,
+        "plays": 9,
         "durationSeconds": 2040,
         "statsMatchStrategy": "media_url"
       },
