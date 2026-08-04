@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T13:51:47.861Z",
+  "generatedAt": "2026-08-04T15:49:03.487Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 162,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 1581
   },
   "totals": {
-    "audioPlaysTotal": 5496,
+    "audioPlaysTotal": 5499,
     "audioEpisodesTotal": 162
   },
   "current": {
@@ -431,7 +431,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/c7vi3yargmfxxv6r/7_26_26_S.mp3",
-        "plays": 10,
+        "plays": 11,
         "durationSeconds": 2424,
         "statsMatchStrategy": "media_url"
       },
@@ -504,18 +504,18 @@
         "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/emd-2026-block-2-kickoff-every-man-discipleship-block-2/"
       },
       "title": {
-        "episodeName": "Block 2 Kickoff",
+        "episodeName": "Block 2 Kickoff Event",
         "subtitle": "featuring Peter Demos",
-        "display": "Block 2 Kickoff (featuring Peter Demos)"
+        "display": "Block 2 Kickoff Event (featuring Peter Demos)"
       },
       "series": {
-        "name": "2026 Every Man Discipleship Block 2",
-        "key": "2026-every-man-discipleship-block-2",
+        "name": "EMD - 2026 Block 2",
+        "key": "emd-2026-block-2",
         "type": "topical"
       },
       "study": {
-        "name": "CGBC - Every Man Discipleship",
-        "key": "cgbc-every-man-discipleship",
+        "name": "Every Man Discipleship",
+        "key": "every-man-discipleship",
         "type": "topical_study"
       },
       "scripture": {
@@ -573,24 +573,24 @@
       },
       "art": {
         "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
           "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
         },
         "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
           "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
         },
         "study": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/EMD_Kickoff_B2.jpg",
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
           "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
         }
       },
       "memberships": {
         "series": [
-          "2026-every-man-discipleship-block-2"
+          "emd-2026-block-2"
         ],
         "studies": [
-          "cgbc-every-man-discipleship"
+          "every-man-discipleship"
         ],
         "bibleBooks": [],
         "collections": [],
@@ -731,7 +731,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/kdrwh2r97p26gbds/7_22_26_W.mp3",
-        "plays": 7,
+        "plays": 8,
         "durationSeconds": 1800,
         "statsMatchStrategy": "media_url"
       },
@@ -6986,7 +6986,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gnz7sthiniv3cnvc/408_W_Audioabqf1.mp3",
-        "plays": 34,
+        "plays": 35,
         "durationSeconds": 2010,
         "statsMatchStrategy": "media_url"
       },
