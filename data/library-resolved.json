@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-08T23:17:22.439Z",
+  "generatedAt": "2026-08-09T01:46:14.842Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 164,
-    "archiveItems": 164,
-    "videoMatchedItems": 156,
-    "transcriptMatchedItems": 22,
+    "rssItems": 165,
+    "archiveItems": 165,
+    "videoMatchedItems": 157,
+    "transcriptMatchedItems": 23,
     "quoteCandidateCount": 1656
   },
   "totals": {
-    "audioPlaysTotal": 5532,
-    "audioEpisodesTotal": 164
+    "audioPlaysTotal": 5535,
+    "audioEpisodesTotal": 165
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-ljdzkp",
-        "detectedFromDate": "2026-07-22",
-        "detectedFromTitle": "The Tribulation Pt. 8 (God's Wrath Announced and Active - The Seven Trumpets)",
+        "detectedFromEpisode": "media-abt75q",
+        "detectedFromDate": "2026-08-05",
+        "detectedFromTitle": "Tribulation Pt. 9 (God's Wrath Announced and Active Pt. 2 - The Seven Trumpets)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -77,11 +77,209 @@
       "stableId": "media-abt75q",
       "sourceKey": {
         "mediaUrl": "https://mcdn.podbean.com/mf/web/9pm69m9xn3k255b9/8_02_26_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/864abc21-f708-3e13-85ad-86ac3a3ec178"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdf-1786231419/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdf-1786231419/"
+      },
+      "title": {
+        "episodeName": "Tribulation Pt. 9",
+        "subtitle": "God's Wrath Announced and Active Pt. 2 - The Seven Trumpets",
+        "display": "Tribulation Pt. 9 (God's Wrath Announced and Active Pt. 2 - The Seven Trumpets)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Revelation 8:12-13, Revelation 9:1-11",
+        "display": "Revelation 8:12-13, Revelation 9:1-11",
+        "book": "Revelation",
+        "bookKey": "revelation",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Revelation 8:7-13, Revelation 9:1-11, John 3:16",
+        "display": "Revelation 8:7-13, Revelation 9:1-11, John 3:16",
+        "tokens": [
+          "Revelation 8:7-13",
+          "Revelation 8:7",
+          "Revelation 8:8",
+          "Revelation 8:9",
+          "Revelation 8:10",
+          "Revelation 8:11",
+          "Revelation 8:12",
+          "Revelation 8:13",
+          "Revelation 9:1-11",
+          "Revelation 9:1",
+          "Revelation 9:2",
+          "Revelation 9:3",
+          "Revelation 9:4",
+          "Revelation 9:5",
+          "Revelation 9:6",
+          "Revelation 9:7",
+          "Revelation 9:8",
+          "Revelation 9:9",
+          "Revelation 9:10",
+          "Revelation 9:11",
+          "John 3:16"
+        ],
+        "searchTokens": [
+          "Revelation 8:12-13",
+          "Revelation 8:12",
+          "Revelation 8:13",
+          "Revelation 9:1-11",
+          "Revelation 9:1",
+          "Revelation 9:2",
+          "Revelation 9:3",
+          "Revelation 9:4",
+          "Revelation 9:5",
+          "Revelation 9:6",
+          "Revelation 9:7",
+          "Revelation 9:8",
+          "Revelation 9:9",
+          "Revelation 9:10",
+          "Revelation 9:11",
+          "Revelation 8:7-13",
+          "Revelation 8:7",
+          "Revelation 8:8",
+          "Revelation 8:9",
+          "Revelation 8:10",
+          "Revelation 8:11",
+          "John 3:16"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 8:12-13",
+          "Revelation 8:12",
+          "Revelation 8:13",
+          "Revelation 9:1-11",
+          "Revelation 9:1",
+          "Revelation 9:2",
+          "Revelation 9:3",
+          "Revelation 9:4",
+          "Revelation 9:5",
+          "Revelation 9:6",
+          "Revelation 9:7",
+          "Revelation 9:8",
+          "Revelation 9:9",
+          "Revelation 9:10",
+          "Revelation 9:11",
+          "Revelation 8:7-13",
+          "Revelation 8:7",
+          "Revelation 8:8",
+          "Revelation 8:9",
+          "Revelation 8:10",
+          "Revelation 8:11",
+          "John 3:16"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "08/05/2026",
+        "iso": "2026-08-05",
+        "year": 2026,
+        "month": 8,
+        "monthName": "August",
+        "day": 5
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-08-05.srt",
+            "cleanFile": "transcripts_clean/en/2026-08-05_tribulation-pt-9.srt",
+            "displayFile": "transcripts_display/en/2026-08-05_tribulation-pt-9.srt",
+            "jsonFile": "data/transcripts/en/2026-08-05_tribulation-pt-9.json",
+            "displayJsonFile": "data/transcripts/en/2026-08-05_tribulation-pt-9.display.json",
+            "segmentCount": 645,
+            "displaySegmentCount": 550
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-08-05.srt",
+        "cleanFile": "transcripts_clean/en/2026-08-05_tribulation-pt-9.srt",
+        "displayFile": "transcripts_display/en/2026-08-05_tribulation-pt-9.srt",
+        "jsonFile": "data/transcripts/en/2026-08-05_tribulation-pt-9.json",
+        "displayJsonFile": "data/transcripts/en/2026-08-05_tribulation-pt-9.display.json",
+        "segmentCount": 645,
+        "displaySegmentCount": 550
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/9pm69m9xn3k255b9/8_02_26_S.mp3",
+        "plays": 6,
+        "durationSeconds": 1860,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "b1Pv2I2L2S4",
+        "url": "https://www.youtube.com/watch?v=b1Pv2I2L2S4",
+        "views": 2
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/asdfasdfvsazdfgtrwe.jpg",
+          "wide": "https://i.ytimg.com/vi/b1Pv2I2L2S4/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-08"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-abt75q",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/9pm69m9xn3k255b9/8_02_26_S.mp3",
         "rssGuid": "broJacobcedargrovebaptist.podbean.com/d23027b7-4919-3891-97c6-75e31ddc0748"
       },
       "links": {
         "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/asdfasdf-1785936066/",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdf-1785936066/"
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/asdfasdf-1786231419/"
       },
       "title": {
         "episodeName": "The Impact of the Gospel In Relationships Pt. 6",
@@ -1091,7 +1289,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/kdrwh2r97p26gbds/7_22_26_W.mp3",
-        "plays": 9,
+        "plays": 10,
         "durationSeconds": 1800,
         "statsMatchStrategy": "media_url"
       },
@@ -9386,7 +9584,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/bqmxszttqxbwic33/01_Romans_10_1-4_Have_You_Heard_8959m.mp3",
-        "plays": 38,
+        "plays": 39,
         "durationSeconds": 2421,
         "statsMatchStrategy": "media_url"
       },
@@ -12205,7 +12403,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8jv9i29rybhcg6wf/713PC6uaty.mp3",
-        "plays": 38,
+        "plays": 39,
         "durationSeconds": 1840,
         "statsMatchStrategy": "media_url"
       },
