@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-19T17:38:42.824Z",
+  "generatedAt": "2026-08-19T17:43:15.755Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
     "archiveItems": 169,
     "videoMatchedItems": 161,
-    "transcriptMatchedItems": 32,
-    "quoteCandidateCount": 2331
+    "transcriptMatchedItems": 38,
+    "quoteCandidateCount": 2781
   },
   "totals": {
     "audioPlaysTotal": 5602,
@@ -8656,7 +8656,7 @@
           "Romans 11:28",
           "Romans 11:29"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -8675,16 +8675,27 @@
         "day": 22
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-03-22.srt",
+            "cleanFile": "transcripts_clean/en/2026-03-22_how-unsearchable-pt-7.srt",
+            "displayFile": "transcripts_display/en/2026-03-22_how-unsearchable-pt-7.srt",
+            "jsonFile": "data/transcripts/en/2026-03-22_how-unsearchable-pt-7.json",
+            "displayJsonFile": "data/transcripts/en/2026-03-22_how-unsearchable-pt-7.display.json",
+            "segmentCount": 736,
+            "displaySegmentCount": 642
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-03-22.srt",
+        "cleanFile": "transcripts_clean/en/2026-03-22_how-unsearchable-pt-7.srt",
+        "displayFile": "transcripts_display/en/2026-03-22_how-unsearchable-pt-7.srt",
+        "jsonFile": "data/transcripts/en/2026-03-22_how-unsearchable-pt-7.json",
+        "displayJsonFile": "data/transcripts/en/2026-03-22_how-unsearchable-pt-7.display.json",
+        "segmentCount": 736,
+        "displaySegmentCount": 642
       },
       "audio": {
         "hasAudio": true,
@@ -8790,7 +8801,7 @@
           "Romans 11:23",
           "Romans 11:24"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -8809,16 +8820,27 @@
         "day": 15
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-03-15.srt",
+            "cleanFile": "transcripts_clean/en/2026-03-15_a-necessary-clarification-pt-6.srt",
+            "displayFile": "transcripts_display/en/2026-03-15_a-necessary-clarification-pt-6.srt",
+            "jsonFile": "data/transcripts/en/2026-03-15_a-necessary-clarification-pt-6.json",
+            "displayJsonFile": "data/transcripts/en/2026-03-15_a-necessary-clarification-pt-6.display.json",
+            "segmentCount": 976,
+            "displaySegmentCount": 870
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-03-15.srt",
+        "cleanFile": "transcripts_clean/en/2026-03-15_a-necessary-clarification-pt-6.srt",
+        "displayFile": "transcripts_display/en/2026-03-15_a-necessary-clarification-pt-6.srt",
+        "jsonFile": "data/transcripts/en/2026-03-15_a-necessary-clarification-pt-6.json",
+        "displayJsonFile": "data/transcripts/en/2026-03-15_a-necessary-clarification-pt-6.display.json",
+        "segmentCount": 976,
+        "displaySegmentCount": 870
       },
       "audio": {
         "hasAudio": true,
@@ -8924,7 +8946,7 @@
           "Romans 11:23",
           "Romans 11:24"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -8943,16 +8965,27 @@
         "day": 8
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-03-08.srt",
+            "cleanFile": "transcripts_clean/en/2026-03-08_a-necessary-clarification-pt-5.srt",
+            "displayFile": "transcripts_display/en/2026-03-08_a-necessary-clarification-pt-5.srt",
+            "jsonFile": "data/transcripts/en/2026-03-08_a-necessary-clarification-pt-5.json",
+            "displayJsonFile": "data/transcripts/en/2026-03-08_a-necessary-clarification-pt-5.display.json",
+            "segmentCount": 571,
+            "displaySegmentCount": 479
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-03-08.srt",
+        "cleanFile": "transcripts_clean/en/2026-03-08_a-necessary-clarification-pt-5.srt",
+        "displayFile": "transcripts_display/en/2026-03-08_a-necessary-clarification-pt-5.srt",
+        "jsonFile": "data/transcripts/en/2026-03-08_a-necessary-clarification-pt-5.json",
+        "displayJsonFile": "data/transcripts/en/2026-03-08_a-necessary-clarification-pt-5.display.json",
+        "segmentCount": 571,
+        "displaySegmentCount": 479
       },
       "audio": {
         "hasAudio": true,
@@ -9484,7 +9517,7 @@
           "Romans 11:9",
           "Romans 11:10"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -9503,16 +9536,27 @@
         "day": 1
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-02-01.srt",
+            "cleanFile": "transcripts_clean/en/2026-02-01_how-unsearchable-pt-1.srt",
+            "displayFile": "transcripts_display/en/2026-02-01_how-unsearchable-pt-1.srt",
+            "jsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.json",
+            "displayJsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.display.json",
+            "segmentCount": 831,
+            "displaySegmentCount": 737
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-02-01.srt",
+        "cleanFile": "transcripts_clean/en/2026-02-01_how-unsearchable-pt-1.srt",
+        "displayFile": "transcripts_display/en/2026-02-01_how-unsearchable-pt-1.srt",
+        "jsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.json",
+        "displayJsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.display.json",
+        "segmentCount": 831,
+        "displaySegmentCount": 737
       },
       "audio": {
         "hasAudio": true,
@@ -9624,7 +9668,7 @@
           "Romans 10:20",
           "Romans 10:21"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -9643,16 +9687,27 @@
         "day": 1
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-02-01.srt",
+            "cleanFile": "transcripts_clean/en/2026-02-01_have-you-heard-pt-4.srt",
+            "displayFile": "transcripts_display/en/2026-02-01_have-you-heard-pt-4.srt",
+            "jsonFile": "data/transcripts/en/2026-02-01_have-you-heard-pt-4.json",
+            "displayJsonFile": "data/transcripts/en/2026-02-01_have-you-heard-pt-4.display.json",
+            "segmentCount": 831,
+            "displaySegmentCount": 737
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-02-01.srt",
+        "cleanFile": "transcripts_clean/en/2026-02-01_have-you-heard-pt-4.srt",
+        "displayFile": "transcripts_display/en/2026-02-01_have-you-heard-pt-4.srt",
+        "jsonFile": "data/transcripts/en/2026-02-01_have-you-heard-pt-4.json",
+        "displayJsonFile": "data/transcripts/en/2026-02-01_have-you-heard-pt-4.display.json",
+        "segmentCount": 831,
+        "displaySegmentCount": 737
       },
       "audio": {
         "hasAudio": true,
@@ -10299,7 +10354,7 @@
           "Romans 9:32",
           "Romans 9:33"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -10318,16 +10373,27 @@
         "day": 21
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-12-21.srt",
+            "cleanFile": "transcripts_clean/en/2025-12-21_unexplainable-mercy-pt-5.srt",
+            "displayFile": "transcripts_display/en/2025-12-21_unexplainable-mercy-pt-5.srt",
+            "jsonFile": "data/transcripts/en/2025-12-21_unexplainable-mercy-pt-5.json",
+            "displayJsonFile": "data/transcripts/en/2025-12-21_unexplainable-mercy-pt-5.display.json",
+            "segmentCount": 864,
+            "displaySegmentCount": 766
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-12-21.srt",
+        "cleanFile": "transcripts_clean/en/2025-12-21_unexplainable-mercy-pt-5.srt",
+        "displayFile": "transcripts_display/en/2025-12-21_unexplainable-mercy-pt-5.srt",
+        "jsonFile": "data/transcripts/en/2025-12-21_unexplainable-mercy-pt-5.json",
+        "displayJsonFile": "data/transcripts/en/2025-12-21_unexplainable-mercy-pt-5.display.json",
+        "segmentCount": 864,
+        "displaySegmentCount": 766
       },
       "audio": {
         "hasAudio": true,
