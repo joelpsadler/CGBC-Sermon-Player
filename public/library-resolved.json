@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-19T14:34:03.545Z",
+  "generatedAt": "2026-08-19T15:05:50.057Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
     "archiveItems": 169,
     "videoMatchedItems": 161,
-    "transcriptMatchedItems": 26,
-    "quoteCandidateCount": 1881
+    "transcriptMatchedItems": 27,
+    "quoteCandidateCount": 1956
   },
   "totals": {
-    "audioPlaysTotal": 5591,
+    "audioPlaysTotal": 5596,
     "audioEpisodesTotal": 169
   },
   "current": {
@@ -10332,7 +10332,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/82mm2gn969aaixty/51_Romans_9_25-33_Unexplainable_Mercy_Pt_5_251221_0.mp3",
-        "plays": 183,
+        "plays": 184,
         "durationSeconds": 2370,
         "statsMatchStrategy": "media_url"
       },
@@ -10472,7 +10472,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xpnmxpq7a7saq6h8/Romans_9_19-24_Unexplainable_Mercy_Pt_4_251214_0auhuf.mp3",
-        "plays": 46,
+        "plays": 47,
         "durationSeconds": 2441,
         "statsMatchStrategy": "media_url"
       },
@@ -10622,7 +10622,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/qbhkhc32nui5dsuz/12079cno0.mp3",
-        "plays": 42,
+        "plays": 43,
         "durationSeconds": 2343,
         "statsMatchStrategy": "media_url"
       },
@@ -10881,7 +10881,7 @@
           "Romans 9:12",
           "Romans 9:13"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -10900,21 +10900,32 @@
         "day": 23
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-11-23.srt",
+            "cleanFile": "transcripts_clean/en/2025-11-23_unexplainable-mercy-pt-2.srt",
+            "displayFile": "transcripts_display/en/2025-11-23_unexplainable-mercy-pt-2.srt",
+            "jsonFile": "data/transcripts/en/2025-11-23_unexplainable-mercy-pt-2.json",
+            "displayJsonFile": "data/transcripts/en/2025-11-23_unexplainable-mercy-pt-2.display.json",
+            "segmentCount": 708,
+            "displaySegmentCount": 606
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-11-23.srt",
+        "cleanFile": "transcripts_clean/en/2025-11-23_unexplainable-mercy-pt-2.srt",
+        "displayFile": "transcripts_display/en/2025-11-23_unexplainable-mercy-pt-2.srt",
+        "jsonFile": "data/transcripts/en/2025-11-23_unexplainable-mercy-pt-2.json",
+        "displayJsonFile": "data/transcripts/en/2025-11-23_unexplainable-mercy-pt-2.display.json",
+        "segmentCount": 708,
+        "displaySegmentCount": 606
       },
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rs8nzz7gt33yxy8r/1123_Save_for_Dupe_12086jyp4.mp3",
-        "plays": 32,
+        "plays": 33,
         "durationSeconds": 2110,
         "statsMatchStrategy": "media_url"
       },
@@ -11052,7 +11063,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8jrrhsjd9tngk7qm/1116_PCb9a76.mp3",
-        "plays": 35,
+        "plays": 36,
         "durationSeconds": 1952,
         "statsMatchStrategy": "media_url"
       },
