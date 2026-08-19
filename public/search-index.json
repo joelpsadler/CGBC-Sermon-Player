@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-19T14:21:29.037Z",
+  "generatedAt": "2026-08-19T14:33:35.261Z",
   "version": 2,
   "note": "Lightweight transcript search index. Full transcripts stay in data/transcripts/<lang>/ and are loaded only when an episode opens.",
-  "count": 25,
+  "count": 26,
   "entries": [
     {
       "stableId": "media-vh6ziq",
@@ -2826,6 +2826,119 @@
           "start": 118.849,
           "text": "Listen, people are people are wanting to know what is about to happen.",
           "keywords": "people happen listen want wanting"
+        }
+      ]
+    },
+    {
+      "stableId": "media-ckye21",
+      "date": "2025-10-26",
+      "title": "What We Know... Is Good",
+      "episodeName": "What We Know... Is Good",
+      "subtitle": "",
+      "series": "Romans Chapter 8",
+      "study": "Romans",
+      "scripture": "Romans 8:28-31",
+      "speaker": "Pastor Jacob Lannom",
+      "defaultLanguage": "en",
+      "transcriptJson": "data/transcripts/en/2025-10-26_what-we-know-is-good.json",
+      "transcriptDisplayJson": "data/transcripts/en/2025-10-26_what-we-know-is-good.display.json",
+      "transcriptCleanSrt": "transcripts_clean/en/2025-10-26_what-we-know-is-good.srt",
+      "transcriptDisplaySrt": "transcripts_display/en/2025-10-26_what-we-know-is-good.srt",
+      "languages": {
+        "en": {
+          "language": "en",
+          "incomingFile": "transcripts_incoming/2025-10-26.srt",
+          "cleanFile": "transcripts_clean/en/2025-10-26_what-we-know-is-good.srt",
+          "displayFile": "transcripts_display/en/2025-10-26_what-we-know-is-good.srt",
+          "jsonFile": "data/transcripts/en/2025-10-26_what-we-know-is-good.json",
+          "displayJsonFile": "data/transcripts/en/2025-10-26_what-we-know-is-good.display.json",
+          "segmentCount": 756,
+          "displaySegmentCount": 669
+        }
+      },
+      "metadataText": "What We Know... Is Good | Romans Chapter 8 | romans-chapter-8 | Romans | Romans 8:28-31 | Romans 8:28 | Romans 8:29 | Romans 8:30 | Romans 8:31 | Pastor Jacob Lannom | 10/26/25 | 2025-10-26 | 2025 | October",
+      "transcriptKeywordText": "god good love jesu jesus call says word listen spirit called holy look sav saved shall accord according purpose tell mean people think time don life today want world elect whom christ hath means verse believe bible let lov man morn morning roman romans understand work doesn glorifi glorified grace john light plan pray predestination son talk way 8 even justifi might mind put said salvation sin day men paul text thou together words church gospel justified liv loved matter 1st 3 appear believer change chapter commandment fact firstborn foreknowledge heart made many name preach predestin predestinate someth something speak talking thy year yes yet 2 affection bound brethren come commandments conform conformed darknes darkness days either everyth everything gonna happen hear hey image obey omnipotent omnipresent power rather thee unto works years 10 1700 28 29 3000 among argu back bas based become beginn beginning born continue debate establish ever everyone exactly explain eye feel first flesh given heaven job knowledge knows living make noth nothing okay powerful predestined receiv received result someone sovereignty speaking thank therefore thinking tim times try upon 30 6 already alway always answer anyth anything appeared argument away bring calls character choose christian desire earth election end enter eyes faith faithful father find foreknow fully gets giv give great greek grieve guarantee hand hell hide himself intentionally intercession jonah king listening literally little lost maketh moreover need never night ought pain parameter parameters part past powerfully prayer preacher probably question reach read realize remember repentance respond reveal room saying scripture sees set shalt shown",
+      "searchText": "What We Know... Is Good | Romans Chapter 8 | romans-chapter-8 | Romans | Romans 8:28-31 | Romans 8:28 | Romans 8:29 | Romans 8:30 | Romans 8:31 | Pastor Jacob Lannom | 10/26/25 | 2025-10-26 | 2025 | October | god good love jesu jesus call says word listen spirit called holy look sav saved shall accord according purpose tell mean people think time don life today want world elect whom christ hath means verse believe bible let lov man morn morning roman romans understand work doesn glorifi glorified grace john light plan pray predestination son talk way 8 even justifi might mind put said salvation sin day men paul text thou together words church gospel justified liv loved matter 1st 3 appear believer change chapter commandment fact firstborn foreknowledge heart made many name preach predestin predestinate someth something speak talking thy year yes yet 2 affection bound brethren come commandments conform conformed darknes darkness days either everyth everything gonna happen hear hey image obey omnipotent omnipresent power rather thee unto works years 10 1700 28 29 3000 among argu back bas based become beginn beginning born continue debate establish ever everyone exactly explain eye feel first flesh given heaven job knowledge knows living make noth nothing okay powerful predestined receiv received result someone sovereignty speaking thank therefore thinking tim times try upon 30 6 already alway always answer anyth anything appeared argument away bring calls character choose christian desire earth election end enter eyes faith faithful father find foreknow fully gets giv give great greek grieve guarantee hand hell hide himself intentionally intercession jonah king listening literally little lost maketh moreover need never night ought pain parameter parameters part past powerfully prayer preacher probably question reach read realize remember repentance respond reveal room saying scripture sees set shalt shown | 8 bibl bibles chapter please roman romans turn bas based feel feeling might people salvation assurance bas based christ jesu jesus last look looked ministry prayer week 26 27 exactly tell tells verse helpeth infirmiti infirmities likewise spirit groaning groanings intercession itself maketh spirit utter uttered accord according god intercession maketh mind saint saints spirit help helps holy intercede pray spirit truth behalf knows need plead pleads holy interced interceding result spirit god good love says together work accord according call called purpose even phrase tell tells together work works hurt pain trial trouble valley along every god good together work works",
+      "preview": [
+        {
+          "start": 13.199,
+          "text": "If you would, please turn your Bibles to Romans chapter 8.",
+          "keywords": "8 bibl bibles chapter please roman romans turn"
+        },
+        {
+          "start": 19.899,
+          "text": "I know people might say, well, my salvation is not based on a feeling.",
+          "keywords": "bas based feel feeling might people salvation"
+        },
+        {
+          "start": 23.816,
+          "text": "No, it's based on the assurance that we have through Jesus Christ.",
+          "keywords": "assurance bas based christ jesu jesus"
+        },
+        {
+          "start": 37.549,
+          "text": "And last week, we looked at the ministry of prayer.",
+          "keywords": "last look looked ministry prayer week"
+        },
+        {
+          "start": 48.116,
+          "text": "Well, verse 26 and 27 tells us exactly what we are to do.",
+          "keywords": "26 27 exactly tell tells verse"
+        },
+        {
+          "start": 53.866,
+          "text": "Likewise, the Spirit also helpeth our infirmities.",
+          "keywords": "helpeth infirmiti infirmities likewise spirit"
+        },
+        {
+          "start": 60.233,
+          "text": "Spirit itself maketh intercession for us with groanings which cannot be uttered.",
+          "keywords": "groaning groanings intercession itself maketh spirit utter uttered"
+        },
+        {
+          "start": 68.033,
+          "text": "What is the mind of the Spirit, because he maketh intercession for the saints according to the will of God?",
+          "keywords": "accord according god intercession maketh mind saint saints spirit"
+        },
+        {
+          "start": 75.25,
+          "text": "We pray in the truth that the Holy Spirit helps us intercede,",
+          "keywords": "help helps holy intercede pray spirit truth"
+        },
+        {
+          "start": 79.2,
+          "text": "that is, pleads in our behalf and knows our need.",
+          "keywords": "behalf knows need plead pleads"
+        },
+        {
+          "start": 90.2,
+          "text": "But what is the result of the Holy Spirit's interceding?",
+          "keywords": "holy interced interceding result spirit"
+        },
+        {
+          "start": 99.833,
+          "text": "It says this, and we know that all things work together for good to them that love God.",
+          "keywords": "god good love says together work"
+        },
+        {
+          "start": 105.45,
+          "text": "to them who are called according to his purpose.",
+          "keywords": "accord according call called purpose"
+        },
+        {
+          "start": 119.7,
+          "text": "That phrase works together tells us that even",
+          "keywords": "even phrase tell tells together work works"
+        },
+        {
+          "start": 122.7,
+          "text": "in the trial, the trouble, the hurt, the pain in the valley,",
+          "keywords": "hurt pain trial trouble valley"
+        },
+        {
+          "start": 126.166,
+          "text": "God works those things along with every other thing together with his will, for our good.",
+          "keywords": "along every god good together work works"
         }
       ]
     }
