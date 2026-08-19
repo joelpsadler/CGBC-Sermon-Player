@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-19T15:20:09.601Z",
+  "generatedAt": "2026-08-19T15:23:31.802Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
     "archiveItems": 169,
     "videoMatchedItems": 161,
-    "transcriptMatchedItems": 27,
-    "quoteCandidateCount": 1956
+    "transcriptMatchedItems": 28,
+    "quoteCandidateCount": 2031
   },
   "totals": {
-    "audioPlaysTotal": 5596,
+    "audioPlaysTotal": 5597,
     "audioEpisodesTotal": 169
   },
   "current": {
@@ -11030,7 +11030,7 @@
           "Romans 9:4",
           "Romans 9:5"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -11049,16 +11049,27 @@
         "day": 16
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-11-16.srt",
+            "cleanFile": "transcripts_clean/en/2025-11-16_unexplainable-mercy-pt-1.srt",
+            "displayFile": "transcripts_display/en/2025-11-16_unexplainable-mercy-pt-1.srt",
+            "jsonFile": "data/transcripts/en/2025-11-16_unexplainable-mercy-pt-1.json",
+            "displayJsonFile": "data/transcripts/en/2025-11-16_unexplainable-mercy-pt-1.display.json",
+            "segmentCount": 608,
+            "displaySegmentCount": 512
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-11-16.srt",
+        "cleanFile": "transcripts_clean/en/2025-11-16_unexplainable-mercy-pt-1.srt",
+        "displayFile": "transcripts_display/en/2025-11-16_unexplainable-mercy-pt-1.srt",
+        "jsonFile": "data/transcripts/en/2025-11-16_unexplainable-mercy-pt-1.json",
+        "displayJsonFile": "data/transcripts/en/2025-11-16_unexplainable-mercy-pt-1.display.json",
+        "segmentCount": 608,
+        "displaySegmentCount": 512
       },
       "audio": {
         "hasAudio": true,
@@ -11470,7 +11481,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/dn22vutskbp82si6/1102PC8yqh3.mp3",
-        "plays": 32,
+        "plays": 33,
         "durationSeconds": 2241,
         "statsMatchStrategy": "media_url"
       },
