@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-19T15:35:43.201Z",
+  "generatedAt": "2026-08-19T16:00:43.491Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
     "archiveItems": 169,
     "videoMatchedItems": 161,
-    "transcriptMatchedItems": 29,
-    "quoteCandidateCount": 2106
+    "transcriptMatchedItems": 30,
+    "quoteCandidateCount": 2181
   },
   "totals": {
     "audioPlaysTotal": 5600,
@@ -10439,7 +10439,7 @@
           "Romans 9:23",
           "Romans 9:24"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -10458,16 +10458,27 @@
         "day": 14
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-12-14.srt",
+            "cleanFile": "transcripts_clean/en/2025-12-14_unexplainable-mercy-pt-4.srt",
+            "displayFile": "transcripts_display/en/2025-12-14_unexplainable-mercy-pt-4.srt",
+            "jsonFile": "data/transcripts/en/2025-12-14_unexplainable-mercy-pt-4.json",
+            "displayJsonFile": "data/transcripts/en/2025-12-14_unexplainable-mercy-pt-4.display.json",
+            "segmentCount": 897,
+            "displaySegmentCount": 797
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-12-14.srt",
+        "cleanFile": "transcripts_clean/en/2025-12-14_unexplainable-mercy-pt-4.srt",
+        "displayFile": "transcripts_display/en/2025-12-14_unexplainable-mercy-pt-4.srt",
+        "jsonFile": "data/transcripts/en/2025-12-14_unexplainable-mercy-pt-4.json",
+        "displayJsonFile": "data/transcripts/en/2025-12-14_unexplainable-mercy-pt-4.display.json",
+        "segmentCount": 897,
+        "displaySegmentCount": 797
       },
       "audio": {
         "hasAudio": true,
