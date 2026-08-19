@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T16:18:02.698Z",
+  "generatedAt": "2026-08-19T17:38:42.824Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 2331
   },
   "totals": {
-    "audioPlaysTotal": 5600,
+    "audioPlaysTotal": 5602,
     "audioEpisodesTotal": 169
   },
   "current": {
@@ -8689,7 +8689,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/knutdgfwiqt7rh65/07_Romans_11_25-29_How_Unsearchable_Pt_768h04.mp3",
-        "plays": 31,
+        "plays": 32,
         "durationSeconds": 2084,
         "statsMatchStrategy": "media_url"
       },
@@ -9517,7 +9517,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6hb96gcy7x2n3qii/01_Romans_11_1-10_How_Unsearchable_Pt_18rh74.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 2283,
         "statsMatchStrategy": "media_url"
       },
@@ -11209,7 +11209,7 @@
           "Romans 8:38",
           "Romans 8:39"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -11228,16 +11228,27 @@
         "day": 9
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-11-09.srt",
+            "cleanFile": "transcripts_clean/en/2025-11-09_are-you-persuaded-pt-2.srt",
+            "displayFile": "transcripts_display/en/2025-11-09_are-you-persuaded-pt-2.srt",
+            "jsonFile": "data/transcripts/en/2025-11-09_are-you-persuaded-pt-2.json",
+            "displayJsonFile": "data/transcripts/en/2025-11-09_are-you-persuaded-pt-2.display.json",
+            "segmentCount": 745,
+            "displaySegmentCount": 663
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-11-09.srt",
+        "cleanFile": "transcripts_clean/en/2025-11-09_are-you-persuaded-pt-2.srt",
+        "displayFile": "transcripts_display/en/2025-11-09_are-you-persuaded-pt-2.srt",
+        "jsonFile": "data/transcripts/en/2025-11-09_are-you-persuaded-pt-2.json",
+        "displayJsonFile": "data/transcripts/en/2025-11-09_are-you-persuaded-pt-2.display.json",
+        "segmentCount": 745,
+        "displaySegmentCount": 663
       },
       "audio": {
         "hasAudio": true,
@@ -11286,132 +11297,6 @@
       },
       "presentation": {
         "bibleBooksMode": "series_group"
-      },
-      "flags": {
-        "isStandaloneEpisode": false,
-        "includeInAudioTotals": true,
-        "includeInVideoTotals": true
-      }
-    },
-    {
-      "stableId": "media-rb6cpb",
-      "sourceKey": {
-        "mediaUrl": "https://mcdn.podbean.com/mf/web/728ufjgkwfrvmzb3/Working_1102WorshipPC9p24l.mp3",
-        "rssGuid": "broJacobcedargrovebaptist.podbean.com/460f32a8-0fff-3379-bedb-9c5ac8623161"
-      },
-      "links": {
-        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/",
-        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/"
-      },
-      "title": {
-        "episodeName": "Worship Night",
-        "subtitle": "",
-        "display": "Worship Night"
-      },
-      "series": {
-        "name": "2025 Specials",
-        "key": "2025-specials",
-        "type": "topical"
-      },
-      "study": {
-        "name": "",
-        "key": null,
-        "type": "none"
-      },
-      "scripture": {
-        "raw": "",
-        "display": "",
-        "book": null,
-        "bookKey": null,
-        "isVarious": false
-      },
-      "references": {
-        "raw": "",
-        "display": "",
-        "tokens": [],
-        "searchTokens": []
-      },
-      "search": {
-        "scriptureTokens": [],
-        "hasTranscriptText": true
-      },
-      "collections": [],
-      "bookTags": [],
-      "speaker": "CGBC",
-      "date": {
-        "raw": "11/02/25",
-        "iso": "2025-11-02",
-        "year": 2025,
-        "month": 11,
-        "monthName": "November",
-        "day": 2
-      },
-      "transcript": {
-        "hasTranscript": true,
-        "defaultLanguage": "en",
-        "languages": {
-          "en": {
-            "language": "en",
-            "incomingFile": "transcripts_incoming/2025-11-02.srt",
-            "cleanFile": "transcripts_clean/en/2025-11-02_worship-night.srt",
-            "displayFile": "transcripts_display/en/2025-11-02_worship-night.srt",
-            "jsonFile": "data/transcripts/en/2025-11-02_worship-night.json",
-            "displayJsonFile": "data/transcripts/en/2025-11-02_worship-night.display.json",
-            "segmentCount": 781,
-            "displaySegmentCount": 690
-          }
-        },
-        "incomingFile": "transcripts_incoming/2025-11-02.srt",
-        "cleanFile": "transcripts_clean/en/2025-11-02_worship-night.srt",
-        "displayFile": "transcripts_display/en/2025-11-02_worship-night.srt",
-        "jsonFile": "data/transcripts/en/2025-11-02_worship-night.json",
-        "displayJsonFile": "data/transcripts/en/2025-11-02_worship-night.display.json",
-        "segmentCount": 781,
-        "displaySegmentCount": 690
-      },
-      "audio": {
-        "hasAudio": true,
-        "url": "https://mcdn.podbean.com/mf/web/728ufjgkwfrvmzb3/Working_1102WorshipPC9p24l.mp3",
-        "plays": 40,
-        "durationSeconds": 4895,
-        "statsMatchStrategy": "media_url"
-      },
-      "video": {
-        "hasVideo": true,
-        "youtubeId": "JO_WOgMdaWA",
-        "url": "https://www.youtube.com/watch?v=JO_WOgMdaWA",
-        "views": 34
-      },
-      "art": {
-        "episode": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/3.jpg",
-          "wide": "https://i.ytimg.com/vi/JO_WOgMdaWA/maxresdefault.jpg"
-        },
-        "series": {
-          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/2025_Specials_4x3_3Kx3K_Web.jpg",
-          "wide": "https://i.ytimg.com/vi/LNHD6LJGxKA/maxresdefault.jpg"
-        },
-        "study": {
-          "square": null,
-          "wide": null
-        }
-      },
-      "memberships": {
-        "series": [
-          "2025-specials"
-        ],
-        "studies": [],
-        "bibleBooks": [],
-        "collections": [],
-        "byYear": [
-          "2025"
-        ],
-        "byMonth": [
-          "2025-11"
-        ]
-      },
-      "presentation": {
-        "bibleBooksMode": "none"
       },
       "flags": {
         "isStandaloneEpisode": false,
@@ -11569,6 +11454,121 @@
       },
       "presentation": {
         "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-rb6cpb",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/728ufjgkwfrvmzb3/Working_1102WorshipPC9p24l.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/460f32a8-0fff-3379-bedb-9c5ac8623161"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/worship-night-nov-2-2025/"
+      },
+      "title": {
+        "episodeName": "Worship Night",
+        "subtitle": "",
+        "display": "Worship Night"
+      },
+      "series": {
+        "name": "2025 Specials",
+        "key": "2025-specials",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "",
+        "display": "",
+        "book": null,
+        "bookKey": null,
+        "isVarious": false
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "CGBC",
+      "date": {
+        "raw": "11/01/25",
+        "iso": "2025-11-01",
+        "year": 2025,
+        "month": 11,
+        "monthName": "November",
+        "day": 1
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/728ufjgkwfrvmzb3/Working_1102WorshipPC9p24l.mp3",
+        "plays": 40,
+        "durationSeconds": 4895,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "JO_WOgMdaWA",
+        "url": "https://www.youtube.com/watch?v=JO_WOgMdaWA",
+        "views": 34
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/3.jpg",
+          "wide": "https://i.ytimg.com/vi/JO_WOgMdaWA/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/2025_Specials_4x3_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/LNHD6LJGxKA/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "2025-specials"
+        ],
+        "studies": [],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2025"
+        ],
+        "byMonth": [
+          "2025-11"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
       },
       "flags": {
         "isStandaloneEpisode": false,
