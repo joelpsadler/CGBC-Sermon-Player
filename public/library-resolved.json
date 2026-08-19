@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-19T15:23:31.802Z",
+  "generatedAt": "2026-08-19T15:35:43.201Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
     "archiveItems": 169,
     "videoMatchedItems": 161,
-    "transcriptMatchedItems": 28,
-    "quoteCandidateCount": 2031
+    "transcriptMatchedItems": 29,
+    "quoteCandidateCount": 2106
   },
   "totals": {
-    "audioPlaysTotal": 5597,
+    "audioPlaysTotal": 5600,
     "audioEpisodesTotal": 169
   },
   "current": {
@@ -8823,7 +8823,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gmd44ikr6uq967w2/06_Romans_11_22-24_A_Necessary_Clarification_Pt_6ac79i.mp3",
-        "plays": 33,
+        "plays": 34,
         "durationSeconds": 2709,
         "statsMatchStrategy": "media_url"
       },
@@ -8957,7 +8957,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5f36xb9wmaimhhxp/05_Romans_11_22-24_A_Necessary_Clarification_Pt_571zu9.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 2709,
         "statsMatchStrategy": "media_url"
       },
@@ -10589,7 +10589,7 @@
           "Romans 9:23",
           "Romans 9:24"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -10608,16 +10608,27 @@
         "day": 7
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-12-07.srt",
+            "cleanFile": "transcripts_clean/en/2025-12-07_unexplainable-mercy-pt-3.srt",
+            "displayFile": "transcripts_display/en/2025-12-07_unexplainable-mercy-pt-3.srt",
+            "jsonFile": "data/transcripts/en/2025-12-07_unexplainable-mercy-pt-3.json",
+            "displayJsonFile": "data/transcripts/en/2025-12-07_unexplainable-mercy-pt-3.display.json",
+            "segmentCount": 798,
+            "displaySegmentCount": 692
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-12-07.srt",
+        "cleanFile": "transcripts_clean/en/2025-12-07_unexplainable-mercy-pt-3.srt",
+        "displayFile": "transcripts_display/en/2025-12-07_unexplainable-mercy-pt-3.srt",
+        "jsonFile": "data/transcripts/en/2025-12-07_unexplainable-mercy-pt-3.json",
+        "displayJsonFile": "data/transcripts/en/2025-12-07_unexplainable-mercy-pt-3.display.json",
+        "segmentCount": 798,
+        "displaySegmentCount": 692
       },
       "audio": {
         "hasAudio": true,
@@ -11220,7 +11231,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/bczwezy2brdp4uk8/Working_1109PC62rnj.mp3",
-        "plays": 40,
+        "plays": 41,
         "durationSeconds": 2086,
         "statsMatchStrategy": "media_url"
       },
