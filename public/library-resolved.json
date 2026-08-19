@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-19T16:00:43.491Z",
+  "generatedAt": "2026-08-19T16:18:02.698Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 169,
     "archiveItems": 169,
     "videoMatchedItems": 161,
-    "transcriptMatchedItems": 30,
-    "quoteCandidateCount": 2181
+    "transcriptMatchedItems": 32,
+    "quoteCandidateCount": 2331
   },
   "totals": {
     "audioPlaysTotal": 5600,
@@ -11333,7 +11333,7 @@
       },
       "search": {
         "scriptureTokens": [],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [],
@@ -11347,16 +11347,27 @@
         "day": 2
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-11-02.srt",
+            "cleanFile": "transcripts_clean/en/2025-11-02_worship-night.srt",
+            "displayFile": "transcripts_display/en/2025-11-02_worship-night.srt",
+            "jsonFile": "data/transcripts/en/2025-11-02_worship-night.json",
+            "displayJsonFile": "data/transcripts/en/2025-11-02_worship-night.display.json",
+            "segmentCount": 781,
+            "displaySegmentCount": 690
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-11-02.srt",
+        "cleanFile": "transcripts_clean/en/2025-11-02_worship-night.srt",
+        "displayFile": "transcripts_display/en/2025-11-02_worship-night.srt",
+        "jsonFile": "data/transcripts/en/2025-11-02_worship-night.json",
+        "displayJsonFile": "data/transcripts/en/2025-11-02_worship-night.display.json",
+        "segmentCount": 781,
+        "displaySegmentCount": 690
       },
       "audio": {
         "hasAudio": true,
@@ -11470,7 +11481,7 @@
           "Romans 8:38",
           "Romans 8:39"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -11489,16 +11500,27 @@
         "day": 2
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2025-11-02.srt",
+            "cleanFile": "transcripts_clean/en/2025-11-02_are-you-persuaded-pt-1.srt",
+            "displayFile": "transcripts_display/en/2025-11-02_are-you-persuaded-pt-1.srt",
+            "jsonFile": "data/transcripts/en/2025-11-02_are-you-persuaded-pt-1.json",
+            "displayJsonFile": "data/transcripts/en/2025-11-02_are-you-persuaded-pt-1.display.json",
+            "segmentCount": 781,
+            "displaySegmentCount": 690
+          }
+        },
+        "incomingFile": "transcripts_incoming/2025-11-02.srt",
+        "cleanFile": "transcripts_clean/en/2025-11-02_are-you-persuaded-pt-1.srt",
+        "displayFile": "transcripts_display/en/2025-11-02_are-you-persuaded-pt-1.srt",
+        "jsonFile": "data/transcripts/en/2025-11-02_are-you-persuaded-pt-1.json",
+        "displayJsonFile": "data/transcripts/en/2025-11-02_are-you-persuaded-pt-1.display.json",
+        "segmentCount": 781,
+        "displaySegmentCount": 690
       },
       "audio": {
         "hasAudio": true,
