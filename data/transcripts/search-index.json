@@ -1,9 +1,122 @@
 {
-  "generatedAt": "2026-08-27T21:59:54.067Z",
+  "generatedAt": "2026-08-27T22:59:49.665Z",
   "version": 2,
   "note": "Lightweight transcript search index. Full transcripts stay in data/transcripts/<lang>/ and are loaded only when an episode opens.",
-  "count": 39,
+  "count": 40,
   "entries": [
+    {
+      "stableId": "media-dede04",
+      "date": "2026-08-22",
+      "title": "A Man and His Fatherhood (Part 9 of 10)",
+      "episodeName": "A Man and His Fatherhood",
+      "subtitle": "Part 9 of 10",
+      "series": "EMD 2026 Block 2",
+      "study": "Every Man Discipleship",
+      "scripture": "Selected Scriptures",
+      "speaker": "Pastor Jacob Lannom",
+      "defaultLanguage": "en",
+      "transcriptJson": "data/transcripts/en/2026-08-22_a-man-and-his-fatherhood.json",
+      "transcriptDisplayJson": "data/transcripts/en/2026-08-22_a-man-and-his-fatherhood.display.json",
+      "transcriptCleanSrt": "transcripts_clean/en/2026-08-22_a-man-and-his-fatherhood.srt",
+      "transcriptDisplaySrt": "transcripts_display/en/2026-08-22_a-man-and-his-fatherhood.srt",
+      "languages": {
+        "en": {
+          "language": "en",
+          "incomingFile": "transcripts_incoming/2026-08-22.srt",
+          "cleanFile": "transcripts_clean/en/2026-08-22_a-man-and-his-fatherhood.srt",
+          "displayFile": "transcripts_display/en/2026-08-22_a-man-and-his-fatherhood.srt",
+          "jsonFile": "data/transcripts/en/2026-08-22_a-man-and-his-fatherhood.json",
+          "displayJsonFile": "data/transcripts/en/2026-08-22_a-man-and-his-fatherhood.display.json",
+          "segmentCount": 564,
+          "displaySegmentCount": 501
+        }
+      },
+      "metadataText": "A Man and His Fatherhood | Part 9 of 10 | A Man and His Fatherhood (Part 9 of 10) | EMD 2026 Block 2 | emd-2026-block-2 | Every Man Discipleship | every-man-discipleship | Various | Selected Scriptures | Pastor Jacob Lannom | 08/22/2026 | 2026-08-22 | 2026 | August",
+      "transcriptKeywordText": "god church men listen man want father family verse word don kid stand children home kids life may walk way wife words look need thy vision live said says talk 6 godly great heart come ever hey mean saying thou christ day faithful people understand 2 3 call culture follow good lov matter number read someth something talking deuteronomy happen love maybe pray proverb proverbs put today yeah 5 alway always begin called days establish established even famili families find gett getting husband important leader might okay shall son time try 1st able com convict doesn fathers give gonna grow jesu jesus let little loving never part sit sunday thank thee think tim times whole 10 7 arrow arrows ask believe bless build center chapter christian clear coming command daughter didn discipleship door dwell everyone example fact fatherhood follower group heaven husbands lawyer lead letter liv long looking lot make means next person psalm reject sho shoes soul start take tell therefore thine together tonight train two value without work yet 20 accept already anyone anyth anything become bible bit book burden care centered child commandment commandments confus confusing control convicted conviction cool degrad degrading different discipl ephesian ephesians every fair faith fault fine first flesh following future gues guess hand hard house instead keep land link made moment moral nation new night non-negotiable old open pastor place point position question ronnie shalt shepherd show society someone spiritual stuff sure teach text three told unto valu values walking wednesday whatever 1 127 1980 22 accepted achievement ahead annoy annoying answer",
+      "searchText": "A Man and His Fatherhood | Part 9 of 10 | A Man and His Fatherhood (Part 9 of 10) | EMD 2026 Block 2 | emd-2026-block-2 | Every Man Discipleship | every-man-discipleship | Various | Selected Scriptures | Pastor Jacob Lannom | 08/22/2026 | 2026-08-22 | 2026 | August | god church men listen man want father family verse word don kid stand children home kids life may walk way wife words look need thy vision live said says talk 6 godly great heart come ever hey mean saying thou christ day faithful people understand 2 3 call culture follow good lov matter number read someth something talking deuteronomy happen love maybe pray proverb proverbs put today yeah 5 alway always begin called days establish established even famili families find gett getting husband important leader might okay shall son time try 1st able com convict doesn fathers give gonna grow jesu jesus let little loving never part sit sunday thank thee think tim times whole 10 7 arrow arrows ask believe bless build center chapter christian clear coming command daughter didn discipleship door dwell everyone example fact fatherhood follower group heaven husbands lawyer lead letter liv long looking lot make means next person psalm reject sho shoes soul start take tell therefore thine together tonight train two value without work yet 20 accept already anyone anyth anything become bible bit book burden care centered child commandment commandments confus confusing control convicted conviction cool degrad degrading different discipl ephesian ephesians every fair faith fault fine first flesh following future gues guess hand hard house instead keep land link made moment moral nation new night non-negotiable old open pastor place point position question ronnie shalt shepherd show society someone spiritual stuff sure teach text three told unto valu values walking wednesday whatever 1 127 1980 22 accepted achievement ahead annoy annoying answer | ahead officially start started tonight church event next night ronnie sunday tonight week bit little look looks plan plans semester spr spring church churches example meeting meetings three two church gett getting lot someth something start started discipleship form forms men ministry matter semantic semantics word words god group men thank discipl disciple discipled god intentionally learn give god lesson tonight word words able bless blessed god make pray god love name pray thank 6 chapter deuteronomy ahead bibl bibles old testament turn 1st 5 anyone book books call called fatherhood man talk talking tonight talk fatherhood manhood talking without",
+      "preview": [
+        {
+          "start": 15.733,
+          "text": "Officially, so we're going to go ahead and get started tonight.",
+          "keywords": "ahead officially start started tonight"
+        },
+        {
+          "start": 23.649,
+          "text": "Ronnie, they have an event at their church tonight, and then also Sunday night, next week.",
+          "keywords": "church event next night ronnie sunday tonight week"
+        },
+        {
+          "start": 34.083,
+          "text": "little bit about their plans, and it looks like they're going to have a spring semester.",
+          "keywords": "bit little look looks plan plans semester spr spring"
+        },
+        {
+          "start": 50.833,
+          "text": "For example, I've had about two or three meetings with other churches about",
+          "keywords": "church churches example meeting meetings three two"
+        },
+        {
+          "start": 54,
+          "text": "getting something like this started in their own church, and a lot",
+          "keywords": "church gett getting lot someth something start started"
+        },
+        {
+          "start": 75.599,
+          "text": "ministry, but in the forms of men's discipleship.",
+          "keywords": "discipleship form forms men ministry"
+        },
+        {
+          "start": 77.583,
+          "text": "And so, it's just semantics, but words do matter.",
+          "keywords": "matter semantic semantics word words"
+        },
+        {
+          "start": 83.95,
+          "text": "God, we just thank you for the group of men here, God, that they're",
+          "keywords": "god group men thank"
+        },
+        {
+          "start": 88.033,
+          "text": "here intentionally to learn from you, God, to disciple, and also be discipled.",
+          "keywords": "discipl disciple discipled god intentionally learn"
+        },
+        {
+          "start": 91.799,
+          "text": "So God, give me the words to say at tonight's lesson,",
+          "keywords": "give god lesson tonight word words"
+        },
+        {
+          "start": 94.799,
+          "text": "and for all those that are not able to make it, God, I pray that you just blessed them as well.",
+          "keywords": "able bless blessed god make pray"
+        },
+        {
+          "start": 97.683,
+          "text": "God, we thank you, we love you, just name, pray.",
+          "keywords": "god love name pray thank"
+        },
+        {
+          "start": 100.933,
+          "text": "Go ahead and turn your Bibles to Deuteronomy, chapter 6, Deuteronomy, chapter 6, that is in the Old Testament.",
+          "keywords": "6 chapter deuteronomy ahead bibl bibles old testament turn"
+        },
+        {
+          "start": 111.25,
+          "text": "Anyone know what the 1st 5 books are called?",
+          "keywords": "1st 5 anyone book books call called"
+        },
+        {
+          "start": 117.383,
+          "text": "We're talking about a man and his fatherhood tonight.",
+          "keywords": "fatherhood man talk talking tonight"
+        },
+        {
+          "start": 121.483,
+          "text": "you cannot talk about fatherhood without talking about manhood.",
+          "keywords": "talk fatherhood manhood talking without"
+        }
+      ]
+    },
     {
       "stableId": "media-7tbryb",
       "date": "2026-08-19",
