@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-31T21:11:22.206Z",
+  "generatedAt": "2026-09-01T00:53:31.773Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 172,
-    "archiveItems": 172,
-    "videoMatchedItems": 164,
-    "transcriptMatchedItems": 41,
-    "quoteCandidateCount": 3006
+    "rssItems": 173,
+    "archiveItems": 173,
+    "videoMatchedItems": 165,
+    "transcriptMatchedItems": 42,
+    "quoteCandidateCount": 3081
   },
   "totals": {
     "audioPlaysTotal": 5658,
-    "audioEpisodesTotal": 172
+    "audioEpisodesTotal": 173
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -84,6 +84,134 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-nzb35a",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/27949wusmhfmxii3/8_29_26_Sat_EMD_10.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/edd2fd69-dce2-3018-aa87-313bb34256b7"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/man-and-the-fear-of-man-emd-2026-block-2/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/man-and-the-fear-of-man-emd-2026-block-2/"
+      },
+      "title": {
+        "episodeName": "A Man and The Fear Of Man",
+        "subtitle": "Part 10 of 10",
+        "display": "A Man and The Fear Of Man (Part 10 of 10)"
+      },
+      "series": {
+        "name": "EMD 2026 Block 2",
+        "key": "emd-2026-block-2",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Every Man Discipleship",
+        "key": "every-man-discipleship",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "08/29/2026",
+        "iso": "2026-08-29",
+        "year": 2026,
+        "month": 8,
+        "monthName": "August",
+        "day": 29
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-08-29.srt",
+            "cleanFile": "transcripts_clean/en/2026-08-29_a-man-and-the-fear-of-man.srt",
+            "displayFile": "transcripts_display/en/2026-08-29_a-man-and-the-fear-of-man.srt",
+            "jsonFile": "data/transcripts/en/2026-08-29_a-man-and-the-fear-of-man.json",
+            "displayJsonFile": "data/transcripts/en/2026-08-29_a-man-and-the-fear-of-man.display.json",
+            "segmentCount": 528,
+            "displaySegmentCount": 477
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-08-29.srt",
+        "cleanFile": "transcripts_clean/en/2026-08-29_a-man-and-the-fear-of-man.srt",
+        "displayFile": "transcripts_display/en/2026-08-29_a-man-and-the-fear-of-man.srt",
+        "jsonFile": "data/transcripts/en/2026-08-29_a-man-and-the-fear-of-man.json",
+        "displayJsonFile": "data/transcripts/en/2026-08-29_a-man-and-the-fear-of-man.display.json",
+        "segmentCount": 528,
+        "displaySegmentCount": 477
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/27949wusmhfmxii3/8_29_26_Sat_EMD_10.mp3",
+        "plays": 0,
+        "durationSeconds": 1387,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "Wg_N3PKyPYw",
+        "url": "https://www.youtube.com/watch?v=Wg_N3PKyPYw",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/08_29_16_Sat_EMD_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/Wg_N3PKyPYw/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/4.jpg",
+          "wide": "https://i.ytimg.com/vi/17DvOs9vHNs/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "emd-2026-block-2"
+        ],
+        "studies": [
+          "every-man-discipleship"
+        ],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-08"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-unl4i3",
       "sourceKey": {
@@ -290,7 +418,7 @@
         "hasVideo": true,
         "youtubeId": "cdFAD-_x_xI",
         "url": "https://www.youtube.com/watch?v=cdFAD-_x_xI",
-        "views": 16
+        "views": 17
       },
       "art": {
         "episode": {
