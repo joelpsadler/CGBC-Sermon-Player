@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-05T18:40:19.216Z",
+  "generatedAt": "2026-09-05T20:00:31.207Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 174,
-    "archiveItems": 174,
-    "videoMatchedItems": 166,
-    "transcriptMatchedItems": 43,
-    "quoteCandidateCount": 3156
+    "rssItems": 175,
+    "archiveItems": 175,
+    "videoMatchedItems": 167,
+    "transcriptMatchedItems": 44,
+    "quoteCandidateCount": 3231
   },
   "totals": {
-    "audioPlaysTotal": 5678,
-    "audioEpisodesTotal": 174
+    "audioPlaysTotal": 5679,
+    "audioEpisodesTotal": 175
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-7tbryb",
-        "detectedFromDate": "2026-08-19",
-        "detectedFromTitle": "The Tribulation Pt. 10 (God's Wrath Announced and Active Pt.3 - The Seven Trumpets)",
+        "detectedFromEpisode": "media-bmhm9p",
+        "detectedFromDate": "2026-09-02",
+        "detectedFromTitle": "The Tribulation Pt. 11 (God's Wrath Announced and Active Pt. 4 - The Seven Trumpets)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -80,10 +80,236 @@
         "square": null,
         "wide": null
       },
-      "count": 1
+      "count": 2
     }
   ],
   "items": [
+    {
+      "stableId": "media-bmhm9p",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/27xadpqf4zzgchef/09_02_06_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/e01410ff-84f0-3037-8ed6-c4df6c56a7f6"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-11-eschatology-the-tribulation/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-11-eschatology-the-tribulation/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 11",
+        "subtitle": "God's Wrath Announced and Active Pt. 4 - The Seven Trumpets",
+        "display": "The Tribulation Pt. 11 (God's Wrath Announced and Active Pt. 4 - The Seven Trumpets)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Revelation 10, 11:1-14",
+        "display": "Revelation 10, 11:1-14",
+        "book": "Revelation",
+        "bookKey": "revelation",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Revelation 9:20-21, Revelation 1:1-3, Revelation 10, Revelation 11:1-14",
+        "display": "Revelation 9:20-21, Revelation 1:1-3, Revelation 10, Revelation 11:1-14",
+        "tokens": [
+          "Revelation 9:20-21",
+          "Revelation 9:20",
+          "Revelation 9:21",
+          "Revelation 1:1-3",
+          "Revelation 1:1",
+          "Revelation 1:2",
+          "Revelation 1:3",
+          "Revelation 1:10",
+          "Revelation 11:1-14",
+          "Revelation 11:1",
+          "Revelation 11:2",
+          "Revelation 11:3",
+          "Revelation 11:4",
+          "Revelation 11:5",
+          "Revelation 11:6",
+          "Revelation 11:7",
+          "Revelation 11:8",
+          "Revelation 11:9",
+          "Revelation 11:10",
+          "Revelation 11:11",
+          "Revelation 11:12",
+          "Revelation 11:13",
+          "Revelation 11:14"
+        ],
+        "searchTokens": [
+          "Revelation 10",
+          "Revelation 11:1-14",
+          "Revelation 11:1",
+          "Revelation 11:2",
+          "Revelation 11:3",
+          "Revelation 11:4",
+          "Revelation 11:5",
+          "Revelation 11:6",
+          "Revelation 11:7",
+          "Revelation 11:8",
+          "Revelation 11:9",
+          "Revelation 11:10",
+          "Revelation 11:11",
+          "Revelation 11:12",
+          "Revelation 11:13",
+          "Revelation 11:14",
+          "Revelation 9:20-21",
+          "Revelation 9:20",
+          "Revelation 9:21",
+          "Revelation 1:1-3",
+          "Revelation 1:1",
+          "Revelation 1:2",
+          "Revelation 1:3",
+          "Revelation 1:10"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 10",
+          "Revelation 11:1-14",
+          "Revelation 11:1",
+          "Revelation 11:2",
+          "Revelation 11:3",
+          "Revelation 11:4",
+          "Revelation 11:5",
+          "Revelation 11:6",
+          "Revelation 11:7",
+          "Revelation 11:8",
+          "Revelation 11:9",
+          "Revelation 11:10",
+          "Revelation 11:11",
+          "Revelation 11:12",
+          "Revelation 11:13",
+          "Revelation 11:14",
+          "Revelation 9:20-21",
+          "Revelation 9:20",
+          "Revelation 9:21",
+          "Revelation 1:1-3",
+          "Revelation 1:1",
+          "Revelation 1:2",
+          "Revelation 1:3",
+          "Revelation 1:10"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [
+        {
+          "name": "The Tribulation",
+          "key": "the-tribulation",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
+        }
+      ],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "09/02/2026",
+        "iso": "2026-09-02",
+        "year": 2026,
+        "month": 9,
+        "monthName": "September",
+        "day": 2
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-09-02.srt",
+            "cleanFile": "transcripts_clean/en/2026-09-02_the-tribulation-pt-11.srt",
+            "displayFile": "transcripts_display/en/2026-09-02_the-tribulation-pt-11.srt",
+            "jsonFile": "data/transcripts/en/2026-09-02_the-tribulation-pt-11.json",
+            "displayJsonFile": "data/transcripts/en/2026-09-02_the-tribulation-pt-11.display.json",
+            "segmentCount": 523,
+            "displaySegmentCount": 449
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-09-02.srt",
+        "cleanFile": "transcripts_clean/en/2026-09-02_the-tribulation-pt-11.srt",
+        "displayFile": "transcripts_display/en/2026-09-02_the-tribulation-pt-11.srt",
+        "jsonFile": "data/transcripts/en/2026-09-02_the-tribulation-pt-11.json",
+        "displayJsonFile": "data/transcripts/en/2026-09-02_the-tribulation-pt-11.display.json",
+        "segmentCount": 523,
+        "displaySegmentCount": 449
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/27xadpqf4zzgchef/09_02_06_W.mp3",
+        "plays": 0,
+        "durationSeconds": 1529,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "_4RTnzR-uB0",
+        "url": "https://www.youtube.com/watch?v=_4RTnzR-uB0",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/09_02_06_W_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/_4RTnzR-uB0/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation"
+        ],
+        "collections": [
+          "the-tribulation"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-59zdq9",
       "sourceKey": {
@@ -306,7 +532,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/n7tfrhyrujy86nhg/8_30_26_Sun.mp3",
-        "plays": 9,
+        "plays": 10,
         "durationSeconds": 2259,
         "statsMatchStrategy": "media_url"
       },
@@ -1073,7 +1299,7 @@
         "hasVideo": true,
         "youtubeId": "yeT-vTTvfNs",
         "url": "https://www.youtube.com/watch?v=yeT-vTTvfNs",
-        "views": 6
+        "views": 7
       },
       "art": {
         "episode": {
