@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-06T20:18:05.665Z",
+  "generatedAt": "2026-09-06T20:24:14.249Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 175,
-    "archiveItems": 175,
-    "videoMatchedItems": 167,
-    "transcriptMatchedItems": 44,
-    "quoteCandidateCount": 3234
+    "rssItems": 176,
+    "archiveItems": 176,
+    "videoMatchedItems": 168,
+    "transcriptMatchedItems": 45,
+    "quoteCandidateCount": 3309
   },
   "totals": {
     "audioPlaysTotal": 5695,
@@ -20,19 +20,19 @@
       "wednesday": ""
     },
     "seriesKeys": [
-      "romans-chapter-12",
+      "upon-this-rock",
       "the-tribulation"
     ],
     "lanes": {
       "sunday": {
         "lane": "sunday",
-        "seriesKey": "romans-chapter-12",
-        "seriesName": "Romans Chapter 12",
-        "studyKey": "romans",
-        "studyName": "Romans",
-        "detectedFromEpisode": "media-59zdq9",
-        "detectedFromDate": "2026-08-30",
-        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 10 (The Power in Humility)",
+        "seriesKey": "upon-this-rock",
+        "seriesName": "Upon This Rock",
+        "studyKey": null,
+        "studyName": null,
+        "detectedFromEpisode": "media-2d95xk",
+        "detectedFromDate": "2026-09-06",
+        "detectedFromTitle": "We Will Uphold the Sanctity of Family (Cedar Grove Core Values)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -84,6 +84,244 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-2d95xk",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/rerbj2unpxpe7k4x/09_06_26_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/0fbd52d2-9a8c-347d-b87e-19381e90bca1"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/we-will-uphold-the-sanctity-of-family-upon-this-rock/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/we-will-uphold-the-sanctity-of-family-upon-this-rock/"
+      },
+      "title": {
+        "episodeName": "We Will Uphold the Sanctity of Family",
+        "subtitle": "Cedar Grove Core Values",
+        "display": "We Will Uphold the Sanctity of Family (Cedar Grove Core Values)"
+      },
+      "series": {
+        "name": "Upon This Rock",
+        "key": "upon-this-rock",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Matthew 16:13-19",
+        "display": "Matthew 16:13-19",
+        "book": "Matthew",
+        "bookKey": "matthew",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Matthew 16:13-19, Matthew 7:24-25, Matthew 6:19-21, Matthew 6:33-34, Deuteronomy 6:1-7, Acts 1:14, 1 Thessalonians 5:17, 1 John 5:14",
+        "display": "Matthew 16:13-19, Matthew 7:24-25, Matthew 6:19-21, Matthew 6:33-34, Deuteronomy 6:1-7, Acts 1:14, 1 Thessalonians 5:17, 1 John 5:14",
+        "tokens": [
+          "Matthew 16:13-19",
+          "Matthew 16:13",
+          "Matthew 16:14",
+          "Matthew 16:15",
+          "Matthew 16:16",
+          "Matthew 16:17",
+          "Matthew 16:18",
+          "Matthew 16:19",
+          "Matthew 7:24-25",
+          "Matthew 7:24",
+          "Matthew 7:25",
+          "Matthew 6:19-21",
+          "Matthew 6:19",
+          "Matthew 6:20",
+          "Matthew 6:21",
+          "Matthew 6:33-34",
+          "Matthew 6:33",
+          "Matthew 6:34",
+          "Deuteronomy 6:1-7",
+          "Deuteronomy 6:1",
+          "Deuteronomy 6:2",
+          "Deuteronomy 6:3",
+          "Deuteronomy 6:4",
+          "Deuteronomy 6:5",
+          "Deuteronomy 6:6",
+          "Deuteronomy 6:7",
+          "Acts 1:14",
+          "1 Thessalonians 5:17",
+          "1 John 5:14"
+        ],
+        "searchTokens": [
+          "Matthew 16:13-19",
+          "Matthew 16:13",
+          "Matthew 16:14",
+          "Matthew 16:15",
+          "Matthew 16:16",
+          "Matthew 16:17",
+          "Matthew 16:18",
+          "Matthew 16:19",
+          "Matthew 7:24-25",
+          "Matthew 7:24",
+          "Matthew 7:25",
+          "Matthew 6:19-21",
+          "Matthew 6:19",
+          "Matthew 6:20",
+          "Matthew 6:21",
+          "Matthew 6:33-34",
+          "Matthew 6:33",
+          "Matthew 6:34",
+          "Deuteronomy 6:1-7",
+          "Deuteronomy 6:1",
+          "Deuteronomy 6:2",
+          "Deuteronomy 6:3",
+          "Deuteronomy 6:4",
+          "Deuteronomy 6:5",
+          "Deuteronomy 6:6",
+          "Deuteronomy 6:7",
+          "Acts 1:14",
+          "1 Thessalonians 5:17",
+          "1 John 5:14"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Matthew 16:13-19",
+          "Matthew 16:13",
+          "Matthew 16:14",
+          "Matthew 16:15",
+          "Matthew 16:16",
+          "Matthew 16:17",
+          "Matthew 16:18",
+          "Matthew 16:19",
+          "Matthew 7:24-25",
+          "Matthew 7:24",
+          "Matthew 7:25",
+          "Matthew 6:19-21",
+          "Matthew 6:19",
+          "Matthew 6:20",
+          "Matthew 6:21",
+          "Matthew 6:33-34",
+          "Matthew 6:33",
+          "Matthew 6:34",
+          "Deuteronomy 6:1-7",
+          "Deuteronomy 6:1",
+          "Deuteronomy 6:2",
+          "Deuteronomy 6:3",
+          "Deuteronomy 6:4",
+          "Deuteronomy 6:5",
+          "Deuteronomy 6:6",
+          "Deuteronomy 6:7",
+          "Acts 1:14",
+          "1 Thessalonians 5:17",
+          "1 John 5:14"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "Deuteronomy",
+          "key": "deuteronomy"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "1 John",
+          "key": "1-john"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "09/06/2026",
+        "iso": "2026-09-06",
+        "year": 2026,
+        "month": 9,
+        "monthName": "September",
+        "day": 6
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-09-06.srt",
+            "cleanFile": "transcripts_clean/en/2026-09-06_we-will-uphold-the-sanctity-of-family.srt",
+            "displayFile": "transcripts_display/en/2026-09-06_we-will-uphold-the-sanctity-of-family.srt",
+            "jsonFile": "data/transcripts/en/2026-09-06_we-will-uphold-the-sanctity-of-family.json",
+            "displayJsonFile": "data/transcripts/en/2026-09-06_we-will-uphold-the-sanctity-of-family.display.json",
+            "segmentCount": 844,
+            "displaySegmentCount": 751
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-09-06.srt",
+        "cleanFile": "transcripts_clean/en/2026-09-06_we-will-uphold-the-sanctity-of-family.srt",
+        "displayFile": "transcripts_display/en/2026-09-06_we-will-uphold-the-sanctity-of-family.srt",
+        "jsonFile": "data/transcripts/en/2026-09-06_we-will-uphold-the-sanctity-of-family.json",
+        "displayJsonFile": "data/transcripts/en/2026-09-06_we-will-uphold-the-sanctity-of-family.display.json",
+        "segmentCount": 844,
+        "displaySegmentCount": 751
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/rerbj2unpxpe7k4x/09_06_26_S.mp3",
+        "plays": 0,
+        "durationSeconds": 2251,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "uuZCiD879I8",
+        "url": "https://www.youtube.com/watch?v=uuZCiD879I8",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/09_06_25_Sun_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/uuZCiD879I8/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/09_06_25_Sun_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/uuZCiD879I8/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "upon-this-rock"
+        ],
+        "studies": [],
+        "bibleBooks": [
+          "matthew",
+          "deuteronomy",
+          "1-thessalonians",
+          "1-john"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-bmhm9p",
       "sourceKey": {
