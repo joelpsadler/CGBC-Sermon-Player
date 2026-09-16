@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-16T13:12:13.798Z",
+  "generatedAt": "2026-09-16T15:58:33.710Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 177,
-    "archiveItems": 177,
-    "videoMatchedItems": 169,
-    "transcriptMatchedItems": 46,
-    "quoteCandidateCount": 3384
+    "rssItems": 178,
+    "archiveItems": 178,
+    "videoMatchedItems": 170,
+    "transcriptMatchedItems": 47,
+    "quoteCandidateCount": 3459
   },
   "totals": {
     "audioPlaysTotal": 5808,
-    "audioEpisodesTotal": 177
+    "audioEpisodesTotal": 178
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Upon This Rock",
         "studyKey": null,
         "studyName": null,
-        "detectedFromEpisode": "media-2d95xk",
-        "detectedFromDate": "2026-09-06",
-        "detectedFromTitle": "We Will Uphold the Sanctity of Family (Cedar Grove Core Values)",
+        "detectedFromEpisode": "media-dmd6fv",
+        "detectedFromDate": "2026-09-13",
+        "detectedFromTitle": "I Will Live Daily With Integrity In Thought, Word and Deed (Cedar Grove Core Values)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -84,6 +84,312 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-dmd6fv",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/xnje5bgyzp2wzva6/26_09_13_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/1df8451a-4911-3db2-b758-ac02c890f26c"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/i-will-live-daily-with-integrity-in-thought-word-and-deed-upon-this-rock/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/i-will-live-daily-with-integrity-in-thought-word-and-deed-upon-this-rock/"
+      },
+      "title": {
+        "episodeName": "I Will Live Daily With Integrity In Thought, Word and Deed",
+        "subtitle": "Cedar Grove Core Values",
+        "display": "I Will Live Daily With Integrity In Thought, Word and Deed (Cedar Grove Core Values)"
+      },
+      "series": {
+        "name": "Upon This Rock",
+        "key": "upon-this-rock",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Matthew 16:13-19",
+        "display": "Matthew 16:13-19",
+        "book": "Matthew",
+        "bookKey": "matthew",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Matthew 16:13-19, Matthew 7:24-25, Matthew 6:19-21, Matthew 6:33-34, Matthew 4:3-10, Exodus 20:13, 1 Peter 1:15-16, Ephesians 4:24, Philippians 2:5, Philippians 4:8, Colossians 4:6, James 1:22, Deuteronomy 6:1-7, Acts 1:14",
+        "display": "Matthew 16:13-19, Matthew 7:24-25, Matthew 6:19-21, Matthew 6:33-34, Matthew 4:3-10, Exodus 20:13, 1 Peter 1:15-16, Ephesians 4:24, Philippians 2:5, Philippians 4:8, Colossians 4:6, James 1:22, Deuteronomy 6:1-7, Acts 1:14",
+        "tokens": [
+          "Matthew 16:13-19",
+          "Matthew 16:13",
+          "Matthew 16:14",
+          "Matthew 16:15",
+          "Matthew 16:16",
+          "Matthew 16:17",
+          "Matthew 16:18",
+          "Matthew 16:19",
+          "Matthew 7:24-25",
+          "Matthew 7:24",
+          "Matthew 7:25",
+          "Matthew 6:19-21",
+          "Matthew 6:19",
+          "Matthew 6:20",
+          "Matthew 6:21",
+          "Matthew 6:33-34",
+          "Matthew 6:33",
+          "Matthew 6:34",
+          "Matthew 4:3-10",
+          "Matthew 4:3",
+          "Matthew 4:4",
+          "Matthew 4:5",
+          "Matthew 4:6",
+          "Matthew 4:7",
+          "Matthew 4:8",
+          "Matthew 4:9",
+          "Matthew 4:10",
+          "Exodus 20:13",
+          "1 Peter 1:15-16",
+          "1 Peter 1:15",
+          "1 Peter 1:16",
+          "Ephesians 4:24",
+          "Philippians 2:5",
+          "Philippians 4:8",
+          "Colossians 4:6",
+          "James 1:22",
+          "Deuteronomy 6:1-7",
+          "Deuteronomy 6:1",
+          "Deuteronomy 6:2",
+          "Deuteronomy 6:3",
+          "Deuteronomy 6:4",
+          "Deuteronomy 6:5",
+          "Deuteronomy 6:6",
+          "Deuteronomy 6:7",
+          "Acts 1:14"
+        ],
+        "searchTokens": [
+          "Matthew 16:13-19",
+          "Matthew 16:13",
+          "Matthew 16:14",
+          "Matthew 16:15",
+          "Matthew 16:16",
+          "Matthew 16:17",
+          "Matthew 16:18",
+          "Matthew 16:19",
+          "Matthew 7:24-25",
+          "Matthew 7:24",
+          "Matthew 7:25",
+          "Matthew 6:19-21",
+          "Matthew 6:19",
+          "Matthew 6:20",
+          "Matthew 6:21",
+          "Matthew 6:33-34",
+          "Matthew 6:33",
+          "Matthew 6:34",
+          "Matthew 4:3-10",
+          "Matthew 4:3",
+          "Matthew 4:4",
+          "Matthew 4:5",
+          "Matthew 4:6",
+          "Matthew 4:7",
+          "Matthew 4:8",
+          "Matthew 4:9",
+          "Matthew 4:10",
+          "Exodus 20:13",
+          "1 Peter 1:15-16",
+          "1 Peter 1:15",
+          "1 Peter 1:16",
+          "Ephesians 4:24",
+          "Philippians 2:5",
+          "Philippians 4:8",
+          "Colossians 4:6",
+          "James 1:22",
+          "Deuteronomy 6:1-7",
+          "Deuteronomy 6:1",
+          "Deuteronomy 6:2",
+          "Deuteronomy 6:3",
+          "Deuteronomy 6:4",
+          "Deuteronomy 6:5",
+          "Deuteronomy 6:6",
+          "Deuteronomy 6:7",
+          "Acts 1:14"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Matthew 16:13-19",
+          "Matthew 16:13",
+          "Matthew 16:14",
+          "Matthew 16:15",
+          "Matthew 16:16",
+          "Matthew 16:17",
+          "Matthew 16:18",
+          "Matthew 16:19",
+          "Matthew 7:24-25",
+          "Matthew 7:24",
+          "Matthew 7:25",
+          "Matthew 6:19-21",
+          "Matthew 6:19",
+          "Matthew 6:20",
+          "Matthew 6:21",
+          "Matthew 6:33-34",
+          "Matthew 6:33",
+          "Matthew 6:34",
+          "Matthew 4:3-10",
+          "Matthew 4:3",
+          "Matthew 4:4",
+          "Matthew 4:5",
+          "Matthew 4:6",
+          "Matthew 4:7",
+          "Matthew 4:8",
+          "Matthew 4:9",
+          "Matthew 4:10",
+          "Exodus 20:13",
+          "1 Peter 1:15-16",
+          "1 Peter 1:15",
+          "1 Peter 1:16",
+          "Ephesians 4:24",
+          "Philippians 2:5",
+          "Philippians 4:8",
+          "Colossians 4:6",
+          "James 1:22",
+          "Deuteronomy 6:1-7",
+          "Deuteronomy 6:1",
+          "Deuteronomy 6:2",
+          "Deuteronomy 6:3",
+          "Deuteronomy 6:4",
+          "Deuteronomy 6:5",
+          "Deuteronomy 6:6",
+          "Deuteronomy 6:7",
+          "Acts 1:14"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "Deuteronomy",
+          "key": "deuteronomy"
+        },
+        {
+          "name": "Exodus",
+          "key": "exodus"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "Colossians",
+          "key": "colossians"
+        },
+        {
+          "name": "James",
+          "key": "james"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "09/13/2026",
+        "iso": "2026-09-13",
+        "year": 2026,
+        "month": 9,
+        "monthName": "September",
+        "day": 13
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-09-13.srt",
+            "cleanFile": "transcripts_clean/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.srt",
+            "displayFile": "transcripts_display/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.srt",
+            "jsonFile": "data/transcripts/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.json",
+            "displayJsonFile": "data/transcripts/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.display.json",
+            "segmentCount": 758,
+            "displaySegmentCount": 668
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-09-13.srt",
+        "cleanFile": "transcripts_clean/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.srt",
+        "displayFile": "transcripts_display/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.srt",
+        "jsonFile": "data/transcripts/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.json",
+        "displayJsonFile": "data/transcripts/en/2026-09-13_i-will-live-daily-with-integrity-in-thought-word-and-deed.display.json",
+        "segmentCount": 758,
+        "displaySegmentCount": 668
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/xnje5bgyzp2wzva6/26_09_13_S.mp3",
+        "plays": 0,
+        "durationSeconds": 2066,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "_HuLaSUhIys",
+        "url": "https://www.youtube.com/watch?v=_HuLaSUhIys",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/26_09_13_S_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/_HuLaSUhIys/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/09_06_25_Sun_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/uuZCiD879I8/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "upon-this-rock"
+        ],
+        "studies": [],
+        "bibleBooks": [
+          "matthew",
+          "deuteronomy",
+          "exodus",
+          "ephesians",
+          "philippians",
+          "colossians",
+          "james",
+          "acts"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-52n99w",
       "sourceKey": {
@@ -713,7 +1019,7 @@
         "hasVideo": true,
         "youtubeId": "_4RTnzR-uB0",
         "url": "https://www.youtube.com/watch?v=_4RTnzR-uB0",
-        "views": 30
+        "views": 31
       },
       "art": {
         "episode": {
