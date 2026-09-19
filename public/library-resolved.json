@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-19T09:52:41.785Z",
+  "generatedAt": "2026-09-19T13:27:45.587Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 178,
     "archiveItems": 178,
     "videoMatchedItems": 170,
-    "transcriptMatchedItems": 47,
-    "quoteCandidateCount": 3459
+    "transcriptMatchedItems": 46,
+    "quoteCandidateCount": 3393
   },
   "totals": {
     "audioPlaysTotal": 5832,
@@ -81,6 +81,17 @@
         "wide": null
       },
       "count": 3
+    },
+    {
+      "key": "unexplainable",
+      "name": "Unexplainable",
+      "description": "",
+      "sortOrder": 999,
+      "art": {
+        "square": "assets/collections/unexplainable/square.jpg",
+        "wide": "assets/collections/unexplainable/wide.jpg"
+      },
+      "count": 12
     }
   ],
   "items": [
@@ -553,7 +564,7 @@
         "hasVideo": true,
         "youtubeId": "kxgtdW_UKDE",
         "url": "https://www.youtube.com/watch?v=kxgtdW_UKDE",
-        "views": 60
+        "views": 61
       },
       "art": {
         "episode": {
@@ -10683,7 +10694,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Severity Pt.4",
+          "itemSortOrder": 12,
+          "collectionItemTitle": "Severity Pt.4",
+          "collectionItemOrder": 12
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -10759,7 +10785,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2026"
         ],
@@ -10802,8 +10830,8 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 11: 22-24",
-        "display": "Romans 11: 22-24",
+        "raw": "Romans 11:22-24",
+        "display": "Romans 11:22-24",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -10828,7 +10856,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Severity Pt. 3",
+          "itemSortOrder": 11,
+          "collectionItemTitle": "Severity Pt. 3",
+          "collectionItemOrder": 11
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -10904,7 +10947,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2026"
         ],
@@ -10947,8 +10992,8 @@
         "type": "book_study"
       },
       "scripture": {
-        "raw": "Romans 11: 22-24",
-        "display": "Romans 11: 22-24",
+        "raw": "Romans 11:22-24",
+        "display": "Romans 11:22-24",
         "book": "Romans",
         "bookKey": "romans",
         "isVarious": false
@@ -10973,7 +11018,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Severity Pt.2",
+          "itemSortOrder": 10,
+          "collectionItemTitle": "Severity Pt.2",
+          "collectionItemOrder": 10
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -11049,7 +11109,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2026"
         ],
@@ -11542,9 +11604,24 @@
           "Romans 11:9",
           "Romans 11:10"
         ],
-        "hasTranscriptText": true
+        "hasTranscriptText": false
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Severity Pt. 1",
+          "itemSortOrder": 9,
+          "collectionItemTitle": "Severity Pt. 1",
+          "collectionItemOrder": 9
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -11553,35 +11630,24 @@
       ],
       "speaker": "Pastor Jacob Lannom",
       "date": {
-        "raw": "02/01/2026",
-        "iso": "2026-02-01",
+        "raw": "02/08/2026",
+        "iso": "2026-02-08",
         "year": 2026,
         "month": 2,
         "monthName": "February",
-        "day": 1
+        "day": 8
       },
       "transcript": {
-        "hasTranscript": true,
+        "hasTranscript": false,
         "defaultLanguage": "en",
-        "languages": {
-          "en": {
-            "language": "en",
-            "incomingFile": "transcripts_incoming/2026-02-01.srt",
-            "cleanFile": "transcripts_clean/en/2026-02-01_how-unsearchable-pt-1.srt",
-            "displayFile": "transcripts_display/en/2026-02-01_how-unsearchable-pt-1.srt",
-            "jsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.json",
-            "displayJsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.display.json",
-            "segmentCount": 831,
-            "displaySegmentCount": 737
-          }
-        },
-        "incomingFile": "transcripts_incoming/2026-02-01.srt",
-        "cleanFile": "transcripts_clean/en/2026-02-01_how-unsearchable-pt-1.srt",
-        "displayFile": "transcripts_display/en/2026-02-01_how-unsearchable-pt-1.srt",
-        "jsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.json",
-        "displayJsonFile": "data/transcripts/en/2026-02-01_how-unsearchable-pt-1.display.json",
-        "segmentCount": 831,
-        "displaySegmentCount": 737
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
       },
       "audio": {
         "hasAudio": true,
@@ -11620,7 +11686,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2026"
         ],
@@ -12381,7 +12449,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sovereignty Pt. 5",
+          "itemSortOrder": 8,
+          "collectionItemTitle": "Sovereignty Pt. 5",
+          "collectionItemOrder": 8
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -12457,7 +12540,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -12532,7 +12617,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sovereignty Pt. 4",
+          "itemSortOrder": 7,
+          "collectionItemTitle": "Sovereignty Pt. 4",
+          "collectionItemOrder": 7
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -12608,7 +12708,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -12693,7 +12795,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sovereignty Pt. 3",
+          "itemSortOrder": 6,
+          "collectionItemTitle": "Sovereignty Pt. 3",
+          "collectionItemOrder": 6
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -12769,7 +12886,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -12996,7 +13115,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sovereignty Pt. 2",
+          "itemSortOrder": 5,
+          "collectionItemTitle": "Sovereignty Pt. 2",
+          "collectionItemOrder": 5
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -13072,7 +13206,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -13145,7 +13281,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sovereignty Pt. 1",
+          "itemSortOrder": 4,
+          "collectionItemTitle": "Sovereignty Pt. 1",
+          "collectionItemOrder": 4
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -13221,7 +13372,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -13302,7 +13455,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sufficiency & Security Pt. 3",
+          "itemSortOrder": 3,
+          "collectionItemTitle": "Sufficiency & Security Pt. 3",
+          "collectionItemOrder": 3
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -13378,7 +13546,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -13459,7 +13629,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sufficiency & Security Pt. 2",
+          "itemSortOrder": 2,
+          "collectionItemTitle": "Sufficiency & Security Pt. 2",
+          "collectionItemOrder": 2
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -13535,7 +13720,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
@@ -13721,7 +13908,22 @@
         ],
         "hasTranscriptText": true
       },
-      "collections": [],
+      "collections": [
+        {
+          "name": "Unexplainable",
+          "key": "unexplainable",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/unexplainable/square.jpg",
+            "wide": "assets/collections/unexplainable/wide.jpg"
+          },
+          "itemTitle": "Sufficiency & Security Pt. 1",
+          "itemSortOrder": 1,
+          "collectionItemTitle": "Sufficiency & Security Pt. 1",
+          "collectionItemOrder": 1
+        }
+      ],
       "bookTags": [
         {
           "name": "Romans",
@@ -13797,7 +13999,9 @@
         "bibleBooks": [
           "romans"
         ],
-        "collections": [],
+        "collections": [
+          "unexplainable"
+        ],
         "byYear": [
           "2025"
         ],
