@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T10:22:44.904Z",
+  "generatedAt": "2026-09-24T12:59:48.963Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 179,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 3468
   },
   "totals": {
-    "audioPlaysTotal": 5882,
+    "audioPlaysTotal": 5883,
     "audioEpisodesTotal": 179
   },
   "current": {
@@ -301,7 +301,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5fbaf5ernt6ydenf/26_09_20_S.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 2204,
         "statsMatchStrategy": "media_url"
       },
@@ -309,7 +309,7 @@
         "hasVideo": true,
         "youtubeId": "Ow8syiCnQoo",
         "url": "https://www.youtube.com/watch?v=Ow8syiCnQoo",
-        "views": 0
+        "views": 2
       },
       "art": {
         "episode": {
