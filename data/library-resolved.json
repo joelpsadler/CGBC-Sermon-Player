@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-26T18:48:56.375Z",
+  "generatedAt": "2026-09-26T20:44:29.568Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 179,
-    "archiveItems": 179,
-    "videoMatchedItems": 171,
-    "transcriptMatchedItems": 47,
-    "quoteCandidateCount": 3468
+    "rssItems": 180,
+    "archiveItems": 180,
+    "videoMatchedItems": 172,
+    "transcriptMatchedItems": 48,
+    "quoteCandidateCount": 3543
   },
   "totals": {
-    "audioPlaysTotal": 5895,
-    "audioEpisodesTotal": 179
+    "audioPlaysTotal": 5896,
+    "audioEpisodesTotal": 180
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -309,7 +309,7 @@
         "hasVideo": true,
         "youtubeId": "Ow8syiCnQoo",
         "url": "https://www.youtube.com/watch?v=Ow8syiCnQoo",
-        "views": 9
+        "views": 12
       },
       "art": {
         "episode": {
@@ -337,6 +337,308 @@
           "psalm",
           "mark",
           "romans"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-7clsbv",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/8hg9yasrnew47ijn/26_09_16_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/3f87a3a6-349d-3faa-8f73-9855d0cc4817"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/wed-working-awaiting-rss-info-260916/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/wed-working-awaiting-rss-info-260916/"
+      },
+      "title": {
+        "episodeName": "Rehearsal For Heaven",
+        "subtitle": "",
+        "display": "Rehearsal For Heaven"
+      },
+      "series": {
+        "name": "2026 Specials",
+        "key": "2026-specials",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "2 Thessalonians 1:7",
+        "display": "2 Thessalonians 1:7",
+        "book": "2 Thessalonians",
+        "bookKey": "2-thessalonians",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "John 4:19-24, Romans 12:1-2, 1 Corinthians 16:2, 2 Corinthians 6:17, Mark 5:18-20, John 12:21, John 14:15, 21, John 12:24, Galatians 2:20, Ephesians 5:18, Matthew 7:7-8, John 14:1-3, 2 Thessalonians 1:1-12",
+        "display": "John 4:19-24, Romans 12:1-2, 1 Corinthians 16:2, 2 Corinthians 6:17, Mark 5:18-20, John 12:21, John 14:15, 21, John 12:24, Galatians 2:20, Ephesians 5:18, Matthew 7:7-8, John 14:1-3, 2 Thessalonians 1:1-12",
+        "tokens": [
+          "John 4:19-24",
+          "John 4:19",
+          "John 4:20",
+          "John 4:21",
+          "John 4:22",
+          "John 4:23",
+          "John 4:24",
+          "Romans 12:1-2",
+          "Romans 12:1",
+          "Romans 12:2",
+          "1 Corinthians 16:2",
+          "2 Corinthians 6:17",
+          "Mark 5:18-20",
+          "Mark 5:18",
+          "Mark 5:19",
+          "Mark 5:20",
+          "John 12:21",
+          "John 14:15",
+          "John 14:21",
+          "John 12:24",
+          "Galatians 2:20",
+          "Ephesians 5:18",
+          "Matthew 7:7-8",
+          "Matthew 7:7",
+          "Matthew 7:8",
+          "John 14:1-3",
+          "John 14:1",
+          "John 14:2",
+          "John 14:3",
+          "2 Thessalonians 1:1-12",
+          "2 Thessalonians 1:1",
+          "2 Thessalonians 1:2",
+          "2 Thessalonians 1:3",
+          "2 Thessalonians 1:4",
+          "2 Thessalonians 1:5",
+          "2 Thessalonians 1:6",
+          "2 Thessalonians 1:7",
+          "2 Thessalonians 1:8",
+          "2 Thessalonians 1:9",
+          "2 Thessalonians 1:10",
+          "2 Thessalonians 1:11",
+          "2 Thessalonians 1:12"
+        ],
+        "searchTokens": [
+          "2 Thessalonians 1:7",
+          "John 4:19-24",
+          "John 4:19",
+          "John 4:20",
+          "John 4:21",
+          "John 4:22",
+          "John 4:23",
+          "John 4:24",
+          "Romans 12:1-2",
+          "Romans 12:1",
+          "Romans 12:2",
+          "1 Corinthians 16:2",
+          "2 Corinthians 6:17",
+          "Mark 5:18-20",
+          "Mark 5:18",
+          "Mark 5:19",
+          "Mark 5:20",
+          "John 12:21",
+          "John 14:15",
+          "John 14:21",
+          "John 12:24",
+          "Galatians 2:20",
+          "Ephesians 5:18",
+          "Matthew 7:7-8",
+          "Matthew 7:7",
+          "Matthew 7:8",
+          "John 14:1-3",
+          "John 14:1",
+          "John 14:2",
+          "John 14:3",
+          "2 Thessalonians 1:1-12",
+          "2 Thessalonians 1:1",
+          "2 Thessalonians 1:2",
+          "2 Thessalonians 1:3",
+          "2 Thessalonians 1:4",
+          "2 Thessalonians 1:5",
+          "2 Thessalonians 1:6",
+          "2 Thessalonians 1:8",
+          "2 Thessalonians 1:9",
+          "2 Thessalonians 1:10",
+          "2 Thessalonians 1:11",
+          "2 Thessalonians 1:12"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "2 Thessalonians 1:7",
+          "John 4:19-24",
+          "John 4:19",
+          "John 4:20",
+          "John 4:21",
+          "John 4:22",
+          "John 4:23",
+          "John 4:24",
+          "Romans 12:1-2",
+          "Romans 12:1",
+          "Romans 12:2",
+          "1 Corinthians 16:2",
+          "2 Corinthians 6:17",
+          "Mark 5:18-20",
+          "Mark 5:18",
+          "Mark 5:19",
+          "Mark 5:20",
+          "John 12:21",
+          "John 14:15",
+          "John 14:21",
+          "John 12:24",
+          "Galatians 2:20",
+          "Ephesians 5:18",
+          "Matthew 7:7-8",
+          "Matthew 7:7",
+          "Matthew 7:8",
+          "John 14:1-3",
+          "John 14:1",
+          "John 14:2",
+          "John 14:3",
+          "2 Thessalonians 1:1-12",
+          "2 Thessalonians 1:1",
+          "2 Thessalonians 1:2",
+          "2 Thessalonians 1:3",
+          "2 Thessalonians 1:4",
+          "2 Thessalonians 1:5",
+          "2 Thessalonians 1:6",
+          "2 Thessalonians 1:8",
+          "2 Thessalonians 1:9",
+          "2 Thessalonians 1:10",
+          "2 Thessalonians 1:11",
+          "2 Thessalonians 1:12"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "2 Thessalonians",
+          "key": "2-thessalonians"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        },
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Mark",
+          "key": "mark"
+        },
+        {
+          "name": "Galatians",
+          "key": "galatians"
+        },
+        {
+          "name": "Ephesians",
+          "key": "ephesians"
+        },
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "09/16/2026",
+        "iso": "2026-09-16",
+        "year": 2026,
+        "month": 9,
+        "monthName": "September",
+        "day": 16
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-09-16.srt",
+            "cleanFile": "transcripts_clean/en/2026-09-16_rehearsal-for-heaven.srt",
+            "displayFile": "transcripts_display/en/2026-09-16_rehearsal-for-heaven.srt",
+            "jsonFile": "data/transcripts/en/2026-09-16_rehearsal-for-heaven.json",
+            "displayJsonFile": "data/transcripts/en/2026-09-16_rehearsal-for-heaven.display.json",
+            "segmentCount": 575,
+            "displaySegmentCount": 513
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-09-16.srt",
+        "cleanFile": "transcripts_clean/en/2026-09-16_rehearsal-for-heaven.srt",
+        "displayFile": "transcripts_display/en/2026-09-16_rehearsal-for-heaven.srt",
+        "jsonFile": "data/transcripts/en/2026-09-16_rehearsal-for-heaven.json",
+        "displayJsonFile": "data/transcripts/en/2026-09-16_rehearsal-for-heaven.display.json",
+        "segmentCount": 575,
+        "displaySegmentCount": 513
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/8hg9yasrnew47ijn/26_09_16_W.mp3",
+        "plays": 0,
+        "durationSeconds": 1521,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "DN3nS3E0WGo",
+        "url": "https://www.youtube.com/watch?v=DN3nS3E0WGo",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://mcdn.podbean.com/mf/web/tyy7aknipfz9fdgu/26_09_16_W_Specials_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/DN3nS3E0WGo/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2026-01-20_at_10200bkqn6.jpg",
+          "wide": "https://i.ytimg.com/vi/XNjmYEn25xY/sddefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "2026-specials"
+        ],
+        "studies": [],
+        "bibleBooks": [
+          "2-thessalonians",
+          "john",
+          "romans",
+          "1-corinthians",
+          "2-corinthians",
+          "mark",
+          "galatians",
+          "ephesians",
+          "matthew"
         ],
         "collections": [],
         "byYear": [
@@ -816,7 +1118,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/9e5krtwr7d5n45bf/09_09_26_S.mp3",
-        "plays": 12,
+        "plays": 13,
         "durationSeconds": 1618,
         "statsMatchStrategy": "media_url"
       },
@@ -1065,7 +1367,7 @@
         "hasVideo": true,
         "youtubeId": "uuZCiD879I8",
         "url": "https://www.youtube.com/watch?v=uuZCiD879I8",
-        "views": 48
+        "views": 49
       },
       "art": {
         "episode": {
