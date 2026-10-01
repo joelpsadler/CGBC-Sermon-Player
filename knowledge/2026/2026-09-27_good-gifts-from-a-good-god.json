@@ -1,0 +1,2798 @@
+{
+  "schemaVersion": "1.0",
+  "recordType": "CGBC_SERMON_KNOWLEDGE",
+  "recordVersion": "1.0",
+  "generatedAt": "2026-09-30T15:34:36.528092+00:00",
+  "githubMainAtBuild": "d4c6de4d65f2f82289ba8ac8f915459e8b4229c0",
+  "sermon": {
+    "stableId": "media-fdtrrp",
+    "title": "Good Gifts From A Good God",
+    "subtitle": "Harvest Day 2026",
+    "date": "2026-09-27",
+    "speaker": "Jacob Lannom",
+    "series": "2026 Specials",
+    "study": "",
+    "seriesType": "Topical",
+    "scripture": "Matthew 20:1-16",
+    "references": [
+      "Matthew 13:10-17",
+      "Matthew 19:30",
+      "Ephesians 2:8-10",
+      "Romans 2:11",
+      "Luke 19:10",
+      "Romans 10:13",
+      "Exodus 8:8-10",
+      "2 Corinthians 6:2"
+    ],
+    "bookTags": [
+      "Matthew",
+      "Ephesians",
+      "Romans",
+      "Luke",
+      "Exodus",
+      "2 Corinthians"
+    ],
+    "collections": [],
+    "videoUrl": "https://www.youtube.com/watch?v=wxi-a-tSMGI",
+    "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/good-gifts-from-a-good-god-2026-specials/",
+    "transcriptPath": "data/transcripts/en/2026-09-27_good-gifts-from-a-good-god.json",
+    "incomingTranscriptPath": "transcripts_incoming/2026-09-27.srt",
+    "cleanTranscriptPath": "transcripts_clean/en/2026-09-27_good-gifts-from-a-good-god.srt",
+    "displayTranscriptPath": "transcripts_display/en/2026-09-27_good-gifts-from-a-good-god.srt",
+    "youtubeId": "wxi-a-tSMGI",
+    "durationSeconds": 2106,
+    "translationUsedInPreparation": "NASB95",
+    "sourceArchivePath": "Sermon Source Archive/2026/26_09_27/"
+  },
+  "sources": [
+    {
+      "id": "src-transcript",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "Sermon Source Archive/2026/26_09_27/original-transcript.srt",
+      "sha256": "a00175cb17a6b10dbd67d31028ee65921bc567472c768c6f1ddd017779f1618f",
+      "notes": "Original 715-segment SRT. Its segment timing/text aligns with the current processed transcript used by the sermon player."
+    },
+    {
+      "id": "src-processed-transcript",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "data/transcripts/en/2026-09-27_good-gifts-from-a-good-god.json",
+      "notes": "Authoritative repository processed transcript at GitHub main d4c6de4d65f2f82289ba8ac8f915459e8b4229c0; stableId media-fdtrrp; 715 segments."
+    },
+    {
+      "id": "src-notes",
+      "kind": "PASTOR — PREPARED",
+      "pathOrName": "Sermon Source Archive/2026/26_09_27/sermon-notes.pdf",
+      "sha256": "1bf79ecd161c99116dadb7b06319812a6e648178598639ffba5b267e28fb4f25",
+      "notes": "Logos sermon preparation export dated September 26, 2026."
+    },
+    {
+      "id": "src-slides",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_09_27/slides.pptx",
+      "sha256": "dc3f0a6fe608256ce9652eeb821ae2666344775e709727c86222be49a992acef",
+      "notes": "47-slide visual presentation. Knowledge map stores references/roles rather than full NASB95 verse text."
+    },
+    {
+      "id": "src-art-square",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_09_27/art-square.jpg",
+      "sha256": "b9ebbd2b1627df666a8989b7e650934231f59423c40877f53e7406b12ebc3bdd",
+      "notes": "Archived square episode artwork."
+    },
+    {
+      "id": "src-art-wide",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_09_27/art-wide.jpg",
+      "sha256": "791ffe4246b3ef540ccae025263f63ef194538f7353e595eb003b7e4ddde1675",
+      "notes": "Archived widescreen episode artwork."
+    },
+    {
+      "id": "src-holman",
+      "kind": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "pathOrName": "Holman New Testament Commentary: Matthew",
+      "notes": "Named and quoted by Pastor Jacob in the prepared notes and sermon during the Matthew 20:13-16 discussion."
+    },
+    {
+      "id": "src-deeper-podcast",
+      "kind": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "pathOrName": "Deeper Podcast / Pastor Joey Martin",
+      "notes": "Pastor Jacob verbally attributes the closing father-and-son illustration to the Deeper Podcast and Pastor Joey Martin."
+    },
+    {
+      "id": "src-doctrine-taxonomy",
+      "kind": "ANALYSIS — CLASSIFICATION",
+      "pathOrName": "CGBC_Biblical_Doctrine_Taxonomy_Aliased.json",
+      "sha256": "6094c2f940826b0604a7ab05e3ae70803d73a76ad40b6bfe0939f34e0e34e70e",
+      "notes": "CGBC classification vocabulary only; taxonomy labels are not independent sermon evidence."
+    }
+  ],
+  "structure": {
+    "introduction": "Parables and spiritual receptivity",
+    "anchorPassage": "Matthew 20:1-16",
+    "framingConnection": [
+      "Matthew 19:30",
+      "Matthew 20:16"
+    ],
+    "movements": [
+      {
+        "order": 1,
+        "title": "Their Dependency",
+        "nodeRef": "media-fdtrrp.n006",
+        "start": 591.966
+      },
+      {
+        "order": 2,
+        "title": "Their Opportunity",
+        "nodeRef": "media-fdtrrp.n008",
+        "start": 649.983
+      },
+      {
+        "order": 3,
+        "title": "His Impartiality",
+        "nodeRef": "media-fdtrrp.n010",
+        "start": 943.683
+      },
+      {
+        "order": 4,
+        "title": "Their Availability",
+        "nodeRef": "media-fdtrrp.n019",
+        "start": 1413.299
+      }
+    ]
+  },
+  "slideMap": [
+    {
+      "slide": 1,
+      "kind": "branding",
+      "meaningful": false,
+      "notes": "CGBC logo / sermon visual background."
+    },
+    {
+      "slide": 2,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 3,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 4,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 5,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 6,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 7,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 8,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Why Jesus spoke in parables",
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "slide": 9,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 10,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 11,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 12,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 13,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 14,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 15,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 16,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 17,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Parable of the laborers in the vineyard",
+      "scripture": [
+        "Matthew 20:1-16"
+      ]
+    },
+    {
+      "slide": 18,
+      "kind": "title",
+      "meaningful": true,
+      "title": "Good Gifts From A Good God"
+    },
+    {
+      "slide": 19,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "The first and the last",
+      "scripture": [
+        "Matthew 19:30"
+      ]
+    },
+    {
+      "slide": 20,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "The last and the first",
+      "scripture": [
+        "Matthew 20:16"
+      ]
+    },
+    {
+      "slide": 21,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "Their Dependency"
+    },
+    {
+      "slide": 22,
+      "kind": "branding",
+      "meaningful": false,
+      "notes": "CGBC logo / transition slide."
+    },
+    {
+      "slide": 23,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "Their Opportunity"
+    },
+    {
+      "slide": 24,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:3-4"
+      ]
+    },
+    {
+      "slide": 25,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:3-4"
+      ]
+    },
+    {
+      "slide": 26,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:5"
+      ]
+    },
+    {
+      "slide": 27,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:6-7"
+      ]
+    },
+    {
+      "slide": 28,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:6-7"
+      ]
+    },
+    {
+      "slide": 29,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:8-9"
+      ]
+    },
+    {
+      "slide": 30,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:8-9"
+      ]
+    },
+    {
+      "slide": 31,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:10-12"
+      ]
+    },
+    {
+      "slide": 32,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Their Opportunity / vineyard sequence",
+      "scripture": [
+        "Matthew 20:10-12"
+      ]
+    },
+    {
+      "slide": 33,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "His Impartiality"
+    },
+    {
+      "slide": 34,
+      "kind": "branding",
+      "meaningful": false,
+      "notes": "CGBC logo / transition slide."
+    },
+    {
+      "slide": 35,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Salvation by grace through faith",
+      "scripture": [
+        "Ephesians 2:8-10"
+      ]
+    },
+    {
+      "slide": 36,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Created in Christ Jesus for good works",
+      "scripture": [
+        "Ephesians 2:8-10"
+      ]
+    },
+    {
+      "slide": 37,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "The landowner's right to give",
+      "scripture": [
+        "Matthew 20:13-16"
+      ]
+    },
+    {
+      "slide": 38,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "The landowner's generosity / first and last",
+      "scripture": [
+        "Matthew 20:13-16"
+      ]
+    },
+    {
+      "slide": 39,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "No partiality with God",
+      "scripture": [
+        "Romans 2:11"
+      ]
+    },
+    {
+      "slide": 40,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "The Son of Man seeks and saves the lost",
+      "scripture": [
+        "Luke 19:10"
+      ]
+    },
+    {
+      "slide": 41,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "Their Availability"
+    },
+    {
+      "slide": 42,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Call on the name of the Lord",
+      "scripture": [
+        "Romans 10:13"
+      ]
+    },
+    {
+      "slide": 43,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Pharaoh asks for the frogs to be removed",
+      "scripture": [
+        "Exodus 8:8-9"
+      ]
+    },
+    {
+      "slide": 44,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Moses asks Pharaoh when",
+      "scripture": [
+        "Exodus 8:8-9"
+      ]
+    },
+    {
+      "slide": 45,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Pharaoh answers: tomorrow",
+      "scripture": [
+        "Exodus 8:10"
+      ]
+    },
+    {
+      "slide": 46,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Now is the day of salvation",
+      "scripture": [
+        "2 Corinthians 6:2"
+      ]
+    },
+    {
+      "slide": 47,
+      "kind": "branding",
+      "meaningful": false,
+      "notes": "Closing visual background."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "media-fdtrrp.n001",
+      "type": "outlinePoint",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Hear the parable with a receptive heart",
+      "summary": "The sermon opens by explaining parables and stressing that spiritual receptivity matters before moving into Matthew 20.",
+      "start": 86.733,
+      "end": 384.416,
+      "segmentIndexes": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132
+      ],
+      "scripture": [
+        "Matthew 13:10-17"
+      ],
+      "topics": [
+        "parables",
+        "spiritual receptivity",
+        "hearing",
+        "heart posture"
+      ],
+      "doctrine": [
+        "Bibliology",
+        "Hamartiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n002",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "A heart can be present while far from God",
+      "text": "You may be in here this morning and you are physically in the building, but your heart is far from God.",
+      "start": 363.0,
+      "end": 366.533,
+      "segmentIndexes": [
+        126
+      ],
+      "topics": [
+        "heart posture",
+        "spiritual receptivity"
+      ],
+      "doctrine": [
+        "Hamartiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n003",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "God has something for each listener",
+      "text": "Folks, listen, God has something for each of us here, whether you're lost as you're saved.",
+      "start": 380.583,
+      "end": 384.416,
+      "segmentIndexes": [
+        132
+      ],
+      "topics": [
+        "hearing",
+        "response",
+        "application"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ],
+      "notes": "Transcript grammar preserved in spokenExact-level content; listener-facing summaries may be normalized."
+    },
+    {
+      "id": "media-fdtrrp.n004",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Main parable",
+      "summary": "Matthew 20:1-16 is the sermon anchor. The parable is read and then developed through four movements.",
+      "start": 405.433,
+      "end": 576.649,
+      "segmentIndexes": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199
+      ],
+      "scripture": [
+        "Matthew 20:1-16"
+      ],
+      "topics": [
+        "laborers in the vineyard",
+        "kingdom of heaven",
+        "grace",
+        "service"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n005",
+      "type": "connection",
+      "provenance": "PASTOR — PREPARED",
+      "title": "The parable begins and ends with the first/last reversal",
+      "summary": "The sermon connects Matthew 19:30 with Matthew 20:16 and uses that reversal to frame the parable.",
+      "start": 552.25,
+      "end": 591.899,
+      "segmentIndexes": [
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ],
+      "scripture": [
+        "Matthew 19:30",
+        "Matthew 20:16"
+      ],
+      "topics": [
+        "first and last",
+        "kingdom reversal",
+        "comparison"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n006",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Their Dependency",
+      "summary": "The day laborers are portrayed as desperate and dependent on someone coming to hire them.",
+      "start": 591.966,
+      "end": 649.916,
+      "segmentIndexes": [
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225
+      ],
+      "scripture": [
+        "Matthew 20:1-2"
+      ],
+      "topics": [
+        "dependency",
+        "day laborers",
+        "need",
+        "salvation"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Anthropology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n007",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The workers were dependent",
+      "text": "They were just dependent on somebody to give them some kind of work.",
+      "start": 630.299,
+      "end": 633.6,
+      "segmentIndexes": [
+        218
+      ],
+      "scripture": [
+        "Matthew 20:1-2"
+      ],
+      "topics": [
+        "dependency",
+        "need"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n008",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Their Opportunity",
+      "summary": "Workers are repeatedly invited into the vineyard throughout the day; the sermon emphasizes the opportunity given to those waiting.",
+      "start": 649.983,
+      "end": 943.683,
+      "segmentIndexes": [
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336
+      ],
+      "scripture": [
+        "Matthew 20:3-12"
+      ],
+      "topics": [
+        "opportunity",
+        "invitation",
+        "vineyard",
+        "laborers"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n009",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Opportunity throughout the day",
+      "text": "We see that all throughout the day, there was opportunity for as many who were willing to come to the vineyard and work.",
+      "start": 783.549,
+      "end": 788.649,
+      "segmentIndexes": [
+        273,
+        274
+      ],
+      "scripture": [
+        "Matthew 20:3-9"
+      ],
+      "topics": [
+        "opportunity",
+        "invitation",
+        "availability"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n010",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — PREPARED",
+      "title": "His Impartiality",
+      "summary": "The equal payment becomes the bridge to the sermon's central contrast between work-based salvation and grace-based salvation.",
+      "start": 943.683,
+      "end": 1412.049,
+      "segmentIndexes": [
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506
+      ],
+      "scripture": [
+        "Matthew 20:10-16",
+        "Ephesians 2:8-10",
+        "Romans 2:11",
+        "Luke 19:10"
+      ],
+      "topics": [
+        "impartiality",
+        "grace",
+        "works",
+        "salvation",
+        "comparison",
+        "God's generosity"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n011",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Work cannot earn salvation",
+      "spokenExact": "By the way, if you can earn your salvation, you don't have it.",
+      "displayText": "If you can earn your salvation, you don't have it.",
+      "start": 993.133,
+      "end": 995.883,
+      "segmentIndexes": [
+        356
+      ],
+      "scripture": [
+        "Ephesians 2:8-10"
+      ],
+      "topics": [
+        "salvation",
+        "works",
+        "grace"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n012",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Grace is the great equalizer",
+      "spokenExact": "Grace is the great equalizer. Grace is not earned, only given.",
+      "displayText": "Grace is the great equalizer. Grace is not earned, only given.",
+      "start": 1005.6,
+      "end": 1009.5,
+      "segmentIndexes": [
+        359,
+        360
+      ],
+      "scripture": [
+        "Ephesians 2:8-10"
+      ],
+      "topics": [
+        "grace",
+        "salvation",
+        "equality",
+        "gift"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n013",
+      "type": "scriptureTrail",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Grace and impartiality trail",
+      "summary": "Matthew 20:10-16 → Ephesians 2:8-10 → Romans 2:11 → Luke 19:10.",
+      "scripture": [
+        "Matthew 20:10-16",
+        "Ephesians 2:8-10",
+        "Romans 2:11",
+        "Luke 19:10"
+      ],
+      "topics": [
+        "grace",
+        "works",
+        "impartiality",
+        "seeking the lost"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Theology Proper",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-notes",
+        "src-slides",
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n014",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Ministry can obscure Jesus",
+      "text": "We get so busy with ministry that we miss Jesus.",
+      "start": 1134.783,
+      "end": 1137.299,
+      "segmentIndexes": [
+        405
+      ],
+      "topics": [
+        "ministry",
+        "Jesus",
+        "spiritual focus",
+        "service"
+      ],
+      "doctrine": [
+        "Christology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n015",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Serve because Christ has saved",
+      "text": "I give my life to the works of the ministry because I've been saved by Jesus.",
+      "start": 1116.966,
+      "end": 1120.383,
+      "segmentIndexes": [
+        400
+      ],
+      "scripture": [
+        "Ephesians 2:8-10"
+      ],
+      "topics": [
+        "service",
+        "works",
+        "salvation",
+        "ministry"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n016",
+      "type": "definition",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Parable interpretation used in the sermon",
+      "summary": "The landowner represents God; the workers represent those who are saved; the vineyard is the world in which believers serve Christ.",
+      "start": 1138.983,
+      "end": 1150.683,
+      "segmentIndexes": [
+        406,
+        407,
+        408,
+        409
+      ],
+      "scripture": [
+        "Matthew 20:1-16"
+      ],
+      "topics": [
+        "parable interpretation",
+        "God",
+        "saved people",
+        "service"
+      ],
+      "doctrine": [
+        "Theology Proper",
+        "Soteriology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n017",
+      "type": "observation",
+      "provenance": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "title": "Holman New Testament Commentary support",
+      "summary": "Pastor Jacob cites the Holman New Testament Commentary in the section on kingdom grace, rewards, God's standards, and faithfulness to one's calling.",
+      "start": 1323.666,
+      "end": 1362.783,
+      "segmentIndexes": [
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489
+      ],
+      "scripture": [
+        "Matthew 20:1-16"
+      ],
+      "topics": [
+        "kingdom grace",
+        "rewards",
+        "faithfulness",
+        "God's standards"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-holman",
+        "src-transcript",
+        "src-notes"
+      ],
+      "notes": "1 Corinthians 4:5 appears inside the quoted commentary, not as a direct sermon Scripture reference."
+    },
+    {
+      "id": "media-fdtrrp.n018",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "All are dependent and offered the gospel",
+      "text": "We are all dependent on him for our salvation. We are all given the same opportunity, through the gospel.",
+      "start": 1372.866,
+      "end": 1377.966,
+      "segmentIndexes": [
+        493,
+        494
+      ],
+      "scripture": [
+        "Romans 2:11",
+        "Luke 19:10"
+      ],
+      "topics": [
+        "dependency",
+        "gospel",
+        "opportunity",
+        "salvation"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n019",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Their Availability",
+      "summary": "The final movement warns against postponing response to God and contrasts worldly preoccupation with availability to God.",
+      "start": 1413.299,
+      "end": 1689.599,
+      "segmentIndexes": [
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590
+      ],
+      "scripture": [
+        "Romans 10:13",
+        "Exodus 8:8-10",
+        "2 Corinthians 6:2"
+      ],
+      "topics": [
+        "availability",
+        "response",
+        "delay",
+        "salvation",
+        "today"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Hamartiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n020",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Worldly preoccupation and availability",
+      "text": "They are already hired out by this world system. They do not make themselves available to God.",
+      "start": 1435.983,
+      "end": 1442.45,
+      "segmentIndexes": [
+        513,
+        514
+      ],
+      "topics": [
+        "availability",
+        "worldliness",
+        "response"
+      ],
+      "doctrine": [
+        "Hamartiology",
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n021",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Respond now rather than tomorrow",
+      "spokenExact": "If you're not willing to give your life to Christ now, what makes you think you will tomorrow?",
+      "displayText": "If you're not willing to give your life to Christ now, what makes you think you will tomorrow?",
+      "start": 1494.9,
+      "end": 1499.166,
+      "segmentIndexes": [
+        533,
+        534
+      ],
+      "scripture": [
+        "Romans 10:13",
+        "2 Corinthians 6:2"
+      ],
+      "topics": [
+        "salvation",
+        "response",
+        "today",
+        "delay"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n022",
+      "type": "illustration",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Pharaoh's 'tomorrow'",
+      "summary": "The sermon uses Pharaoh's response in Exodus 8 to illustrate the danger of delaying submission to God.",
+      "start": 1503.066,
+      "end": 1664.15,
+      "segmentIndexes": [
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        565,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        582,
+        583
+      ],
+      "scripture": [
+        "Exodus 8:8-10"
+      ],
+      "topics": [
+        "Pharaoh",
+        "delay",
+        "tomorrow",
+        "submission",
+        "hard heart"
+      ],
+      "doctrine": [
+        "Hamartiology",
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n023",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Now is the day of salvation",
+      "summary": "After the Pharaoh illustration, the sermon points to 2 Corinthians 6:2 and stresses the present moment rather than delay.",
+      "start": 1672.933,
+      "end": 1689.599,
+      "segmentIndexes": [
+        586,
+        587,
+        588,
+        589,
+        590
+      ],
+      "scripture": [
+        "2 Corinthians 6:2"
+      ],
+      "topics": [
+        "salvation",
+        "now",
+        "response",
+        "urgency"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n024",
+      "type": "illustration",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The father and son choosing a gift",
+      "summary": "Pastor Jacob attributes a story based on actual people to Pastor Joey Martin on the Deeper Podcast: a son asks his father to choose because his father makes good choices.",
+      "start": 1724.349,
+      "end": 1833.116,
+      "segmentIndexes": [
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617,
+        618,
+        619,
+        620,
+        621,
+        622,
+        623,
+        624,
+        625,
+        626,
+        627,
+        628,
+        629,
+        630,
+        631
+      ],
+      "topics": [
+        "trust",
+        "father",
+        "choices",
+        "good gifts",
+        "illustration"
+      ],
+      "doctrine": [
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-deeper-podcast"
+      ],
+      "notes": "Provenance must remain explicit; this illustration is not claimed as Pastor Jacob's original story."
+    },
+    {
+      "id": "media-fdtrrp.n025",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "God makes the best choices",
+      "spokenExact": "Our God always makes. The best choices for us. He knows what we need.",
+      "displayText": "Our God always makes the best choices for us. He knows what we need.",
+      "start": 1826.283,
+      "end": 1833.116,
+      "segmentIndexes": [
+        629,
+        630,
+        631
+      ],
+      "topics": [
+        "God's goodness",
+        "trust",
+        "providence",
+        "choices"
+      ],
+      "doctrine": [
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n026",
+      "type": "question",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Are you trusting Him?",
+      "text": "My question is simple, are you trusting him? With your life. Are you trusting him with his choices?",
+      "start": 1846.533,
+      "end": 1853.766,
+      "segmentIndexes": [
+        636,
+        637,
+        638
+      ],
+      "topics": [
+        "trust",
+        "application",
+        "God's choices"
+      ],
+      "doctrine": [
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n027",
+      "type": "question",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "What if we're in the eleventh hour?",
+      "text": "What if we're in the 11th hour?",
+      "start": 1954.566,
+      "end": 1955.766,
+      "segmentIndexes": [
+        676
+      ],
+      "scripture": [
+        "Matthew 20:1-16"
+      ],
+      "topics": [
+        "eleventh hour",
+        "urgency",
+        "salvation"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n028",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Stop keeping score and serve the King",
+      "summary": "The closing application asks whether listeners are comparing, tallying good deeds, or keeping score, then calls them to simply serve the King.",
+      "start": 1962.483,
+      "end": 1995.483,
+      "segmentIndexes": [
+        678,
+        679,
+        680,
+        681,
+        682,
+        683,
+        684,
+        685,
+        686,
+        687
+      ],
+      "topics": [
+        "comparison",
+        "service",
+        "good works",
+        "joy",
+        "Jesus"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Soteriology",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n029",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Comparison steals joy",
+      "spokenExact": "By the way, if we stop looking, uh, comparison is a thief of joy.",
+      "displayText": "Comparison is a thief of joy.",
+      "start": 1291.799,
+      "end": 1295.816,
+      "segmentIndexes": [
+        465
+      ],
+      "topics": [
+        "comparison",
+        "joy"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": null,
+      "sourceRefs": [
+        "src-transcript"
+      ],
+      "notes": "Useful semantic quote candidate; not part of Joel's reviewed/selected Harvest Day quote set."
+    },
+    {
+      "id": "media-fdtrrp.n030",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Serve the King",
+      "text": "Just serve the king.",
+      "displayText": "Just serve the King.",
+      "start": 1980.633,
+      "end": 1981.5,
+      "segmentIndexes": [
+        683
+      ],
+      "topics": [
+        "service",
+        "Jesus",
+        "application"
+      ],
+      "doctrine": [
+        "Christology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": null,
+      "sourceRefs": [
+        "src-transcript"
+      ],
+      "notes": "Not part of Joel's reviewed/selected Harvest Day quote set."
+    },
+    {
+      "id": "media-fdtrrp.n031",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Soteriology",
+      "summary": "The dominant doctrinal thread is salvation by grace rather than works, the gospel invitation, response, and urgency.",
+      "scripture": [
+        "Matthew 20:1-16",
+        "Ephesians 2:8-10",
+        "Romans 10:13",
+        "2 Corinthians 6:2"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n032",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Theology Proper",
+      "summary": "God is presented as generous, impartial, sovereign over what is His, seeking the lost, and trustworthy in His choices.",
+      "scripture": [
+        "Matthew 20:13-16",
+        "Romans 2:11",
+        "Luke 19:10"
+      ],
+      "doctrine": [
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n033",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Hamartiology",
+      "summary": "Resistance, pride, work-based thinking, worldly preoccupation, and Pharaoh's hardened delay illustrate sinful heart responses.",
+      "scripture": [
+        "Matthew 13:10-17",
+        "Exodus 8:8-10"
+      ],
+      "doctrine": [
+        "Hamartiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n034",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Christology",
+      "summary": "Jesus is the teacher of the parable, the Savior who seeks the lost, and the King believers are called to serve.",
+      "scripture": [
+        "Matthew 13:10-17",
+        "Luke 19:10"
+      ],
+      "doctrine": [
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-fdtrrp.n035",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Ecclesiology",
+      "summary": "The sermon applies grace to ministry and service, warning against doing ministry in a way that loses sight of Jesus.",
+      "scripture": [
+        "Ephesians 2:8-10"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    }
+  ],
+  "discover": [
+    {
+      "id": "discover.parables",
+      "question": "Why begin with Jesus' teaching about parables?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon prepares the listener to hear Matthew 20 with a receptive heart rather than a resistant one.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n001",
+        "media-fdtrrp.n002"
+      ],
+      "start": 86.733,
+      "scripture": [
+        "Matthew 13:10-17"
+      ]
+    },
+    {
+      "id": "discover.dependency",
+      "question": "What does Their Dependency show?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The workers had no leverage of their own; they depended on someone coming to give them work.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n006",
+        "media-fdtrrp.n007"
+      ],
+      "start": 591.966,
+      "scripture": [
+        "Matthew 20:1-2"
+      ]
+    },
+    {
+      "id": "discover.opportunity",
+      "question": "What does Their Opportunity emphasize?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The landowner repeatedly goes out and gives people an opportunity to enter the vineyard.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n008",
+        "media-fdtrrp.n009"
+      ],
+      "start": 649.983,
+      "scripture": [
+        "Matthew 20:3-12"
+      ]
+    },
+    {
+      "id": "discover.grace",
+      "question": "Why does the sermon call grace the great equalizer?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Because salvation is presented as grace-based rather than something earned through spiritual work or status.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n010",
+        "media-fdtrrp.n011",
+        "media-fdtrrp.n012"
+      ],
+      "start": 993.133,
+      "scripture": [
+        "Ephesians 2:8-10"
+      ]
+    },
+    {
+      "id": "discover.ministry",
+      "question": "Can ministry itself become a distraction?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Yes. The sermon warns that even good ministry activity can become a checklist that causes us to miss Jesus.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n014",
+        "media-fdtrrp.n015"
+      ],
+      "start": 1112.4
+    },
+    {
+      "id": "discover.impartiality",
+      "question": "What does God's impartiality mean in this sermon?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon connects the landowner's generosity with grace, God's standards, and the truth that all people depend on Him for salvation.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n010",
+        "media-fdtrrp.n013",
+        "media-fdtrrp.n018"
+      ],
+      "start": 1367.466,
+      "scripture": [
+        "Romans 2:11",
+        "Luke 19:10"
+      ]
+    },
+    {
+      "id": "discover.availability",
+      "question": "What is Their Availability warning against?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Against assuming there will always be a later time to respond to God while life is already occupied by everything else.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n019",
+        "media-fdtrrp.n020",
+        "media-fdtrrp.n021"
+      ],
+      "start": 1413.299
+    },
+    {
+      "id": "discover.pharaoh",
+      "question": "Why does the sermon bring in Pharaoh and the frogs?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Pharaoh's 'tomorrow' becomes an illustration of the danger of delaying submission when the time to respond is now.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n022",
+        "media-fdtrrp.n023"
+      ],
+      "start": 1503.066,
+      "scripture": [
+        "Exodus 8:8-10",
+        "2 Corinthians 6:2"
+      ]
+    },
+    {
+      "id": "discover.good-choices",
+      "question": "What does the closing father-and-son story teach?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "It illustrates trusting a good father to make the better choice, which the sermon applies to trusting God with our lives.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n024",
+        "media-fdtrrp.n025",
+        "media-fdtrrp.n026"
+      ],
+      "start": 1724.349
+    },
+    {
+      "id": "discover.serve",
+      "question": "How does the sermon close for a believer?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Stop comparing and keeping score. Serve the King.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-fdtrrp.n028",
+        "media-fdtrrp.n030"
+      ],
+      "start": 1962.483
+    }
+  ],
+  "quotes": {
+    "reviewedBy": "Joel",
+    "reviewInput": "1F, 2,3,5,9",
+    "reviewRule": "Only Joel-created selections receive durable Approved/Featured status. Unselected recommendations are not stored as denials.",
+    "featured": [
+      "media-fdtrrp.quote.q001"
+    ],
+    "approved": [
+      "media-fdtrrp.quote.q002",
+      "media-fdtrrp.quote.q003",
+      "media-fdtrrp.quote.q005",
+      "media-fdtrrp.quote.q009"
+    ],
+    "selected": [
+      {
+        "id": "media-fdtrrp.quote.q001",
+        "reviewNumber": 1,
+        "spokenExact": "Grace is the great equalizer. Grace is not earned, only given.",
+        "displayText": "Grace is the great equalizer. Grace is not earned, only given.",
+        "start": 1005.6,
+        "end": 1009.5,
+        "segmentIndexes": [
+          359,
+          360
+        ],
+        "status": "featured",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-fdtrrp.n012",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fdtrrp&start=1005.600&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fdtrrp&start=1005.600&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=wxi-a-tSMGI&t=1005s"
+      },
+      {
+        "id": "media-fdtrrp.quote.q002",
+        "reviewNumber": 2,
+        "spokenExact": "We get so busy with ministry that we miss Jesus.",
+        "displayText": "We get so busy with ministry that we miss Jesus.",
+        "start": 1134.783,
+        "end": 1137.299,
+        "segmentIndexes": [
+          405
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-fdtrrp.n014",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fdtrrp&start=1134.783&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fdtrrp&start=1134.783&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=wxi-a-tSMGI&t=1134s"
+      },
+      {
+        "id": "media-fdtrrp.quote.q003",
+        "reviewNumber": 3,
+        "spokenExact": "If you're not willing to give your life to Christ now, what makes you think you will tomorrow?",
+        "displayText": "If you're not willing to give your life to Christ now, what makes you think you will tomorrow?",
+        "start": 1494.9,
+        "end": 1499.166,
+        "segmentIndexes": [
+          533,
+          534
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-fdtrrp.n021",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fdtrrp&start=1494.900&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fdtrrp&start=1494.900&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=wxi-a-tSMGI&t=1494s"
+      },
+      {
+        "id": "media-fdtrrp.quote.q005",
+        "reviewNumber": 5,
+        "spokenExact": "Our God always makes. The best choices for us. He knows what we need.",
+        "displayText": "Our God always makes the best choices for us. He knows what we need.",
+        "start": 1826.283,
+        "end": 1833.116,
+        "segmentIndexes": [
+          629,
+          630,
+          631
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-fdtrrp.n025",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fdtrrp&start=1826.283&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fdtrrp&start=1826.283&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=wxi-a-tSMGI&t=1826s"
+      },
+      {
+        "id": "media-fdtrrp.quote.q009",
+        "reviewNumber": 9,
+        "spokenExact": "By the way, if you can earn your salvation, you don't have it.",
+        "displayText": "If you can earn your salvation, you don't have it.",
+        "start": 993.133,
+        "end": 995.883,
+        "segmentIndexes": [
+          356
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-fdtrrp.n011",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fdtrrp&start=993.133&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fdtrrp&start=993.133&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=wxi-a-tSMGI&t=993s"
+      }
+    ]
+  },
+  "authorCorpus": {
+    "purpose": "Private future author/research corpus. Surface and organize Pastor Jacob Lannom's actual teaching without imitating his voice.",
+    "recurringTheses": [
+      {
+        "id": "author.thesis.01",
+        "statement": "Grace, not spiritual work or accumulated merit, is the basis of salvation.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-fdtrrp.n010",
+          "media-fdtrrp.n011",
+          "media-fdtrrp.n012",
+          "media-fdtrrp.n013"
+        ]
+      },
+      {
+        "id": "author.thesis.02",
+        "statement": "The parable exposes human comparison and expectations by placing God's generosity and standards above our scorekeeping.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-fdtrrp.n005",
+          "media-fdtrrp.n010",
+          "media-fdtrrp.n017",
+          "media-fdtrrp.n028"
+        ]
+      },
+      {
+        "id": "author.thesis.03",
+        "statement": "Good ministry work must flow from salvation and must not replace attention to Jesus Himself.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-fdtrrp.n014",
+          "media-fdtrrp.n015"
+        ]
+      },
+      {
+        "id": "author.thesis.04",
+        "statement": "Delay is spiritually dangerous; the repeated application is to respond to God now rather than presuming on tomorrow.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-fdtrrp.n019",
+          "media-fdtrrp.n021",
+          "media-fdtrrp.n022",
+          "media-fdtrrp.n023",
+          "media-fdtrrp.n027"
+        ]
+      },
+      {
+        "id": "author.thesis.05",
+        "statement": "Trust in God's goodness includes trusting His choices for us, not merely receiving the choices we would make for ourselves.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-fdtrrp.n024",
+          "media-fdtrrp.n025",
+          "media-fdtrrp.n026"
+        ]
+      }
+    ],
+    "topicClusters": [
+      "grace versus works",
+      "salvation",
+      "God's generosity",
+      "God's impartiality",
+      "dependency",
+      "opportunity",
+      "availability",
+      "spiritual receptivity",
+      "ministry and Jesus",
+      "delay and tomorrow",
+      "trust in God's choices",
+      "comparison",
+      "service"
+    ],
+    "potentialLiteraryDestinations": [
+      "Grace Is the Great Equalizer",
+      "When Ministry Makes Us Miss Jesus",
+      "The Danger of Tomorrow",
+      "Trusting the Father's Choices",
+      "Stop Keeping Score and Serve the King"
+    ],
+    "rule": "Potential literary destinations are organizational suggestions, not titles Pastor Jacob has chosen."
+  },
+  "search": {
+    "strategy": "Canonical semantic enrichment for future generated search indexes; browser search should consume compact generated indexes rather than loading this whole record.",
+    "primaryTerms": [
+      "Good Gifts From A Good God",
+      "Harvest Day 2026",
+      "Matthew 20",
+      "laborers in the vineyard",
+      "parable",
+      "dependency",
+      "opportunity",
+      "impartiality",
+      "availability",
+      "grace",
+      "works",
+      "grace-based salvation",
+      "work-based salvation",
+      "Ephesians 2",
+      "Romans 2:11",
+      "Luke 19:10",
+      "Romans 10:13",
+      "Pharaoh",
+      "Exodus 8",
+      "tomorrow",
+      "2 Corinthians 6:2",
+      "ministry",
+      "miss Jesus",
+      "God's good choices",
+      "eleventh hour",
+      "comparison",
+      "serve the King"
+    ],
+    "doctrineTerms": [
+      "Soteriology",
+      "Theology Proper",
+      "Hamartiology",
+      "Christology",
+      "Ecclesiology",
+      "Salvation",
+      "Who God Is",
+      "Sin and the Fall",
+      "Jesus Christ",
+      "The Church"
+    ],
+    "quoteSearchRefs": [
+      "media-fdtrrp.quote.q001",
+      "media-fdtrrp.quote.q002",
+      "media-fdtrrp.quote.q003",
+      "media-fdtrrp.quote.q005",
+      "media-fdtrrp.quote.q009"
+    ]
+  },
+  "provenance": {
+    "authorityOrder": [
+      "Scripture",
+      "Processed/raw sermon transcript for what was actually spoken",
+      "Logos preparation for intended structure and prepared material",
+      "Slides for visual emphasis",
+      "Pastor-named external resources",
+      "CGBC doctrine taxonomy for classification only",
+      "Analysis synthesis/generated questions"
+    ],
+    "rules": [
+      "Do not present prepared wording as spoken exact unless transcript-confirmed.",
+      "Do not present generated questions or synthesis as Pastor Jacob's own words.",
+      "Do not use taxonomy aliases as proof of doctrine.",
+      "Preserve external-resource attribution when an illustration or commentary comes from another source.",
+      "Store Scripture references rather than full NASB95 verse text in the canonical knowledge JSON."
+    ]
+  },
+  "editorialFlags": [
+    {
+      "id": "flag.commentary-1cor45",
+      "issue": "1 Corinthians 4:5 appears inside the Holman New Testament Commentary excerpt in the prepared notes.",
+      "resolution": "Treat it as commentary provenance, not an RSS supporting Scripture reference unless the sermon itself directly uses it."
+    },
+    {
+      "id": "flag.deeper-podcast",
+      "issue": "The closing father-and-son story is verbally attributed to the Deeper Podcast and Pastor Joey Martin and described as based on actual people.",
+      "resolution": "Preserve that attribution in provenance; do not present the story as Pastor Jacob's original illustration."
+    },
+    {
+      "id": "flag.nasb95-rights",
+      "issue": "Notes and slides contain NASB95 verse text.",
+      "resolution": "The knowledge JSON stores references and summaries, not full NASB95 verse text."
+    },
+    {
+      "id": "flag.transcript-artifacts",
+      "issue": "The transcript contains occasional ASR grammar/name artifacts while maintaining stable timing/segment indexes.",
+      "resolution": "Preserve spoken evidence and use clearly labeled display cleanup only where needed."
+    }
+  ],
+  "implementation": {
+    "canonicalPath": "knowledge/2026/2026-09-27_good-gifts-from-a-good-god.json",
+    "oneSermonOneFile": true,
+    "generatedOutputsAreDisposable": true,
+    "sourceArchivePath": "Sermon Source Archive/2026/26_09_27/",
+    "futureConsumers": [
+      "CGBC Discover",
+      "Deep Dive",
+      "Search enrichment",
+      "Quote Engine 2.0",
+      "Private Pastor Jacob author corpus"
+    ]
+  },
+  "amendment": {
+    "type": "archive_path_normalization",
+    "verifiedAgainstGitHubMain": "0760ff44972bf2d4f6ec1860be0421d486a57acc",
+    "note": "Archive paths updated to include the year layer. Sermon knowledge content and Joel's quote selections are preserved."
+  }
+}
