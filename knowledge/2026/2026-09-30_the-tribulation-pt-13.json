@@ -1,0 +1,2227 @@
+{
+  "schemaVersion": "1.0",
+  "recordType": "CGBC_SERMON_KNOWLEDGE",
+  "recordVersion": "1.0",
+  "generatedAt": "2026-10-01T16:18:57.044296+00:00",
+  "githubMainAtBuild": "c7ae08c1e0a7032afe7bf5e8df4de26d84a0f6e8",
+  "sermon": {
+    "stableId": "media-phykqw",
+    "title": "The Tribulation Pt. 13",
+    "subtitle": "The Child, the War in Heaven, and Satan Cast Down",
+    "date": "2026-09-30",
+    "speaker": "Jacob Lannom",
+    "series": "The Tribulation",
+    "study": "Eschatology",
+    "seriesType": "Topical",
+    "scripture": "Revelation 12:5-17",
+    "references": [
+      "Revelation 12:1-4",
+      "Psalm 2:9",
+      "Revelation 19:15",
+      "Acts 1:8-12",
+      "Matthew 24:16",
+      "Luke 10:17-20",
+      "1 Peter 5:8",
+      "Job 1:6",
+      "Exodus 19:4",
+      "Romans 1:16"
+    ],
+    "bookTags": [
+      "Revelation",
+      "Psalms",
+      "Acts",
+      "Matthew",
+      "Luke",
+      "1 Peter",
+      "Job",
+      "Exodus",
+      "Romans"
+    ],
+    "collections": [
+      "The Tribulation"
+    ],
+    "videoUrl": "https://www.youtube.com/watch?v=Gv1WVTiFmJI",
+    "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-13-eschatology-the-tribulation/",
+    "audioUrl": "https://mcdn.podbean.com/mf/web/rmuppkjdz8fnaqer/26_09_30_W.mp3",
+    "transcriptPath": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.json",
+    "displayTranscriptJsonPath": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.display.json",
+    "incomingTranscriptPath": "transcripts_incoming/2026-09-30.srt",
+    "cleanTranscriptPath": "transcripts_clean/en/2026-09-30_the-tribulation-pt-13.srt",
+    "displayTranscriptPath": "transcripts_display/en/2026-09-30_the-tribulation-pt-13.srt",
+    "youtubeId": "Gv1WVTiFmJI",
+    "durationSeconds": 1393,
+    "processedTranscriptSegmentCount": 510,
+    "displayTranscriptSegmentCount": 445,
+    "translationUsedInPreparation": "KJV 1900",
+    "sourceArchivePath": "Sermon Source Archive/2026/26_09_30/"
+  },
+  "sources": [
+    {
+      "id": "src-transcript",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "Sermon Source Archive/2026/26_09_30/original-transcript.srt",
+      "sha256": "62e922b217cb745699af07cd6957d328b6907e310a04d901cbca43aff4cdaea7",
+      "notes": "Original Final Cut Pro SRT, 510 timed segments. Caption font tags are archival formatting; segment timing/text spot-checks align with the current processed transcript."
+    },
+    {
+      "id": "src-processed-transcript",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.json",
+      "notes": "Authoritative repository processed transcript at GitHub main c7ae08c1e0a7032afe7bf5e8df4de26d84a0f6e8; stableId media-phykqw; 510 segments."
+    },
+    {
+      "id": "src-notes",
+      "kind": "PASTOR — PREPARED",
+      "pathOrName": "Sermon Source Archive/2026/26_09_30/sermon-notes.pdf",
+      "sha256": "bd0a082eeb66731538e1fa210b57714c105c7b254c95e175eb251558c0a8a727",
+      "notes": "Logos sermon preparation export, September 30, 2026 at 12:41 PM. Scripture quotations are labeled KJV 1900."
+    },
+    {
+      "id": "src-art-square",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_09_30/art-square.jpg",
+      "sha256": "eeae9b10a148305ddc4b4d87dc46284dd21d116ad5332533dea51b2657849197",
+      "notes": "Archived square episode artwork, 2048×2048 JPEG."
+    },
+    {
+      "id": "src-art-wide",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_09_30/art-wide.jpg",
+      "sha256": "305c3649e1e03d6c2681cb145f1b616101113d124e23db460907264ef4d3f625",
+      "notes": "Archived widescreen episode artwork, 1920×1080 JPEG."
+    },
+    {
+      "id": "src-bkc",
+      "kind": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "pathOrName": "The Bible Knowledge Commentary — Revelation 12:10-12",
+      "notes": "Pastor Jacob names and quotes this commentary while discussing the timing of Satan's final expulsion and the 1,260-day Great Tribulation period."
+    },
+    {
+      "id": "src-this-same-jesus",
+      "kind": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "pathOrName": "“This Same Jesus” — Master's Voice / FRONTLINE",
+      "notes": "Pastor Jacob identifies this song as drawing from Acts 1 and connects it to Christ's ascension and return. Song lyrics are not reproduced in the canonical knowledge record."
+    },
+    {
+      "id": "src-doctrine-taxonomy",
+      "kind": "ANALYSIS — CLASSIFICATION",
+      "pathOrName": "CGBC_Biblical_Doctrine_Taxonomy_Aliased.json",
+      "sha256": "6094c2f940826b0604a7ab05e3ae70803d73a76ad40b6bfe0939f34e0e34e70e",
+      "notes": "CGBC classification vocabulary only; taxonomy labels and aliases are not independent sermon evidence."
+    },
+    {
+      "id": "src-quote-curation",
+      "kind": "CGBC — OFFICIAL",
+      "pathOrName": "config/quote-curation.json",
+      "sha256": "16821da8270ad50ea0889053661d0a0a7ce120658b1221c41ccd58aec5eaa181",
+      "notes": "Joel-reviewed quote decisions for this sermon: Featured recommendations 1 and 10; Approved recommendations 2, 4, and 8."
+    }
+  ],
+  "structure": {
+    "introduction": "Revelation 12 recap: the woman is Israel and the red dragon is Satan",
+    "anchorPassage": "Revelation 12:5-17",
+    "framingConnection": [
+      "Revelation 12:1-4"
+    ],
+    "movements": [
+      {
+        "order": 1,
+        "title": "The Child: Christ's identity, reign, ascension, and return",
+        "nodeRef": "media-phykqw.n002",
+        "start": 125.95
+      },
+      {
+        "order": 2,
+        "title": "The woman protected during the Great Tribulation",
+        "nodeRef": "media-phykqw.n009",
+        "start": 456.666
+      },
+      {
+        "order": 3,
+        "title": "War in heaven and Satan cast down",
+        "nodeRef": "media-phykqw.n010",
+        "start": 521.766
+      },
+      {
+        "order": 4,
+        "title": "Satan's earthly persecution and God's protection",
+        "nodeRef": "media-phykqw.n020",
+        "start": 1084.333
+      },
+      {
+        "order": 5,
+        "title": "The remnant and present victory",
+        "nodeRef": "media-phykqw.n023",
+        "start": 1160.883
+      }
+    ]
+  },
+  "slideMap": [],
+  "nodes": [
+    {
+      "id": "media-phykqw.n001",
+      "type": "outlinePoint",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Revelation 12 recap: the woman and the dragon",
+      "summary": "The sermon briefly re-establishes the woman as Israel and the red dragon as Satan before moving to the child in Revelation 12:5.",
+      "start": 32.766,
+      "end": 79.799,
+      "segmentIndexes": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "scripture": [
+        "Revelation 12:1-4"
+      ],
+      "topics": [
+        "Israel",
+        "woman of Revelation 12",
+        "Satan",
+        "red dragon",
+        "recap"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n002",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — PREPARED",
+      "title": "The Child is Jesus Christ, the ruler with a rod of iron",
+      "summary": "Psalm 2:9 and Revelation 19:15 are used to connect the man child of Revelation 12:5 with Jesus Christ and His future rule over the nations.",
+      "start": 125.95,
+      "end": 182.516,
+      "segmentIndexes": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "scripture": [
+        "Revelation 12:5",
+        "Psalm 2:9",
+        "Revelation 19:15"
+      ],
+      "topics": [
+        "Jesus Christ",
+        "man child",
+        "rod of iron",
+        "reign of Christ",
+        "King of kings"
+      ],
+      "doctrine": [
+        "Christology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n003",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "God does not change",
+      "spokenExact": "God never changes. And if God is the same yesterday, today, and forever. That includes all the way before the beginning of creation because Jesus is not a created being, right? Jesus is part of the triune God. You had the Father, the Son, and the Holy Spirit that have always existed in community together.",
+      "displayText": "God never changes. If God is the same yesterday, today, and forever, that includes all the way before the beginning of creation because Jesus is not a created being. Jesus is part of the triune God. The Father, the Son, and the Holy Spirit have always existed in community together.",
+      "start": 214.15,
+      "end": 231.599,
+      "segmentIndexes": [
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80
+      ],
+      "topics": [
+        "immutability of God",
+        "Trinity",
+        "deity of Christ",
+        "eternity of Christ"
+      ],
+      "doctrine": [
+        "Theology Proper",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ]
+    },
+    {
+      "id": "media-phykqw.n004",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Mercy, wrath, and justice belong to the same God",
+      "spokenExact": "Listen, if you want a merciful God, you have one. But you also got a wrathful and just God. And he's the same God.",
+      "displayText": "If you want a merciful God, you have one. But you also got a wrathful and just God. And He's the same God.",
+      "start": 259.5,
+      "end": 266.449,
+      "segmentIndexes": [
+        89,
+        90,
+        91
+      ],
+      "topics": [
+        "mercy",
+        "wrath",
+        "justice",
+        "character of God"
+      ],
+      "doctrine": [
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ]
+    },
+    {
+      "id": "media-phykqw.n005",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "God's will is for our good and His glory",
+      "text": "The sad part about that is, his will is for our good and his glory. And so to not submit to his will is not beneficial for us, not only today, but for eternity.",
+      "start": 273.25,
+      "end": 285.716,
+      "segmentIndexes": [
+        94,
+        95,
+        96,
+        97
+      ],
+      "topics": [
+        "will of God",
+        "submission",
+        "good",
+        "glory",
+        "eternity"
+      ],
+      "doctrine": [
+        "Theology Proper",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n006",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Christ ascended and will return",
+      "spokenExact": "He also ascended and will return. You do realize that it's part of the gospel, not just that he lived, that he just died, not that he rose again, but that he ascended into heaven, and he is looking to return for his bride. Right? That is the gospel.",
+      "displayText": "He also ascended and will return. You do realize that it's part of the gospel, not just that He lived, that He died, not that He rose again, but that He ascended into heaven, and He is looking to return for His bride. That is the gospel.",
+      "start": 325.449,
+      "end": 339.949,
+      "segmentIndexes": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ],
+      "scripture": [
+        "Revelation 12:5",
+        "Acts 1:8-12"
+      ],
+      "topics": [
+        "ascension",
+        "return of Christ",
+        "gospel",
+        "Bride of Christ"
+      ],
+      "doctrine": [
+        "Christology",
+        "Soteriology",
+        "Eschatology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-quote-curation"
+      ]
+    },
+    {
+      "id": "media-phykqw.n007",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Acts 1 explains Christ's ascension and promised return",
+      "summary": "The sermon reads Acts 1:8-12 as the historical and theological backdrop for Revelation 12:5: Jesus physically ascended and the disciples were told that this same Jesus would return.",
+      "start": 340.033,
+      "end": 427.083,
+      "segmentIndexes": [
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155
+      ],
+      "scripture": [
+        "Acts 1:8-12",
+        "Revelation 12:5"
+      ],
+      "topics": [
+        "ascension",
+        "second coming",
+        "disciples",
+        "witnesses",
+        "Mount of Olives"
+      ],
+      "doctrine": [
+        "Christology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n008",
+      "type": "connection",
+      "provenance": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "title": "“This Same Jesus” reinforces the ascension-and-return promise",
+      "summary": "Pastor Jacob names the Master's Voice / FRONTLINE song “This Same Jesus” and connects its theme to Acts 1 and the promise that the same Jesus who ascended will return.",
+      "start": 427.8,
+      "end": 456.6,
+      "segmentIndexes": [
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165
+      ],
+      "scripture": [
+        "Acts 1:9-11"
+      ],
+      "topics": [
+        "This Same Jesus",
+        "Master's Voice",
+        "FRONTLINE",
+        "return of Christ",
+        "song reference"
+      ],
+      "doctrine": [
+        "Christology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-this-same-jesus"
+      ],
+      "notes": "The canonical record preserves the attribution and relationship without reproducing copyrighted song lyrics."
+    },
+    {
+      "id": "media-phykqw.n009",
+      "type": "outlinePoint",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "The woman is protected during the Great Tribulation",
+      "summary": "Revelation 12:6 is explained as a 1,260-day, three-and-a-half-year period. Matthew 24:16 is connected to intensified persecution, while the sermon's controlling emphasis is that God protects His people.",
+      "start": 460.449,
+      "end": 519.433,
+      "segmentIndexes": [
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186
+      ],
+      "scripture": [
+        "Revelation 12:6",
+        "Matthew 24:16"
+      ],
+      "topics": [
+        "1,260 days",
+        "three and a half years",
+        "Great Tribulation",
+        "Israel",
+        "persecution",
+        "divine protection"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n010",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — PREPARED",
+      "title": "War in heaven: Michael and his angels fight the dragon",
+      "summary": "Revelation 12:7-12 is read as a heavenly conflict in which Michael and his angels defeat Satan and his angels, the accuser is cast down, and heaven responds with praise while earth receives a warning.",
+      "start": 521.766,
+      "end": 578.766,
+      "segmentIndexes": [
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206
+      ],
+      "scripture": [
+        "Revelation 12:7-12"
+      ],
+      "topics": [
+        "war in heaven",
+        "Michael",
+        "Satan",
+        "angels",
+        "demons",
+        "accuser",
+        "cast down"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n011",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Respond to deception with the gospel rather than hatred",
+      "text": "The devil right here, listen, he's deceived the whole world. We have to understand what we're up against. See, a lot of times we sit there and in hate and irritation and just anger. We lash out at these people who are simply deceived by the evil one. You know what we need to do? Share the gospel with them. And hope they hope that they receive. Listen, we cannot force them to.",
+      "start": 626.533,
+      "end": 651.183,
+      "segmentIndexes": [
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235
+      ],
+      "topics": [
+        "deception",
+        "anger",
+        "gospel",
+        "evangelism",
+        "spiritual conflict"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n012",
+      "type": "connection",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "The timing of the heavenly war is debated",
+      "summary": "The sermon acknowledges that some interpreters connect Satan's fall to Christ's first coming through Luke 10:17-20. Pastor Jacob says the details do not correlate strongly enough for him to place Revelation 12's war there and later describes an end-times placement as an educated assumption.",
+      "start": 674.883,
+      "end": 799.383,
+      "segmentIndexes": [
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290
+      ],
+      "scripture": [
+        "Revelation 12:7-12",
+        "Luke 10:17-20",
+        "1 Peter 5:8"
+      ],
+      "topics": [
+        "timing of Satan's fall",
+        "interpretive uncertainty",
+        "first coming",
+        "end times",
+        "church age"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "notes": "Preserve the sermon's uncertainty language; this is not presented as an uncontested chronology."
+    },
+    {
+      "id": "media-phykqw.n013",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "There is power in the name of Jesus",
+      "text": "You know why it's so important to have the name of Jesus right there? Because even the devil is subject to his name. You understand what I'm saying? There's power in the name of Jesus. We want everyone to understand when they get in here, what we're about and who we're about.",
+      "start": 697.799,
+      "end": 707.766,
+      "segmentIndexes": [
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "scripture": [
+        "Luke 10:17-20"
+      ],
+      "topics": [
+        "name of Jesus",
+        "authority of Christ",
+        "demons"
+      ],
+      "doctrine": [
+        "Christology",
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n014",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Do not underestimate or overestimate the enemy",
+      "text": "I want you to know something. We have a real enemy, and it is the devil. He is walking around. He is prowling around. Sin is crouching at the door. He's deceiving the whole world. Listen, we don't want to underestimate him, but we don't want to overestimate him as well.",
+      "start": 780.299,
+      "end": 795.716,
+      "segmentIndexes": [
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289
+      ],
+      "scripture": [
+        "1 Peter 5:8"
+      ],
+      "topics": [
+        "devil",
+        "spiritual vigilance",
+        "enemy",
+        "deception",
+        "discernment"
+      ],
+      "doctrine": [
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n015",
+      "type": "question",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Is Satan really in heaven right now?",
+      "text": "So the question is, is Satan really in heaven right now?",
+      "start": 802.799,
+      "end": 805.966,
+      "segmentIndexes": [
+        292
+      ],
+      "scripture": [
+        "Revelation 12:10",
+        "Job 1:6"
+      ],
+      "topics": [
+        "Satan",
+        "heaven",
+        "accuser",
+        "interpretive question"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n016",
+      "type": "answer",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "The sermon points to Satan's access as accuser while refusing to over-explain the reason",
+      "summary": "Revelation 12:10 and Job 1:6 are used to support the idea that Satan has had access to the heavenly realm. Pastor Jacob explicitly says he cannot explain why God permits this and defers to God's higher plan.",
+      "start": 806.766,
+      "end": 872.399,
+      "segmentIndexes": [
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321
+      ],
+      "scripture": [
+        "Revelation 12:10",
+        "Job 1:6"
+      ],
+      "topics": [
+        "Satan",
+        "heavenly access",
+        "accuser",
+        "limits of explanation",
+        "God's plan"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n017",
+      "type": "argument",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Michael's victory leads to Satan's expulsion and a song of praise",
+      "summary": "The sermon emphasizes that Satan and his demons are not strong enough to prevail. Michael and the holy angels win, and Revelation 12:10-11 celebrates salvation, God's kingdom, Christ's power, and victory through the blood of the Lamb.",
+      "start": 920.166,
+      "end": 958.45,
+      "segmentIndexes": [
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353
+      ],
+      "scripture": [
+        "Revelation 12:10-11"
+      ],
+      "topics": [
+        "Michael",
+        "Satan defeated",
+        "blood of the Lamb",
+        "testimony",
+        "victory"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Soteriology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n018",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The accuser cannot undo what Christ has paid for",
+      "text": "First off, some of what he's accusing us is probably true. Because we do fall. We do stumble. But you know what is the vanity in him tattling on us? is that if we know Christ, we're covered by the blood. Amen? It's kind of like what I said in a rough illustration. God's like, listen, hey, that's something that's already been paid for.",
+      "start": 958.5,
+      "end": 980.95,
+      "segmentIndexes": [
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361
+      ],
+      "scripture": [
+        "Revelation 12:10-11"
+      ],
+      "topics": [
+        "accusation",
+        "blood of Christ",
+        "payment for sin",
+        "assurance"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n019",
+      "type": "connection",
+      "provenance": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "title": "The Bible Knowledge Commentary ties Satan's short time to the Great Tribulation",
+      "summary": "Pastor Jacob cites The Bible Knowledge Commentary to support reading Satan's remaining short time as the 1,260-day Great Tribulation period rather than stretching the prophecy across the entire interadvent age.",
+      "start": 1047.783,
+      "end": 1074.066,
+      "segmentIndexes": [
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396
+      ],
+      "scripture": [
+        "Revelation 12:10-12"
+      ],
+      "topics": [
+        "1,260 days",
+        "Great Tribulation",
+        "short time",
+        "commentary"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-bkc"
+      ]
+    },
+    {
+      "id": "media-phykqw.n020",
+      "type": "outlinePoint",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Satan's fury turns toward Israel, but God provides protection",
+      "summary": "Revelation 12:13-14 is read as Satan's intensified persecution of Israel after being cast to earth, while the eagle-wing imagery communicates God's swift and powerful protection.",
+      "start": 1079.166,
+      "end": 1132.45,
+      "segmentIndexes": [
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415
+      ],
+      "scripture": [
+        "Revelation 12:13-14"
+      ],
+      "topics": [
+        "Israel",
+        "persecution",
+        "dragon",
+        "eagle wings",
+        "protection"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n021",
+      "type": "connection",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Eagle-wing imagery recalls God's deliverance in Exodus",
+      "summary": "Exodus 19:4 is used as an Old Testament parallel for the eagle-wing language in Revelation 12:14, reinforcing the theme of God's protection rather than requiring literal wings.",
+      "start": 1100.95,
+      "end": 1132.45,
+      "segmentIndexes": [
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415
+      ],
+      "scripture": [
+        "Revelation 12:14",
+        "Exodus 19:4"
+      ],
+      "topics": [
+        "eagle wings",
+        "Exodus",
+        "deliverance",
+        "symbolism",
+        "protection"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n022",
+      "type": "observation",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "The flood imagery is treated symbolically while the protection theme remains firm",
+      "summary": "In Revelation 12:15-16, the sermon does not claim a precise literal mechanism for the flood and earth imagery. Its firm conclusion is that Satan's attack moves from heaven to earth and God protects those under attack.",
+      "start": 1133.166,
+      "end": 1160.65,
+      "segmentIndexes": [
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425
+      ],
+      "scripture": [
+        "Revelation 12:15-16"
+      ],
+      "topics": [
+        "flood imagery",
+        "symbolism",
+        "earth",
+        "divine protection"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n023",
+      "type": "question",
+      "provenance": "ANALYSIS — GENERATED QUESTION",
+      "title": "Who is the remnant in Revelation 12:17?",
+      "summary": "The sermon considers the view that the woman represents the church, but argues that the woman's role in bringing forth Christ points to Israel. It then allows the remnant to include believers present during the Tribulation.",
+      "start": 1160.883,
+      "end": 1234.75,
+      "segmentIndexes": [
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454
+      ],
+      "scripture": [
+        "Revelation 12:17"
+      ],
+      "topics": [
+        "remnant",
+        "Israel",
+        "church",
+        "believers",
+        "Jew and Gentile"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n024",
+      "type": "connection",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Romans 1:16 supports a Jew-and-Gentile understanding of the believing remnant",
+      "summary": "Romans 1:16 is brought in to show the gospel's saving reach to the Jew first and also to the Greek, supporting the sermon's statement that the remnant can include believing Jews and Gentiles.",
+      "start": 1225.566,
+      "end": 1247.583,
+      "segmentIndexes": [
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459
+      ],
+      "scripture": [
+        "Revelation 12:17",
+        "Romans 1:16"
+      ],
+      "topics": [
+        "remnant",
+        "gospel",
+        "Jew",
+        "Gentile",
+        "believers"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ]
+    },
+    {
+      "id": "media-phykqw.n025",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Satan is defeated and cannot take a soul God holds",
+      "spokenExact": "Satan is backed in a corner knowing he is defeated. He can try, but he will not succeed in getting one soul that God holds in his hands.",
+      "displayText": "Satan is backed in a corner knowing he is defeated. He can try, but he will not succeed in getting one soul that God holds in His hands.",
+      "start": 1249.033,
+      "end": 1257.95,
+      "segmentIndexes": [
+        460,
+        461,
+        462
+      ],
+      "topics": [
+        "Satan defeated",
+        "security",
+        "victory",
+        "God's keeping"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ]
+    },
+    {
+      "id": "media-phykqw.n026",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Christ's victory is present as well as future",
+      "text": "What a beautiful truth, that's not just for the tribulation end time, but that's also for today. And so we have to live in that victory. See, a lot of people, a lot of people see the victory that we have in Christ as some abstract idea for the future. Let me just tell you something. There's definitely victory waiting for us. But there's also victory for us right here right now. And so we have to live in that.",
+      "start": 1259.233,
+      "end": 1282.733,
+      "segmentIndexes": [
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471
+      ],
+      "topics": [
+        "victory in Christ",
+        "present Christian life",
+        "future hope",
+        "defeated enemy"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n027",
+      "type": "illustration",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "An event-driven childhood illustrates the danger of living only for what comes next",
+      "summary": "Pastor Jacob recalls being strongly motivated by the next anticipated event as a child. He uses the memory to transition into a warning that Christians can become so focused on future hope that they overlook God's present work.",
+      "start": 1293.666,
+      "end": 1329.549,
+      "segmentIndexes": [
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491
+      ],
+      "topics": [
+        "anticipation",
+        "future focus",
+        "present faithfulness",
+        "personal illustration"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n028",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Do not miss what God is doing right now",
+      "spokenExact": "And so, listen, sometimes Christians, if all we're looking forward to is what is coming, we may miss what God is doing for us right here, right now.",
+      "displayText": "Sometimes Christians, if all we're looking forward to is what is coming, we may miss what God is doing for us right here, right now.",
+      "start": 1329.966,
+      "end": 1338.599,
+      "segmentIndexes": [
+        492,
+        493,
+        494
+      ],
+      "topics": [
+        "present faithfulness",
+        "future hope",
+        "God's present work",
+        "Christian life"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ],
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ]
+    },
+    {
+      "id": "media-phykqw.n029",
+      "type": "application",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Biblical hope of Christ's return fuels victory today",
+      "summary": "The closing application holds two truths together: believers are to keep their eyes on Christ and His sure return, and they can live in present victory over a defeated enemy.",
+      "start": 1339.683,
+      "end": 1366.15,
+      "segmentIndexes": [
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507
+      ],
+      "topics": [
+        "hope",
+        "return of Christ",
+        "certainty",
+        "victory",
+        "present Christian life"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Christology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript"
+      ]
+    },
+    {
+      "id": "media-phykqw.n030",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Eschatology",
+      "summary": "The sermon is primarily an exposition of Revelation 12:5-17 within the Tribulation study: Christ's ascension and return, the Great Tribulation, heavenly conflict, Satan's expulsion, Israel's protection, and the believing remnant.",
+      "scripture": [
+        "Revelation 12:5-17",
+        "Matthew 24:16"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-phykqw.n031",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Christology",
+      "summary": "Christ is identified as the man child, the ruler with the rod of iron, the ascended Lord who will return, and the One whose blood secures victory.",
+      "scripture": [
+        "Revelation 12:5",
+        "Psalm 2:9",
+        "Revelation 19:15",
+        "Acts 1:8-12",
+        "Revelation 12:11"
+      ],
+      "doctrine": [
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-phykqw.n032",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Angelology",
+      "summary": "Michael, holy angels, Satan, demons, spiritual deception, accusation, the heavenly war, and Satan's defeat are major teaching threads.",
+      "scripture": [
+        "Revelation 12:7-12",
+        "Luke 10:17-20",
+        "1 Peter 5:8",
+        "Job 1:6"
+      ],
+      "doctrine": [
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-phykqw.n033",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Theology Proper",
+      "summary": "The sermon explicitly develops God's immutability, Trinity, mercy, wrath, justice, good will, glory, higher purposes, and protective care.",
+      "scripture": [
+        "Revelation 12:5-17",
+        "Exodus 19:4"
+      ],
+      "doctrine": [
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-phykqw.n034",
+      "type": "doctrine",
+      "provenance": "ANALYSIS — CLASSIFICATION",
+      "title": "Soteriology",
+      "summary": "The gospel, Christ's blood, assurance against accusation, salvation for Jew and Gentile, and the believer's secure victory in Christ form a supporting salvation thread.",
+      "scripture": [
+        "Revelation 12:11",
+        "Romans 1:16"
+      ],
+      "doctrine": [
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-doctrine-taxonomy"
+      ]
+    }
+  ],
+  "discover": [
+    {
+      "id": "discover.child",
+      "question": "Who is the child in Revelation 12:5?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon identifies the child as Jesus Christ, using the shared “rod of iron” language in Psalm 2:9 and Revelation 19:15 to connect Revelation 12:5 with Christ's reign.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n002"
+      ],
+      "start": 125.95,
+      "scripture": [
+        "Revelation 12:5",
+        "Psalm 2:9",
+        "Revelation 19:15"
+      ]
+    },
+    {
+      "id": "discover.same-god",
+      "question": "How does the sermon connect the Lord of the Old Testament with Jesus Christ?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "It stresses that God does not change and that Jesus is not a created being but is part of the triune God. Mercy, justice, holiness, and wrath are not competing gods or characters; they belong to the same God.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n003",
+        "media-phykqw.n004",
+        "media-phykqw.n033"
+      ],
+      "start": 214.15
+    },
+    {
+      "id": "discover.ascension",
+      "question": "Why does the sermon emphasize Christ's ascension?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Revelation 12:5's language of the child being caught up to God is read as Christ's ascension, not the church's rapture. Acts 1 supplies the historical scene and the promise that the same Jesus who ascended will return.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n006",
+        "media-phykqw.n007"
+      ],
+      "start": 292.033,
+      "scripture": [
+        "Revelation 12:5",
+        "Acts 1:8-12"
+      ]
+    },
+    {
+      "id": "discover.1260",
+      "question": "What does the 1,260-day period represent in this sermon?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon equates it with three and a half years, or forty-two thirty-day months, and places it in the Great Tribulation while emphasizing God's protection of Israel.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n009"
+      ],
+      "start": 475.266,
+      "scripture": [
+        "Revelation 12:6",
+        "Matthew 24:16"
+      ]
+    },
+    {
+      "id": "discover.war",
+      "question": "What happens in the war in heaven?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Michael and his angels fight Satan and his angels. Satan does not prevail, the accuser is cast down, and heaven responds with praise while earth is warned of his short remaining time.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n010",
+        "media-phykqw.n017"
+      ],
+      "start": 521.766,
+      "scripture": [
+        "Revelation 12:7-12"
+      ]
+    },
+    {
+      "id": "discover.timing",
+      "question": "When does the sermon place the war in heaven?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Pastor Jacob explicitly treats the timing as debated. He discusses the first-coming interpretation through Luke 10, but says the correlation is insufficient and describes an end-times placement as an educated assumption.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n012"
+      ],
+      "start": 681.183,
+      "scripture": [
+        "Luke 10:17-20",
+        "1 Peter 5:8",
+        "Revelation 12:7-12"
+      ]
+    },
+    {
+      "id": "discover.deception",
+      "question": "How should Christians respond to a world deceived by the devil?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The application is not to lash out in hatred or irritation at deceived people, but to share the gospel and recognize that conversion cannot be forced.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n011"
+      ],
+      "start": 626.533
+    },
+    {
+      "id": "discover.accuser",
+      "question": "What does Satan's role as accuser mean for someone who knows Christ?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon acknowledges that believers still stumble, but says the accuser's case cannot reverse Christ's finished payment: those who know Christ are covered by the blood.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n018"
+      ],
+      "start": 958.5,
+      "scripture": [
+        "Revelation 12:10-11"
+      ]
+    },
+    {
+      "id": "discover.protection",
+      "question": "How does the sermon understand the eagle wings and flood imagery?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "It treats the imagery symbolically rather than requiring literal wings or a literal mechanism. Exodus 19:4 supports the controlling idea: God gives swift, powerful protection to His people while Satan attacks.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n020",
+        "media-phykqw.n021",
+        "media-phykqw.n022"
+      ],
+      "start": 1084.333,
+      "scripture": [
+        "Revelation 12:13-16",
+        "Exodus 19:4"
+      ]
+    },
+    {
+      "id": "discover.remnant-victory",
+      "question": "Who is the remnant, and what does the sermon bring forward for Christians today?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon maintains that the woman is Israel while allowing the remnant to include believers, Jew and Gentile alike. It then turns the end-times scene into present application: Satan is defeated, Christ's victory is real now, and future hope should not make believers miss God's present work.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-phykqw.n023",
+        "media-phykqw.n024",
+        "media-phykqw.n025",
+        "media-phykqw.n026",
+        "media-phykqw.n028",
+        "media-phykqw.n029"
+      ],
+      "start": 1160.883,
+      "scripture": [
+        "Revelation 12:17",
+        "Romans 1:16"
+      ]
+    }
+  ],
+  "quotes": {
+    "reviewedBy": "Joel",
+    "reviewInput": "F1, 2, 4, 8, F10",
+    "reviewRule": "Only Joel-selected recommendations receive durable Approved/Featured status. Unselected recommendations are not stored as denials.",
+    "featured": [
+      "media-phykqw.quote.q001",
+      "media-phykqw.quote.q010"
+    ],
+    "approved": [
+      "media-phykqw.quote.q002",
+      "media-phykqw.quote.q004",
+      "media-phykqw.quote.q008"
+    ],
+    "selected": [
+      {
+        "id": "media-phykqw.quote.q001",
+        "reviewNumber": 1,
+        "curationQuoteId": "manual-media-phykqw-214-5bi3uli",
+        "spokenExact": "God never changes. And if God is the same yesterday, today, and forever. That includes all the way before the beginning of creation because Jesus is not a created being, right? Jesus is part of the triune God. You had the Father, the Son, and the Holy Spirit that have always existed in community together.",
+        "displayText": "God never changes. If God is the same yesterday, today, and forever, that includes all the way before the beginning of creation because Jesus is not a created being. Jesus is part of the triune God. The Father, the Son, and the Holy Spirit have always existed in community together.",
+        "start": 214.15,
+        "end": 231.599,
+        "segmentIndexes": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "status": "featured",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-phykqw.n003",
+        "contextBefore": "Let me just tell you something that's absolutely incorrect. You need to understand something.",
+        "contextAfter": "Listen, what I'm trying to say is, I cannot wrap my mind around that. But I know it's true because God's word says so.",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-phykqw&start=214.150&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-phykqw&start=214.150&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=Gv1WVTiFmJI&t=214s"
+      },
+      {
+        "id": "media-phykqw.quote.q002",
+        "reviewNumber": 2,
+        "curationQuoteId": "manual-media-phykqw-259-d6kh4wd",
+        "spokenExact": "Listen, if you want a merciful God, you have one. But you also got a wrathful and just God. And he's the same God.",
+        "displayText": "If you want a merciful God, you have one. But you also got a wrathful and just God. And He's the same God.",
+        "start": 259.5,
+        "end": 266.449,
+        "segmentIndexes": [
+          89,
+          90,
+          91
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-phykqw.n004",
+        "contextBefore": "and terror inflicting on the sins of the world, it is the only way that he can be perfect in all of his ways.",
+        "contextAfter": "Jesus is going to reign and he will destroy anyone who does not submit to his will.",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-phykqw&start=259.500&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-phykqw&start=259.500&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=Gv1WVTiFmJI&t=259s"
+      },
+      {
+        "id": "media-phykqw.quote.q004",
+        "reviewNumber": 4,
+        "curationQuoteId": "manual-media-phykqw-325-8z5u28p",
+        "spokenExact": "He also ascended and will return. You do realize that it's part of the gospel, not just that he lived, that he just died, not that he rose again, but that he ascended into heaven, and he is looking to return for his bride. Right? That is the gospel.",
+        "displayText": "He also ascended and will return. You do realize that it's part of the gospel, not just that He lived, that He died, not that He rose again, but that He ascended into heaven, and He is looking to return for His bride. That is the gospel.",
+        "start": 325.449,
+        "end": 339.949,
+        "segmentIndexes": [
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-phykqw.n006",
+        "contextBefore": "rose again, but there's even more to the gospel that we really don't talk about enough.",
+        "contextAfter": "So in Acts chapter one, verse 8 through 12. Look what he says, but ye shall receive power.",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-phykqw&start=325.449&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-phykqw&start=325.449&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=Gv1WVTiFmJI&t=325s"
+      },
+      {
+        "id": "media-phykqw.quote.q008",
+        "reviewNumber": 8,
+        "curationQuoteId": "manual-media-phykqw-1249-87s1uv3",
+        "spokenExact": "Satan is backed in a corner knowing he is defeated. He can try, but he will not succeed in getting one soul that God holds in his hands.",
+        "displayText": "Satan is backed in a corner knowing he is defeated. He can try, but he will not succeed in getting one soul that God holds in His hands.",
+        "start": 1249.033,
+        "end": 1257.95,
+        "segmentIndexes": [
+          460,
+          461,
+          462
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-phykqw.n025",
+        "contextBefore": "also to the Greek. either way.",
+        "contextAfter": "What a beautiful truth, that's not just for the tribulation end time, but that's also for today.",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-phykqw&start=1249.033&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-phykqw&start=1249.033&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=Gv1WVTiFmJI&t=1249s"
+      },
+      {
+        "id": "media-phykqw.quote.q010",
+        "reviewNumber": 10,
+        "curationQuoteId": "manual-media-phykqw-1329-dlqjsyt",
+        "spokenExact": "And so, listen, sometimes Christians, if all we're looking forward to is what is coming, we may miss what God is doing for us right here, right now.",
+        "displayText": "Sometimes Christians, if all we're looking forward to is what is coming, we may miss what God is doing for us right here, right now.",
+        "start": 1329.966,
+        "end": 1338.599,
+        "segmentIndexes": [
+          492,
+          493,
+          494
+        ],
+        "status": "featured",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-phykqw.n028",
+        "contextBefore": "You know, I had to look forward to something, right? To get out of here, right?",
+        "contextAfter": "Now, with that being said, scripture is very clear. We are to set our eyes on Christ.",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-phykqw&start=1329.966&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-phykqw&start=1329.966&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=Gv1WVTiFmJI&t=1329s"
+      }
+    ]
+  },
+  "authorCorpus": {
+    "purpose": "Private future author/research corpus. Surface and organize Pastor Jacob Lannom's actual teaching without imitating his voice.",
+    "recurringTheses": [
+      {
+        "id": "author.thesis.01",
+        "statement": "Jesus Christ is the eternal, uncreated Son within the triune God, and the same Jesus who ascended will return to reign.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-phykqw.n002",
+          "media-phykqw.n003",
+          "media-phykqw.n006",
+          "media-phykqw.n007"
+        ]
+      },
+      {
+        "id": "author.thesis.02",
+        "statement": "God's mercy, justice, wrath, goodness, and glory belong to one unchanging God rather than competing portraits of God.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-phykqw.n003",
+          "media-phykqw.n004",
+          "media-phykqw.n005",
+          "media-phykqw.n033"
+        ]
+      },
+      {
+        "id": "author.thesis.03",
+        "statement": "Satan is a real, active, deceiving accuser, but he is not equal to God and is ultimately defeated.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-phykqw.n010",
+          "media-phykqw.n012",
+          "media-phykqw.n014",
+          "media-phykqw.n017",
+          "media-phykqw.n025"
+        ]
+      },
+      {
+        "id": "author.thesis.04",
+        "statement": "Revelation's persecution imagery is read through the controlling theme that God protects His people, while interpretive details should not be stated with more certainty than the text permits.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-phykqw.n009",
+          "media-phykqw.n016",
+          "media-phykqw.n020",
+          "media-phykqw.n021",
+          "media-phykqw.n022",
+          "media-phykqw.n023"
+        ]
+      },
+      {
+        "id": "author.thesis.05",
+        "statement": "Christian eschatological hope should produce present gospel faithfulness and present victory rather than a life that only waits for the next future event.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-phykqw.n011",
+          "media-phykqw.n026",
+          "media-phykqw.n027",
+          "media-phykqw.n028",
+          "media-phykqw.n029"
+        ]
+      }
+    ],
+    "topicClusters": [
+      "Revelation 12",
+      "the woman as Israel",
+      "the man child as Christ",
+      "rod of iron",
+      "immutability of God",
+      "Trinity",
+      "mercy and justice",
+      "ascension of Christ",
+      "return of Christ",
+      "Great Tribulation",
+      "1,260 days",
+      "war in heaven",
+      "Michael",
+      "Satan and demons",
+      "spiritual deception",
+      "the accuser",
+      "blood of the Lamb",
+      "divine protection",
+      "eagle wings",
+      "the remnant",
+      "Jew and Gentile",
+      "victory in Christ",
+      "present faithfulness",
+      "biblical hope"
+    ],
+    "namedResources": [
+      {
+        "name": "The Bible Knowledge Commentary",
+        "role": "supporting commentary",
+        "nodeRefs": [
+          "media-phykqw.n019"
+        ]
+      },
+      {
+        "name": "“This Same Jesus” — Master's Voice / FRONTLINE",
+        "role": "song connection to Acts 1",
+        "nodeRefs": [
+          "media-phykqw.n008"
+        ]
+      }
+    ],
+    "potentialLiteraryDestinations": [
+      "The Same Jesus: Ascended and Returning",
+      "A Real Enemy, a Defeated Enemy",
+      "When Future Hope Becomes Present Victory",
+      "God's Protection in the Middle of Tribulation",
+      "Mercy and Justice in the Same Unchanging God"
+    ],
+    "rule": "Potential literary destinations are organizational suggestions, not titles Pastor Jacob has chosen."
+  },
+  "search": {
+    "strategy": "Canonical semantic enrichment for future generated search indexes; browser search should consume compact generated indexes rather than loading this whole record.",
+    "primaryTerms": [
+      "The Tribulation Pt. 13",
+      "The Child the War in Heaven and Satan Cast Down",
+      "Revelation 12",
+      "Revelation 12:5-17",
+      "woman Israel",
+      "red dragon Satan",
+      "man child Jesus",
+      "rod of iron",
+      "Psalm 2:9",
+      "Revelation 19:15",
+      "God never changes",
+      "Trinity",
+      "merciful and just God",
+      "ascension of Christ",
+      "Acts 1",
+      "This Same Jesus",
+      "return of Christ",
+      "Bride of Christ",
+      "1260 days",
+      "three and a half years",
+      "42 months",
+      "Great Tribulation",
+      "Matthew 24:16",
+      "war in heaven",
+      "Michael and his angels",
+      "Satan cast down",
+      "Luke 10",
+      "1 Peter 5:8",
+      "real enemy",
+      "Job 1:6",
+      "accuser of the brethren",
+      "blood of the Lamb",
+      "Bible Knowledge Commentary",
+      "eagle wings",
+      "Exodus 19:4",
+      "flood imagery",
+      "remnant",
+      "Romans 1:16",
+      "Jew and Gentile",
+      "defeated enemy",
+      "victory today",
+      "our hope is sure",
+      "present faithfulness"
+    ],
+    "doctrineTerms": [
+      "Eschatology",
+      "Christology",
+      "Angelology",
+      "Theology Proper",
+      "Soteriology",
+      "The Future",
+      "Jesus Christ",
+      "Angels Satan and Demons",
+      "Who God Is",
+      "Salvation"
+    ],
+    "quoteSearchRefs": [
+      "media-phykqw.quote.q001",
+      "media-phykqw.quote.q002",
+      "media-phykqw.quote.q004",
+      "media-phykqw.quote.q008",
+      "media-phykqw.quote.q010"
+    ]
+  },
+  "provenance": {
+    "authorityOrder": [
+      "Scripture",
+      "Processed/raw sermon transcript for what was actually spoken",
+      "Logos preparation for intended structure and prepared material",
+      "Slides for visual emphasis when applicable",
+      "CGBC official materials",
+      "Pastor-named external resources",
+      "CGBC doctrine taxonomy for classification only",
+      "Analysis synthesis/generated questions"
+    ],
+    "rules": [
+      "Do not present prepared wording as spoken exact unless transcript-confirmed.",
+      "Do not present generated questions or synthesis as Pastor Jacob's own words.",
+      "Do not use taxonomy aliases as proof of doctrine.",
+      "Preserve interpretive uncertainty where Pastor Jacob explicitly presents an issue as debated or says he cannot fully explain it.",
+      "Preserve external-resource attribution when commentary, music, or illustrations come from another source.",
+      "Store Scripture references rather than large blocks of KJV 1900 verse text in the canonical knowledge JSON."
+    ]
+  },
+  "editorialFlags": [
+    {
+      "id": "flag.no-slides",
+      "issue": "Wednesday sermons do not use sermon slides in this workflow, and no PowerPoint was supplied for 2026-09-30.",
+      "resolution": "Treat slides as intentionally not applicable. The source archive contains the four applicable source files and slideMap is empty; do not create a placeholder PPTX."
+    },
+    {
+      "id": "flag.kjv1900",
+      "issue": "This sermon preparation PDF explicitly labels Scripture quotations as KJV 1900 rather than the NASB95 normally used in the archive workflow.",
+      "resolution": "Preserve KJV 1900 as the historical preparation translation for this sermon. The canonical record stores references and summaries rather than large verse-text reproductions."
+    },
+    {
+      "id": "flag.interpretive-uncertainty",
+      "issue": "The timing of the Revelation 12 heavenly war and details of the remnant are discussed as debated interpretive questions.",
+      "resolution": "Preserve Pastor Jacob's stated uncertainty and 'educated assumption' language; do not convert these points into uncontested chronology."
+    },
+    {
+      "id": "flag.symbolic-imagery",
+      "issue": "The sermon treats the woman, eagle wings, and flood/earth imagery in Revelation 12 as symbolic/theatrical description rather than requiring literal physical mechanisms.",
+      "resolution": "Keep the public summary focused on the sermon's firm claims: Israel is represented by the woman and God protects His people amid Satan's attack."
+    },
+    {
+      "id": "flag.external-commentary",
+      "issue": "The Bible Knowledge Commentary is cited for the 1,260-day Great Tribulation interpretation.",
+      "resolution": "Keep the commentary attribution explicit rather than presenting the quoted explanation as Pastor Jacob's original wording."
+    },
+    {
+      "id": "flag.song-rights",
+      "issue": "Pastor Jacob cites and briefly sings/quotes the song “This Same Jesus.”",
+      "resolution": "Preserve the song title, artist connection, and theological role, but do not reproduce the song lyrics in the canonical knowledge JSON."
+    },
+    {
+      "id": "flag.transcript-artifacts",
+      "issue": "The processed transcript preserves occasional recognition artifacts and rough spoken grammar while maintaining stable timestamps and segment indexes.",
+      "resolution": "Use exact transcript wording only for spokenExact evidence and quote provenance; listener-facing synthesis may normalize obvious transcript artifacts without changing meaning."
+    }
+  ],
+  "implementation": {
+    "canonicalPath": "knowledge/2026/2026-09-30_the-tribulation-pt-13.json",
+    "oneSermonOneFile": true,
+    "generatedOutputsAreDisposable": true,
+    "sourceArchivePath": "Sermon Source Archive/2026/26_09_30/",
+    "sourceArchiveExpectedFiles": [
+      "Sermon Source Archive/2026/26_09_30/sermon-notes.pdf",
+      "Sermon Source Archive/2026/26_09_30/original-transcript.srt",
+      "Sermon Source Archive/2026/26_09_30/art-square.jpg",
+      "Sermon Source Archive/2026/26_09_30/art-wide.jpg"
+    ],
+    "slidesApplicable": false,
+    "futureConsumers": [
+      "CGBC Discover",
+      "Deep Dive",
+      "Search enrichment",
+      "Quote Engine 2.0",
+      "Private Pastor Jacob author corpus"
+    ]
+  }
+}
