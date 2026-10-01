@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-10-01T14:57:19.149Z",
+  "generatedAt": "2026-10-01T15:46:21.835Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 181,
-    "archiveItems": 181,
-    "videoMatchedItems": 173,
-    "transcriptMatchedItems": 49,
-    "quoteCandidateCount": 3623
+    "rssItems": 183,
+    "archiveItems": 183,
+    "videoMatchedItems": 175,
+    "transcriptMatchedItems": 50,
+    "quoteCandidateCount": 3698
   },
   "totals": {
-    "audioPlaysTotal": 5944,
-    "audioEpisodesTotal": 181
+    "audioPlaysTotal": 5947,
+    "audioEpisodesTotal": 183
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-52n99w",
-        "detectedFromDate": "2026-09-09",
-        "detectedFromTitle": "The Tribulation Pt. 12 (God's Wrath Announced and Active Pt. 5 - The Seven Trumpets)",
+        "detectedFromEpisode": "media-phykqw",
+        "detectedFromDate": "2026-09-30",
+        "detectedFromTitle": "The Tribulation Pt. 13 (The Child, the War in Heaven, and Satan Cast Down)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -80,7 +80,7 @@
         "square": null,
         "wide": null
       },
-      "count": 3
+      "count": 4
     },
     {
       "key": "unexplainable",
@@ -95,6 +95,398 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-phykqw",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/rmuppkjdz8fnaqer/26_09_30_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/03e538fc-c0d8-3fb3-87c6-2d1b6bd6789d"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-13-eschatology-the-tribulation/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-13-eschatology-the-tribulation/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 13",
+        "subtitle": "The Child, the War in Heaven, and Satan Cast Down",
+        "display": "The Tribulation Pt. 13 (The Child, the War in Heaven, and Satan Cast Down)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Revelation 12:5-17",
+        "display": "Revelation 12:5-17",
+        "book": "Revelation",
+        "bookKey": "revelation",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Psalm 2:9, Revelation 19:15, Acts 1:8-12, Matthew 24:16, Luke 10:17-20, 1 Peter 5:8, Job 1:6, Exodus 19:4, Romans 1:16",
+        "display": "Psalm 2:9, Revelation 19:15, Acts 1:8-12, Matthew 24:16, Luke 10:17-20, 1 Peter 5:8, Job 1:6, Exodus 19:4, Romans 1:16",
+        "tokens": [
+          "Psalm 2:9",
+          "Revelation 19:15",
+          "Acts 1:8-12",
+          "Acts 1:8",
+          "Acts 1:9",
+          "Acts 1:10",
+          "Acts 1:11",
+          "Acts 1:12",
+          "Matthew 24:16",
+          "Luke 10:17-20",
+          "Luke 10:17",
+          "Luke 10:18",
+          "Luke 10:19",
+          "Luke 10:20",
+          "1 Peter 5:8",
+          "Job 1:6",
+          "Exodus 19:4",
+          "Romans 1:16"
+        ],
+        "searchTokens": [
+          "Revelation 12:5-17",
+          "Revelation 12:5",
+          "Revelation 12:6",
+          "Revelation 12:7",
+          "Revelation 12:8",
+          "Revelation 12:9",
+          "Revelation 12:10",
+          "Revelation 12:11",
+          "Revelation 12:12",
+          "Revelation 12:13",
+          "Revelation 12:14",
+          "Revelation 12:15",
+          "Revelation 12:16",
+          "Revelation 12:17",
+          "Psalm 2:9",
+          "Revelation 19:15",
+          "Acts 1:8-12",
+          "Acts 1:8",
+          "Acts 1:9",
+          "Acts 1:10",
+          "Acts 1:11",
+          "Acts 1:12",
+          "Matthew 24:16",
+          "Luke 10:17-20",
+          "Luke 10:17",
+          "Luke 10:18",
+          "Luke 10:19",
+          "Luke 10:20",
+          "1 Peter 5:8",
+          "Job 1:6",
+          "Exodus 19:4",
+          "Romans 1:16"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 12:5-17",
+          "Revelation 12:5",
+          "Revelation 12:6",
+          "Revelation 12:7",
+          "Revelation 12:8",
+          "Revelation 12:9",
+          "Revelation 12:10",
+          "Revelation 12:11",
+          "Revelation 12:12",
+          "Revelation 12:13",
+          "Revelation 12:14",
+          "Revelation 12:15",
+          "Revelation 12:16",
+          "Revelation 12:17",
+          "Psalm 2:9",
+          "Revelation 19:15",
+          "Acts 1:8-12",
+          "Acts 1:8",
+          "Acts 1:9",
+          "Acts 1:10",
+          "Acts 1:11",
+          "Acts 1:12",
+          "Matthew 24:16",
+          "Luke 10:17-20",
+          "Luke 10:17",
+          "Luke 10:18",
+          "Luke 10:19",
+          "Luke 10:20",
+          "1 Peter 5:8",
+          "Job 1:6",
+          "Exodus 19:4",
+          "Romans 1:16"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [
+        {
+          "name": "The Tribulation",
+          "key": "the-tribulation",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": null,
+            "wide": null
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
+        }
+      ],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "Psalms",
+          "key": "psalms"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        },
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "Luke",
+          "key": "luke"
+        },
+        {
+          "name": "1 Peter",
+          "key": "1-peter"
+        },
+        {
+          "name": "Job",
+          "key": "job"
+        },
+        {
+          "name": "Exodus",
+          "key": "exodus"
+        },
+        {
+          "name": "Romans",
+          "key": "romans"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "09/30/2026",
+        "iso": "2026-09-30",
+        "year": 2026,
+        "month": 9,
+        "monthName": "September",
+        "day": 30
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-09-30.srt",
+            "cleanFile": "transcripts_clean/en/2026-09-30_the-tribulation-pt-13.srt",
+            "displayFile": "transcripts_display/en/2026-09-30_the-tribulation-pt-13.srt",
+            "jsonFile": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.json",
+            "displayJsonFile": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.display.json",
+            "segmentCount": 510,
+            "displaySegmentCount": 445
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-09-30.srt",
+        "cleanFile": "transcripts_clean/en/2026-09-30_the-tribulation-pt-13.srt",
+        "displayFile": "transcripts_display/en/2026-09-30_the-tribulation-pt-13.srt",
+        "jsonFile": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.json",
+        "displayJsonFile": "data/transcripts/en/2026-09-30_the-tribulation-pt-13.display.json",
+        "segmentCount": 510,
+        "displaySegmentCount": 445
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/rmuppkjdz8fnaqer/26_09_30_W.mp3",
+        "plays": 0,
+        "durationSeconds": 1393,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "Gv1WVTiFmJI",
+        "url": "https://www.youtube.com/watch?v=Gv1WVTiFmJI",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/26_09_30_W_square.jpg",
+          "wide": "https://i.ytimg.com/vi/Gv1WVTiFmJI/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "psalms",
+          "acts",
+          "matthew",
+          "luke",
+          "1-peter",
+          "job",
+          "exodus",
+          "romans"
+        ],
+        "collections": [
+          "the-tribulation"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
+    {
+      "stableId": "media-fbofz4",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/ngrc6gyridfuvuiq/26_09_28_Frontline.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/f236866d-0055-3b3f-b8d4-e883c0b50c26"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/frontline/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/frontline/"
+      },
+      "title": {
+        "episodeName": "2026 Harvest Day Concert",
+        "subtitle": "Featuring FRONTLINE",
+        "display": "2026 Harvest Day Concert (Featuring FRONTLINE)"
+      },
+      "series": {
+        "name": "2026 Specials",
+        "key": "2026-specials",
+        "type": "standalone"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "",
+        "display": "",
+        "book": null,
+        "bookKey": null,
+        "isVarious": false
+      },
+      "references": {
+        "raw": "",
+        "display": "",
+        "tokens": [],
+        "searchTokens": []
+      },
+      "search": {
+        "scriptureTokens": [],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [],
+      "speaker": "Jacob Lannom & FRONTLINE",
+      "date": {
+        "raw": "09/28/2026",
+        "iso": "2026-09-28",
+        "year": 2026,
+        "month": 9,
+        "monthName": "September",
+        "day": 28
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/ngrc6gyridfuvuiq/26_09_28_Frontline.mp3",
+        "plays": 0,
+        "durationSeconds": 5951,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "0pvkvqUUSQY",
+        "url": "https://www.youtube.com/watch?v=0pvkvqUUSQY",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Frontline_26_PCbpfqj.jpg",
+          "wide": "https://i.ytimg.com/vi/0pvkvqUUSQY/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Screenshot_2026-01-20_at_10200bkqn6.jpg",
+          "wide": "https://i.ytimg.com/vi/XNjmYEn25xY/sddefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "2026-specials"
+        ],
+        "studies": [],
+        "bibleBooks": [],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-09"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "none"
+      },
+      "flags": {
+        "isStandaloneEpisode": true,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-fdtrrp",
       "sourceKey": {
@@ -20284,7 +20676,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/uvvjjckyhzy3fjc4/1216rb5c.mp3",
-        "plays": 40,
+        "plays": 41,
         "durationSeconds": 2412,
         "statsMatchStrategy": "media_url"
       },
@@ -20538,7 +20930,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ac4d47ckf4butt6m/11_17_24_The_Gospel_Answer_to_Obtaining_Righteousnessaxsut.mp3",
-        "plays": 26,
+        "plays": 27,
         "durationSeconds": 2120,
         "statsMatchStrategy": "media_url"
       },
@@ -20809,7 +21201,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/q52auy6szwcn64vn/1027a5tlp.mp3",
-        "plays": 29,
+        "plays": 30,
         "durationSeconds": 1622,
         "statsMatchStrategy": "media_url"
       },
