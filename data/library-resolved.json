@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-10-01T16:02:32.093Z",
+  "generatedAt": "2026-10-01T16:11:30.290Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 183,
     "archiveItems": 183,
     "videoMatchedItems": 175,
     "transcriptMatchedItems": 50,
-    "quoteCandidateCount": 3698
+    "quoteCandidateCount": 3703
   },
   "totals": {
-    "audioPlaysTotal": 5948,
+    "audioPlaysTotal": 5949,
     "audioEpisodesTotal": 183
   },
   "current": {
@@ -128,9 +128,14 @@
         "isVarious": false
       },
       "references": {
-        "raw": "Psalm 2:9, Revelation 19:15, Acts 1:8-12, Matthew 24:16, Luke 10:17-20, 1 Peter 5:8, Job 1:6, Exodus 19:4, Romans 1:16",
-        "display": "Psalm 2:9, Revelation 19:15, Acts 1:8-12, Matthew 24:16, Luke 10:17-20, 1 Peter 5:8, Job 1:6, Exodus 19:4, Romans 1:16",
+        "raw": "Revelation 12:1-4, Psalm 2:9, Revelation 19:15, Acts 1:8-12, Matthew 24:16, Luke 10:17-20, 1 Peter 5:8, Job 1:6, Exodus 19:4, Romans 1:16",
+        "display": "Revelation 12:1-4, Psalm 2:9, Revelation 19:15, Acts 1:8-12, Matthew 24:16, Luke 10:17-20, 1 Peter 5:8, Job 1:6, Exodus 19:4, Romans 1:16",
         "tokens": [
+          "Revelation 12:1-4",
+          "Revelation 12:1",
+          "Revelation 12:2",
+          "Revelation 12:3",
+          "Revelation 12:4",
           "Psalm 2:9",
           "Revelation 19:15",
           "Acts 1:8-12",
@@ -165,6 +170,11 @@
           "Revelation 12:15",
           "Revelation 12:16",
           "Revelation 12:17",
+          "Revelation 12:1-4",
+          "Revelation 12:1",
+          "Revelation 12:2",
+          "Revelation 12:3",
+          "Revelation 12:4",
           "Psalm 2:9",
           "Revelation 19:15",
           "Acts 1:8-12",
@@ -201,6 +211,11 @@
           "Revelation 12:15",
           "Revelation 12:16",
           "Revelation 12:17",
+          "Revelation 12:1-4",
+          "Revelation 12:1",
+          "Revelation 12:2",
+          "Revelation 12:3",
+          "Revelation 12:4",
           "Psalm 2:9",
           "Revelation 19:15",
           "Acts 1:8-12",
@@ -702,7 +717,7 @@
         "hasVideo": true,
         "youtubeId": "wxi-a-tSMGI",
         "url": "https://www.youtube.com/watch?v=wxi-a-tSMGI",
-        "views": 5
+        "views": 6
       },
       "art": {
         "episode": {
@@ -20493,7 +20508,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5nv5wrg24cam4m8n/12_22_24_The_True_Light668zj.mp3",
-        "plays": 30,
+        "plays": 31,
         "durationSeconds": 2403,
         "statsMatchStrategy": "media_url"
       },
