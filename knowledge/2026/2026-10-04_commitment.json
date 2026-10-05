@@ -1,0 +1,3445 @@
+{
+  "schemaVersion": "2.0",
+  "recordType": "CGBC_SERMON_KNOWLEDGE",
+  "recordVersion": "2.0",
+  "generatedAt": "2026-10-05T02:37:25.875879Z",
+  "githubMainAtBuild": "61aaec0d5eebbbc91de162606e91db2702b65b8d",
+  "sermon": {
+    "stableId": "media-28j0ye",
+    "title": "Commitment",
+    "subtitle": "Cedar Grove Core Values",
+    "date": "2026-10-04",
+    "speaker": "Jacob Lannom",
+    "series": "Upon This Rock",
+    "study": "",
+    "seriesType": "Topical",
+    "scripture": "Selected Scriptures",
+    "scriptureRaw": "Various",
+    "references": [
+      "Hebrews 10:23-25",
+      "Matthew 6:21",
+      "Malachi 3:10",
+      "Acts 4:34-37",
+      "2 Corinthians 9:7",
+      "Proverbs 13:4",
+      "1 Corinthians 15:58",
+      "Proverbs 16:3"
+    ],
+    "bookTags": [
+      "Hebrews",
+      "Matthew",
+      "Malachi",
+      "Acts",
+      "2 Corinthians",
+      "Proverbs",
+      "1 Corinthians"
+    ],
+    "collections": [],
+    "videoUrl": "https://www.youtube.com/watch?v=dcmqfZhuwh0",
+    "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/commitment-upon-this-rock/",
+    "audioUrl": "https://mcdn.podbean.com/mf/web/3exbq5b5w2bcdezc/26_10_04_S.mp3",
+    "transcriptPath": "data/transcripts/en/2026-10-04_commitment.json",
+    "incomingTranscriptPath": "transcripts_incoming/2026-10-04.srt",
+    "cleanTranscriptPath": "transcripts_clean/en/2026-10-04_commitment.srt",
+    "displayTranscriptPath": "transcripts_display/en/2026-10-04_commitment.srt",
+    "displayTranscriptJsonPath": "data/transcripts/en/2026-10-04_commitment.display.json",
+    "youtubeId": "dcmqfZhuwh0",
+    "durationSeconds": 2138,
+    "translationUsedInPreparation": "Mixed (KJV 1900, NASB95, NKJV)",
+    "sourceArchivePath": "Sermon Source Archive/2026/26_10_04/"
+  },
+  "sources": [
+    {
+      "id": "src-transcript-srt",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "Sermon Source Archive/2026/26_10_04/original-transcript.srt",
+      "sha256": "dc17e5052fb82d26071eaac0c3c9b746e32446ab81ca7af97fedff5fd76d4529",
+      "notes": "Primary archival source for exact spoken wording and timestamps; 722 segments."
+    },
+    {
+      "id": "src-transcript-json",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "data/transcripts/en/2026-10-04_commitment.json",
+      "notes": "Authoritative faithful-clean repository transcript verified at GitHub main 61aaec0d5eebbbc91de162606e91db2702b65b8d; stableId media-28j0ye; 722 segments."
+    },
+    {
+      "id": "src-logos",
+      "kind": "PASTOR — PREPARED",
+      "pathOrName": "Sermon Source Archive/2026/26_10_04/sermon-notes.pdf",
+      "sha256": "d2f48cb684abda09a55f1e0e959d8eff93d13b46e15e4247b98f1984c80021c6",
+      "notes": "Pastor Jacob's Logos preparation export; sermon structure, intended wording, Scripture trail, translations and named lexical resources."
+    },
+    {
+      "id": "src-slides",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_10_04/slides.pptx",
+      "sha256": "465ac4da1e159c91ea9864b79c69296cb1efc3bd2c047c7cda19e5f94f0369b1",
+      "notes": "Original 33-slide visual roadmap and archival visual source of truth. Repeated branding source positions: 4, 9, 15, 19, 23, 26, 32."
+    },
+    {
+      "id": "src-slides-web",
+      "kind": "ANALYSIS — PRESENTATION DERIVATIVE",
+      "pathOrName": "Sermon Source Archive/2026/26_10_04/slides-web/",
+      "notes": "Optimized WebP derivatives from the original PPTX. The 1601x900 render's extra right-edge column was removed before scaling and the output edge hardened to prevent the previously observed white seam."
+    },
+    {
+      "id": "src-art-square",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_10_04/art-square.jpg",
+      "sha256": "0bb191333dddf462fd329261555d55742b4546917c5b40db575293c57b9f3899",
+      "notes": "Original supplied square sermon artwork."
+    },
+    {
+      "id": "src-art-wide",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_10_04/art-wide.jpg",
+      "sha256": "ba01ce08ac403ecdfafaf85f30a478d0bd4e56f92b1380470d44b9ebb919dcb4",
+      "notes": "Original supplied wide sermon artwork."
+    },
+    {
+      "id": "src-rss",
+      "kind": "CGBC — CANONICAL METADATA",
+      "pathOrName": "Podbean RSS / current resolved library",
+      "notes": "Published metadata verified on GitHub main 61aaec0d5eebbbc91de162606e91db2702b65b8d; stableId media-28j0ye; YouTube dcmqfZhuwh0."
+    }
+  ],
+  "presentation": {
+    "slideAssets": {
+      "basePath": "Sermon Source Archive/2026/26_10_04/slides-web/",
+      "format": "webp",
+      "rendering": "lossless-webp-from-PPT-render; cropped from 1601x900 to exact 1600x900 before scaling; final edge seam correction applied",
+      "sizes": {
+        "small": {
+          "width": 640,
+          "height": 360,
+          "folder": "small/"
+        },
+        "medium": {
+          "width": 1280,
+          "height": 720,
+          "folder": "medium/"
+        }
+      },
+      "filenamePattern": "slide-{NNN}.webp"
+    },
+    "defaultVisual": {
+      "small": "small/branding.webp",
+      "medium": "medium/branding.webp",
+      "displayWhen": "no_active_content_slide"
+    },
+    "sourceSlides": {
+      "count": 33,
+      "meaningfulCount": 26,
+      "blankBrandingSourceSlides": [
+        4,
+        9,
+        15,
+        19,
+        23,
+        26,
+        32
+      ],
+      "original": "Sermon Source Archive/2026/26_10_04/slides.pptx"
+    },
+    "timingPolicy": {
+      "purpose": "contextual synchronization",
+      "automaticPlacementThreshold": 0.51,
+      "inferredTimingIsHistoricalFact": false,
+      "chronologyGuardrail": true,
+      "gapsDisplayDefaultVisual": true
+    },
+    "visualCueAudit": {
+      "explicitScreenOrSlideCues": [],
+      "excludedAmbiguousCues": [
+        {
+          "start": 221.233,
+          "text": "And you can see that in every single aspect of your life.",
+          "reason": "Ordinary rhetorical language, not an explicit reference to a projected visual."
+        }
+      ]
+    },
+    "scriptureDisplay": {
+      "translationsUsed": [
+        "KJV 1900",
+        "NASB95",
+        "NKJV"
+      ],
+      "rightsPolicy": "central_policy_required",
+      "sourceSlidesContainScriptureText": true,
+      "translationPolicyKeys": [
+        "KJV_1900",
+        "NASB95",
+        "NKJV"
+      ],
+      "fallbackWhenNotCleared": "Display branding/default visual plus Scripture reference, translation label, and non-reproducing contextual explanation."
+    }
+  },
+  "slideMap": [
+    {
+      "slide": 1,
+      "kind": "title",
+      "meaningful": true,
+      "title": "Upon This Rock (Core Values)",
+      "asset": "slide-001.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n001"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.88,
+      "timingEvidence": [
+        "sermon_series_opening",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1.266,
+      "end": 184.7
+    },
+    {
+      "slide": 2,
+      "kind": "vision",
+      "meaningful": true,
+      "title": "CGBC vision",
+      "asset": "slide-002.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n002"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 184.7,
+      "end": 194.9
+    },
+    {
+      "slide": 3,
+      "kind": "mission",
+      "meaningful": true,
+      "title": "CGBC mission",
+      "asset": "slide-003.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n003"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 194.9,
+      "end": 205.4
+    },
+    {
+      "slide": 4,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [],
+      "timingStatus": "inferred_branding_interval",
+      "timingConfidence": 0.83,
+      "timingEvidence": [
+        "source_blank_position",
+        "sermon_transition",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 205.4,
+      "end": 256.4
+    },
+    {
+      "slide": 5,
+      "kind": "coreValueRecap",
+      "meaningful": true,
+      "title": "I will uphold the sanctity of the family",
+      "asset": "slide-005.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n005"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 256.4,
+      "end": 306.1
+    },
+    {
+      "slide": 6,
+      "kind": "coreValueRecap",
+      "meaningful": true,
+      "title": "I will live daily with integrity in thought, word, and deed",
+      "asset": "slide-006.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n006"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 306.1,
+      "end": 359.9
+    },
+    {
+      "slide": 7,
+      "kind": "coreValueRecap",
+      "meaningful": true,
+      "title": "I will build and grow each relationship represented in the church purpose",
+      "asset": "slide-007.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n007"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.98,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 359.9,
+      "end": 393.7
+    },
+    {
+      "slide": 8,
+      "kind": "sectionTitle",
+      "meaningful": true,
+      "title": "Commitment",
+      "asset": "slide-008.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n008"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 393.7,
+      "end": 401.6
+    },
+    {
+      "slide": 9,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [],
+      "timingStatus": "inferred_branding_interval",
+      "timingConfidence": 0.79,
+      "timingEvidence": [
+        "source_blank_position",
+        "sermon_transition",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 401.6,
+      "end": 439.083
+    },
+    {
+      "slide": 10,
+      "kind": "coreValueStatement",
+      "meaningful": true,
+      "title": "I will wholeheartedly commit myself to the purpose and mission of my church",
+      "asset": "slide-010.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n008",
+        "media-28j0ye.n010"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 439.083,
+      "end": 648.183
+    },
+    {
+      "slide": 11,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "By attending faithfully",
+      "asset": "slide-011.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n011"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 648.183,
+      "end": 657.183
+    },
+    {
+      "slide": 12,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Hebrews 10:25",
+      "asset": "slide-012.webp",
+      "scripture": [
+        "Hebrews 10:25"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n012"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 657.183,
+      "end": 667.866
+    },
+    {
+      "slide": 13,
+      "kind": "wordStudy",
+      "meaningful": true,
+      "title": "ἔθος (ethos): custom, practice, habit",
+      "asset": "slide-013.webp",
+      "scripture": [
+        "Hebrews 10:25"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n013",
+        "media-28j0ye.n014"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.98,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 667.866,
+      "end": 879.383
+    },
+    {
+      "slide": 14,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Hebrews 10:23-24",
+      "asset": "slide-014.webp",
+      "scripture": [
+        "Hebrews 10:23-25"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n015"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 879.383,
+      "end": 895.033
+    },
+    {
+      "slide": 15,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [],
+      "timingStatus": "source_blank_unplaced",
+      "timingConfidence": 0.3,
+      "timingEvidence": [
+        "source_blank_position"
+      ],
+      "autoPlacement": false
+    },
+    {
+      "slide": 16,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Hebrews 10:25",
+      "asset": "slide-016.webp",
+      "scripture": [
+        "Hebrews 10:23-25"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n015",
+        "media-28j0ye.n016"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.96,
+      "timingEvidence": [
+        "scripture_continuation",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 895.033,
+      "end": 1003.033
+    },
+    {
+      "slide": 17,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "By giving cheerfully",
+      "asset": "slide-017.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n017",
+        "media-28j0ye.n018"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1006.45,
+      "end": 1169.233
+    },
+    {
+      "slide": 18,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Matthew 6:21",
+      "asset": "slide-018.webp",
+      "scripture": [
+        "Matthew 6:21"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n019"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1169.233,
+      "end": 1187.433
+    },
+    {
+      "slide": 19,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [],
+      "timingStatus": "inferred_branding_interval",
+      "timingConfidence": 0.78,
+      "timingEvidence": [
+        "source_blank_position",
+        "sermon_transition",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1187.433,
+      "end": 1195.45
+    },
+    {
+      "slide": 20,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Malachi 3:10",
+      "asset": "slide-020.webp",
+      "scripture": [
+        "Malachi 3:10"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n020"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1195.45,
+      "end": 1235.333
+    },
+    {
+      "slide": 21,
+      "kind": "teachingEmphasis",
+      "meaningful": true,
+      "title": "Generous giving lifts ministry limitations",
+      "asset": "slide-021.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n021"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1235.333,
+      "end": 1309.566
+    },
+    {
+      "slide": 22,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Acts 4:34-35",
+      "asset": "slide-022.webp",
+      "scripture": [
+        "Acts 4:34-37"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n022"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1312.233,
+      "end": 1326.849
+    },
+    {
+      "slide": 23,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [],
+      "timingStatus": "source_blank_unplaced",
+      "timingConfidence": 0.31,
+      "timingEvidence": [
+        "source_blank_position"
+      ],
+      "autoPlacement": false
+    },
+    {
+      "slide": 24,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Acts 4:36-37",
+      "asset": "slide-024.webp",
+      "scripture": [
+        "Acts 4:34-37"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n022"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_continuation",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1326.849,
+      "end": 1337.7
+    },
+    {
+      "slide": 25,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "2 Corinthians 9:7",
+      "asset": "slide-025.webp",
+      "scripture": [
+        "2 Corinthians 9:7"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n023"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1395.433,
+      "end": 1404.183
+    },
+    {
+      "slide": 26,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n024",
+        "media-28j0ye.n025",
+        "media-28j0ye.n026"
+      ],
+      "timingStatus": "inferred_branding_interval",
+      "timingConfidence": 0.92,
+      "timingEvidence": [
+        "source_blank_position",
+        "application_without_dedicated_slide",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1404.183,
+      "end": 1721.533
+    },
+    {
+      "slide": 27,
+      "kind": "outlinePoint",
+      "meaningful": true,
+      "title": "By working diligently",
+      "asset": "slide-027.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n027"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1721.533,
+      "end": 1737.25
+    },
+    {
+      "slide": 28,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Proverbs 13:4",
+      "asset": "slide-028.webp",
+      "scripture": [
+        "Proverbs 13:4"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n028",
+        "media-28j0ye.n030"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.98,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1737.25,
+      "end": 1785.066
+    },
+    {
+      "slide": 29,
+      "kind": "scriptureRepeat",
+      "meaningful": true,
+      "title": "Proverbs 13:4 repeated",
+      "asset": "slide-029.webp",
+      "scripture": [
+        "Proverbs 13:4"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n028"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "explicit_revisit_cue",
+        "scripture_reference_match",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1785.066,
+      "end": 1796.0
+    },
+    {
+      "slide": 30,
+      "kind": "wordStudy",
+      "meaningful": true,
+      "title": "Soul: whole-person lexical range",
+      "asset": "slide-030.webp",
+      "scripture": [
+        "Proverbs 13:4"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n029"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1796.0,
+      "end": 1816.6
+    },
+    {
+      "slide": 31,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "1 Corinthians 15:58",
+      "asset": "slide-031.webp",
+      "scripture": [
+        "1 Corinthians 15:58"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n031"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1878.3,
+      "end": 1895.633
+    },
+    {
+      "slide": 32,
+      "kind": "branding",
+      "meaningful": false,
+      "title": "Source branding/blank position",
+      "asset": "branding.webp",
+      "scripture": [],
+      "nodeRefs": [
+        "media-28j0ye.n032"
+      ],
+      "timingStatus": "inferred_branding_interval",
+      "timingConfidence": 0.88,
+      "timingEvidence": [
+        "source_blank_position",
+        "application_without_dedicated_slide",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1895.633,
+      "end": 1933.2
+    },
+    {
+      "slide": 33,
+      "kind": "scripture",
+      "meaningful": true,
+      "title": "Proverbs 16:3",
+      "asset": "slide-033.webp",
+      "scripture": [
+        "Proverbs 16:3"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n033"
+      ],
+      "timingStatus": "inferred",
+      "timingConfidence": 0.99,
+      "timingEvidence": [
+        "scripture_reference_match",
+        "spoken_slide_match",
+        "prepared_notes_alignment",
+        "slide_sequence_boundary"
+      ],
+      "autoPlacement": true,
+      "start": 1933.2,
+      "end": 1948.5
+    }
+  ],
+  "structure": {
+    "centralCoreValue": "Commitment",
+    "statement": "I will wholeheartedly commit myself to the purpose and mission of my church.",
+    "foundation": "Commitment to the purpose and mission of the local church is expressed through faithful presence, cheerful giving, and diligent work.",
+    "branches": [
+      {
+        "order": 1,
+        "name": "Attend faithfully",
+        "nodeRef": "media-28j0ye.n011",
+        "scripture": [
+          "Hebrews 10:23-25"
+        ]
+      },
+      {
+        "order": 2,
+        "name": "Give cheerfully",
+        "nodeRef": "media-28j0ye.n017",
+        "scripture": [
+          "Matthew 6:21",
+          "Malachi 3:10",
+          "Acts 4:34-37",
+          "2 Corinthians 9:7"
+        ]
+      },
+      {
+        "order": 3,
+        "name": "Work diligently",
+        "nodeRef": "media-28j0ye.n027",
+        "scripture": [
+          "Proverbs 13:4",
+          "1 Corinthians 15:58",
+          "Proverbs 16:3"
+        ]
+      }
+    ]
+  },
+  "scriptureMap": {
+    "main": "Selected Scriptures",
+    "supporting": [
+      "Hebrews 10:23-25",
+      "Matthew 6:21",
+      "Malachi 3:10",
+      "Acts 4:34-37",
+      "2 Corinthians 9:7",
+      "Proverbs 13:4",
+      "1 Corinthians 15:58",
+      "Proverbs 16:3"
+    ],
+    "branchTrails": {
+      "attendance": [
+        "Hebrews 10:23-25"
+      ],
+      "giving": [
+        "Matthew 6:21",
+        "Malachi 3:10",
+        "Acts 4:34-37",
+        "2 Corinthians 9:7"
+      ],
+      "work": [
+        "Proverbs 13:4",
+        "1 Corinthians 15:58",
+        "Proverbs 16:3"
+      ]
+    },
+    "translationsUsedInPreparation": {
+      "KJV 1900": [
+        "Hebrews 10:23-25",
+        "Matthew 6:21",
+        "Acts 4:34-37"
+      ],
+      "NASB95": [
+        "Malachi 3:10",
+        "2 Corinthians 9:7",
+        "Proverbs 16:3"
+      ],
+      "NKJV": [
+        "Proverbs 13:4",
+        "1 Corinthians 15:58"
+      ]
+    }
+  },
+  "wordStudies": [
+    {
+      "term": "ἔθος (ethos)",
+      "resource": "Dictionary of Biblical Languages with Semantic Domains: Greek (New Testament)",
+      "section": "Attend faithfully",
+      "meaning": "custom, practice, habit",
+      "nodeRef": "media-28j0ye.n013"
+    },
+    {
+      "term": "soul / נֶפֶשׁ (nephesh)",
+      "resource": "Enhanced Brown-Driver-Briggs Hebrew and English Lexicon",
+      "section": "Work diligently",
+      "meaning": "soul, living being, life, self, person, desire, appetite, emotion, and passion",
+      "nodeRef": "media-28j0ye.n029"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "media-28j0ye.n001",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Core-values series context",
+      "summary": "The sermon resumes the Upon This Rock core-values series and frames it as both membership orientation and renewal for existing members.",
+      "start": 131.533,
+      "end": 184.7,
+      "segmentIndexes": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "scripture": [],
+      "topics": [
+        "Upon This Rock",
+        "core values",
+        "church membership"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n002",
+          "confidence": 0.86,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n003",
+          "confidence": 0.86,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n002",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "CGBC vision",
+      "summary": "Cedar Grove Baptist Church exists to create a space where people and families can meet Jesus, find community, and grow in their faith.",
+      "start": 184.7,
+      "end": 194.9,
+      "segmentIndexes": [
+        65,
+        66,
+        67
+      ],
+      "scripture": [],
+      "topics": [
+        "vision",
+        "meet Jesus",
+        "community",
+        "grow in faith"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-28j0ye.n003",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "CGBC mission",
+      "summary": "The mission is to love others unconditionally, learn about God increasingly, live to share Jesus intentionally, and lead others to Christ continually.",
+      "start": 194.9,
+      "end": 205.4,
+      "segmentIndexes": [
+        68,
+        69,
+        70,
+        71,
+        72
+      ],
+      "scripture": [],
+      "topics": [
+        "mission",
+        "discipleship",
+        "evangelism",
+        "love"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-28j0ye.n004",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Values direct life",
+      "summary": "The sermon argues that vision and mission are ineffective unless the church values the right things rightly; what a person values directs how that person lives.",
+      "start": 209.9,
+      "end": 248.5,
+      "segmentIndexes": [
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90
+      ],
+      "scripture": [],
+      "topics": [
+        "values",
+        "direction",
+        "renewed mind"
+      ],
+      "doctrine": [
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n008",
+          "confidence": 0.83,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n005",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Core Value 1 recap: Family",
+      "summary": "Families should be places of holiness and faith building rather than idols that displace Christ.",
+      "start": 256.4,
+      "end": 306.1,
+      "segmentIndexes": [
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107
+      ],
+      "scripture": [],
+      "topics": [
+        "family",
+        "holiness",
+        "idolatry"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-28j0ye.n006",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Core Value 2 recap: Integrity",
+      "summary": "Integrity means living honestly before God and others, publicly and privately, so testimony and daily life agree.",
+      "start": 306.1,
+      "end": 359.9,
+      "segmentIndexes": [
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ],
+      "scripture": [],
+      "topics": [
+        "integrity",
+        "testimony",
+        "honesty"
+      ],
+      "doctrine": [
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-28j0ye.n007",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Core Value 3 recap: Relationships",
+      "summary": "The third core value calls members to build and grow the relationships represented in the church mission.",
+      "start": 359.9,
+      "end": 393.7,
+      "segmentIndexes": [
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "scripture": [],
+      "topics": [
+        "relationships",
+        "mission",
+        "church life"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ]
+    },
+    {
+      "id": "media-28j0ye.n008",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Core Value 4: Commitment",
+      "summary": "The core commitment statement is: I will wholeheartedly commit myself to the purpose and mission of my church.",
+      "start": 393.7,
+      "end": 531.533,
+      "segmentIndexes": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196
+      ],
+      "scripture": [],
+      "topics": [
+        "commitment",
+        "purpose",
+        "mission",
+        "membership"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n003",
+          "confidence": 0.95,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n010",
+          "confidence": 0.93,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n009",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Commitment is missing",
+      "summary": "The sermon diagnoses a lack of commitment to church purpose and mission as a major weakness in contemporary church life.",
+      "start": 531.6,
+      "end": 537.299,
+      "segmentIndexes": [
+        197,
+        198
+      ],
+      "scripture": [],
+      "topics": [
+        "commitment",
+        "purpose",
+        "mission"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "spokenExact": "If there's anything missing from the church today, it is this. People being committed to the purpose in the mission.",
+      "displayText": "If there’s anything missing from the church today, it is this: people being committed to the purpose and mission.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "reviewNumber": 3,
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n008",
+          "confidence": 0.95,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n010",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "From the fringe to the fold",
+      "summary": "The purpose of the commitment value is to move people from passive sidelines participation into active shared responsibility through three concrete practices.",
+      "start": 620.95,
+      "end": 648.166,
+      "segmentIndexes": [
+        225,
+        226,
+        227,
+        228,
+        229,
+        230
+      ],
+      "scripture": [],
+      "topics": [
+        "participation",
+        "membership",
+        "service",
+        "commitment"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n008",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n009",
+          "confidence": 0.9,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n011",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Attend faithfully",
+      "summary": "The first expression of commitment is faithful participation in the corporate gathering of believers.",
+      "start": 648.183,
+      "end": 657.183,
+      "segmentIndexes": [
+        231,
+        232,
+        233
+      ],
+      "scripture": [
+        "Hebrews 10:23-25"
+      ],
+      "topics": [
+        "church attendance",
+        "corporate gathering",
+        "faithfulness"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n010",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n012",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Hebrews 10:25 and assembling",
+      "summary": "Hebrews 10:25 is used to establish corporate gathering as a priority that includes mutual exhortation.",
+      "start": 657.183,
+      "end": 667.799,
+      "segmentIndexes": [
+        234,
+        235,
+        236,
+        237
+      ],
+      "scripture": [
+        "Hebrews 10:25"
+      ],
+      "topics": [
+        "assembling",
+        "exhortation",
+        "attendance"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n011",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n013",
+      "type": "wordStudy",
+      "provenance": "PASTOR — PREPARED",
+      "title": "ἔθος (ethos): custom, practice, habit",
+      "summary": "The word translated 'manner' is explained from the Dictionary of Biblical Languages with Semantic Domains as custom, practice, or habit.",
+      "start": 667.866,
+      "end": 672.6,
+      "segmentIndexes": [
+        238,
+        239
+      ],
+      "scripture": [
+        "Hebrews 10:25"
+      ],
+      "topics": [
+        "ethos",
+        "habit",
+        "attendance"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n012",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n014",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Guard against habits of neglect",
+      "summary": "Ordinary absences are distinguished from a repeated habit of placing sports, hunting, family plans, or convenience ahead of gathering with the church.",
+      "start": 673.983,
+      "end": 871.0,
+      "segmentIndexes": [
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310
+      ],
+      "scripture": [
+        "Hebrews 10:25"
+      ],
+      "topics": [
+        "priorities",
+        "attendance",
+        "habits",
+        "discipleship"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n013",
+          "confidence": 0.94,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n015",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Attendance considers one another",
+      "summary": "Hebrews 10:23-25 is read as a progression: hold fast, consider one another, provoke love and good works, and gather to exhort one another.",
+      "start": 879.383,
+      "end": 924.299,
+      "segmentIndexes": [
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325
+      ],
+      "scripture": [
+        "Hebrews 10:23-25"
+      ],
+      "topics": [
+        "mutual encouragement",
+        "good works",
+        "attendance"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n012",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n011",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n016",
+      "type": "illustration",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Presence can provoke good works",
+      "summary": "The sermon illustrates mutual encouragement through older members, hugs, prayer, and the effect another believer's presence can have on a struggling pastor.",
+      "start": 924.366,
+      "end": 1003.0,
+      "segmentIndexes": [
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348,
+        349,
+        350,
+        351,
+        352,
+        353
+      ],
+      "scripture": [
+        "Hebrews 10:23-25"
+      ],
+      "topics": [
+        "encouragement",
+        "prayer",
+        "presence",
+        "community"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "illustrates",
+          "targetNodeRef": "media-28j0ye.n015",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n017",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Give cheerfully",
+      "summary": "The second expression of commitment is cheerful, faithful giving that supports the ministry of the local church.",
+      "start": 1006.45,
+      "end": 1087.683,
+      "segmentIndexes": [
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385
+      ],
+      "scripture": [],
+      "topics": [
+        "giving",
+        "stewardship",
+        "local church"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n010",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n018",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Tithe principle and New Testament giving",
+      "summary": "The sermon distinguishes the pre-law principle of the tithe from a commanded New Testament percentage while insisting that not giving is not a faithful option.",
+      "start": 1087.75,
+      "end": 1168.0,
+      "segmentIndexes": [
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408
+      ],
+      "scripture": [],
+      "topics": [
+        "tithe",
+        "giving",
+        "stewardship"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.93,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n019",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Treasure reveals the heart",
+      "summary": "Matthew 6:21 is used to connect the direction of one's resources with the direction of one's heart.",
+      "start": 1169.233,
+      "end": 1187.2,
+      "segmentIndexes": [
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415
+      ],
+      "scripture": [
+        "Matthew 6:21"
+      ],
+      "topics": [
+        "treasure",
+        "heart",
+        "giving"
+      ],
+      "doctrine": [
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.92,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n020",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Storehouse principle",
+      "summary": "Malachi 3:10 is used as an Old Testament storehouse principle while the sermon explicitly avoids presenting the tithe percentage as a New Testament command.",
+      "start": 1187.433,
+      "end": 1236.299,
+      "segmentIndexes": [
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ],
+      "scripture": [
+        "Malachi 3:10"
+      ],
+      "topics": [
+        "storehouse",
+        "tithe",
+        "giving"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.87,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n018",
+          "confidence": 0.88,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n021",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Generous giving lifts ministry limitations",
+      "summary": "Generous and intentional giving is presented as a way to remove financial limitations from local-church ministry and lift up the name of Jesus.",
+      "start": 1236.666,
+      "end": 1246.133,
+      "segmentIndexes": [
+        433,
+        434,
+        435
+      ],
+      "scripture": [],
+      "topics": [
+        "generosity",
+        "local church",
+        "ministry",
+        "Jesus"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "spokenExact": "Listen, when we give generously and intentionally, we lift the burden of financial limitations on magnifying the ministry of this local church, and in doing so, we lift up the name of Jesus.",
+      "displayText": "When we give generously and intentionally, we lift the burden of financial limitations on magnifying the ministry of this local church, and in doing so, we lift up the name of Jesus.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "reviewNumber": 6,
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n022",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Acts 4 generosity",
+      "summary": "Acts 4:34-37 is used to show voluntary, sacrificial giving in the early church, including Barnabas bringing proceeds to the apostles.",
+      "start": 1309.566,
+      "end": 1395.433,
+      "segmentIndexes": [
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484
+      ],
+      "scripture": [
+        "Acts 4:34-37"
+      ],
+      "topics": [
+        "early church",
+        "generosity",
+        "Barnabas",
+        "giving"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.94,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n023",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "God loves a cheerful giver",
+      "summary": "Second Corinthians 9:7 is used to distinguish cheerful, purposeful giving from grudging or compelled giving.",
+      "start": 1395.433,
+      "end": 1422.783,
+      "segmentIndexes": [
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492
+      ],
+      "scripture": [
+        "2 Corinthians 9:7"
+      ],
+      "topics": [
+        "cheerful giving",
+        "heart posture",
+        "generosity"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n024",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Local giving reality",
+      "summary": "Pastor Jacob gives time-bound local statistics about weekly givers and attendance to challenge Cedar Grove about whether inadequate giving limits ministry opportunities.",
+      "start": 1422.783,
+      "end": 1593.733,
+      "segmentIndexes": [
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535,
+        536,
+        537,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552
+      ],
+      "scripture": [],
+      "topics": [
+        "Cedar Grove",
+        "giving",
+        "stewardship",
+        "ministry capacity"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n023",
+          "confidence": 0.9,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n025",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "A giving heart",
+      "summary": "The sermon summarizes its giving emphasis by saying Scripture requires a giving heart rather than a fixed giving amount.",
+      "start": 1660.15,
+      "end": 1663.383,
+      "segmentIndexes": [
+        575
+      ],
+      "scripture": [],
+      "topics": [
+        "giving",
+        "heart",
+        "generosity"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "spokenExact": "Nowhere in scripture will you find a given amount required just a giving heart required.",
+      "displayText": "Nowhere in Scripture will you find a giving amount required, just a giving heart required.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "reviewNumber": 7,
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n018",
+          "confidence": 0.91,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.95,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n026",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Digital ministry still depends on local-church generosity",
+      "summary": "Online sermons and podcasts are valued, but the sermon warns against consuming ministry while forgetting that such platforms are often built and maintained through local-church giving and service.",
+      "start": 1673.766,
+      "end": 1721.533,
+      "segmentIndexes": [
+        580,
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593,
+        594,
+        595
+      ],
+      "scripture": [],
+      "topics": [
+        "online ministry",
+        "podcasts",
+        "local church",
+        "giving"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.91,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n027",
+      "type": "outlinePoint",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Work diligently",
+      "summary": "The third expression of commitment is diligent work for the mission of the church.",
+      "start": 1721.533,
+      "end": 1737.25,
+      "segmentIndexes": [
+        595,
+        596,
+        597,
+        598
+      ],
+      "scripture": [],
+      "topics": [
+        "diligence",
+        "work",
+        "service",
+        "commitment"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n010",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n028",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Proverbs 13:4 and diligence",
+      "summary": "Proverbs 13:4 contrasts lazy desire with diligent labor and is applied beyond material gain to the whole person.",
+      "start": 1737.25,
+      "end": 1796.0,
+      "segmentIndexes": [
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617,
+        618,
+        619,
+        620,
+        621
+      ],
+      "scripture": [
+        "Proverbs 13:4"
+      ],
+      "topics": [
+        "diligence",
+        "laziness",
+        "work"
+      ],
+      "doctrine": [
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n027",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n029",
+      "type": "wordStudy",
+      "provenance": "PASTOR — PREPARED",
+      "title": "Soul as the whole person",
+      "summary": "Using the Enhanced Brown-Driver-Briggs Hebrew and English Lexicon, the sermon explains 'soul' as encompassing living being, life, self, person, desire, appetite, emotion, and passion, then applies the proverb to physical, moral, and spiritual life.",
+      "start": 1796.0,
+      "end": 1827.0,
+      "segmentIndexes": [
+        621,
+        622,
+        623,
+        624,
+        625,
+        626,
+        627,
+        628,
+        629
+      ],
+      "scripture": [
+        "Proverbs 13:4"
+      ],
+      "topics": [
+        "soul",
+        "whole person",
+        "diligence"
+      ],
+      "doctrine": [
+        "Anthropology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n028",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n030",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Work hard in the house of God",
+      "summary": "The sermon refuses a double standard in which believers work diligently everywhere except the church.",
+      "start": 1743.733,
+      "end": 1751.583,
+      "segmentIndexes": [
+        601,
+        602
+      ],
+      "scripture": [],
+      "topics": [
+        "diligence",
+        "church work",
+        "laziness"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "spokenExact": "God forbid we work hard everywhere else in our life except the house of God. God forbid laziness being an issue here at Cedar Grove.",
+      "displayText": "God forbid we work hard everywhere else in our life except the house of God. God forbid laziness be an issue here at Cedar Grove.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "reviewNumber": 8,
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n027",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n031",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Labor is not in vain",
+      "summary": "First Corinthians 15:58 answers discouragement in ministry with confidence that steadfast labor in the Lord is not in vain.",
+      "start": 1827.0,
+      "end": 1901.083,
+      "segmentIndexes": [
+        629,
+        630,
+        631,
+        632,
+        633,
+        634,
+        635,
+        636,
+        637,
+        638,
+        639,
+        640,
+        641,
+        642,
+        643,
+        644,
+        645,
+        646,
+        647,
+        648,
+        649,
+        650,
+        651
+      ],
+      "scripture": [
+        "1 Corinthians 15:58"
+      ],
+      "topics": [
+        "labor",
+        "perseverance",
+        "ministry discouragement"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n027",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "answers",
+          "targetNodeRef": "media-28j0ye.n034",
+          "confidence": 0.88,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n032",
+      "type": "clarification",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Busyness must remain rooted in Jesus",
+      "summary": "The sermon qualifies diligent ministry: Jesus is the reason for the work, and labor that ignores personal relationship with Him is not the work of the Lord.",
+      "start": 1908.933,
+      "end": 1933.2,
+      "segmentIndexes": [
+        653,
+        654,
+        655,
+        656,
+        657,
+        658,
+        659,
+        660,
+        661
+      ],
+      "scripture": [],
+      "topics": [
+        "Jesus",
+        "ministry",
+        "busyness",
+        "relationship with Christ"
+      ],
+      "doctrine": [
+        "Christology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-28j0ye.n027",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n033",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Commit works to the Lord",
+      "summary": "Proverbs 16:3 is used to ground plans and ministry labor in commitment to the Lord.",
+      "start": 1933.2,
+      "end": 1948.5,
+      "segmentIndexes": [
+        661,
+        662,
+        663,
+        664
+      ],
+      "scripture": [
+        "Proverbs 16:3"
+      ],
+      "topics": [
+        "commit works",
+        "plans",
+        "Lord"
+      ],
+      "doctrine": [
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos",
+        "src-slides"
+      ],
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-28j0ye.n032",
+          "confidence": 0.92,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n034",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Visible results are not the measure",
+      "summary": "The sermon warns that ministry results may not match expectations while reaffirming that labor in the Lord is not in vain.",
+      "start": 2023.866,
+      "end": 2030.583,
+      "segmentIndexes": [
+        693,
+        694
+      ],
+      "scripture": [
+        "1 Corinthians 15:58"
+      ],
+      "topics": [
+        "results",
+        "faithfulness",
+        "ministry",
+        "labor"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt",
+        "src-logos"
+      ],
+      "spokenExact": "The result may not look like what you want it to look like. But your labor is not in vain in the Lord.",
+      "displayText": "The result may not look like what you want it to look like. But your labor is not in vain in the Lord.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "reviewNumber": 10,
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-28j0ye.n031",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-28j0ye.n035",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Commit together",
+      "summary": "The sermon closes by pointing to transformed lives and ministry fruit, then asks the congregation to attend faithfully, give cheerfully, and work diligently together.",
+      "start": 2056.6,
+      "end": 2114.533,
+      "segmentIndexes": [
+        703,
+        704,
+        705,
+        706,
+        707,
+        708,
+        709,
+        710,
+        711,
+        712,
+        713,
+        714,
+        715,
+        716,
+        717,
+        718,
+        719,
+        720,
+        721,
+        722
+      ],
+      "scripture": [],
+      "topics": [
+        "commitment",
+        "attendance",
+        "giving",
+        "diligence",
+        "church"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript-srt"
+      ],
+      "connections": [
+        {
+          "type": "returnsTo",
+          "targetNodeRef": "media-28j0ye.n008",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n011",
+          "confidence": 0.93,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n017",
+          "confidence": 0.93,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-28j0ye.n027",
+          "confidence": 0.93,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    }
+  ],
+  "discover": [
+    {
+      "id": "commitment.d001",
+      "question": "What does commitment mean in this Cedar Grove core-value sermon?",
+      "questionOrigin": "ANALYSIS — SYNTHESIS",
+      "answer": "Wholehearted commitment to the purpose and mission of the church, expressed through faithful attendance, cheerful giving, and diligent work.",
+      "answerOrigin": "PASTOR — PREPARED + SPOKEN",
+      "nodeRefs": [
+        "media-28j0ye.n008",
+        "media-28j0ye.n010",
+        "media-28j0ye.n035"
+      ],
+      "start": 439.083
+    },
+    {
+      "id": "commitment.d002",
+      "question": "Why does Pastor Jacob say church attendance matters?",
+      "questionOrigin": "ANALYSIS — SYNTHESIS",
+      "answer": "Because gathering is not merely personal consumption; Hebrews 10:23-25 frames presence as a way believers consider, exhort, encourage, and provoke one another toward love and good works.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n011",
+        "media-28j0ye.n012",
+        "media-28j0ye.n015",
+        "media-28j0ye.n016"
+      ],
+      "scripture": [
+        "Hebrews 10:23-25"
+      ],
+      "start": 648.183
+    },
+    {
+      "id": "commitment.d003",
+      "question": "What does 'manner' mean in Hebrews 10:25 in this sermon?",
+      "questionOrigin": "SERMON WORD STUDY",
+      "answer": "The sermon cites ἔθος (ethos) as meaning custom, practice, or habit, then applies that to repeated neglect of gathering.",
+      "answerOrigin": "PASTOR — PREPARED + SPOKEN",
+      "nodeRefs": [
+        "media-28j0ye.n013",
+        "media-28j0ye.n014"
+      ],
+      "scripture": [
+        "Hebrews 10:25"
+      ],
+      "start": 667.866
+    },
+    {
+      "id": "commitment.d004",
+      "question": "Does the sermon teach that Christians are commanded to give a fixed tithe percentage?",
+      "questionOrigin": "SERMON QUESTION",
+      "answer": "No. Pastor Jacob explicitly says he does not believe a tithe percentage is commanded to the New Testament church, while also teaching that faithful giving itself is not optional and that the tithe is a useful principle for prioritizing God.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n018",
+        "media-28j0ye.n025"
+      ],
+      "start": 1087.75
+    },
+    {
+      "id": "commitment.d005",
+      "question": "How does Matthew 6:21 support the giving section?",
+      "questionOrigin": "ANALYSIS — SYNTHESIS",
+      "answer": "The sermon uses Jesus' statement about treasure and heart to argue that financial priorities reveal what a person values.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n019"
+      ],
+      "scripture": [
+        "Matthew 6:21"
+      ],
+      "start": 1169.233
+    },
+    {
+      "id": "commitment.d006",
+      "question": "What is the local-church point of the storehouse discussion?",
+      "questionOrigin": "ANALYSIS — SYNTHESIS",
+      "answer": "Malachi 3:10 supplies an Old Testament storehouse principle, and Pastor Jacob applies that principle by urging believers to support the local church to which they are committed rather than using outside giving to replace local-church giving.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n020",
+        "media-28j0ye.n021"
+      ],
+      "scripture": [
+        "Malachi 3:10"
+      ],
+      "start": 1187.433
+    },
+    {
+      "id": "commitment.d007",
+      "question": "What does Acts 4:34-37 contribute to the sermon?",
+      "questionOrigin": "ANALYSIS — SYNTHESIS",
+      "answer": "It supplies a New Testament example of voluntary, sacrificial generosity in the church, including Barnabas bringing proceeds to the apostles.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n022"
+      ],
+      "scripture": [
+        "Acts 4:34-37"
+      ],
+      "start": 1309.566
+    },
+    {
+      "id": "commitment.d008",
+      "question": "What makes giving cheerful rather than compelled?",
+      "questionOrigin": "SERMON QUESTION",
+      "answer": "Second Corinthians 9:7 is used to emphasize purposeful heart posture rather than grudgingness or compulsion.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n023"
+      ],
+      "scripture": [
+        "2 Corinthians 9:7"
+      ],
+      "start": 1395.433
+    },
+    {
+      "id": "commitment.d009",
+      "question": "How does Proverbs 13:4 apply beyond money in this sermon?",
+      "questionOrigin": "ANALYSIS — SYNTHESIS",
+      "answer": "The lexical discussion of 'soul' broadens the proverb to the whole person, so diligence is applied physically, morally, and spiritually, not merely to material wealth.",
+      "answerOrigin": "PASTOR — PREPARED + SPOKEN",
+      "nodeRefs": [
+        "media-28j0ye.n028",
+        "media-28j0ye.n029"
+      ],
+      "scripture": [
+        "Proverbs 13:4"
+      ],
+      "start": 1737.25
+    },
+    {
+      "id": "commitment.d010",
+      "question": "What should a believer remember when ministry results disappoint?",
+      "questionOrigin": "SERMON APPLICATION",
+      "answer": "Visible results may differ from expectations, but 1 Corinthians 15:58 grounds confidence that steadfast labor in the Lord is not in vain; the sermon then calls the church to commit its works to the Lord.",
+      "answerOrigin": "PASTOR — SPOKEN EXACT",
+      "nodeRefs": [
+        "media-28j0ye.n031",
+        "media-28j0ye.n033",
+        "media-28j0ye.n034"
+      ],
+      "scripture": [
+        "1 Corinthians 15:58",
+        "Proverbs 16:3"
+      ],
+      "start": 1878.3
+    }
+  ],
+  "quotes": {
+    "reviewedBy": "Joel",
+    "reviewInput": "F3, 6, F7, 8, F10",
+    "reviewRule": "Only Joel-selected recommendations receive durable Approved/Featured status. Unselected recommendations are not stored as denials.",
+    "featured": [
+      "media-28j0ye.quote.q003",
+      "media-28j0ye.quote.q007",
+      "media-28j0ye.quote.q010"
+    ],
+    "approved": [
+      "media-28j0ye.quote.q006",
+      "media-28j0ye.quote.q008"
+    ],
+    "selected": [
+      {
+        "id": "media-28j0ye.quote.q003",
+        "reviewNumber": 3,
+        "spokenExact": "If there's anything missing from the church today, it is this. People being committed to the purpose in the mission.",
+        "displayText": "If there’s anything missing from the church today, it is this: people being committed to the purpose and mission.",
+        "start": 531.6,
+        "end": 537.299,
+        "segmentIndexes": [
+          197,
+          198
+        ],
+        "status": "featured",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-28j0ye.n009",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-28j0ye&start=531.600&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-28j0ye&start=531.600&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=dcmqfZhuwh0&t=531s"
+      },
+      {
+        "id": "media-28j0ye.quote.q006",
+        "reviewNumber": 6,
+        "spokenExact": "Listen, when we give generously and intentionally, we lift the burden of financial limitations on magnifying the ministry of this local church, and in doing so, we lift up the name of Jesus.",
+        "displayText": "When we give generously and intentionally, we lift the burden of financial limitations on magnifying the ministry of this local church, and in doing so, we lift up the name of Jesus.",
+        "start": 1236.666,
+        "end": 1246.133,
+        "segmentIndexes": [
+          433,
+          434,
+          435
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-28j0ye.n021",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-28j0ye&start=1236.666&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-28j0ye&start=1236.666&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=dcmqfZhuwh0&t=1236s"
+      },
+      {
+        "id": "media-28j0ye.quote.q007",
+        "reviewNumber": 7,
+        "spokenExact": "Nowhere in scripture will you find a given amount required just a giving heart required.",
+        "displayText": "Nowhere in Scripture will you find a giving amount required, just a giving heart required.",
+        "start": 1660.15,
+        "end": 1663.383,
+        "segmentIndexes": [
+          575
+        ],
+        "status": "featured",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-28j0ye.n025",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-28j0ye&start=1660.150&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-28j0ye&start=1660.150&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=dcmqfZhuwh0&t=1660s"
+      },
+      {
+        "id": "media-28j0ye.quote.q008",
+        "reviewNumber": 8,
+        "spokenExact": "God forbid we work hard everywhere else in our life except the house of God. God forbid laziness being an issue here at Cedar Grove.",
+        "displayText": "God forbid we work hard everywhere else in our life except the house of God. God forbid laziness be an issue here at Cedar Grove.",
+        "start": 1743.733,
+        "end": 1751.583,
+        "segmentIndexes": [
+          601,
+          602
+        ],
+        "status": "approved",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-28j0ye.n030",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-28j0ye&start=1743.733&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-28j0ye&start=1743.733&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=dcmqfZhuwh0&t=1743s"
+      },
+      {
+        "id": "media-28j0ye.quote.q010",
+        "reviewNumber": 10,
+        "spokenExact": "The result may not look like what you want it to look like. But your labor is not in vain in the Lord.",
+        "displayText": "The result may not look like what you want it to look like. But your labor is not in vain in the Lord.",
+        "start": 2023.866,
+        "end": 2030.583,
+        "segmentIndexes": [
+          693,
+          694
+        ],
+        "status": "featured",
+        "reviewState": "reviewed_selected",
+        "nodeRef": "media-28j0ye.n034",
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-28j0ye&start=2023.866&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-28j0ye&start=2023.866&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=dcmqfZhuwh0&t=2023s"
+      }
+    ]
+  },
+  "authorCorpus": {
+    "purpose": "Private long-term Pastor Jacob Lannom research corpus support.",
+    "recurringTheses": [
+      "What people value directs how they live.",
+      "Local-church commitment is active participation rather than fringe attendance.",
+      "Corporate gathering is mutual ministry because presence can provoke others toward love and good works.",
+      "Giving should be intentional, generous, cheerful, and connected to the ministry of the local church.",
+      "Diligent ministry labor must remain rooted in personal relationship with Jesus.",
+      "Visible ministry results are not the final measure of faithful labor."
+    ],
+    "topicClusters": [
+      "church membership",
+      "commitment",
+      "corporate worship",
+      "attendance",
+      "stewardship",
+      "giving",
+      "local church",
+      "diligence",
+      "service",
+      "ministry perseverance"
+    ],
+    "potentialLiteraryDestinations": [
+      "local church membership and covenant",
+      "church culture and core values",
+      "stewardship and generosity",
+      "faithful ministry labor"
+    ],
+    "rule": "Treat Pastor Jacob's sermon, notes, and slides as evidence of his teaching. Do not convert analysis inferences into pastor-attributed claims without source support."
+  },
+  "search": {
+    "strategy": "Enrich discovery with sermon metadata, Scripture, spoken concepts, selected quotes, word studies, and presentation-linked semantic nodes.",
+    "primaryTerms": [
+      "Commitment",
+      "Upon This Rock",
+      "Cedar Grove Core Values",
+      "church commitment",
+      "attending faithfully",
+      "corporate gathering",
+      "giving cheerfully",
+      "tithe",
+      "storehouse",
+      "cheerful giver",
+      "working diligently",
+      "labor not in vain",
+      "purpose and mission",
+      "fringe to the fold",
+      "ethos",
+      "soul",
+      "local church stewardship"
+    ],
+    "doctrineTerms": [
+      "Ecclesiology",
+      "Sanctification",
+      "Christology",
+      "Anthropology"
+    ],
+    "quoteSearchRefs": [
+      "media-28j0ye.quote.q003",
+      "media-28j0ye.quote.q006",
+      "media-28j0ye.quote.q007",
+      "media-28j0ye.quote.q008",
+      "media-28j0ye.quote.q010"
+    ],
+    "futureUse": [
+      "Study Mode",
+      "Discover",
+      "Search",
+      "Deep Dive",
+      "sermon relationships",
+      "Pastor Jacob author corpus"
+    ]
+  },
+  "provenance": {
+    "labels": [
+      "PASTOR — SPOKEN EXACT",
+      "PASTOR — PREPARED",
+      "PASTOR — VISUAL",
+      "CGBC — CANONICAL METADATA",
+      "ANALYSIS — SYNTHESIS",
+      "ANALYSIS — PRESENTATION DERIVATIVE"
+    ],
+    "authorityOrder": [
+      "PASTOR — SPOKEN EXACT",
+      "PASTOR — PREPARED",
+      "PASTOR — VISUAL",
+      "CGBC — CANONICAL METADATA",
+      "ANALYSIS — SYNTHESIS"
+    ],
+    "rules": [
+      "Original transcript SRT is archival evidence for spoken wording and timing.",
+      "Repository faithful-clean transcript is authoritative for stable segment indexing used by CGBC consumers.",
+      "Prepared notes establish intended structure and named lexical resources but do not override what was actually preached.",
+      "PPTX is the archival visual source of truth; WebP files are disposable presentation derivatives.",
+      "Slide timing is approximate contextual synchronization, not a claim about exact historical booth clicks.",
+      "PowerPoint chronology is a hard timing guardrail.",
+      "Unselected quote recommendations are not stored as rejected."
+    ]
+  },
+  "editorialFlags": [
+    {
+      "id": "ef001",
+      "issue": "Faithful-clean transcript says 'purpose in the mission' in the reviewed Q003 moment; prepared notes and the recurring core-value statement say 'purpose and mission'.",
+      "resolution": "Preserve transcript wording in spokenExact and use the Joel-approved cleaned displayText with 'purpose and mission'."
+    },
+    {
+      "id": "ef002",
+      "issue": "Faithful-clean transcript says 'given amount required' in Q007; prepared notes say 'giving amount required'.",
+      "resolution": "Preserve 'given' in spokenExact and use the Joel-approved displayText 'giving amount required'."
+    },
+    {
+      "id": "ef003",
+      "issue": "Sermon preparation uses multiple Bible translations: KJV 1900, NASB95, and NKJV.",
+      "resolution": "Preserve translation labels per Scripture trail/slide and require central rights policy for future public digital Scripture display."
+    },
+    {
+      "id": "ef004",
+      "issue": "Seven source PPTX positions are repeated identical branding/blank slides.",
+      "resolution": "Preserve all 33 source positions in slideMap but normalize slides 4, 9, 15, 19, 23, 26, and 32 to one branding.webp per output size."
+    },
+    {
+      "id": "ef005",
+      "issue": "The sermon includes local giving and attendance statistics for a recent six-month period.",
+      "resolution": "Store them only as time-bound sermon/application evidence; do not generalize them as permanent church statistics."
+    },
+    {
+      "id": "ef006",
+      "issue": "No explicit projected-screen or slide cue was found in the sermon transcript.",
+      "resolution": "Slide timing relies on spoken slide matches, Scripture matches, prepared notes, chronology, and source branding positions; ordinary phrases such as 'you can see' are not promoted to explicit_visual_cue evidence."
+    }
+  ],
+  "implementation": {
+    "canonicalPath": "knowledge/2026/2026-10-04_commitment.json",
+    "oneSermonOneFile": true,
+    "generatedOutputsAreDisposable": true,
+    "sourceArchivePath": "Sermon Source Archive/2026/26_10_04/",
+    "futureConsumers": [
+      "Study Mode",
+      "Discover",
+      "Search",
+      "Deep Dive",
+      "Quote Engine",
+      "doctrine discovery",
+      "sermon relationship mapping",
+      "Pastor Jacob research corpus"
+    ],
+    "presentationReady": true,
+    "presentationSchemaVersion": "2.0"
+  },
+  "amendment": {
+    "type": "new_presentation_ready_canonical_record",
+    "verifiedAgainstGitHubMain": "61aaec0d5eebbbc91de162606e91db2702b65b8d",
+    "note": "Built after the normal sermon-player publish generated stable ID media-28j0ye and the 722-segment faithful-clean transcript."
+  },
+  "presentationEnrichment": {
+    "type": "presentation_ready_temporal_enrichment",
+    "basedOnRecordVersion": "new",
+    "builtAgainstGitHubMain": "61aaec0d5eebbbc91de162606e91db2702b65b8d",
+    "sourcePptxSlides": 33,
+    "meaningfulSlideAssets": 26,
+    "normalizedBrandingSlides": [
+      4,
+      9,
+      15,
+      19,
+      23,
+      26,
+      32
+    ],
+    "notes": "Built in one pass from the original transcript, Logos notes, PPTX, published metadata and artwork. Timing is contextual and confidence-scored; no exact booth-click history is claimed."
+  }
+}
