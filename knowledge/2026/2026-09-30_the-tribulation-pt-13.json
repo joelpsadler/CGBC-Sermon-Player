@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "2.1",
   "recordType": "CGBC_SERMON_KNOWLEDGE",
-  "recordVersion": "2.0",
-  "generatedAt": "2026-10-04T18:37:53.551111Z",
-  "githubMainAtBuild": "67eb22e0cf4c336eadc243bbbe9e8bbd9cc86bbd",
+  "recordVersion": "2.1",
+  "generatedAt": "2026-10-11T10:00:00-05:00",
+  "githubMainAtBuild": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
   "sermon": {
     "stableId": "media-phykqw",
     "title": "The Tribulation Pt. 13",
@@ -208,6 +208,23 @@
       "sourceRefs": [
         "src-transcript",
         "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.israel-in-revelation",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        }
+      ],
+      "sermonCallbacks": [
+        {
+          "callbackRelation": "recap",
+          "unresolvedTargetDescription": "the previous lesson in The Tribulation study identifying the woman in Revelation 12 as Israel and the red dragon as Satan",
+          "spokenDescription": "Last week we went over who The Woman is in Revelation 12 ... This Woman symbolizes Israel. We then looked at the Red Dragon ... This is Satan, the devil."
+        }
       ]
     },
     {
@@ -261,7 +278,53 @@
       "sourceRefs": [
         "src-transcript",
         "src-notes"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.reign",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.identity",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:5",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Psalm 2:9",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:5"
+          ]
+        },
+        {
+          "reference": "Revelation 19:15",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:5"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n003",
@@ -311,7 +374,22 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.immutability",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "trinity",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christ.identity",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n004",
@@ -356,7 +434,14 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.justice-and-wrath",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n005",
@@ -399,6 +484,26 @@
           "confidence": 0.88,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.obedience",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "The will of God for human good and His glory",
+          "significance": "primary",
+          "reason": "The application explicitly frames submission to God around His will being for our good and His glory."
+        }
+      ],
+      "applicationAudience": [
+        "all-listeners"
+      ],
+      "applicationFunction": [
+        "warning",
+        "instruction"
       ]
     },
     {
@@ -461,7 +566,43 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.ascension",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.return",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:5",
+          "role": "primary-text",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Acts 1:8-12",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:5"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n007",
@@ -540,7 +681,41 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.ascension",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.return",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Acts 1:8-12",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Revelation 12:5",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Acts 1:8-12"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n008",
@@ -593,6 +768,12 @@
           "targetNodeRef": "media-phykqw.n006",
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.return",
+          "significance": "supporting"
         }
       ]
     },
@@ -658,6 +839,20 @@
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.great-tribulation",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "eschatology.israel-in-revelation",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "god.divine-protection",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -714,7 +909,33 @@
       "sourceRefs": [
         "src-transcript",
         "src-notes"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.war-in-heaven",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "satan.accusation",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "satan.defeat",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:7-12",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n011",
@@ -762,6 +983,27 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.evangelism",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "instruction"
       ]
     },
     {
@@ -855,6 +1097,12 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.war-in-heaven",
+          "significance": "primary"
+        }
       ]
     },
     {
@@ -891,7 +1139,25 @@
       ],
       "sourceRefs": [
         "src-transcript"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.authority",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Luke 10:17-20",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "explanation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n014",
@@ -940,6 +1206,37 @@
           "confidence": 0.92,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "bible.discernment",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "1 Peter 5:8",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "warning",
+        "instruction"
       ]
     },
     {
@@ -976,6 +1273,19 @@
       "sourceRefs": [
         "src-transcript",
         "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.accusation",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Satan's heavenly access as accuser",
+          "significance": "primary",
+          "reason": "The sermon explicitly raises whether Satan has present heavenly access in light of Revelation 12:10 and Job 1:6."
+        }
       ]
     },
     {
@@ -1049,7 +1359,21 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.accusation",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Satan's heavenly access as accuser",
+          "significance": "primary",
+          "reason": "The sermon uses Revelation 12:10 and Job 1:6 while explicitly leaving the reason for such access unresolved."
+        }
+      ],
+      "teachingStance": "unresolved"
     },
     {
       "id": "media-phykqw.n017",
@@ -1104,6 +1428,20 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.defeat",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.atonement",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.victory-in-christ",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -1153,6 +1491,37 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.accusation",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.atonement",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.assurance",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:10-11",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "encouragement",
+        "instruction"
       ]
     },
     {
@@ -1205,6 +1574,12 @@
           "targetNodeRef": "media-phykqw.n009",
           "confidence": 0.86,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.great-tribulation",
+          "significance": "primary"
         }
       ]
     },
@@ -1267,6 +1642,16 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.israel-in-revelation",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "god.divine-protection",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -1321,7 +1706,44 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.divine-protection",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Eagle-wing deliverance imagery",
+          "significance": "primary",
+          "reason": "The node explicitly connects Revelation 12:14 with Exodus 19:4 as protection imagery."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:14",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Exodus 19:4",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:14"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n022",
@@ -1373,6 +1795,12 @@
           "targetNodeRef": "media-phykqw.n020",
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.divine-protection",
+          "significance": "primary"
         }
       ]
     },
@@ -1446,6 +1874,16 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.remnant",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "eschatology.israel-in-revelation",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -1499,7 +1937,41 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.remnant",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:17",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Romans 1:16",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:17"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n025",
@@ -1537,7 +2009,22 @@
       "sourceRefs": [
         "src-transcript",
         "src-quote-curation"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.defeat",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.assurance",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.victory-in-christ",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n026",
@@ -1591,6 +2078,27 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.victory-in-christ",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "satan.defeat",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "encouragement",
+        "exhortation"
       ]
     },
     {
@@ -1643,7 +2151,19 @@
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.present-faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "supporting"
+        }
+      ],
+      "illustrationOrigin": "personal",
+      "illustrationForm": "story"
     },
     {
       "id": "media-phykqw.n028",
@@ -1688,7 +2208,18 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.present-faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-phykqw.n029",
@@ -1747,6 +2278,31 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.return",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.victory-in-christ",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.present-faithfulness",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "encouragement",
+        "instruction"
       ]
     },
     {
@@ -1877,6 +2433,210 @@
         "src-transcript",
         "src-notes",
         "src-doctrine-taxonomy"
+      ]
+    },
+    {
+      "id": "media-phykqw.n035",
+      "type": "connection",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Some interpreters place the heavenly war at Christ's first coming",
+      "summary": "Pastor Jacob reports that some interpreters connect Revelation 12's heavenly war with Christ's first coming and Luke 10:17-20; he presents this as another view rather than his adopted conclusion.",
+      "start": 677.283,
+      "end": 760.733,
+      "scripture": [
+        "Revelation 12:7-12",
+        "Luke 10:17-20"
+      ],
+      "topics": [
+        "timing of Satan's fall",
+        "first coming",
+        "reported interpretation"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "teachingStance": "reported-other-view",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-phykqw.n012",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "segmentIndexes": [
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.war-in-heaven",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:7-12",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Luke 10:17-20",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:7-12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media-phykqw.n036",
+      "type": "clarification",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "End-times placement is an educated assumption",
+      "summary": "Pastor Jacob says the details do not correlate strongly enough to place this Revelation 12 war at Christ's first coming, then calls an end-times placement an educated assumption.",
+      "start": 754.45,
+      "end": 801.899,
+      "scripture": [
+        "Revelation 12:7-12",
+        "Luke 10:17-20",
+        "1 Peter 5:8"
+      ],
+      "topics": [
+        "timing of Satan's fall",
+        "interpretive uncertainty",
+        "end times"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "teachingStance": "tentative",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-phykqw.n012",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "segmentIndexes": [
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.war-in-heaven",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:7-12",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "explanation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Luke 10:17-20",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "explanation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:7-12"
+          ]
+        },
+        {
+          "reference": "1 Peter 5:8",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "explanation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 12:7-12"
+          ]
+        }
       ]
     }
   ],
@@ -2469,5 +3229,57 @@
     "normalizedBrandingSlides": [],
     "slidesApplicable": false,
     "notes": "Existing semantic knowledge and Joel-reviewed quote states preserved. No slide deck is applicable, so slideMap remains empty and no presentation timing is fabricated. Sparse evidence-backed semantic node connections were added for future Study, Discover, Search, and presentation-aware consumers."
-  }
+  },
+  "normalization": {
+    "profile": "CGBC_SEMANTIC_NORMALIZATION",
+    "version": "2.1",
+    "conceptRegistryVersion": "1.0",
+    "architectureGuide": "CGBC_Project_Architecture_and_Sermon_Knowledge_Guide.pdf",
+    "sourceBaseCommit": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
+    "completedAt": "2026-10-11T10:00:00-05:00",
+    "passes": {
+      "concepts": true,
+      "scriptureCommentary": true,
+      "teachingStance": true,
+      "applications": true,
+      "namedResources": true,
+      "definitionsWordStudies": true,
+      "illustrations": true,
+      "sermonCallbacks": true
+    },
+    "preservationNote": "Existing stable sermon/node IDs, approved/featured quote decisions, timestamps, source evidence, Discover material, archive paths, and prior editorial decisions were preserved; 2.1 adds normalized semantic metadata and two stance-safe clarification nodes in the Tribulation record."
+  },
+  "namedResources": [
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.bible-knowledge-commentary",
+      "name": "The Bible Knowledge Commentary",
+      "resourceType": "commentary",
+      "usageRole": [
+        "interpretation-support"
+      ],
+      "nodeRefs": [
+        "media-phykqw.n019"
+      ],
+      "sourceRefs": [
+        "src-bkc"
+      ]
+    },
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.this-same-jesus-song",
+      "name": "This Same Jesus",
+      "creator": "Master's Voice / FRONTLINE",
+      "resourceType": "song",
+      "usageRole": [
+        "cultural-reference"
+      ],
+      "nodeRefs": [
+        "media-phykqw.n008"
+      ],
+      "sourceRefs": [
+        "src-this-same-jesus"
+      ]
+    }
+  ]
 }

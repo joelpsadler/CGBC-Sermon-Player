@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "2.1",
   "recordType": "CGBC_SERMON_KNOWLEDGE",
-  "recordVersion": "2.0",
-  "generatedAt": "2026-10-05T02:37:25.875879Z",
-  "githubMainAtBuild": "61aaec0d5eebbbc91de162606e91db2702b65b8d",
+  "recordVersion": "2.1",
+  "generatedAt": "2026-10-11T10:00:00-05:00",
+  "githubMainAtBuild": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
   "sermon": {
     "stableId": "media-28j0ye",
     "title": "Commitment",
@@ -983,14 +983,16 @@
       "resource": "Dictionary of Biblical Languages with Semantic Domains: Greek (New Testament)",
       "section": "Attend faithfully",
       "meaning": "custom, practice, habit",
-      "nodeRef": "media-28j0ye.n013"
+      "nodeRef": "media-28j0ye.n013",
+      "normalizedTerm": "ethos"
     },
     {
       "term": "soul / נֶפֶשׁ (nephesh)",
       "resource": "Enhanced Brown-Driver-Briggs Hebrew and English Lexicon",
       "section": "Work diligently",
       "meaning": "soul, living being, life, self, person, desire, appetite, emotion, and passion",
-      "nodeRef": "media-28j0ye.n029"
+      "nodeRef": "media-28j0ye.n029",
+      "normalizedTerm": "nephesh"
     }
   ],
   "nodes": [
@@ -1055,6 +1057,24 @@
           "confidence": 0.86,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.core-values",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.membership",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "sermonCallbacks": [
+        {
+          "callbackRelation": "series-continuation",
+          "targetSermonId": "media-vo86yt",
+          "spokenDescription": "After a one week break from our series of Core Values here at Cedar Grove, we come to the fourth one."
+        }
       ]
     },
     {
@@ -1090,7 +1110,22 @@
         "src-transcript-srt",
         "src-logos",
         "src-slides"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.vision",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.community",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.core-values",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n003",
@@ -1127,7 +1162,26 @@
         "src-transcript-srt",
         "src-logos",
         "src-slides"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.mission",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.evangelism",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "love.unconditional",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n004",
@@ -1182,7 +1236,14 @@
           "confidence": 0.83,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.values-and-priorities",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n005",
@@ -1230,7 +1291,14 @@
         "src-transcript-srt",
         "src-logos",
         "src-slides"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "family.sanctity",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n006",
@@ -1284,7 +1352,14 @@
         "src-transcript-srt",
         "src-logos",
         "src-slides"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.integrity",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n007",
@@ -1328,7 +1403,18 @@
         "src-transcript-srt",
         "src-logos",
         "src-slides"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.relationships",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n008",
@@ -1429,7 +1515,22 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.commitment",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.membership",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n009",
@@ -1474,7 +1575,18 @@
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.commitment",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n010",
@@ -1524,7 +1636,22 @@
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.membership",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.commitment",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n011",
@@ -1568,7 +1695,33 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.commitment",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Hebrews 10:23-25",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n012",
@@ -1613,7 +1766,29 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.mutual-encouragement",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Hebrews 10:25",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n013",
@@ -1655,6 +1830,23 @@
           "targetNodeRef": "media-28j0ye.n012",
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Hebrews 10:25",
+          "role": "primary-text",
+          "functions": [
+            "word-study",
+            "explanation"
+          ],
+          "significance": "primary"
         }
       ]
     },
@@ -1768,6 +1960,37 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.values-and-priorities",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Hebrews 10:25",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "church-members"
+      ],
+      "applicationFunction": [
+        "warning",
+        "instruction"
       ]
     },
     {
@@ -1828,7 +2051,29 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.mutual-encouragement",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Hebrews 10:23-25",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n016",
@@ -1896,7 +2141,23 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.mutual-encouragement",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.community",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "supporting"
+        }
+      ],
+      "illustrationOrigin": "local-church",
+      "illustrationForm": "example"
     },
     {
       "id": "media-28j0ye.n017",
@@ -1968,7 +2229,18 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.commitment",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n018",
@@ -2031,7 +2303,21 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Tithe principle",
+          "significance": "primary",
+          "reason": "The node distinguishes a pre-law tithe principle from a commanded New Testament percentage."
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n019",
@@ -2079,7 +2365,29 @@
           "confidence": 0.92,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.values-and-priorities",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 6:21",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n020",
@@ -2144,7 +2452,25 @@
           "confidence": 0.88,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Malachi 3:10",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n021",
@@ -2192,7 +2518,18 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n022",
@@ -2263,7 +2600,25 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Acts 4:34-37",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n023",
@@ -2313,7 +2668,29 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-receptivity",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "2 Corinthians 9:7",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n024",
@@ -2413,6 +2790,27 @@
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.commitment",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "church-members",
+        "specific-group"
+      ],
+      "applicationFunction": [
+        "warning",
+        "reflection"
+      ],
+      "applicationSpecificGroupLabels": [
+        "Cedar Grove congregation"
       ]
     },
     {
@@ -2464,7 +2862,14 @@
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n026",
@@ -2518,6 +2923,23 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "church-members"
+      ],
+      "applicationFunction": [
+        "warning",
+        "instruction"
       ]
     },
     {
@@ -2563,7 +2985,22 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.commitment",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n028",
@@ -2627,7 +3064,25 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Proverbs 13:4",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n029",
@@ -2678,6 +3133,30 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Whole-person meaning of nephesh",
+          "significance": "primary",
+          "reason": "The word study applies the lexical range of nephesh to the whole person."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Proverbs 13:4",
+          "role": "primary-text",
+          "functions": [
+            "word-study",
+            "explanation"
+          ],
+          "significance": "primary"
+        }
       ]
     },
     {
@@ -2724,7 +3203,18 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n031",
@@ -2795,7 +3285,29 @@
           "confidence": 0.88,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "1 Corinthians 15:58",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n032",
@@ -2843,7 +3355,18 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.christ-centered-service",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n033",
@@ -2888,7 +3411,29 @@
           "confidence": 0.92,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.obedience",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Proverbs 16:3",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n034",
@@ -2937,7 +3482,32 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "1 Corinthians 15:58",
+          "role": "primary-text",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-28j0ye.n035",
@@ -3014,6 +3584,31 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.commitment",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.stewardship-giving",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.diligence",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "church-members"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "invitation"
       ]
     }
   ],
@@ -3441,5 +4036,56 @@
       32
     ],
     "notes": "Built in one pass from the original transcript, Logos notes, PPTX, published metadata and artwork. Timing is contextual and confidence-scored; no exact booth-click history is claimed."
-  }
+  },
+  "normalization": {
+    "profile": "CGBC_SEMANTIC_NORMALIZATION",
+    "version": "2.1",
+    "conceptRegistryVersion": "1.0",
+    "architectureGuide": "CGBC_Project_Architecture_and_Sermon_Knowledge_Guide.pdf",
+    "sourceBaseCommit": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
+    "completedAt": "2026-10-11T10:00:00-05:00",
+    "passes": {
+      "concepts": true,
+      "scriptureCommentary": true,
+      "teachingStance": true,
+      "applications": true,
+      "namedResources": true,
+      "definitionsWordStudies": true,
+      "illustrations": true,
+      "sermonCallbacks": true
+    },
+    "preservationNote": "Existing stable sermon/node IDs, approved/featured quote decisions, timestamps, source evidence, Discover material, archive paths, and prior editorial decisions were preserved; 2.1 adds normalized semantic metadata."
+  },
+  "namedResources": [
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.dictionary-biblical-languages-semantic-domains-greek-nt",
+      "name": "Dictionary of Biblical Languages with Semantic Domains: Greek (New Testament)",
+      "resourceType": "lexicon",
+      "usageRole": [
+        "definition-source"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n013"
+      ],
+      "sourceRefs": [
+        "src-logos"
+      ]
+    },
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.enhanced-brown-driver-briggs",
+      "name": "Enhanced Brown-Driver-Briggs Hebrew and English Lexicon",
+      "resourceType": "lexicon",
+      "usageRole": [
+        "definition-source"
+      ],
+      "nodeRefs": [
+        "media-28j0ye.n029"
+      ],
+      "sourceRefs": [
+        "src-logos"
+      ]
+    }
+  ]
 }

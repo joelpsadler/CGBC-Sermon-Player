@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "2.1",
   "recordType": "CGBC_SERMON_KNOWLEDGE",
-  "recordVersion": "2.0",
-  "generatedAt": "2026-10-04T13:06:55.593466Z",
-  "githubMainAtBuild": "5a6c92eb26a07555aed03c6410bc02d34a4c77fc",
+  "recordVersion": "2.1",
+  "generatedAt": "2026-10-11T10:00:00-05:00",
+  "githubMainAtBuild": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
   "sermon": {
     "stableId": "media-vo86yt",
     "title": "Relationships",
@@ -1198,13 +1198,15 @@
       "term": "hamartōlos",
       "resource": "Lexham Theological Wordbook",
       "section": "Love others unconditionally",
-      "nodeRef": "media-vo86yt.n008"
+      "nodeRef": "media-vo86yt.n008",
+      "normalizedTerm": "hamartōlos"
     },
     {
       "term": "kēryssō",
       "resource": "Lexham Theological Wordbook",
       "section": "Live to share Jesus intentionally",
-      "nodeRef": "media-vo86yt.n021"
+      "nodeRef": "media-vo86yt.n021",
+      "normalizedTerm": "kēryssō"
     }
   ],
   "nodes": [
@@ -1245,6 +1247,20 @@
         "src-transcript-srt",
         "src-logos",
         "src-slides"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.foundation",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.lordship",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.core-values",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -1281,7 +1297,24 @@
       "publicQuoteStatus": null,
       "sourceRefs": [
         "src-transcript-srt"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.foundation",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 16:15-19",
+          "role": "primary-text",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n003",
@@ -1321,7 +1354,29 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.identity",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.foundation",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 16:15-19",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n004",
@@ -1363,6 +1418,32 @@
           "targetNodeRef": "media-vo86yt.n001",
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.relationships",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.core-values",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.membership",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "sermonCallbacks": [
+        {
+          "callbackRelation": "earlier-sermon",
+          "unresolvedTargetDescription": "the previous two sermons in the Upon This Rock core-values series covering the sanctity of the family and integrity",
+          "spokenDescription": "We have gone over two of the seven already the past two weeks."
         }
       ]
     },
@@ -1431,7 +1512,77 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "love.truth-and-love",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "sin.human-condition",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.relationships",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "John 15:12-13",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Romans 5:8",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "John 15:12-13"
+          ]
+        },
+        {
+          "reference": "Ephesians 2:1-5",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "John 15:12-13"
+          ]
+        },
+        {
+          "reference": "1 Corinthians 13:4-7",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "John 15:12-13"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n006",
@@ -1455,6 +1606,12 @@
       ],
       "sourceRefs": [
         "src-transcript-srt"
+      ],
+      "concepts": [
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        }
       ]
     },
     {
@@ -1498,7 +1655,37 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "John 15:12-13",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "explanation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Romans 5:8",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "explanation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "John 15:12-13"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n008",
@@ -1526,6 +1713,23 @@
         "src-logos",
         "src-slides",
         "src-lexham"
+      ],
+      "concepts": [
+        {
+          "conceptId": "sin.human-condition",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 5:8",
+          "role": "primary-text",
+          "functions": [
+            "word-study",
+            "explanation"
+          ],
+          "significance": "primary"
+        }
       ]
     },
     {
@@ -1570,7 +1774,45 @@
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.grace",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "god.love",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "sin.human-condition",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 5:8",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Ephesians 2:1-5",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Romans 5:8"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n010",
@@ -1615,7 +1857,45 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "love.truth-and-love",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "sin.human-condition",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Ephesians 2:1-5",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "1 Corinthians 13:4-7",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Ephesians 2:1-5"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n011",
@@ -1659,7 +1939,29 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "love.truth-and-love",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "love.unconditional",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "1 Corinthians 13:4-7",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n012",
@@ -1698,7 +2000,18 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.relationships",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n013",
@@ -1735,6 +2048,22 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.relationships",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "church-members"
+      ],
+      "applicationFunction": [
+        "exhortation"
       ]
     },
     {
@@ -1800,7 +2129,36 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "bible.personal-study",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Family discipleship",
+          "significance": "supporting",
+          "reason": "The node explicitly extends personal learning responsibility into the home/family context."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Psalm 25:4-5",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n015",
@@ -1839,7 +2197,18 @@
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "bible.personal-study",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n016",
@@ -1878,6 +2247,28 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "bible.personal-study",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.corporate-gathering",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers",
+        "families-parents"
+      ],
+      "applicationFunction": [
+        "warning",
+        "instruction"
       ]
     },
     {
@@ -1917,7 +2308,14 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n018",
@@ -1958,6 +2356,23 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "bible.personal-study",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "bible.discernment",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "instruction"
       ]
     },
     {
@@ -1999,7 +2414,18 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.health",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "bible.spiritual-hunger",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n020",
@@ -2063,7 +2489,29 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Mark 16:14-15",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n021",
@@ -2100,6 +2548,27 @@
           "targetNodeRef": "media-vo86yt.n020",
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Mark 16:14-15",
+          "role": "primary-text",
+          "functions": [
+            "word-study",
+            "explanation"
+          ],
+          "significance": "primary"
         }
       ]
     },
@@ -2145,7 +2614,29 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.every-member-ministry",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Mark 16:14-15",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n023",
@@ -2191,7 +2682,18 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.atonement",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n024",
@@ -2229,6 +2731,23 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "instruction"
       ]
     },
     {
@@ -2315,7 +2834,45 @@
           "confidence": 0.86,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.great-commission",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.evangelism",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 28:18-20",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Romans 10:13-15",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Matthew 28:18-20"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n026",
@@ -2353,7 +2910,22 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.growth",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n027",
@@ -2391,6 +2963,16 @@
           "targetNodeRef": "media-vo86yt.n025",
           "confidence": 0.86,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.health",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
         }
       ]
     },
@@ -2438,7 +3020,33 @@
           "confidence": 0.86,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.faith-not-works",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 10:13-15",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-vo86yt.n029",
@@ -2478,6 +3086,16 @@
           "targetNodeRef": "media-vo86yt.n025",
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
         }
       ]
     },
@@ -2531,6 +3149,32 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.obedience",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 10:13-15",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation"
       ]
     },
     {
@@ -2574,6 +3218,20 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.relationships",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "love.unconditional",
+          "significance": "primary"
+        }
       ]
     },
     {
@@ -2610,6 +3268,12 @@
           "targetNodeRef": "media-vo86yt.n014",
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "bible.personal-study",
+          "significance": "primary"
         }
       ]
     },
@@ -2658,6 +3322,20 @@
           "targetNodeRef": "media-vo86yt.n025",
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.great-commission",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.mission",
+          "significance": "supporting"
         }
       ]
     },
@@ -3997,5 +4675,42 @@
     "builtAgainstGitHubMain": "5a6c92eb26a07555aed03c6410bc02d34a4c77fc",
     "sourceSet": "freshly re-inspected original transcript, Logos notes, original PPTX, square artwork, wide artwork",
     "preservation": "Existing semantic nodes, Discover content, author corpus, doctrine/search enrichment, editorial flags, and Joel-reviewed quote statuses preserved; presentation data added without changing sermon meaning."
-  }
+  },
+  "normalization": {
+    "profile": "CGBC_SEMANTIC_NORMALIZATION",
+    "version": "2.1",
+    "conceptRegistryVersion": "1.0",
+    "architectureGuide": "CGBC_Project_Architecture_and_Sermon_Knowledge_Guide.pdf",
+    "sourceBaseCommit": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
+    "completedAt": "2026-10-11T10:00:00-05:00",
+    "passes": {
+      "concepts": true,
+      "scriptureCommentary": true,
+      "teachingStance": true,
+      "applications": true,
+      "namedResources": true,
+      "definitionsWordStudies": true,
+      "illustrations": true,
+      "sermonCallbacks": true
+    },
+    "preservationNote": "Existing stable sermon/node IDs, approved/featured quote decisions, timestamps, source evidence, Discover material, archive paths, and prior editorial decisions were preserved; 2.1 adds normalized semantic metadata."
+  },
+  "namedResources": [
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.lexham-theological-wordbook",
+      "name": "Lexham Theological Wordbook",
+      "resourceType": "lexicon",
+      "usageRole": [
+        "definition-source"
+      ],
+      "nodeRefs": [
+        "media-vo86yt.n008",
+        "media-vo86yt.n021"
+      ],
+      "sourceRefs": [
+        "src-lexham"
+      ]
+    }
+  ]
 }

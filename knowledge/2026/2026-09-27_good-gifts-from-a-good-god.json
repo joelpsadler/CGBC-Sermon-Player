@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "2.1",
   "recordType": "CGBC_SERMON_KNOWLEDGE",
-  "recordVersion": "2.0",
-  "generatedAt": "2026-10-04T15:36:27.458237+00:00",
-  "githubMainAtBuild": "5c2ebce47b307db952fb8287fb0a1a52497989cb",
+  "recordVersion": "2.1",
+  "generatedAt": "2026-10-11T10:00:00-05:00",
+  "githubMainAtBuild": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
   "sermon": {
     "stableId": "media-fdtrrp",
     "title": "Good Gifts From A Good God",
@@ -1333,6 +1333,16 @@
         "src-transcript",
         "src-notes",
         "src-slides"
+      ],
+      "concepts": [
+        {
+          "conceptId": "scripture.parables",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-receptivity",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -1369,7 +1379,14 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.spiritual-receptivity",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n003",
@@ -1404,7 +1421,18 @@
           "confidence": 0.88,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.spiritual-receptivity",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n004",
@@ -1505,7 +1533,33 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "scripture.parables",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:1-16",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n005",
@@ -1566,7 +1620,44 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.comparison",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "First-and-last kingdom reversal",
+          "significance": "primary",
+          "reason": "The sermon explicitly frames Matthew 20 through Matthew 19:30 and Matthew 20:16."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 19:30",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Matthew 20:16",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Matthew 19:30"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n006",
@@ -1629,7 +1720,25 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.dependence",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:1-2",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n007",
@@ -1665,7 +1774,25 @@
           "confidence": 0.96,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.dependence",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:1-2",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "explanation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n008",
@@ -1818,7 +1945,25 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.availability-to-god",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:3-12",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n009",
@@ -1856,7 +2001,25 @@
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.availability-to-god",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:3-9",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n010",
@@ -2080,7 +2243,73 @@
           "confidence": 0.88,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.impartiality",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.comparison",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.faith-not-works",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:10-16",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Ephesians 2:8-10",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Matthew 20:10-16"
+          ]
+        },
+        {
+          "reference": "Romans 2:11",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Matthew 20:10-16"
+          ]
+        },
+        {
+          "reference": "Luke 19:10",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Matthew 20:10-16"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n011",
@@ -2124,7 +2353,29 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.faith-not-works",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Ephesians 2:8-10",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n012",
@@ -2170,7 +2421,25 @@
           "confidence": 0.99,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.grace",
+          "significance": "primary"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Ephesians 2:8-10",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n013",
@@ -2212,6 +2481,16 @@
           "targetNodeRef": "media-fdtrrp.n010",
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.grace",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "god.impartiality",
+          "significance": "supporting"
         }
       ]
     },
@@ -2255,6 +2534,22 @@
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.service",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.christ-centered-service",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "warning"
       ]
     },
     {
@@ -2303,7 +2598,29 @@
           "confidence": 0.91,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.service",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.grace",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Ephesians 2:8-10",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n016",
@@ -2350,7 +2667,30 @@
           "confidence": 0.92,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "scripture.parables",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Matthew 20:1-16",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "explanation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "definedTerm": "laborers in the vineyard parable"
     },
     {
       "id": "media-fdtrrp.n017",
@@ -2407,6 +2747,16 @@
           "confidence": 0.89,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "god.impartiality",
+          "significance": "supporting"
+        }
       ]
     },
     {
@@ -2450,7 +2800,41 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.dependence",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 2:11",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Luke 19:10",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Romans 2:11"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n019",
@@ -2580,7 +2964,57 @@
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.availability-to-god",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.urgency",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 10:13",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "Exodus 8:8-10",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Romans 10:13"
+          ]
+        },
+        {
+          "reference": "2 Corinthians 6:2",
+          "role": "cross-reference",
+          "functions": [
+            "explanation",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Romans 10:13"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n020",
@@ -2619,6 +3053,30 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.availability-to-god",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "World-system preoccupation",
+          "significance": "supporting",
+          "reason": "The application names being already hired out by the world system as a barrier to availability to God."
+        }
+      ],
+      "applicationAudience": [
+        "all-listeners"
+      ],
+      "applicationFunction": [
+        "warning",
+        "reflection"
       ]
     },
     {
@@ -2666,7 +3124,41 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.urgency",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 10:13",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        },
+        {
+          "reference": "2 Corinthians 6:2",
+          "role": "cross-reference",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Romans 10:13"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n022",
@@ -2759,7 +3251,19 @@
           "confidence": 0.98,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.urgency",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.obedience",
+          "significance": "supporting"
+        }
+      ],
+      "illustrationOrigin": "biblical",
+      "illustrationForm": "example"
     },
     {
       "id": "media-fdtrrp.n023",
@@ -2806,7 +3310,29 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.urgency",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "2 Corinthians 6:2",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n024",
@@ -2879,7 +3405,23 @@
           "confidence": 0.94,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.trust-god",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "god.providence",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "god.goodness",
+          "significance": "supporting"
+        }
+      ],
+      "illustrationOrigin": "external-source",
+      "illustrationForm": "story"
     },
     {
       "id": "media-fdtrrp.n025",
@@ -2915,7 +3457,22 @@
       "publicQuoteStatus": "approved",
       "sourceRefs": [
         "src-transcript"
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.goodness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.trust-god",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "god.providence",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n026",
@@ -2953,6 +3510,16 @@
           "targetNodeRef": "media-fdtrrp.n025",
           "confidence": 0.95,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.trust-god",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "god.providence",
+          "significance": "supporting"
         }
       ]
     },
@@ -2993,6 +3560,12 @@
           "targetNodeRef": "media-fdtrrp.n004",
           "confidence": 0.9,
           "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.urgency",
+          "significance": "primary"
         }
       ]
     },
@@ -3050,6 +3623,23 @@
           "confidence": 0.84,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.comparison",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.service",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "reflection"
       ]
     },
     {
@@ -3086,7 +3676,14 @@
           "confidence": 0.93,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.comparison",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n030",
@@ -3128,7 +3725,14 @@
           "confidence": 0.97,
           "provenance": "ANALYSIS — SYNTHESIS"
         }
-      ]
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.service",
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed"
     },
     {
       "id": "media-fdtrrp.n031",
@@ -3763,5 +4367,57 @@
       47
     ],
     "notes": "Existing semantic knowledge and reviewed quote states preserved; presentation metadata, timing, assets, and sparse node connections added."
-  }
+  },
+  "normalization": {
+    "profile": "CGBC_SEMANTIC_NORMALIZATION",
+    "version": "2.1",
+    "conceptRegistryVersion": "1.0",
+    "architectureGuide": "CGBC_Project_Architecture_and_Sermon_Knowledge_Guide.pdf",
+    "sourceBaseCommit": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
+    "completedAt": "2026-10-11T10:00:00-05:00",
+    "passes": {
+      "concepts": true,
+      "scriptureCommentary": true,
+      "teachingStance": true,
+      "applications": true,
+      "namedResources": true,
+      "definitionsWordStudies": true,
+      "illustrations": true,
+      "sermonCallbacks": true
+    },
+    "preservationNote": "Existing stable sermon/node IDs, approved/featured quote decisions, timestamps, source evidence, Discover material, archive paths, and prior editorial decisions were preserved; 2.1 adds normalized semantic metadata."
+  },
+  "namedResources": [
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.holman-new-testament-commentary-matthew",
+      "name": "Holman New Testament Commentary: Matthew",
+      "resourceType": "commentary",
+      "usageRole": [
+        "interpretation-support"
+      ],
+      "nodeRefs": [
+        "media-fdtrrp.n017"
+      ],
+      "sourceRefs": [
+        "src-holman"
+      ]
+    },
+    {
+      "identityStatus": "resolved",
+      "resourceId": "resource.deeper-podcast-joey-martin",
+      "name": "Deeper Podcast",
+      "creator": "Pastor Joey Martin",
+      "resourceType": "podcast",
+      "usageRole": [
+        "illustration-source"
+      ],
+      "nodeRefs": [
+        "media-fdtrrp.n024"
+      ],
+      "sourceRefs": [
+        "src-deeper-podcast"
+      ]
+    }
+  ]
 }

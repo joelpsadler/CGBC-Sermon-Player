@@ -1,0 +1,836 @@
+{
+  "registryType": "CGBC_CONCEPT_REGISTRY",
+  "registryVersion": "1.0",
+  "generatedAt": "2026-10-11T10:00:00-05:00",
+  "sourceBaseCommit": "5ceefc5db4a5f0e10cab1a6db888f862ed7c6c29",
+  "description": "Conservative starter registry for durable semantic concepts already evidenced in CGBC canonical sermon records. Doctrine taxonomy remains separate classification vocabulary.",
+  "governance": {
+    "principle": "Capture locally once. Normalize globally. Generate search separately.",
+    "candidatePolicy": "Use conceptCandidates in sermon records for meaningful concepts not yet approved in this registry; do not silently mint permanent IDs during routine weekly work.",
+    "scopeNote": "Aliases aid normalization after node meaning has been established from sermon evidence; alias matching alone is not proof that a concept was taught."
+  },
+  "concepts": [
+    {
+      "conceptId": "christ.foundation",
+      "label": "Christ as the Foundation",
+      "aliases": [
+        "Christ as foundation",
+        "church foundation",
+        "foundation"
+      ],
+      "relatedConceptIds": [
+        "christ.lordship",
+        "church.core-values"
+      ]
+    },
+    {
+      "conceptId": "christ.lordship",
+      "label": "Lordship of Christ",
+      "aliases": [
+        "lordship of Christ"
+      ],
+      "relatedConceptIds": [
+        "christ.foundation",
+        "christ.identity"
+      ]
+    },
+    {
+      "conceptId": "christ.identity",
+      "label": "Identity of Christ",
+      "aliases": [
+        "identity of Christ",
+        "deity of Christ",
+        "eternity of Christ"
+      ],
+      "relatedConceptIds": [
+        "christ.lordship",
+        "trinity"
+      ]
+    },
+    {
+      "conceptId": "christ.ascension",
+      "label": "Ascension of Christ",
+      "aliases": [
+        "ascension"
+      ],
+      "relatedConceptIds": [
+        "christ.return"
+      ]
+    },
+    {
+      "conceptId": "christ.return",
+      "label": "Return of Christ",
+      "aliases": [
+        "return of Christ",
+        "second coming"
+      ],
+      "relatedConceptIds": [
+        "christ.ascension",
+        "christian-life.hope"
+      ]
+    },
+    {
+      "conceptId": "christ.reign",
+      "label": "Reign of Christ",
+      "aliases": [
+        "reign of Christ",
+        "King of kings",
+        "rod of iron"
+      ],
+      "relatedConceptIds": [
+        "christ.return",
+        "christ.lordship"
+      ]
+    },
+    {
+      "conceptId": "christ.authority",
+      "label": "Authority of Christ",
+      "aliases": [
+        "authority of Christ",
+        "name of Jesus"
+      ],
+      "relatedConceptIds": [
+        "christ.lordship"
+      ]
+    },
+    {
+      "conceptId": "christ.atonement",
+      "label": "Atonement and the Blood of Christ",
+      "aliases": [
+        "atonement",
+        "blood of Christ",
+        "blood of the Lamb",
+        "payment for sin"
+      ],
+      "relatedConceptIds": [
+        "salvation.assurance",
+        "salvation.gospel"
+      ]
+    },
+    {
+      "conceptId": "god.love",
+      "label": "Love of God",
+      "aliases": [
+        "God's love"
+      ],
+      "relatedConceptIds": [
+        "salvation.grace",
+        "love.unconditional"
+      ]
+    },
+    {
+      "conceptId": "god.goodness",
+      "label": "Goodness of God",
+      "aliases": [
+        "God's goodness",
+        "good gifts"
+      ],
+      "relatedConceptIds": [
+        "god.providence",
+        "christian-life.trust-god"
+      ]
+    },
+    {
+      "conceptId": "god.providence",
+      "label": "Providence and God's Wise Choices",
+      "aliases": [
+        "providence",
+        "God's choices",
+        "choices"
+      ],
+      "relatedConceptIds": [
+        "god.goodness",
+        "christian-life.trust-god"
+      ]
+    },
+    {
+      "conceptId": "god.impartiality",
+      "label": "Impartiality of God",
+      "aliases": [
+        "impartiality",
+        "God's standards"
+      ],
+      "relatedConceptIds": [
+        "salvation.grace"
+      ]
+    },
+    {
+      "conceptId": "god.immutability",
+      "label": "Immutability of God",
+      "aliases": [
+        "immutability of God"
+      ],
+      "relatedConceptIds": [
+        "trinity"
+      ]
+    },
+    {
+      "conceptId": "god.justice-and-wrath",
+      "label": "Justice and Wrath of God",
+      "aliases": [
+        "justice",
+        "wrath"
+      ],
+      "relatedConceptIds": [
+        "god.immutability"
+      ]
+    },
+    {
+      "conceptId": "god.divine-protection",
+      "label": "Divine Protection",
+      "aliases": [
+        "divine protection",
+        "protection",
+        "deliverance"
+      ],
+      "relatedConceptIds": [
+        "christian-life.hope"
+      ]
+    },
+    {
+      "conceptId": "trinity",
+      "label": "Trinity",
+      "aliases": [
+        "Trinity"
+      ],
+      "relatedConceptIds": [
+        "christ.identity",
+        "god.immutability"
+      ]
+    },
+    {
+      "conceptId": "salvation.gospel",
+      "label": "The Gospel",
+      "aliases": [
+        "gospel",
+        "good news"
+      ],
+      "relatedConceptIds": [
+        "christ.atonement",
+        "church.evangelism"
+      ]
+    },
+    {
+      "conceptId": "salvation.grace",
+      "label": "Salvation by Grace",
+      "aliases": [
+        "grace",
+        "grace-based salvation",
+        "gift"
+      ],
+      "relatedConceptIds": [
+        "salvation.faith-not-works",
+        "god.love"
+      ]
+    },
+    {
+      "conceptId": "salvation.faith-not-works",
+      "label": "Salvation by Faith, Not Works",
+      "aliases": [
+        "work-based salvation",
+        "faith-based salvation",
+        "grace versus works"
+      ],
+      "relatedConceptIds": [
+        "salvation.grace",
+        "salvation.gospel"
+      ]
+    },
+    {
+      "conceptId": "salvation.assurance",
+      "label": "Assurance and Security in Christ",
+      "aliases": [
+        "assurance",
+        "security",
+        "God's keeping"
+      ],
+      "relatedConceptIds": [
+        "christ.atonement",
+        "satan.accusation"
+      ]
+    },
+    {
+      "conceptId": "salvation.response",
+      "label": "Response to the Gospel",
+      "aliases": [
+        "salvation response"
+      ],
+      "relatedConceptIds": [
+        "salvation.gospel",
+        "salvation.urgency"
+      ]
+    },
+    {
+      "conceptId": "salvation.urgency",
+      "label": "Urgency of Responding to God",
+      "aliases": [
+        "urgency",
+        "delay",
+        "tomorrow",
+        "now"
+      ],
+      "relatedConceptIds": [
+        "salvation.response"
+      ]
+    },
+    {
+      "conceptId": "salvation.dependence",
+      "label": "Dependence on God for Salvation",
+      "aliases": [
+        "dependency",
+        "need"
+      ],
+      "relatedConceptIds": [
+        "salvation.grace"
+      ]
+    },
+    {
+      "conceptId": "church.vision",
+      "label": "CGBC Vision",
+      "aliases": [
+        "vision"
+      ],
+      "relatedConceptIds": [
+        "church.mission",
+        "church.core-values",
+        "church.community"
+      ]
+    },
+    {
+      "conceptId": "church.community",
+      "label": "Church Community",
+      "aliases": [
+        "community"
+      ],
+      "relatedConceptIds": [
+        "church.relationships",
+        "church.mutual-encouragement"
+      ]
+    },
+    {
+      "conceptId": "church.core-values",
+      "label": "CGBC Core Values",
+      "aliases": [
+        "core values",
+        "CGBC core values",
+        "Upon This Rock"
+      ],
+      "relatedConceptIds": [
+        "church.relationships",
+        "church.commitment",
+        "church.vision"
+      ]
+    },
+    {
+      "conceptId": "church.relationships",
+      "label": "Christian and Church Relationships",
+      "aliases": [
+        "relationships",
+        "Relationships",
+        "church relationships",
+        "Christian relationships"
+      ],
+      "relatedConceptIds": [
+        "love.unconditional",
+        "church.core-values"
+      ]
+    },
+    {
+      "conceptId": "church.commitment",
+      "label": "Commitment to the Local Church",
+      "aliases": [
+        "commitment"
+      ],
+      "relatedConceptIds": [
+        "church.membership",
+        "church.core-values"
+      ]
+    },
+    {
+      "conceptId": "church.membership",
+      "label": "Church Membership",
+      "aliases": [
+        "church membership",
+        "membership"
+      ],
+      "relatedConceptIds": [
+        "church.commitment"
+      ]
+    },
+    {
+      "conceptId": "church.mission",
+      "label": "Mission of the Church",
+      "aliases": [
+        "mission"
+      ],
+      "relatedConceptIds": [
+        "church.evangelism",
+        "church.great-commission"
+      ]
+    },
+    {
+      "conceptId": "church.evangelism",
+      "label": "Evangelism and Gospel Proclamation",
+      "aliases": [
+        "evangelism",
+        "gospel proclamation",
+        "witness",
+        "leading people to Christ"
+      ],
+      "relatedConceptIds": [
+        "salvation.gospel",
+        "church.mission"
+      ]
+    },
+    {
+      "conceptId": "church.great-commission",
+      "label": "The Great Commission",
+      "aliases": [
+        "Great Commission"
+      ],
+      "relatedConceptIds": [
+        "church.evangelism",
+        "church.mission"
+      ]
+    },
+    {
+      "conceptId": "church.every-member-ministry",
+      "label": "Every-Member Ministry",
+      "aliases": [
+        "every-member ministry"
+      ],
+      "relatedConceptIds": [
+        "church.evangelism",
+        "church.service"
+      ]
+    },
+    {
+      "conceptId": "church.growth",
+      "label": "Church Growth for Gospel Ends",
+      "aliases": [
+        "church growth"
+      ],
+      "relatedConceptIds": [
+        "church.evangelism",
+        "church.health"
+      ]
+    },
+    {
+      "conceptId": "church.health",
+      "label": "Church Health",
+      "aliases": [
+        "church health"
+      ],
+      "relatedConceptIds": [
+        "bible.spiritual-hunger",
+        "church.commitment"
+      ]
+    },
+    {
+      "conceptId": "church.corporate-gathering",
+      "label": "Corporate Gathering and Attendance",
+      "aliases": [
+        "church attendance",
+        "corporate gathering",
+        "assembling",
+        "attendance"
+      ],
+      "relatedConceptIds": [
+        "church.mutual-encouragement",
+        "church.commitment"
+      ]
+    },
+    {
+      "conceptId": "church.mutual-encouragement",
+      "label": "Mutual Encouragement in the Church",
+      "aliases": [
+        "mutual encouragement",
+        "exhortation",
+        "encouragement",
+        "presence"
+      ],
+      "relatedConceptIds": [
+        "church.corporate-gathering"
+      ]
+    },
+    {
+      "conceptId": "church.stewardship-giving",
+      "label": "Stewardship and Giving",
+      "aliases": [
+        "giving",
+        "stewardship",
+        "generosity",
+        "cheerful giving"
+      ],
+      "relatedConceptIds": [
+        "church.commitment",
+        "church.service"
+      ]
+    },
+    {
+      "conceptId": "church.service",
+      "label": "Service and Ministry",
+      "aliases": [
+        "service",
+        "ministry",
+        "church work"
+      ],
+      "relatedConceptIds": [
+        "church.commitment",
+        "christian-life.christ-centered-service"
+      ]
+    },
+    {
+      "conceptId": "bible.personal-study",
+      "label": "Personal Bible Study",
+      "aliases": [
+        "personal Bible study",
+        "Bible study"
+      ],
+      "relatedConceptIds": [
+        "bible.discernment",
+        "bible.spiritual-hunger"
+      ]
+    },
+    {
+      "conceptId": "bible.discernment",
+      "label": "Biblical Discernment",
+      "aliases": [
+        "discernment"
+      ],
+      "relatedConceptIds": [
+        "bible.personal-study"
+      ]
+    },
+    {
+      "conceptId": "bible.spiritual-hunger",
+      "label": "Hunger for God's Word",
+      "aliases": [
+        "spiritual hunger"
+      ],
+      "relatedConceptIds": [
+        "bible.personal-study",
+        "church.health"
+      ]
+    },
+    {
+      "conceptId": "christian-life.spiritual-growth",
+      "label": "Spiritual Growth",
+      "aliases": [
+        "spiritual growth",
+        "transformation",
+        "discipleship"
+      ],
+      "relatedConceptIds": [
+        "bible.personal-study",
+        "christian-life.obedience"
+      ]
+    },
+    {
+      "conceptId": "christian-life.obedience",
+      "label": "Obedience and Submission to God",
+      "aliases": [
+        "obedience",
+        "submission"
+      ],
+      "relatedConceptIds": [
+        "christian-life.spiritual-growth"
+      ]
+    },
+    {
+      "conceptId": "christian-life.diligence",
+      "label": "Diligence in Christian Service",
+      "aliases": [
+        "diligence",
+        "labor"
+      ],
+      "relatedConceptIds": [
+        "christian-life.faithfulness",
+        "church.service"
+      ]
+    },
+    {
+      "conceptId": "christian-life.faithfulness",
+      "label": "Faithfulness and Perseverance",
+      "aliases": [
+        "faithfulness",
+        "perseverance"
+      ],
+      "relatedConceptIds": [
+        "christian-life.diligence",
+        "christian-life.hope"
+      ]
+    },
+    {
+      "conceptId": "christian-life.trust-god",
+      "label": "Trust in God",
+      "aliases": [
+        "trust"
+      ],
+      "relatedConceptIds": [
+        "god.goodness",
+        "god.providence"
+      ]
+    },
+    {
+      "conceptId": "christian-life.spiritual-receptivity",
+      "label": "Spiritual Receptivity",
+      "aliases": [
+        "spiritual receptivity",
+        "hearing",
+        "heart posture"
+      ],
+      "relatedConceptIds": [
+        "salvation.response"
+      ]
+    },
+    {
+      "conceptId": "christian-life.spiritual-vigilance",
+      "label": "Spiritual Vigilance",
+      "aliases": [
+        "spiritual vigilance"
+      ],
+      "relatedConceptIds": [
+        "bible.discernment",
+        "satan.deception"
+      ]
+    },
+    {
+      "conceptId": "christian-life.victory-in-christ",
+      "label": "Victory in Christ",
+      "aliases": [
+        "victory in Christ",
+        "victory",
+        "defeated enemy"
+      ],
+      "relatedConceptIds": [
+        "satan.defeat",
+        "christian-life.hope"
+      ]
+    },
+    {
+      "conceptId": "christian-life.hope",
+      "label": "Biblical Hope",
+      "aliases": [
+        "future hope",
+        "hope"
+      ],
+      "relatedConceptIds": [
+        "christ.return",
+        "christian-life.present-faithfulness"
+      ]
+    },
+    {
+      "conceptId": "christian-life.present-faithfulness",
+      "label": "Present Faithfulness",
+      "aliases": [
+        "present faithfulness",
+        "God's present work"
+      ],
+      "relatedConceptIds": [
+        "christian-life.hope",
+        "christian-life.faithfulness"
+      ]
+    },
+    {
+      "conceptId": "christian-life.values-and-priorities",
+      "label": "Values and Priorities",
+      "aliases": [
+        "values",
+        "priorities",
+        "direction"
+      ],
+      "relatedConceptIds": [
+        "church.commitment"
+      ]
+    },
+    {
+      "conceptId": "christian-life.christ-centered-service",
+      "label": "Christ-Centered Service",
+      "aliases": [
+        "spiritual focus",
+        "relationship with Christ",
+        "busyness"
+      ],
+      "relatedConceptIds": [
+        "church.service"
+      ]
+    },
+    {
+      "conceptId": "christian-life.availability-to-god",
+      "label": "Availability to God",
+      "aliases": [
+        "availability"
+      ],
+      "relatedConceptIds": [
+        "salvation.response",
+        "christian-life.obedience"
+      ]
+    },
+    {
+      "conceptId": "christian-life.comparison",
+      "label": "Comparison and Spiritual Scorekeeping",
+      "aliases": [
+        "comparison"
+      ],
+      "relatedConceptIds": [
+        "salvation.grace",
+        "christian-life.spiritual-growth"
+      ]
+    },
+    {
+      "conceptId": "love.unconditional",
+      "label": "Unconditional Love",
+      "aliases": [
+        "unconditional love"
+      ],
+      "relatedConceptIds": [
+        "god.love",
+        "love.truth-and-love"
+      ]
+    },
+    {
+      "conceptId": "love.truth-and-love",
+      "label": "Truth and Love",
+      "aliases": [
+        "truth and love",
+        "correction",
+        "boundaries"
+      ],
+      "relatedConceptIds": [
+        "love.unconditional"
+      ]
+    },
+    {
+      "conceptId": "satan.deception",
+      "label": "Satanic Deception",
+      "aliases": [
+        "deception",
+        "spiritual deception"
+      ],
+      "relatedConceptIds": [
+        "satan.defeat",
+        "church.evangelism"
+      ]
+    },
+    {
+      "conceptId": "satan.accusation",
+      "label": "Satan as Accuser",
+      "aliases": [
+        "accusation",
+        "accuser"
+      ],
+      "relatedConceptIds": [
+        "salvation.assurance",
+        "satan.defeat"
+      ]
+    },
+    {
+      "conceptId": "satan.defeat",
+      "label": "Defeat of Satan",
+      "aliases": [
+        "Satan defeated",
+        "defeated enemy"
+      ],
+      "relatedConceptIds": [
+        "christian-life.victory-in-christ",
+        "christ.return"
+      ]
+    },
+    {
+      "conceptId": "eschatology.great-tribulation",
+      "label": "The Great Tribulation",
+      "aliases": [
+        "Great Tribulation",
+        "1,260 days",
+        "three and a half years",
+        "short time"
+      ],
+      "relatedConceptIds": [
+        "eschatology.war-in-heaven",
+        "god.divine-protection"
+      ]
+    },
+    {
+      "conceptId": "eschatology.war-in-heaven",
+      "label": "War in Heaven",
+      "aliases": [
+        "war in heaven"
+      ],
+      "relatedConceptIds": [
+        "satan.defeat",
+        "eschatology.great-tribulation"
+      ]
+    },
+    {
+      "conceptId": "eschatology.israel-in-revelation",
+      "label": "Israel in Revelation 12",
+      "aliases": [
+        "woman of Revelation 12",
+        "Israel"
+      ],
+      "relatedConceptIds": [
+        "eschatology.great-tribulation",
+        "god.divine-protection"
+      ]
+    },
+    {
+      "conceptId": "eschatology.remnant",
+      "label": "The Believing Remnant",
+      "aliases": [
+        "remnant"
+      ],
+      "relatedConceptIds": [
+        "eschatology.israel-in-revelation",
+        "salvation.gospel"
+      ]
+    },
+    {
+      "conceptId": "sin.human-condition",
+      "label": "Human Sinful Condition",
+      "aliases": [
+        "sinful condition",
+        "sinner"
+      ],
+      "relatedConceptIds": [
+        "salvation.grace",
+        "god.love"
+      ]
+    },
+    {
+      "conceptId": "family.sanctity",
+      "label": "Sanctity of the Family",
+      "aliases": [
+        "family",
+        "sanctity of the family"
+      ],
+      "relatedConceptIds": [
+        "church.core-values"
+      ]
+    },
+    {
+      "conceptId": "christian-life.integrity",
+      "label": "Christian Integrity",
+      "aliases": [
+        "integrity",
+        "honesty"
+      ],
+      "relatedConceptIds": [
+        "church.core-values",
+        "christian-life.faithfulness"
+      ]
+    },
+    {
+      "conceptId": "scripture.parables",
+      "label": "Jesus' Parables",
+      "aliases": [
+        "parables",
+        "laborers in the vineyard",
+        "parable interpretation"
+      ],
+      "relatedConceptIds": [
+        "christian-life.spiritual-receptivity"
+      ]
+    }
+  ]
+}
