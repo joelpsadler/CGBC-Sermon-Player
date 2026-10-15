@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-10-15T15:22:22.244Z",
+  "generatedAt": "2026-10-15T15:44:32.627Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 185,
     "archiveItems": 185,
     "videoMatchedItems": 177,
     "transcriptMatchedItems": 52,
-    "quoteCandidateCount": 3858
+    "quoteCandidateCount": 3862
   },
   "totals": {
-    "audioPlaysTotal": 6274,
+    "audioPlaysTotal": 6275,
     "audioEpisodesTotal": 185
   },
   "current": {
@@ -267,7 +267,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6e3minvpqh4a89ck/261014.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 1498,
         "statsMatchStrategy": "media_url"
       },
@@ -275,7 +275,7 @@
         "hasVideo": true,
         "youtubeId": "gZfqXpBrx4w",
         "url": "https://www.youtube.com/watch?v=gZfqXpBrx4w",
-        "views": 0
+        "views": 2
       },
       "art": {
         "episode": {
