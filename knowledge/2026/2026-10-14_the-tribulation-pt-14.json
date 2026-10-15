@@ -1,0 +1,3861 @@
+{
+  "schemaVersion": "2.1",
+  "recordType": "CGBC_SERMON_KNOWLEDGE",
+  "recordVersion": "2.1",
+  "generatedAt": "2026-10-15T15:55:47.543337Z",
+  "githubMainAtBuild": "f295799067dcd0b910691c4d4911e7c45ff3f22a",
+  "normalization": {
+    "profile": "CGBC_SEMANTIC_NORMALIZATION",
+    "version": "2.1",
+    "conceptRegistryVersion": "1.0",
+    "architectureGuide": "CGBC_Project_Architecture_and_Sermon_Knowledge_Guide.pdf",
+    "sourceBaseCommit": "f295799067dcd0b910691c4d4911e7c45ff3f22a",
+    "completedAt": "2026-10-15T15:55:47.543351Z",
+    "passes": {
+      "concepts": true,
+      "scriptureCommentary": true,
+      "teachingStance": true,
+      "applications": true,
+      "namedResources": true,
+      "definitionsWordStudies": true,
+      "illustrations": true,
+      "sermonCallbacks": true
+    },
+    "preservationNote": "Built after publication and quote-curation verification. Quote decisions were finalized before this 2.1 semantic pass. Wednesday no-slide status is intentional."
+  },
+  "sermon": {
+    "stableId": "media-h88lwp",
+    "title": "The Tribulation Pt. 14",
+    "subtitle": "The Beast from the Sea",
+    "date": "2026-10-14",
+    "speaker": "Jacob Lannom",
+    "series": "The Tribulation",
+    "study": "Eschatology",
+    "seriesType": "Topical",
+    "scripture": "Revelation 13:1-10",
+    "scriptureRaw": "Revelation 13:1-10",
+    "references": [
+      "Revelation 12:17",
+      "Genesis 1:1-2",
+      "Daniel 7",
+      "Romans 10:9",
+      "Isaiah 14:14",
+      "2 Thessalonians 2:3-4",
+      "1 Timothy 4:1-2"
+    ],
+    "bookTags": [
+      "Revelation",
+      "Genesis",
+      "Daniel",
+      "Romans",
+      "Isaiah",
+      "2 Thessalonians",
+      "1 Timothy"
+    ],
+    "collections": [],
+    "durationSeconds": 1498,
+    "youtubeId": "gZfqXpBrx4w",
+    "videoUrl": "https://www.youtube.com/watch?v=gZfqXpBrx4w",
+    "audioUrl": "https://mcdn.podbean.com/mf/web/6e3minvpqh4a89ck/261014.mp3",
+    "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-14-eschatology-the-tribulation/",
+    "transcriptPath": "data/transcripts/en/2026-10-14_the-tribulation-pt-14.json",
+    "displayTranscriptPath": "transcripts_display/en/2026-10-14_the-tribulation-pt-14.srt",
+    "displayTranscriptJsonPath": "data/transcripts/en/2026-10-14_the-tribulation-pt-14.display.json",
+    "sourceArchivePath": "Sermon Source Archive/2026/26_10_14/",
+    "translationUsedInPreparation": "Mixed (KJV 1900 and NASB95)"
+  },
+  "sources": [
+    {
+      "id": "src-transcript",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "Sermon Source Archive/2026/26_10_14/original-transcript.srt",
+      "sha256": "7ccf352034ed142d6b9c6c2667aa0ac305eafb00743a6f0693392cd2a94d5480",
+      "notes": "Primary archival evidence for spoken wording and timing; 482 segments."
+    },
+    {
+      "id": "src-processed-transcript",
+      "kind": "PASTOR — SPOKEN EXACT",
+      "pathOrName": "data/transcripts/en/2026-10-14_the-tribulation-pt-14.json",
+      "notes": "Repository faithful-clean transcript verified at GitHub main f295799067dcd0b910691c4d4911e7c45ff3f22a; stableId media-h88lwp; 482 segments."
+    },
+    {
+      "id": "src-notes",
+      "kind": "PASTOR — PREPARED",
+      "pathOrName": "Sermon Source Archive/2026/26_10_14/sermon-notes.pdf",
+      "sha256": "99b3183d38f35573540ec25124d8401290a90167a6dbaba312199de0fe1a218a",
+      "notes": "Pastor Jacob's Logos preparation export, The Study of the End Times (20), with sermon structure, Scripture trail, KJV 1900/NASB95 translation labels, and named commentary excerpts."
+    },
+    {
+      "id": "src-art-square",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_10_14/art-square.jpg",
+      "sha256": "c2a9ede65cc18e0e141fbc107986a2fe6b4f8beff5b2054d6819c416617cb386",
+      "notes": "Original supplied square episode artwork."
+    },
+    {
+      "id": "src-art-wide",
+      "kind": "PASTOR — VISUAL",
+      "pathOrName": "Sermon Source Archive/2026/26_10_14/art-wide.jpg",
+      "sha256": "25f4b13237d885d8c4d531bc552171136d4eedd9fe7ebbd8a2549c354d335ad8",
+      "notes": "Original supplied wide episode artwork and no-slide visual fallback."
+    },
+    {
+      "id": "src-rss",
+      "kind": "CGBC — OFFICIAL",
+      "pathOrName": "Podbean RSS / public/library-resolved.json",
+      "notes": "Published metadata verified on GitHub main f295799067dcd0b910691c4d4911e7c45ff3f22a; stableId media-h88lwp; audio and YouTube video published."
+    },
+    {
+      "id": "src-quote-curation",
+      "kind": "CGBC — OFFICIAL",
+      "pathOrName": "config/quote-curation.json",
+      "notes": "Joel-reviewed quote decisions verified after library refresh. Git blob 59eee5744e60a75036de4d8c28a9723c1a403a1d."
+    },
+    {
+      "id": "src-international-theological-commentary",
+      "kind": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "pathOrName": "International Theological Commentary (pastor-named resource; exact volume/author unresolved)",
+      "notes": "Used for the counterfeit-creation contrast between Genesis 1 and Revelation 13. Preserve attribution; do not treat the external wording as Pastor Jacob's original commentary."
+    },
+    {
+      "id": "src-holman-nt-commentary",
+      "kind": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "pathOrName": "Holman New Testament Commentary (pastor-named resource; exact volume author unresolved)",
+      "notes": "Used for the Beast-versus-Lamb contrast and the temporary reign of evil versus the Lamb's eternal victory. Preserve attribution."
+    }
+  ],
+  "structure": {
+    "introduction": "Jesus has victory, God remains in control, and frightening prophecy should drive listeners toward trust rather than fear.",
+    "anchorPassage": "Revelation 13:1-10",
+    "seriesContinuity": {
+      "previousSermonId": "media-phykqw",
+      "previousTitle": "The Tribulation Pt. 13",
+      "relation": "previous-sermon / Revelation 12 recap"
+    },
+    "movements": [
+      {
+        "order": 1,
+        "title": "Victory before fear",
+        "nodeRef": "media-h88lwp.n001",
+        "start": 24.033
+      },
+      {
+        "order": 2,
+        "title": "Revelation 12 recap and the testimony of the remnant",
+        "nodeRef": "media-h88lwp.n002",
+        "start": 85.15
+      },
+      {
+        "order": 3,
+        "title": "The Beast from the Sea and counterfeit creation",
+        "nodeRef": "media-h88lwp.n006",
+        "start": 265.083
+      },
+      {
+        "order": 4,
+        "title": "Composite imperial power and the individual Antichrist",
+        "nodeRef": "media-h88lwp.n014",
+        "start": 671.35
+      },
+      {
+        "order": 5,
+        "title": "Counterfeit worship and spiritual deception",
+        "nodeRef": "media-h88lwp.n018",
+        "start": 780.133
+      },
+      {
+        "order": 6,
+        "title": "Blasphemy, apostasy, and war against the saints",
+        "nodeRef": "media-h88lwp.n025",
+        "start": 1098.783
+      },
+      {
+        "order": 7,
+        "title": "The Lamb's victory and the perseverance of the saints",
+        "nodeRef": "media-h88lwp.n031",
+        "start": 1263.066
+      },
+      {
+        "order": 8,
+        "title": "When life squeezes you, what comes out?",
+        "nodeRef": "media-h88lwp.n035",
+        "start": 1335.849
+      }
+    ]
+  },
+  "slideMap": [],
+  "scriptureMap": {
+    "main": "Revelation 13:1-10",
+    "continuity": [
+      "Revelation 12:17"
+    ],
+    "supporting": [
+      "Genesis 1:1-2",
+      "Daniel 7",
+      "Romans 10:9",
+      "Isaiah 14:14",
+      "2 Thessalonians 2:3-4",
+      "1 Timothy 4:1-2"
+    ],
+    "commentaryIndex": {
+      "Revelation 12:17": [
+        "media-h88lwp.n003"
+      ],
+      "Revelation 13:1": [
+        "media-h88lwp.n007",
+        "media-h88lwp.n008",
+        "media-h88lwp.n009",
+        "media-h88lwp.n011"
+      ],
+      "Revelation 13:2": [
+        "media-h88lwp.n010",
+        "media-h88lwp.n014",
+        "media-h88lwp.n015"
+      ],
+      "Revelation 13:3-4": [
+        "media-h88lwp.n016",
+        "media-h88lwp.n017",
+        "media-h88lwp.n018",
+        "media-h88lwp.n019"
+      ],
+      "Revelation 13:5-6": [
+        "media-h88lwp.n025",
+        "media-h88lwp.n027"
+      ],
+      "Revelation 13:7": [
+        "media-h88lwp.n030"
+      ],
+      "Revelation 13:8": [
+        "media-h88lwp.n031",
+        "media-h88lwp.n032"
+      ],
+      "Revelation 13:9-10": [
+        "media-h88lwp.n033",
+        "media-h88lwp.n034",
+        "media-h88lwp.n035"
+      ],
+      "Genesis 1:1-2": [
+        "media-h88lwp.n008"
+      ],
+      "Daniel 7": [
+        "media-h88lwp.n010"
+      ],
+      "Romans 10:9": [
+        "media-h88lwp.n013"
+      ],
+      "Isaiah 14:14": [
+        "media-h88lwp.n024"
+      ],
+      "2 Thessalonians 2:3-4": [
+        "media-h88lwp.n027"
+      ],
+      "1 Timothy 4:1-2": [
+        "media-h88lwp.n029"
+      ]
+    },
+    "translationsUsedInPreparation": {
+      "KJV 1900": [
+        "Revelation 12:17",
+        "Revelation 13:1-8",
+        "Genesis 1:1-2"
+      ],
+      "NASB95": [
+        "Isaiah 14:14",
+        "2 Thessalonians 2:3-4",
+        "1 Timothy 4:1-2",
+        "Revelation 13:9-10"
+      ]
+    }
+  },
+  "namedResources": [
+    {
+      "identityStatus": "uncertain",
+      "name": "International Theological Commentary",
+      "resourceType": "commentary",
+      "usageRole": [
+        "interpretation-support",
+        "quotation-source"
+      ],
+      "nodeRefs": [
+        "media-h88lwp.n008"
+      ],
+      "sourceRefs": [
+        "src-international-theological-commentary",
+        "src-notes",
+        "src-transcript"
+      ],
+      "identityNote": "The sermon names the commentary/series but the supplied preparation material does not identify the specific volume, author, or editor. No stable resourceId is assigned."
+    },
+    {
+      "identityStatus": "uncertain",
+      "name": "Holman New Testament Commentary",
+      "resourceType": "commentary",
+      "usageRole": [
+        "interpretation-support",
+        "quotation-source"
+      ],
+      "nodeRefs": [
+        "media-h88lwp.n032"
+      ],
+      "sourceRefs": [
+        "src-holman-nt-commentary",
+        "src-notes",
+        "src-transcript"
+      ],
+      "identityNote": "The sermon names the commentary but the supplied preparation material does not identify the specific volume author in a way safe to normalize. No stable resourceId is assigned."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "media-h88lwp.n001",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Jesus has victory over the frightening future",
+      "summary": "The sermon deliberately frames frightening end-times material with Christ's victory, trust in Him, and God's control, explicitly including children and adults in the reassurance.",
+      "start": 24.033,
+      "end": 85.083,
+      "segmentIndexes": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "scripture": [],
+      "topics": [
+        "victory in Christ",
+        "fear",
+        "trust",
+        "God's control",
+        "eschatology"
+      ],
+      "doctrine": [
+        "Christology",
+        "Eschatology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.victory-in-christ",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.trust-god",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "all-listeners",
+        "children-youth"
+      ],
+      "applicationFunction": [
+        "encouragement",
+        "instruction"
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n037",
+          "confidence": 0.84,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n002",
+      "type": "outlinePoint",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "Revelation 12 recap carries directly into Revelation 13",
+      "summary": "The sermon recaps the woman as Israel, the Son as Jesus Christ, the red dragon as Satan, the heavenly war, Satan's defeat, and his persecution of God's people before moving directly into the Beast from the Sea.",
+      "start": 85.15,
+      "end": 129.3,
+      "segmentIndexes": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "scripture": [
+        "Revelation 12:1-17"
+      ],
+      "topics": [
+        "Revelation 12",
+        "Israel",
+        "Jesus Christ",
+        "Satan",
+        "war in heaven",
+        "series continuity"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Christology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.israel-in-revelation",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "eschatology.war-in-heaven",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "satan.defeat",
+          "significance": "supporting"
+        }
+      ],
+      "sermonCallbacks": [
+        {
+          "callbackRelation": "previous-sermon",
+          "targetSermonId": "media-phykqw",
+          "spokenDescription": "Chapter 12 introduced the woman as Israel, the Son as Jesus Christ, the red dragon as Satan, the war in heaven, and Satan's persecution of the woman and believers."
+        }
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n003",
+          "confidence": 0.9,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n003",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The remnant is marked by obedience and testimony of Jesus",
+      "summary": "Revelation 12:17 is used to identify the remnant by keeping God's commandments and having the testimony of Jesus Christ, which becomes a bridge from the prior sermon into the present application.",
+      "start": 129.599,
+      "end": 161.516,
+      "segmentIndexes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "scripture": [
+        "Revelation 12:17"
+      ],
+      "topics": [
+        "remnant",
+        "testimony of Jesus",
+        "obedience",
+        "identity"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.remnant",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 12:17",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n002",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n004",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "A Christian testimony must actually include Jesus Christ",
+      "summary": "The sermon distinguishes church background from conversion testimony and insists that a born-again testimony centers on surrender to Christ, confessing Him as Lord, and believing in His resurrection.",
+      "start": 162.433,
+      "end": 220.199,
+      "segmentIndexes": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "scripture": [
+        "Romans 10:9"
+      ],
+      "topics": [
+        "testimony",
+        "conversion",
+        "Jesus Christ",
+        "born again",
+        "confession"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.gospel",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.lordship",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "all-listeners"
+      ],
+      "applicationFunction": [
+        "instruction",
+        "reflection",
+        "invitation"
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-h88lwp.n003",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n005",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Believers should be identifiable with Christ now",
+      "summary": "The remnant question is brought into the present: believers should be identifiable with Christ among coworkers, family, loved ones, and friends rather than merely being religious or church-going.",
+      "start": 220.566,
+      "end": 260.833,
+      "segmentIndexes": [
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86
+      ],
+      "scripture": [],
+      "topics": [
+        "Christian identity",
+        "public witness",
+        "discipleship",
+        "testimony"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "church.evangelism",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "reflection"
+      ],
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-h88lwp.n004",
+          "confidence": 0.94,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n006",
+      "type": "transition",
+      "provenance": "ANALYSIS — SYNTHESIS",
+      "title": "The Beast from the Sea becomes the next end-times player",
+      "summary": "The sermon moves from Revelation 12 into the primary passage, Revelation 13:1-10, identifying the Beast from the Sea as the next major figure in the study.",
+      "start": 265.083,
+      "end": 276.05,
+      "segmentIndexes": [
+        89,
+        90,
+        91,
+        92
+      ],
+      "scripture": [
+        "Revelation 13:1-10"
+      ],
+      "topics": [
+        "Beast from the Sea",
+        "Revelation 13",
+        "end-times players"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Beast from the Sea",
+          "significance": "primary",
+          "reason": "The sermon makes the Beast from the Sea the central figure of the lesson; no permanent CGBC concept ID currently exists.",
+          "aliases": [
+            "sea beast",
+            "beast of Revelation 13"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n007",
+      "type": "clarification",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The sea-beast imagery is substantially symbolic",
+      "summary": "The sermon explicitly says much of the description is symbolic and leaves open whether an actual literal beast emerges from the sea. It interprets the sand/sea imagery as the multitudes of humanity and nations and Satan's shoreline position as dominion over the earth in the latter half of the Tribulation.",
+      "start": 398.766,
+      "end": 447.183,
+      "segmentIndexes": [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "scripture": [
+        "Revelation 13:1"
+      ],
+      "topics": [
+        "symbolism",
+        "sea",
+        "nations",
+        "humanity",
+        "Satanic dominion"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.great-tribulation",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Symbolic apocalyptic imagery",
+          "significance": "supporting",
+          "reason": "Pastor explicitly distinguishes symbolic description from a guaranteed literal monster emerging from the sea."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:1",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "unresolved",
+      "notes": "The unresolved stance applies to the literal physical mechanism. Pastor affirmatively teaches that much of the imagery is symbolic.",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n006",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n008",
+      "type": "connection",
+      "provenance": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "title": "Genesis 1 supplies a counterfeit-creation contrast",
+      "summary": "The sermon contrasts the Holy Spirit hovering over the waters in Genesis 1:1-2 with the dragon standing by the sea in Revelation 13 and cites the International Theological Commentary for the image of a demonic counterfeit creation.",
+      "start": 447.3,
+      "end": 513.466,
+      "segmentIndexes": [
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169
+      ],
+      "scripture": [
+        "Genesis 1:1-2",
+        "Revelation 13:1"
+      ],
+      "topics": [
+        "Holy Spirit",
+        "creation",
+        "counterfeit creation",
+        "dragon",
+        "sea"
+      ],
+      "doctrine": [
+        "Pneumatology",
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-international-theological-commentary"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "trinity",
+          "significance": "incidental"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Satanic counterfeit creation",
+          "significance": "primary",
+          "reason": "The sermon and cited commentary explicitly contrast God's orderly creation with the dragon summoning a demonic counterfeit."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Genesis 1:1-2",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 13:1"
+          ]
+        },
+        {
+          "reference": "Revelation 13:1",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "context"
+          ],
+          "significance": "primary",
+          "relatedTo": [
+            "Genesis 1:1-2"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n007",
+          "confidence": 0.94,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n009",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The beast mirrors the dragon with heightened royal imagery",
+      "summary": "The seven heads, ten horns, ten diadems, and blasphemous names are compared with the red dragon of Revelation 12; the additional crowns give the beast a heightened royal appearance.",
+      "start": 515.283,
+      "end": 539.283,
+      "segmentIndexes": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "scripture": [
+        "Revelation 13:1",
+        "Revelation 12:3"
+      ],
+      "topics": [
+        "seven heads",
+        "ten horns",
+        "diadems",
+        "dragon",
+        "royal imagery"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Beast imagery and counterfeit kingship",
+          "significance": "primary",
+          "reason": "The sermon emphasizes the beast's resemblance to the dragon and its more royal presentation."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:1",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n007",
+          "confidence": 0.91,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n010",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Daniel 7 explains the leopard, bear, and lion imagery",
+      "summary": "The leopard, bear, and lion imagery in Revelation 13 is connected to Daniel 7 and to historic conquering powers associated in the sermon with Greece, Medo-Persia, and Babylon; Revelation combines the imagery into one monster.",
+      "start": 540.366,
+      "end": 563.933,
+      "segmentIndexes": [
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184
+      ],
+      "scripture": [
+        "Revelation 13:2",
+        "Daniel 7"
+      ],
+      "topics": [
+        "Daniel 7",
+        "leopard",
+        "bear",
+        "lion",
+        "Greece",
+        "Medo-Persia",
+        "Babylon",
+        "empire"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Composite imperial beast",
+          "significance": "primary",
+          "reason": "The sermon interprets Revelation's beast as combining imagery associated with earlier conquering empires."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:2",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation"
+          ],
+          "significance": "primary",
+          "relatedTo": [
+            "Daniel 7"
+          ]
+        },
+        {
+          "reference": "Daniel 7",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Revelation 13:2"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n009",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n011",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Blasphemous titles claim divine status",
+      "summary": "The beast's blasphemous names are interpreted as claims to divine status and compared to Roman imperial titles such as Lord and Savior, preparing the sermon to connect the issue with confessing Jesus as Lord.",
+      "start": 567.0,
+      "end": 588.483,
+      "segmentIndexes": [
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191
+      ],
+      "scripture": [
+        "Revelation 13:1",
+        "Romans 10:9"
+      ],
+      "topics": [
+        "blasphemy",
+        "divine status",
+        "Roman emperors",
+        "Lord",
+        "Savior"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.lordship",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Counterfeit divine titles",
+          "significance": "primary",
+          "reason": "The sermon explicitly interprets the beast's blasphemous names as claims to divine status."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:1",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation",
+            "context"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n009",
+          "confidence": 0.9,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n013",
+          "confidence": 0.92,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n012",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Salvation affects everybody around you",
+      "summary": "Personal salvation is between the believer and the Lord, but allegiance to Christ has visible consequences for the people around the believer.",
+      "start": 603.25,
+      "end": 606.666,
+      "segmentIndexes": [
+        198
+      ],
+      "scripture": [],
+      "topics": [
+        "salvation",
+        "public faith",
+        "testimony",
+        "Lordship"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ],
+      "concepts": [
+        {
+          "conceptId": "salvation.response",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christ.lordship",
+          "significance": "supporting"
+        }
+      ],
+      "spokenExact": "Your salvation is between you and the Lord, but it affects everybody around you.",
+      "displayText": "Your salvation is between you and the Lord, but it affects everybody around you.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "reviewNumber": 3,
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n013",
+          "confidence": 0.88,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n013",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Romans 10:9 makes the confession 'Jesus is Lord' publicly costly",
+      "summary": "The sermon places Romans 10:9 in its Roman imperial context: confessing Jesus as Lord directly contests the emperor's claim to lordship and could carry lethal consequences, so conversion is presented as public allegiance rather than hidden private religion.",
+      "start": 608.1,
+      "end": 670.316,
+      "segmentIndexes": [
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222
+      ],
+      "scripture": [
+        "Romans 10:9",
+        "Revelation 13:1"
+      ],
+      "topics": [
+        "Jesus is Lord",
+        "Roman emperor",
+        "confession",
+        "public allegiance",
+        "martyrdom"
+      ],
+      "doctrine": [
+        "Soteriology",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.lordship",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Romans 10:9",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "explanation",
+            "application"
+          ],
+          "significance": "primary",
+          "relatedTo": [
+            "Revelation 13:1"
+          ]
+        },
+        {
+          "reference": "Revelation 13:1",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Romans 10:9"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-h88lwp.n011",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n014",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The beast represents concentrated political, military, and economic power",
+      "summary": "The composite monster is summarized as political, military, and economic power, gathering the force of conquering nations into a single symbol.",
+      "start": 671.35,
+      "end": 681.533,
+      "segmentIndexes": [
+        223,
+        224,
+        225,
+        226
+      ],
+      "scripture": [
+        "Revelation 13:1-2",
+        "Daniel 7"
+      ],
+      "topics": [
+        "political power",
+        "military power",
+        "economic power",
+        "empire"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Concentrated imperial power",
+          "significance": "primary",
+          "reason": "Pastor directly summarizes the beast as political, military, and economic power."
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n010",
+          "confidence": 0.89,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n015",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Revived Roman Empire is presented as a major scholarly interpretation",
+      "summary": "The sermon reports that many scholars identify the beast with a revived Roman Empire and says the view is hard to argue against, especially because John's first readers would naturally associate the imagery with Rome. The view is presented seriously but as an interpretive position rather than as an unqualified settled claim.",
+      "start": 681.6,
+      "end": 705.049,
+      "segmentIndexes": [
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233
+      ],
+      "scripture": [
+        "Revelation 13:1-2"
+      ],
+      "topics": [
+        "revived Roman Empire",
+        "Rome",
+        "interpretive view"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Revived Roman Empire interpretation",
+          "significance": "supporting",
+          "reason": "Pastor reports and treats this as a strong scholarly interpretation without collapsing it into an unqualified statement."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:1-2",
+          "role": "primary-text",
+          "functions": [
+            "context",
+            "interpretation"
+          ],
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "reported-other-view",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n014",
+          "confidence": 0.86,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n016",
+      "type": "clarification",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The beast is also treated as an individual",
+      "summary": "Revelation 13:3-4 is read as having a singular personal dimension: although the beast symbolizes corrupt political power, the sermon argues that it also resolves into an individual figure.",
+      "start": 706.149,
+      "end": 738.25,
+      "segmentIndexes": [
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244
+      ],
+      "scripture": [
+        "Revelation 13:3-4"
+      ],
+      "topics": [
+        "individual beast",
+        "singular figure",
+        "wounded head",
+        "healing"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Individual Beast figure",
+          "significance": "primary",
+          "reason": "Pastor explicitly says the beast must also be understood as an individual."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:3-4",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n014",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n017",
+      "type": "doctrine",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The individual Beast is identified with the Antichrist",
+      "summary": "The sermon identifies the individual beast with the Antichrist, anticipating a persuasive political powerhouse whose authority is empowered by the dragon.",
+      "start": 739.383,
+      "end": 780.066,
+      "segmentIndexes": [
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258
+      ],
+      "scripture": [
+        "Revelation 13:3-4"
+      ],
+      "topics": [
+        "Antichrist",
+        "political leader",
+        "Satanic power",
+        "world system"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "eschatology.great-tribulation",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Antichrist",
+          "significance": "primary",
+          "reason": "The sermon explicitly identifies the individual Beast with the Antichrist; the current CGBC Concept Registry does not yet contain an Antichrist concept ID."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:3-4",
+          "role": "primary-text",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n016",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n018",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The world worships both the dragon and the beast",
+      "summary": "The response to the beast's apparent healing and authority is worship directed to both Satan and the beast.",
+      "start": 780.133,
+      "end": 788.633,
+      "segmentIndexes": [
+        259,
+        260
+      ],
+      "scripture": [
+        "Revelation 13:3-4"
+      ],
+      "topics": [
+        "worship of beast",
+        "worship of dragon",
+        "false worship"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "False worship of the Beast",
+          "significance": "primary",
+          "reason": "Revelation 13:4 and Pastor Jacob's exposition make worship of the dragon and beast central to the section."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:3-4",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n017",
+          "confidence": 0.95,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n019",
+      "type": "argument",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Satan attracts through counterfeit beauty and rulership",
+      "summary": "The sermon rejects a cartoonish expectation that Satan will look obviously evil. Satan is described as presenting attractively and counterfeiting rulership, and the Antichrist's grotesque imagery is treated symbolically rather than as the appearance people will literally see.",
+      "start": 792.133,
+      "end": 835.2,
+      "segmentIndexes": [
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274
+      ],
+      "scripture": [
+        "Revelation 13:1-4"
+      ],
+      "topics": [
+        "angel of light",
+        "counterfeit ruler",
+        "deception",
+        "symbolism",
+        "Antichrist"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Counterfeit rulership",
+          "significance": "primary",
+          "reason": "Pastor characterizes Satan's strategy as a counterfeit form of attractive rulership."
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n018",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n020",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Contemporary Satanism is used as a time-bound illustration of receptivity",
+      "summary": "The sermon cites contemporary Satanist congregations and organizational growth as an illustration that explicit Satan worship already exists and can grow. These are sermon-time cultural claims, not timeless canonical statistics.",
+      "start": 837.85,
+      "end": 877.866,
+      "segmentIndexes": [
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287
+      ],
+      "scripture": [],
+      "topics": [
+        "Satanism",
+        "contemporary culture",
+        "worship",
+        "cultural example"
+      ],
+      "doctrine": [
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        }
+      ],
+      "notes": "Retained as source-grounded sermon content. External factual claims are time-bound and were not independently verified for this archival analysis."
+    },
+    {
+      "id": "media-h88lwp.n021",
+      "type": "illustration",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "School outreach and After School Satan Clubs illustrate legal and cultural tension",
+      "summary": "Drawing from local ministry conversations, Good News Club, FCA, and After School Satan Clubs, the sermon illustrates how Christian and Satanist organizations can occupy the same legal-access environment and uses that contrast to prepare the congregation for the Beast's future worship.",
+      "start": 879.85,
+      "end": 1036.616,
+      "segmentIndexes": [
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343
+      ],
+      "scripture": [],
+      "topics": [
+        "school ministry",
+        "Good News Club",
+        "FCA",
+        "After School Satan Clubs",
+        "religious access",
+        "local ministry"
+      ],
+      "doctrine": [
+        "Ecclesiology",
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "church.evangelism",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        }
+      ],
+      "illustrationOrigin": "personal",
+      "illustrationForm": "example",
+      "notes": "The illustration includes time-bound local and legal claims. Preserve as Pastor Jacob's sermon illustration, not as a CGBC legal finding.",
+      "connections": [
+        {
+          "type": "illustrates",
+          "targetNodeRef": "media-h88lwp.n019",
+          "confidence": 0.91,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n022",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "People falling for the Beast should not surprise believers",
+      "summary": "The cultural illustration is summarized with the warning that the world's future attraction to the Beast should not surprise believers.",
+      "start": 1039.333,
+      "end": 1044.666,
+      "segmentIndexes": [
+        344,
+        345
+      ],
+      "scripture": [],
+      "topics": [
+        "Beast",
+        "deception",
+        "end times",
+        "worship"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "supporting"
+        }
+      ],
+      "spokenExact": "We shouldn't be surprised when the end comes when people just fall head over heels. For the beast.",
+      "displayText": "We shouldn’t be surprised when the end comes when people just fall head over heels for the beast.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "reviewNumber": 6,
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n019",
+          "confidence": 0.95,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n023",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Those who reject Jesus may be ready to receive the devil",
+      "summary": "The sermon warns that rejection of Jesus can prepare people for counterfeit spiritual allegiance.",
+      "start": 1068.0,
+      "end": 1073.516,
+      "segmentIndexes": [
+        353,
+        354
+      ],
+      "scripture": [],
+      "topics": [
+        "rejecting Jesus",
+        "devil",
+        "spiritual deception",
+        "warning"
+      ],
+      "doctrine": [
+        "Christology",
+        "Angelology",
+        "Soteriology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.response",
+          "significance": "supporting"
+        }
+      ],
+      "spokenExact": "Do not underestimate the readiness for those who reject Jesus to receive the devil.",
+      "displayText": "Do not underestimate the readiness for those who reject Jesus to receive the devil.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "featured",
+      "reviewNumber": 7,
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-h88lwp.n019",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n024",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Isaiah 14:14 exposes Satan's desire for divine likeness",
+      "summary": "Isaiah 14:14 is used to explain the worship scene of Revelation 13:4: Satan has long desired divine status, and the dragon empowers the Beast within that counterfeit ambition.",
+      "start": 1074.366,
+      "end": 1097.033,
+      "segmentIndexes": [
+        355,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362
+      ],
+      "scripture": [
+        "Isaiah 14:14",
+        "Revelation 13:4"
+      ],
+      "topics": [
+        "Satan's pride",
+        "Most High",
+        "worship",
+        "Beast's power"
+      ],
+      "doctrine": [
+        "Angelology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Satanic desire for divine status",
+          "significance": "primary",
+          "reason": "Pastor uses Isaiah 14:14 to interpret Satan's desire to be like the Most High."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Isaiah 14:14",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support"
+          ],
+          "significance": "primary",
+          "relatedTo": [
+            "Revelation 13:4"
+          ]
+        },
+        {
+          "reference": "Revelation 13:4",
+          "role": "primary-text",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "Isaiah 14:14"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n018",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        },
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n023",
+          "confidence": 0.86,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n025",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The Beast blasphemes God for forty-two months",
+      "summary": "Revelation 13:5-6 is interpreted as a sustained verbal assault on God's name and reputation during the final forty-two-month period of the Tribulation.",
+      "start": 1098.783,
+      "end": 1121.766,
+      "segmentIndexes": [
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369
+      ],
+      "scripture": [
+        "Revelation 13:5-6"
+      ],
+      "topics": [
+        "blasphemy",
+        "42 months",
+        "Great Tribulation",
+        "God's name"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.great-tribulation",
+          "significance": "primary"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Beast's blasphemy",
+          "significance": "primary",
+          "reason": "The sermon interprets Revelation 13:5-6 as the Beast's sustained attempt to defame God's name."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:5-6",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation",
+            "context"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n024",
+          "confidence": 0.9,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n026",
+      "type": "observation",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "A contemporary political example warns about distorted biblical language",
+      "summary": "The sermon uses an unnamed contemporary political figure as an example of mixing some truth with distortion and characterizes Scripture distortion that draws people away from Christ as demonic influence.",
+      "start": 1122.849,
+      "end": 1169.65,
+      "segmentIndexes": [
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        382,
+        383,
+        384,
+        385,
+        386
+      ],
+      "scripture": [],
+      "topics": [
+        "politics",
+        "distortion of Scripture",
+        "demonic influence",
+        "truth"
+      ],
+      "doctrine": [
+        "Bibliology",
+        "Angelology"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "bible.discernment",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "satan.deception",
+          "significance": "supporting"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "notes": "The transcript does not reliably preserve the person's name. No identity is assigned in the canonical record."
+    },
+    {
+      "id": "media-h88lwp.n027",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Second Thessalonians 2 connects the final period with apostasy and the man of lawlessness",
+      "summary": "Second Thessalonians 2:3-4 is used to connect Revelation's Beast with apostasy, the man of lawlessness, self-exaltation, and a claim to divine status in the temple.",
+      "start": 1170.783,
+      "end": 1192.266,
+      "segmentIndexes": [
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393
+      ],
+      "scripture": [
+        "2 Thessalonians 2:3-4",
+        "Revelation 13:5-6"
+      ],
+      "topics": [
+        "apostasy",
+        "man of lawlessness",
+        "son of destruction",
+        "temple",
+        "divine claims"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Man of lawlessness",
+          "significance": "primary",
+          "reason": "The sermon directly connects 2 Thessalonians 2:3-4 with the Beast's self-exalting end-times role."
+        },
+        {
+          "label": "Apostasy",
+          "significance": "supporting",
+          "reason": "The sermon cites apostasy as part of the end-times pattern."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "2 Thessalonians 2:3-4",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary",
+          "relatedTo": [
+            "Revelation 13:5-6"
+          ]
+        },
+        {
+          "reference": "Revelation 13:5-6",
+          "role": "primary-text",
+          "functions": [
+            "interpretation"
+          ],
+          "significance": "supporting",
+          "relatedTo": [
+            "2 Thessalonians 2:3-4"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n025",
+          "confidence": 0.97,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n028",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Words and deception can turn hearts away from the true God",
+      "summary": "The sermon applies the Beast's verbal assault to the present susceptibility of people to political rhetoric and known liars, arguing that after severe judgments it would not be difficult for deceptive words to turn hearts from the true God.",
+      "start": 1193.283,
+      "end": 1222.983,
+      "segmentIndexes": [
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403
+      ],
+      "scripture": [],
+      "topics": [
+        "deception",
+        "political rhetoric",
+        "words",
+        "heart",
+        "end times"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "bible.discernment",
+          "significance": "supporting"
+        }
+      ],
+      "applicationAudience": [
+        "all-listeners"
+      ],
+      "applicationFunction": [
+        "warning",
+        "reflection"
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-h88lwp.n027",
+          "confidence": 0.9,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n029",
+      "type": "scriptureTrail",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "First Timothy 4 describes later-times deception and doctrines of demons",
+      "summary": "First Timothy 4:1-2 is used as a cross-reference for end-times spiritual falling away, deceitful spirits, demonic doctrine, and hardened consciences.",
+      "start": 1222.983,
+      "end": 1237.2,
+      "segmentIndexes": [
+        404,
+        405,
+        406,
+        407,
+        408
+      ],
+      "scripture": [
+        "1 Timothy 4:1-2",
+        "Revelation 13:5-6"
+      ],
+      "topics": [
+        "later times",
+        "falling away",
+        "deceitful spirits",
+        "doctrines of demons",
+        "conscience"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Angelology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "satan.deception",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "End-times apostasy and demonic doctrine",
+          "significance": "primary",
+          "reason": "Pastor uses 1 Timothy 4:1-2 to interpret the spiritual environment surrounding the Beast's deception."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "1 Timothy 4:1-2",
+          "role": "cross-reference",
+          "functions": [
+            "context",
+            "doctrinal-support",
+            "application"
+          ],
+          "significance": "primary",
+          "relatedTo": [
+            "Revelation 13:5-6"
+          ]
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "supports",
+          "targetNodeRef": "media-h88lwp.n028",
+          "confidence": 0.94,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n030",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The Beast's verbal assault becomes physical persecution",
+      "summary": "Revelation 13:7 is read as a transition from blasphemy to physical war against the saints, with global authority over peoples and nations and forced religious allegiance.",
+      "start": 1238.349,
+      "end": 1269.299,
+      "segmentIndexes": [
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418
+      ],
+      "scripture": [
+        "Revelation 13:7"
+      ],
+      "topics": [
+        "persecution",
+        "saints",
+        "global authority",
+        "forced worship",
+        "minority believers"
+      ],
+      "doctrine": [
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "eschatology.great-tribulation",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Persecution under the Beast",
+          "significance": "primary",
+          "reason": "The sermon interprets Revelation 13:7 as physical war against the saints and forced allegiance."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:7",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n025",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n031",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Revelation 13:8 contrasts universal worship with the Lamb's book of life",
+      "summary": "The sermon emphasizes the division between earth-dwellers who worship the Beast and those whose names belong to the Lamb's book of life.",
+      "start": 1266.133,
+      "end": 1273.5,
+      "segmentIndexes": [
+        418,
+        419
+      ],
+      "scripture": [
+        "Revelation 13:8"
+      ],
+      "topics": [
+        "book of life",
+        "Lamb",
+        "worship",
+        "believers"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Soteriology",
+        "Christology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.atonement",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "salvation.assurance",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Book of life",
+          "significance": "primary",
+          "reason": "Revelation 13:8 is treated as the decisive contrast between Beast worship and belonging to the Lamb."
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:8",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n030",
+          "confidence": 0.91,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n032",
+      "type": "connection",
+      "provenance": "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "title": "Holman commentary contrasts the wounded Beast with the slain Lamb",
+      "summary": "The sermon cites the Holman New Testament Commentary to sharpen the contrast between the temporarily rampant evil of the wounded-and-healed monster and the eternally victorious Lamb whose sacrificial death is God's planned remedy for evil.",
+      "start": 1273.933,
+      "end": 1314.533,
+      "segmentIndexes": [
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432
+      ],
+      "scripture": [
+        "Revelation 13:8"
+      ],
+      "topics": [
+        "Lamb",
+        "Beast",
+        "problem of evil",
+        "atonement",
+        "eternal kingdom",
+        "victory"
+      ],
+      "doctrine": [
+        "Christology",
+        "Soteriology",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes",
+        "src-holman-nt-commentary"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christ.atonement",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.victory-in-christ",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christ.reign",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:8",
+          "role": "primary-text",
+          "functions": [
+            "interpretation",
+            "doctrinal-support"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n031",
+          "confidence": 0.94,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n033",
+      "type": "scripture",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Revelation 13:9-10 calls the saints to perseverance and faith",
+      "summary": "The closing verses are interpreted as a call for the saints to endure. The sermon identifies perseverance and faith as the response demanded in a period of captivity, violence, and persecution.",
+      "start": 1315.15,
+      "end": 1333.683,
+      "segmentIndexes": [
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439
+      ],
+      "scripture": [
+        "Revelation 13:9-10"
+      ],
+      "topics": [
+        "perseverance",
+        "faith",
+        "saints",
+        "captivity",
+        "persecution"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "supporting"
+        }
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:9-10",
+          "role": "primary-text",
+          "functions": [
+            "observation",
+            "interpretation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n031",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n034",
+      "type": "quote",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Persecution reveals the genuineness of faith",
+      "summary": "The sermon states that steadfastness under terrible persecution demonstrates the truth of the saints' faith.",
+      "start": 1327.683,
+      "end": 1333.683,
+      "segmentIndexes": [
+        438,
+        439
+      ],
+      "scripture": [
+        "Revelation 13:9-10"
+      ],
+      "topics": [
+        "steadfastness",
+        "faith",
+        "persecution",
+        "saints"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-quote-curation"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        }
+      ],
+      "spokenExact": "It is by the steadfastness of the saints, even in the midst of terrible and intense persecution that their faith is shown true.",
+      "displayText": "It is by the steadfastness of the saints, even in the midst of terrible and intense persecution, that their faith is shown true.",
+      "quoteCandidate": true,
+      "publicQuoteStatus": "approved",
+      "reviewNumber": 9,
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:9-10",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "supporting"
+        }
+      ],
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n033",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n035",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Present trials ask the same question: what comes out when life squeezes you?",
+      "summary": "The sermon distinguishes present hardship from the unprecedented persecution of the Tribulation, then applies the principle of perseverance by asking whether pressure produces worldly collapse or increased faith.",
+      "start": 1335.849,
+      "end": 1366.266,
+      "segmentIndexes": [
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "scripture": [
+        "Revelation 13:9-10"
+      ],
+      "topics": [
+        "trials",
+        "pressure",
+        "faith",
+        "perseverance",
+        "present application"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Eschatology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.present-faithfulness",
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "reflection",
+        "exhortation",
+        "encouragement"
+      ],
+      "scriptureCommentary": [
+        {
+          "reference": "Revelation 13:9-10",
+          "role": "primary-text",
+          "functions": [
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "applies",
+          "targetNodeRef": "media-h88lwp.n033",
+          "confidence": 0.99,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n036",
+      "type": "illustration",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "A sick church member is encouraged to turn struggle into testimony",
+      "summary": "Pastor Jacob recounts encouraging a very sick church member to write down what God was teaching him and eventually preach about God's goodness in the struggle; the member responded quickly with written material.",
+      "start": 1370.349,
+      "end": 1411.983,
+      "segmentIndexes": [
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465
+      ],
+      "scripture": [],
+      "topics": [
+        "suffering",
+        "testimony",
+        "God's goodness",
+        "sermon preparation",
+        "local church"
+      ],
+      "doctrine": [
+        "Sanctification",
+        "Theology Proper"
+      ],
+      "audiences": [
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "god.goodness",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        }
+      ],
+      "illustrationOrigin": "personal",
+      "illustrationForm": "story",
+      "notes": "The canonical summary intentionally avoids identifying the congregant by name.",
+      "connections": [
+        {
+          "type": "illustrates",
+          "targetNodeRef": "media-h88lwp.n035",
+          "confidence": 0.96,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n037",
+      "type": "application",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "Pressure reveals what the heart is producing",
+      "summary": "The sermon returns to the squeezing metaphor and warns that pressure can expose anger, jealousy, bitterness, resentment, lust, or other sin. The desired response is faith elevated above the pressure affecting individuals, families, and the church.",
+      "start": 1415.166,
+      "end": 1473.716,
+      "segmentIndexes": [
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481
+      ],
+      "scripture": [],
+      "topics": [
+        "pressure",
+        "heart response",
+        "faith",
+        "anger",
+        "bitterness",
+        "family",
+        "church"
+      ],
+      "doctrine": [
+        "Sanctification"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.faithfulness",
+          "significance": "primary"
+        },
+        {
+          "conceptId": "christian-life.spiritual-growth",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.present-faithfulness",
+          "significance": "primary"
+        }
+      ],
+      "applicationAudience": [
+        "believers",
+        "families-parents",
+        "church-members"
+      ],
+      "applicationFunction": [
+        "reflection",
+        "warning",
+        "exhortation",
+        "encouragement"
+      ],
+      "connections": [
+        {
+          "type": "buildsOn",
+          "targetNodeRef": "media-h88lwp.n035",
+          "confidence": 0.98,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-h88lwp.n038",
+      "type": "doctrine",
+      "provenance": "PASTOR — SPOKEN EXACT",
+      "title": "The sermon affirms removal of the Bride from the wrath to come",
+      "summary": "Near the close, Pastor Jacob states his belief that God will remove His Bride from the coming wrath while also warning that the world is setting up for these events and that persecution will come.",
+      "start": 1433.883,
+      "end": 1454.466,
+      "segmentIndexes": [
+        471,
+        472,
+        473,
+        474,
+        475,
+        476
+      ],
+      "scripture": [],
+      "topics": [
+        "Bride of Christ",
+        "wrath to come",
+        "rapture",
+        "persecution",
+        "end-times readiness"
+      ],
+      "doctrine": [
+        "Eschatology",
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "author",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-transcript",
+        "src-notes"
+      ],
+      "concepts": [
+        {
+          "conceptId": "christian-life.spiritual-vigilance",
+          "significance": "supporting"
+        },
+        {
+          "conceptId": "christian-life.hope",
+          "significance": "supporting"
+        }
+      ],
+      "conceptCandidates": [
+        {
+          "label": "Pretribulational removal of the Bride",
+          "significance": "primary",
+          "reason": "Pastor explicitly states his belief that God will remove His Bride from the wrath to come; no current permanent concept ID exists for this position."
+        }
+      ],
+      "teachingStance": "affirmed",
+      "connections": [
+        {
+          "type": "clarifies",
+          "targetNodeRef": "media-h88lwp.n037",
+          "confidence": 0.8,
+          "provenance": "ANALYSIS — SYNTHESIS"
+        }
+      ]
+    }
+  ],
+  "discover": [
+    {
+      "id": "discover.victory-frame",
+      "question": "Why does the sermon begin a frightening prophecy passage by talking about victory?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Pastor Jacob intentionally frames the whole lesson with the claim that Jesus has victory and God remains in control. The purpose is not to make listeners afraid of Revelation 13 but to direct them to trust Christ.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n001"
+      ],
+      "start": 24.033
+    },
+    {
+      "id": "discover.remnant-testimony",
+      "question": "How does Revelation 12:17 identify the remnant in this sermon?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon highlights two marks in the verse: they keep God's commandments and have the testimony of Jesus Christ. Pastor Jacob then applies that description by asking whether a believer's own testimony actually centers on Jesus.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n003",
+        "media-h88lwp.n004",
+        "media-h88lwp.n005"
+      ],
+      "scripture": [
+        "Revelation 12:17"
+      ],
+      "start": 129.599
+    },
+    {
+      "id": "discover.symbolic-sea",
+      "question": "Does the sermon treat the Beast from the Sea as a literal monster?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Not straightforwardly. Pastor Jacob says much of the description is symbolic and leaves the exact physical mechanism open. He interprets the sea/sand setting as humanity and the nations and the imagery as communicating Satanic dominion and concentrated power.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n007",
+        "media-h88lwp.n009"
+      ],
+      "scripture": [
+        "Revelation 13:1"
+      ],
+      "start": 406.683
+    },
+    {
+      "id": "discover.counterfeit-creation",
+      "question": "Why does the sermon connect Revelation 13 with Genesis 1?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Genesis 1 shows the Spirit of God over the waters bringing forth ordered creation. Revelation 13 is then read as a dark counterfeit: the dragon stands by the sea as the Beast emerges. The sermon uses this contrast to portray Satan as an imitator rather than an equal creator.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n008"
+      ],
+      "scripture": [
+        "Genesis 1:1-2",
+        "Revelation 13:1"
+      ],
+      "start": 447.3
+    },
+    {
+      "id": "discover.daniel7",
+      "question": "What does Daniel 7 contribute to the Beast imagery?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The leopard, bear, and lion point back to conquering kingdoms in Daniel 7. Pastor Jacob treats Revelation's Beast as combining that older imperial imagery into one composite monster representing concentrated political, military, and economic power.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n010",
+        "media-h88lwp.n014"
+      ],
+      "scripture": [
+        "Daniel 7",
+        "Revelation 13:2"
+      ],
+      "start": 540.366
+    },
+    {
+      "id": "discover.jesus-lord",
+      "question": "Why does Romans 10:9 matter in a sermon about the Beast?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Because the Beast's blasphemous titles claim divine status. Pastor Jacob sets that against the Christian confession 'Jesus is Lord' and explains that for Roman believers such a confession publicly rejected the emperor's rival claim to lordship.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n011",
+        "media-h88lwp.n012",
+        "media-h88lwp.n013"
+      ],
+      "scripture": [
+        "Romans 10:9",
+        "Revelation 13:1"
+      ],
+      "start": 583.033
+    },
+    {
+      "id": "discover.empire-individual",
+      "question": "Does the sermon understand the Beast as an empire or as an individual?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Both dimensions appear, but with different certainty. The revived-Roman-Empire view is reported as a strong scholarly interpretation. Pastor Jacob then more directly argues from Revelation 13:3-4 that the Beast also has a singular personal dimension and identifies that person with the Antichrist.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n014",
+        "media-h88lwp.n015",
+        "media-h88lwp.n016",
+        "media-h88lwp.n017"
+      ],
+      "scripture": [
+        "Revelation 13:1-4"
+      ],
+      "start": 671.35
+    },
+    {
+      "id": "discover.counterfeit-ruler",
+      "question": "Why would the world want to follow the Antichrist?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon argues that Satanic deception does not normally present itself as obviously grotesque. Satan counterfeits rulership attractively, so the symbolic monster in Revelation can correspond to a real leader whom people find persuasive and desirable to follow.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n018",
+        "media-h88lwp.n019",
+        "media-h88lwp.n022",
+        "media-h88lwp.n023"
+      ],
+      "scripture": [
+        "Revelation 13:3-4"
+      ],
+      "start": 780.133
+    },
+    {
+      "id": "discover.42months",
+      "question": "What is the significance of the forty-two months in Revelation 13:5-6?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Pastor Jacob places the Beast's blasphemous campaign in the final forty-two-month period of the Tribulation. Second Thessalonians 2 is then used to connect that self-exalting figure with the man of lawlessness and apostasy.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n025",
+        "media-h88lwp.n027"
+      ],
+      "scripture": [
+        "Revelation 13:5-6",
+        "2 Thessalonians 2:3-4"
+      ],
+      "start": 1098.783
+    },
+    {
+      "id": "discover.deception-apostasy",
+      "question": "How does 1 Timothy 4 fit the sermon’s picture of the end times?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The passage supplies a spiritual explanation for falling away: deceitful spirits, doctrines of demons, hypocrisy, and hardened conscience. Pastor Jacob uses it to show that the Beast's political power is also a spiritual-deception crisis.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n028",
+        "media-h88lwp.n029"
+      ],
+      "scripture": [
+        "1 Timothy 4:1-2"
+      ],
+      "start": 1217.049
+    },
+    {
+      "id": "discover.lamb-vs-beast",
+      "question": "What is the deepest contrast in Revelation 13:8 in this sermon?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "The sermon contrasts the wounded-and-healed monster, whose evil runs for a short period, with the Lamb whose sacrificial death is God's remedy for evil and whose kingdom endures forever. Evil is real and terrible, but it is temporary; the Lamb's victory is final.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n031",
+        "media-h88lwp.n032"
+      ],
+      "scripture": [
+        "Revelation 13:8"
+      ],
+      "start": 1263.066
+    },
+    {
+      "id": "discover.perseverance",
+      "question": "What does the sermon say persecution reveals about faith?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "Revelation 13:9-10 is applied as a call to steadfast faith. Pastor Jacob says intense persecution reveals the genuineness of the saints' faith and then asks the present-day question: when pressure squeezes a believer, a family, or the church, what comes out?",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n033",
+        "media-h88lwp.n034",
+        "media-h88lwp.n035",
+        "media-h88lwp.n036",
+        "media-h88lwp.n037"
+      ],
+      "scripture": [
+        "Revelation 13:9-10"
+      ],
+      "start": 1315.15
+    },
+    {
+      "id": "discover.rapture-stance",
+      "question": "What end-times position does Pastor Jacob state near the close?",
+      "questionOrigin": "ANALYSIS — GENERATED QUESTION",
+      "answer": "He explicitly states his belief that God will remove His Bride from the wrath to come. At the same time, he warns believers not to treat future persecution as remote and instead urges present faithfulness.",
+      "answerOrigin": "ANALYSIS — SYNTHESIS",
+      "nodeRefs": [
+        "media-h88lwp.n038",
+        "media-h88lwp.n037"
+      ],
+      "start": 1433.883
+    }
+  ],
+  "quotes": {
+    "reviewedBy": "Joel",
+    "reviewInput": "F3, 6, F7, 9",
+    "reviewRule": "Only Joel-selected recommendations receive durable Approved/Featured status. Curation status in config/quote-curation.json is authoritative.",
+    "featured": [
+      "manual-media-h88lwp-603-fd48f8d",
+      "manual-media-h88lwp-1068-aaacf11"
+    ],
+    "approved": [
+      "manual-media-h88lwp-1039-6e0fc93",
+      "manual-media-h88lwp-1327-6998429"
+    ],
+    "selected": [
+      {
+        "id": "manual-media-h88lwp-603-fd48f8d",
+        "nodeRef": "media-h88lwp.n012",
+        "status": "featured",
+        "reviewNumber": 3,
+        "spokenExact": "Your salvation is between you and the Lord, but it affects everybody around you.",
+        "displayText": "Your salvation is between you and the Lord, but it affects everybody around you.",
+        "start": 603.25,
+        "end": 606.666,
+        "segmentIndexes": [
+          198
+        ],
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-h88lwp&start=603.250&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-h88lwp&start=603.250&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=gZfqXpBrx4w&t=603s"
+      },
+      {
+        "id": "manual-media-h88lwp-1039-6e0fc93",
+        "nodeRef": "media-h88lwp.n022",
+        "status": "approved",
+        "reviewNumber": 6,
+        "spokenExact": "We shouldn't be surprised when the end comes when people just fall head over heels. For the beast.",
+        "displayText": "We shouldn’t be surprised when the end comes when people just fall head over heels for the beast.",
+        "start": 1039.333,
+        "end": 1044.666,
+        "segmentIndexes": [
+          344,
+          345
+        ],
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-h88lwp&start=1039.333&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-h88lwp&start=1039.333&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=gZfqXpBrx4w&t=1039s"
+      },
+      {
+        "id": "manual-media-h88lwp-1068-aaacf11",
+        "nodeRef": "media-h88lwp.n023",
+        "status": "featured",
+        "reviewNumber": 7,
+        "spokenExact": "Do not underestimate the readiness for those who reject Jesus to receive the devil.",
+        "displayText": "Do not underestimate the readiness for those who reject Jesus to receive the devil.",
+        "start": 1068.0,
+        "end": 1073.516,
+        "segmentIndexes": [
+          353,
+          354
+        ],
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-h88lwp&start=1068.000&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-h88lwp&start=1068.000&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=gZfqXpBrx4w&t=1068s"
+      },
+      {
+        "id": "manual-media-h88lwp-1327-6998429",
+        "nodeRef": "media-h88lwp.n034",
+        "status": "approved",
+        "reviewNumber": 9,
+        "spokenExact": "It is by the steadfastness of the saints, even in the midst of terrible and intense persecution that their faith is shown true.",
+        "displayText": "It is by the steadfastness of the saints, even in the midst of terrible and intense persecution, that their faith is shown true.",
+        "start": 1327.683,
+        "end": 1333.683,
+        "segmentIndexes": [
+          438,
+          439
+        ],
+        "audioDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-h88lwp&start=1327.683&autoplay=0",
+        "videoDeepLink": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-h88lwp&start=1327.683&autoplay=0",
+        "youtubeTimestamp": "https://www.youtube.com/watch?v=gZfqXpBrx4w&t=1327s"
+      }
+    ]
+  },
+  "authorCorpus": {
+    "purpose": "Private Pastor Jacob Lannom research corpus. Organize his source-grounded teaching without imitating his voice.",
+    "recurringTheses": [
+      {
+        "id": "author.thesis.01",
+        "statement": "Frightening eschatology should be framed by Christ's victory, God's control, and present trust rather than fear.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n001",
+          "media-h88lwp.n032",
+          "media-h88lwp.n037"
+        ]
+      },
+      {
+        "id": "author.thesis.02",
+        "statement": "Christian allegiance is publicly identifiable: testimony centers on Jesus Christ and confession of Jesus as Lord reshapes life in the surrounding world.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n003",
+          "media-h88lwp.n004",
+          "media-h88lwp.n005",
+          "media-h88lwp.n012",
+          "media-h88lwp.n013"
+        ]
+      },
+      {
+        "id": "author.thesis.03",
+        "statement": "Revelation 13 presents Satanic power as counterfeit creation and counterfeit kingship, imitating divine authority rather than matching God's power.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n007",
+          "media-h88lwp.n008",
+          "media-h88lwp.n009",
+          "media-h88lwp.n011",
+          "media-h88lwp.n019"
+        ]
+      },
+      {
+        "id": "author.thesis.04",
+        "statement": "The Beast is taught as concentrated political, military, and economic power with a personal Antichrist dimension; the revived-Roman-Empire identification is treated as a serious reported interpretation rather than an unqualified assertion.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n014",
+          "media-h88lwp.n015",
+          "media-h88lwp.n016",
+          "media-h88lwp.n017"
+        ]
+      },
+      {
+        "id": "author.thesis.05",
+        "statement": "Satanic deception seeks worship by making false authority attractive, distorting truth, and turning hearts from the true God.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n018",
+          "media-h88lwp.n019",
+          "media-h88lwp.n023",
+          "media-h88lwp.n024",
+          "media-h88lwp.n028",
+          "media-h88lwp.n029"
+        ]
+      },
+      {
+        "id": "author.thesis.06",
+        "statement": "The Beast's evil is severe but temporary; the Lamb's sacrificial victory and eternal kingdom are the controlling contrast.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n031",
+          "media-h88lwp.n032"
+        ]
+      },
+      {
+        "id": "author.thesis.07",
+        "statement": "Persecution and ordinary present trials reveal what faith is producing: steadfastness under pressure is evidence of faithfulness, and the desired response is faith elevated above fear, anger, bitterness, and other sinful reactions.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n033",
+          "media-h88lwp.n034",
+          "media-h88lwp.n035",
+          "media-h88lwp.n036",
+          "media-h88lwp.n037"
+        ]
+      },
+      {
+        "id": "author.thesis.08",
+        "statement": "Pastor Jacob affirms that the Bride will be removed from the coming wrath while still warning the church to expect increasing persecution and practice present spiritual vigilance.",
+        "status": "ANALYSIS — SYNTHESIS",
+        "nodeRefs": [
+          "media-h88lwp.n038",
+          "media-h88lwp.n037"
+        ]
+      }
+    ],
+    "topicClusters": [
+      "Revelation 13",
+      "Beast from the Sea",
+      "Antichrist",
+      "Daniel 7",
+      "counterfeit creation",
+      "counterfeit kingship",
+      "Satanic deception",
+      "Jesus is Lord",
+      "Roman imperial context",
+      "revived Roman Empire interpretation",
+      "forty-two months",
+      "apostasy",
+      "man of lawlessness",
+      "doctrines of demons",
+      "persecution of saints",
+      "book of life",
+      "Lamb slain from the foundation of the world",
+      "perseverance",
+      "faith under pressure",
+      "pretribulational removal of the Bride"
+    ],
+    "scriptureCommentaryCoverage": [
+      "Revelation 12:17",
+      "Revelation 13:1-10",
+      "Genesis 1:1-2",
+      "Daniel 7",
+      "Romans 10:9",
+      "Isaiah 14:14",
+      "2 Thessalonians 2:3-4",
+      "1 Timothy 4:1-2"
+    ],
+    "namedResources": [
+      {
+        "name": "International Theological Commentary",
+        "role": "counterfeit-creation interpretation support",
+        "nodeRefs": [
+          "media-h88lwp.n008"
+        ]
+      },
+      {
+        "name": "Holman New Testament Commentary",
+        "role": "Beast/Lamb contrast and victory interpretation support",
+        "nodeRefs": [
+          "media-h88lwp.n032"
+        ]
+      }
+    ],
+    "seriesRelationships": [
+      {
+        "relation": "previous-sermon",
+        "targetSermonId": "media-phykqw",
+        "targetTitle": "The Tribulation Pt. 13",
+        "evidenceNodeRef": "media-h88lwp.n002",
+        "note": "Pt. 14 opens by recapping the Revelation 12 players and conflict developed in Pt. 13 before moving directly into Revelation 13."
+      }
+    ],
+    "potentialLiteraryDestinations": [
+      "Counterfeit Kingdom: The Beast, the Dragon, and False Lordship",
+      "Jesus Is Lord: Public Allegiance in an Age of Counterfeit Authority",
+      "When Evil Looks Attractive: Spiritual Deception and Discernment",
+      "The Monster and the Lamb: Temporary Evil and Eternal Victory",
+      "When Life Squeezes You: Perseverance as the Proof of Faith"
+    ],
+    "rule": "Potential literary destinations are ANALYSIS — SYNTHESIS organizational suggestions, not titles or claims Pastor Jacob has adopted."
+  },
+  "search": {
+    "strategy": "Canonical semantic enrichment for future generated search indexes. Preserve the difference between literal transcript occurrence and semantic teaching.",
+    "primaryTerms": [
+      "The Tribulation Pt. 14",
+      "The Beast from the Sea",
+      "Revelation 13",
+      "Revelation 13:1-10",
+      "Revelation 12:17",
+      "remnant testimony",
+      "Jesus is Lord",
+      "Romans 10:9",
+      "Beast from the Sea",
+      "sea beast",
+      "seven heads ten horns",
+      "blasphemous names",
+      "Daniel 7",
+      "leopard bear lion",
+      "political military economic power",
+      "revived Roman Empire",
+      "Antichrist",
+      "counterfeit ruler",
+      "Satan worship",
+      "Isaiah 14:14",
+      "forty-two months",
+      "42 months",
+      "2 Thessalonians 2",
+      "man of lawlessness",
+      "apostasy",
+      "1 Timothy 4",
+      "doctrines of demons",
+      "war with the saints",
+      "book of life",
+      "Lamb slain from the foundation of the world",
+      "perseverance of the saints",
+      "steadfastness",
+      "when life squeezes you",
+      "pretribulation",
+      "Bride removed from wrath"
+    ],
+    "doctrineTerms": [
+      "Eschatology",
+      "Angelology",
+      "Christology",
+      "Soteriology",
+      "Pneumatology",
+      "Theology Proper",
+      "Sanctification",
+      "Ecclesiology",
+      "Bibliology"
+    ],
+    "conceptIds": [
+      "christ.lordship",
+      "christ.atonement",
+      "christ.reign",
+      "christian-life.victory-in-christ",
+      "christian-life.trust-god",
+      "christian-life.hope",
+      "christian-life.faithfulness",
+      "christian-life.present-faithfulness",
+      "christian-life.spiritual-vigilance",
+      "satan.deception",
+      "eschatology.great-tribulation",
+      "eschatology.remnant",
+      "salvation.gospel",
+      "salvation.response",
+      "bible.discernment"
+    ],
+    "conceptCandidates": [
+      "Beast from the Sea",
+      "Antichrist",
+      "Satanic counterfeit creation",
+      "Counterfeit rulership",
+      "Revived Roman Empire interpretation",
+      "Man of lawlessness",
+      "Apostasy",
+      "Persecution under the Beast",
+      "Book of life",
+      "Pretribulational removal of the Bride"
+    ],
+    "quoteSearchRefs": [
+      "manual-media-h88lwp-603-fd48f8d",
+      "manual-media-h88lwp-1039-6e0fc93",
+      "manual-media-h88lwp-1068-aaacf11",
+      "manual-media-h88lwp-1327-6998429"
+    ]
+  },
+  "provenance": {
+    "authorityOrder": [
+      "Scripture",
+      "Processed/raw sermon transcript for what was actually spoken",
+      "Logos preparation for intended structure and prepared material",
+      "CGBC official metadata and quote curation",
+      "Pastor-named external resources",
+      "CGBC doctrine taxonomy for classification only",
+      "Analysis synthesis/generated questions"
+    ],
+    "rules": [
+      "Do not present prepared wording as spoken exact unless transcript-confirmed.",
+      "Do not present generated questions or synthesis as Pastor Jacob's own words.",
+      "Do not use doctrine taxonomy aliases as proof of doctrine.",
+      "Preserve the reported-other-view stance on the revived Roman Empire interpretation.",
+      "Preserve the unresolved literal-mechanism question surrounding the symbolic Beast imagery.",
+      "Preserve external commentary attribution; do not silently absorb another author's wording into Pastor Jacob's commentary.",
+      "Treat contemporary cultural, legal, statistical, and political examples as time-bound sermon evidence unless independently verified elsewhere.",
+      "Store Scripture references and Pastor Jacob's interpretation rather than large blocks of KJV 1900 or NASB95 verse text."
+    ]
+  },
+  "editorialFlags": [
+    {
+      "id": "flag.no-slides",
+      "issue": "This is a Wednesday sermon and no sermon PowerPoint is used in the Wednesday workflow.",
+      "resolution": "slideMap is intentionally empty. No PPTX or slide derivatives are fabricated. art-wide.jpg is the default visual fallback."
+    },
+    {
+      "id": "flag.mixed-translations",
+      "issue": "The preparation notes use both KJV 1900 and NASB95 in this sermon.",
+      "resolution": "Preserve translation labels in scriptureMap and avoid large public verse-text reproduction in canonical knowledge."
+    },
+    {
+      "id": "flag.symbolic-beast",
+      "issue": "Pastor Jacob says much of Revelation 13's Beast imagery is symbolic and explicitly leaves open whether an actual literal beast emerges from the sea.",
+      "resolution": "Preserve that uncertainty. Do not turn the literal mechanism into an affirmed claim."
+    },
+    {
+      "id": "flag.revived-rome",
+      "issue": "The revived Roman Empire identification is introduced as a view held by many scholars and treated as difficult to dismiss, while the personal Antichrist interpretation is taught more directly.",
+      "resolution": "Store the empire view as reported-other-view and the individual/Antichrist teaching separately as affirmed."
+    },
+    {
+      "id": "flag.external-resources",
+      "issue": "The sermon names the International Theological Commentary and Holman New Testament Commentary without enough bibliographic detail in the supplied material to safely identify a specific volume/author.",
+      "resolution": "Normalize both named resources with identityStatus uncertain; retain attribution and do not invent resource IDs."
+    },
+    {
+      "id": "flag.contemporary-claims",
+      "issue": "The sermon includes time-bound cultural, legal, organizational, political, and statistical claims concerning Satanism, school clubs, Planned Parenthood, and a contemporary political figure.",
+      "resolution": "Preserve these as Pastor Jacob's sermon examples where relevant, but do not surface them as independently verified timeless facts. The politician's identity is left unresolved because the transcript is unclear."
+    },
+    {
+      "id": "flag.transcript-artifacts",
+      "issue": "The faithful transcript contains recognition artifacts such as 'Mito, Persia,' 'home of New Testament commentary,' and rough spoken grammar.",
+      "resolution": "Preserve exact wording only where needed for spokenExact evidence. Use preparation notes to normalize Medo-Persia and Holman New Testament Commentary in summaries without changing the sermon's meaning."
+    },
+    {
+      "id": "flag.rss-daniel-token",
+      "issue": "Published RSS metadata correctly lists the reference as Daniel 7, while the current resolved-library token expansion also contains an erroneous Daniel 1:7 token.",
+      "resolution": "Canonical knowledge preserves the authoritative raw reference Daniel 7. This package does not modify resolver code or generated search indexes."
+    }
+  ],
+  "implementation": {
+    "canonicalPath": "knowledge/2026/2026-10-14_the-tribulation-pt-14.json",
+    "oneSermonOneFile": true,
+    "generatedOutputsAreDisposable": true,
+    "sourceArchivePath": "Sermon Source Archive/2026/26_10_14/",
+    "sourceArchiveExpectedFiles": [
+      "Sermon Source Archive/2026/26_10_14/sermon-notes.pdf",
+      "Sermon Source Archive/2026/26_10_14/original-transcript.srt",
+      "Sermon Source Archive/2026/26_10_14/art-square.jpg",
+      "Sermon Source Archive/2026/26_10_14/art-wide.jpg"
+    ],
+    "slidesApplicable": false,
+    "futureConsumers": [
+      "CGBC Discover",
+      "Deep Dive",
+      "Search enrichment",
+      "Quote Engine 2.0",
+      "Private Pastor Jacob author corpus",
+      "Verse-centric Pastor Jacob commentary",
+      "Sermon Map / timeline projections"
+    ]
+  },
+  "presentation": {
+    "sourcePresentation": {
+      "applicable": false,
+      "reason": "Wednesday sermon workflow does not use a sermon PowerPoint for this service."
+    },
+    "slideAssets": {
+      "applicable": false,
+      "basePath": null,
+      "format": null,
+      "sizes": {},
+      "reason": "No source PPTX exists, so no slide derivatives are generated."
+    },
+    "defaultVisual": {
+      "archiveAsset": "Sermon Source Archive/2026/26_10_14/art-wide.jpg",
+      "displayWhen": "sermon_has_no_slide_presentation",
+      "role": "episode_artwork_fallback"
+    },
+    "timing": {
+      "model": "not_applicable",
+      "automaticPlacementThreshold": null,
+      "historicalClickPrecisionClaimed": false,
+      "chronologyGuardrail": null,
+      "explicitVisualCueCount": 0,
+      "notes": "No sermon slide deck exists. Transcript and semantic-node timing remain authoritative."
+    },
+    "scriptureDisplay": {
+      "translations": [
+        "KJV 1900",
+        "NASB95"
+      ],
+      "permissionMode": "reference_and_summary_only",
+      "fallback": "episode_artwork_plus_reference_translation_and_context_without_large_verse_text_reproduction",
+      "notes": "Canonical knowledge stores references and source-grounded commentary rather than large blocks of Bible text."
+    }
+  },
+  "presentationEnrichment": {
+    "type": "no_slide_presentation_ready_record",
+    "builtAgainstGitHubMain": "f295799067dcd0b910691c4d4911e7c45ff3f22a",
+    "sourcePptxSlides": 0,
+    "meaningfulSlideAssets": 0,
+    "normalizedBrandingSlides": [],
+    "slidesApplicable": false,
+    "notes": "Wednesday sermon: presentation metadata records the intentional absence of slides rather than fabricating a deck or timing."
+  }
+}
