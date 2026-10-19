@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-10-19T02:12:45.249Z",
+  "generatedAt": "2026-10-19T02:31:45.071Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 185,
-    "archiveItems": 185,
-    "videoMatchedItems": 177,
-    "transcriptMatchedItems": 52,
-    "quoteCandidateCount": 3862
+    "rssItems": 186,
+    "archiveItems": 186,
+    "videoMatchedItems": 178,
+    "transcriptMatchedItems": 53,
+    "quoteCandidateCount": 3937
   },
   "totals": {
     "audioPlaysTotal": 6293,
-    "audioEpisodesTotal": 185
+    "audioEpisodesTotal": 186
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Upon This Rock",
         "studyKey": null,
         "studyName": null,
-        "detectedFromEpisode": "media-28j0ye",
-        "detectedFromDate": "2026-10-04",
-        "detectedFromTitle": "Commitment (Cedar Grove Core Values)",
+        "detectedFromEpisode": "media-202jts",
+        "detectedFromDate": "2026-10-18",
+        "detectedFromTitle": "Accountability (Cedar Grove Core Values)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -95,6 +95,219 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-202jts",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/qaz6j955373shghp/26_10_18_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/1d4187bc-e808-31a1-a5f3-941b4d02d047"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/accountability-upon-this-rock/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/accountability-upon-this-rock/"
+      },
+      "title": {
+        "episodeName": "Accountability",
+        "subtitle": "Cedar Grove Core Values",
+        "display": "Accountability (Cedar Grove Core Values)"
+      },
+      "series": {
+        "name": "Upon This Rock",
+        "key": "upon-this-rock",
+        "type": "topical"
+      },
+      "study": {
+        "name": "",
+        "key": null,
+        "type": "none"
+      },
+      "scripture": {
+        "raw": "Various",
+        "display": "Selected Scriptures",
+        "book": null,
+        "bookKey": null,
+        "isVarious": true
+      },
+      "references": {
+        "raw": "Hebrews 10:23-25, Philippians 2:2, Romans 3:10, Romans 5:1, 1 Thessalonians 4:3-7, 2",
+        "display": "Hebrews 10:23-25, Philippians 2:2, Romans 3:10, Romans 5:1, 1 Thessalonians 4:3-7, 2",
+        "tokens": [
+          "Hebrews 10:23-25",
+          "Hebrews 10:23",
+          "Hebrews 10:24",
+          "Hebrews 10:25",
+          "Philippians 2:2",
+          "Romans 3:10",
+          "Romans 5:1",
+          "1 Thessalonians 4:3-7",
+          "1 Thessalonians 4:3",
+          "1 Thessalonians 4:4",
+          "1 Thessalonians 4:5",
+          "1 Thessalonians 4:6",
+          "1 Thessalonians 4:7",
+          "1 Thessalonians 4:2"
+        ],
+        "searchTokens": [
+          "Hebrews 10:23-25",
+          "Hebrews 10:23",
+          "Hebrews 10:24",
+          "Hebrews 10:25",
+          "Philippians 2:2",
+          "Romans 3:10",
+          "Romans 5:1",
+          "1 Thessalonians 4:3-7",
+          "1 Thessalonians 4:3",
+          "1 Thessalonians 4:4",
+          "1 Thessalonians 4:5",
+          "1 Thessalonians 4:6",
+          "1 Thessalonians 4:7",
+          "1 Thessalonians 4:2"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Hebrews 10:23-25",
+          "Hebrews 10:23",
+          "Hebrews 10:24",
+          "Hebrews 10:25",
+          "Philippians 2:2",
+          "Romans 3:10",
+          "Romans 5:1",
+          "1 Thessalonians 4:3-7",
+          "1 Thessalonians 4:3",
+          "1 Thessalonians 4:4",
+          "1 Thessalonians 4:5",
+          "1 Thessalonians 4:6",
+          "1 Thessalonians 4:7",
+          "1 Thessalonians 4:2"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Hebrews",
+          "key": "hebrews"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Colossians",
+          "key": "colossians"
+        },
+        {
+          "name": "Proverbs",
+          "key": "proverbs"
+        },
+        {
+          "name": "Galatians",
+          "key": "galatians"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "10/18/2026",
+        "iso": "2026-10-18",
+        "year": 2026,
+        "month": 10,
+        "monthName": "October",
+        "day": 18
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-10-18.srt",
+            "cleanFile": "transcripts_clean/en/2026-10-18_accountability.srt",
+            "displayFile": "transcripts_display/en/2026-10-18_accountability.srt",
+            "jsonFile": "data/transcripts/en/2026-10-18_accountability.json",
+            "displayJsonFile": "data/transcripts/en/2026-10-18_accountability.display.json",
+            "segmentCount": 784,
+            "displaySegmentCount": 699
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-10-18.srt",
+        "cleanFile": "transcripts_clean/en/2026-10-18_accountability.srt",
+        "displayFile": "transcripts_display/en/2026-10-18_accountability.srt",
+        "jsonFile": "data/transcripts/en/2026-10-18_accountability.json",
+        "displayJsonFile": "data/transcripts/en/2026-10-18_accountability.display.json",
+        "segmentCount": 784,
+        "displaySegmentCount": 699
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/qaz6j955373shghp/26_10_18_S.mp3",
+        "plays": 0,
+        "durationSeconds": 2205,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "2AzLvlDC3vI",
+        "url": "https://www.youtube.com/watch?v=2AzLvlDC3vI",
+        "views": 1
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/261018_square.jpg",
+          "wide": "https://i.ytimg.com/vi/2AzLvlDC3vI/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/09_06_25_Sun_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/uuZCiD879I8/maxresdefault.jpg"
+        },
+        "study": {
+          "square": null,
+          "wide": null
+        }
+      },
+      "memberships": {
+        "series": [
+          "upon-this-rock"
+        ],
+        "studies": [],
+        "bibleBooks": [
+          "hebrews",
+          "philippians",
+          "romans",
+          "1-thessalonians",
+          "2-corinthians",
+          "colossians",
+          "proverbs",
+          "galatians"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-10"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-h88lwp",
       "sourceKey": {
