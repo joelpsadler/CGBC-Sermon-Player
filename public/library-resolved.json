@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T02:53:14.596Z",
+  "generatedAt": "2026-10-19T08:13:59.217Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 186,
@@ -9,7 +9,7 @@
     "quoteCandidateCount": 3941
   },
   "totals": {
-    "audioPlaysTotal": 6294,
+    "audioPlaysTotal": 6296,
     "audioEpisodesTotal": 186
   },
   "current": {
@@ -303,7 +303,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/qaz6j955373shghp/26_10_18_S.mp3",
-        "plays": 0,
+        "plays": 1,
         "durationSeconds": 2205,
         "statsMatchStrategy": "media_url"
       },
@@ -311,7 +311,7 @@
         "hasVideo": true,
         "youtubeId": "2AzLvlDC3vI",
         "url": "https://www.youtube.com/watch?v=2AzLvlDC3vI",
-        "views": 1
+        "views": 2
       },
       "art": {
         "episode": {
@@ -7600,7 +7600,7 @@
         "hasVideo": true,
         "youtubeId": "5Pq9emGc8lk",
         "url": "https://www.youtube.com/watch?v=5Pq9emGc8lk",
-        "views": 6
+        "views": 7
       },
       "art": {
         "episode": {
@@ -21105,7 +21105,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/2fq6ucd6umd8jen2/1215Podcast9dam7.mp3",
-        "plays": 31,
+        "plays": 32,
         "durationSeconds": 2266,
         "statsMatchStrategy": "media_url"
       },
