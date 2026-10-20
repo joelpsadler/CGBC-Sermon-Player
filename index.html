@@ -6010,52 +6010,29 @@ function nextIdleQuote(){
   </script>
 
   <script>
-    /* CGBC Knowledge Explorer entrance (desktop only).
-       1 click: existing navigation reset; 3 clicks: existing quote review;
-       5 clicks: beta lab, after a convenience passcode prompt.
-       Wait briefly before the 3-click action so a 5-click sequence can finish.
-       This client-side prompt is NOT security; never publish private research data. */
-    (function setupLogoShortcuts(){
+    /* Desktop logo: original three-click Quote Review shortcut; single click resets. */
+    (function setupQuoteReviewPageShortcut(){
       const logo = document.getElementById('logoReset');
       if(!logo || logo.dataset.quoteReviewShortcut === 'true') return;
       logo.dataset.quoteReviewShortcut = 'true';
       let clicks = 0, timer = null;
-      const CLICK_GAP_MS = 600;
       function isDesktop(){ return window.matchMedia && window.matchMedia('(min-width:901px)').matches; }
-      function resetNavigation(){
-        // Reuse the original reset handler already attached to this logo.
-        logo.click();
-      }
-      function openLab(){
-        const entered = window.prompt('CGBC Knowledge Explorer access code:');
-        if(entered === null) return;
-        if(entered.trim() === '1814') window.location.href = 'knowledge-lab.html';
-        else window.alert('Incorrect access code.');
-      }
       logo.addEventListener('click', function(event){
-        if(!isDesktop()) return; // Mobile retains its original reset behavior.
-        // A synthetic reset click must pass through to the original handler.
-        if(logo.dataset.logoResetPassThrough === 'true') return;
+        if(!isDesktop()) return;
         event.preventDefault();
         event.stopImmediatePropagation();
         clicks += 1;
         clearTimeout(timer);
-        if(clicks >= 5){
+        if(clicks >= 3){
           clicks = 0;
-          openLab();
+          window.location.href = 'quote-review.html';
           return;
         }
         timer = setTimeout(function(){
-          const count = clicks;
           clicks = 0;
-          if(count >= 3){
-            window.location.href = 'quote-review.html';
-          } else {
-            logo.dataset.logoResetPassThrough = 'true';
-            try { resetNavigation(); }
-            finally { delete logo.dataset.logoResetPassThrough; }
-          }
-        }, CLICK_GAP_MS);
+          if(typeof hardResetPage === 'function') hardResetPage();
+          else window.location.href = window.location.origin + window.location.pathname;
+        }, 420);
       }, true);
     })();
   </script>
