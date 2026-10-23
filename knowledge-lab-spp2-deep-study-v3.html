@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGBC Knowledge Lab | SPP2 Deep Study v3</title>
+<style>
+:root{
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  color-scheme:dark;
+  --bg:#0b1522;--panel:#102536;--panel2:#0c1f2f;--line:#31536a;
+  --text:#eaf3f8;--muted:#a8bfcd;--accent:#afe4f6;--gold:#f4c76f;
+  --violet:#c8b2ff;--green:#9fe0ba;--blue:#9acfff;--warn:#f0c37a;
+  --red:#ee9c9c
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 85% 0,#17334a,var(--bg) 65%);color:var(--text);min-height:100vh}
+a{color:#a8ddff}
+button{font:inherit}
+header{
+  padding:18px clamp(14px,3vw,38px);border-bottom:1px solid #284459;
+  display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap
+}
+.eyebrow{font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;color:#8fbed6;font-weight:800}
+h1{font-size:clamp(1.55rem,3vw,2.35rem);margin:4px 0}
+header p{margin:4px 0;color:#bfd0db}
+.back{background:#b4e6f7;color:#102432;font-weight:850;text-decoration:none;border-radius:10px;padding:11px 15px}
+.wrap{max-width:1420px;margin:auto;padding:18px clamp(10px,2.5vw,32px) 60px}
+.hero{
+  border:1px solid #37627a;border-radius:16px;padding:17px 18px;margin:10px 0 18px;
+  background:linear-gradient(135deg,#17394e,#112638)
+}
+.hero strong{color:#d8f5ff}
+.status{font-size:.84rem;color:#b8d0de;margin:10px 0 14px}
+.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 18px;position:sticky;top:0;z-index:10;padding:8px;background:#0b1522ed;backdrop-filter:blur(10px)}
+.toolbar button{
+  background:#172e40;border:1px solid #41647a;color:#edf7fb;border-radius:9px;padding:8px 11px;cursor:pointer
+}
+.toolbar button[aria-pressed=true]{background:var(--accent);color:#102637;font-weight:850}
+.study-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:15px 0;overflow:hidden;
+  box-shadow:0 10px 35px #0002
+}
+.study-head{padding:18px 18px 14px;border-bottom:1px solid #2d4b5f}
+.refline{font-size:.77rem;color:#afc8d7;margin-bottom:7px}
+.study-head h2{font-size:1.25rem;margin:0 0 12px}
+.jake-core{
+  background:#122c3c;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 14px;margin:11px 0
+}
+.jake-core .tag{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#ffe2a4;font-weight:800}
+.jake-core blockquote{font-size:1.08rem;line-height:1.55;margin:8px 0 5px;color:#fff}
+.jake-core .clean{font-size:.78rem;color:#b7cad5}
+.explain{font-size:.98rem;line-height:1.62;margin:10px 0;color:#e8f3f8}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.action{
+  display:inline-block;text-decoration:none;background:#172e40;border:1px solid #41647a;border-radius:8px;
+  padding:7px 10px;font-size:.78rem;color:#d9effa
+}
+.scripture-stack{padding:15px 18px 18px}
+.scripture-card{background:var(--panel2);border:1px solid #355d74;border-radius:12px;margin:12px 0;overflow:hidden}
+.scripture-title{padding:11px 12px;border-bottom:1px solid #31536a;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.scripture-title strong{font-size:.95rem}
+.translation{font-size:.7rem;color:#a9c4d4;border:1px solid #476b80;border-radius:999px;padding:3px 7px}
+.verse-text{font-family:Georgia,serif;font-size:1rem;line-height:1.68;padding:13px 14px;color:#f0f4f7;background:#0d2232}
+.quick-tools{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;background:#10293b;border-top:1px solid #2d5065}
+.quick-tools button{
+  cursor:pointer;background:#173247;border:1px solid #41677d;color:#e6f4fb;border-radius:999px;padding:6px 9px;font-size:.73rem
+}
+.quick-tools button[aria-pressed=true]{background:#b5e9f8;color:#102535;font-weight:850}
+.tool-panel{padding:12px 14px;border-top:1px solid #2d5065;line-height:1.55;font-size:.87rem}
+.tool-panel h4{margin:0 0 7px;color:#d7eef9;font-size:.83rem;text-transform:uppercase;letter-spacing:.06em}
+.tool-panel p{margin:6px 0}
+.word-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.word{background:#102b3d;border:1px solid #385e74;border-radius:9px;padding:9px}
+.word b{color:#fff}
+.word small{display:block;color:#a9c4d4;margin-top:3px}
+.independent{border-left:3px solid var(--violet);padding-left:10px}
+.commentary{border-left:3px solid var(--green);padding-left:10px}
+.warning{border-left:3px solid var(--warn);background:#382d1f;padding:9px 10px;border-radius:0 7px 7px 0}
+.evidence{border-left:3px solid var(--blue);padding-left:10px}
+.hidden{display:none!important}
+.editor{background:#12283a;border:1px solid #355b70;border-radius:13px;padding:14px;margin-top:16px}
+.editor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
+.metric{background:#0d2030;border:1px solid #35566b;border-radius:10px;padding:11px}
+.metric b{display:block;font-size:1.3rem;color:#d7f2ff}
+.good{color:#a6e5bd}.muted{color:var(--muted)}
+@media(max-width:760px){.study-head,.scripture-stack{padding-left:11px;padding-right:11px}.toolbar{position:static}.jake-core blockquote{font-size:1rem}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">Cedar Grove Baptist Church · Knowledge Lab · SPP2 Deep Study Pilot</div>
+    <h1>Relationships</h1>
+    <p>Pastor Jake’s teaching first · Scripture visible · Joel Quick Tools everywhere a specific passage matters</p>
+  </div>
+  <a class="back" href="knowledge-lab-spp2-listener-v2.html">← Listener v2</a>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <strong>What this pilot is testing:</strong>
+    whether the deeper SPP2 research can make the sermon easier to understand without turning the page into commentary about the sermon.
+    Jake’s own words lead. Specific Scripture is shown. Deeper language, context, commentary checks, and evidence are one tap away.
+  </div>
+
+  <div id="status" class="status">Loading current Relationships knowledge…</div>
+
+  <div class="toolbar">
+    <button data-mode="study" aria-pressed="true">Deep study</button>
+    <button data-mode="compact">Compact</button>
+    <button data-mode="open">Open all tools</button>
+    <button data-mode="editor">Editor check</button>
+  </div>
+
+  <section id="studies"></section>
+
+  <section id="editorPanel" class="editor hidden">
+    <h2>Editor check</h2>
+    <div id="metrics" class="editor-grid"></div>
+    <p class="muted">The public-facing study text below is a projection. Canonical provenance, uncertainty, and the full SPP2 research remain in the sermon JSON.</p>
+  </section>
+</main>
+
+<script>
+'use strict';
+
+const DATA='knowledge/2026/2026-09-20_relationships.json';
+const $=id=>document.getElementById(id);
+const arr=v=>Array.isArray(v)?v:[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let doc=null;
+
+const studies={
+'relationships.spp2.d011':{
+  core:'The rock upon which we stand is Jesus Himself.',
+  coreNote:'Exact sermon wording, lightly capitalized.',
+  explain:'If we get Jesus wrong, everything built on top of that foundation is wrong. Church identity, values, methods, and growth all depend on who Jesus is.',
+  verses:[
+    {
+      ref:'Matthew 16:15–19',
+      text:'15 He saith unto them, But whom say ye that I am? 16 And Simon Peter answered and said, Thou art the Christ, the Son of the living God. 17 And Jesus answered and said unto him, Blessed art thou, Simon Barjona: for flesh and blood hath not revealed it unto thee, but my Father which is in heaven. 18 And I say also unto thee, That thou art Peter, and upon this rock I will build my church; and the gates of hell shall not prevail against it. 19 And I will give unto thee the keys of the kingdom of heaven: and whatsoever thou shalt bind on earth shall be bound in heaven: and whatsoever thou shalt loose on earth shall be loosed in heaven.',
+      keywords:[
+        ['Christ','Χριστός · Christos · G5547','Messiah / Anointed One; Peter’s confession identifies Jesus.'],
+        ['Peter','Πέτρος · Petros · G4074','Peter’s name in Jesus’ direct response.'],
+        ['rock','πέτρα · petra · G4073','The “rock” language is real wordplay; grammar alone does not settle every historical interpretation.'],
+        ['I will build','οἰκοδομήσω · oikodomēsō · G3618','Jesus is explicitly the builder of His church.']
+      ],
+      context:'Matthew 16:13–28 moves from Peter’s confession to Jesus’ promise, then immediately to Jesus predicting His suffering and rebuking Peter. The foundation discussion belongs inside that whole Christ-centered scene.',
+      commentary:'Historical interpreters do not all identify “this rock” in exactly the same way. JFB and Matthew Henry both recognize more complexity than a simple “Peter cannot be involved because the words differ” argument. This is a deeper interpretive note, not a reason to rewrite Jake’s sermon claim.',
+      jake:'“The rock upon which we stand is Jesus himself. He is the chief cornerstone of the church… If you’ve got Jesus wrong, you’ve got it all wrong.”',
+      related:'Christ as foundation · church identity · Christology · Upon This Rock series'
+    }
+  ],
+  study:'Independent study adds a qualification: Matthew 16 addresses Peter directly and contains genuine Peter/rock wordplay. That does not erase the sermon’s Christ-centered foundation emphasis, but the Greek alone should not be used to claim the Peter question is automatically settled.'
+},
+'relationships.spp2.d012':{
+  core:'You must love people no matter the condition they are in. This does not mean that we tolerate or support their sins.',
+  coreNote:'Exact sermon wording with punctuation cleanup.',
+  explain:'The sermon holds love and truth together. Love is not conditioned on whether the other person responds the way we want, but love also does not require pretending destructive choices are good.',
+  verses:[
+    {
+      ref:'John 15:12–13',
+      text:'12 This is my commandment, That ye love one another, as I have loved you. 13 Greater love hath no man than this, that a man lay down his life for his friends.',
+      keywords:[
+        ['love','ἀγαπᾶτε · agapate · G25','Present active subjunctive in the command clause; the model is Jesus’ prior self-giving love.'],
+        ['loved','ἠγάπησα · ēgapēsa · G25','Jesus’ own love is the pattern for the disciples.']
+      ],
+      context:'John 15 is part of Jesus’ farewell teaching to the disciples. Abiding, obedience, fruit, friendship, and love belong together.',
+      commentary:'Historical commentary broadly supports self-giving love as the controlling idea. No distinct commentator contribution needs to be inserted into the sermon voice.',
+      jake:'“Our love is not predicated or dependent on someone’s response to our love.”',
+      related:'Romans 5:8 · Ephesians 2:1–5 · 1 Corinthians 13:4–7 · unconditional love · truth and love'
+    },
+    {
+      ref:'Romans 5:8',
+      text:'But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us.',
+      keywords:[
+        ['sinners','ἁμαρτωλῶν · hamartōlōn · G268','Genitive masculine plural, functioning substantivally: “sinners.”'],
+        ['while we were','ὄντων · ontōn · G1510','With “sinners,” forms the idea “while we were sinners.”']
+      ],
+      context:'Romans 5:1–11 describes justification, peace with God, hope, and God’s love demonstrated through Christ’s death for the ungodly.',
+      commentary:'The sermon’s main point is supported: God’s love precedes moral cleanup. The lexical nuance is that Paul describes people as sinners, not merely isolated sinful behaviors.',
+      jake:'“God loved us even before He saved us.”',
+      related:'grace · sinful condition · salvation · love before cleanup'
+    },
+    {
+      ref:'1 Corinthians 13:4–7',
+      text:'4 Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up, 5 Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil; 6 Rejoiceth not in iniquity, but rejoiceth in the truth; 7 Beareth all things, believeth all things, hopeth all things, endureth all things.',
+      keywords:[
+        ['suffereth long','μακροθυμεῖ · makrothymei · G3114','Patient endurance toward people.'],
+        ['rejoiceth with the truth','συγχαίρει… τῇ ἀληθείᾳ','Love is not detached from truth.']
+      ],
+      context:'Paul is correcting a gifted but divided Corinthian church. The chapter sits inside a larger discussion of spiritual gifts, rivalry, and love.',
+      commentary:'JFB and Henry both emphasize patience, kindness, restraint, and truth. Their agreement is corroboration, not a public attribution requirement for Jake’s independently taught point.',
+      jake:'“Unconditional love is not afraid of saying the tough truth in a loving way.”',
+      related:'Christian love · correction · truth · church relationships'
+    }
+  ],
+  study:'The deeper qualification is practical: Scripture supports love joined with truth, but it does not automatically make every confrontation wise, timely, or loving.'
+},
+'relationships.spp2.d013':{
+  core:'We’ve gotta go deeper. Don’t just believe something because someone you liked or followed told you that’s what to believe. Go to God’s Word, learn from Him.',
+  coreNote:'Exact sermon wording with light cleanup.',
+  explain:'Learning God’s Word is personal. Church teaching cannot replace personally seeking God in Scripture, and that responsibility extends into the home.',
+  verses:[
+    {
+      ref:'Psalm 25:4–5',
+      text:'4 Shew me thy ways, O LORD; teach me thy paths. 5 Lead me in thy truth, and teach me: for thou art the God of my salvation; on thee do I wait all the day.',
+      keywords:[
+        ['show / make known','הוֹדִיעֵנִי · hôḏîʿēnî · H3045','Hiphil imperative: “cause me to know / make known to me.”'],
+        ['teach me','לַמְּדֵנִי · lamməḏēnî · H3925','Piel imperative: an active plea for God to teach.'],
+        ['lead me','הַדְרִיכֵנִי · haḏrîḵēnî · H1869','Hiphil imperative: “guide / lead me.”']
+      ],
+      context:'Psalm 25 is a Davidic acrostic prayer about trust, confession, guidance, covenant mercy, and waiting on the LORD. Verses 4–5 are prayer, not merely a study technique.',
+      commentary:'The SPP2 review did not pin a verse-specific JFB/Henry payload here. Independent Hebrew analysis supports the emphasis on dependence, teachability, and guidance.',
+      jake:'“Make me know Your ways, O Lord. Teach me Your paths. Lead me in Your truth and teach me…” followed by “You cannot increasingly learn about God and stay the same.”',
+      related:'personal Bible study · family discipleship · hunger for God’s Word · Bibliology'
+    }
+  ],
+  study:'Important evidence note: Jake says “Psalm 24:4–5” aloud, but the words he recites, the prepared notes, and slide 26 are Psalm 25:4–5. The transcript should preserve what was spoken while the study surface points to the correct passage.'
+},
+'relationships.spp2.d014':{
+  core:'Not everyone’s a pastor. But everyone’s a proclaimer of truth.',
+  coreNote:'Exact sermon wording.',
+  explain:'Holding a pastoral office and proclaiming the gospel are not the same thing. The sermon’s point is that ordinary believers can tell the truth about Christ.',
+  verses:[
+    {
+      ref:'Mark 16:14–15',
+      text:'14 Afterward he appeared unto the eleven as they sat at meat, and upbraided them with their unbelief and hardness of heart, because they believed not them which had seen him after he was risen. 15 And he said unto them, Go ye into all the world, and preach the gospel to every creature.',
+      keywords:[
+        ['preach / proclaim','κηρύξατε · kēryxate · G2784','Aorist active imperative, second person plural: proclaim / herald the gospel.']
+      ],
+      context:'In the traditional longer ending of Mark, the risen Jesus addresses the Eleven. The immediate grammatical audience is the disciples in that scene.',
+      commentary:'The main lexical point is sound: κηρύσσω is proclamation language, not a technical definition of pastoral office. Broader application to every believer rests on the wider New Testament witness, not on this verb alone.',
+      jake:'“Not everyone’s a pastor. But everyone’s a preacher… not everyone’s a pastor, but everyone’s a proclaimer of truth.”',
+      related:'gospel proclamation · every-member ministry · Matthew 28:18–20 · Romans 10:13–15'
+    }
+  ],
+  study:'Textual note: Mark 16:9–20 has a well-known manuscript-history question. That should stay available in deeper study without hijacking the sermon’s first-layer point.'
+},
+'relationships.spp2.d015':{
+  core:'Go, therefore, and make disciples… baptizing them… teaching them to observe all that I commanded you.',
+  coreNote:'Jake reads the Great Commission directly from Matthew 28.',
+  explain:'The mission does not stop with a decision. The text itself describes disciple-making that includes baptism and teaching people to obey Jesus.',
+  verses:[
+    {
+      ref:'Matthew 28:18–20',
+      text:'18 And Jesus came and spake unto them, saying, All power is given unto me in heaven and in earth. 19 Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost: 20 Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.',
+      keywords:[
+        ['make disciples','μαθητεύσατε · mathēteusate · G3100','Aorist active imperative: the central command.'],
+        ['going','πορευθέντες · poreuthentes · G4198','Participial form accompanying the disciple-making commission.'],
+        ['baptizing','βαπτίζοντες · baptizontes · G907','Present active participle describing the disciple-making mission.'],
+        ['teaching','διδάσκοντες · didaskontes · G1321','Present active participle: teaching disciples to obey Jesus.']
+      ],
+      context:'Matthew closes with the risen Jesus speaking to the Eleven in Galilee. His universal authority and enduring presence frame the commission.',
+      commentary:'Historical commentary supports the broad mission under Christ’s authority. The grammar clarifies that disciple-making is central and that baptizing and teaching belong inside that mission.',
+      jake:'Jake reads the passage, then presses the church toward “leading others to Christ continually.”',
+      related:'Great Commission · discipleship · baptism · teaching · church mission'
+    }
+  ],
+  study:'The fuller disciple-formation emphasis is a legitimate biblical insight from the passage, but Jake does not extensively develop the Greek structure in this sermon. That extra layer should remain visibly independent.'
+},
+'relationships.spp2.d016':{
+  core:'How will they believe in Him whom they have not heard? … How will they preach unless they are sent?',
+  coreNote:'Jake reads Paul’s chain and then asks, “When’s the last time you brought the good news?”',
+  explain:'Paul connects calling on Christ with believing, hearing, proclamation, and sending. The sermon turns that chain into a direct challenge to bring the good news.',
+  verses:[
+    {
+      ref:'Romans 10:13–15',
+      text:'13 For whosoever shall call upon the name of the Lord shall be saved. 14 How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard? and how shall they hear without a preacher? 15 And how shall they preach, except they be sent? as it is written, How beautiful are the feet of them that preach the gospel of peace, and bring glad tidings of good things!',
+      keywords:[
+        ['call','ἐπικαλέσηται · epikalesētai · G1941','Aorist middle subjunctive: whoever calls on the Lord.'],
+        ['hear','ἀκούσωσιν · akousōsin · G191','Aorist active subjunctive: hearing is part of Paul’s rhetorical chain.'],
+        ['preaching','κηρύσσοντος · kēryssontos · G2784','Present active participle: a herald / proclaimer bringing the message.']
+      ],
+      context:'Romans 9–11 deals with Israel, the righteousness of faith, the reach of the gospel, and Jew-Gentile questions. Romans 10:13–15 is part of that larger argument.',
+      commentary:'JFB emphasizes the logical chain from calling to faith, hearing, proclamation, and sending, especially in the mission to the Gentiles. That historical comparison corroborates the structure already visible in Paul’s argument.',
+      jake:'“That word preacher? Proclaimer of truth… When’s the last time you brought the good news?” Later: “How other people receive the good news is not up to us. We can let God handle that.”',
+      related:'evangelism · sending · proclamation · faith · obedience · church mission'
+    }
+  ],
+  study:'The sermon application is strong, but the passage should not be reduced to a generic evangelism slogan. Paul’s larger Jew-Gentile argument and the sending motif remain part of the context.'
+}
+};
+
+function time(s){if(s==null||!Number.isFinite(Number(s)))return '';s=Number(s);return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')}
+function listen(start,label='Listen'){return start==null?'':'<a class="action" target="_blank" rel="noopener" href="index.html?mode=audio&item='+encodeURIComponent(doc.sermon.stableId)+'&start='+encodeURIComponent(start)+'&autoplay=0">▶ '+esc(label)+' '+time(start)+'</a>'}
+function transcriptLink(start){return '<a class="action" target="_blank" rel="noopener" href="index.html?mode=audio&item='+encodeURIComponent(doc.sermon.stableId)+'&start='+encodeURIComponent(start||0)+'&autoplay=0">Transcript context</a>'}
+function toolButton(name,label){return '<button data-tool="'+esc(name)+'" aria-pressed="'+(name==='verse'?'true':'false')+'">'+esc(label)+'</button>'}
+function wordsHtml(words){return '<div class="word-grid">'+words.map(w=>'<div class="word"><b>'+esc(w[0])+'</b><small>'+esc(w[1])+'</small><div>'+esc(w[2])+'</div></div>').join('')+'</div>'}
+function scriptureCard(v,d,start,idx){
+  const id='v-'+Math.random().toString(36).slice(2);
+  return `<div class="scripture-card" data-verse-card>
+    <div class="scripture-title"><strong>${esc(v.ref)}</strong><span class="translation">KJV study display</span></div>
+    <div class="verse-text" data-panel="verse">${esc(v.text)}</div>
+    <div class="quick-tools">
+      ${toolButton('verse','Verse')}
+      ${toolButton('keywords','Key words')}
+      ${toolButton('strongs',"Strong's / language")}
+      ${toolButton('context','Context')}
+      ${toolButton('commentary','Commentary check')}
+      ${toolButton('jake','Jake')}
+      ${toolButton('listen','Listen / transcript')}
+      ${toolButton('related','Related study')}
+    </div>
+    <div class="tool-panel hidden" data-panel="keywords"><h4>Key words</h4>${wordsHtml(v.keywords)}</div>
+    <div class="tool-panel hidden" data-panel="strongs"><h4>Strong's / original language</h4><div class="independent">${wordsHtml(v.keywords)}<p class="muted">Strong’s numbers are indexes, not interpretive verdicts. Meaning is constrained by grammar and context.</p></div></div>
+    <div class="tool-panel hidden" data-panel="context"><h4>Context</h4><p>${esc(v.context)}</p></div>
+    <div class="tool-panel hidden" data-panel="commentary"><h4>Commentary double-check</h4><div class="commentary"><p>${esc(v.commentary)}</p></div></div>
+    <div class="tool-panel hidden" data-panel="jake"><h4>Jake on this passage</h4><p>${esc(v.jake)}</p>${listen(start,'Listen at')}</div>
+    <div class="tool-panel hidden" data-panel="listen"><h4>Listen / transcript</h4><div class="evidence">${listen(start,'Listen at')}${transcriptLink(start)}</div></div>
+    <div class="tool-panel hidden" data-panel="related"><h4>Related study</h4><p>${esc(v.related)}</p></div>
+  </div>`;
+}
+function renderStudy(d){
+  const s=studies[d.id]||{};
+  return `<article class="study-card">
+    <div class="study-head">
+      <div class="refline">${esc(arr(d.scripture).join(' · '))}</div>
+      <h2>${esc(d.question)}</h2>
+      <div class="jake-core">
+        <div class="tag">From the sermon</div>
+        <blockquote>“${esc(s.core||d.answer)}”</blockquote>
+        <div class="clean">${esc(s.coreNote||'Faithful sermon projection.')}</div>
+      </div>
+      <p class="explain">${esc(s.explain||d.answer)}</p>
+      <div class="actions">${listen(d.start,'Listen at')}${transcriptLink(d.start)}</div>
+    </div>
+    <div class="scripture-stack">
+      ${arr(s.verses).map((v,i)=>scriptureCard(v,d,d.start,i)).join('')}
+      <div class="tool-panel independent"><h4>Study deeper</h4><p>${esc(s.study||'Additional independent study is preserved in the canonical record.')}</p></div>
+    </div>
+  </article>`;
+}
+function wireTools(){
+  document.querySelectorAll('[data-verse-card]').forEach(card=>{
+    const buttons=[...card.querySelectorAll('[data-tool]')];
+    const panels=[...card.querySelectorAll('[data-panel]')];
+    buttons.forEach(btn=>btn.onclick=()=>{
+      const target=btn.dataset.tool;
+      buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+      panels.forEach(p=>p.classList.toggle('hidden',p.dataset.panel!==target));
+    });
+  });
+}
+function renderEditor(){
+  const spp2=arr(doc.discover).filter(d=>String(d.id||'').includes('.spp2.'));
+  const enriched=arr(doc.nodes).filter(n=>/SPP2 v1\.1|INDEPENDENT ANALYSIS|INDEPENDENT CONTEXT|TEXTUAL GATE|WORD-STUDY RESEARCH|PASTOR SYNTHESIS|LEXICAL REVIEW|SCRIPTURE ANALYSIS/.test(String(n.notes||'')));
+  $('metrics').innerHTML=[
+    [arr(doc.nodes).length,'canonical nodes'],
+    [spp2.length,'SPP2 study questions'],
+    [enriched.length,'enriched nodes'],
+    [spp2.reduce((n,d)=>n+arr(studies[d.id]?.verses).length,0),'specific Scripture surfaces']
+  ].map(([n,l])=>'<div class="metric"><b>'+esc(n)+'</b><span>'+esc(l)+'</span></div>').join('');
+}
+function setMode(mode){
+  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+  $('editorPanel').classList.toggle('hidden',mode!=='editor');
+  document.querySelectorAll('[data-verse-card]').forEach(card=>{
+    const buttons=[...card.querySelectorAll('[data-tool]')],panels=[...card.querySelectorAll('[data-panel]')];
+    if(mode==='open'){
+      panels.forEach(p=>p.classList.remove('hidden'));
+      buttons.forEach(b=>b.setAttribute('aria-pressed','true'));
+    }else{
+      panels.forEach(p=>p.classList.toggle('hidden',p.dataset.panel!=='verse'));
+      buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tool==='verse')));
+    }
+  });
+  document.querySelectorAll('.scripture-stack').forEach(x=>x.classList.toggle('hidden',mode==='compact'));
+}
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+
+async function load(){
+  try{
+    const r=await fetch(DATA+'?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error(r.status+' '+r.statusText);
+    doc=await r.json();
+    const spp2=arr(doc.discover).filter(d=>String(d.id||'').includes('.spp2.'));
+    $('status').innerHTML='<span class="good">Loaded current GitHub record:</span> <strong>'+esc(doc.sermon?.title||'Relationships')+'</strong> · '+esc(doc.sermon?.date||'')+' · '+spp2.length+' deep-study questions';
+    $('studies').innerHTML=spp2.map(renderStudy).join('');
+    wireTools();renderEditor();
+  }catch(e){
+    $('status').innerHTML='<span style="color:#ffd294"><strong>Could not load Relationships JSON.</strong> '+esc(e.message)+'</span>';
+  }
+}
+load();
+</script>
+</body>
+</html>
