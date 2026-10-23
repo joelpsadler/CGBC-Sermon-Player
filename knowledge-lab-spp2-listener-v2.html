@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGBC Knowledge Lab | SPP2 Listener Evaluation v2</title>
+<style>
+:root{
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  color-scheme:dark;
+  background:#0b1522;
+  color:#e8f0f8;
+  --panel:#132536;--line:#2c495d;--soft:#18364b;--accent:#afe3f6;
+  --muted:#9fb7c8;--gold:#f5c879;--green:#9be0bc;--violet:#c7b0ff;
+  --warn:#f0c57d;--blue:#8fc8ff
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 85% 0,#17334a,#0b1522 65%);min-height:100vh}
+a{color:#9ed9ff}
+button{font:inherit}
+header{
+  padding:18px clamp(16px,3vw,38px);
+  display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;
+  border-bottom:1px solid #284459
+}
+.eyebrow{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:#8fbed6;font-weight:800}
+h1{margin:4px 0;font-size:clamp(1.5rem,3vw,2.3rem)}
+h2{font-size:1.18rem}
+.wrap{max-width:1450px;margin:auto;padding:18px clamp(12px,2.4vw,32px) 50px}
+.back{background:#b1e0f4;color:#102432;font-weight:800;text-decoration:none;border-radius:10px;padding:11px 15px}
+.notice{font-size:.86rem;color:#b5c9d8;line-height:1.55}
+.hero{
+  background:linear-gradient(135deg,#17384d,#102638);
+  border:1px solid #36576d;border-radius:16px;padding:18px;margin:14px 0
+}
+.hero strong{color:#d8f4ff}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.toolbar button{
+  cursor:pointer;background:#172d40;border:1px solid #3b5970;color:#f0f6ff;
+  border-radius:9px;padding:9px 12px
+}
+.toolbar button[aria-pressed=true]{background:var(--accent);color:#102637;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+.card{
+  background:#0e2030;border:1px solid #35566b;border-radius:14px;padding:17px;
+  box-shadow:inset 0 3px 0 #89d6ef
+}
+.card h3{margin:0 0 10px;font-size:1.08rem}
+.answer{
+  font-size:1.02rem;line-height:1.62;color:#eef7fb;margin:8px 0 12px
+}
+.scripture{font-size:.77rem;color:#b7cfde;margin-bottom:10px}
+.listen{
+  display:inline-block;text-decoration:none;font-size:.78rem;padding:6px 9px;
+  border:1px solid #46657a;border-radius:7px;margin:3px 5px 3px 0
+}
+details{
+  margin-top:10px;border:1px solid #315066;border-radius:10px;background:#10283a;overflow:hidden
+}
+summary{
+  cursor:pointer;padding:10px 12px;font-weight:750;color:#cceeff;list-style:none
+}
+summary::-webkit-details-marker{display:none}
+details[open] summary{border-bottom:1px solid #315066}
+.layer{padding:11px 13px;line-height:1.55;font-size:.88rem;color:#d9e7ef}
+.layer p{margin:0 0 9px}
+.layer.sermon{border-left:3px solid var(--gold)}
+.layer.scriptureDepth{border-left:3px solid var(--violet)}
+.layer.study{border-left:3px solid var(--green)}
+.layer.evidence{border-left:3px solid var(--blue)}
+.label{
+  display:inline-block;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid #49677d;border-radius:999px;padding:3px 7px;margin-bottom:7px;color:#d0e7f4
+}
+.label.independent{border-color:#a78bed;color:#ddd0ff}
+.label.external{border-color:#76b58e;color:#c6f2d5}
+.label.evidence{border-color:#719ed1;color:#cae2ff}
+.small{font-size:.77rem;color:var(--muted)}
+.editor{
+  margin-top:18px;background:#132536;border:1px solid #2c495d;border-radius:14px;padding:16px
+}
+.editor h2{margin-top:0}
+.editor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.metric{background:#0d2030;border:1px solid #35566b;border-radius:10px;padding:12px}
+.metric b{display:block;font-size:1.35rem;color:#d2f1ff}
+.good{color:#a7e6c0}
+.warn{color:#ffd294}
+.hidden{display:none!important}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.wrap{padding-left:10px;padding-right:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">Cedar Grove Baptist Church · Knowledge Lab · SPP2 Listener Evaluation</div>
+    <h1>Relationships</h1>
+    <div class="notice">Sermon teaching first. Scripture depth only when you want it.</div>
+  </div>
+  <div>
+    <a class="back" href="knowledge-lab-spp2.html">← Editorial SPP2 Review</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <strong>What this version is testing:</strong>
+    the sermon page already establishes Pastor Jake as the speaker, so the default answers do not keep re-attributing every sentence to him.
+    Independent biblical analysis and outside commentary are labeled only when the boundary matters.
+  </div>
+
+  <div id="status" class="notice">Loading current Relationships knowledge…</div>
+
+  <div class="toolbar" aria-label="View mode">
+    <button data-mode="listener" aria-pressed="true">Listener view</button>
+    <button data-mode="all">Open all depth</button>
+    <button data-mode="editor">Editor notes</button>
+  </div>
+
+  <section id="cards" class="grid"></section>
+
+  <section id="editorPanel" class="editor hidden">
+    <h2>Editor check</h2>
+    <p class="notice">This is the part for us, not the listener. It shows whether the SPP2 research remains safely preserved behind the concise presentation.</p>
+    <div id="metrics" class="editor-grid"></div>
+    <div id="editorNotes"></div>
+  </section>
+</main>
+
+<script>
+'use strict';
+
+const DATA='knowledge/2026/2026-09-20_relationships.json';
+const $=id=>document.getElementById(id);
+const arr=v=>Array.isArray(v)?v:[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let doc=null;
+
+const listenerCopy={
+  'relationships.spp2.d011':{
+    short:'Jesus is the foundation. Everything the church believes and does has to begin with who He is and our response to Him.',
+    depth:'Matthew 16 records Peter confessing Jesus as the Messiah and Son of the living God. Jesus then speaks directly to Peter and promises to build His church. The passage contains real wordplay between Peter and “rock,” but that wordplay alone does not settle every historical interpretation of the verse.',
+    study:'Christ is explicitly the builder of the church. Christians have historically differed over how Peter, his confession, and Christ relate to the “rock” language. That question belongs in deeper study rather than in the first-layer sermon answer.'
+  },
+  'relationships.spp2.d012':{
+    short:'Yes. Biblical love receives people as people without pretending that sin is good. Love and truth are not enemies.',
+    depth:'John 15 shows self-giving love patterned after Christ. Romans 5 shows God acting in love while people are still sinners, and 1 Corinthians 13 describes love as patient and kind while also rejoicing with the truth.',
+    study:'The sermon’s practical correction advice is pastoral application. Scripture supports love joined with truth, but that does not make every confrontation automatically wise or loving.'
+  },
+  'relationships.spp2.d013':{
+    short:'David asks God to show him His ways, teach him His paths, and guide him in truth. Learning God’s Word begins with dependence on God, not information alone.',
+    depth:'The Hebrew verbs carry the sense of “make me know,” “teach me,” and “guide me.” The prayer is active and personal: David is asking God to shape the way he understands and walks.',
+    study:'The sermon verbally says “Psalm 24,” but the words recited, the prepared notes, and the slide point to Psalm 25:4–5. The historical transcript should remain unchanged while the knowledge record preserves the discrepancy.'
+  },
+  'relationships.spp2.d014':{
+    short:'Not every Christian is a pastor, but every Christian can tell others about Christ. Proclaiming the gospel is bigger than holding a church office.',
+    depth:'In Mark 16:15, the verb translated “preach” carries the ordinary sense of proclaiming or heralding a message. Matthew 28 gives another commission passage in the same sermon and broadens the picture to making disciples.',
+    study:'Mark 16:9–20 has a well-known textual-history question because the longer ending is absent from some early manuscripts. That does not need to lead the listener-facing answer, but it should remain preserved in the research layer.'
+  },
+  'relationships.spp2.d015':{
+    short:'No. The Great Commission is about making disciples, not merely getting a decision. Baptizing and teaching people to obey Jesus are part of the mission.',
+    depth:'In Matthew 28:19–20, “make disciples” is the central command. Going, baptizing, and teaching describe the disciple-making mission under Jesus’ authority and with His promised presence.',
+    study:'The sermon strongly emphasizes leading people to Christ. The fuller disciple-formation observation comes from independent study of the passage and should stay clearly distinguished from what was specifically developed in this sermon.'
+  },
+  'relationships.spp2.d016':{
+    short:'Because people cannot call on Christ without believing, cannot believe without hearing, and cannot hear without someone bringing the message. Gospel witness is part of that chain.',
+    depth:'Romans 10 reasons backward through calling, believing, hearing, proclaiming, and sending. The point is not simply “talk more,” but that God uses proclaimed good news so people can hear and believe.',
+    study:'Romans 9–11 is also dealing with Israel, the Gentiles, and the reach of the gospel. That larger context keeps Romans 10:13–15 from becoming an isolated slogan.'
+  }
+};
+
+function time(s){
+  if(s==null||!Number.isFinite(Number(s)))return '';
+  s=Number(s);
+  return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+}
+function playerLink(start){
+  if(start==null)return '';
+  return '<a class="listen" target="_blank" rel="noopener" href="index.html?mode=audio&item='+encodeURIComponent(doc.sermon.stableId)+'&start='+encodeURIComponent(start)+'&autoplay=0">▶ Listen at '+time(start)+'</a>';
+}
+function nodeFor(id){return arr(doc.nodes).find(n=>n.id===id)}
+function sermonLayer(d){
+  const items=arr(d.nodeRefs).map(nodeFor).filter(Boolean);
+  const lines=[];
+  for(const n of items){
+    const text=n.summary||n.text||n.title;
+    if(text && !lines.includes(text))lines.push(text);
+  }
+  if(!lines.length)return 'Open the linked sermon moment to hear the teaching in context.';
+  return lines.slice(0,4).map(x=>'<p>'+esc(x)+'</p>').join('');
+}
+function researchLinks(d){
+  const items=arr(d.nodeRefs).map(nodeFor).filter(Boolean);
+  let notes=items.map(n=>String(n.notes||'')).join('\n');
+  const sourceMatches=[...notes.matchAll(/SOURCE LINKS \[RESEARCH \/ LINK-OUT ONLY\]:\s*([^\n]+)/g)];
+  const urls=[];
+  for(const m of sourceMatches){
+    for(const u of m[1].split(';').map(x=>x.trim())) if(/^https?:\/\//.test(u) && !urls.includes(u)) urls.push(u);
+  }
+  if(!urls.length)return '<p class="small">Research links remain preserved in the canonical node notes.</p>';
+  return urls.slice(0,6).map((u,i)=>'<a class="listen" target="_blank" rel="noopener" href="'+esc(u)+'">Research source '+(i+1)+'</a>').join('');
+}
+function card(d){
+  const c=listenerCopy[d.id]||{};
+  const scripture=arr(d.scripture).join(' · ');
+  return `
+  <article class="card">
+    <div class="scripture">${esc(scripture)}</div>
+    <h3>${esc(d.question)}</h3>
+    <p class="answer">${esc(c.short||d.answer)}</p>
+    ${playerLink(d.start)}
+
+    <details>
+      <summary>From this sermon</summary>
+      <div class="layer sermon">
+        <span class="label">Sermon teaching</span>
+        ${sermonLayer(d)}
+        <div class="small">Linked nodes: ${esc(arr(d.nodeRefs).join(', '))}</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Scripture depth</summary>
+      <div class="layer scriptureDepth">
+        <span class="label independent">Independent biblical analysis</span>
+        <p>${esc(c.depth||'Additional Scripture analysis is preserved in the canonical research notes.')}</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Study deeper</summary>
+      <div class="layer study">
+        <span class="label independent">Independent study</span>
+        <p>${esc(c.study||'Deeper interpretive and original-language research is preserved in the canonical record.')}</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Evidence & sources</summary>
+      <div class="layer evidence">
+        <span class="label evidence">Evidence</span>
+        <p>Canonical sermon nodes and timestamps remain the anchor. External research is kept separate from the sermon voice.</p>
+        ${researchLinks(d)}
+      </div>
+    </details>
+  </article>`;
+}
+function isEnriched(n){
+  const t=String(n.notes||'');
+  return /SPP2 v1\.1|INDEPENDENT ANALYSIS|INDEPENDENT CONTEXT|TEXTUAL GATE|WORD-STUDY RESEARCH|PASTOR SYNTHESIS|LEXICAL REVIEW|SCRIPTURE ANALYSIS/.test(t);
+}
+function renderEditor(){
+  const spp2Discover=arr(doc.discover).filter(d=>String(d.id||'').includes('.spp2.'));
+  const enriched=arr(doc.nodes).filter(isEnriched);
+  const fullBlocks=arr(doc.nodes).filter(n=>String(n.notes||'').includes('SPP2 v1.1 ADDITIVE SCRIPTURE RESEARCH'));
+  $('metrics').innerHTML=[
+    [arr(doc.nodes).length,'canonical nodes preserved'],
+    [spp2Discover.length,'new SPP2 Discover questions'],
+    [enriched.length,'nodes enriched by SPP2'],
+    [fullBlocks.length,'nodes with full research blocks']
+  ].map(([n,l])=>`<div class="metric"><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('');
+  $('editorNotes').innerHTML=`
+    <p class="good"><strong>Presentation rule being tested:</strong> the sermon speaker is already established by the page, so default answers use the sermon voice without repetitive third-person attribution.</p>
+    <p class="notice"><strong>Attribution still appears where it matters:</strong> independent biblical analysis, outside commentary, exact quotation, prepared notes, and unresolved research gates.</p>
+  `;
+}
+function setMode(mode){
+  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+  const details=[...document.querySelectorAll('.card details')];
+  if(mode==='all') details.forEach(d=>d.open=true);
+  if(mode==='listener') details.forEach(d=>d.open=false);
+  $('editorPanel').classList.toggle('hidden',mode!=='editor');
+  if(mode==='editor'){details.forEach(d=>d.open=false);$('editorPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+}
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+
+async function load(){
+  try{
+    const r=await fetch(DATA+'?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error(r.status+' '+r.statusText);
+    doc=await r.json();
+    const spp2=arr(doc.discover).filter(d=>String(d.id||'').includes('.spp2.'));
+    $('status').innerHTML='<span class="good">Loaded current GitHub record:</span> <strong>'+esc(doc.sermon?.title||'Relationships')+'</strong> · '+esc(doc.sermon?.date||'')+' · '+esc(spp2.length)+' SPP2 listener discoveries';
+    $('cards').innerHTML=spp2.map(card).join('');
+    renderEditor();
+  }catch(e){
+    $('status').innerHTML='<span class="warn"><strong>Could not load Relationships JSON.</strong> '+esc(e.message)+'</span>';
+  }
+}
+load();
+</script>
+</body>
+</html>
