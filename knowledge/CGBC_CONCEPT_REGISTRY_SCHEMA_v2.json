@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cedargrovebaptist.church/schemas/CGBC_CONCEPT_REGISTRY_SCHEMA_v2.json",
+  "title": "CGBC Concept Registry Schema v2",
+  "description": "Fresh-corpus semantic concept registry. Version 2 forbids silent carry-forward from the legacy v1 registry and requires evidence-backed lifecycle/provenance for every approved concept.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryType",
+    "registryVersion",
+    "registryState",
+    "generatedAt",
+    "sourceBaseCommit",
+    "description",
+    "governance",
+    "legacyRegistryPolicy",
+    "concepts"
+  ],
+  "properties": {
+    "registryType": {
+      "const": "CGBC_CONCEPT_REGISTRY"
+    },
+    "registryVersion": {
+      "const": "2.0"
+    },
+    "registryState": {
+      "enum": [
+        "BOOTSTRAP_EMPTY",
+        "ACTIVE",
+        "SUPERSEDED"
+      ]
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sourceBaseCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governingReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principle",
+        "freshCorpusPolicy",
+        "candidatePolicy",
+        "approvalPolicy",
+        "scopeNote"
+      ],
+      "properties": {
+        "principle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "freshCorpusPolicy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidatePolicy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approvalPolicy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scopeNote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "legacyRegistryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previousVersionPath",
+        "treatment",
+        "automaticCarryForwardAllowed"
+      ],
+      "properties": {
+        "previousVersionPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "treatment": {
+          "const": "LEGACY_REFERENCE_ONLY_NOT_FRESH_AUTHORITY"
+        },
+        "automaticCarryForwardAllowed": {
+          "const": false
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/conceptRecord"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "registryState": {
+            "const": "BOOTSTRAP_EMPTY"
+          }
+        },
+        "required": [
+          "registryState"
+        ]
+      },
+      "then": {
+        "properties": {
+          "concepts": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "registryState": {
+            "const": "ACTIVE"
+          }
+        },
+        "required": [
+          "registryState"
+        ]
+      },
+      "then": {
+        "properties": {
+          "concepts": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "evidenceBasis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sermonStableId",
+        "nodeRefs",
+        "evidenceSummary"
+      ],
+      "properties": {
+        "sermonStableId": {
+          "type": "string",
+          "pattern": "^media-[A-Za-z0-9]+$"
+        },
+        "nodeRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "passageResearchRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidenceSummary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "conceptProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "establishedFromFreshCorpus",
+        "createdAt",
+        "lastVerifiedAt"
+      ],
+      "properties": {
+        "establishedFromFreshCorpus": {
+          "const": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastVerifiedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verificationNote": {
+          "type": "string"
+        }
+      }
+    },
+    "conceptRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conceptId",
+        "label",
+        "aliases",
+        "definition",
+        "lifecycleStatus",
+        "evidenceBasis",
+        "relatedConceptIds",
+        "provenance"
+      ],
+      "properties": {
+        "conceptId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scopeNote": {
+          "type": "string"
+        },
+        "lifecycleStatus": {
+          "enum": [
+            "APPROVED",
+            "DEPRECATED",
+            "MERGED"
+          ]
+        },
+        "evidenceBasis": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidenceBasis"
+          }
+        },
+        "relatedConceptIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "mergedIntoConceptId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "redirectFromConceptIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/conceptProvenance"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "lifecycleStatus": {
+                "const": "MERGED"
+              }
+            },
+            "required": [
+              "lifecycleStatus"
+            ]
+          },
+          "then": {
+            "required": [
+              "mergedIntoConceptId"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
