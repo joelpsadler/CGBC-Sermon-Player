@@ -1,0 +1,29 @@
+{
+  "registryType": "CGBC_CONCEPT_REGISTRY",
+  "registryVersion": "2.0",
+  "registryState": "BOOTSTRAP_EMPTY",
+  "generatedAt": "2026-10-24T10:00:25-05:00",
+  "sourceBaseCommit": "d394702d0d96c4284631b151e851032246689fc6",
+  "description": "Empty bootstrap registry for the fresh CGBC knowledge-corpus rebaseline. No semantic concepts are carried forward automatically from Concept Registry v1; concepts become permanent only after fresh sermon evidence has been completed and normalized.",
+  "governingReferences": [
+    "CGBC_Project_Architecture_and_Sermon_Knowledge_Guide_REV5_InfoMap3_RegistryV2_SPP_Amended_2026-10-24.pdf",
+    "CGBC_Scripture_Study_and_Sermon_Knowledge_Consolidated_Guide_v1_8_SPP_Amended_2026-10-24.pdf",
+    "SPP_Single_Pass_Operating_Standard_v1_2_0_InfoMap3.zip",
+    "knowledge/CGBC_INFO_MAP_SCHEMA_v3_0.json",
+    "knowledge/CGBC_INFO_MAP_VALIDATION_RULES_v3_0.md"
+  ],
+  "governance": {
+    "principle": "Capture sermon meaning from fresh evidence first; normalize globally only after the meaning is established.",
+    "freshCorpusPolicy": "The legacy v1 registry is not research evidence and is not an automatic source of permanent concept IDs during the fresh corpus rebaseline.",
+    "candidatePolicy": "Fresh sermon records may use conceptCandidates when no approved v2 concept exists. Candidate normalization is a post-research corpus step and must not require redoing Scripture research.",
+    "approvalPolicy": "A concept may enter the active v2 registry only after its meaning is supported by fresh canonical sermon evidence and its evidenceBasis resolves to the fresh corpus.",
+    "scopeNote": "The Concept Registry is semantic normalization vocabulary, not doctrine authority and not proof that a sermon teaches a concept merely because an alias matches transcript text."
+  },
+  "legacyRegistryPolicy": {
+    "previousVersionPath": "knowledge/CGBC_CONCEPT_REGISTRY_v1.json",
+    "treatment": "LEGACY_REFERENCE_ONLY_NOT_FRESH_AUTHORITY",
+    "automaticCarryForwardAllowed": false,
+    "notes": "Legacy concepts may be independently re-established after fresh evidence is frozen; matching a v1 label or alias is not sufficient for adoption."
+  },
+  "concepts": []
+}

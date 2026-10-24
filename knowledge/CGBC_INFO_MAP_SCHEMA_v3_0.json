@@ -1,0 +1,2448 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cedargrovebaptist.church/schemas/CGBC_INFO_MAP_SCHEMA_v3_0.json",
+  "title": "CGBC Canonical Sermon Info Map Schema 3.0",
+  "description": "Fresh-build canonical sermon knowledge contract aligned to REV5 Mapping-Amended, Scripture/Knowledge Guide v1.7, and the SPP single-pass research requirements. Version 3.0 replaces the old backfill-preservation model with source-first fresh construction while keeping sermon identity and external owner curation distinct.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordType",
+    "recordVersion",
+    "generatedAt",
+    "buildProvenance",
+    "conceptRegistryRef",
+    "quoteCurationRef",
+    "sermon",
+    "sources",
+    "structure",
+    "slideMap",
+    "nodes",
+    "passageResearch",
+    "discover",
+    "authorCorpus",
+    "search",
+    "provenance",
+    "editorialFlags",
+    "implementation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "3.0"
+    },
+    "recordType": {
+      "const": "CGBC_SERMON_KNOWLEDGE"
+    },
+    "recordVersion": {
+      "const": "3.0"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "buildProvenance": {
+      "$ref": "#/$defs/buildProvenance"
+    },
+    "conceptRegistryRef": {
+      "$ref": "#/$defs/conceptRegistryRef"
+    },
+    "quoteCurationRef": {
+      "$ref": "#/$defs/quoteCurationRef"
+    },
+    "sermon": {
+      "$ref": "#/$defs/sermon"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "structure": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "canonicalEditorial": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "visualIdentity": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "slideMap": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "scriptureMap": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "namedResources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/namedResource"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "passageResearch": {
+      "$ref": "#/$defs/passageResearch"
+    },
+    "mapViews": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mapView"
+      }
+    },
+    "discover": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "question",
+          "answer",
+          "nodeRefs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "answer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nodeRefs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "scripture": {
+            "$ref": "#/$defs/scriptureArray"
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "authorCorpus": {
+      "$ref": "#/$defs/authorCorpus"
+    },
+    "search": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenanceManifest"
+    },
+    "editorialFlags": {
+      "type": "array",
+      "items": {}
+    },
+    "implementation": {
+      "$ref": "#/$defs/implementation"
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "presentationEnrichment": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "sourceArchivePath": {
+      "type": "string",
+      "pattern": "^Sermon Source Archive/[0-9]{4}/[0-9]{2}_[0-9]{2}_[0-9]{2}/$"
+    },
+    "scriptureArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "audience": {
+      "enum": [
+        "discover",
+        "deepDive",
+        "author",
+        "quoteEngine",
+        "search"
+      ]
+    },
+    "teachingStance": {
+      "enum": [
+        "affirmed",
+        "tentative",
+        "reported-other-view",
+        "contrasted",
+        "rejected",
+        "unresolved"
+      ]
+    },
+    "significance": {
+      "enum": [
+        "primary",
+        "supporting",
+        "incidental"
+      ]
+    },
+    "sermon": {
+      "type": "object",
+      "required": [
+        "stableId",
+        "title",
+        "date",
+        "speaker",
+        "series",
+        "seriesType",
+        "scripture",
+        "references",
+        "bookTags",
+        "collections",
+        "durationSeconds",
+        "sourceArchivePath"
+      ],
+      "properties": {
+        "stableId": {
+          "type": "string",
+          "pattern": "^media-[A-Za-z0-9]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "speaker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "series": {
+          "type": "string"
+        },
+        "study": {
+          "type": "string"
+        },
+        "seriesType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scripture": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scriptureRaw": {
+          "type": "string"
+        },
+        "references": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "bookTags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "collections": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "durationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "youtubeId": {
+          "type": "string"
+        },
+        "sourceArchivePath": {
+          "$ref": "#/$defs/sourceArchivePath"
+        },
+        "transcriptPaths": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "incomingSrt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "cleanSrt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "faithfulJson": {
+              "type": "string",
+              "minLength": 1
+            },
+            "displaySrt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "displayJson": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "connection": {
+      "type": "object",
+      "required": [
+        "type",
+        "targetNodeRef",
+        "provenance"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetNodeRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenanceLabel"
+        }
+      },
+      "additionalProperties": true
+    },
+    "concept": {
+      "type": "object",
+      "required": [
+        "conceptId",
+        "significance"
+      ],
+      "properties": {
+        "conceptId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "significance": {
+          "$ref": "#/$defs/significance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "conceptCandidate": {
+      "type": "object",
+      "required": [
+        "label",
+        "significance"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "significance": {
+          "$ref": "#/$defs/significance"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "candidateKey": {
+          "type": "string",
+          "pattern": "^candidate\\.[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "scriptureCommentary": {
+      "type": "object",
+      "required": [
+        "reference",
+        "role",
+        "functions",
+        "significance"
+      ],
+      "properties": {
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "primary-text",
+            "cross-reference"
+          ]
+        },
+        "functions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "observation",
+              "explanation",
+              "interpretation",
+              "context",
+              "word-study",
+              "doctrinal-support",
+              "application"
+            ]
+          }
+        },
+        "significance": {
+          "$ref": "#/$defs/significance"
+        },
+        "relatedTo": {
+          "$ref": "#/$defs/scriptureArray"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sermonCallback": {
+      "type": "object",
+      "required": [
+        "callbackRelation"
+      ],
+      "properties": {
+        "callbackRelation": {
+          "enum": [
+            "previous-sermon",
+            "earlier-sermon",
+            "series-continuation",
+            "recap",
+            "future-preview"
+          ]
+        },
+        "targetSermonId": {
+          "type": "string",
+          "pattern": "^media-[A-Za-z0-9]+$"
+        },
+        "unresolvedTargetDescription": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spokenDescription": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "targetSermonId"
+          ]
+        },
+        {
+          "required": [
+            "unresolvedTargetDescription"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "provenance",
+        "title",
+        "audiences",
+        "sourceRefs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "argument",
+            "question",
+            "answer",
+            "illustration",
+            "application",
+            "definition",
+            "scriptureTrail",
+            "scripture",
+            "doctrine",
+            "wordStudy",
+            "quote",
+            "transition",
+            "observation",
+            "connection",
+            "outlinePoint",
+            "clarification"
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenanceLabel"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "spokenExact": {
+          "type": "string"
+        },
+        "displayText": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "start": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end": {
+          "type": "number",
+          "minimum": 0
+        },
+        "segmentIndexes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "scripture": {
+          "$ref": "#/$defs/scriptureArray"
+        },
+        "topics": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "doctrine": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "audiences": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/audience"
+          }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connection"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "quoteCandidate": {
+          "type": "boolean"
+        },
+        "concepts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/concept"
+          }
+        },
+        "conceptCandidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conceptCandidate"
+          }
+        },
+        "scriptureCommentary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scriptureCommentary"
+          }
+        },
+        "teachingStance": {
+          "$ref": "#/$defs/teachingStance"
+        },
+        "applicationAudience": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "all-listeners",
+              "believers",
+              "unbelievers",
+              "church-members",
+              "church-leaders",
+              "families-parents",
+              "children-youth",
+              "specific-group"
+            ]
+          }
+        },
+        "applicationSpecificGroupLabels": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "applicationFunction": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "exhortation",
+              "warning",
+              "encouragement",
+              "invitation",
+              "reflection",
+              "instruction"
+            ]
+          }
+        },
+        "definedTerm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "illustrationOrigin": {
+          "enum": [
+            "personal",
+            "biblical",
+            "historical",
+            "external-source",
+            "local-church",
+            "hypothetical",
+            "general-observation"
+          ]
+        },
+        "illustrationForm": {
+          "enum": [
+            "story",
+            "analogy",
+            "example",
+            "scenario",
+            "testimony"
+          ]
+        },
+        "sermonCallbacks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sermonCallback"
+          }
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "definition"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "definedTerm"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "illustration"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "illustrationOrigin"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "application"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "applicationAudience",
+              "applicationFunction"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "applicationAudience": {
+                "contains": {
+                  "const": "specific-group"
+                }
+              }
+            },
+            "required": [
+              "applicationAudience"
+            ]
+          },
+          "then": {
+            "required": [
+              "applicationSpecificGroupLabels"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "namedResource": {
+      "type": "object",
+      "required": [
+        "identityStatus",
+        "name",
+        "resourceType",
+        "usageRole",
+        "nodeRefs",
+        "sourceRefs"
+      ],
+      "properties": {
+        "identityStatus": {
+          "enum": [
+            "resolved",
+            "uncertain"
+          ]
+        },
+        "resourceId": {
+          "type": "string",
+          "pattern": "^resource\\.[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "creator": {
+          "type": "string"
+        },
+        "resourceType": {
+          "enum": [
+            "commentary",
+            "book",
+            "lexicon",
+            "podcast",
+            "song",
+            "sermon-message",
+            "article",
+            "website",
+            "other"
+          ]
+        },
+        "usageRole": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "interpretation-support",
+              "definition-source",
+              "illustration-source",
+              "background",
+              "quotation-source",
+              "recommendation",
+              "cultural-reference"
+            ]
+          }
+        },
+        "nodeRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "identityNote": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "identityStatus": {
+                "const": "resolved"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "resourceId"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "identityStatus": {
+                "const": "uncertain"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "identityNote"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "provenanceLabel": {
+      "enum": [
+        "PASTOR - SPOKEN EXACT",
+        "PASTOR - PREPARED",
+        "PASTOR - VISUAL",
+        "SCRIPTURE",
+        "JAKE - EXISTING TEACHING SYNTHESIS",
+        "INDEPENDENT BIBLICAL ANALYSIS",
+        "PASTOR RESOURCE / EXTERNAL SUPPORT",
+        "AUTHOR RESEARCH BRIEF",
+        "JAKE DRAFT SYNTHESIS",
+        "JAKE APPROVED / PUBLISHED",
+        "CGBC - OFFICIAL",
+        "ANALYSIS - CLASSIFICATION",
+        "ANALYSIS - GENERATED QUESTION",
+        "EDITORIAL FLAG"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "kind",
+        "pathOrName",
+        "authorityRole"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^src-[A-Za-z0-9._-]+$"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pathOrName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityRole": {
+          "enum": [
+            "AUTHORITATIVE_ARCHIVE",
+            "FAITHFUL_DERIVED",
+            "DISPLAY_DERIVED",
+            "METADATA_AUTHORITY",
+            "EXTERNAL_RESEARCH",
+            "CURATION_AUTHORITY",
+            "OTHER"
+          ]
+        },
+        "evidenceEligible": {
+          "type": "boolean"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "gitBlobSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "derivedFromSourceRef": {
+          "type": "string",
+          "pattern": "^src-[A-Za-z0-9._-]+$"
+        },
+        "rightsUse": {
+          "enum": [
+            "CGBC_OWNED_OR_AUTHORIZED",
+            "RESEARCH + SYNTHESIS",
+            "DIRECT DISPLAY CLEARED",
+            "DIRECT DISPLAY CONDITIONAL",
+            "LINK / REFERENCE ONLY"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "authorityRole": {
+                "const": "DISPLAY_DERIVED"
+              }
+            },
+            "required": [
+              "authorityRole"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidenceEligible": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "buildProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "buildMode",
+        "builtAt",
+        "githubMain",
+        "governingReferences",
+        "researchStandard",
+        "validationStatus",
+        "freshEvidenceAttestation"
+      ],
+      "properties": {
+        "buildMode": {
+          "enum": [
+            "FRESH_REBASELINE",
+            "WEEKLY_NEW_SERMON"
+          ]
+        },
+        "builtAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "githubMain": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "sourcePackageSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "governingReferences": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 3
+        },
+        "researchStandard": {
+          "enum": [
+            "SPP_SINGLE_PASS",
+            "SPP2_SINGLE_PASS"
+          ]
+        },
+        "researchStandardVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validationStatus": {
+          "enum": [
+            "PENDING",
+            "PASSED",
+            "QUALIFIED",
+            "FAILED"
+          ]
+        },
+        "freshEvidenceAttestation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "priorGeneratedResearchExcluded",
+            "independentInterpretationRecordedBeforeCommentary",
+            "qaComparedOnlyAfterFreeze"
+          ],
+          "properties": {
+            "priorGeneratedResearchExcluded": {
+              "const": true
+            },
+            "independentInterpretationRecordedBeforeCommentary": {
+              "const": true
+            },
+            "qaComparedOnlyAfterFreeze": {
+              "const": true
+            },
+            "frozenAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "sourceLocks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "passageResearch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "researchStandardVersion",
+        "records",
+        "freshEvidenceAttestation",
+        "quoteCandidates",
+        "localFactualRecords"
+      ],
+      "properties": {
+        "profile": {
+          "const": "CGBC_PASSAGE_RESEARCH_3_0"
+        },
+        "researchStandardVersion": {
+          "enum": [
+            "SPP-1.2.0-compatible",
+            "SPP2-1.1.2-compatible"
+          ]
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "reference",
+              "nodeRefs",
+              "jake",
+              "independentStudy",
+              "commentaryWitnesses",
+              "entityRefs",
+              "contextClaimRefs",
+              "mapFeatureRefs",
+              "sourceEvidenceRefs",
+              "relatedStudy",
+              "authorResearch",
+              "reviewGates",
+              "display"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "contextReference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "nodeRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "jake": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "treatment",
+                  "spokenEvidence"
+                ],
+                "properties": {
+                  "treatment": {
+                    "enum": [
+                      "interpreted",
+                      "explained",
+                      "applied",
+                      "quoted",
+                      "referenced",
+                      "reported"
+                    ]
+                  },
+                  "spokenEvidence": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "segmentIndex",
+                        "start",
+                        "end",
+                        "transcriptRef",
+                        "verificationStatus"
+                      ],
+                      "properties": {
+                        "segmentIndex": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "start": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "end": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "transcriptRef": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "exactWords": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "verificationStatus": {
+                          "enum": [
+                            "VERIFIED",
+                            "NOT_VERIFIED"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "controllingInterpretation": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "faithfulSynthesis": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "text",
+                      "lane",
+                      "segmentIndexes"
+                    ],
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "lane": {
+                        "const": "JAKE - EXISTING TEACHING SYNTHESIS"
+                      },
+                      "segmentIndexes": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "minItems": 1,
+                        "uniqueItems": true
+                      }
+                    }
+                  }
+                }
+              },
+              "independentStudy": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "literaryContext",
+                  "provisionalInterpretation",
+                  "evidenceSupport",
+                  "keyWords",
+                  "textualIssues"
+                ],
+                "properties": {
+                  "literaryContext": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "provisionalInterpretation": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "evidenceSupport": {
+                    "enum": [
+                      "SUPPORTED",
+                      "QUALIFIED",
+                      "DISPUTED",
+                      "INSUFFICIENT EVIDENCE"
+                    ]
+                  },
+                  "keyWords": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "reference",
+                        "language",
+                        "surfaceForm",
+                        "lemma",
+                        "morphology",
+                        "contextualMeaning",
+                        "verificationStatus",
+                        "evidenceSource"
+                      ],
+                      "properties": {
+                        "reference": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "language": {
+                          "enum": [
+                            "Greek",
+                            "Hebrew",
+                            "Aramaic"
+                          ]
+                        },
+                        "surfaceForm": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "lemma": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "morphology": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "contextualMeaning": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "strongsId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "caution": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "verificationStatus": {
+                          "enum": [
+                            "VERIFIED",
+                            "QUALIFIED",
+                            "NOT_VERIFIED"
+                          ]
+                        },
+                        "evidenceSource": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "source",
+                            "commitOrEdition",
+                            "fileOrItem",
+                            "locator",
+                            "verificationStatus",
+                            "rights"
+                          ],
+                          "properties": {
+                            "source": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "commitOrEdition": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "fileOrItem": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "locator": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "fileGitBlobSha": {
+                              "type": "string",
+                              "pattern": "^[0-9a-f]{40}$"
+                            },
+                            "rowSha256": {
+                              "type": "string",
+                              "pattern": "^[0-9a-f]{64}$"
+                            },
+                            "verifiedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "verificationStatus": {
+                              "enum": [
+                                "VERIFIED",
+                                "QUALIFIED",
+                                "NOT_VERIFIED"
+                              ]
+                            },
+                            "rights": {
+                              "enum": [
+                                "CC BY 4.0",
+                                "PUBLIC DOMAIN VERIFIED EDITION",
+                                "RESEARCH ONLY",
+                                "LINK ONLY",
+                                "LICENSED CONDITIONAL"
+                              ]
+                            },
+                            "attribution": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "textualIssues": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "sourceEvidenceRefs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "uniqueItems": true
+                  }
+                }
+              },
+              "commentaryWitnesses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "author",
+                    "work",
+                    "editionId",
+                    "itemLocator",
+                    "relationToJake",
+                    "sourceEvidenceRef",
+                    "reuseClass"
+                  ],
+                  "properties": {
+                    "author": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "work": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "editionId": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "itemLocator": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "relationToJake": {
+                      "enum": [
+                        "supports",
+                        "qualifies",
+                        "differs",
+                        "disputes",
+                        "independent/no-direct-comparison",
+                        "insufficient-evidence"
+                      ]
+                    },
+                    "sourceEvidenceRef": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reuseClass": {
+                      "enum": [
+                        "DIRECT_DISPLAY_CLEARED_FOR_ITEM",
+                        "SYNTHESIS_ONLY",
+                        "LINK_ONLY",
+                        "RESEARCH_ONLY"
+                      ]
+                    },
+                    "rightsEvidence": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "qualification": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "entityRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "eventRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "contextClaimRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "mapFeatureRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "sourceEvidenceRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "relatedStudy": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "question",
+                    "destination",
+                    "fallbackSummary"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "question": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "destination": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "reference"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "scripture"
+                            },
+                            "reference": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "sermon"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^media-[a-zA-Z0-9_-]+$"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "node"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^media-[a-zA-Z0-9_-]+\\.n[0-9]+$"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "person"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^cgbc:person:"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "place"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^cgbc:place:"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "event"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^cgbc:event:"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "concept"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "map-feature"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^cgbc:map:"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "stableId"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "context-claim"
+                            },
+                            "stableId": {
+                              "type": "string",
+                              "pattern": "^cgbc:context:"
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "type",
+                            "url"
+                          ],
+                          "properties": {
+                            "type": {
+                              "const": "external-link"
+                            },
+                            "url": {
+                              "type": "string",
+                              "format": "uri",
+                              "pattern": "^https?://"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "fallbackSummary": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "sourceEvidenceRefs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "uniqueItems": true
+                    }
+                  }
+                }
+              },
+              "authorResearch": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "lane",
+                  "adoptionStatus",
+                  "publicSafe"
+                ],
+                "properties": {
+                  "lane": {
+                    "enum": [
+                      "AUTHOR RESEARCH BRIEF",
+                      "JAKE - EXISTING TEACHING SYNTHESIS",
+                      "JAKE DRAFT SYNTHESIS",
+                      "JAKE APPROVED / PUBLISHED"
+                    ]
+                  },
+                  "adoptionStatus": {
+                    "enum": [
+                      "NOT_ADOPTED",
+                      "DRAFT",
+                      "APPROVED",
+                      "PUBLISHED",
+                      "NOT_APPLICABLE"
+                    ]
+                  },
+                  "publicSafe": {
+                    "type": "boolean"
+                  },
+                  "privateContentStoredExternally": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "reviewGates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "issue",
+                    "status",
+                    "action",
+                    "blocks"
+                  ],
+                  "properties": {
+                    "issue": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "status": {
+                      "enum": [
+                        "OPEN",
+                        "QUALIFIED",
+                        "RESOLVED",
+                        "NOT_APPLICABLE"
+                      ]
+                    },
+                    "action": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "blocks": {
+                      "type": "array",
+                      "items": {
+                        "enum": [
+                          "research",
+                          "direct-display",
+                          "publication",
+                          "production",
+                          "none"
+                        ]
+                      },
+                      "minItems": 1,
+                      "uniqueItems": true
+                    }
+                  }
+                }
+              },
+              "display": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "jakeFirst",
+                  "researchDisclosure",
+                  "directDisplayAllowed"
+                ],
+                "properties": {
+                  "jakeFirst": {
+                    "const": true
+                  },
+                  "researchDisclosure": {
+                    "enum": [
+                      "INDEPENDENT",
+                      "QUALIFIED",
+                      "PRIVATE_ONLY"
+                    ]
+                  },
+                  "directDisplayAllowed": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "freshEvidenceAttestation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "priorGeneratedResearchExcluded",
+            "independentInterpretationRecordedBeforeCommentary",
+            "qaComparedOnlyAfterFreeze"
+          ],
+          "properties": {
+            "priorGeneratedResearchExcluded": {
+              "const": true
+            },
+            "independentInterpretationRecordedBeforeCommentary": {
+              "const": true
+            },
+            "qaComparedOnlyAfterFreeze": {
+              "const": true
+            },
+            "frozenAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "quoteCandidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "exactText",
+              "segmentIndex",
+              "start",
+              "end",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "exactText": {
+                "type": "string",
+                "minLength": 1
+              },
+              "segmentIndex": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "minimum": 0
+              },
+              "status": {
+                "const": "UNREVIEWED"
+              }
+            }
+          }
+        },
+        "localFactualRecords": {
+          "type": "array",
+          "description": "Stage new factual records using the exact Shared Facts factualRecord definition, with status LOCAL_STAGED. The canonical evidence field for factual records is evidenceRefs; passage-level sourceEvidenceRefs is independent.",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/factualRecord"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "status"
+                ],
+                "properties": {
+                  "status": {
+                    "const": "LOCAL_STAGED"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "factualRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "canonicalMeaning",
+        "aliases",
+        "provenance",
+        "status",
+        "rights"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "person",
+            "place",
+            "group",
+            "event",
+            "chronology",
+            "context-claim",
+            "map-feature",
+            "source-edition",
+            "evidence",
+            "linguistic-source"
+          ]
+        },
+        "canonicalMeaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "SHARED_VERIFIED",
+            "LOCAL_STAGED",
+            "QUALIFIED",
+            "DISPUTED"
+          ]
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "rights": {
+          "enum": [
+            "CC_BY_4_0",
+            "PUBLIC_DOMAIN_ITEM_VERIFIED",
+            "SYNTHESIS_ONLY",
+            "LINK_ONLY",
+            "RESEARCH_ONLY",
+            "LICENSED_CONDITIONAL"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityIds": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "temporalPrecision": {
+          "enum": [
+            "exact",
+            "range",
+            "approximate",
+            "unknown"
+          ]
+        },
+        "dateRange": {
+          "type": "object",
+          "properties": {
+            "earliest": {
+              "type": "string",
+              "minLength": 1
+            },
+            "latest": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "spatialPrecision": {
+          "enum": [
+            "site",
+            "vicinity",
+            "region",
+            "route",
+            "unknown"
+          ]
+        },
+        "locationStatus": {
+          "enum": [
+            "IDENTIFIED",
+            "APPROXIMATE",
+            "DISPUTED",
+            "UNNAMED",
+            "UNKNOWN"
+          ]
+        },
+        "geometry": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Point",
+                "LineString",
+                "Polygon",
+                "MultiPoint",
+                "MultiLineString",
+                "MultiPolygon",
+                "GeometryCollection"
+              ]
+            },
+            "coordinates": {
+              "type": "array"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": true
+        },
+        "representativePoint": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "geometryEvidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whatItSupports": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supportType": {
+          "enum": [
+            "original-language",
+            "commentary",
+            "primary-historical",
+            "historical-reference",
+            "archaeological",
+            "geographic",
+            "cartographic",
+            "scripture",
+            "other"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "sourceEdition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rightsBasis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualification": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "evidence"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "sourceId",
+              "locator",
+              "whatItSupports",
+              "supportType",
+              "confidence"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "map-feature"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "spatialPrecision",
+              "locationStatus",
+              "geometryEvidenceRefs"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "locationStatus"
+            ],
+            "properties": {
+              "locationStatus": {
+                "const": "UNNAMED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "geometry": {
+                "type": "null"
+              },
+              "representativePoint": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "person",
+                  "place",
+                  "group",
+                  "event",
+                  "chronology",
+                  "context-claim",
+                  "map-feature",
+                  "linguistic-source"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "evidenceRefs"
+            ],
+            "properties": {
+              "evidenceRefs": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "conceptRegistryRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "schemaPath",
+        "registryVersion",
+        "registryStateAtBuild"
+      ],
+      "properties": {
+        "path": {
+          "const": "knowledge/CGBC_CONCEPT_REGISTRY_v2.json"
+        },
+        "schemaPath": {
+          "const": "knowledge/CGBC_CONCEPT_REGISTRY_SCHEMA_v2.json"
+        },
+        "registryVersion": {
+          "const": "2.0"
+        },
+        "registryStateAtBuild": {
+          "enum": [
+            "BOOTSTRAP_EMPTY",
+            "ACTIVE"
+          ]
+        },
+        "registrySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "quoteCurationRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorityPath",
+        "authorityRole",
+        "sermonStableId",
+        "policy"
+      ],
+      "properties": {
+        "authorityPath": {
+          "const": "config/quote-curation.json"
+        },
+        "authorityRole": {
+          "const": "OWNER_CURATION_SOURCE_OF_TRUTH"
+        },
+        "sermonStableId": {
+          "type": "string",
+          "pattern": "^media-[A-Za-z0-9]+$"
+        },
+        "policy": {
+          "const": "Reviewed quote status is resolved from quote curation; canonical sermon knowledge stores only source-grounded quote evidence and UNREVIEWED research candidates."
+        }
+      }
+    },
+    "mapView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "purpose",
+        "featureRefs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^cgbc:map-view:[A-Za-z0-9._:-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "featureRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "scriptureRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "nodeRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "passageResearchRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "displayNote": {
+          "type": "string"
+        }
+      }
+    },
+    "authorCorpus": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "privateContentIncluded",
+        "publicSafeOnly"
+      ],
+      "properties": {
+        "privateContentIncluded": {
+          "const": false
+        },
+        "publicSafeOnly": {
+          "const": true
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lane",
+              "ref"
+            ],
+            "properties": {
+              "lane": {
+                "enum": [
+                  "PASTOR - SPOKEN EXACT",
+                  "JAKE - EXISTING TEACHING SYNTHESIS",
+                  "AUTHOR RESEARCH BRIEF",
+                  "JAKE DRAFT SYNTHESIS",
+                  "JAKE APPROVED / PUBLISHED"
+                ]
+              },
+              "ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "provenanceManifest": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "policy",
+        "lanes"
+      ],
+      "properties": {
+        "policy": {
+          "const": "SEPARATE_EVIDENCE_LANES"
+        },
+        "lanes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/provenanceLabel"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "canonicalPath",
+        "sourceArchivePath",
+        "schemaPath",
+        "validationRulesPath"
+      ],
+      "properties": {
+        "canonicalPath": {
+          "type": "string",
+          "pattern": "^knowledge/[0-9]{4}/[0-9]{4}-[0-9]{2}-[0-9]{2}_[a-z0-9][a-z0-9-]*\\.json$"
+        },
+        "sourceArchivePath": {
+          "$ref": "#/$defs/sourceArchivePath"
+        },
+        "schemaPath": {
+          "const": "knowledge/CGBC_INFO_MAP_SCHEMA_v3_0.json"
+        },
+        "validationRulesPath": {
+          "const": "knowledge/CGBC_INFO_MAP_VALIDATION_RULES_v3_0.md"
+        }
+      }
+    }
+  }
+}
