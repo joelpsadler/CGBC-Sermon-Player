@@ -1,0 +1,1477 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "place-jerusalem",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.234167,
+          31.776667
+        ]
+      },
+      "properties": {
+        "id": "place-jerusalem",
+        "name": "Jerusalem",
+        "modernIdentification": "Jerusalem",
+        "identificationScore": 1000,
+        "sourceId": "Jerusalem",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-bethlehem",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.207639,
+          31.704306
+        ]
+      },
+      "properties": {
+        "id": "place-bethlehem",
+        "name": "Bethlehem",
+        "modernIdentification": "Bethlehem",
+        "identificationScore": 1000,
+        "sourceId": "Bethlehem_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-bethany",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.255903,
+          31.771661
+        ]
+      },
+      "properties": {
+        "id": "place-bethany",
+        "name": "Bethany",
+        "modernIdentification": "Al Eizariya",
+        "identificationScore": 889,
+        "sourceId": "Bethany_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-bethel",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.241389,
+          31.922778
+        ]
+      },
+      "properties": {
+        "id": "place-bethel",
+        "name": "Bethel",
+        "modernIdentification": "Beitin",
+        "identificationScore": 716,
+        "sourceId": "Bethel_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-cana",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.30269,
+          32.8222
+        ]
+      },
+      "properties": {
+        "id": "place-cana",
+        "name": "Cana",
+        "modernIdentification": "Horbat Qana",
+        "identificationScore": 690,
+        "sourceId": "Cana",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-jericho",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.444564,
+          31.871719
+        ]
+      },
+      "properties": {
+        "id": "place-jericho",
+        "name": "Jericho",
+        "modernIdentification": "Tell es Sultan",
+        "identificationScore": 1000,
+        "sourceId": "Jericho_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-galilee",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.527,
+          32.76
+        ]
+      },
+      "properties": {
+        "id": "place-galilee",
+        "name": "Galilee",
+        "modernIdentification": "Galilee",
+        "identificationScore": 1000,
+        "sourceId": "Galilee_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-jordan-river",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.558333,
+          31.761389
+        ]
+      },
+      "properties": {
+        "id": "place-jordan-river",
+        "name": "Jordan River",
+        "modernIdentification": "Jordan River",
+        "identificationScore": 1000,
+        "sourceId": "Jordan",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "river"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-judea",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.234167,
+          31.776667
+        ]
+      },
+      "properties": {
+        "id": "place-judea",
+        "name": "Judea",
+        "modernIdentification": "Judea representative point Jerusalem",
+        "identificationScore": 1000,
+        "sourceId": "Judea_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-egypt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.3075,
+          30.129444
+        ]
+      },
+      "properties": {
+        "id": "place-egypt",
+        "name": "Egypt",
+        "modernIdentification": "Egypt reference point Ain Shams",
+        "identificationScore": 1000,
+        "sourceId": "Egypt",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-horeb",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.973333,
+          28.539722
+        ]
+      },
+      "properties": {
+        "id": "place-mount-horeb",
+        "name": "Mount Horeb",
+        "modernIdentification": "Traditional Jebel Musa; not proved biblical site",
+        "identificationScore": 1000,
+        "sourceId": "Mount_Horeb",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "disputed_mountain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-sinai",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.973333,
+          28.539722
+        ]
+      },
+      "properties": {
+        "id": "place-mount-sinai",
+        "name": "Mount Sinai",
+        "modernIdentification": "Traditional Jebel Musa; competing identifications",
+        "identificationScore": 465,
+        "sourceId": "Mount_Sinai",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "disputed_mountain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-nebo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.75,
+          31.766667
+        ]
+      },
+      "properties": {
+        "id": "place-mount-nebo",
+        "name": "Mount Nebo",
+        "modernIdentification": "Jabal al Naba",
+        "identificationScore": 413,
+        "sourceId": "Mount_Nebo",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "mountain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-carmel",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.023333,
+          32.6725
+        ]
+      },
+      "properties": {
+        "id": "place-mount-carmel",
+        "name": "Mount Carmel",
+        "modernIdentification": "Mount Carmel",
+        "identificationScore": 1000,
+        "sourceId": "Mount_Carmel",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "mountain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-of-olives",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.245686,
+          31.777946
+        ]
+      },
+      "properties": {
+        "id": "place-mount-of-olives",
+        "name": "Mount of Olives",
+        "modernIdentification": "Mount of Olives",
+        "identificationScore": 1000,
+        "sourceId": "Mount_of_Olives",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "hill"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-ararat-region",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.300381,
+          39.702761
+        ]
+      },
+      "properties": {
+        "id": "place-ararat-region",
+        "name": "Ararat region",
+        "modernIdentification": "Urartu; not ark landing point",
+        "identificationScore": 1000,
+        "sourceId": "Ararat",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-ur",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          46.104444,
+          30.962222
+        ]
+      },
+      "properties": {
+        "id": "place-ur",
+        "name": "Ur of the Chaldees",
+        "modernIdentification": "Traditional Tell el Muqayyar",
+        "identificationScore": 703,
+        "sourceId": "Ur_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "disputed_settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-haran",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.032778,
+          36.864444
+        ]
+      },
+      "properties": {
+        "id": "place-haran",
+        "name": "Haran",
+        "modernIdentification": "Harran",
+        "identificationScore": 922,
+        "sourceId": "Haran",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-canaan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.333333,
+          32.766667
+        ]
+      },
+      "properties": {
+        "id": "place-canaan",
+        "name": "Canaan",
+        "modernIdentification": "Regional representative point",
+        "identificationScore": 1000,
+        "sourceId": "Canaan",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-goshen",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.834217,
+          30.79937
+        ]
+      },
+      "properties": {
+        "id": "place-goshen",
+        "name": "Goshen",
+        "modernIdentification": "Qantir; regional proposal only",
+        "identificationScore": 1020,
+        "sourceId": "Goshen_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-hebron",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.10222,
+          31.525087
+        ]
+      },
+      "properties": {
+        "id": "place-hebron",
+        "name": "Hebron",
+        "modernIdentification": "Tel Rumeida",
+        "identificationScore": 1000,
+        "sourceId": "Hebron",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-gibeon",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.183351,
+          31.847451
+        ]
+      },
+      "properties": {
+        "id": "place-gibeon",
+        "name": "Gibeon",
+        "modernIdentification": "El Jib",
+        "identificationScore": 912,
+        "sourceId": "Gibeon",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-shechem",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.281944,
+          32.213611
+        ]
+      },
+      "properties": {
+        "id": "place-shechem",
+        "name": "Shechem",
+        "modernIdentification": "Tell Balatah",
+        "identificationScore": 1000,
+        "sourceId": "Shechem",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-shiloh",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.289536,
+          32.055703
+        ]
+      },
+      "properties": {
+        "id": "place-shiloh",
+        "name": "Shiloh",
+        "modernIdentification": "Khirbet Seilun",
+        "identificationScore": 1000,
+        "sourceId": "Shiloh",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-susa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          48.25778,
+          32.18922
+        ]
+      },
+      "properties": {
+        "id": "place-susa",
+        "name": "Susa",
+        "modernIdentification": "Shush",
+        "identificationScore": 1000,
+        "sourceId": "Susa",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-persia",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          48.516247,
+          34.8065
+        ]
+      },
+      "properties": {
+        "id": "place-persia",
+        "name": "Persia",
+        "modernIdentification": "Persia regional reference point not historical boundary",
+        "identificationScore": 1000,
+        "sourceId": "Persia",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-ephesus",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.3407,
+          37.939125
+        ]
+      },
+      "properties": {
+        "id": "place-ephesus",
+        "name": "Ephesus",
+        "modernIdentification": "Ephesus",
+        "identificationScore": 1000,
+        "sourceId": "Ephesus",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-rome",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.4852,
+          41.8922
+        ]
+      },
+      "properties": {
+        "id": "place-rome",
+        "name": "Rome",
+        "modernIdentification": "Rome",
+        "identificationScore": 1000,
+        "sourceId": "Rome",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-babylon",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.422222,
+          32.543333
+        ]
+      },
+      "properties": {
+        "id": "place-babylon",
+        "name": "Babylon",
+        "modernIdentification": "Babylon",
+        "identificationScore": 1000,
+        "sourceId": "Babylon_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-babylonia",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.422222,
+          32.543333
+        ]
+      },
+      "properties": {
+        "id": "place-babylonia",
+        "name": "Babylonia",
+        "modernIdentification": "Babylonia regional label near Babylon",
+        "identificationScore": 1000,
+        "sourceId": "Babylonia",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-nile-river",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.3667,
+          31.4653
+        ]
+      },
+      "properties": {
+        "id": "place-nile-river",
+        "name": "Nile River",
+        "modernIdentification": "Nile river representative point",
+        "identificationScore": 1000,
+        "sourceId": "Nile",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "river"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-nazareth",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.29769,
+          32.70214
+        ]
+      },
+      "properties": {
+        "id": "place-nazareth",
+        "name": "Nazareth",
+        "modernIdentification": "Nazareth",
+        "identificationScore": 1000,
+        "sourceId": "Nazareth",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-nineveh",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.1528,
+          36.3594
+        ]
+      },
+      "properties": {
+        "id": "place-nineveh",
+        "name": "Nineveh",
+        "modernIdentification": "Nineveh",
+        "identificationScore": 1000,
+        "sourceId": "Nineveh",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-dothan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.239861,
+          32.413528
+        ]
+      },
+      "properties": {
+        "id": "place-dothan",
+        "name": "Dothan",
+        "modernIdentification": "Tel Dotan",
+        "identificationScore": 877,
+        "sourceId": "Dothan",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-patmos",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          26.541667,
+          37.325
+        ]
+      },
+      "properties": {
+        "id": "place-patmos",
+        "name": "Patmos",
+        "modernIdentification": "Patmos",
+        "identificationScore": 1000,
+        "sourceId": "Patmos",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "island"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-samaria",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.195,
+          32.276111
+        ]
+      },
+      "properties": {
+        "id": "place-samaria",
+        "name": "Samaria",
+        "modernIdentification": "Samaria",
+        "identificationScore": 1000,
+        "sourceId": "Samaria_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-damascus",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.30639,
+          33.511112
+        ]
+      },
+      "properties": {
+        "id": "place-damascus",
+        "name": "Damascus",
+        "modernIdentification": "Damascus",
+        "identificationScore": 1000,
+        "sourceId": "Damascus",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-tabor",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.392917,
+          32.68625
+        ]
+      },
+      "properties": {
+        "id": "place-mount-tabor",
+        "name": "Mount Tabor",
+        "modernIdentification": "Jebel et Tur",
+        "identificationScore": 1000,
+        "sourceId": "Mount_Tabor",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "mountain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-hermon",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.85,
+          33.4
+        ]
+      },
+      "properties": {
+        "id": "place-mount-hermon",
+        "name": "Mount Hermon",
+        "modernIdentification": "Mount Hermon",
+        "identificationScore": 1000,
+        "sourceId": "Mount_Hermon",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "mountain"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-bethsaida",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.63096,
+          32.91038
+        ]
+      },
+      "properties": {
+        "id": "place-bethsaida",
+        "name": "Bethsaida",
+        "modernIdentification": "At Tell; competing site identifications",
+        "identificationScore": 740,
+        "sourceId": "Bethsaida_2",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "disputed_settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-cyprus",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.0,
+          35.0
+        ]
+      },
+      "properties": {
+        "id": "place-cyprus",
+        "name": "Cyprus",
+        "modernIdentification": "Cyprus representative point",
+        "identificationScore": 1000,
+        "sourceId": "Cyprus",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "island"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-crete",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.893333,
+          35.309722
+        ]
+      },
+      "properties": {
+        "id": "place-crete",
+        "name": "Crete",
+        "modernIdentification": "Crete representative point",
+        "identificationScore": 1000,
+        "sourceId": "Crete",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "island"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-greece",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.726738,
+          37.971851
+        ]
+      },
+      "properties": {
+        "id": "place-greece",
+        "name": "Greece",
+        "modernIdentification": "Athens reference point not full region",
+        "identificationScore": 1000,
+        "sourceId": "Greece",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-athens",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.726738,
+          37.971851
+        ]
+      },
+      "properties": {
+        "id": "place-athens",
+        "name": "Athens",
+        "modernIdentification": "Athens",
+        "identificationScore": 1000,
+        "sourceId": "Athens",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-caesarea",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.891667,
+          32.5
+        ]
+      },
+      "properties": {
+        "id": "place-caesarea",
+        "name": "Caesarea",
+        "modernIdentification": "Caesarea Maritima",
+        "identificationScore": 1000,
+        "sourceId": "Caesarea",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-moab",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.701389,
+          31.180556
+        ]
+      },
+      "properties": {
+        "id": "place-moab",
+        "name": "Moab",
+        "modernIdentification": "Moab regional reference point Kerak",
+        "identificationScore": 1000,
+        "sourceId": "Moab_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-tyre",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.196111,
+          33.270833
+        ]
+      },
+      "properties": {
+        "id": "place-tyre",
+        "name": "Tyre",
+        "modernIdentification": "Tyre",
+        "identificationScore": 1000,
+        "sourceId": "Tyre",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-sidon",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.371944,
+          33.560985
+        ]
+      },
+      "properties": {
+        "id": "place-sidon",
+        "name": "Sidon",
+        "modernIdentification": "Sidon",
+        "identificationScore": 1000,
+        "sourceId": "Sidon",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-philistia",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.545833,
+          31.663889
+        ]
+      },
+      "properties": {
+        "id": "place-philistia",
+        "name": "Philistia",
+        "modernIdentification": "Region reference point near Ashkelon",
+        "identificationScore": 1000,
+        "sourceId": "Philistia",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-mount-moriah",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.235556,
+          31.777778
+        ]
+      },
+      "properties": {
+        "id": "place-mount-moriah",
+        "name": "Mount Moriah",
+        "modernIdentification": "Temple Mount identification",
+        "identificationScore": 1000,
+        "sourceId": "Mount_Moriah",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "hill"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-shinar",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.422222,
+          32.543333
+        ]
+      },
+      "properties": {
+        "id": "place-shinar",
+        "name": "Shinar",
+        "modernIdentification": "Regional reference near Babylon",
+        "identificationScore": 1000,
+        "sourceId": "Shinar",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-midian",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.0122,
+          28.4947
+        ]
+      },
+      "properties": {
+        "id": "place-midian",
+        "name": "Midian",
+        "modernIdentification": "Regional reference near Al Bad",
+        "identificationScore": 1000,
+        "sourceId": "Midian",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "region"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-uruk",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.636111,
+          31.322222
+        ]
+      },
+      "properties": {
+        "id": "place-uruk",
+        "name": "Uruk",
+        "modernIdentification": "Uruk",
+        "identificationScore": 1000,
+        "sourceId": "Erech",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-kadesh-syria",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.5196,
+          34.55781
+        ]
+      },
+      "properties": {
+        "id": "place-kadesh-syria",
+        "name": "Kadesh (Syria)",
+        "modernIdentification": "Tell Nebi Mend",
+        "identificationScore": 542,
+        "sourceId": "Kadesh_2",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-kadesh-barnea",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.422222,
+          30.648333
+        ]
+      },
+      "properties": {
+        "id": "place-kadesh-barnea",
+        "name": "Kadesh-barnea",
+        "modernIdentification": "Ain el Qudeirat; proposal only",
+        "identificationScore": 864,
+        "sourceId": "Kadesh_barnea",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "disputed_settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-jezreel",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.327953,
+          32.557853
+        ]
+      },
+      "properties": {
+        "id": "place-jezreel",
+        "name": "Jezreel",
+        "modernIdentification": "Tel Yizreel",
+        "identificationScore": 806,
+        "sourceId": "Jezreel_2",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-valley-of-elah",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.99802,
+          31.67542
+        ]
+      },
+      "properties": {
+        "id": "place-valley-of-elah",
+        "name": "Valley of Elah",
+        "modernIdentification": "Valley of Elah representative point",
+        "identificationScore": 1000,
+        "sourceId": "Valley_of_Elah",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "valley"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-aijalon",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.023611,
+          31.841111
+        ]
+      },
+      "properties": {
+        "id": "place-aijalon",
+        "name": "Aijalon",
+        "modernIdentification": "Yalo",
+        "identificationScore": 665,
+        "sourceId": "Aijalon_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-gibeah",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.230718,
+          31.823113
+        ]
+      },
+      "properties": {
+        "id": "place-gibeah",
+        "name": "Gibeah",
+        "modernIdentification": "Tel el Ful",
+        "identificationScore": 669,
+        "sourceId": "Gibeah_1",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-peniel",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.69211,
+          32.187016
+        ]
+      },
+      "properties": {
+        "id": "place-peniel",
+        "name": "Peniel",
+        "modernIdentification": "Tell edh Dhahab esh Sherqiyeh",
+        "identificationScore": 694,
+        "sourceId": "Penuel",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "disputed_settlement"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-kishon-river",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.033333,
+          32.816667
+        ]
+      },
+      "properties": {
+        "id": "place-kishon-river",
+        "name": "Kishon River",
+        "modernIdentification": "Kishon River representative point",
+        "identificationScore": 854,
+        "sourceId": "Kishon",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "river"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-jabbok-river",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.543056,
+          32.11525
+        ]
+      },
+      "properties": {
+        "id": "place-jabbok-river",
+        "name": "Jabbok River",
+        "modernIdentification": "Zarqa River representative point",
+        "identificationScore": 1000,
+        "sourceId": "Jabbok",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "river"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-sea-of-galilee",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.590033,
+          32.818906
+        ]
+      },
+      "properties": {
+        "id": "place-sea-of-galilee",
+        "name": "Sea of Galilee",
+        "modernIdentification": "Sea of Galilee, representative point of lake",
+        "identificationScore": 1000,
+        "sourceId": "Sea_of_Galilee",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "CONTEXT_ONLY_NOT_A_MAP_SITE_PIN",
+        "isCandidate": true,
+        "locationType": "lake"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "place-tarsus",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.892056,
+          36.913028
+        ]
+      },
+      "properties": {
+        "id": "place-tarsus",
+        "name": "Tarsus",
+        "modernIdentification": "Tarsus",
+        "identificationScore": 1000,
+        "sourceId": "Tarsus",
+        "source": "openbible_geocoding_ccby4_via_bsb",
+        "pointSemantics": "modern place site/reference, NOT precise Biblical event point",
+        "renderPolicy": "historic_site_candidate",
+        "isCandidate": true,
+        "locationType": "settlement"
+      }
+    }
+  ]
+}
