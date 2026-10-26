@@ -1,0 +1,439 @@
+{
+  "catalogType": "CGBC_SCRIPTURE_REFERENCE_CATALOG",
+  "catalogVersion": "1.0-fresh",
+  "origin": "Good Gifts fresh original-source SPP build 2026-10-25",
+  "generatedAt": "2026-10-25T23:30:00-05:00",
+  "authority": "CGBC source-verified reference catalog paired with authoritative NASB95 allocation ledger",
+  "preferredTranslation": "NASB1995",
+  "fallbackTranslation": "KJV",
+  "policy": {
+    "userStatedAllowanceVerses": 1000,
+    "usedNASB95VersesFromThisPackage": 35,
+    "reasonZeroUsed": null,
+    "remainingAllowanceNotAsserted": false,
+    "displayRule": "NASB95 display conditional on licensed delivery and ledger checks; this package reproduces no separately republished Bible verse text beyond existing original PPTX and sermon notes",
+    "noDuplicateTextStorage": true,
+    "freshCorpusLedgerStartRemaining": 965
+  },
+  "sermons": [
+    {
+      "stableId": "media-fdtrrp",
+      "canonicalPath": "knowledge/2026/2026-09-27_good-gifts-from-a-good-god.json",
+      "passageReferences": [
+        "Matthew 13:10-17",
+        "Matthew 20:1-16",
+        "Matthew 19:30",
+        "Ephesians 2:8-10",
+        "Romans 2:11",
+        "Luke 19:10",
+        "Romans 10:13",
+        "Exodus 8:8-10",
+        "2 Corinthians 6:2",
+        "Isaiah 6:9-10",
+        "James 1:17",
+        "Romans 8:28",
+        "Romans 10:9"
+      ],
+      "distinctVerseCount": 35,
+      "verseIds": [
+        "Matthew 13:10",
+        "Matthew 13:11",
+        "Matthew 13:12",
+        "Matthew 13:13",
+        "Matthew 13:14",
+        "Matthew 13:15",
+        "Matthew 13:16",
+        "Matthew 13:17",
+        "Matthew 20:1",
+        "Matthew 20:2",
+        "Matthew 20:3",
+        "Matthew 20:4",
+        "Matthew 20:5",
+        "Matthew 20:6",
+        "Matthew 20:7",
+        "Matthew 20:8",
+        "Matthew 20:9",
+        "Matthew 20:10",
+        "Matthew 20:11",
+        "Matthew 20:12",
+        "Matthew 20:13",
+        "Matthew 20:14",
+        "Matthew 20:15",
+        "Matthew 20:16",
+        "Matthew 19:30",
+        "Ephesians 2:8",
+        "Ephesians 2:9",
+        "Ephesians 2:10",
+        "Romans 2:11",
+        "Luke 19:10",
+        "Romans 10:13",
+        "Exodus 8:8",
+        "Exodus 8:9",
+        "Exodus 8:10",
+        "2 Corinthians 6:2"
+      ],
+      "displayStatus": "ALLOCATED_RIGHTS_CONDITIONAL_NO_VERSE_TEXT_EMBEDDED",
+      "nasb95ActualDisplayCount": 0,
+      "nasb95AllocatedVerseCount": 35
+    }
+  ],
+  "verseEntries": [
+    {
+      "verseId": "Matthew 13:10",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:11",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:12",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:13",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:14",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:15",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:16",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 13:17",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:1",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:2",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:3",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:4",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:5",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:6",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:7",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:8",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:9",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:10",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:11",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:12",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:13",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:14",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:15",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 20:16",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Matthew 19:30",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Ephesians 2:8",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Ephesians 2:9",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Ephesians 2:10",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Romans 2:11",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Luke 19:10",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Romans 10:13",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Exodus 8:8",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Exodus 8:9",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "Exodus 8:10",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    },
+    {
+      "verseId": "2 Corinthians 6:2",
+      "sermonStableIds": [
+        "media-fdtrrp"
+      ],
+      "intendedTranslation": "NASB1995",
+      "fallback": "KJV",
+      "nasb95UsageStatus": "ALLOCATED_NOT_EMBEDDED",
+      "sourceReference": "src-slides / src-sermon-notes"
+    }
+  ],
+  "usageLedgerPath": "knowledge/CGBC_NASB95_VERSE_USAGE_LEDGER.json",
+  "allusionOnlyReferences": [
+    "James 1:17",
+    "Romans 8:28",
+    "Romans 10:9",
+    "Isaiah 6:9-10"
+  ]
+}
