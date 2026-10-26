@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-26T14:37:13.569Z",
+  "generatedAt": "2026-10-26T14:40:05.307Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 187,
     "archiveItems": 187,
     "videoMatchedItems": 179,
-    "transcriptMatchedItems": 53,
-    "quoteCandidateCount": 3941
+    "transcriptMatchedItems": 54,
+    "quoteCandidateCount": 4016
   },
   "totals": {
     "audioPlaysTotal": 6339,
@@ -390,7 +390,7 @@
           "Matthew 28:19",
           "Matthew 28:20"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -441,16 +441,27 @@
         "day": 21
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-10-21.srt",
+            "cleanFile": "transcripts_clean/en/2026-10-21_the-tribulation-pt-15.srt",
+            "displayFile": "transcripts_display/en/2026-10-21_the-tribulation-pt-15.srt",
+            "jsonFile": "data/transcripts/en/2026-10-21_the-tribulation-pt-15.json",
+            "displayJsonFile": "data/transcripts/en/2026-10-21_the-tribulation-pt-15.display.json",
+            "segmentCount": 426,
+            "displaySegmentCount": 373
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-10-21.srt",
+        "cleanFile": "transcripts_clean/en/2026-10-21_the-tribulation-pt-15.srt",
+        "displayFile": "transcripts_display/en/2026-10-21_the-tribulation-pt-15.srt",
+        "jsonFile": "data/transcripts/en/2026-10-21_the-tribulation-pt-15.json",
+        "displayJsonFile": "data/transcripts/en/2026-10-21_the-tribulation-pt-15.display.json",
+        "segmentCount": 426,
+        "displaySegmentCount": 373
       },
       "audio": {
         "hasAudio": true,
