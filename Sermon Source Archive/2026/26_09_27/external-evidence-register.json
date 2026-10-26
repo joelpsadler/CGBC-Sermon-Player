@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-10-25T23:30:00-05:00",
+  "originalSourceSHA256": {
+    "original-transcript.srt": "a00175cb17a6b10dbd67d31028ee65921bc567472c768c6f1ddd017779f1618f",
+    "sermon-notes.pdf": "1bf79ecd161c99116dadb7b06319812a6e648178598639ffba5b267e28fb4f25",
+    "slides.pptx": "dc3f0a6fe608256ce9652eeb821ae2666344775e709727c86222be49a992acef",
+    "art-square.jpg": "b9ebbd2b1627df666a8989b7e650934231f59423c40877f53e7406b12ebc3bdd",
+    "art-wide.jpg": "791ffe4246b3ef540ccae025263f63ef194538f7353e595eb003b7e4ddde1675"
+  },
+  "referenceSources": [
+    {
+      "id": "src-biblehub-matt20",
+      "title": "BibleHub Matthew 20:15 Greek text analysis",
+      "itemUrl": "https://biblehub.com/text/matthew/20-15.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Greek forms, ὀφθαλμός, πονηρός and ἀγαθός, secondary manually checked public research view"
+    },
+    {
+      "id": "src-biblehub-20-16",
+      "title": "BibleHub Matthew 20:16 text witnesses",
+      "itemUrl": "https://biblehub.com/text/matthew/20-16.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Greek first and last phrase and textual expansion in some traditions"
+    },
+    {
+      "id": "src-biblehub-eph",
+      "title": "BibleHub Ephesians 2:8 Greek text analysis",
+      "itemUrl": "https://biblehub.com/text/ephesians/2-8.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Greek χάριτί, πίστεως, σεσῳσμένοι grammatical forms"
+    },
+    {
+      "id": "src-biblehub-exod",
+      "title": "BibleHub Exodus 8:10 Hebrew text analysis",
+      "itemUrl": "https://biblehub.com/text/exodus/8-10.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Hebrew לְמָחָר, adverbial tomorrow, source-language reading"
+    },
+    {
+      "id": "src-biblehub-cor",
+      "title": "BibleHub 2 Corinthians 6:2 Greek text analysis",
+      "itemUrl": "https://biblehub.com/text/2_corinthians/6-2.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Greek νῦν and salvific urgency, morphologically indexed"
+    },
+    {
+      "id": "src-biblehub-rom",
+      "title": "BibleHub Romans 10:13 Greek text analysis",
+      "itemUrl": "https://biblehub.com/texts/romans/10-13.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Greek all-who-call formulation and Joel quotation"
+    },
+    {
+      "id": "src-ccel-jfb",
+      "title": "Jamieson Fausset Brown CCEL Commentary Matthew 20:1–16",
+      "itemUrl": "https://www.ccel.org/ccel/jamieson/jfb.xi.i.xxii.html",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Reference to Peter's question in Matthew 19, kingdom rewards and resentment"
+    },
+    {
+      "id": "src-ccel-henry",
+      "title": "Matthew Henry CCEL Commentary Matthew 20:1–16",
+      "itemUrl": "https://www.ccel.org/ccel/henry/mhc5.Matt.xxi.html",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "First-and-last connection and grace given by employer"
+    },
+    {
+      "id": "src-oxford-eubank",
+      "title": "Nathan Eubank JSNT 2013 Oxford archive abstract",
+      "itemUrl": "https://ora.ox.ac.uk/objects/uuid%3A53fedb44-dcd2-4ea5-ae0e-3dbb42293d11",
+      "rights": "RESEARCH_ONLY",
+      "supportedClaim": "Scholarly contested claim: the parable also concerns recompense/reward in Matt 19–20"
+    },
+    {
+      "id": "src-fuller",
+      "title": "Fuller Seminary late-coming workers explanation",
+      "itemUrl": "https://fuller.edu/next-faithful-step/resources/parable-of-the-late-coming-workers/",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Multiple interpretive approaches and unresolved landowner motivation"
+    },
+    {
+      "id": "src-cambridge-ag",
+      "title": "Cambridge New Testament Studies agricultural harvest paper",
+      "itemUrl": "https://www.cambridge.org/core/journals/new-testament-studies/article/agricultural-background-of-the-harvest-logion-in-matthew-9378-and-luke-q-102/F2A63FE16129AD792AECE6AEFCBA5EB2",
+      "rights": "RESEARCH_ONLY",
+      "supportedClaim": "First-century Palestine and empire temporary agricultural labor during harvest"
+    },
+    {
+      "id": "src-biblehub-13",
+      "title": "BibleHub Matthew 13:15 original Greek text analysis",
+      "itemUrl": "https://biblehub.com/text/matthew/13-15.htm",
+      "rights": "LINK_ONLY",
+      "supportedClaim": "Greek hearing/seeing/returning quotation"
+    }
+  ],
+  "permanentLibraryFirstReference": "read-only checksum-locked SPP bundled master",
+  "historicalPeopleReused": [
+    "person-jesus",
+    "person-moses"
+  ],
+  "historicalEventsReused": [
+    "event-cgbc-matthew20-vineyard-parable-setting"
+  ],
+  "historicalPlacesReused": [
+    "place-egypt",
+    "place-judea"
+  ],
+  "reminder": "No public bulk BibleHub/CCEL rehosting; no modern Holman paragraph distributed in derived research."
+}
