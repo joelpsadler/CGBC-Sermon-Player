@@ -1,389 +1,272 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CGBC Knowledge Lab | SPP2 Deep Study v3</title>
+<meta name="theme-color" content="#101821">
+<title>CGBC Knowledge Lab · SPP / Info Map 3.0 Inspection</title>
 <style>
-:root{
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
-  color-scheme:dark;
-  --bg:#0b1522;--panel:#102536;--panel2:#0c1f2f;--line:#31536a;
-  --text:#eaf3f8;--muted:#a8bfcd;--accent:#afe4f6;--gold:#f4c76f;
-  --violet:#c8b2ff;--green:#9fe0ba;--blue:#9acfff;--warn:#f0c37a;
-  --red:#ee9c9c
-}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 85% 0,#17334a,var(--bg) 65%);color:var(--text);min-height:100vh}
-a{color:#a8ddff}
-button{font:inherit}
-header{
-  padding:18px clamp(14px,3vw,38px);border-bottom:1px solid #284459;
-  display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap
-}
-.eyebrow{font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;color:#8fbed6;font-weight:800}
-h1{font-size:clamp(1.55rem,3vw,2.35rem);margin:4px 0}
-header p{margin:4px 0;color:#bfd0db}
-.back{background:#b4e6f7;color:#102432;font-weight:850;text-decoration:none;border-radius:10px;padding:11px 15px}
-.wrap{max-width:1420px;margin:auto;padding:18px clamp(10px,2.5vw,32px) 60px}
-.hero{
-  border:1px solid #37627a;border-radius:16px;padding:17px 18px;margin:10px 0 18px;
-  background:linear-gradient(135deg,#17394e,#112638)
-}
-.hero strong{color:#d8f5ff}
-.status{font-size:.84rem;color:#b8d0de;margin:10px 0 14px}
-.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 18px;position:sticky;top:0;z-index:10;padding:8px;background:#0b1522ed;backdrop-filter:blur(10px)}
-.toolbar button{
-  background:#172e40;border:1px solid #41647a;color:#edf7fb;border-radius:9px;padding:8px 11px;cursor:pointer
-}
-.toolbar button[aria-pressed=true]{background:var(--accent);color:#102637;font-weight:850}
-.study-card{
-  background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:15px 0;overflow:hidden;
-  box-shadow:0 10px 35px #0002
-}
-.study-head{padding:18px 18px 14px;border-bottom:1px solid #2d4b5f}
-.refline{font-size:.77rem;color:#afc8d7;margin-bottom:7px}
-.study-head h2{font-size:1.25rem;margin:0 0 12px}
-.jake-core{
-  background:#122c3c;border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 14px;margin:11px 0
-}
-.jake-core .tag{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#ffe2a4;font-weight:800}
-.jake-core blockquote{font-size:1.08rem;line-height:1.55;margin:8px 0 5px;color:#fff}
-.jake-core .clean{font-size:.78rem;color:#b7cad5}
-.explain{font-size:.98rem;line-height:1.62;margin:10px 0;color:#e8f3f8}
-.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.action{
-  display:inline-block;text-decoration:none;background:#172e40;border:1px solid #41647a;border-radius:8px;
-  padding:7px 10px;font-size:.78rem;color:#d9effa
-}
-.scripture-stack{padding:15px 18px 18px}
-.scripture-card{background:var(--panel2);border:1px solid #355d74;border-radius:12px;margin:12px 0;overflow:hidden}
-.scripture-title{padding:11px 12px;border-bottom:1px solid #31536a;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
-.scripture-title strong{font-size:.95rem}
-.translation{font-size:.7rem;color:#a9c4d4;border:1px solid #476b80;border-radius:999px;padding:3px 7px}
-.verse-text{font-family:Georgia,serif;font-size:1rem;line-height:1.68;padding:13px 14px;color:#f0f4f7;background:#0d2232}
-.quick-tools{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;background:#10293b;border-top:1px solid #2d5065}
-.quick-tools button{
-  cursor:pointer;background:#173247;border:1px solid #41677d;color:#e6f4fb;border-radius:999px;padding:6px 9px;font-size:.73rem
-}
-.quick-tools button[aria-pressed=true]{background:#b5e9f8;color:#102535;font-weight:850}
-.tool-panel{padding:12px 14px;border-top:1px solid #2d5065;line-height:1.55;font-size:.87rem}
-.tool-panel h4{margin:0 0 7px;color:#d7eef9;font-size:.83rem;text-transform:uppercase;letter-spacing:.06em}
-.tool-panel p{margin:6px 0}
-.word-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
-.word{background:#102b3d;border:1px solid #385e74;border-radius:9px;padding:9px}
-.word b{color:#fff}
-.word small{display:block;color:#a9c4d4;margin-top:3px}
-.independent{border-left:3px solid var(--violet);padding-left:10px}
-.commentary{border-left:3px solid var(--green);padding-left:10px}
-.warning{border-left:3px solid var(--warn);background:#382d1f;padding:9px 10px;border-radius:0 7px 7px 0}
-.evidence{border-left:3px solid var(--blue);padding-left:10px}
-.hidden{display:none!important}
-.editor{background:#12283a;border:1px solid #355b70;border-radius:13px;padding:14px;margin-top:16px}
-.editor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
-.metric{background:#0d2030;border:1px solid #35566b;border-radius:10px;padding:11px}
-.metric b{display:block;font-size:1.3rem;color:#d7f2ff}
-.good{color:#a6e5bd}.muted{color:var(--muted)}
-@media(max-width:760px){.study-head,.scripture-stack{padding-left:11px;padding-right:11px}.toolbar{position:static}.jake-core blockquote{font-size:1rem}}
+:root{--bg:#0c1219;--pane:#131f2a;--pane2:#192735;--edge:#304457;--text:#e8f2f4;--muted:#acc1ca;--link:#9cdeec;--teal:#5bd8c3;--amber:#ffcc78;--bad:#fa9796;--good:#8dddb6;--shadow:0 15px 35px #0003}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font:15px/1.55 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg)}button,input,select{font:inherit}a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e2c772;outline-offset:2px}
+.top{display:flex;gap:15px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#14202a;border-bottom:1px solid var(--edge);padding:12px 20px;position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;border:1px solid #548078;background:#223a3c;width:42px;height:42px;border-radius:10px;color:var(--teal);font-weight:900;letter-spacing:-1px}.brand h1{font-size:18px;line-height:1.2;margin:0}.brand small{color:var(--muted)}.top-actions{display:flex;gap:7px;flex-wrap:wrap}
+.btn{background:#203447;border:1px solid #456174;border-radius:8px;color:var(--text);padding:8px 12px;font-size:13px}.btn:hover{background:#2a455a}.btn.primary{background:#27695f;border-color:#56a897}.btn.ghost{background:transparent}.btn.tiny{font-size:12px;padding:5px 9px}.sourcebar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 18px;border-bottom:1px solid #24394b;background:#0f1923;color:var(--muted);font-size:12px}.sourcebar input{min-width:280px;flex:1;max-width:660px}.input{padding:9px 11px;border-radius:8px;background:#0c1923;border:1px solid #486277;color:var(--text)}
+.shell{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:calc(100vh - 124px)}nav{border-right:1px solid var(--edge);padding:16px 10px 30px;background:#101a23;position:sticky;top:120px;height:calc(100vh - 120px);overflow:auto}nav .group{font-size:10px;letter-spacing:.18em;color:#7ea5b3;font-weight:800;padding:17px 12px 5px;text-transform:uppercase}nav button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:none;border:1px solid transparent;color:#c0d1da;padding:9px 11px;border-radius:8px;margin:1px 0;font-size:13px}nav button:hover{background:#1f3342}nav button.active{background:#203e44;border-color:#3f8e81;color:#e8fff7;font-weight:700}nav button span:first-child{width:18px;display:inline-block;text-align:center}
+main{padding:24px 26px 85px;max-width:1660px;min-width:0;width:100%}.heading{margin-bottom:23px;display:flex;align-items:start;gap:10px;flex-wrap:wrap;justify-content:space-between}.heading h2{font-size:29px;letter-spacing:-.03em;line-height:1.15;margin:0}.heading p{color:var(--muted);margin:8px 0 0;max-width:930px}.card{background:var(--pane);border:1px solid var(--edge);border-radius:12px;padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow);min-width:0}.card h3{margin:0 0 12px;font-size:19px;line-height:1.3}.card h4{margin:16px 0 6px;color:#d5e2ee}.card p{margin:8px 0 12px}.card small,.small{font-size:12px;color:var(--muted)}.meta{color:var(--muted);font-size:13px}.intro{font-size:17px;line-height:1.55;max-width:900px}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:9px;margin-bottom:18px}.stat{border:1px solid #395467;background:#192a38;padding:15px;border-radius:10px}.stat .num{font-size:28px;font-weight:800;color:#e0ffef;font-variant-numeric:tabular-nums}.stat .what{font-size:12px;color:#a6c5c7}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.stack{display:grid;gap:14px}.pill{display:inline-flex;border:1px solid #446274;color:#b9d7dd;background:#203241;font-size:11px;font-weight:700;letter-spacing:.025em;border-radius:100px;padding:3px 8px;margin:2px 4px 2px 0;max-width:100%;overflow-wrap:anywhere}.pill.good{border-color:#4c9177;color:#a9e4ca;background:#1a4038}.pill.warn{border-color:#b18749;color:#ffe1ae;background:#413321}.pill.bad{border-color:#ad5a59;color:#ffc6bc;background:#48292c}.pill.info{border-color:#4b82a4;color:#bce1ff;background:#21394c}.quiet{color:var(--muted)}.warning{border-left:4px solid var(--amber);background:#32291c;border-radius:7px;padding:12px 14px;margin:10px 0;color:#ffe8ca}.note{border-left:4px solid #55b8af;background:#173532;border-radius:7px;padding:12px 14px;margin:10px 0}.missing{border:1px dashed #715d44;border-radius:9px;background:#2a261f;padding:16px;color:#f6dbb8}.list{padding-left:20px;margin:8px 0}.list li{margin:6px 0}.multiline{white-space:pre-wrap;overflow-wrap:anywhere}.chips{display:flex;flex-wrap:wrap;align-items:center;gap:3px}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.stretch{flex:1}.mutedline{border-top:1px solid #294153;margin:15px 0}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:16px}.controls .input{min-width:220px;flex:1}.controls select{max-width:300px}
+.kv{display:grid;grid-template-columns:minmax(150px,23%) 1fr;gap:5px 11px;padding:4px 0}.kv dt{color:#8eb0c1;font-size:12px;overflow-wrap:anywhere}.kv dd{margin:0;overflow-wrap:anywhere}.dataTable{width:100%;border-collapse:collapse;font-size:13px}.dataTable th,.dataTable td{padding:9px 10px;border-bottom:1px solid #354b5c;vertical-align:top;text-align:left;overflow-wrap:anywhere}.dataTable th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#9abbcb;background:#1a2a38}.scrollx{overflow:auto}details{border:1px solid #33485b;border-radius:8px;margin:9px 0;padding:9px 12px;background:#172734}details[open]{background:#1a2c3a}details summary{cursor:pointer;color:#c9e9f1;font-weight:700}pre{white-space:pre-wrap;word-break:break-word;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;max-height:460px;overflow:auto;background:#0b141d;border:1px solid #273c4c;border-radius:8px;padding:13px;color:#b9d6e8}.json-raw{max-height:68vh;overflow:auto}mark{background:#775b28;color:white}.foot{color:#8cabb8;font-size:12px;padding-top:20px}.notice-top{margin-bottom:16px;padding:12px;border:1px solid #5e714d;border-radius:10px;background:#263727}.source-record{font-size:12px;color:#94b2c5;overflow-wrap:anywhere}.two-col{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(250px,.7fr);gap:16px}
+.videoimg{width:100%;height:auto;max-width:340px;aspect-ratio:16/9;object-fit:contain;border:1px solid #37546a;border-radius:8px;background:#0a1118}.slideTile{border:1px solid #395060;border-radius:10px;background:#1b2d3b;padding:10px}.slideTile img{width:100%;height:170px;object-fit:contain;border-radius:5px;background:#0a131b}.slideTile .title{margin:8px 0;font-size:12px;max-height:55px;overflow:hidden}.dataNav{display:grid;grid-template-columns:280px minmax(0,1fr);gap:13px}.filepick{width:100%;max-width:420px}.pathbutton{background:#1d3345;border:1px solid #375a6e;border-radius:6px;color:#bde9f0;margin:3px 3px 3px 0;padding:6px;font-size:11px}.jsonhead{display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between;gap:8px}.identity{background:#203943;padding:8px 12px;border-radius:6px;overflow-wrap:anywhere}
+.maparea{border:1px solid #385b6d;border-radius:9px;overflow:hidden;min-height:360px;background:#d4d9cd;position:relative}.maparea #leafmap{height:460px;width:100%}.maparea svg{width:100%;height:auto;min-height:330px;display:block;background:linear-gradient(165deg,#112d41,#213d47)}.maparea svg circle{cursor:pointer}.maparea svg circle:hover{stroke:#fff;stroke-width:2}.map-pop{background:#1e2e3d;padding:10px;border-top:1px solid #475a69}.maplist{max-height:400px;overflow:auto}.maplist button{text-align:left;margin:3px 4px}.inline-code{font-family:monospace;background:#0a1820;padding:2px 5px;border-radius:4px;font-size:12px}
+#toast{position:fixed;right:18px;bottom:18px;z-index:100;color:#11352e;background:#b2e8d6;border-radius:8px;padding:9px 13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}#toast.show{opacity:1}.source-preview img{object-fit:contain}
+@media(max-width:850px){.shell{display:block}nav{position:static;height:auto;display:flex;gap:4px;overflow:auto;padding:7px 10px;border-right:0;border-bottom:1px solid var(--edge)}nav .group{display:none}nav button{width:max-content;white-space:nowrap;flex-shrink:0;margin:0;font-size:12px}.top{position:static}main{padding:20px 12px 70px}.grid2,.grid3,.two-col,.dataNav{grid-template-columns:1fr}.card{padding:15px 13px}.heading h2{font-size:24px}.sourcebar input{min-width:130px}.kv{grid-template-columns:1fr}.kv dt{font-weight:700}.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.maparea #leafmap{height:360px}}
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 <body>
-<header>
-  <div>
-    <div class="eyebrow">Cedar Grove Baptist Church · Knowledge Lab · SPP2 Deep Study Pilot</div>
-    <h1>Relationships</h1>
-    <p>Pastor Jake’s teaching first · Scripture visible · Joel Quick Tools everywhere a specific passage matters</p>
-  </div>
-  <a class="back" href="knowledge-lab-spp2-listener-v2.html">← Listener v2</a>
+<header class="top">
+ <div class="brand"><div class="logo">CG</div><div><h1>CGBC Knowledge Lab</h1><small>SPP evidence inspection • Info Map 3.0 • Good Gifts</small></div></div>
+ <div class="top-actions"><button id="reloadBtn" class="btn primary">↻ Load current GitHub</button><button id="fileBtn" class="btn">＋ Open local JSON</button><button id="exportBtn" class="btn">↓ Export audit</button></div>
 </header>
-
-<main class="wrap">
-  <div class="hero">
-    <strong>What this pilot is testing:</strong>
-    whether the deeper SPP2 research can make the sermon easier to understand without turning the page into commentary about the sermon.
-    Jake’s own words lead. Specific Scripture is shown. Deeper language, context, commentary checks, and evidence are one tap away.
-  </div>
-
-  <div id="status" class="status">Loading current Relationships knowledge…</div>
-
-  <div class="toolbar">
-    <button data-mode="study" aria-pressed="true">Deep study</button>
-    <button data-mode="compact">Compact</button>
-    <button data-mode="open">Open all tools</button>
-    <button data-mode="editor">Editor check</button>
-  </div>
-
-  <section id="studies"></section>
-
-  <section id="editorPanel" class="editor hidden">
-    <h2>Editor check</h2>
-    <div id="metrics" class="editor-grid"></div>
-    <p class="muted">The public-facing study text below is a projection. Canonical provenance, uncertainty, and the full SPP2 research remain in the sermon JSON.</p>
-  </section>
-</main>
-
+<div class="sourcebar"><strong>Read-only • not production</strong><span id="loadStatus">Starting…</span><input class="input" id="baseUrl" aria-label="Repository published site URL" title="Base URL for published GitHub Pages repository"><button id="applyBase" class="btn tiny">Use URL</button><input type="file" accept=".json,.geojson,application/json" id="fileInput" multiple hidden></div>
+<div class="shell"><nav id="nav" aria-label="Inspection categories"></nav><main id="main" aria-live="polite"></main></div>
+<div id="toast" role="status"></div>
 <script>
-'use strict';
-
-const DATA='knowledge/2026/2026-09-20_relationships.json';
-const $=id=>document.getElementById(id);
-const arr=v=>Array.isArray(v)?v:[];
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let doc=null;
-
-const studies={
-'relationships.spp2.d011':{
-  core:'The rock upon which we stand is Jesus Himself.',
-  coreNote:'Exact sermon wording, lightly capitalized.',
-  explain:'If we get Jesus wrong, everything built on top of that foundation is wrong. Church identity, values, methods, and growth all depend on who Jesus is.',
-  verses:[
-    {
-      ref:'Matthew 16:15–19',
-      text:'15 He saith unto them, But whom say ye that I am? 16 And Simon Peter answered and said, Thou art the Christ, the Son of the living God. 17 And Jesus answered and said unto him, Blessed art thou, Simon Barjona: for flesh and blood hath not revealed it unto thee, but my Father which is in heaven. 18 And I say also unto thee, That thou art Peter, and upon this rock I will build my church; and the gates of hell shall not prevail against it. 19 And I will give unto thee the keys of the kingdom of heaven: and whatsoever thou shalt bind on earth shall be bound in heaven: and whatsoever thou shalt loose on earth shall be loosed in heaven.',
-      keywords:[
-        ['Christ','Χριστός · Christos · G5547','Messiah / Anointed One; Peter’s confession identifies Jesus.'],
-        ['Peter','Πέτρος · Petros · G4074','Peter’s name in Jesus’ direct response.'],
-        ['rock','πέτρα · petra · G4073','The “rock” language is real wordplay; grammar alone does not settle every historical interpretation.'],
-        ['I will build','οἰκοδομήσω · oikodomēsō · G3618','Jesus is explicitly the builder of His church.']
-      ],
-      context:'Matthew 16:13–28 moves from Peter’s confession to Jesus’ promise, then immediately to Jesus predicting His suffering and rebuking Peter. The foundation discussion belongs inside that whole Christ-centered scene.',
-      commentary:'Historical interpreters do not all identify “this rock” in exactly the same way. JFB and Matthew Henry both recognize more complexity than a simple “Peter cannot be involved because the words differ” argument. This is a deeper interpretive note, not a reason to rewrite Jake’s sermon claim.',
-      jake:'“The rock upon which we stand is Jesus himself. He is the chief cornerstone of the church… If you’ve got Jesus wrong, you’ve got it all wrong.”',
-      related:'Christ as foundation · church identity · Christology · Upon This Rock series'
-    }
-  ],
-  study:'Independent study adds a qualification: Matthew 16 addresses Peter directly and contains genuine Peter/rock wordplay. That does not erase the sermon’s Christ-centered foundation emphasis, but the Greek alone should not be used to claim the Peter question is automatically settled.'
-},
-'relationships.spp2.d012':{
-  core:'You must love people no matter the condition they are in. This does not mean that we tolerate or support their sins.',
-  coreNote:'Exact sermon wording with punctuation cleanup.',
-  explain:'The sermon holds love and truth together. Love is not conditioned on whether the other person responds the way we want, but love also does not require pretending destructive choices are good.',
-  verses:[
-    {
-      ref:'John 15:12–13',
-      text:'12 This is my commandment, That ye love one another, as I have loved you. 13 Greater love hath no man than this, that a man lay down his life for his friends.',
-      keywords:[
-        ['love','ἀγαπᾶτε · agapate · G25','Present active subjunctive in the command clause; the model is Jesus’ prior self-giving love.'],
-        ['loved','ἠγάπησα · ēgapēsa · G25','Jesus’ own love is the pattern for the disciples.']
-      ],
-      context:'John 15 is part of Jesus’ farewell teaching to the disciples. Abiding, obedience, fruit, friendship, and love belong together.',
-      commentary:'Historical commentary broadly supports self-giving love as the controlling idea. No distinct commentator contribution needs to be inserted into the sermon voice.',
-      jake:'“Our love is not predicated or dependent on someone’s response to our love.”',
-      related:'Romans 5:8 · Ephesians 2:1–5 · 1 Corinthians 13:4–7 · unconditional love · truth and love'
-    },
-    {
-      ref:'Romans 5:8',
-      text:'But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us.',
-      keywords:[
-        ['sinners','ἁμαρτωλῶν · hamartōlōn · G268','Genitive masculine plural, functioning substantivally: “sinners.”'],
-        ['while we were','ὄντων · ontōn · G1510','With “sinners,” forms the idea “while we were sinners.”']
-      ],
-      context:'Romans 5:1–11 describes justification, peace with God, hope, and God’s love demonstrated through Christ’s death for the ungodly.',
-      commentary:'The sermon’s main point is supported: God’s love precedes moral cleanup. The lexical nuance is that Paul describes people as sinners, not merely isolated sinful behaviors.',
-      jake:'“God loved us even before He saved us.”',
-      related:'grace · sinful condition · salvation · love before cleanup'
-    },
-    {
-      ref:'1 Corinthians 13:4–7',
-      text:'4 Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up, 5 Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil; 6 Rejoiceth not in iniquity, but rejoiceth in the truth; 7 Beareth all things, believeth all things, hopeth all things, endureth all things.',
-      keywords:[
-        ['suffereth long','μακροθυμεῖ · makrothymei · G3114','Patient endurance toward people.'],
-        ['rejoiceth with the truth','συγχαίρει… τῇ ἀληθείᾳ','Love is not detached from truth.']
-      ],
-      context:'Paul is correcting a gifted but divided Corinthian church. The chapter sits inside a larger discussion of spiritual gifts, rivalry, and love.',
-      commentary:'JFB and Henry both emphasize patience, kindness, restraint, and truth. Their agreement is corroboration, not a public attribution requirement for Jake’s independently taught point.',
-      jake:'“Unconditional love is not afraid of saying the tough truth in a loving way.”',
-      related:'Christian love · correction · truth · church relationships'
-    }
-  ],
-  study:'The deeper qualification is practical: Scripture supports love joined with truth, but it does not automatically make every confrontation wise, timely, or loving.'
-},
-'relationships.spp2.d013':{
-  core:'We’ve gotta go deeper. Don’t just believe something because someone you liked or followed told you that’s what to believe. Go to God’s Word, learn from Him.',
-  coreNote:'Exact sermon wording with light cleanup.',
-  explain:'Learning God’s Word is personal. Church teaching cannot replace personally seeking God in Scripture, and that responsibility extends into the home.',
-  verses:[
-    {
-      ref:'Psalm 25:4–5',
-      text:'4 Shew me thy ways, O LORD; teach me thy paths. 5 Lead me in thy truth, and teach me: for thou art the God of my salvation; on thee do I wait all the day.',
-      keywords:[
-        ['show / make known','הוֹדִיעֵנִי · hôḏîʿēnî · H3045','Hiphil imperative: “cause me to know / make known to me.”'],
-        ['teach me','לַמְּדֵנִי · lamməḏēnî · H3925','Piel imperative: an active plea for God to teach.'],
-        ['lead me','הַדְרִיכֵנִי · haḏrîḵēnî · H1869','Hiphil imperative: “guide / lead me.”']
-      ],
-      context:'Psalm 25 is a Davidic acrostic prayer about trust, confession, guidance, covenant mercy, and waiting on the LORD. Verses 4–5 are prayer, not merely a study technique.',
-      commentary:'The SPP2 review did not pin a verse-specific JFB/Henry payload here. Independent Hebrew analysis supports the emphasis on dependence, teachability, and guidance.',
-      jake:'“Make me know Your ways, O Lord. Teach me Your paths. Lead me in Your truth and teach me…” followed by “You cannot increasingly learn about God and stay the same.”',
-      related:'personal Bible study · family discipleship · hunger for God’s Word · Bibliology'
-    }
-  ],
-  study:'Important evidence note: Jake says “Psalm 24:4–5” aloud, but the words he recites, the prepared notes, and slide 26 are Psalm 25:4–5. The transcript should preserve what was spoken while the study surface points to the correct passage.'
-},
-'relationships.spp2.d014':{
-  core:'Not everyone’s a pastor. But everyone’s a proclaimer of truth.',
-  coreNote:'Exact sermon wording.',
-  explain:'Holding a pastoral office and proclaiming the gospel are not the same thing. The sermon’s point is that ordinary believers can tell the truth about Christ.',
-  verses:[
-    {
-      ref:'Mark 16:14–15',
-      text:'14 Afterward he appeared unto the eleven as they sat at meat, and upbraided them with their unbelief and hardness of heart, because they believed not them which had seen him after he was risen. 15 And he said unto them, Go ye into all the world, and preach the gospel to every creature.',
-      keywords:[
-        ['preach / proclaim','κηρύξατε · kēryxate · G2784','Aorist active imperative, second person plural: proclaim / herald the gospel.']
-      ],
-      context:'In the traditional longer ending of Mark, the risen Jesus addresses the Eleven. The immediate grammatical audience is the disciples in that scene.',
-      commentary:'The main lexical point is sound: κηρύσσω is proclamation language, not a technical definition of pastoral office. Broader application to every believer rests on the wider New Testament witness, not on this verb alone.',
-      jake:'“Not everyone’s a pastor. But everyone’s a preacher… not everyone’s a pastor, but everyone’s a proclaimer of truth.”',
-      related:'gospel proclamation · every-member ministry · Matthew 28:18–20 · Romans 10:13–15'
-    }
-  ],
-  study:'Textual note: Mark 16:9–20 has a well-known manuscript-history question. That should stay available in deeper study without hijacking the sermon’s first-layer point.'
-},
-'relationships.spp2.d015':{
-  core:'Go, therefore, and make disciples… baptizing them… teaching them to observe all that I commanded you.',
-  coreNote:'Jake reads the Great Commission directly from Matthew 28.',
-  explain:'The mission does not stop with a decision. The text itself describes disciple-making that includes baptism and teaching people to obey Jesus.',
-  verses:[
-    {
-      ref:'Matthew 28:18–20',
-      text:'18 And Jesus came and spake unto them, saying, All power is given unto me in heaven and in earth. 19 Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost: 20 Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.',
-      keywords:[
-        ['make disciples','μαθητεύσατε · mathēteusate · G3100','Aorist active imperative: the central command.'],
-        ['going','πορευθέντες · poreuthentes · G4198','Participial form accompanying the disciple-making commission.'],
-        ['baptizing','βαπτίζοντες · baptizontes · G907','Present active participle describing the disciple-making mission.'],
-        ['teaching','διδάσκοντες · didaskontes · G1321','Present active participle: teaching disciples to obey Jesus.']
-      ],
-      context:'Matthew closes with the risen Jesus speaking to the Eleven in Galilee. His universal authority and enduring presence frame the commission.',
-      commentary:'Historical commentary supports the broad mission under Christ’s authority. The grammar clarifies that disciple-making is central and that baptizing and teaching belong inside that mission.',
-      jake:'Jake reads the passage, then presses the church toward “leading others to Christ continually.”',
-      related:'Great Commission · discipleship · baptism · teaching · church mission'
-    }
-  ],
-  study:'The fuller disciple-formation emphasis is a legitimate biblical insight from the passage, but Jake does not extensively develop the Greek structure in this sermon. That extra layer should remain visibly independent.'
-},
-'relationships.spp2.d016':{
-  core:'How will they believe in Him whom they have not heard? … How will they preach unless they are sent?',
-  coreNote:'Jake reads Paul’s chain and then asks, “When’s the last time you brought the good news?”',
-  explain:'Paul connects calling on Christ with believing, hearing, proclamation, and sending. The sermon turns that chain into a direct challenge to bring the good news.',
-  verses:[
-    {
-      ref:'Romans 10:13–15',
-      text:'13 For whosoever shall call upon the name of the Lord shall be saved. 14 How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard? and how shall they hear without a preacher? 15 And how shall they preach, except they be sent? as it is written, How beautiful are the feet of them that preach the gospel of peace, and bring glad tidings of good things!',
-      keywords:[
-        ['call','ἐπικαλέσηται · epikalesētai · G1941','Aorist middle subjunctive: whoever calls on the Lord.'],
-        ['hear','ἀκούσωσιν · akousōsin · G191','Aorist active subjunctive: hearing is part of Paul’s rhetorical chain.'],
-        ['preaching','κηρύσσοντος · kēryssontos · G2784','Present active participle: a herald / proclaimer bringing the message.']
-      ],
-      context:'Romans 9–11 deals with Israel, the righteousness of faith, the reach of the gospel, and Jew-Gentile questions. Romans 10:13–15 is part of that larger argument.',
-      commentary:'JFB emphasizes the logical chain from calling to faith, hearing, proclamation, and sending, especially in the mission to the Gentiles. That historical comparison corroborates the structure already visible in Paul’s argument.',
-      jake:'“That word preacher? Proclaimer of truth… When’s the last time you brought the good news?” Later: “How other people receive the good news is not up to us. We can let God handle that.”',
-      related:'evangelism · sending · proclamation · faith · obedience · church mission'
-    }
-  ],
-  study:'The sermon application is strong, but the passage should not be reduced to a generic evangelism slogan. Paul’s larger Jew-Gentile argument and the sending motif remain part of the context.'
-}
+(()=>{'use strict';
+const GITHUB_SITE='https://joelpsadler.github.io/CGBC-Sermon-Player/';
+const PATHS={
+ sermon:'knowledge/2026/2026-09-27_good-gifts-from-a-good-god.json',
+ registry:'knowledge/CGBC_CONCEPT_REGISTRY_v2.json',
+ ledger:'knowledge/CGBC_NASB95_VERSE_USAGE_LEDGER.json',
+ catalog:'knowledge/CGBC_SCRIPTURE_REFERENCE_CATALOG.json',
+ quotes:'config/quote-curation.json',
+ geography:'knowledge/shared/people-time-place/CGBC_SOURCE_ATTRIBUTED_MAP_FEATURES.geojson',
+ people:'knowledge/shared/people-time-place/CGBC_PEOPLE_TIME_PLACE_LIBRARY.json',
+ context:'knowledge/shared/people-time-place/CGBC_HISTORICAL_EVENT_TIME_PLACE_LINKS.json',
+ transcript:'data/transcripts/en/2026-09-27_good-gifts-from-a-good-god.json'
 };
-
-function time(s){if(s==null||!Number.isFinite(Number(s)))return '';s=Number(s);return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')}
-function listen(start,label='Listen'){return start==null?'':'<a class="action" target="_blank" rel="noopener" href="index.html?mode=audio&item='+encodeURIComponent(doc.sermon.stableId)+'&start='+encodeURIComponent(start)+'&autoplay=0">▶ '+esc(label)+' '+time(start)+'</a>'}
-function transcriptLink(start){return '<a class="action" target="_blank" rel="noopener" href="index.html?mode=audio&item='+encodeURIComponent(doc.sermon.stableId)+'&start='+encodeURIComponent(start||0)+'&autoplay=0">Transcript context</a>'}
-function toolButton(name,label){return '<button data-tool="'+esc(name)+'" aria-pressed="'+(name==='verse'?'true':'false')+'">'+esc(label)+'</button>'}
-function wordsHtml(words){return '<div class="word-grid">'+words.map(w=>'<div class="word"><b>'+esc(w[0])+'</b><small>'+esc(w[1])+'</small><div>'+esc(w[2])+'</div></div>').join('')+'</div>'}
-function scriptureCard(v,d,start,idx){
-  const id='v-'+Math.random().toString(36).slice(2);
-  return `<div class="scripture-card" data-verse-card>
-    <div class="scripture-title"><strong>${esc(v.ref)}</strong><span class="translation">KJV study display</span></div>
-    <div class="verse-text" data-panel="verse">${esc(v.text)}</div>
-    <div class="quick-tools">
-      ${toolButton('verse','Verse')}
-      ${toolButton('keywords','Key words')}
-      ${toolButton('strongs',"Strong's / language")}
-      ${toolButton('context','Context')}
-      ${toolButton('commentary','Commentary check')}
-      ${toolButton('jake','Jake')}
-      ${toolButton('listen','Listen / transcript')}
-      ${toolButton('related','Related study')}
-    </div>
-    <div class="tool-panel hidden" data-panel="keywords"><h4>Key words</h4>${wordsHtml(v.keywords)}</div>
-    <div class="tool-panel hidden" data-panel="strongs"><h4>Strong's / original language</h4><div class="independent">${wordsHtml(v.keywords)}<p class="muted">Strong’s numbers are indexes, not interpretive verdicts. Meaning is constrained by grammar and context.</p></div></div>
-    <div class="tool-panel hidden" data-panel="context"><h4>Context</h4><p>${esc(v.context)}</p></div>
-    <div class="tool-panel hidden" data-panel="commentary"><h4>Commentary double-check</h4><div class="commentary"><p>${esc(v.commentary)}</p></div></div>
-    <div class="tool-panel hidden" data-panel="jake"><h4>Jake on this passage</h4><p>${esc(v.jake)}</p>${listen(start,'Listen at')}</div>
-    <div class="tool-panel hidden" data-panel="listen"><h4>Listen / transcript</h4><div class="evidence">${listen(start,'Listen at')}${transcriptLink(start)}</div></div>
-    <div class="tool-panel hidden" data-panel="related"><h4>Related study</h4><p>${esc(v.related)}</p></div>
-  </div>`;
+let data={}, states={}, active='overview', searchText='', mapMode='shared', mapInstance=null, mapLayers=null, inspectorKey='sermon', inspectorFilter='', nodeFilter='', passageFilter='', rawPage=0;
+const $=id=>document.getElementById(id);
+const esc=v=>String(v===undefined||v===null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const js=v=>JSON.stringify(v,null,2); const arr=v=>Array.isArray(v)?v:[]; const obj=v=>v&&typeof v==='object'&&!Array.isArray(v)?v:{};
+const str=v=>v===undefined||v===null?'':typeof v==='object'?JSON.stringify(v):String(v);
+const base=()=>($('baseUrl').value.trim()||GITHUB_SITE).replace(/\/?$/,'/');
+const href=p=>{try{return new URL(p,base()).href}catch{return p}};
+const validLink=u=>{try{let x=new URL(u,base());return ['https:','http:'].includes(x.protocol)?x.href:''}catch{return ''}};
+const link=(url,title='Open source')=>{let u=validLink(url);return u?`<a target="_blank" rel="noopener noreferrer" href="${esc(u)}">${esc(title)} ↗</a>`:'<span class="quiet">No verified link</span>'};
+const pill=(s,kind='')=>`<span class="pill ${kind}">${esc(s)}</span>`;
+const status=s=>{let x=String(s||'').toUpperCase();return /PENDING|QUALIF|CONDIT|INFER|LINK_ONLY|UNREVIEW|NOT_VERIFIED|NOT_AVAILABLE|OMITTED|UNCERTAIN/.test(x)?'warn':/MISSING|BLOCK|FAILED|DISPUTED|NO_|INCOMPATIBLE|NONE/.test(x)?'bad':/READY|VERIFY|VALID|COMPLETE|PRESENT|SUPPORTED|ACTIVE|APPROVED|RESOLVED|PASSED/.test(x)?'good':'info'};
+const fmtTime=s=>{if(typeof s!=='number'||!Number.isFinite(s))return 'time not available';let n=Math.floor(s);return [Math.floor(n/3600),Math.floor(n%3600/60),n%60].map((v,i)=>String(v).padStart(i===0?1:2,'0')).join(':')};
+const playerAt=seconds=>{const s=data.sermon?.sermon||{},id=s.stableId;return id?href(`index.html?mode=video&item=${encodeURIComponent(id)}&start=${Math.max(0,Math.floor(seconds||0))}&autoplay=0`):''};
+const watchAt=seconds=>{const s=data.sermon?.sermon||{},id=s.youtubeId;return id?`https://www.youtube.com/watch?v=${encodeURIComponent(id)}&t=${Math.max(0,Math.floor(seconds||0))}s`:validLink(s.videoUrl)};
+const timeLinks=(seconds,withVideo=true)=>typeof seconds==='number'?`<span class="row">${pill(fmtTime(seconds),'info')} ${link(playerAt(seconds),'CGBC player')} ${withVideo?link(watchAt(seconds),'YouTube'):''}</span>`:pill('No timed anchor','warn');
+const refs=xs=>arr(xs).map(x=>pill(typeof x==='object'?(x.reference||x.ref||x.id||JSON.stringify(x)):x)).join('');
+const showText=(s,fallback='Not recorded in this dataset')=>s?`<div class="multiline">${esc(str(s))}</div>`:`<span class="quiet">${esc(fallback)}</span>`;
+const field=(k,v)=>`<div class="kv"><dt>${esc(k)}</dt><dd>${typeof v==='object'?refs(Array.isArray(v)?v:[]):esc(v??'')}</dd></div>`;
+const kv=o=>`<dl>${Object.entries(obj(o)).map(([k,v])=>Array.isArray(v)?field(k,v.length?`[${v.length} items]`:'[]'):typeof v==='object'?field(k,v===null?'null':'{…}'):field(k,v)).join('')}</dl>`;
+const raw=(value,title='Inspect complete original JSON')=>`<details class="rawdetails"><summary>${esc(title)}</summary><div class="row" style="margin:7px 0"><button class="btn tiny copy-record">Copy record JSON</button></div><pre>${esc(js(value))}</pre></details>`;
+const card=(title,body,top='')=>`<article class="card"><h3>${esc(title)} ${top}</h3>${body}</article>`;
+const header=(title,sub,extra='')=>`<div class="heading"><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div>${extra}</div>`;
+const list=(xs,mapper)=>`<ul class="list">${arr(xs).map(mapper||((x)=>`<li>${esc(str(x))}</li>`)).join('')}</ul>`;
+const tinyEmpty=(txt)=>`<div class="missing">${esc(txt)}</div>`;
+function download(name,body,type='application/json'){const blob=new Blob([body],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000)}
+function toast(s){let t=$('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+function matching(val,q){try{return JSON.stringify(val).toLowerCase().includes(q.toLowerCase())}catch{return false}}
+function getData(name){return data[name]||{}}
+const labels=[
+ ['Start','overview','◈','Overview + totals'],
+ ['Start','audit','✓','Harvest audit & gaps'],
+ ['Teaching','jake','☷','Jake teaching & connections'],
+ ['Teaching','bible','✦','Scripture + original language'],
+ ['Teaching','quick','⚒','Quick Tools / Strong’s / Greek'],
+ ['Teaching','doctrine','◇','Doctrine & dictionary'],
+ ['Explore','discover','?','Discover questions'],
+ ['Explore','deep','▤','Deep Dive / history / timelines'],
+ ['Explore','maps','◎','Map & genealogy demo'],
+ ['Evidence','slides','▧','Slides, cues, original evidence'],
+ ['Evidence','quotes','❞','Quote curation & candidates'],
+ ['Evidence','author','✎','Complete Author Corpus'],
+ ['Evidence','sources','⌕','Sources, rights, QA flags'],
+ ['Evidence','search','⟡','Semantic search & related study'],
+ ['Everything','data','{}','All records: raw JSON explorer']
+];
+function nav(){let prior='';$('nav').innerHTML=labels.map(([group,k,icon,t])=>{let h='';if(group!==prior){h+=`<div class="group">${group}</div>`;prior=group;}return h+`<button data-tab="${k}" class="${active===k?'active':''}"><span>${icon}</span>${esc(t)}</button>`}).join('')}
+function readouts(){const o=getData('sermon'),p=obj(o.passageResearch),e=obj(o.presentationEnrichment),geo=getData('geography'),registry=getData('registry'),ledger=getData('ledger');let words=arr(p.records).flatMap(x=>arr(x.independentStudy?.keyWords));return {nodes:arr(o.nodes).length,passages:arr(p.records).length,words:words.length,wordsVerified:words.filter(w=>String(w.verificationStatus).toUpperCase()==='VERIFIED').length,slides:arr(o.slideMap).length,discover:arr(o.discover).length,concepts:arr(registry.concepts).length,dictionary:arr(e.theologyDictionary?.terms).length,quick:arr(e.quickTools).length,author:arr(o.authorCorpus?.commissionedWorks).length,records:arr(p.localFactualRecords).length,maps:arr(geo.features).length,nasbUsed:ledger.chargedVerseUnits,source:arr(o.sources).length,quotes:arr(p.quoteCandidates).length,flags:arr(o.editorialFlags).length}};
+function renderOverview(){const o=getData('sermon'),s=obj(o.sermon),e=obj(o.presentationEnrichment),m=readouts();
+if(!Object.keys(o).length)return header('No canonical record loaded','Use “Load current GitHub” or open the canonical Info Map JSON from your computer.')+tinyEmpty('Could not obtain the sermon Info Map. Check the repository URL, Pages publication, and the load report below.')+card('Source attempts',sourceReport());
+return header('Good Gifts: one-record harvest inspector','This is a window into the uploaded canonical data, not a re-created sermon, not an approval tool, and not a beta feature completion claim.',pill('READ ONLY','info'))+
+`<div class="statgrid">${[['Teaching nodes',m.nodes],['Scripture studies',m.passages],['Greek/Hebrew word records',m.words],['Source-locked word records',m.wordsVerified],['Original slide links',m.slides],['Discover questions',m.discover],['Shared map features',m.maps],['Registry concepts',m.concepts],['Theology definitions',m.dictionary],['Quick Tool entries',m.quick],['Official Author works',m.author],['Local evidence facts',m.records]].map(([n,v])=>`<div class="stat"><div class="num">${esc(v)}</div><div class="what">${esc(n)}</div></div>`).join('')}</div>
+<div class="grid2">
+ ${card('Original sermon identity',`<dl>${Object.entries({Title:s.title,Subtitle:s.subtitle,Speaker:s.speaker,Date:s.date,'Stable ID':s.stableId,Scripture:s.scripture,Series:s.series,'Sermon archive':s.sourceArchivePath}).map(([k,v])=>field(k,v||'Not recorded')).join('')}</dl><p class="row">${link(playerAt(0),'Open original CGBC player')}${link(watchAt(0),'Original YouTube video')}</p>${refs(s.references)}`)}
+ ${card('Critical honesty checks',`${Object.entries(e.featureDisposition||{}).filter(([k])=>/Greek|Strong|map|geo|NASB|author|theolog|scripture|copyright|commentary|source|verse|slides/i.test(k)).map(([k,v])=>`<div class="kv"><dt>${esc(k.replaceAll('_',' '))}</dt><dd>${pill(v,status(v))}</dd></div>`).join('')}<div class="warning">Greek/Strong’s details are preserved as qualified research where present. The canonical record says pinned STEPBible row verification is incomplete, so inline authoritative word cards must not be presented as verified.</div>`)}
+</div>
+${card('Inspect everything harvested',`<div class="grid3">${labels.slice(2).map(x=>`<button class="btn" data-tab="${x[1]}">${x[2]} ${esc(x[3])}</button>`).join('')}</div><p class="small">Every section includes expandable original data. The “All records” tab exposes all loaded files and nested fields, including fields not surfaced by this first-pass UI.</p>`)}
+${card('What is really loaded?',sourceReport())}
+${raw(o.buildProvenance,'Build provenance and original source locks')}`;
 }
-function renderStudy(d){
-  const s=studies[d.id]||{};
-  return `<article class="study-card">
-    <div class="study-head">
-      <div class="refline">${esc(arr(d.scripture).join(' · '))}</div>
-      <h2>${esc(d.question)}</h2>
-      <div class="jake-core">
-        <div class="tag">From the sermon</div>
-        <blockquote>“${esc(s.core||d.answer)}”</blockquote>
-        <div class="clean">${esc(s.coreNote||'Faithful sermon projection.')}</div>
-      </div>
-      <p class="explain">${esc(s.explain||d.answer)}</p>
-      <div class="actions">${listen(d.start,'Listen at')}${transcriptLink(d.start)}</div>
-    </div>
-    <div class="scripture-stack">
-      ${arr(s.verses).map((v,i)=>scriptureCard(v,d,d.start,i)).join('')}
-      <div class="tool-panel independent"><h4>Study deeper</h4><p>${esc(s.study||'Additional independent study is preserved in the canonical record.')}</p></div>
-    </div>
-  </article>`;
+function sourceReport(){return `<div class="scrollx"><table class="dataTable"><thead><tr><th>Live file</th><th>Load state</th><th>Source path</th></tr></thead><tbody>${Object.entries(PATHS).map(([k,path])=>`<tr><td>${esc(k)}</td><td>${pill(states[k]?.state||'NOT TRIED',status(states[k]?.state||'PENDING'))} ${esc(states[k]?.detail||'')}</td><td>${link(href(path),path)}</td></tr>`).join('')}</tbody></table></div>`}
+function renderAudit(){let o=getData('sermon'),e=o.presentationEnrichment||{},m=readouts(),reg=getData('registry'),d=o.passageResearch||{},def=e.featureDisposition||{};
+let rows=[
+ ['Canonical Info Map 3.0','sermon',!!o.recordVersion,o.recordVersion||'Not loaded'],
+ ['Jake synthesis / evidence nodes','jake',m.nodes>0,`${m.nodes} nodes`],
+ ['SRT cue / original source links','slides',m.nodes>0&&m.source>0,`${m.source} sources; ${m.nodes} nodes`],
+ ['Slides and timing provenance','slides',m.slides>0,`${m.slides} mapped slides; timing may be inferred`],
+ ['Passage-level independent research','bible',m.passages>0,`${m.passages} study records`],
+ ['Greek, Strong’s, morphology research','quick',m.words>0,`${m.words} qualified research words; ${m.wordsVerified} VERIFIED entries`],
+ ['Inline source-locked Strong’s cards','quick',arr(e.inlineWordStudy?.terms).length>0,`${arr(e.inlineWordStudy?.terms).length} approved inline terms; ${e.inlineWordStudy?.displayPolicy||'not recorded'}`],
+ ['Theological definitions embedded','doctrine',m.dictionary>0,`${m.dictionary} entries`],
+ ['Concept Registry v2','doctrine',m.concepts>0,`${m.concepts} registry concepts; ${reg.registryVersion||'unavailable'}`],
+ ['Quick Tool / Scripture Companion definitions','quick',m.quick>0,`${m.quick} reference-level tool specs`],
+ ['Discover questions','discover',m.discover>0,`${m.discover} Q/A entries`],
+ ['History and source evidence','sources',m.records>0,`${m.records} factual records`],
+ ['Sermon-specific verified map features','maps',arr(d.records).some(x=>arr(x.mapFeatureRefs).length>0),`${arr(d.records).reduce((n,x)=>n+arr(x.mapFeatureRefs).length,0)} sermon map links; no invented vineyard`],
+ ['Shared map reference preview','maps',m.maps>0,`${m.maps} shared features (different provenance)`],
+ ['Author Corpus commissioned content','author',m.author>0,`${m.author} full stored commissioned works`],
+ ['Owner quote decision authority','quotes',!!getData('quotes').quotes||Object.keys(getData('quotes')).length>0,'config/quote-curation.json, separate authority'],
+ ['NASB95 verse allocation ledger','bible',getData('ledger').chargedVerseUnits===35,`${getData('ledger').chargedVerseUnits??'?'} charged; ${getData('ledger').remainingVerseUnits??'?'} remaining`],
+ ['Search & source semantics','search',!!o.search,`${arr(o.search?.facets).length} facets; aliases present`]
+];
+return header('Full SPP harvest audit','This matrix tests whether expected data can actually be inspected. “Present” means readable, not independently re-certified. Check source qualifications and gaps before any PASS COMPLETE assertion.')+
+card('Visible versus missing',`<div class="scrollx"><table class="dataTable"><thead><tr><th>Required investigation</th><th>Readout</th><th>Jump</th></tr></thead><tbody>${rows.map(([t,sect,ok,msg])=>`<tr><td>${esc(t)}</td><td>${pill(ok?'DATA PRESENT':'NOT VERIFIED / NOT PRESENT',ok?'good':'warn')} <span>${esc(msg)}</span></td><td><button class="btn tiny" data-tab="${sect}">Inspect</button></td></tr>`).join('')}</tbody></table></div>`)+
+card('Original package feature dispositions',`<div class="scrollx"><table class="dataTable"><thead><tr><th>Feature</th><th>Recorded disposition</th></tr></thead><tbody>${Object.entries(def).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${pill(str(v),status(v))}</td></tr>`).join('')}</tbody></table></div>${raw(def)}`)+
+card('Editorial flags and unresolved items',list(o.editorialFlags,flag=>`<li>${pill(flag.level||flag.status||'NOTICE',status(flag.level||flag.status))} <b>${esc(flag.scope||flag.id||'Flag')}</b>: ${esc(flag.message||flag.issue||JSON.stringify(flag))}</li>`)+raw(o.editorialFlags))+
+card('Integrity / schema status claimed by the record',`${field('Build validation',o.buildProvenance?.validationStatus||'Unknown')}${field('Sermon ID',o.sermon?.stableId)}${field('Build repository commit',o.buildProvenance?.githubMain)}<div class="warning">A validation-status field is a recorded build claim. This viewer checks data accessibility and visible cross-links but does not independently replay all original research, rights checks, hashes, or GitHub schema tests.</div>`);}
+function renderJake(){const o=getData('sermon');let nodes=arr(o.nodes),types=[...new Set(nodes.map(n=>n.type))];let show=nodes.filter(n=>!nodeFilter||matching(n,nodeFilter));
+return header('Jake: original teaching, speech & typed connections','Look at exact anchored speech separately from faithful synthesis, Scripture, doctrine, slides, stance, and graph links.')+
+`<div class="controls"><input class="input" id="nodeFilter" value="${esc(nodeFilter)}" placeholder="Filter teaching, cues, topics, verse, node ID"><button class="btn" id="nodeFilterBtn">Apply filter</button>${types.map(t=>`<button class="btn tiny" data-nodefilter="${esc(t)}">${esc(t)}</button>`).join('')}</div><p class="meta">Showing ${show.length} of ${nodes.length} teaching nodes</p>`+
+show.map((n,i)=>card(`${n.id?.split('.').pop()||i+1} · ${n.title||'Teaching node'}`,`${pill(n.type,'info')}${pill(n.provenance||'Not stated',status(n.provenance))}${pill(n.teachingStance||'stance not stated')}
+<p>${showText(n.summary)}</p>
+${n.spokenExact?`<div class="note"><b>PASTOR, exact anchor:</b> “${esc(n.spokenExact)}” ${pill('Cue '+(n.spokenAnchorCue??'?'))}</div>`:''}
+<div class="row">${timeLinks(n.start)} ${typeof n.end==='number'?pill('Ends '+fmtTime(n.end)):''}</div>
+<details><summary>Teaching evidence, original transcript and relationships</summary>
+${field('Node ID',n.id)}${field('Cue numbers',arr(n.cueNumbers).join(', ')||'Not enumerated')}${field('Segments',arr(n.segmentIndexes).length+' indexed segments')}
+${field('Slides',arr(n.slideNumbers).join(', ')||'None linked')}${field('Source refs',arr(n.sourceRefs).join(', '))}
+${card('Doctrine tags / topics / scripture',`${refs(n.doctrine)}${refs(n.topics)}${refs(n.scripture)}${raw(n.scriptureCommentary,'Full sermon Scripture commentary')}`)}
+${card('Typed node connections',arr(n.connections).map(c=>`<div>${pill(c.type,'info')} ${esc(c.targetNodeRef||c.target||'')} ${pill(c.provenance||'')} ${c.targetNodeRef?`<button class="btn tiny" data-findnode="${esc(c.targetNodeRef)}">Jump to target</button>`:''}</div>`).join('')||'No stored connections')}
+${raw(n,'Whole teaching node')}
+</details>`,pill(n.id,'info'))).join('')+raw(o.structure,'Original sermon movement structure');
 }
-function wireTools(){
-  document.querySelectorAll('[data-verse-card]').forEach(card=>{
-    const buttons=[...card.querySelectorAll('[data-tool]')];
-    const panels=[...card.querySelectorAll('[data-panel]')];
-    buttons.forEach(btn=>btn.onclick=()=>{
-      const target=btn.dataset.tool;
-      buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
-      panels.forEach(p=>p.classList.toggle('hidden',p.dataset.panel!==target));
-    });
-  });
+function renderBible(){const o=getData('sermon'),p=obj(o.passageResearch),all=arr(p.records);let rows=all.filter(v=>!passageFilter||matching(v,passageFilter));const ledger=getData('ledger'),catalog=getData('catalog');
+return header('Scripture study & original-language investigation','Nine passage records with Jake evidence, independent interpretation, lexical observations, commentary comparison, rights, and links. These are distinct provenance lanes.')+
+`<div class="controls"><input class="input" placeholder="Search passage, context or Greek" class="input" id="passageFilter" value="${esc(passageFilter)}"><button class="btn" id="passageFilterBtn">Apply filter</button></div>`+
+card('Verse accounting, not unrestricted Bible-text republication',`<div class="row">${pill(`${ledger.chargedVerseUnits??'?'} NASB95 units charged`,'info')}${pill(`${ledger.remainingVerseUnits??'?'} units remaining`,'good')}${pill('Actual NASB95 display rights: conditional','warn')}</div><p>The ledger records allocated verse IDs, but these JSONs do not grant permission to copy all NASB95 verse text into this public viewer.</p>${raw(ledger,'Official verse ledger')}${raw(catalog,'Scripture reference catalog')}`)+
+rows.map(r=>{const j=obj(r.jake),ind=obj(r.independentStudy);
+return card(r.reference,`${pill(ind.evidenceSupport||'NOT RATED',status(ind.evidenceSupport))}${pill(j.treatment||'Jake usage')}${pill(r.display?.directDisplayAllowed?'DIRECT DISPLAY':'DISPLAY CONDITIONAL',r.display?.directDisplayAllowed?'good':'warn')}
+<p class="meta">Context: ${esc(r.contextReference||ind.literaryContext||'Not recorded')}</p>
+<h4>Jake’s faithful interpretation</h4>${showText(j.controllingInterpretation||j.faithfulSynthesis?.text||j.faithfulSynthesis)}
+<h4>Independent Scripture investigation</h4>${showText(ind.provisionalInterpretation)}
+${arr(ind.keyWords).length?`<h4>Greek / Hebrew original-language records</h4>${arr(ind.keyWords).map(w=>`<div class="note"><span style="font-size:20px">${esc(w.surfaceForm)}</span> ${pill(w.strongsId||'No Strong’s ID','info')} ${pill(w.verificationStatus||'UNVERIFIED',status(w.verificationStatus))}<div><b>Lemma:</b> ${esc(w.lemma||'')} • <b>Language:</b> ${esc(w.language||'')}</div><div><b>Recorded morphology:</b> ${esc(w.morphology||'')}</div><div><b>Contextual sense:</b> ${esc(w.contextualMeaning||'')}</div><div class="small">${esc(w.caution||'')}</div>${link(w.evidenceSource?.locator||'', 'Research source')}</div>`).join('')}`:`${pill('No individual language word recorded','warn')}`}
+<details><summary>Actual spoken support & commentary witnesses (${arr(r.commentaryWitnesses).length})</summary>
+${arr(j.spokenEvidence).map(v=>`<div class="note"><b>Exact words:</b> ${esc(v.exactWords||'')}<div>${timeLinks(v.start)} ${pill(v.verificationStatus||'')}</div></div>`).join('')}
+${arr(r.commentaryWitnesses).map(c=>`<div class="card"><b>${esc(c.author||c.work)}</b> ${pill(c.reuseClass||'RIGHTS UNKNOWN',status(c.reuseClass))}<div>${esc(c.qualification||'')}</div><small>${esc(c.relationToJake||'')}</small><div>${link((c.itemLocator||'').split(' ')[0],'Original commentary source')}</div></div>`).join('')}
+<h4>Related Study destinations</h4>${arr(r.relatedStudy).map(d=>`<p><b>${esc(d.question||'Study')}</b>: ${esc(d.fallbackSummary||'')} ${pill(d.destination?.type||'')} ${d.destination?.type==='scripture'?link('https://www.biblegateway.com/passage/?search='+encodeURIComponent(d.destination.reference||'')+'&version=KJV','Scripture link'):''}</p>`).join('')}
+<h4>Sources / entity / map relations</h4>${refs(r.sourceEvidenceRefs)}${refs(r.entityRefs)}${refs(r.eventRefs)}${refs(r.mapFeatureRefs)}<br>${refs(r.contextClaimRefs)}
+${arr(r.reviewGates).map(g=>`<div class="warning">${pill(g.status||'FLAG',status(g.status))} ${esc(g.issue||'')}: ${esc(g.action||'')}</div>`).join('')}
+${raw(r)}</details>`,pill(r.id,'info'))}).join('')+
+raw(p.freshEvidenceAttestation,'Scripture research ordering attestation');
 }
-function renderEditor(){
-  const spp2=arr(doc.discover).filter(d=>String(d.id||'').includes('.spp2.'));
-  const enriched=arr(doc.nodes).filter(n=>/SPP2 v1\.1|INDEPENDENT ANALYSIS|INDEPENDENT CONTEXT|TEXTUAL GATE|WORD-STUDY RESEARCH|PASTOR SYNTHESIS|LEXICAL REVIEW|SCRIPTURE ANALYSIS/.test(String(n.notes||'')));
-  $('metrics').innerHTML=[
-    [arr(doc.nodes).length,'canonical nodes'],
-    [spp2.length,'SPP2 study questions'],
-    [enriched.length,'enriched nodes'],
-    [spp2.reduce((n,d)=>n+arr(studies[d.id]?.verses).length,0),'specific Scripture surfaces']
-  ].map(([n,l])=>'<div class="metric"><b>'+esc(n)+'</b><span>'+esc(l)+'</span></div>').join('');
+function renderQuick(){let o=getData('sermon'),e=obj(o.presentationEnrichment),rs=arr(o.passageResearch?.records),words=rs.flatMap(p=>arr(p.independentStudy?.keyWords).map(w=>({...w,passage:p.reference})));
+return header('Quick Tools + Strong’s + Greek + Joel’s study surfaces','Nothing is silently filled. Actual word records are shown, qualified source status is visible, and tools whose data is missing remain marked.')+
+card('Nine passage-level Quick Tool specifications',arr(e.quickTools).map(t=>`<div class="card"><div class="row"><b>${esc(t.reference)}</b> ${pill(t.wordToolStatus||'UNKNOWN',status(t.wordToolStatus))} ${pill(t.scriptureTextStatus||'UNKNOWN',status(t.scriptureTextStatus))}</div><div class="chips">${refs(t.tools)}</div><div class="small">Teaching nodes: ${esc(arr(t.nodeRefs).join(', '))}</div>${raw(t,'Complete tool definition')}</div>`).join('')||tinyEmpty('No Quick Tool rows found'))+
+card('Word study inventory: actual recorded Greek / Strong’s',`<div class="warning">The canonical record contains qualified secondary-source forms, lemmas and Strong’s IDs, but zero pinned STEPBible word rows verified for authoritative inline display. This is a genuine evaluation gap, not a hidden toggle.</div><div class="scrollx"><table class="dataTable"><thead><tr><th>Passage</th><th>Original form</th><th>Lemma / Strong’s</th><th>Morphology and meaning</th><th>Provenance</th></tr></thead><tbody>${words.map(w=>`<tr><td>${esc(w.passage)}</td><td><b style="font-size:18px">${esc(w.surfaceForm)}</b></td><td>${esc(w.lemma)}<br>${pill(w.strongsId||'none')}</td><td>${esc(w.morphology||'')}<br>${esc(w.contextualMeaning||'')}</td><td>${pill(w.verificationStatus||'UNVERIFIED',status(w.verificationStatus))}<br>${link(w.evidenceSource?.locator||'','Research link')}<p class="small">${esc(w.caution||'')}</p></td></tr>`).join('')}</tbody></table></div>`)+
+card('Inline word study and link-out state',`${field('Display policy',e.inlineWordStudy?.displayPolicy||'NOT PROVIDED')}${field('Actual inline terms',arr(e.inlineWordStudy?.terms).length)}${field('Interaction',e.inlineWordStudy?.interaction||'')}${raw(e.inlineWordStudy)}<h4>Research-only lexicon links</h4>${arr(e.lexiconLinks).map(l=>`<p>${pill(l.reference)} ${link(l.sourceUrl,'BibleHub or licensed lexical source')} ${pill(l.displayStatus||'UNKNOWN',status(l.displayStatus))}</p>`).join('')}`)+
+card('Scripture / Commentary / Jake / Listen / Related study',arr(rs).map(r=>`<details><summary>${esc(r.reference)}: inspect the connected tools</summary>${field('Context',r.contextReference)}${field('Pastor Jake',r.jake?.controllingInterpretation||r.jake?.faithfulSynthesis?.text||'See passage research')}${field('Listen start',r.jake?.spokenEvidence?.[0]?.start)}<p>${timeLinks(r.jake?.spokenEvidence?.[0]?.start)}</p>${r.commentaryWitnesses?.map(c=>`<p>${esc(c.author)}: ${esc(c.qualification||'')} ${link((c.itemLocator||'').split(' ')[0], 'Source')}</p>`).join('')}${arr(r.relatedStudy).map(t=>`<p>${esc(t.question)} • ${esc(t.fallbackSummary||'')}</p>`).join('')}</details>`).join(''))+
+card('Dictionary and original language availability',`<p>${pill('Theology dictionary: '+arr(e.theologyDictionary?.terms).length+' terms','good')} ${pill('Webster 1828: no embedded verified entries','warn')} ${pill('NASB95: rights-gated','warn')}</p><p>Everything stored for the dictionary is visible in <button class="btn tiny" data-tab="doctrine">Doctrine & dictionary</button>. Independent passage research is in <button class="btn tiny" data-tab="bible">Scripture study</button>.</p>`); }
+function renderDoctrine(){let o=getData('sermon'),e=o.presentationEnrichment||{},dict=e.theologyDictionary||{},reg=getData('registry'),doctrines=[...new Set(arr(o.nodes).flatMap(n=>arr(n.doctrine).map(str)))].filter(Boolean);
+return header('Doctrine, semantics and every dictionary definition','These are sermon-specific embedded definitions, plus the separate shared Concept Registry v2. The doctrine classification vocabulary is not proof of Jake’s views.')+
+card('CGBC sermon theology dictionary',`${pill(arr(dict.terms).length+' terms','good')} ${pill(dict.indexType||'dictionary','info')}${arr(dict.terms).map(t=>`<div class="card"><h4>${esc(t.term)} ${pill(t.category||'THEOLOGY','info')}</h4><p>${esc(t.definition||'')}</p><div>${refs(t.aliases)}${refs(t.scripture)}</div><div class="small">${esc(t.usage||'')} • ${esc(t.rights||'')}</div>${raw(t,'Term with all evidence and aliases')}</div>`).join('')}${raw(dict,'Entire embedded dictionary')}`)+
+card('Doctrinal classification in Jake’s teaching',`<p>${refs(doctrines)}</p>${arr(o.nodes).filter(n=>arr(n.doctrine).length).map(n=>`<div><b>${esc(n.title)}</b> ${refs(n.doctrine)} <span class="small">${esc(n.id)}</span></div>`).join('')}`)+
+card('Concept Registry v2, full promoted concepts',`${pill(arr(reg.concepts).length+' entries','info')}${arr(reg.concepts).map(c=>`<details><summary>${esc(c.label||c.conceptId)} ${pill(c.lifecycleStatus||'')}</summary><p>${esc(c.definition||'')}</p>${field('Concept ID',c.conceptId)}${field('Aliases',arr(c.aliases).join('; '))}${field('Related IDs',arr(c.relatedConceptIds).join(', '))}${raw(c.evidenceBasis,'Permanent concept evidence')}${raw(c,'Complete concept record')}</details>`).join('')}${raw(reg,'Full live Concept Registry')}`);}
+function renderDiscover(){let o=getData('sermon');return header('Discover: 10 questions and answers','Source-based audience discovery with linked nodes, Bible references, and playback destinations. The current player does not necessarily consume these yet.')+
+arr(o.discover).map((d,i)=>card(`${i+1}. ${d.question||'Question'}`,`<p class="intro">${esc(d.answer||'')}</p><p>${refs(d.scripture)}</p><p>${timeLinks(d.start)}</p>${field('Node references',arr(d.nodeRefs).join(', '))}${field('Origin / authorship',d.authorshipNote||d.provenance||'See original record')}${raw(d,'Full Discover evidence and destination')}`,pill(d.id||''))).join('');}
+function renderDeep(){let o=getData('sermon'),e=o.presentationEnrichment||{},p=arr(o.passageResearch?.records);
+return header('Deep Dive: history, commentary, time, context and study pathways','Distinct from past sermon speech: historical research is independent; the parable workday is illustrative, not a precisely dated event.')+
+card('Deep Dive sections',arr(e.deepDiveSections).map(v=>`<div class="card"><h4>${esc(v.title)}</h4>${refs(v.nodeRefs)}${refs(v.passageRefs)}${raw(v)}</div>`).join(''))+
+card('Setting the stage: actual historical contextual claims',arr(e.settingTheStage).map(v=>`<div class="card"><h4>${esc(v.title)}</h4><p>${esc(v.summary||'')}</p>${pill(v.precision||'',status(v.precision))} ${pill(v.evidenceClass||'')} ${refs(v.evidenceRefs)}${raw(v)}</div>`).join(''))+
+card('Illustrative time sequence from Matthew 20',arr(e.timelines).map(t=>`<div><b>${esc(t.title)}</b>${pill(t.type||'',status(t.type))}<div class="grid3">${arr(t.events).map(ev=>`<div class="stat"><div class="num" style="font-size:20px">${esc(ev.approxLocalClock||'')}</div><div>${esc(ev.description||'')}</div><small>Relative hour ${esc(ev.relativeHour??'')}</small></div>`).join('')}</div><p class="small">${esc(t.note||'')}</p>${raw(t)}</div>`).join('')||tinyEmpty('No time-sequence record'))+
+card('Historical objects',arr(e.historicalObjects).map(v=>`<div><h4>${esc(v.title)}</h4><p>${esc(v.description||'')}</p>${pill(v.imageStatus||'IMAGE STATUS UNKNOWN',status(v.imageStatus))} ${pill(v.period||'')} ${refs(v.nodeRefs)}${raw(v)}</div>`).join(''))+
+card('Commentary comparisons: research and attribution first',arr(e.deepDiveOtherCommentary).map(v=>`<div class="card"><b>${esc(v.source)}</b> • ${esc(v.reference)} ${pill(v.excerptDisplay||'NOT CHECKED',status(v.excerptDisplay))}<p>${esc(v.sourceContribution||'')}</p><p><b>Comparison:</b> ${esc(v.comparison||'')}</p>${link(v.sourceUrl,'Read original historical commentary')}${raw(v)}</div>`).join(''))+
+card('Study routes',arr(e.studyRoutes).map(v=>`<details><summary>${esc(v.title||v.reference||'Study route')}</summary>${kv(v)}${raw(v)}</details>`).join(''))+
+card('Teaching entry and feature provenance',`<h4>${esc(e.teachingEntry?.title||'')}</h4>${list(e.teachingEntry?.paragraphs)}${refs(e.teachingEntry?.context)}${raw(e.teachingEntry)}${raw(e.publicProjectionPolicy)}`);
 }
-function setMode(mode){
-  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
-  $('editorPanel').classList.toggle('hidden',mode!=='editor');
-  document.querySelectorAll('[data-verse-card]').forEach(card=>{
-    const buttons=[...card.querySelectorAll('[data-tool]')],panels=[...card.querySelectorAll('[data-panel]')];
-    if(mode==='open'){
-      panels.forEach(p=>p.classList.remove('hidden'));
-      buttons.forEach(b=>b.setAttribute('aria-pressed','true'));
-    }else{
-      panels.forEach(p=>p.classList.toggle('hidden',p.dataset.panel!=='verse'));
-      buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tool==='verse')));
-    }
-  });
-  document.querySelectorAll('.scripture-stack').forEach(x=>x.classList.toggle('hidden',mode==='compact'));
-}
-document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
-
-async function load(){
-  try{
-    const r=await fetch(DATA+'?v='+Date.now(),{cache:'no-store'});
-    if(!r.ok)throw new Error(r.status+' '+r.statusText);
-    doc=await r.json();
-    const spp2=arr(doc.discover).filter(d=>String(d.id||'').includes('.spp2.'));
-    $('status').innerHTML='<span class="good">Loaded current GitHub record:</span> <strong>'+esc(doc.sermon?.title||'Relationships')+'</strong> · '+esc(doc.sermon?.date||'')+' · '+spp2.length+' deep-study questions';
-    $('studies').innerHTML=spp2.map(renderStudy).join('');
-    wireTools();renderEditor();
-  }catch(e){
-    $('status').innerHTML='<span style="color:#ffd294"><strong>Could not load Relationships JSON.</strong> '+esc(e.message)+'</span>';
-  }
-}
-load();
+function svgMap(points){if(!points.length)return tinyEmpty('No point geometry loaded.');let ll=points.map(f=>f.geometry?.coordinates).filter(x=>Array.isArray(x)&&x.length>1&&x.every(Number.isFinite));let left=Math.min(...ll.map(x=>x[0])),right=Math.max(...ll.map(x=>x[0])),low=Math.min(...ll.map(x=>x[1])),high=Math.max(...ll.map(x=>x[1]));let px=Math.max((right-left)*.08,2),py=Math.max((high-low)*.12,2);left-=px;right+=px;low-=py;high+=py;const W=990,H=470;const xy=c=>[(c[0]-left)/(right-left)*(W-45)+20,(high-c[1])/(high-low)*(H-38)+18];let circles=points.map(f=>{let [x,y]=xy(f.geometry.coordinates);let name=f.properties?.name||f.id||'place';let special=/egypt|judea/i.test(name);return `<g><circle data-map-id="${esc(f.id||'')}" cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="${special?7:4.5}" fill="${special?'#ffc875':'#86e1d0'}" stroke="#102630" stroke-width="1.5"><title>${esc(name)}</title></circle></g>`}).join('');let grid=Array.from({length:6},(_,i)=>`<line x1="0" y1="${i*H/5}" x2="${W}" y2="${i*H/5}" stroke="#385e6b" stroke-width=".7"/>`).join('');return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Fallback coordinate plot of biblically attributed locations"><text x="20" y="27" fill="#e7eecf" font-size="16">Source-attributed coordinates • no basemap (Leaflet unavailable)</text>${grid}${circles}</svg>`}
+function renderMaps(){let o=getData('sermon'),e=obj(o.presentationEnrichment),geo=getData('geography'),points=arr(geo.features).filter(f=>f.geometry?.type==='Point'&&Array.isArray(f.geometry?.coordinates));const matched=['place-egypt','place-judea'];let subset=mapMode==='context'?points.filter(x=>matched.includes(x.id)):points;let linked=arr(o.passageResearch?.records).flatMap(r=>arr(r.mapFeatureRefs));
+return header('Biblical places & historical map demonstration','The shared foundation is read-only. It is a usable demonstration, not proof that the Good Gifts parable has an exact geographical coordinate.')+
+`<div class="warning"><b>Vineyard mapping:</b> ${esc(e.geography?.reason||'No sermon-specific geometry declared.')}. ${esc(e.geography?.mapDisposition||'No exact sermon map designation.')}</div>`+
+card('Shared people/time/place foundation coordinates',`<div class="row">${pill(points.length+' attributed points','info')} ${pill(linked.length+' sermon passage-to-map links',linked.length?'good':'warn')}<button class="btn tiny" data-mapmode="shared">Show all shared features</button><button class="btn tiny" data-mapmode="context">Focus Egypt & Judea</button></div><div class="maparea"><div id="leafmap"></div><div id="mapfallback" style="display:none">${svgMap(subset)}</div><div class="map-pop" id="mapselected">Select a point to inspect its source, coordinate meaning and precision. ${pill('Points can represent candidate modern sites, not exact ancient events','warn')}</div></div><p class="small">Map source: knowledge/shared/people-time-place/CGBC_SOURCE_ATTRIBUTED_MAP_FEATURES.geojson. Tiles are an optional third-party visual background; source geometry and rights labels belong to CGBC’s pinned foundation.</p><div class="maplist"><div class="row">${subset.map(f=>`<button class="btn tiny" data-map-id="${esc(f.id)}">${esc(f.properties?.name||f.id)}</button>`).join('')}</div></div>${raw(e.geography,'Actual Good Gifts geography research')}`)+
+card('Historical / genealogy foundation: raw records',`<p class="quiet">The shared person and event libraries are reference material, not new independent Good Gifts research.</p><div class="statgrid">${[['People',arr(getData('people').people).length],['Relationships',arr(getData('people').relationships).length],['Genealogy views',arr(getData('people').genealogyViews).length],['Chronology events',arr(getData('context').records).length],['Historical places',arr(getData('people').places).length]].map(([name,num])=>`<div class="stat"><div class="num">${num}</div><div class="what">${name}</div></div>`).join('')}</div><h4>Genealogy and timeline views</h4>${arr(getData('people').genealogyViews).map(v=>`<details><summary>${esc(v.title||v.id)}</summary>${kv(v)}${raw(v)}</details>`).join('')}<h4>Representative people</h4>${arr(getData('people').people).slice(0,20).map(v=>`<details><summary>${esc(v.name||v.id)} ${pill(v.id)}</summary>${kv(v)}${raw(v)}</details>`).join('')}${pill(Object.keys(getData('people')).length?'People data loaded':'People file not available',Object.keys(getData('people')).length?'info':'warn')}${pill(Object.keys(getData('context')).length?'Event/time/place data loaded':'Context file not available',Object.keys(getData('context')).length?'info':'warn')}<p><button class="btn" data-inspector="people">Inspect all people/family records</button><button class="btn" data-inspector="context">Inspect chronology/events</button></p>${raw(getData('people'),'Shared people reference raw data')}${raw(getData('context'),'Shared events and chronology raw data')}`); }
+function showMapDetails(id){const f=arr(getData('geography').features).find(x=>x.id===id);if(!f)return;let box=$('mapselected');if(box){box.innerHTML=`<b>${esc(f.properties?.name||f.id)}</b> • ${esc(f.id)}<div>${pill(f.geometry?.coordinates?.join(', '),'info')}${pill(f.properties?.renderPolicy||'')}${pill(f.properties?.pointSemantics||'COORDINATE QUALIFICATION','warn')}</div><p class="small">${esc(f.properties?.source||'Source not recorded')} • ${esc(f.properties?.modernIdentification||'')}</p>${raw(f,'Complete point provenance')}`;}}
+function initMap(){const box=$('leafmap'),fb=$('mapfallback');if(!box)return;let points=arr(getData('geography').features).filter(f=>f.geometry?.type==='Point'&&Array.isArray(f.geometry?.coordinates));if(mapMode==='context')points=points.filter(f=>['place-egypt','place-judea'].includes(f.id));if(mapInstance){mapInstance.remove();mapInstance=null}
+if(!window.L||!points.length){box.style.display='none';fb.style.display='block';return;}
+try{box.style.display='block';fb.style.display='none';mapInstance=L.map(box,{scrollWheelZoom:false}).setView([31,35],5);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:14}).addTo(mapInstance);let bounds=[];for(let p of points){let [lon,lat]=p.geometry.coordinates;if(!Number.isFinite(lon)||!Number.isFinite(lat))continue;bounds.push([lat,lon]);const mark=L.circleMarker([lat,lon],{radius:/egypt|judea/i.test(p.properties?.name)?8:5,color:'#224742',weight:1,fillColor:'#54d4b8',fillOpacity:.88}).addTo(mapInstance);mark.bindTooltip(esc(p.properties?.name||p.id));mark.on('click',()=>showMapDetails(p.id))}if(bounds.length)mapInstance.fitBounds(bounds,{padding:[35,35],maxZoom:mapMode==='context'?7:6});setTimeout(()=>mapInstance?.invalidateSize(),200);}
+catch(err){box.style.display='none';fb.style.display='block';console.warn('Leaflet unavailable; source-coordinate SVG works instead',err)}}
+function renderSlides(){let o=getData('sermon'),slides=arr(o.slideMap),totals=slides.reduce((a,s)=>(a[s.timingState||'NO_TIMING']=(a[s.timingState||'NO_TIMING']||0)+1,a),{});
+return header('PowerPoint slides, transcript cues & hard evidence','The original deck is evidence. Derived images and timing confidence can be inspected without inventing exact physical slide transitions.')+
+card('Source and timing honesty',`${Object.entries(totals).map(([k,v])=>pill(`${k}: ${v}`,status(k))).join('')}<p>${pill(slides.length+' numbered slides','info')}</p><p class="small">A cue/text match identifies an inferred sermon relationship, not an observed slide-click event.</p>${arr(o.sources).map(s=>`<div class="kv"><dt>${esc(s.kind||'source')}</dt><dd>${esc(s.pathOrName||'')} ${pill(s.id||'')} ${esc(s.sha256?'SHA256 '+s.sha256.slice(0,18)+'…':'')}</dd></div>`).join('')}`)+
+`<div class="grid3">${slides.map((s,i)=>`<div class="slideTile"><div class="row"><b>Slide ${esc(s.slideNumber??i+1)}</b> ${pill(s.timingState||'UNKNOWN',status(s.timingState))}</div><img loading="lazy" src="${esc(href(s.derivativeJpgPath||''))}" alt="Derived slide ${esc(s.slideNumber)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="small" style="display:none">Derivative image not publicly accessible at recorded path</div><div class="title" title="${esc(s.title||'')}">${esc(s.title||'No slide title recorded')}</div><div class="small">${timeLinks(s.start,false)}</div><div class="small">Cue ${esc(s.cueNumber??'not anchored')} · ${esc(s.confidence||'no confidence')} · ${esc(s.inferenceMethod||'')}</div>${refs(s.nodeRefs)}${raw(s,'Original full slide mapping')}</div>`).join('')}</div>`+
+card('Original sources & custody status',`<div class="scrollx"><table class="dataTable"><thead><tr><th>ID / source</th><th>Path</th><th>SHA-256 / rights</th></tr></thead><tbody>${arr(o.sources).map(s=>`<tr><td>${esc(s.id)}<br>${esc(s.kind||'')}</td><td>${esc(s.pathOrName||'')}</td><td><span class="source-record">${esc(s.sha256||'No hash in record')}</span><br>${esc(s.rightsUse||'')}</td></tr>`).join('')}</tbody></table></div>${raw(o.sources,'Full source provenance records')}`)+
+card('Published timed transcript data (if accessible)',`${getData('transcript').segments?pill('Transcript indexed','good'):pill('Original SRT is not automatically exposed by this viewer','warn')}${raw(getData('transcript'),'Loaded transcript JSON / public cues')}`);}
+function renderQuotes(){let o=getData('sermon'),p=obj(o.passageResearch),c=getData('quotes'),sermon=o.sermon?.stableId||'',found=[];function scan(x,path,depth){if(depth>7||found.length>=140)return;if(Array.isArray(x)){x.forEach((v,i)=>scan(v,`${path}[${i}]`,depth+1));return;}if(x&&typeof x==='object'){if(typeof x.id==='string'&&x.id.includes(sermon)||typeof x.quoteId==='string'&&x.quoteId.includes(sermon)){found.push({path,item:x});return}for(let [k,v] of Object.entries(x)){if(k.includes(sermon)||k.includes('media-fdtrrp'))found.push({path:path+'.'+k,item:v});else if(v&&typeof v==='object')scan(v,path+'.'+k,depth+1)}}}scan(c,'curation',0);
+return header('Exact quote candidates & owner decisions','Do not confuse a quote recommendation or score with owner APPROVED/FEATURED status. config/quote-curation.json alone controls editorial publication.')+
+card('New candidates: all UNREVIEWED',`${arr(p.quoteCandidates).map(q=>`<div class="card"><p style="font-size:18px">“${esc(q.exactText||q.text||'')}”</p>${pill(q.status||'UNREVIEWED',status(q.status))} ${pill(q.id||'')}<p>${timeLinks(q.start)}</p>${raw(q)}</div>`).join('')||tinyEmpty('No new quoted candidates in this record.')}`)+
+card('Existing authoritative review state',`${pill(found.length+' potentially linked records','info')} ${pill(states.quotes?.state||'NOT LOADED',status(states.quotes?.state))}<p>The candidate list is advisory. Reviewed decisions are read from the original configuration, not edited in this page.</p>${found.slice(0,50).map(f=>`<details><summary>${esc(f.path)}</summary>${raw(f.item,'Exact curation record')}</details>`).join('')}${raw(c,'Full current owner quote-curation source')}`)+
+card('Explicit owner linkage in canonical record',`${raw(o.presentationEnrichment?.ownerCuratedQuoteLinkage)}`);}
+function renderAuthor(){let o=getData('sermon'),a=o.authorCorpus||{};
+return header('Official commissioned Author Corpus, not a weekly sidecar','All content actually stored in the one canonical sermon JSON is displayed. Draft language is not evidence Jake previously preached, personally adopted, or published it.')+
+`<div class="warning"><b>Public repository disclosure:</b> ${esc(a.publicStorageMode||'GitHub JSON may be public')}. A hidden tab or passcode would not protect confidential material. This tool is deliberately an inspection screen.</div>`+
+card('Authorship lanes and scope',`${pill(a.commissionedAuthorization||'Authorization not recorded','info')}${field('Commissioned works',arr(a.commissionedWorks).length)}${field('Reference records',arr(a.references).length)}${field('privateContentIncluded',a.privateContentIncluded)}${field('publicSafeOnly',a.publicSafeOnly)}${raw(o.provenance,'Provenance lanes and attribution rules')}`)+
+arr(a.commissionedWorks).map((w,i)=>card(`${i+1}. ${w.topic||w.provenance||'Commissioned work'}`,`${pill(w.provenance||'UNKNOWN',status(w.provenance))} ${pill(w.originStatus||'')}${pill(w.separateHistoricalPublicationAttested?'Later publication verified':'NOT a verified historical Jake publication',w.separateHistoricalPublicationAttested?'good':'warn')}<div class="note"><b>Complete commissioned content</b>${Object.entries(obj(w.content)).map(([k,v])=>`<h4>${esc(k)}</h4>${Array.isArray(v)?list(v):showText(v)}`).join('')}</div><p>${esc(w.notes||'')}</p>${refs(w.evidenceRefs)}${raw(w)}`,pill(w.id))).join('')+
+card('All stored referenced author/evidence lanes',`<div class="scrollx"><table class="dataTable"><thead><tr><th>Lane</th><th>Reference</th><th>Status</th></tr></thead><tbody>${arr(a.references).map(x=>`<tr><td>${esc(x.lane||'')}</td><td>${esc(x.ref||'')}</td><td>${esc(x.status||'')}</td></tr>`).join('')}</tbody></table></div>${raw(a,'All Author Corpus fields')}`);}
+function renderSources(){let o=getData('sermon'),p=obj(o.passageResearch),facts=arr(p.localFactualRecords),groups={};for(let v of facts)(groups[v.kind||'other']??=[]).push(v);return header('Sources, evidence claims, rights and unresolved editorial flags','Inspect actual recorded source editions and source-to-claim support. A claimed verification field is not a license to republish third-party text.')+
+card('Original sermon source locks',arr(o.sources).map(s=>`<details><summary>${esc(s.id)} · ${esc(s.kind||'')} ${pill(s.authorityRole||'')}</summary>${kv(s)}${raw(s)}</details>`).join(''))+
+Object.entries(groups).map(([k,vals])=>card(`Fact register · ${k} (${vals.length})`,vals.map(v=>`<details><summary>${esc(v.name||v.canonicalMeaning||v.id||'Fact')} ${pill(v.status||'',status(v.status))}</summary>${kv(v)}${raw(v,'Complete fact / source / locator / rights')}</details>`).join(''))).join('')+
+card('Named resources',arr(o.namedResources).map(r=>`<details><summary>${esc(r.name||r.resourceId)}</summary>${kv(r)}${raw(r)}</details>`).join(''))+
+card('Every editorial flag',list(o.editorialFlags,f=>`<li>${pill(f.level||'',status(f.level))} ${esc(f.scope||'')}: ${esc(f.message||'')}</li>`)+raw(o.editorialFlags));}
+function renderSearch(){let o=getData('sermon'),s=o.search||{},p=o.passageResearch||{},e=o.presentationEnrichment||{},links=arr(p.records).flatMap(r=>arr(r.relatedStudy).map(x=>({...x,passage:r.reference})));
+return header('Search, aliases, typed connections and actionable Related Study','This evaluates SPP’s produced knowledge. It is not a claim that the public media player currently indexes every semantic field.')+
+card('Semantic and literal search configuration',`${kv(s)}${raw(s,'Entire semantic search projection')}`)+
+card('Cross-passage Related Study destinations',`${pill(links.length+' declared study destinations','info')}${links.map(t=>`<details><summary>${esc(t.passage)} · ${esc(t.question||'Study link')}</summary><p>${esc(t.fallbackSummary||'')}</p>${kv(t.destination)}${raw(t)}</details>`).join('')}`)+
+card('Canonical typed teaching links',`${pill(arr(o.nodes).reduce((n,v)=>n+arr(v.connections).length,0)+' typed node connections','info')}${arr(o.nodes).filter(n=>arr(n.connections).length).map(n=>`<details><summary>${esc(n.title)} (${arr(n.connections).length})</summary>${arr(n.connections).map(c=>`<p>${pill(c.type||'')} ${esc(c.targetNodeRef||c.target||'')} ${pill(c.provenance||'')}</p>`).join('')}${raw(n.connections)}</details>`).join('')}`)+
+card('Index and semantic tests',`<div class="controls"><input class="input" id="recordSearch" placeholder="Find grace, Matthew 20, comparison, denarius, G18…"><button class="btn" id="recordSearchBtn">Search every loaded source</button></div><p class="small">The raw cross-file search is in “All records” and scans JSON records directly. It does not modify GitHub search indexes.</p>${raw(e.studyRoutes,'Study routes')}`);}
+function flattenHits(root,q,max=150){let out=[],seen=0;function recur(x,path,depth){if(out.length>=max||seen++>450000||depth>19)return;if(Array.isArray(x)){x.forEach((v,i)=>recur(v,`${path}[${i}]`,depth+1));return;}if(x&&typeof x==='object'){Object.entries(x).forEach(([k,v])=>recur(v,`${path}.${k}`,depth+1));return;}if(String(x).toLowerCase().includes(q.toLowerCase()))out.push({path,value:String(x).slice(0,360)})}recur(root,'$',0);return out;}
+function renderData(){let name=inspectorKey in data?inspectorKey:'sermon',v=getData(name),keys=Object.entries(obj(v)),filter=inspectorFilter.toLowerCase();
+let hits=inspectorFilter?flattenHits(v,inspectorFilter,250):[];
+return header('Every byte of accessible JSON: full record explorer','Select any loaded file or top-level subtree. Inspect all nested material and search raw field values, including anything not explicitly presented by a tool panel.')+
+`<div class="dataNav"><div class="card"><h3>Loaded datasets</h3>${Object.keys(PATHS).map(k=>`<button style="width:100%;text-align:left;margin:3px 0" class="btn ${k===name?'primary':''}" data-inspector="${k}">${esc(k)} ${pill(states[k]?.state||'NOT LOADED',status(states[k]?.state))}</button>`).join('')}<hr><div class="small">Or use the top “Open local JSON” button. Local choices only change this viewer, never any original file.</div></div>
+<div class="card"><div class="jsonhead"><h3>${esc(name)} <span class="small">${esc(PATHS[name]||'Local file')}</span></h3><button class="btn tiny" id="downloadSelected">Download selected data</button></div>
+<div class="controls"><input id="inspectorFilter" class="input" value="${esc(inspectorFilter)}" placeholder="Search every property and value"><button class="btn" id="inspectorSearchBtn">Search JSON</button><button class="btn" id="clearSearchBtn">Clear</button></div>
+${inspectorFilter?`<p>${hits.length} matching leaf values${hits.length>=250?' (first 250 shown)':''}</p><div style="max-height:320px;overflow:auto">${hits.map(h=>`<div class="kv"><dt>${esc(h.path)}</dt><dd>${esc(h.value)}</dd></div>`).join('')||tinyEmpty('No matches')}</div>`:''}
+<h4>Top-level keys</h4><div class="chips">${keys.map(([k,x])=>`<button class="pathbutton" data-path="${esc(k)}">${esc(k)} ${Array.isArray(x)?'['+x.length+']':x&&typeof x==='object'?'{'+Object.keys(x).length+'}':''}</button>`).join('')}</div><div id="treeFocus"><p class="quiet">Select any key above to inspect that entire subtree.</p></div>
+${raw(v,'Complete entire loaded '+name+' JSON')}</div></div>`; }
+function render(){nav();let node=$('main');try{node.innerHTML=({overview:renderOverview,audit:renderAudit,jake:renderJake,bible:renderBible,quick:renderQuick,doctrine:renderDoctrine,discover:renderDiscover,deep:renderDeep,maps:renderMaps,slides:renderSlides,quotes:renderQuotes,author:renderAuthor,sources:renderSources,search:renderSearch,data:renderData}[active]||renderOverview)()+`<div class="foot">CGBC Knowledge Lab • Read-only viewer • canonical Info Map 3.0 is the authority; other records remain separate for their established purposes. No GitHub edits, approvals, deployment actions, or SPP reprocessing occur in this page.</div>`;
+if(active==='maps')setTimeout(initMap,20);
+if(active==='data')window.scrollTo({top:0,behavior:'instant'});}catch(err){console.error(err);node.innerHTML=header('Viewer error','A panel could not render, but its original data is still available through the raw data explorer.')+`<pre>${esc(err.message||String(err))}</pre>`+`<button class="btn" data-tab="data">Open all records</button>`}}
+async function load(){let root=base();$('loadStatus').textContent='Loading read-only datasets…';for(const k of Object.keys(PATHS))states[k]={state:'LOADING'};render();let success=0;
+await Promise.all(Object.entries(PATHS).map(async([key,path])=>{try{const response=await fetch(href(path),{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);const value=await response.json();data[key]=value;states[key]={state:'LOADED',detail:Array.isArray(value)?value.length+' rows':''};success++}catch(e){states[key]={state:'UNAVAILABLE',detail:e.message};}}));$('loadStatus').textContent=`${success}/${Object.keys(PATHS).length} sources loaded · ${root.includes('github.io')?'Published repository':'custom/local source'}`;render();}
+$('nav').addEventListener('click',e=>{let b=e.target.closest('[data-tab]');if(b){active=b.dataset.tab;render();window.scrollTo(0,0)}});
+$('main').addEventListener('click',async e=>{let b=e.target.closest('button,[data-map-id]');if(!b)return;
+if(b.dataset.tab){active=b.dataset.tab;render();window.scrollTo(0,0);return}
+if(b.dataset.inspector){inspectorKey=b.dataset.inspector;active='data';render();window.scrollTo(0,0);return}
+if(b.dataset.nodefilter!==undefined){nodeFilter=b.dataset.nodefilter;render();return}
+if(b.dataset.findnode){nodeFilter=b.dataset.findnode;render();window.scrollTo(0,0);return}
+if(b.dataset.mapmode){mapMode=b.dataset.mapmode;render();return}
+if(b.dataset.mapId){showMapDetails(b.dataset.mapId);return}
+if(b.dataset.path){let v=getData(inspectorKey)[b.dataset.path];$('treeFocus').innerHTML=`<h4>${esc(b.dataset.path)}</h4>${raw(v,'All '+b.dataset.path+' nested values').replace('<details','<details open')}`;return}
+if(b.id==='nodeFilterBtn'){nodeFilter=$('nodeFilter').value;render();return}
+if(b.id==='passageFilterBtn'){passageFilter=$('passageFilter').value;render();return}
+if(b.id==='inspectorSearchBtn'){inspectorFilter=$('inspectorFilter').value;render();return}
+if(b.id==='clearSearchBtn'){inspectorFilter='';render();return}
+if(b.id==='recordSearchBtn'){inspectorFilter=$('recordSearch').value;inspectorKey='sermon';active='data';render();return}
+if(b.id==='downloadSelected'){download('CGBC_'+inspectorKey+'_inspection.json',js(getData(inspectorKey)));return}
+if(b.classList.contains('copy-record')){let p=b.closest('details').querySelector('pre');if(p){try{await navigator.clipboard.writeText(p.textContent);toast('Record copied')}catch{toast('Copy not available: select raw text below')}}return}
+});
+$('main').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='inspectorFilter'){$('inspectorSearchBtn')?.click()}if(e.key==='Enter'&&e.target.id==='nodeFilter'){$('nodeFilterBtn')?.click()}if(e.key==='Enter'&&e.target.id==='passageFilter'){$('passageFilterBtn')?.click()}});
+$('reloadBtn').onclick=load;$('applyBase').onclick=load;$('fileBtn').onclick=()=>$('fileInput').click();
+$('fileInput').onchange=async e=>{let fs=Array.from(e.target.files||[]),loaded=0;for(let f of fs){try{let v=JSON.parse(await f.text()),n=f.name.toLowerCase();let k=n.includes('concept_registry')?'registry':n.includes('verse_usage_ledger')?'ledger':n.includes('scripture_reference_catalog')?'catalog':n.includes('quote-curation')?'quotes':n.endsWith('.geojson')||v.type==='FeatureCollection'?'geography':n.includes('people_time_place_library')?'people':n.includes('historical_event_time')?'context':v.recordType==='CGBC_SERMON_KNOWLEDGE'||v.schemaVersion==='3.0'?'sermon':n.includes('transcript')?'transcript':null;if(!k){toast('Unrecognized JSON: '+f.name);continue}data[k]=v;states[k]={state:'LOCAL FILE',detail:f.name};loaded++}catch(err){console.error(err);toast('Failed to read '+f.name)}}$('loadStatus').textContent=`${loaded} local file(s) opened for inspection`;render();};
+$('exportBtn').onclick=()=>{let m=readouts(),o=getData('sermon');let payload={inspectedAt:new Date().toISOString(),ui:'knowledge-lab-spp2-deep-study-v3.html',sermonStableId:o.sermon?.stableId||null,canonicalPath:PATHS.sermon,liveStates:states,counts:m,featureDisposition:o.presentationEnrichment?.featureDisposition||{},editorialFlags:o.editorialFlags||[],note:'Surface-level presentation audit, not an independent original-evidence/schema/rights certification.'};download('CGBC-SPP-Good-Gifts-visual-audit.json',js(payload));};
+$('baseUrl').value=location.protocol==='file:'?GITHUB_SITE:new URL('./',location.href).href;
+const params=new URLSearchParams(location.search);if(params.get('base'))$('baseUrl').value=params.get('base');load();
+})();
 </script>
 </body>
 </html>
