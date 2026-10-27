@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cgbclebanontn.org/schema/cgbc_jake_passage_commentary-v1.json",
+  "title": "CGBC CGBC_JAKE_PASSAGE_COMMENTARY Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryType",
+    "schemaVersion",
+    "registryRevision",
+    "bootstrapGitCommit",
+    "entries",
+    "changeLog",
+    "policy"
+  ],
+  "properties": {
+    "registryType": {
+      "const": "CGBC_JAKE_PASSAGE_COMMENTARY"
+    },
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "registryRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "bootstrapGitCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "lastUpdate": {
+      "type": "string",
+      "format": "date"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "changeLog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "changeId",
+          "date",
+          "reason",
+          "previousRegistrySha256"
+        ],
+        "properties": {
+          "changeId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 250
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "previousRegistrySha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "operationCount": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "policy": {
+      "const": "CGBC_SHARED_KNOWLEDGE_ADDITIVE_EVIDENCE_LOCKED_V1"
+    }
+  },
+  "$defs": {
+    "passage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passageKey",
+        "bookCode",
+        "startChapter",
+        "startVerse",
+        "endChapter",
+        "endVerse",
+        "displayReference"
+      ],
+      "properties": {
+        "passageKey": {
+          "type": "string",
+          "pattern": "^[1-3]?[A-Z]{2,3}\\.[0-9]+\\.[0-9]+-[0-9]+\\.[0-9]+$"
+        },
+        "bookCode": {
+          "type": "string",
+          "pattern": "^[1-3]?[A-Z]{2,3}$"
+        },
+        "startChapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startVerse": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endChapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endVerse": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "displayReference": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "occasion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sermonId",
+        "preachingDate",
+        "nodeIds",
+        "cueRanges",
+        "passageRole",
+        "sermonLens",
+        "pointIds",
+        "historicalProvenance",
+        "originalSourceSha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "sermonId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "preachingDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "nodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "cueRanges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "startCue",
+              "endCue",
+              "startMs",
+              "endMs"
+            ],
+            "properties": {
+              "startCue": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "endCue": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "startMs": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "endMs": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "passageRole": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sermonLens": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pointIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "historicalProvenance": {
+          "type": "string",
+          "enum": [
+            "HISTORICAL_JAKE_PREACHING"
+          ]
+        },
+        "originalSourceSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "exactQuoteRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "qualification": {
+          "type": "string"
+        }
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "teaching",
+        "stance",
+        "supportOccasionIds",
+        "relation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "teaching": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stance": {
+          "type": "string",
+          "enum": [
+            "AFFIRMED",
+            "TENTATIVE",
+            "REJECTED",
+            "CONTRASTED",
+            "REPORTED_OTHER_VIEW",
+            "UNRESOLVED"
+          ]
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "ESTABLISHED",
+            "NUANCE",
+            "QUALIFICATION",
+            "DISAGREEMENT"
+          ]
+        },
+        "supportOccasionIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "relatedPointIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "qualification": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "kind",
+        "at",
+        "reason",
+        "prior",
+        "newRevision"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SETTING_CORRECTION",
+            "CLAIM_CORRECTION",
+            "POINT_CORRECTION",
+            "ENTRY_RELATION_UPDATE"
+          ]
+        },
+        "at": {
+          "type": "string",
+          "format": "date"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prior": {
+          "type": "object"
+        },
+        "newRevision": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "supportingEvidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "supportingOccasionIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "passage",
+        "points",
+        "occasions",
+        "history",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "passage": {
+          "$ref": "#/$defs/passage"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/point"
+          },
+          "minItems": 0
+        },
+        "occasions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/occasion"
+          },
+          "minItems": 0
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/history"
+          },
+          "minItems": 0
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "relatedPassageKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "editorialSummary": {
+          "type": "string"
+        },
+        "editorialSummaryPointIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

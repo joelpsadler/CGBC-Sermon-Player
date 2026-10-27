@@ -1,0 +1,551 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cgbclebanontn.org/schema/cgbc_passage_context-v1.json",
+  "title": "CGBC CGBC_PASSAGE_CONTEXT Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryType",
+    "schemaVersion",
+    "registryRevision",
+    "bootstrapGitCommit",
+    "entries",
+    "changeLog",
+    "policy"
+  ],
+  "properties": {
+    "registryType": {
+      "const": "CGBC_PASSAGE_CONTEXT"
+    },
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "registryRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "bootstrapGitCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "lastUpdate": {
+      "type": "string",
+      "format": "date"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "changeLog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "changeId",
+          "date",
+          "reason",
+          "previousRegistrySha256"
+        ],
+        "properties": {
+          "changeId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 250
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "previousRegistrySha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "operationCount": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "policy": {
+      "const": "CGBC_SHARED_KNOWLEDGE_ADDITIVE_EVIDENCE_LOCKED_V1"
+    }
+  },
+  "$defs": {
+    "passage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passageKey",
+        "bookCode",
+        "startChapter",
+        "startVerse",
+        "endChapter",
+        "endVerse",
+        "displayReference"
+      ],
+      "properties": {
+        "passageKey": {
+          "type": "string",
+          "pattern": "^[1-3]?[A-Z]{2,3}\\.[0-9]+\\.[0-9]+-[0-9]+\\.[0-9]+$"
+        },
+        "bookCode": {
+          "type": "string",
+          "pattern": "^[1-3]?[A-Z]{2,3}$"
+        },
+        "startChapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startVerse": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endChapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endVerse": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "displayReference": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "work",
+        "edition",
+        "locator",
+        "verifiedOn",
+        "rights",
+        "supportType",
+        "supportedAssertion"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "work": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verifiedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "rights": {
+          "type": "string",
+          "enum": [
+            "PUBLIC_DOMAIN_VERIFIED",
+            "LICENSED_FOR_DISPLAY",
+            "PARAPHRASE_WITH_CITATION",
+            "RESEARCH_LINK_ONLY",
+            "NOT_CLEARED_FOR_DISPLAY"
+          ]
+        },
+        "supportType": {
+          "type": "string",
+          "enum": [
+            "DIRECT",
+            "INFERENTIAL",
+            "CORROBORATIVE",
+            "DISPUTED"
+          ]
+        },
+        "sourceSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "supportedAssertion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "usageId",
+        "sermonId",
+        "passageRole",
+        "nodeIds",
+        "evidenceIds",
+        "observedOn"
+      ],
+      "properties": {
+        "usageId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "sermonId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "passageRole": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "observedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "claimIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "sourceInfoMapSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "statement",
+        "category",
+        "status",
+        "evidenceIds",
+        "displayPermission"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "CULTURE",
+            "ECONOMY",
+            "POLITICS",
+            "RELIGION",
+            "LAW",
+            "ARCHAEOLOGY",
+            "GEOGRAPHY",
+            "CHRONOLOGY",
+            "LANGUAGE_CONTEXT",
+            "LITERARY_CONTEXT",
+            "OTHER"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "QUALIFIED",
+            "DISPUTED"
+          ]
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "displayPermission": {
+          "type": "string",
+          "enum": [
+            "SUMMARY_WITH_CITATION",
+            "LINK_ONLY",
+            "NOT_FOR_PUBLIC_DISPLAY"
+          ]
+        },
+        "alternateTo": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "chronologyQualification": {
+          "type": "string"
+        },
+        "geographyPrecision": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "setting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "text",
+        "claimIds",
+        "displayPermission"
+      ],
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claimIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "displayPermission": {
+          "type": "string",
+          "enum": [
+            "SUMMARY_WITH_CITATION",
+            "LINK_ONLY",
+            "NOT_FOR_PUBLIC_DISPLAY"
+          ]
+        },
+        "editorialScope": {
+          "type": "string"
+        },
+        "sourceNote": {
+          "type": "string"
+        }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "kind",
+        "at",
+        "reason",
+        "prior",
+        "newRevision"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SETTING_CORRECTION",
+            "CLAIM_CORRECTION",
+            "POINT_CORRECTION",
+            "ENTRY_RELATION_UPDATE"
+          ]
+        },
+        "at": {
+          "type": "string",
+          "format": "date"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prior": {
+          "type": "object"
+        },
+        "newRevision": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "supportingEvidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "supportingOccasionIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "passage",
+        "genre",
+        "literaryScope",
+        "settingTheStage",
+        "claims",
+        "sources",
+        "usages",
+        "history",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 250
+        },
+        "passage": {
+          "$ref": "#/$defs/passage"
+        },
+        "genre": {
+          "type": "string",
+          "enum": [
+            "NARRATIVE",
+            "PARABLE",
+            "PROPHECY",
+            "POETRY",
+            "VISION",
+            "TEACHING",
+            "EPISTLE",
+            "MIXED",
+            "DISPUTED"
+          ]
+        },
+        "literaryScope": {
+          "type": "string",
+          "enum": [
+            "ACTUAL_HISTORICAL_REFERENTS",
+            "ILLUSTRATIVE_CHARACTERS_AND_EVENTS",
+            "MIXED_OR_QUALIFIED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "settingTheStage": {
+          "$ref": "#/$defs/setting"
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          },
+          "minItems": 0
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 0
+        },
+        "usages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/usage"
+          },
+          "minItems": 0
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/history"
+          },
+          "minItems": 0
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "relatedPassageKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "pinnedFoundationRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "researchScope": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACCEPTED",
+            "QUALIFIED",
+            "DISPUTED"
+          ]
+        }
+      }
+    }
+  }
+}
