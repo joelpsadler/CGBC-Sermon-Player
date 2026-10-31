@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-31T19:26:20.554Z",
+  "generatedAt": "2026-10-31T19:59:14.654Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 188,
-    "archiveItems": 188,
-    "videoMatchedItems": 180,
-    "transcriptMatchedItems": 55,
-    "quoteCandidateCount": 4099
+    "rssItems": 189,
+    "archiveItems": 189,
+    "videoMatchedItems": 181,
+    "transcriptMatchedItems": 56,
+    "quoteCandidateCount": 4174
   },
   "totals": {
     "audioPlaysTotal": 6378,
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-10iw6m",
-        "detectedFromDate": "2026-10-21",
-        "detectedFromTitle": "The Tribulation Pt. 15 (The False Prophet, Counterfeit Worship, and the Mark of the Beast)",
+        "detectedFromEpisode": "media-bgo90k",
+        "detectedFromDate": "2026-10-28",
+        "detectedFromTitle": "The Tribulation Pt. 16 (The Lamb, the 144,000, and the Three Angels)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -95,6 +95,261 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-bgo90k",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/xgy7eynt2esd2kdm/26_10_28_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/6ce5f560-0086-3b79-a2d0-523aa3fb2c31"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-16-eschatology-the-tribulation/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-16-eschatology-the-tribulation/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 16",
+        "subtitle": "The Lamb, the 144,000, and the Three Angels",
+        "display": "The Tribulation Pt. 16 (The Lamb, the 144,000, and the Three Angels)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Revelation 14:1-11",
+        "display": "Revelation 14:1-11",
+        "book": "Revelation",
+        "bookKey": "revelation",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Revelation 13, Psalm 2:6, Hebrews 12:22, Revelation 1:15, Revelation 6:1, Revelation 5:8, 2 Corinthians 2:14-16, Exodus 20:3, Philippians 2:9-11, Revelation 17, Revelation 18, Jeremiah 25:15-17",
+        "display": "Revelation 13, Psalm 2:6, Hebrews 12:22, Revelation 1:15, Revelation 6:1, Revelation 5:8, 2 Corinthians 2:14-16, Exodus 20:3, Philippians 2:9-11, Revelation 17, Revelation 18, Jeremiah 25:15-17",
+        "tokens": [
+          "Revelation 13",
+          "Psalm 2:6",
+          "Hebrews 12:22",
+          "Revelation 1:15",
+          "Revelation 6:1",
+          "Revelation 5:8",
+          "2 Corinthians 2:14-16",
+          "2 Corinthians 2:14",
+          "2 Corinthians 2:15",
+          "2 Corinthians 2:16",
+          "Exodus 20:3",
+          "Philippians 2:9-11",
+          "Philippians 2:9",
+          "Philippians 2:10",
+          "Philippians 2:11",
+          "Revelation 2:17",
+          "Revelation 2:18",
+          "Jeremiah 25:15-17",
+          "Jeremiah 25:15",
+          "Jeremiah 25:16",
+          "Jeremiah 25:17"
+        ],
+        "searchTokens": [
+          "Revelation 14:1-11",
+          "Revelation 14:1",
+          "Revelation 14:2",
+          "Revelation 14:3",
+          "Revelation 14:4",
+          "Revelation 14:5",
+          "Revelation 14:6",
+          "Revelation 14:7",
+          "Revelation 14:8",
+          "Revelation 14:9",
+          "Revelation 14:10",
+          "Revelation 14:11",
+          "Revelation 13",
+          "Psalm 2:6",
+          "Hebrews 12:22",
+          "Revelation 1:15",
+          "Revelation 6:1",
+          "Revelation 5:8",
+          "2 Corinthians 2:14-16",
+          "2 Corinthians 2:14",
+          "2 Corinthians 2:15",
+          "2 Corinthians 2:16",
+          "Exodus 20:3",
+          "Philippians 2:9-11",
+          "Philippians 2:9",
+          "Philippians 2:10",
+          "Philippians 2:11",
+          "Revelation 2:17",
+          "Revelation 2:18",
+          "Jeremiah 25:15-17",
+          "Jeremiah 25:15",
+          "Jeremiah 25:16",
+          "Jeremiah 25:17"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 14:1-11",
+          "Revelation 14:1",
+          "Revelation 14:2",
+          "Revelation 14:3",
+          "Revelation 14:4",
+          "Revelation 14:5",
+          "Revelation 14:6",
+          "Revelation 14:7",
+          "Revelation 14:8",
+          "Revelation 14:9",
+          "Revelation 14:10",
+          "Revelation 14:11",
+          "Revelation 13",
+          "Psalm 2:6",
+          "Hebrews 12:22",
+          "Revelation 1:15",
+          "Revelation 6:1",
+          "Revelation 5:8",
+          "2 Corinthians 2:14-16",
+          "2 Corinthians 2:14",
+          "2 Corinthians 2:15",
+          "2 Corinthians 2:16",
+          "Exodus 20:3",
+          "Philippians 2:9-11",
+          "Philippians 2:9",
+          "Philippians 2:10",
+          "Philippians 2:11",
+          "Revelation 2:17",
+          "Revelation 2:18",
+          "Jeremiah 25:15-17",
+          "Jeremiah 25:15",
+          "Jeremiah 25:16",
+          "Jeremiah 25:17"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "Psalms",
+          "key": "psalms"
+        },
+        {
+          "name": "Hebrews",
+          "key": "hebrews"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Exodus",
+          "key": "exodus"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "Jeremiah",
+          "key": "jeremiah"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "10/28/2026",
+        "iso": "2026-10-28",
+        "year": 2026,
+        "month": 10,
+        "monthName": "October",
+        "day": 28
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-10-28.srt",
+            "cleanFile": "transcripts_clean/en/2026-10-28_the-tribulation-pt-16.srt",
+            "displayFile": "transcripts_display/en/2026-10-28_the-tribulation-pt-16.srt",
+            "jsonFile": "data/transcripts/en/2026-10-28_the-tribulation-pt-16.json",
+            "displayJsonFile": "data/transcripts/en/2026-10-28_the-tribulation-pt-16.display.json",
+            "segmentCount": 515,
+            "displaySegmentCount": 439
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-10-28.srt",
+        "cleanFile": "transcripts_clean/en/2026-10-28_the-tribulation-pt-16.srt",
+        "displayFile": "transcripts_display/en/2026-10-28_the-tribulation-pt-16.srt",
+        "jsonFile": "data/transcripts/en/2026-10-28_the-tribulation-pt-16.json",
+        "displayJsonFile": "data/transcripts/en/2026-10-28_the-tribulation-pt-16.display.json",
+        "segmentCount": 515,
+        "displaySegmentCount": 439
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/xgy7eynt2esd2kdm/26_10_28_W.mp3",
+        "plays": 0,
+        "durationSeconds": 1542,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "fO3g1hZc0ak",
+        "url": "https://www.youtube.com/watch?v=fO3g1hZc0ak",
+        "views": 2
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/26_10_28_W_art-square.jpg",
+          "wide": "https://i.ytimg.com/vi/fO3g1hZc0ak/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "psalms",
+          "hebrews",
+          "2-corinthians",
+          "exodus",
+          "philippians",
+          "jeremiah"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-10"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-gzstek",
       "sourceKey": {
