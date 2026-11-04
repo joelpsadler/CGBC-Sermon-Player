@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-03T23:46:03.390Z",
+  "generatedAt": "2026-11-04T00:29:23.455Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 190,
     "archiveItems": 190,
     "videoMatchedItems": 182,
-    "transcriptMatchedItems": 56,
-    "quoteCandidateCount": 4178
+    "transcriptMatchedItems": 57,
+    "quoteCandidateCount": 4253
   },
   "totals": {
     "audioPlaysTotal": 6394,
@@ -252,7 +252,7 @@
           "Galatians 6:1",
           "Philippians 2:2"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -291,16 +291,27 @@
         "day": 1
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-11-01.srt",
+            "cleanFile": "transcripts_clean/en/2026-11-01_why-membership-matters.srt",
+            "displayFile": "transcripts_display/en/2026-11-01_why-membership-matters.srt",
+            "jsonFile": "data/transcripts/en/2026-11-01_why-membership-matters.json",
+            "displayJsonFile": "data/transcripts/en/2026-11-01_why-membership-matters.display.json",
+            "segmentCount": 703,
+            "displaySegmentCount": 621
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-11-01.srt",
+        "cleanFile": "transcripts_clean/en/2026-11-01_why-membership-matters.srt",
+        "displayFile": "transcripts_display/en/2026-11-01_why-membership-matters.srt",
+        "jsonFile": "data/transcripts/en/2026-11-01_why-membership-matters.json",
+        "displayJsonFile": "data/transcripts/en/2026-11-01_why-membership-matters.display.json",
+        "segmentCount": 703,
+        "displaySegmentCount": 621
       },
       "audio": {
         "hasAudio": true,
