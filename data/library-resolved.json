@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-11-08T03:05:15.695Z",
+  "generatedAt": "2026-11-08T10:51:52.548Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 190,
-    "archiveItems": 190,
-    "videoMatchedItems": 182,
+    "rssItems": 191,
+    "archiveItems": 191,
+    "videoMatchedItems": 183,
     "transcriptMatchedItems": 57,
     "quoteCandidateCount": 4259
   },
   "totals": {
-    "audioPlaysTotal": 6416,
-    "audioEpisodesTotal": 190
+    "audioPlaysTotal": 6444,
+    "audioEpisodesTotal": 191
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-bgo90k",
-        "detectedFromDate": "2026-10-28",
-        "detectedFromTitle": "The Tribulation Pt. 16 (The Lamb, the 144,000, and the Three Angels)",
+        "detectedFromEpisode": "media-f9oh8t",
+        "detectedFromDate": "2026-11-04",
+        "detectedFromTitle": "The Tribulation Pt. 17 (The Doctrine of Eternal Torment)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -95,6 +95,334 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-f9oh8t",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/wsb8w3nfhv6ujccp/26_11_04_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/03860069-9a35-3706-831c-bbe745fc9ca5"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-17-eschatology-the-tribulation/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-tribulation-pt-17-eschatology-the-tribulation/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 17",
+        "subtitle": "The Doctrine of Eternal Torment",
+        "display": "The Tribulation Pt. 17 (The Doctrine of Eternal Torment)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Revelation 14:9-11",
+        "display": "Revelation 14:9-11",
+        "book": "Revelation",
+        "bookKey": "revelation",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Romans 5:18, Romans 11:32, 1 Corinthians 15:22, 2 Corinthians 5:19, Titus 2:11, Matthew 25:40-46, John 14:6, Acts 4:12, Psalm 51:4, Matthew 10:28, Revelation 19:20, Revelation 20:10, Revelation 20:13-15, Philippians 2:9-11, 1 Corinthians 15:51-53, Luke 16:19-31, Mark 9:48",
+        "display": "Romans 5:18, Romans 11:32, 1 Corinthians 15:22, 2 Corinthians 5:19, Titus 2:11, Matthew 25:40-46, John 14:6, Acts 4:12, Psalm 51:4, Matthew 10:28, Revelation 19:20, Revelation 20:10, Revelation 20:13-15, Philippians 2:9-11, 1 Corinthians 15:51-53, Luke 16:19-31, Mark 9:48",
+        "tokens": [
+          "Romans 5:18",
+          "Romans 11:32",
+          "1 Corinthians 15:22",
+          "2 Corinthians 5:19",
+          "Titus 2:11",
+          "Matthew 25:40-46",
+          "Matthew 25:40",
+          "Matthew 25:41",
+          "Matthew 25:42",
+          "Matthew 25:43",
+          "Matthew 25:44",
+          "Matthew 25:45",
+          "Matthew 25:46",
+          "John 14:6",
+          "Acts 4:12",
+          "Psalm 51:4",
+          "Matthew 10:28",
+          "Revelation 19:20",
+          "Revelation 20:10",
+          "Revelation 20:13-15",
+          "Revelation 20:13",
+          "Revelation 20:14",
+          "Revelation 20:15",
+          "Philippians 2:9-11",
+          "Philippians 2:9",
+          "Philippians 2:10",
+          "Philippians 2:11",
+          "1 Corinthians 15:51-53",
+          "1 Corinthians 15:51",
+          "1 Corinthians 15:52",
+          "1 Corinthians 15:53",
+          "Luke 16:19-31",
+          "Luke 16:19",
+          "Luke 16:20",
+          "Luke 16:21",
+          "Luke 16:22",
+          "Luke 16:23",
+          "Luke 16:24",
+          "Luke 16:25",
+          "Luke 16:26",
+          "Luke 16:27",
+          "Luke 16:28",
+          "Luke 16:29",
+          "Luke 16:30",
+          "Luke 16:31",
+          "Mark 9:48"
+        ],
+        "searchTokens": [
+          "Revelation 14:9-11",
+          "Revelation 14:9",
+          "Revelation 14:10",
+          "Revelation 14:11",
+          "Romans 5:18",
+          "Romans 11:32",
+          "1 Corinthians 15:22",
+          "2 Corinthians 5:19",
+          "Titus 2:11",
+          "Matthew 25:40-46",
+          "Matthew 25:40",
+          "Matthew 25:41",
+          "Matthew 25:42",
+          "Matthew 25:43",
+          "Matthew 25:44",
+          "Matthew 25:45",
+          "Matthew 25:46",
+          "John 14:6",
+          "Acts 4:12",
+          "Psalm 51:4",
+          "Matthew 10:28",
+          "Revelation 19:20",
+          "Revelation 20:10",
+          "Revelation 20:13-15",
+          "Revelation 20:13",
+          "Revelation 20:14",
+          "Revelation 20:15",
+          "Philippians 2:9-11",
+          "Philippians 2:9",
+          "Philippians 2:10",
+          "Philippians 2:11",
+          "1 Corinthians 15:51-53",
+          "1 Corinthians 15:51",
+          "1 Corinthians 15:52",
+          "1 Corinthians 15:53",
+          "Luke 16:19-31",
+          "Luke 16:19",
+          "Luke 16:20",
+          "Luke 16:21",
+          "Luke 16:22",
+          "Luke 16:23",
+          "Luke 16:24",
+          "Luke 16:25",
+          "Luke 16:26",
+          "Luke 16:27",
+          "Luke 16:28",
+          "Luke 16:29",
+          "Luke 16:30",
+          "Luke 16:31",
+          "Mark 9:48"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 14:9-11",
+          "Revelation 14:9",
+          "Revelation 14:10",
+          "Revelation 14:11",
+          "Romans 5:18",
+          "Romans 11:32",
+          "1 Corinthians 15:22",
+          "2 Corinthians 5:19",
+          "Titus 2:11",
+          "Matthew 25:40-46",
+          "Matthew 25:40",
+          "Matthew 25:41",
+          "Matthew 25:42",
+          "Matthew 25:43",
+          "Matthew 25:44",
+          "Matthew 25:45",
+          "Matthew 25:46",
+          "John 14:6",
+          "Acts 4:12",
+          "Psalm 51:4",
+          "Matthew 10:28",
+          "Revelation 19:20",
+          "Revelation 20:10",
+          "Revelation 20:13-15",
+          "Revelation 20:13",
+          "Revelation 20:14",
+          "Revelation 20:15",
+          "Philippians 2:9-11",
+          "Philippians 2:9",
+          "Philippians 2:10",
+          "Philippians 2:11",
+          "1 Corinthians 15:51-53",
+          "1 Corinthians 15:51",
+          "1 Corinthians 15:52",
+          "1 Corinthians 15:53",
+          "Luke 16:19-31",
+          "Luke 16:19",
+          "Luke 16:20",
+          "Luke 16:21",
+          "Luke 16:22",
+          "Luke 16:23",
+          "Luke 16:24",
+          "Luke 16:25",
+          "Luke 16:26",
+          "Luke 16:27",
+          "Luke 16:28",
+          "Luke 16:29",
+          "Luke 16:30",
+          "Luke 16:31",
+          "Mark 9:48"
+        ],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "1 Corinthians",
+          "key": "1-corinthians"
+        },
+        {
+          "name": "2 Corinthians",
+          "key": "2-corinthians"
+        },
+        {
+          "name": "Titus",
+          "key": "titus"
+        },
+        {
+          "name": "Matthew",
+          "key": "matthew"
+        },
+        {
+          "name": "John",
+          "key": "john"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        },
+        {
+          "name": "Psalms",
+          "key": "psalms"
+        },
+        {
+          "name": "Philippians",
+          "key": "philippians"
+        },
+        {
+          "name": "Luke",
+          "key": "luke"
+        },
+        {
+          "name": "Mark",
+          "key": "mark"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "11/04/2026",
+        "iso": "2026-11-04",
+        "year": 2026,
+        "month": 11,
+        "monthName": "November",
+        "day": 4
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/wsb8w3nfhv6ujccp/26_11_04_W.mp3",
+        "plays": 1,
+        "durationSeconds": 1820,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "fVARe2bwGN8",
+        "url": "https://www.youtube.com/watch?v=fVARe2bwGN8",
+        "views": 2
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/261104-square.jpg",
+          "wide": "https://i.ytimg.com/vi/fVARe2bwGN8/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "romans",
+          "1-corinthians",
+          "2-corinthians",
+          "titus",
+          "matthew",
+          "john",
+          "acts",
+          "psalms",
+          "philippians",
+          "luke",
+          "mark"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-11"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-daqi89",
       "sourceKey": {
@@ -568,7 +896,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xgy7eynt2esd2kdm/26_10_28_W.mp3",
-        "plays": 5,
+        "plays": 6,
         "durationSeconds": 1542,
         "statsMatchStrategy": "media_url"
       },
@@ -779,7 +1107,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8ns8ypx92fu2hr5e/26_10_25_S.mp3",
-        "plays": 4,
+        "plays": 5,
         "durationSeconds": 1975,
         "statsMatchStrategy": "media_url"
       },
@@ -2199,7 +2527,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rmuppkjdz8fnaqer/26_09_30_W.mp3",
-        "plays": 13,
+        "plays": 14,
         "durationSeconds": 1393,
         "statsMatchStrategy": "media_url"
       },
@@ -2328,7 +2656,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ngrc6gyridfuvuiq/26_09_28_Frontline.mp3",
-        "plays": 8,
+        "plays": 9,
         "durationSeconds": 5951,
         "statsMatchStrategy": "media_url"
       },
@@ -2582,7 +2910,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/z5w4nc97dfdbnqgh/26_09_27_S.mp3",
-        "plays": 10,
+        "plays": 11,
         "durationSeconds": 2106,
         "statsMatchStrategy": "media_url"
       },
@@ -3659,7 +3987,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/9e5krtwr7d5n45bf/09_09_26_S.mp3",
-        "plays": 21,
+        "plays": 22,
         "durationSeconds": 1618,
         "statsMatchStrategy": "media_url"
       },
@@ -3900,7 +4228,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rerbj2unpxpe7k4x/09_06_26_S.mp3",
-        "plays": 24,
+        "plays": 25,
         "durationSeconds": 2251,
         "statsMatchStrategy": "media_url"
       },
@@ -4538,7 +4866,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/27949wusmhfmxii3/8_29_26_Sat_EMD_10.mp3",
-        "plays": 12,
+        "plays": 13,
         "durationSeconds": 1387,
         "statsMatchStrategy": "media_url"
       },
@@ -4785,7 +5113,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/qq3b3u792ucnhvgg/8_23_26_Sun.mp3",
-        "plays": 12,
+        "plays": 13,
         "durationSeconds": 1859,
         "statsMatchStrategy": "media_url"
       },
@@ -5523,7 +5851,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/e7xdgikbysxfdq66/8_09_16_S.mp3",
-        "plays": 16,
+        "plays": 17,
         "durationSeconds": 2035,
         "statsMatchStrategy": "media_url"
       },
@@ -7103,7 +7431,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5xwk3v58xfye6xys/7_26_26_S_EMD_DEMOS_CGBC.mp3",
-        "plays": 15,
+        "plays": 16,
         "durationSeconds": 3341,
         "statsMatchStrategy": "media_url"
       },
@@ -7273,7 +7601,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/kdrwh2r97p26gbds/7_22_26_W.mp3",
-        "plays": 17,
+        "plays": 18,
         "durationSeconds": 1800,
         "statsMatchStrategy": "media_url"
       },
@@ -7756,7 +8084,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/edbjr3bpkmrf3t3e/71526_Wbe00f.mp3",
-        "plays": 14,
+        "plays": 15,
         "durationSeconds": 1821,
         "statsMatchStrategy": "media_url"
       },
@@ -8357,7 +8685,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/43caphgrw385ts3u/70826_Wbgr13.mp3",
-        "plays": 25,
+        "plays": 26,
         "durationSeconds": 1913,
         "statsMatchStrategy": "media_url"
       },
@@ -8889,7 +9217,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/jwyvh79epdvsh6ar/70126W_Guestal797.mp3",
-        "plays": 17,
+        "plays": 18,
         "durationSeconds": 1552,
         "statsMatchStrategy": "media_url"
       },
@@ -9004,7 +9332,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/zvwrqzzpvqe7evs7/62426_W_Guest81knp.mp3",
-        "plays": 12,
+        "plays": 13,
         "durationSeconds": 1486,
         "statsMatchStrategy": "media_url"
       },
@@ -10295,7 +10623,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/44x3ygu3u9mgdhiz/053126_S7v81y.mp3",
-        "plays": 18,
+        "plays": 19,
         "durationSeconds": 1876,
         "statsMatchStrategy": "media_url"
       },
@@ -10489,7 +10817,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ixhq6ebmih5tzfxz/052726_W7xe3n.mp3",
-        "plays": 21,
+        "plays": 22,
         "durationSeconds": 1871,
         "statsMatchStrategy": "media_url"
       },
@@ -11284,7 +11612,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/97x7drqkeafd6ez2/51326_W_PCbq84u.mp3",
-        "plays": 25,
+        "plays": 27,
         "durationSeconds": 1531,
         "statsMatchStrategy": "media_url"
       },
@@ -11749,7 +12077,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/k7qr6ueuf68pdhm5/50626_Wajlts.mp3",
-        "plays": 25,
+        "plays": 27,
         "durationSeconds": 1832,
         "statsMatchStrategy": "media_url"
       },
@@ -12429,7 +12757,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/g2vi5vn9p7a9mzqs/42926_W_PCa0hzm.mp3",
-        "plays": 33,
+        "plays": 34,
         "durationSeconds": 1775,
         "statsMatchStrategy": "media_url"
       },
@@ -12712,7 +13040,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8wjwp38qj5wj6ph5/42626_S_PC78jah.mp3",
-        "plays": 75,
+        "plays": 76,
         "durationSeconds": 2159,
         "statsMatchStrategy": "media_url"
       },
@@ -13390,7 +13718,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ibwgg4ipp5drjk33/412_S_PC935iv.mp3",
-        "plays": 33,
+        "plays": 34,
         "durationSeconds": 2255,
         "statsMatchStrategy": "media_url"
       },
@@ -13528,7 +13856,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/gnz7sthiniv3cnvc/408_W_Audioabqf1.mp3",
-        "plays": 39,
+        "plays": 40,
         "durationSeconds": 2010,
         "statsMatchStrategy": "media_url"
       },
@@ -13662,7 +13990,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/cehkc42vzrq4e7dg/01_Romans_12_1-2_The_Impact_of_the_Gospel_Pt_18f2z6.mp3",
-        "plays": 55,
+        "plays": 56,
         "durationSeconds": 1812,
         "statsMatchStrategy": "media_url"
       },
