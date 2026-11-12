@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-12T00:56:04.925Z",
+  "generatedAt": "2026-11-12T00:59:59.053Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 192,
     "archiveItems": 192,
     "videoMatchedItems": 184,
-    "transcriptMatchedItems": 58,
-    "quoteCandidateCount": 4337
+    "transcriptMatchedItems": 59,
+    "quoteCandidateCount": 4412
   },
   "totals": {
     "audioPlaysTotal": 6507,
@@ -609,7 +609,7 @@
           "Luke 16:31",
           "Mark 9:48"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -672,16 +672,27 @@
         "day": 4
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-11-04.srt",
+            "cleanFile": "transcripts_clean/en/2026-11-04_the-tribulation-pt-17.srt",
+            "displayFile": "transcripts_display/en/2026-11-04_the-tribulation-pt-17.srt",
+            "jsonFile": "data/transcripts/en/2026-11-04_the-tribulation-pt-17.json",
+            "displayJsonFile": "data/transcripts/en/2026-11-04_the-tribulation-pt-17.display.json",
+            "segmentCount": 659,
+            "displaySegmentCount": 583
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-11-04.srt",
+        "cleanFile": "transcripts_clean/en/2026-11-04_the-tribulation-pt-17.srt",
+        "displayFile": "transcripts_display/en/2026-11-04_the-tribulation-pt-17.srt",
+        "jsonFile": "data/transcripts/en/2026-11-04_the-tribulation-pt-17.json",
+        "displayJsonFile": "data/transcripts/en/2026-11-04_the-tribulation-pt-17.display.json",
+        "segmentCount": 659,
+        "displaySegmentCount": 583
       },
       "audio": {
         "hasAudio": true,
