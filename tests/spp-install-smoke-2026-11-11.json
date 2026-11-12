@@ -1,0 +1,14 @@
+{
+  "testType": "CGBC_SPP_DIRECT_INSTALL_SMOKE",
+  "testDate": "2026-11-11",
+  "testOnly": true,
+  "sermonRecord": false,
+  "productionData": false,
+  "note": "Isolated GitHub install capability test. No scripture, sermon, quote curation, or Pastor Jake commentary data.",
+  "targets": [
+    "knowledge/<year>/<sermon>.json",
+    "config/quote-curation.json",
+    "knowledge/shared/CGBC_JAKE_PASSAGE_COMMENTARY_REGISTRY.json"
+  ],
+  "resultExpectation": "File can be created and read back on isolated branch; no production file changes."
+}
