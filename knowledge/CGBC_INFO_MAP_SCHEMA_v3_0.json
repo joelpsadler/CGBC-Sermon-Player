@@ -20,7 +20,6 @@
     "nodes",
     "passageResearch",
     "discover",
-    "authorCorpus",
     "search",
     "provenance",
     "editorialFlags",
@@ -148,7 +147,9 @@
       }
     },
     "authorCorpus": {
-      "$ref": "#/$defs/authorCorpus"
+      "$ref": "#/$defs/authorCorpus",
+      "deprecated": true,
+      "description": "Legacy-only optional compatibility field. Not generated for new SPP sermon records; Pastor Jake Commentary is a derived projection from the canonical sermon record."
     },
     "search": {
       "type": "object",
@@ -1130,7 +1131,6 @@
               "mapFeatureRefs",
               "sourceEvidenceRefs",
               "relatedStudy",
-              "authorResearch",
               "reviewGates",
               "display"
             ],
@@ -1760,7 +1760,9 @@
                   "privateContentStoredExternally": {
                     "type": "boolean"
                   }
-                }
+                },
+                "deprecated": true,
+                "description": "Legacy-only optional compatibility field. Not generated for new SPP passage records."
               },
               "reviewGates": {
                 "type": "array",
