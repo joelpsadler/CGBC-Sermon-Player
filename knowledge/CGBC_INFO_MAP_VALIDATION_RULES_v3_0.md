@@ -47,7 +47,7 @@ Machine-readable JSON Schema and these semantic rules are complementary. The sch
 - **V3.0-053** Doctrine taxonomy and concept registries classify meaning; neither is independent evidence that Jake taught a claim.
 
 ## G. Passage research and SPP compatibility profile
-- **V3.0-060** `passageResearch` implements the substantive SPP v1.1.2 research record requirements inside the canonical record: Jake evidence, independent literary/original-language study, commentary witnesses, entities/context/maps, evidence refs, Related Study, Author Research lane/status, review gates, and display policy.
+- **V3.0-060** `passageResearch` retains Jake evidence, independent literary/original-language study, commentary witnesses, entities/context/maps, evidence refs, Related Study, review gates, and display policy in the canonical record. Legacy `authorResearch` is optional and not generated for new SPP records.
 - **V3.0-061** The 3.0 embedded profile intentionally removes the v1.1.2 `baselineInfoMapBlob` dependency because a fresh rebaseline does not treat the legacy knowledge JSON as its construction scaffold.
 - **V3.0-062** Materially interpreted/explained/applied passages receive full research. Passing citations may receive lighter treatment. Never fabricate a controlling Jake interpretation where the sermon supplies none.
 - **V3.0-063** Jake-facing interpretation leads. Independent disputes/qualifications may be deeper but must not obscure what Jake explicitly taught.
@@ -88,10 +88,10 @@ Machine-readable JSON Schema and these semantic rules are complementary. The sch
 - **V3.0-120** Related Study requires a useful question, typed destination and fallback summary. Valid destinations follow the SPP passage research contract.
 - **V3.0-121** A destination may exist before a dedicated UI screen. The canonical typed reference and fallback are sufficient; UI implementation is not a research blocker.
 
-## N. Author Corpus and commissioned research
-- **V3.0-130** Public sermon JSON contains no confidential commissioned brief content. `authorCorpus.privateContentIncluded` must be false.
-- **V3.0-131** Author Research Brief, Jake Draft Synthesis and Jake Approved/Published remain distinct adoption states. Independent research becomes Jake-authored material only through a later adoption act.
-- **V3.0-132** Public-safe references may point to private corpus material without exposing private bytes.
+## N. Commissioned Pastor Jake Scripture Commentary and legacy compatibility
+- **V3.0-130** New SPP sermon JSON does not generate `authorCorpus` or passage `authorResearch`. Both are optional legacy compatibility fields, not mandatory output requirements. Confidential source/preparation content remains private.
+- **V3.0-131** Commissioned Pastor Jake Scripture Commentary is a passage-indexed derivative of the one canonical Info Map 3.0 record, with supporting Jake evidence, source links and internally preserved authorship/provenance. Commission does not attest historical speech or later personal adoption/publication.
+- **V3.0-132** Existing records with `authorCorpus` or `authorResearch` remain schema-compatible for legacy reading. New records do not generate separate weekly author-work/corpus records. Independently researched material is not retroactively attributed to Jake's historical preaching.
 
 ## O. Quote curation authority
 - **V3.0-140** `config/quote-curation.json` is the owner-curation source of truth for reviewed/Featured/Approved/Rejected status.
@@ -100,7 +100,7 @@ Machine-readable JSON Schema and these semantic rules are complementary. The sch
 - **V3.0-143** Rebuilding sermon knowledge must not rewrite quote-curation decisions.
 
 ## P. Discover, Search, and projections
-- **V3.0-150** Discover, Deep Dive, Search, maps and Author Corpus are projections from the same canonical sermon meaning/evidence. They must not create a competing knowledge store.
+- **V3.0-150** Discover, Deep Dive, Search, maps and commissioned Pastor Jake Scripture Commentary are projections from the same canonical sermon meaning/evidence. They must not create a competing knowledge store.
 - **V3.0-151** Discover answers resolve to source-grounded nodes/passage evidence. Generated questions remain labeled analysis.
 - **V3.0-152** Literal transcript occurrence stays in transcript/search indexes. Do not inflate the semantic graph by turning every spoken word into a concept.
 
