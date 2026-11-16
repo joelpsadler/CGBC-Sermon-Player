@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "sotw-jake-canonical-source-catalog-v1",
+  "status": "CGBC_OWNER_AUTHORIZED_COMMISSIONED_COMMENTARY",
+  "description": "Translation-neutral Jacob Lannom commentary catalog. The original source record and cumulative current commentary are housed in the SOTW author namespace.",
+  "sourceRepository": "SOTW-Historical-Commentaries/historical-commentary-resources",
+  "sourceBranch": "main",
+  "sources": [
+    {
+      "sermonId": "media-daqi89",
+      "path": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceSHA256": "fd4383e39a07c81b81449fdd55642516b19171a215d31dffe587809b922e6cee",
+      "status": "CGBC_OWNER_AUTHORIZED_COMMISSIONED_SYNTHESIS"
+    }
+  ],
+  "scopePolicy": "Canonical OSIS scope keys apply unchanged to ASV1901, KJV1769, BSB, and Webster1833; Bible text lives in each edition, not here.",
+  "rightsPolicy": "Preserve original sermon occasions, provenance, and commentary revision history internally. Display author as Jacob Lannom.",
+  "displayAuthor": "Jacob Lannom",
+  "sourceMode": "SOTW_LOCAL",
+  "authorId": "jacob-lannom",
+  "coveragePath": "api/jacob-lannom/v1/coverage.json",
+  "currentCommentaryPath": "api/jacob-lannom/v1/current-commentary.json"
+}

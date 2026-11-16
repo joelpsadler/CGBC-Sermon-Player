@@ -1,0 +1,1981 @@
+{
+  "buildProvenance": {
+    "buildMode": "FRESH_REBASELINE",
+    "builtAt": "2026-11-15T23:50:00Z",
+    "freshEvidenceAttestation": {
+      "independentInterpretationRecordedBeforeCommentary": true,
+      "priorGeneratedResearchExcluded": true,
+      "qaComparedOnlyAfterFreeze": true
+    },
+    "githubMain": "500ccd5865c27dea830e8079660dad982e1e4520",
+    "governingReferences": [
+      "00_START_HERE.md",
+      "SPP_WEEKLY_EXECUTION_GATES.md",
+      "SPP_OPERATING_STANDARD.md"
+    ],
+    "researchStandard": "SPP_SINGLE_PASS",
+    "validationStatus": "PASSED",
+    "sourcePackageSha256": "c0b6b65b7feb3075767120523b892891b3c01d2511d797db86ed773cfc605d02",
+    "researchStandardVersion": "REV6 nine-requirement Phase A locked handoff",
+    "sourceLocks": [
+      "ORIGINAL_SRT:sha256:837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+      "PREPARED_LOGOS_NOTES_PDF:sha256:2fba5726c80577b0be063774680942f6a2e958e5504f1ccd1c4860d608f8619c"
+    ],
+    "notes": "No Phase B research retrieval; source-locked from Phase A. Chapters based on SRT clock, real media clock not independently verified."
+  },
+  "conceptRegistryRef": {
+    "path": "knowledge/CGBC_CONCEPT_REGISTRY_v2.json",
+    "registryStateAtBuild": "ACTIVE",
+    "registryVersion": "2.0",
+    "schemaPath": "knowledge/CGBC_CONCEPT_REGISTRY_SCHEMA_v2.json",
+    "registrySha256": "e1408dbcfe564940df22da12838d3ca230ebc0b98c527d76d08fe12f34295a34"
+  },
+  "discover": [
+    {
+      "id": "media-daqi89.discover.01",
+      "question": "Why does Acts 2 matter for church membership?",
+      "answer": "Acts 2 shows believers receiving the Gospel, being baptized, and entering an identifiable worshiping community. It does not specify every modern administrative form.",
+      "nodeRefs": [
+        "media-daqi89.n003"
+      ],
+      "scripture": [
+        "Acts 2:41"
+      ],
+      "start": 675.966
+    },
+    {
+      "id": "media-daqi89.discover.02",
+      "question": "Who is responsible for serving in the church?",
+      "answer": "Leaders equip the saints, and each member has a meaningful part in building up the body in love.",
+      "nodeRefs": [
+        "media-daqi89.n006"
+      ],
+      "scripture": [
+        "Ephesians 4:11-16"
+      ],
+      "start": 1158.183
+    },
+    {
+      "id": "media-daqi89.discover.03",
+      "question": "Where does correction belong?",
+      "answer": "1 Corinthians 5 sets a responsibility within the believing community; Galatians 6:1 directs us to pursue restoration gently.",
+      "nodeRefs": [
+        "media-daqi89.n007"
+      ],
+      "scripture": [
+        "1 Corinthians 5:12-13"
+      ],
+      "start": 1390.799
+    },
+    {
+      "id": "media-daqi89.discover.04",
+      "question": "What is the pastor’s calling toward the flock?",
+      "answer": "Hebrews 13:17 pictures leaders watching over souls under accountability to God; local responsibility is an application of that relationship.",
+      "nodeRefs": [
+        "media-daqi89.n005"
+      ],
+      "scripture": [
+        "Hebrews 13:17"
+      ],
+      "start": 1014.483
+    }
+  ],
+  "editorialFlags": [
+    "QUALIFIED_ACTS_NOT_MODERN_MEMBERSHIP_ROLL",
+    "BAPTISM_MODE_INTERPRETATION_DISPUTED_IN_HISTORICAL_COMPARISON",
+    "ORIGINAL_LANGUAGE_MORPHOLOGY_NOT_IN_PINNED_PHASE_A",
+    "SUNDAY_SLIDES_NOT_SUPPLIED",
+    "SRT_TO_MEDIA_CLOCK_UNVERIFIED",
+    "THIRD_PARTY_GOTQUESTIONS_TEXT_NOT_REPUBLISHED",
+    "NASB95_ZERO_VERSES_REPRODUCED",
+    "FUTURE_CHAPTER_INGEST_NOT_INSTALLED",
+    "SOTW_V3_HISTORICAL_LAYER_STAGING_ONLY"
+  ],
+  "generatedAt": "2026-11-15T23:50:00Z",
+  "implementation": {
+    "canonicalPath": "knowledge/2026/2026-11-01_why-membership-matters.json",
+    "schemaPath": "knowledge/CGBC_INFO_MAP_SCHEMA_v3_0.json",
+    "sourceArchivePath": "Sermon Source Archive/2026/11_01_26/",
+    "validationRulesPath": "knowledge/CGBC_INFO_MAP_VALIDATION_RULES_v3_0.md"
+  },
+  "nodes": [
+    {
+      "id": "media-daqi89.n002",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "The Spirit Forms a Witnessing Community",
+      "summary": "When we read Acts 2, I want us to see more than a remarkable day at Pentecost. Jesus promised His disciples power to be His witnesses, and the Holy Spirit enabled them to declare the good news so that people from different places heard in their own languages. Peter did not stand up to build a movement around himself. He preached Jesus, and his hearers were confronted with a response. We are still here today because the Gospel went out beyond Jerusalem. A faithful church keeps Christ and His Word at the center and never forgets that the Spirit's work is seen in people receiving the message and living together as believers.",
+      "start": 394.199,
+      "end": 610.566,
+      "segmentIndexes": [
+        147,
+        190,
+        227
+      ],
+      "scripture": [
+        "Acts 2:1-13"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "Acts 2:1-13",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n003",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Believers Are Added to the Body",
+      "summary": "I often hear the question, 'Why does church membership matter if the Bible never gives us a modern membership form?' I want us to notice the people who received Peter's preaching in Acts 2. They believed the message of Jesus Christ, were baptized, and were added to an identifiable body. I believe that gives us a strong pattern for believers who are not content simply to attend anonymously. Our salvation is in Christ, not in a church roll; baptism follows faith as public obedience. I teach believer's baptism by immersion because it portrays our identification with Christ in His death and resurrection. We should see the church as a family we actually join, care for, and serve, while recognizing that Acts does not give us an entire modern membership policy.",
+      "start": 675.966,
+      "end": 781.566,
+      "segmentIndexes": [
+        253,
+        261,
+        278,
+        294
+      ],
+      "scripture": [
+        "Acts 2:41"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "Acts 2:41",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "connections": [
+        {
+          "type": "EXPLAINS",
+          "targetNodeRef": "media-daqi89.n002",
+          "provenance": "INDEPENDENT BIBLICAL ANALYSIS"
+        },
+        {
+          "type": "SUPPORTS",
+          "targetNodeRef": "media-daqi89.n004",
+          "provenance": "JAKE - EXISTING TEACHING SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n004",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Recognized Servants for a Real Need",
+      "summary": "When a real need arose among the widows in Acts 6, the apostles did not simply find a personality to put on a platform. They asked the church to select trustworthy men from among them so that the needs could be met and the ministry of the Word and prayer could continue. I believe leadership should come from within a body whose character and service are known. And I want to be clear: our church must never be built on the pastor's personality. The nursery worker, the greeter, the servant helping a family, and the preacher are all serving Christ in the gifts and responsibilities He has given them. A healthy church identifies, equips, and trusts its people to do the work together.",
+      "start": 814.633,
+      "end": 974.633,
+      "segmentIndexes": [
+        308,
+        315,
+        342,
+        368
+      ],
+      "scripture": [
+        "Acts 6:3"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "Acts 6:3",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "connections": [
+        {
+          "type": "SUPPORTS",
+          "targetNodeRef": "media-daqi89.n006",
+          "provenance": "JAKE - EXISTING TEACHING SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n005",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "The Flock We Have Been Called to Shepherd",
+      "summary": "Hebrews reminds us that spiritual leaders keep watch over souls and will give an account. I take that seriously. God has called me to shepherd a particular flock, and I cannot fulfill that responsibility by pretending every relationship in the world carries the same pastoral obligation. That does not mean I refuse to help a person outside our church. It means I owe faithful care, teaching, prayer, and oversight to the people entrusted to my ministry. Our members also carry a responsibility: to be equipped, to encourage one another, and to take the Gospel into their homes and workplaces. Our Good Shepherd is Christ; every under-shepherd must answer to Him.",
+      "start": 1014.483,
+      "end": 1100.633,
+      "segmentIndexes": [
+        384,
+        390,
+        404,
+        410
+      ],
+      "scripture": [
+        "Hebrews 13:17"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "Hebrews 13:17",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "connections": [
+        {
+          "type": "COMPLEMENTS",
+          "targetNodeRef": "media-daqi89.n006",
+          "provenance": "JAKE - EXISTING TEACHING SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n006",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Members Who Build One Another Up",
+      "summary": "The Lord gives leaders to equip the saints for ministry, not to make the rest of the church spectators. Ephesians 4 pictures a body held together under Christ, growing as each part does its work in love. That includes people whose ministry is never noticed from a platform. When we build one another up, speak truth in love, and use the gifts God has entrusted to us, we become stronger in our witness outside the church. I keep saying this because it matters: we do not want sitters, we want servers. Our connection to a local body should lead to real investment in people, not just having our name on a list.",
+      "start": 1158.183,
+      "end": 1313.333,
+      "segmentIndexes": [
+        433,
+        453,
+        462,
+        485
+      ],
+      "scripture": [
+        "Ephesians 4:11-16"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "Ephesians 4:11-16",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n007",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Accountability Because We Belong to One Another",
+      "summary": "Paul does not tell the church at Corinth to spend all its time condemning the world outside. He tells believers to deal honestly with serious, known sin within their own fellowship. That distinction matters. When we say that we belong to Christ and to one another, we do not get to ignore destructive conduct and pretend it has no effect on the church family. Yet accountability is not permission for pride or gossip. It means we take holiness seriously, begin with ourselves, and address real wrongdoing as people who love the church enough to pursue what is right. Being identified with a congregation gives weight to our responsibility toward one another.",
+      "start": 1390.799,
+      "end": 1594.983,
+      "segmentIndexes": [
+        517,
+        540,
+        579,
+        584
+      ],
+      "scripture": [
+        "1 Corinthians 5:12-13"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "1 Corinthians 5:12-13",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ],
+      "connections": [
+        {
+          "type": "QUALIFIES",
+          "targetNodeRef": "media-daqi89.n008",
+          "provenance": "JAKE - EXISTING TEACHING SYNTHESIS"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n008",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Correction That Aims to Restore",
+      "summary": "If a brother or sister is overtaken in a trespass, Galatians 6 calls those who are spiritual to restore that person gently while watching their own hearts. That changes the spirit in which we exercise accountability. We are not hunting for someone else's failure. We know how easily a few poor decisions can affect any one of us, and we want to bring a loved one back to health. A church family should feel the absence of those who have drifted away. We ought to pray, reach out, listen, and respond with genuine compassion, without confusing love with overlooking sin. Our goal is restoration, never the satisfaction of being right.",
+      "start": 1622.283,
+      "end": 1685.816,
+      "segmentIndexes": [
+        594,
+        596,
+        600,
+        615
+      ],
+      "scripture": [
+        "Galatians 6:1"
+      ],
+      "topics": [
+        "church membership",
+        "ecclesiology"
+      ],
+      "doctrine": [
+        "Ecclesiology"
+      ],
+      "audiences": [
+        "search",
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "teachingStance": "affirmed",
+      "scriptureCommentary": [
+        {
+          "reference": "Galatians 6:1",
+          "role": "primary-text",
+          "functions": [
+            "explanation",
+            "application"
+          ],
+          "significance": "primary"
+        }
+      ]
+    },
+    {
+      "id": "media-daqi89.n009",
+      "type": "application",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Respond to Jesus and serve His people",
+      "summary": "A church roll cannot save a person. Christ calls sinners to faith; those belonging to Him should belong actively to others through baptism, fellowship and service.",
+      "start": 1774.383,
+      "end": 1973.15,
+      "segmentIndexes": [
+        660,
+        665,
+        666,
+        692
+      ],
+      "scripture": [
+        "Acts 2:41",
+        "Ephesians 4:16"
+      ],
+      "audiences": [
+        "search",
+        "discover"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "applicationAudience": [
+        "all-listeners",
+        "believers"
+      ],
+      "applicationFunction": [
+        "invitation",
+        "exhortation"
+      ]
+    }
+  ],
+  "passageResearch": {
+    "freshEvidenceAttestation": {
+      "independentInterpretationRecordedBeforeCommentary": true,
+      "priorGeneratedResearchExcluded": true,
+      "qaComparedOnlyAfterFreeze": true
+    },
+    "localFactualRecords": [],
+    "profile": "CGBC_PASSAGE_RESEARCH_3_0",
+    "quoteCandidates": [],
+    "records": [
+      {
+        "id": "media-daqi89.passage.01",
+        "reference": "Acts 2:1-41",
+        "contextReference": "Acts 1:8 promises Spirit-empowered witness; Acts 2 records the Spirit, multilingual hearing, Peter’s sermon, response and the new community in 2:42-47.",
+        "nodeRefs": [
+          "media-daqi89.n002"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 147,
+              "start": 394.199,
+              "end": 397.199,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 190,
+              "start": 519.483,
+              "end": 522.233,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 227,
+              "start": 607.566,
+              "end": 610.566,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "The Pentecost narrative describes witness, repentance, baptism, incorporation and subsequent communal devotion; it does not prescribe every administrative practice of later congregations.",
+          "faithfulSynthesis": {
+            "text": "When we read Acts 2, I want us to see more than a remarkable day at Pentecost. Jesus promised His disciples power to be His witnesses, and the Holy Spirit enabled them to declare the good news so that people from different places heard in their own languages. Peter did not stand up to build a movement around himself. He preached Jesus, and his hearers were confronted with a response. We are still here today because the Gospel went out beyond Jerusalem. A faithful church keeps Christ and His Word at the center and never forgets that the Spirit's work is seen in people receiving the message and living together as believers.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              147,
+              190,
+              227
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Acts 1:8 promises Spirit-empowered witness; Acts 2 records the Spirit, multilingual hearing, Peter’s sermon, response and the new community in 2:42-47.",
+          "provisionalInterpretation": "The Pentecost narrative describes witness, repentance, baptism, incorporation and subsequent communal devotion; it does not prescribe every administrative practice of later congregations.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "Pentecost language phenomenon is a narrated miraculous event; do not infer an unrelated linguistic mechanism or historic membership-roll requirement."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Pentecost language phenomenon is a narrated miraculous event; do not infer an unrelated linguistic mechanism or historic membership-roll requirement.",
+            "status": "RESOLVED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": true
+        }
+      },
+      {
+        "id": "media-daqi89.passage.02",
+        "reference": "Acts 2:37-41",
+        "contextReference": "Peter’s proclamation leads hearers to conviction and a call for repentance (2:37-40), followed by baptism and the reported addition of about three thousand (2:41), then their devoted common life (2:42-47).",
+        "nodeRefs": [
+          "media-daqi89.n003"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 253,
+              "start": 675.966,
+              "end": 678.6,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 261,
+              "start": 693.066,
+              "end": 696.116,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 278,
+              "start": 743.166,
+              "end": 746.7,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 294,
+              "start": 777.966,
+              "end": 781.566,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "The passage shows welcomed baptized confessors added to a recognized Christian community. Modern membership administration and the necessity of only one baptism mode are inferential, not explicit institutional directives in this passage.",
+          "faithfulSynthesis": {
+            "text": "I often hear the question, 'Why does church membership matter if the Bible never gives us a modern membership form?' I want us to notice the people who received Peter's preaching in Acts 2. They believed the message of Jesus Christ, were baptized, and were added to an identifiable body. I believe that gives us a strong pattern for believers who are not content simply to attend anonymously. Our salvation is in Christ, not in a church roll; baptism follows faith as public obedience. I teach believer's baptism by immersion because it portrays our identification with Christ in His death and resurrection. We should see the church as a family we actually join, care for, and serve, while recognizing that Acts does not give us an entire modern membership policy.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              253,
+              261,
+              278,
+              294
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Peter’s proclamation leads hearers to conviction and a call for repentance (2:37-40), followed by baptism and the reported addition of about three thousand (2:41), then their devoted common life (2:42-47).",
+          "provisionalInterpretation": "The passage shows welcomed baptized confessors added to a recognized Christian community. Modern membership administration and the necessity of only one baptism mode are inferential, not explicit institutional directives in this passage.",
+          "evidenceSupport": "QUALIFIED",
+          "keyWords": [],
+          "textualIssues": [
+            "Jake favors believer immersion; a preparation-source βαπτίζω gloss was not independently checked against a Greek dataset. JFB quotes a different baptism-logistics view. Modern roll and universal mode claims remain qualified."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "JFB",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "0b02d409e52d5bec494655d8afef72af0329b4da",
+            "itemLocator": "sword:jfb:ACT.2.41-47:5:41596:1106",
+            "relationToJake": "differs",
+            "sourceEvidenceRef": "src-sotw-6",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "SOTW JFB Acts 2:41-47 quotes a historical counter-hypothesis about immersing 3,000 in one day. This differs from any exclusive-method proof claimed from the narrative; community addition remains supported."
+          },
+          {
+            "author": "Matthew Henry",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "57bc7fe6ef5c464fddf5eacd1304d122d5178a29",
+            "itemLocator": "sword:mhc:ACT.2.37-41:5:194405:19896",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-8",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-6",
+          "src-sotw-8"
+        ],
+        "relatedStudy": [
+          {
+            "id": "media-daqi89.related.01",
+            "question": "How does a recognized community choose servants?",
+            "destination": {
+              "type": "scripture",
+              "reference": "Acts 6:1-6"
+            },
+            "fallbackSummary": "Compare the two passages in their literary settings, preserving the sermon’s pastoral application.",
+            "sourceEvidenceRefs": [
+              "src-original-notes-1"
+            ]
+          }
+        ],
+        "reviewGates": [
+          {
+            "issue": "Jake favors believer immersion; a preparation-source βαπτίζω gloss was not independently checked against a Greek dataset. JFB quotes a different baptism-logistics view. Modern roll and universal mode claims remain qualified.",
+            "status": "QUALIFIED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "QUALIFIED",
+          "directDisplayAllowed": true
+        }
+      },
+      {
+        "id": "media-daqi89.passage.03",
+        "reference": "Acts 6:1-6",
+        "contextReference": "Acts 6:1-6 responds to unequal care for Hellenist widows; the Twelve call the congregation to identify seven qualified servants while preserving prayer and preaching.",
+        "nodeRefs": [
+          "media-daqi89.n004"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 308,
+              "start": 814.633,
+              "end": 818.35,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 315,
+              "start": 837.549,
+              "end": 840.85,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 342,
+              "start": 908.833,
+              "end": 910.983,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 368,
+              "start": 972.0,
+              "end": 974.633,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "Community participation in choosing trusted servants is explicit, but detailed modern rules for membership elections or church offices are not specified.",
+          "faithfulSynthesis": {
+            "text": "When a real need arose among the widows in Acts 6, the apostles did not simply find a personality to put on a platform. They asked the church to select trustworthy men from among them so that the needs could be met and the ministry of the Word and prayer could continue. I believe leadership should come from within a body whose character and service are known. And I want to be clear: our church must never be built on the pastor's personality. The nursery worker, the greeter, the servant helping a family, and the preacher are all serving Christ in the gifts and responsibilities He has given them. A healthy church identifies, equips, and trusts its people to do the work together.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              308,
+              315,
+              342,
+              368
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Acts 6:1-6 responds to unequal care for Hellenist widows; the Twelve call the congregation to identify seven qualified servants while preserving prayer and preaching.",
+          "provisionalInterpretation": "Community participation in choosing trusted servants is explicit, but detailed modern rules for membership elections or church offices are not specified.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "Avoid applying this passage as a universal mandate for a particular voting list or asserting the seven were explicitly called later deacons in this narrative."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "John Calvin",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "19ade7ebbc55e1f443f12d56fa3e17801221baf4",
+            "itemLocator": "sword:calvincommentaries:ACT.6.3-3:245:547646:5927",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-7",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-7"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Avoid applying this passage as a universal mandate for a particular voting list or asserting the seven were explicitly called later deacons in this narrative.",
+            "status": "RESOLVED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": true
+        }
+      },
+      {
+        "id": "media-daqi89.passage.04",
+        "reference": "Hebrews 13:17",
+        "contextReference": "Hebrews 13 includes remembrance of former leaders (13:7), instruction concerning present leaders (13:17), and greeting of leaders (13:24) within congregational exhortation.",
+        "nodeRefs": [
+          "media-daqi89.n005"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 384,
+              "start": 1014.483,
+              "end": 1018.383,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 390,
+              "start": 1038.9,
+              "end": 1042.25,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 404,
+              "start": 1075.983,
+              "end": 1079.95,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 410,
+              "start": 1098.366,
+              "end": 1100.633,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "The text teaches a real relationship of pastoral watching and corresponding obedience/accountability; applying this relationship to a locally identifiable membership is reasonable but not a written roll requirement.",
+          "faithfulSynthesis": {
+            "text": "Hebrews reminds us that spiritual leaders keep watch over souls and will give an account. I take that seriously. God has called me to shepherd a particular flock, and I cannot fulfill that responsibility by pretending every relationship in the world carries the same pastoral obligation. That does not mean I refuse to help a person outside our church. It means I owe faithful care, teaching, prayer, and oversight to the people entrusted to my ministry. Our members also carry a responsibility: to be equipped, to encourage one another, and to take the Gospel into their homes and workplaces. Our Good Shepherd is Christ; every under-shepherd must answer to Him.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              384,
+              390,
+              404,
+              410
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Hebrews 13 includes remembrance of former leaders (13:7), instruction concerning present leaders (13:17), and greeting of leaders (13:24) within congregational exhortation.",
+          "provisionalInterpretation": "The text teaches a real relationship of pastoral watching and corresponding obedience/accountability; applying this relationship to a locally identifiable membership is reasonable but not a written roll requirement.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "Pastoral scope is application rather than the verse explicitly specifying church administrative boundaries."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "JFB",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "24ea3e75de0ee5f8f868b3f2b75fbdd40fd23ff7",
+            "itemLocator": "sword:jfb:HEB.13.17-17:19:592125:4211",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-11",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-11"
+        ],
+        "relatedStudy": [
+          {
+            "id": "media-daqi89.related.02",
+            "question": "How do shepherding and every-member ministry fit together?",
+            "destination": {
+              "type": "scripture",
+              "reference": "Ephesians 4:11-16"
+            },
+            "fallbackSummary": "Compare the two passages in their literary settings, preserving the sermon’s pastoral application.",
+            "sourceEvidenceRefs": [
+              "src-original-notes-1"
+            ]
+          }
+        ],
+        "reviewGates": [
+          {
+            "issue": "Pastoral scope is application rather than the verse explicitly specifying church administrative boundaries.",
+            "status": "RESOLVED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": true
+        }
+      },
+      {
+        "id": "media-daqi89.passage.05",
+        "reference": "Ephesians 4:11-16",
+        "contextReference": "Ephesians 4:1-16 moves from unity in the one body and diverse gifts to mature ministry under Christ the head; 4:16 explicitly connects every part’s contribution with growth in love.",
+        "nodeRefs": [
+          "media-daqi89.n006"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 433,
+              "start": 1158.183,
+              "end": 1162.2,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 453,
+              "start": 1216.083,
+              "end": 1219.083,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 462,
+              "start": 1245.183,
+              "end": 1249.433,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 485,
+              "start": 1311.483,
+              "end": 1313.333,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "The text strongly grounds shared service and maturity in the gathered body. It does not mean a Christian has no duties beyond a formal congregation.",
+          "faithfulSynthesis": {
+            "text": "The Lord gives leaders to equip the saints for ministry, not to make the rest of the church spectators. Ephesians 4 pictures a body held together under Christ, growing as each part does its work in love. That includes people whose ministry is never noticed from a platform. When we build one another up, speak truth in love, and use the gifts God has entrusted to us, we become stronger in our witness outside the church. I keep saying this because it matters: we do not want sitters, we want servers. Our connection to a local body should lead to real investment in people, not just having our name on a list.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              433,
+              453,
+              462,
+              485
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Ephesians 4:1-16 moves from unity in the one body and diverse gifts to mature ministry under Christ the head; 4:16 explicitly connects every part’s contribution with growth in love.",
+          "provisionalInterpretation": "The text strongly grounds shared service and maturity in the gathered body. It does not mean a Christian has no duties beyond a formal congregation.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "Distinguish mutual ministry from a claim that church members exclusively perform all forms of Christian service."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "JFB",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "3dc83ad1114db7dfc39db9ac59ffd17685cb1de9",
+            "itemLocator": "sword:jfb:EPH.4.16-16:10:159822:1810",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-9",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-9"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Distinguish mutual ministry from a claim that church members exclusively perform all forms of Christian service.",
+            "status": "RESOLVED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": true
+        }
+      },
+      {
+        "id": "media-daqi89.passage.06",
+        "reference": "1 Corinthians 5:1-13",
+        "contextReference": "Paul addresses a specific grave incest case the Corinthians have tolerated (5:1-2), directs the church to act, and distinguishes its disciplinary responsibility for insiders from God’s judgment of outsiders (5:9-13).",
+        "nodeRefs": [
+          "media-daqi89.n007"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 517,
+              "start": 1390.799,
+              "end": 1392.9,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 540,
+              "start": 1459.683,
+              "end": 1462.683,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 579,
+              "start": 1570.45,
+              "end": 1573.083,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 584,
+              "start": 1591.633,
+              "end": 1594.983,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "Explicit inside/outside responsibility supports an identifiable fellowship; specific governance mechanisms and generic enforcement of every fault are not provided by the text.",
+          "faithfulSynthesis": {
+            "text": "Paul does not tell the church at Corinth to spend all its time condemning the world outside. He tells believers to deal honestly with serious, known sin within their own fellowship. That distinction matters. When we say that we belong to Christ and to one another, we do not get to ignore destructive conduct and pretend it has no effect on the church family. Yet accountability is not permission for pride or gossip. It means we take holiness seriously, begin with ourselves, and address real wrongdoing as people who love the church enough to pursue what is right. Being identified with a congregation gives weight to our responsibility toward one another.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              517,
+              540,
+              579,
+              584
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Paul addresses a specific grave incest case the Corinthians have tolerated (5:1-2), directs the church to act, and distinguishes its disciplinary responsibility for insiders from God’s judgment of outsiders (5:9-13).",
+          "provisionalInterpretation": "Explicit inside/outside responsibility supports an identifiable fellowship; specific governance mechanisms and generic enforcement of every fault are not provided by the text.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "Do not flatten a severe disciplinary case into indiscriminate confrontation; read with Galatians 6:1."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "John Calvin",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "264041cc8f5fef8e43090703109da4f3a6ee45bc",
+            "itemLocator": "sword:calvincommentaries:1CO.5.12-12:247:497279:1535",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-5",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          },
+          {
+            "author": "JFB",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "64db3e793317794ceabea1e9c00a1781679c1eb4",
+            "itemLocator": "sword:jfb:1CO.5.12-12:7:160249:1106",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-4",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-5",
+          "src-sotw-4"
+        ],
+        "relatedStudy": [
+          {
+            "id": "media-daqi89.related.03",
+            "question": "How does correction become gentle restoration?",
+            "destination": {
+              "type": "scripture",
+              "reference": "Galatians 6:1"
+            },
+            "fallbackSummary": "Compare the two passages in their literary settings, preserving the sermon’s pastoral application.",
+            "sourceEvidenceRefs": [
+              "src-original-notes-1"
+            ]
+          }
+        ],
+        "reviewGates": [
+          {
+            "issue": "Do not flatten a severe disciplinary case into indiscriminate confrontation; read with Galatians 6:1.",
+            "status": "RESOLVED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": true
+        }
+      },
+      {
+        "id": "media-daqi89.passage.07",
+        "reference": "Galatians 6:1",
+        "contextReference": "Galatians 6:1 follows Galatians 5’s appeal to walk by the Spirit and 5:26’s warning against conceit and provocation, then proceeds to burden-bearing in 6:2.",
+        "nodeRefs": [
+          "media-daqi89.n008"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 594,
+              "start": 1622.283,
+              "end": 1625.4,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 596,
+              "start": 1628.733,
+              "end": 1631.766,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 600,
+              "start": 1642.783,
+              "end": 1644.183,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 615,
+              "start": 1682.65,
+              "end": 1685.816,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "Restoration must be conducted in gentleness and self-examination. The passage qualifies the manner in which 1 Corinthians 5 accountability is applied.",
+          "faithfulSynthesis": {
+            "text": "If a brother or sister is overtaken in a trespass, Galatians 6 calls those who are spiritual to restore that person gently while watching their own hearts. That changes the spirit in which we exercise accountability. We are not hunting for someone else's failure. We know how easily a few poor decisions can affect any one of us, and we want to bring a loved one back to health. A church family should feel the absence of those who have drifted away. We ought to pray, reach out, listen, and respond with genuine compassion, without confusing love with overlooking sin. Our goal is restoration, never the satisfaction of being right.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              594,
+              596,
+              600,
+              615
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Galatians 6:1 follows Galatians 5’s appeal to walk by the Spirit and 5:26’s warning against conceit and provocation, then proceeds to burden-bearing in 6:2.",
+          "provisionalInterpretation": "Restoration must be conducted in gentleness and self-examination. The passage qualifies the manner in which 1 Corinthians 5 accountability is applied.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "Restoration and correction must be individualized; the text does not authorize coercion or humiliation."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "Matthew Henry",
+            "work": "SOTW indexed historical commentary",
+            "editionId": "da7ddb690133a66132fef6d33f60f4dc8a74fc24",
+            "itemLocator": "sword:mhc:GAL.6.1-10:9:204096:25080",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-10",
+            "reuseClass": "SYNTHESIS_ONLY",
+            "qualification": "Historical witness is a comparison, not doctrinal proof; no reproduced commentary text."
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-10"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Restoration and correction must be individualized; the text does not authorize coercion or humiliation.",
+            "status": "RESOLVED",
+            "action": "Preserve bound and distinguish pastoral application from express Scripture.",
+            "blocks": [
+              "none"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": true
+        }
+      }
+    ],
+    "researchStandardVersion": "SPP-1.2.0-compatible"
+  },
+  "provenance": {
+    "policy": "SEPARATE_EVIDENCE_LANES",
+    "lanes": [
+      "PASTOR - SPOKEN EXACT",
+      "PASTOR - PREPARED",
+      "JAKE - EXISTING TEACHING SYNTHESIS",
+      "INDEPENDENT BIBLICAL ANALYSIS",
+      "PASTOR RESOURCE / EXTERNAL SUPPORT",
+      "ANALYSIS - CLASSIFICATION",
+      "AUTHOR RESEARCH BRIEF"
+    ],
+    "notes": "Internal provenance distinguishes spoken SRT, prepared Logos, commissioned first-person prose and bounded independent Scripture analysis; do not assert revised prose was spoken verbatim."
+  },
+  "quoteCurationRef": {
+    "authorityPath": "config/quote-curation.json",
+    "authorityRole": "OWNER_CURATION_SOURCE_OF_TRUTH",
+    "policy": "Reviewed quote status is resolved from quote curation; canonical sermon knowledge stores only source-grounded quote evidence and UNREVIEWED research candidates.",
+    "sermonStableId": "media-daqi89"
+  },
+  "recordType": "CGBC_SERMON_KNOWLEDGE",
+  "recordVersion": "3.0",
+  "schemaVersion": "3.0",
+  "search": {
+    "title": "Why Membership Matters",
+    "topics": [
+      "local church membership",
+      "church family",
+      "believers baptism",
+      "pastoral responsibility",
+      "deacons and church service",
+      "equipping the saints",
+      "accountability and restoration",
+      "unity"
+    ],
+    "aliases": [
+      "membership Sunday",
+      "church body",
+      "believer baptism",
+      "discipline",
+      "serving one another"
+    ],
+    "scriptureReferences": [
+      "Acts 1:8",
+      "Acts 2:1-4",
+      "Acts 2:5-8",
+      "Acts 2:12-13",
+      "Acts 2:37-38",
+      "Acts 2:41",
+      "Acts 6:3",
+      "Hebrews 13:17",
+      "Ephesians 4:11-16",
+      "1 Corinthians 5:1-2",
+      "1 Corinthians 5:9-13",
+      "Galatians 6:1",
+      "Philippians 2:2"
+    ],
+    "chapterIds": [
+      "media-daqi89-ch01-identity",
+      "media-daqi89-ch02-pentecost",
+      "media-daqi89-ch03-received",
+      "media-daqi89-ch04-leadership",
+      "media-daqi89-ch05-shepherd",
+      "media-daqi89-ch06-service",
+      "media-daqi89-ch07-accountability",
+      "media-daqi89-ch08-restoration",
+      "media-daqi89-ch09-call"
+    ],
+    "stableId": "media-daqi89",
+    "projectionsAreDerivative": true
+  },
+  "sermon": {
+    "bookTags": [
+      "Acts",
+      "Hebrews",
+      "Ephesians",
+      "1 Corinthians",
+      "Galatians",
+      "Philippians"
+    ],
+    "collections": [],
+    "date": "2026-11-01",
+    "durationSeconds": 1999.0,
+    "references": [
+      "Acts 1:8",
+      "Acts 2:1-4",
+      "Acts 2:5-8",
+      "Acts 2:12-13",
+      "Acts 2:37-38",
+      "Acts 2:41",
+      "Acts 6:3",
+      "Hebrews 13:17",
+      "Ephesians 4:11-16",
+      "1 Corinthians 5:1-2",
+      "1 Corinthians 5:9-13",
+      "Galatians 6:1",
+      "Philippians 2:2"
+    ],
+    "scripture": "Selected Scriptures",
+    "series": "Upon This Rock",
+    "seriesType": "Topical",
+    "sourceArchivePath": "Sermon Source Archive/2026/11_01_26/",
+    "speaker": "Jacob Lannom",
+    "stableId": "media-daqi89",
+    "study": "",
+    "subtitle": "Membership Sunday 2026",
+    "title": "Why Membership Matters",
+    "youtubeId": "o9FmFo7tPX0",
+    "rssGuid": "broJacobcedargrovebaptist.podbean.com/10536c98-0fa6-3ac9-a119-d6d519f5faf1",
+    "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/261101-working/",
+    "audioUrl": "https://mcdn.podbean.com/mf/web/5g483tv5qct8nhyi/26_11_01_S.mp3",
+    "transcriptPaths": {
+      "incomingSrt": "transcripts_incoming/2026-11-01.srt",
+      "cleanSrt": "transcripts_clean/en/2026-11-01_why-membership-matters.srt",
+      "faithfulJson": "data/transcripts/en/2026-11-01_why-membership-matters.json"
+    }
+  },
+  "slideMap": [],
+  "sources": [
+    {
+      "authorityRole": "AUTHORITATIVE_ARCHIVE",
+      "id": "src-original-srt",
+      "kind": "ORIGINAL_SRT",
+      "pathOrName": "originals/2026-11-01.srt",
+      "rightsUse": "CGBC_OWNED_OR_AUTHORIZED",
+      "sha256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+      "notes": "703 original cues; SRT clock only, no media-offset verification"
+    },
+    {
+      "authorityRole": "AUTHORITATIVE_ARCHIVE",
+      "id": "src-original-notes-1",
+      "kind": "ORIGINAL_LOGOS_NOTES",
+      "pathOrName": "originals/Why Membership Matters.pdf",
+      "rightsUse": "LINK / REFERENCE ONLY",
+      "sha256": "2fba5726c80577b0be063774680942f6a2e958e5504f1ccd1c4860d608f8619c",
+      "notes": "Private ten-page Logos preparation. Do not republish copyright-protected quotations or Lexham source text."
+    },
+    {
+      "id": "src-published-rss",
+      "kind": "PUBLISHED_RSS",
+      "pathOrName": "data/raw-rss.json",
+      "authorityRole": "METADATA_AUTHORITY",
+      "gitBlobSha": "c955dbde4ad117e7cd31612644c1bffc0a417aa0",
+      "rightsUse": "LINK / REFERENCE ONLY"
+    },
+    {
+      "id": "src-sotw-4",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-1-corinthians-2026-11-12/authors/jamieson-fausset-brown/1CO/5.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "64db3e793317794ceabea1e9c00a1781679c1eb4",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "JFB; sword:jfb:1CO.5.12-12:7:160249:1106; SUPPORTS_INTERNAL_ACCOUNTABILITY; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-5",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-1-corinthians-2026-11-12/authors/john-calvin/1CO/5.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "264041cc8f5fef8e43090703109da4f3a6ee45bc",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "John Calvin; sword:calvincommentaries:1CO.5.12-12:247:497279:1535; SUPPORTS_INSIDE_OUTSIDE_DISCIPLINE_SCOPE; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-6",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-acts-2026-11-12/authors/jamieson-fausset-brown/ACT/2.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "0b02d409e52d5bec494655d8afef72af0329b4da",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "JFB; sword:jfb:ACT.2.41-47:5:41596:1106; SUPPORTS_ADDING_COMMUNITY; QUALIFIES_EXCLUSIVE_IMMERSION_HISTORICAL_INFERENCE; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-7",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-acts-2026-11-12/authors/john-calvin/ACT/6.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "19ade7ebbc55e1f443f12d56fa3e17801221baf4",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "John Calvin; sword:calvincommentaries:ACT.6.3-3:245:547646:5927; SUPPORTS_CONGREGATIONAL_CHOICE_IN_WIDOW_SERVICE_CONTEXT; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-8",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-acts-2026-11-12/authors/matthew-henry/ACT/2.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "57bc7fe6ef5c464fddf5eacd1304d122d5178a29",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "Matthew Henry; sword:mhc:ACT.2.37-41:5:194405:19896; SUPPORTS_CONVICTION_REPENTANCE_BAPTISM_COMMUNAL_GROWTH; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-9",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-ephesians-2026-11-13/authors/jamieson-fausset-brown/EPH/4.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "3dc83ad1114db7dfc39db9ac59ffd17685cb1de9",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "JFB; sword:jfb:EPH.4.16-16:10:159822:1810; SUPPORTS_MUTUAL_PARTICIPATION_AND_GROWTH; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-10",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-galatians-2026-11-12/authors/matthew-henry/GAL/6.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "da7ddb690133a66132fef6d33f60f4dc8a74fc24",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "Matthew Henry; sword:mhc:GAL.6.1-10:9:204096:25080; SUPPORTS_GENTLE_RESTORATION_AND_SELF_EXAMINATION; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-sotw-11",
+      "kind": "SOTW_V3_HISTORICAL_COMMENTARY",
+      "pathOrName": "api/v3/snapshots/structured-hebrews-2026-11-14/authors/jamieson-fausset-brown/HEB/13.json",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "gitBlobSha": "24ea3e75de0ee5f8f868b3f2b75fbdd40fd23ff7",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "notes": "JFB; sword:jfb:HEB.13.17-17:19:592125:4211; SUPPORTS_MUTUAL_LEADER_CONGREGATION_OBLIGATIONS; NO_FORMAL_ROLL_PROOF; STAGING source, read-only comparison; no reproduced content"
+    },
+    {
+      "id": "src-quote-curation",
+      "kind": "OWNER_QUOTE_CURATION",
+      "pathOrName": "config/quote-curation.json",
+      "authorityRole": "CURATION_AUTHORITY",
+      "gitBlobSha": "552c38646c310c1a3e9703c641053352be277807",
+      "rightsUse": "CGBC_OWNED_OR_AUTHORIZED"
+    }
+  ],
+  "structure": {
+    "status": "SOURCE_EVIDENCE_ALIGNED",
+    "focus": "Why identifiable membership matters in gospel community and mutual responsibility",
+    "mainClaim": "Belonging to a local church should entail known community, accountable pastoral care, shared service, holiness and gentle restoration, not merely listing a name.",
+    "outline": [
+      {
+        "title": "The Church and the Meaning of Membership",
+        "chapterId": "media-daqi89-ch01-identity",
+        "scripture": [
+          "Acts 1:8",
+          "Acts 2:41"
+        ]
+      },
+      {
+        "title": "Pentecost and the Gospel Witness",
+        "chapterId": "media-daqi89-ch02-pentecost",
+        "scripture": [
+          "Acts 1:8",
+          "Acts 2:1-13",
+          "Acts 2:37-38"
+        ]
+      },
+      {
+        "title": "Added to the Body and Baptism",
+        "chapterId": "media-daqi89-ch03-received",
+        "scripture": [
+          "Acts 2:41",
+          "Romans 6:3-4"
+        ]
+      },
+      {
+        "title": "Choosing Leaders from Within",
+        "chapterId": "media-daqi89-ch04-leadership",
+        "scripture": [
+          "Acts 6:1-6"
+        ]
+      },
+      {
+        "title": "The Pastor and His Flock",
+        "chapterId": "media-daqi89-ch05-shepherd",
+        "scripture": [
+          "Hebrews 13:17"
+        ]
+      },
+      {
+        "title": "Every Part Serving the Body",
+        "chapterId": "media-daqi89-ch06-service",
+        "scripture": [
+          "Ephesians 4:11-16"
+        ]
+      },
+      {
+        "title": "Accountability Within the Church",
+        "chapterId": "media-daqi89-ch07-accountability",
+        "scripture": [
+          "1 Corinthians 5:1-13"
+        ]
+      },
+      {
+        "title": "Restore in Gentleness and Stand Together",
+        "chapterId": "media-daqi89-ch08-restoration",
+        "scripture": [
+          "Galatians 6:1",
+          "Philippians 2:2"
+        ]
+      },
+      {
+        "title": "A Member Who Lives the Mission",
+        "chapterId": "media-daqi89-ch09-call",
+        "scripture": [
+          "Acts 2:41",
+          "Ephesians 4:11-16"
+        ]
+      }
+    ],
+    "chapterNavigation": [
+      {
+        "id": "media-daqi89-ch01-identity",
+        "order": 1,
+        "title": "The Church and the Meaning of Membership",
+        "startCueId": "1",
+        "endCueId": "121",
+        "startSeconds": 1.266,
+        "endSeconds": 336.666,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Acts 1:8",
+          "Acts 2:41"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED"
+      },
+      {
+        "id": "media-daqi89-ch02-pentecost",
+        "order": 2,
+        "title": "Pentecost and the Gospel Witness",
+        "startCueId": "122",
+        "endCueId": "252",
+        "startSeconds": 337.083,
+        "endSeconds": 674.633,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Acts 1:8",
+          "Acts 2:1-13",
+          "Acts 2:37-38"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n002"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch03-received",
+        "order": 3,
+        "title": "Added to the Body and Baptism",
+        "startCueId": "253",
+        "endCueId": "307",
+        "startSeconds": 675.966,
+        "endSeconds": 813.416,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Acts 2:41",
+          "Romans 6:3-4"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n003"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch04-leadership",
+        "order": 4,
+        "title": "Choosing Leaders from Within",
+        "startCueId": "308",
+        "endCueId": "375",
+        "startSeconds": 814.633,
+        "endSeconds": 993.666,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Acts 6:1-6"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n004"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch05-shepherd",
+        "order": 5,
+        "title": "The Pastor and His Flock",
+        "startCueId": "376",
+        "endCueId": "432",
+        "startSeconds": 993.733,
+        "endSeconds": 1157.349,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Hebrews 13:17"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n005"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch06-service",
+        "order": 6,
+        "title": "Every Part Serving the Body",
+        "startCueId": "433",
+        "endCueId": "512",
+        "startSeconds": 1158.183,
+        "endSeconds": 1378.316,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Ephesians 4:11-16"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n006"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch07-accountability",
+        "order": 7,
+        "title": "Accountability Within the Church",
+        "startCueId": "513",
+        "endCueId": "593",
+        "startSeconds": 1378.333,
+        "endSeconds": 1622.216,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "1 Corinthians 5:1-13"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n007"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch08-restoration",
+        "order": 8,
+        "title": "Restore in Gentleness and Stand Together",
+        "startCueId": "594",
+        "endCueId": "643",
+        "startSeconds": 1622.283,
+        "endSeconds": 1772.95,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Galatians 6:1",
+          "Philippians 2:2"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n008"
+        ]
+      },
+      {
+        "id": "media-daqi89-ch09-call",
+        "order": 9,
+        "title": "A Member Who Lives the Mission",
+        "startCueId": "644",
+        "endCueId": "703",
+        "startSeconds": 1774.383,
+        "endSeconds": 1973.15,
+        "basis": "SRT_CUE_ALIGNED",
+        "scripture": [
+          "Acts 2:41",
+          "Ephesians 4:11-16"
+        ],
+        "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+        "playbackAvailability": "AVAILABLE_AUDIO_AND_VIDEO_LINKS; MEDIA_CLOCK_OFFSET_UNVERIFIED",
+        "sourceEvidence": "ORIGINAL_SRT_CUE_ALIGNED",
+        "nodeRefs": [
+          "media-daqi89.n009"
+        ]
+      }
+    ],
+    "scriptureConnections": [
+      {
+        "from": "ACT.2.41",
+        "to": "ACT.2.42-47",
+        "type": "EXPLAINS",
+        "rationale": "Those added became a devoted worshiping and teaching community; follow narrative rather than equate to modern registry",
+        "status": "SCRIPTURE_TEXT_CONTEXT"
+      },
+      {
+        "from": "ACT.2.41",
+        "to": "ACT.6.1-6",
+        "type": "SUPPORTS",
+        "rationale": "As this community expanded, trusted servants emerged from among its members",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "ACT.6.1-6",
+        "to": "EPH.4.11-16",
+        "type": "SUPPORTS",
+        "rationale": "Internal leadership and the active ministry of each part contribute to congregational service",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "HEB.13.17",
+        "to": "EPH.4.11-16",
+        "type": "COMPLEMENTS",
+        "rationale": "Shepherding oversight equips the people; ministry is not concentrated in one personality",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "1CO.5.12-13",
+        "to": "GAL.6.1",
+        "type": "QUALIFIES",
+        "rationale": "Internal accountability must be restorative, gentle and mindful of our own temptation",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "PHP.2.2",
+        "to": "EPH.4.11-16",
+        "type": "SUPPORTS",
+        "rationale": "Shared mind and love align with body unity; Philippians reference only, not extensive exposition",
+        "status": "REFERENCE_LEVEL"
+      },
+      {
+        "from": "ROM.6.3-4",
+        "to": "ACT.2.41",
+        "type": "ILLUSTRATES",
+        "rationale": "Burial-and-rising symbolism connected by Jake to the baptism he describes",
+        "status": "JAKE_ALLUSION"
+      }
+    ],
+    "teachingOccasions": [
+      {
+        "id": "media-daqi89.teaching.01",
+        "scope": "ACT.2",
+        "cueIds": [
+          147,
+          190,
+          227
+        ],
+        "source": "src-original-srt"
+      },
+      {
+        "id": "media-daqi89.teaching.02",
+        "scope": "ACT.2.37-41",
+        "cueIds": [
+          253,
+          261,
+          278,
+          294
+        ],
+        "source": "src-original-srt"
+      },
+      {
+        "id": "media-daqi89.teaching.03",
+        "scope": "ACT.6.1-6",
+        "cueIds": [
+          308,
+          315,
+          342,
+          368
+        ],
+        "source": "src-original-srt"
+      },
+      {
+        "id": "media-daqi89.teaching.04",
+        "scope": "HEB.13.17",
+        "cueIds": [
+          384,
+          390,
+          404,
+          410
+        ],
+        "source": "src-original-srt"
+      },
+      {
+        "id": "media-daqi89.teaching.05",
+        "scope": "EPH.4.11-16",
+        "cueIds": [
+          433,
+          453,
+          462,
+          485
+        ],
+        "source": "src-original-srt"
+      },
+      {
+        "id": "media-daqi89.teaching.06",
+        "scope": "1CO.5.1-13",
+        "cueIds": [
+          517,
+          540,
+          579,
+          584
+        ],
+        "source": "src-original-srt"
+      },
+      {
+        "id": "media-daqi89.teaching.07",
+        "scope": "GAL.6.1",
+        "cueIds": [
+          594,
+          596,
+          600,
+          615
+        ],
+        "source": "src-original-srt"
+      }
+    ],
+    "slideStatus": "SUNDAY_ORIGINAL_SLIDES_NOT_SUPPLIED",
+    "slideSwitchesInferred": false
+  },
+  "visualIdentity": {
+    "fallbackBranding": true,
+    "notes": "No user-supplied PPTX; normal episode artwork may be used by future reader; no fabricated slide numbers"
+  },
+  "scriptureMap": {
+    "primaryStudy": "Selected Scriptures",
+    "scopeReferences": [
+      "ACT.2",
+      "ACT.2.37-41",
+      "ACT.6.1-6",
+      "HEB.13.17",
+      "EPH.4.11-16",
+      "1CO.5.1-13",
+      "GAL.6.1"
+    ],
+    "referenceOnly": [
+      "ACT.1.8",
+      "ACT.2.42-47",
+      "ROM.6.3-4",
+      "PHP.2.2"
+    ],
+    "typedConnections": [
+      {
+        "from": "ACT.2.41",
+        "to": "ACT.2.42-47",
+        "type": "EXPLAINS",
+        "rationale": "Those added became a devoted worshiping and teaching community; follow narrative rather than equate to modern registry",
+        "status": "SCRIPTURE_TEXT_CONTEXT"
+      },
+      {
+        "from": "ACT.2.41",
+        "to": "ACT.6.1-6",
+        "type": "SUPPORTS",
+        "rationale": "As this community expanded, trusted servants emerged from among its members",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "ACT.6.1-6",
+        "to": "EPH.4.11-16",
+        "type": "SUPPORTS",
+        "rationale": "Internal leadership and the active ministry of each part contribute to congregational service",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "HEB.13.17",
+        "to": "EPH.4.11-16",
+        "type": "COMPLEMENTS",
+        "rationale": "Shepherding oversight equips the people; ministry is not concentrated in one personality",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "1CO.5.12-13",
+        "to": "GAL.6.1",
+        "type": "QUALIFIES",
+        "rationale": "Internal accountability must be restorative, gentle and mindful of our own temptation",
+        "status": "JAKE_TAUGHT"
+      },
+      {
+        "from": "PHP.2.2",
+        "to": "EPH.4.11-16",
+        "type": "SUPPORTS",
+        "rationale": "Shared mind and love align with body unity; Philippians reference only, not extensive exposition",
+        "status": "REFERENCE_LEVEL"
+      },
+      {
+        "from": "ROM.6.3-4",
+        "to": "ACT.2.41",
+        "type": "ILLUSTRATES",
+        "rationale": "Burial-and-rising symbolism connected by Jake to the baptism he describes",
+        "status": "JAKE_ALLUSION"
+      }
+    ],
+    "translationDisplay": "REFERENCE_ONLY_NO_NASB95_VERSE_TEXT"
+  },
+  "canonicalEditorial": {
+    "title": "Why Membership Matters",
+    "speaker": "Jacob Lannom",
+    "audienceSummary": "Belonging to the church means being known, serving others, submitting to pastoral care, and holding one another accountable in love. Salvation rests in Christ rather than administrative membership.",
+    "publicRights": "Only original commissioned explanatory prose and Scripture references; no NASB95 displayed verse text, no copyrighted third-party quotation."
+  },
+  "presentation": {
+    "canonicalPlayerFutureNavigation": true,
+    "commentaryLinksPolicy": "NO_AUDIO_VIDEO_CUE_LINKS_WITH_SYNTHESIS",
+    "sourceSpotcheckLedger": "SOTW/api/jacob-lannom/v1/coverage.json; separate viewer",
+    "publicAuthor": "Jacob Lannom",
+    "studyNotesVisible": false
+  },
+  "authorCorpus": {
+    "privateContentIncluded": false,
+    "publicSafeOnly": true,
+    "references": [
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#ACT.2",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      },
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#ACT.2.37-41",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      },
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#ACT.6.1-6",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      },
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#HEB.13.17",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      },
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#EPH.4.11-16",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      },
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#1CO.5.1-13",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      },
+      {
+        "ref": "SOTW/api/jacob-lannom/v1/current-commentary.json#GAL.6.1",
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "status": "STAGED_NOT_INSTALLED"
+      }
+    ]
+  }
+}

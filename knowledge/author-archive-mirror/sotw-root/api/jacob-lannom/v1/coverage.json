@@ -1,0 +1,468 @@
+{
+  "schemaVersion": "jacob-commentary-coverage-v1",
+  "authorId": "jacob-lannom",
+  "displayName": "Jacob Lannom",
+  "translationIndependent": true,
+  "scriptureIdScheme": "SOTW_CANONICAL_OSIS_SCOPE",
+  "lastReconciledOn": "2026-11-16",
+  "status": "CURRENT",
+  "sourceRecords": [
+    {
+      "sermonId": "media-daqi89",
+      "sermonDate": "2026-11-01",
+      "sermonTitle": "Why Membership Matters",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceSHA256": "fd4383e39a07c81b81449fdd55642516b19171a215d31dffe587809b922e6cee"
+    }
+  ],
+  "summary": {
+    "bookIntroductions": 1,
+    "scopedEntries": 7,
+    "sermonOccasions": 1,
+    "scriptureConnections": 6
+  },
+  "entries": [
+    {
+      "scopeKey": "ACT.2",
+      "scopeType": "CHAPTER_INTRODUCTION",
+      "title": "Acts 2: The Spirit, the Gospel, and a Devoted Church",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.01",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n002",
+      "sourceCueIds": [
+        147,
+        190,
+        227
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=ACT&scope=ACT.2",
+      "evidenceMoments": [
+        {
+          "cueId": "147",
+          "startSeconds": 394.199,
+          "endSeconds": 397.199,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 394,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=394&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=394&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "190",
+          "startSeconds": 519.483,
+          "endSeconds": 522.233,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 519,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=519&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=519&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "227",
+          "startSeconds": 607.566,
+          "endSeconds": 610.566,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 607,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=607&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=607&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "ACT.2.37-41",
+      "scopeType": "PASSAGE",
+      "title": "Acts 2:37–41: Received, Baptized, and Added",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.02",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n003",
+      "sourceCueIds": [
+        253,
+        261,
+        278,
+        294
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=ACT&scope=ACT.2.37-41",
+      "evidenceMoments": [
+        {
+          "cueId": "253",
+          "startSeconds": 675.966,
+          "endSeconds": 678.6,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 675,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=675&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=675&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "261",
+          "startSeconds": 693.066,
+          "endSeconds": 696.116,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 693,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=693&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=693&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "278",
+          "startSeconds": 743.166,
+          "endSeconds": 746.7,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 743,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=743&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=743&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "294",
+          "startSeconds": 777.966,
+          "endSeconds": 781.566,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 777,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=777&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=777&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "ACT.6.1-6",
+      "scopeType": "PASSAGE",
+      "title": "Acts 6:1–6: Leaders from Among the Body",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.03",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n004",
+      "sourceCueIds": [
+        308,
+        315,
+        342,
+        368
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=ACT&scope=ACT.6.1-6",
+      "evidenceMoments": [
+        {
+          "cueId": "308",
+          "startSeconds": 814.633,
+          "endSeconds": 818.35,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 814,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=814&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=814&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "315",
+          "startSeconds": 837.549,
+          "endSeconds": 840.85,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 837,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=837&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=837&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "342",
+          "startSeconds": 908.833,
+          "endSeconds": 910.983,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 908,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=908&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=908&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "368",
+          "startSeconds": 972.0,
+          "endSeconds": 974.633,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 972,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=972&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=972&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "HEB.13.17",
+      "scopeType": "PASSAGE",
+      "title": "Hebrews 13:17: A Shepherd’s Responsibility",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.04",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n005",
+      "sourceCueIds": [
+        384,
+        390,
+        404,
+        410
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=HEB&scope=HEB.13.17",
+      "evidenceMoments": [
+        {
+          "cueId": "384",
+          "startSeconds": 1014.483,
+          "endSeconds": 1018.383,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1014,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1014&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1014&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "390",
+          "startSeconds": 1038.9,
+          "endSeconds": 1042.25,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1038,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1038&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1038&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "404",
+          "startSeconds": 1075.983,
+          "endSeconds": 1079.95,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1075,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1075&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1075&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "410",
+          "startSeconds": 1098.366,
+          "endSeconds": 1100.633,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1098,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1098&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1098&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "EPH.4.11-16",
+      "scopeType": "PASSAGE",
+      "title": "Ephesians 4:11–16: Every Part Works",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.05",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n006",
+      "sourceCueIds": [
+        433,
+        453,
+        462,
+        485
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=EPH&scope=EPH.4.11-16",
+      "evidenceMoments": [
+        {
+          "cueId": "433",
+          "startSeconds": 1158.183,
+          "endSeconds": 1162.2,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1158,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1158&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1158&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "453",
+          "startSeconds": 1216.083,
+          "endSeconds": 1219.083,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1216,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1216&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1216&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "462",
+          "startSeconds": 1245.183,
+          "endSeconds": 1249.433,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1245,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1245&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1245&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "485",
+          "startSeconds": 1311.483,
+          "endSeconds": 1313.333,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1311,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1311&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1311&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "1CO.5.1-13",
+      "scopeType": "PASSAGE",
+      "title": "1 Corinthians 5:1–13: Inside and Outside",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.06",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n007",
+      "sourceCueIds": [
+        517,
+        540,
+        579,
+        584
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=1CO&scope=1CO.5.1-13",
+      "evidenceMoments": [
+        {
+          "cueId": "517",
+          "startSeconds": 1390.799,
+          "endSeconds": 1392.9,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1390,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1390&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1390&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "540",
+          "startSeconds": 1459.683,
+          "endSeconds": 1462.683,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1459,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1459&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1459&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "579",
+          "startSeconds": 1570.45,
+          "endSeconds": 1573.083,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1570,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1570&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1570&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "584",
+          "startSeconds": 1591.633,
+          "endSeconds": 1594.983,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1591,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1591&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1591&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "GAL.6.1",
+      "scopeType": "PASSAGE",
+      "title": "Galatians 6:1: Restore with Gentleness",
+      "sermonDate": "2026-11-01",
+      "sermonId": "media-daqi89",
+      "teachingOccasionId": "media-daqi89.teaching.07",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sourceNodeRef": "media-daqi89.n008",
+      "sourceCueIds": [
+        594,
+        596,
+        600,
+        615
+      ],
+      "availability": "CURRENT",
+      "readerUrl": "review-jake-scripture.html?book=GAL&scope=GAL.6.1",
+      "evidenceMoments": [
+        {
+          "cueId": "594",
+          "startSeconds": 1622.283,
+          "endSeconds": 1625.4,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1622,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1622&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1622&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "596",
+          "startSeconds": 1628.733,
+          "endSeconds": 1631.766,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1628,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1628&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1628&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "600",
+          "startSeconds": 1642.783,
+          "endSeconds": 1644.183,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1642,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1642&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1642&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        },
+        {
+          "cueId": "615",
+          "startSeconds": 1682.65,
+          "endSeconds": 1685.816,
+          "originalSourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1682,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1682&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1682&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Coverage index is a review and navigation projection, not another canonical sermon record. Includes book, chapter and passage scopes. KJV, ASV and future translations share identical scope keys.",
+    "New coverage cues are spoken SRT spot checks, not verbatim verification of composed commentary; media sync not independently verified.",
+    "Owner withdrew previously staged Romans 12:17 generated commentary for reprocessing. No corresponding active Romans source, coverage or published prose remains. Prior Git history is recoverable.",
+    "Scope IDs are translation neutral for ASV1901, KJV1769, BSB and Webster1833. Reader integration is edition-specific and must be verified separately."
+  ]
+}

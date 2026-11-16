@@ -52,6 +52,15 @@
       "eventType": "INITIAL_ALLOCATION",
       "translation": "NASB1995",
       "accountingNote": "35 distinct verses allocated once from original sermon slides, not republished in new research datasets."
+    },
+    {
+      "eventId": "nasb95-zero-text-publication-media-daqi89-20261116",
+      "sermonStableId": "media-daqi89",
+      "verseIds": [],
+      "verseUnits": 0,
+      "eventType": "PUBLICATION_ZERO_NASB95_VERSE_TEXT",
+      "translation": "NASB1995",
+      "accountingNote": "Membership Sunday production record contains references and analysis but reproduces zero NASB95 Scripture verse texts. Existing 35-unit Good Gifts allocation is unchanged."
     }
   ],
   "allocationPolicy": {

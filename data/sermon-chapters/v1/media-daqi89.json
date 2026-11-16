@@ -1,0 +1,401 @@
+{
+  "adapter": {
+    "playerBaseUrl": null,
+    "resolutionStatus": "ADAPTER_NOT_VERIFIED",
+    "verifiedPlayerSourceBlob": null
+  },
+  "chapters": [
+    {
+      "endCueId": "121",
+      "endSeconds": 336.666,
+      "id": "media-daqi89-ch01-identity",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch01-identity",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch01-identity",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [],
+      "order": 1,
+      "scriptureScopes": [
+        "Acts 1:8",
+        "Acts 2:41"
+      ],
+      "startCueId": "1",
+      "startSeconds": 1.266,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The Church and the Meaning of Membership"
+    },
+    {
+      "endCueId": "252",
+      "endSeconds": 674.633,
+      "id": "media-daqi89-ch02-pentecost",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch02-pentecost",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 337.083,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch02-pentecost",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 337.083,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n002"
+      ],
+      "order": 2,
+      "scriptureScopes": [
+        "Acts 1:8",
+        "Acts 2:1-13",
+        "Acts 2:37-38"
+      ],
+      "startCueId": "122",
+      "startSeconds": 337.083,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Pentecost and the Gospel Witness"
+    },
+    {
+      "endCueId": "307",
+      "endSeconds": 813.416,
+      "id": "media-daqi89-ch03-received",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch03-received",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 675.966,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch03-received",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 675.966,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n003"
+      ],
+      "order": 3,
+      "scriptureScopes": [
+        "Acts 2:41",
+        "Romans 6:3-4"
+      ],
+      "startCueId": "253",
+      "startSeconds": 675.966,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Added to the Body and Baptism"
+    },
+    {
+      "endCueId": "375",
+      "endSeconds": 993.666,
+      "id": "media-daqi89-ch04-leadership",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch04-leadership",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 814.633,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch04-leadership",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 814.633,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n004"
+      ],
+      "order": 4,
+      "scriptureScopes": [
+        "Acts 6:1-6"
+      ],
+      "startCueId": "308",
+      "startSeconds": 814.633,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Choosing Leaders from Within"
+    },
+    {
+      "endCueId": "432",
+      "endSeconds": 1157.349,
+      "id": "media-daqi89-ch05-shepherd",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch05-shepherd",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 993.733,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch05-shepherd",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 993.733,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n005"
+      ],
+      "order": 5,
+      "scriptureScopes": [
+        "Hebrews 13:17"
+      ],
+      "startCueId": "376",
+      "startSeconds": 993.733,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The Pastor and His Flock"
+    },
+    {
+      "endCueId": "512",
+      "endSeconds": 1378.316,
+      "id": "media-daqi89-ch06-service",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch06-service",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 1158.183,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch06-service",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 1158.183,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n006"
+      ],
+      "order": 6,
+      "scriptureScopes": [
+        "Ephesians 4:11-16"
+      ],
+      "startCueId": "433",
+      "startSeconds": 1158.183,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Every Part Serving the Body"
+    },
+    {
+      "endCueId": "593",
+      "endSeconds": 1622.216,
+      "id": "media-daqi89-ch07-accountability",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch07-accountability",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 1378.333,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch07-accountability",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 1378.333,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n007"
+      ],
+      "order": 7,
+      "scriptureScopes": [
+        "1 Corinthians 5:1-13"
+      ],
+      "startCueId": "513",
+      "startSeconds": 1378.333,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Accountability Within the Church"
+    },
+    {
+      "endCueId": "643",
+      "endSeconds": 1772.95,
+      "id": "media-daqi89-ch08-restoration",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch08-restoration",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 1622.283,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch08-restoration",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 1622.283,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n008"
+      ],
+      "order": 8,
+      "scriptureScopes": [
+        "Galatians 6:1",
+        "Philippians 2:2"
+      ],
+      "startCueId": "594",
+      "startSeconds": 1622.283,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Restore in Gentleness and Stand Together"
+    },
+    {
+      "endCueId": "703",
+      "endSeconds": 1973.15,
+      "id": "media-daqi89-ch09-call",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch09-call",
+            "preferredMedium": "audio",
+            "stableId": "media-daqi89",
+            "startSeconds": 1774.383,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-daqi89-ch09-call",
+            "preferredMedium": "video",
+            "stableId": "media-daqi89",
+            "startSeconds": 1774.383,
+            "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-daqi89.n009"
+      ],
+      "order": 9,
+      "scriptureScopes": [
+        "Acts 2:41",
+        "Ephesians 4:11-16"
+      ],
+      "startCueId": "644",
+      "startSeconds": 1774.383,
+      "syncStatus": "SRT_CLOCK_ONLY_MEDIA_CLOCK_UNVERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "A Member Who Lives the Mission"
+    }
+  ],
+  "kind": "DERIVED_SERMON_CHAPTER_NAVIGATION_NOT_CANONICAL_MEANING",
+  "media": {
+    "audioAvailable": true,
+    "audioSourceUrl": "https://mcdn.podbean.com/mf/web/5g483tv5qct8nhyi/26_11_01_S.mp3",
+    "durationSeconds": 1999.0,
+    "videoAvailable": true,
+    "videoSourceUrl": null,
+    "youtubeId": "o9FmFo7tPX0"
+  },
+  "schemaVersion": "cgbc-sermon-chapter-markers-v1",
+  "source": {
+    "canonicalInfoMapPath": "knowledge/2026/2026-11-01_why-membership-matters.json",
+    "canonicalInfoMapSha256": "24bc1437309247316419c22cfbc075d2c1f01ca380637f87b338b1d847c3bb85",
+    "canonicalSourceRepository": "joelpsadler/CGBC-Sermon-Player",
+    "sermonDate": "2026-11-01",
+    "sermonStableId": "media-daqi89",
+    "sourceTimeClock": "ORIGINAL_SRT"
+  },
+  "status": "EXPORT_READY_PLAYER_INTEGRATION_NOT_VERIFIED"
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "jacob-translation-neutral-route-v1",
+  "authorId": "jacob-lannom",
+  "displayName": "Jacob Lannom",
+  "scopeIdScheme": "SOTW_CANONICAL_OSIS_SCOPE",
+  "translationIndependent": true,
+  "supportedEditionKeys": [
+    "ASV1901",
+    "KJV1769",
+    "BSB",
+    "Webster1833"
+  ],
+  "editions": [
+    {
+      "id": "ASV1901",
+      "label": "American Standard Version (1901)"
+    },
+    {
+      "id": "KJV1769",
+      "label": "King James Version (1769)"
+    },
+    {
+      "id": "BSB",
+      "label": "Berean Standard Bible"
+    },
+    {
+      "id": "Webster1833",
+      "label": "Webster Bible (1833)"
+    }
+  ],
+  "commentaryPath": "api/jacob-lannom/v1/current-commentary.json",
+  "coveragePath": "api/jacob-lannom/v1/coverage.json",
+  "viewerPath": "review-jake-scripture.html",
+  "noBibleTextBundled": true,
+  "noSermonMediaLinksInCommentary": true,
+  "scopeKeys": [
+    "ACT.2",
+    "ACT.2.37-41",
+    "ACT.6.1-6",
+    "HEB.13.17",
+    "EPH.4.11-16",
+    "1CO.5.1-13",
+    "GAL.6.1"
+  ],
+  "note": "Clients resolve incoming book/chapter/verse to the same canonical OSIS scope and show Jacob as an author where applicable; no per-edition commentary clones."
+}
