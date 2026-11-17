@@ -4,7 +4,7 @@
   "displayName": "Jacob Lannom",
   "translationIndependent": true,
   "scriptureIdScheme": "SOTW_CANONICAL_OSIS_SCOPE",
-  "currentRevision": 3,
+  "currentRevision": 4,
   "reconciledAt": "2026-11-16",
   "sourceRecords": [
     {
@@ -12,7 +12,7 @@
       "sermonDate": "2026-11-01",
       "sermonTitle": "Why Membership Matters",
       "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
-      "sourceSHA256": "fd4383e39a07c81b81449fdd55642516b19171a215d31dffe587809b922e6cee"
+      "sourceSHA256": "4d034f82ae641f2416d709750677f06568a3a89c6bf3a7a0471c9d1c44a37af2"
     }
   ],
   "entries": [
@@ -52,8 +52,8 @@
       "scopeKey": "ACT.2.37-41",
       "scopeType": "PASSAGE",
       "title": "Acts 2:37–41: Received, Baptized, and Added",
-      "commentary": "I often hear the question, 'Why does church membership matter if the Bible never gives us a modern membership form?' I want us to notice the people who received Peter's preaching in Acts 2. They believed the message of Jesus Christ, were baptized, and were added to an identifiable body. I believe that gives us a strong pattern for believers who are not content simply to attend anonymously. Our salvation is in Christ, not in a church roll; baptism follows faith as public obedience. I teach believer's baptism by immersion because it portrays our identification with Christ in His death and resurrection. We should see the church as a family we actually join, care for, and serve, while recognizing that Acts does not give us an entire modern membership policy.",
-      "currentVersion": 1,
+      "commentary": "Peter proclaimed Jesus to the gathered crowd at Pentecost: the One they had rejected had been raised by God and exalted as Lord and Christ. When the hearers were pierced to the heart, they asked Peter and the other apostles what they should do. Peter called them to repent and be baptized in the name of Jesus Christ, speaking of forgiveness of sins and the gift of the Holy Spirit. Those who received his word were baptized, and Acts tells us that about three thousand people were added that day. The passage first shows the Gospel being proclaimed, believed, and answered, not a modern membership procedure. The next verses show these new believers devoted to the apostles' teaching, fellowship, the breaking of bread, and prayer.\n\nI want us to see why that matters for how we live as Christ's people. Salvation is in Jesus, never in having our name on a church roll. I teach believer's baptism as obedient public identification with Christ, and I practice immersion because it pictures burial and rising to new life; Acts 2:41 reports their baptism without describing each person's baptismal method. Those who trusted the Gospel were not left as isolated hearers: they became part of a recognizable believing community. That gives us good reason to take belonging, mutual care, and service in a local church seriously. But the account does not command our modern membership forms or spell out every local church policy. The Gospel and the people's response must remain central; the membership application follows from them.",
+      "currentVersion": 2,
       "supportingOccasions": [
         {
           "teachingOccasionId": "media-daqi89.teaching.02",
@@ -283,7 +283,20 @@
       "activeScopeCount": 7,
       "previousVersion": 2,
       "priorTextLocation": "Git history (prior SOTW commit); not active or published as commentary"
+    },
+    {
+      "revision": 4,
+      "date": "2026-11-16",
+      "status": "OWNER_AUTHORIZED_TARGETED_CORRECTION_STAGED_NOT_INSTALLED",
+      "reason": "Owner-authorized Scripture-first correction of Acts 2:37–41 portable commentary; seven active scopes retained and twenty withdrawn Romans draft scopes remain withdrawn. Preserves accepted November 16 revision 3 withdrawal.",
+      "scopeKeysModified": [
+        "ACT.2.37-41"
+      ],
+      "previousVersion": 3,
+      "sourceSermonIds": [
+        "media-daqi89"
+      ]
     }
   ],
-  "policy": "One current, translation-neutral Jacob commentary per Scripture scope. Previously generated Romans 12:17 draft withdrawn by owner pending fresh processing. Membership teaching occasions remain accepted."
+  "policy": "One current, translation-neutral Jacob commentary per Scripture scope. Owner-withdrawn Romans draft remains withdrawn pending fresh REV6 processing. Only Acts 2:37–41 commentary updated; all other six accepted membership scopes preserved."
 }
