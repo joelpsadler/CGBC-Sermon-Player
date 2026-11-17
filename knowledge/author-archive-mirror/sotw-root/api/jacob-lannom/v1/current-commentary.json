@@ -4,7 +4,7 @@
   "displayName": "Jacob Lannom",
   "translationIndependent": true,
   "scriptureIdScheme": "SOTW_CANONICAL_OSIS_SCOPE",
-  "currentRevision": 4,
+  "currentRevision": 1,
   "reconciledAt": "2026-11-16",
   "sourceRecords": [
     {
@@ -12,291 +12,262 @@
       "sermonDate": "2026-11-01",
       "sermonTitle": "Why Membership Matters",
       "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
-      "sourceSHA256": "4d034f82ae641f2416d709750677f06568a3a89c6bf3a7a0471c9d1c44a37af2"
+      "sourceSHA256": "4495e91f6e8c16f3dc308f0c570248eae83094e22e28031132a7f0850875b945"
     }
   ],
   "entries": [
     {
       "scopeKey": "ACT.2",
       "scopeType": "CHAPTER_INTRODUCTION",
-      "title": "Acts 2: The Spirit, the Gospel, and a Devoted Church",
-      "commentary": "When we read Acts 2, I want us to see more than a remarkable day at Pentecost. Jesus promised His disciples power to be His witnesses, and the Holy Spirit enabled them to declare the good news so that people from different places heard in their own languages. Peter did not stand up to build a movement around himself. He preached Jesus, and his hearers were confronted with a response. We are still here today because the Gospel went out beyond Jerusalem. A faithful church keeps Christ and His Word at the center and never forgets that the Spirit's work is seen in people receiving the message and living together as believers.",
+      "title": "Acts 2: The Spirit and a Believing Community",
+      "commentary": "Acts 2 begins with God's promise being fulfilled. Jesus had told His disciples that the Holy Spirit would empower them to be witnesses, and at Pentecost people from different places heard the mighty works of God in their own languages. Peter stood and preached Jesus Christ, His death, resurrection, and exaltation. The response that followed was not the result of a personality-driven movement. God was drawing people to the gospel, and the apostles pointed them to Christ.\n\nWe need that same center in our churches today. The church is not built on a pastor's personality, a favorite ministry, or our ability to make everything look like the earliest days in Jerusalem. Those first believers devoted themselves to the apostles' teaching, fellowship, breaking of bread, and prayer. They were joined together around Christ and His Word. Churches will face real disagreements and growing pains, just as the New Testament churches did, but we must not lose sight of the Savior, His mission, and our responsibility to one another.",
       "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.01",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.01",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n002",
+          "nodeRef": "media-daqi89.n010",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
-            147,
-            190,
-            227
+            124,
+            125,
+            126
           ],
-          "startSeconds": 394.199,
-          "endSeconds": 610.566,
+          "startSeconds": 344.233,
+          "endSeconds": 354.0,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
-      "referenceTargets": [
-        {
-          "reference": "ACT.6.1-6",
-          "type": "SUPPORTS",
-          "rationale": "As this community expanded, trusted servants emerged from among its members"
-        }
-      ]
+      "scriptureLinks": [
+        "Acts 2:1–47"
+      ],
+      "referenceTargets": []
     },
     {
       "scopeKey": "ACT.2.37-41",
       "scopeType": "PASSAGE",
-      "title": "Acts 2:37–41: Received, Baptized, and Added",
-      "commentary": "Peter proclaimed Jesus to the gathered crowd at Pentecost: the One they had rejected had been raised by God and exalted as Lord and Christ. When the hearers were pierced to the heart, they asked Peter and the other apostles what they should do. Peter called them to repent and be baptized in the name of Jesus Christ, speaking of forgiveness of sins and the gift of the Holy Spirit. Those who received his word were baptized, and Acts tells us that about three thousand people were added that day. The passage first shows the Gospel being proclaimed, believed, and answered, not a modern membership procedure. The next verses show these new believers devoted to the apostles' teaching, fellowship, the breaking of bread, and prayer.\n\nI want us to see why that matters for how we live as Christ's people. Salvation is in Jesus, never in having our name on a church roll. I teach believer's baptism as obedient public identification with Christ, and I practice immersion because it pictures burial and rising to new life; Acts 2:41 reports their baptism without describing each person's baptismal method. Those who trusted the Gospel were not left as isolated hearers: they became part of a recognizable believing community. That gives us good reason to take belonging, mutual care, and service in a local church seriously. But the account does not command our modern membership forms or spell out every local church policy. The Gospel and the people's response must remain central; the membership application follows from them.",
-      "currentVersion": 2,
+      "title": "Receiving the Word, Baptism, and Belonging",
+      "commentary": "This helps us understand why salvation and believers' baptism is the pattern of belonging to the church. We are saved by Jesus Christ, not by signing a church membership card. Baptism is the believer's public act of obedience and identification with Christ. Immersion vividly pictures our burial with Christ and our rising to walk in newness of life. Acts 2:41 gives the order of receiving the word, being baptized, and being added; it does not describe the exact procedure for every baptism.",
+      "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.02",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.02",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n003",
+          "nodeRef": "media-daqi89.n011",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
-            253,
-            261,
-            278,
-            294
+            225,
+            226,
+            227
           ],
-          "startSeconds": 675.966,
-          "endSeconds": 781.566,
+          "startSeconds": 604.683,
+          "endSeconds": 610.566,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
+      "scriptureLinks": [
+        "Acts 2:37–41"
+      ],
       "referenceTargets": [
         {
           "reference": "ACT.2.42-47",
           "type": "EXPLAINS",
-          "rationale": "Those added became a devoted worshiping and teaching community; follow narrative rather than equate to modern registry"
+          "rationale": "Those added to the community share teaching, fellowship, breaking of bread and prayers"
         },
         {
-          "reference": "ACT.6.1-6",
+          "reference": "ACT.6.1-7",
           "type": "SUPPORTS",
-          "rationale": "As this community expanded, trusted servants emerged from among its members"
+          "rationale": "Acts 6 displays a maturing and organized community with internal responsibility"
         }
       ]
     },
     {
-      "scopeKey": "ACT.6.1-6",
+      "scopeKey": "ACT.6.1-7",
       "scopeType": "PASSAGE",
-      "title": "Acts 6:1–6: Leaders from Among the Body",
-      "commentary": "When a real need arose among the widows in Acts 6, the apostles did not simply find a personality to put on a platform. They asked the church to select trustworthy men from among them so that the needs could be met and the ministry of the Word and prayer could continue. I believe leadership should come from within a body whose character and service are known. And I want to be clear: our church must never be built on the pastor's personality. The nursery worker, the greeter, the servant helping a family, and the preacher are all serving Christ in the gifts and responsibilities He has given them. A healthy church identifies, equips, and trusts its people to do the work together.",
+      "title": "Servants Chosen from Among the Church",
+      "commentary": "The church in Acts 6 was growing, but growth brought a real problem. Some widows were being overlooked in the daily distribution, and the apostles did not pretend the complaint was unimportant. They called the disciples together and directed them to select trustworthy men from among themselves, men known for good reputation, wisdom, and the Spirit's fullness. The church had people who could be recognized, entrusted with responsibility, and called to serve.\n\nNotice what this teaches us about leadership. We should not build the church around a personality, including the pastor's personality. Christ is the head of the church. Faithful leadership comes from a body of believers who know one another, recognize trustworthy servants, and take shared responsibility seriously. The apostles also protected their calling to prayer and the ministry of the Word while making sure practical care was not neglected.\n\nActs 6 does not hand every congregation a complete modern voting policy or membership form. It does give us a living picture of a church responding to needs through accountable, qualified service from within its fellowship. Our structures ought to support that biblical work. The goal is not simply to have leaders on paper; it is to be a church that cares for people in Christ's name.",
       "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.03",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.03",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n004",
+          "nodeRef": "media-daqi89.n012",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
             308,
-            315,
-            342,
-            368
+            309,
+            310
           ],
           "startSeconds": 814.633,
-          "endSeconds": 974.633,
+          "endSeconds": 822.6,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
+      "scriptureLinks": [
+        "Acts 6:1–7"
+      ],
       "referenceTargets": [
         {
           "reference": "EPH.4.11-16",
-          "type": "SUPPORTS",
-          "rationale": "Internal leadership and the active ministry of each part contribute to congregational service"
+          "type": "PARALLEL",
+          "rationale": "Recognized internal service and the equipping of all believers reinforce one another"
         }
       ]
     },
     {
       "scopeKey": "HEB.13.17",
       "scopeType": "PASSAGE",
-      "title": "Hebrews 13:17: A Shepherd’s Responsibility",
-      "commentary": "Hebrews reminds us that spiritual leaders keep watch over souls and will give an account. I take that seriously. God has called me to shepherd a particular flock, and I cannot fulfill that responsibility by pretending every relationship in the world carries the same pastoral obligation. That does not mean I refuse to help a person outside our church. It means I owe faithful care, teaching, prayer, and oversight to the people entrusted to my ministry. Our members also carry a responsibility: to be equipped, to encourage one another, and to take the Gospel into their homes and workplaces. Our Good Shepherd is Christ; every under-shepherd must answer to Him.",
+      "title": "Pastoral Watchfulness and a Recognizable Flock",
+      "commentary": "Hebrews 13:17 calls believers to respond faithfully to those who lead them, because those leaders watch over souls and will give an account. This is a massive responsibility. A pastor cannot faithfully shepherd an undefined crowd in the same personal way he shepherds the people entrusted to his care. The passage calls for both responsible leadership and a congregation willing to receive biblical guidance.\n\nThis is not permission to ignore people outside the church. Of course we should answer questions, offer help in a crisis, and share Jesus. However we must not neglect the flock we have been called to feed and lead.\n\nMembership gives practical clarity to that relationship. It helps a congregation and its leaders know who is committed to walking together, receiving care, and bearing responsibility. Our ultimate Shepherd is Jesus Christ. Every pastor serves under Him, and no leader's authority can replace the authority of His Word.",
       "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.04",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.04",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n005",
+          "nodeRef": "media-daqi89.n013",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
-            384,
-            390,
-            404,
-            410
+            378,
+            379,
+            380
           ],
-          "startSeconds": 1014.483,
-          "endSeconds": 1100.633,
+          "startSeconds": 1000.149,
+          "endSeconds": 1006.149,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
+      "scriptureLinks": [
+        "Hebrews 13:17"
+      ],
       "referenceTargets": [
         {
           "reference": "EPH.4.11-16",
-          "type": "COMPLEMENTS",
-          "rationale": "Shepherding oversight equips the people; ministry is not concentrated in one personality"
+          "type": "SUPPORTS",
+          "rationale": "Leaders answer for pastoral watchfulness and equip believers for service"
         }
       ]
     },
     {
       "scopeKey": "EPH.4.11-16",
       "scopeType": "PASSAGE",
-      "title": "Ephesians 4:11–16: Every Part Works",
-      "commentary": "The Lord gives leaders to equip the saints for ministry, not to make the rest of the church spectators. Ephesians 4 pictures a body held together under Christ, growing as each part does its work in love. That includes people whose ministry is never noticed from a platform. When we build one another up, speak truth in love, and use the gifts God has entrusted to us, we become stronger in our witness outside the church. I keep saying this because it matters: we do not want sitters, we want servers. Our connection to a local body should lead to real investment in people, not just having our name on a list.",
+      "title": "Every Part Serving as the Body Grows",
+      "commentary": "Ephesians 4 shows us that Christ gives leaders to equip His people for the work of ministry. The goal is not that a few people do all the work while everyone else watches. The whole body is to grow toward maturity, unity in the faith, and the knowledge of the Son of God. Christ is the head, and every part has a meaningful contribution as we speak the truth in love.\n\nOur local church is one of the places where those responsibilities become concrete. We know people we can encourage, teach, strengthen, warn when necessary, and serve with the gifts God has given us. A congregation that learns to care for its own members is better prepared to care for its neighbors and share the gospel beyond its doors. The most outward-focused churches must take inward service seriously, because the life we share is part of our witness.\n\nSo where are we serving? We do not want to be satisfied with merely sitting and watching. We want to be servants. But the point is more than filling a volunteer schedule. As every part works properly under Christ, the body builds itself up in love.",
       "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.05",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.05",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n006",
+          "nodeRef": "media-daqi89.n014",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
-            433,
-            453,
-            462,
-            485
+            434,
+            435,
+            436
           ],
-          "startSeconds": 1158.183,
-          "endSeconds": 1313.333,
+          "startSeconds": 1163.65,
+          "endSeconds": 1171.616,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
-      "referenceTargets": []
+      "scriptureLinks": [
+        "Ephesians 4:11–16"
+      ],
+      "referenceTargets": [
+        {
+          "reference": "ACT.6.1-7",
+          "type": "EXPLAINS",
+          "rationale": "The broader body-of-Christ purpose explains why role-specific service matters"
+        }
+      ]
     },
     {
       "scopeKey": "1CO.5.1-13",
       "scopeType": "PASSAGE",
-      "title": "1 Corinthians 5:1–13: Inside and Outside",
-      "commentary": "Paul does not tell the church at Corinth to spend all its time condemning the world outside. He tells believers to deal honestly with serious, known sin within their own fellowship. That distinction matters. When we say that we belong to Christ and to one another, we do not get to ignore destructive conduct and pretend it has no effect on the church family. Yet accountability is not permission for pride or gossip. It means we take holiness seriously, begin with ourselves, and address real wrongdoing as people who love the church enough to pursue what is right. Being identified with a congregation gives weight to our responsibility toward one another.",
+      "title": "Accountability Begins within the Church",
+      "commentary": "Paul confronted the Corinthian church because serious, known sin was being tolerated among people who claimed to belong to the congregation. Rather than mourn and address it, the church had become proud. Paul drew a clear distinction between the church's responsibility toward those within its fellowship and God's judgment of those outside. He was not commissioning believers to police every stranger in the community. He was calling the church to take its own holiness and witness seriously.\n\nWe can spend so much time talking about the sin of the world while refusing to face sin we know about in our own congregations. That is neither love nor faithfulness. Belonging to a church means we are willing to care enough to speak truth, to be corrected ourselves, and to seek the spiritual good of our brothers and sisters. A recognizable body of believers makes this mutual responsibility possible.\n\nThis passage does not authorize rumors, private investigations, or people looking for someone to condemn. Paul's case concerns grave misconduct the church already knew about, and any corrective action must be handled biblically and responsibly. We must join this passage with the call to gentleness and restoration in Galatians 6:1. The aim is a holy, faithful church, not a congregation ruled by suspicion.",
       "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.06",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.06",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n007",
+          "nodeRef": "media-daqi89.n015",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
-            517,
-            540,
-            579,
-            584
+            512,
+            513,
+            514
           ],
-          "startSeconds": 1390.799,
-          "endSeconds": 1594.983,
+          "startSeconds": 1375.266,
+          "endSeconds": 1383.233,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
+      "scriptureLinks": [
+        "1 Corinthians 5:1–13"
+      ],
       "referenceTargets": [
         {
           "reference": "GAL.6.1",
           "type": "QUALIFIES",
-          "rationale": "Internal accountability must be restorative, gentle and mindful of our own temptation"
+          "rationale": "Church discipline must not be presented as permission for harsh judgment; restoration is gentle and self-aware"
         }
       ]
     },
     {
       "scopeKey": "GAL.6.1",
       "scopeType": "PASSAGE",
-      "title": "Galatians 6:1: Restore with Gentleness",
-      "commentary": "If a brother or sister is overtaken in a trespass, Galatians 6 calls those who are spiritual to restore that person gently while watching their own hearts. That changes the spirit in which we exercise accountability. We are not hunting for someone else's failure. We know how easily a few poor decisions can affect any one of us, and we want to bring a loved one back to health. A church family should feel the absence of those who have drifted away. We ought to pray, reach out, listen, and respond with genuine compassion, without confusing love with overlooking sin. Our goal is restoration, never the satisfaction of being right.",
+      "title": "Restoration with Gentleness and Humility",
+      "commentary": "Galatians 6 reminds us how to respond when a brother or sister is caught in a trespass. Those who are walking by the Spirit are to restore that person in a spirit of gentleness, watching themselves because they too can be tempted. The next verse calls us to bear one another's burdens. There is no room here for pride, cruelty, or delight in somebody else's failure.\n\nAccountability in the church is not a call to go looking for people to expose. We all need the Lord's grace, and any one of us can stumble. When someone needs correction, our hearts should be set on helping that person return to faithful fellowship with Christ and His people. Love does not pretend sin is harmless, but neither does it forget the person who needs care.\n\nThis is one of the reasons local belonging is precious. We are not meant to be disconnected believers who face every spiritual battle alone. In the church, we can encourage, warn, carry burdens, confess our own need for help, and restore one another gently. That is accountability shaped by the Spirit rather than by pride.",
       "currentVersion": 1,
       "supportingOccasions": [
         {
-          "teachingOccasionId": "media-daqi89.teaching.07",
+          "teachingOccasionId": "media-daqi89.fresh.2026-11-16.07",
           "sermonId": "media-daqi89",
           "sermonDate": "2026-11-01",
-          "nodeRef": "media-daqi89.n008",
+          "nodeRef": "media-daqi89.n016",
           "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
           "cueIds": [
-            594,
-            596,
-            600,
-            615
+            589,
+            590,
+            591
           ],
-          "startSeconds": 1622.283,
-          "endSeconds": 1685.816,
+          "startSeconds": 1609.533,
+          "endSeconds": 1618.5,
           "sourceSHA256": "837811aa9228848ef322c40a65a547e118fc503a9aa41c7b51b22ad43f8a4927"
         }
       ],
-      "scriptureLinks": [],
-      "referenceTargets": []
+      "scriptureLinks": [
+        "Galatians 6:1–2"
+      ],
+      "referenceTargets": [
+        {
+          "reference": "1CO.5.1-13",
+          "type": "QUALIFIES",
+          "rationale": "Restoration and humility are essential when applying congregational correction"
+        }
+      ]
     }
   ],
   "history": [
     {
       "revision": 1,
-      "date": "2026-11-13",
-      "reason": "Initial new-SPP migrated canonical commentary; no older Good Gifts work accepted",
-      "sourceSermonIds": [
-        "media-fie2dj"
-      ],
-      "previousVersion": null
-    },
-    {
-      "revision": 2,
-      "date": "2026-11-15",
-      "reason": "New November 1 membership teaching contributions; previous Romans scopes preserved unchanged",
-      "sourceSermonIds": [
-        "media-daqi89"
-      ],
-      "previousVersion": 1,
-      "scopeKeysAdded": [
-        "ACT.2",
-        "ACT.2.37-41",
-        "ACT.6.1-6",
-        "HEB.13.17",
-        "EPH.4.11-16",
-        "1CO.5.1-13",
-        "GAL.6.1"
-      ],
-      "historyPortability": "REVISION_HISTORY_PORTABILITY_PENDING; original prior baseline is pinned in sealed research, full prior-current JSON not mirrored as separately accepted history file"
-    },
-    {
-      "revision": 3,
       "date": "2026-11-16",
-      "reason": "Owner-authorized withdrawal of the 2026-11-08 Romans 12:17 draft commentary for a fresh REV6 rerun; retain November 1 membership commentary unchanged",
-      "sourceSermonIds": [
-        "media-daqi89"
-      ],
-      "withdrawnSermonIds": [
-        "media-fie2dj"
-      ],
-      "withdrawnScopeCount": 20,
-      "activeScopeCount": 7,
-      "previousVersion": 2,
-      "priorTextLocation": "Git history (prior SOTW commit); not active or published as commentary"
-    },
-    {
-      "revision": 4,
-      "date": "2026-11-16",
-      "status": "OWNER_AUTHORIZED_TARGETED_CORRECTION_STAGED_NOT_INSTALLED",
-      "reason": "Owner-authorized Scripture-first correction of Acts 2:37–41 portable commentary; seven active scopes retained and twenty withdrawn Romans draft scopes remain withdrawn. Preserves accepted November 16 revision 3 withdrawal.",
-      "scopeKeysModified": [
-        "ACT.2.37-41"
-      ],
-      "previousVersion": 3,
-      "sourceSermonIds": [
-        "media-daqi89"
-      ]
+      "sermonId": "media-daqi89",
+      "kind": "OWNER_REVISED_FRESH_BUILD_REPLACES_PRIOR_SPP_CONTENT",
+      "newScopeCount": 7,
+      "note": "Earlier generated commentary text excluded; original evidence independently locked"
     }
   ],
-  "policy": "One current, translation-neutral Jacob commentary per Scripture scope. Owner-withdrawn Romans draft remains withdrawn pending fresh REV6 processing. Only Acts 2:37–41 commentary updated; all other six accepted membership scopes preserved."
+  "policy": {
+    "readerAuthor": "Jacob Lannom",
+    "noMediaOrCueLinksInReader": true,
+    "researchProvenanceInternalOnly": true,
+    "noBibleTextBundled": true
+  }
 }
