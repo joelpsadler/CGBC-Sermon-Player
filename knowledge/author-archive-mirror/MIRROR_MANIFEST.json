@@ -1,11 +1,12 @@
 {
-  "kind": "CGBC_SOTW_JACOB_READ_ONLY_MIRROR_MANIFEST",
-  "author": "Jacob Lannom",
-  "status": "INSTALLED_AND_VERIFIED",
-  "generatedAt": "2026-11-16",
-  "primaryRepository": "SOTW-Historical-Commentaries/historical-commentary-resources",
+  "schemaVersion": "cgbc-jacob-author-cold-mirror-v1",
+  "authority": "SOTW_AUTHOR_PRIMARY_CGBC_READ_ONLY_MIRROR",
+  "sourceRepository": "SOTW-Historical-Commentaries/historical-commentary-resources",
   "mirrorRepository": "joelpsadler/CGBC-Sermon-Player",
-  "fileCount": 5,
+  "mirrorPrefix": "knowledge/author-archive-mirror/sotw-root",
+  "sourceBaselineCommit": "201ae69e162c22c01f26e73ce7266ef6abfe150b",
+  "scope": "PUBLIC_SAFE_JACOB_AUTHOR_ARCHIVE_ONLY",
+  "installStatus": "STAGED_NOT_DEPLOYED",
   "files": [
     {
       "sotwPath": "api/jacob-lannom/v1/coverage.json",
@@ -37,11 +38,5 @@
       "sha256": "20fe91ba705c97ef1d9574149b474c4f56cf1a3234db5ebf0dcd3c7cd7d008d5",
       "bytes": 1218
     }
-  ],
-  "assertion": "All active SOTW Jacob JSON files mirrored byte-identically.",
-  "installedOn": "2026-11-16",
-  "verifiedPrimaryCommit": "4cb6cb15ceefdbdaf810dcd6a598bbba53292077",
-  "verifiedMirrorCommit": "31443b11115b821e148c0b772bc426ea16e4d24e",
-  "sourceBaselineCommit": "201ae69e162c22c01f26e73ce7266ef6abfe150b",
-  "installStatus": "STAGED_NOT_DEPLOYED"
+  ]
 }
