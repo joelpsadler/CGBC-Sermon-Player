@@ -8,33 +8,40 @@
   "fileCount": 5,
   "files": [
     {
-      "sotwRootPath": "api/jacob-lannom/v1/coverage.json",
+      "sotwPath": "api/jacob-lannom/v1/coverage.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/coverage.json",
-      "sha256": "22f4a566861543bbda05940d1a59ecc7f152dd4eae532e94b5ca74e5ba4f2d79"
+      "sha256": "446aaeb57423f47b3533591b36e5082e9fbc7e35a3d45de0bd5f75237abd68f3",
+      "bytes": 23341
     },
     {
-      "sotwRootPath": "api/jacob-lannom/v1/current-commentary.json",
+      "sotwPath": "api/jacob-lannom/v1/current-commentary.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/current-commentary.json",
-      "sha256": "96739ce21b67942de2ebe2a95f2733aacd213b2a48a0c7adfcf3059bab5ba6f5"
+      "sha256": "47af7f0f8c8e6f9f66ce49bd0c7f07f6ee4d796790be03dc81ac4fcf5336356c",
+      "bytes": 15260
     },
     {
-      "sotwRootPath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
+      "sotwPath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/source-records/media-daqi89.json",
-      "sha256": "fd4383e39a07c81b81449fdd55642516b19171a215d31dffe587809b922e6cee"
+      "sha256": "4d034f82ae641f2416d709750677f06568a3a89c6bf3a7a0471c9d1c44a37af2",
+      "bytes": 13490
     },
     {
-      "sotwRootPath": "api/jacob-lannom/v1/translation-lookup.json",
+      "sotwPath": "api/jacob-lannom/v1/translation-lookup.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/translation-lookup.json",
-      "sha256": "0b55603c2db63ecd833f94a0d269d9cd0825ed209fa786becd51080c75702c7f"
+      "sha256": "0b55603c2db63ecd833f94a0d269d9cd0825ed209fa786becd51080c75702c7f",
+      "bytes": 1180
     },
     {
-      "sotwRootPath": "api/jake/v1/catalog.json",
+      "sotwPath": "api/jake/v1/catalog.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jake/v1/catalog.json",
-      "sha256": "5d86308b20f1ce6a52bc8307001ef4b49f77ef5490b3cdb5dfb36b4afbe853ad"
+      "sha256": "20fe91ba705c97ef1d9574149b474c4f56cf1a3234db5ebf0dcd3c7cd7d008d5",
+      "bytes": 1218
     }
   ],
   "assertion": "All active SOTW Jacob JSON files mirrored byte-identically.",
   "installedOn": "2026-11-16",
   "verifiedPrimaryCommit": "4cb6cb15ceefdbdaf810dcd6a598bbba53292077",
-  "verifiedMirrorCommit": "31443b11115b821e148c0b772bc426ea16e4d24e"
+  "verifiedMirrorCommit": "31443b11115b821e148c0b772bc426ea16e4d24e",
+  "sourceBaselineCommit": "201ae69e162c22c01f26e73ce7266ef6abfe150b",
+  "installStatus": "STAGED_NOT_DEPLOYED"
 }
