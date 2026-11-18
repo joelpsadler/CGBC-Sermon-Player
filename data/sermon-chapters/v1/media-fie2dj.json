@@ -1,0 +1,399 @@
+{
+  "adapter": {
+    "playerBaseUrl": null,
+    "resolutionStatus": "ADAPTER_NOT_VERIFIED",
+    "verifiedPlayerSourceBlob": null
+  },
+  "chapters": [
+    {
+      "endCueId": "30",
+      "endSeconds": 94.683,
+      "id": "media-fie2dj.ch01",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch01",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch01",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n001"
+      ],
+      "order": 1,
+      "scriptureScopes": [
+        "ROM"
+      ],
+      "startCueId": "1",
+      "startSeconds": 1.266,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Opening and return to Romans"
+    },
+    {
+      "endCueId": "187",
+      "endSeconds": 546.533,
+      "id": "media-fie2dj.ch02",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch02",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 95.283,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch02",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 95.283,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n010"
+      ],
+      "order": 2,
+      "scriptureScopes": [
+        "ROM"
+      ],
+      "startCueId": "31",
+      "startSeconds": 95.283,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Romans 1–11: the gospel recap"
+    },
+    {
+      "endCueId": "209",
+      "endSeconds": 600.299,
+      "id": "media-fie2dj.ch03",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch03",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 547.799,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch03",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 547.799,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n011"
+      ],
+      "order": 3,
+      "scriptureScopes": [
+        "ROM.12.1-2"
+      ],
+      "startCueId": "188",
+      "startSeconds": 547.799,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Romans 12: living sacrifice and renewed minds"
+    },
+    {
+      "endCueId": "353",
+      "endSeconds": 931.433,
+      "id": "media-fie2dj.ch04",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch04",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 601.083,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch04",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 601.083,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n020"
+      ],
+      "order": 4,
+      "scriptureScopes": [
+        "EPH.2"
+      ],
+      "startCueId": "210",
+      "startSeconds": 601.083,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The saving gospel and a lesson about sin"
+    },
+    {
+      "endCueId": "509",
+      "endSeconds": 1377.533,
+      "id": "media-fie2dj.ch05",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch05",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 932.233,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch05",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 932.233,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n012",
+        "media-fie2dj.n021"
+      ],
+      "order": 5,
+      "scriptureScopes": [
+        "ROM.12.1-2"
+      ],
+      "startCueId": "354",
+      "startSeconds": 932.233,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Changed lives and the fruit of salvation"
+    },
+    {
+      "endCueId": "559",
+      "endSeconds": 1531.616,
+      "id": "media-fie2dj.ch06",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch06",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1378.45,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch06",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1378.45,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n013"
+      ],
+      "order": 6,
+      "scriptureScopes": [
+        "ROM.12.14-21"
+      ],
+      "startCueId": "510",
+      "startSeconds": 1378.45,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Relational response and Romans 12:17–21"
+    },
+    {
+      "endCueId": "672",
+      "endSeconds": 1841.65,
+      "id": "media-fie2dj.ch07",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch07",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1531.683,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch07",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1531.683,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n014",
+        "media-fie2dj.n022"
+      ],
+      "order": 7,
+      "scriptureScopes": [
+        "ROM.12.17"
+      ],
+      "startCueId": "560",
+      "startSeconds": 1531.683,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Do not repay evil for evil"
+    },
+    {
+      "endCueId": "738",
+      "endSeconds": 2043.716,
+      "id": "media-fie2dj.ch08",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch08",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1843.333,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch08",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 1843.333,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n015"
+      ],
+      "order": 8,
+      "scriptureScopes": [
+        "ROM.12.17"
+      ],
+      "startCueId": "673",
+      "startSeconds": 1843.333,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Honorable witness before all people"
+    },
+    {
+      "endCueId": "756",
+      "endSeconds": 2094.066,
+      "id": "media-fie2dj.ch09",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch09",
+            "preferredMedium": "audio",
+            "stableId": "media-fie2dj",
+            "startSeconds": 2044.033,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-fie2dj.ch09",
+            "preferredMedium": "video",
+            "stableId": "media-fie2dj",
+            "startSeconds": 2044.033,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-fie2dj.n016"
+      ],
+      "order": 9,
+      "scriptureScopes": [
+        "ROM.12.17"
+      ],
+      "startCueId": "739",
+      "startSeconds": 2044.033,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The cost of following Christ"
+    }
+  ],
+  "kind": "DERIVED_SERMON_CHAPTER_NAVIGATION_NOT_CANONICAL_MEANING",
+  "media": {
+    "audioAvailable": true,
+    "audioSourceUrl": "https://mcdn.podbean.com/mf/web/zn42tfd5ebhv6std/26_11_08_S.mp3",
+    "durationSeconds": 2116.0,
+    "videoAvailable": true,
+    "videoSourceUrl": "https://youtu.be/LIvgpCfud60",
+    "youtubeId": "LIvgpCfud60"
+  },
+  "schemaVersion": "cgbc-sermon-chapter-markers-v1",
+  "source": {
+    "canonicalInfoMapPath": "knowledge/2026/2026-11-08_the-impact-of-the-gospel-in-relationships-pt-11.json",
+    "canonicalInfoMapSha256": "2263f046d8d07b885da4fe05c9c45104ffc6b507894d00c7477e3bab92ba556d",
+    "canonicalSourceRepository": "joelpsadler/CGBC-Sermon-Player",
+    "sermonDate": "2026-11-08",
+    "sermonStableId": "media-fie2dj",
+    "sourceTimeClock": "ORIGINAL_SRT"
+  },
+  "status": "EXPORT_READY_PLAYER_INTEGRATION_NOT_VERIFIED"
+}

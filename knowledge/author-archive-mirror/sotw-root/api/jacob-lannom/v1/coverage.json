@@ -4,8 +4,8 @@
   "displayName": "Jacob Lannom",
   "translationIndependent": true,
   "scriptureIdScheme": "SOTW_CANONICAL_OSIS_SCOPE",
-  "lastReconciledOn": "2026-11-16",
-  "status": "DUAL_COPY_INSTALLED",
+  "lastReconciledOn": "2026-11-17",
+  "status": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED",
   "sourceRecords": [
     {
       "sermonId": "media-daqi89",
@@ -13,12 +13,19 @@
       "sermonTitle": "Why Membership Matters",
       "sourcePath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
       "sourceSHA256": "f38454931afd82cf28ffa56c85c3143e687f260792984b9c79fcf71257f3ae69"
+    },
+    {
+      "sermonId": "media-fie2dj",
+      "sermonDate": "2026-11-08",
+      "sermonTitle": "The Impact of the Gospel In Relationships Pt. 11",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-fie2dj.json",
+      "sourceSHA256": "809e123caf82adddc8ff29bc0b327e66b7fae11608252942774a44883adfebee"
     }
   ],
   "summary": {
     "bookIntroductions": 1,
-    "scopedEntries": 7,
-    "sermonOccasions": 1,
+    "scopedEntries": 10,
+    "sermonOccasions": 2,
     "scriptureConnections": 9
   },
   "entries": [
@@ -466,6 +473,323 @@
           "sourceCueId": "591",
           "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-daqi89&start=1615&autoplay=0",
           "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-daqi89&start=1615&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "ROM",
+      "scopeType": "BOOK_OVERVIEW",
+      "title": "Romans: The Gospel That Changes Our Lives",
+      "sermonDate": "2026-11-08",
+      "sermonId": "media-fie2dj",
+      "teachingOccasionId": "media-fie2dj.fresh.2026-11-17.01",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-fie2dj.json",
+      "sourceNodeRef": "media-fie2dj.n010",
+      "sourceCueIds": [
+        34,
+        55,
+        87,
+        184
+      ],
+      "availability": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=ROM&scope=ROM",
+      "evidenceMoments": [
+        {
+          "cueId": "34",
+          "startSeconds": 106.566,
+          "endSeconds": 110.216,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 106,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=106&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=106&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "34",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "55",
+          "startSeconds": 175.15,
+          "endSeconds": 177.966,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 175,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=175&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=175&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "55",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "87",
+          "startSeconds": 255.783,
+          "endSeconds": 257.149,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 255,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=255&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=255&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "87",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "ROM.12",
+      "scopeType": "CHAPTER_INTRODUCTION",
+      "title": "Romans 12: Mercy, Renewal, and a Changed Life",
+      "sermonDate": "2026-11-08",
+      "sermonId": "media-fie2dj",
+      "teachingOccasionId": "media-fie2dj.fresh.2026-11-17.02",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-fie2dj.json",
+      "sourceNodeRef": "media-fie2dj.n011",
+      "sourceCueIds": [
+        194,
+        197,
+        240,
+        386,
+        490
+      ],
+      "availability": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=ROM&scope=ROM.12",
+      "evidenceMoments": [
+        {
+          "cueId": "194",
+          "startSeconds": 563.833,
+          "endSeconds": 567.133,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 563,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=563&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=563&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "194",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "197",
+          "startSeconds": 573.25,
+          "endSeconds": 576.416,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 573,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=573&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=573&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "197",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "240",
+          "startSeconds": 674.166,
+          "endSeconds": 676.266,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 674,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=674&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=674&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "240",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "ROM.12.17",
+      "scopeType": "PASSAGE",
+      "title": "Romans 12:17: Refuse Retaliation, Pursue What Is Honorable",
+      "sermonDate": "2026-11-08",
+      "sermonId": "media-fie2dj",
+      "teachingOccasionId": "media-fie2dj.fresh.2026-11-17.03",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-fie2dj.json",
+      "sourceNodeRef": "media-fie2dj.n014",
+      "sourceCueIds": [
+        545,
+        622,
+        624,
+        643,
+        648,
+        651,
+        673,
+        675,
+        681,
+        715,
+        719,
+        729,
+        753
+      ],
+      "availability": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=ROM&scope=ROM.12.17",
+      "evidenceMoments": [
+        {
+          "cueId": "545",
+          "startSeconds": 1485.366,
+          "endSeconds": 1487.033,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1485,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1485&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1485&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "545",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "622",
+          "startSeconds": 1685.099,
+          "endSeconds": 1688.75,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1685,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1685&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1685&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "622",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "624",
+          "startSeconds": 1694.4,
+          "endSeconds": 1695.95,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1694,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1694&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1694&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "624",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "643",
+          "startSeconds": 1746.733,
+          "endSeconds": 1749.733,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1746,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1746&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1746&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "643",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "648",
+          "startSeconds": 1762.083,
+          "endSeconds": 1763.883,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1762,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1762&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1762&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "648",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "651",
+          "startSeconds": 1771.033,
+          "endSeconds": 1773.25,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1771,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1771&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1771&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "651",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "673",
+          "startSeconds": 1843.333,
+          "endSeconds": 1846.5,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1843,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1843&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1843&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "673",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "675",
+          "startSeconds": 1850.766,
+          "endSeconds": 1853.766,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1850,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1850&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1850&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "675",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "681",
+          "startSeconds": 1868.099,
+          "endSeconds": 1869.166,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1868,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1868&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1868&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "681",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "715",
+          "startSeconds": 1974.9,
+          "endSeconds": 1977.716,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1974,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1974&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1974&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "715",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "719",
+          "startSeconds": 1991.466,
+          "endSeconds": 1993.616,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1991,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=1991&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=1991&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "719",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "729",
+          "startSeconds": 2013.299,
+          "endSeconds": 2016.833,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 2013,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=2013&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=2013&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "729",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "753",
+          "startSeconds": 2080.8,
+          "endSeconds": 2083.433,
+          "originalSourceSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 2080,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-fie2dj&start=2080&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-fie2dj&start=2080&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "753",
           "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
         }
       ]

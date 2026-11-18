@@ -1,0 +1,1407 @@
+{
+  "buildProvenance": {
+    "buildMode": "FRESH_REBASELINE",
+    "builtAt": "2026-11-17T23:45:00Z",
+    "freshEvidenceAttestation": {
+      "independentInterpretationRecordedBeforeCommentary": true,
+      "priorGeneratedResearchExcluded": true,
+      "qaComparedOnlyAfterFreeze": true
+    },
+    "githubMain": "98b8d45c502ecddeaeea08551f0818c2e7fdf1c7",
+    "governingReferences": [
+      "00_START_HERE.md",
+      "SPP_WEEKLY_EXECUTION_GATES.md",
+      "SPP_OPERATING_STANDARD.md"
+    ],
+    "researchStandard": "SPP_SINGLE_PASS",
+    "validationStatus": "PENDING",
+    "sourcePackageSha256": "307019165c65f340b892ab9e736261ae0e048d253a817429a43e3e5e56e9a5ae",
+    "sourceLocks": [
+      "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+      "0a41ed6cfa556bdde6e791c9a1774864b97dc7804bac927b046204762988d2e7"
+    ],
+    "notes": "Phase B candidate, full-schema validated before owner content-hash approval; NOT RELEASED."
+  },
+  "conceptRegistryRef": {
+    "path": "knowledge/CGBC_CONCEPT_REGISTRY_v2.json",
+    "registryStateAtBuild": "ACTIVE",
+    "registryVersion": "2.0",
+    "schemaPath": "knowledge/CGBC_CONCEPT_REGISTRY_SCHEMA_v2.json"
+  },
+  "discover": [
+    {
+      "id": "media-fie2dj.discover01",
+      "question": "How does the gospel change the way we react when someone hurts us?",
+      "answer": "Romans 12:17 rejects retaliation and calls for careful, honorable public conduct.",
+      "nodeRefs": [
+        "media-fie2dj.n014",
+        "media-fie2dj.n015"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ]
+    },
+    {
+      "id": "media-fie2dj.discover02",
+      "question": "Why do Christians care how they appear to unbelievers?",
+      "answer": "To help others see the character of Christ rather than giving needless offense through grudges or fleshly reactions.",
+      "nodeRefs": [
+        "media-fie2dj.n015",
+        "media-fie2dj.n021"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ]
+    }
+  ],
+  "editorialFlags": [
+    "AWAITING_OWNER_COMMENTARY_REVIEW",
+    "NO_MEDIA_CLOCK_VALIDATION",
+    "NO_SLIDES_SUPPLIED",
+    "NASB95_PUBLIC_VERSE_TEXT_NONE",
+    "PRIVATE_LOGOS_NOT_FOR_REPUBLICATION",
+    "MORPHOLOGY_NOT_VERIFIED"
+  ],
+  "generatedAt": "2026-11-17T23:45:00Z",
+  "implementation": {
+    "canonicalPath": "knowledge/2026/2026-11-08_the-impact-of-the-gospel-in-relationships-pt-11.json",
+    "schemaPath": "knowledge/CGBC_INFO_MAP_SCHEMA_v3_0.json",
+    "sourceArchivePath": "Sermon Source Archive/2026/11_08_26/",
+    "validationRulesPath": "knowledge/CGBC_INFO_MAP_VALIDATION_RULES_v3_0.md"
+  },
+  "nodes": [
+    {
+      "id": "media-fie2dj.n001",
+      "type": "observation",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Opening and return to Romans",
+      "summary": "The church gathers as the pastor returns to the expository study of Romans.",
+      "start": 16.5,
+      "end": 94.683,
+      "segmentIndexes": [
+        2,
+        30
+      ],
+      "scripture": [
+        "ROM"
+      ],
+      "topics": [
+        "gospel",
+        "Romans"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:2",
+        "cue:30"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n010",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Romans 1–11: gospel and salvation",
+      "summary": "Paul presents salvation through Christ, sin, justification by faith, union, assurance, Israel, and the riches of God.",
+      "start": 95.283,
+      "end": 546.533,
+      "segmentIndexes": [
+        31,
+        187
+      ],
+      "scripture": [
+        "ROM"
+      ],
+      "topics": [
+        "gospel",
+        "Romans"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:31",
+        "cue:187"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n011",
+      "type": "scripture",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Romans 12:1–2, the mercies of God",
+      "summary": "God’s mercies call believers to living worship and renewed minds.",
+      "start": 547.799,
+      "end": 600.299,
+      "segmentIndexes": [
+        188,
+        209
+      ],
+      "scripture": [
+        "ROM.12.1-2"
+      ],
+      "topics": [
+        "gospel",
+        "Romans"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:188",
+        "cue:209"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n012",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "New life and its visible fruit",
+      "summary": "God saves and transforms believers; fruit follows salvation rather than causing it.",
+      "start": 601.083,
+      "end": 1377.533,
+      "segmentIndexes": [
+        210,
+        509
+      ],
+      "scripture": [
+        "EPH.2"
+      ],
+      "topics": [
+        "gospel",
+        "Romans"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:210",
+        "cue:509"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n013",
+      "type": "transition",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Blessing persecutors, refusing vengeance",
+      "summary": "Romans 12:14–21 is read; the sermon concentrates on verse 17.",
+      "start": 1378.45,
+      "end": 1531.616,
+      "segmentIndexes": [
+        510,
+        559
+      ],
+      "scripture": [
+        "ROM.12.14-21"
+      ],
+      "topics": [
+        "gospel",
+        "Romans"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:510",
+        "cue:559"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n014",
+      "type": "argument",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Do not repay evil for evil",
+      "summary": "Do not use Mosaic judicial restitution to justify private revenge; lawful process is distinct from sinful retaliation.",
+      "start": 1531.683,
+      "end": 1841.65,
+      "segmentIndexes": [
+        560,
+        672
+      ],
+      "scripture": [
+        "ROM.12.17"
+      ],
+      "topics": [
+        "gospel transformation",
+        "honorable witness"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:560",
+        "cue:672"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n015",
+      "type": "application",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Honor Christ before observers",
+      "summary": "What is honorable is worth preparing for; kindness, ministry, witness, and refusing grudges are concrete applications.",
+      "start": 1843.333,
+      "end": 2043.716,
+      "segmentIndexes": [
+        673,
+        738
+      ],
+      "scripture": [
+        "ROM.12.17"
+      ],
+      "topics": [
+        "gospel transformation",
+        "honorable witness"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:673",
+        "cue:738"
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "reflection"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n016",
+      "type": "application",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Counting the cost of following Christ",
+      "summary": "The closing challenge asks what following Christ has cost us.",
+      "start": 2044.033,
+      "end": 2094.066,
+      "segmentIndexes": [
+        739,
+        756
+      ],
+      "scripture": [
+        "ROM.12.17"
+      ],
+      "topics": [
+        "gospel",
+        "Romans"
+      ],
+      "audiences": [
+        "discover",
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "evidenceRefs": [
+        "cue:739",
+        "cue:756"
+      ],
+      "applicationAudience": [
+        "believers"
+      ],
+      "applicationFunction": [
+        "exhortation",
+        "reflection"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n020",
+      "type": "illustration",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "Paintball lesson about sin’s effects",
+      "summary": "Pastor references a paintball incident with his father to illustrate that sin has consequences. The story is testimony, not independently corroborated history.",
+      "start": 709.75,
+      "end": 931.433,
+      "audiences": [
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "illustrationOrigin": "personal",
+      "illustrationForm": "story",
+      "scripture": [
+        "EPH.2"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n021",
+      "type": "illustration",
+      "provenance": "JAKE - EXISTING TEACHING SYNTHESIS",
+      "title": "A classmate surprised he was Christian",
+      "summary": "A college classmate’s surprised reaction warns that Christian witness ought to be identifiable in behavior.",
+      "start": 1322.333,
+      "end": 1377.533,
+      "audiences": [
+        "discover",
+        "deepDive"
+      ],
+      "sourceRefs": [
+        "src-original-srt"
+      ],
+      "illustrationOrigin": "personal",
+      "illustrationForm": "testimony",
+      "scripture": [
+        "ROM.12.1-2"
+      ]
+    },
+    {
+      "id": "media-fie2dj.n022",
+      "type": "definition",
+      "provenance": "PASTOR - PREPARED",
+      "title": "Respect what is right: consider and take care",
+      "summary": "Pastor gives the contextual sense “consider, have regard for, take care to” of the verb in Romans 12:17. Prepared lexicon does not independently attest surface morphology.",
+      "definedTerm": "respect / provide (Romans 12:17)",
+      "start": 1762.083,
+      "end": 1777.683,
+      "audiences": [
+        "deepDive",
+        "search"
+      ],
+      "sourceRefs": [
+        "src-original-srt",
+        "src-original-notes-1"
+      ],
+      "scripture": [
+        "ROM.12.17"
+      ]
+    }
+  ],
+  "passageResearch": {
+    "freshEvidenceAttestation": {
+      "independentInterpretationRecordedBeforeCommentary": true,
+      "priorGeneratedResearchExcluded": true,
+      "qaComparedOnlyAfterFreeze": true
+    },
+    "localFactualRecords": [],
+    "profile": "CGBC_PASSAGE_RESEARCH_3_0",
+    "quoteCandidates": [],
+    "records": [
+      {
+        "id": "media-fie2dj.pr-rom",
+        "reference": "Romans 1:16",
+        "contextReference": "ROM",
+        "nodeRefs": [
+          "media-fie2dj.n010"
+        ],
+        "jake": {
+          "treatment": "applied",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 34,
+              "start": 106.566,
+              "end": 110.216,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 55,
+              "start": 175.15,
+              "end": 177.966,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 87,
+              "start": 255.783,
+              "end": 257.149,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 184,
+              "start": 537.0,
+              "end": 540.35,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "The salvation Paul expounds in Romans is the foundation for transformed life and relationships.",
+          "faithfulSynthesis": {
+            "text": "If we want to understand the gospel and the salvation God gives us through Jesus Christ, Romans is a place to dig deeply. Paul begins by declaring that he is not ashamed of the gospel because it is God’s power for salvation to everyone who believes. From there he shows us that God judges without partiality, that all of us have sinned, and that we cannot make ourselves righteous by our own works. Abraham believed God, and righteousness was credited to him by faith. Through Jesus Christ we are justified by faith and have peace with God.\n\nBut the good news does not end with forgiveness. In Christ we have died to sin and are called to walk in newness of life. We belong to the risen Savior, and God’s purpose and love give His people confidence even when life is difficult. Paul also deals seriously with Israel, election, and the mercy and wisdom of God, until we arrive at his great declaration of praise at the end of chapter 11. We cannot exhaust the riches of God by reducing Romans to a few favorite verses.\n\nThis is why we study the gospel before talking about how to live. Romans does not teach us to earn salvation by becoming better people. It shows us what God has done through Christ, and then calls us to live as people who have received His mercy. The gospel that saves us must also shape the way we treat one another.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              34,
+              55,
+              87,
+              184
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Romans 1–11 explains sin, righteousness, the gospel and God’s mercy, leading to transformed life and community obligations in Romans 12–15.",
+          "provisionalInterpretation": "God’s mercy through Christ precedes and motivates Christian transformation and ethical action; changed behavior is fruit rather than a saving prerequisite.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "NASB95 Logos PDF contains OCR/small-caps artifacts; do not quote as definitive verse text."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-srt",
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Owner temporary content-hash review",
+            "status": "OPEN",
+            "action": "Await explicit approval of all 3 proposed commentary scopes before production release",
+            "blocks": [
+              "publication",
+              "production"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": false
+        }
+      },
+      {
+        "id": "media-fie2dj.pr-rom12",
+        "reference": "Romans 12:1–2",
+        "contextReference": "ROM.12.1-2",
+        "nodeRefs": [
+          "media-fie2dj.n011",
+          "media-fie2dj.n012"
+        ],
+        "jake": {
+          "treatment": "applied",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 194,
+              "start": 563.833,
+              "end": 567.133,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 197,
+              "start": 573.25,
+              "end": 576.416,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 240,
+              "start": 674.166,
+              "end": 676.266,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 386,
+              "start": 1030.333,
+              "end": 1033.383,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 490,
+              "start": 1311.299,
+              "end": 1312.799,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "The salvation Paul expounds in Romans is the foundation for transformed life and relationships.",
+          "faithfulSynthesis": {
+            "text": "When Paul urges us to present our bodies as living sacrifices, he appeals to the mercies of God. That order matters. We do not change our lives so that God might save us. We are saved by grace through faith in Jesus Christ, and when God saves us, He changes us. Romans 12 is the outworking of the gospel that Romans 1–11 has been explaining.\n\nThe miracle of salvation reaches far deeper than a cleaned-up reputation. We were dead in trespasses and sins, but God makes us alive in Christ. He forgives, frees us from bondage to sin, gives us His Spirit, and keeps His people by His power. Change is not the entrance requirement for salvation; it is a necessary fruit of what God has done. As we keep walking with Christ, our thoughts, actions, and ambitions ought to be brought increasingly into line with His Word. That is not legalism. It is the life of a person being transformed.\n\nThat change must become visible, including in our relationships. It is a painful thing when someone who has spent time around us is surprised to discover that we follow Jesus. Our witness should not depend on a church building, a religious label, or what we post online. People should see Christ’s work in how we speak and respond. A renewed mind does not simply ask, “What am I entitled to do?” It asks, “What honors God, and what will show others the gospel?”",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              194,
+              197,
+              240,
+              386,
+              490
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Romans 1–11 explains sin, righteousness, the gospel and God’s mercy, leading to transformed life and community obligations in Romans 12–15.",
+          "provisionalInterpretation": "God’s mercy through Christ precedes and motivates Christian transformation and ethical action; changed behavior is fruit rather than a saving prerequisite.",
+          "evidenceSupport": "SUPPORTED",
+          "keyWords": [],
+          "textualIssues": [
+            "NASB95 Logos PDF contains OCR/small-caps artifacts; do not quote as definitive verse text."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-srt",
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Owner temporary content-hash review",
+            "status": "OPEN",
+            "action": "Await explicit approval of all 3 proposed commentary scopes before production release",
+            "blocks": [
+              "publication",
+              "production"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "INDEPENDENT",
+          "directDisplayAllowed": false
+        }
+      },
+      {
+        "id": "media-fie2dj.pr-rom1217",
+        "reference": "Romans 12:17",
+        "contextReference": "ROM.12.14-21",
+        "nodeRefs": [
+          "media-fie2dj.n014",
+          "media-fie2dj.n015",
+          "media-fie2dj.n022"
+        ],
+        "jake": {
+          "treatment": "explained",
+          "spokenEvidence": [
+            {
+              "segmentIndex": 545,
+              "start": 1485.366,
+              "end": 1487.033,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 622,
+              "start": 1685.099,
+              "end": 1688.75,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 624,
+              "start": 1694.4,
+              "end": 1695.95,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 643,
+              "start": 1746.733,
+              "end": 1749.733,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 648,
+              "start": 1762.083,
+              "end": 1763.883,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 651,
+              "start": 1771.033,
+              "end": 1773.25,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 673,
+              "start": 1843.333,
+              "end": 1846.5,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 675,
+              "start": 1850.766,
+              "end": 1853.766,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 681,
+              "start": 1868.099,
+              "end": 1869.166,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 715,
+              "start": 1974.9,
+              "end": 1977.716,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 719,
+              "start": 1991.466,
+              "end": 1993.616,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 729,
+              "start": 2013.299,
+              "end": 2016.833,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            },
+            {
+              "segmentIndex": 753,
+              "start": 2080.8,
+              "end": 2083.433,
+              "transcriptRef": "src-original-srt",
+              "verificationStatus": "VERIFIED"
+            }
+          ],
+          "controllingInterpretation": "Romans 12:17 forbids personal retaliation and commands care for honorable public witness, with lawful public justice distinct from sinful personal revenge.",
+          "faithfulSynthesis": {
+            "text": "Romans 12:17 calls us to do two things that our flesh often resists. We must not repay anyone evil for evil, and we must take care to do what is right in the sight of others. When someone wrongs us, it can feel natural to give them the same treatment in return. We may even try to dress that response up in biblical language. But being hurt does not give us permission to be hateful, petty, or cruel.\n\nSometimes we reach for the Old Testament statement about an eye for an eye as though it gives us a personal right to get even. That instruction belonged to a setting of lawful judgment; it was not a private revenge permit. And the Old Testament itself warns us not to say we will repay evil or do to someone exactly as they have done to us. This does not mean Christians have no lawful rights, must ignore crimes, or must become doormats. There is a difference between proper legal process and allowing resentment to take over our own actions. We cross a line when we decide that another person's wrong justifies our own sin.\n\nI know how quickly a sarcastic response can become a fleshly reaction. The Lord does not excuse it merely because I can get a laugh. In the same way, angry public talk, threats, and contempt toward people we disagree with do not somehow become righteous because we believe our cause is right. We cannot allow the circumstances around us to dictate whether we obey God's Word.\n\nPaul also tells us to consider what is honorable before everyone. The word translated “respect” carries the sense of giving thought or care to something. Our conduct requires that kind of attention. We do not allow unbelievers to decide what God's Word means, but we must care whether the life they see in us points toward Jesus or drives them away. The church is called to minister, not merely to win arguments. When people are hungry, our responsibility to love and serve them does not disappear because we have a strong opinion about what government should do.\n\nAsk yourself how easily you take matters into your own hands, and how readily you carry an old wound into a new relationship. Grudges damage the fellowship of believers. We ought not let personal hurt overcome our love for brothers and sisters in Christ. Following Jesus in a world that resists Him can be costly. Yet our calling remains to show His holiness and goodness, not to be overcome by evil. Paul continues the argument through peace, leaving vengeance to God, caring for enemies, and overcoming evil with good; those next instructions grow out of the same gospel-shaped response.",
+            "lane": "JAKE - EXISTING TEACHING SYNTHESIS",
+            "segmentIndexes": [
+              545,
+              622,
+              624,
+              643,
+              648,
+              651,
+              673,
+              675,
+              681,
+              715,
+              719,
+              729,
+              753
+            ]
+          }
+        },
+        "independentStudy": {
+          "literaryContext": "Romans 12:9–21 is continuous ethical instruction, connecting enemy-love and peace to the gospel mercies of 12:1–2; the sermon treats v.17 in detail while reading 18–21, not expounding them fully.",
+          "provisionalInterpretation": "The two imperatives require refusal to requite evil and thoughtful conduct honorable before everyone; neither Mosaic civil penalties nor public justice license private revenge.",
+          "evidenceSupport": "QUALIFIED",
+          "keyWords": [
+            {
+              "reference": "ROM.12.17",
+              "language": "Greek",
+              "surfaceForm": "NOT_IN_PINNED_SOURCE",
+              "lemma": "προνοέω",
+              "morphology": "NOT_VERIFIED_FROM_PINNED_ORIGINAL_LANGUAGE_DATA",
+              "contextualMeaning": "consider; have regard for; take care to",
+              "strongsId": "G4306",
+              "verificationStatus": "QUALIFIED",
+              "caution": "Lemma/gloss from owner-prepared proprietary notes; no Greek surface token, parsing or independent morphology verification.",
+              "evidenceSource": {
+                "source": "Jacob Lannom, Logos prepared notes, Dictionary of Biblical Languages with Semantic Domains: Greek (New Testament)",
+                "commitOrEdition": "owner-provided Logos PDF 2026-11-05",
+                "fileOrItem": "The Impact of the Gospel (In Relationships) (11).pdf",
+                "locator": "Romans 12:17 study note; lexicon entry 4629",
+                "verificationStatus": "QUALIFIED",
+                "rights": "RESEARCH ONLY"
+              }
+            }
+          ],
+          "textualIssues": [
+            "SRT cues 633 and 736 contain dropped-negative or contradictory ASR readings; use contextual qualifiers, not verbatim repairs.",
+            "No verified Greek inflected form/morphology from the pinned research sources."
+          ],
+          "sourceEvidenceRefs": [
+            "src-original-srt",
+            "src-original-notes-1"
+          ]
+        },
+        "commentaryWitnesses": [
+          {
+            "author": "Jamieson, Fausset and Brown",
+            "work": "Jamieson, Fausset and Brown commentary on Romans",
+            "editionId": "SOTW:structured-romans-2026-11-12:jfb",
+            "itemLocator": "ROM.12.17; itemSHA256=e99b125c2ae111d044991d96260a021a55efaffc26ebb91c1ff6e7bf099e8182",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-jfb",
+            "reuseClass": "RESEARCH_ONLY",
+            "qualification": "Honorable conduct in public"
+          },
+          {
+            "author": "John Calvin",
+            "work": "John Calvin commentary on Romans",
+            "editionId": "SOTW:structured-romans-2026-11-12:calvin",
+            "itemLocator": "ROM.12.17; itemSHA256=c43620d6732d0ddb53a096e8e6f0dd8fe039ad665ff6d36b8e05460f069aca0e",
+            "relationToJake": "supports",
+            "sourceEvidenceRef": "src-sotw-calvin",
+            "reuseClass": "RESEARCH_ONLY",
+            "qualification": "Upright conduct and refusal of revenge; his extension about withholding help remains attributed to him"
+          },
+          {
+            "author": "Adam Clarke",
+            "work": "Adam Clarke commentary on Romans",
+            "editionId": "SOTW:structured-romans-2026-11-12:clarke",
+            "itemLocator": "ROM.12.17; itemSHA256=8f5b02d3011af76f0ab2690589554dd3497142613ead2f47d0270685fc5e83bd",
+            "relationToJake": "qualifies",
+            "sourceEvidenceRef": "src-sotw-clarke",
+            "reuseClass": "RESEARCH_ONLY",
+            "qualification": "His debt-specific example is not sermon teaching"
+          }
+        ],
+        "entityRefs": [],
+        "contextClaimRefs": [],
+        "mapFeatureRefs": [],
+        "sourceEvidenceRefs": [
+          "src-original-srt",
+          "src-original-notes-1",
+          "src-sotw-jfb",
+          "src-sotw-calvin",
+          "src-sotw-clarke"
+        ],
+        "relatedStudy": [],
+        "reviewGates": [
+          {
+            "issue": "Owner temporary content-hash review",
+            "status": "OPEN",
+            "action": "Await explicit approval of all 3 proposed commentary scopes before production release",
+            "blocks": [
+              "publication",
+              "production"
+            ]
+          }
+        ],
+        "display": {
+          "jakeFirst": true,
+          "researchDisclosure": "QUALIFIED",
+          "directDisplayAllowed": false
+        }
+      }
+    ],
+    "researchStandardVersion": "SPP-1.2.0-compatible"
+  },
+  "provenance": {
+    "policy": "SEPARATE_EVIDENCE_LANES",
+    "lanes": [
+      "PASTOR - SPOKEN EXACT",
+      "PASTOR - PREPARED",
+      "JAKE - EXISTING TEACHING SYNTHESIS",
+      "ANALYSIS - CLASSIFICATION"
+    ],
+    "originalSrtSHA256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+    "originalNotesSHA256": "0a41ed6cfa556bdde6e791c9a1774864b97dc7804bac927b046204762988d2e7",
+    "srtCueCount": 756,
+    "noNewHistoricalOrPoliticalFacts": true,
+    "lexicalStatus": "QUALIFIED_NOT_VERIFIED_MORPHOLOGY",
+    "notes": "Draft passage prose not a direct spoken quotation. Historical-source summaries remain research only. All node summaries are paraphrased; original cue IDs/words retained separately in the sealed Phase A SRT."
+  },
+  "quoteCurationRef": {
+    "authorityPath": "config/quote-curation.json",
+    "authorityRole": "OWNER_CURATION_SOURCE_OF_TRUTH",
+    "policy": "Reviewed quote status is resolved from quote curation; canonical sermon knowledge stores only source-grounded quote evidence and UNREVIEWED research candidates.",
+    "sermonStableId": "media-fie2dj"
+  },
+  "recordType": "CGBC_SERMON_KNOWLEDGE",
+  "recordVersion": "3.0",
+  "schemaVersion": "3.0",
+  "search": {
+    "terms": [
+      "Romans",
+      "Romans 12:17",
+      "the gospel",
+      "salvation",
+      "renewal",
+      "personal revenge",
+      "non-retaliation",
+      "honorable conduct",
+      "grudges",
+      "Christian witness",
+      "pray for persecutors",
+      "grace and transformation"
+    ],
+    "scripture": [
+      "ROM",
+      "ROM.12",
+      "ROM.12.17"
+    ],
+    "source": "CANONICAL_DERIVATIVE_OWNER_APPROVED_STAGED_NOT_INSTALLED"
+  },
+  "sermon": {
+    "bookTags": [
+      "Romans",
+      "Ephesians",
+      "Exodus",
+      "Proverbs",
+      "2 Corinthians",
+      "1 Thessalonians"
+    ],
+    "collections": [],
+    "date": "2026-11-08",
+    "durationSeconds": 2116.0,
+    "references": [
+      "Romans 1:16",
+      "Romans 2:9-11",
+      "Romans 3:10",
+      "Romans 4:1-3",
+      "Romans 5:1-2",
+      "Romans 6:1-4",
+      "Romans 7:4",
+      "Romans 8:28",
+      "Romans 8:31",
+      "Romans 8:38-39",
+      "Romans 10:9-13",
+      "Romans 11:33-36",
+      "Romans 12:1-2",
+      "Romans 12:14-16",
+      "Romans 12:17-21",
+      "Ephesians 2",
+      "Exodus 21:24",
+      "Proverbs 20:22",
+      "Proverbs 24:29",
+      "2 Corinthians 8:21",
+      "1 Thessalonians 5:15"
+    ],
+    "scripture": "Romans 12:17",
+    "series": "Romans Chapter 12",
+    "seriesType": "Expositional",
+    "sourceArchivePath": "Sermon Source Archive/2026/11_08_26/",
+    "speaker": "Jacob Lannom",
+    "stableId": "media-fie2dj",
+    "study": "Romans",
+    "subtitle": "Respect What Is Right",
+    "title": "The Impact of the Gospel In Relationships Pt. 11",
+    "youtubeId": "LIvgpCfud60",
+    "audioUrl": "https://mcdn.podbean.com/mf/web/zn42tfd5ebhv6std/26_11_08_S.mp3",
+    "videoUrl": "https://youtu.be/LIvgpCfud60",
+    "scriptureRaw": "Romans 12:17",
+    "transcriptPaths": {
+      "incomingSrt": "transcripts_incoming/2026-11-08.srt"
+    }
+  },
+  "slideMap": [],
+  "sources": [
+    {
+      "authorityRole": "AUTHORITATIVE_ARCHIVE",
+      "id": "src-original-srt",
+      "kind": "ORIGINAL_SRT",
+      "pathOrName": "originals/2026-11-08.srt",
+      "rightsUse": "CGBC_OWNED_OR_AUTHORIZED",
+      "sha256": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89",
+      "evidenceEligible": true,
+      "notes": "Exact SRT: 756 cues, archived private; automatic captions contain transcription errors."
+    },
+    {
+      "authorityRole": "AUTHORITATIVE_ARCHIVE",
+      "id": "src-original-notes-1",
+      "kind": "ORIGINAL_LOGOS_NOTES",
+      "pathOrName": "originals/The Impact of the Gospel (In Relationships) (11).pdf",
+      "rightsUse": "LINK / REFERENCE ONLY",
+      "sha256": "0a41ed6cfa556bdde6e791c9a1774864b97dc7804bac927b046204762988d2e7",
+      "evidenceEligible": true,
+      "notes": "Nine-page Logos prepared notes, private only; NASB95 verse bodies not reproduced."
+    },
+    {
+      "id": "src-published-rss",
+      "kind": "PUBLISHED_RSS_METADATA",
+      "pathOrName": "data/raw-rss.json",
+      "authorityRole": "METADATA_AUTHORITY",
+      "gitBlobSha": "c955dbde4ad117e7cd31612644c1bffc0a417aa0",
+      "rightsUse": "LINK / REFERENCE ONLY",
+      "evidenceEligible": true
+    },
+    {
+      "id": "src-quote-curation",
+      "kind": "HUMAN_REVIEWED_QUOTE_CONFIG",
+      "pathOrName": "config/quote-curation.json",
+      "authorityRole": "CURATION_AUTHORITY",
+      "gitBlobSha": "552c38646c310c1a3e9703c641053352be277807",
+      "rightsUse": "LINK / REFERENCE ONLY",
+      "evidenceEligible": true
+    },
+    {
+      "id": "src-sotw-jfb",
+      "kind": "HISTORICAL_COMMENTARY_SOURCE",
+      "pathOrName": "SOTW structured-romans-2026-11-12 Jamieson Fausset Brown ROM.12.17",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "evidenceEligible": true,
+      "notes": "Item-level SHA256 e99b125c2ae111d044991d96260a021a55efaffc26ebb91c1ff6e7bf099e8182; historical research comparison only, not directly reproduced."
+    },
+    {
+      "id": "src-sotw-calvin",
+      "kind": "HISTORICAL_COMMENTARY_SOURCE",
+      "pathOrName": "SOTW structured-romans-2026-11-12 John Calvin ROM.12.17",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "evidenceEligible": true,
+      "notes": "Item-level SHA256 c43620d6732d0ddb53a096e8e6f0dd8fe039ad665ff6d36b8e05460f069aca0e; historical research comparison only, not directly reproduced."
+    },
+    {
+      "id": "src-sotw-clarke",
+      "kind": "HISTORICAL_COMMENTARY_SOURCE",
+      "pathOrName": "SOTW structured-romans-2026-11-12 Adam Clarke ROM.12.17",
+      "authorityRole": "EXTERNAL_RESEARCH",
+      "rightsUse": "RESEARCH + SYNTHESIS",
+      "evidenceEligible": true,
+      "notes": "Item-level SHA256 8f5b02d3011af76f0ab2690589554dd3497142613ead2f47d0270685fc5e83bd; historical research comparison only, not directly reproduced."
+    }
+  ],
+  "structure": {
+    "status": "SOURCE_ANCHORED_SRT_CHAPTERS_NOT_MEDIA_SYNC_VERIFIED",
+    "chapterNavigation": [
+      {
+        "id": "media-fie2dj.ch01",
+        "title": "Opening and return to Romans",
+        "order": 1,
+        "startCueId": "1",
+        "endCueId": "30",
+        "startSeconds": 1.266,
+        "endSeconds": 94.683,
+        "scripture": [
+          "ROM"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n001"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch02",
+        "title": "Romans 1–11: the gospel recap",
+        "order": 2,
+        "startCueId": "31",
+        "endCueId": "187",
+        "startSeconds": 95.283,
+        "endSeconds": 546.533,
+        "scripture": [
+          "ROM"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n010"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch03",
+        "title": "Romans 12: living sacrifice and renewed minds",
+        "order": 3,
+        "startCueId": "188",
+        "endCueId": "209",
+        "startSeconds": 547.799,
+        "endSeconds": 600.299,
+        "scripture": [
+          "ROM.12.1-2"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n011"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch04",
+        "title": "The saving gospel and a lesson about sin",
+        "order": 4,
+        "startCueId": "210",
+        "endCueId": "353",
+        "startSeconds": 601.083,
+        "endSeconds": 931.433,
+        "scripture": [
+          "EPH.2"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n020"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch05",
+        "title": "Changed lives and the fruit of salvation",
+        "order": 5,
+        "startCueId": "354",
+        "endCueId": "509",
+        "startSeconds": 932.233,
+        "endSeconds": 1377.533,
+        "scripture": [
+          "ROM.12.1-2"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n012",
+          "media-fie2dj.n021"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch06",
+        "title": "Relational response and Romans 12:17–21",
+        "order": 6,
+        "startCueId": "510",
+        "endCueId": "559",
+        "startSeconds": 1378.45,
+        "endSeconds": 1531.616,
+        "scripture": [
+          "ROM.12.14-21"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n013"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch07",
+        "title": "Do not repay evil for evil",
+        "order": 7,
+        "startCueId": "560",
+        "endCueId": "672",
+        "startSeconds": 1531.683,
+        "endSeconds": 1841.65,
+        "scripture": [
+          "ROM.12.17"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n014",
+          "media-fie2dj.n022"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch08",
+        "title": "Honorable witness before all people",
+        "order": 8,
+        "startCueId": "673",
+        "endCueId": "738",
+        "startSeconds": 1843.333,
+        "endSeconds": 2043.716,
+        "scripture": [
+          "ROM.12.17"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n015"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      },
+      {
+        "id": "media-fie2dj.ch09",
+        "title": "The cost of following Christ",
+        "order": 9,
+        "startCueId": "739",
+        "endCueId": "756",
+        "startSeconds": 2044.033,
+        "endSeconds": 2094.066,
+        "scripture": [
+          "ROM.12.17"
+        ],
+        "basis": "SRT_CUE_ALIGNED",
+        "mediaSyncStatus": "UNVERIFIED_MEDIA_CLOCK",
+        "listenerFacing": true,
+        "source": "originals/2026-11-08.srt",
+        "audioAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "videoAvailability": "PUBLISHED_URL_NOT_TIME_VERIFIED",
+        "nodeRefs": [
+          "media-fie2dj.n016"
+        ],
+        "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+        "scriptureEvidenceStatus": "SCRIPTURE_REFERENCE_GROUNDED_IN_SRT"
+      }
+    ],
+    "scriptureConnections": [
+      {
+        "from": "ROM.12.17",
+        "to": "PRO.20.22",
+        "type": "SUPPORTS",
+        "rationale": "Proverbs warns against personal repaying of evil and waiting on the Lord; Jake reads it to ground Romans 12:17.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "622-624",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "PRO.24.29",
+        "type": "PARALLEL",
+        "rationale": "Both passages reject saying I will do to him as he has done to me; cited in the sermon.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "624-628",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "EXO.21.24",
+        "type": "QUALIFIES",
+        "rationale": "Differentiate civic judicial restitution in Mosaic law from a believer privately taking revenge.",
+        "status": "SUPPORTED_WITH_LEGAL_CONTEXT_QUALIFICATION",
+        "sourceCueRange": "586-598,631-645",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "2CO.8.21",
+        "type": "PARALLEL",
+        "rationale": "Concern for honorable conduct before God and before people is a shared ethical expression.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "646-652,673-674",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "1TH.5.15",
+        "type": "PARALLEL",
+        "rationale": "Explicitly prohibits repaying evil for evil and directs believers to pursue good for all.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "675-677",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "ROM.12.14-16",
+        "type": "EXPLAINS",
+        "rationale": "Read as immediate surrounding exhortation to blessing, sympathy and humble treatment of others.",
+        "status": "SUPPORTED_CONTEXT",
+        "sourceCueRange": "534-541",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "ROM.12.18-21",
+        "type": "EXPLAINS",
+        "rationale": "Verses 18-21 complete the unit with peace, divine vengeance, enemy care and doing good, read aloud but deferred in detailed exposition.",
+        "status": "READ_ALOUD_DETAIL_DEFERRED",
+        "sourceCueRange": "542-559,739-740",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.1-2",
+        "to": "ROM.12.17",
+        "type": "SUPPORTS",
+        "rationale": "God’s mercy and renewed mind ground living response rather than retaliation.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "188-209,510-565",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "EPH.2.1-5",
+        "to": "ROM.12.1-2",
+        "type": "SUPPORTS",
+        "rationale": "Spiritual deadness and new life undergird the gospel transformation application to relational conduct; chapter cited at sermon.",
+        "status": "SOURCE_CITES_EPHESIANS_2_NOT_ALL_VERSES_READ",
+        "sourceCueRange": "240-244,354-388",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      }
+    ],
+    "outline": {
+      "main": "Gospel changes life and relationships; Romans 12:17 forbids personal retaliation and calls for honorable public conduct",
+      "evidence": "LOCKED_PHASE_A"
+    }
+  },
+  "scriptureMap": {
+    "typedConnections": [
+      {
+        "from": "ROM.12.17",
+        "to": "PRO.20.22",
+        "type": "SUPPORTS",
+        "rationale": "Proverbs warns against personal repaying of evil and waiting on the Lord; Jake reads it to ground Romans 12:17.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "622-624",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "PRO.24.29",
+        "type": "PARALLEL",
+        "rationale": "Both passages reject saying I will do to him as he has done to me; cited in the sermon.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "624-628",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "EXO.21.24",
+        "type": "QUALIFIES",
+        "rationale": "Differentiate civic judicial restitution in Mosaic law from a believer privately taking revenge.",
+        "status": "SUPPORTED_WITH_LEGAL_CONTEXT_QUALIFICATION",
+        "sourceCueRange": "586-598,631-645",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "2CO.8.21",
+        "type": "PARALLEL",
+        "rationale": "Concern for honorable conduct before God and before people is a shared ethical expression.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "646-652,673-674",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "1TH.5.15",
+        "type": "PARALLEL",
+        "rationale": "Explicitly prohibits repaying evil for evil and directs believers to pursue good for all.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "675-677",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "ROM.12.14-16",
+        "type": "EXPLAINS",
+        "rationale": "Read as immediate surrounding exhortation to blessing, sympathy and humble treatment of others.",
+        "status": "SUPPORTED_CONTEXT",
+        "sourceCueRange": "534-541",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.17",
+        "to": "ROM.12.18-21",
+        "type": "EXPLAINS",
+        "rationale": "Verses 18-21 complete the unit with peace, divine vengeance, enemy care and doing good, read aloud but deferred in detailed exposition.",
+        "status": "READ_ALOUD_DETAIL_DEFERRED",
+        "sourceCueRange": "542-559,739-740",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "ROM.12.1-2",
+        "to": "ROM.12.17",
+        "type": "SUPPORTS",
+        "rationale": "God’s mercy and renewed mind ground living response rather than retaliation.",
+        "status": "SUPPORTED",
+        "sourceCueRange": "188-209,510-565",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      },
+      {
+        "from": "EPH.2.1-5",
+        "to": "ROM.12.1-2",
+        "type": "SUPPORTS",
+        "rationale": "Spiritual deadness and new life undergird the gospel transformation application to relational conduct; chapter cited at sermon.",
+        "status": "SOURCE_CITES_EPHESIANS_2_NOT_ALL_VERSES_READ",
+        "sourceCueRange": "240-244,354-388",
+        "sourceKind": "ORIGINAL_SRT_AND_SCRIPTURE_CONTEXT"
+      }
+    ],
+    "primary": "ROM.12.17",
+    "context": [
+      "ROM.12.1-2",
+      "ROM.12.14-21"
+    ],
+    "mediaClockStatus": "SRT_ONLY_UNVERIFIED_MEDIA_CLOCK",
+    "sourceEvidenceHash": "37735b1db6df69783c4a226232edd7b6e73381f436f6ff4bb027d5ee53672e89"
+  },
+  "authorCorpus": {
+    "privateContentIncluded": false,
+    "publicSafeOnly": true,
+    "references": [
+      {
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "ref": "media-fie2dj.pr-rom",
+        "status": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED"
+      },
+      {
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "ref": "media-fie2dj.pr-rom12",
+        "status": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED"
+      },
+      {
+        "lane": "JAKE DRAFT SYNTHESIS",
+        "ref": "media-fie2dj.pr-rom1217",
+        "status": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED"
+      }
+    ]
+  }
+}
