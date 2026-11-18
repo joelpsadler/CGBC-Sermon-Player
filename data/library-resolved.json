@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-11-18T12:25:38.072Z",
+  "generatedAt": "2026-11-18T18:06:57.040Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 192,
-    "archiveItems": 192,
-    "videoMatchedItems": 184,
-    "transcriptMatchedItems": 59,
-    "quoteCandidateCount": 4416
+    "rssItems": 193,
+    "archiveItems": 193,
+    "videoMatchedItems": 185,
+    "transcriptMatchedItems": 60,
+    "quoteCandidateCount": 4491
   },
   "totals": {
-    "audioPlaysTotal": 6530,
-    "audioEpisodesTotal": 192
+    "audioPlaysTotal": 6556,
+    "audioEpisodesTotal": 193
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -30,9 +30,9 @@
         "seriesName": "Romans Chapter 12",
         "studyKey": "romans",
         "studyName": "Romans",
-        "detectedFromEpisode": "media-fie2dj",
-        "detectedFromDate": "2026-11-08",
-        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 11 (Respect What Is Right)",
+        "detectedFromEpisode": "media-wqvm4d",
+        "detectedFromDate": "2026-11-15",
+        "detectedFromTitle": "The Impact of the Gospel In Relationships Pt. 12 (Be at Peace with All Men)",
         "source": "auto_detected_by_publish_day_lane"
       },
       "wednesday": {
@@ -69,7 +69,7 @@
         "square": "assets/collections/the-impact-of-the-gospel-in-relationships/square.jpg",
         "wide": "assets/collections/the-impact-of-the-gospel-in-relationships/wide.jpg"
       },
-      "count": 10
+      "count": 11
     },
     {
       "key": "the-tribulation",
@@ -95,6 +95,286 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-wqvm4d",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/xc9pfszxzgjex9gv/26_11_15_S.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/9b7a1f98-24e5-3dc1-9651-e525de10c1f0"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-in-relationships-pt-12-romans-chapter-12/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/the-impact-of-the-gospel-in-relationships-pt-12-romans-chapter-12/"
+      },
+      "title": {
+        "episodeName": "The Impact of the Gospel In Relationships Pt. 12",
+        "subtitle": "Be at Peace with All Men",
+        "display": "The Impact of the Gospel In Relationships Pt. 12 (Be at Peace with All Men)"
+      },
+      "series": {
+        "name": "Romans Chapter 12",
+        "key": "romans-chapter-12",
+        "type": "expositional"
+      },
+      "study": {
+        "name": "Romans",
+        "key": "romans",
+        "type": "book_study"
+      },
+      "scripture": {
+        "raw": "Romans 12:18",
+        "display": "Romans 12:18",
+        "book": "Romans",
+        "bookKey": "romans",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Romans 12:17-21, Genesis 45:1-8, 1 Samuel 24:3-7, 1 Samuel 24:16-19, Acts 7:54-60, Luke 23:34",
+        "display": "Romans 12:17-21, Genesis 45:1-8, 1 Samuel 24:3-7, 1 Samuel 24:16-19, Acts 7:54-60, Luke 23:34",
+        "tokens": [
+          "Romans 12:17-21",
+          "Romans 12:17",
+          "Romans 12:18",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Genesis 45:1-8",
+          "Genesis 45:1",
+          "Genesis 45:2",
+          "Genesis 45:3",
+          "Genesis 45:4",
+          "Genesis 45:5",
+          "Genesis 45:6",
+          "Genesis 45:7",
+          "Genesis 45:8",
+          "1 Samuel 24:3-7",
+          "1 Samuel 24:3",
+          "1 Samuel 24:4",
+          "1 Samuel 24:5",
+          "1 Samuel 24:6",
+          "1 Samuel 24:7",
+          "1 Samuel 24:16-19",
+          "1 Samuel 24:16",
+          "1 Samuel 24:17",
+          "1 Samuel 24:18",
+          "1 Samuel 24:19",
+          "Acts 7:54-60",
+          "Acts 7:54",
+          "Acts 7:55",
+          "Acts 7:56",
+          "Acts 7:57",
+          "Acts 7:58",
+          "Acts 7:59",
+          "Acts 7:60",
+          "Luke 23:34"
+        ],
+        "searchTokens": [
+          "Romans 12:18",
+          "Romans 12:17-21",
+          "Romans 12:17",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Genesis 45:1-8",
+          "Genesis 45:1",
+          "Genesis 45:2",
+          "Genesis 45:3",
+          "Genesis 45:4",
+          "Genesis 45:5",
+          "Genesis 45:6",
+          "Genesis 45:7",
+          "Genesis 45:8",
+          "1 Samuel 24:3-7",
+          "1 Samuel 24:3",
+          "1 Samuel 24:4",
+          "1 Samuel 24:5",
+          "1 Samuel 24:6",
+          "1 Samuel 24:7",
+          "1 Samuel 24:16-19",
+          "1 Samuel 24:16",
+          "1 Samuel 24:17",
+          "1 Samuel 24:18",
+          "1 Samuel 24:19",
+          "Acts 7:54-60",
+          "Acts 7:54",
+          "Acts 7:55",
+          "Acts 7:56",
+          "Acts 7:57",
+          "Acts 7:58",
+          "Acts 7:59",
+          "Acts 7:60",
+          "Luke 23:34"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Romans 12:18",
+          "Romans 12:17-21",
+          "Romans 12:17",
+          "Romans 12:19",
+          "Romans 12:20",
+          "Romans 12:21",
+          "Genesis 45:1-8",
+          "Genesis 45:1",
+          "Genesis 45:2",
+          "Genesis 45:3",
+          "Genesis 45:4",
+          "Genesis 45:5",
+          "Genesis 45:6",
+          "Genesis 45:7",
+          "Genesis 45:8",
+          "1 Samuel 24:3-7",
+          "1 Samuel 24:3",
+          "1 Samuel 24:4",
+          "1 Samuel 24:5",
+          "1 Samuel 24:6",
+          "1 Samuel 24:7",
+          "1 Samuel 24:16-19",
+          "1 Samuel 24:16",
+          "1 Samuel 24:17",
+          "1 Samuel 24:18",
+          "1 Samuel 24:19",
+          "Acts 7:54-60",
+          "Acts 7:54",
+          "Acts 7:55",
+          "Acts 7:56",
+          "Acts 7:57",
+          "Acts 7:58",
+          "Acts 7:59",
+          "Acts 7:60",
+          "Luke 23:34"
+        ],
+        "hasTranscriptText": true
+      },
+      "collections": [
+        {
+          "name": "The Impact of the Gospel In Relationships",
+          "key": "the-impact-of-the-gospel-in-relationships",
+          "description": "",
+          "sortOrder": 999,
+          "art": {
+            "square": "assets/collections/the-impact-of-the-gospel-in-relationships/square.jpg",
+            "wide": "assets/collections/the-impact-of-the-gospel-in-relationships/wide.jpg"
+          },
+          "itemTitle": "",
+          "itemSortOrder": null,
+          "collectionItemTitle": "",
+          "collectionItemOrder": null
+        }
+      ],
+      "bookTags": [
+        {
+          "name": "Romans",
+          "key": "romans"
+        },
+        {
+          "name": "Genesis",
+          "key": "genesis"
+        },
+        {
+          "name": "1 Samuel",
+          "key": "1-samuel"
+        },
+        {
+          "name": "Acts",
+          "key": "acts"
+        },
+        {
+          "name": "Luke",
+          "key": "luke"
+        }
+      ],
+      "speaker": "Pastor Jacob Lannom",
+      "date": {
+        "raw": "11/15/2026",
+        "iso": "2026-11-15",
+        "year": 2026,
+        "month": 11,
+        "monthName": "November",
+        "day": 15
+      },
+      "transcript": {
+        "hasTranscript": true,
+        "defaultLanguage": "en",
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-11-15.srt",
+            "cleanFile": "transcripts_clean/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.srt",
+            "displayFile": "transcripts_display/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.srt",
+            "jsonFile": "data/transcripts/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.json",
+            "displayJsonFile": "data/transcripts/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.display.json",
+            "segmentCount": 691,
+            "displaySegmentCount": 598
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-11-15.srt",
+        "cleanFile": "transcripts_clean/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.srt",
+        "displayFile": "transcripts_display/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.srt",
+        "jsonFile": "data/transcripts/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.json",
+        "displayJsonFile": "data/transcripts/en/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.display.json",
+        "segmentCount": 691,
+        "displaySegmentCount": 598
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/xc9pfszxzgjex9gv/26_11_15_S.mp3",
+        "plays": 0,
+        "durationSeconds": 2082,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "XxYUGD-1m-g",
+        "url": "https://www.youtube.com/watch?v=XxYUGD-1m-g",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/261115-square.jpg",
+          "wide": "https://i.ytimg.com/vi/XxYUGD-1m-g/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_12_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/j_xzfVXBG9M/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Romans_1_Square_3Kx3K_Web.jpg",
+          "wide": "https://i.ytimg.com/vi/_VTwr4VPqXA/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "romans-chapter-12"
+        ],
+        "studies": [
+          "romans"
+        ],
+        "bibleBooks": [
+          "romans",
+          "genesis",
+          "1-samuel",
+          "acts",
+          "luke"
+        ],
+        "collections": [
+          "the-impact-of-the-gospel-in-relationships"
+        ],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-11"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "series_group"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-fie2dj",
       "sourceKey": {
@@ -372,7 +652,7 @@
         "hasVideo": true,
         "youtubeId": "LIvgpCfud60",
         "url": "https://www.youtube.com/watch?v=LIvgpCfud60",
-        "views": 12
+        "views": 14
       },
       "art": {
         "episode": {
@@ -697,7 +977,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/wsb8w3nfhv6ujccp/26_11_04_W.mp3",
-        "plays": 4,
+        "plays": 5,
         "durationSeconds": 1820,
         "statsMatchStrategy": "media_url"
       },
@@ -980,7 +1260,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/5g483tv5qct8nhyi/26_11_01_S.mp3",
-        "plays": 7,
+        "plays": 8,
         "durationSeconds": 1999,
         "statsMatchStrategy": "media_url"
       },
@@ -1232,7 +1512,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/xgy7eynt2esd2kdm/26_10_28_W.mp3",
-        "plays": 7,
+        "plays": 8,
         "durationSeconds": 1542,
         "statsMatchStrategy": "media_url"
       },
@@ -1443,7 +1723,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8ns8ypx92fu2hr5e/26_10_25_S.mp3",
-        "plays": 7,
+        "plays": 13,
         "durationSeconds": 1975,
         "statsMatchStrategy": "media_url"
       },
@@ -1869,7 +2149,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/j4hg95bhedgc7zhs/26_10_21_W.mp3",
-        "plays": 6,
+        "plays": 7,
         "durationSeconds": 1213,
         "statsMatchStrategy": "media_url"
       },
@@ -2136,7 +2416,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/qaz6j955373shghp/26_10_18_S.mp3",
-        "plays": 7,
+        "plays": 9,
         "durationSeconds": 2205,
         "statsMatchStrategy": "media_url"
       },
@@ -2364,7 +2644,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/6e3minvpqh4a89ck/261014.mp3",
-        "plays": 12,
+        "plays": 13,
         "durationSeconds": 1498,
         "statsMatchStrategy": "media_url"
       },
@@ -2577,7 +2857,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/3exbq5b5w2bcdezc/26_10_04_S.mp3",
-        "plays": 21,
+        "plays": 23,
         "durationSeconds": 2138,
         "statsMatchStrategy": "media_url"
       },
@@ -2863,7 +3143,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/rmuppkjdz8fnaqer/26_09_30_W.mp3",
-        "plays": 15,
+        "plays": 16,
         "durationSeconds": 1393,
         "statsMatchStrategy": "media_url"
       },
@@ -2992,7 +3272,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ngrc6gyridfuvuiq/26_09_28_Frontline.mp3",
-        "plays": 9,
+        "plays": 14,
         "durationSeconds": 5951,
         "statsMatchStrategy": "media_url"
       },
@@ -3246,7 +3526,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/z5w4nc97dfdbnqgh/26_09_27_S.mp3",
-        "plays": 12,
+        "plays": 13,
         "durationSeconds": 2106,
         "statsMatchStrategy": "media_url"
       },
@@ -3805,7 +4085,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/8hg9yasrnew47ijn/26_09_16_W.mp3",
-        "plays": 7,
+        "plays": 9,
         "durationSeconds": 1521,
         "statsMatchStrategy": "media_url"
       },
@@ -11272,7 +11552,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/ggke978k4bgrnpkn/David.mp3",
-        "plays": 18,
+        "plays": 19,
         "durationSeconds": 2630,
         "statsMatchStrategy": "media_url"
       },
@@ -13605,7 +13885,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/mg5yakctt2c7z8cm/42226_W_PC8l5zh.mp3",
-        "plays": 77,
+        "plays": 78,
         "durationSeconds": 1774,
         "statsMatchStrategy": "media_url"
       },
