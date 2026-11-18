@@ -1,0 +1,402 @@
+{
+  "adapter": {
+    "playerBaseUrl": null,
+    "resolutionStatus": "ADAPTER_NOT_VERIFIED",
+    "verifiedPlayerSourceBlob": null
+  },
+  "chapters": [
+    {
+      "endCueId": "39",
+      "endSeconds": 119.116,
+      "id": "media-wqvm4d.ch01",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch01",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch01",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n001"
+      ],
+      "order": 1,
+      "scriptureScopes": [
+        "ROM.12.17-21"
+      ],
+      "startCueId": "1",
+      "startSeconds": 1.266,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Reading Romans 12 and introducing gospel-shaped relationships"
+    },
+    {
+      "endCueId": "127",
+      "endSeconds": 362.033,
+      "id": "media-wqvm4d.ch02",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch02",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 120.549,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch02",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 120.549,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n002"
+      ],
+      "order": 2,
+      "scriptureScopes": [
+        "ROM.12.17",
+        "GEN.45.1-8"
+      ],
+      "startCueId": "40",
+      "startSeconds": 120.549,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Joseph: mercy instead of vengeance"
+    },
+    {
+      "endCueId": "253",
+      "endSeconds": 722.516,
+      "id": "media-wqvm4d.ch03",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch03",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 362.833,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch03",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 362.833,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n003"
+      ],
+      "order": 3,
+      "scriptureScopes": [
+        "1SA.24.3-7",
+        "1SA.24.16-19",
+        "ROM.12.17"
+      ],
+      "startCueId": "128",
+      "startSeconds": 362.833,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "David refuses to return evil for evil"
+    },
+    {
+      "endCueId": "350",
+      "endSeconds": 1000.75,
+      "id": "media-wqvm4d.ch04",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch04",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 722.533,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch04",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 722.533,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n004"
+      ],
+      "order": 4,
+      "scriptureScopes": [
+        "ACT.7.54-60",
+        "LUK.23.34",
+        "ROM.12.17"
+      ],
+      "startCueId": "254",
+      "startSeconds": 722.533,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Stephen and Jesus respond to violence with forgiveness"
+    },
+    {
+      "endCueId": "407",
+      "endSeconds": 1145.283,
+      "id": "media-wqvm4d.ch05",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch05",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1001.583,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch05",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1001.583,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n005"
+      ],
+      "order": 5,
+      "scriptureScopes": [
+        "ROM.12.18"
+      ],
+      "startCueId": "351",
+      "startSeconds": 1001.583,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Romans 12:18: peace without compromising truth"
+    },
+    {
+      "endCueId": "573",
+      "endSeconds": 1683.783,
+      "id": "media-wqvm4d.ch06",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch06",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1146.666,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch06",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1146.666,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n006"
+      ],
+      "order": 6,
+      "scriptureScopes": [
+        "ROM.12.18"
+      ],
+      "startCueId": "408",
+      "startSeconds": 1146.666,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Contemporary concerns and religious persecution"
+    },
+    {
+      "endCueId": "615",
+      "endSeconds": 1825.133,
+      "id": "media-wqvm4d.ch07",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch07",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1689.183,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch07",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1689.183,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n007"
+      ],
+      "order": 7,
+      "scriptureScopes": [
+        "ROM.12.18"
+      ],
+      "startCueId": "574",
+      "startSeconds": 1689.183,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Conviction, love, and sharing the gospel"
+    },
+    {
+      "endCueId": "646",
+      "endSeconds": 1921.15,
+      "id": "media-wqvm4d.ch08",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch08",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1826.183,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch08",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1826.183,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n008"
+      ],
+      "order": 8,
+      "scriptureScopes": [
+        "ROM.12.18"
+      ],
+      "startCueId": "616",
+      "startSeconds": 1826.183,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Seek peace instead of becoming a source of conflict"
+    },
+    {
+      "endCueId": "691",
+      "endSeconds": 2060.166,
+      "id": "media-wqvm4d.ch09",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch09",
+            "preferredMedium": "audio",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1924.2,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-wqvm4d.ch09",
+            "preferredMedium": "video",
+            "stableId": "media-wqvm4d",
+            "startSeconds": 1924.2,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-wqvm4d.n009"
+      ],
+      "order": 9,
+      "scriptureScopes": [
+        "ROM.12.18"
+      ],
+      "startCueId": "647",
+      "startSeconds": 1924.2,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Harmony, service, and the final appeal"
+    }
+  ],
+  "kind": "DERIVED_SERMON_CHAPTER_NAVIGATION_NOT_CANONICAL_MEANING",
+  "media": {
+    "audioAvailable": true,
+    "audioSourceUrl": "https://mcdn.podbean.com/mf/web/xc9pfszxzgjex9gv/26_11_15_S.mp3",
+    "durationSeconds": 2082.0,
+    "videoAvailable": true,
+    "videoSourceUrl": "https://youtu.be/XxYUGD-1m-g",
+    "youtubeId": "XxYUGD-1m-g"
+  },
+  "schemaVersion": "cgbc-sermon-chapter-markers-v1",
+  "source": {
+    "canonicalInfoMapPath": "knowledge/2026/2026-11-15_the-impact-of-the-gospel-in-relationships-pt-12.json",
+    "canonicalInfoMapSha256": "817a959bd5b212f25fd5c0055808d4ae5ecdf19cfe8f7d5bbee3cc43aa88e133",
+    "canonicalSourceRepository": "joelpsadler/CGBC-Sermon-Player",
+    "sermonDate": "2026-11-15",
+    "sermonStableId": "media-wqvm4d",
+    "sourceTimeClock": "ORIGINAL_SRT"
+  },
+  "status": "EXPORT_READY_PLAYER_INTEGRATION_NOT_VERIFIED"
+}
