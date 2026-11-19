@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-19T17:08:16.761Z",
+  "generatedAt": "2026-11-19T17:13:30.683Z",
   "version": 1,
   "sourceSummary": {
     "rssItems": 194,
     "archiveItems": 194,
     "videoMatchedItems": 186,
-    "transcriptMatchedItems": 60,
-    "quoteCandidateCount": 4494
+    "transcriptMatchedItems": 61,
+    "quoteCandidateCount": 4569
   },
   "totals": {
     "audioPlaysTotal": 6567,
@@ -274,7 +274,7 @@
           "1 John 5:12",
           "1 John 5:13"
         ],
-        "hasTranscriptText": false
+        "hasTranscriptText": true
       },
       "collections": [],
       "bookTags": [
@@ -325,16 +325,27 @@
         "day": 18
       },
       "transcript": {
-        "hasTranscript": false,
+        "hasTranscript": true,
         "defaultLanguage": "en",
-        "languages": {},
-        "incomingFile": null,
-        "cleanFile": null,
-        "displayFile": null,
-        "jsonFile": null,
-        "displayJsonFile": null,
-        "segmentCount": 0,
-        "displaySegmentCount": 0
+        "languages": {
+          "en": {
+            "language": "en",
+            "incomingFile": "transcripts_incoming/2026-11-18.srt",
+            "cleanFile": "transcripts_clean/en/2026-11-18_the-tribulation-pt-19.srt",
+            "displayFile": "transcripts_display/en/2026-11-18_the-tribulation-pt-19.srt",
+            "jsonFile": "data/transcripts/en/2026-11-18_the-tribulation-pt-19.json",
+            "displayJsonFile": "data/transcripts/en/2026-11-18_the-tribulation-pt-19.display.json",
+            "segmentCount": 609,
+            "displaySegmentCount": 514
+          }
+        },
+        "incomingFile": "transcripts_incoming/2026-11-18.srt",
+        "cleanFile": "transcripts_clean/en/2026-11-18_the-tribulation-pt-19.srt",
+        "displayFile": "transcripts_display/en/2026-11-18_the-tribulation-pt-19.srt",
+        "jsonFile": "data/transcripts/en/2026-11-18_the-tribulation-pt-19.json",
+        "displayJsonFile": "data/transcripts/en/2026-11-18_the-tribulation-pt-19.display.json",
+        "segmentCount": 609,
+        "displaySegmentCount": 514
       },
       "audio": {
         "hasAudio": true,
@@ -629,7 +640,7 @@
         "hasVideo": true,
         "youtubeId": "XxYUGD-1m-g",
         "url": "https://www.youtube.com/watch?v=XxYUGD-1m-g",
-        "views": 6
+        "views": 5
       },
       "art": {
         "episode": {
@@ -955,7 +966,7 @@
         "hasVideo": true,
         "youtubeId": "LIvgpCfud60",
         "url": "https://www.youtube.com/watch?v=LIvgpCfud60",
-        "views": 31
+        "views": 33
       },
       "art": {
         "episode": {
