@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-11-19T10:52:40.780Z",
+  "generatedAt": "2026-11-19T17:08:16.761Z",
   "version": 1,
   "sourceSummary": {
-    "rssItems": 193,
-    "archiveItems": 193,
-    "videoMatchedItems": 185,
+    "rssItems": 194,
+    "archiveItems": 194,
+    "videoMatchedItems": 186,
     "transcriptMatchedItems": 60,
     "quoteCandidateCount": 4494
   },
   "totals": {
-    "audioPlaysTotal": 6565,
-    "audioEpisodesTotal": 193
+    "audioPlaysTotal": 6567,
+    "audioEpisodesTotal": 194
   },
   "current": {
     "strategy": "auto_detect_by_sunday_wednesday_lanes",
@@ -41,9 +41,9 @@
         "seriesName": "The Tribulation",
         "studyKey": "eschatology",
         "studyName": "Eschatology",
-        "detectedFromEpisode": "media-f9oh8t",
-        "detectedFromDate": "2026-11-04",
-        "detectedFromTitle": "The Tribulation Pt. 17 (The Doctrine of Eternal Torment)",
+        "detectedFromEpisode": "media-4vosdo",
+        "detectedFromDate": "2026-11-18",
+        "detectedFromTitle": "The Tribulation Pt. 19 (Harvests - The Grain and the Grapes)",
         "source": "auto_detected_by_publish_day_lane"
       }
     }
@@ -95,6 +95,309 @@
     }
   ],
   "items": [
+    {
+      "stableId": "media-4vosdo",
+      "sourceKey": {
+        "mediaUrl": "https://mcdn.podbean.com/mf/web/cgat4a2ab5m5zpiz/26_11_18_W.mp3",
+        "rssGuid": "broJacobcedargrovebaptist.podbean.com/c70cde58-f369-365d-aaa8-7048f883badd"
+      },
+      "links": {
+        "episodeUrl": "https://broJacobcedargrovebaptist.podbean.com/e/1118_w/",
+        "shareUrl": "https://brojacobcedargrovebaptist.podbean.com/e/1118_w/"
+      },
+      "title": {
+        "episodeName": "The Tribulation Pt. 19",
+        "subtitle": "Harvests - The Grain and the Grapes",
+        "display": "The Tribulation Pt. 19 (Harvests - The Grain and the Grapes)"
+      },
+      "series": {
+        "name": "The Tribulation",
+        "key": "the-tribulation",
+        "type": "topical"
+      },
+      "study": {
+        "name": "Eschatology",
+        "key": "eschatology",
+        "type": "topical_study"
+      },
+      "scripture": {
+        "raw": "Revelation 14:14-20",
+        "display": "Revelation 14:14-20",
+        "book": "Revelation",
+        "bookKey": "revelation",
+        "isVarious": false
+      },
+      "references": {
+        "raw": "Colossians 1:15-16, 1 Thessalonians 4:16-18, Isaiah 66:15-16, Malachi 3:2-3, 1 Kings 18:20-39, Isaiah 63:3, Joel 3:13, Hebrews 13:12, 1 John 5:12-13",
+        "display": "Colossians 1:15-16, 1 Thessalonians 4:16-18, Isaiah 66:15-16, Malachi 3:2-3, 1 Kings 18:20-39, Isaiah 63:3, Joel 3:13, Hebrews 13:12, 1 John 5:12-13",
+        "tokens": [
+          "Colossians 1:15-16",
+          "Colossians 1:15",
+          "Colossians 1:16",
+          "1 Thessalonians 4:16-18",
+          "1 Thessalonians 4:16",
+          "1 Thessalonians 4:17",
+          "1 Thessalonians 4:18",
+          "Isaiah 66:15-16",
+          "Isaiah 66:15",
+          "Isaiah 66:16",
+          "Malachi 3:2-3",
+          "Malachi 3:2",
+          "Malachi 3:3",
+          "1 Kings 18:20-39",
+          "1 Kings 18:20",
+          "1 Kings 18:21",
+          "1 Kings 18:22",
+          "1 Kings 18:23",
+          "1 Kings 18:24",
+          "1 Kings 18:25",
+          "1 Kings 18:26",
+          "1 Kings 18:27",
+          "1 Kings 18:28",
+          "1 Kings 18:29",
+          "1 Kings 18:30",
+          "1 Kings 18:31",
+          "1 Kings 18:32",
+          "1 Kings 18:33",
+          "1 Kings 18:34",
+          "1 Kings 18:35",
+          "1 Kings 18:36",
+          "1 Kings 18:37",
+          "1 Kings 18:38",
+          "1 Kings 18:39",
+          "Isaiah 63:3",
+          "Joel 3:13",
+          "Hebrews 13:12",
+          "1 John 5:12-13",
+          "1 John 5:12",
+          "1 John 5:13"
+        ],
+        "searchTokens": [
+          "Revelation 14:14-20",
+          "Revelation 14:14",
+          "Revelation 14:15",
+          "Revelation 14:16",
+          "Revelation 14:17",
+          "Revelation 14:18",
+          "Revelation 14:19",
+          "Revelation 14:20",
+          "Colossians 1:15-16",
+          "Colossians 1:15",
+          "Colossians 1:16",
+          "1 Thessalonians 4:16-18",
+          "1 Thessalonians 4:16",
+          "1 Thessalonians 4:17",
+          "1 Thessalonians 4:18",
+          "Isaiah 66:15-16",
+          "Isaiah 66:15",
+          "Isaiah 66:16",
+          "Malachi 3:2-3",
+          "Malachi 3:2",
+          "Malachi 3:3",
+          "1 Kings 18:20-39",
+          "1 Kings 18:20",
+          "1 Kings 18:21",
+          "1 Kings 18:22",
+          "1 Kings 18:23",
+          "1 Kings 18:24",
+          "1 Kings 18:25",
+          "1 Kings 18:26",
+          "1 Kings 18:27",
+          "1 Kings 18:28",
+          "1 Kings 18:29",
+          "1 Kings 18:30",
+          "1 Kings 18:31",
+          "1 Kings 18:32",
+          "1 Kings 18:33",
+          "1 Kings 18:34",
+          "1 Kings 18:35",
+          "1 Kings 18:36",
+          "1 Kings 18:37",
+          "1 Kings 18:38",
+          "1 Kings 18:39",
+          "Isaiah 63:3",
+          "Joel 3:13",
+          "Hebrews 13:12",
+          "1 John 5:12-13",
+          "1 John 5:12",
+          "1 John 5:13"
+        ]
+      },
+      "search": {
+        "scriptureTokens": [
+          "Revelation 14:14-20",
+          "Revelation 14:14",
+          "Revelation 14:15",
+          "Revelation 14:16",
+          "Revelation 14:17",
+          "Revelation 14:18",
+          "Revelation 14:19",
+          "Revelation 14:20",
+          "Colossians 1:15-16",
+          "Colossians 1:15",
+          "Colossians 1:16",
+          "1 Thessalonians 4:16-18",
+          "1 Thessalonians 4:16",
+          "1 Thessalonians 4:17",
+          "1 Thessalonians 4:18",
+          "Isaiah 66:15-16",
+          "Isaiah 66:15",
+          "Isaiah 66:16",
+          "Malachi 3:2-3",
+          "Malachi 3:2",
+          "Malachi 3:3",
+          "1 Kings 18:20-39",
+          "1 Kings 18:20",
+          "1 Kings 18:21",
+          "1 Kings 18:22",
+          "1 Kings 18:23",
+          "1 Kings 18:24",
+          "1 Kings 18:25",
+          "1 Kings 18:26",
+          "1 Kings 18:27",
+          "1 Kings 18:28",
+          "1 Kings 18:29",
+          "1 Kings 18:30",
+          "1 Kings 18:31",
+          "1 Kings 18:32",
+          "1 Kings 18:33",
+          "1 Kings 18:34",
+          "1 Kings 18:35",
+          "1 Kings 18:36",
+          "1 Kings 18:37",
+          "1 Kings 18:38",
+          "1 Kings 18:39",
+          "Isaiah 63:3",
+          "Joel 3:13",
+          "Hebrews 13:12",
+          "1 John 5:12-13",
+          "1 John 5:12",
+          "1 John 5:13"
+        ],
+        "hasTranscriptText": false
+      },
+      "collections": [],
+      "bookTags": [
+        {
+          "name": "Revelation",
+          "key": "revelation"
+        },
+        {
+          "name": "Colossians",
+          "key": "colossians"
+        },
+        {
+          "name": "1 Thessalonians",
+          "key": "1-thessalonians"
+        },
+        {
+          "name": "Isaiah",
+          "key": "isaiah"
+        },
+        {
+          "name": "Malachi",
+          "key": "malachi"
+        },
+        {
+          "name": "1 Kings",
+          "key": "1-kings"
+        },
+        {
+          "name": "Joel",
+          "key": "joel"
+        },
+        {
+          "name": "Hebrews",
+          "key": "hebrews"
+        },
+        {
+          "name": "1 John",
+          "key": "1-john"
+        }
+      ],
+      "speaker": "Jacob Lannom",
+      "date": {
+        "raw": "11/18/2026",
+        "iso": "2026-11-18",
+        "year": 2026,
+        "month": 11,
+        "monthName": "November",
+        "day": 18
+      },
+      "transcript": {
+        "hasTranscript": false,
+        "defaultLanguage": "en",
+        "languages": {},
+        "incomingFile": null,
+        "cleanFile": null,
+        "displayFile": null,
+        "jsonFile": null,
+        "displayJsonFile": null,
+        "segmentCount": 0,
+        "displaySegmentCount": 0
+      },
+      "audio": {
+        "hasAudio": true,
+        "url": "https://mcdn.podbean.com/mf/web/cgat4a2ab5m5zpiz/26_11_18_W.mp3",
+        "plays": 0,
+        "durationSeconds": 1732,
+        "statsMatchStrategy": "media_url"
+      },
+      "video": {
+        "hasVideo": true,
+        "youtubeId": "H3Env0L2CSM",
+        "url": "https://www.youtube.com/watch?v=H3Env0L2CSM",
+        "views": 0
+      },
+      "art": {
+        "episode": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/261118_PC.jpg",
+          "wide": "https://i.ytimg.com/vi/H3Env0L2CSM/maxresdefault.jpg"
+        },
+        "series": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/16.jpg",
+          "wide": "https://i.ytimg.com/vi/on7PfLd0Tcc/maxresdefault.jpg"
+        },
+        "study": {
+          "square": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog17428071/Eschatology_Book_1_1_PC6gdrj.jpg",
+          "wide": "https://i.ytimg.com/vi/M9RQAT9yc2Q/maxresdefault.jpg"
+        }
+      },
+      "memberships": {
+        "series": [
+          "the-tribulation"
+        ],
+        "studies": [
+          "eschatology"
+        ],
+        "bibleBooks": [
+          "revelation",
+          "colossians",
+          "1-thessalonians",
+          "isaiah",
+          "malachi",
+          "1-kings",
+          "joel",
+          "hebrews",
+          "1-john"
+        ],
+        "collections": [],
+        "byYear": [
+          "2026"
+        ],
+        "byMonth": [
+          "2026-11"
+        ]
+      },
+      "presentation": {
+        "bibleBooksMode": "episode_only"
+      },
+      "flags": {
+        "isStandaloneEpisode": false,
+        "includeInAudioTotals": true,
+        "includeInVideoTotals": true
+      }
+    },
     {
       "stableId": "media-wqvm4d",
       "sourceKey": {
@@ -326,7 +629,7 @@
         "hasVideo": true,
         "youtubeId": "XxYUGD-1m-g",
         "url": "https://www.youtube.com/watch?v=XxYUGD-1m-g",
-        "views": 5
+        "views": 6
       },
       "art": {
         "episode": {
@@ -652,7 +955,7 @@
         "hasVideo": true,
         "youtubeId": "LIvgpCfud60",
         "url": "https://www.youtube.com/watch?v=LIvgpCfud60",
-        "views": 27
+        "views": 31
       },
       "art": {
         "episode": {
@@ -26702,7 +27005,7 @@
       "audio": {
         "hasAudio": true,
         "url": "https://mcdn.podbean.com/mf/web/uqit7qga4s6ys3ms/05_26_24_Results_of_the_Merciful_Wrath_of_God7qbip.mp3",
-        "plays": 33,
+        "plays": 35,
         "durationSeconds": 2064,
         "statsMatchStrategy": "media_url"
       },
