@@ -1,0 +1,445 @@
+{
+  "adapter": {
+    "playerBaseUrl": null,
+    "resolutionStatus": "ADAPTER_NOT_VERIFIED",
+    "verifiedPlayerSourceBlob": null
+  },
+  "chapters": [
+    {
+      "endCueId": "45",
+      "endSeconds": 144.3,
+      "id": "media-4vosdo.ch01",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch01",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch01",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1.266,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n001"
+      ],
+      "order": 1,
+      "scriptureScopes": [
+        "REV.14.14-16"
+      ],
+      "startCueId": "1",
+      "startSeconds": 1.266,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Christ Presides over the Harvest"
+    },
+    {
+      "endCueId": "99",
+      "endSeconds": 293.35,
+      "id": "media-4vosdo.ch02",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch02",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 144.366,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch02",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 144.366,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n002"
+      ],
+      "order": 2,
+      "scriptureScopes": [
+        "REV.14.16",
+        "1TH.4.16-18"
+      ],
+      "startCueId": "46",
+      "startSeconds": 144.366,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The First Harvest and the Gathering of Believers"
+    },
+    {
+      "endCueId": "166",
+      "endSeconds": 478.966,
+      "id": "media-4vosdo.ch03",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch03",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 293.466,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch03",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 293.466,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n003"
+      ],
+      "order": 3,
+      "scriptureScopes": [
+        "REV.14.17-20"
+      ],
+      "startCueId": "100",
+      "startSeconds": 293.466,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The Grape Vintage and Judgment"
+    },
+    {
+      "endCueId": "207",
+      "endSeconds": 598.866,
+      "id": "media-4vosdo.ch04",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch04",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 480.133,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch04",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 480.133,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n004"
+      ],
+      "order": 4,
+      "scriptureScopes": [
+        "REV.14.18",
+        "ISA.66.15-16"
+      ],
+      "startCueId": "167",
+      "startSeconds": 480.133,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The Angel Who Has Authority over Fire"
+    },
+    {
+      "endCueId": "263",
+      "endSeconds": 742.666,
+      "id": "media-4vosdo.ch05",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch05",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 599.7,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch05",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 599.7,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n005"
+      ],
+      "order": 5,
+      "scriptureScopes": [
+        "REV.14.18",
+        "MAL.3.2-3"
+      ],
+      "startCueId": "208",
+      "startSeconds": 599.7,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Refinement Is Not the Winepress of Wrath"
+    },
+    {
+      "endCueId": "299",
+      "endSeconds": 852.0,
+      "id": "media-4vosdo.ch06",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch06",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 743.649,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch06",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 743.649,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n006"
+      ],
+      "order": 6,
+      "scriptureScopes": [
+        "REV.14.19",
+        "ISA.63.3",
+        "JOL.3.13"
+      ],
+      "startCueId": "264",
+      "startSeconds": 743.649,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The Winepress and the Prophets"
+    },
+    {
+      "endCueId": "397",
+      "endSeconds": 1133.583,
+      "id": "media-4vosdo.ch07",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch07",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 852.066,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch07",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 852.066,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n007"
+      ],
+      "order": 7,
+      "scriptureScopes": [
+        "REV.14.19-20",
+        "HEB.13.11-13"
+      ],
+      "startCueId": "300",
+      "startSeconds": 852.066,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Wrath, the City, and Christ Outside the Gate"
+    },
+    {
+      "endCueId": "422",
+      "endSeconds": 1212.066,
+      "id": "media-4vosdo.ch08",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch08",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1133.65,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch08",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1133.65,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n008"
+      ],
+      "order": 8,
+      "scriptureScopes": [
+        "REV.14.20"
+      ],
+      "startCueId": "398",
+      "startSeconds": 1133.65,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "The Blood and the Scale of Judgment"
+    },
+    {
+      "endCueId": "512",
+      "endSeconds": 1452.65,
+      "id": "media-4vosdo.ch09",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch09",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1214.583,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch09",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1214.583,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n009"
+      ],
+      "order": 9,
+      "scriptureScopes": [
+        "REV.14.17-20"
+      ],
+      "startCueId": "423",
+      "startSeconds": 1214.583,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "God Keeps His Promises"
+    },
+    {
+      "endCueId": "609",
+      "endSeconds": 1710.049,
+      "id": "media-4vosdo.ch10",
+      "links": {
+        "audio": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch10",
+            "preferredMedium": "audio",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1452.733,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        },
+        "video": {
+          "available": true,
+          "resolvedUrl": null,
+          "target": {
+            "chapterId": "media-4vosdo.ch10",
+            "preferredMedium": "video",
+            "stableId": "media-4vosdo",
+            "startSeconds": 1452.733,
+            "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED"
+          }
+        }
+      },
+      "nodeRefs": [
+        "media-4vosdo.n010"
+      ],
+      "order": 10,
+      "scriptureScopes": [
+        "1JN.5.12-13",
+        "REV.14.14-20"
+      ],
+      "startCueId": "513",
+      "startSeconds": 1452.733,
+      "syncStatus": "SRT_CUE_ALIGNED_NOT_MEDIA_VERIFIED",
+      "timeBasis": "SRT_CUE_ALIGNED",
+      "title": "Assurance and Gospel Witness"
+    }
+  ],
+  "kind": "DERIVED_SERMON_CHAPTER_NAVIGATION_NOT_CANONICAL_MEANING",
+  "media": {
+    "audioAvailable": true,
+    "audioSourceUrl": "https://mcdn.podbean.com/mf/web/cgat4a2ab5m5zpiz/26_11_18_W.mp3",
+    "durationSeconds": 1732.0,
+    "videoAvailable": true,
+    "videoSourceUrl": "https://www.youtube.com/watch?v=H3Env0L2CSM",
+    "youtubeId": "H3Env0L2CSM"
+  },
+  "schemaVersion": "cgbc-sermon-chapter-markers-v1",
+  "source": {
+    "canonicalInfoMapPath": "knowledge/2026/2026-11-18_the-tribulation-pt-19.json",
+    "canonicalInfoMapSha256": "ee1ec85a3fad5fed523f35409c7a91e75432bae0eb51d0cdc63dfa3c0fcbed57",
+    "canonicalSourceRepository": "joelpsadler/CGBC-Sermon-Player",
+    "sermonDate": "2026-11-18",
+    "sermonStableId": "media-4vosdo",
+    "sourceTimeClock": "ORIGINAL_SRT"
+  },
+  "status": "EXPORT_READY_PLAYER_INTEGRATION_NOT_VERIFIED"
+}

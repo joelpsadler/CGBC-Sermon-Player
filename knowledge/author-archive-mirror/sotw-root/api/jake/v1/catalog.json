@@ -22,6 +22,12 @@
       "path": "api/jacob-lannom/v1/source-records/media-wqvm4d.json",
       "sourceSHA256": "99ad9a95ec0f7332e90b9917ac4be756f8ea04d2f835d462efce7c589a03621b",
       "status": "OWNER_CONTENT_APPROVED_NOT_INSTALLED"
+    },
+    {
+      "sermonId": "media-4vosdo",
+      "path": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sourceSHA256": "38c6dcd33c2f57c5865d114eebabb279ef1041cc14953aeb0c06e850ab8d1ebd",
+      "status": "OWNER_CONTENT_APPROVED_NOT_INSTALLED"
     }
   ],
   "scopePolicy": "Canonical OSIS scope keys apply unchanged to ASV1901, KJV1769, BSB, and Webster1833; Bible text lives in each edition, not here.",

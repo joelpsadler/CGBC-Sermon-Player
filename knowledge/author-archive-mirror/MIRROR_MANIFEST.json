@@ -4,21 +4,27 @@
   "sourceRepository": "SOTW-Historical-Commentaries/historical-commentary-resources",
   "mirrorRepository": "joelpsadler/CGBC-Sermon-Player",
   "mirrorPrefix": "knowledge/author-archive-mirror/sotw-root",
-  "sourceBaselineCommit": "905f2695305c884ba454e0da5f1d85b21146136d",
+  "sourceBaselineCommit": "b2eeaeadd733d96a8ee1f157ea1d73c48d1fea4c",
   "scope": "PUBLIC_SAFE_JACOB_AUTHOR_ARCHIVE_ONLY",
   "installStatus": "STAGED_NOT_DEPLOYED",
   "files": [
     {
       "sotwPath": "api/jacob-lannom/v1/coverage.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/coverage.json",
-      "sha256": "40283295e06d37b74c430987ed716a3749580c5b1a686e98211426a54a3e66cf",
-      "bytes": 78575
+      "sha256": "d413f3951d737bbe09afe07dec40411950d31519a54d8bbdfc31fcbf14ff4d36",
+      "bytes": 98026
     },
     {
       "sotwPath": "api/jacob-lannom/v1/current-commentary.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/current-commentary.json",
-      "sha256": "62ee80f046ca27edee8062a30744dae96f565e602c7327a3782ab0c67a1d0269",
-      "bytes": 44706
+      "sha256": "5515788fb3e8ad65cea2457e0233d2037630b18802b87da5c509097443e671a7",
+      "bytes": 56969
+    },
+    {
+      "sotwPath": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sha256": "38c6dcd33c2f57c5865d114eebabb279ef1041cc14953aeb0c06e850ab8d1ebd",
+      "bytes": 12582
     },
     {
       "sotwPath": "api/jacob-lannom/v1/source-records/media-daqi89.json",
@@ -41,14 +47,14 @@
     {
       "sotwPath": "api/jacob-lannom/v1/translation-lookup.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jacob-lannom/v1/translation-lookup.json",
-      "sha256": "61018aff49d9eab9d2bc0d1e4dd1eaad17988899ca4b930152ba382dad6708af",
-      "bytes": 1331
+      "sha256": "ec6c2e0736f06af944eb80d8d068fbe9ecdfad3dc4a829c923288fd257c93202",
+      "bytes": 1410
     },
     {
       "sotwPath": "api/jake/v1/catalog.json",
       "cgbcMirrorPath": "knowledge/author-archive-mirror/sotw-root/api/jake/v1/catalog.json",
-      "sha256": "8ebcffdde268a507330f8a94fd113982dbab3a98486457d7054359fbd5adf818",
-      "bytes": 1742
+      "sha256": "b4c5b178b0af07569fdb4bc0ea8df2eefdd01a4018daebc327598b137ed01dc3",
+      "bytes": 2004
     }
   ]
 }

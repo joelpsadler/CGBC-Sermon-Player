@@ -4,7 +4,7 @@
   "displayName": "Jacob Lannom",
   "translationIndependent": true,
   "scriptureIdScheme": "SOTW_CANONICAL_OSIS_SCOPE",
-  "lastReconciledOn": "2026-11-18",
+  "lastReconciledOn": "2026-11-21",
   "status": "OWNER_CONTENT_APPROVED_STAGED_NOT_INSTALLED",
   "sourceRecords": [
     {
@@ -27,13 +27,20 @@
       "sermonTitle": "The Impact of the Gospel In Relationships Pt. 12",
       "sourcePath": "api/jacob-lannom/v1/source-records/media-wqvm4d.json",
       "sourceSHA256": "99ad9a95ec0f7332e90b9917ac4be756f8ea04d2f835d462efce7c589a03621b"
+    },
+    {
+      "sermonId": "media-4vosdo",
+      "sermonDate": "2026-11-18",
+      "sermonTitle": "The Tribulation Pt. 19",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sourceSHA256": "38c6dcd33c2f57c5865d114eebabb279ef1041cc14953aeb0c06e850ab8d1ebd"
     }
   ],
   "summary": {
     "bookIntroductions": 1,
-    "scopedEntries": 16,
-    "sermonOccasions": 3,
-    "scriptureConnections": 27
+    "scopedEntries": 20,
+    "sermonOccasions": 4,
+    "scriptureConnections": 32
   },
   "entries": [
     {
@@ -1373,6 +1380,326 @@
           "sourceCueId": "344",
           "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-wqvm4d&start=988&autoplay=0",
           "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-wqvm4d&start=988&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "REV.14.14-16",
+      "scopeType": "PASSAGE",
+      "title": "Christ and the Harvest of Believers",
+      "sermonDate": "2026-11-18",
+      "sermonId": "media-4vosdo",
+      "teachingOccasionId": "media-4vosdo.approved.2026-11-21.01",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sourceNodeRef": "media-4vosdo.n001",
+      "sourceCueIds": [
+        14,
+        49,
+        84
+      ],
+      "availability": "STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=REV&scope=REV.14.14-16",
+      "evidenceMoments": [
+        {
+          "cueId": "14",
+          "startSeconds": 52.866,
+          "endSeconds": 56.283,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 52,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=52&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=52&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "14",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=52&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=52&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "49",
+          "startSeconds": 147.849,
+          "endSeconds": 150.666,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 147,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=147&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=147&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "49",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=147&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=147&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "84",
+          "startSeconds": 246.666,
+          "endSeconds": 250.133,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 246,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=246&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=246&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "84",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=246&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=246&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "1TH.4.16-18",
+      "scopeType": "PASSAGE",
+      "title": "The Lord’s Return, Resurrection, and Comfort",
+      "sermonDate": "2026-11-18",
+      "sermonId": "media-4vosdo",
+      "teachingOccasionId": "media-4vosdo.approved.2026-11-21.02",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sourceNodeRef": "media-4vosdo.n002",
+      "sourceCueIds": [
+        72,
+        85,
+        96
+      ],
+      "availability": "STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=1TH&scope=1TH.4.16-18",
+      "evidenceMoments": [
+        {
+          "cueId": "72",
+          "startSeconds": 210.55,
+          "endSeconds": 213.9,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 210,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=210&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=210&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "72",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=210&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=210&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "85",
+          "startSeconds": 250.15,
+          "endSeconds": 252.666,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 250,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=250&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=250&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "85",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=250&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=250&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "96",
+          "startSeconds": 280.933,
+          "endSeconds": 284.766,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 280,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=280&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=280&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "96",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=280&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=280&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "REV.14.17-20",
+      "scopeType": "PASSAGE",
+      "title": "The Grape Harvest and the Winepress of Judgment",
+      "sermonDate": "2026-11-18",
+      "sermonId": "media-4vosdo",
+      "teachingOccasionId": "media-4vosdo.approved.2026-11-21.03",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sourceNodeRef": "media-4vosdo.n003",
+      "sourceCueIds": [
+        109,
+        184,
+        296,
+        381,
+        421,
+        458,
+        588
+      ],
+      "availability": "STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=REV&scope=REV.14.17-20",
+      "evidenceMoments": [
+        {
+          "cueId": "109",
+          "startSeconds": 316.566,
+          "endSeconds": 319.616,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 316,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=316&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=316&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "109",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=316&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=316&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "184",
+          "startSeconds": 525.183,
+          "endSeconds": 527.149,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 525,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=525&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=525&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "184",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=525&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=525&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "296",
+          "startSeconds": 840.133,
+          "endSeconds": 840.6,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 840,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=840&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=840&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "296",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=840&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=840&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "381",
+          "startSeconds": 1080.733,
+          "endSeconds": 1083.9,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1080,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1080&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1080&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "381",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1080&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1080&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "421",
+          "startSeconds": 1204.983,
+          "endSeconds": 1208.7,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1204,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1204&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1204&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "421",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1204&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1204&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "458",
+          "startSeconds": 1299.9,
+          "endSeconds": 1302.599,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1299,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1299&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1299&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "458",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1299&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1299&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "588",
+          "startSeconds": 1649.95,
+          "endSeconds": 1650.966,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1649,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1649&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1649&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "588",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1649&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1649&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        }
+      ]
+    },
+    {
+      "scopeKey": "HEB.13.11-13",
+      "scopeType": "PASSAGE",
+      "title": "Jesus Suffers Outside the Gate",
+      "sermonDate": "2026-11-18",
+      "sermonId": "media-4vosdo",
+      "teachingOccasionId": "media-4vosdo.approved.2026-11-21.04",
+      "sourcePath": "api/jacob-lannom/v1/source-records/media-4vosdo.json",
+      "sourceNodeRef": "media-4vosdo.n007",
+      "sourceCueIds": [
+        362,
+        375,
+        380
+      ],
+      "availability": "STAGED_NOT_INSTALLED",
+      "readerUrl": "review-jake-scripture.html?book=HEB&scope=HEB.13.11-13",
+      "evidenceMoments": [
+        {
+          "cueId": "362",
+          "startSeconds": 1021.333,
+          "endSeconds": 1024.683,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1021,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1021&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1021&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "362",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1021&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1021&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "375",
+          "startSeconds": 1063.15,
+          "endSeconds": 1065.716,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1063,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1063&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1063&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "375",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1063&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1063&autoplay=0",
+          "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
+        },
+        {
+          "cueId": "380",
+          "startSeconds": 1076.766,
+          "endSeconds": 1080.716,
+          "originalSourceSHA256": "7ba9f7a444ee46b7f2103e4d270441191b45ca5cf60281252407911b479bf520",
+          "evidenceType": "ORIGINAL_SRT_SPOKEN_WORDS_NOT_SYNTHESIS_QUOTE",
+          "seekSeconds": 1076,
+          "listenUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1076&autoplay=0",
+          "watchUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1076&autoplay=0",
+          "clockSync": "SRT_CLOCK_MEDIA_OFFSET_UNVERIFIED",
+          "sourceCueId": "380",
+          "audioSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=audio&item=media-4vosdo&start=1076&autoplay=0",
+          "videoSeekUrl": "https://joelpsadler.github.io/CGBC-Sermon-Player/index.html?mode=video&item=media-4vosdo&start=1076&autoplay=0",
           "clockStatus": "ORIGINAL_SRT_CUE_ALIGNED_NOT_MEDIA_SYNC_VERIFIED"
         }
       ]
